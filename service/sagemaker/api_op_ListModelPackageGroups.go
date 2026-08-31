@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -62,6 +64,39 @@ type ListModelPackageGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelPackageGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelPackageGroupsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelPackageGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListModelPackageGroupsInput_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListModelPackageGroupsInput_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.CrossAccountFilterOption != "" {
+		s.WriteString(schemas.ListModelPackageGroupsInput_CrossAccountFilterOption, string(v.CrossAccountFilterOption))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListModelPackageGroupsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListModelPackageGroupsInput_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelPackageGroupsInput_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListModelPackageGroupsInput_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListModelPackageGroupsInput_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListModelPackageGroupsOutput struct {
 
 	// A list of summaries of the model groups in your Amazon Web Services account.
@@ -79,13 +114,35 @@ type ListModelPackageGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelPackageGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelPackageGroupsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelPackageGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeModelPackageGroupSummaryList(s, schemas.ListModelPackageGroupsOutput_ModelPackageGroupSummaryList, v.ModelPackageGroupSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelPackageGroupsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListModelPackageGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListModelPackageGroupsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListModelPackageGroupsOutput_ModelPackageGroupSummaryList:
+			return deserializeModelPackageGroupSummaryList(d, schemas.ListModelPackageGroupsOutput_ModelPackageGroupSummaryList, &v.ModelPackageGroupSummaryList)
+		case schemas.ListModelPackageGroupsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListModelPackageGroupsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListModelPackageGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListModelPackageGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelPackageGroups, schemas.ListModelPackageGroupsInput, schemas.ListModelPackageGroupsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListModelPackageGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelPackageGroups, schemas.ListModelPackageGroupsInput, schemas.ListModelPackageGroupsOutput), output: &ListModelPackageGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

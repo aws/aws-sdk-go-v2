@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type ListSecurityKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityKeysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityKeysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListSecurityKeysRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSecurityKeysRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityKeysRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListSecurityKeysOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.
@@ -61,13 +81,35 @@ type ListSecurityKeysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityKeysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityKeysResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityKeysResponse_NextToken, *v.NextToken)
+	}
+	serializeSecurityKeysList(s, schemas.ListSecurityKeysResponse_SecurityKeys, v.SecurityKeys)
+}
+func (v *ListSecurityKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSecurityKeysResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSecurityKeysResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSecurityKeysResponse_NextToken, v.NextToken)
+		case schemas.ListSecurityKeysResponse_SecurityKeys:
+			return deserializeSecurityKeysList(d, schemas.ListSecurityKeysResponse_SecurityKeys, &v.SecurityKeys)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSecurityKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSecurityKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityKeys, schemas.ListSecurityKeysRequest, schemas.ListSecurityKeysResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSecurityKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityKeys, schemas.ListSecurityKeysRequest, schemas.ListSecurityKeysResponse), output: &ListSecurityKeysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

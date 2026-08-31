@@ -4,6 +4,8 @@ package cognitoidentity
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,25 @@ type SetPrincipalTagAttributeMapInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetPrincipalTagAttributeMapInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetPrincipalTagAttributeMapInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetPrincipalTagAttributeMapInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.SetPrincipalTagAttributeMapInput_IdentityPoolId, *v.IdentityPoolId)
+	}
+	if v.IdentityProviderName != nil {
+		s.WriteString(schemas.SetPrincipalTagAttributeMapInput_IdentityProviderName, *v.IdentityProviderName)
+	}
+	serializePrincipalTags(s, schemas.SetPrincipalTagAttributeMapInput_PrincipalTags, v.PrincipalTags)
+	if v.UseDefaults != nil {
+		s.WriteBool(schemas.SetPrincipalTagAttributeMapInput_UseDefaults, *v.UseDefaults)
+	}
+}
+
 type SetPrincipalTagAttributeMapOutput struct {
 
 	// The ID of the Identity Pool you want to set attribute mappings for.
@@ -68,13 +89,47 @@ type SetPrincipalTagAttributeMapOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetPrincipalTagAttributeMapOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetPrincipalTagAttributeMapResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetPrincipalTagAttributeMapOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.SetPrincipalTagAttributeMapResponse_IdentityPoolId, *v.IdentityPoolId)
+	}
+	if v.IdentityProviderName != nil {
+		s.WriteString(schemas.SetPrincipalTagAttributeMapResponse_IdentityProviderName, *v.IdentityProviderName)
+	}
+	serializePrincipalTags(s, schemas.SetPrincipalTagAttributeMapResponse_PrincipalTags, v.PrincipalTags)
+	if v.UseDefaults != nil {
+		s.WriteBool(schemas.SetPrincipalTagAttributeMapResponse_UseDefaults, *v.UseDefaults)
+	}
+}
+func (v *SetPrincipalTagAttributeMapOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetPrincipalTagAttributeMapResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetPrincipalTagAttributeMapResponse_IdentityPoolId:
+			v.IdentityPoolId = new(string)
+			return d.ReadString(schemas.SetPrincipalTagAttributeMapResponse_IdentityPoolId, v.IdentityPoolId)
+		case schemas.SetPrincipalTagAttributeMapResponse_IdentityProviderName:
+			v.IdentityProviderName = new(string)
+			return d.ReadString(schemas.SetPrincipalTagAttributeMapResponse_IdentityProviderName, v.IdentityProviderName)
+		case schemas.SetPrincipalTagAttributeMapResponse_PrincipalTags:
+			return deserializePrincipalTags(d, schemas.SetPrincipalTagAttributeMapResponse_PrincipalTags, &v.PrincipalTags)
+		case schemas.SetPrincipalTagAttributeMapResponse_UseDefaults:
+			v.UseDefaults = new(bool)
+			return d.ReadBool(schemas.SetPrincipalTagAttributeMapResponse_UseDefaults, v.UseDefaults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetPrincipalTagAttributeMapMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetPrincipalTagAttributeMap{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetPrincipalTagAttributeMap, schemas.SetPrincipalTagAttributeMapInput, schemas.SetPrincipalTagAttributeMapResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSetPrincipalTagAttributeMap{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetPrincipalTagAttributeMap, schemas.SetPrincipalTagAttributeMapInput, schemas.SetPrincipalTagAttributeMapResponse), output: &SetPrincipalTagAttributeMapOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

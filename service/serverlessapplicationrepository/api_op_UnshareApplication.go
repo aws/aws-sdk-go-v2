@@ -4,6 +4,8 @@ package serverlessapplicationrepository
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type UnshareApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnshareApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnshareApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnshareApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.UnshareApplicationRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.UnshareApplicationRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type UnshareApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type UnshareApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnshareApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnshareApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UnshareApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUnshareApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUnshareApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnshareApplication, schemas.UnshareApplicationRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUnshareApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnshareApplication, schemas.UnshareApplicationRequest, nil), output: &UnshareApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

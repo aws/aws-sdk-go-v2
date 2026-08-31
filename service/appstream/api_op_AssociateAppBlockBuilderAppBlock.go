@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type AssociateAppBlockBuilderAppBlockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateAppBlockBuilderAppBlockInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateAppBlockBuilderAppBlockRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateAppBlockBuilderAppBlockInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppBlockArn != nil {
+		s.WriteString(schemas.AssociateAppBlockBuilderAppBlockRequest_AppBlockArn, *v.AppBlockArn)
+	}
+	if v.AppBlockBuilderName != nil {
+		s.WriteString(schemas.AssociateAppBlockBuilderAppBlockRequest_AppBlockBuilderName, *v.AppBlockBuilderName)
+	}
+}
+
 type AssociateAppBlockBuilderAppBlockOutput struct {
 
 	// The list of app block builders associated with app blocks.
@@ -50,13 +67,34 @@ type AssociateAppBlockBuilderAppBlockOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateAppBlockBuilderAppBlockOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateAppBlockBuilderAppBlockResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateAppBlockBuilderAppBlockOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppBlockBuilderAppBlockAssociation != nil {
+		s.WriteStruct(schemas.AssociateAppBlockBuilderAppBlockResult_AppBlockBuilderAppBlockAssociation)
+		v.AppBlockBuilderAppBlockAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateAppBlockBuilderAppBlockOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateAppBlockBuilderAppBlockResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateAppBlockBuilderAppBlockResult_AppBlockBuilderAppBlockAssociation:
+			v.AppBlockBuilderAppBlockAssociation = &types.AppBlockBuilderAppBlockAssociation{}
+			return v.AppBlockBuilderAppBlockAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateAppBlockBuilderAppBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpAssociateAppBlockBuilderAppBlock{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateAppBlockBuilderAppBlock, schemas.AssociateAppBlockBuilderAppBlockRequest, schemas.AssociateAppBlockBuilderAppBlockResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpAssociateAppBlockBuilderAppBlock{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateAppBlockBuilderAppBlock, schemas.AssociateAppBlockBuilderAppBlockRequest, schemas.AssociateAppBlockBuilderAppBlockResult), output: &AssociateAppBlockBuilderAppBlockOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

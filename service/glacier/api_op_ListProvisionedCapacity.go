@@ -5,7 +5,9 @@ package glacier
 import (
 	"context"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type ListProvisionedCapacityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProvisionedCapacityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProvisionedCapacityInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProvisionedCapacityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListProvisionedCapacityInput_accountId, *v.AccountId)
+	}
+}
+
 type ListProvisionedCapacityOutput struct {
 
 	// The response body contains the following JSON fields.
@@ -50,13 +64,29 @@ type ListProvisionedCapacityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProvisionedCapacityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProvisionedCapacityOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProvisionedCapacityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeProvisionedCapacityList(s, schemas.ListProvisionedCapacityOutput_ProvisionedCapacityList, v.ProvisionedCapacityList)
+}
+func (v *ListProvisionedCapacityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProvisionedCapacityOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProvisionedCapacityOutput_ProvisionedCapacityList:
+			return deserializeProvisionedCapacityList(d, schemas.ListProvisionedCapacityOutput_ProvisionedCapacityList, &v.ProvisionedCapacityList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProvisionedCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProvisionedCapacity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProvisionedCapacity, schemas.ListProvisionedCapacityInput, schemas.ListProvisionedCapacityOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProvisionedCapacity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProvisionedCapacity, schemas.ListProvisionedCapacityInput, schemas.ListProvisionedCapacityOutput), output: &ListProvisionedCapacityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

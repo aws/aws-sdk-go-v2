@@ -4,7 +4,9 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetManagedScalingPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetManagedScalingPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetManagedScalingPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetManagedScalingPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.GetManagedScalingPolicyInput_ClusterId, *v.ClusterId)
+	}
+}
+
 type GetManagedScalingPolicyOutput struct {
 
 	// Specifies the managed scaling policy that is attached to an Amazon EMR cluster.
@@ -46,13 +60,34 @@ type GetManagedScalingPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetManagedScalingPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetManagedScalingPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetManagedScalingPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagedScalingPolicy != nil {
+		s.WriteStruct(schemas.GetManagedScalingPolicyOutput_ManagedScalingPolicy)
+		v.ManagedScalingPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetManagedScalingPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetManagedScalingPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetManagedScalingPolicyOutput_ManagedScalingPolicy:
+			v.ManagedScalingPolicy = &types.ManagedScalingPolicy{}
+			return v.ManagedScalingPolicy.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetManagedScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetManagedScalingPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedScalingPolicy, schemas.GetManagedScalingPolicyInput, schemas.GetManagedScalingPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetManagedScalingPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedScalingPolicy, schemas.GetManagedScalingPolicyInput, schemas.GetManagedScalingPolicyOutput), output: &GetManagedScalingPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

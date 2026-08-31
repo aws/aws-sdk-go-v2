@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type CreateProvisioningTemplateVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProvisioningTemplateVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProvisioningTemplateVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProvisioningTemplateVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SetAsDefault != false {
+		s.WriteBool(schemas.CreateProvisioningTemplateVersionRequest_setAsDefault, v.SetAsDefault)
+	}
+	if v.TemplateBody != nil {
+		s.WriteString(schemas.CreateProvisioningTemplateVersionRequest_templateBody, *v.TemplateBody)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.CreateProvisioningTemplateVersionRequest_templateName, *v.TemplateName)
+	}
+}
+
 type CreateProvisioningTemplateVersionOutput struct {
 
 	// True if the provisioning template version is the default version, otherwise
@@ -66,13 +86,49 @@ type CreateProvisioningTemplateVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProvisioningTemplateVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProvisioningTemplateVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProvisioningTemplateVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsDefaultVersion != false {
+		s.WriteBool(schemas.CreateProvisioningTemplateVersionResponse_isDefaultVersion, v.IsDefaultVersion)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.CreateProvisioningTemplateVersionResponse_templateArn, *v.TemplateArn)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.CreateProvisioningTemplateVersionResponse_templateName, *v.TemplateName)
+	}
+	if v.VersionId != nil {
+		s.WriteInt32(schemas.CreateProvisioningTemplateVersionResponse_versionId, *v.VersionId)
+	}
+}
+func (v *CreateProvisioningTemplateVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProvisioningTemplateVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProvisioningTemplateVersionResponse_isDefaultVersion:
+			return d.ReadBool(schemas.CreateProvisioningTemplateVersionResponse_isDefaultVersion, &v.IsDefaultVersion)
+		case schemas.CreateProvisioningTemplateVersionResponse_templateArn:
+			v.TemplateArn = new(string)
+			return d.ReadString(schemas.CreateProvisioningTemplateVersionResponse_templateArn, v.TemplateArn)
+		case schemas.CreateProvisioningTemplateVersionResponse_templateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.CreateProvisioningTemplateVersionResponse_templateName, v.TemplateName)
+		case schemas.CreateProvisioningTemplateVersionResponse_versionId:
+			v.VersionId = new(int32)
+			return d.ReadInt32(schemas.CreateProvisioningTemplateVersionResponse_versionId, v.VersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProvisioningTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProvisioningTemplateVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProvisioningTemplateVersion, schemas.CreateProvisioningTemplateVersionRequest, schemas.CreateProvisioningTemplateVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProvisioningTemplateVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProvisioningTemplateVersion, schemas.CreateProvisioningTemplateVersionRequest, schemas.CreateProvisioningTemplateVersionResponse), output: &CreateProvisioningTemplateVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

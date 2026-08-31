@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,26 @@ type UpdateUserIdentityInfoInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserIdentityInfoInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserIdentityInfoRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserIdentityInfoInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityInfo != nil {
+		s.WriteStruct(schemas.UpdateUserIdentityInfoRequest_IdentityInfo)
+		v.IdentityInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateUserIdentityInfoRequest_InstanceId, *v.InstanceId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.UpdateUserIdentityInfoRequest_UserId, *v.UserId)
+	}
+}
+
 type UpdateUserIdentityInfoOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -63,13 +85,26 @@ type UpdateUserIdentityInfoOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserIdentityInfoOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserIdentityInfoOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateUserIdentityInfoOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateUserIdentityInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateUserIdentityInfo{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserIdentityInfo, schemas.UpdateUserIdentityInfoRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateUserIdentityInfo{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserIdentityInfo, schemas.UpdateUserIdentityInfoRequest, nil), output: &UpdateUserIdentityInfoOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package grafana
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/grafana/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/grafana/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,44 @@ type AssociateLicenseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateLicenseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateLicenseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateLicenseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GrafanaToken != nil {
+		s.WriteString(schemas.AssociateLicenseRequest_grafanaToken, *v.GrafanaToken)
+	}
+	if v.LicenseType != "" {
+		s.WriteString(schemas.AssociateLicenseRequest_licenseType, string(v.LicenseType))
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.AssociateLicenseRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *AssociateLicenseInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateLicenseRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateLicenseRequest_grafanaToken:
+			v.GrafanaToken = new(string)
+			return d.ReadString(schemas.AssociateLicenseRequest_grafanaToken, v.GrafanaToken)
+		case schemas.AssociateLicenseRequest_licenseType:
+			var ev string
+			if err := d.ReadString(schemas.AssociateLicenseRequest_licenseType, &ev); err != nil {
+				return err
+			}
+			v.LicenseType = types.LicenseType(ev)
+			return nil
+		case schemas.AssociateLicenseRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.AssociateLicenseRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type AssociateLicenseOutput struct {
 
 	// A structure containing data about the workspace.
@@ -66,13 +106,34 @@ type AssociateLicenseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateLicenseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateLicenseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateLicenseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Workspace != nil {
+		s.WriteStruct(schemas.AssociateLicenseResponse_workspace)
+		v.Workspace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateLicenseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateLicenseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateLicenseResponse_workspace:
+			v.Workspace = &types.WorkspaceDescription{}
+			return v.Workspace.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateLicenseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateLicense{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateLicense, schemas.AssociateLicenseRequest, schemas.AssociateLicenseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateLicense{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateLicense, schemas.AssociateLicenseRequest, schemas.AssociateLicenseResponse), output: &AssociateLicenseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

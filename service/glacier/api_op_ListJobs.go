@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -100,6 +102,33 @@ type ListJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListJobsInput_accountId, *v.AccountId)
+	}
+	if v.Completed != nil {
+		s.WriteString(schemas.ListJobsInput_completed, *v.Completed)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListJobsInput_limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListJobsInput_marker, *v.Marker)
+	}
+	if v.Statuscode != nil {
+		s.WriteString(schemas.ListJobsInput_statuscode, *v.Statuscode)
+	}
+	if v.VaultName != nil {
+		s.WriteString(schemas.ListJobsInput_vaultName, *v.VaultName)
+	}
+}
+
 // Contains the Amazon Glacier response to your request.
 type ListJobsOutput struct {
 
@@ -118,13 +147,35 @@ type ListJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobList(s, schemas.ListJobsOutput_JobList, v.JobList)
+	if v.Marker != nil {
+		s.WriteString(schemas.ListJobsOutput_Marker, *v.Marker)
+	}
+}
+func (v *ListJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListJobsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListJobsOutput_JobList:
+			return deserializeJobList(d, schemas.ListJobsOutput_JobList, &v.JobList)
+		case schemas.ListJobsOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListJobsOutput_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobs, schemas.ListJobsInput, schemas.ListJobsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobs, schemas.ListJobsInput, schemas.ListJobsOutput), output: &ListJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type UpdateRoutingProfileDefaultOutboundQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRoutingProfileDefaultOutboundQueueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRoutingProfileDefaultOutboundQueueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRoutingProfileDefaultOutboundQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultOutboundQueueId != nil {
+		s.WriteString(schemas.UpdateRoutingProfileDefaultOutboundQueueRequest_DefaultOutboundQueueId, *v.DefaultOutboundQueueId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateRoutingProfileDefaultOutboundQueueRequest_InstanceId, *v.InstanceId)
+	}
+	if v.RoutingProfileId != nil {
+		s.WriteString(schemas.UpdateRoutingProfileDefaultOutboundQueueRequest_RoutingProfileId, *v.RoutingProfileId)
+	}
+}
+
 type UpdateRoutingProfileDefaultOutboundQueueOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +73,26 @@ type UpdateRoutingProfileDefaultOutboundQueueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRoutingProfileDefaultOutboundQueueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRoutingProfileDefaultOutboundQueueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateRoutingProfileDefaultOutboundQueueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRoutingProfileDefaultOutboundQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRoutingProfileDefaultOutboundQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRoutingProfileDefaultOutboundQueue, schemas.UpdateRoutingProfileDefaultOutboundQueueRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRoutingProfileDefaultOutboundQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRoutingProfileDefaultOutboundQueue, schemas.UpdateRoutingProfileDefaultOutboundQueueRequest, nil), output: &UpdateRoutingProfileDefaultOutboundQueueOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

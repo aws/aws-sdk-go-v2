@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeInferenceExperimentInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeInferenceExperimentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInferenceExperimentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInferenceExperimentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeInferenceExperimentRequest_Name, *v.Name)
+	}
 }
 
 type DescribeInferenceExperimentOutput struct {
@@ -142,13 +156,135 @@ type DescribeInferenceExperimentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInferenceExperimentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInferenceExperimentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInferenceExperimentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeInferenceExperimentResponse_Arn, *v.Arn)
+	}
+	if v.CompletionTime != nil {
+		s.WriteTime(schemas.DescribeInferenceExperimentResponse_CompletionTime, *v.CompletionTime)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeInferenceExperimentResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DataStorageConfig != nil {
+		s.WriteStruct(schemas.DescribeInferenceExperimentResponse_DataStorageConfig)
+		v.DataStorageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeInferenceExperimentResponse_Description, *v.Description)
+	}
+	if v.EndpointMetadata != nil {
+		s.WriteStruct(schemas.DescribeInferenceExperimentResponse_EndpointMetadata)
+		v.EndpointMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKey != nil {
+		s.WriteString(schemas.DescribeInferenceExperimentResponse_KmsKey, *v.KmsKey)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeInferenceExperimentResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	serializeModelVariantConfigSummaryList(s, schemas.DescribeInferenceExperimentResponse_ModelVariants, v.ModelVariants)
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeInferenceExperimentResponse_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeInferenceExperimentResponse_RoleArn, *v.RoleArn)
+	}
+	if v.Schedule != nil {
+		s.WriteStruct(schemas.DescribeInferenceExperimentResponse_Schedule)
+		v.Schedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ShadowModeConfig != nil {
+		s.WriteStruct(schemas.DescribeInferenceExperimentResponse_ShadowModeConfig)
+		v.ShadowModeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeInferenceExperimentResponse_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.DescribeInferenceExperimentResponse_StatusReason, *v.StatusReason)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DescribeInferenceExperimentResponse_Type, string(v.Type))
+	}
+}
+func (v *DescribeInferenceExperimentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInferenceExperimentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInferenceExperimentResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeInferenceExperimentResponse_Arn, v.Arn)
+		case schemas.DescribeInferenceExperimentResponse_CompletionTime:
+			v.CompletionTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeInferenceExperimentResponse_CompletionTime, v.CompletionTime)
+		case schemas.DescribeInferenceExperimentResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeInferenceExperimentResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeInferenceExperimentResponse_DataStorageConfig:
+			v.DataStorageConfig = &types.InferenceExperimentDataStorageConfig{}
+			return v.DataStorageConfig.Deserialize(d)
+		case schemas.DescribeInferenceExperimentResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeInferenceExperimentResponse_Description, v.Description)
+		case schemas.DescribeInferenceExperimentResponse_EndpointMetadata:
+			v.EndpointMetadata = &types.EndpointMetadata{}
+			return v.EndpointMetadata.Deserialize(d)
+		case schemas.DescribeInferenceExperimentResponse_KmsKey:
+			v.KmsKey = new(string)
+			return d.ReadString(schemas.DescribeInferenceExperimentResponse_KmsKey, v.KmsKey)
+		case schemas.DescribeInferenceExperimentResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeInferenceExperimentResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeInferenceExperimentResponse_ModelVariants:
+			return deserializeModelVariantConfigSummaryList(d, schemas.DescribeInferenceExperimentResponse_ModelVariants, &v.ModelVariants)
+		case schemas.DescribeInferenceExperimentResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeInferenceExperimentResponse_Name, v.Name)
+		case schemas.DescribeInferenceExperimentResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeInferenceExperimentResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeInferenceExperimentResponse_Schedule:
+			v.Schedule = &types.InferenceExperimentSchedule{}
+			return v.Schedule.Deserialize(d)
+		case schemas.DescribeInferenceExperimentResponse_ShadowModeConfig:
+			v.ShadowModeConfig = &types.ShadowModeConfig{}
+			return v.ShadowModeConfig.Deserialize(d)
+		case schemas.DescribeInferenceExperimentResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeInferenceExperimentResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.InferenceExperimentStatus(ev)
+			return nil
+		case schemas.DescribeInferenceExperimentResponse_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.DescribeInferenceExperimentResponse_StatusReason, v.StatusReason)
+		case schemas.DescribeInferenceExperimentResponse_Type:
+			var ev string
+			if err := d.ReadString(schemas.DescribeInferenceExperimentResponse_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.InferenceExperimentType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeInferenceExperimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeInferenceExperiment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInferenceExperiment, schemas.DescribeInferenceExperimentRequest, schemas.DescribeInferenceExperimentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeInferenceExperiment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInferenceExperiment, schemas.DescribeInferenceExperimentRequest, schemas.DescribeInferenceExperimentResponse), output: &DescribeInferenceExperimentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

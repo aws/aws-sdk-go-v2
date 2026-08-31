@@ -4,7 +4,9 @@ package neptunegraph
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -35,6 +37,17 @@ type CancelExportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelExportTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelExportTaskInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelExportTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskIdentifier != nil {
+		s.WriteString(schemas.CancelExportTaskInput_taskIdentifier, *v.TaskIdentifier)
+	}
+}
 func (in *CancelExportTaskInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ApiType = ptr.String("ControlPlane")
@@ -91,13 +104,92 @@ type CancelExportTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelExportTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelExportTaskOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelExportTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteString(schemas.CancelExportTaskOutput_destination, *v.Destination)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.CancelExportTaskOutput_format, string(v.Format))
+	}
+	if v.GraphId != nil {
+		s.WriteString(schemas.CancelExportTaskOutput_graphId, *v.GraphId)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.CancelExportTaskOutput_kmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.ParquetType != "" {
+		s.WriteString(schemas.CancelExportTaskOutput_parquetType, string(v.ParquetType))
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CancelExportTaskOutput_roleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CancelExportTaskOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.CancelExportTaskOutput_statusReason, *v.StatusReason)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.CancelExportTaskOutput_taskId, *v.TaskId)
+	}
+}
+func (v *CancelExportTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelExportTaskOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelExportTaskOutput_destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.CancelExportTaskOutput_destination, v.Destination)
+		case schemas.CancelExportTaskOutput_format:
+			var ev string
+			if err := d.ReadString(schemas.CancelExportTaskOutput_format, &ev); err != nil {
+				return err
+			}
+			v.Format = types.ExportFormat(ev)
+			return nil
+		case schemas.CancelExportTaskOutput_graphId:
+			v.GraphId = new(string)
+			return d.ReadString(schemas.CancelExportTaskOutput_graphId, v.GraphId)
+		case schemas.CancelExportTaskOutput_kmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.CancelExportTaskOutput_kmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.CancelExportTaskOutput_parquetType:
+			var ev string
+			if err := d.ReadString(schemas.CancelExportTaskOutput_parquetType, &ev); err != nil {
+				return err
+			}
+			v.ParquetType = types.ParquetType(ev)
+			return nil
+		case schemas.CancelExportTaskOutput_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.CancelExportTaskOutput_roleArn, v.RoleArn)
+		case schemas.CancelExportTaskOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CancelExportTaskOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ExportTaskStatus(ev)
+			return nil
+		case schemas.CancelExportTaskOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.CancelExportTaskOutput_statusReason, v.StatusReason)
+		case schemas.CancelExportTaskOutput_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.CancelExportTaskOutput_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelExportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelExportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelExportTask, schemas.CancelExportTaskInput, schemas.CancelExportTaskOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelExportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelExportTask, schemas.CancelExportTaskInput, schemas.CancelExportTaskOutput), output: &CancelExportTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

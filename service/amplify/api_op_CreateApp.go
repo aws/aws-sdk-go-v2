@@ -4,7 +4,9 @@ package amplify
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -149,6 +151,79 @@ type CreateAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.CreateAppRequest_accessToken, *v.AccessToken)
+	}
+	if v.AutoBranchCreationConfig != nil {
+		s.WriteStruct(schemas.CreateAppRequest_autoBranchCreationConfig)
+		v.AutoBranchCreationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAutoBranchCreationPatterns(s, schemas.CreateAppRequest_autoBranchCreationPatterns, v.AutoBranchCreationPatterns)
+	if v.BasicAuthCredentials != nil {
+		s.WriteString(schemas.CreateAppRequest_basicAuthCredentials, *v.BasicAuthCredentials)
+	}
+	if v.BuildSpec != nil {
+		s.WriteString(schemas.CreateAppRequest_buildSpec, *v.BuildSpec)
+	}
+	if v.CacheConfig != nil {
+		s.WriteStruct(schemas.CreateAppRequest_cacheConfig)
+		v.CacheConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ComputeRoleArn != nil {
+		s.WriteString(schemas.CreateAppRequest_computeRoleArn, *v.ComputeRoleArn)
+	}
+	if v.CustomHeaders != nil {
+		s.WriteString(schemas.CreateAppRequest_customHeaders, *v.CustomHeaders)
+	}
+	serializeCustomRules(s, schemas.CreateAppRequest_customRules, v.CustomRules)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAppRequest_description, *v.Description)
+	}
+	if v.EnableAutoBranchCreation != nil {
+		s.WriteBool(schemas.CreateAppRequest_enableAutoBranchCreation, *v.EnableAutoBranchCreation)
+	}
+	if v.EnableBasicAuth != nil {
+		s.WriteBool(schemas.CreateAppRequest_enableBasicAuth, *v.EnableBasicAuth)
+	}
+	if v.EnableBranchAutoBuild != nil {
+		s.WriteBool(schemas.CreateAppRequest_enableBranchAutoBuild, *v.EnableBranchAutoBuild)
+	}
+	if v.EnableBranchAutoDeletion != nil {
+		s.WriteBool(schemas.CreateAppRequest_enableBranchAutoDeletion, *v.EnableBranchAutoDeletion)
+	}
+	serializeEnvironmentVariables(s, schemas.CreateAppRequest_environmentVariables, v.EnvironmentVariables)
+	if v.IamServiceRoleArn != nil {
+		s.WriteString(schemas.CreateAppRequest_iamServiceRoleArn, *v.IamServiceRoleArn)
+	}
+	if v.JobConfig != nil {
+		s.WriteStruct(schemas.CreateAppRequest_jobConfig)
+		v.JobConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAppRequest_name, *v.Name)
+	}
+	if v.OauthToken != nil {
+		s.WriteString(schemas.CreateAppRequest_oauthToken, *v.OauthToken)
+	}
+	if v.Platform != "" {
+		s.WriteString(schemas.CreateAppRequest_platform, string(v.Platform))
+	}
+	if v.Repository != nil {
+		s.WriteString(schemas.CreateAppRequest_repository, *v.Repository)
+	}
+	serializeTagMap(s, schemas.CreateAppRequest_tags, v.Tags)
+}
+
 type CreateAppOutput struct {
 
 	// Represents the different branches of a repository for building, deploying, and
@@ -163,13 +238,34 @@ type CreateAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAppResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.App != nil {
+		s.WriteStruct(schemas.CreateAppResult_app)
+		v.App.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAppResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAppResult_app:
+			v.App = &types.App{}
+			return v.App.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApp, schemas.CreateAppRequest, schemas.CreateAppResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApp, schemas.CreateAppRequest, schemas.CreateAppResult), output: &CreateAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

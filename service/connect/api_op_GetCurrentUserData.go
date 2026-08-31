@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,29 @@ type GetCurrentUserDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCurrentUserDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCurrentUserDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCurrentUserDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.GetCurrentUserDataRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GetCurrentUserDataRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetCurrentUserDataRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCurrentUserDataRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetCurrentUserDataOutput struct {
 
 	// The total count of the result, regardless of the current page size.
@@ -86,13 +111,41 @@ type GetCurrentUserDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCurrentUserDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCurrentUserDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCurrentUserDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTotalCount != nil {
+		s.WriteInt64(schemas.GetCurrentUserDataResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCurrentUserDataResponse_NextToken, *v.NextToken)
+	}
+	serializeUserDataList(s, schemas.GetCurrentUserDataResponse_UserDataList, v.UserDataList)
+}
+func (v *GetCurrentUserDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCurrentUserDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCurrentUserDataResponse_ApproximateTotalCount:
+			v.ApproximateTotalCount = new(int64)
+			return d.ReadInt64(schemas.GetCurrentUserDataResponse_ApproximateTotalCount, v.ApproximateTotalCount)
+		case schemas.GetCurrentUserDataResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetCurrentUserDataResponse_NextToken, v.NextToken)
+		case schemas.GetCurrentUserDataResponse_UserDataList:
+			return deserializeUserDataList(d, schemas.GetCurrentUserDataResponse_UserDataList, &v.UserDataList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCurrentUserDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCurrentUserData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCurrentUserData, schemas.GetCurrentUserDataRequest, schemas.GetCurrentUserDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCurrentUserData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCurrentUserData, schemas.GetCurrentUserDataRequest, schemas.GetCurrentUserDataResponse), output: &GetCurrentUserDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

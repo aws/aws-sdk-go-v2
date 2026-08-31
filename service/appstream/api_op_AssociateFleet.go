@@ -4,6 +4,8 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type AssociateFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateFleetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetName != nil {
+		s.WriteString(schemas.AssociateFleetRequest_FleetName, *v.FleetName)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.AssociateFleetRequest_StackName, *v.StackName)
+	}
+}
+
 type AssociateFleetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type AssociateFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateFleetResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateFleetResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpAssociateFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateFleet, schemas.AssociateFleetRequest, schemas.AssociateFleetResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpAssociateFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateFleet, schemas.AssociateFleetRequest, schemas.AssociateFleetResult), output: &AssociateFleetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -88,6 +90,42 @@ type CreateWorkforceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkforceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkforceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkforceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CognitoConfig != nil {
+		s.WriteStruct(schemas.CreateWorkforceRequest_CognitoConfig)
+		v.CognitoConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.CreateWorkforceRequest_IpAddressType, string(v.IpAddressType))
+	}
+	if v.OidcConfig != nil {
+		s.WriteStruct(schemas.CreateWorkforceRequest_OidcConfig)
+		v.OidcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceIpConfig != nil {
+		s.WriteStruct(schemas.CreateWorkforceRequest_SourceIpConfig)
+		v.SourceIpConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateWorkforceRequest_Tags, v.Tags)
+	if v.WorkforceName != nil {
+		s.WriteString(schemas.CreateWorkforceRequest_WorkforceName, *v.WorkforceName)
+	}
+	if v.WorkforceVpcConfig != nil {
+		s.WriteStruct(schemas.CreateWorkforceRequest_WorkforceVpcConfig)
+		v.WorkforceVpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateWorkforceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the workforce.
@@ -101,13 +139,32 @@ type CreateWorkforceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkforceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkforceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkforceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkforceArn != nil {
+		s.WriteString(schemas.CreateWorkforceResponse_WorkforceArn, *v.WorkforceArn)
+	}
+}
+func (v *CreateWorkforceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkforceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkforceResponse_WorkforceArn:
+			v.WorkforceArn = new(string)
+			return d.ReadString(schemas.CreateWorkforceResponse_WorkforceArn, v.WorkforceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkforceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateWorkforce{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkforce, schemas.CreateWorkforceRequest, schemas.CreateWorkforceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateWorkforce{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkforce, schemas.CreateWorkforceRequest, schemas.CreateWorkforceResponse), output: &CreateWorkforceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

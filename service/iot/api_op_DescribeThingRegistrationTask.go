@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -37,6 +39,18 @@ type DescribeThingRegistrationTaskInput struct {
 	TaskId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeThingRegistrationTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeThingRegistrationTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeThingRegistrationTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.DescribeThingRegistrationTaskRequest_taskId, *v.TaskId)
+	}
 }
 
 type DescribeThingRegistrationTaskOutput struct {
@@ -83,13 +97,99 @@ type DescribeThingRegistrationTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeThingRegistrationTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeThingRegistrationTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeThingRegistrationTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.DescribeThingRegistrationTaskResponse_creationDate, *v.CreationDate)
+	}
+	if v.FailureCount != 0 {
+		s.WriteInt32(schemas.DescribeThingRegistrationTaskResponse_failureCount, v.FailureCount)
+	}
+	if v.InputFileBucket != nil {
+		s.WriteString(schemas.DescribeThingRegistrationTaskResponse_inputFileBucket, *v.InputFileBucket)
+	}
+	if v.InputFileKey != nil {
+		s.WriteString(schemas.DescribeThingRegistrationTaskResponse_inputFileKey, *v.InputFileKey)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.DescribeThingRegistrationTaskResponse_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DescribeThingRegistrationTaskResponse_message, *v.Message)
+	}
+	if v.PercentageProgress != 0 {
+		s.WriteInt32(schemas.DescribeThingRegistrationTaskResponse_percentageProgress, v.PercentageProgress)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeThingRegistrationTaskResponse_roleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeThingRegistrationTaskResponse_status, string(v.Status))
+	}
+	if v.SuccessCount != 0 {
+		s.WriteInt32(schemas.DescribeThingRegistrationTaskResponse_successCount, v.SuccessCount)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.DescribeThingRegistrationTaskResponse_taskId, *v.TaskId)
+	}
+	if v.TemplateBody != nil {
+		s.WriteString(schemas.DescribeThingRegistrationTaskResponse_templateBody, *v.TemplateBody)
+	}
+}
+func (v *DescribeThingRegistrationTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeThingRegistrationTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeThingRegistrationTaskResponse_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeThingRegistrationTaskResponse_creationDate, v.CreationDate)
+		case schemas.DescribeThingRegistrationTaskResponse_failureCount:
+			return d.ReadInt32(schemas.DescribeThingRegistrationTaskResponse_failureCount, &v.FailureCount)
+		case schemas.DescribeThingRegistrationTaskResponse_inputFileBucket:
+			v.InputFileBucket = new(string)
+			return d.ReadString(schemas.DescribeThingRegistrationTaskResponse_inputFileBucket, v.InputFileBucket)
+		case schemas.DescribeThingRegistrationTaskResponse_inputFileKey:
+			v.InputFileKey = new(string)
+			return d.ReadString(schemas.DescribeThingRegistrationTaskResponse_inputFileKey, v.InputFileKey)
+		case schemas.DescribeThingRegistrationTaskResponse_lastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeThingRegistrationTaskResponse_lastModifiedDate, v.LastModifiedDate)
+		case schemas.DescribeThingRegistrationTaskResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DescribeThingRegistrationTaskResponse_message, v.Message)
+		case schemas.DescribeThingRegistrationTaskResponse_percentageProgress:
+			return d.ReadInt32(schemas.DescribeThingRegistrationTaskResponse_percentageProgress, &v.PercentageProgress)
+		case schemas.DescribeThingRegistrationTaskResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeThingRegistrationTaskResponse_roleArn, v.RoleArn)
+		case schemas.DescribeThingRegistrationTaskResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeThingRegistrationTaskResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		case schemas.DescribeThingRegistrationTaskResponse_successCount:
+			return d.ReadInt32(schemas.DescribeThingRegistrationTaskResponse_successCount, &v.SuccessCount)
+		case schemas.DescribeThingRegistrationTaskResponse_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.DescribeThingRegistrationTaskResponse_taskId, v.TaskId)
+		case schemas.DescribeThingRegistrationTaskResponse_templateBody:
+			v.TemplateBody = new(string)
+			return d.ReadString(schemas.DescribeThingRegistrationTaskResponse_templateBody, v.TemplateBody)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeThingRegistrationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeThingRegistrationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeThingRegistrationTask, schemas.DescribeThingRegistrationTaskRequest, schemas.DescribeThingRegistrationTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeThingRegistrationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeThingRegistrationTask, schemas.DescribeThingRegistrationTaskRequest, schemas.DescribeThingRegistrationTaskResponse), output: &DescribeThingRegistrationTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

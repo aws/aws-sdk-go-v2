@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,41 @@ type CreateBatchSegmentJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBatchSegmentJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBatchSegmentJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBatchSegmentJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterArn != nil {
+		s.WriteString(schemas.CreateBatchSegmentJobRequest_filterArn, *v.FilterArn)
+	}
+	if v.JobInput != nil {
+		s.WriteStruct(schemas.CreateBatchSegmentJobRequest_jobInput)
+		v.JobInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.CreateBatchSegmentJobRequest_jobName, *v.JobName)
+	}
+	if v.JobOutput != nil {
+		s.WriteStruct(schemas.CreateBatchSegmentJobRequest_jobOutput)
+		v.JobOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NumResults != nil {
+		s.WriteInt32(schemas.CreateBatchSegmentJobRequest_numResults, *v.NumResults)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateBatchSegmentJobRequest_roleArn, *v.RoleArn)
+	}
+	if v.SolutionVersionArn != nil {
+		s.WriteString(schemas.CreateBatchSegmentJobRequest_solutionVersionArn, *v.SolutionVersionArn)
+	}
+	serializeTags(s, schemas.CreateBatchSegmentJobRequest_tags, v.Tags)
+}
+
 type CreateBatchSegmentJobOutput struct {
 
 	// The ARN of the batch segment job.
@@ -85,13 +122,32 @@ type CreateBatchSegmentJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBatchSegmentJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBatchSegmentJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBatchSegmentJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchSegmentJobArn != nil {
+		s.WriteString(schemas.CreateBatchSegmentJobResponse_batchSegmentJobArn, *v.BatchSegmentJobArn)
+	}
+}
+func (v *CreateBatchSegmentJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBatchSegmentJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBatchSegmentJobResponse_batchSegmentJobArn:
+			v.BatchSegmentJobArn = new(string)
+			return d.ReadString(schemas.CreateBatchSegmentJobResponse_batchSegmentJobArn, v.BatchSegmentJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBatchSegmentJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateBatchSegmentJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBatchSegmentJob, schemas.CreateBatchSegmentJobRequest, schemas.CreateBatchSegmentJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateBatchSegmentJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBatchSegmentJob, schemas.CreateBatchSegmentJobRequest, schemas.CreateBatchSegmentJobResponse), output: &CreateBatchSegmentJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

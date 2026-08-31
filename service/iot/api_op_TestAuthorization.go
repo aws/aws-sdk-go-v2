@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,27 @@ type TestAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestAuthorizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestAuthorizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestAuthorizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuthInfos(s, schemas.TestAuthorizationRequest_authInfos, v.AuthInfos)
+	if v.ClientId != nil {
+		s.WriteString(schemas.TestAuthorizationRequest_clientId, *v.ClientId)
+	}
+	if v.CognitoIdentityPoolId != nil {
+		s.WriteString(schemas.TestAuthorizationRequest_cognitoIdentityPoolId, *v.CognitoIdentityPoolId)
+	}
+	serializePolicyNames(s, schemas.TestAuthorizationRequest_policyNamesToAdd, v.PolicyNamesToAdd)
+	serializePolicyNames(s, schemas.TestAuthorizationRequest_policyNamesToSkip, v.PolicyNamesToSkip)
+	if v.Principal != nil {
+		s.WriteString(schemas.TestAuthorizationRequest_principal, *v.Principal)
+	}
+}
+
 type TestAuthorizationOutput struct {
 
 	// The authentication results.
@@ -70,13 +93,29 @@ type TestAuthorizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestAuthorizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestAuthorizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestAuthorizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuthResults(s, schemas.TestAuthorizationResponse_authResults, v.AuthResults)
+}
+func (v *TestAuthorizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestAuthorizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestAuthorizationResponse_authResults:
+			return deserializeAuthResults(d, schemas.TestAuthorizationResponse_authResults, &v.AuthResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTestAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestAuthorization, schemas.TestAuthorizationRequest, schemas.TestAuthorizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTestAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestAuthorization, schemas.TestAuthorizationRequest, schemas.TestAuthorizationResponse), output: &TestAuthorizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

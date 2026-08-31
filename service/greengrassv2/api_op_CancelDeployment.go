@@ -4,6 +4,8 @@ package greengrassv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type CancelDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.CancelDeploymentRequest_deploymentId, *v.DeploymentId)
+	}
+}
+
 type CancelDeploymentOutput struct {
 
 	// A message that communicates if the cancel was successful.
@@ -46,13 +60,32 @@ type CancelDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelDeploymentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CancelDeploymentResponse_message, *v.Message)
+	}
+}
+func (v *CancelDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelDeploymentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelDeploymentResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CancelDeploymentResponse_message, v.Message)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelDeployment, schemas.CancelDeploymentRequest, schemas.CancelDeploymentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelDeployment, schemas.CancelDeploymentRequest, schemas.CancelDeploymentResponse), output: &CancelDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

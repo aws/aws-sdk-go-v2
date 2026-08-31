@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,27 @@ type UpdateIdMappingTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIdMappingTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIdMappingTableInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIdMappingTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateIdMappingTableInput_description, *v.Description)
+	}
+	if v.IdMappingTableIdentifier != nil {
+		s.WriteString(schemas.UpdateIdMappingTableInput_idMappingTableIdentifier, *v.IdMappingTableIdentifier)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.UpdateIdMappingTableInput_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.UpdateIdMappingTableInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+
 type UpdateIdMappingTableOutput struct {
 
 	// The updated ID mapping table.
@@ -59,13 +82,34 @@ type UpdateIdMappingTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIdMappingTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIdMappingTableOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIdMappingTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdMappingTable != nil {
+		s.WriteStruct(schemas.UpdateIdMappingTableOutput_idMappingTable)
+		v.IdMappingTable.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateIdMappingTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIdMappingTableOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIdMappingTableOutput_idMappingTable:
+			v.IdMappingTable = &types.IdMappingTable{}
+			return v.IdMappingTable.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIdMappingTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIdMappingTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIdMappingTable, schemas.UpdateIdMappingTableInput, schemas.UpdateIdMappingTableOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIdMappingTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIdMappingTable, schemas.UpdateIdMappingTableInput, schemas.UpdateIdMappingTableOutput), output: &UpdateIdMappingTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -126,6 +128,29 @@ type AssociateEmailAddressAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateEmailAddressAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateEmailAddressAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateEmailAddressAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasConfiguration != nil {
+		s.WriteStruct(schemas.AssociateEmailAddressAliasRequest_AliasConfiguration)
+		v.AliasConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AssociateEmailAddressAliasRequest_ClientToken, *v.ClientToken)
+	}
+	if v.EmailAddressId != nil {
+		s.WriteString(schemas.AssociateEmailAddressAliasRequest_EmailAddressId, *v.EmailAddressId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.AssociateEmailAddressAliasRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type AssociateEmailAddressAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -133,13 +158,26 @@ type AssociateEmailAddressAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateEmailAddressAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateEmailAddressAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateEmailAddressAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateEmailAddressAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateEmailAddressAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateEmailAddressAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateEmailAddressAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateEmailAddressAlias, schemas.AssociateEmailAddressAliasRequest, schemas.AssociateEmailAddressAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateEmailAddressAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateEmailAddressAlias, schemas.AssociateEmailAddressAliasRequest, schemas.AssociateEmailAddressAliasResponse), output: &AssociateEmailAddressAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

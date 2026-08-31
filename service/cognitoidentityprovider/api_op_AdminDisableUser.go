@@ -4,6 +4,8 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,21 @@ type AdminDisableUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminDisableUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminDisableUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminDisableUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AdminDisableUserRequest_UserPoolId, *v.UserPoolId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.AdminDisableUserRequest_Username, *v.Username)
+	}
+}
+
 // Represents the response received from the server to disable the user as an
 // administrator.
 type AdminDisableUserOutput struct {
@@ -68,13 +85,26 @@ type AdminDisableUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminDisableUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminDisableUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminDisableUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AdminDisableUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminDisableUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdminDisableUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminDisableUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminDisableUser, schemas.AdminDisableUserRequest, schemas.AdminDisableUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminDisableUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminDisableUser, schemas.AdminDisableUserRequest, schemas.AdminDisableUserResponse), output: &AdminDisableUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type GetResourceDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceDefinitionVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceDefinitionVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceDefinitionVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceDefinitionId != nil {
+		s.WriteString(schemas.GetResourceDefinitionVersionRequest_ResourceDefinitionId, *v.ResourceDefinitionId)
+	}
+	if v.ResourceDefinitionVersionId != nil {
+		s.WriteString(schemas.GetResourceDefinitionVersionRequest_ResourceDefinitionVersionId, *v.ResourceDefinitionVersionId)
+	}
+}
+
 type GetResourceDefinitionVersionOutput struct {
 
 	// Arn of the resource definition version.
@@ -69,13 +86,58 @@ type GetResourceDefinitionVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceDefinitionVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceDefinitionVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceDefinitionVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetResourceDefinitionVersionResponse_Arn, *v.Arn)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteString(schemas.GetResourceDefinitionVersionResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Definition != nil {
+		s.WriteStruct(schemas.GetResourceDefinitionVersionResponse_Definition)
+		v.Definition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetResourceDefinitionVersionResponse_Id, *v.Id)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.GetResourceDefinitionVersionResponse_Version, *v.Version)
+	}
+}
+func (v *GetResourceDefinitionVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourceDefinitionVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourceDefinitionVersionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetResourceDefinitionVersionResponse_Arn, v.Arn)
+		case schemas.GetResourceDefinitionVersionResponse_CreationTimestamp:
+			v.CreationTimestamp = new(string)
+			return d.ReadString(schemas.GetResourceDefinitionVersionResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.GetResourceDefinitionVersionResponse_Definition:
+			v.Definition = &types.ResourceDefinitionVersion{}
+			return v.Definition.Deserialize(d)
+		case schemas.GetResourceDefinitionVersionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetResourceDefinitionVersionResponse_Id, v.Id)
+		case schemas.GetResourceDefinitionVersionResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.GetResourceDefinitionVersionResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourceDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourceDefinitionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceDefinitionVersion, schemas.GetResourceDefinitionVersionRequest, schemas.GetResourceDefinitionVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourceDefinitionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceDefinitionVersion, schemas.GetResourceDefinitionVersionRequest, schemas.GetResourceDefinitionVersionResponse), output: &GetResourceDefinitionVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

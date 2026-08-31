@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,42 @@ type CreateFlowDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFlowDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFlowDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFlowDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowDefinitionName != nil {
+		s.WriteString(schemas.CreateFlowDefinitionRequest_FlowDefinitionName, *v.FlowDefinitionName)
+	}
+	if v.HumanLoopActivationConfig != nil {
+		s.WriteStruct(schemas.CreateFlowDefinitionRequest_HumanLoopActivationConfig)
+		v.HumanLoopActivationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HumanLoopConfig != nil {
+		s.WriteStruct(schemas.CreateFlowDefinitionRequest_HumanLoopConfig)
+		v.HumanLoopConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HumanLoopRequestSource != nil {
+		s.WriteStruct(schemas.CreateFlowDefinitionRequest_HumanLoopRequestSource)
+		v.HumanLoopRequestSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.CreateFlowDefinitionRequest_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateFlowDefinitionRequest_RoleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.CreateFlowDefinitionRequest_Tags, v.Tags)
+}
+
 type CreateFlowDefinitionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the flow definition you create.
@@ -77,13 +115,32 @@ type CreateFlowDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFlowDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFlowDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFlowDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowDefinitionArn != nil {
+		s.WriteString(schemas.CreateFlowDefinitionResponse_FlowDefinitionArn, *v.FlowDefinitionArn)
+	}
+}
+func (v *CreateFlowDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFlowDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFlowDefinitionResponse_FlowDefinitionArn:
+			v.FlowDefinitionArn = new(string)
+			return d.ReadString(schemas.CreateFlowDefinitionResponse_FlowDefinitionArn, v.FlowDefinitionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFlowDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFlowDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFlowDefinition, schemas.CreateFlowDefinitionRequest, schemas.CreateFlowDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateFlowDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFlowDefinition, schemas.CreateFlowDefinitionRequest, schemas.CreateFlowDefinitionResponse), output: &CreateFlowDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

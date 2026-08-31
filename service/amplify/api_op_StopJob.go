@@ -4,7 +4,9 @@ package amplify
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type StopJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.StopJobRequest_appId, *v.AppId)
+	}
+	if v.BranchName != nil {
+		s.WriteString(schemas.StopJobRequest_branchName, *v.BranchName)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.StopJobRequest_jobId, *v.JobId)
+	}
+}
+
 // The result structure for the stop job request.
 type StopJobOutput struct {
 
@@ -59,13 +79,34 @@ type StopJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopJobResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobSummary != nil {
+		s.WriteStruct(schemas.StopJobResult_jobSummary)
+		v.JobSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StopJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopJobResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopJobResult_jobSummary:
+			v.JobSummary = &types.JobSummary{}
+			return v.JobSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopJob, schemas.StopJobRequest, schemas.StopJobResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopJob, schemas.StopJobRequest, schemas.StopJobResult), output: &StopJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

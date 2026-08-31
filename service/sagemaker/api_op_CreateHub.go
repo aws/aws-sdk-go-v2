@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,31 @@ type CreateHubInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHubInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHubRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHubInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HubDescription != nil {
+		s.WriteString(schemas.CreateHubRequest_HubDescription, *v.HubDescription)
+	}
+	if v.HubDisplayName != nil {
+		s.WriteString(schemas.CreateHubRequest_HubDisplayName, *v.HubDisplayName)
+	}
+	if v.HubName != nil {
+		s.WriteString(schemas.CreateHubRequest_HubName, *v.HubName)
+	}
+	serializeHubSearchKeywordList(s, schemas.CreateHubRequest_HubSearchKeywords, v.HubSearchKeywords)
+	if v.S3StorageConfig != nil {
+		s.WriteStruct(schemas.CreateHubRequest_S3StorageConfig)
+		v.S3StorageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateHubRequest_Tags, v.Tags)
+}
+
 type CreateHubOutput struct {
 
 	// The Amazon Resource Name (ARN) of the hub.
@@ -64,13 +91,32 @@ type CreateHubOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHubOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHubResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHubOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HubArn != nil {
+		s.WriteString(schemas.CreateHubResponse_HubArn, *v.HubArn)
+	}
+}
+func (v *CreateHubOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateHubResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateHubResponse_HubArn:
+			v.HubArn = new(string)
+			return d.ReadString(schemas.CreateHubResponse_HubArn, v.HubArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateHubMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateHub{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHub, schemas.CreateHubRequest, schemas.CreateHubResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateHub{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHub, schemas.CreateHubRequest, schemas.CreateHubResponse), output: &CreateHubOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

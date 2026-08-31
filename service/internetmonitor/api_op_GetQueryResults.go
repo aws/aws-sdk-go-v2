@@ -5,7 +5,9 @@ package internetmonitor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,27 @@ type GetQueryResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueryResultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueryResultsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueryResultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetQueryResultsInput_MaxResults, *v.MaxResults)
+	}
+	if v.MonitorName != nil {
+		s.WriteString(schemas.GetQueryResultsInput_MonitorName, *v.MonitorName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetQueryResultsInput_NextToken, *v.NextToken)
+	}
+	if v.QueryId != nil {
+		s.WriteString(schemas.GetQueryResultsInput_QueryId, *v.QueryId)
+	}
+}
+
 type GetQueryResultsOutput struct {
 
 	// The data results that the query returns. Data is returned in arrays, aligned
@@ -81,13 +104,38 @@ type GetQueryResultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueryResultsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueryResultsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueryResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeQueryData(s, schemas.GetQueryResultsOutput_Data, v.Data)
+	serializeQueryFields(s, schemas.GetQueryResultsOutput_Fields, v.Fields)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetQueryResultsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *GetQueryResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetQueryResultsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetQueryResultsOutput_Data:
+			return deserializeQueryData(d, schemas.GetQueryResultsOutput_Data, &v.Data)
+		case schemas.GetQueryResultsOutput_Fields:
+			return deserializeQueryFields(d, schemas.GetQueryResultsOutput_Fields, &v.Fields)
+		case schemas.GetQueryResultsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetQueryResultsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetQueryResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetQueryResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryResults, schemas.GetQueryResultsInput, schemas.GetQueryResultsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetQueryResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryResults, schemas.GetQueryResultsInput, schemas.GetQueryResultsOutput), output: &GetQueryResultsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

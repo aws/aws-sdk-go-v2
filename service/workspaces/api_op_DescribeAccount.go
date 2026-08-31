@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -27,6 +29,15 @@ func (c *Client) DescribeAccount(ctx context.Context, params *DescribeAccountInp
 
 type DescribeAccountInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type DescribeAccountOutput struct {
@@ -55,13 +66,58 @@ type DescribeAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DedicatedTenancyAccountType != "" {
+		s.WriteString(schemas.DescribeAccountResult_DedicatedTenancyAccountType, string(v.DedicatedTenancyAccountType))
+	}
+	if v.DedicatedTenancyManagementCidrRange != nil {
+		s.WriteString(schemas.DescribeAccountResult_DedicatedTenancyManagementCidrRange, *v.DedicatedTenancyManagementCidrRange)
+	}
+	if v.DedicatedTenancySupport != "" {
+		s.WriteString(schemas.DescribeAccountResult_DedicatedTenancySupport, string(v.DedicatedTenancySupport))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DescribeAccountResult_Message, *v.Message)
+	}
+}
+func (v *DescribeAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccountResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccountResult_DedicatedTenancyAccountType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAccountResult_DedicatedTenancyAccountType, &ev); err != nil {
+				return err
+			}
+			v.DedicatedTenancyAccountType = types.DedicatedTenancyAccountType(ev)
+			return nil
+		case schemas.DescribeAccountResult_DedicatedTenancyManagementCidrRange:
+			v.DedicatedTenancyManagementCidrRange = new(string)
+			return d.ReadString(schemas.DescribeAccountResult_DedicatedTenancyManagementCidrRange, v.DedicatedTenancyManagementCidrRange)
+		case schemas.DescribeAccountResult_DedicatedTenancySupport:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAccountResult_DedicatedTenancySupport, &ev); err != nil {
+				return err
+			}
+			v.DedicatedTenancySupport = types.DedicatedTenancySupportResultEnum(ev)
+			return nil
+		case schemas.DescribeAccountResult_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DescribeAccountResult_Message, v.Message)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccount, schemas.DescribeAccountRequest, schemas.DescribeAccountResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccount, schemas.DescribeAccountRequest, schemas.DescribeAccountResult), output: &DescribeAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

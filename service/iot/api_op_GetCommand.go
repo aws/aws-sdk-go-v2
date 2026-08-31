@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetCommandInput struct {
 	CommandId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetCommandInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCommandRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCommandInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommandId != nil {
+		s.WriteString(schemas.GetCommandRequest_commandId, *v.CommandId)
+	}
 }
 
 type GetCommandOutput struct {
@@ -88,13 +102,115 @@ type GetCommandOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCommandOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCommandResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCommandOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommandArn != nil {
+		s.WriteString(schemas.GetCommandResponse_commandArn, *v.CommandArn)
+	}
+	if v.CommandId != nil {
+		s.WriteString(schemas.GetCommandResponse_commandId, *v.CommandId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetCommandResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Deprecated != nil {
+		s.WriteBool(schemas.GetCommandResponse_deprecated, *v.Deprecated)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetCommandResponse_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GetCommandResponse_displayName, *v.DisplayName)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetCommandResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	serializeCommandParameterList(s, schemas.GetCommandResponse_mandatoryParameters, v.MandatoryParameters)
+	if v.Namespace != "" {
+		s.WriteString(schemas.GetCommandResponse_namespace, string(v.Namespace))
+	}
+	if v.Payload != nil {
+		s.WriteStruct(schemas.GetCommandResponse_payload)
+		v.Payload.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PayloadTemplate != nil {
+		s.WriteString(schemas.GetCommandResponse_payloadTemplate, *v.PayloadTemplate)
+	}
+	if v.PendingDeletion != nil {
+		s.WriteBool(schemas.GetCommandResponse_pendingDeletion, *v.PendingDeletion)
+	}
+	if v.Preprocessor != nil {
+		s.WriteStruct(schemas.GetCommandResponse_preprocessor)
+		v.Preprocessor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetCommandResponse_roleArn, *v.RoleArn)
+	}
+}
+func (v *GetCommandOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCommandResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCommandResponse_commandArn:
+			v.CommandArn = new(string)
+			return d.ReadString(schemas.GetCommandResponse_commandArn, v.CommandArn)
+		case schemas.GetCommandResponse_commandId:
+			v.CommandId = new(string)
+			return d.ReadString(schemas.GetCommandResponse_commandId, v.CommandId)
+		case schemas.GetCommandResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCommandResponse_createdAt, v.CreatedAt)
+		case schemas.GetCommandResponse_deprecated:
+			v.Deprecated = new(bool)
+			return d.ReadBool(schemas.GetCommandResponse_deprecated, v.Deprecated)
+		case schemas.GetCommandResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetCommandResponse_description, v.Description)
+		case schemas.GetCommandResponse_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetCommandResponse_displayName, v.DisplayName)
+		case schemas.GetCommandResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCommandResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetCommandResponse_mandatoryParameters:
+			return deserializeCommandParameterList(d, schemas.GetCommandResponse_mandatoryParameters, &v.MandatoryParameters)
+		case schemas.GetCommandResponse_namespace:
+			var ev string
+			if err := d.ReadString(schemas.GetCommandResponse_namespace, &ev); err != nil {
+				return err
+			}
+			v.Namespace = types.CommandNamespace(ev)
+			return nil
+		case schemas.GetCommandResponse_payload:
+			v.Payload = &types.CommandPayload{}
+			return v.Payload.Deserialize(d)
+		case schemas.GetCommandResponse_payloadTemplate:
+			v.PayloadTemplate = new(string)
+			return d.ReadString(schemas.GetCommandResponse_payloadTemplate, v.PayloadTemplate)
+		case schemas.GetCommandResponse_pendingDeletion:
+			v.PendingDeletion = new(bool)
+			return d.ReadBool(schemas.GetCommandResponse_pendingDeletion, v.PendingDeletion)
+		case schemas.GetCommandResponse_preprocessor:
+			v.Preprocessor = &types.CommandPreprocessor{}
+			return v.Preprocessor.Deserialize(d)
+		case schemas.GetCommandResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetCommandResponse_roleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCommandMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCommand{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCommand, schemas.GetCommandRequest, schemas.GetCommandResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCommand{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCommand, schemas.GetCommandRequest, schemas.GetCommandResponse), output: &GetCommandOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

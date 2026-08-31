@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -52,6 +54,34 @@ type ListTrainingPlansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTrainingPlansInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTrainingPlansRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTrainingPlansInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTrainingPlanFilters(s, schemas.ListTrainingPlansRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTrainingPlansRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTrainingPlansRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListTrainingPlansRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListTrainingPlansRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.StartTimeAfter != nil {
+		s.WriteTime(schemas.ListTrainingPlansRequest_StartTimeAfter, *v.StartTimeAfter)
+	}
+	if v.StartTimeBefore != nil {
+		s.WriteTime(schemas.ListTrainingPlansRequest_StartTimeBefore, *v.StartTimeBefore)
+	}
+}
+
 type ListTrainingPlansOutput struct {
 
 	// A list of summary information for the training plans.
@@ -68,13 +98,35 @@ type ListTrainingPlansOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTrainingPlansOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTrainingPlansResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTrainingPlansOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTrainingPlansResponse_NextToken, *v.NextToken)
+	}
+	serializeTrainingPlanSummaries(s, schemas.ListTrainingPlansResponse_TrainingPlanSummaries, v.TrainingPlanSummaries)
+}
+func (v *ListTrainingPlansOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTrainingPlansResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTrainingPlansResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTrainingPlansResponse_NextToken, v.NextToken)
+		case schemas.ListTrainingPlansResponse_TrainingPlanSummaries:
+			return deserializeTrainingPlanSummaries(d, schemas.ListTrainingPlansResponse_TrainingPlanSummaries, &v.TrainingPlanSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTrainingPlansMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTrainingPlans{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrainingPlans, schemas.ListTrainingPlansRequest, schemas.ListTrainingPlansResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTrainingPlans{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrainingPlans, schemas.ListTrainingPlansRequest, schemas.ListTrainingPlansResponse), output: &ListTrainingPlansOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

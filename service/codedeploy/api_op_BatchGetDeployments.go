@@ -4,7 +4,9 @@ package codedeploy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,16 @@ type BatchGetDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetDeploymentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetDeploymentsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeploymentsList(s, schemas.BatchGetDeploymentsInput_deploymentIds, v.DeploymentIds)
+}
+
 // Represents the output of a BatchGetDeployments operation.
 type BatchGetDeploymentsOutput struct {
 
@@ -49,13 +61,29 @@ type BatchGetDeploymentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetDeploymentsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeploymentsInfoList(s, schemas.BatchGetDeploymentsOutput_deploymentsInfo, v.DeploymentsInfo)
+}
+func (v *BatchGetDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetDeploymentsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetDeploymentsOutput_deploymentsInfo:
+			return deserializeDeploymentsInfoList(d, schemas.BatchGetDeploymentsOutput_deploymentsInfo, &v.DeploymentsInfo)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetDeployments, schemas.BatchGetDeploymentsInput, schemas.BatchGetDeploymentsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetDeployments, schemas.BatchGetDeploymentsInput, schemas.BatchGetDeploymentsOutput), output: &BatchGetDeploymentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

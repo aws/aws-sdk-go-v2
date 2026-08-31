@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type DeleteImageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteImageVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteImageVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteImageVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.DeleteImageVersionRequest_Alias, *v.Alias)
+	}
+	if v.ImageName != nil {
+		s.WriteString(schemas.DeleteImageVersionRequest_ImageName, *v.ImageName)
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.DeleteImageVersionRequest_Version, *v.Version)
+	}
+}
+
 type DeleteImageVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +67,26 @@ type DeleteImageVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteImageVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteImageVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteImageVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteImageVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteImageVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteImageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteImageVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteImageVersion, schemas.DeleteImageVersionRequest, schemas.DeleteImageVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteImageVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteImageVersion, schemas.DeleteImageVersionRequest, schemas.DeleteImageVersionResponse), output: &DeleteImageVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

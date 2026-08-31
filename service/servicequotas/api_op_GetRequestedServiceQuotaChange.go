@@ -4,7 +4,9 @@ package servicequotas
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetRequestedServiceQuotaChangeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRequestedServiceQuotaChangeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRequestedServiceQuotaChangeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRequestedServiceQuotaChangeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.GetRequestedServiceQuotaChangeRequest_RequestId, *v.RequestId)
+	}
+}
+
 type GetRequestedServiceQuotaChangeOutput struct {
 
 	// Information about the quota increase request.
@@ -45,13 +59,34 @@ type GetRequestedServiceQuotaChangeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRequestedServiceQuotaChangeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRequestedServiceQuotaChangeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRequestedServiceQuotaChangeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestedQuota != nil {
+		s.WriteStruct(schemas.GetRequestedServiceQuotaChangeResponse_RequestedQuota)
+		v.RequestedQuota.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetRequestedServiceQuotaChangeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRequestedServiceQuotaChangeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRequestedServiceQuotaChangeResponse_RequestedQuota:
+			v.RequestedQuota = &types.RequestedServiceQuotaChange{}
+			return v.RequestedQuota.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRequestedServiceQuotaChangeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRequestedServiceQuotaChange{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRequestedServiceQuotaChange, schemas.GetRequestedServiceQuotaChangeRequest, schemas.GetRequestedServiceQuotaChangeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRequestedServiceQuotaChange{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRequestedServiceQuotaChange, schemas.GetRequestedServiceQuotaChangeRequest, schemas.GetRequestedServiceQuotaChangeResponse), output: &GetRequestedServiceQuotaChangeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type ListContactEvaluationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContactEvaluationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContactEvaluationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContactEvaluationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.ListContactEvaluationsRequest_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListContactEvaluationsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContactEvaluationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListContactEvaluationsOutput struct {
 
 	// Provides details about a list of contact evaluations belonging to an instance.
@@ -68,13 +88,35 @@ type ListContactEvaluationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContactEvaluationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContactEvaluationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContactEvaluationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEvaluationSummaryList(s, schemas.ListContactEvaluationsResponse_EvaluationSummaryList, v.EvaluationSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContactEvaluationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListContactEvaluationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListContactEvaluationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListContactEvaluationsResponse_EvaluationSummaryList:
+			return deserializeEvaluationSummaryList(d, schemas.ListContactEvaluationsResponse_EvaluationSummaryList, &v.EvaluationSummaryList)
+		case schemas.ListContactEvaluationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListContactEvaluationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListContactEvaluationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListContactEvaluations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContactEvaluations, schemas.ListContactEvaluationsRequest, schemas.ListContactEvaluationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListContactEvaluations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContactEvaluations, schemas.ListContactEvaluationsRequest, schemas.ListContactEvaluationsResponse), output: &ListContactEvaluationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

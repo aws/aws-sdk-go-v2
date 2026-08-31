@@ -5,7 +5,9 @@ package managedblockchain
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListProposalsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProposalsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProposalsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProposalsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProposalsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.ListProposalsInput_NetworkId, *v.NetworkId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProposalsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListProposalsOutput struct {
 
 	// The pagination token that indicates the next set of results to retrieve.
@@ -57,13 +77,35 @@ type ListProposalsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProposalsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProposalsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProposalsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProposalsOutput_NextToken, *v.NextToken)
+	}
+	serializeProposalSummaryList(s, schemas.ListProposalsOutput_Proposals, v.Proposals)
+}
+func (v *ListProposalsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProposalsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProposalsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProposalsOutput_NextToken, v.NextToken)
+		case schemas.ListProposalsOutput_Proposals:
+			return deserializeProposalSummaryList(d, schemas.ListProposalsOutput_Proposals, &v.Proposals)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProposalsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProposals{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProposals, schemas.ListProposalsInput, schemas.ListProposalsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProposals{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProposals, schemas.ListProposalsInput, schemas.ListProposalsOutput), output: &ListProposalsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

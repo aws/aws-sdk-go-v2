@@ -5,6 +5,8 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,24 @@ type CreateMilestoneInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMilestoneInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMilestoneInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMilestoneInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateMilestoneInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.MilestoneName != nil {
+		s.WriteString(schemas.CreateMilestoneInput_MilestoneName, *v.MilestoneName)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.CreateMilestoneInput_WorkloadId, *v.WorkloadId)
+	}
+}
+
 // Output of a create milestone call.
 type CreateMilestoneOutput struct {
 
@@ -77,13 +97,38 @@ type CreateMilestoneOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMilestoneOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMilestoneOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMilestoneOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MilestoneNumber != nil {
+		s.WriteInt32(schemas.CreateMilestoneOutput_MilestoneNumber, *v.MilestoneNumber)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.CreateMilestoneOutput_WorkloadId, *v.WorkloadId)
+	}
+}
+func (v *CreateMilestoneOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMilestoneOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMilestoneOutput_MilestoneNumber:
+			v.MilestoneNumber = new(int32)
+			return d.ReadInt32(schemas.CreateMilestoneOutput_MilestoneNumber, v.MilestoneNumber)
+		case schemas.CreateMilestoneOutput_WorkloadId:
+			v.WorkloadId = new(string)
+			return d.ReadString(schemas.CreateMilestoneOutput_WorkloadId, v.WorkloadId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMilestoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMilestone{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMilestone, schemas.CreateMilestoneInput, schemas.CreateMilestoneOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMilestone{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMilestone, schemas.CreateMilestoneInput, schemas.CreateMilestoneOutput), output: &CreateMilestoneOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

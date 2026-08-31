@@ -5,7 +5,9 @@ package greengrassv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -77,6 +79,27 @@ type ListInstalledComponentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstalledComponentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstalledComponentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstalledComponentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreDeviceThingName != nil {
+		s.WriteString(schemas.ListInstalledComponentsRequest_coreDeviceThingName, *v.CoreDeviceThingName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInstalledComponentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInstalledComponentsRequest_nextToken, *v.NextToken)
+	}
+	if v.TopologyFilter != "" {
+		s.WriteString(schemas.ListInstalledComponentsRequest_topologyFilter, string(v.TopologyFilter))
+	}
+}
+
 type ListInstalledComponentsOutput struct {
 
 	// A list that summarizes each component on the core device.
@@ -100,13 +123,35 @@ type ListInstalledComponentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstalledComponentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstalledComponentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstalledComponentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstalledComponentList(s, schemas.ListInstalledComponentsResponse_installedComponents, v.InstalledComponents)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInstalledComponentsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListInstalledComponentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInstalledComponentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInstalledComponentsResponse_installedComponents:
+			return deserializeInstalledComponentList(d, schemas.ListInstalledComponentsResponse_installedComponents, &v.InstalledComponents)
+		case schemas.ListInstalledComponentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInstalledComponentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInstalledComponentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInstalledComponents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstalledComponents, schemas.ListInstalledComponentsRequest, schemas.ListInstalledComponentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListInstalledComponents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstalledComponents, schemas.ListInstalledComponentsRequest, schemas.ListInstalledComponentsResponse), output: &ListInstalledComponentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

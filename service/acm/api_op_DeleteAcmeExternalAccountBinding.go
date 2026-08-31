@@ -4,6 +4,8 @@ package acm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/acm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -36,6 +38,17 @@ type DeleteAcmeExternalAccountBindingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAcmeExternalAccountBindingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAcmeExternalAccountBindingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAcmeExternalAccountBindingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcmeExternalAccountBindingArn != nil {
+		s.WriteString(schemas.DeleteAcmeExternalAccountBindingRequest_AcmeExternalAccountBindingArn, *v.AcmeExternalAccountBindingArn)
+	}
+}
 func (in *DeleteAcmeExternalAccountBindingInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ServiceType = ptr.String("ACM-ACME")
@@ -48,13 +61,26 @@ type DeleteAcmeExternalAccountBindingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAcmeExternalAccountBindingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAcmeExternalAccountBindingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAcmeExternalAccountBindingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAcmeExternalAccountBindingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAcmeExternalAccountBinding{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAcmeExternalAccountBinding, schemas.DeleteAcmeExternalAccountBindingRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteAcmeExternalAccountBinding{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAcmeExternalAccountBinding, schemas.DeleteAcmeExternalAccountBindingRequest, nil), output: &DeleteAcmeExternalAccountBindingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

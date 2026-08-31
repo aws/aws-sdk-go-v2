@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,23 @@ type AdminDisableProviderForUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminDisableProviderForUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminDisableProviderForUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminDisableProviderForUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.User != nil {
+		s.WriteStruct(schemas.AdminDisableProviderForUserRequest_User)
+		v.User.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AdminDisableProviderForUserRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type AdminDisableProviderForUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -85,13 +104,26 @@ type AdminDisableProviderForUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminDisableProviderForUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminDisableProviderForUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminDisableProviderForUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AdminDisableProviderForUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminDisableProviderForUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdminDisableProviderForUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminDisableProviderForUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminDisableProviderForUser, schemas.AdminDisableProviderForUserRequest, schemas.AdminDisableProviderForUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminDisableProviderForUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminDisableProviderForUser, schemas.AdminDisableProviderForUserRequest, schemas.AdminDisableProviderForUserResponse), output: &AdminDisableProviderForUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

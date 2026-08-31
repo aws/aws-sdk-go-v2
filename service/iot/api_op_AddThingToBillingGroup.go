@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type AddThingToBillingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddThingToBillingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddThingToBillingGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddThingToBillingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingGroupArn != nil {
+		s.WriteString(schemas.AddThingToBillingGroupRequest_billingGroupArn, *v.BillingGroupArn)
+	}
+	if v.BillingGroupName != nil {
+		s.WriteString(schemas.AddThingToBillingGroupRequest_billingGroupName, *v.BillingGroupName)
+	}
+	if v.ThingArn != nil {
+		s.WriteString(schemas.AddThingToBillingGroupRequest_thingArn, *v.ThingArn)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.AddThingToBillingGroupRequest_thingName, *v.ThingName)
+	}
+}
+
 type AddThingToBillingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +77,26 @@ type AddThingToBillingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddThingToBillingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddThingToBillingGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddThingToBillingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AddThingToBillingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddThingToBillingGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddThingToBillingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddThingToBillingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddThingToBillingGroup, schemas.AddThingToBillingGroupRequest, schemas.AddThingToBillingGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddThingToBillingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddThingToBillingGroup, schemas.AddThingToBillingGroupRequest, schemas.AddThingToBillingGroupResponse), output: &AddThingToBillingGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

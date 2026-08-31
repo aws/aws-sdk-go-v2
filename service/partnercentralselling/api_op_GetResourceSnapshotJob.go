@@ -4,7 +4,9 @@ package partnercentralselling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -44,6 +46,21 @@ type GetResourceSnapshotJobInput struct {
 	ResourceSnapshotJobIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetResourceSnapshotJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceSnapshotJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceSnapshotJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetResourceSnapshotJobRequest_Catalog, *v.Catalog)
+	}
+	if v.ResourceSnapshotJobIdentifier != nil {
+		s.WriteString(schemas.GetResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier, *v.ResourceSnapshotJobIdentifier)
+	}
 }
 
 type GetResourceSnapshotJobOutput struct {
@@ -108,13 +125,106 @@ type GetResourceSnapshotJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceSnapshotJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceSnapshotJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceSnapshotJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetResourceSnapshotJobResponse_Arn, *v.Arn)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetResourceSnapshotJobResponse_Catalog, *v.Catalog)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetResourceSnapshotJobResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.EngagementId != nil {
+		s.WriteString(schemas.GetResourceSnapshotJobResponse_EngagementId, *v.EngagementId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetResourceSnapshotJobResponse_Id, *v.Id)
+	}
+	if v.LastFailure != nil {
+		s.WriteString(schemas.GetResourceSnapshotJobResponse_LastFailure, *v.LastFailure)
+	}
+	if v.LastSuccessfulExecutionDate != nil {
+		s.WriteTime(schemas.GetResourceSnapshotJobResponse_LastSuccessfulExecutionDate, *v.LastSuccessfulExecutionDate)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetResourceSnapshotJobResponse_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.GetResourceSnapshotJobResponse_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceSnapshotTemplateName != nil {
+		s.WriteString(schemas.GetResourceSnapshotJobResponse_ResourceSnapshotTemplateName, *v.ResourceSnapshotTemplateName)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.GetResourceSnapshotJobResponse_ResourceType, string(v.ResourceType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetResourceSnapshotJobResponse_Status, string(v.Status))
+	}
+}
+func (v *GetResourceSnapshotJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourceSnapshotJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourceSnapshotJobResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetResourceSnapshotJobResponse_Arn, v.Arn)
+		case schemas.GetResourceSnapshotJobResponse_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.GetResourceSnapshotJobResponse_Catalog, v.Catalog)
+		case schemas.GetResourceSnapshotJobResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetResourceSnapshotJobResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetResourceSnapshotJobResponse_EngagementId:
+			v.EngagementId = new(string)
+			return d.ReadString(schemas.GetResourceSnapshotJobResponse_EngagementId, v.EngagementId)
+		case schemas.GetResourceSnapshotJobResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetResourceSnapshotJobResponse_Id, v.Id)
+		case schemas.GetResourceSnapshotJobResponse_LastFailure:
+			v.LastFailure = new(string)
+			return d.ReadString(schemas.GetResourceSnapshotJobResponse_LastFailure, v.LastFailure)
+		case schemas.GetResourceSnapshotJobResponse_LastSuccessfulExecutionDate:
+			v.LastSuccessfulExecutionDate = new(time.Time)
+			return d.ReadTime(schemas.GetResourceSnapshotJobResponse_LastSuccessfulExecutionDate, v.LastSuccessfulExecutionDate)
+		case schemas.GetResourceSnapshotJobResponse_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.GetResourceSnapshotJobResponse_ResourceArn, v.ResourceArn)
+		case schemas.GetResourceSnapshotJobResponse_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.GetResourceSnapshotJobResponse_ResourceId, v.ResourceId)
+		case schemas.GetResourceSnapshotJobResponse_ResourceSnapshotTemplateName:
+			v.ResourceSnapshotTemplateName = new(string)
+			return d.ReadString(schemas.GetResourceSnapshotJobResponse_ResourceSnapshotTemplateName, v.ResourceSnapshotTemplateName)
+		case schemas.GetResourceSnapshotJobResponse_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.GetResourceSnapshotJobResponse_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = types.ResourceType(ev)
+			return nil
+		case schemas.GetResourceSnapshotJobResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetResourceSnapshotJobResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ResourceSnapshotJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourceSnapshotJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetResourceSnapshotJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceSnapshotJob, schemas.GetResourceSnapshotJobRequest, schemas.GetResourceSnapshotJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetResourceSnapshotJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceSnapshotJob, schemas.GetResourceSnapshotJobRequest, schemas.GetResourceSnapshotJobResponse), output: &GetResourceSnapshotJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

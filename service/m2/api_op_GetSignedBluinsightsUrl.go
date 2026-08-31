@@ -4,6 +4,8 @@ package m2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -27,6 +29,22 @@ type GetSignedBluinsightsUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSignedBluinsightsUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSignedBluinsightsUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetSignedBluinsightsUrlInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type GetSignedBluinsightsUrlOutput struct {
 
 	// Single sign-on AWS Blu Insights URL.
@@ -40,13 +58,32 @@ type GetSignedBluinsightsUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSignedBluinsightsUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSignedBluinsightsUrlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSignedBluinsightsUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SignedBiUrl != nil {
+		s.WriteString(schemas.GetSignedBluinsightsUrlResponse_signedBiUrl, *v.SignedBiUrl)
+	}
+}
+func (v *GetSignedBluinsightsUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSignedBluinsightsUrlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSignedBluinsightsUrlResponse_signedBiUrl:
+			v.SignedBiUrl = new(string)
+			return d.ReadString(schemas.GetSignedBluinsightsUrlResponse_signedBiUrl, v.SignedBiUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSignedBluinsightsUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSignedBluinsightsUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSignedBluinsightsUrl, nil, schemas.GetSignedBluinsightsUrlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSignedBluinsightsUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSignedBluinsightsUrl, nil, schemas.GetSignedBluinsightsUrlResponse), output: &GetSignedBluinsightsUrlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

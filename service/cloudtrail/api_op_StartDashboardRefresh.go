@@ -4,6 +4,8 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,19 @@ type StartDashboardRefreshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDashboardRefreshInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDashboardRefreshRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDashboardRefreshInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardId != nil {
+		s.WriteString(schemas.StartDashboardRefreshRequest_DashboardId, *v.DashboardId)
+	}
+	serializeQueryParameterValues(s, schemas.StartDashboardRefreshRequest_QueryParameterValues, v.QueryParameterValues)
+}
+
 type StartDashboardRefreshOutput struct {
 
 	//  The refresh ID for the dashboard.
@@ -62,13 +77,32 @@ type StartDashboardRefreshOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDashboardRefreshOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDashboardRefreshResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDashboardRefreshOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RefreshId != nil {
+		s.WriteString(schemas.StartDashboardRefreshResponse_RefreshId, *v.RefreshId)
+	}
+}
+func (v *StartDashboardRefreshOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDashboardRefreshResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDashboardRefreshResponse_RefreshId:
+			v.RefreshId = new(string)
+			return d.ReadString(schemas.StartDashboardRefreshResponse_RefreshId, v.RefreshId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDashboardRefreshMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartDashboardRefresh{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDashboardRefresh, schemas.StartDashboardRefreshRequest, schemas.StartDashboardRefreshResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartDashboardRefresh{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDashboardRefresh, schemas.StartDashboardRefreshRequest, schemas.StartDashboardRefreshResponse), output: &StartDashboardRefreshOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

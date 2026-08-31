@@ -4,7 +4,9 @@ package apprunner
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,22 @@ type CreateConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionName != nil {
+		s.WriteString(schemas.CreateConnectionRequest_ConnectionName, *v.ConnectionName)
+	}
+	if v.ProviderType != "" {
+		s.WriteString(schemas.CreateConnectionRequest_ProviderType, string(v.ProviderType))
+	}
+	serializeTagList(s, schemas.CreateConnectionRequest_Tags, v.Tags)
+}
+
 type CreateConnectionOutput struct {
 
 	// A description of the App Runner connection that's created by this request.
@@ -65,13 +83,34 @@ type CreateConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Connection != nil {
+		s.WriteStruct(schemas.CreateConnectionResponse_Connection)
+		v.Connection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectionResponse_Connection:
+			v.Connection = &types.Connection{}
+			return v.Connection.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnection, schemas.CreateConnectionRequest, schemas.CreateConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnection, schemas.CreateConnectionRequest, schemas.CreateConnectionResponse), output: &CreateConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

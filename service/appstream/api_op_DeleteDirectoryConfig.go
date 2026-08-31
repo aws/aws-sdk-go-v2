@@ -4,6 +4,8 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteDirectoryConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDirectoryConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDirectoryConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDirectoryConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryName != nil {
+		s.WriteString(schemas.DeleteDirectoryConfigRequest_DirectoryName, *v.DirectoryName)
+	}
+}
+
 type DeleteDirectoryConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type DeleteDirectoryConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDirectoryConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDirectoryConfigResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDirectoryConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteDirectoryConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDirectoryConfigResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDirectoryConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteDirectoryConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDirectoryConfig, schemas.DeleteDirectoryConfigRequest, schemas.DeleteDirectoryConfigResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteDirectoryConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDirectoryConfig, schemas.DeleteDirectoryConfigRequest, schemas.DeleteDirectoryConfigResult), output: &DeleteDirectoryConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

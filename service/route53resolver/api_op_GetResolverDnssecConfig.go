@@ -4,7 +4,9 @@ package route53resolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetResolverDnssecConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResolverDnssecConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResolverDnssecConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResolverDnssecConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceId != nil {
+		s.WriteString(schemas.GetResolverDnssecConfigRequest_ResourceId, *v.ResourceId)
+	}
+}
+
 type GetResolverDnssecConfigOutput struct {
 
 	// The information about a configuration for DNSSEC validation.
@@ -45,13 +59,34 @@ type GetResolverDnssecConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResolverDnssecConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResolverDnssecConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResolverDnssecConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverDNSSECConfig != nil {
+		s.WriteStruct(schemas.GetResolverDnssecConfigResponse_ResolverDNSSECConfig)
+		v.ResolverDNSSECConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetResolverDnssecConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResolverDnssecConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResolverDnssecConfigResponse_ResolverDNSSECConfig:
+			v.ResolverDNSSECConfig = &types.ResolverDnssecConfig{}
+			return v.ResolverDNSSECConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResolverDnssecConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetResolverDnssecConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResolverDnssecConfig, schemas.GetResolverDnssecConfigRequest, schemas.GetResolverDnssecConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetResolverDnssecConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResolverDnssecConfig, schemas.GetResolverDnssecConfigRequest, schemas.GetResolverDnssecConfigResponse), output: &GetResolverDnssecConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

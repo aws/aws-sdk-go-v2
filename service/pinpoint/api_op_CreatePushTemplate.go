@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,23 @@ type CreatePushTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePushTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePushTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePushTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PushNotificationTemplateRequest != nil {
+		s.WriteStruct(schemas.CreatePushTemplateRequest_PushNotificationTemplateRequest)
+		v.PushNotificationTemplateRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.CreatePushTemplateRequest_TemplateName, *v.TemplateName)
+	}
+}
+
 type CreatePushTemplateOutput struct {
 
 	// Provides information about a request to create a message template.
@@ -57,13 +76,34 @@ type CreatePushTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePushTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePushTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePushTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateTemplateMessageBody != nil {
+		s.WriteStruct(schemas.CreatePushTemplateResponse_CreateTemplateMessageBody)
+		v.CreateTemplateMessageBody.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreatePushTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePushTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePushTemplateResponse_CreateTemplateMessageBody:
+			v.CreateTemplateMessageBody = &types.CreateTemplateMessageBody{}
+			return v.CreateTemplateMessageBody.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePushTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePushTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePushTemplate, schemas.CreatePushTemplateRequest, schemas.CreatePushTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePushTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePushTemplate, schemas.CreatePushTemplateRequest, schemas.CreatePushTemplateResponse), output: &CreatePushTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

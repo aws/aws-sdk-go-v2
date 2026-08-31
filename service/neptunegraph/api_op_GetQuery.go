@@ -5,6 +5,7 @@ package neptunegraph
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -48,6 +49,20 @@ type GetQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphIdentifier != nil {
+		s.WriteString(schemas.GetQueryInput_graphIdentifier, *v.GraphIdentifier)
+	}
+	if v.QueryId != nil {
+		s.WriteString(schemas.GetQueryInput_queryId, *v.QueryId)
+	}
+}
 func (in *GetQueryInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ApiType = ptr.String("DataPlane")
@@ -76,13 +91,60 @@ type GetQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Elapsed != nil {
+		s.WriteInt32(schemas.GetQueryOutput_elapsed, *v.Elapsed)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetQueryOutput_id, *v.Id)
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.GetQueryOutput_queryString, *v.QueryString)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.GetQueryOutput_state, string(v.State))
+	}
+	if v.Waited != nil {
+		s.WriteInt32(schemas.GetQueryOutput_waited, *v.Waited)
+	}
+}
+func (v *GetQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetQueryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetQueryOutput_elapsed:
+			v.Elapsed = new(int32)
+			return d.ReadInt32(schemas.GetQueryOutput_elapsed, v.Elapsed)
+		case schemas.GetQueryOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetQueryOutput_id, v.Id)
+		case schemas.GetQueryOutput_queryString:
+			v.QueryString = new(string)
+			return d.ReadString(schemas.GetQueryOutput_queryString, v.QueryString)
+		case schemas.GetQueryOutput_state:
+			var ev string
+			if err := d.ReadString(schemas.GetQueryOutput_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.QueryState(ev)
+			return nil
+		case schemas.GetQueryOutput_waited:
+			v.Waited = new(int32)
+			return d.ReadInt32(schemas.GetQueryOutput_waited, v.Waited)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQuery, schemas.GetQueryInput, schemas.GetQueryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQuery, schemas.GetQueryInput, schemas.GetQueryOutput), output: &GetQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

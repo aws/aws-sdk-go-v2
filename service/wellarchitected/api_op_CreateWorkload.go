@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -206,6 +208,61 @@ type CreateWorkloadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkloadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkloadInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkloadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWorkloadAccountIds(s, schemas.CreateWorkloadInput_AccountIds, v.AccountIds)
+	serializeWorkloadApplications(s, schemas.CreateWorkloadInput_Applications, v.Applications)
+	if v.ArchitecturalDesign != nil {
+		s.WriteString(schemas.CreateWorkloadInput_ArchitecturalDesign, *v.ArchitecturalDesign)
+	}
+	serializeWorkloadAwsRegions(s, schemas.CreateWorkloadInput_AwsRegions, v.AwsRegions)
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateWorkloadInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateWorkloadInput_Description, *v.Description)
+	}
+	if v.DiscoveryConfig != nil {
+		s.WriteStruct(schemas.CreateWorkloadInput_DiscoveryConfig)
+		v.DiscoveryConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Environment != "" {
+		s.WriteString(schemas.CreateWorkloadInput_Environment, string(v.Environment))
+	}
+	if v.Industry != nil {
+		s.WriteString(schemas.CreateWorkloadInput_Industry, *v.Industry)
+	}
+	if v.IndustryType != nil {
+		s.WriteString(schemas.CreateWorkloadInput_IndustryType, *v.IndustryType)
+	}
+	if v.JiraConfiguration != nil {
+		s.WriteStruct(schemas.CreateWorkloadInput_JiraConfiguration)
+		v.JiraConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeWorkloadLenses(s, schemas.CreateWorkloadInput_Lenses, v.Lenses)
+	serializeWorkloadNonAwsRegions(s, schemas.CreateWorkloadInput_NonAwsRegions, v.NonAwsRegions)
+	if v.Notes != nil {
+		s.WriteString(schemas.CreateWorkloadInput_Notes, *v.Notes)
+	}
+	serializeWorkloadPillarPriorities(s, schemas.CreateWorkloadInput_PillarPriorities, v.PillarPriorities)
+	serializeWorkloadProfileArns(s, schemas.CreateWorkloadInput_ProfileArns, v.ProfileArns)
+	if v.ReviewOwner != nil {
+		s.WriteString(schemas.CreateWorkloadInput_ReviewOwner, *v.ReviewOwner)
+	}
+	serializeReviewTemplateArns(s, schemas.CreateWorkloadInput_ReviewTemplateArns, v.ReviewTemplateArns)
+	serializeTagMap(s, schemas.CreateWorkloadInput_Tags, v.Tags)
+	if v.WorkloadName != nil {
+		s.WriteString(schemas.CreateWorkloadInput_WorkloadName, *v.WorkloadName)
+	}
+}
+
 // Output of a create workload call.
 type CreateWorkloadOutput struct {
 
@@ -222,13 +279,38 @@ type CreateWorkloadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkloadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkloadOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkloadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkloadArn != nil {
+		s.WriteString(schemas.CreateWorkloadOutput_WorkloadArn, *v.WorkloadArn)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.CreateWorkloadOutput_WorkloadId, *v.WorkloadId)
+	}
+}
+func (v *CreateWorkloadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkloadOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkloadOutput_WorkloadArn:
+			v.WorkloadArn = new(string)
+			return d.ReadString(schemas.CreateWorkloadOutput_WorkloadArn, v.WorkloadArn)
+		case schemas.CreateWorkloadOutput_WorkloadId:
+			v.WorkloadId = new(string)
+			return d.ReadString(schemas.CreateWorkloadOutput_WorkloadId, v.WorkloadId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorkload{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkload, schemas.CreateWorkloadInput, schemas.CreateWorkloadOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWorkload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkload, schemas.CreateWorkloadInput, schemas.CreateWorkloadOutput), output: &CreateWorkloadOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

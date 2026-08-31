@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type DescribeWorkspaceAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspaceAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspaceAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspaceAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWorkSpaceAssociatedResourceTypeList(s, schemas.DescribeWorkspaceAssociationsRequest_AssociatedResourceTypes, v.AssociatedResourceTypes)
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DescribeWorkspaceAssociationsRequest_WorkspaceId, *v.WorkspaceId)
+	}
+}
+
 type DescribeWorkspaceAssociationsOutput struct {
 
 	// List of information about the specified associations.
@@ -50,13 +65,29 @@ type DescribeWorkspaceAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspaceAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspaceAssociationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspaceAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWorkspaceResourceAssociationList(s, schemas.DescribeWorkspaceAssociationsResult_Associations, v.Associations)
+}
+func (v *DescribeWorkspaceAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWorkspaceAssociationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWorkspaceAssociationsResult_Associations:
+			return deserializeWorkspaceResourceAssociationList(d, schemas.DescribeWorkspaceAssociationsResult_Associations, &v.Associations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWorkspaceAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWorkspaceAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspaceAssociations, schemas.DescribeWorkspaceAssociationsRequest, schemas.DescribeWorkspaceAssociationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeWorkspaceAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspaceAssociations, schemas.DescribeWorkspaceAssociationsRequest, schemas.DescribeWorkspaceAssociationsResult), output: &DescribeWorkspaceAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

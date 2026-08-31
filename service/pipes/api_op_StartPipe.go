@@ -4,7 +4,9 @@ package pipes
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pipes/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pipes/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type StartPipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPipeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPipeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPipeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.StartPipeRequest_Name, *v.Name)
+	}
+}
+
 type StartPipeOutput struct {
 
 	// The ARN of the pipe.
@@ -63,13 +77,70 @@ type StartPipeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPipeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPipeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPipeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StartPipeResponse_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.StartPipeResponse_CreationTime, *v.CreationTime)
+	}
+	if v.CurrentState != "" {
+		s.WriteString(schemas.StartPipeResponse_CurrentState, string(v.CurrentState))
+	}
+	if v.DesiredState != "" {
+		s.WriteString(schemas.StartPipeResponse_DesiredState, string(v.DesiredState))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.StartPipeResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartPipeResponse_Name, *v.Name)
+	}
+}
+func (v *StartPipeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartPipeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartPipeResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StartPipeResponse_Arn, v.Arn)
+		case schemas.StartPipeResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.StartPipeResponse_CreationTime, v.CreationTime)
+		case schemas.StartPipeResponse_CurrentState:
+			var ev string
+			if err := d.ReadString(schemas.StartPipeResponse_CurrentState, &ev); err != nil {
+				return err
+			}
+			v.CurrentState = types.PipeState(ev)
+			return nil
+		case schemas.StartPipeResponse_DesiredState:
+			var ev string
+			if err := d.ReadString(schemas.StartPipeResponse_DesiredState, &ev); err != nil {
+				return err
+			}
+			v.DesiredState = types.RequestedPipeState(ev)
+			return nil
+		case schemas.StartPipeResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.StartPipeResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.StartPipeResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StartPipeResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartPipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartPipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPipe, schemas.StartPipeRequest, schemas.StartPipeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartPipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPipe, schemas.StartPipeRequest, schemas.StartPipeResponse), output: &StartPipeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,34 @@ type DeleteVpcEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVpcEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVpcEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVpcEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteVpcEndpointRequest_clientToken, *v.ClientToken)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteVpcEndpointRequest_id, *v.Id)
+	}
+}
+func (v *DeleteVpcEndpointInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVpcEndpointRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVpcEndpointRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DeleteVpcEndpointRequest_clientToken, v.ClientToken)
+		case schemas.DeleteVpcEndpointRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteVpcEndpointRequest_id, v.Id)
+		}
+		return nil
+	})
+}
+
 type DeleteVpcEndpointOutput struct {
 
 	// Details about the deleted endpoint.
@@ -52,13 +82,34 @@ type DeleteVpcEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVpcEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVpcEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVpcEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteVpcEndpointDetail != nil {
+		s.WriteStruct(schemas.DeleteVpcEndpointResponse_deleteVpcEndpointDetail)
+		v.DeleteVpcEndpointDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteVpcEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVpcEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVpcEndpointResponse_deleteVpcEndpointDetail:
+			v.DeleteVpcEndpointDetail = &types.DeleteVpcEndpointDetail{}
+			return v.DeleteVpcEndpointDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVpcEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteVpcEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVpcEndpoint, schemas.DeleteVpcEndpointRequest, schemas.DeleteVpcEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteVpcEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVpcEndpoint, schemas.DeleteVpcEndpointRequest, schemas.DeleteVpcEndpointResponse), output: &DeleteVpcEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

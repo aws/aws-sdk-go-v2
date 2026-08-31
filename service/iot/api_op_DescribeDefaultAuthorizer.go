@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,15 @@ type DescribeDefaultAuthorizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDefaultAuthorizerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDefaultAuthorizerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDefaultAuthorizerInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DescribeDefaultAuthorizerOutput struct {
 
 	// The default authorizer's description.
@@ -43,13 +54,34 @@ type DescribeDefaultAuthorizerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDefaultAuthorizerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDefaultAuthorizerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDefaultAuthorizerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizerDescription != nil {
+		s.WriteStruct(schemas.DescribeDefaultAuthorizerResponse_authorizerDescription)
+		v.AuthorizerDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeDefaultAuthorizerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDefaultAuthorizerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDefaultAuthorizerResponse_authorizerDescription:
+			v.AuthorizerDescription = &types.AuthorizerDescription{}
+			return v.AuthorizerDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDefaultAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDefaultAuthorizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDefaultAuthorizer, schemas.DescribeDefaultAuthorizerRequest, schemas.DescribeDefaultAuthorizerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDefaultAuthorizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDefaultAuthorizer, schemas.DescribeDefaultAuthorizerRequest, schemas.DescribeDefaultAuthorizerResponse), output: &DescribeDefaultAuthorizerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

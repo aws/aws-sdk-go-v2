@@ -5,7 +5,9 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -112,6 +114,34 @@ type ListIntentMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntentMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntentMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntentMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalyticsBinByList(s, schemas.ListIntentMetricsRequest_binBy, v.BinBy)
+	if v.BotId != nil {
+		s.WriteString(schemas.ListIntentMetricsRequest_botId, *v.BotId)
+	}
+	if v.EndDateTime != nil {
+		s.WriteTime(schemas.ListIntentMetricsRequest_endDateTime, *v.EndDateTime)
+	}
+	serializeAnalyticsIntentFilters(s, schemas.ListIntentMetricsRequest_filters, v.Filters)
+	serializeAnalyticsIntentGroupByList(s, schemas.ListIntentMetricsRequest_groupBy, v.GroupBy)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIntentMetricsRequest_maxResults, *v.MaxResults)
+	}
+	serializeAnalyticsIntentMetrics(s, schemas.ListIntentMetricsRequest_metrics, v.Metrics)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIntentMetricsRequest_nextToken, *v.NextToken)
+	}
+	if v.StartDateTime != nil {
+		s.WriteTime(schemas.ListIntentMetricsRequest_startDateTime, *v.StartDateTime)
+	}
+}
+
 type ListIntentMetricsOutput struct {
 
 	// The identifier for the bot for which you retrieved intent metrics.
@@ -135,13 +165,41 @@ type ListIntentMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntentMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntentMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntentMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListIntentMetricsResponse_botId, *v.BotId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIntentMetricsResponse_nextToken, *v.NextToken)
+	}
+	serializeAnalyticsIntentResults(s, schemas.ListIntentMetricsResponse_results, v.Results)
+}
+func (v *ListIntentMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIntentMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIntentMetricsResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.ListIntentMetricsResponse_botId, v.BotId)
+		case schemas.ListIntentMetricsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIntentMetricsResponse_nextToken, v.NextToken)
+		case schemas.ListIntentMetricsResponse_results:
+			return deserializeAnalyticsIntentResults(d, schemas.ListIntentMetricsResponse_results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIntentMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIntentMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntentMetrics, schemas.ListIntentMetricsRequest, schemas.ListIntentMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIntentMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntentMetrics, schemas.ListIntentMetricsRequest, schemas.ListIntentMetricsResponse), output: &ListIntentMetricsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

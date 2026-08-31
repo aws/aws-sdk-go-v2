@@ -4,6 +4,8 @@ package amplify
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetArtifactUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetArtifactUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetArtifactUrlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetArtifactUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactId != nil {
+		s.WriteString(schemas.GetArtifactUrlRequest_artifactId, *v.ArtifactId)
+	}
+}
+
 // Returns the result structure for the get artifact request.
 type GetArtifactUrlOutput struct {
 
@@ -53,13 +67,38 @@ type GetArtifactUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetArtifactUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetArtifactUrlResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetArtifactUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactId != nil {
+		s.WriteString(schemas.GetArtifactUrlResult_artifactId, *v.ArtifactId)
+	}
+	if v.ArtifactUrl != nil {
+		s.WriteString(schemas.GetArtifactUrlResult_artifactUrl, *v.ArtifactUrl)
+	}
+}
+func (v *GetArtifactUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetArtifactUrlResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetArtifactUrlResult_artifactId:
+			v.ArtifactId = new(string)
+			return d.ReadString(schemas.GetArtifactUrlResult_artifactId, v.ArtifactId)
+		case schemas.GetArtifactUrlResult_artifactUrl:
+			v.ArtifactUrl = new(string)
+			return d.ReadString(schemas.GetArtifactUrlResult_artifactUrl, v.ArtifactUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetArtifactUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetArtifactUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetArtifactUrl, schemas.GetArtifactUrlRequest, schemas.GetArtifactUrlResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetArtifactUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetArtifactUrl, schemas.GetArtifactUrlRequest, schemas.GetArtifactUrlResult), output: &GetArtifactUrlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,27 @@ type RegisterCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaCertificatePem != nil {
+		s.WriteString(schemas.RegisterCertificateRequest_caCertificatePem, *v.CaCertificatePem)
+	}
+	if v.CertificatePem != nil {
+		s.WriteString(schemas.RegisterCertificateRequest_certificatePem, *v.CertificatePem)
+	}
+	if v.SetAsActive != nil {
+		s.WriteBool(schemas.RegisterCertificateRequest_setAsActive, *v.SetAsActive)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RegisterCertificateRequest_status, string(v.Status))
+	}
+}
+
 // The output from the RegisterCertificate operation.
 type RegisterCertificateOutput struct {
 
@@ -72,13 +95,38 @@ type RegisterCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterCertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.RegisterCertificateResponse_certificateArn, *v.CertificateArn)
+	}
+	if v.CertificateId != nil {
+		s.WriteString(schemas.RegisterCertificateResponse_certificateId, *v.CertificateId)
+	}
+}
+func (v *RegisterCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterCertificateResponse_certificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.RegisterCertificateResponse_certificateArn, v.CertificateArn)
+		case schemas.RegisterCertificateResponse_certificateId:
+			v.CertificateId = new(string)
+			return d.ReadString(schemas.RegisterCertificateResponse_certificateId, v.CertificateId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterCertificate, schemas.RegisterCertificateRequest, schemas.RegisterCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterCertificate, schemas.RegisterCertificateRequest, schemas.RegisterCertificateResponse), output: &RegisterCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

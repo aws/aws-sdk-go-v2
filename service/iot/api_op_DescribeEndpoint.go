@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,18 @@ type DescribeEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointType != nil {
+		s.WriteString(schemas.DescribeEndpointRequest_endpointType, *v.EndpointType)
+	}
+}
+
 // The output from the DescribeEndpoint operation.
 type DescribeEndpointOutput struct {
 
@@ -66,13 +80,32 @@ type DescribeEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointAddress != nil {
+		s.WriteString(schemas.DescribeEndpointResponse_endpointAddress, *v.EndpointAddress)
+	}
+}
+func (v *DescribeEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEndpointResponse_endpointAddress:
+			v.EndpointAddress = new(string)
+			return d.ReadString(schemas.DescribeEndpointResponse_endpointAddress, v.EndpointAddress)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEndpoint, schemas.DescribeEndpointRequest, schemas.DescribeEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEndpoint, schemas.DescribeEndpointRequest, schemas.DescribeEndpointResponse), output: &DescribeEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

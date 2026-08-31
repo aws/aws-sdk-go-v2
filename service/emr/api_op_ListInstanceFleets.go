@@ -5,7 +5,9 @@ package emr
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type ListInstanceFleetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstanceFleetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstanceFleetsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstanceFleetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.ListInstanceFleetsInput_ClusterId, *v.ClusterId)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListInstanceFleetsInput_Marker, *v.Marker)
+	}
+}
+
 type ListInstanceFleetsOutput struct {
 
 	// The list of instance fleets for the cluster and given filters.
@@ -55,13 +72,35 @@ type ListInstanceFleetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstanceFleetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstanceFleetsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstanceFleetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstanceFleetList(s, schemas.ListInstanceFleetsOutput_InstanceFleets, v.InstanceFleets)
+	if v.Marker != nil {
+		s.WriteString(schemas.ListInstanceFleetsOutput_Marker, *v.Marker)
+	}
+}
+func (v *ListInstanceFleetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInstanceFleetsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInstanceFleetsOutput_InstanceFleets:
+			return deserializeInstanceFleetList(d, schemas.ListInstanceFleetsOutput_InstanceFleets, &v.InstanceFleets)
+		case schemas.ListInstanceFleetsOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListInstanceFleetsOutput_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInstanceFleetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListInstanceFleets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstanceFleets, schemas.ListInstanceFleetsInput, schemas.ListInstanceFleetsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListInstanceFleets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstanceFleets, schemas.ListInstanceFleetsInput, schemas.ListInstanceFleetsOutput), output: &ListInstanceFleetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

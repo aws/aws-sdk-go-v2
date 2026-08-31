@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,22 @@ type DeactivateEvaluationFormInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeactivateEvaluationFormInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeactivateEvaluationFormRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeactivateEvaluationFormInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationFormId != nil {
+		s.WriteString(schemas.DeactivateEvaluationFormRequest_EvaluationFormId, *v.EvaluationFormId)
+	}
+	s.WriteInt32(schemas.DeactivateEvaluationFormRequest_EvaluationFormVersion, v.EvaluationFormVersion)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeactivateEvaluationFormRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DeactivateEvaluationFormOutput struct {
 
 	// The Amazon Resource Name (ARN) for the evaluation form resource.
@@ -72,13 +90,41 @@ type DeactivateEvaluationFormOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeactivateEvaluationFormOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeactivateEvaluationFormResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeactivateEvaluationFormOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationFormArn != nil {
+		s.WriteString(schemas.DeactivateEvaluationFormResponse_EvaluationFormArn, *v.EvaluationFormArn)
+	}
+	if v.EvaluationFormId != nil {
+		s.WriteString(schemas.DeactivateEvaluationFormResponse_EvaluationFormId, *v.EvaluationFormId)
+	}
+	s.WriteInt32(schemas.DeactivateEvaluationFormResponse_EvaluationFormVersion, v.EvaluationFormVersion)
+}
+func (v *DeactivateEvaluationFormOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeactivateEvaluationFormResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeactivateEvaluationFormResponse_EvaluationFormArn:
+			v.EvaluationFormArn = new(string)
+			return d.ReadString(schemas.DeactivateEvaluationFormResponse_EvaluationFormArn, v.EvaluationFormArn)
+		case schemas.DeactivateEvaluationFormResponse_EvaluationFormId:
+			v.EvaluationFormId = new(string)
+			return d.ReadString(schemas.DeactivateEvaluationFormResponse_EvaluationFormId, v.EvaluationFormId)
+		case schemas.DeactivateEvaluationFormResponse_EvaluationFormVersion:
+			return d.ReadInt32(schemas.DeactivateEvaluationFormResponse_EvaluationFormVersion, &v.EvaluationFormVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeactivateEvaluationFormMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeactivateEvaluationForm{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeactivateEvaluationForm, schemas.DeactivateEvaluationFormRequest, schemas.DeactivateEvaluationFormResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeactivateEvaluationForm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeactivateEvaluationForm, schemas.DeactivateEvaluationFormRequest, schemas.DeactivateEvaluationFormResponse), output: &DeactivateEvaluationFormOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

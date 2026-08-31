@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,18 @@ type DescribeUserPoolDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUserPoolDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUserPoolDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUserPoolDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.DescribeUserPoolDomainRequest_Domain, *v.Domain)
+	}
+}
+
 type DescribeUserPoolDomainOutput struct {
 
 	// The details of the requested user pool domain.
@@ -67,13 +81,34 @@ type DescribeUserPoolDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUserPoolDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUserPoolDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUserPoolDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainDescription != nil {
+		s.WriteStruct(schemas.DescribeUserPoolDomainResponse_DomainDescription)
+		v.DomainDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeUserPoolDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeUserPoolDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeUserPoolDomainResponse_DomainDescription:
+			v.DomainDescription = &types.DomainDescriptionType{}
+			return v.DomainDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeUserPoolDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeUserPoolDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUserPoolDomain, schemas.DescribeUserPoolDomainRequest, schemas.DescribeUserPoolDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeUserPoolDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUserPoolDomain, schemas.DescribeUserPoolDomainRequest, schemas.DescribeUserPoolDomainResponse), output: &DescribeUserPoolDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

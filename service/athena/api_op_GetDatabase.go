@@ -4,7 +4,9 @@ package athena
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type GetDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDatabaseInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogName != nil {
+		s.WriteString(schemas.GetDatabaseInput_CatalogName, *v.CatalogName)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.GetDatabaseInput_DatabaseName, *v.DatabaseName)
+	}
+	if v.WorkGroup != nil {
+		s.WriteString(schemas.GetDatabaseInput_WorkGroup, *v.WorkGroup)
+	}
+}
+
 type GetDatabaseOutput struct {
 
 	// The database returned.
@@ -54,13 +74,34 @@ type GetDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDatabaseOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Database != nil {
+		s.WriteStruct(schemas.GetDatabaseOutput_Database)
+		v.Database.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDatabaseOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDatabaseOutput_Database:
+			v.Database = &types.Database{}
+			return v.Database.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDatabase, schemas.GetDatabaseInput, schemas.GetDatabaseOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDatabase, schemas.GetDatabaseInput, schemas.GetDatabaseOutput), output: &GetDatabaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

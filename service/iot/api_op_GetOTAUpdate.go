@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type GetOTAUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOTAUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOTAUpdateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOTAUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OtaUpdateId != nil {
+		s.WriteString(schemas.GetOTAUpdateRequest_otaUpdateId, *v.OtaUpdateId)
+	}
+}
+
 type GetOTAUpdateOutput struct {
 
 	// The OTA update info.
@@ -49,13 +63,34 @@ type GetOTAUpdateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOTAUpdateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOTAUpdateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOTAUpdateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OtaUpdateInfo != nil {
+		s.WriteStruct(schemas.GetOTAUpdateResponse_otaUpdateInfo)
+		v.OtaUpdateInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetOTAUpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOTAUpdateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOTAUpdateResponse_otaUpdateInfo:
+			v.OtaUpdateInfo = &types.OTAUpdateInfo{}
+			return v.OtaUpdateInfo.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOTAUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOTAUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOTAUpdate, schemas.GetOTAUpdateRequest, schemas.GetOTAUpdateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOTAUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOTAUpdate, schemas.GetOTAUpdateRequest, schemas.GetOTAUpdateResponse), output: &GetOTAUpdateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

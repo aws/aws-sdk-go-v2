@@ -4,6 +4,8 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,18 @@ type DeleteConformancePackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConformancePackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConformancePackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConformancePackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConformancePackName != nil {
+		s.WriteString(schemas.DeleteConformancePackRequest_ConformancePackName, *v.ConformancePackName)
+	}
+}
+
 type DeleteConformancePackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,13 +75,26 @@ type DeleteConformancePackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConformancePackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConformancePackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteConformancePackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConformancePackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteConformancePack{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConformancePack, schemas.DeleteConformancePackRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteConformancePack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConformancePack, schemas.DeleteConformancePackRequest, nil), output: &DeleteConformancePackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

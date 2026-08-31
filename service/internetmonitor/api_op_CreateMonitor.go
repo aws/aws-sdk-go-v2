@@ -5,7 +5,9 @@ package internetmonitor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -113,6 +115,39 @@ type CreateMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMonitorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMonitorInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateMonitorInput_ClientToken, *v.ClientToken)
+	}
+	if v.HealthEventsConfig != nil {
+		s.WriteStruct(schemas.CreateMonitorInput_HealthEventsConfig)
+		v.HealthEventsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InternetMeasurementsLogDelivery != nil {
+		s.WriteStruct(schemas.CreateMonitorInput_InternetMeasurementsLogDelivery)
+		v.InternetMeasurementsLogDelivery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxCityNetworksToMonitor != nil {
+		s.WriteInt32(schemas.CreateMonitorInput_MaxCityNetworksToMonitor, *v.MaxCityNetworksToMonitor)
+	}
+	if v.MonitorName != nil {
+		s.WriteString(schemas.CreateMonitorInput_MonitorName, *v.MonitorName)
+	}
+	serializeSetOfARNs(s, schemas.CreateMonitorInput_Resources, v.Resources)
+	serializeTagMap(s, schemas.CreateMonitorInput_Tags, v.Tags)
+	if v.TrafficPercentageToMonitor != nil {
+		s.WriteInt32(schemas.CreateMonitorInput_TrafficPercentageToMonitor, *v.TrafficPercentageToMonitor)
+	}
+}
+
 type CreateMonitorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the monitor.
@@ -131,13 +166,42 @@ type CreateMonitorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMonitorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMonitorOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMonitorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateMonitorOutput_Arn, *v.Arn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateMonitorOutput_Status, string(v.Status))
+	}
+}
+func (v *CreateMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMonitorOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMonitorOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateMonitorOutput_Arn, v.Arn)
+		case schemas.CreateMonitorOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateMonitorOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.MonitorConfigState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMonitor, schemas.CreateMonitorInput, schemas.CreateMonitorOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMonitor, schemas.CreateMonitorInput, schemas.CreateMonitorOutput), output: &CreateMonitorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,34 @@ type UpdateTrainingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTrainingJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTrainingJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTrainingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfilerConfig != nil {
+		s.WriteStruct(schemas.UpdateTrainingJobRequest_ProfilerConfig)
+		v.ProfilerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeProfilerRuleConfigurations(s, schemas.UpdateTrainingJobRequest_ProfilerRuleConfigurations, v.ProfilerRuleConfigurations)
+	if v.RemoteDebugConfig != nil {
+		s.WriteStruct(schemas.UpdateTrainingJobRequest_RemoteDebugConfig)
+		v.RemoteDebugConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceConfig != nil {
+		s.WriteStruct(schemas.UpdateTrainingJobRequest_ResourceConfig)
+		v.ResourceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrainingJobName != nil {
+		s.WriteString(schemas.UpdateTrainingJobRequest_TrainingJobName, *v.TrainingJobName)
+	}
+}
+
 type UpdateTrainingJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the training job.
@@ -67,13 +97,32 @@ type UpdateTrainingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTrainingJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTrainingJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTrainingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrainingJobArn != nil {
+		s.WriteString(schemas.UpdateTrainingJobResponse_TrainingJobArn, *v.TrainingJobArn)
+	}
+}
+func (v *UpdateTrainingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTrainingJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTrainingJobResponse_TrainingJobArn:
+			v.TrainingJobArn = new(string)
+			return d.ReadString(schemas.UpdateTrainingJobResponse_TrainingJobArn, v.TrainingJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTrainingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateTrainingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTrainingJob, schemas.UpdateTrainingJobRequest, schemas.UpdateTrainingJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateTrainingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTrainingJob, schemas.UpdateTrainingJobRequest, schemas.UpdateTrainingJobResponse), output: &UpdateTrainingJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

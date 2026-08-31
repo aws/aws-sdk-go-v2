@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,31 @@ type DisassociateBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateBotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateBotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateBotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DisassociateBotRequest_ClientToken, *v.ClientToken)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DisassociateBotRequest_InstanceId, *v.InstanceId)
+	}
+	if v.LexBot != nil {
+		s.WriteStruct(schemas.DisassociateBotRequest_LexBot)
+		v.LexBot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LexV2Bot != nil {
+		s.WriteStruct(schemas.DisassociateBotRequest_LexV2Bot)
+		v.LexV2Bot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DisassociateBotOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,13 +88,26 @@ type DisassociateBotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateBotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateBotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateBotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateBot, schemas.DisassociateBotRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateBot, schemas.DisassociateBotRequest, nil), output: &DisassociateBotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

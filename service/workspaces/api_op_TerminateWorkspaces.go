@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,16 @@ type TerminateWorkspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateWorkspacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateWorkspacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateWorkspacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTerminateWorkspaceRequests(s, schemas.TerminateWorkspacesRequest_TerminateWorkspaceRequests, v.TerminateWorkspaceRequests)
+}
+
 type TerminateWorkspacesOutput struct {
 
 	// Information about the WorkSpaces that could not be terminated.
@@ -72,13 +84,29 @@ type TerminateWorkspacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateWorkspacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateWorkspacesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateWorkspacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedTerminateWorkspaceRequests(s, schemas.TerminateWorkspacesResult_FailedRequests, v.FailedRequests)
+}
+func (v *TerminateWorkspacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TerminateWorkspacesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TerminateWorkspacesResult_FailedRequests:
+			return deserializeFailedTerminateWorkspaceRequests(d, schemas.TerminateWorkspacesResult_FailedRequests, &v.FailedRequests)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTerminateWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTerminateWorkspaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateWorkspaces, schemas.TerminateWorkspacesRequest, schemas.TerminateWorkspacesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTerminateWorkspaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateWorkspaces, schemas.TerminateWorkspacesRequest, schemas.TerminateWorkspacesResult), output: &TerminateWorkspacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

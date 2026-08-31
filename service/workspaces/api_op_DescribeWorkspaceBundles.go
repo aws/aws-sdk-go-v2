@@ -5,7 +5,9 @@ package workspaces
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,22 @@ type DescribeWorkspaceBundlesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspaceBundlesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspaceBundlesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspaceBundlesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBundleIdList(s, schemas.DescribeWorkspaceBundlesRequest_BundleIds, v.BundleIds)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeWorkspaceBundlesRequest_NextToken, *v.NextToken)
+	}
+	if v.Owner != nil {
+		s.WriteString(schemas.DescribeWorkspaceBundlesRequest_Owner, *v.Owner)
+	}
+}
+
 type DescribeWorkspaceBundlesOutput struct {
 
 	// Information about the bundles.
@@ -63,13 +81,35 @@ type DescribeWorkspaceBundlesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspaceBundlesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspaceBundlesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspaceBundlesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBundleList(s, schemas.DescribeWorkspaceBundlesResult_Bundles, v.Bundles)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeWorkspaceBundlesResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeWorkspaceBundlesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWorkspaceBundlesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWorkspaceBundlesResult_Bundles:
+			return deserializeBundleList(d, schemas.DescribeWorkspaceBundlesResult_Bundles, &v.Bundles)
+		case schemas.DescribeWorkspaceBundlesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeWorkspaceBundlesResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWorkspaceBundlesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWorkspaceBundles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspaceBundles, schemas.DescribeWorkspaceBundlesRequest, schemas.DescribeWorkspaceBundlesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeWorkspaceBundles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspaceBundles, schemas.DescribeWorkspaceBundlesRequest, schemas.DescribeWorkspaceBundlesResult), output: &DescribeWorkspaceBundlesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

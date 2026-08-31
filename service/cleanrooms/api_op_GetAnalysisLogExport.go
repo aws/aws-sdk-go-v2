@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type GetAnalysisLogExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAnalysisLogExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnalysisLogExportInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnalysisLogExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisLogExportIdentifier != nil {
+		s.WriteString(schemas.GetAnalysisLogExportInput_analysisLogExportIdentifier, *v.AnalysisLogExportIdentifier)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.GetAnalysisLogExportInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+
 type GetAnalysisLogExportOutput struct {
 
 	// The analysis log export processing metadata.
@@ -57,13 +74,34 @@ type GetAnalysisLogExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAnalysisLogExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnalysisLogExportOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnalysisLogExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisLogExport != nil {
+		s.WriteStruct(schemas.GetAnalysisLogExportOutput_analysisLogExport)
+		v.AnalysisLogExport.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAnalysisLogExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAnalysisLogExportOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAnalysisLogExportOutput_analysisLogExport:
+			v.AnalysisLogExport = &types.AnalysisLogExport{}
+			return v.AnalysisLogExport.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAnalysisLogExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAnalysisLogExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnalysisLogExport, schemas.GetAnalysisLogExportInput, schemas.GetAnalysisLogExportOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAnalysisLogExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnalysisLogExport, schemas.GetAnalysisLogExportInput, schemas.GetAnalysisLogExportOutput), output: &GetAnalysisLogExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

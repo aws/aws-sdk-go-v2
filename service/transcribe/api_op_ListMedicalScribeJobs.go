@@ -5,7 +5,9 @@ package transcribe
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,27 @@ type ListMedicalScribeJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMedicalScribeJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMedicalScribeJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMedicalScribeJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobNameContains != nil {
+		s.WriteString(schemas.ListMedicalScribeJobsRequest_JobNameContains, *v.JobNameContains)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMedicalScribeJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMedicalScribeJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListMedicalScribeJobsRequest_Status, string(v.Status))
+	}
+}
+
 type ListMedicalScribeJobsOutput struct {
 
 	// Provides a summary of information about each result.
@@ -77,13 +100,45 @@ type ListMedicalScribeJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMedicalScribeJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMedicalScribeJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMedicalScribeJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMedicalScribeJobSummaries(s, schemas.ListMedicalScribeJobsResponse_MedicalScribeJobSummaries, v.MedicalScribeJobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMedicalScribeJobsResponse_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListMedicalScribeJobsResponse_Status, string(v.Status))
+	}
+}
+func (v *ListMedicalScribeJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMedicalScribeJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMedicalScribeJobsResponse_MedicalScribeJobSummaries:
+			return deserializeMedicalScribeJobSummaries(d, schemas.ListMedicalScribeJobsResponse_MedicalScribeJobSummaries, &v.MedicalScribeJobSummaries)
+		case schemas.ListMedicalScribeJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMedicalScribeJobsResponse_NextToken, v.NextToken)
+		case schemas.ListMedicalScribeJobsResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.ListMedicalScribeJobsResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.MedicalScribeJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMedicalScribeJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMedicalScribeJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMedicalScribeJobs, schemas.ListMedicalScribeJobsRequest, schemas.ListMedicalScribeJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMedicalScribeJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMedicalScribeJobs, schemas.ListMedicalScribeJobsRequest, schemas.ListMedicalScribeJobsResponse), output: &ListMedicalScribeJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,41 @@ type UpdateDataTableAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataTableAttributeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataTableAttributeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataTableAttributeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.UpdateDataTableAttributeRequest_AttributeName, *v.AttributeName)
+	}
+	if v.DataTableId != nil {
+		s.WriteString(schemas.UpdateDataTableAttributeRequest_DataTableId, *v.DataTableId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDataTableAttributeRequest_Description, *v.Description)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateDataTableAttributeRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDataTableAttributeRequest_Name, *v.Name)
+	}
+	if v.Primary != false {
+		s.WriteBool(schemas.UpdateDataTableAttributeRequest_Primary, v.Primary)
+	}
+	if v.Validation != nil {
+		s.WriteStruct(schemas.UpdateDataTableAttributeRequest_Validation)
+		v.Validation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ValueType != "" {
+		s.WriteString(schemas.UpdateDataTableAttributeRequest_ValueType, string(v.ValueType))
+	}
+}
+
 type UpdateDataTableAttributeOutput struct {
 
 	// The new lock version for the attribute after the update.
@@ -92,13 +129,40 @@ type UpdateDataTableAttributeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataTableAttributeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataTableAttributeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataTableAttributeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LockVersion != nil {
+		s.WriteStruct(schemas.UpdateDataTableAttributeResponse_LockVersion)
+		v.LockVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDataTableAttributeResponse_Name, *v.Name)
+	}
+}
+func (v *UpdateDataTableAttributeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataTableAttributeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataTableAttributeResponse_LockVersion:
+			v.LockVersion = &types.DataTableLockVersion{}
+			return v.LockVersion.Deserialize(d)
+		case schemas.UpdateDataTableAttributeResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateDataTableAttributeResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataTableAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataTableAttribute{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataTableAttribute, schemas.UpdateDataTableAttributeRequest, schemas.UpdateDataTableAttributeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataTableAttribute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataTableAttribute, schemas.UpdateDataTableAttributeRequest, schemas.UpdateDataTableAttributeResponse), output: &UpdateDataTableAttributeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

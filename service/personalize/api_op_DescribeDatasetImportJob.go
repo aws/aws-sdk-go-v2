@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribeDatasetImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDatasetImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDatasetImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDatasetImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetImportJobArn != nil {
+		s.WriteString(schemas.DescribeDatasetImportJobRequest_datasetImportJobArn, *v.DatasetImportJobArn)
+	}
+}
+
 type DescribeDatasetImportJobOutput struct {
 
 	// Information about the dataset import job, including the status.
@@ -57,13 +71,34 @@ type DescribeDatasetImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDatasetImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDatasetImportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDatasetImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetImportJob != nil {
+		s.WriteStruct(schemas.DescribeDatasetImportJobResponse_datasetImportJob)
+		v.DatasetImportJob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeDatasetImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDatasetImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDatasetImportJobResponse_datasetImportJob:
+			v.DatasetImportJob = &types.DatasetImportJob{}
+			return v.DatasetImportJob.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDatasetImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDatasetImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDatasetImportJob, schemas.DescribeDatasetImportJobRequest, schemas.DescribeDatasetImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDatasetImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDatasetImportJob, schemas.DescribeDatasetImportJobRequest, schemas.DescribeDatasetImportJobResponse), output: &DescribeDatasetImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package partnercentralselling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -74,6 +76,28 @@ type CreateEngagementContextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEngagementContextInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEngagementContextRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEngagementContextInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.CreateEngagementContextRequest_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateEngagementContextRequest_ClientToken, *v.ClientToken)
+	}
+	if v.EngagementIdentifier != nil {
+		s.WriteString(schemas.CreateEngagementContextRequest_EngagementIdentifier, *v.EngagementIdentifier)
+	}
+	serializeEngagementContextPayload(s, schemas.CreateEngagementContextRequest_Payload, v.Payload)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateEngagementContextRequest_Type, string(v.Type))
+	}
+}
+
 type CreateEngagementContextOutput struct {
 
 	// The unique identifier assigned to the newly created engagement context. This ID
@@ -101,13 +125,50 @@ type CreateEngagementContextOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEngagementContextOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEngagementContextResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEngagementContextOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContextId != nil {
+		s.WriteString(schemas.CreateEngagementContextResponse_ContextId, *v.ContextId)
+	}
+	if v.EngagementArn != nil {
+		s.WriteString(schemas.CreateEngagementContextResponse_EngagementArn, *v.EngagementArn)
+	}
+	if v.EngagementId != nil {
+		s.WriteString(schemas.CreateEngagementContextResponse_EngagementId, *v.EngagementId)
+	}
+	if v.EngagementLastModifiedAt != nil {
+		s.WriteTime(schemas.CreateEngagementContextResponse_EngagementLastModifiedAt, *v.EngagementLastModifiedAt)
+	}
+}
+func (v *CreateEngagementContextOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEngagementContextResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEngagementContextResponse_ContextId:
+			v.ContextId = new(string)
+			return d.ReadString(schemas.CreateEngagementContextResponse_ContextId, v.ContextId)
+		case schemas.CreateEngagementContextResponse_EngagementArn:
+			v.EngagementArn = new(string)
+			return d.ReadString(schemas.CreateEngagementContextResponse_EngagementArn, v.EngagementArn)
+		case schemas.CreateEngagementContextResponse_EngagementId:
+			v.EngagementId = new(string)
+			return d.ReadString(schemas.CreateEngagementContextResponse_EngagementId, v.EngagementId)
+		case schemas.CreateEngagementContextResponse_EngagementLastModifiedAt:
+			v.EngagementLastModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateEngagementContextResponse_EngagementLastModifiedAt, v.EngagementLastModifiedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEngagementContextMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateEngagementContext{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEngagementContext, schemas.CreateEngagementContextRequest, schemas.CreateEngagementContextResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateEngagementContext{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEngagementContext, schemas.CreateEngagementContextRequest, schemas.CreateEngagementContextResponse), output: &CreateEngagementContextOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

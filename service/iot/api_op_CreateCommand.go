@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,45 @@ type CreateCommandInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCommandInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCommandRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCommandInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommandId != nil {
+		s.WriteString(schemas.CreateCommandRequest_commandId, *v.CommandId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateCommandRequest_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateCommandRequest_displayName, *v.DisplayName)
+	}
+	serializeCommandParameterList(s, schemas.CreateCommandRequest_mandatoryParameters, v.MandatoryParameters)
+	if v.Namespace != "" {
+		s.WriteString(schemas.CreateCommandRequest_namespace, string(v.Namespace))
+	}
+	if v.Payload != nil {
+		s.WriteStruct(schemas.CreateCommandRequest_payload)
+		v.Payload.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PayloadTemplate != nil {
+		s.WriteString(schemas.CreateCommandRequest_payloadTemplate, *v.PayloadTemplate)
+	}
+	if v.Preprocessor != nil {
+		s.WriteStruct(schemas.CreateCommandRequest_preprocessor)
+		v.Preprocessor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateCommandRequest_roleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.CreateCommandRequest_tags, v.Tags)
+}
+
 type CreateCommandOutput struct {
 
 	// The Amazon Resource Number (ARN) of the command. For example,
@@ -97,13 +138,38 @@ type CreateCommandOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCommandOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCommandResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCommandOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommandArn != nil {
+		s.WriteString(schemas.CreateCommandResponse_commandArn, *v.CommandArn)
+	}
+	if v.CommandId != nil {
+		s.WriteString(schemas.CreateCommandResponse_commandId, *v.CommandId)
+	}
+}
+func (v *CreateCommandOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCommandResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCommandResponse_commandArn:
+			v.CommandArn = new(string)
+			return d.ReadString(schemas.CreateCommandResponse_commandArn, v.CommandArn)
+		case schemas.CreateCommandResponse_commandId:
+			v.CommandId = new(string)
+			return d.ReadString(schemas.CreateCommandResponse_commandId, v.CommandId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCommandMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCommand{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCommand, schemas.CreateCommandRequest, schemas.CreateCommandResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCommand{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCommand, schemas.CreateCommandRequest, schemas.CreateCommandResponse), output: &CreateCommandOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

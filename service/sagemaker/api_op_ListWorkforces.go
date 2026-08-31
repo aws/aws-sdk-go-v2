@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,30 @@ type ListWorkforcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkforcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkforcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkforcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkforcesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListWorkforcesRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkforcesRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListWorkforcesRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListWorkforcesRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListWorkforcesOutput struct {
 
 	// A list containing information about your workforce.
@@ -63,13 +89,35 @@ type ListWorkforcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkforcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkforcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkforcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkforcesResponse_NextToken, *v.NextToken)
+	}
+	serializeWorkforces(s, schemas.ListWorkforcesResponse_Workforces, v.Workforces)
+}
+func (v *ListWorkforcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkforcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkforcesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkforcesResponse_NextToken, v.NextToken)
+		case schemas.ListWorkforcesResponse_Workforces:
+			return deserializeWorkforces(d, schemas.ListWorkforcesResponse_Workforces, &v.Workforces)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkforcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListWorkforces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkforces, schemas.ListWorkforcesRequest, schemas.ListWorkforcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListWorkforces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkforces, schemas.ListWorkforcesRequest, schemas.ListWorkforcesResponse), output: &ListWorkforcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,33 @@ type ListBotLocalesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBotLocalesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBotLocalesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBotLocalesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListBotLocalesRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListBotLocalesRequest_botVersion, *v.BotVersion)
+	}
+	serializeBotLocaleFilters(s, schemas.ListBotLocalesRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBotLocalesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBotLocalesRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != nil {
+		s.WriteStruct(schemas.ListBotLocalesRequest_sortBy)
+		v.SortBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListBotLocalesOutput struct {
 
 	// The identifier of the bot to list locales for.
@@ -85,13 +114,47 @@ type ListBotLocalesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBotLocalesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBotLocalesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBotLocalesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListBotLocalesResponse_botId, *v.BotId)
+	}
+	serializeBotLocaleSummaryList(s, schemas.ListBotLocalesResponse_botLocaleSummaries, v.BotLocaleSummaries)
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListBotLocalesResponse_botVersion, *v.BotVersion)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBotLocalesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListBotLocalesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBotLocalesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBotLocalesResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.ListBotLocalesResponse_botId, v.BotId)
+		case schemas.ListBotLocalesResponse_botLocaleSummaries:
+			return deserializeBotLocaleSummaryList(d, schemas.ListBotLocalesResponse_botLocaleSummaries, &v.BotLocaleSummaries)
+		case schemas.ListBotLocalesResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.ListBotLocalesResponse_botVersion, v.BotVersion)
+		case schemas.ListBotLocalesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBotLocalesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBotLocalesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBotLocales{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBotLocales, schemas.ListBotLocalesRequest, schemas.ListBotLocalesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBotLocales{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBotLocales, schemas.ListBotLocalesRequest, schemas.ListBotLocalesResponse), output: &ListBotLocalesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package athena
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,47 @@ type StartSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartSessionRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.CopyWorkGroupTags != nil {
+		s.WriteBool(schemas.StartSessionRequest_CopyWorkGroupTags, *v.CopyWorkGroupTags)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.StartSessionRequest_Description, *v.Description)
+	}
+	if v.EngineConfiguration != nil {
+		s.WriteStruct(schemas.StartSessionRequest_EngineConfiguration)
+		v.EngineConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionRole != nil {
+		s.WriteString(schemas.StartSessionRequest_ExecutionRole, *v.ExecutionRole)
+	}
+	if v.MonitoringConfiguration != nil {
+		s.WriteStruct(schemas.StartSessionRequest_MonitoringConfiguration)
+		v.MonitoringConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NotebookVersion != nil {
+		s.WriteString(schemas.StartSessionRequest_NotebookVersion, *v.NotebookVersion)
+	}
+	if v.SessionIdleTimeoutInMinutes != nil {
+		s.WriteInt32(schemas.StartSessionRequest_SessionIdleTimeoutInMinutes, *v.SessionIdleTimeoutInMinutes)
+	}
+	serializeTagList(s, schemas.StartSessionRequest_Tags, v.Tags)
+	if v.WorkGroup != nil {
+		s.WriteString(schemas.StartSessionRequest_WorkGroup, *v.WorkGroup)
+	}
+}
+
 type StartSessionOutput struct {
 
 	// The session ID.
@@ -111,13 +154,42 @@ type StartSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionId != nil {
+		s.WriteString(schemas.StartSessionResponse_SessionId, *v.SessionId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.StartSessionResponse_State, string(v.State))
+	}
+}
+func (v *StartSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSessionResponse_SessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.StartSessionResponse_SessionId, v.SessionId)
+		case schemas.StartSessionResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.StartSessionResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.SessionState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSession, schemas.StartSessionRequest, schemas.StartSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSession, schemas.StartSessionRequest, schemas.StartSessionResponse), output: &StartSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

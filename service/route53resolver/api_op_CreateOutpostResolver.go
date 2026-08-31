@@ -4,7 +4,9 @@ package route53resolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,31 @@ type CreateOutpostResolverInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOutpostResolverInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOutpostResolverRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOutpostResolverInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreateOutpostResolverRequest_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.InstanceCount != nil {
+		s.WriteInt32(schemas.CreateOutpostResolverRequest_InstanceCount, *v.InstanceCount)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateOutpostResolverRequest_Name, *v.Name)
+	}
+	if v.OutpostArn != nil {
+		s.WriteString(schemas.CreateOutpostResolverRequest_OutpostArn, *v.OutpostArn)
+	}
+	if v.PreferredInstanceType != nil {
+		s.WriteString(schemas.CreateOutpostResolverRequest_PreferredInstanceType, *v.PreferredInstanceType)
+	}
+	serializeTagList(s, schemas.CreateOutpostResolverRequest_Tags, v.Tags)
+}
+
 type CreateOutpostResolverOutput struct {
 
 	// Information about the CreateOutpostResolver request, including the status of
@@ -74,13 +101,34 @@ type CreateOutpostResolverOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOutpostResolverOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOutpostResolverResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOutpostResolverOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutpostResolver != nil {
+		s.WriteStruct(schemas.CreateOutpostResolverResponse_OutpostResolver)
+		v.OutpostResolver.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateOutpostResolverOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOutpostResolverResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOutpostResolverResponse_OutpostResolver:
+			v.OutpostResolver = &types.OutpostResolver{}
+			return v.OutpostResolver.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateOutpostResolverMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateOutpostResolver{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOutpostResolver, schemas.CreateOutpostResolverRequest, schemas.CreateOutpostResolverResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateOutpostResolver{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOutpostResolver, schemas.CreateOutpostResolverRequest, schemas.CreateOutpostResolverResponse), output: &CreateOutpostResolverOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

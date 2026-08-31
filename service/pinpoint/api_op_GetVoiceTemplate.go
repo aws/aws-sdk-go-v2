@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,21 @@ type GetVoiceTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVoiceTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVoiceTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVoiceTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateName != nil {
+		s.WriteString(schemas.GetVoiceTemplateRequest_TemplateName, *v.TemplateName)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.GetVoiceTemplateRequest_Version, *v.Version)
+	}
+}
+
 type GetVoiceTemplateOutput struct {
 
 	// Provides information about the content and settings for a message template that
@@ -76,13 +93,34 @@ type GetVoiceTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVoiceTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVoiceTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVoiceTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VoiceTemplateResponse != nil {
+		s.WriteStruct(schemas.GetVoiceTemplateResponse_VoiceTemplateResponse)
+		v.VoiceTemplateResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetVoiceTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVoiceTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVoiceTemplateResponse_VoiceTemplateResponse:
+			v.VoiceTemplateResponse = &types.VoiceTemplateResponse{}
+			return v.VoiceTemplateResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetVoiceTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetVoiceTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVoiceTemplate, schemas.GetVoiceTemplateRequest, schemas.GetVoiceTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetVoiceTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVoiceTemplate, schemas.GetVoiceTemplateRequest, schemas.GetVoiceTemplateResponse), output: &GetVoiceTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

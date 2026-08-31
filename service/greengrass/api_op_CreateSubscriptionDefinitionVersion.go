@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,22 @@ type CreateSubscriptionDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSubscriptionDefinitionVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSubscriptionDefinitionVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSubscriptionDefinitionVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmznClientToken != nil {
+		s.WriteString(schemas.CreateSubscriptionDefinitionVersionRequest_AmznClientToken, *v.AmznClientToken)
+	}
+	if v.SubscriptionDefinitionId != nil {
+		s.WriteString(schemas.CreateSubscriptionDefinitionVersionRequest_SubscriptionDefinitionId, *v.SubscriptionDefinitionId)
+	}
+	serialize__listOfSubscription(s, schemas.CreateSubscriptionDefinitionVersionRequest_Subscriptions, v.Subscriptions)
+}
+
 type CreateSubscriptionDefinitionVersionOutput struct {
 
 	// The ARN of the version.
@@ -60,13 +78,50 @@ type CreateSubscriptionDefinitionVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSubscriptionDefinitionVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSubscriptionDefinitionVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSubscriptionDefinitionVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateSubscriptionDefinitionVersionResponse_Arn, *v.Arn)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteString(schemas.CreateSubscriptionDefinitionVersionResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateSubscriptionDefinitionVersionResponse_Id, *v.Id)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.CreateSubscriptionDefinitionVersionResponse_Version, *v.Version)
+	}
+}
+func (v *CreateSubscriptionDefinitionVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSubscriptionDefinitionVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSubscriptionDefinitionVersionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateSubscriptionDefinitionVersionResponse_Arn, v.Arn)
+		case schemas.CreateSubscriptionDefinitionVersionResponse_CreationTimestamp:
+			v.CreationTimestamp = new(string)
+			return d.ReadString(schemas.CreateSubscriptionDefinitionVersionResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.CreateSubscriptionDefinitionVersionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateSubscriptionDefinitionVersionResponse_Id, v.Id)
+		case schemas.CreateSubscriptionDefinitionVersionResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.CreateSubscriptionDefinitionVersionResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSubscriptionDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSubscriptionDefinitionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSubscriptionDefinitionVersion, schemas.CreateSubscriptionDefinitionVersionRequest, schemas.CreateSubscriptionDefinitionVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSubscriptionDefinitionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSubscriptionDefinitionVersion, schemas.CreateSubscriptionDefinitionVersionRequest, schemas.CreateSubscriptionDefinitionVersionResponse), output: &CreateSubscriptionDefinitionVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

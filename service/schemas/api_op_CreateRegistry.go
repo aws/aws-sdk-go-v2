@@ -4,6 +4,8 @@ package schemas
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/schemas/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,22 @@ type CreateRegistryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRegistryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRegistryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRegistryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateRegistryRequest_Description, *v.Description)
+	}
+	if v.RegistryName != nil {
+		s.WriteString(schemas.CreateRegistryRequest_RegistryName, *v.RegistryName)
+	}
+	serializeTags(s, schemas.CreateRegistryRequest_Tags, v.Tags)
+}
+
 type CreateRegistryOutput struct {
 
 	// The description of the registry.
@@ -59,13 +77,47 @@ type CreateRegistryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRegistryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRegistryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRegistryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateRegistryResponse_Description, *v.Description)
+	}
+	if v.RegistryArn != nil {
+		s.WriteString(schemas.CreateRegistryResponse_RegistryArn, *v.RegistryArn)
+	}
+	if v.RegistryName != nil {
+		s.WriteString(schemas.CreateRegistryResponse_RegistryName, *v.RegistryName)
+	}
+	serializeTags(s, schemas.CreateRegistryResponse_Tags, v.Tags)
+}
+func (v *CreateRegistryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRegistryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRegistryResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateRegistryResponse_Description, v.Description)
+		case schemas.CreateRegistryResponse_RegistryArn:
+			v.RegistryArn = new(string)
+			return d.ReadString(schemas.CreateRegistryResponse_RegistryArn, v.RegistryArn)
+		case schemas.CreateRegistryResponse_RegistryName:
+			v.RegistryName = new(string)
+			return d.ReadString(schemas.CreateRegistryResponse_RegistryName, v.RegistryName)
+		case schemas.CreateRegistryResponse_Tags:
+			return deserializeTags(d, schemas.CreateRegistryResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRegistryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRegistry{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRegistry, schemas.CreateRegistryRequest, schemas.CreateRegistryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRegistry{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRegistry, schemas.CreateRegistryRequest, schemas.CreateRegistryResponse), output: &CreateRegistryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

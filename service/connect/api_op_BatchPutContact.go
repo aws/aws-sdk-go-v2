@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,22 @@ type BatchPutContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.BatchPutContactRequest_ClientToken, *v.ClientToken)
+	}
+	serializeContactDataRequestList(s, schemas.BatchPutContactRequest_ContactDataRequestList, v.ContactDataRequestList)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.BatchPutContactRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type BatchPutContactOutput struct {
 
 	// List of requests for which contact creation failed.
@@ -74,13 +92,32 @@ type BatchPutContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedRequestList(s, schemas.BatchPutContactResponse_FailedRequestList, v.FailedRequestList)
+	serializeSuccessfulRequestList(s, schemas.BatchPutContactResponse_SuccessfulRequestList, v.SuccessfulRequestList)
+}
+func (v *BatchPutContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutContactResponse_FailedRequestList:
+			return deserializeFailedRequestList(d, schemas.BatchPutContactResponse_FailedRequestList, &v.FailedRequestList)
+		case schemas.BatchPutContactResponse_SuccessfulRequestList:
+			return deserializeSuccessfulRequestList(d, schemas.BatchPutContactResponse_SuccessfulRequestList, &v.SuccessfulRequestList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchPutContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchPutContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutContact, schemas.BatchPutContactRequest, schemas.BatchPutContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchPutContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutContact, schemas.BatchPutContactRequest, schemas.BatchPutContactResponse), output: &BatchPutContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

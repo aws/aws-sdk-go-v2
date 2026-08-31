@@ -4,6 +4,8 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetOrganizationCustomRulePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOrganizationCustomRulePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOrganizationCustomRulePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOrganizationCustomRulePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationConfigRuleName != nil {
+		s.WriteString(schemas.GetOrganizationCustomRulePolicyRequest_OrganizationConfigRuleName, *v.OrganizationConfigRuleName)
+	}
+}
+
 type GetOrganizationCustomRulePolicyOutput struct {
 
 	// The policy definition containing the logic for your organization Config Custom
@@ -46,13 +60,32 @@ type GetOrganizationCustomRulePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOrganizationCustomRulePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOrganizationCustomRulePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOrganizationCustomRulePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyText != nil {
+		s.WriteString(schemas.GetOrganizationCustomRulePolicyResponse_PolicyText, *v.PolicyText)
+	}
+}
+func (v *GetOrganizationCustomRulePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOrganizationCustomRulePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOrganizationCustomRulePolicyResponse_PolicyText:
+			v.PolicyText = new(string)
+			return d.ReadString(schemas.GetOrganizationCustomRulePolicyResponse_PolicyText, v.PolicyText)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOrganizationCustomRulePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetOrganizationCustomRulePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOrganizationCustomRulePolicy, schemas.GetOrganizationCustomRulePolicyRequest, schemas.GetOrganizationCustomRulePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetOrganizationCustomRulePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOrganizationCustomRulePolicy, schemas.GetOrganizationCustomRulePolicyRequest, schemas.GetOrganizationCustomRulePolicyResponse), output: &GetOrganizationCustomRulePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

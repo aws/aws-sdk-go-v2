@@ -5,7 +5,9 @@ package managedblockchain
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,30 @@ type ListNetworksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNetworksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNetworksInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNetworksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Framework != "" {
+		s.WriteString(schemas.ListNetworksInput_Framework, string(v.Framework))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListNetworksInput_MaxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListNetworksInput_Name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNetworksInput_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListNetworksInput_Status, string(v.Status))
+	}
+}
+
 type ListNetworksOutput struct {
 
 	// An array of NetworkSummary objects that contain configuration properties for
@@ -67,13 +93,35 @@ type ListNetworksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNetworksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNetworksOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNetworksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNetworkSummaryList(s, schemas.ListNetworksOutput_Networks, v.Networks)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNetworksOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListNetworksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNetworksOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNetworksOutput_Networks:
+			return deserializeNetworkSummaryList(d, schemas.ListNetworksOutput_Networks, &v.Networks)
+		case schemas.ListNetworksOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNetworksOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNetworksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNetworks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworks, schemas.ListNetworksInput, schemas.ListNetworksOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNetworks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworks, schemas.ListNetworksInput, schemas.ListNetworksOutput), output: &ListNetworksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

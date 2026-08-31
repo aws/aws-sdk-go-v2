@@ -4,6 +4,8 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteThemeForStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteThemeForStackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteThemeForStackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteThemeForStackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StackName != nil {
+		s.WriteString(schemas.DeleteThemeForStackRequest_StackName, *v.StackName)
+	}
+}
+
 type DeleteThemeForStackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteThemeForStackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteThemeForStackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteThemeForStackResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteThemeForStackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteThemeForStackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteThemeForStackResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteThemeForStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteThemeForStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteThemeForStack, schemas.DeleteThemeForStackRequest, schemas.DeleteThemeForStackResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteThemeForStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteThemeForStack, schemas.DeleteThemeForStackRequest, schemas.DeleteThemeForStackResult), output: &DeleteThemeForStackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -87,6 +89,49 @@ type UpdateDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppNetworkAccessType != "" {
+		s.WriteString(schemas.UpdateDomainRequest_AppNetworkAccessType, string(v.AppNetworkAccessType))
+	}
+	if v.AppSecurityGroupManagement != "" {
+		s.WriteString(schemas.UpdateDomainRequest_AppSecurityGroupManagement, string(v.AppSecurityGroupManagement))
+	}
+	if v.DefaultSpaceSettings != nil {
+		s.WriteStruct(schemas.UpdateDomainRequest_DefaultSpaceSettings)
+		v.DefaultSpaceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultUserSettings != nil {
+		s.WriteStruct(schemas.UpdateDomainRequest_DefaultUserSettings)
+		v.DefaultUserSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.UpdateDomainRequest_DomainId, *v.DomainId)
+	}
+	if v.DomainSettingsForUpdate != nil {
+		s.WriteStruct(schemas.UpdateDomainRequest_DomainSettingsForUpdate)
+		v.DomainSettingsForUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HomeEfsFileSystemCreation != "" {
+		s.WriteString(schemas.UpdateDomainRequest_HomeEfsFileSystemCreation, string(v.HomeEfsFileSystemCreation))
+	}
+	serializeSubnets(s, schemas.UpdateDomainRequest_SubnetIds, v.SubnetIds)
+	if v.TagPropagation != "" {
+		s.WriteString(schemas.UpdateDomainRequest_TagPropagation, string(v.TagPropagation))
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.UpdateDomainRequest_VpcId, *v.VpcId)
+	}
+}
+
 type UpdateDomainOutput struct {
 
 	// The Amazon Resource Name (ARN) of the domain.
@@ -98,13 +143,32 @@ type UpdateDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainArn != nil {
+		s.WriteString(schemas.UpdateDomainResponse_DomainArn, *v.DomainArn)
+	}
+}
+func (v *UpdateDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDomainResponse_DomainArn:
+			v.DomainArn = new(string)
+			return d.ReadString(schemas.UpdateDomainResponse_DomainArn, v.DomainArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomain, schemas.UpdateDomainRequest, schemas.UpdateDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomain, schemas.UpdateDomainRequest, schemas.UpdateDomainResponse), output: &UpdateDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

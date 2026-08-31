@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeArtifactInput struct {
 	ArtifactArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeArtifactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeArtifactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeArtifactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactArn != nil {
+		s.WriteString(schemas.DescribeArtifactRequest_ArtifactArn, *v.ArtifactArn)
+	}
 }
 
 type DescribeArtifactOutput struct {
@@ -76,13 +90,97 @@ type DescribeArtifactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeArtifactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeArtifactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeArtifactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactArn != nil {
+		s.WriteString(schemas.DescribeArtifactResponse_ArtifactArn, *v.ArtifactArn)
+	}
+	if v.ArtifactName != nil {
+		s.WriteString(schemas.DescribeArtifactResponse_ArtifactName, *v.ArtifactName)
+	}
+	if v.ArtifactType != nil {
+		s.WriteString(schemas.DescribeArtifactResponse_ArtifactType, *v.ArtifactType)
+	}
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.DescribeArtifactResponse_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeArtifactResponse_CreationTime, *v.CreationTime)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteStruct(schemas.DescribeArtifactResponse_LastModifiedBy)
+		v.LastModifiedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeArtifactResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.LineageGroupArn != nil {
+		s.WriteString(schemas.DescribeArtifactResponse_LineageGroupArn, *v.LineageGroupArn)
+	}
+	if v.MetadataProperties != nil {
+		s.WriteStruct(schemas.DescribeArtifactResponse_MetadataProperties)
+		v.MetadataProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeLineageEntityParameters(s, schemas.DescribeArtifactResponse_Properties, v.Properties)
+	if v.Source != nil {
+		s.WriteStruct(schemas.DescribeArtifactResponse_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeArtifactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeArtifactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeArtifactResponse_ArtifactArn:
+			v.ArtifactArn = new(string)
+			return d.ReadString(schemas.DescribeArtifactResponse_ArtifactArn, v.ArtifactArn)
+		case schemas.DescribeArtifactResponse_ArtifactName:
+			v.ArtifactName = new(string)
+			return d.ReadString(schemas.DescribeArtifactResponse_ArtifactName, v.ArtifactName)
+		case schemas.DescribeArtifactResponse_ArtifactType:
+			v.ArtifactType = new(string)
+			return d.ReadString(schemas.DescribeArtifactResponse_ArtifactType, v.ArtifactType)
+		case schemas.DescribeArtifactResponse_CreatedBy:
+			v.CreatedBy = &types.UserContext{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.DescribeArtifactResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeArtifactResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeArtifactResponse_LastModifiedBy:
+			v.LastModifiedBy = &types.UserContext{}
+			return v.LastModifiedBy.Deserialize(d)
+		case schemas.DescribeArtifactResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeArtifactResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeArtifactResponse_LineageGroupArn:
+			v.LineageGroupArn = new(string)
+			return d.ReadString(schemas.DescribeArtifactResponse_LineageGroupArn, v.LineageGroupArn)
+		case schemas.DescribeArtifactResponse_MetadataProperties:
+			v.MetadataProperties = &types.MetadataProperties{}
+			return v.MetadataProperties.Deserialize(d)
+		case schemas.DescribeArtifactResponse_Properties:
+			return deserializeLineageEntityParameters(d, schemas.DescribeArtifactResponse_Properties, &v.Properties)
+		case schemas.DescribeArtifactResponse_Source:
+			v.Source = &types.ArtifactSource{}
+			return v.Source.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeArtifact, schemas.DescribeArtifactRequest, schemas.DescribeArtifactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeArtifact, schemas.DescribeArtifactRequest, schemas.DescribeArtifactResponse), output: &DescribeArtifactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

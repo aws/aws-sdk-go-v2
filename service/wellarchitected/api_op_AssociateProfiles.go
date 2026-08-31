@@ -4,6 +4,8 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type AssociateProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateProfilesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeProfileArns(s, schemas.AssociateProfilesInput_ProfileArns, v.ProfileArns)
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.AssociateProfilesInput_WorkloadId, *v.WorkloadId)
+	}
+}
+
 type AssociateProfilesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +61,26 @@ type AssociateProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateProfiles, schemas.AssociateProfilesInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateProfiles, schemas.AssociateProfilesInput, nil), output: &AssociateProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

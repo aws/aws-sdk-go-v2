@@ -4,6 +4,8 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,34 @@ type DeleteConfiguredTableAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConfiguredTableAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConfiguredTableAssociationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConfiguredTableAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfiguredTableAssociationIdentifier != nil {
+		s.WriteString(schemas.DeleteConfiguredTableAssociationInput_configuredTableAssociationIdentifier, *v.ConfiguredTableAssociationIdentifier)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.DeleteConfiguredTableAssociationInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+func (v *DeleteConfiguredTableAssociationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteConfiguredTableAssociationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteConfiguredTableAssociationInput_configuredTableAssociationIdentifier:
+			v.ConfiguredTableAssociationIdentifier = new(string)
+			return d.ReadString(schemas.DeleteConfiguredTableAssociationInput_configuredTableAssociationIdentifier, v.ConfiguredTableAssociationIdentifier)
+		case schemas.DeleteConfiguredTableAssociationInput_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.DeleteConfiguredTableAssociationInput_membershipIdentifier, v.MembershipIdentifier)
+		}
+		return nil
+	})
+}
+
 type DeleteConfiguredTableAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +77,26 @@ type DeleteConfiguredTableAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConfiguredTableAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConfiguredTableAssociationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConfiguredTableAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteConfiguredTableAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteConfiguredTableAssociationOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConfiguredTableAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteConfiguredTableAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfiguredTableAssociation, schemas.DeleteConfiguredTableAssociationInput, schemas.DeleteConfiguredTableAssociationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteConfiguredTableAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfiguredTableAssociation, schemas.DeleteConfiguredTableAssociationInput, schemas.DeleteConfiguredTableAssociationOutput), output: &DeleteConfiguredTableAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,16 @@ type DescribeDeliveryChannelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDeliveryChannelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDeliveryChannelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDeliveryChannelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeliveryChannelNameList(s, schemas.DescribeDeliveryChannelsRequest_DeliveryChannelNames, v.DeliveryChannelNames)
+}
+
 // The output for the DescribeDeliveryChannels action.
 type DescribeDeliveryChannelsOutput struct {
 
@@ -49,13 +61,29 @@ type DescribeDeliveryChannelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDeliveryChannelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDeliveryChannelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDeliveryChannelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeliveryChannelList(s, schemas.DescribeDeliveryChannelsResponse_DeliveryChannels, v.DeliveryChannels)
+}
+func (v *DescribeDeliveryChannelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDeliveryChannelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDeliveryChannelsResponse_DeliveryChannels:
+			return deserializeDeliveryChannelList(d, schemas.DescribeDeliveryChannelsResponse_DeliveryChannels, &v.DeliveryChannels)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDeliveryChannelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDeliveryChannels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDeliveryChannels, schemas.DescribeDeliveryChannelsRequest, schemas.DescribeDeliveryChannelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDeliveryChannels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDeliveryChannels, schemas.DescribeDeliveryChannelsRequest, schemas.DescribeDeliveryChannelsResponse), output: &DescribeDeliveryChannelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

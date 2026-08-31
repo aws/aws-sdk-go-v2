@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -92,6 +94,50 @@ type CreateAIRecommendationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAIRecommendationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAIRecommendationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAIRecommendationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIRecommendationJobName != nil {
+		s.WriteString(schemas.CreateAIRecommendationJobRequest_AIRecommendationJobName, *v.AIRecommendationJobName)
+	}
+	if v.AIWorkloadConfigIdentifier != nil {
+		s.WriteString(schemas.CreateAIRecommendationJobRequest_AIWorkloadConfigIdentifier, *v.AIWorkloadConfigIdentifier)
+	}
+	serializeAIAdapterSource(s, schemas.CreateAIRecommendationJobRequest_AdapterSource, v.AdapterSource)
+	if v.ComputeSpec != nil {
+		s.WriteStruct(schemas.CreateAIRecommendationJobRequest_ComputeSpec)
+		v.ComputeSpec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InferenceSpecification != nil {
+		s.WriteStruct(schemas.CreateAIRecommendationJobRequest_InferenceSpecification)
+		v.InferenceSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAIModelSource(s, schemas.CreateAIRecommendationJobRequest_ModelSource, v.ModelSource)
+	if v.OptimizeModel != nil {
+		s.WriteBool(schemas.CreateAIRecommendationJobRequest_OptimizeModel, *v.OptimizeModel)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.CreateAIRecommendationJobRequest_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PerformanceTarget != nil {
+		s.WriteStruct(schemas.CreateAIRecommendationJobRequest_PerformanceTarget)
+		v.PerformanceTarget.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateAIRecommendationJobRequest_RoleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.CreateAIRecommendationJobRequest_Tags, v.Tags)
+}
+
 type CreateAIRecommendationJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created recommendation job.
@@ -105,13 +151,32 @@ type CreateAIRecommendationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAIRecommendationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAIRecommendationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAIRecommendationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIRecommendationJobArn != nil {
+		s.WriteString(schemas.CreateAIRecommendationJobResponse_AIRecommendationJobArn, *v.AIRecommendationJobArn)
+	}
+}
+func (v *CreateAIRecommendationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAIRecommendationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAIRecommendationJobResponse_AIRecommendationJobArn:
+			v.AIRecommendationJobArn = new(string)
+			return d.ReadString(schemas.CreateAIRecommendationJobResponse_AIRecommendationJobArn, v.AIRecommendationJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAIRecommendationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAIRecommendationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAIRecommendationJob, schemas.CreateAIRecommendationJobRequest, schemas.CreateAIRecommendationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAIRecommendationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAIRecommendationJob, schemas.CreateAIRecommendationJobRequest, schemas.CreateAIRecommendationJobResponse), output: &CreateAIRecommendationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

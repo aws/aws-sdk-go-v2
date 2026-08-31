@@ -4,7 +4,9 @@ package codedeploy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,19 @@ type BatchGetDeploymentTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetDeploymentTargetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetDeploymentTargetsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetDeploymentTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.BatchGetDeploymentTargetsInput_deploymentId, *v.DeploymentId)
+	}
+	serializeTargetIdList(s, schemas.BatchGetDeploymentTargetsInput_targetIds, v.TargetIds)
+}
+
 type BatchGetDeploymentTargetsOutput struct {
 
 	//  A list of target objects for a deployment. Each target object contains details
@@ -94,13 +109,29 @@ type BatchGetDeploymentTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetDeploymentTargetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetDeploymentTargetsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetDeploymentTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeploymentTargetList(s, schemas.BatchGetDeploymentTargetsOutput_deploymentTargets, v.DeploymentTargets)
+}
+func (v *BatchGetDeploymentTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetDeploymentTargetsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetDeploymentTargetsOutput_deploymentTargets:
+			return deserializeDeploymentTargetList(d, schemas.BatchGetDeploymentTargetsOutput_deploymentTargets, &v.DeploymentTargets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetDeploymentTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetDeploymentTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetDeploymentTargets, schemas.BatchGetDeploymentTargetsInput, schemas.BatchGetDeploymentTargetsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetDeploymentTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetDeploymentTargets, schemas.BatchGetDeploymentTargetsInput, schemas.BatchGetDeploymentTargetsOutput), output: &BatchGetDeploymentTargetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

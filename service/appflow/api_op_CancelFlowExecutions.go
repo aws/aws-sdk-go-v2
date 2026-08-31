@@ -4,6 +4,8 @@ package appflow
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appflow/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,19 @@ type CancelFlowExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelFlowExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelFlowExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelFlowExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExecutionIds(s, schemas.CancelFlowExecutionsRequest_executionIds, v.ExecutionIds)
+	if v.FlowName != nil {
+		s.WriteString(schemas.CancelFlowExecutionsRequest_flowName, *v.FlowName)
+	}
+}
+
 type CancelFlowExecutionsOutput struct {
 
 	// The IDs of runs that Amazon AppFlow couldn't cancel. These runs might be
@@ -76,13 +91,29 @@ type CancelFlowExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelFlowExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelFlowExecutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelFlowExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExecutionIds(s, schemas.CancelFlowExecutionsResponse_invalidExecutions, v.InvalidExecutions)
+}
+func (v *CancelFlowExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelFlowExecutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelFlowExecutionsResponse_invalidExecutions:
+			return deserializeExecutionIds(d, schemas.CancelFlowExecutionsResponse_invalidExecutions, &v.InvalidExecutions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelFlowExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelFlowExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelFlowExecutions, schemas.CancelFlowExecutionsRequest, schemas.CancelFlowExecutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelFlowExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelFlowExecutions, schemas.CancelFlowExecutionsRequest, schemas.CancelFlowExecutionsResponse), output: &CancelFlowExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

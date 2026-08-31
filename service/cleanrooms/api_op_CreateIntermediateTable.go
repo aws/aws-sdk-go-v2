@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,32 @@ type CreateIntermediateTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIntermediateTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIntermediateTableInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIntermediateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateIntermediateTableInput_description, *v.Description)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.CreateIntermediateTableInput_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.CreateIntermediateTableInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateIntermediateTableInput_name, *v.Name)
+	}
+	serializePopulationAnalysisConfiguration(s, schemas.CreateIntermediateTableInput_populationAnalysisConfiguration, v.PopulationAnalysisConfiguration)
+	if v.RetentionInDays != nil {
+		s.WriteInt32(schemas.CreateIntermediateTableInput_retentionInDays, *v.RetentionInDays)
+	}
+	serializeTagMap(s, schemas.CreateIntermediateTableInput_tags, v.Tags)
+}
+
 type CreateIntermediateTableOutput struct {
 
 	// The intermediate table that was created.
@@ -76,13 +104,34 @@ type CreateIntermediateTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIntermediateTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIntermediateTableOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIntermediateTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntermediateTable != nil {
+		s.WriteStruct(schemas.CreateIntermediateTableOutput_intermediateTable)
+		v.IntermediateTable.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateIntermediateTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIntermediateTableOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIntermediateTableOutput_intermediateTable:
+			v.IntermediateTable = &types.IntermediateTable{}
+			return v.IntermediateTable.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIntermediateTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIntermediateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIntermediateTable, schemas.CreateIntermediateTableInput, schemas.CreateIntermediateTableOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIntermediateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIntermediateTable, schemas.CreateIntermediateTableInput, schemas.CreateIntermediateTableOutput), output: &CreateIntermediateTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

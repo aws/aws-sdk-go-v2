@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -84,6 +86,33 @@ type UpdateEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEndpointInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentConfig != nil {
+		s.WriteStruct(schemas.UpdateEndpointInput_DeploymentConfig)
+		v.DeploymentConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointConfigName != nil {
+		s.WriteString(schemas.UpdateEndpointInput_EndpointConfigName, *v.EndpointConfigName)
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.UpdateEndpointInput_EndpointName, *v.EndpointName)
+	}
+	serializeVariantPropertyList(s, schemas.UpdateEndpointInput_ExcludeRetainedVariantProperties, v.ExcludeRetainedVariantProperties)
+	if v.RetainAllVariantProperties != nil {
+		s.WriteBool(schemas.UpdateEndpointInput_RetainAllVariantProperties, *v.RetainAllVariantProperties)
+	}
+	if v.RetainDeploymentConfig != nil {
+		s.WriteBool(schemas.UpdateEndpointInput_RetainDeploymentConfig, *v.RetainDeploymentConfig)
+	}
+}
+
 type UpdateEndpointOutput struct {
 
 	// The Amazon Resource Name (ARN) of the endpoint.
@@ -97,13 +126,32 @@ type UpdateEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEndpointOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointArn != nil {
+		s.WriteString(schemas.UpdateEndpointOutput_EndpointArn, *v.EndpointArn)
+	}
+}
+func (v *UpdateEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEndpointOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEndpointOutput_EndpointArn:
+			v.EndpointArn = new(string)
+			return d.ReadString(schemas.UpdateEndpointOutput_EndpointArn, v.EndpointArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEndpoint, schemas.UpdateEndpointInput, schemas.UpdateEndpointOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEndpoint, schemas.UpdateEndpointInput, schemas.UpdateEndpointOutput), output: &UpdateEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package managedblockchain
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,25 @@ type CreateAccessorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccessorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccessorInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccessorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessorType != "" {
+		s.WriteString(schemas.CreateAccessorInput_AccessorType, string(v.AccessorType))
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateAccessorInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.CreateAccessorInput_NetworkType, string(v.NetworkType))
+	}
+	serializeInputTagMap(s, schemas.CreateAccessorInput_Tags, v.Tags)
+}
+
 type CreateAccessorOutput struct {
 
 	// The unique identifier of the accessor.
@@ -99,13 +120,48 @@ type CreateAccessorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccessorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccessorOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccessorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessorId != nil {
+		s.WriteString(schemas.CreateAccessorOutput_AccessorId, *v.AccessorId)
+	}
+	if v.BillingToken != nil {
+		s.WriteString(schemas.CreateAccessorOutput_BillingToken, *v.BillingToken)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.CreateAccessorOutput_NetworkType, string(v.NetworkType))
+	}
+}
+func (v *CreateAccessorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAccessorOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAccessorOutput_AccessorId:
+			v.AccessorId = new(string)
+			return d.ReadString(schemas.CreateAccessorOutput_AccessorId, v.AccessorId)
+		case schemas.CreateAccessorOutput_BillingToken:
+			v.BillingToken = new(string)
+			return d.ReadString(schemas.CreateAccessorOutput_BillingToken, v.BillingToken)
+		case schemas.CreateAccessorOutput_NetworkType:
+			var ev string
+			if err := d.ReadString(schemas.CreateAccessorOutput_NetworkType, &ev); err != nil {
+				return err
+			}
+			v.NetworkType = types.AccessorNetworkType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAccessorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAccessor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessor, schemas.CreateAccessorInput, schemas.CreateAccessorOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAccessor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessor, schemas.CreateAccessorInput, schemas.CreateAccessorOutput), output: &CreateAccessorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

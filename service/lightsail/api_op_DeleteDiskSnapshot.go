@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,18 @@ type DeleteDiskSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDiskSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDiskSnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDiskSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DiskSnapshotName != nil {
+		s.WriteString(schemas.DeleteDiskSnapshotRequest_diskSnapshotName, *v.DiskSnapshotName)
+	}
+}
+
 type DeleteDiskSnapshotOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -60,13 +74,29 @@ type DeleteDiskSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDiskSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDiskSnapshotResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDiskSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.DeleteDiskSnapshotResult_operations, v.Operations)
+}
+func (v *DeleteDiskSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDiskSnapshotResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDiskSnapshotResult_operations:
+			return deserializeOperationList(d, schemas.DeleteDiskSnapshotResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDiskSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDiskSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDiskSnapshot, schemas.DeleteDiskSnapshotRequest, schemas.DeleteDiskSnapshotResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteDiskSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDiskSnapshot, schemas.DeleteDiskSnapshotRequest, schemas.DeleteDiskSnapshotResult), output: &DeleteDiskSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

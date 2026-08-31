@@ -4,7 +4,9 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -30,6 +32,15 @@ func (c *Client) GetBlockPublicAccessConfiguration(ctx context.Context, params *
 
 type GetBlockPublicAccessConfigurationInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *GetBlockPublicAccessConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBlockPublicAccessConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBlockPublicAccessConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type GetBlockPublicAccessConfigurationOutput struct {
@@ -68,13 +79,42 @@ type GetBlockPublicAccessConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBlockPublicAccessConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBlockPublicAccessConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBlockPublicAccessConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlockPublicAccessConfiguration != nil {
+		s.WriteStruct(schemas.GetBlockPublicAccessConfigurationOutput_BlockPublicAccessConfiguration)
+		v.BlockPublicAccessConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BlockPublicAccessConfigurationMetadata != nil {
+		s.WriteStruct(schemas.GetBlockPublicAccessConfigurationOutput_BlockPublicAccessConfigurationMetadata)
+		v.BlockPublicAccessConfigurationMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetBlockPublicAccessConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBlockPublicAccessConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBlockPublicAccessConfigurationOutput_BlockPublicAccessConfiguration:
+			v.BlockPublicAccessConfiguration = &types.BlockPublicAccessConfiguration{}
+			return v.BlockPublicAccessConfiguration.Deserialize(d)
+		case schemas.GetBlockPublicAccessConfigurationOutput_BlockPublicAccessConfigurationMetadata:
+			v.BlockPublicAccessConfigurationMetadata = &types.BlockPublicAccessConfigurationMetadata{}
+			return v.BlockPublicAccessConfigurationMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBlockPublicAccessConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetBlockPublicAccessConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBlockPublicAccessConfiguration, schemas.GetBlockPublicAccessConfigurationInput, schemas.GetBlockPublicAccessConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetBlockPublicAccessConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBlockPublicAccessConfiguration, schemas.GetBlockPublicAccessConfigurationInput, schemas.GetBlockPublicAccessConfigurationOutput), output: &GetBlockPublicAccessConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

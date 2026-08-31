@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,27 @@ type ListPrincipalPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPrincipalPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPrincipalPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPrincipalPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AscendingOrder != false {
+		s.WriteBool(schemas.ListPrincipalPoliciesRequest_ascendingOrder, v.AscendingOrder)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListPrincipalPoliciesRequest_marker, *v.Marker)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListPrincipalPoliciesRequest_pageSize, *v.PageSize)
+	}
+	if v.Principal != nil {
+		s.WriteString(schemas.ListPrincipalPoliciesRequest_principal, *v.Principal)
+	}
+}
+
 // The output from the ListPrincipalPolicies operation.
 type ListPrincipalPoliciesOutput struct {
 
@@ -75,13 +98,35 @@ type ListPrincipalPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPrincipalPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPrincipalPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPrincipalPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListPrincipalPoliciesResponse_nextMarker, *v.NextMarker)
+	}
+	serializePolicies(s, schemas.ListPrincipalPoliciesResponse_policies, v.Policies)
+}
+func (v *ListPrincipalPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPrincipalPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPrincipalPoliciesResponse_nextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListPrincipalPoliciesResponse_nextMarker, v.NextMarker)
+		case schemas.ListPrincipalPoliciesResponse_policies:
+			return deserializePolicies(d, schemas.ListPrincipalPoliciesResponse_policies, &v.Policies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPrincipalPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPrincipalPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPrincipalPolicies, schemas.ListPrincipalPoliciesRequest, schemas.ListPrincipalPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPrincipalPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPrincipalPolicies, schemas.ListPrincipalPoliciesRequest, schemas.ListPrincipalPoliciesResponse), output: &ListPrincipalPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

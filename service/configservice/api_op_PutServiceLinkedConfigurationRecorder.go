@@ -4,7 +4,9 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,19 @@ type PutServiceLinkedConfigurationRecorderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutServiceLinkedConfigurationRecorderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutServiceLinkedConfigurationRecorderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutServiceLinkedConfigurationRecorderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServicePrincipal != nil {
+		s.WriteString(schemas.PutServiceLinkedConfigurationRecorderRequest_ServicePrincipal, *v.ServicePrincipal)
+	}
+	serializeTagsList(s, schemas.PutServiceLinkedConfigurationRecorderRequest_Tags, v.Tags)
+}
+
 type PutServiceLinkedConfigurationRecorderOutput struct {
 
 	// The Amazon Resource Name (ARN) of the specified configuration recorder.
@@ -84,13 +99,38 @@ type PutServiceLinkedConfigurationRecorderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutServiceLinkedConfigurationRecorderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutServiceLinkedConfigurationRecorderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutServiceLinkedConfigurationRecorderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.PutServiceLinkedConfigurationRecorderResponse_Arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PutServiceLinkedConfigurationRecorderResponse_Name, *v.Name)
+	}
+}
+func (v *PutServiceLinkedConfigurationRecorderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutServiceLinkedConfigurationRecorderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutServiceLinkedConfigurationRecorderResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.PutServiceLinkedConfigurationRecorderResponse_Arn, v.Arn)
+		case schemas.PutServiceLinkedConfigurationRecorderResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PutServiceLinkedConfigurationRecorderResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutServiceLinkedConfigurationRecorderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutServiceLinkedConfigurationRecorder{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutServiceLinkedConfigurationRecorder, schemas.PutServiceLinkedConfigurationRecorderRequest, schemas.PutServiceLinkedConfigurationRecorderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutServiceLinkedConfigurationRecorder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutServiceLinkedConfigurationRecorder, schemas.PutServiceLinkedConfigurationRecorderRequest, schemas.PutServiceLinkedConfigurationRecorderResponse), output: &PutServiceLinkedConfigurationRecorderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

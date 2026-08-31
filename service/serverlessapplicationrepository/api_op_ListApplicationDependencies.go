@@ -5,7 +5,9 @@ package serverlessapplicationrepository
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,27 @@ type ListApplicationDependenciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationDependenciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationDependenciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationDependenciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ListApplicationDependenciesRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListApplicationDependenciesRequest_MaxItems, *v.MaxItems)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationDependenciesRequest_NextToken, *v.NextToken)
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.ListApplicationDependenciesRequest_SemanticVersion, *v.SemanticVersion)
+	}
+}
+
 type ListApplicationDependenciesOutput struct {
 
 	// An array of application summaries nested in the application.
@@ -58,13 +81,35 @@ type ListApplicationDependenciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationDependenciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationDependenciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationDependenciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfApplicationDependencySummary(s, schemas.ListApplicationDependenciesResponse_Dependencies, v.Dependencies)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationDependenciesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListApplicationDependenciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListApplicationDependenciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListApplicationDependenciesResponse_Dependencies:
+			return deserialize__listOfApplicationDependencySummary(d, schemas.ListApplicationDependenciesResponse_Dependencies, &v.Dependencies)
+		case schemas.ListApplicationDependenciesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListApplicationDependenciesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListApplicationDependenciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListApplicationDependencies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationDependencies, schemas.ListApplicationDependenciesRequest, schemas.ListApplicationDependenciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListApplicationDependencies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationDependencies, schemas.ListApplicationDependenciesRequest, schemas.ListApplicationDependenciesResponse), output: &ListApplicationDependenciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

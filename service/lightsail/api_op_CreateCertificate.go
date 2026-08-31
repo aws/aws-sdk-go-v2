@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,23 @@ type CreateCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateName != nil {
+		s.WriteString(schemas.CreateCertificateRequest_certificateName, *v.CertificateName)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.CreateCertificateRequest_domainName, *v.DomainName)
+	}
+	serializeSubjectAlternativeNameList(s, schemas.CreateCertificateRequest_subjectAlternativeNames, v.SubjectAlternativeNames)
+	serializeTagList(s, schemas.CreateCertificateRequest_tags, v.Tags)
+}
+
 type CreateCertificateOutput struct {
 
 	// An object that describes the certificate created.
@@ -81,13 +100,37 @@ type CreateCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCertificateResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Certificate != nil {
+		s.WriteStruct(schemas.CreateCertificateResult_certificate)
+		v.Certificate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeOperationList(s, schemas.CreateCertificateResult_operations, v.Operations)
+}
+func (v *CreateCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCertificateResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCertificateResult_certificate:
+			v.Certificate = &types.CertificateSummary{}
+			return v.Certificate.Deserialize(d)
+		case schemas.CreateCertificateResult_operations:
+			return deserializeOperationList(d, schemas.CreateCertificateResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCertificate, schemas.CreateCertificateRequest, schemas.CreateCertificateResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCertificate, schemas.CreateCertificateRequest, schemas.CreateCertificateResult), output: &CreateCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

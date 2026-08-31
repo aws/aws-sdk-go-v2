@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,38 @@ type StartDetectMitigationActionsTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDetectMitigationActionsTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDetectMitigationActionsTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDetectMitigationActionsTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDetectMitigationActionsToExecuteList(s, schemas.StartDetectMitigationActionsTaskRequest_actions, v.Actions)
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartDetectMitigationActionsTaskRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.IncludeOnlyActiveViolations != nil {
+		s.WriteBool(schemas.StartDetectMitigationActionsTaskRequest_includeOnlyActiveViolations, *v.IncludeOnlyActiveViolations)
+	}
+	if v.IncludeSuppressedAlerts != nil {
+		s.WriteBool(schemas.StartDetectMitigationActionsTaskRequest_includeSuppressedAlerts, *v.IncludeSuppressedAlerts)
+	}
+	if v.Target != nil {
+		s.WriteStruct(schemas.StartDetectMitigationActionsTaskRequest_target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.StartDetectMitigationActionsTaskRequest_taskId, *v.TaskId)
+	}
+	if v.ViolationEventOccurrenceRange != nil {
+		s.WriteStruct(schemas.StartDetectMitigationActionsTaskRequest_violationEventOccurrenceRange)
+		v.ViolationEventOccurrenceRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartDetectMitigationActionsTaskOutput struct {
 
 	//  The unique identifier of the task.
@@ -84,13 +118,32 @@ type StartDetectMitigationActionsTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDetectMitigationActionsTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDetectMitigationActionsTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDetectMitigationActionsTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.StartDetectMitigationActionsTaskResponse_taskId, *v.TaskId)
+	}
+}
+func (v *StartDetectMitigationActionsTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDetectMitigationActionsTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDetectMitigationActionsTaskResponse_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.StartDetectMitigationActionsTaskResponse_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDetectMitigationActionsTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartDetectMitigationActionsTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDetectMitigationActionsTask, schemas.StartDetectMitigationActionsTaskRequest, schemas.StartDetectMitigationActionsTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartDetectMitigationActionsTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDetectMitigationActionsTask, schemas.StartDetectMitigationActionsTaskRequest, schemas.StartDetectMitigationActionsTaskResponse), output: &StartDetectMitigationActionsTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

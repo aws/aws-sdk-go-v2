@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteBotReplicaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBotReplicaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBotReplicaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBotReplicaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.DeleteBotReplicaRequest_botId, *v.BotId)
+	}
+	if v.ReplicaRegion != nil {
+		s.WriteString(schemas.DeleteBotReplicaRequest_replicaRegion, *v.ReplicaRegion)
+	}
+}
+
 type DeleteBotReplicaOutput struct {
 
 	// The unique bot ID of the replicated bot generated.
@@ -56,13 +73,48 @@ type DeleteBotReplicaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBotReplicaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBotReplicaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBotReplicaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.DeleteBotReplicaResponse_botId, *v.BotId)
+	}
+	if v.BotReplicaStatus != "" {
+		s.WriteString(schemas.DeleteBotReplicaResponse_botReplicaStatus, string(v.BotReplicaStatus))
+	}
+	if v.ReplicaRegion != nil {
+		s.WriteString(schemas.DeleteBotReplicaResponse_replicaRegion, *v.ReplicaRegion)
+	}
+}
+func (v *DeleteBotReplicaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBotReplicaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBotReplicaResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.DeleteBotReplicaResponse_botId, v.BotId)
+		case schemas.DeleteBotReplicaResponse_botReplicaStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeleteBotReplicaResponse_botReplicaStatus, &ev); err != nil {
+				return err
+			}
+			v.BotReplicaStatus = types.BotReplicaStatus(ev)
+			return nil
+		case schemas.DeleteBotReplicaResponse_replicaRegion:
+			v.ReplicaRegion = new(string)
+			return d.ReadString(schemas.DeleteBotReplicaResponse_replicaRegion, v.ReplicaRegion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBotReplicaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBotReplica{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBotReplica, schemas.DeleteBotReplicaRequest, schemas.DeleteBotReplicaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBotReplica{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBotReplica, schemas.DeleteBotReplicaRequest, schemas.DeleteBotReplicaResponse), output: &DeleteBotReplicaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

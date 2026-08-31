@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribeIndexInput struct {
 	IndexName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeIndexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIndexRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexName != nil {
+		s.WriteString(schemas.DescribeIndexRequest_indexName, *v.IndexName)
+	}
 }
 
 type DescribeIndexOutput struct {
@@ -72,13 +86,48 @@ type DescribeIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIndexOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIndexResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexName != nil {
+		s.WriteString(schemas.DescribeIndexResponse_indexName, *v.IndexName)
+	}
+	if v.IndexStatus != "" {
+		s.WriteString(schemas.DescribeIndexResponse_indexStatus, string(v.IndexStatus))
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.DescribeIndexResponse_schema, *v.Schema)
+	}
+}
+func (v *DescribeIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeIndexResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeIndexResponse_indexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.DescribeIndexResponse_indexName, v.IndexName)
+		case schemas.DescribeIndexResponse_indexStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeIndexResponse_indexStatus, &ev); err != nil {
+				return err
+			}
+			v.IndexStatus = types.IndexStatus(ev)
+			return nil
+		case schemas.DescribeIndexResponse_schema:
+			v.Schema = new(string)
+			return d.ReadString(schemas.DescribeIndexResponse_schema, v.Schema)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIndex, schemas.DescribeIndexRequest, schemas.DescribeIndexResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIndex, schemas.DescribeIndexRequest, schemas.DescribeIndexResponse), output: &DescribeIndexOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

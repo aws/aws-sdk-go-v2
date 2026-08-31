@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -76,6 +78,45 @@ type ListModelPackagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelPackagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelPackagesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelPackagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListModelPackagesInput_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListModelPackagesInput_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListModelPackagesInput_MaxResults, *v.MaxResults)
+	}
+	if v.ModelApprovalStatus != "" {
+		s.WriteString(schemas.ListModelPackagesInput_ModelApprovalStatus, string(v.ModelApprovalStatus))
+	}
+	if v.ModelPackageGroupName != nil {
+		s.WriteString(schemas.ListModelPackagesInput_ModelPackageGroupName, *v.ModelPackageGroupName)
+	}
+	if v.ModelPackageType != "" {
+		s.WriteString(schemas.ListModelPackagesInput_ModelPackageType, string(v.ModelPackageType))
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListModelPackagesInput_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelPackagesInput_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListModelPackagesInput_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListModelPackagesInput_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListModelPackagesOutput struct {
 
 	// An array of ModelPackageSummary objects, each of which lists a model package.
@@ -93,13 +134,35 @@ type ListModelPackagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelPackagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelPackagesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelPackagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeModelPackageSummaryList(s, schemas.ListModelPackagesOutput_ModelPackageSummaryList, v.ModelPackageSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelPackagesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListModelPackagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListModelPackagesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListModelPackagesOutput_ModelPackageSummaryList:
+			return deserializeModelPackageSummaryList(d, schemas.ListModelPackagesOutput_ModelPackageSummaryList, &v.ModelPackageSummaryList)
+		case schemas.ListModelPackagesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListModelPackagesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListModelPackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListModelPackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelPackages, schemas.ListModelPackagesInput, schemas.ListModelPackagesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListModelPackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelPackages, schemas.ListModelPackagesInput, schemas.ListModelPackagesOutput), output: &ListModelPackagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

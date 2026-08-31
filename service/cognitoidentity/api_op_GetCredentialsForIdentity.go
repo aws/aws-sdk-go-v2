@@ -4,7 +4,9 @@ package cognitoidentity
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,22 @@ type GetCredentialsForIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCredentialsForIdentityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCredentialsForIdentityInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCredentialsForIdentityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomRoleArn != nil {
+		s.WriteString(schemas.GetCredentialsForIdentityInput_CustomRoleArn, *v.CustomRoleArn)
+	}
+	if v.IdentityId != nil {
+		s.WriteString(schemas.GetCredentialsForIdentityInput_IdentityId, *v.IdentityId)
+	}
+	serializeLoginsMap(s, schemas.GetCredentialsForIdentityInput_Logins, v.Logins)
+}
+
 // Returned in response to a successful GetCredentialsForIdentity operation.
 type GetCredentialsForIdentityOutput struct {
 
@@ -75,13 +93,40 @@ type GetCredentialsForIdentityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCredentialsForIdentityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCredentialsForIdentityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCredentialsForIdentityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Credentials != nil {
+		s.WriteStruct(schemas.GetCredentialsForIdentityResponse_Credentials)
+		v.Credentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdentityId != nil {
+		s.WriteString(schemas.GetCredentialsForIdentityResponse_IdentityId, *v.IdentityId)
+	}
+}
+func (v *GetCredentialsForIdentityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCredentialsForIdentityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCredentialsForIdentityResponse_Credentials:
+			v.Credentials = &types.Credentials{}
+			return v.Credentials.Deserialize(d)
+		case schemas.GetCredentialsForIdentityResponse_IdentityId:
+			v.IdentityId = new(string)
+			return d.ReadString(schemas.GetCredentialsForIdentityResponse_IdentityId, v.IdentityId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCredentialsForIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCredentialsForIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCredentialsForIdentity, schemas.GetCredentialsForIdentityInput, schemas.GetCredentialsForIdentityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCredentialsForIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCredentialsForIdentity, schemas.GetCredentialsForIdentityInput, schemas.GetCredentialsForIdentityResponse), output: &GetCredentialsForIdentityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

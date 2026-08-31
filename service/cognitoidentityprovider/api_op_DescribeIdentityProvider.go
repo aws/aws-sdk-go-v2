@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DescribeIdentityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIdentityProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIdentityProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIdentityProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProviderName != nil {
+		s.WriteString(schemas.DescribeIdentityProviderRequest_ProviderName, *v.ProviderName)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.DescribeIdentityProviderRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type DescribeIdentityProviderOutput struct {
 
 	// The details of the requested IdP.
@@ -53,13 +70,34 @@ type DescribeIdentityProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIdentityProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIdentityProviderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIdentityProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityProvider != nil {
+		s.WriteStruct(schemas.DescribeIdentityProviderResponse_IdentityProvider)
+		v.IdentityProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeIdentityProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeIdentityProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeIdentityProviderResponse_IdentityProvider:
+			v.IdentityProvider = &types.IdentityProviderType{}
+			return v.IdentityProvider.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeIdentityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeIdentityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIdentityProvider, schemas.DescribeIdentityProviderRequest, schemas.DescribeIdentityProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeIdentityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIdentityProvider, schemas.DescribeIdentityProviderRequest, schemas.DescribeIdentityProviderResponse), output: &DescribeIdentityProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

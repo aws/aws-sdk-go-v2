@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,24 @@ type ListWebAuthnCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWebAuthnCredentialsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWebAuthnCredentialsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWebAuthnCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.ListWebAuthnCredentialsRequest_AccessToken, *v.AccessToken)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWebAuthnCredentialsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWebAuthnCredentialsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListWebAuthnCredentialsOutput struct {
 
 	// A list of registered passkeys for a user.
@@ -77,13 +97,35 @@ type ListWebAuthnCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWebAuthnCredentialsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWebAuthnCredentialsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWebAuthnCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWebAuthnCredentialDescriptionListType(s, schemas.ListWebAuthnCredentialsResponse_Credentials, v.Credentials)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWebAuthnCredentialsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListWebAuthnCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWebAuthnCredentialsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWebAuthnCredentialsResponse_Credentials:
+			return deserializeWebAuthnCredentialDescriptionListType(d, schemas.ListWebAuthnCredentialsResponse_Credentials, &v.Credentials)
+		case schemas.ListWebAuthnCredentialsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWebAuthnCredentialsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWebAuthnCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListWebAuthnCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWebAuthnCredentials, schemas.ListWebAuthnCredentialsRequest, schemas.ListWebAuthnCredentialsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListWebAuthnCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWebAuthnCredentials, schemas.ListWebAuthnCredentialsRequest, schemas.ListWebAuthnCredentialsResponse), output: &ListWebAuthnCredentialsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

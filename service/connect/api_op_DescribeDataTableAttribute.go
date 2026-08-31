@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type DescribeDataTableAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataTableAttributeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataTableAttributeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataTableAttributeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.DescribeDataTableAttributeRequest_AttributeName, *v.AttributeName)
+	}
+	if v.DataTableId != nil {
+		s.WriteString(schemas.DescribeDataTableAttributeRequest_DataTableId, *v.DataTableId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeDataTableAttributeRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DescribeDataTableAttributeOutput struct {
 
 	// The complete attribute information including configuration, validation rules,
@@ -61,13 +81,34 @@ type DescribeDataTableAttributeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataTableAttributeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataTableAttributeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataTableAttributeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attribute != nil {
+		s.WriteStruct(schemas.DescribeDataTableAttributeResponse_Attribute)
+		v.Attribute.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeDataTableAttributeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDataTableAttributeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDataTableAttributeResponse_Attribute:
+			v.Attribute = &types.DataTableAttribute{}
+			return v.Attribute.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDataTableAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDataTableAttribute{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataTableAttribute, schemas.DescribeDataTableAttributeRequest, schemas.DescribeDataTableAttributeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDataTableAttribute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataTableAttribute, schemas.DescribeDataTableAttributeRequest, schemas.DescribeDataTableAttributeResponse), output: &DescribeDataTableAttributeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

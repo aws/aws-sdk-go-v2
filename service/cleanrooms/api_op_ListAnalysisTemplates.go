@@ -5,7 +5,9 @@ package cleanrooms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,40 @@ type ListAnalysisTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnalysisTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnalysisTemplatesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnalysisTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAnalysisTemplatesInput_maxResults, *v.MaxResults)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.ListAnalysisTemplatesInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnalysisTemplatesInput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAnalysisTemplatesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAnalysisTemplatesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAnalysisTemplatesInput_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListAnalysisTemplatesInput_maxResults, v.MaxResults)
+		case schemas.ListAnalysisTemplatesInput_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.ListAnalysisTemplatesInput_membershipIdentifier, v.MembershipIdentifier)
+		case schemas.ListAnalysisTemplatesInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAnalysisTemplatesInput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListAnalysisTemplatesOutput struct {
 
 	// Lists analysis template metadata.
@@ -59,13 +95,35 @@ type ListAnalysisTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnalysisTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnalysisTemplatesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnalysisTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalysisTemplateSummaryList(s, schemas.ListAnalysisTemplatesOutput_analysisTemplateSummaries, v.AnalysisTemplateSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnalysisTemplatesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAnalysisTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAnalysisTemplatesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAnalysisTemplatesOutput_analysisTemplateSummaries:
+			return deserializeAnalysisTemplateSummaryList(d, schemas.ListAnalysisTemplatesOutput_analysisTemplateSummaries, &v.AnalysisTemplateSummaries)
+		case schemas.ListAnalysisTemplatesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAnalysisTemplatesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAnalysisTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAnalysisTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnalysisTemplates, schemas.ListAnalysisTemplatesInput, schemas.ListAnalysisTemplatesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAnalysisTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnalysisTemplates, schemas.ListAnalysisTemplatesInput, schemas.ListAnalysisTemplatesOutput), output: &ListAnalysisTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package cognitoidentity
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,20 @@ type UnlinkIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnlinkIdentityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnlinkIdentityInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnlinkIdentityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityId != nil {
+		s.WriteString(schemas.UnlinkIdentityInput_IdentityId, *v.IdentityId)
+	}
+	serializeLoginsMap(s, schemas.UnlinkIdentityInput_Logins, v.Logins)
+	serializeLoginsList(s, schemas.UnlinkIdentityInput_LoginsToRemove, v.LoginsToRemove)
+}
+
 type UnlinkIdentityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +71,26 @@ type UnlinkIdentityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnlinkIdentityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnlinkIdentityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UnlinkIdentityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUnlinkIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUnlinkIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnlinkIdentity, schemas.UnlinkIdentityInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUnlinkIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnlinkIdentity, schemas.UnlinkIdentityInput, nil), output: &UnlinkIdentityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetApnsVoipSandboxChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApnsVoipSandboxChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApnsVoipSandboxChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApnsVoipSandboxChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetApnsVoipSandboxChannelRequest_ApplicationId, *v.ApplicationId)
+	}
+}
+
 type GetApnsVoipSandboxChannelOutput struct {
 
 	// Provides information about the status and settings of the APNs (Apple Push
@@ -50,13 +64,34 @@ type GetApnsVoipSandboxChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApnsVoipSandboxChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApnsVoipSandboxChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApnsVoipSandboxChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.APNSVoipSandboxChannelResponse != nil {
+		s.WriteStruct(schemas.GetApnsVoipSandboxChannelResponse_APNSVoipSandboxChannelResponse)
+		v.APNSVoipSandboxChannelResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetApnsVoipSandboxChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApnsVoipSandboxChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApnsVoipSandboxChannelResponse_APNSVoipSandboxChannelResponse:
+			v.APNSVoipSandboxChannelResponse = &types.APNSVoipSandboxChannelResponse{}
+			return v.APNSVoipSandboxChannelResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApnsVoipSandboxChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApnsVoipSandboxChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApnsVoipSandboxChannel, schemas.GetApnsVoipSandboxChannelRequest, schemas.GetApnsVoipSandboxChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApnsVoipSandboxChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApnsVoipSandboxChannel, schemas.GetApnsVoipSandboxChannelRequest, schemas.GetApnsVoipSandboxChannelResponse), output: &GetApnsVoipSandboxChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

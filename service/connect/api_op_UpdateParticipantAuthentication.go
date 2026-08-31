@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,30 @@ type UpdateParticipantAuthenticationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateParticipantAuthenticationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateParticipantAuthenticationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateParticipantAuthenticationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.UpdateParticipantAuthenticationRequest_Code, *v.Code)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.UpdateParticipantAuthenticationRequest_Error, *v.Error)
+	}
+	if v.ErrorDescription != nil {
+		s.WriteString(schemas.UpdateParticipantAuthenticationRequest_ErrorDescription, *v.ErrorDescription)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateParticipantAuthenticationRequest_InstanceId, *v.InstanceId)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.UpdateParticipantAuthenticationRequest_State, *v.State)
+	}
+}
+
 type UpdateParticipantAuthenticationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -72,13 +98,26 @@ type UpdateParticipantAuthenticationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateParticipantAuthenticationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateParticipantAuthenticationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateParticipantAuthenticationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateParticipantAuthenticationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateParticipantAuthenticationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateParticipantAuthenticationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateParticipantAuthentication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateParticipantAuthentication, schemas.UpdateParticipantAuthenticationRequest, schemas.UpdateParticipantAuthenticationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateParticipantAuthentication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateParticipantAuthentication, schemas.UpdateParticipantAuthenticationRequest, schemas.UpdateParticipantAuthenticationResponse), output: &UpdateParticipantAuthenticationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

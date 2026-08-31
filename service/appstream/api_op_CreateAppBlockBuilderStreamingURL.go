@@ -4,6 +4,8 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type CreateAppBlockBuilderStreamingURLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAppBlockBuilderStreamingURLInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAppBlockBuilderStreamingURLRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAppBlockBuilderStreamingURLInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppBlockBuilderName != nil {
+		s.WriteString(schemas.CreateAppBlockBuilderStreamingURLRequest_AppBlockBuilderName, *v.AppBlockBuilderName)
+	}
+	if v.Validity != nil {
+		s.WriteInt64(schemas.CreateAppBlockBuilderStreamingURLRequest_Validity, *v.Validity)
+	}
+}
+
 type CreateAppBlockBuilderStreamingURLOutput struct {
 
 	// The elapsed time, in seconds after the Unix epoch, when this URL expires.
@@ -52,13 +69,38 @@ type CreateAppBlockBuilderStreamingURLOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAppBlockBuilderStreamingURLOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAppBlockBuilderStreamingURLResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAppBlockBuilderStreamingURLOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Expires != nil {
+		s.WriteTime(schemas.CreateAppBlockBuilderStreamingURLResult_Expires, *v.Expires)
+	}
+	if v.StreamingURL != nil {
+		s.WriteString(schemas.CreateAppBlockBuilderStreamingURLResult_StreamingURL, *v.StreamingURL)
+	}
+}
+func (v *CreateAppBlockBuilderStreamingURLOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAppBlockBuilderStreamingURLResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAppBlockBuilderStreamingURLResult_Expires:
+			v.Expires = new(time.Time)
+			return d.ReadTime(schemas.CreateAppBlockBuilderStreamingURLResult_Expires, v.Expires)
+		case schemas.CreateAppBlockBuilderStreamingURLResult_StreamingURL:
+			v.StreamingURL = new(string)
+			return d.ReadString(schemas.CreateAppBlockBuilderStreamingURLResult_StreamingURL, v.StreamingURL)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAppBlockBuilderStreamingURLMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateAppBlockBuilderStreamingURL{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAppBlockBuilderStreamingURL, schemas.CreateAppBlockBuilderStreamingURLRequest, schemas.CreateAppBlockBuilderStreamingURLResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateAppBlockBuilderStreamingURL{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAppBlockBuilderStreamingURL, schemas.CreateAppBlockBuilderStreamingURLRequest, schemas.CreateAppBlockBuilderStreamingURLResult), output: &CreateAppBlockBuilderStreamingURLOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sqs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,19 @@ type DeleteMessageBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMessageBatchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMessageBatchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMessageBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeleteMessageBatchRequestEntryList(s, schemas.DeleteMessageBatchRequest_Entries, v.Entries)
+	if v.QueueUrl != nil {
+		s.WriteString(schemas.DeleteMessageBatchRequest_QueueUrl, *v.QueueUrl)
+	}
+}
+
 // For each message in the batch, the response contains a DeleteMessageBatchResultEntry tag if the message is
 // deleted or a BatchResultErrorEntrytag if the message can't be deleted.
 type DeleteMessageBatchOutput struct {
@@ -67,13 +82,32 @@ type DeleteMessageBatchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMessageBatchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMessageBatchResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMessageBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchResultErrorEntryList(s, schemas.DeleteMessageBatchResult_Failed, v.Failed)
+	serializeDeleteMessageBatchResultEntryList(s, schemas.DeleteMessageBatchResult_Successful, v.Successful)
+}
+func (v *DeleteMessageBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMessageBatchResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteMessageBatchResult_Failed:
+			return deserializeBatchResultErrorEntryList(d, schemas.DeleteMessageBatchResult_Failed, &v.Failed)
+		case schemas.DeleteMessageBatchResult_Successful:
+			return deserializeDeleteMessageBatchResultEntryList(d, schemas.DeleteMessageBatchResult_Successful, &v.Successful)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMessageBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteMessageBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMessageBatch, schemas.DeleteMessageBatchRequest, schemas.DeleteMessageBatchResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteMessageBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMessageBatch, schemas.DeleteMessageBatchRequest, schemas.DeleteMessageBatchResult), output: &DeleteMessageBatchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

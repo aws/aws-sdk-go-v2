@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type GetLoggerDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLoggerDefinitionVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLoggerDefinitionVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLoggerDefinitionVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoggerDefinitionId != nil {
+		s.WriteString(schemas.GetLoggerDefinitionVersionRequest_LoggerDefinitionId, *v.LoggerDefinitionId)
+	}
+	if v.LoggerDefinitionVersionId != nil {
+		s.WriteString(schemas.GetLoggerDefinitionVersionRequest_LoggerDefinitionVersionId, *v.LoggerDefinitionVersionId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetLoggerDefinitionVersionRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetLoggerDefinitionVersionOutput struct {
 
 	// The ARN of the logger definition version.
@@ -72,13 +92,58 @@ type GetLoggerDefinitionVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLoggerDefinitionVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLoggerDefinitionVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLoggerDefinitionVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetLoggerDefinitionVersionResponse_Arn, *v.Arn)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteString(schemas.GetLoggerDefinitionVersionResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Definition != nil {
+		s.WriteStruct(schemas.GetLoggerDefinitionVersionResponse_Definition)
+		v.Definition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetLoggerDefinitionVersionResponse_Id, *v.Id)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.GetLoggerDefinitionVersionResponse_Version, *v.Version)
+	}
+}
+func (v *GetLoggerDefinitionVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLoggerDefinitionVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLoggerDefinitionVersionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetLoggerDefinitionVersionResponse_Arn, v.Arn)
+		case schemas.GetLoggerDefinitionVersionResponse_CreationTimestamp:
+			v.CreationTimestamp = new(string)
+			return d.ReadString(schemas.GetLoggerDefinitionVersionResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.GetLoggerDefinitionVersionResponse_Definition:
+			v.Definition = &types.LoggerDefinitionVersion{}
+			return v.Definition.Deserialize(d)
+		case schemas.GetLoggerDefinitionVersionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetLoggerDefinitionVersionResponse_Id, v.Id)
+		case schemas.GetLoggerDefinitionVersionResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.GetLoggerDefinitionVersionResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLoggerDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLoggerDefinitionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLoggerDefinitionVersion, schemas.GetLoggerDefinitionVersionRequest, schemas.GetLoggerDefinitionVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLoggerDefinitionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLoggerDefinitionVersion, schemas.GetLoggerDefinitionVersionRequest, schemas.GetLoggerDefinitionVersionResponse), output: &GetLoggerDefinitionVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

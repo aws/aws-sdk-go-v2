@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,20 @@ type GetProvisionedLimitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProvisionedLimitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProvisionedLimitRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProvisionedLimitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LimitDefinition != nil {
+		s.WriteStruct(schemas.GetProvisionedLimitRequest_LimitDefinition)
+		v.LimitDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetProvisionedLimitOutput struct {
 
 	// The provisioned and default limit values for the requested limit.
@@ -62,13 +78,34 @@ type GetProvisionedLimitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProvisionedLimitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProvisionedLimitResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProvisionedLimitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteStruct(schemas.GetProvisionedLimitResponse_Limit)
+		v.Limit.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetProvisionedLimitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProvisionedLimitResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProvisionedLimitResponse_Limit:
+			v.Limit = &types.LimitType{}
+			return v.Limit.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProvisionedLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetProvisionedLimit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProvisionedLimit, schemas.GetProvisionedLimitRequest, schemas.GetProvisionedLimitResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetProvisionedLimit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProvisionedLimit, schemas.GetProvisionedLimitRequest, schemas.GetProvisionedLimitResponse), output: &GetProvisionedLimitOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

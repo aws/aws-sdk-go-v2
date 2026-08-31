@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.UpdateTerms
+
+{"Terms":{"ClientId":"__ClientId__","CreationDate":946684800,"Enforcement":"NONE","LastModifiedDate":946684800,"Links":{"key0":"__Value__"},"TermsId":"__TermsId__","TermsName":"__TermsName__","TermsSource":"LINK","UserPoolId":"__UserPoolId__"}}

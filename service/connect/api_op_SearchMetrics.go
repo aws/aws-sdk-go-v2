@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,34 @@ type SearchMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchMetricsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchMetricsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchMetricsRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchCriteria != nil {
+		s.WriteStruct(schemas.SearchMetricsRequest_SearchCriteria)
+		v.SearchCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchFilter != nil {
+		s.WriteStruct(schemas.SearchMetricsRequest_SearchFilter)
+		v.SearchFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchMetricsOutput struct {
 
 	// The approximate total number of metrics that matched your search criteria.
@@ -70,13 +100,41 @@ type SearchMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTotalCount != nil {
+		s.WriteInt64(schemas.SearchMetricsResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
+	}
+	serializeMetricSearchSummaryList(s, schemas.SearchMetricsResponse_Metrics, v.Metrics)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchMetricsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *SearchMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchMetricsResponse_ApproximateTotalCount:
+			v.ApproximateTotalCount = new(int64)
+			return d.ReadInt64(schemas.SearchMetricsResponse_ApproximateTotalCount, v.ApproximateTotalCount)
+		case schemas.SearchMetricsResponse_Metrics:
+			return deserializeMetricSearchSummaryList(d, schemas.SearchMetricsResponse_Metrics, &v.Metrics)
+		case schemas.SearchMetricsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchMetricsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchMetrics, schemas.SearchMetricsRequest, schemas.SearchMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchMetrics, schemas.SearchMetricsRequest, schemas.SearchMetricsResponse), output: &SearchMetricsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

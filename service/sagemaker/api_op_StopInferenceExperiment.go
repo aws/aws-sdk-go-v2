@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,26 @@ type StopInferenceExperimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopInferenceExperimentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopInferenceExperimentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopInferenceExperimentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeModelVariantConfigList(s, schemas.StopInferenceExperimentRequest_DesiredModelVariants, v.DesiredModelVariants)
+	if v.DesiredState != "" {
+		s.WriteString(schemas.StopInferenceExperimentRequest_DesiredState, string(v.DesiredState))
+	}
+	serializeModelVariantActionMap(s, schemas.StopInferenceExperimentRequest_ModelVariantActions, v.ModelVariantActions)
+	if v.Name != nil {
+		s.WriteString(schemas.StopInferenceExperimentRequest_Name, *v.Name)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.StopInferenceExperimentRequest_Reason, *v.Reason)
+	}
+}
+
 type StopInferenceExperimentOutput struct {
 
 	// The ARN of the stopped inference experiment.
@@ -76,13 +98,32 @@ type StopInferenceExperimentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopInferenceExperimentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopInferenceExperimentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopInferenceExperimentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InferenceExperimentArn != nil {
+		s.WriteString(schemas.StopInferenceExperimentResponse_InferenceExperimentArn, *v.InferenceExperimentArn)
+	}
+}
+func (v *StopInferenceExperimentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopInferenceExperimentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopInferenceExperimentResponse_InferenceExperimentArn:
+			v.InferenceExperimentArn = new(string)
+			return d.ReadString(schemas.StopInferenceExperimentResponse_InferenceExperimentArn, v.InferenceExperimentArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopInferenceExperimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopInferenceExperiment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopInferenceExperiment, schemas.StopInferenceExperimentRequest, schemas.StopInferenceExperimentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopInferenceExperiment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopInferenceExperiment, schemas.StopInferenceExperimentRequest, schemas.StopInferenceExperimentResponse), output: &StopInferenceExperimentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

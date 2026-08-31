@@ -5,7 +5,9 @@ package appstream
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,25 @@ type DescribeImagePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImagePermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImagePermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImagePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeImagePermissionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeImagePermissionsRequest_Name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeImagePermissionsRequest_NextToken, *v.NextToken)
+	}
+	serializeAwsAccountIdList(s, schemas.DescribeImagePermissionsRequest_SharedAwsAccountIds, v.SharedAwsAccountIds)
+}
+
 type DescribeImagePermissionsOutput struct {
 
 	// The name of the private image.
@@ -66,13 +87,41 @@ type DescribeImagePermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImagePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImagePermissionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImagePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeImagePermissionsResult_Name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeImagePermissionsResult_NextToken, *v.NextToken)
+	}
+	serializeSharedImagePermissionsList(s, schemas.DescribeImagePermissionsResult_SharedImagePermissionsList, v.SharedImagePermissionsList)
+}
+func (v *DescribeImagePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeImagePermissionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeImagePermissionsResult_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeImagePermissionsResult_Name, v.Name)
+		case schemas.DescribeImagePermissionsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeImagePermissionsResult_NextToken, v.NextToken)
+		case schemas.DescribeImagePermissionsResult_SharedImagePermissionsList:
+			return deserializeSharedImagePermissionsList(d, schemas.DescribeImagePermissionsResult_SharedImagePermissionsList, &v.SharedImagePermissionsList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeImagePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeImagePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImagePermissions, schemas.DescribeImagePermissionsRequest, schemas.DescribeImagePermissionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeImagePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImagePermissions, schemas.DescribeImagePermissionsRequest, schemas.DescribeImagePermissionsResult), output: &DescribeImagePermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DetectSentimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectSentimentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectSentimentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectSentimentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.DetectSentimentRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.DetectSentimentRequest_Text, *v.Text)
+	}
+}
+
 type DetectSentimentOutput struct {
 
 	// The inferred sentiment that Amazon Comprehend has the highest level of
@@ -57,13 +74,44 @@ type DetectSentimentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectSentimentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectSentimentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectSentimentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Sentiment != "" {
+		s.WriteString(schemas.DetectSentimentResponse_Sentiment, string(v.Sentiment))
+	}
+	if v.SentimentScore != nil {
+		s.WriteStruct(schemas.DetectSentimentResponse_SentimentScore)
+		v.SentimentScore.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DetectSentimentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectSentimentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectSentimentResponse_Sentiment:
+			var ev string
+			if err := d.ReadString(schemas.DetectSentimentResponse_Sentiment, &ev); err != nil {
+				return err
+			}
+			v.Sentiment = types.SentimentType(ev)
+			return nil
+		case schemas.DetectSentimentResponse_SentimentScore:
+			v.SentimentScore = &types.SentimentScore{}
+			return v.SentimentScore.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectSentimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectSentiment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectSentiment, schemas.DetectSentimentRequest, schemas.DetectSentimentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetectSentiment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectSentiment, schemas.DetectSentimentRequest, schemas.DetectSentimentResponse), output: &DetectSentimentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

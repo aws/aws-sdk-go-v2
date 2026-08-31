@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,25 @@ type GetCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCertificatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCertificatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCertificatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateName != nil {
+		s.WriteString(schemas.GetCertificatesRequest_certificateName, *v.CertificateName)
+	}
+	serializeCertificateStatusList(s, schemas.GetCertificatesRequest_certificateStatuses, v.CertificateStatuses)
+	if v.IncludeCertificateDetails != false {
+		s.WriteBool(schemas.GetCertificatesRequest_includeCertificateDetails, v.IncludeCertificateDetails)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.GetCertificatesRequest_pageToken, *v.PageToken)
+	}
+}
+
 type GetCertificatesOutput struct {
 
 	// An object that describes certificates.
@@ -78,13 +99,35 @@ type GetCertificatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCertificatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCertificatesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCertificatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCertificateSummaryList(s, schemas.GetCertificatesResult_certificates, v.Certificates)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetCertificatesResult_nextPageToken, *v.NextPageToken)
+	}
+}
+func (v *GetCertificatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCertificatesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCertificatesResult_certificates:
+			return deserializeCertificateSummaryList(d, schemas.GetCertificatesResult_certificates, &v.Certificates)
+		case schemas.GetCertificatesResult_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetCertificatesResult_nextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCertificates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCertificates, schemas.GetCertificatesRequest, schemas.GetCertificatesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCertificates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCertificates, schemas.GetCertificatesRequest, schemas.GetCertificatesResult), output: &GetCertificatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

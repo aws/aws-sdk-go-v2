@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetRelationalDatabasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRelationalDatabasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRelationalDatabasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRelationalDatabasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PageToken != nil {
+		s.WriteString(schemas.GetRelationalDatabasesRequest_pageToken, *v.PageToken)
+	}
+}
+
 type GetRelationalDatabasesOutput struct {
 
 	// The token to advance to the next page of results from your request.
@@ -55,13 +69,35 @@ type GetRelationalDatabasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRelationalDatabasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRelationalDatabasesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRelationalDatabasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetRelationalDatabasesResult_nextPageToken, *v.NextPageToken)
+	}
+	serializeRelationalDatabaseList(s, schemas.GetRelationalDatabasesResult_relationalDatabases, v.RelationalDatabases)
+}
+func (v *GetRelationalDatabasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRelationalDatabasesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRelationalDatabasesResult_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetRelationalDatabasesResult_nextPageToken, v.NextPageToken)
+		case schemas.GetRelationalDatabasesResult_relationalDatabases:
+			return deserializeRelationalDatabaseList(d, schemas.GetRelationalDatabasesResult_relationalDatabases, &v.RelationalDatabases)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRelationalDatabasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRelationalDatabases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRelationalDatabases, schemas.GetRelationalDatabasesRequest, schemas.GetRelationalDatabasesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRelationalDatabases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRelationalDatabases, schemas.GetRelationalDatabasesRequest, schemas.GetRelationalDatabasesResult), output: &GetRelationalDatabasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package sqs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,18 @@ type PurgeQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PurgeQueueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurgeQueueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurgeQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueueUrl != nil {
+		s.WriteString(schemas.PurgeQueueRequest_QueueUrl, *v.QueueUrl)
+	}
+}
+
 type PurgeQueueOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +69,26 @@ type PurgeQueueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PurgeQueueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurgeQueueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PurgeQueueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPurgeQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPurgeQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PurgeQueue, schemas.PurgeQueueRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPurgeQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PurgeQueue, schemas.PurgeQueueRequest, nil), output: &PurgeQueueOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

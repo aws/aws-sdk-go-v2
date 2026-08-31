@@ -4,6 +4,8 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type StopConfigurationRecorderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopConfigurationRecorderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopConfigurationRecorderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopConfigurationRecorderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationRecorderName != nil {
+		s.WriteString(schemas.StopConfigurationRecorderRequest_ConfigurationRecorderName, *v.ConfigurationRecorderName)
+	}
+}
+
 type StopConfigurationRecorderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type StopConfigurationRecorderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopConfigurationRecorderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopConfigurationRecorderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopConfigurationRecorderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopConfigurationRecorderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopConfigurationRecorder{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopConfigurationRecorder, schemas.StopConfigurationRecorderRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopConfigurationRecorder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopConfigurationRecorder, schemas.StopConfigurationRecorderRequest, nil), output: &StopConfigurationRecorderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.UpdateEngagementContext
+
+{"ContextId":"__ContextId__","EngagementArn":"__EngagementArn__","EngagementId":"__EngagementId__","EngagementLastModifiedAt":"2000-01-01T00:00:00Z"}

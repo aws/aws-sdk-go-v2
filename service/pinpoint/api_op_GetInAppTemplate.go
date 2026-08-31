@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,21 @@ type GetInAppTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInAppTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInAppTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInAppTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateName != nil {
+		s.WriteString(schemas.GetInAppTemplateRequest_TemplateName, *v.TemplateName)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.GetInAppTemplateRequest_Version, *v.Version)
+	}
+}
+
 type GetInAppTemplateOutput struct {
 
 	// In-App Template Response.
@@ -75,13 +92,34 @@ type GetInAppTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInAppTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInAppTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInAppTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InAppTemplateResponse != nil {
+		s.WriteStruct(schemas.GetInAppTemplateResponse_InAppTemplateResponse)
+		v.InAppTemplateResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetInAppTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInAppTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInAppTemplateResponse_InAppTemplateResponse:
+			v.InAppTemplateResponse = &types.InAppTemplateResponse{}
+			return v.InAppTemplateResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInAppTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInAppTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInAppTemplate, schemas.GetInAppTemplateRequest, schemas.GetInAppTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetInAppTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInAppTemplate, schemas.GetInAppTemplateRequest, schemas.GetInAppTemplateResponse), output: &GetInAppTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

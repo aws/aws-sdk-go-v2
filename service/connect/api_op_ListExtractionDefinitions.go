@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type ListExtractionDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExtractionDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExtractionDefinitionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExtractionDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListExtractionDefinitionsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListExtractionDefinitionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExtractionDefinitionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListExtractionDefinitionsOutput struct {
 
 	// Information about the extraction definitions.
@@ -62,13 +82,35 @@ type ListExtractionDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExtractionDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExtractionDefinitionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExtractionDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExtractionDefinitionSummaryList(s, schemas.ListExtractionDefinitionsResponse_ExtractionDefinitionSummaryList, v.ExtractionDefinitionSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExtractionDefinitionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListExtractionDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListExtractionDefinitionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListExtractionDefinitionsResponse_ExtractionDefinitionSummaryList:
+			return deserializeExtractionDefinitionSummaryList(d, schemas.ListExtractionDefinitionsResponse_ExtractionDefinitionSummaryList, &v.ExtractionDefinitionSummaryList)
+		case schemas.ListExtractionDefinitionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListExtractionDefinitionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListExtractionDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListExtractionDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExtractionDefinitions, schemas.ListExtractionDefinitionsRequest, schemas.ListExtractionDefinitionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListExtractionDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExtractionDefinitions, schemas.ListExtractionDefinitionsRequest, schemas.ListExtractionDefinitionsResponse), output: &ListExtractionDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

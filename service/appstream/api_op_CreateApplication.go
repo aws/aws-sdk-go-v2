@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -87,6 +89,44 @@ type CreateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppBlockArn != nil {
+		s.WriteString(schemas.CreateApplicationRequest_AppBlockArn, *v.AppBlockArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateApplicationRequest_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateApplicationRequest_DisplayName, *v.DisplayName)
+	}
+	if v.IconS3Location != nil {
+		s.WriteStruct(schemas.CreateApplicationRequest_IconS3Location)
+		v.IconS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStringList(s, schemas.CreateApplicationRequest_InstanceFamilies, v.InstanceFamilies)
+	if v.LaunchParameters != nil {
+		s.WriteString(schemas.CreateApplicationRequest_LaunchParameters, *v.LaunchParameters)
+	}
+	if v.LaunchPath != nil {
+		s.WriteString(schemas.CreateApplicationRequest_LaunchPath, *v.LaunchPath)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateApplicationRequest_Name, *v.Name)
+	}
+	serializePlatforms(s, schemas.CreateApplicationRequest_Platforms, v.Platforms)
+	serializeTags(s, schemas.CreateApplicationRequest_Tags, v.Tags)
+	if v.WorkingDirectory != nil {
+		s.WriteString(schemas.CreateApplicationRequest_WorkingDirectory, *v.WorkingDirectory)
+	}
+}
+
 type CreateApplicationOutput struct {
 
 	// Describes an application in the application catalog.
@@ -98,13 +138,34 @@ type CreateApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Application != nil {
+		s.WriteStruct(schemas.CreateApplicationResult_Application)
+		v.Application.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateApplicationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateApplicationResult_Application:
+			v.Application = &types.Application{}
+			return v.Application.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplication, schemas.CreateApplicationRequest, schemas.CreateApplicationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplication, schemas.CreateApplicationRequest, schemas.CreateApplicationResult), output: &CreateApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

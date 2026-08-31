@@ -4,7 +4,9 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,30 @@ type PutConfigurationAggregatorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutConfigurationAggregatorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutConfigurationAggregatorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutConfigurationAggregatorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountAggregationSourceList(s, schemas.PutConfigurationAggregatorRequest_AccountAggregationSources, v.AccountAggregationSources)
+	if v.AggregatorFilters != nil {
+		s.WriteStruct(schemas.PutConfigurationAggregatorRequest_AggregatorFilters)
+		v.AggregatorFilters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConfigurationAggregatorName != nil {
+		s.WriteString(schemas.PutConfigurationAggregatorRequest_ConfigurationAggregatorName, *v.ConfigurationAggregatorName)
+	}
+	if v.OrganizationAggregationSource != nil {
+		s.WriteStruct(schemas.PutConfigurationAggregatorRequest_OrganizationAggregationSource)
+		v.OrganizationAggregationSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsList(s, schemas.PutConfigurationAggregatorRequest_Tags, v.Tags)
+}
+
 type PutConfigurationAggregatorOutput struct {
 
 	// Returns a ConfigurationAggregator object.
@@ -91,13 +117,34 @@ type PutConfigurationAggregatorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutConfigurationAggregatorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutConfigurationAggregatorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutConfigurationAggregatorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationAggregator != nil {
+		s.WriteStruct(schemas.PutConfigurationAggregatorResponse_ConfigurationAggregator)
+		v.ConfigurationAggregator.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutConfigurationAggregatorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutConfigurationAggregatorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutConfigurationAggregatorResponse_ConfigurationAggregator:
+			v.ConfigurationAggregator = &types.ConfigurationAggregator{}
+			return v.ConfigurationAggregator.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutConfigurationAggregatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutConfigurationAggregator{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutConfigurationAggregator, schemas.PutConfigurationAggregatorRequest, schemas.PutConfigurationAggregatorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutConfigurationAggregator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutConfigurationAggregator, schemas.PutConfigurationAggregatorRequest, schemas.PutConfigurationAggregatorResponse), output: &PutConfigurationAggregatorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

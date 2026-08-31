@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListAgentContextsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentContextsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentContextsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentContextsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAgentContextsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentContextsRequest_nextToken, *v.NextToken)
+	}
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.ListAgentContextsRequest_profileArn, *v.ProfileArn)
+	}
+}
+
 type ListAgentContextsOutput struct {
 
 	// A list of context summaries associated with the profile.
@@ -57,13 +77,35 @@ type ListAgentContextsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentContextsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentContextsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentContextsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContextSummaries(s, schemas.ListAgentContextsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentContextsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAgentContextsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAgentContextsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAgentContextsResponse_items:
+			return deserializeContextSummaries(d, schemas.ListAgentContextsResponse_items, &v.Items)
+		case schemas.ListAgentContextsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAgentContextsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAgentContextsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAgentContexts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentContexts, schemas.ListAgentContextsRequest, schemas.ListAgentContextsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAgentContexts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentContexts, schemas.ListAgentContextsRequest, schemas.ListAgentContextsResponse), output: &ListAgentContextsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

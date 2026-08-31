@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -231,6 +233,39 @@ type AdminInitiateAuthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminInitiateAuthInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminInitiateAuthRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminInitiateAuthInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyticsMetadata != nil {
+		s.WriteStruct(schemas.AdminInitiateAuthRequest_AnalyticsMetadata)
+		v.AnalyticsMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AuthFlow != "" {
+		s.WriteString(schemas.AdminInitiateAuthRequest_AuthFlow, string(v.AuthFlow))
+	}
+	serializeAuthParametersType(s, schemas.AdminInitiateAuthRequest_AuthParameters, v.AuthParameters)
+	if v.ClientId != nil {
+		s.WriteString(schemas.AdminInitiateAuthRequest_ClientId, *v.ClientId)
+	}
+	serializeClientMetadataType(s, schemas.AdminInitiateAuthRequest_ClientMetadata, v.ClientMetadata)
+	if v.ContextData != nil {
+		s.WriteStruct(schemas.AdminInitiateAuthRequest_ContextData)
+		v.ContextData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Session != nil {
+		s.WriteString(schemas.AdminInitiateAuthRequest_Session, *v.Session)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AdminInitiateAuthRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 // Initiates the authentication response, as an administrator.
 type AdminInitiateAuthOutput struct {
 
@@ -358,13 +393,56 @@ type AdminInitiateAuthOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminInitiateAuthOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminInitiateAuthResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminInitiateAuthOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationResult != nil {
+		s.WriteStruct(schemas.AdminInitiateAuthResponse_AuthenticationResult)
+		v.AuthenticationResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAvailableChallengeListType(s, schemas.AdminInitiateAuthResponse_AvailableChallenges, v.AvailableChallenges)
+	if v.ChallengeName != "" {
+		s.WriteString(schemas.AdminInitiateAuthResponse_ChallengeName, string(v.ChallengeName))
+	}
+	serializeChallengeParametersType(s, schemas.AdminInitiateAuthResponse_ChallengeParameters, v.ChallengeParameters)
+	if v.Session != nil {
+		s.WriteString(schemas.AdminInitiateAuthResponse_Session, *v.Session)
+	}
+}
+func (v *AdminInitiateAuthOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminInitiateAuthResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdminInitiateAuthResponse_AuthenticationResult:
+			v.AuthenticationResult = &types.AuthenticationResultType{}
+			return v.AuthenticationResult.Deserialize(d)
+		case schemas.AdminInitiateAuthResponse_AvailableChallenges:
+			return deserializeAvailableChallengeListType(d, schemas.AdminInitiateAuthResponse_AvailableChallenges, &v.AvailableChallenges)
+		case schemas.AdminInitiateAuthResponse_ChallengeName:
+			var ev string
+			if err := d.ReadString(schemas.AdminInitiateAuthResponse_ChallengeName, &ev); err != nil {
+				return err
+			}
+			v.ChallengeName = types.ChallengeNameType(ev)
+			return nil
+		case schemas.AdminInitiateAuthResponse_ChallengeParameters:
+			return deserializeChallengeParametersType(d, schemas.AdminInitiateAuthResponse_ChallengeParameters, &v.ChallengeParameters)
+		case schemas.AdminInitiateAuthResponse_Session:
+			v.Session = new(string)
+			return d.ReadString(schemas.AdminInitiateAuthResponse_Session, v.Session)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdminInitiateAuthMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminInitiateAuth{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminInitiateAuth, schemas.AdminInitiateAuthRequest, schemas.AdminInitiateAuthResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminInitiateAuth{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminInitiateAuth, schemas.AdminInitiateAuthRequest, schemas.AdminInitiateAuthResponse), output: &AdminInitiateAuthOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

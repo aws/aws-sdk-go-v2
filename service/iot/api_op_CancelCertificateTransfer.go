@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,18 @@ type CancelCertificateTransferInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelCertificateTransferInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelCertificateTransferRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelCertificateTransferInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateId != nil {
+		s.WriteString(schemas.CancelCertificateTransferRequest_certificateId, *v.CertificateId)
+	}
+}
+
 type CancelCertificateTransferOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +68,26 @@ type CancelCertificateTransferOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelCertificateTransferOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelCertificateTransferOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelCertificateTransferOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelCertificateTransferMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelCertificateTransfer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelCertificateTransfer, schemas.CancelCertificateTransferRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelCertificateTransfer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelCertificateTransfer, schemas.CancelCertificateTransferRequest, nil), output: &CancelCertificateTransferOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

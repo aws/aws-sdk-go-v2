@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,23 @@ type DeleteArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteArtifactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteArtifactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteArtifactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactArn != nil {
+		s.WriteString(schemas.DeleteArtifactRequest_ArtifactArn, *v.ArtifactArn)
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.DeleteArtifactRequest_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DeleteArtifactOutput struct {
 
 	// The Amazon Resource Name (ARN) of the artifact.
@@ -46,13 +65,32 @@ type DeleteArtifactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteArtifactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteArtifactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteArtifactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactArn != nil {
+		s.WriteString(schemas.DeleteArtifactResponse_ArtifactArn, *v.ArtifactArn)
+	}
+}
+func (v *DeleteArtifactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteArtifactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteArtifactResponse_ArtifactArn:
+			v.ArtifactArn = new(string)
+			return d.ReadString(schemas.DeleteArtifactResponse_ArtifactArn, v.ArtifactArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteArtifact, schemas.DeleteArtifactRequest, schemas.DeleteArtifactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteArtifact, schemas.DeleteArtifactRequest, schemas.DeleteArtifactResponse), output: &DeleteArtifactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

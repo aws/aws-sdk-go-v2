@@ -5,7 +5,9 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,27 @@ type ListBotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBotsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBotsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBotsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBotFilters(s, schemas.ListBotsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBotsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBotsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != nil {
+		s.WriteStruct(schemas.ListBotsRequest_sortBy)
+		v.SortBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListBotsOutput struct {
 
 	// Summary information for the bots that meet the filter criteria specified in the
@@ -72,13 +95,35 @@ type ListBotsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBotsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBotsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBotSummaryList(s, schemas.ListBotsResponse_botSummaries, v.BotSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBotsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListBotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBotsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBotsResponse_botSummaries:
+			return deserializeBotSummaryList(d, schemas.ListBotsResponse_botSummaries, &v.BotSummaries)
+		case schemas.ListBotsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBotsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBots{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBots, schemas.ListBotsRequest, schemas.ListBotsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBots{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBots, schemas.ListBotsRequest, schemas.ListBotsResponse), output: &ListBotsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

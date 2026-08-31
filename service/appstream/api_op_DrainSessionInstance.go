@@ -4,6 +4,8 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DrainSessionInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DrainSessionInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DrainSessionInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DrainSessionInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionId != nil {
+		s.WriteString(schemas.DrainSessionInstanceRequest_SessionId, *v.SessionId)
+	}
+}
+
 type DrainSessionInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type DrainSessionInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DrainSessionInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DrainSessionInstanceResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DrainSessionInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DrainSessionInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DrainSessionInstanceResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDrainSessionInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDrainSessionInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DrainSessionInstance, schemas.DrainSessionInstanceRequest, schemas.DrainSessionInstanceResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDrainSessionInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DrainSessionInstance, schemas.DrainSessionInstanceRequest, schemas.DrainSessionInstanceResult), output: &DrainSessionInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

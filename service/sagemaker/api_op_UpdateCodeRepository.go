@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,23 @@ type UpdateCodeRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCodeRepositoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCodeRepositoryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCodeRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeRepositoryName != nil {
+		s.WriteString(schemas.UpdateCodeRepositoryInput_CodeRepositoryName, *v.CodeRepositoryName)
+	}
+	if v.GitConfig != nil {
+		s.WriteStruct(schemas.UpdateCodeRepositoryInput_GitConfig)
+		v.GitConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateCodeRepositoryOutput struct {
 
 	// The ARN of the Git repository.
@@ -55,13 +74,32 @@ type UpdateCodeRepositoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCodeRepositoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCodeRepositoryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCodeRepositoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeRepositoryArn != nil {
+		s.WriteString(schemas.UpdateCodeRepositoryOutput_CodeRepositoryArn, *v.CodeRepositoryArn)
+	}
+}
+func (v *UpdateCodeRepositoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCodeRepositoryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCodeRepositoryOutput_CodeRepositoryArn:
+			v.CodeRepositoryArn = new(string)
+			return d.ReadString(schemas.UpdateCodeRepositoryOutput_CodeRepositoryArn, v.CodeRepositoryArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCodeRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateCodeRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCodeRepository, schemas.UpdateCodeRepositoryInput, schemas.UpdateCodeRepositoryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateCodeRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCodeRepository, schemas.UpdateCodeRepositoryInput, schemas.UpdateCodeRepositoryOutput), output: &UpdateCodeRepositoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

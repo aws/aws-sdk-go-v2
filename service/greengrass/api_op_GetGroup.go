@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -31,6 +33,18 @@ type GetGroupInput struct {
 	GroupId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.GetGroupRequest_GroupId, *v.GroupId)
+	}
 }
 
 type GetGroupOutput struct {
@@ -65,13 +79,71 @@ type GetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetGroupResponse_Arn, *v.Arn)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteString(schemas.GetGroupResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetGroupResponse_Id, *v.Id)
+	}
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteString(schemas.GetGroupResponse_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	if v.LatestVersion != nil {
+		s.WriteString(schemas.GetGroupResponse_LatestVersion, *v.LatestVersion)
+	}
+	if v.LatestVersionArn != nil {
+		s.WriteString(schemas.GetGroupResponse_LatestVersionArn, *v.LatestVersionArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetGroupResponse_Name, *v.Name)
+	}
+	serializeTags(s, schemas.GetGroupResponse_tags, v.Tags)
+}
+func (v *GetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGroupResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetGroupResponse_Arn, v.Arn)
+		case schemas.GetGroupResponse_CreationTimestamp:
+			v.CreationTimestamp = new(string)
+			return d.ReadString(schemas.GetGroupResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.GetGroupResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetGroupResponse_Id, v.Id)
+		case schemas.GetGroupResponse_LastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(string)
+			return d.ReadString(schemas.GetGroupResponse_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.GetGroupResponse_LatestVersion:
+			v.LatestVersion = new(string)
+			return d.ReadString(schemas.GetGroupResponse_LatestVersion, v.LatestVersion)
+		case schemas.GetGroupResponse_LatestVersionArn:
+			v.LatestVersionArn = new(string)
+			return d.ReadString(schemas.GetGroupResponse_LatestVersionArn, v.LatestVersionArn)
+		case schemas.GetGroupResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetGroupResponse_Name, v.Name)
+		case schemas.GetGroupResponse_tags:
+			return deserializeTags(d, schemas.GetGroupResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroup, schemas.GetGroupRequest, schemas.GetGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroup, schemas.GetGroupRequest, schemas.GetGroupResponse), output: &GetGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

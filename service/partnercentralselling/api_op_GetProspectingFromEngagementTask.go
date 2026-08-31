@@ -4,7 +4,9 @@ package partnercentralselling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -45,6 +47,21 @@ type GetProspectingFromEngagementTaskInput struct {
 	TaskIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetProspectingFromEngagementTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProspectingFromEngagementTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProspectingFromEngagementTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetProspectingFromEngagementTaskRequest_Catalog, *v.Catalog)
+	}
+	if v.TaskIdentifier != nil {
+		s.WriteString(schemas.GetProspectingFromEngagementTaskRequest_TaskIdentifier, *v.TaskIdentifier)
+	}
 }
 
 // Represents the response structure containing the full details of a prospecting
@@ -92,13 +109,59 @@ type GetProspectingFromEngagementTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProspectingFromEngagementTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProspectingFromEngagementTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProspectingFromEngagementTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetProspectingFromEngagementTaskResponse_EndTime, *v.EndTime)
+	}
+	serializeEngagementProspectingResultList(s, schemas.GetProspectingFromEngagementTaskResponse_Engagements, v.Engagements)
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetProspectingFromEngagementTaskResponse_StartTime, *v.StartTime)
+	}
+	if v.TaskArn != nil {
+		s.WriteString(schemas.GetProspectingFromEngagementTaskResponse_TaskArn, *v.TaskArn)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.GetProspectingFromEngagementTaskResponse_TaskId, *v.TaskId)
+	}
+	if v.TaskName != nil {
+		s.WriteString(schemas.GetProspectingFromEngagementTaskResponse_TaskName, *v.TaskName)
+	}
+}
+func (v *GetProspectingFromEngagementTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProspectingFromEngagementTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProspectingFromEngagementTaskResponse_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.GetProspectingFromEngagementTaskResponse_EndTime, v.EndTime)
+		case schemas.GetProspectingFromEngagementTaskResponse_Engagements:
+			return deserializeEngagementProspectingResultList(d, schemas.GetProspectingFromEngagementTaskResponse_Engagements, &v.Engagements)
+		case schemas.GetProspectingFromEngagementTaskResponse_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.GetProspectingFromEngagementTaskResponse_StartTime, v.StartTime)
+		case schemas.GetProspectingFromEngagementTaskResponse_TaskArn:
+			v.TaskArn = new(string)
+			return d.ReadString(schemas.GetProspectingFromEngagementTaskResponse_TaskArn, v.TaskArn)
+		case schemas.GetProspectingFromEngagementTaskResponse_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.GetProspectingFromEngagementTaskResponse_TaskId, v.TaskId)
+		case schemas.GetProspectingFromEngagementTaskResponse_TaskName:
+			v.TaskName = new(string)
+			return d.ReadString(schemas.GetProspectingFromEngagementTaskResponse_TaskName, v.TaskName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProspectingFromEngagementTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetProspectingFromEngagementTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProspectingFromEngagementTask, schemas.GetProspectingFromEngagementTaskRequest, schemas.GetProspectingFromEngagementTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetProspectingFromEngagementTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProspectingFromEngagementTask, schemas.GetProspectingFromEngagementTaskRequest, schemas.GetProspectingFromEngagementTaskResponse), output: &GetProspectingFromEngagementTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

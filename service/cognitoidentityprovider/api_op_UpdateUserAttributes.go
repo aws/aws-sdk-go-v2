@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -112,6 +114,20 @@ type UpdateUserAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.UpdateUserAttributesRequest_AccessToken, *v.AccessToken)
+	}
+	serializeClientMetadataType(s, schemas.UpdateUserAttributesRequest_ClientMetadata, v.ClientMetadata)
+	serializeAttributeListType(s, schemas.UpdateUserAttributesRequest_UserAttributes, v.UserAttributes)
+}
+
 // Represents the response from the server for the request to update user
 // attributes.
 type UpdateUserAttributesOutput struct {
@@ -132,13 +148,29 @@ type UpdateUserAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCodeDeliveryDetailsListType(s, schemas.UpdateUserAttributesResponse_CodeDeliveryDetailsList, v.CodeDeliveryDetailsList)
+}
+func (v *UpdateUserAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateUserAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateUserAttributesResponse_CodeDeliveryDetailsList:
+			return deserializeCodeDeliveryDetailsListType(d, schemas.UpdateUserAttributesResponse_CodeDeliveryDetailsList, &v.CodeDeliveryDetailsList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateUserAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateUserAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserAttributes, schemas.UpdateUserAttributesRequest, schemas.UpdateUserAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateUserAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserAttributes, schemas.UpdateUserAttributesRequest, schemas.UpdateUserAttributesResponse), output: &UpdateUserAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

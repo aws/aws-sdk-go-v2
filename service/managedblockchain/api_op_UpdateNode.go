@@ -4,7 +4,9 @@ package managedblockchain
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,29 @@ type UpdateNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNodeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogPublishingConfiguration != nil {
+		s.WriteStruct(schemas.UpdateNodeInput_LogPublishingConfiguration)
+		v.LogPublishingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MemberId != nil {
+		s.WriteString(schemas.UpdateNodeInput_MemberId, *v.MemberId)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.UpdateNodeInput_NetworkId, *v.NetworkId)
+	}
+	if v.NodeId != nil {
+		s.WriteString(schemas.UpdateNodeInput_NodeId, *v.NodeId)
+	}
+}
+
 type UpdateNodeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,13 +81,26 @@ type UpdateNodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNodeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateNodeOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNode, schemas.UpdateNodeInput, schemas.UpdateNodeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNode, schemas.UpdateNodeInput, schemas.UpdateNodeOutput), output: &UpdateNodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

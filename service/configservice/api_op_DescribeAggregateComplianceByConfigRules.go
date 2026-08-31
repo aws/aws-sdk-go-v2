@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,29 @@ type DescribeAggregateComplianceByConfigRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAggregateComplianceByConfigRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAggregateComplianceByConfigRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAggregateComplianceByConfigRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationAggregatorName != nil {
+		s.WriteString(schemas.DescribeAggregateComplianceByConfigRulesRequest_ConfigurationAggregatorName, *v.ConfigurationAggregatorName)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.DescribeAggregateComplianceByConfigRulesRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.DescribeAggregateComplianceByConfigRulesRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAggregateComplianceByConfigRulesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeAggregateComplianceByConfigRulesOutput struct {
 
 	// Returns a list of AggregateComplianceByConfigRule object.
@@ -66,13 +91,35 @@ type DescribeAggregateComplianceByConfigRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAggregateComplianceByConfigRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAggregateComplianceByConfigRulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAggregateComplianceByConfigRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAggregateComplianceByConfigRuleList(s, schemas.DescribeAggregateComplianceByConfigRulesResponse_AggregateComplianceByConfigRules, v.AggregateComplianceByConfigRules)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAggregateComplianceByConfigRulesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAggregateComplianceByConfigRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAggregateComplianceByConfigRulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAggregateComplianceByConfigRulesResponse_AggregateComplianceByConfigRules:
+			return deserializeAggregateComplianceByConfigRuleList(d, schemas.DescribeAggregateComplianceByConfigRulesResponse_AggregateComplianceByConfigRules, &v.AggregateComplianceByConfigRules)
+		case schemas.DescribeAggregateComplianceByConfigRulesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAggregateComplianceByConfigRulesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAggregateComplianceByConfigRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAggregateComplianceByConfigRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAggregateComplianceByConfigRules, schemas.DescribeAggregateComplianceByConfigRulesRequest, schemas.DescribeAggregateComplianceByConfigRulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAggregateComplianceByConfigRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAggregateComplianceByConfigRules, schemas.DescribeAggregateComplianceByConfigRulesRequest, schemas.DescribeAggregateComplianceByConfigRulesResponse), output: &DescribeAggregateComplianceByConfigRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

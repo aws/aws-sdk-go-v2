@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type CreateGUISessionAccessDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGUISessionAccessDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGUISessionAccessDetailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGUISessionAccessDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceName != nil {
+		s.WriteString(schemas.CreateGUISessionAccessDetailsRequest_resourceName, *v.ResourceName)
+	}
+}
+
 type CreateGUISessionAccessDetailsOutput struct {
 
 	// The reason the operation failed.
@@ -62,13 +76,57 @@ type CreateGUISessionAccessDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGUISessionAccessDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGUISessionAccessDetailsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGUISessionAccessDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureReason != nil {
+		s.WriteString(schemas.CreateGUISessionAccessDetailsResult_failureReason, *v.FailureReason)
+	}
+	if v.PercentageComplete != nil {
+		s.WriteInt32(schemas.CreateGUISessionAccessDetailsResult_percentageComplete, *v.PercentageComplete)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.CreateGUISessionAccessDetailsResult_resourceName, *v.ResourceName)
+	}
+	serializeSessions(s, schemas.CreateGUISessionAccessDetailsResult_sessions, v.Sessions)
+	if v.Status != "" {
+		s.WriteString(schemas.CreateGUISessionAccessDetailsResult_status, string(v.Status))
+	}
+}
+func (v *CreateGUISessionAccessDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGUISessionAccessDetailsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGUISessionAccessDetailsResult_failureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.CreateGUISessionAccessDetailsResult_failureReason, v.FailureReason)
+		case schemas.CreateGUISessionAccessDetailsResult_percentageComplete:
+			v.PercentageComplete = new(int32)
+			return d.ReadInt32(schemas.CreateGUISessionAccessDetailsResult_percentageComplete, v.PercentageComplete)
+		case schemas.CreateGUISessionAccessDetailsResult_resourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.CreateGUISessionAccessDetailsResult_resourceName, v.ResourceName)
+		case schemas.CreateGUISessionAccessDetailsResult_sessions:
+			return deserializeSessions(d, schemas.CreateGUISessionAccessDetailsResult_sessions, &v.Sessions)
+		case schemas.CreateGUISessionAccessDetailsResult_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateGUISessionAccessDetailsResult_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGUISessionAccessDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateGUISessionAccessDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGUISessionAccessDetails, schemas.CreateGUISessionAccessDetailsRequest, schemas.CreateGUISessionAccessDetailsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateGUISessionAccessDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGUISessionAccessDetails, schemas.CreateGUISessionAccessDetailsRequest, schemas.CreateGUISessionAccessDetailsResult), output: &CreateGUISessionAccessDetailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

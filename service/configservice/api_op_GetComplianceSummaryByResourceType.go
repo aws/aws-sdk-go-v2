@@ -4,7 +4,9 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,16 @@ type GetComplianceSummaryByResourceTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComplianceSummaryByResourceTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComplianceSummaryByResourceTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComplianceSummaryByResourceTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceTypes(s, schemas.GetComplianceSummaryByResourceTypeRequest_ResourceTypes, v.ResourceTypes)
+}
+
 type GetComplianceSummaryByResourceTypeOutput struct {
 
 	// The number of resources that are compliant and the number that are
@@ -52,13 +64,29 @@ type GetComplianceSummaryByResourceTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComplianceSummaryByResourceTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComplianceSummaryByResourceTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComplianceSummaryByResourceTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComplianceSummariesByResourceType(s, schemas.GetComplianceSummaryByResourceTypeResponse_ComplianceSummariesByResourceType, v.ComplianceSummariesByResourceType)
+}
+func (v *GetComplianceSummaryByResourceTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetComplianceSummaryByResourceTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetComplianceSummaryByResourceTypeResponse_ComplianceSummariesByResourceType:
+			return deserializeComplianceSummariesByResourceType(d, schemas.GetComplianceSummaryByResourceTypeResponse_ComplianceSummariesByResourceType, &v.ComplianceSummariesByResourceType)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetComplianceSummaryByResourceTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetComplianceSummaryByResourceType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComplianceSummaryByResourceType, schemas.GetComplianceSummaryByResourceTypeRequest, schemas.GetComplianceSummaryByResourceTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetComplianceSummaryByResourceType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComplianceSummaryByResourceType, schemas.GetComplianceSummaryByResourceTypeRequest, schemas.GetComplianceSummaryByResourceTypeResponse), output: &GetComplianceSummaryByResourceTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

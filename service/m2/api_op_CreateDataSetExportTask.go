@@ -5,7 +5,9 @@ package m2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/m2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,25 @@ type CreateDataSetExportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataSetExportTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataSetExportTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataSetExportTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreateDataSetExportTaskRequest_applicationId, *v.ApplicationId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDataSetExportTaskRequest_clientToken, *v.ClientToken)
+	}
+	serializeDataSetExportConfig(s, schemas.CreateDataSetExportTaskRequest_exportConfig, v.ExportConfig)
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateDataSetExportTaskRequest_kmsKeyId, *v.KmsKeyId)
+	}
+}
+
 type CreateDataSetExportTaskOutput struct {
 
 	// The task identifier. This operation is asynchronous. Use this identifier with
@@ -64,13 +85,32 @@ type CreateDataSetExportTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataSetExportTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataSetExportTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataSetExportTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.CreateDataSetExportTaskResponse_taskId, *v.TaskId)
+	}
+}
+func (v *CreateDataSetExportTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataSetExportTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataSetExportTaskResponse_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.CreateDataSetExportTaskResponse_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataSetExportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataSetExportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSetExportTask, schemas.CreateDataSetExportTaskRequest, schemas.CreateDataSetExportTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataSetExportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSetExportTask, schemas.CreateDataSetExportTaskRequest, schemas.CreateDataSetExportTaskResponse), output: &CreateDataSetExportTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

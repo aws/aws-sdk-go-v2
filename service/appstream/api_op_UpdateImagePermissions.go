@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,26 @@ type UpdateImagePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateImagePermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateImagePermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateImagePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImagePermissions != nil {
+		s.WriteStruct(schemas.UpdateImagePermissionsRequest_ImagePermissions)
+		v.ImagePermissions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateImagePermissionsRequest_Name, *v.Name)
+	}
+	if v.SharedAccountId != nil {
+		s.WriteString(schemas.UpdateImagePermissionsRequest_SharedAccountId, *v.SharedAccountId)
+	}
+}
+
 type UpdateImagePermissionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +74,26 @@ type UpdateImagePermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateImagePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateImagePermissionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateImagePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateImagePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateImagePermissionsResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateImagePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateImagePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateImagePermissions, schemas.UpdateImagePermissionsRequest, schemas.UpdateImagePermissionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateImagePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateImagePermissions, schemas.UpdateImagePermissionsRequest, schemas.UpdateImagePermissionsResult), output: &UpdateImagePermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

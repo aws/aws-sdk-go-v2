@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,16 @@ type RebootWorkspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootWorkspacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootWorkspacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootWorkspacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRebootWorkspaceRequests(s, schemas.RebootWorkspacesRequest_RebootWorkspaceRequests, v.RebootWorkspaceRequests)
+}
+
 type RebootWorkspacesOutput struct {
 
 	// Information about the WorkSpaces that could not be rebooted.
@@ -51,13 +63,29 @@ type RebootWorkspacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootWorkspacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootWorkspacesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootWorkspacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedRebootWorkspaceRequests(s, schemas.RebootWorkspacesResult_FailedRequests, v.FailedRequests)
+}
+func (v *RebootWorkspacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RebootWorkspacesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RebootWorkspacesResult_FailedRequests:
+			return deserializeFailedRebootWorkspaceRequests(d, schemas.RebootWorkspacesResult_FailedRequests, &v.FailedRequests)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRebootWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRebootWorkspaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootWorkspaces, schemas.RebootWorkspacesRequest, schemas.RebootWorkspacesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRebootWorkspaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootWorkspaces, schemas.RebootWorkspacesRequest, schemas.RebootWorkspacesResult), output: &RebootWorkspacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

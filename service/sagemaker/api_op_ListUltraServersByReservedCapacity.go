@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListUltraServersByReservedCapacityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUltraServersByReservedCapacityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUltraServersByReservedCapacityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUltraServersByReservedCapacityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListUltraServersByReservedCapacityRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUltraServersByReservedCapacityRequest_NextToken, *v.NextToken)
+	}
+	if v.ReservedCapacityArn != nil {
+		s.WriteString(schemas.ListUltraServersByReservedCapacityRequest_ReservedCapacityArn, *v.ReservedCapacityArn)
+	}
+}
+
 type ListUltraServersByReservedCapacityOutput struct {
 
 	// A list of UltraServers that are part of the specified reserved capacity.
@@ -60,13 +80,35 @@ type ListUltraServersByReservedCapacityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUltraServersByReservedCapacityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUltraServersByReservedCapacityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUltraServersByReservedCapacityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUltraServersByReservedCapacityResponse_NextToken, *v.NextToken)
+	}
+	serializeUltraServers(s, schemas.ListUltraServersByReservedCapacityResponse_UltraServers, v.UltraServers)
+}
+func (v *ListUltraServersByReservedCapacityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUltraServersByReservedCapacityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUltraServersByReservedCapacityResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUltraServersByReservedCapacityResponse_NextToken, v.NextToken)
+		case schemas.ListUltraServersByReservedCapacityResponse_UltraServers:
+			return deserializeUltraServers(d, schemas.ListUltraServersByReservedCapacityResponse_UltraServers, &v.UltraServers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUltraServersByReservedCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListUltraServersByReservedCapacity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUltraServersByReservedCapacity, schemas.ListUltraServersByReservedCapacityRequest, schemas.ListUltraServersByReservedCapacityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListUltraServersByReservedCapacity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUltraServersByReservedCapacity, schemas.ListUltraServersByReservedCapacityRequest, schemas.ListUltraServersByReservedCapacityResponse), output: &ListUltraServersByReservedCapacityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

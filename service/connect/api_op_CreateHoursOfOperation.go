@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,30 @@ type CreateHoursOfOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHoursOfOperationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHoursOfOperationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHoursOfOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHoursOfOperationConfigList(s, schemas.CreateHoursOfOperationRequest_Config, v.Config)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateHoursOfOperationRequest_Description, *v.Description)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateHoursOfOperationRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateHoursOfOperationRequest_Name, *v.Name)
+	}
+	serializeParentHoursOfOperationConfigList(s, schemas.CreateHoursOfOperationRequest_ParentHoursOfOperationConfigs, v.ParentHoursOfOperationConfigs)
+	serializeTagMap(s, schemas.CreateHoursOfOperationRequest_Tags, v.Tags)
+	if v.TimeZone != nil {
+		s.WriteString(schemas.CreateHoursOfOperationRequest_TimeZone, *v.TimeZone)
+	}
+}
+
 type CreateHoursOfOperationOutput struct {
 
 	// The Amazon Resource Name (ARN) for the hours of operation.
@@ -82,13 +108,38 @@ type CreateHoursOfOperationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHoursOfOperationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHoursOfOperationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHoursOfOperationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HoursOfOperationArn != nil {
+		s.WriteString(schemas.CreateHoursOfOperationResponse_HoursOfOperationArn, *v.HoursOfOperationArn)
+	}
+	if v.HoursOfOperationId != nil {
+		s.WriteString(schemas.CreateHoursOfOperationResponse_HoursOfOperationId, *v.HoursOfOperationId)
+	}
+}
+func (v *CreateHoursOfOperationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateHoursOfOperationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateHoursOfOperationResponse_HoursOfOperationArn:
+			v.HoursOfOperationArn = new(string)
+			return d.ReadString(schemas.CreateHoursOfOperationResponse_HoursOfOperationArn, v.HoursOfOperationArn)
+		case schemas.CreateHoursOfOperationResponse_HoursOfOperationId:
+			v.HoursOfOperationId = new(string)
+			return d.ReadString(schemas.CreateHoursOfOperationResponse_HoursOfOperationId, v.HoursOfOperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateHoursOfOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateHoursOfOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHoursOfOperation, schemas.CreateHoursOfOperationRequest, schemas.CreateHoursOfOperationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateHoursOfOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHoursOfOperation, schemas.CreateHoursOfOperationRequest, schemas.CreateHoursOfOperationResponse), output: &CreateHoursOfOperationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,34 @@ type CreateContactFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContactFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContactFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContactFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteString(schemas.CreateContactFlowRequest_Content, *v.Content)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateContactFlowRequest_Description, *v.Description)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateContactFlowRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateContactFlowRequest_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateContactFlowRequest_Status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.CreateContactFlowRequest_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateContactFlowRequest_Type, string(v.Type))
+	}
+}
+
 type CreateContactFlowOutput struct {
 
 	// The Amazon Resource Name (ARN) of the flow.
@@ -89,13 +119,44 @@ type CreateContactFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContactFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContactFlowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContactFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactFlowArn != nil {
+		s.WriteString(schemas.CreateContactFlowResponse_ContactFlowArn, *v.ContactFlowArn)
+	}
+	if v.ContactFlowId != nil {
+		s.WriteString(schemas.CreateContactFlowResponse_ContactFlowId, *v.ContactFlowId)
+	}
+	if v.FlowContentSha256 != nil {
+		s.WriteString(schemas.CreateContactFlowResponse_FlowContentSha256, *v.FlowContentSha256)
+	}
+}
+func (v *CreateContactFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateContactFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateContactFlowResponse_ContactFlowArn:
+			v.ContactFlowArn = new(string)
+			return d.ReadString(schemas.CreateContactFlowResponse_ContactFlowArn, v.ContactFlowArn)
+		case schemas.CreateContactFlowResponse_ContactFlowId:
+			v.ContactFlowId = new(string)
+			return d.ReadString(schemas.CreateContactFlowResponse_ContactFlowId, v.ContactFlowId)
+		case schemas.CreateContactFlowResponse_FlowContentSha256:
+			v.FlowContentSha256 = new(string)
+			return d.ReadString(schemas.CreateContactFlowResponse_FlowContentSha256, v.FlowContentSha256)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateContactFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateContactFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContactFlow, schemas.CreateContactFlowRequest, schemas.CreateContactFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateContactFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContactFlow, schemas.CreateContactFlowRequest, schemas.CreateContactFlowResponse), output: &CreateContactFlowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

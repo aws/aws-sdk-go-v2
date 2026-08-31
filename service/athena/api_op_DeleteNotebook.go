@@ -4,6 +4,8 @@ package athena
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteNotebookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNotebookInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNotebookInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNotebookInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotebookId != nil {
+		s.WriteString(schemas.DeleteNotebookInput_NotebookId, *v.NotebookId)
+	}
+}
+
 type DeleteNotebookOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteNotebookOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNotebookOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNotebookOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNotebookOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteNotebookOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteNotebookOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteNotebookMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteNotebook{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNotebook, schemas.DeleteNotebookInput, schemas.DeleteNotebookOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteNotebook{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNotebook, schemas.DeleteNotebookInput, schemas.DeleteNotebookOutput), output: &DeleteNotebookOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

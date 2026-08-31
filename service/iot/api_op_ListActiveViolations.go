@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,36 @@ type ListActiveViolationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListActiveViolationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListActiveViolationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListActiveViolationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BehaviorCriteriaType != "" {
+		s.WriteString(schemas.ListActiveViolationsRequest_behaviorCriteriaType, string(v.BehaviorCriteriaType))
+	}
+	if v.ListSuppressedAlerts != nil {
+		s.WriteBool(schemas.ListActiveViolationsRequest_listSuppressedAlerts, *v.ListSuppressedAlerts)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListActiveViolationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListActiveViolationsRequest_nextToken, *v.NextToken)
+	}
+	if v.SecurityProfileName != nil {
+		s.WriteString(schemas.ListActiveViolationsRequest_securityProfileName, *v.SecurityProfileName)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.ListActiveViolationsRequest_thingName, *v.ThingName)
+	}
+	if v.VerificationState != "" {
+		s.WriteString(schemas.ListActiveViolationsRequest_verificationState, string(v.VerificationState))
+	}
+}
+
 type ListActiveViolationsOutput struct {
 
 	// The list of active violations.
@@ -78,13 +110,35 @@ type ListActiveViolationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListActiveViolationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListActiveViolationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListActiveViolationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActiveViolations(s, schemas.ListActiveViolationsResponse_activeViolations, v.ActiveViolations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListActiveViolationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListActiveViolationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListActiveViolationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListActiveViolationsResponse_activeViolations:
+			return deserializeActiveViolations(d, schemas.ListActiveViolationsResponse_activeViolations, &v.ActiveViolations)
+		case schemas.ListActiveViolationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListActiveViolationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListActiveViolationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListActiveViolations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListActiveViolations, schemas.ListActiveViolationsRequest, schemas.ListActiveViolationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListActiveViolations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListActiveViolations, schemas.ListActiveViolationsRequest, schemas.ListActiveViolationsResponse), output: &ListActiveViolationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

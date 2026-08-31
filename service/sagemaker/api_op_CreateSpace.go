@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,40 @@ type CreateSpaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSpaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSpaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.CreateSpaceRequest_DomainId, *v.DomainId)
+	}
+	if v.OwnershipSettings != nil {
+		s.WriteStruct(schemas.CreateSpaceRequest_OwnershipSettings)
+		v.OwnershipSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SpaceDisplayName != nil {
+		s.WriteString(schemas.CreateSpaceRequest_SpaceDisplayName, *v.SpaceDisplayName)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.CreateSpaceRequest_SpaceName, *v.SpaceName)
+	}
+	if v.SpaceSettings != nil {
+		s.WriteStruct(schemas.CreateSpaceRequest_SpaceSettings)
+		v.SpaceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SpaceSharingSettings != nil {
+		s.WriteStruct(schemas.CreateSpaceRequest_SpaceSharingSettings)
+		v.SpaceSharingSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateSpaceRequest_Tags, v.Tags)
+}
+
 type CreateSpaceOutput struct {
 
 	// The space's Amazon Resource Name (ARN).
@@ -67,13 +103,32 @@ type CreateSpaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSpaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSpaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSpaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SpaceArn != nil {
+		s.WriteString(schemas.CreateSpaceResponse_SpaceArn, *v.SpaceArn)
+	}
+}
+func (v *CreateSpaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSpaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSpaceResponse_SpaceArn:
+			v.SpaceArn = new(string)
+			return d.ReadString(schemas.CreateSpaceResponse_SpaceArn, v.SpaceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSpaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSpace, schemas.CreateSpaceRequest, schemas.CreateSpaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSpace, schemas.CreateSpaceRequest, schemas.CreateSpaceResponse), output: &CreateSpaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

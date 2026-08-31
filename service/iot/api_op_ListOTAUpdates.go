@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListOTAUpdatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOTAUpdatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOTAUpdatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOTAUpdatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOTAUpdatesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOTAUpdatesRequest_nextToken, *v.NextToken)
+	}
+	if v.OtaUpdateStatus != "" {
+		s.WriteString(schemas.ListOTAUpdatesRequest_otaUpdateStatus, string(v.OtaUpdateStatus))
+	}
+}
+
 type ListOTAUpdatesOutput struct {
 
 	// A token to use to get the next set of results.
@@ -57,13 +77,35 @@ type ListOTAUpdatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOTAUpdatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOTAUpdatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOTAUpdatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOTAUpdatesResponse_nextToken, *v.NextToken)
+	}
+	serializeOTAUpdatesSummary(s, schemas.ListOTAUpdatesResponse_otaUpdates, v.OtaUpdates)
+}
+func (v *ListOTAUpdatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOTAUpdatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOTAUpdatesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOTAUpdatesResponse_nextToken, v.NextToken)
+		case schemas.ListOTAUpdatesResponse_otaUpdates:
+			return deserializeOTAUpdatesSummary(d, schemas.ListOTAUpdatesResponse_otaUpdates, &v.OtaUpdates)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOTAUpdatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOTAUpdates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOTAUpdates, schemas.ListOTAUpdatesRequest, schemas.ListOTAUpdatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOTAUpdates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOTAUpdates, schemas.ListOTAUpdatesRequest, schemas.ListOTAUpdatesResponse), output: &ListOTAUpdatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

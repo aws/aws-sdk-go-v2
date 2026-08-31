@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteAIBenchmarkJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAIBenchmarkJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAIBenchmarkJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAIBenchmarkJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIBenchmarkJobName != nil {
+		s.WriteString(schemas.DeleteAIBenchmarkJobRequest_AIBenchmarkJobName, *v.AIBenchmarkJobName)
+	}
+}
+
 type DeleteAIBenchmarkJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted benchmark job.
@@ -44,13 +58,32 @@ type DeleteAIBenchmarkJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAIBenchmarkJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAIBenchmarkJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAIBenchmarkJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIBenchmarkJobArn != nil {
+		s.WriteString(schemas.DeleteAIBenchmarkJobResponse_AIBenchmarkJobArn, *v.AIBenchmarkJobArn)
+	}
+}
+func (v *DeleteAIBenchmarkJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAIBenchmarkJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAIBenchmarkJobResponse_AIBenchmarkJobArn:
+			v.AIBenchmarkJobArn = new(string)
+			return d.ReadString(schemas.DeleteAIBenchmarkJobResponse_AIBenchmarkJobArn, v.AIBenchmarkJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAIBenchmarkJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAIBenchmarkJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAIBenchmarkJob, schemas.DeleteAIBenchmarkJobRequest, schemas.DeleteAIBenchmarkJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteAIBenchmarkJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAIBenchmarkJob, schemas.DeleteAIBenchmarkJobRequest, schemas.DeleteAIBenchmarkJobResponse), output: &DeleteAIBenchmarkJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

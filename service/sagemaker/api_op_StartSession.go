@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type StartSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.StartSessionRequest_ResourceIdentifier, *v.ResourceIdentifier)
+	}
+}
+
 type StartSessionOutput struct {
 
 	// A unique identifier for the established remote connection session.
@@ -54,13 +68,44 @@ type StartSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionId != nil {
+		s.WriteString(schemas.StartSessionResponse_SessionId, *v.SessionId)
+	}
+	if v.StreamUrl != nil {
+		s.WriteString(schemas.StartSessionResponse_StreamUrl, *v.StreamUrl)
+	}
+	if v.TokenValue != nil {
+		s.WriteString(schemas.StartSessionResponse_TokenValue, *v.TokenValue)
+	}
+}
+func (v *StartSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSessionResponse_SessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.StartSessionResponse_SessionId, v.SessionId)
+		case schemas.StartSessionResponse_StreamUrl:
+			v.StreamUrl = new(string)
+			return d.ReadString(schemas.StartSessionResponse_StreamUrl, v.StreamUrl)
+		case schemas.StartSessionResponse_TokenValue:
+			v.TokenValue = new(string)
+			return d.ReadString(schemas.StartSessionResponse_TokenValue, v.TokenValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSession, schemas.StartSessionRequest, schemas.StartSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSession, schemas.StartSessionRequest, schemas.StartSessionResponse), output: &StartSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

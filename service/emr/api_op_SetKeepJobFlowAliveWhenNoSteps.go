@@ -4,6 +4,8 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,19 @@ type SetKeepJobFlowAliveWhenNoStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetKeepJobFlowAliveWhenNoStepsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetKeepJobFlowAliveWhenNoStepsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetKeepJobFlowAliveWhenNoStepsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeXmlStringList(s, schemas.SetKeepJobFlowAliveWhenNoStepsInput_JobFlowIds, v.JobFlowIds)
+	if v.KeepJobFlowAliveWhenNoSteps != nil {
+		s.WriteBool(schemas.SetKeepJobFlowAliveWhenNoStepsInput_KeepJobFlowAliveWhenNoSteps, *v.KeepJobFlowAliveWhenNoSteps)
+	}
+}
+
 type SetKeepJobFlowAliveWhenNoStepsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,13 +74,26 @@ type SetKeepJobFlowAliveWhenNoStepsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetKeepJobFlowAliveWhenNoStepsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetKeepJobFlowAliveWhenNoStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SetKeepJobFlowAliveWhenNoStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetKeepJobFlowAliveWhenNoStepsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetKeepJobFlowAliveWhenNoSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetKeepJobFlowAliveWhenNoSteps, schemas.SetKeepJobFlowAliveWhenNoStepsInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSetKeepJobFlowAliveWhenNoSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetKeepJobFlowAliveWhenNoSteps, schemas.SetKeepJobFlowAliveWhenNoStepsInput, nil), output: &SetKeepJobFlowAliveWhenNoStepsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

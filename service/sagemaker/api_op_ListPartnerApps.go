@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type ListPartnerAppsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPartnerAppsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPartnerAppsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPartnerAppsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPartnerAppsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPartnerAppsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListPartnerAppsOutput struct {
 
 	// If the previous response was truncated, you will receive this token. Use it in
@@ -57,13 +74,35 @@ type ListPartnerAppsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPartnerAppsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPartnerAppsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPartnerAppsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPartnerAppsResponse_NextToken, *v.NextToken)
+	}
+	serializePartnerAppSummaries(s, schemas.ListPartnerAppsResponse_Summaries, v.Summaries)
+}
+func (v *ListPartnerAppsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPartnerAppsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPartnerAppsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPartnerAppsResponse_NextToken, v.NextToken)
+		case schemas.ListPartnerAppsResponse_Summaries:
+			return deserializePartnerAppSummaries(d, schemas.ListPartnerAppsResponse_Summaries, &v.Summaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPartnerAppsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPartnerApps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPartnerApps, schemas.ListPartnerAppsRequest, schemas.ListPartnerAppsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPartnerApps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPartnerApps, schemas.ListPartnerAppsRequest, schemas.ListPartnerAppsResponse), output: &ListPartnerAppsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package amplify
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteDomainAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDomainAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDomainAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDomainAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.DeleteDomainAssociationRequest_appId, *v.AppId)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.DeleteDomainAssociationRequest_domainName, *v.DomainName)
+	}
+}
+
 type DeleteDomainAssociationOutput struct {
 
 	// Describes the association between a custom domain and an Amplify app.
@@ -53,13 +70,34 @@ type DeleteDomainAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDomainAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDomainAssociationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDomainAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainAssociation != nil {
+		s.WriteStruct(schemas.DeleteDomainAssociationResult_domainAssociation)
+		v.DomainAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteDomainAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDomainAssociationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDomainAssociationResult_domainAssociation:
+			v.DomainAssociation = &types.DomainAssociation{}
+			return v.DomainAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDomainAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDomainAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDomainAssociation, schemas.DeleteDomainAssociationRequest, schemas.DeleteDomainAssociationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDomainAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDomainAssociation, schemas.DeleteDomainAssociationRequest, schemas.DeleteDomainAssociationResult), output: &DeleteDomainAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,46 @@ type CreateImportedImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateImportedImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateImportedImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateImportedImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSoftwareVersion != "" {
+		s.WriteString(schemas.CreateImportedImageRequest_AgentSoftwareVersion, string(v.AgentSoftwareVersion))
+	}
+	serializeAppCatalogConfig(s, schemas.CreateImportedImageRequest_AppCatalogConfig, v.AppCatalogConfig)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateImportedImageRequest_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateImportedImageRequest_DisplayName, *v.DisplayName)
+	}
+	if v.DryRun != nil {
+		s.WriteBool(schemas.CreateImportedImageRequest_DryRun, *v.DryRun)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.CreateImportedImageRequest_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateImportedImageRequest_Name, *v.Name)
+	}
+	if v.RuntimeValidationConfig != nil {
+		s.WriteStruct(schemas.CreateImportedImageRequest_RuntimeValidationConfig)
+		v.RuntimeValidationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceAmiId != nil {
+		s.WriteString(schemas.CreateImportedImageRequest_SourceAmiId, *v.SourceAmiId)
+	}
+	serializeTags(s, schemas.CreateImportedImageRequest_Tags, v.Tags)
+	if v.WorkspaceImageId != nil {
+		s.WriteString(schemas.CreateImportedImageRequest_WorkspaceImageId, *v.WorkspaceImageId)
+	}
+}
+
 type CreateImportedImageOutput struct {
 
 	// Describes an image.
@@ -93,13 +135,34 @@ type CreateImportedImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateImportedImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateImportedImageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateImportedImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Image != nil {
+		s.WriteStruct(schemas.CreateImportedImageResult_Image)
+		v.Image.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateImportedImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateImportedImageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateImportedImageResult_Image:
+			v.Image = &types.Image{}
+			return v.Image.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateImportedImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateImportedImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateImportedImage, schemas.CreateImportedImageRequest, schemas.CreateImportedImageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateImportedImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateImportedImage, schemas.CreateImportedImageRequest, schemas.CreateImportedImageResult), output: &CreateImportedImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

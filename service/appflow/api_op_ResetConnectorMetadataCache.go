@@ -4,7 +4,9 @@ package appflow
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appflow/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -91,6 +93,30 @@ type ResetConnectorMetadataCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetConnectorMetadataCacheInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetConnectorMetadataCacheRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetConnectorMetadataCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiVersion != nil {
+		s.WriteString(schemas.ResetConnectorMetadataCacheRequest_apiVersion, *v.ApiVersion)
+	}
+	if v.ConnectorEntityName != nil {
+		s.WriteString(schemas.ResetConnectorMetadataCacheRequest_connectorEntityName, *v.ConnectorEntityName)
+	}
+	if v.ConnectorProfileName != nil {
+		s.WriteString(schemas.ResetConnectorMetadataCacheRequest_connectorProfileName, *v.ConnectorProfileName)
+	}
+	if v.ConnectorType != "" {
+		s.WriteString(schemas.ResetConnectorMetadataCacheRequest_connectorType, string(v.ConnectorType))
+	}
+	if v.EntitiesPath != nil {
+		s.WriteString(schemas.ResetConnectorMetadataCacheRequest_entitiesPath, *v.EntitiesPath)
+	}
+}
+
 type ResetConnectorMetadataCacheOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -98,13 +124,26 @@ type ResetConnectorMetadataCacheOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetConnectorMetadataCacheOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetConnectorMetadataCacheResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetConnectorMetadataCacheOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ResetConnectorMetadataCacheOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResetConnectorMetadataCacheResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResetConnectorMetadataCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpResetConnectorMetadataCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetConnectorMetadataCache, schemas.ResetConnectorMetadataCacheRequest, schemas.ResetConnectorMetadataCacheResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpResetConnectorMetadataCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetConnectorMetadataCache, schemas.ResetConnectorMetadataCacheRequest, schemas.ResetConnectorMetadataCacheResponse), output: &ResetConnectorMetadataCacheOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

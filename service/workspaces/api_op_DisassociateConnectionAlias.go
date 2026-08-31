@@ -4,6 +4,8 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type DisassociateConnectionAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateConnectionAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateConnectionAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateConnectionAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasId != nil {
+		s.WriteString(schemas.DisassociateConnectionAliasRequest_AliasId, *v.AliasId)
+	}
+}
+
 type DisassociateConnectionAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +62,26 @@ type DisassociateConnectionAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateConnectionAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateConnectionAliasResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateConnectionAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateConnectionAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateConnectionAliasResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateConnectionAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateConnectionAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateConnectionAlias, schemas.DisassociateConnectionAliasRequest, schemas.DisassociateConnectionAliasResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateConnectionAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateConnectionAlias, schemas.DisassociateConnectionAliasRequest, schemas.DisassociateConnectionAliasResult), output: &DisassociateConnectionAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

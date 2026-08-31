@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -51,6 +53,30 @@ type ListHumanTaskUisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHumanTaskUisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHumanTaskUisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHumanTaskUisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListHumanTaskUisRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListHumanTaskUisRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListHumanTaskUisRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHumanTaskUisRequest_NextToken, *v.NextToken)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListHumanTaskUisRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListHumanTaskUisOutput struct {
 
 	// An array of objects describing the human task user interfaces.
@@ -67,13 +93,35 @@ type ListHumanTaskUisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHumanTaskUisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHumanTaskUisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHumanTaskUisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHumanTaskUiSummaries(s, schemas.ListHumanTaskUisResponse_HumanTaskUiSummaries, v.HumanTaskUiSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHumanTaskUisResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListHumanTaskUisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHumanTaskUisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHumanTaskUisResponse_HumanTaskUiSummaries:
+			return deserializeHumanTaskUiSummaries(d, schemas.ListHumanTaskUisResponse_HumanTaskUiSummaries, &v.HumanTaskUiSummaries)
+		case schemas.ListHumanTaskUisResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHumanTaskUisResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHumanTaskUisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListHumanTaskUis{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHumanTaskUis, schemas.ListHumanTaskUisRequest, schemas.ListHumanTaskUisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListHumanTaskUis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHumanTaskUis, schemas.ListHumanTaskUisRequest, schemas.ListHumanTaskUisResponse), output: &ListHumanTaskUisOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

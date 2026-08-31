@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type DescribeAppLicenseUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppLicenseUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppLicenseUsageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppLicenseUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingPeriod != nil {
+		s.WriteString(schemas.DescribeAppLicenseUsageRequest_BillingPeriod, *v.BillingPeriod)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeAppLicenseUsageRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAppLicenseUsageRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeAppLicenseUsageOutput struct {
 
 	// Collection of license usage records.
@@ -56,13 +76,35 @@ type DescribeAppLicenseUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppLicenseUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppLicenseUsageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppLicenseUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdminAppLicenseUsageList(s, schemas.DescribeAppLicenseUsageResult_AppLicenseUsages, v.AppLicenseUsages)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAppLicenseUsageResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAppLicenseUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAppLicenseUsageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAppLicenseUsageResult_AppLicenseUsages:
+			return deserializeAdminAppLicenseUsageList(d, schemas.DescribeAppLicenseUsageResult_AppLicenseUsages, &v.AppLicenseUsages)
+		case schemas.DescribeAppLicenseUsageResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAppLicenseUsageResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAppLicenseUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeAppLicenseUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppLicenseUsage, schemas.DescribeAppLicenseUsageRequest, schemas.DescribeAppLicenseUsageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeAppLicenseUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppLicenseUsage, schemas.DescribeAppLicenseUsageRequest, schemas.DescribeAppLicenseUsageResult), output: &DescribeAppLicenseUsageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package datasync
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListTaskExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTaskExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTaskExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTaskExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTaskExecutionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTaskExecutionsRequest_NextToken, *v.NextToken)
+	}
+	if v.TaskArn != nil {
+		s.WriteString(schemas.ListTaskExecutionsRequest_TaskArn, *v.TaskArn)
+	}
+}
+
 // ListTaskExecutionsResponse
 type ListTaskExecutionsOutput struct {
 
@@ -58,13 +78,35 @@ type ListTaskExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTaskExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTaskExecutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTaskExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTaskExecutionsResponse_NextToken, *v.NextToken)
+	}
+	serializeTaskExecutionList(s, schemas.ListTaskExecutionsResponse_TaskExecutions, v.TaskExecutions)
+}
+func (v *ListTaskExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTaskExecutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTaskExecutionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTaskExecutionsResponse_NextToken, v.NextToken)
+		case schemas.ListTaskExecutionsResponse_TaskExecutions:
+			return deserializeTaskExecutionList(d, schemas.ListTaskExecutionsResponse_TaskExecutions, &v.TaskExecutions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTaskExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTaskExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTaskExecutions, schemas.ListTaskExecutionsRequest, schemas.ListTaskExecutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTaskExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTaskExecutions, schemas.ListTaskExecutionsRequest, schemas.ListTaskExecutionsResponse), output: &ListTaskExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

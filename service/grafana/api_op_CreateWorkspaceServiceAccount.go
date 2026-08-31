@@ -4,7 +4,9 @@ package grafana
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/grafana/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/grafana/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,24 @@ type CreateWorkspaceServiceAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkspaceServiceAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkspaceServiceAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkspaceServiceAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GrafanaRole != "" {
+		s.WriteString(schemas.CreateWorkspaceServiceAccountRequest_grafanaRole, string(v.GrafanaRole))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateWorkspaceServiceAccountRequest_name, *v.Name)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.CreateWorkspaceServiceAccountRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+
 type CreateWorkspaceServiceAccountOutput struct {
 
 	// The permission level given to the service account.
@@ -94,13 +114,54 @@ type CreateWorkspaceServiceAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkspaceServiceAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkspaceServiceAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkspaceServiceAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GrafanaRole != "" {
+		s.WriteString(schemas.CreateWorkspaceServiceAccountResponse_grafanaRole, string(v.GrafanaRole))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateWorkspaceServiceAccountResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateWorkspaceServiceAccountResponse_name, *v.Name)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.CreateWorkspaceServiceAccountResponse_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *CreateWorkspaceServiceAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkspaceServiceAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkspaceServiceAccountResponse_grafanaRole:
+			var ev string
+			if err := d.ReadString(schemas.CreateWorkspaceServiceAccountResponse_grafanaRole, &ev); err != nil {
+				return err
+			}
+			v.GrafanaRole = types.Role(ev)
+			return nil
+		case schemas.CreateWorkspaceServiceAccountResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateWorkspaceServiceAccountResponse_id, v.Id)
+		case schemas.CreateWorkspaceServiceAccountResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateWorkspaceServiceAccountResponse_name, v.Name)
+		case schemas.CreateWorkspaceServiceAccountResponse_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.CreateWorkspaceServiceAccountResponse_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkspaceServiceAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorkspaceServiceAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspaceServiceAccount, schemas.CreateWorkspaceServiceAccountRequest, schemas.CreateWorkspaceServiceAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWorkspaceServiceAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspaceServiceAccount, schemas.CreateWorkspaceServiceAccountRequest, schemas.CreateWorkspaceServiceAccountResponse), output: &CreateWorkspaceServiceAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

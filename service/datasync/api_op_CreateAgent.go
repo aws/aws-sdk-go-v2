@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,27 @@ type CreateAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAgentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAgentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivationKey != nil {
+		s.WriteString(schemas.CreateAgentRequest_ActivationKey, *v.ActivationKey)
+	}
+	if v.AgentName != nil {
+		s.WriteString(schemas.CreateAgentRequest_AgentName, *v.AgentName)
+	}
+	serializePLSecurityGroupArnList(s, schemas.CreateAgentRequest_SecurityGroupArns, v.SecurityGroupArns)
+	serializePLSubnetArnList(s, schemas.CreateAgentRequest_SubnetArns, v.SubnetArns)
+	serializeInputTagList(s, schemas.CreateAgentRequest_Tags, v.Tags)
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.CreateAgentRequest_VpcEndpointId, *v.VpcEndpointId)
+	}
+}
+
 // CreateAgentResponse
 type CreateAgentOutput struct {
 
@@ -85,13 +108,32 @@ type CreateAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAgentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAgentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentArn != nil {
+		s.WriteString(schemas.CreateAgentResponse_AgentArn, *v.AgentArn)
+	}
+}
+func (v *CreateAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAgentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAgentResponse_AgentArn:
+			v.AgentArn = new(string)
+			return d.ReadString(schemas.CreateAgentResponse_AgentArn, v.AgentArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgent, schemas.CreateAgentRequest, schemas.CreateAgentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgent, schemas.CreateAgentRequest, schemas.CreateAgentResponse), output: &CreateAgentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

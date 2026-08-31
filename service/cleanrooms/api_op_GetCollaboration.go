@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,28 @@ type GetCollaborationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCollaborationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCollaborationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCollaborationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.GetCollaborationInput_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+}
+func (v *GetCollaborationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCollaborationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCollaborationInput_collaborationIdentifier:
+			v.CollaborationIdentifier = new(string)
+			return d.ReadString(schemas.GetCollaborationInput_collaborationIdentifier, v.CollaborationIdentifier)
+		}
+		return nil
+	})
+}
+
 type GetCollaborationOutput struct {
 
 	// The entire collaboration for this identifier.
@@ -47,13 +71,34 @@ type GetCollaborationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCollaborationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCollaborationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCollaborationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Collaboration != nil {
+		s.WriteStruct(schemas.GetCollaborationOutput_collaboration)
+		v.Collaboration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCollaborationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCollaborationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCollaborationOutput_collaboration:
+			v.Collaboration = &types.Collaboration{}
+			return v.Collaboration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCollaborationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCollaboration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCollaboration, schemas.GetCollaborationInput, schemas.GetCollaborationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCollaboration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCollaboration, schemas.GetCollaborationInput, schemas.GetCollaborationOutput), output: &GetCollaborationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

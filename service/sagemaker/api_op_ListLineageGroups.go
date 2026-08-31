@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -56,6 +58,33 @@ type ListLineageGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLineageGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLineageGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLineageGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAfter != nil {
+		s.WriteTime(schemas.ListLineageGroupsRequest_CreatedAfter, *v.CreatedAfter)
+	}
+	if v.CreatedBefore != nil {
+		s.WriteTime(schemas.ListLineageGroupsRequest_CreatedBefore, *v.CreatedBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLineageGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLineageGroupsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListLineageGroupsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListLineageGroupsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListLineageGroupsOutput struct {
 
 	// A list of lineage groups and their properties.
@@ -71,13 +100,35 @@ type ListLineageGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLineageGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLineageGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLineageGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLineageGroupSummaries(s, schemas.ListLineageGroupsResponse_LineageGroupSummaries, v.LineageGroupSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLineageGroupsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLineageGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLineageGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLineageGroupsResponse_LineageGroupSummaries:
+			return deserializeLineageGroupSummaries(d, schemas.ListLineageGroupsResponse_LineageGroupSummaries, &v.LineageGroupSummaries)
+		case schemas.ListLineageGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLineageGroupsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLineageGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLineageGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLineageGroups, schemas.ListLineageGroupsRequest, schemas.ListLineageGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListLineageGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLineageGroups, schemas.ListLineageGroupsRequest, schemas.ListLineageGroupsResponse), output: &ListLineageGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

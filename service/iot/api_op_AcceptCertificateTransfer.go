@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type AcceptCertificateTransferInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptCertificateTransferInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptCertificateTransferRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptCertificateTransferInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateId != nil {
+		s.WriteString(schemas.AcceptCertificateTransferRequest_certificateId, *v.CertificateId)
+	}
+	if v.SetAsActive != false {
+		s.WriteBool(schemas.AcceptCertificateTransferRequest_setAsActive, v.SetAsActive)
+	}
+}
+
 type AcceptCertificateTransferOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +70,26 @@ type AcceptCertificateTransferOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptCertificateTransferOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptCertificateTransferOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AcceptCertificateTransferOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcceptCertificateTransferMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAcceptCertificateTransfer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptCertificateTransfer, schemas.AcceptCertificateTransferRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAcceptCertificateTransfer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptCertificateTransfer, schemas.AcceptCertificateTransferRequest, nil), output: &AcceptCertificateTransferOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

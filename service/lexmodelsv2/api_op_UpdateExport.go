@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -44,6 +46,21 @@ type UpdateExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportId != nil {
+		s.WriteString(schemas.UpdateExportRequest_exportId, *v.ExportId)
+	}
+	if v.FilePassword != nil {
+		s.WriteString(schemas.UpdateExportRequest_filePassword, *v.FilePassword)
+	}
+}
+
 type UpdateExportOutput struct {
 
 	// The date and time that the export was created.
@@ -73,13 +90,72 @@ type UpdateExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.UpdateExportResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.ExportId != nil {
+		s.WriteString(schemas.UpdateExportResponse_exportId, *v.ExportId)
+	}
+	if v.ExportStatus != "" {
+		s.WriteString(schemas.UpdateExportResponse_exportStatus, string(v.ExportStatus))
+	}
+	if v.FileFormat != "" {
+		s.WriteString(schemas.UpdateExportResponse_fileFormat, string(v.FileFormat))
+	}
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.UpdateExportResponse_lastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.ResourceSpecification != nil {
+		s.WriteStruct(schemas.UpdateExportResponse_resourceSpecification)
+		v.ResourceSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateExportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateExportResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateExportResponse_creationDateTime, v.CreationDateTime)
+		case schemas.UpdateExportResponse_exportId:
+			v.ExportId = new(string)
+			return d.ReadString(schemas.UpdateExportResponse_exportId, v.ExportId)
+		case schemas.UpdateExportResponse_exportStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateExportResponse_exportStatus, &ev); err != nil {
+				return err
+			}
+			v.ExportStatus = types.ExportStatus(ev)
+			return nil
+		case schemas.UpdateExportResponse_fileFormat:
+			var ev string
+			if err := d.ReadString(schemas.UpdateExportResponse_fileFormat, &ev); err != nil {
+				return err
+			}
+			v.FileFormat = types.ImportExportFileFormat(ev)
+			return nil
+		case schemas.UpdateExportResponse_lastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateExportResponse_lastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.UpdateExportResponse_resourceSpecification:
+			v.ResourceSpecification = &types.ExportResourceSpecification{}
+			return v.ResourceSpecification.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExport, schemas.UpdateExportRequest, schemas.UpdateExportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExport, schemas.UpdateExportRequest, schemas.UpdateExportResponse), output: &UpdateExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type ListFleetMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFleetMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFleetMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFleetMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFleetMetricsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFleetMetricsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListFleetMetricsOutput struct {
 
 	// The list of fleet metrics objects.
@@ -56,13 +73,35 @@ type ListFleetMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFleetMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFleetMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFleetMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFleetMetricNameAndArnList(s, schemas.ListFleetMetricsResponse_fleetMetrics, v.FleetMetrics)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFleetMetricsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListFleetMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFleetMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFleetMetricsResponse_fleetMetrics:
+			return deserializeFleetMetricNameAndArnList(d, schemas.ListFleetMetricsResponse_fleetMetrics, &v.FleetMetrics)
+		case schemas.ListFleetMetricsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFleetMetricsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFleetMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFleetMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFleetMetrics, schemas.ListFleetMetricsRequest, schemas.ListFleetMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFleetMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFleetMetrics, schemas.ListFleetMetricsRequest, schemas.ListFleetMetricsResponse), output: &ListFleetMetricsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

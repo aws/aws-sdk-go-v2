@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,38 @@ type CreateHubContentPresignedUrlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHubContentPresignedUrlsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHubContentPresignedUrlsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHubContentPresignedUrlsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessConfig != nil {
+		s.WriteStruct(schemas.CreateHubContentPresignedUrlsRequest_AccessConfig)
+		v.AccessConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HubContentName != nil {
+		s.WriteString(schemas.CreateHubContentPresignedUrlsRequest_HubContentName, *v.HubContentName)
+	}
+	if v.HubContentType != "" {
+		s.WriteString(schemas.CreateHubContentPresignedUrlsRequest_HubContentType, string(v.HubContentType))
+	}
+	if v.HubContentVersion != nil {
+		s.WriteString(schemas.CreateHubContentPresignedUrlsRequest_HubContentVersion, *v.HubContentVersion)
+	}
+	if v.HubName != nil {
+		s.WriteString(schemas.CreateHubContentPresignedUrlsRequest_HubName, *v.HubName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.CreateHubContentPresignedUrlsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.CreateHubContentPresignedUrlsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type CreateHubContentPresignedUrlsOutput struct {
 
 	// An array of authorized URL configurations, each containing a presigned URL and
@@ -85,13 +119,35 @@ type CreateHubContentPresignedUrlsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHubContentPresignedUrlsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHubContentPresignedUrlsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHubContentPresignedUrlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuthorizedUrlConfigs(s, schemas.CreateHubContentPresignedUrlsResponse_AuthorizedUrlConfigs, v.AuthorizedUrlConfigs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.CreateHubContentPresignedUrlsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *CreateHubContentPresignedUrlsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateHubContentPresignedUrlsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateHubContentPresignedUrlsResponse_AuthorizedUrlConfigs:
+			return deserializeAuthorizedUrlConfigs(d, schemas.CreateHubContentPresignedUrlsResponse_AuthorizedUrlConfigs, &v.AuthorizedUrlConfigs)
+		case schemas.CreateHubContentPresignedUrlsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.CreateHubContentPresignedUrlsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateHubContentPresignedUrlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateHubContentPresignedUrls{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHubContentPresignedUrls, schemas.CreateHubContentPresignedUrlsRequest, schemas.CreateHubContentPresignedUrlsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateHubContentPresignedUrls{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHubContentPresignedUrls, schemas.CreateHubContentPresignedUrlsRequest, schemas.CreateHubContentPresignedUrlsResponse), output: &CreateHubContentPresignedUrlsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

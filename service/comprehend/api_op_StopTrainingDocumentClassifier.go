@@ -4,6 +4,8 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type StopTrainingDocumentClassifierInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopTrainingDocumentClassifierInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopTrainingDocumentClassifierRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopTrainingDocumentClassifierInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentClassifierArn != nil {
+		s.WriteString(schemas.StopTrainingDocumentClassifierRequest_DocumentClassifierArn, *v.DocumentClassifierArn)
+	}
+}
+
 type StopTrainingDocumentClassifierOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +61,26 @@ type StopTrainingDocumentClassifierOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopTrainingDocumentClassifierOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopTrainingDocumentClassifierResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopTrainingDocumentClassifierOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopTrainingDocumentClassifierOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopTrainingDocumentClassifierResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopTrainingDocumentClassifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopTrainingDocumentClassifier{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopTrainingDocumentClassifier, schemas.StopTrainingDocumentClassifierRequest, schemas.StopTrainingDocumentClassifierResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopTrainingDocumentClassifier{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopTrainingDocumentClassifier, schemas.StopTrainingDocumentClassifierRequest, schemas.StopTrainingDocumentClassifierResponse), output: &StopTrainingDocumentClassifierOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

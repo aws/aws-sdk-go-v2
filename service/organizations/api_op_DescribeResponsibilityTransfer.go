@@ -4,7 +4,9 @@ package organizations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribeResponsibilityTransferInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeResponsibilityTransferInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeResponsibilityTransferRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeResponsibilityTransferInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeResponsibilityTransferRequest_Id, *v.Id)
+	}
+}
+
 type DescribeResponsibilityTransferOutput struct {
 
 	// A ResponsibilityTransfer object. Contains details for a transfer.
@@ -47,13 +61,34 @@ type DescribeResponsibilityTransferOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeResponsibilityTransferOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeResponsibilityTransferResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeResponsibilityTransferOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResponsibilityTransfer != nil {
+		s.WriteStruct(schemas.DescribeResponsibilityTransferResponse_ResponsibilityTransfer)
+		v.ResponsibilityTransfer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeResponsibilityTransferOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeResponsibilityTransferResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeResponsibilityTransferResponse_ResponsibilityTransfer:
+			v.ResponsibilityTransfer = &types.ResponsibilityTransfer{}
+			return v.ResponsibilityTransfer.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeResponsibilityTransferMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeResponsibilityTransfer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeResponsibilityTransfer, schemas.DescribeResponsibilityTransferRequest, schemas.DescribeResponsibilityTransferResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeResponsibilityTransfer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeResponsibilityTransfer, schemas.DescribeResponsibilityTransferRequest, schemas.DescribeResponsibilityTransferResponse), output: &DescribeResponsibilityTransferOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

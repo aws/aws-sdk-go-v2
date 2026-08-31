@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,22 @@ type DescribeOrganizationConformancePackStatusesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOrganizationConformancePackStatusesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrganizationConformancePackStatusesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrganizationConformancePackStatusesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.DescribeOrganizationConformancePackStatusesRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeOrganizationConformancePackStatusesRequest_NextToken, *v.NextToken)
+	}
+	serializeOrganizationConformancePackNames(s, schemas.DescribeOrganizationConformancePackStatusesRequest_OrganizationConformancePackNames, v.OrganizationConformancePackNames)
+}
+
 type DescribeOrganizationConformancePackStatusesOutput struct {
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -68,13 +86,35 @@ type DescribeOrganizationConformancePackStatusesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOrganizationConformancePackStatusesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrganizationConformancePackStatusesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrganizationConformancePackStatusesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeOrganizationConformancePackStatusesResponse_NextToken, *v.NextToken)
+	}
+	serializeOrganizationConformancePackStatuses(s, schemas.DescribeOrganizationConformancePackStatusesResponse_OrganizationConformancePackStatuses, v.OrganizationConformancePackStatuses)
+}
+func (v *DescribeOrganizationConformancePackStatusesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeOrganizationConformancePackStatusesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeOrganizationConformancePackStatusesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeOrganizationConformancePackStatusesResponse_NextToken, v.NextToken)
+		case schemas.DescribeOrganizationConformancePackStatusesResponse_OrganizationConformancePackStatuses:
+			return deserializeOrganizationConformancePackStatuses(d, schemas.DescribeOrganizationConformancePackStatusesResponse_OrganizationConformancePackStatuses, &v.OrganizationConformancePackStatuses)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeOrganizationConformancePackStatusesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeOrganizationConformancePackStatuses{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationConformancePackStatuses, schemas.DescribeOrganizationConformancePackStatusesRequest, schemas.DescribeOrganizationConformancePackStatusesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeOrganizationConformancePackStatuses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationConformancePackStatuses, schemas.DescribeOrganizationConformancePackStatusesRequest, schemas.DescribeOrganizationConformancePackStatusesResponse), output: &DescribeOrganizationConformancePackStatusesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

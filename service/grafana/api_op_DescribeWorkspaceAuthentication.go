@@ -4,7 +4,9 @@ package grafana
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/grafana/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/grafana/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,28 @@ type DescribeWorkspaceAuthenticationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspaceAuthenticationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspaceAuthenticationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspaceAuthenticationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DescribeWorkspaceAuthenticationRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *DescribeWorkspaceAuthenticationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWorkspaceAuthenticationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWorkspaceAuthenticationRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.DescribeWorkspaceAuthenticationRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type DescribeWorkspaceAuthenticationOutput struct {
 
 	// A structure containing information about the authentication methods used in the
@@ -49,13 +73,34 @@ type DescribeWorkspaceAuthenticationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspaceAuthenticationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspaceAuthenticationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspaceAuthenticationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Authentication != nil {
+		s.WriteStruct(schemas.DescribeWorkspaceAuthenticationResponse_authentication)
+		v.Authentication.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeWorkspaceAuthenticationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWorkspaceAuthenticationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWorkspaceAuthenticationResponse_authentication:
+			v.Authentication = &types.AuthenticationDescription{}
+			return v.Authentication.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWorkspaceAuthenticationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeWorkspaceAuthentication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspaceAuthentication, schemas.DescribeWorkspaceAuthenticationRequest, schemas.DescribeWorkspaceAuthenticationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeWorkspaceAuthentication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspaceAuthentication, schemas.DescribeWorkspaceAuthenticationRequest, schemas.DescribeWorkspaceAuthenticationResponse), output: &DescribeWorkspaceAuthenticationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

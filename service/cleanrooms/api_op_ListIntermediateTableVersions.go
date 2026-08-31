@@ -5,7 +5,9 @@ package cleanrooms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,27 @@ type ListIntermediateTableVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntermediateTableVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntermediateTableVersionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntermediateTableVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntermediateTableIdentifier != nil {
+		s.WriteString(schemas.ListIntermediateTableVersionsInput_intermediateTableIdentifier, *v.IntermediateTableIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIntermediateTableVersionsInput_maxResults, *v.MaxResults)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.ListIntermediateTableVersionsInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIntermediateTableVersionsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListIntermediateTableVersionsOutput struct {
 
 	// The list of intermediate table version summaries.
@@ -66,13 +89,35 @@ type ListIntermediateTableVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntermediateTableVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntermediateTableVersionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntermediateTableVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIntermediateTableVersionSummaryList(s, schemas.ListIntermediateTableVersionsOutput_intermediateTableVersionSummaries, v.IntermediateTableVersionSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIntermediateTableVersionsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListIntermediateTableVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIntermediateTableVersionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIntermediateTableVersionsOutput_intermediateTableVersionSummaries:
+			return deserializeIntermediateTableVersionSummaryList(d, schemas.ListIntermediateTableVersionsOutput_intermediateTableVersionSummaries, &v.IntermediateTableVersionSummaries)
+		case schemas.ListIntermediateTableVersionsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIntermediateTableVersionsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIntermediateTableVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIntermediateTableVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntermediateTableVersions, schemas.ListIntermediateTableVersionsInput, schemas.ListIntermediateTableVersionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIntermediateTableVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntermediateTableVersions, schemas.ListIntermediateTableVersionsInput, schemas.ListIntermediateTableVersionsOutput), output: &ListIntermediateTableVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

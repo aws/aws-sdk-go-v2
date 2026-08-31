@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteSmsChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSmsChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSmsChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSmsChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.DeleteSmsChannelRequest_ApplicationId, *v.ApplicationId)
+	}
+}
+
 type DeleteSmsChannelOutput struct {
 
 	// Provides information about the status and settings of the SMS channel for an
@@ -50,13 +64,34 @@ type DeleteSmsChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSmsChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSmsChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSmsChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SMSChannelResponse != nil {
+		s.WriteStruct(schemas.DeleteSmsChannelResponse_SMSChannelResponse)
+		v.SMSChannelResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteSmsChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSmsChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSmsChannelResponse_SMSChannelResponse:
+			v.SMSChannelResponse = &types.SMSChannelResponse{}
+			return v.SMSChannelResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSmsChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSmsChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSmsChannel, schemas.DeleteSmsChannelRequest, schemas.DeleteSmsChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSmsChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSmsChannel, schemas.DeleteSmsChannelRequest, schemas.DeleteSmsChannelResponse), output: &DeleteSmsChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

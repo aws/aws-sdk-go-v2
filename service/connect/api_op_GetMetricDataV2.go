@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -1807,6 +1809,38 @@ type GetMetricDataV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMetricDataV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMetricDataV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMetricDataV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetMetricDataV2Request_EndTime, *v.EndTime)
+	}
+	serializeFiltersV2List(s, schemas.GetMetricDataV2Request_Filters, v.Filters)
+	serializeGroupingsV2(s, schemas.GetMetricDataV2Request_Groupings, v.Groupings)
+	if v.Interval != nil {
+		s.WriteStruct(schemas.GetMetricDataV2Request_Interval)
+		v.Interval.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetMetricDataV2Request_MaxResults, *v.MaxResults)
+	}
+	serializeMetricsV2(s, schemas.GetMetricDataV2Request_Metrics, v.Metrics)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetMetricDataV2Request_NextToken, *v.NextToken)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetMetricDataV2Request_ResourceArn, *v.ResourceArn)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetMetricDataV2Request_StartTime, *v.StartTime)
+	}
+}
+
 type GetMetricDataV2Output struct {
 
 	// Information about the metrics requested in the API request If no grouping is
@@ -1822,13 +1856,35 @@ type GetMetricDataV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMetricDataV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMetricDataV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMetricDataV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricResultsV2(s, schemas.GetMetricDataV2Response_MetricResults, v.MetricResults)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetMetricDataV2Response_NextToken, *v.NextToken)
+	}
+}
+func (v *GetMetricDataV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMetricDataV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMetricDataV2Response_MetricResults:
+			return deserializeMetricResultsV2(d, schemas.GetMetricDataV2Response_MetricResults, &v.MetricResults)
+		case schemas.GetMetricDataV2Response_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetMetricDataV2Response_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMetricDataV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMetricDataV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMetricDataV2, schemas.GetMetricDataV2Request, schemas.GetMetricDataV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMetricDataV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMetricDataV2, schemas.GetMetricDataV2Request, schemas.GetMetricDataV2Response), output: &GetMetricDataV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

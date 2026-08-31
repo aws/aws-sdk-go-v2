@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type UpdateWorkspaceVisibilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkspaceVisibilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspaceVisibilityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspaceVisibilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateWorkspaceVisibilityRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Visibility != "" {
+		s.WriteString(schemas.UpdateWorkspaceVisibilityRequest_Visibility, string(v.Visibility))
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.UpdateWorkspaceVisibilityRequest_WorkspaceId, *v.WorkspaceId)
+	}
+}
+
 type UpdateWorkspaceVisibilityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +77,26 @@ type UpdateWorkspaceVisibilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkspaceVisibilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspaceVisibilityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspaceVisibilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateWorkspaceVisibilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkspaceVisibilityResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkspaceVisibilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWorkspaceVisibility{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspaceVisibility, schemas.UpdateWorkspaceVisibilityRequest, schemas.UpdateWorkspaceVisibilityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWorkspaceVisibility{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspaceVisibility, schemas.UpdateWorkspaceVisibilityRequest, schemas.UpdateWorkspaceVisibilityResponse), output: &UpdateWorkspaceVisibilityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

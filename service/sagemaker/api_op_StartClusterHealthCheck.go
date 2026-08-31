@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,19 @@ type StartClusterHealthCheckInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartClusterHealthCheckInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartClusterHealthCheckRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartClusterHealthCheckInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.StartClusterHealthCheckRequest_ClusterName, *v.ClusterName)
+	}
+	serializeDeepHealthCheckConfigurations(s, schemas.StartClusterHealthCheckRequest_DeepHealthCheckConfigurations, v.DeepHealthCheckConfigurations)
+}
+
 type StartClusterHealthCheckOutput struct {
 
 	// The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster on which the
@@ -60,13 +75,32 @@ type StartClusterHealthCheckOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartClusterHealthCheckOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartClusterHealthCheckResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartClusterHealthCheckOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.StartClusterHealthCheckResponse_ClusterArn, *v.ClusterArn)
+	}
+}
+func (v *StartClusterHealthCheckOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartClusterHealthCheckResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartClusterHealthCheckResponse_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.StartClusterHealthCheckResponse_ClusterArn, v.ClusterArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartClusterHealthCheckMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartClusterHealthCheck{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartClusterHealthCheck, schemas.StartClusterHealthCheckRequest, schemas.StartClusterHealthCheckResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartClusterHealthCheck{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartClusterHealthCheck, schemas.StartClusterHealthCheckRequest, schemas.StartClusterHealthCheckResponse), output: &StartClusterHealthCheckOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

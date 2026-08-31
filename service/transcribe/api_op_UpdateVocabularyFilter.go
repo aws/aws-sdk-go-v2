@@ -4,7 +4,9 @@ package transcribe
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -78,6 +80,25 @@ type UpdateVocabularyFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVocabularyFilterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVocabularyFilterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVocabularyFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.UpdateVocabularyFilterRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.VocabularyFilterFileUri != nil {
+		s.WriteString(schemas.UpdateVocabularyFilterRequest_VocabularyFilterFileUri, *v.VocabularyFilterFileUri)
+	}
+	if v.VocabularyFilterName != nil {
+		s.WriteString(schemas.UpdateVocabularyFilterRequest_VocabularyFilterName, *v.VocabularyFilterName)
+	}
+	serializeWords(s, schemas.UpdateVocabularyFilterRequest_Words, v.Words)
+}
+
 type UpdateVocabularyFilterOutput struct {
 
 	// The language code you selected for your custom vocabulary filter.
@@ -98,13 +119,48 @@ type UpdateVocabularyFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVocabularyFilterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVocabularyFilterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVocabularyFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.UpdateVocabularyFilterResponse_LanguageCode, string(v.LanguageCode))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.UpdateVocabularyFilterResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.VocabularyFilterName != nil {
+		s.WriteString(schemas.UpdateVocabularyFilterResponse_VocabularyFilterName, *v.VocabularyFilterName)
+	}
+}
+func (v *UpdateVocabularyFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVocabularyFilterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVocabularyFilterResponse_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.UpdateVocabularyFilterResponse_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = types.LanguageCode(ev)
+			return nil
+		case schemas.UpdateVocabularyFilterResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateVocabularyFilterResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.UpdateVocabularyFilterResponse_VocabularyFilterName:
+			v.VocabularyFilterName = new(string)
+			return d.ReadString(schemas.UpdateVocabularyFilterResponse_VocabularyFilterName, v.VocabularyFilterName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateVocabularyFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateVocabularyFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVocabularyFilter, schemas.UpdateVocabularyFilterRequest, schemas.UpdateVocabularyFilterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateVocabularyFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVocabularyFilter, schemas.UpdateVocabularyFilterRequest, schemas.UpdateVocabularyFilterResponse), output: &UpdateVocabularyFilterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

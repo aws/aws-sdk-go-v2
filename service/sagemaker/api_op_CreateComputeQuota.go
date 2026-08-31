@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,38 @@ type CreateComputeQuotaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateComputeQuotaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateComputeQuotaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateComputeQuotaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivationState != "" {
+		s.WriteString(schemas.CreateComputeQuotaRequest_ActivationState, string(v.ActivationState))
+	}
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.CreateComputeQuotaRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.ComputeQuotaConfig != nil {
+		s.WriteStruct(schemas.CreateComputeQuotaRequest_ComputeQuotaConfig)
+		v.ComputeQuotaConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ComputeQuotaTarget != nil {
+		s.WriteStruct(schemas.CreateComputeQuotaRequest_ComputeQuotaTarget)
+		v.ComputeQuotaTarget.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateComputeQuotaRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateComputeQuotaRequest_Name, *v.Name)
+	}
+	serializeTagList(s, schemas.CreateComputeQuotaRequest_Tags, v.Tags)
+}
+
 type CreateComputeQuotaOutput struct {
 
 	// ARN of the compute allocation definition.
@@ -82,13 +116,38 @@ type CreateComputeQuotaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateComputeQuotaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateComputeQuotaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateComputeQuotaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeQuotaArn != nil {
+		s.WriteString(schemas.CreateComputeQuotaResponse_ComputeQuotaArn, *v.ComputeQuotaArn)
+	}
+	if v.ComputeQuotaId != nil {
+		s.WriteString(schemas.CreateComputeQuotaResponse_ComputeQuotaId, *v.ComputeQuotaId)
+	}
+}
+func (v *CreateComputeQuotaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateComputeQuotaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateComputeQuotaResponse_ComputeQuotaArn:
+			v.ComputeQuotaArn = new(string)
+			return d.ReadString(schemas.CreateComputeQuotaResponse_ComputeQuotaArn, v.ComputeQuotaArn)
+		case schemas.CreateComputeQuotaResponse_ComputeQuotaId:
+			v.ComputeQuotaId = new(string)
+			return d.ReadString(schemas.CreateComputeQuotaResponse_ComputeQuotaId, v.ComputeQuotaId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateComputeQuotaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateComputeQuota{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComputeQuota, schemas.CreateComputeQuotaRequest, schemas.CreateComputeQuotaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateComputeQuota{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComputeQuota, schemas.CreateComputeQuotaRequest, schemas.CreateComputeQuotaResponse), output: &CreateComputeQuotaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

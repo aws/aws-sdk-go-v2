@@ -4,6 +4,8 @@ package managedblockchain
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type DeleteAccessorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccessorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccessorInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccessorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessorId != nil {
+		s.WriteString(schemas.DeleteAccessorInput_AccessorId, *v.AccessorId)
+	}
+}
+
 type DeleteAccessorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +61,26 @@ type DeleteAccessorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccessorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccessorOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccessorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAccessorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAccessorOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAccessorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAccessor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccessor, schemas.DeleteAccessorInput, schemas.DeleteAccessorOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAccessor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccessor, schemas.DeleteAccessorInput, schemas.DeleteAccessorOutput), output: &DeleteAccessorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

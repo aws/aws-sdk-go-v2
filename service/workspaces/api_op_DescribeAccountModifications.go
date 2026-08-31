@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeAccountModificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountModificationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountModificationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountModificationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAccountModificationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeAccountModificationsOutput struct {
 
 	// The list of modifications to the configuration of BYOL.
@@ -49,13 +63,35 @@ type DescribeAccountModificationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountModificationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountModificationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountModificationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountModificationList(s, schemas.DescribeAccountModificationsResult_AccountModifications, v.AccountModifications)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAccountModificationsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAccountModificationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccountModificationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccountModificationsResult_AccountModifications:
+			return deserializeAccountModificationList(d, schemas.DescribeAccountModificationsResult_AccountModifications, &v.AccountModifications)
+		case schemas.DescribeAccountModificationsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAccountModificationsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccountModificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAccountModifications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountModifications, schemas.DescribeAccountModificationsRequest, schemas.DescribeAccountModificationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAccountModifications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountModifications, schemas.DescribeAccountModificationsRequest, schemas.DescribeAccountModificationsResult), output: &DescribeAccountModificationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

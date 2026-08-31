@@ -4,6 +4,8 @@ package organizations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,18 @@ type RemoveAccountFromOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveAccountFromOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveAccountFromOrganizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveAccountFromOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.RemoveAccountFromOrganizationRequest_AccountId, *v.AccountId)
+	}
+}
+
 type RemoveAccountFromOrganizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -76,13 +90,26 @@ type RemoveAccountFromOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveAccountFromOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveAccountFromOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveAccountFromOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveAccountFromOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveAccountFromOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveAccountFromOrganization, schemas.RemoveAccountFromOrganizationRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRemoveAccountFromOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveAccountFromOrganization, schemas.RemoveAccountFromOrganizationRequest, nil), output: &RemoveAccountFromOrganizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

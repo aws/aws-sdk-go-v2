@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type GetExportImageTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExportImageTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExportImageTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExportImageTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.GetExportImageTaskRequest_TaskId, *v.TaskId)
+	}
+}
+
 type GetExportImageTaskOutput struct {
 
 	// Information about the export image task, including its current state, created
@@ -45,13 +59,34 @@ type GetExportImageTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExportImageTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExportImageTaskResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExportImageTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportImageTask != nil {
+		s.WriteStruct(schemas.GetExportImageTaskResult_ExportImageTask)
+		v.ExportImageTask.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetExportImageTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetExportImageTaskResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetExportImageTaskResult_ExportImageTask:
+			v.ExportImageTask = &types.ExportImageTask{}
+			return v.ExportImageTask.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetExportImageTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetExportImageTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExportImageTask, schemas.GetExportImageTaskRequest, schemas.GetExportImageTaskResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetExportImageTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExportImageTask, schemas.GetExportImageTaskRequest, schemas.GetExportImageTaskResult), output: &GetExportImageTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package emr
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type ListSupportedInstanceTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSupportedInstanceTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSupportedInstanceTypesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSupportedInstanceTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListSupportedInstanceTypesInput_Marker, *v.Marker)
+	}
+	if v.ReleaseLabel != nil {
+		s.WriteString(schemas.ListSupportedInstanceTypesInput_ReleaseLabel, *v.ReleaseLabel)
+	}
+}
+
 type ListSupportedInstanceTypesOutput struct {
 
 	// The pagination token that marks the next set of results to retrieve.
@@ -61,13 +78,35 @@ type ListSupportedInstanceTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSupportedInstanceTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSupportedInstanceTypesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSupportedInstanceTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListSupportedInstanceTypesOutput_Marker, *v.Marker)
+	}
+	serializeSupportedInstanceTypesList(s, schemas.ListSupportedInstanceTypesOutput_SupportedInstanceTypes, v.SupportedInstanceTypes)
+}
+func (v *ListSupportedInstanceTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSupportedInstanceTypesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSupportedInstanceTypesOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListSupportedInstanceTypesOutput_Marker, v.Marker)
+		case schemas.ListSupportedInstanceTypesOutput_SupportedInstanceTypes:
+			return deserializeSupportedInstanceTypesList(d, schemas.ListSupportedInstanceTypesOutput_SupportedInstanceTypes, &v.SupportedInstanceTypes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSupportedInstanceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSupportedInstanceTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSupportedInstanceTypes, schemas.ListSupportedInstanceTypesInput, schemas.ListSupportedInstanceTypesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSupportedInstanceTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSupportedInstanceTypes, schemas.ListSupportedInstanceTypesInput, schemas.ListSupportedInstanceTypesOutput), output: &ListSupportedInstanceTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

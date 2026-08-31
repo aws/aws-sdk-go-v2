@@ -5,7 +5,9 @@ package dsql
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dsql/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dsql/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -51,6 +53,24 @@ type DeleteStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteStreamInput_clientToken, *v.ClientToken)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.DeleteStreamInput_clusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.StreamIdentifier != nil {
+		s.WriteString(schemas.DeleteStreamInput_streamIdentifier, *v.StreamIdentifier)
+	}
+}
+
 // The output from a deleted stream.
 type DeleteStreamOutput struct {
 
@@ -85,13 +105,60 @@ type DeleteStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStreamOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteStreamOutput_arn, *v.Arn)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.DeleteStreamOutput_clusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DeleteStreamOutput_creationTime, *v.CreationTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteStreamOutput_status, string(v.Status))
+	}
+	if v.StreamIdentifier != nil {
+		s.WriteString(schemas.DeleteStreamOutput_streamIdentifier, *v.StreamIdentifier)
+	}
+}
+func (v *DeleteStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteStreamOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteStreamOutput_arn, v.Arn)
+		case schemas.DeleteStreamOutput_clusterIdentifier:
+			v.ClusterIdentifier = new(string)
+			return d.ReadString(schemas.DeleteStreamOutput_clusterIdentifier, v.ClusterIdentifier)
+		case schemas.DeleteStreamOutput_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DeleteStreamOutput_creationTime, v.CreationTime)
+		case schemas.DeleteStreamOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteStreamOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.StreamStatus(ev)
+			return nil
+		case schemas.DeleteStreamOutput_streamIdentifier:
+			v.StreamIdentifier = new(string)
+			return d.ReadString(schemas.DeleteStreamOutput_streamIdentifier, v.StreamIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStream, schemas.DeleteStreamInput, schemas.DeleteStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStream, schemas.DeleteStreamInput, schemas.DeleteStreamOutput), output: &DeleteStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

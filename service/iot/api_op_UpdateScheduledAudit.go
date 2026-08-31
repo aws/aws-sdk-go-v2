@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,28 @@ type UpdateScheduledAuditInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateScheduledAuditInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateScheduledAuditRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateScheduledAuditInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DayOfMonth != nil {
+		s.WriteString(schemas.UpdateScheduledAuditRequest_dayOfMonth, *v.DayOfMonth)
+	}
+	if v.DayOfWeek != "" {
+		s.WriteString(schemas.UpdateScheduledAuditRequest_dayOfWeek, string(v.DayOfWeek))
+	}
+	if v.Frequency != "" {
+		s.WriteString(schemas.UpdateScheduledAuditRequest_frequency, string(v.Frequency))
+	}
+	if v.ScheduledAuditName != nil {
+		s.WriteString(schemas.UpdateScheduledAuditRequest_scheduledAuditName, *v.ScheduledAuditName)
+	}
+	serializeTargetAuditCheckNames(s, schemas.UpdateScheduledAuditRequest_targetCheckNames, v.TargetCheckNames)
+}
+
 type UpdateScheduledAuditOutput struct {
 
 	// The ARN of the scheduled audit.
@@ -71,13 +95,32 @@ type UpdateScheduledAuditOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateScheduledAuditOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateScheduledAuditResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateScheduledAuditOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScheduledAuditArn != nil {
+		s.WriteString(schemas.UpdateScheduledAuditResponse_scheduledAuditArn, *v.ScheduledAuditArn)
+	}
+}
+func (v *UpdateScheduledAuditOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateScheduledAuditResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateScheduledAuditResponse_scheduledAuditArn:
+			v.ScheduledAuditArn = new(string)
+			return d.ReadString(schemas.UpdateScheduledAuditResponse_scheduledAuditArn, v.ScheduledAuditArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateScheduledAuditMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateScheduledAudit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScheduledAudit, schemas.UpdateScheduledAuditRequest, schemas.UpdateScheduledAuditResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateScheduledAudit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScheduledAudit, schemas.UpdateScheduledAuditRequest, schemas.UpdateScheduledAuditResponse), output: &UpdateScheduledAuditOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

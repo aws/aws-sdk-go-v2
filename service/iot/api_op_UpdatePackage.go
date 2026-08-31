@@ -5,6 +5,8 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,30 @@ type UpdatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePackageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePackageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePackageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdatePackageRequest_clientToken, *v.ClientToken)
+	}
+	if v.DefaultVersionName != nil {
+		s.WriteString(schemas.UpdatePackageRequest_defaultVersionName, *v.DefaultVersionName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdatePackageRequest_description, *v.Description)
+	}
+	if v.PackageName != nil {
+		s.WriteString(schemas.UpdatePackageRequest_packageName, *v.PackageName)
+	}
+	if v.UnsetDefaultVersion != nil {
+		s.WriteBool(schemas.UpdatePackageRequest_unsetDefaultVersion, *v.UnsetDefaultVersion)
+	}
+}
+
 type UpdatePackageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -67,13 +93,26 @@ type UpdatePackageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePackageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePackageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePackageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdatePackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePackageResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePackage, schemas.UpdatePackageRequest, schemas.UpdatePackageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePackage, schemas.UpdatePackageRequest, schemas.UpdatePackageResponse), output: &UpdatePackageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

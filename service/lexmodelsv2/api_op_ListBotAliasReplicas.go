@@ -5,7 +5,9 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,27 @@ type ListBotAliasReplicasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBotAliasReplicasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBotAliasReplicasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBotAliasReplicasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListBotAliasReplicasRequest_botId, *v.BotId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBotAliasReplicasRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBotAliasReplicasRequest_nextToken, *v.NextToken)
+	}
+	if v.ReplicaRegion != nil {
+		s.WriteString(schemas.ListBotAliasReplicasRequest_replicaRegion, *v.ReplicaRegion)
+	}
+}
+
 type ListBotAliasReplicasOutput struct {
 
 	// The summary information of the replicated bot created from the source bot alias.
@@ -73,13 +96,53 @@ type ListBotAliasReplicasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBotAliasReplicasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBotAliasReplicasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBotAliasReplicasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBotAliasReplicaSummaryList(s, schemas.ListBotAliasReplicasResponse_botAliasReplicaSummaries, v.BotAliasReplicaSummaries)
+	if v.BotId != nil {
+		s.WriteString(schemas.ListBotAliasReplicasResponse_botId, *v.BotId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBotAliasReplicasResponse_nextToken, *v.NextToken)
+	}
+	if v.ReplicaRegion != nil {
+		s.WriteString(schemas.ListBotAliasReplicasResponse_replicaRegion, *v.ReplicaRegion)
+	}
+	if v.SourceRegion != nil {
+		s.WriteString(schemas.ListBotAliasReplicasResponse_sourceRegion, *v.SourceRegion)
+	}
+}
+func (v *ListBotAliasReplicasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBotAliasReplicasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBotAliasReplicasResponse_botAliasReplicaSummaries:
+			return deserializeBotAliasReplicaSummaryList(d, schemas.ListBotAliasReplicasResponse_botAliasReplicaSummaries, &v.BotAliasReplicaSummaries)
+		case schemas.ListBotAliasReplicasResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.ListBotAliasReplicasResponse_botId, v.BotId)
+		case schemas.ListBotAliasReplicasResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBotAliasReplicasResponse_nextToken, v.NextToken)
+		case schemas.ListBotAliasReplicasResponse_replicaRegion:
+			v.ReplicaRegion = new(string)
+			return d.ReadString(schemas.ListBotAliasReplicasResponse_replicaRegion, v.ReplicaRegion)
+		case schemas.ListBotAliasReplicasResponse_sourceRegion:
+			v.SourceRegion = new(string)
+			return d.ReadString(schemas.ListBotAliasReplicasResponse_sourceRegion, v.SourceRegion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBotAliasReplicasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBotAliasReplicas{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBotAliasReplicas, schemas.ListBotAliasReplicasRequest, schemas.ListBotAliasReplicasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBotAliasReplicas{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBotAliasReplicas, schemas.ListBotAliasReplicasRequest, schemas.ListBotAliasReplicasResponse), output: &ListBotAliasReplicasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

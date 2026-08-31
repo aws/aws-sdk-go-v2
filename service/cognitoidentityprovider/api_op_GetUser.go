@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,18 @@ type GetUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.GetUserRequest_AccessToken, *v.AccessToken)
+	}
+}
+
 // Represents the response from the server from the request to get information
 // about the user.
 type GetUserOutput struct {
@@ -84,13 +98,47 @@ type GetUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMFAOptionListType(s, schemas.GetUserResponse_MFAOptions, v.MFAOptions)
+	if v.PreferredMfaSetting != nil {
+		s.WriteString(schemas.GetUserResponse_PreferredMfaSetting, *v.PreferredMfaSetting)
+	}
+	serializeAttributeListType(s, schemas.GetUserResponse_UserAttributes, v.UserAttributes)
+	serializeUserMFASettingListType(s, schemas.GetUserResponse_UserMFASettingList, v.UserMFASettingList)
+	if v.Username != nil {
+		s.WriteString(schemas.GetUserResponse_Username, *v.Username)
+	}
+}
+func (v *GetUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUserResponse_MFAOptions:
+			return deserializeMFAOptionListType(d, schemas.GetUserResponse_MFAOptions, &v.MFAOptions)
+		case schemas.GetUserResponse_PreferredMfaSetting:
+			v.PreferredMfaSetting = new(string)
+			return d.ReadString(schemas.GetUserResponse_PreferredMfaSetting, v.PreferredMfaSetting)
+		case schemas.GetUserResponse_UserAttributes:
+			return deserializeAttributeListType(d, schemas.GetUserResponse_UserAttributes, &v.UserAttributes)
+		case schemas.GetUserResponse_UserMFASettingList:
+			return deserializeUserMFASettingListType(d, schemas.GetUserResponse_UserMFASettingList, &v.UserMFASettingList)
+		case schemas.GetUserResponse_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.GetUserResponse_Username, v.Username)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUser, schemas.GetUserRequest, schemas.GetUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUser, schemas.GetUserRequest, schemas.GetUserResponse), output: &GetUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DescribeRoleAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRoleAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRoleAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRoleAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoleAlias != nil {
+		s.WriteString(schemas.DescribeRoleAliasRequest_roleAlias, *v.RoleAlias)
+	}
+}
+
 type DescribeRoleAliasOutput struct {
 
 	// The role alias description.
@@ -49,13 +63,34 @@ type DescribeRoleAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRoleAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRoleAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRoleAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoleAliasDescription != nil {
+		s.WriteStruct(schemas.DescribeRoleAliasResponse_roleAliasDescription)
+		v.RoleAliasDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeRoleAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRoleAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRoleAliasResponse_roleAliasDescription:
+			v.RoleAliasDescription = &types.RoleAliasDescription{}
+			return v.RoleAliasDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRoleAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRoleAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRoleAlias, schemas.DescribeRoleAliasRequest, schemas.DescribeRoleAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeRoleAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRoleAlias, schemas.DescribeRoleAliasRequest, schemas.DescribeRoleAliasResponse), output: &DescribeRoleAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

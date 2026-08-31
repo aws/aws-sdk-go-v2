@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,31 @@ type ImportModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.ImportModelRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.ModelKmsKeyId != nil {
+		s.WriteString(schemas.ImportModelRequest_ModelKmsKeyId, *v.ModelKmsKeyId)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.ImportModelRequest_ModelName, *v.ModelName)
+	}
+	if v.SourceModelArn != nil {
+		s.WriteString(schemas.ImportModelRequest_SourceModelArn, *v.SourceModelArn)
+	}
+	serializeTagList(s, schemas.ImportModelRequest_Tags, v.Tags)
+	if v.VersionName != nil {
+		s.WriteString(schemas.ImportModelRequest_VersionName, *v.VersionName)
+	}
+}
+
 type ImportModelOutput struct {
 
 	// The Amazon Resource Name (ARN) of the custom model being imported.
@@ -83,13 +110,32 @@ type ImportModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelArn != nil {
+		s.WriteString(schemas.ImportModelResponse_ModelArn, *v.ModelArn)
+	}
+}
+func (v *ImportModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportModelResponse_ModelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.ImportModelResponse_ModelArn, v.ModelArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportModel, schemas.ImportModelRequest, schemas.ImportModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpImportModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportModel, schemas.ImportModelRequest, schemas.ImportModelResponse), output: &ImportModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

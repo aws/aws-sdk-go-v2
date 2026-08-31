@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,27 @@ type CreateViewVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateViewVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateViewVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateViewVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateViewVersionRequest_InstanceId, *v.InstanceId)
+	}
+	if v.VersionDescription != nil {
+		s.WriteString(schemas.CreateViewVersionRequest_VersionDescription, *v.VersionDescription)
+	}
+	if v.ViewContentSha256 != nil {
+		s.WriteString(schemas.CreateViewVersionRequest_ViewContentSha256, *v.ViewContentSha256)
+	}
+	if v.ViewId != nil {
+		s.WriteString(schemas.CreateViewVersionRequest_ViewId, *v.ViewId)
+	}
+}
+
 type CreateViewVersionOutput struct {
 
 	// All view data is contained within the View object.
@@ -63,13 +86,34 @@ type CreateViewVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateViewVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateViewVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateViewVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.View != nil {
+		s.WriteStruct(schemas.CreateViewVersionResponse_View)
+		v.View.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateViewVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateViewVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateViewVersionResponse_View:
+			v.View = &types.View{}
+			return v.View.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateViewVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateViewVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateViewVersion, schemas.CreateViewVersionRequest, schemas.CreateViewVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateViewVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateViewVersion, schemas.CreateViewVersionRequest, schemas.CreateViewVersionResponse), output: &CreateViewVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

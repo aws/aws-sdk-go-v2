@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type ListBotReplicasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBotReplicasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBotReplicasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBotReplicasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListBotReplicasRequest_botId, *v.BotId)
+	}
+}
+
 type ListBotReplicasOutput struct {
 
 	// the unique bot IDs in the list of replicated bots.
@@ -51,13 +65,41 @@ type ListBotReplicasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBotReplicasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBotReplicasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBotReplicasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListBotReplicasResponse_botId, *v.BotId)
+	}
+	serializeBotReplicaSummaryList(s, schemas.ListBotReplicasResponse_botReplicaSummaries, v.BotReplicaSummaries)
+	if v.SourceRegion != nil {
+		s.WriteString(schemas.ListBotReplicasResponse_sourceRegion, *v.SourceRegion)
+	}
+}
+func (v *ListBotReplicasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBotReplicasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBotReplicasResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.ListBotReplicasResponse_botId, v.BotId)
+		case schemas.ListBotReplicasResponse_botReplicaSummaries:
+			return deserializeBotReplicaSummaryList(d, schemas.ListBotReplicasResponse_botReplicaSummaries, &v.BotReplicaSummaries)
+		case schemas.ListBotReplicasResponse_sourceRegion:
+			v.SourceRegion = new(string)
+			return d.ReadString(schemas.ListBotReplicasResponse_sourceRegion, v.SourceRegion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBotReplicasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBotReplicas{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBotReplicas, schemas.ListBotReplicasRequest, schemas.ListBotReplicasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBotReplicas{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBotReplicas, schemas.ListBotReplicasRequest, schemas.ListBotReplicasResponse), output: &ListBotReplicasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

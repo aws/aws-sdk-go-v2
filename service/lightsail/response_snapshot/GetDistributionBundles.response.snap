@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.GetDistributionBundles
+
+{"bundles":[{"bundleId":"__BundleId__","isActive":true,"name":"__Name__","price":1,"transferPerMonthInGb":1},{"bundleId":"__BundleId__","isActive":true,"name":"__Name__","price":1,"transferPerMonthInGb":1}]}

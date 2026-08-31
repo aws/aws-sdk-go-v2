@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,23 @@ type UpdateUserHierarchyStructureInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserHierarchyStructureInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserHierarchyStructureRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserHierarchyStructureInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HierarchyStructure != nil {
+		s.WriteStruct(schemas.UpdateUserHierarchyStructureRequest_HierarchyStructure)
+		v.HierarchyStructure.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateUserHierarchyStructureRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type UpdateUserHierarchyStructureOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +69,26 @@ type UpdateUserHierarchyStructureOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserHierarchyStructureOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserHierarchyStructureOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateUserHierarchyStructureOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateUserHierarchyStructureMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateUserHierarchyStructure{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserHierarchyStructure, schemas.UpdateUserHierarchyStructureRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateUserHierarchyStructure{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserHierarchyStructure, schemas.UpdateUserHierarchyStructureRequest, nil), output: &UpdateUserHierarchyStructureOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

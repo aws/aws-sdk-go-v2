@@ -5,7 +5,9 @@ package route53resolver
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,22 @@ type ListResolverDnssecConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResolverDnssecConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResolverDnssecConfigsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResolverDnssecConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilters(s, schemas.ListResolverDnssecConfigsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResolverDnssecConfigsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResolverDnssecConfigsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListResolverDnssecConfigsOutput struct {
 
 	// If a response includes the last of the DNSSEC configurations that are
@@ -76,13 +94,35 @@ type ListResolverDnssecConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResolverDnssecConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResolverDnssecConfigsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResolverDnssecConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResolverDnssecConfigsResponse_NextToken, *v.NextToken)
+	}
+	serializeResolverDnssecConfigList(s, schemas.ListResolverDnssecConfigsResponse_ResolverDnssecConfigs, v.ResolverDnssecConfigs)
+}
+func (v *ListResolverDnssecConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResolverDnssecConfigsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResolverDnssecConfigsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResolverDnssecConfigsResponse_NextToken, v.NextToken)
+		case schemas.ListResolverDnssecConfigsResponse_ResolverDnssecConfigs:
+			return deserializeResolverDnssecConfigList(d, schemas.ListResolverDnssecConfigsResponse_ResolverDnssecConfigs, &v.ResolverDnssecConfigs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResolverDnssecConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResolverDnssecConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResolverDnssecConfigs, schemas.ListResolverDnssecConfigsRequest, schemas.ListResolverDnssecConfigsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListResolverDnssecConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResolverDnssecConfigs, schemas.ListResolverDnssecConfigsRequest, schemas.ListResolverDnssecConfigsResponse), output: &ListResolverDnssecConfigsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

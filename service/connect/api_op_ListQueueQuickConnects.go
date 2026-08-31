@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -52,6 +54,27 @@ type ListQueueQuickConnectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueueQuickConnectsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueueQuickConnectsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueueQuickConnectsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListQueueQuickConnectsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListQueueQuickConnectsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueueQuickConnectsRequest_NextToken, *v.NextToken)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.ListQueueQuickConnectsRequest_QueueId, *v.QueueId)
+	}
+}
+
 type ListQueueQuickConnectsOutput struct {
 
 	// The Amazon Web Services Region where this resource was last modified.
@@ -72,13 +95,47 @@ type ListQueueQuickConnectsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueueQuickConnectsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueueQuickConnectsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueueQuickConnectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.ListQueueQuickConnectsResponse_LastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ListQueueQuickConnectsResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueueQuickConnectsResponse_NextToken, *v.NextToken)
+	}
+	serializeQuickConnectSummaryList(s, schemas.ListQueueQuickConnectsResponse_QuickConnectSummaryList, v.QuickConnectSummaryList)
+}
+func (v *ListQueueQuickConnectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListQueueQuickConnectsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListQueueQuickConnectsResponse_LastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.ListQueueQuickConnectsResponse_LastModifiedRegion, v.LastModifiedRegion)
+		case schemas.ListQueueQuickConnectsResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ListQueueQuickConnectsResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.ListQueueQuickConnectsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListQueueQuickConnectsResponse_NextToken, v.NextToken)
+		case schemas.ListQueueQuickConnectsResponse_QuickConnectSummaryList:
+			return deserializeQuickConnectSummaryList(d, schemas.ListQueueQuickConnectsResponse_QuickConnectSummaryList, &v.QuickConnectSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListQueueQuickConnectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListQueueQuickConnects{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueueQuickConnects, schemas.ListQueueQuickConnectsRequest, schemas.ListQueueQuickConnectsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListQueueQuickConnects{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueueQuickConnects, schemas.ListQueueQuickConnectsRequest, schemas.ListQueueQuickConnectsResponse), output: &ListQueueQuickConnectsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,16 @@ type BatchDescribeModelPackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDescribeModelPackageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDescribeModelPackageInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDescribeModelPackageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeModelPackageArnList(s, schemas.BatchDescribeModelPackageInput_ModelPackageArnList, v.ModelPackageArnList)
+}
+
 type BatchDescribeModelPackageOutput struct {
 
 	// A map of the resource and BatchDescribeModelPackageError objects reporting the
@@ -49,13 +61,32 @@ type BatchDescribeModelPackageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDescribeModelPackageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDescribeModelPackageOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDescribeModelPackageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDescribeModelPackageErrorMap(s, schemas.BatchDescribeModelPackageOutput_BatchDescribeModelPackageErrorMap, v.BatchDescribeModelPackageErrorMap)
+	serializeModelPackageSummaries(s, schemas.BatchDescribeModelPackageOutput_ModelPackageSummaries, v.ModelPackageSummaries)
+}
+func (v *BatchDescribeModelPackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDescribeModelPackageOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDescribeModelPackageOutput_BatchDescribeModelPackageErrorMap:
+			return deserializeBatchDescribeModelPackageErrorMap(d, schemas.BatchDescribeModelPackageOutput_BatchDescribeModelPackageErrorMap, &v.BatchDescribeModelPackageErrorMap)
+		case schemas.BatchDescribeModelPackageOutput_ModelPackageSummaries:
+			return deserializeModelPackageSummaries(d, schemas.BatchDescribeModelPackageOutput_ModelPackageSummaries, &v.ModelPackageSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDescribeModelPackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDescribeModelPackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDescribeModelPackage, schemas.BatchDescribeModelPackageInput, schemas.BatchDescribeModelPackageOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDescribeModelPackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDescribeModelPackage, schemas.BatchDescribeModelPackageInput, schemas.BatchDescribeModelPackageOutput), output: &BatchDescribeModelPackageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

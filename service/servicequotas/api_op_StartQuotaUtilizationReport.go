@@ -4,7 +4,9 @@ package servicequotas
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,15 @@ type StartQuotaUtilizationReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartQuotaUtilizationReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartQuotaUtilizationReportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartQuotaUtilizationReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type StartQuotaUtilizationReportOutput struct {
 
 	// An optional message providing additional information about the report
@@ -56,13 +67,48 @@ type StartQuotaUtilizationReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartQuotaUtilizationReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartQuotaUtilizationReportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartQuotaUtilizationReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.StartQuotaUtilizationReportResponse_Message, *v.Message)
+	}
+	if v.ReportId != nil {
+		s.WriteString(schemas.StartQuotaUtilizationReportResponse_ReportId, *v.ReportId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartQuotaUtilizationReportResponse_Status, string(v.Status))
+	}
+}
+func (v *StartQuotaUtilizationReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartQuotaUtilizationReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartQuotaUtilizationReportResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.StartQuotaUtilizationReportResponse_Message, v.Message)
+		case schemas.StartQuotaUtilizationReportResponse_ReportId:
+			v.ReportId = new(string)
+			return d.ReadString(schemas.StartQuotaUtilizationReportResponse_ReportId, v.ReportId)
+		case schemas.StartQuotaUtilizationReportResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.StartQuotaUtilizationReportResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ReportStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartQuotaUtilizationReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartQuotaUtilizationReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQuotaUtilizationReport, schemas.StartQuotaUtilizationReportRequest, schemas.StartQuotaUtilizationReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartQuotaUtilizationReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQuotaUtilizationReport, schemas.StartQuotaUtilizationReportRequest, schemas.StartQuotaUtilizationReportResponse), output: &StartQuotaUtilizationReportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

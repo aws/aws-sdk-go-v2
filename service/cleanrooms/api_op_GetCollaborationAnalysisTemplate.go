@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,34 @@ type GetCollaborationAnalysisTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCollaborationAnalysisTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCollaborationAnalysisTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCollaborationAnalysisTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisTemplateArn != nil {
+		s.WriteString(schemas.GetCollaborationAnalysisTemplateInput_analysisTemplateArn, *v.AnalysisTemplateArn)
+	}
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.GetCollaborationAnalysisTemplateInput_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+}
+func (v *GetCollaborationAnalysisTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCollaborationAnalysisTemplateInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCollaborationAnalysisTemplateInput_analysisTemplateArn:
+			v.AnalysisTemplateArn = new(string)
+			return d.ReadString(schemas.GetCollaborationAnalysisTemplateInput_analysisTemplateArn, v.AnalysisTemplateArn)
+		case schemas.GetCollaborationAnalysisTemplateInput_collaborationIdentifier:
+			v.CollaborationIdentifier = new(string)
+			return d.ReadString(schemas.GetCollaborationAnalysisTemplateInput_collaborationIdentifier, v.CollaborationIdentifier)
+		}
+		return nil
+	})
+}
+
 type GetCollaborationAnalysisTemplateOutput struct {
 
 	// The analysis template within a collaboration.
@@ -54,13 +84,34 @@ type GetCollaborationAnalysisTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCollaborationAnalysisTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCollaborationAnalysisTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCollaborationAnalysisTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationAnalysisTemplate != nil {
+		s.WriteStruct(schemas.GetCollaborationAnalysisTemplateOutput_collaborationAnalysisTemplate)
+		v.CollaborationAnalysisTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCollaborationAnalysisTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCollaborationAnalysisTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCollaborationAnalysisTemplateOutput_collaborationAnalysisTemplate:
+			v.CollaborationAnalysisTemplate = &types.CollaborationAnalysisTemplate{}
+			return v.CollaborationAnalysisTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCollaborationAnalysisTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCollaborationAnalysisTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCollaborationAnalysisTemplate, schemas.GetCollaborationAnalysisTemplateInput, schemas.GetCollaborationAnalysisTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCollaborationAnalysisTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCollaborationAnalysisTemplate, schemas.GetCollaborationAnalysisTemplateInput, schemas.GetCollaborationAnalysisTemplateOutput), output: &GetCollaborationAnalysisTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

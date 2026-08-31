@@ -4,7 +4,9 @@ package organizations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,27 @@ type UpdatePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteString(schemas.UpdatePolicyRequest_Content, *v.Content)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdatePolicyRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdatePolicyRequest_Name, *v.Name)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.UpdatePolicyRequest_PolicyId, *v.PolicyId)
+	}
+}
+
 type UpdatePolicyOutput struct {
 
 	// A structure that contains details about the updated policy, showing the
@@ -78,13 +101,34 @@ type UpdatePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteStruct(schemas.UpdatePolicyResponse_Policy)
+		v.Policy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePolicyResponse_Policy:
+			v.Policy = &types.Policy{}
+			return v.Policy.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePolicy, schemas.UpdatePolicyRequest, schemas.UpdatePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdatePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePolicy, schemas.UpdatePolicyRequest, schemas.UpdatePolicyResponse), output: &UpdatePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

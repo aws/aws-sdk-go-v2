@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeFeatureTransformationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFeatureTransformationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFeatureTransformationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFeatureTransformationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FeatureTransformationArn != nil {
+		s.WriteString(schemas.DescribeFeatureTransformationRequest_featureTransformationArn, *v.FeatureTransformationArn)
+	}
+}
+
 type DescribeFeatureTransformationOutput struct {
 
 	// A listing of the FeatureTransformation properties.
@@ -45,13 +59,34 @@ type DescribeFeatureTransformationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFeatureTransformationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFeatureTransformationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFeatureTransformationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FeatureTransformation != nil {
+		s.WriteStruct(schemas.DescribeFeatureTransformationResponse_featureTransformation)
+		v.FeatureTransformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeFeatureTransformationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFeatureTransformationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFeatureTransformationResponse_featureTransformation:
+			v.FeatureTransformation = &types.FeatureTransformation{}
+			return v.FeatureTransformation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFeatureTransformationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFeatureTransformation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFeatureTransformation, schemas.DescribeFeatureTransformationRequest, schemas.DescribeFeatureTransformationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeFeatureTransformation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFeatureTransformation, schemas.DescribeFeatureTransformationRequest, schemas.DescribeFeatureTransformationResponse), output: &DescribeFeatureTransformationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

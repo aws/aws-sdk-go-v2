@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,22 @@ type BatchDescribeDataTableValueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDescribeDataTableValueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDescribeDataTableValueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDescribeDataTableValueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataTableId != nil {
+		s.WriteString(schemas.BatchDescribeDataTableValueRequest_DataTableId, *v.DataTableId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.BatchDescribeDataTableValueRequest_InstanceId, *v.InstanceId)
+	}
+	serializeDataTableValueIdentifierList(s, schemas.BatchDescribeDataTableValueRequest_Values, v.Values)
+}
+
 type BatchDescribeDataTableValueOutput struct {
 
 	// A list of values that failed to be retrieved with error messages explaining the
@@ -69,13 +87,32 @@ type BatchDescribeDataTableValueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDescribeDataTableValueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDescribeDataTableValueResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDescribeDataTableValueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDescribeDataTableValueFailureResultList(s, schemas.BatchDescribeDataTableValueResponse_Failed, v.Failed)
+	serializeBatchDescribeDataTableValueSuccessResultList(s, schemas.BatchDescribeDataTableValueResponse_Successful, v.Successful)
+}
+func (v *BatchDescribeDataTableValueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDescribeDataTableValueResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDescribeDataTableValueResponse_Failed:
+			return deserializeBatchDescribeDataTableValueFailureResultList(d, schemas.BatchDescribeDataTableValueResponse_Failed, &v.Failed)
+		case schemas.BatchDescribeDataTableValueResponse_Successful:
+			return deserializeBatchDescribeDataTableValueSuccessResultList(d, schemas.BatchDescribeDataTableValueResponse_Successful, &v.Successful)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDescribeDataTableValueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDescribeDataTableValue{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDescribeDataTableValue, schemas.BatchDescribeDataTableValueRequest, schemas.BatchDescribeDataTableValueResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDescribeDataTableValue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDescribeDataTableValue, schemas.BatchDescribeDataTableValueRequest, schemas.BatchDescribeDataTableValueResponse), output: &BatchDescribeDataTableValueOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

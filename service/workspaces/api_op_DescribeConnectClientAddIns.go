@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type DescribeConnectClientAddInsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectClientAddInsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectClientAddInsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectClientAddInsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeConnectClientAddInsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConnectClientAddInsRequest_NextToken, *v.NextToken)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DescribeConnectClientAddInsRequest_ResourceId, *v.ResourceId)
+	}
+}
+
 type DescribeConnectClientAddInsOutput struct {
 
 	// Information about client add-ins.
@@ -56,13 +76,35 @@ type DescribeConnectClientAddInsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectClientAddInsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectClientAddInsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectClientAddInsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectClientAddInList(s, schemas.DescribeConnectClientAddInsResult_AddIns, v.AddIns)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConnectClientAddInsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeConnectClientAddInsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConnectClientAddInsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConnectClientAddInsResult_AddIns:
+			return deserializeConnectClientAddInList(d, schemas.DescribeConnectClientAddInsResult_AddIns, &v.AddIns)
+		case schemas.DescribeConnectClientAddInsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeConnectClientAddInsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConnectClientAddInsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConnectClientAddIns{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectClientAddIns, schemas.DescribeConnectClientAddInsRequest, schemas.DescribeConnectClientAddInsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeConnectClientAddIns{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectClientAddIns, schemas.DescribeConnectClientAddInsRequest, schemas.DescribeConnectClientAddInsResult), output: &DescribeConnectClientAddInsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

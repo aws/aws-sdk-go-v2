@@ -5,7 +5,9 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,36 @@ type ListIntentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListIntentsRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListIntentsRequest_botVersion, *v.BotVersion)
+	}
+	serializeIntentFilters(s, schemas.ListIntentsRequest_filters, v.Filters)
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListIntentsRequest_localeId, *v.LocaleId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIntentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIntentsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != nil {
+		s.WriteStruct(schemas.ListIntentsRequest_sortBy)
+		v.SortBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListIntentsOutput struct {
 
 	// The identifier of the bot that contains the intent.
@@ -100,13 +132,53 @@ type ListIntentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListIntentsResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListIntentsResponse_botVersion, *v.BotVersion)
+	}
+	serializeIntentSummaryList(s, schemas.ListIntentsResponse_intentSummaries, v.IntentSummaries)
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListIntentsResponse_localeId, *v.LocaleId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIntentsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListIntentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIntentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIntentsResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.ListIntentsResponse_botId, v.BotId)
+		case schemas.ListIntentsResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.ListIntentsResponse_botVersion, v.BotVersion)
+		case schemas.ListIntentsResponse_intentSummaries:
+			return deserializeIntentSummaryList(d, schemas.ListIntentsResponse_intentSummaries, &v.IntentSummaries)
+		case schemas.ListIntentsResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.ListIntentsResponse_localeId, v.LocaleId)
+		case schemas.ListIntentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIntentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIntentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIntents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntents, schemas.ListIntentsRequest, schemas.ListIntentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIntents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntents, schemas.ListIntentsRequest, schemas.ListIntentsResponse), output: &ListIntentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

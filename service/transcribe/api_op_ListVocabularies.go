@@ -5,7 +5,9 @@ package transcribe
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,27 @@ type ListVocabulariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVocabulariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVocabulariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVocabulariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListVocabulariesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListVocabulariesRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVocabulariesRequest_NextToken, *v.NextToken)
+	}
+	if v.StateEquals != "" {
+		s.WriteString(schemas.ListVocabulariesRequest_StateEquals, string(v.StateEquals))
+	}
+}
+
 type ListVocabulariesOutput struct {
 
 	// If NextToken is present in your response, it indicates that not all results are
@@ -78,13 +101,45 @@ type ListVocabulariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVocabulariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVocabulariesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVocabulariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVocabulariesResponse_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListVocabulariesResponse_Status, string(v.Status))
+	}
+	serializeVocabularies(s, schemas.ListVocabulariesResponse_Vocabularies, v.Vocabularies)
+}
+func (v *ListVocabulariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVocabulariesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVocabulariesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVocabulariesResponse_NextToken, v.NextToken)
+		case schemas.ListVocabulariesResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.ListVocabulariesResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.VocabularyState(ev)
+			return nil
+		case schemas.ListVocabulariesResponse_Vocabularies:
+			return deserializeVocabularies(d, schemas.ListVocabulariesResponse_Vocabularies, &v.Vocabularies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVocabulariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListVocabularies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVocabularies, schemas.ListVocabulariesRequest, schemas.ListVocabulariesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListVocabularies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVocabularies, schemas.ListVocabulariesRequest, schemas.ListVocabulariesResponse), output: &ListVocabulariesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

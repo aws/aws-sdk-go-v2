@@ -4,7 +4,9 @@ package schemas
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/schemas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/schemas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type StartDiscovererInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDiscovererInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDiscovererRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDiscovererInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DiscovererId != nil {
+		s.WriteString(schemas.StartDiscovererRequest_DiscovererId, *v.DiscovererId)
+	}
+}
+
 type StartDiscovererOutput struct {
 
 	// The ID of the discoverer.
@@ -48,13 +62,42 @@ type StartDiscovererOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDiscovererOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDiscovererResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDiscovererOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DiscovererId != nil {
+		s.WriteString(schemas.StartDiscovererResponse_DiscovererId, *v.DiscovererId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.StartDiscovererResponse_State, string(v.State))
+	}
+}
+func (v *StartDiscovererOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDiscovererResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDiscovererResponse_DiscovererId:
+			v.DiscovererId = new(string)
+			return d.ReadString(schemas.StartDiscovererResponse_DiscovererId, v.DiscovererId)
+		case schemas.StartDiscovererResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.StartDiscovererResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.DiscovererState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDiscovererMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartDiscoverer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDiscoverer, schemas.StartDiscovererRequest, schemas.StartDiscovererResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartDiscoverer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDiscoverer, schemas.StartDiscovererRequest, schemas.StartDiscovererResponse), output: &StartDiscovererOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

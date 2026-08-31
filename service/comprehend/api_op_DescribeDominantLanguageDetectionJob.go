@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DescribeDominantLanguageDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDominantLanguageDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDominantLanguageDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDominantLanguageDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeDominantLanguageDetectionJobRequest_JobId, *v.JobId)
+	}
+}
+
 type DescribeDominantLanguageDetectionJobOutput struct {
 
 	// An object that contains the properties associated with a dominant language
@@ -49,13 +63,34 @@ type DescribeDominantLanguageDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDominantLanguageDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDominantLanguageDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDominantLanguageDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DominantLanguageDetectionJobProperties != nil {
+		s.WriteStruct(schemas.DescribeDominantLanguageDetectionJobResponse_DominantLanguageDetectionJobProperties)
+		v.DominantLanguageDetectionJobProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeDominantLanguageDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDominantLanguageDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDominantLanguageDetectionJobResponse_DominantLanguageDetectionJobProperties:
+			v.DominantLanguageDetectionJobProperties = &types.DominantLanguageDetectionJobProperties{}
+			return v.DominantLanguageDetectionJobProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDominantLanguageDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDominantLanguageDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDominantLanguageDetectionJob, schemas.DescribeDominantLanguageDetectionJobRequest, schemas.DescribeDominantLanguageDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDominantLanguageDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDominantLanguageDetectionJob, schemas.DescribeDominantLanguageDetectionJobRequest, schemas.DescribeDominantLanguageDetectionJobResponse), output: &DescribeDominantLanguageDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

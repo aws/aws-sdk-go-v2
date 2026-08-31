@@ -4,7 +4,9 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type ModifyInstanceGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyInstanceGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyInstanceGroupsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyInstanceGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.ModifyInstanceGroupsInput_ClusterId, *v.ClusterId)
+	}
+	serializeInstanceGroupModifyConfigList(s, schemas.ModifyInstanceGroupsInput_InstanceGroups, v.InstanceGroups)
+}
+
 type ModifyInstanceGroupsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +61,26 @@ type ModifyInstanceGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyInstanceGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyInstanceGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ModifyInstanceGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyInstanceGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyInstanceGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyInstanceGroups, schemas.ModifyInstanceGroupsInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpModifyInstanceGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyInstanceGroups, schemas.ModifyInstanceGroupsInput, nil), output: &ModifyInstanceGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

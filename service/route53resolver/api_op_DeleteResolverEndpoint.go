@@ -4,7 +4,9 @@ package route53resolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type DeleteResolverEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResolverEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResolverEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResolverEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverEndpointId != nil {
+		s.WriteString(schemas.DeleteResolverEndpointRequest_ResolverEndpointId, *v.ResolverEndpointId)
+	}
+}
+
 type DeleteResolverEndpointOutput struct {
 
 	// Information about the DeleteResolverEndpoint request, including the status of
@@ -52,13 +66,34 @@ type DeleteResolverEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResolverEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResolverEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResolverEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverEndpoint != nil {
+		s.WriteStruct(schemas.DeleteResolverEndpointResponse_ResolverEndpoint)
+		v.ResolverEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteResolverEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResolverEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteResolverEndpointResponse_ResolverEndpoint:
+			v.ResolverEndpoint = &types.ResolverEndpoint{}
+			return v.ResolverEndpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteResolverEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteResolverEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResolverEndpoint, schemas.DeleteResolverEndpointRequest, schemas.DeleteResolverEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteResolverEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResolverEndpoint, schemas.DeleteResolverEndpointRequest, schemas.DeleteResolverEndpointResponse), output: &DeleteResolverEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package codedeploy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,16 @@ type BatchGetOnPremisesInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetOnPremisesInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetOnPremisesInstancesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetOnPremisesInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstanceNameList(s, schemas.BatchGetOnPremisesInstancesInput_instanceNames, v.InstanceNames)
+}
+
 // Represents the output of a BatchGetOnPremisesInstances operation.
 type BatchGetOnPremisesInstancesOutput struct {
 
@@ -49,13 +61,29 @@ type BatchGetOnPremisesInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetOnPremisesInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetOnPremisesInstancesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetOnPremisesInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstanceInfoList(s, schemas.BatchGetOnPremisesInstancesOutput_instanceInfos, v.InstanceInfos)
+}
+func (v *BatchGetOnPremisesInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetOnPremisesInstancesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetOnPremisesInstancesOutput_instanceInfos:
+			return deserializeInstanceInfoList(d, schemas.BatchGetOnPremisesInstancesOutput_instanceInfos, &v.InstanceInfos)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetOnPremisesInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetOnPremisesInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetOnPremisesInstances, schemas.BatchGetOnPremisesInstancesInput, schemas.BatchGetOnPremisesInstancesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetOnPremisesInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetOnPremisesInstances, schemas.BatchGetOnPremisesInstancesInput, schemas.BatchGetOnPremisesInstancesOutput), output: &BatchGetOnPremisesInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

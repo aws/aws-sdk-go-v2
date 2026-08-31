@@ -5,7 +5,9 @@ package athena
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,27 @@ type ListCalculationExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCalculationExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCalculationExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCalculationExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCalculationExecutionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCalculationExecutionsRequest_NextToken, *v.NextToken)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.ListCalculationExecutionsRequest_SessionId, *v.SessionId)
+	}
+	if v.StateFilter != "" {
+		s.WriteString(schemas.ListCalculationExecutionsRequest_StateFilter, string(v.StateFilter))
+	}
+}
+
 type ListCalculationExecutionsOutput struct {
 
 	// A list of CalculationSummary objects.
@@ -82,13 +105,35 @@ type ListCalculationExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCalculationExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCalculationExecutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCalculationExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCalculationsList(s, schemas.ListCalculationExecutionsResponse_Calculations, v.Calculations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCalculationExecutionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCalculationExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCalculationExecutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCalculationExecutionsResponse_Calculations:
+			return deserializeCalculationsList(d, schemas.ListCalculationExecutionsResponse_Calculations, &v.Calculations)
+		case schemas.ListCalculationExecutionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCalculationExecutionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCalculationExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCalculationExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCalculationExecutions, schemas.ListCalculationExecutionsRequest, schemas.ListCalculationExecutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCalculationExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCalculationExecutions, schemas.ListCalculationExecutionsRequest, schemas.ListCalculationExecutionsResponse), output: &ListCalculationExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

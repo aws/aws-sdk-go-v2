@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type DescribeClusterSchedulerConfigInput struct {
 	ClusterSchedulerConfigVersion *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeClusterSchedulerConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterSchedulerConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterSchedulerConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterSchedulerConfigId != nil {
+		s.WriteString(schemas.DescribeClusterSchedulerConfigRequest_ClusterSchedulerConfigId, *v.ClusterSchedulerConfigId)
+	}
+	if v.ClusterSchedulerConfigVersion != nil {
+		s.WriteInt32(schemas.DescribeClusterSchedulerConfigRequest_ClusterSchedulerConfigVersion, *v.ClusterSchedulerConfigVersion)
+	}
 }
 
 type DescribeClusterSchedulerConfigOutput struct {
@@ -106,13 +123,117 @@ type DescribeClusterSchedulerConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterSchedulerConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterSchedulerConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterSchedulerConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.DescribeClusterSchedulerConfigResponse_ClusterArn, *v.ClusterArn)
+	}
+	if v.ClusterSchedulerConfigArn != nil {
+		s.WriteString(schemas.DescribeClusterSchedulerConfigResponse_ClusterSchedulerConfigArn, *v.ClusterSchedulerConfigArn)
+	}
+	if v.ClusterSchedulerConfigId != nil {
+		s.WriteString(schemas.DescribeClusterSchedulerConfigResponse_ClusterSchedulerConfigId, *v.ClusterSchedulerConfigId)
+	}
+	if v.ClusterSchedulerConfigVersion != nil {
+		s.WriteInt32(schemas.DescribeClusterSchedulerConfigResponse_ClusterSchedulerConfigVersion, *v.ClusterSchedulerConfigVersion)
+	}
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.DescribeClusterSchedulerConfigResponse_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeClusterSchedulerConfigResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeClusterSchedulerConfigResponse_Description, *v.Description)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeClusterSchedulerConfigResponse_FailureReason, *v.FailureReason)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteStruct(schemas.DescribeClusterSchedulerConfigResponse_LastModifiedBy)
+		v.LastModifiedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeClusterSchedulerConfigResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeClusterSchedulerConfigResponse_Name, *v.Name)
+	}
+	if v.SchedulerConfig != nil {
+		s.WriteStruct(schemas.DescribeClusterSchedulerConfigResponse_SchedulerConfig)
+		v.SchedulerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeClusterSchedulerConfigResponse_Status, string(v.Status))
+	}
+	serializeStatusDetailsMap(s, schemas.DescribeClusterSchedulerConfigResponse_StatusDetails, v.StatusDetails)
+}
+func (v *DescribeClusterSchedulerConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeClusterSchedulerConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeClusterSchedulerConfigResponse_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.DescribeClusterSchedulerConfigResponse_ClusterArn, v.ClusterArn)
+		case schemas.DescribeClusterSchedulerConfigResponse_ClusterSchedulerConfigArn:
+			v.ClusterSchedulerConfigArn = new(string)
+			return d.ReadString(schemas.DescribeClusterSchedulerConfigResponse_ClusterSchedulerConfigArn, v.ClusterSchedulerConfigArn)
+		case schemas.DescribeClusterSchedulerConfigResponse_ClusterSchedulerConfigId:
+			v.ClusterSchedulerConfigId = new(string)
+			return d.ReadString(schemas.DescribeClusterSchedulerConfigResponse_ClusterSchedulerConfigId, v.ClusterSchedulerConfigId)
+		case schemas.DescribeClusterSchedulerConfigResponse_ClusterSchedulerConfigVersion:
+			v.ClusterSchedulerConfigVersion = new(int32)
+			return d.ReadInt32(schemas.DescribeClusterSchedulerConfigResponse_ClusterSchedulerConfigVersion, v.ClusterSchedulerConfigVersion)
+		case schemas.DescribeClusterSchedulerConfigResponse_CreatedBy:
+			v.CreatedBy = &types.UserContext{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.DescribeClusterSchedulerConfigResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeClusterSchedulerConfigResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeClusterSchedulerConfigResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeClusterSchedulerConfigResponse_Description, v.Description)
+		case schemas.DescribeClusterSchedulerConfigResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeClusterSchedulerConfigResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeClusterSchedulerConfigResponse_LastModifiedBy:
+			v.LastModifiedBy = &types.UserContext{}
+			return v.LastModifiedBy.Deserialize(d)
+		case schemas.DescribeClusterSchedulerConfigResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeClusterSchedulerConfigResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeClusterSchedulerConfigResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeClusterSchedulerConfigResponse_Name, v.Name)
+		case schemas.DescribeClusterSchedulerConfigResponse_SchedulerConfig:
+			v.SchedulerConfig = &types.SchedulerConfig{}
+			return v.SchedulerConfig.Deserialize(d)
+		case schemas.DescribeClusterSchedulerConfigResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeClusterSchedulerConfigResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SchedulerResourceStatus(ev)
+			return nil
+		case schemas.DescribeClusterSchedulerConfigResponse_StatusDetails:
+			return deserializeStatusDetailsMap(d, schemas.DescribeClusterSchedulerConfigResponse_StatusDetails, &v.StatusDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeClusterSchedulerConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeClusterSchedulerConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterSchedulerConfig, schemas.DescribeClusterSchedulerConfigRequest, schemas.DescribeClusterSchedulerConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeClusterSchedulerConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterSchedulerConfig, schemas.DescribeClusterSchedulerConfigRequest, schemas.DescribeClusterSchedulerConfigResponse), output: &DescribeClusterSchedulerConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,31 @@ type UpdateStudioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStudioInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStudioInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStudioInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultS3Location != nil {
+		s.WriteString(schemas.UpdateStudioInput_DefaultS3Location, *v.DefaultS3Location)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateStudioInput_Description, *v.Description)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.UpdateStudioInput_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateStudioInput_Name, *v.Name)
+	}
+	if v.StudioId != nil {
+		s.WriteString(schemas.UpdateStudioInput_StudioId, *v.StudioId)
+	}
+	serializeSubnetIdList(s, schemas.UpdateStudioInput_SubnetIds, v.SubnetIds)
+}
+
 type UpdateStudioOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,13 +88,26 @@ type UpdateStudioOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStudioOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStudioOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateStudioOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateStudioMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateStudio{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStudio, schemas.UpdateStudioInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateStudio{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStudio, schemas.UpdateStudioInput, nil), output: &UpdateStudioOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

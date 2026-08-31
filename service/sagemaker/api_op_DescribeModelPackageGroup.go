@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeModelPackageGroupInput struct {
 	ModelPackageGroupName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeModelPackageGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeModelPackageGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeModelPackageGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelPackageGroupName != nil {
+		s.WriteString(schemas.DescribeModelPackageGroupInput_ModelPackageGroupName, *v.ModelPackageGroupName)
+	}
 }
 
 type DescribeModelPackageGroupOutput struct {
@@ -74,13 +88,76 @@ type DescribeModelPackageGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeModelPackageGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeModelPackageGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeModelPackageGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.DescribeModelPackageGroupOutput_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeModelPackageGroupOutput_CreationTime, *v.CreationTime)
+	}
+	if v.ManagedConfiguration != nil {
+		s.WriteStruct(schemas.DescribeModelPackageGroupOutput_ManagedConfiguration)
+		v.ManagedConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelPackageGroupArn != nil {
+		s.WriteString(schemas.DescribeModelPackageGroupOutput_ModelPackageGroupArn, *v.ModelPackageGroupArn)
+	}
+	if v.ModelPackageGroupDescription != nil {
+		s.WriteString(schemas.DescribeModelPackageGroupOutput_ModelPackageGroupDescription, *v.ModelPackageGroupDescription)
+	}
+	if v.ModelPackageGroupName != nil {
+		s.WriteString(schemas.DescribeModelPackageGroupOutput_ModelPackageGroupName, *v.ModelPackageGroupName)
+	}
+	if v.ModelPackageGroupStatus != "" {
+		s.WriteString(schemas.DescribeModelPackageGroupOutput_ModelPackageGroupStatus, string(v.ModelPackageGroupStatus))
+	}
+}
+func (v *DescribeModelPackageGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeModelPackageGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeModelPackageGroupOutput_CreatedBy:
+			v.CreatedBy = &types.UserContext{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.DescribeModelPackageGroupOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelPackageGroupOutput_CreationTime, v.CreationTime)
+		case schemas.DescribeModelPackageGroupOutput_ManagedConfiguration:
+			v.ManagedConfiguration = &types.ManagedConfiguration{}
+			return v.ManagedConfiguration.Deserialize(d)
+		case schemas.DescribeModelPackageGroupOutput_ModelPackageGroupArn:
+			v.ModelPackageGroupArn = new(string)
+			return d.ReadString(schemas.DescribeModelPackageGroupOutput_ModelPackageGroupArn, v.ModelPackageGroupArn)
+		case schemas.DescribeModelPackageGroupOutput_ModelPackageGroupDescription:
+			v.ModelPackageGroupDescription = new(string)
+			return d.ReadString(schemas.DescribeModelPackageGroupOutput_ModelPackageGroupDescription, v.ModelPackageGroupDescription)
+		case schemas.DescribeModelPackageGroupOutput_ModelPackageGroupName:
+			v.ModelPackageGroupName = new(string)
+			return d.ReadString(schemas.DescribeModelPackageGroupOutput_ModelPackageGroupName, v.ModelPackageGroupName)
+		case schemas.DescribeModelPackageGroupOutput_ModelPackageGroupStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeModelPackageGroupOutput_ModelPackageGroupStatus, &ev); err != nil {
+				return err
+			}
+			v.ModelPackageGroupStatus = types.ModelPackageGroupStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeModelPackageGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeModelPackageGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeModelPackageGroup, schemas.DescribeModelPackageGroupInput, schemas.DescribeModelPackageGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeModelPackageGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeModelPackageGroup, schemas.DescribeModelPackageGroupInput, schemas.DescribeModelPackageGroupOutput), output: &DescribeModelPackageGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

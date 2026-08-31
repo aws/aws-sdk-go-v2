@@ -4,7 +4,9 @@ package partnercentralselling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -69,6 +71,31 @@ type UpdateEngagementContextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEngagementContextInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEngagementContextRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEngagementContextInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.UpdateEngagementContextRequest_Catalog, *v.Catalog)
+	}
+	if v.ContextIdentifier != nil {
+		s.WriteString(schemas.UpdateEngagementContextRequest_ContextIdentifier, *v.ContextIdentifier)
+	}
+	if v.EngagementIdentifier != nil {
+		s.WriteString(schemas.UpdateEngagementContextRequest_EngagementIdentifier, *v.EngagementIdentifier)
+	}
+	if v.EngagementLastModifiedAt != nil {
+		s.WriteTime(schemas.UpdateEngagementContextRequest_EngagementLastModifiedAt, *v.EngagementLastModifiedAt)
+	}
+	serializeUpdateEngagementContextPayload(s, schemas.UpdateEngagementContextRequest_Payload, v.Payload)
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateEngagementContextRequest_Type, string(v.Type))
+	}
+}
+
 type UpdateEngagementContextOutput struct {
 
 	// The unique identifier of the engagement context that was updated.
@@ -97,13 +124,50 @@ type UpdateEngagementContextOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEngagementContextOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEngagementContextResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEngagementContextOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContextId != nil {
+		s.WriteString(schemas.UpdateEngagementContextResponse_ContextId, *v.ContextId)
+	}
+	if v.EngagementArn != nil {
+		s.WriteString(schemas.UpdateEngagementContextResponse_EngagementArn, *v.EngagementArn)
+	}
+	if v.EngagementId != nil {
+		s.WriteString(schemas.UpdateEngagementContextResponse_EngagementId, *v.EngagementId)
+	}
+	if v.EngagementLastModifiedAt != nil {
+		s.WriteTime(schemas.UpdateEngagementContextResponse_EngagementLastModifiedAt, *v.EngagementLastModifiedAt)
+	}
+}
+func (v *UpdateEngagementContextOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEngagementContextResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEngagementContextResponse_ContextId:
+			v.ContextId = new(string)
+			return d.ReadString(schemas.UpdateEngagementContextResponse_ContextId, v.ContextId)
+		case schemas.UpdateEngagementContextResponse_EngagementArn:
+			v.EngagementArn = new(string)
+			return d.ReadString(schemas.UpdateEngagementContextResponse_EngagementArn, v.EngagementArn)
+		case schemas.UpdateEngagementContextResponse_EngagementId:
+			v.EngagementId = new(string)
+			return d.ReadString(schemas.UpdateEngagementContextResponse_EngagementId, v.EngagementId)
+		case schemas.UpdateEngagementContextResponse_EngagementLastModifiedAt:
+			v.EngagementLastModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateEngagementContextResponse_EngagementLastModifiedAt, v.EngagementLastModifiedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEngagementContextMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateEngagementContext{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEngagementContext, schemas.UpdateEngagementContextRequest, schemas.UpdateEngagementContextResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateEngagementContext{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEngagementContext, schemas.UpdateEngagementContextRequest, schemas.UpdateEngagementContextResponse), output: &UpdateEngagementContextOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

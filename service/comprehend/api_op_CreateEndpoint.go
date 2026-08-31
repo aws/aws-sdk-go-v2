@@ -5,7 +5,9 @@ package comprehend
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,34 @@ type CreateEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateEndpointRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.CreateEndpointRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.DesiredInferenceUnits != nil {
+		s.WriteInt32(schemas.CreateEndpointRequest_DesiredInferenceUnits, *v.DesiredInferenceUnits)
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.CreateEndpointRequest_EndpointName, *v.EndpointName)
+	}
+	if v.FlywheelArn != nil {
+		s.WriteString(schemas.CreateEndpointRequest_FlywheelArn, *v.FlywheelArn)
+	}
+	if v.ModelArn != nil {
+		s.WriteString(schemas.CreateEndpointRequest_ModelArn, *v.ModelArn)
+	}
+	serializeTagList(s, schemas.CreateEndpointRequest_Tags, v.Tags)
+}
+
 type CreateEndpointOutput struct {
 
 	// The Amazon Resource Number (ARN) of the endpoint being created.
@@ -84,13 +114,38 @@ type CreateEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointArn != nil {
+		s.WriteString(schemas.CreateEndpointResponse_EndpointArn, *v.EndpointArn)
+	}
+	if v.ModelArn != nil {
+		s.WriteString(schemas.CreateEndpointResponse_ModelArn, *v.ModelArn)
+	}
+}
+func (v *CreateEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEndpointResponse_EndpointArn:
+			v.EndpointArn = new(string)
+			return d.ReadString(schemas.CreateEndpointResponse_EndpointArn, v.EndpointArn)
+		case schemas.CreateEndpointResponse_ModelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.CreateEndpointResponse_ModelArn, v.ModelArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEndpoint, schemas.CreateEndpointRequest, schemas.CreateEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEndpoint, schemas.CreateEndpointRequest, schemas.CreateEndpointResponse), output: &CreateEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,33 @@ type UpdateContactFlowModuleAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContactFlowModuleAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContactFlowModuleAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContactFlowModuleAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasId != nil {
+		s.WriteString(schemas.UpdateContactFlowModuleAliasRequest_AliasId, *v.AliasId)
+	}
+	if v.ContactFlowModuleId != nil {
+		s.WriteString(schemas.UpdateContactFlowModuleAliasRequest_ContactFlowModuleId, *v.ContactFlowModuleId)
+	}
+	if v.ContactFlowModuleVersion != nil {
+		s.WriteInt64(schemas.UpdateContactFlowModuleAliasRequest_ContactFlowModuleVersion, *v.ContactFlowModuleVersion)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateContactFlowModuleAliasRequest_Description, *v.Description)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateContactFlowModuleAliasRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateContactFlowModuleAliasRequest_Name, *v.Name)
+	}
+}
+
 type UpdateContactFlowModuleAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -63,13 +92,26 @@ type UpdateContactFlowModuleAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContactFlowModuleAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContactFlowModuleAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContactFlowModuleAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateContactFlowModuleAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateContactFlowModuleAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateContactFlowModuleAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateContactFlowModuleAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContactFlowModuleAlias, schemas.UpdateContactFlowModuleAliasRequest, schemas.UpdateContactFlowModuleAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateContactFlowModuleAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContactFlowModuleAlias, schemas.UpdateContactFlowModuleAliasRequest, schemas.UpdateContactFlowModuleAliasResponse), output: &UpdateContactFlowModuleAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

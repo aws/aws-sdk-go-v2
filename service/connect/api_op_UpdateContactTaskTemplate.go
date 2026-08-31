@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -89,6 +91,24 @@ type UpdateContactTaskTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContactTaskTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContactTaskTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContactTaskTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.UpdateContactTaskTemplateRequest_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateContactTaskTemplateRequest_InstanceId, *v.InstanceId)
+	}
+	if v.TaskTemplateId != nil {
+		s.WriteString(schemas.UpdateContactTaskTemplateRequest_TaskTemplateId, *v.TaskTemplateId)
+	}
+}
+
 type UpdateContactTaskTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -96,13 +116,26 @@ type UpdateContactTaskTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContactTaskTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContactTaskTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContactTaskTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateContactTaskTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateContactTaskTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateContactTaskTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateContactTaskTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContactTaskTemplate, schemas.UpdateContactTaskTemplateRequest, schemas.UpdateContactTaskTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateContactTaskTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContactTaskTemplate, schemas.UpdateContactTaskTemplateRequest, schemas.UpdateContactTaskTemplateResponse), output: &UpdateContactTaskTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

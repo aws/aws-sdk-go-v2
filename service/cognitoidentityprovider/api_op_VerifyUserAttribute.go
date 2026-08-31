@@ -4,6 +4,8 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,24 @@ type VerifyUserAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyUserAttributeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyUserAttributeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyUserAttributeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.VerifyUserAttributeRequest_AccessToken, *v.AccessToken)
+	}
+	if v.AttributeName != nil {
+		s.WriteString(schemas.VerifyUserAttributeRequest_AttributeName, *v.AttributeName)
+	}
+	if v.Code != nil {
+		s.WriteString(schemas.VerifyUserAttributeRequest_Code, *v.Code)
+	}
+}
+
 // A container representing the response from the server from the request to
 // verify user attributes.
 type VerifyUserAttributeOutput struct {
@@ -73,13 +93,26 @@ type VerifyUserAttributeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyUserAttributeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyUserAttributeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyUserAttributeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *VerifyUserAttributeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VerifyUserAttributeResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationVerifyUserAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpVerifyUserAttribute{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyUserAttribute, schemas.VerifyUserAttributeRequest, schemas.VerifyUserAttributeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpVerifyUserAttribute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyUserAttribute, schemas.VerifyUserAttributeRequest, schemas.VerifyUserAttributeResponse), output: &VerifyUserAttributeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

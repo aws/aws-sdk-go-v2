@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,21 @@ type AttachCertificateToDistributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachCertificateToDistributionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachCertificateToDistributionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachCertificateToDistributionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateName != nil {
+		s.WriteString(schemas.AttachCertificateToDistributionRequest_certificateName, *v.CertificateName)
+	}
+	if v.DistributionName != nil {
+		s.WriteString(schemas.AttachCertificateToDistributionRequest_distributionName, *v.DistributionName)
+	}
+}
+
 type AttachCertificateToDistributionOutput struct {
 
 	// An object that describes the result of the action, such as the status of the
@@ -79,13 +96,34 @@ type AttachCertificateToDistributionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachCertificateToDistributionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachCertificateToDistributionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachCertificateToDistributionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Operation != nil {
+		s.WriteStruct(schemas.AttachCertificateToDistributionResult_operation)
+		v.Operation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AttachCertificateToDistributionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttachCertificateToDistributionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttachCertificateToDistributionResult_operation:
+			v.Operation = &types.Operation{}
+			return v.Operation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAttachCertificateToDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAttachCertificateToDistribution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachCertificateToDistribution, schemas.AttachCertificateToDistributionRequest, schemas.AttachCertificateToDistributionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAttachCertificateToDistribution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachCertificateToDistribution, schemas.AttachCertificateToDistributionRequest, schemas.AttachCertificateToDistributionResult), output: &AttachCertificateToDistributionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

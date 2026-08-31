@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type ListWorkspacePagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkspacePagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkspacePagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkspacePagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListWorkspacePagesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkspacePagesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkspacePagesRequest_NextToken, *v.NextToken)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.ListWorkspacePagesRequest_WorkspaceId, *v.WorkspaceId)
+	}
+}
+
 type ListWorkspacePagesOutput struct {
 
 	// A list of page configurations in the workspace.
@@ -67,13 +90,35 @@ type ListWorkspacePagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkspacePagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkspacePagesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkspacePagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkspacePagesResponse_NextToken, *v.NextToken)
+	}
+	serializeWorkspacePageList(s, schemas.ListWorkspacePagesResponse_WorkspacePageList, v.WorkspacePageList)
+}
+func (v *ListWorkspacePagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkspacePagesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkspacePagesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkspacePagesResponse_NextToken, v.NextToken)
+		case schemas.ListWorkspacePagesResponse_WorkspacePageList:
+			return deserializeWorkspacePageList(d, schemas.ListWorkspacePagesResponse_WorkspacePageList, &v.WorkspacePageList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkspacePagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorkspacePages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkspacePages, schemas.ListWorkspacePagesRequest, schemas.ListWorkspacePagesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWorkspacePages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkspacePages, schemas.ListWorkspacePagesRequest, schemas.ListWorkspacePagesResponse), output: &ListWorkspacePagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

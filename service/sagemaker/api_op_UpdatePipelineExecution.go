@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,29 @@ type UpdatePipelineExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePipelineExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePipelineExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePipelineExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParallelismConfiguration != nil {
+		s.WriteStruct(schemas.UpdatePipelineExecutionRequest_ParallelismConfiguration)
+		v.ParallelismConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PipelineExecutionArn != nil {
+		s.WriteString(schemas.UpdatePipelineExecutionRequest_PipelineExecutionArn, *v.PipelineExecutionArn)
+	}
+	if v.PipelineExecutionDescription != nil {
+		s.WriteString(schemas.UpdatePipelineExecutionRequest_PipelineExecutionDescription, *v.PipelineExecutionDescription)
+	}
+	if v.PipelineExecutionDisplayName != nil {
+		s.WriteString(schemas.UpdatePipelineExecutionRequest_PipelineExecutionDisplayName, *v.PipelineExecutionDisplayName)
+	}
+}
+
 type UpdatePipelineExecutionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated pipeline execution.
@@ -55,13 +80,32 @@ type UpdatePipelineExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePipelineExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePipelineExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePipelineExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineExecutionArn != nil {
+		s.WriteString(schemas.UpdatePipelineExecutionResponse_PipelineExecutionArn, *v.PipelineExecutionArn)
+	}
+}
+func (v *UpdatePipelineExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePipelineExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePipelineExecutionResponse_PipelineExecutionArn:
+			v.PipelineExecutionArn = new(string)
+			return d.ReadString(schemas.UpdatePipelineExecutionResponse_PipelineExecutionArn, v.PipelineExecutionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePipelineExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePipelineExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePipelineExecution, schemas.UpdatePipelineExecutionRequest, schemas.UpdatePipelineExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdatePipelineExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePipelineExecution, schemas.UpdatePipelineExecutionRequest, schemas.UpdatePipelineExecutionResponse), output: &UpdatePipelineExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,18 @@ type StartWorkspacesPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartWorkspacesPoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartWorkspacesPoolRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartWorkspacesPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PoolId != nil {
+		s.WriteString(schemas.StartWorkspacesPoolRequest_PoolId, *v.PoolId)
+	}
+}
+
 type StartWorkspacesPoolOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +64,26 @@ type StartWorkspacesPoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartWorkspacesPoolOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartWorkspacesPoolResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartWorkspacesPoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartWorkspacesPoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartWorkspacesPoolResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartWorkspacesPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartWorkspacesPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartWorkspacesPool, schemas.StartWorkspacesPoolRequest, schemas.StartWorkspacesPoolResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartWorkspacesPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartWorkspacesPool, schemas.StartWorkspacesPoolRequest, schemas.StartWorkspacesPoolResult), output: &StartWorkspacesPoolOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

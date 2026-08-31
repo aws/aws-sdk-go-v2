@@ -4,6 +4,8 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,19 @@ type DeleteTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DeleteTagsRequest_ResourceId, *v.ResourceId)
+	}
+	serializeTagKeyList(s, schemas.DeleteTagsRequest_TagKeys, v.TagKeys)
+}
+
 type DeleteTagsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +62,26 @@ type DeleteTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTagsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTagsResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTags, schemas.DeleteTagsRequest, schemas.DeleteTagsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTags, schemas.DeleteTagsRequest, schemas.DeleteTagsResult), output: &DeleteTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

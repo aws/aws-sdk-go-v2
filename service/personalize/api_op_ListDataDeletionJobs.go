@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type ListDataDeletionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataDeletionJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataDeletionJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataDeletionJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetGroupArn != nil {
+		s.WriteString(schemas.ListDataDeletionJobsRequest_datasetGroupArn, *v.DatasetGroupArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataDeletionJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataDeletionJobsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListDataDeletionJobsOutput struct {
 
 	// The list of data deletion jobs.
@@ -60,13 +80,35 @@ type ListDataDeletionJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataDeletionJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataDeletionJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataDeletionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataDeletionJobs(s, schemas.ListDataDeletionJobsResponse_dataDeletionJobs, v.DataDeletionJobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataDeletionJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDataDeletionJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataDeletionJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataDeletionJobsResponse_dataDeletionJobs:
+			return deserializeDataDeletionJobs(d, schemas.ListDataDeletionJobsResponse_dataDeletionJobs, &v.DataDeletionJobs)
+		case schemas.ListDataDeletionJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataDeletionJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataDeletionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDataDeletionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataDeletionJobs, schemas.ListDataDeletionJobsRequest, schemas.ListDataDeletionJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDataDeletionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataDeletionJobs, schemas.ListDataDeletionJobsRequest, schemas.ListDataDeletionJobsResponse), output: &ListDataDeletionJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

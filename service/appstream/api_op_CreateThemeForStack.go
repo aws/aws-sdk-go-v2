@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,35 @@ type CreateThemeForStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateThemeForStackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateThemeForStackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateThemeForStackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FaviconS3Location != nil {
+		s.WriteStruct(schemas.CreateThemeForStackRequest_FaviconS3Location)
+		v.FaviconS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeThemeFooterLinks(s, schemas.CreateThemeForStackRequest_FooterLinks, v.FooterLinks)
+	if v.OrganizationLogoS3Location != nil {
+		s.WriteStruct(schemas.CreateThemeForStackRequest_OrganizationLogoS3Location)
+		v.OrganizationLogoS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.CreateThemeForStackRequest_StackName, *v.StackName)
+	}
+	if v.ThemeStyling != "" {
+		s.WriteString(schemas.CreateThemeForStackRequest_ThemeStyling, string(v.ThemeStyling))
+	}
+	if v.TitleText != nil {
+		s.WriteString(schemas.CreateThemeForStackRequest_TitleText, *v.TitleText)
+	}
+}
+
 type CreateThemeForStackOutput struct {
 
 	//  The theme object that contains the metadata of the custom branding.
@@ -77,13 +108,34 @@ type CreateThemeForStackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateThemeForStackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateThemeForStackResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateThemeForStackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Theme != nil {
+		s.WriteStruct(schemas.CreateThemeForStackResult_Theme)
+		v.Theme.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateThemeForStackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateThemeForStackResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateThemeForStackResult_Theme:
+			v.Theme = &types.Theme{}
+			return v.Theme.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateThemeForStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateThemeForStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateThemeForStack, schemas.CreateThemeForStackRequest, schemas.CreateThemeForStackResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateThemeForStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateThemeForStack, schemas.CreateThemeForStackRequest, schemas.CreateThemeForStackResult), output: &CreateThemeForStackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

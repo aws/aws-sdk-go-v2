@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type StopEdgeDeploymentStageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopEdgeDeploymentStageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopEdgeDeploymentStageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopEdgeDeploymentStageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EdgeDeploymentPlanName != nil {
+		s.WriteString(schemas.StopEdgeDeploymentStageRequest_EdgeDeploymentPlanName, *v.EdgeDeploymentPlanName)
+	}
+	if v.StageName != nil {
+		s.WriteString(schemas.StopEdgeDeploymentStageRequest_StageName, *v.StageName)
+	}
+}
+
 type StopEdgeDeploymentStageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type StopEdgeDeploymentStageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopEdgeDeploymentStageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopEdgeDeploymentStageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopEdgeDeploymentStageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopEdgeDeploymentStageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopEdgeDeploymentStage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopEdgeDeploymentStage, schemas.StopEdgeDeploymentStageRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopEdgeDeploymentStage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopEdgeDeploymentStage, schemas.StopEdgeDeploymentStageRequest, nil), output: &StopEdgeDeploymentStageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,26 @@ type ListResourceEvaluationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceEvaluationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceEvaluationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceEvaluationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListResourceEvaluationsRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.ListResourceEvaluationsRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceEvaluationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListResourceEvaluationsOutput struct {
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -57,13 +79,35 @@ type ListResourceEvaluationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceEvaluationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceEvaluationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceEvaluationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceEvaluationsResponse_NextToken, *v.NextToken)
+	}
+	serializeResourceEvaluations(s, schemas.ListResourceEvaluationsResponse_ResourceEvaluations, v.ResourceEvaluations)
+}
+func (v *ListResourceEvaluationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourceEvaluationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourceEvaluationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourceEvaluationsResponse_NextToken, v.NextToken)
+		case schemas.ListResourceEvaluationsResponse_ResourceEvaluations:
+			return deserializeResourceEvaluations(d, schemas.ListResourceEvaluationsResponse_ResourceEvaluations, &v.ResourceEvaluations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResourceEvaluationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResourceEvaluations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceEvaluations, schemas.ListResourceEvaluationsRequest, schemas.ListResourceEvaluationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListResourceEvaluations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceEvaluations, schemas.ListResourceEvaluationsRequest, schemas.ListResourceEvaluationsResponse), output: &ListResourceEvaluationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,62 @@ type UpdateSecurityPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSecurityPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSecurityPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSecurityPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateSecurityPolicyRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSecurityPolicyRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateSecurityPolicyRequest_name, *v.Name)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.UpdateSecurityPolicyRequest_policy, *v.Policy)
+	}
+	if v.PolicyVersion != nil {
+		s.WriteString(schemas.UpdateSecurityPolicyRequest_policyVersion, *v.PolicyVersion)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateSecurityPolicyRequest_type, string(v.Type))
+	}
+}
+func (v *UpdateSecurityPolicyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSecurityPolicyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSecurityPolicyRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateSecurityPolicyRequest_clientToken, v.ClientToken)
+		case schemas.UpdateSecurityPolicyRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateSecurityPolicyRequest_description, v.Description)
+		case schemas.UpdateSecurityPolicyRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateSecurityPolicyRequest_name, v.Name)
+		case schemas.UpdateSecurityPolicyRequest_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.UpdateSecurityPolicyRequest_policy, v.Policy)
+		case schemas.UpdateSecurityPolicyRequest_policyVersion:
+			v.PolicyVersion = new(string)
+			return d.ReadString(schemas.UpdateSecurityPolicyRequest_policyVersion, v.PolicyVersion)
+		case schemas.UpdateSecurityPolicyRequest_type:
+			var ev string
+			if err := d.ReadString(schemas.UpdateSecurityPolicyRequest_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.SecurityPolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type UpdateSecurityPolicyOutput struct {
 
 	// Details about the updated security policy.
@@ -70,13 +128,34 @@ type UpdateSecurityPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSecurityPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSecurityPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSecurityPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecurityPolicyDetail != nil {
+		s.WriteStruct(schemas.UpdateSecurityPolicyResponse_securityPolicyDetail)
+		v.SecurityPolicyDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateSecurityPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSecurityPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSecurityPolicyResponse_securityPolicyDetail:
+			v.SecurityPolicyDetail = &types.SecurityPolicyDetail{}
+			return v.SecurityPolicyDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSecurityPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateSecurityPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSecurityPolicy, schemas.UpdateSecurityPolicyRequest, schemas.UpdateSecurityPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateSecurityPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSecurityPolicy, schemas.UpdateSecurityPolicyRequest, schemas.UpdateSecurityPolicyResponse), output: &UpdateSecurityPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

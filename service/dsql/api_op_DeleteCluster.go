@@ -5,7 +5,9 @@ package dsql
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dsql/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dsql/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -46,6 +48,21 @@ type DeleteClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteClusterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteClusterInput_clientToken, *v.ClientToken)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.DeleteClusterInput_identifier, *v.Identifier)
+	}
+}
+
 // The output from a deleted cluster.
 type DeleteClusterOutput struct {
 
@@ -75,13 +92,54 @@ type DeleteClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteClusterOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteClusterOutput_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DeleteClusterOutput_creationTime, *v.CreationTime)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.DeleteClusterOutput_identifier, *v.Identifier)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteClusterOutput_status, string(v.Status))
+	}
+}
+func (v *DeleteClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteClusterOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteClusterOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteClusterOutput_arn, v.Arn)
+		case schemas.DeleteClusterOutput_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DeleteClusterOutput_creationTime, v.CreationTime)
+		case schemas.DeleteClusterOutput_identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.DeleteClusterOutput_identifier, v.Identifier)
+		case schemas.DeleteClusterOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteClusterOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ClusterStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCluster, schemas.DeleteClusterInput, schemas.DeleteClusterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCluster, schemas.DeleteClusterInput, schemas.DeleteClusterOutput), output: &DeleteClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

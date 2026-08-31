@@ -5,7 +5,9 @@ package managedblockchain
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type ListProposalVotesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProposalVotesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProposalVotesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProposalVotesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProposalVotesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.ListProposalVotesInput_NetworkId, *v.NetworkId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProposalVotesInput_NextToken, *v.NextToken)
+	}
+	if v.ProposalId != nil {
+		s.WriteString(schemas.ListProposalVotesInput_ProposalId, *v.ProposalId)
+	}
+}
+
 type ListProposalVotesOutput struct {
 
 	//  The pagination token that indicates the next set of results to retrieve.
@@ -63,13 +86,35 @@ type ListProposalVotesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProposalVotesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProposalVotesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProposalVotesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProposalVotesOutput_NextToken, *v.NextToken)
+	}
+	serializeProposalVoteList(s, schemas.ListProposalVotesOutput_ProposalVotes, v.ProposalVotes)
+}
+func (v *ListProposalVotesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProposalVotesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProposalVotesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProposalVotesOutput_NextToken, v.NextToken)
+		case schemas.ListProposalVotesOutput_ProposalVotes:
+			return deserializeProposalVoteList(d, schemas.ListProposalVotesOutput_ProposalVotes, &v.ProposalVotes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProposalVotesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProposalVotes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProposalVotes, schemas.ListProposalVotesInput, schemas.ListProposalVotesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProposalVotes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProposalVotes, schemas.ListProposalVotesInput, schemas.ListProposalVotesOutput), output: &ListProposalVotesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

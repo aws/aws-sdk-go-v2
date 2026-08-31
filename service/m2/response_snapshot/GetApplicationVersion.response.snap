@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"applicationVersion":1,"creationTime":946684800,"definitionContent":"__DefinitionContent__","description":"__Description__","name":"__Name__","status":"Creating","statusReason":"__StatusReason__"}

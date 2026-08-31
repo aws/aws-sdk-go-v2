@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,27 @@ type UpdateHubContentReferenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateHubContentReferenceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateHubContentReferenceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateHubContentReferenceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HubContentName != nil {
+		s.WriteString(schemas.UpdateHubContentReferenceRequest_HubContentName, *v.HubContentName)
+	}
+	if v.HubContentType != "" {
+		s.WriteString(schemas.UpdateHubContentReferenceRequest_HubContentType, string(v.HubContentType))
+	}
+	if v.HubName != nil {
+		s.WriteString(schemas.UpdateHubContentReferenceRequest_HubName, *v.HubName)
+	}
+	if v.MinVersion != nil {
+		s.WriteString(schemas.UpdateHubContentReferenceRequest_MinVersion, *v.MinVersion)
+	}
+}
+
 type UpdateHubContentReferenceOutput struct {
 
 	// The ARN of the private model hub that contains the updated hub content.
@@ -84,13 +107,38 @@ type UpdateHubContentReferenceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateHubContentReferenceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateHubContentReferenceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateHubContentReferenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HubArn != nil {
+		s.WriteString(schemas.UpdateHubContentReferenceResponse_HubArn, *v.HubArn)
+	}
+	if v.HubContentArn != nil {
+		s.WriteString(schemas.UpdateHubContentReferenceResponse_HubContentArn, *v.HubContentArn)
+	}
+}
+func (v *UpdateHubContentReferenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateHubContentReferenceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateHubContentReferenceResponse_HubArn:
+			v.HubArn = new(string)
+			return d.ReadString(schemas.UpdateHubContentReferenceResponse_HubArn, v.HubArn)
+		case schemas.UpdateHubContentReferenceResponse_HubContentArn:
+			v.HubContentArn = new(string)
+			return d.ReadString(schemas.UpdateHubContentReferenceResponse_HubContentArn, v.HubContentArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateHubContentReferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateHubContentReference{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHubContentReference, schemas.UpdateHubContentReferenceRequest, schemas.UpdateHubContentReferenceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateHubContentReference{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHubContentReference, schemas.UpdateHubContentReferenceRequest, schemas.UpdateHubContentReferenceResponse), output: &UpdateHubContentReferenceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

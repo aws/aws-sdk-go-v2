@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -184,6 +186,45 @@ type CreateSolutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSolutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSolutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSolutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetGroupArn != nil {
+		s.WriteString(schemas.CreateSolutionRequest_datasetGroupArn, *v.DatasetGroupArn)
+	}
+	if v.EventType != nil {
+		s.WriteString(schemas.CreateSolutionRequest_eventType, *v.EventType)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSolutionRequest_name, *v.Name)
+	}
+	if v.PerformAutoML != false {
+		s.WriteBool(schemas.CreateSolutionRequest_performAutoML, v.PerformAutoML)
+	}
+	if v.PerformAutoTraining != nil {
+		s.WriteBool(schemas.CreateSolutionRequest_performAutoTraining, *v.PerformAutoTraining)
+	}
+	if v.PerformHPO != nil {
+		s.WriteBool(schemas.CreateSolutionRequest_performHPO, *v.PerformHPO)
+	}
+	if v.PerformIncrementalUpdate != nil {
+		s.WriteBool(schemas.CreateSolutionRequest_performIncrementalUpdate, *v.PerformIncrementalUpdate)
+	}
+	if v.RecipeArn != nil {
+		s.WriteString(schemas.CreateSolutionRequest_recipeArn, *v.RecipeArn)
+	}
+	if v.SolutionConfig != nil {
+		s.WriteStruct(schemas.CreateSolutionRequest_solutionConfig)
+		v.SolutionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateSolutionRequest_tags, v.Tags)
+}
+
 type CreateSolutionOutput struct {
 
 	// The ARN of the solution.
@@ -195,13 +236,32 @@ type CreateSolutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSolutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSolutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSolutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SolutionArn != nil {
+		s.WriteString(schemas.CreateSolutionResponse_solutionArn, *v.SolutionArn)
+	}
+}
+func (v *CreateSolutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSolutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSolutionResponse_solutionArn:
+			v.SolutionArn = new(string)
+			return d.ReadString(schemas.CreateSolutionResponse_solutionArn, v.SolutionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSolutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSolution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSolution, schemas.CreateSolutionRequest, schemas.CreateSolutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateSolution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSolution, schemas.CreateSolutionRequest, schemas.CreateSolutionResponse), output: &CreateSolutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

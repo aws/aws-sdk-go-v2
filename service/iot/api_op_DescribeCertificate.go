@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type DescribeCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateId != nil {
+		s.WriteString(schemas.DescribeCertificateRequest_certificateId, *v.CertificateId)
+	}
+}
+
 // The output of the DescribeCertificate operation.
 type DescribeCertificateOutput struct {
 
@@ -52,13 +66,34 @@ type DescribeCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateDescription != nil {
+		s.WriteStruct(schemas.DescribeCertificateResponse_certificateDescription)
+		v.CertificateDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCertificateResponse_certificateDescription:
+			v.CertificateDescription = &types.CertificateDescription{}
+			return v.CertificateDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCertificate, schemas.DescribeCertificateRequest, schemas.DescribeCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCertificate, schemas.DescribeCertificateRequest, schemas.DescribeCertificateResponse), output: &DescribeCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

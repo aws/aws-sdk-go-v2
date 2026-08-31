@@ -4,7 +4,9 @@ package cognitoidentity
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type GetIdentityPoolRolesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdentityPoolRolesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityPoolRolesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityPoolRolesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.GetIdentityPoolRolesInput_IdentityPoolId, *v.IdentityPoolId)
+	}
+}
+
 // Returned in response to a successful GetIdentityPoolRoles operation.
 type GetIdentityPoolRolesOutput struct {
 
@@ -59,13 +73,38 @@ type GetIdentityPoolRolesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdentityPoolRolesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityPoolRolesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityPoolRolesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.GetIdentityPoolRolesResponse_IdentityPoolId, *v.IdentityPoolId)
+	}
+	serializeRoleMappingMap(s, schemas.GetIdentityPoolRolesResponse_RoleMappings, v.RoleMappings)
+	serializeRolesMap(s, schemas.GetIdentityPoolRolesResponse_Roles, v.Roles)
+}
+func (v *GetIdentityPoolRolesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIdentityPoolRolesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIdentityPoolRolesResponse_IdentityPoolId:
+			v.IdentityPoolId = new(string)
+			return d.ReadString(schemas.GetIdentityPoolRolesResponse_IdentityPoolId, v.IdentityPoolId)
+		case schemas.GetIdentityPoolRolesResponse_RoleMappings:
+			return deserializeRoleMappingMap(d, schemas.GetIdentityPoolRolesResponse_RoleMappings, &v.RoleMappings)
+		case schemas.GetIdentityPoolRolesResponse_Roles:
+			return deserializeRolesMap(d, schemas.GetIdentityPoolRolesResponse_Roles, &v.Roles)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIdentityPoolRolesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetIdentityPoolRoles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityPoolRoles, schemas.GetIdentityPoolRolesInput, schemas.GetIdentityPoolRolesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetIdentityPoolRoles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityPoolRoles, schemas.GetIdentityPoolRolesInput, schemas.GetIdentityPoolRolesResponse), output: &GetIdentityPoolRolesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

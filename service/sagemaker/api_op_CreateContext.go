@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,31 @@ type CreateContextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContextInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContextRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContextInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContextName != nil {
+		s.WriteString(schemas.CreateContextRequest_ContextName, *v.ContextName)
+	}
+	if v.ContextType != nil {
+		s.WriteString(schemas.CreateContextRequest_ContextType, *v.ContextType)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateContextRequest_Description, *v.Description)
+	}
+	serializeLineageEntityParameters(s, schemas.CreateContextRequest_Properties, v.Properties)
+	if v.Source != nil {
+		s.WriteStruct(schemas.CreateContextRequest_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateContextRequest_Tags, v.Tags)
+}
+
 type CreateContextOutput struct {
 
 	// The Amazon Resource Name (ARN) of the context.
@@ -69,13 +96,32 @@ type CreateContextOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContextOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContextResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContextOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContextArn != nil {
+		s.WriteString(schemas.CreateContextResponse_ContextArn, *v.ContextArn)
+	}
+}
+func (v *CreateContextOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateContextResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateContextResponse_ContextArn:
+			v.ContextArn = new(string)
+			return d.ReadString(schemas.CreateContextResponse_ContextArn, v.ContextArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateContextMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateContext{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContext, schemas.CreateContextRequest, schemas.CreateContextResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateContext{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContext, schemas.CreateContextRequest, schemas.CreateContextResponse), output: &CreateContextOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type ListLexBotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLexBotsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLexBotsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLexBotsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListLexBotsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLexBotsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLexBotsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListLexBotsOutput struct {
 
 	// The names and Amazon Web Services Regions of the Amazon Lex bots associated
@@ -66,13 +86,35 @@ type ListLexBotsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLexBotsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLexBotsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLexBotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLexBotsList(s, schemas.ListLexBotsResponse_LexBots, v.LexBots)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLexBotsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLexBotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLexBotsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLexBotsResponse_LexBots:
+			return deserializeLexBotsList(d, schemas.ListLexBotsResponse_LexBots, &v.LexBots)
+		case schemas.ListLexBotsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLexBotsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLexBotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLexBots{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLexBots, schemas.ListLexBotsRequest, schemas.ListLexBotsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLexBots{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLexBots, schemas.ListLexBotsRequest, schemas.ListLexBotsResponse), output: &ListLexBotsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

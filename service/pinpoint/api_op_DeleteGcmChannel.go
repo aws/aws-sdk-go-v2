@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteGcmChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGcmChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGcmChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGcmChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.DeleteGcmChannelRequest_ApplicationId, *v.ApplicationId)
+	}
+}
+
 type DeleteGcmChannelOutput struct {
 
 	// Provides information about the status and settings of the GCM channel for an
@@ -52,13 +66,34 @@ type DeleteGcmChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGcmChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGcmChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGcmChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GCMChannelResponse != nil {
+		s.WriteStruct(schemas.DeleteGcmChannelResponse_GCMChannelResponse)
+		v.GCMChannelResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteGcmChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteGcmChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteGcmChannelResponse_GCMChannelResponse:
+			v.GCMChannelResponse = &types.GCMChannelResponse{}
+			return v.GCMChannelResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteGcmChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteGcmChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGcmChannel, schemas.DeleteGcmChannelRequest, schemas.DeleteGcmChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteGcmChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGcmChannel, schemas.DeleteGcmChannelRequest, schemas.DeleteGcmChannelResponse), output: &DeleteGcmChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

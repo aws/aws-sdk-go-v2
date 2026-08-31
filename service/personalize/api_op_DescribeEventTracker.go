@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DescribeEventTrackerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEventTrackerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEventTrackerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEventTrackerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventTrackerArn != nil {
+		s.WriteString(schemas.DescribeEventTrackerRequest_eventTrackerArn, *v.EventTrackerArn)
+	}
+}
+
 type DescribeEventTrackerOutput struct {
 
 	// An object that describes the event tracker.
@@ -48,13 +62,34 @@ type DescribeEventTrackerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEventTrackerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEventTrackerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEventTrackerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventTracker != nil {
+		s.WriteStruct(schemas.DescribeEventTrackerResponse_eventTracker)
+		v.EventTracker.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeEventTrackerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEventTrackerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEventTrackerResponse_eventTracker:
+			v.EventTracker = &types.EventTracker{}
+			return v.EventTracker.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEventTrackerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEventTracker{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventTracker, schemas.DescribeEventTrackerRequest, schemas.DescribeEventTrackerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEventTracker{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventTracker, schemas.DescribeEventTrackerRequest, schemas.DescribeEventTrackerResponse), output: &DescribeEventTrackerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

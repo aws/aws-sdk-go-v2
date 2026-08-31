@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,19 @@ type PreviewPrivacyImpactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PreviewPrivacyImpactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PreviewPrivacyImpactInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PreviewPrivacyImpactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.PreviewPrivacyImpactInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	serializePreviewPrivacyImpactParametersInput(s, schemas.PreviewPrivacyImpactInput_parameters, v.Parameters)
+}
+
 type PreviewPrivacyImpactOutput struct {
 
 	// An estimate of the number of aggregation functions that the member who can
@@ -56,13 +71,29 @@ type PreviewPrivacyImpactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PreviewPrivacyImpactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PreviewPrivacyImpactOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PreviewPrivacyImpactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePrivacyImpact(s, schemas.PreviewPrivacyImpactOutput_privacyImpact, v.PrivacyImpact)
+}
+func (v *PreviewPrivacyImpactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PreviewPrivacyImpactOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PreviewPrivacyImpactOutput_privacyImpact:
+			return deserializePrivacyImpact(d, schemas.PreviewPrivacyImpactOutput_privacyImpact, &v.PrivacyImpact)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPreviewPrivacyImpactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPreviewPrivacyImpact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PreviewPrivacyImpact, schemas.PreviewPrivacyImpactInput, schemas.PreviewPrivacyImpactOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPreviewPrivacyImpact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PreviewPrivacyImpact, schemas.PreviewPrivacyImpactInput, schemas.PreviewPrivacyImpactOutput), output: &PreviewPrivacyImpactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

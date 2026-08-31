@@ -4,6 +4,8 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,19 @@ type RevokeIpRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeIpRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeIpRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeIpRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.RevokeIpRulesRequest_GroupId, *v.GroupId)
+	}
+	serializeIpRevokedRuleList(s, schemas.RevokeIpRulesRequest_UserRules, v.UserRules)
+}
+
 type RevokeIpRulesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +60,26 @@ type RevokeIpRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeIpRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeIpRulesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeIpRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RevokeIpRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RevokeIpRulesResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRevokeIpRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRevokeIpRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeIpRules, schemas.RevokeIpRulesRequest, schemas.RevokeIpRulesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRevokeIpRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeIpRules, schemas.RevokeIpRulesRequest, schemas.RevokeIpRulesResult), output: &RevokeIpRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

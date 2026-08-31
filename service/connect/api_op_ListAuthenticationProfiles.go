@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type ListAuthenticationProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAuthenticationProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAuthenticationProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAuthenticationProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListAuthenticationProfilesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAuthenticationProfilesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAuthenticationProfilesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAuthenticationProfilesOutput struct {
 
 	// A summary of a given authentication profile.
@@ -63,13 +83,35 @@ type ListAuthenticationProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAuthenticationProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAuthenticationProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAuthenticationProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuthenticationProfileSummaryList(s, schemas.ListAuthenticationProfilesResponse_AuthenticationProfileSummaryList, v.AuthenticationProfileSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAuthenticationProfilesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAuthenticationProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAuthenticationProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAuthenticationProfilesResponse_AuthenticationProfileSummaryList:
+			return deserializeAuthenticationProfileSummaryList(d, schemas.ListAuthenticationProfilesResponse_AuthenticationProfileSummaryList, &v.AuthenticationProfileSummaryList)
+		case schemas.ListAuthenticationProfilesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAuthenticationProfilesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAuthenticationProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAuthenticationProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAuthenticationProfiles, schemas.ListAuthenticationProfilesRequest, schemas.ListAuthenticationProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAuthenticationProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAuthenticationProfiles, schemas.ListAuthenticationProfilesRequest, schemas.ListAuthenticationProfilesResponse), output: &ListAuthenticationProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

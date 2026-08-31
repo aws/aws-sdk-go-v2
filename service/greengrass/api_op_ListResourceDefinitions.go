@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListResourceDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceDefinitionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteString(schemas.ListResourceDefinitionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceDefinitionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListResourceDefinitionsOutput struct {
 
 	// Information about a definition.
@@ -51,13 +68,35 @@ type ListResourceDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceDefinitionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfDefinitionInformation(s, schemas.ListResourceDefinitionsResponse_Definitions, v.Definitions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceDefinitionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListResourceDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourceDefinitionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourceDefinitionsResponse_Definitions:
+			return deserialize__listOfDefinitionInformation(d, schemas.ListResourceDefinitionsResponse_Definitions, &v.Definitions)
+		case schemas.ListResourceDefinitionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourceDefinitionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResourceDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListResourceDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceDefinitions, schemas.ListResourceDefinitionsRequest, schemas.ListResourceDefinitionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListResourceDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceDefinitions, schemas.ListResourceDefinitionsRequest, schemas.ListResourceDefinitionsResponse), output: &ListResourceDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

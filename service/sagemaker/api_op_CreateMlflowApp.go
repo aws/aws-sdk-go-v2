@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,38 @@ type CreateMlflowAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMlflowAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMlflowAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMlflowAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountDefaultStatus != "" {
+		s.WriteString(schemas.CreateMlflowAppRequest_AccountDefaultStatus, string(v.AccountDefaultStatus))
+	}
+	if v.ArtifactStoreUri != nil {
+		s.WriteString(schemas.CreateMlflowAppRequest_ArtifactStoreUri, *v.ArtifactStoreUri)
+	}
+	serializeDefaultDomainIdList(s, schemas.CreateMlflowAppRequest_DefaultDomainIdList, v.DefaultDomainIdList)
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateMlflowAppRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.ModelRegistrationMode != "" {
+		s.WriteString(schemas.CreateMlflowAppRequest_ModelRegistrationMode, string(v.ModelRegistrationMode))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateMlflowAppRequest_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateMlflowAppRequest_RoleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.CreateMlflowAppRequest_Tags, v.Tags)
+	if v.WeeklyMaintenanceWindowStart != nil {
+		s.WriteString(schemas.CreateMlflowAppRequest_WeeklyMaintenanceWindowStart, *v.WeeklyMaintenanceWindowStart)
+	}
+}
+
 type CreateMlflowAppOutput struct {
 
 	// The ARN of the MLflow App.
@@ -85,13 +119,32 @@ type CreateMlflowAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMlflowAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMlflowAppResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMlflowAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateMlflowAppResponse_Arn, *v.Arn)
+	}
+}
+func (v *CreateMlflowAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMlflowAppResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMlflowAppResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateMlflowAppResponse_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMlflowAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateMlflowApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMlflowApp, schemas.CreateMlflowAppRequest, schemas.CreateMlflowAppResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateMlflowApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMlflowApp, schemas.CreateMlflowAppRequest, schemas.CreateMlflowAppResponse), output: &CreateMlflowAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

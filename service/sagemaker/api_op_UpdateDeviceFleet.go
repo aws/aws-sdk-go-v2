@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,32 @@ type UpdateDeviceFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDeviceFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDeviceFleetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDeviceFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDeviceFleetRequest_Description, *v.Description)
+	}
+	if v.DeviceFleetName != nil {
+		s.WriteString(schemas.UpdateDeviceFleetRequest_DeviceFleetName, *v.DeviceFleetName)
+	}
+	if v.EnableIotRoleAlias != nil {
+		s.WriteBool(schemas.UpdateDeviceFleetRequest_EnableIotRoleAlias, *v.EnableIotRoleAlias)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.UpdateDeviceFleetRequest_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateDeviceFleetRequest_RoleArn, *v.RoleArn)
+	}
+}
+
 type UpdateDeviceFleetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,13 +88,26 @@ type UpdateDeviceFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDeviceFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDeviceFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateDeviceFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDeviceFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDeviceFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDeviceFleet, schemas.UpdateDeviceFleetRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDeviceFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDeviceFleet, schemas.UpdateDeviceFleetRequest, nil), output: &UpdateDeviceFleetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -112,6 +114,46 @@ type UpdateTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogGroupArn != nil {
+		s.WriteString(schemas.UpdateTaskRequest_CloudWatchLogGroupArn, *v.CloudWatchLogGroupArn)
+	}
+	serializeFilterList(s, schemas.UpdateTaskRequest_Excludes, v.Excludes)
+	serializeFilterList(s, schemas.UpdateTaskRequest_Includes, v.Includes)
+	if v.ManifestConfig != nil {
+		s.WriteStruct(schemas.UpdateTaskRequest_ManifestConfig)
+		v.ManifestConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateTaskRequest_Name, *v.Name)
+	}
+	if v.Options != nil {
+		s.WriteStruct(schemas.UpdateTaskRequest_Options)
+		v.Options.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Schedule != nil {
+		s.WriteStruct(schemas.UpdateTaskRequest_Schedule)
+		v.Schedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskArn != nil {
+		s.WriteString(schemas.UpdateTaskRequest_TaskArn, *v.TaskArn)
+	}
+	if v.TaskReportConfig != nil {
+		s.WriteStruct(schemas.UpdateTaskRequest_TaskReportConfig)
+		v.TaskReportConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -119,13 +161,26 @@ type UpdateTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTask, schemas.UpdateTaskRequest, schemas.UpdateTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTask, schemas.UpdateTaskRequest, schemas.UpdateTaskResponse), output: &UpdateTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

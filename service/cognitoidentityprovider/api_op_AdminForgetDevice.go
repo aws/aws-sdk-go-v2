@@ -4,6 +4,8 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,24 @@ type AdminForgetDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminForgetDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminForgetDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminForgetDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceKey != nil {
+		s.WriteString(schemas.AdminForgetDeviceRequest_DeviceKey, *v.DeviceKey)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AdminForgetDeviceRequest_UserPoolId, *v.UserPoolId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.AdminForgetDeviceRequest_Username, *v.Username)
+	}
+}
+
 type AdminForgetDeviceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -73,13 +93,26 @@ type AdminForgetDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminForgetDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminForgetDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AdminForgetDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdminForgetDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminForgetDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminForgetDevice, schemas.AdminForgetDeviceRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminForgetDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminForgetDevice, schemas.AdminForgetDeviceRequest, nil), output: &AdminForgetDeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,29 @@ type ConfirmDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfirmDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.ConfirmDeviceRequest_AccessToken, *v.AccessToken)
+	}
+	if v.DeviceKey != nil {
+		s.WriteString(schemas.ConfirmDeviceRequest_DeviceKey, *v.DeviceKey)
+	}
+	if v.DeviceName != nil {
+		s.WriteString(schemas.ConfirmDeviceRequest_DeviceName, *v.DeviceName)
+	}
+	if v.DeviceSecretVerifierConfig != nil {
+		s.WriteStruct(schemas.ConfirmDeviceRequest_DeviceSecretVerifierConfig)
+		v.DeviceSecretVerifierConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The confirm-device response.
 type ConfirmDeviceOutput struct {
 
@@ -84,13 +109,31 @@ type ConfirmDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfirmDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmDeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserConfirmationNecessary != false {
+		s.WriteBool(schemas.ConfirmDeviceResponse_UserConfirmationNecessary, v.UserConfirmationNecessary)
+	}
+}
+func (v *ConfirmDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfirmDeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfirmDeviceResponse_UserConfirmationNecessary:
+			return d.ReadBool(schemas.ConfirmDeviceResponse_UserConfirmationNecessary, &v.UserConfirmationNecessary)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConfirmDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpConfirmDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmDevice, schemas.ConfirmDeviceRequest, schemas.ConfirmDeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpConfirmDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmDevice, schemas.ConfirmDeviceRequest, schemas.ConfirmDeviceResponse), output: &ConfirmDeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

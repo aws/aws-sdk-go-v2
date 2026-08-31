@@ -4,6 +4,8 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,21 @@ type UpdateLocationFsxLustreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLocationFsxLustreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLocationFsxLustreRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLocationFsxLustreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.UpdateLocationFsxLustreRequest_LocationArn, *v.LocationArn)
+	}
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.UpdateLocationFsxLustreRequest_Subdirectory, *v.Subdirectory)
+	}
+}
+
 type UpdateLocationFsxLustreOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +72,26 @@ type UpdateLocationFsxLustreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLocationFsxLustreOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLocationFsxLustreResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLocationFsxLustreOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateLocationFsxLustreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLocationFsxLustreResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLocationFsxLustreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLocationFsxLustre{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLocationFsxLustre, schemas.UpdateLocationFsxLustreRequest, schemas.UpdateLocationFsxLustreResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateLocationFsxLustre{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLocationFsxLustre, schemas.UpdateLocationFsxLustreRequest, schemas.UpdateLocationFsxLustreResponse), output: &UpdateLocationFsxLustreOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

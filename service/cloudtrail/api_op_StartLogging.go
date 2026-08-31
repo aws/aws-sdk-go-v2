@@ -4,6 +4,8 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,18 @@ type StartLoggingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartLoggingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartLoggingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartLoggingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.StartLoggingRequest_Name, *v.Name)
+	}
+}
+
 // Returns the objects or data listed below if successful. Otherwise, returns an
 // error.
 type StartLoggingOutput struct {
@@ -51,13 +65,26 @@ type StartLoggingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartLoggingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartLoggingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartLoggingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartLoggingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartLoggingResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartLogging{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartLogging, schemas.StartLoggingRequest, schemas.StartLoggingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartLogging{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartLogging, schemas.StartLoggingRequest, schemas.StartLoggingResponse), output: &StartLoggingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type ListProfileNotificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProfileNotificationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProfileNotificationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProfileNotificationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProfileNotificationsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProfileNotificationsInput_NextToken, *v.NextToken)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.ListProfileNotificationsInput_WorkloadId, *v.WorkloadId)
+	}
+}
+
 type ListProfileNotificationsOutput struct {
 
 	// The token to use to retrieve the next set of results.
@@ -54,13 +74,35 @@ type ListProfileNotificationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProfileNotificationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProfileNotificationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProfileNotificationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProfileNotificationsOutput_NextToken, *v.NextToken)
+	}
+	serializeProfileNotificationSummaries(s, schemas.ListProfileNotificationsOutput_NotificationSummaries, v.NotificationSummaries)
+}
+func (v *ListProfileNotificationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProfileNotificationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProfileNotificationsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProfileNotificationsOutput_NextToken, v.NextToken)
+		case schemas.ListProfileNotificationsOutput_NotificationSummaries:
+			return deserializeProfileNotificationSummaries(d, schemas.ListProfileNotificationsOutput_NotificationSummaries, &v.NotificationSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProfileNotificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProfileNotifications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfileNotifications, schemas.ListProfileNotificationsInput, schemas.ListProfileNotificationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProfileNotifications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfileNotifications, schemas.ListProfileNotificationsInput, schemas.ListProfileNotificationsOutput), output: &ListProfileNotificationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -127,6 +129,45 @@ type CreateCompilationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCompilationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCompilationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCompilationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompilationJobName != nil {
+		s.WriteString(schemas.CreateCompilationJobRequest_CompilationJobName, *v.CompilationJobName)
+	}
+	if v.InputConfig != nil {
+		s.WriteStruct(schemas.CreateCompilationJobRequest_InputConfig)
+		v.InputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelPackageVersionArn != nil {
+		s.WriteString(schemas.CreateCompilationJobRequest_ModelPackageVersionArn, *v.ModelPackageVersionArn)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.CreateCompilationJobRequest_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateCompilationJobRequest_RoleArn, *v.RoleArn)
+	}
+	if v.StoppingCondition != nil {
+		s.WriteStruct(schemas.CreateCompilationJobRequest_StoppingCondition)
+		v.StoppingCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateCompilationJobRequest_Tags, v.Tags)
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateCompilationJobRequest_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateCompilationJobOutput struct {
 
 	// If the action is successful, the service sends back an HTTP 200 response.
@@ -143,13 +184,32 @@ type CreateCompilationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCompilationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCompilationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCompilationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompilationJobArn != nil {
+		s.WriteString(schemas.CreateCompilationJobResponse_CompilationJobArn, *v.CompilationJobArn)
+	}
+}
+func (v *CreateCompilationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCompilationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCompilationJobResponse_CompilationJobArn:
+			v.CompilationJobArn = new(string)
+			return d.ReadString(schemas.CreateCompilationJobResponse_CompilationJobArn, v.CompilationJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCompilationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCompilationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCompilationJob, schemas.CreateCompilationJobRequest, schemas.CreateCompilationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCompilationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCompilationJob, schemas.CreateCompilationJobRequest, schemas.CreateCompilationJobResponse), output: &CreateCompilationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

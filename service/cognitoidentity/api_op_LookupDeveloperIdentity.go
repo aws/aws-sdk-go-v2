@@ -4,6 +4,8 @@ package cognitoidentity
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,30 @@ type LookupDeveloperIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LookupDeveloperIdentityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LookupDeveloperIdentityInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LookupDeveloperIdentityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeveloperUserIdentifier != nil {
+		s.WriteString(schemas.LookupDeveloperIdentityInput_DeveloperUserIdentifier, *v.DeveloperUserIdentifier)
+	}
+	if v.IdentityId != nil {
+		s.WriteString(schemas.LookupDeveloperIdentityInput_IdentityId, *v.IdentityId)
+	}
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.LookupDeveloperIdentityInput_IdentityPoolId, *v.IdentityPoolId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.LookupDeveloperIdentityInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.LookupDeveloperIdentityInput_NextToken, *v.NextToken)
+	}
+}
+
 // Returned in response to a successful LookupDeveloperIdentity action.
 type LookupDeveloperIdentityOutput struct {
 
@@ -93,13 +119,41 @@ type LookupDeveloperIdentityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LookupDeveloperIdentityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LookupDeveloperIdentityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LookupDeveloperIdentityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeveloperUserIdentifierList(s, schemas.LookupDeveloperIdentityResponse_DeveloperUserIdentifierList, v.DeveloperUserIdentifierList)
+	if v.IdentityId != nil {
+		s.WriteString(schemas.LookupDeveloperIdentityResponse_IdentityId, *v.IdentityId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.LookupDeveloperIdentityResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *LookupDeveloperIdentityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LookupDeveloperIdentityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LookupDeveloperIdentityResponse_DeveloperUserIdentifierList:
+			return deserializeDeveloperUserIdentifierList(d, schemas.LookupDeveloperIdentityResponse_DeveloperUserIdentifierList, &v.DeveloperUserIdentifierList)
+		case schemas.LookupDeveloperIdentityResponse_IdentityId:
+			v.IdentityId = new(string)
+			return d.ReadString(schemas.LookupDeveloperIdentityResponse_IdentityId, v.IdentityId)
+		case schemas.LookupDeveloperIdentityResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.LookupDeveloperIdentityResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationLookupDeveloperIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpLookupDeveloperIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.LookupDeveloperIdentity, schemas.LookupDeveloperIdentityInput, schemas.LookupDeveloperIdentityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpLookupDeveloperIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.LookupDeveloperIdentity, schemas.LookupDeveloperIdentityInput, schemas.LookupDeveloperIdentityResponse), output: &LookupDeveloperIdentityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

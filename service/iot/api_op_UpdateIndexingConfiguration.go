@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,25 @@ type UpdateIndexingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIndexingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIndexingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIndexingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThingGroupIndexingConfiguration != nil {
+		s.WriteStruct(schemas.UpdateIndexingConfigurationRequest_thingGroupIndexingConfiguration)
+		v.ThingGroupIndexingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ThingIndexingConfiguration != nil {
+		s.WriteStruct(schemas.UpdateIndexingConfigurationRequest_thingIndexingConfiguration)
+		v.ThingIndexingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateIndexingConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +67,26 @@ type UpdateIndexingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIndexingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIndexingConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIndexingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateIndexingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIndexingConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIndexingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIndexingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIndexingConfiguration, schemas.UpdateIndexingConfigurationRequest, schemas.UpdateIndexingConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIndexingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIndexingConfiguration, schemas.UpdateIndexingConfigurationRequest, schemas.UpdateIndexingConfigurationResponse), output: &UpdateIndexingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

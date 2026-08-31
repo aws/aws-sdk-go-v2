@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,27 @@ type ListPrincipalThingsV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPrincipalThingsV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPrincipalThingsV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPrincipalThingsV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPrincipalThingsV2Request_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPrincipalThingsV2Request_nextToken, *v.NextToken)
+	}
+	if v.Principal != nil {
+		s.WriteString(schemas.ListPrincipalThingsV2Request_principal, *v.Principal)
+	}
+	if v.ThingPrincipalType != "" {
+		s.WriteString(schemas.ListPrincipalThingsV2Request_thingPrincipalType, string(v.ThingPrincipalType))
+	}
+}
+
 type ListPrincipalThingsV2Output struct {
 
 	// The token to use to get the next set of results, or null if there are no
@@ -74,13 +97,35 @@ type ListPrincipalThingsV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPrincipalThingsV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPrincipalThingsV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPrincipalThingsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPrincipalThingsV2Response_nextToken, *v.NextToken)
+	}
+	serializePrincipalThingObjects(s, schemas.ListPrincipalThingsV2Response_principalThingObjects, v.PrincipalThingObjects)
+}
+func (v *ListPrincipalThingsV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPrincipalThingsV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPrincipalThingsV2Response_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPrincipalThingsV2Response_nextToken, v.NextToken)
+		case schemas.ListPrincipalThingsV2Response_principalThingObjects:
+			return deserializePrincipalThingObjects(d, schemas.ListPrincipalThingsV2Response_principalThingObjects, &v.PrincipalThingObjects)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPrincipalThingsV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPrincipalThingsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPrincipalThingsV2, schemas.ListPrincipalThingsV2Request, schemas.ListPrincipalThingsV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPrincipalThingsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPrincipalThingsV2, schemas.ListPrincipalThingsV2Request, schemas.ListPrincipalThingsV2Response), output: &ListPrincipalThingsV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

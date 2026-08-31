@@ -4,7 +4,9 @@ package athena
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListNotebookSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNotebookSessionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNotebookSessionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNotebookSessionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListNotebookSessionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNotebookSessionsRequest_NextToken, *v.NextToken)
+	}
+	if v.NotebookId != nil {
+		s.WriteString(schemas.ListNotebookSessionsRequest_NotebookId, *v.NotebookId)
+	}
+}
+
 type ListNotebookSessionsOutput struct {
 
 	// A list of the sessions belonging to the notebook.
@@ -62,13 +82,35 @@ type ListNotebookSessionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNotebookSessionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNotebookSessionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNotebookSessionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNotebookSessionsResponse_NextToken, *v.NextToken)
+	}
+	serializeNotebookSessionsList(s, schemas.ListNotebookSessionsResponse_NotebookSessionsList, v.NotebookSessionsList)
+}
+func (v *ListNotebookSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNotebookSessionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNotebookSessionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNotebookSessionsResponse_NextToken, v.NextToken)
+		case schemas.ListNotebookSessionsResponse_NotebookSessionsList:
+			return deserializeNotebookSessionsList(d, schemas.ListNotebookSessionsResponse_NotebookSessionsList, &v.NotebookSessionsList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNotebookSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListNotebookSessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNotebookSessions, schemas.ListNotebookSessionsRequest, schemas.ListNotebookSessionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListNotebookSessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNotebookSessions, schemas.ListNotebookSessionsRequest, schemas.ListNotebookSessionsResponse), output: &ListNotebookSessionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

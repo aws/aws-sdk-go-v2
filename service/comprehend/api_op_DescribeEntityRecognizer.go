@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DescribeEntityRecognizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEntityRecognizerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEntityRecognizerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEntityRecognizerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityRecognizerArn != nil {
+		s.WriteString(schemas.DescribeEntityRecognizerRequest_EntityRecognizerArn, *v.EntityRecognizerArn)
+	}
+}
+
 type DescribeEntityRecognizerOutput struct {
 
 	// Describes information associated with an entity recognizer.
@@ -46,13 +60,34 @@ type DescribeEntityRecognizerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEntityRecognizerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEntityRecognizerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEntityRecognizerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityRecognizerProperties != nil {
+		s.WriteStruct(schemas.DescribeEntityRecognizerResponse_EntityRecognizerProperties)
+		v.EntityRecognizerProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeEntityRecognizerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEntityRecognizerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEntityRecognizerResponse_EntityRecognizerProperties:
+			v.EntityRecognizerProperties = &types.EntityRecognizerProperties{}
+			return v.EntityRecognizerProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEntityRecognizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEntityRecognizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEntityRecognizer, schemas.DescribeEntityRecognizerRequest, schemas.DescribeEntityRecognizerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEntityRecognizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEntityRecognizer, schemas.DescribeEntityRecognizerRequest, schemas.DescribeEntityRecognizerResponse), output: &DescribeEntityRecognizerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

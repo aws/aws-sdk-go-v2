@@ -5,6 +5,8 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type ListCustomMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCustomMetricsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomMetricsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListCustomMetricsOutput struct {
 
 	//  The name of the custom metric.
@@ -61,13 +78,35 @@ type ListCustomMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricNames(s, schemas.ListCustomMetricsResponse_metricNames, v.MetricNames)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomMetricsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCustomMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomMetricsResponse_metricNames:
+			return deserializeMetricNames(d, schemas.ListCustomMetricsResponse_metricNames, &v.MetricNames)
+		case schemas.ListCustomMetricsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCustomMetricsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCustomMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCustomMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomMetrics, schemas.ListCustomMetricsRequest, schemas.ListCustomMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCustomMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomMetrics, schemas.ListCustomMetricsRequest, schemas.ListCustomMetricsResponse), output: &ListCustomMetricsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

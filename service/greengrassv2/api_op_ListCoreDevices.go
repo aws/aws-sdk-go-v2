@@ -5,7 +5,9 @@ package greengrassv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,30 @@ type ListCoreDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCoreDevicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCoreDevicesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCoreDevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCoreDevicesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCoreDevicesRequest_nextToken, *v.NextToken)
+	}
+	if v.Runtime != nil {
+		s.WriteString(schemas.ListCoreDevicesRequest_runtime, *v.Runtime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListCoreDevicesRequest_status, string(v.Status))
+	}
+	if v.ThingGroupArn != nil {
+		s.WriteString(schemas.ListCoreDevicesRequest_thingGroupArn, *v.ThingGroupArn)
+	}
+}
+
 type ListCoreDevicesOutput struct {
 
 	// A list that summarizes each core device.
@@ -105,13 +131,35 @@ type ListCoreDevicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCoreDevicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCoreDevicesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCoreDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCoreDevicesList(s, schemas.ListCoreDevicesResponse_coreDevices, v.CoreDevices)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCoreDevicesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCoreDevicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCoreDevicesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCoreDevicesResponse_coreDevices:
+			return deserializeCoreDevicesList(d, schemas.ListCoreDevicesResponse_coreDevices, &v.CoreDevices)
+		case schemas.ListCoreDevicesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCoreDevicesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCoreDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCoreDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCoreDevices, schemas.ListCoreDevicesRequest, schemas.ListCoreDevicesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCoreDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCoreDevices, schemas.ListCoreDevicesRequest, schemas.ListCoreDevicesResponse), output: &ListCoreDevicesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

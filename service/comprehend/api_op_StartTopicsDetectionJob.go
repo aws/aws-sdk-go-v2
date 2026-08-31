@@ -5,7 +5,9 @@ package comprehend
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -85,6 +87,46 @@ type StartTopicsDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTopicsDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTopicsDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTopicsDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartTopicsDetectionJobRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.StartTopicsDetectionJobRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.StartTopicsDetectionJobRequest_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.StartTopicsDetectionJobRequest_JobName, *v.JobName)
+	}
+	if v.NumberOfTopics != nil {
+		s.WriteInt32(schemas.StartTopicsDetectionJobRequest_NumberOfTopics, *v.NumberOfTopics)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.StartTopicsDetectionJobRequest_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.StartTopicsDetectionJobRequest_Tags, v.Tags)
+	if v.VolumeKmsKeyId != nil {
+		s.WriteString(schemas.StartTopicsDetectionJobRequest_VolumeKmsKeyId, *v.VolumeKmsKeyId)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.StartTopicsDetectionJobRequest_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartTopicsDetectionJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the topics detection job. It is a unique,
@@ -121,13 +163,48 @@ type StartTopicsDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTopicsDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTopicsDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTopicsDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobArn != nil {
+		s.WriteString(schemas.StartTopicsDetectionJobResponse_JobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.StartTopicsDetectionJobResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.StartTopicsDetectionJobResponse_JobStatus, string(v.JobStatus))
+	}
+}
+func (v *StartTopicsDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTopicsDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTopicsDetectionJobResponse_JobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.StartTopicsDetectionJobResponse_JobArn, v.JobArn)
+		case schemas.StartTopicsDetectionJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartTopicsDetectionJobResponse_JobId, v.JobId)
+		case schemas.StartTopicsDetectionJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartTopicsDetectionJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartTopicsDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartTopicsDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTopicsDetectionJob, schemas.StartTopicsDetectionJobRequest, schemas.StartTopicsDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartTopicsDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTopicsDetectionJob, schemas.StartTopicsDetectionJobRequest, schemas.StartTopicsDetectionJobResponse), output: &StartTopicsDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

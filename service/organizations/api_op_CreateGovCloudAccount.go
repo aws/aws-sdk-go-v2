@@ -4,7 +4,9 @@ package organizations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -248,6 +250,28 @@ type CreateGovCloudAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGovCloudAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGovCloudAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGovCloudAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountName != nil {
+		s.WriteString(schemas.CreateGovCloudAccountRequest_AccountName, *v.AccountName)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.CreateGovCloudAccountRequest_Email, *v.Email)
+	}
+	if v.IamUserAccessToBilling != "" {
+		s.WriteString(schemas.CreateGovCloudAccountRequest_IamUserAccessToBilling, string(v.IamUserAccessToBilling))
+	}
+	if v.RoleName != nil {
+		s.WriteString(schemas.CreateGovCloudAccountRequest_RoleName, *v.RoleName)
+	}
+	serializeTags(s, schemas.CreateGovCloudAccountRequest_Tags, v.Tags)
+}
+
 type CreateGovCloudAccountOutput struct {
 
 	// Contains the status about a CreateAccount or CreateGovCloudAccount request to create an Amazon Web Services
@@ -260,13 +284,34 @@ type CreateGovCloudAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGovCloudAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGovCloudAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGovCloudAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateAccountStatus != nil {
+		s.WriteStruct(schemas.CreateGovCloudAccountResponse_CreateAccountStatus)
+		v.CreateAccountStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateGovCloudAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGovCloudAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGovCloudAccountResponse_CreateAccountStatus:
+			v.CreateAccountStatus = &types.CreateAccountStatus{}
+			return v.CreateAccountStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGovCloudAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateGovCloudAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGovCloudAccount, schemas.CreateGovCloudAccountRequest, schemas.CreateGovCloudAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateGovCloudAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGovCloudAccount, schemas.CreateGovCloudAccountRequest, schemas.CreateGovCloudAccountResponse), output: &CreateGovCloudAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

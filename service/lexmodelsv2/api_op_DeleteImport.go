@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteImportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteImportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteImportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteImportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImportId != nil {
+		s.WriteString(schemas.DeleteImportRequest_importId, *v.ImportId)
+	}
+}
+
 type DeleteImportOutput struct {
 
 	// The unique identifier of the deleted import.
@@ -53,13 +67,42 @@ type DeleteImportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteImportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteImportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteImportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImportId != nil {
+		s.WriteString(schemas.DeleteImportResponse_importId, *v.ImportId)
+	}
+	if v.ImportStatus != "" {
+		s.WriteString(schemas.DeleteImportResponse_importStatus, string(v.ImportStatus))
+	}
+}
+func (v *DeleteImportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteImportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteImportResponse_importId:
+			v.ImportId = new(string)
+			return d.ReadString(schemas.DeleteImportResponse_importId, v.ImportId)
+		case schemas.DeleteImportResponse_importStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeleteImportResponse_importStatus, &ev); err != nil {
+				return err
+			}
+			v.ImportStatus = types.ImportStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteImportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteImport, schemas.DeleteImportRequest, schemas.DeleteImportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteImport, schemas.DeleteImportRequest, schemas.DeleteImportResponse), output: &DeleteImportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

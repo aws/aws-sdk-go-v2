@@ -4,7 +4,9 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -133,6 +135,49 @@ type CreateTrailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTrailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTrailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogsLogGroupArn != nil {
+		s.WriteString(schemas.CreateTrailRequest_CloudWatchLogsLogGroupArn, *v.CloudWatchLogsLogGroupArn)
+	}
+	if v.CloudWatchLogsRoleArn != nil {
+		s.WriteString(schemas.CreateTrailRequest_CloudWatchLogsRoleArn, *v.CloudWatchLogsRoleArn)
+	}
+	if v.EnableLogFileValidation != nil {
+		s.WriteBool(schemas.CreateTrailRequest_EnableLogFileValidation, *v.EnableLogFileValidation)
+	}
+	if v.IncludeGlobalServiceEvents != nil {
+		s.WriteBool(schemas.CreateTrailRequest_IncludeGlobalServiceEvents, *v.IncludeGlobalServiceEvents)
+	}
+	if v.IsMultiRegionTrail != nil {
+		s.WriteBool(schemas.CreateTrailRequest_IsMultiRegionTrail, *v.IsMultiRegionTrail)
+	}
+	if v.IsOrganizationTrail != nil {
+		s.WriteBool(schemas.CreateTrailRequest_IsOrganizationTrail, *v.IsOrganizationTrail)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateTrailRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateTrailRequest_Name, *v.Name)
+	}
+	if v.S3BucketName != nil {
+		s.WriteString(schemas.CreateTrailRequest_S3BucketName, *v.S3BucketName)
+	}
+	if v.S3KeyPrefix != nil {
+		s.WriteString(schemas.CreateTrailRequest_S3KeyPrefix, *v.S3KeyPrefix)
+	}
+	if v.SnsTopicName != nil {
+		s.WriteString(schemas.CreateTrailRequest_SnsTopicName, *v.SnsTopicName)
+	}
+	serializeTagsList(s, schemas.CreateTrailRequest_TagsList, v.TagsList)
+}
+
 // Returns the objects or data listed below if successful. Otherwise, returns an
 // error.
 type CreateTrailOutput struct {
@@ -198,13 +243,104 @@ type CreateTrailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTrailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTrailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogsLogGroupArn != nil {
+		s.WriteString(schemas.CreateTrailResponse_CloudWatchLogsLogGroupArn, *v.CloudWatchLogsLogGroupArn)
+	}
+	if v.CloudWatchLogsRoleArn != nil {
+		s.WriteString(schemas.CreateTrailResponse_CloudWatchLogsRoleArn, *v.CloudWatchLogsRoleArn)
+	}
+	if v.IncludeGlobalServiceEvents != nil {
+		s.WriteBool(schemas.CreateTrailResponse_IncludeGlobalServiceEvents, *v.IncludeGlobalServiceEvents)
+	}
+	if v.IsMultiRegionTrail != nil {
+		s.WriteBool(schemas.CreateTrailResponse_IsMultiRegionTrail, *v.IsMultiRegionTrail)
+	}
+	if v.IsOrganizationTrail != nil {
+		s.WriteBool(schemas.CreateTrailResponse_IsOrganizationTrail, *v.IsOrganizationTrail)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateTrailResponse_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.LogFileValidationEnabled != nil {
+		s.WriteBool(schemas.CreateTrailResponse_LogFileValidationEnabled, *v.LogFileValidationEnabled)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateTrailResponse_Name, *v.Name)
+	}
+	if v.S3BucketName != nil {
+		s.WriteString(schemas.CreateTrailResponse_S3BucketName, *v.S3BucketName)
+	}
+	if v.S3KeyPrefix != nil {
+		s.WriteString(schemas.CreateTrailResponse_S3KeyPrefix, *v.S3KeyPrefix)
+	}
+	if v.SnsTopicARN != nil {
+		s.WriteString(schemas.CreateTrailResponse_SnsTopicARN, *v.SnsTopicARN)
+	}
+	if v.SnsTopicName != nil {
+		s.WriteString(schemas.CreateTrailResponse_SnsTopicName, *v.SnsTopicName)
+	}
+	if v.TrailARN != nil {
+		s.WriteString(schemas.CreateTrailResponse_TrailARN, *v.TrailARN)
+	}
+}
+func (v *CreateTrailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTrailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTrailResponse_CloudWatchLogsLogGroupArn:
+			v.CloudWatchLogsLogGroupArn = new(string)
+			return d.ReadString(schemas.CreateTrailResponse_CloudWatchLogsLogGroupArn, v.CloudWatchLogsLogGroupArn)
+		case schemas.CreateTrailResponse_CloudWatchLogsRoleArn:
+			v.CloudWatchLogsRoleArn = new(string)
+			return d.ReadString(schemas.CreateTrailResponse_CloudWatchLogsRoleArn, v.CloudWatchLogsRoleArn)
+		case schemas.CreateTrailResponse_IncludeGlobalServiceEvents:
+			v.IncludeGlobalServiceEvents = new(bool)
+			return d.ReadBool(schemas.CreateTrailResponse_IncludeGlobalServiceEvents, v.IncludeGlobalServiceEvents)
+		case schemas.CreateTrailResponse_IsMultiRegionTrail:
+			v.IsMultiRegionTrail = new(bool)
+			return d.ReadBool(schemas.CreateTrailResponse_IsMultiRegionTrail, v.IsMultiRegionTrail)
+		case schemas.CreateTrailResponse_IsOrganizationTrail:
+			v.IsOrganizationTrail = new(bool)
+			return d.ReadBool(schemas.CreateTrailResponse_IsOrganizationTrail, v.IsOrganizationTrail)
+		case schemas.CreateTrailResponse_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.CreateTrailResponse_KmsKeyId, v.KmsKeyId)
+		case schemas.CreateTrailResponse_LogFileValidationEnabled:
+			v.LogFileValidationEnabled = new(bool)
+			return d.ReadBool(schemas.CreateTrailResponse_LogFileValidationEnabled, v.LogFileValidationEnabled)
+		case schemas.CreateTrailResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateTrailResponse_Name, v.Name)
+		case schemas.CreateTrailResponse_S3BucketName:
+			v.S3BucketName = new(string)
+			return d.ReadString(schemas.CreateTrailResponse_S3BucketName, v.S3BucketName)
+		case schemas.CreateTrailResponse_S3KeyPrefix:
+			v.S3KeyPrefix = new(string)
+			return d.ReadString(schemas.CreateTrailResponse_S3KeyPrefix, v.S3KeyPrefix)
+		case schemas.CreateTrailResponse_SnsTopicARN:
+			v.SnsTopicARN = new(string)
+			return d.ReadString(schemas.CreateTrailResponse_SnsTopicARN, v.SnsTopicARN)
+		case schemas.CreateTrailResponse_SnsTopicName:
+			v.SnsTopicName = new(string)
+			return d.ReadString(schemas.CreateTrailResponse_SnsTopicName, v.SnsTopicName)
+		case schemas.CreateTrailResponse_TrailARN:
+			v.TrailARN = new(string)
+			return d.ReadString(schemas.CreateTrailResponse_TrailARN, v.TrailARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTrailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTrail{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrail, schemas.CreateTrailRequest, schemas.CreateTrailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateTrail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrail, schemas.CreateTrailRequest, schemas.CreateTrailResponse), output: &CreateTrailOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

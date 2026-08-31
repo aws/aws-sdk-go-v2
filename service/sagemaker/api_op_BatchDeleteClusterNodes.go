@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,20 @@ type BatchDeleteClusterNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteClusterNodesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteClusterNodesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteClusterNodesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.BatchDeleteClusterNodesRequest_ClusterName, *v.ClusterName)
+	}
+	serializeClusterNodeIds(s, schemas.BatchDeleteClusterNodesRequest_NodeIds, v.NodeIds)
+	serializeClusterNodeLogicalIdList(s, schemas.BatchDeleteClusterNodesRequest_NodeLogicalIds, v.NodeLogicalIds)
+}
+
 type BatchDeleteClusterNodesOutput struct {
 
 	// A list of errors encountered when deleting the specified nodes.
@@ -85,13 +101,38 @@ type BatchDeleteClusterNodesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteClusterNodesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteClusterNodesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteClusterNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDeleteClusterNodesErrorList(s, schemas.BatchDeleteClusterNodesResponse_Failed, v.Failed)
+	serializeBatchDeleteClusterNodeLogicalIdsErrorList(s, schemas.BatchDeleteClusterNodesResponse_FailedNodeLogicalIds, v.FailedNodeLogicalIds)
+	serializeClusterNodeIds(s, schemas.BatchDeleteClusterNodesResponse_Successful, v.Successful)
+	serializeClusterNodeLogicalIdList(s, schemas.BatchDeleteClusterNodesResponse_SuccessfulNodeLogicalIds, v.SuccessfulNodeLogicalIds)
+}
+func (v *BatchDeleteClusterNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteClusterNodesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteClusterNodesResponse_Failed:
+			return deserializeBatchDeleteClusterNodesErrorList(d, schemas.BatchDeleteClusterNodesResponse_Failed, &v.Failed)
+		case schemas.BatchDeleteClusterNodesResponse_FailedNodeLogicalIds:
+			return deserializeBatchDeleteClusterNodeLogicalIdsErrorList(d, schemas.BatchDeleteClusterNodesResponse_FailedNodeLogicalIds, &v.FailedNodeLogicalIds)
+		case schemas.BatchDeleteClusterNodesResponse_Successful:
+			return deserializeClusterNodeIds(d, schemas.BatchDeleteClusterNodesResponse_Successful, &v.Successful)
+		case schemas.BatchDeleteClusterNodesResponse_SuccessfulNodeLogicalIds:
+			return deserializeClusterNodeLogicalIdList(d, schemas.BatchDeleteClusterNodesResponse_SuccessfulNodeLogicalIds, &v.SuccessfulNodeLogicalIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteClusterNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDeleteClusterNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteClusterNodes, schemas.BatchDeleteClusterNodesRequest, schemas.BatchDeleteClusterNodesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDeleteClusterNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteClusterNodes, schemas.BatchDeleteClusterNodesRequest, schemas.BatchDeleteClusterNodesResponse), output: &BatchDeleteClusterNodesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

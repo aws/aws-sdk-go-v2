@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -141,6 +143,61 @@ type UpdateNotebookInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNotebookInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNotebookInstanceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNotebookInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNotebookInstanceAcceleratorTypes(s, schemas.UpdateNotebookInstanceInput_AcceleratorTypes, v.AcceleratorTypes)
+	serializeAdditionalCodeRepositoryNamesOrUrls(s, schemas.UpdateNotebookInstanceInput_AdditionalCodeRepositories, v.AdditionalCodeRepositories)
+	if v.DefaultCodeRepository != nil {
+		s.WriteString(schemas.UpdateNotebookInstanceInput_DefaultCodeRepository, *v.DefaultCodeRepository)
+	}
+	if v.DisassociateAcceleratorTypes != nil {
+		s.WriteBool(schemas.UpdateNotebookInstanceInput_DisassociateAcceleratorTypes, *v.DisassociateAcceleratorTypes)
+	}
+	if v.DisassociateAdditionalCodeRepositories != nil {
+		s.WriteBool(schemas.UpdateNotebookInstanceInput_DisassociateAdditionalCodeRepositories, *v.DisassociateAdditionalCodeRepositories)
+	}
+	if v.DisassociateDefaultCodeRepository != nil {
+		s.WriteBool(schemas.UpdateNotebookInstanceInput_DisassociateDefaultCodeRepository, *v.DisassociateDefaultCodeRepository)
+	}
+	if v.DisassociateLifecycleConfig != nil {
+		s.WriteBool(schemas.UpdateNotebookInstanceInput_DisassociateLifecycleConfig, *v.DisassociateLifecycleConfig)
+	}
+	if v.InstanceMetadataServiceConfiguration != nil {
+		s.WriteStruct(schemas.UpdateNotebookInstanceInput_InstanceMetadataServiceConfiguration)
+		v.InstanceMetadataServiceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceType != "" {
+		s.WriteString(schemas.UpdateNotebookInstanceInput_InstanceType, string(v.InstanceType))
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.UpdateNotebookInstanceInput_IpAddressType, string(v.IpAddressType))
+	}
+	if v.LifecycleConfigName != nil {
+		s.WriteString(schemas.UpdateNotebookInstanceInput_LifecycleConfigName, *v.LifecycleConfigName)
+	}
+	if v.NotebookInstanceName != nil {
+		s.WriteString(schemas.UpdateNotebookInstanceInput_NotebookInstanceName, *v.NotebookInstanceName)
+	}
+	if v.PlatformIdentifier != nil {
+		s.WriteString(schemas.UpdateNotebookInstanceInput_PlatformIdentifier, *v.PlatformIdentifier)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateNotebookInstanceInput_RoleArn, *v.RoleArn)
+	}
+	if v.RootAccess != "" {
+		s.WriteString(schemas.UpdateNotebookInstanceInput_RootAccess, string(v.RootAccess))
+	}
+	if v.VolumeSizeInGB != nil {
+		s.WriteInt32(schemas.UpdateNotebookInstanceInput_VolumeSizeInGB, *v.VolumeSizeInGB)
+	}
+}
+
 type UpdateNotebookInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -148,13 +205,26 @@ type UpdateNotebookInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNotebookInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNotebookInstanceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNotebookInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateNotebookInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateNotebookInstanceOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateNotebookInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateNotebookInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNotebookInstance, schemas.UpdateNotebookInstanceInput, schemas.UpdateNotebookInstanceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateNotebookInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNotebookInstance, schemas.UpdateNotebookInstanceInput, schemas.UpdateNotebookInstanceOutput), output: &UpdateNotebookInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

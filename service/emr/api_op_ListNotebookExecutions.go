@@ -5,7 +5,9 @@ package emr
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -80,6 +82,33 @@ type ListNotebookExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNotebookExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNotebookExecutionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNotebookExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EditorId != nil {
+		s.WriteString(schemas.ListNotebookExecutionsInput_EditorId, *v.EditorId)
+	}
+	if v.ExecutionEngineId != nil {
+		s.WriteString(schemas.ListNotebookExecutionsInput_ExecutionEngineId, *v.ExecutionEngineId)
+	}
+	if v.From != nil {
+		s.WriteTime(schemas.ListNotebookExecutionsInput_From, *v.From)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListNotebookExecutionsInput_Marker, *v.Marker)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListNotebookExecutionsInput_Status, string(v.Status))
+	}
+	if v.To != nil {
+		s.WriteTime(schemas.ListNotebookExecutionsInput_To, *v.To)
+	}
+}
+
 type ListNotebookExecutionsOutput struct {
 
 	// A pagination token that a subsequent ListNotebookExecutions can use to
@@ -95,13 +124,35 @@ type ListNotebookExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNotebookExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNotebookExecutionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNotebookExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListNotebookExecutionsOutput_Marker, *v.Marker)
+	}
+	serializeNotebookExecutionSummaryList(s, schemas.ListNotebookExecutionsOutput_NotebookExecutions, v.NotebookExecutions)
+}
+func (v *ListNotebookExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNotebookExecutionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNotebookExecutionsOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListNotebookExecutionsOutput_Marker, v.Marker)
+		case schemas.ListNotebookExecutionsOutput_NotebookExecutions:
+			return deserializeNotebookExecutionSummaryList(d, schemas.ListNotebookExecutionsOutput_NotebookExecutions, &v.NotebookExecutions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNotebookExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListNotebookExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNotebookExecutions, schemas.ListNotebookExecutionsInput, schemas.ListNotebookExecutionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListNotebookExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNotebookExecutions, schemas.ListNotebookExecutionsInput, schemas.ListNotebookExecutionsOutput), output: &ListNotebookExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

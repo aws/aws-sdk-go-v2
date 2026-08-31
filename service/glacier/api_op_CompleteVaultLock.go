@@ -5,6 +5,8 @@ package glacier
 import (
 	"context"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,24 @@ type CompleteVaultLockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompleteVaultLockInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompleteVaultLockInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompleteVaultLockInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.CompleteVaultLockInput_accountId, *v.AccountId)
+	}
+	if v.LockId != nil {
+		s.WriteString(schemas.CompleteVaultLockInput_lockId, *v.LockId)
+	}
+	if v.VaultName != nil {
+		s.WriteString(schemas.CompleteVaultLockInput_vaultName, *v.VaultName)
+	}
+}
+
 type CompleteVaultLockOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -72,13 +92,26 @@ type CompleteVaultLockOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompleteVaultLockOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompleteVaultLockOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CompleteVaultLockOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCompleteVaultLockMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCompleteVaultLock{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteVaultLock, schemas.CompleteVaultLockInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCompleteVaultLock{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteVaultLock, schemas.CompleteVaultLockInput, nil), output: &CompleteVaultLockOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

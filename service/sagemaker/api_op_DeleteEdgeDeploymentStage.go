@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteEdgeDeploymentStageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEdgeDeploymentStageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEdgeDeploymentStageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEdgeDeploymentStageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EdgeDeploymentPlanName != nil {
+		s.WriteString(schemas.DeleteEdgeDeploymentStageRequest_EdgeDeploymentPlanName, *v.EdgeDeploymentPlanName)
+	}
+	if v.StageName != nil {
+		s.WriteString(schemas.DeleteEdgeDeploymentStageRequest_StageName, *v.StageName)
+	}
+}
+
 type DeleteEdgeDeploymentStageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type DeleteEdgeDeploymentStageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEdgeDeploymentStageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEdgeDeploymentStageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteEdgeDeploymentStageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEdgeDeploymentStageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteEdgeDeploymentStage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEdgeDeploymentStage, schemas.DeleteEdgeDeploymentStageRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteEdgeDeploymentStage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEdgeDeploymentStage, schemas.DeleteEdgeDeploymentStageRequest, nil), output: &DeleteEdgeDeploymentStageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

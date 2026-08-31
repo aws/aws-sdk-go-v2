@@ -4,7 +4,9 @@ package codedeploy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,24 @@ type PutLifecycleEventHookExecutionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutLifecycleEventHookExecutionStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutLifecycleEventHookExecutionStatusInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutLifecycleEventHookExecutionStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.PutLifecycleEventHookExecutionStatusInput_deploymentId, *v.DeploymentId)
+	}
+	if v.LifecycleEventHookExecutionId != nil {
+		s.WriteString(schemas.PutLifecycleEventHookExecutionStatusInput_lifecycleEventHookExecutionId, *v.LifecycleEventHookExecutionId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.PutLifecycleEventHookExecutionStatusInput_status, string(v.Status))
+	}
+}
+
 type PutLifecycleEventHookExecutionStatusOutput struct {
 
 	// The execution ID of the lifecycle event hook. A hook is specified in the hooks
@@ -65,13 +85,32 @@ type PutLifecycleEventHookExecutionStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutLifecycleEventHookExecutionStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutLifecycleEventHookExecutionStatusOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutLifecycleEventHookExecutionStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LifecycleEventHookExecutionId != nil {
+		s.WriteString(schemas.PutLifecycleEventHookExecutionStatusOutput_lifecycleEventHookExecutionId, *v.LifecycleEventHookExecutionId)
+	}
+}
+func (v *PutLifecycleEventHookExecutionStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutLifecycleEventHookExecutionStatusOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutLifecycleEventHookExecutionStatusOutput_lifecycleEventHookExecutionId:
+			v.LifecycleEventHookExecutionId = new(string)
+			return d.ReadString(schemas.PutLifecycleEventHookExecutionStatusOutput_lifecycleEventHookExecutionId, v.LifecycleEventHookExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutLifecycleEventHookExecutionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutLifecycleEventHookExecutionStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutLifecycleEventHookExecutionStatus, schemas.PutLifecycleEventHookExecutionStatusInput, schemas.PutLifecycleEventHookExecutionStatusOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutLifecycleEventHookExecutionStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutLifecycleEventHookExecutionStatus, schemas.PutLifecycleEventHookExecutionStatusInput, schemas.PutLifecycleEventHookExecutionStatusOutput), output: &PutLifecycleEventHookExecutionStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

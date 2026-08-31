@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,19 @@ type BatchGetSchemaAnalysisRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetSchemaAnalysisRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetSchemaAnalysisRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetSchemaAnalysisRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.BatchGetSchemaAnalysisRuleInput_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+	serializeSchemaAnalysisRuleRequestList(s, schemas.BatchGetSchemaAnalysisRuleInput_schemaAnalysisRuleRequests, v.SchemaAnalysisRuleRequests)
+}
+
 type BatchGetSchemaAnalysisRuleOutput struct {
 
 	// The retrieved list of analysis rules.
@@ -59,13 +74,32 @@ type BatchGetSchemaAnalysisRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetSchemaAnalysisRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetSchemaAnalysisRuleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetSchemaAnalysisRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSchemaAnalysisRuleList(s, schemas.BatchGetSchemaAnalysisRuleOutput_analysisRules, v.AnalysisRules)
+	serializeBatchGetSchemaAnalysisRuleErrorList(s, schemas.BatchGetSchemaAnalysisRuleOutput_errors, v.Errors)
+}
+func (v *BatchGetSchemaAnalysisRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetSchemaAnalysisRuleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetSchemaAnalysisRuleOutput_analysisRules:
+			return deserializeSchemaAnalysisRuleList(d, schemas.BatchGetSchemaAnalysisRuleOutput_analysisRules, &v.AnalysisRules)
+		case schemas.BatchGetSchemaAnalysisRuleOutput_errors:
+			return deserializeBatchGetSchemaAnalysisRuleErrorList(d, schemas.BatchGetSchemaAnalysisRuleOutput_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetSchemaAnalysisRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetSchemaAnalysisRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetSchemaAnalysisRule, schemas.BatchGetSchemaAnalysisRuleInput, schemas.BatchGetSchemaAnalysisRuleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetSchemaAnalysisRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetSchemaAnalysisRule, schemas.BatchGetSchemaAnalysisRuleInput, schemas.BatchGetSchemaAnalysisRuleOutput), output: &BatchGetSchemaAnalysisRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

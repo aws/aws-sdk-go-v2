@@ -4,6 +4,8 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DisassociateApplicationFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateApplicationFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateApplicationFleetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateApplicationFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.DisassociateApplicationFleetRequest_ApplicationArn, *v.ApplicationArn)
+	}
+	if v.FleetName != nil {
+		s.WriteString(schemas.DisassociateApplicationFleetRequest_FleetName, *v.FleetName)
+	}
+}
+
 type DisassociateApplicationFleetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DisassociateApplicationFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateApplicationFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateApplicationFleetResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateApplicationFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateApplicationFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateApplicationFleetResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateApplicationFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDisassociateApplicationFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateApplicationFleet, schemas.DisassociateApplicationFleetRequest, schemas.DisassociateApplicationFleetResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDisassociateApplicationFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateApplicationFleet, schemas.DisassociateApplicationFleetRequest, schemas.DisassociateApplicationFleetResult), output: &DisassociateApplicationFleetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

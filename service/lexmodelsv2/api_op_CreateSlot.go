@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -95,6 +97,56 @@ type CreateSlotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSlotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSlotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSlotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.CreateSlotRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.CreateSlotRequest_botVersion, *v.BotVersion)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateSlotRequest_description, *v.Description)
+	}
+	if v.IntentId != nil {
+		s.WriteString(schemas.CreateSlotRequest_intentId, *v.IntentId)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.CreateSlotRequest_localeId, *v.LocaleId)
+	}
+	if v.MultipleValuesSetting != nil {
+		s.WriteStruct(schemas.CreateSlotRequest_multipleValuesSetting)
+		v.MultipleValuesSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ObfuscationSetting != nil {
+		s.WriteStruct(schemas.CreateSlotRequest_obfuscationSetting)
+		v.ObfuscationSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SlotName != nil {
+		s.WriteString(schemas.CreateSlotRequest_slotName, *v.SlotName)
+	}
+	if v.SlotTypeId != nil {
+		s.WriteString(schemas.CreateSlotRequest_slotTypeId, *v.SlotTypeId)
+	}
+	if v.SubSlotSetting != nil {
+		s.WriteStruct(schemas.CreateSlotRequest_subSlotSetting)
+		v.SubSlotSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ValueElicitationSetting != nil {
+		s.WriteStruct(schemas.CreateSlotRequest_valueElicitationSetting)
+		v.ValueElicitationSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateSlotOutput struct {
 
 	// The unique identifier of the bot associated with the slot.
@@ -145,13 +197,112 @@ type CreateSlotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSlotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSlotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSlotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.CreateSlotResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.CreateSlotResponse_botVersion, *v.BotVersion)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.CreateSlotResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateSlotResponse_description, *v.Description)
+	}
+	if v.IntentId != nil {
+		s.WriteString(schemas.CreateSlotResponse_intentId, *v.IntentId)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.CreateSlotResponse_localeId, *v.LocaleId)
+	}
+	if v.MultipleValuesSetting != nil {
+		s.WriteStruct(schemas.CreateSlotResponse_multipleValuesSetting)
+		v.MultipleValuesSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ObfuscationSetting != nil {
+		s.WriteStruct(schemas.CreateSlotResponse_obfuscationSetting)
+		v.ObfuscationSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SlotId != nil {
+		s.WriteString(schemas.CreateSlotResponse_slotId, *v.SlotId)
+	}
+	if v.SlotName != nil {
+		s.WriteString(schemas.CreateSlotResponse_slotName, *v.SlotName)
+	}
+	if v.SlotTypeId != nil {
+		s.WriteString(schemas.CreateSlotResponse_slotTypeId, *v.SlotTypeId)
+	}
+	if v.SubSlotSetting != nil {
+		s.WriteStruct(schemas.CreateSlotResponse_subSlotSetting)
+		v.SubSlotSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ValueElicitationSetting != nil {
+		s.WriteStruct(schemas.CreateSlotResponse_valueElicitationSetting)
+		v.ValueElicitationSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSlotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSlotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSlotResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.CreateSlotResponse_botId, v.BotId)
+		case schemas.CreateSlotResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.CreateSlotResponse_botVersion, v.BotVersion)
+		case schemas.CreateSlotResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.CreateSlotResponse_creationDateTime, v.CreationDateTime)
+		case schemas.CreateSlotResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateSlotResponse_description, v.Description)
+		case schemas.CreateSlotResponse_intentId:
+			v.IntentId = new(string)
+			return d.ReadString(schemas.CreateSlotResponse_intentId, v.IntentId)
+		case schemas.CreateSlotResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.CreateSlotResponse_localeId, v.LocaleId)
+		case schemas.CreateSlotResponse_multipleValuesSetting:
+			v.MultipleValuesSetting = &types.MultipleValuesSetting{}
+			return v.MultipleValuesSetting.Deserialize(d)
+		case schemas.CreateSlotResponse_obfuscationSetting:
+			v.ObfuscationSetting = &types.ObfuscationSetting{}
+			return v.ObfuscationSetting.Deserialize(d)
+		case schemas.CreateSlotResponse_slotId:
+			v.SlotId = new(string)
+			return d.ReadString(schemas.CreateSlotResponse_slotId, v.SlotId)
+		case schemas.CreateSlotResponse_slotName:
+			v.SlotName = new(string)
+			return d.ReadString(schemas.CreateSlotResponse_slotName, v.SlotName)
+		case schemas.CreateSlotResponse_slotTypeId:
+			v.SlotTypeId = new(string)
+			return d.ReadString(schemas.CreateSlotResponse_slotTypeId, v.SlotTypeId)
+		case schemas.CreateSlotResponse_subSlotSetting:
+			v.SubSlotSetting = &types.SubSlotSetting{}
+			return v.SubSlotSetting.Deserialize(d)
+		case schemas.CreateSlotResponse_valueElicitationSetting:
+			v.ValueElicitationSetting = &types.SlotValueElicitationSetting{}
+			return v.ValueElicitationSetting.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSlotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSlot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSlot, schemas.CreateSlotRequest, schemas.CreateSlotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSlot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSlot, schemas.CreateSlotRequest, schemas.CreateSlotResponse), output: &CreateSlotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

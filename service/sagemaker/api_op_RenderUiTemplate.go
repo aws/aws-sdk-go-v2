@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,31 @@ type RenderUiTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RenderUiTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RenderUiTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RenderUiTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HumanTaskUiArn != nil {
+		s.WriteString(schemas.RenderUiTemplateRequest_HumanTaskUiArn, *v.HumanTaskUiArn)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.RenderUiTemplateRequest_RoleArn, *v.RoleArn)
+	}
+	if v.Task != nil {
+		s.WriteStruct(schemas.RenderUiTemplateRequest_Task)
+		v.Task.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UiTemplate != nil {
+		s.WriteStruct(schemas.RenderUiTemplateRequest_UiTemplate)
+		v.UiTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type RenderUiTemplateOutput struct {
 
 	// A list of one or more RenderingError objects if any were encountered while
@@ -70,13 +97,35 @@ type RenderUiTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RenderUiTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RenderUiTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RenderUiTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRenderingErrorList(s, schemas.RenderUiTemplateResponse_Errors, v.Errors)
+	if v.RenderedContent != nil {
+		s.WriteString(schemas.RenderUiTemplateResponse_RenderedContent, *v.RenderedContent)
+	}
+}
+func (v *RenderUiTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RenderUiTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RenderUiTemplateResponse_Errors:
+			return deserializeRenderingErrorList(d, schemas.RenderUiTemplateResponse_Errors, &v.Errors)
+		case schemas.RenderUiTemplateResponse_RenderedContent:
+			v.RenderedContent = new(string)
+			return d.ReadString(schemas.RenderUiTemplateResponse_RenderedContent, v.RenderedContent)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRenderUiTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRenderUiTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RenderUiTemplate, schemas.RenderUiTemplateRequest, schemas.RenderUiTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRenderUiTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RenderUiTemplate, schemas.RenderUiTemplateRequest, schemas.RenderUiTemplateResponse), output: &RenderUiTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

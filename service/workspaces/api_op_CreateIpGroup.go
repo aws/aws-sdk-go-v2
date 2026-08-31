@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,23 @@ type CreateIpGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIpGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIpGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIpGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupDesc != nil {
+		s.WriteString(schemas.CreateIpGroupRequest_GroupDesc, *v.GroupDesc)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.CreateIpGroupRequest_GroupName, *v.GroupName)
+	}
+	serializeTagList(s, schemas.CreateIpGroupRequest_Tags, v.Tags)
+	serializeIpRuleList(s, schemas.CreateIpGroupRequest_UserRules, v.UserRules)
+}
+
 type CreateIpGroupOutput struct {
 
 	// The identifier of the group.
@@ -66,13 +85,32 @@ type CreateIpGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIpGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIpGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIpGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.CreateIpGroupResult_GroupId, *v.GroupId)
+	}
+}
+func (v *CreateIpGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIpGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIpGroupResult_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.CreateIpGroupResult_GroupId, v.GroupId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIpGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateIpGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIpGroup, schemas.CreateIpGroupRequest, schemas.CreateIpGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateIpGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIpGroup, schemas.CreateIpGroupRequest, schemas.CreateIpGroupResult), output: &CreateIpGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

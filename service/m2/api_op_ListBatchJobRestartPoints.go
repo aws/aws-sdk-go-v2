@@ -4,7 +4,9 @@ package m2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/m2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListBatchJobRestartPointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBatchJobRestartPointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBatchJobRestartPointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBatchJobRestartPointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ListBatchJobRestartPointsRequest_applicationId, *v.ApplicationId)
+	}
+	if v.AuthSecretsManagerArn != nil {
+		s.WriteString(schemas.ListBatchJobRestartPointsRequest_authSecretsManagerArn, *v.AuthSecretsManagerArn)
+	}
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.ListBatchJobRestartPointsRequest_executionId, *v.ExecutionId)
+	}
+}
+
 type ListBatchJobRestartPointsOutput struct {
 
 	// Returns all the batch job steps and related information for a batch job that
@@ -56,13 +76,29 @@ type ListBatchJobRestartPointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBatchJobRestartPointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBatchJobRestartPointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBatchJobRestartPointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchJobStepList(s, schemas.ListBatchJobRestartPointsResponse_batchJobSteps, v.BatchJobSteps)
+}
+func (v *ListBatchJobRestartPointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBatchJobRestartPointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBatchJobRestartPointsResponse_batchJobSteps:
+			return deserializeBatchJobStepList(d, schemas.ListBatchJobRestartPointsResponse_batchJobSteps, &v.BatchJobSteps)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBatchJobRestartPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBatchJobRestartPoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBatchJobRestartPoints, schemas.ListBatchJobRestartPointsRequest, schemas.ListBatchJobRestartPointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBatchJobRestartPoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBatchJobRestartPoints, schemas.ListBatchJobRestartPointsRequest, schemas.ListBatchJobRestartPointsResponse), output: &ListBatchJobRestartPointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

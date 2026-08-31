@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -254,6 +256,32 @@ type GetCurrentMetricDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCurrentMetricDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCurrentMetricDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCurrentMetricDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCurrentMetrics(s, schemas.GetCurrentMetricDataRequest_CurrentMetrics, v.CurrentMetrics)
+	if v.Filters != nil {
+		s.WriteStruct(schemas.GetCurrentMetricDataRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeGroupings(s, schemas.GetCurrentMetricDataRequest_Groupings, v.Groupings)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GetCurrentMetricDataRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetCurrentMetricDataRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCurrentMetricDataRequest_NextToken, *v.NextToken)
+	}
+	serializeCurrentMetricSortCriteriaMaxOne(s, schemas.GetCurrentMetricDataRequest_SortCriteria, v.SortCriteria)
+}
+
 type GetCurrentMetricDataOutput struct {
 
 	// The total count of the result, regardless of the current page size.
@@ -278,13 +306,47 @@ type GetCurrentMetricDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCurrentMetricDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCurrentMetricDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCurrentMetricDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTotalCount != nil {
+		s.WriteInt64(schemas.GetCurrentMetricDataResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
+	}
+	if v.DataSnapshotTime != nil {
+		s.WriteTime(schemas.GetCurrentMetricDataResponse_DataSnapshotTime, *v.DataSnapshotTime)
+	}
+	serializeCurrentMetricResults(s, schemas.GetCurrentMetricDataResponse_MetricResults, v.MetricResults)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCurrentMetricDataResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetCurrentMetricDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCurrentMetricDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCurrentMetricDataResponse_ApproximateTotalCount:
+			v.ApproximateTotalCount = new(int64)
+			return d.ReadInt64(schemas.GetCurrentMetricDataResponse_ApproximateTotalCount, v.ApproximateTotalCount)
+		case schemas.GetCurrentMetricDataResponse_DataSnapshotTime:
+			v.DataSnapshotTime = new(time.Time)
+			return d.ReadTime(schemas.GetCurrentMetricDataResponse_DataSnapshotTime, v.DataSnapshotTime)
+		case schemas.GetCurrentMetricDataResponse_MetricResults:
+			return deserializeCurrentMetricResults(d, schemas.GetCurrentMetricDataResponse_MetricResults, &v.MetricResults)
+		case schemas.GetCurrentMetricDataResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetCurrentMetricDataResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCurrentMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCurrentMetricData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCurrentMetricData, schemas.GetCurrentMetricDataRequest, schemas.GetCurrentMetricDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCurrentMetricData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCurrentMetricData, schemas.GetCurrentMetricDataRequest, schemas.GetCurrentMetricDataResponse), output: &GetCurrentMetricDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

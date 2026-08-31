@@ -5,7 +5,9 @@ package personalize
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type ListMetricAttributionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMetricAttributionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMetricAttributionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMetricAttributionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetGroupArn != nil {
+		s.WriteString(schemas.ListMetricAttributionsRequest_datasetGroupArn, *v.DatasetGroupArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMetricAttributionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMetricAttributionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListMetricAttributionsOutput struct {
 
 	// The list of metric attributions.
@@ -55,13 +75,35 @@ type ListMetricAttributionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMetricAttributionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMetricAttributionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMetricAttributionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricAttributions(s, schemas.ListMetricAttributionsResponse_metricAttributions, v.MetricAttributions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMetricAttributionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListMetricAttributionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMetricAttributionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMetricAttributionsResponse_metricAttributions:
+			return deserializeMetricAttributions(d, schemas.ListMetricAttributionsResponse_metricAttributions, &v.MetricAttributions)
+		case schemas.ListMetricAttributionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMetricAttributionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMetricAttributionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMetricAttributions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMetricAttributions, schemas.ListMetricAttributionsRequest, schemas.ListMetricAttributionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMetricAttributions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMetricAttributions, schemas.ListMetricAttributionsRequest, schemas.ListMetricAttributionsResponse), output: &ListMetricAttributionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

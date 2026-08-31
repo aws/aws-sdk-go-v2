@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AppRunner.ListVpcIngressConnections
+
+{"NextToken":"__NextToken__","VpcIngressConnectionSummaryList":[{"ServiceArn":"__ServiceArn__","VpcIngressConnectionArn":"__VpcIngressConnectionArn__"},{"ServiceArn":"__ServiceArn__","VpcIngressConnectionArn":"__VpcIngressConnectionArn__"}]}

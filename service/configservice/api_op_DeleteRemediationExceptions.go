@@ -4,7 +4,9 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,19 @@ type DeleteRemediationExceptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRemediationExceptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRemediationExceptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRemediationExceptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigRuleName != nil {
+		s.WriteString(schemas.DeleteRemediationExceptionsRequest_ConfigRuleName, *v.ConfigRuleName)
+	}
+	serializeRemediationExceptionResourceKeys(s, schemas.DeleteRemediationExceptionsRequest_ResourceKeys, v.ResourceKeys)
+}
+
 type DeleteRemediationExceptionsOutput struct {
 
 	// Returns a list of failed delete remediation exceptions batch objects. Each
@@ -58,13 +73,29 @@ type DeleteRemediationExceptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRemediationExceptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRemediationExceptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRemediationExceptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedDeleteRemediationExceptionsBatches(s, schemas.DeleteRemediationExceptionsResponse_FailedBatches, v.FailedBatches)
+}
+func (v *DeleteRemediationExceptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRemediationExceptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRemediationExceptionsResponse_FailedBatches:
+			return deserializeFailedDeleteRemediationExceptionsBatches(d, schemas.DeleteRemediationExceptionsResponse_FailedBatches, &v.FailedBatches)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRemediationExceptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRemediationExceptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRemediationExceptions, schemas.DeleteRemediationExceptionsRequest, schemas.DeleteRemediationExceptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteRemediationExceptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRemediationExceptions, schemas.DeleteRemediationExceptionsRequest, schemas.DeleteRemediationExceptionsResponse), output: &DeleteRemediationExceptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

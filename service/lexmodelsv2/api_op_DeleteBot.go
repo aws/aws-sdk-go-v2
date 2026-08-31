@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,21 @@ type DeleteBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.DeleteBotRequest_botId, *v.BotId)
+	}
+	if v.SkipResourceInUseCheck != false {
+		s.WriteBool(schemas.DeleteBotRequest_skipResourceInUseCheck, v.SkipResourceInUseCheck)
+	}
+}
+
 type DeleteBotOutput struct {
 
 	// The unique identifier of the bot that Amazon Lex is deleting.
@@ -65,13 +82,42 @@ type DeleteBotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.DeleteBotResponse_botId, *v.BotId)
+	}
+	if v.BotStatus != "" {
+		s.WriteString(schemas.DeleteBotResponse_botStatus, string(v.BotStatus))
+	}
+}
+func (v *DeleteBotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBotResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.DeleteBotResponse_botId, v.BotId)
+		case schemas.DeleteBotResponse_botStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeleteBotResponse_botStatus, &ev); err != nil {
+				return err
+			}
+			v.BotStatus = types.BotStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBot, schemas.DeleteBotRequest, schemas.DeleteBotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBot, schemas.DeleteBotRequest, schemas.DeleteBotResponse), output: &DeleteBotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

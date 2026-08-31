@@ -5,7 +5,9 @@ package appstream
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,27 @@ type DescribeAppBlockBuilderAppBlockAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppBlockBuilderAppBlockAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppBlockBuilderAppBlockAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppBlockBuilderAppBlockAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppBlockArn != nil {
+		s.WriteString(schemas.DescribeAppBlockBuilderAppBlockAssociationsRequest_AppBlockArn, *v.AppBlockArn)
+	}
+	if v.AppBlockBuilderName != nil {
+		s.WriteString(schemas.DescribeAppBlockBuilderAppBlockAssociationsRequest_AppBlockBuilderName, *v.AppBlockBuilderName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeAppBlockBuilderAppBlockAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAppBlockBuilderAppBlockAssociationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeAppBlockBuilderAppBlockAssociationsOutput struct {
 
 	// This list of app block builders associated with app blocks.
@@ -58,13 +81,35 @@ type DescribeAppBlockBuilderAppBlockAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppBlockBuilderAppBlockAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppBlockBuilderAppBlockAssociationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppBlockBuilderAppBlockAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAppBlockBuilderAppBlockAssociationsList(s, schemas.DescribeAppBlockBuilderAppBlockAssociationsResult_AppBlockBuilderAppBlockAssociations, v.AppBlockBuilderAppBlockAssociations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAppBlockBuilderAppBlockAssociationsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAppBlockBuilderAppBlockAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAppBlockBuilderAppBlockAssociationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAppBlockBuilderAppBlockAssociationsResult_AppBlockBuilderAppBlockAssociations:
+			return deserializeAppBlockBuilderAppBlockAssociationsList(d, schemas.DescribeAppBlockBuilderAppBlockAssociationsResult_AppBlockBuilderAppBlockAssociations, &v.AppBlockBuilderAppBlockAssociations)
+		case schemas.DescribeAppBlockBuilderAppBlockAssociationsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAppBlockBuilderAppBlockAssociationsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAppBlockBuilderAppBlockAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeAppBlockBuilderAppBlockAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppBlockBuilderAppBlockAssociations, schemas.DescribeAppBlockBuilderAppBlockAssociationsRequest, schemas.DescribeAppBlockBuilderAppBlockAssociationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeAppBlockBuilderAppBlockAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppBlockBuilderAppBlockAssociations, schemas.DescribeAppBlockBuilderAppBlockAssociationsRequest, schemas.DescribeAppBlockBuilderAppBlockAssociationsResult), output: &DescribeAppBlockBuilderAppBlockAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

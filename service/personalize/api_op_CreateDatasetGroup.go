@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -114,6 +116,28 @@ type CreateDatasetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatasetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDatasetGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDatasetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != "" {
+		s.WriteString(schemas.CreateDatasetGroupRequest_domain, string(v.Domain))
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.CreateDatasetGroupRequest_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDatasetGroupRequest_name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateDatasetGroupRequest_roleArn, *v.RoleArn)
+	}
+	serializeTags(s, schemas.CreateDatasetGroupRequest_tags, v.Tags)
+}
+
 type CreateDatasetGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new dataset group.
@@ -128,13 +152,42 @@ type CreateDatasetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatasetGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDatasetGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDatasetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetGroupArn != nil {
+		s.WriteString(schemas.CreateDatasetGroupResponse_datasetGroupArn, *v.DatasetGroupArn)
+	}
+	if v.Domain != "" {
+		s.WriteString(schemas.CreateDatasetGroupResponse_domain, string(v.Domain))
+	}
+}
+func (v *CreateDatasetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDatasetGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDatasetGroupResponse_datasetGroupArn:
+			v.DatasetGroupArn = new(string)
+			return d.ReadString(schemas.CreateDatasetGroupResponse_datasetGroupArn, v.DatasetGroupArn)
+		case schemas.CreateDatasetGroupResponse_domain:
+			var ev string
+			if err := d.ReadString(schemas.CreateDatasetGroupResponse_domain, &ev); err != nil {
+				return err
+			}
+			v.Domain = types.Domain(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDatasetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDatasetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDatasetGroup, schemas.CreateDatasetGroupRequest, schemas.CreateDatasetGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDatasetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDatasetGroup, schemas.CreateDatasetGroupRequest, schemas.CreateDatasetGroupResponse), output: &CreateDatasetGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package route53resolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DisassociateFirewallRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateFirewallRuleGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateFirewallRuleGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateFirewallRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallRuleGroupAssociationId != nil {
+		s.WriteString(schemas.DisassociateFirewallRuleGroupRequest_FirewallRuleGroupAssociationId, *v.FirewallRuleGroupAssociationId)
+	}
+}
+
 type DisassociateFirewallRuleGroupOutput struct {
 
 	// The firewall rule group association that you just removed.
@@ -45,13 +59,34 @@ type DisassociateFirewallRuleGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateFirewallRuleGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateFirewallRuleGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateFirewallRuleGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallRuleGroupAssociation != nil {
+		s.WriteStruct(schemas.DisassociateFirewallRuleGroupResponse_FirewallRuleGroupAssociation)
+		v.FirewallRuleGroupAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DisassociateFirewallRuleGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateFirewallRuleGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateFirewallRuleGroupResponse_FirewallRuleGroupAssociation:
+			v.FirewallRuleGroupAssociation = &types.FirewallRuleGroupAssociation{}
+			return v.FirewallRuleGroupAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateFirewallRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateFirewallRuleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateFirewallRuleGroup, schemas.DisassociateFirewallRuleGroupRequest, schemas.DisassociateFirewallRuleGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateFirewallRuleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateFirewallRuleGroup, schemas.DisassociateFirewallRuleGroupRequest, schemas.DisassociateFirewallRuleGroupResponse), output: &DisassociateFirewallRuleGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

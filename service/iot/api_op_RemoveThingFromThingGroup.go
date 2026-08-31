@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type RemoveThingFromThingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveThingFromThingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveThingFromThingGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveThingFromThingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThingArn != nil {
+		s.WriteString(schemas.RemoveThingFromThingGroupRequest_thingArn, *v.ThingArn)
+	}
+	if v.ThingGroupArn != nil {
+		s.WriteString(schemas.RemoveThingFromThingGroupRequest_thingGroupArn, *v.ThingGroupArn)
+	}
+	if v.ThingGroupName != nil {
+		s.WriteString(schemas.RemoveThingFromThingGroupRequest_thingGroupName, *v.ThingGroupName)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.RemoveThingFromThingGroupRequest_thingName, *v.ThingName)
+	}
+}
+
 type RemoveThingFromThingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +78,26 @@ type RemoveThingFromThingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveThingFromThingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveThingFromThingGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveThingFromThingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveThingFromThingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveThingFromThingGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveThingFromThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveThingFromThingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveThingFromThingGroup, schemas.RemoveThingFromThingGroupRequest, schemas.RemoveThingFromThingGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveThingFromThingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveThingFromThingGroup, schemas.RemoveThingFromThingGroupRequest, schemas.RemoveThingFromThingGroupResponse), output: &RemoveThingFromThingGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

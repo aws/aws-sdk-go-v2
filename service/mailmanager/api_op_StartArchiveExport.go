@@ -4,7 +4,9 @@ package mailmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -60,6 +62,36 @@ type StartArchiveExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartArchiveExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartArchiveExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartArchiveExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveId != nil {
+		s.WriteString(schemas.StartArchiveExportRequest_ArchiveId, *v.ArchiveId)
+	}
+	serializeExportDestinationConfiguration(s, schemas.StartArchiveExportRequest_ExportDestinationConfiguration, v.ExportDestinationConfiguration)
+	if v.Filters != nil {
+		s.WriteStruct(schemas.StartArchiveExportRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FromTimestamp != nil {
+		s.WriteTime(schemas.StartArchiveExportRequest_FromTimestamp, *v.FromTimestamp)
+	}
+	if v.IncludeMetadata != nil {
+		s.WriteBool(schemas.StartArchiveExportRequest_IncludeMetadata, *v.IncludeMetadata)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.StartArchiveExportRequest_MaxResults, *v.MaxResults)
+	}
+	if v.ToTimestamp != nil {
+		s.WriteTime(schemas.StartArchiveExportRequest_ToTimestamp, *v.ToTimestamp)
+	}
+}
+
 // The response from initiating an archive export.
 type StartArchiveExportOutput struct {
 
@@ -72,13 +104,32 @@ type StartArchiveExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartArchiveExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartArchiveExportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartArchiveExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportId != nil {
+		s.WriteString(schemas.StartArchiveExportResponse_ExportId, *v.ExportId)
+	}
+}
+func (v *StartArchiveExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartArchiveExportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartArchiveExportResponse_ExportId:
+			v.ExportId = new(string)
+			return d.ReadString(schemas.StartArchiveExportResponse_ExportId, v.ExportId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartArchiveExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStartArchiveExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartArchiveExport, schemas.StartArchiveExportRequest, schemas.StartArchiveExportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStartArchiveExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartArchiveExport, schemas.StartArchiveExportRequest, schemas.StartArchiveExportResponse), output: &StartArchiveExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

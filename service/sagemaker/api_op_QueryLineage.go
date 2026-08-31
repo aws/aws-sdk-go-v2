@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,36 @@ type QueryLineageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryLineageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryLineageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryLineageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Direction != "" {
+		s.WriteString(schemas.QueryLineageRequest_Direction, string(v.Direction))
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.QueryLineageRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IncludeEdges != nil {
+		s.WriteBool(schemas.QueryLineageRequest_IncludeEdges, *v.IncludeEdges)
+	}
+	if v.MaxDepth != nil {
+		s.WriteInt32(schemas.QueryLineageRequest_MaxDepth, *v.MaxDepth)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.QueryLineageRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.QueryLineageRequest_NextToken, *v.NextToken)
+	}
+	serializeQueryLineageStartArns(s, schemas.QueryLineageRequest_StartArns, v.StartArns)
+}
+
 type QueryLineageOutput struct {
 
 	// A list of edges that connect vertices in the response.
@@ -94,13 +126,38 @@ type QueryLineageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryLineageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryLineageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryLineageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEdges(s, schemas.QueryLineageResponse_Edges, v.Edges)
+	if v.NextToken != nil {
+		s.WriteString(schemas.QueryLineageResponse_NextToken, *v.NextToken)
+	}
+	serializeVertices(s, schemas.QueryLineageResponse_Vertices, v.Vertices)
+}
+func (v *QueryLineageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryLineageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryLineageResponse_Edges:
+			return deserializeEdges(d, schemas.QueryLineageResponse_Edges, &v.Edges)
+		case schemas.QueryLineageResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.QueryLineageResponse_NextToken, v.NextToken)
+		case schemas.QueryLineageResponse_Vertices:
+			return deserializeVertices(d, schemas.QueryLineageResponse_Vertices, &v.Vertices)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationQueryLineageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpQueryLineage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryLineage, schemas.QueryLineageRequest, schemas.QueryLineageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpQueryLineage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryLineage, schemas.QueryLineageRequest, schemas.QueryLineageResponse), output: &QueryLineageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

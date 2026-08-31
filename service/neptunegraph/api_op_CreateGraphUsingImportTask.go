@@ -4,7 +4,9 @@ package neptunegraph
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -125,6 +127,60 @@ type CreateGraphUsingImportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGraphUsingImportTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGraphUsingImportTaskInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGraphUsingImportTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlankNodeHandling != "" {
+		s.WriteString(schemas.CreateGraphUsingImportTaskInput_blankNodeHandling, string(v.BlankNodeHandling))
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.CreateGraphUsingImportTaskInput_deletionProtection, *v.DeletionProtection)
+	}
+	if v.FailOnError != nil {
+		s.WriteBool(schemas.CreateGraphUsingImportTaskInput_failOnError, *v.FailOnError)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.CreateGraphUsingImportTaskInput_format, string(v.Format))
+	}
+	if v.GraphName != nil {
+		s.WriteString(schemas.CreateGraphUsingImportTaskInput_graphName, *v.GraphName)
+	}
+	serializeImportOptions(s, schemas.CreateGraphUsingImportTaskInput_importOptions, v.ImportOptions)
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.CreateGraphUsingImportTaskInput_kmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.MaxProvisionedMemory != nil {
+		s.WriteInt32(schemas.CreateGraphUsingImportTaskInput_maxProvisionedMemory, *v.MaxProvisionedMemory)
+	}
+	if v.MinProvisionedMemory != nil {
+		s.WriteInt32(schemas.CreateGraphUsingImportTaskInput_minProvisionedMemory, *v.MinProvisionedMemory)
+	}
+	if v.ParquetType != "" {
+		s.WriteString(schemas.CreateGraphUsingImportTaskInput_parquetType, string(v.ParquetType))
+	}
+	if v.PublicConnectivity != nil {
+		s.WriteBool(schemas.CreateGraphUsingImportTaskInput_publicConnectivity, *v.PublicConnectivity)
+	}
+	if v.ReplicaCount != nil {
+		s.WriteInt32(schemas.CreateGraphUsingImportTaskInput_replicaCount, *v.ReplicaCount)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateGraphUsingImportTaskInput_roleArn, *v.RoleArn)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.CreateGraphUsingImportTaskInput_source, *v.Source)
+	}
+	serializeTagMap(s, schemas.CreateGraphUsingImportTaskInput_tags, v.Tags)
+	if v.VectorSearchConfiguration != nil {
+		s.WriteStruct(schemas.CreateGraphUsingImportTaskInput_vectorSearchConfiguration)
+		v.VectorSearchConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
 func (in *CreateGraphUsingImportTaskInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ApiType = ptr.String("ControlPlane")
@@ -181,13 +237,83 @@ type CreateGraphUsingImportTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGraphUsingImportTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGraphUsingImportTaskOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGraphUsingImportTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Format != "" {
+		s.WriteString(schemas.CreateGraphUsingImportTaskOutput_format, string(v.Format))
+	}
+	if v.GraphId != nil {
+		s.WriteString(schemas.CreateGraphUsingImportTaskOutput_graphId, *v.GraphId)
+	}
+	serializeImportOptions(s, schemas.CreateGraphUsingImportTaskOutput_importOptions, v.ImportOptions)
+	if v.ParquetType != "" {
+		s.WriteString(schemas.CreateGraphUsingImportTaskOutput_parquetType, string(v.ParquetType))
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateGraphUsingImportTaskOutput_roleArn, *v.RoleArn)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.CreateGraphUsingImportTaskOutput_source, *v.Source)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateGraphUsingImportTaskOutput_status, string(v.Status))
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.CreateGraphUsingImportTaskOutput_taskId, *v.TaskId)
+	}
+}
+func (v *CreateGraphUsingImportTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGraphUsingImportTaskOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGraphUsingImportTaskOutput_format:
+			var ev string
+			if err := d.ReadString(schemas.CreateGraphUsingImportTaskOutput_format, &ev); err != nil {
+				return err
+			}
+			v.Format = types.Format(ev)
+			return nil
+		case schemas.CreateGraphUsingImportTaskOutput_graphId:
+			v.GraphId = new(string)
+			return d.ReadString(schemas.CreateGraphUsingImportTaskOutput_graphId, v.GraphId)
+		case schemas.CreateGraphUsingImportTaskOutput_importOptions:
+			return deserializeImportOptions(d, schemas.CreateGraphUsingImportTaskOutput_importOptions, &v.ImportOptions)
+		case schemas.CreateGraphUsingImportTaskOutput_parquetType:
+			var ev string
+			if err := d.ReadString(schemas.CreateGraphUsingImportTaskOutput_parquetType, &ev); err != nil {
+				return err
+			}
+			v.ParquetType = types.ParquetType(ev)
+			return nil
+		case schemas.CreateGraphUsingImportTaskOutput_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.CreateGraphUsingImportTaskOutput_roleArn, v.RoleArn)
+		case schemas.CreateGraphUsingImportTaskOutput_source:
+			v.Source = new(string)
+			return d.ReadString(schemas.CreateGraphUsingImportTaskOutput_source, v.Source)
+		case schemas.CreateGraphUsingImportTaskOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateGraphUsingImportTaskOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ImportTaskStatus(ev)
+			return nil
+		case schemas.CreateGraphUsingImportTaskOutput_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.CreateGraphUsingImportTaskOutput_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGraphUsingImportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateGraphUsingImportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGraphUsingImportTask, schemas.CreateGraphUsingImportTaskInput, schemas.CreateGraphUsingImportTaskOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateGraphUsingImportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGraphUsingImportTask, schemas.CreateGraphUsingImportTaskInput, schemas.CreateGraphUsingImportTaskOutput), output: &CreateGraphUsingImportTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

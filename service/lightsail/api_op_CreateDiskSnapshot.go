@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,25 @@ type CreateDiskSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDiskSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDiskSnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDiskSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DiskName != nil {
+		s.WriteString(schemas.CreateDiskSnapshotRequest_diskName, *v.DiskName)
+	}
+	if v.DiskSnapshotName != nil {
+		s.WriteString(schemas.CreateDiskSnapshotRequest_diskSnapshotName, *v.DiskSnapshotName)
+	}
+	if v.InstanceName != nil {
+		s.WriteString(schemas.CreateDiskSnapshotRequest_instanceName, *v.InstanceName)
+	}
+	serializeTagList(s, schemas.CreateDiskSnapshotRequest_tags, v.Tags)
+}
+
 type CreateDiskSnapshotOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -93,13 +114,29 @@ type CreateDiskSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDiskSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDiskSnapshotResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDiskSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.CreateDiskSnapshotResult_operations, v.Operations)
+}
+func (v *CreateDiskSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDiskSnapshotResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDiskSnapshotResult_operations:
+			return deserializeOperationList(d, schemas.CreateDiskSnapshotResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDiskSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDiskSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDiskSnapshot, schemas.CreateDiskSnapshotRequest, schemas.CreateDiskSnapshotResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDiskSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDiskSnapshot, schemas.CreateDiskSnapshotRequest, schemas.CreateDiskSnapshotResult), output: &CreateDiskSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

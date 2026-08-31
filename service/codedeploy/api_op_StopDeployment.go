@@ -4,7 +4,9 @@ package codedeploy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type StopDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopDeploymentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoRollbackEnabled != nil {
+		s.WriteBool(schemas.StopDeploymentInput_autoRollbackEnabled, *v.AutoRollbackEnabled)
+	}
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.StopDeploymentInput_deploymentId, *v.DeploymentId)
+	}
+}
+
 // Represents the output of a StopDeployment operation.
 type StopDeploymentOutput struct {
 
@@ -59,13 +76,42 @@ type StopDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopDeploymentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.StopDeploymentOutput_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.StopDeploymentOutput_statusMessage, *v.StatusMessage)
+	}
+}
+func (v *StopDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopDeploymentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopDeploymentOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.StopDeploymentOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.StopStatus(ev)
+			return nil
+		case schemas.StopDeploymentOutput_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.StopDeploymentOutput_statusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDeployment, schemas.StopDeploymentInput, schemas.StopDeploymentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDeployment, schemas.StopDeploymentInput, schemas.StopDeploymentOutput), output: &StopDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

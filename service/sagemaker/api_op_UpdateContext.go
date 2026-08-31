@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,23 @@ type UpdateContextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContextInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContextRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContextInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContextName != nil {
+		s.WriteString(schemas.UpdateContextRequest_ContextName, *v.ContextName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateContextRequest_Description, *v.Description)
+	}
+	serializeLineageEntityParameters(s, schemas.UpdateContextRequest_Properties, v.Properties)
+	serializeListLineageEntityParameterKey(s, schemas.UpdateContextRequest_PropertiesToRemove, v.PropertiesToRemove)
+}
+
 type UpdateContextOutput struct {
 
 	// The Amazon Resource Name (ARN) of the context.
@@ -53,13 +72,32 @@ type UpdateContextOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContextOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContextResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContextOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContextArn != nil {
+		s.WriteString(schemas.UpdateContextResponse_ContextArn, *v.ContextArn)
+	}
+}
+func (v *UpdateContextOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateContextResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateContextResponse_ContextArn:
+			v.ContextArn = new(string)
+			return d.ReadString(schemas.UpdateContextResponse_ContextArn, v.ContextArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateContextMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateContext{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContext, schemas.UpdateContextRequest, schemas.UpdateContextResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateContext{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContext, schemas.UpdateContextRequest, schemas.UpdateContextResponse), output: &UpdateContextOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

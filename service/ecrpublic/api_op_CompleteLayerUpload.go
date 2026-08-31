@@ -4,6 +4,8 @@ package ecrpublic
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecrpublic/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,25 @@ type CompleteLayerUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompleteLayerUploadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompleteLayerUploadRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompleteLayerUploadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLayerDigestList(s, schemas.CompleteLayerUploadRequest_layerDigests, v.LayerDigests)
+	if v.RegistryId != nil {
+		s.WriteString(schemas.CompleteLayerUploadRequest_registryId, *v.RegistryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.CompleteLayerUploadRequest_repositoryName, *v.RepositoryName)
+	}
+	if v.UploadId != nil {
+		s.WriteString(schemas.CompleteLayerUploadRequest_uploadId, *v.UploadId)
+	}
+}
+
 type CompleteLayerUploadOutput struct {
 
 	// The sha256 digest of the image layer.
@@ -78,13 +99,50 @@ type CompleteLayerUploadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompleteLayerUploadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompleteLayerUploadResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompleteLayerUploadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LayerDigest != nil {
+		s.WriteString(schemas.CompleteLayerUploadResponse_layerDigest, *v.LayerDigest)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.CompleteLayerUploadResponse_registryId, *v.RegistryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.CompleteLayerUploadResponse_repositoryName, *v.RepositoryName)
+	}
+	if v.UploadId != nil {
+		s.WriteString(schemas.CompleteLayerUploadResponse_uploadId, *v.UploadId)
+	}
+}
+func (v *CompleteLayerUploadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CompleteLayerUploadResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CompleteLayerUploadResponse_layerDigest:
+			v.LayerDigest = new(string)
+			return d.ReadString(schemas.CompleteLayerUploadResponse_layerDigest, v.LayerDigest)
+		case schemas.CompleteLayerUploadResponse_registryId:
+			v.RegistryId = new(string)
+			return d.ReadString(schemas.CompleteLayerUploadResponse_registryId, v.RegistryId)
+		case schemas.CompleteLayerUploadResponse_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.CompleteLayerUploadResponse_repositoryName, v.RepositoryName)
+		case schemas.CompleteLayerUploadResponse_uploadId:
+			v.UploadId = new(string)
+			return d.ReadString(schemas.CompleteLayerUploadResponse_uploadId, v.UploadId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCompleteLayerUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCompleteLayerUpload{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteLayerUpload, schemas.CompleteLayerUploadRequest, schemas.CompleteLayerUploadResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCompleteLayerUpload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteLayerUpload, schemas.CompleteLayerUploadRequest, schemas.CompleteLayerUploadResponse), output: &CompleteLayerUploadOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

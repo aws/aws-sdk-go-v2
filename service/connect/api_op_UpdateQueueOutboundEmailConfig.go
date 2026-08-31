@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,26 @@ type UpdateQueueOutboundEmailConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateQueueOutboundEmailConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQueueOutboundEmailConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQueueOutboundEmailConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateQueueOutboundEmailConfigRequest_InstanceId, *v.InstanceId)
+	}
+	if v.OutboundEmailConfig != nil {
+		s.WriteStruct(schemas.UpdateQueueOutboundEmailConfigRequest_OutboundEmailConfig)
+		v.OutboundEmailConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.UpdateQueueOutboundEmailConfigRequest_QueueId, *v.QueueId)
+	}
+}
+
 type UpdateQueueOutboundEmailConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +76,26 @@ type UpdateQueueOutboundEmailConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateQueueOutboundEmailConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQueueOutboundEmailConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateQueueOutboundEmailConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateQueueOutboundEmailConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateQueueOutboundEmailConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQueueOutboundEmailConfig, schemas.UpdateQueueOutboundEmailConfigRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateQueueOutboundEmailConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQueueOutboundEmailConfig, schemas.UpdateQueueOutboundEmailConfigRequest, nil), output: &UpdateQueueOutboundEmailConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

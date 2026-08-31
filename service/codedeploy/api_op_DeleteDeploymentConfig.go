@@ -4,6 +4,8 @@ package codedeploy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteDeploymentConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDeploymentConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDeploymentConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDeploymentConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentConfigName != nil {
+		s.WriteString(schemas.DeleteDeploymentConfigInput_deploymentConfigName, *v.DeploymentConfigName)
+	}
+}
+
 type DeleteDeploymentConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +59,26 @@ type DeleteDeploymentConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDeploymentConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDeploymentConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteDeploymentConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDeploymentConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDeploymentConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDeploymentConfig, schemas.DeleteDeploymentConfigInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteDeploymentConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDeploymentConfig, schemas.DeleteDeploymentConfigInput, nil), output: &DeleteDeploymentConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

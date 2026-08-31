@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -63,6 +65,63 @@ type AugmentedManifestsListItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AugmentedManifestsListItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AugmentedManifestsListItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AugmentedManifestsListItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnnotationDataS3Uri != nil {
+		s.WriteString(schemas.AugmentedManifestsListItem_AnnotationDataS3Uri, *v.AnnotationDataS3Uri)
+	}
+	serializeAttributeNamesList(s, schemas.AugmentedManifestsListItem_AttributeNames, v.AttributeNames)
+	if v.DocumentType != "" {
+		s.WriteString(schemas.AugmentedManifestsListItem_DocumentType, string(v.DocumentType))
+	}
+	if v.S3Uri != nil {
+		s.WriteString(schemas.AugmentedManifestsListItem_S3Uri, *v.S3Uri)
+	}
+	if v.SourceDocumentsS3Uri != nil {
+		s.WriteString(schemas.AugmentedManifestsListItem_SourceDocumentsS3Uri, *v.SourceDocumentsS3Uri)
+	}
+	if v.Split != "" {
+		s.WriteString(schemas.AugmentedManifestsListItem_Split, string(v.Split))
+	}
+}
+func (v *AugmentedManifestsListItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AugmentedManifestsListItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AugmentedManifestsListItem_AnnotationDataS3Uri:
+			v.AnnotationDataS3Uri = new(string)
+			return d.ReadString(schemas.AugmentedManifestsListItem_AnnotationDataS3Uri, v.AnnotationDataS3Uri)
+		case schemas.AugmentedManifestsListItem_AttributeNames:
+			return deserializeAttributeNamesList(d, schemas.AugmentedManifestsListItem_AttributeNames, &v.AttributeNames)
+		case schemas.AugmentedManifestsListItem_DocumentType:
+			var ev string
+			if err := d.ReadString(schemas.AugmentedManifestsListItem_DocumentType, &ev); err != nil {
+				return err
+			}
+			v.DocumentType = AugmentedManifestsDocumentTypeFormat(ev)
+			return nil
+		case schemas.AugmentedManifestsListItem_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.AugmentedManifestsListItem_S3Uri, v.S3Uri)
+		case schemas.AugmentedManifestsListItem_SourceDocumentsS3Uri:
+			v.SourceDocumentsS3Uri = new(string)
+			return d.ReadString(schemas.AugmentedManifestsListItem_SourceDocumentsS3Uri, v.SourceDocumentsS3Uri)
+		case schemas.AugmentedManifestsListItem_Split:
+			var ev string
+			if err := d.ReadString(schemas.AugmentedManifestsListItem_Split, &ev); err != nil {
+				return err
+			}
+			v.Split = Split(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The result of calling the operation. The operation returns one object for each
 // document that is successfully processed by the operation.
 type BatchDetectDominantLanguageItemResult struct {
@@ -74,6 +133,31 @@ type BatchDetectDominantLanguageItemResult struct {
 	Languages []DominantLanguage
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchDetectDominantLanguageItemResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetectDominantLanguageItemResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetectDominantLanguageItemResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Index != nil {
+		s.WriteInt32(schemas.BatchDetectDominantLanguageItemResult_Index, *v.Index)
+	}
+	serializeListOfDominantLanguages(s, schemas.BatchDetectDominantLanguageItemResult_Languages, v.Languages)
+}
+func (v *BatchDetectDominantLanguageItemResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDetectDominantLanguageItemResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDetectDominantLanguageItemResult_Index:
+			v.Index = new(int32)
+			return d.ReadInt32(schemas.BatchDetectDominantLanguageItemResult_Index, v.Index)
+		case schemas.BatchDetectDominantLanguageItemResult_Languages:
+			return deserializeListOfDominantLanguages(d, schemas.BatchDetectDominantLanguageItemResult_Languages, &v.Languages)
+		}
+		return nil
+	})
 }
 
 // The result of calling the operation. The operation returns one object for each
@@ -89,6 +173,31 @@ type BatchDetectEntitiesItemResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDetectEntitiesItemResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetectEntitiesItemResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetectEntitiesItemResult) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfEntities(s, schemas.BatchDetectEntitiesItemResult_Entities, v.Entities)
+	if v.Index != nil {
+		s.WriteInt32(schemas.BatchDetectEntitiesItemResult_Index, *v.Index)
+	}
+}
+func (v *BatchDetectEntitiesItemResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDetectEntitiesItemResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDetectEntitiesItemResult_Entities:
+			return deserializeListOfEntities(d, schemas.BatchDetectEntitiesItemResult_Entities, &v.Entities)
+		case schemas.BatchDetectEntitiesItemResult_Index:
+			v.Index = new(int32)
+			return d.ReadInt32(schemas.BatchDetectEntitiesItemResult_Index, v.Index)
+		}
+		return nil
+	})
+}
+
 // The result of calling the operation. The operation returns one object for each
 // document that is successfully processed by the operation.
 type BatchDetectKeyPhrasesItemResult struct {
@@ -100,6 +209,31 @@ type BatchDetectKeyPhrasesItemResult struct {
 	KeyPhrases []KeyPhrase
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchDetectKeyPhrasesItemResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetectKeyPhrasesItemResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetectKeyPhrasesItemResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Index != nil {
+		s.WriteInt32(schemas.BatchDetectKeyPhrasesItemResult_Index, *v.Index)
+	}
+	serializeListOfKeyPhrases(s, schemas.BatchDetectKeyPhrasesItemResult_KeyPhrases, v.KeyPhrases)
+}
+func (v *BatchDetectKeyPhrasesItemResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDetectKeyPhrasesItemResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDetectKeyPhrasesItemResult_Index:
+			v.Index = new(int32)
+			return d.ReadInt32(schemas.BatchDetectKeyPhrasesItemResult_Index, v.Index)
+		case schemas.BatchDetectKeyPhrasesItemResult_KeyPhrases:
+			return deserializeListOfKeyPhrases(d, schemas.BatchDetectKeyPhrasesItemResult_KeyPhrases, &v.KeyPhrases)
+		}
+		return nil
+	})
 }
 
 // The result of calling the operation. The operation returns one object for each
@@ -119,6 +253,46 @@ type BatchDetectSentimentItemResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDetectSentimentItemResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetectSentimentItemResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetectSentimentItemResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Index != nil {
+		s.WriteInt32(schemas.BatchDetectSentimentItemResult_Index, *v.Index)
+	}
+	if v.Sentiment != "" {
+		s.WriteString(schemas.BatchDetectSentimentItemResult_Sentiment, string(v.Sentiment))
+	}
+	if v.SentimentScore != nil {
+		s.WriteStruct(schemas.BatchDetectSentimentItemResult_SentimentScore)
+		v.SentimentScore.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchDetectSentimentItemResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDetectSentimentItemResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDetectSentimentItemResult_Index:
+			v.Index = new(int32)
+			return d.ReadInt32(schemas.BatchDetectSentimentItemResult_Index, v.Index)
+		case schemas.BatchDetectSentimentItemResult_Sentiment:
+			var ev string
+			if err := d.ReadString(schemas.BatchDetectSentimentItemResult_Sentiment, &ev); err != nil {
+				return err
+			}
+			v.Sentiment = SentimentType(ev)
+			return nil
+		case schemas.BatchDetectSentimentItemResult_SentimentScore:
+			v.SentimentScore = &SentimentScore{}
+			return v.SentimentScore.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The result of calling the operation. The operation returns one object that is
 // successfully processed by the operation.
 type BatchDetectSyntaxItemResult struct {
@@ -132,6 +306,31 @@ type BatchDetectSyntaxItemResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDetectSyntaxItemResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetectSyntaxItemResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetectSyntaxItemResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Index != nil {
+		s.WriteInt32(schemas.BatchDetectSyntaxItemResult_Index, *v.Index)
+	}
+	serializeListOfSyntaxTokens(s, schemas.BatchDetectSyntaxItemResult_SyntaxTokens, v.SyntaxTokens)
+}
+func (v *BatchDetectSyntaxItemResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDetectSyntaxItemResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDetectSyntaxItemResult_Index:
+			v.Index = new(int32)
+			return d.ReadInt32(schemas.BatchDetectSyntaxItemResult_Index, v.Index)
+		case schemas.BatchDetectSyntaxItemResult_SyntaxTokens:
+			return deserializeListOfSyntaxTokens(d, schemas.BatchDetectSyntaxItemResult_SyntaxTokens, &v.SyntaxTokens)
+		}
+		return nil
+	})
+}
+
 // Analysis results for one of the documents in the batch.
 type BatchDetectTargetedSentimentItemResult struct {
 
@@ -142,6 +341,31 @@ type BatchDetectTargetedSentimentItemResult struct {
 	Index *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchDetectTargetedSentimentItemResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetectTargetedSentimentItemResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetectTargetedSentimentItemResult) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfTargetedSentimentEntities(s, schemas.BatchDetectTargetedSentimentItemResult_Entities, v.Entities)
+	if v.Index != nil {
+		s.WriteInt32(schemas.BatchDetectTargetedSentimentItemResult_Index, *v.Index)
+	}
+}
+func (v *BatchDetectTargetedSentimentItemResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDetectTargetedSentimentItemResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDetectTargetedSentimentItemResult_Entities:
+			return deserializeListOfTargetedSentimentEntities(d, schemas.BatchDetectTargetedSentimentItemResult_Entities, &v.Entities)
+		case schemas.BatchDetectTargetedSentimentItemResult_Index:
+			v.Index = new(int32)
+			return d.ReadInt32(schemas.BatchDetectTargetedSentimentItemResult_Index, v.Index)
+		}
+		return nil
+	})
 }
 
 // Describes an error that occurred while processing a document in a batch. The
@@ -159,6 +383,40 @@ type BatchItemError struct {
 	Index *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchItemError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchItemError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchItemError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.BatchItemError_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchItemError_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.Index != nil {
+		s.WriteInt32(schemas.BatchItemError_Index, *v.Index)
+	}
+}
+func (v *BatchItemError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchItemError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchItemError_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.BatchItemError_ErrorCode, v.ErrorCode)
+		case schemas.BatchItemError_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchItemError_ErrorMessage, v.ErrorMessage)
+		case schemas.BatchItemError_Index:
+			v.Index = new(int32)
+			return d.ReadInt32(schemas.BatchItemError_Index, v.Index)
+		}
+		return nil
+	})
 }
 
 // Information about each word or line of text in the input document.
@@ -196,6 +454,61 @@ type Block struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Block) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Block)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Block) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlockType != "" {
+		s.WriteString(schemas.Block_BlockType, string(v.BlockType))
+	}
+	if v.Geometry != nil {
+		s.WriteStruct(schemas.Block_Geometry)
+		v.Geometry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Block_Id, *v.Id)
+	}
+	if v.Page != nil {
+		s.WriteInt32(schemas.Block_Page, *v.Page)
+	}
+	serializeListOfRelationships(s, schemas.Block_Relationships, v.Relationships)
+	if v.Text != nil {
+		s.WriteString(schemas.Block_Text, *v.Text)
+	}
+}
+func (v *Block) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Block, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Block_BlockType:
+			var ev string
+			if err := d.ReadString(schemas.Block_BlockType, &ev); err != nil {
+				return err
+			}
+			v.BlockType = BlockType(ev)
+			return nil
+		case schemas.Block_Geometry:
+			v.Geometry = &Geometry{}
+			return v.Geometry.Deserialize(d)
+		case schemas.Block_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Block_Id, v.Id)
+		case schemas.Block_Page:
+			v.Page = new(int32)
+			return d.ReadInt32(schemas.Block_Page, v.Page)
+		case schemas.Block_Relationships:
+			return deserializeListOfRelationships(d, schemas.Block_Relationships, &v.Relationships)
+		case schemas.Block_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.Block_Text, v.Text)
+		}
+		return nil
+	})
+}
+
 // A reference to a block.
 type BlockReference struct {
 
@@ -212,6 +525,43 @@ type BlockReference struct {
 	EndOffset *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *BlockReference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BlockReference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BlockReference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginOffset != nil {
+		s.WriteInt32(schemas.BlockReference_BeginOffset, *v.BeginOffset)
+	}
+	if v.BlockId != nil {
+		s.WriteString(schemas.BlockReference_BlockId, *v.BlockId)
+	}
+	serializeListOfChildBlocks(s, schemas.BlockReference_ChildBlocks, v.ChildBlocks)
+	if v.EndOffset != nil {
+		s.WriteInt32(schemas.BlockReference_EndOffset, *v.EndOffset)
+	}
+}
+func (v *BlockReference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BlockReference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BlockReference_BeginOffset:
+			v.BeginOffset = new(int32)
+			return d.ReadInt32(schemas.BlockReference_BeginOffset, v.BeginOffset)
+		case schemas.BlockReference_BlockId:
+			v.BlockId = new(string)
+			return d.ReadString(schemas.BlockReference_BlockId, v.BlockId)
+		case schemas.BlockReference_ChildBlocks:
+			return deserializeListOfChildBlocks(d, schemas.BlockReference_ChildBlocks, &v.ChildBlocks)
+		case schemas.BlockReference_EndOffset:
+			v.EndOffset = new(int32)
+			return d.ReadInt32(schemas.BlockReference_EndOffset, v.EndOffset)
+		}
+		return nil
+	})
 }
 
 // The bounding box around the detected page or around an element on a document
@@ -241,6 +591,46 @@ type BoundingBox struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BoundingBox) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BoundingBox)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BoundingBox) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Height != nil {
+		s.WriteFloat32(schemas.BoundingBox_Height, *v.Height)
+	}
+	if v.Left != nil {
+		s.WriteFloat32(schemas.BoundingBox_Left, *v.Left)
+	}
+	if v.Top != nil {
+		s.WriteFloat32(schemas.BoundingBox_Top, *v.Top)
+	}
+	if v.Width != nil {
+		s.WriteFloat32(schemas.BoundingBox_Width, *v.Width)
+	}
+}
+func (v *BoundingBox) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BoundingBox, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BoundingBox_Height:
+			v.Height = new(float32)
+			return d.ReadFloat32(schemas.BoundingBox_Height, v.Height)
+		case schemas.BoundingBox_Left:
+			v.Left = new(float32)
+			return d.ReadFloat32(schemas.BoundingBox_Left, v.Left)
+		case schemas.BoundingBox_Top:
+			v.Top = new(float32)
+			return d.ReadFloat32(schemas.BoundingBox_Top, v.Top)
+		case schemas.BoundingBox_Width:
+			v.Width = new(float32)
+			return d.ReadFloat32(schemas.BoundingBox_Width, v.Width)
+		}
+		return nil
+	})
+}
+
 // Nested block contained within a block.
 type ChildBlock struct {
 
@@ -254,6 +644,40 @@ type ChildBlock struct {
 	EndOffset *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ChildBlock) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChildBlock)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChildBlock) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginOffset != nil {
+		s.WriteInt32(schemas.ChildBlock_BeginOffset, *v.BeginOffset)
+	}
+	if v.ChildBlockId != nil {
+		s.WriteString(schemas.ChildBlock_ChildBlockId, *v.ChildBlockId)
+	}
+	if v.EndOffset != nil {
+		s.WriteInt32(schemas.ChildBlock_EndOffset, *v.EndOffset)
+	}
+}
+func (v *ChildBlock) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChildBlock, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChildBlock_BeginOffset:
+			v.BeginOffset = new(int32)
+			return d.ReadInt32(schemas.ChildBlock_BeginOffset, v.BeginOffset)
+		case schemas.ChildBlock_ChildBlockId:
+			v.ChildBlockId = new(string)
+			return d.ReadString(schemas.ChildBlock_ChildBlockId, v.ChildBlockId)
+		case schemas.ChildBlock_EndOffset:
+			v.EndOffset = new(int32)
+			return d.ReadInt32(schemas.ChildBlock_EndOffset, v.EndOffset)
+		}
+		return nil
+	})
 }
 
 // Describes the result metrics for the test data associated with an documentation
@@ -309,6 +733,70 @@ type ClassifierEvaluationMetrics struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClassifierEvaluationMetrics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClassifierEvaluationMetrics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClassifierEvaluationMetrics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accuracy != nil {
+		s.WriteFloat64(schemas.ClassifierEvaluationMetrics_Accuracy, *v.Accuracy)
+	}
+	if v.F1Score != nil {
+		s.WriteFloat64(schemas.ClassifierEvaluationMetrics_F1Score, *v.F1Score)
+	}
+	if v.HammingLoss != nil {
+		s.WriteFloat64(schemas.ClassifierEvaluationMetrics_HammingLoss, *v.HammingLoss)
+	}
+	if v.MicroF1Score != nil {
+		s.WriteFloat64(schemas.ClassifierEvaluationMetrics_MicroF1Score, *v.MicroF1Score)
+	}
+	if v.MicroPrecision != nil {
+		s.WriteFloat64(schemas.ClassifierEvaluationMetrics_MicroPrecision, *v.MicroPrecision)
+	}
+	if v.MicroRecall != nil {
+		s.WriteFloat64(schemas.ClassifierEvaluationMetrics_MicroRecall, *v.MicroRecall)
+	}
+	if v.Precision != nil {
+		s.WriteFloat64(schemas.ClassifierEvaluationMetrics_Precision, *v.Precision)
+	}
+	if v.Recall != nil {
+		s.WriteFloat64(schemas.ClassifierEvaluationMetrics_Recall, *v.Recall)
+	}
+}
+func (v *ClassifierEvaluationMetrics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClassifierEvaluationMetrics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClassifierEvaluationMetrics_Accuracy:
+			v.Accuracy = new(float64)
+			return d.ReadFloat64(schemas.ClassifierEvaluationMetrics_Accuracy, v.Accuracy)
+		case schemas.ClassifierEvaluationMetrics_F1Score:
+			v.F1Score = new(float64)
+			return d.ReadFloat64(schemas.ClassifierEvaluationMetrics_F1Score, v.F1Score)
+		case schemas.ClassifierEvaluationMetrics_HammingLoss:
+			v.HammingLoss = new(float64)
+			return d.ReadFloat64(schemas.ClassifierEvaluationMetrics_HammingLoss, v.HammingLoss)
+		case schemas.ClassifierEvaluationMetrics_MicroF1Score:
+			v.MicroF1Score = new(float64)
+			return d.ReadFloat64(schemas.ClassifierEvaluationMetrics_MicroF1Score, v.MicroF1Score)
+		case schemas.ClassifierEvaluationMetrics_MicroPrecision:
+			v.MicroPrecision = new(float64)
+			return d.ReadFloat64(schemas.ClassifierEvaluationMetrics_MicroPrecision, v.MicroPrecision)
+		case schemas.ClassifierEvaluationMetrics_MicroRecall:
+			v.MicroRecall = new(float64)
+			return d.ReadFloat64(schemas.ClassifierEvaluationMetrics_MicroRecall, v.MicroRecall)
+		case schemas.ClassifierEvaluationMetrics_Precision:
+			v.Precision = new(float64)
+			return d.ReadFloat64(schemas.ClassifierEvaluationMetrics_Precision, v.Precision)
+		case schemas.ClassifierEvaluationMetrics_Recall:
+			v.Recall = new(float64)
+			return d.ReadFloat64(schemas.ClassifierEvaluationMetrics_Recall, v.Recall)
+		}
+		return nil
+	})
+}
+
 // Provides information about a document classifier.
 type ClassifierMetadata struct {
 
@@ -329,6 +817,48 @@ type ClassifierMetadata struct {
 	NumberOfTrainedDocuments *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ClassifierMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClassifierMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClassifierMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationMetrics != nil {
+		s.WriteStruct(schemas.ClassifierMetadata_EvaluationMetrics)
+		v.EvaluationMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NumberOfLabels != nil {
+		s.WriteInt32(schemas.ClassifierMetadata_NumberOfLabels, *v.NumberOfLabels)
+	}
+	if v.NumberOfTestDocuments != nil {
+		s.WriteInt32(schemas.ClassifierMetadata_NumberOfTestDocuments, *v.NumberOfTestDocuments)
+	}
+	if v.NumberOfTrainedDocuments != nil {
+		s.WriteInt32(schemas.ClassifierMetadata_NumberOfTrainedDocuments, *v.NumberOfTrainedDocuments)
+	}
+}
+func (v *ClassifierMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClassifierMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClassifierMetadata_EvaluationMetrics:
+			v.EvaluationMetrics = &ClassifierEvaluationMetrics{}
+			return v.EvaluationMetrics.Deserialize(d)
+		case schemas.ClassifierMetadata_NumberOfLabels:
+			v.NumberOfLabels = new(int32)
+			return d.ReadInt32(schemas.ClassifierMetadata_NumberOfLabels, v.NumberOfLabels)
+		case schemas.ClassifierMetadata_NumberOfTestDocuments:
+			v.NumberOfTestDocuments = new(int32)
+			return d.ReadInt32(schemas.ClassifierMetadata_NumberOfTestDocuments, v.NumberOfTestDocuments)
+		case schemas.ClassifierMetadata_NumberOfTrainedDocuments:
+			v.NumberOfTrainedDocuments = new(int32)
+			return d.ReadInt32(schemas.ClassifierMetadata_NumberOfTrainedDocuments, v.NumberOfTrainedDocuments)
+		}
+		return nil
+	})
 }
 
 // Data security configuration.
@@ -357,6 +887,48 @@ type DataSecurityConfig struct {
 	VpcConfig *VpcConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataSecurityConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataSecurityConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataSecurityConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataLakeKmsKeyId != nil {
+		s.WriteString(schemas.DataSecurityConfig_DataLakeKmsKeyId, *v.DataLakeKmsKeyId)
+	}
+	if v.ModelKmsKeyId != nil {
+		s.WriteString(schemas.DataSecurityConfig_ModelKmsKeyId, *v.ModelKmsKeyId)
+	}
+	if v.VolumeKmsKeyId != nil {
+		s.WriteString(schemas.DataSecurityConfig_VolumeKmsKeyId, *v.VolumeKmsKeyId)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.DataSecurityConfig_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DataSecurityConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataSecurityConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataSecurityConfig_DataLakeKmsKeyId:
+			v.DataLakeKmsKeyId = new(string)
+			return d.ReadString(schemas.DataSecurityConfig_DataLakeKmsKeyId, v.DataLakeKmsKeyId)
+		case schemas.DataSecurityConfig_ModelKmsKeyId:
+			v.ModelKmsKeyId = new(string)
+			return d.ReadString(schemas.DataSecurityConfig_ModelKmsKeyId, v.ModelKmsKeyId)
+		case schemas.DataSecurityConfig_VolumeKmsKeyId:
+			v.VolumeKmsKeyId = new(string)
+			return d.ReadString(schemas.DataSecurityConfig_VolumeKmsKeyId, v.VolumeKmsKeyId)
+		case schemas.DataSecurityConfig_VpcConfig:
+			v.VpcConfig = &VpcConfig{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An augmented manifest file that provides training data for your custom model.
@@ -401,6 +973,53 @@ type DatasetAugmentedManifestsListItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DatasetAugmentedManifestsListItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetAugmentedManifestsListItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetAugmentedManifestsListItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnnotationDataS3Uri != nil {
+		s.WriteString(schemas.DatasetAugmentedManifestsListItem_AnnotationDataS3Uri, *v.AnnotationDataS3Uri)
+	}
+	serializeAttributeNamesList(s, schemas.DatasetAugmentedManifestsListItem_AttributeNames, v.AttributeNames)
+	if v.DocumentType != "" {
+		s.WriteString(schemas.DatasetAugmentedManifestsListItem_DocumentType, string(v.DocumentType))
+	}
+	if v.S3Uri != nil {
+		s.WriteString(schemas.DatasetAugmentedManifestsListItem_S3Uri, *v.S3Uri)
+	}
+	if v.SourceDocumentsS3Uri != nil {
+		s.WriteString(schemas.DatasetAugmentedManifestsListItem_SourceDocumentsS3Uri, *v.SourceDocumentsS3Uri)
+	}
+}
+func (v *DatasetAugmentedManifestsListItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetAugmentedManifestsListItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetAugmentedManifestsListItem_AnnotationDataS3Uri:
+			v.AnnotationDataS3Uri = new(string)
+			return d.ReadString(schemas.DatasetAugmentedManifestsListItem_AnnotationDataS3Uri, v.AnnotationDataS3Uri)
+		case schemas.DatasetAugmentedManifestsListItem_AttributeNames:
+			return deserializeAttributeNamesList(d, schemas.DatasetAugmentedManifestsListItem_AttributeNames, &v.AttributeNames)
+		case schemas.DatasetAugmentedManifestsListItem_DocumentType:
+			var ev string
+			if err := d.ReadString(schemas.DatasetAugmentedManifestsListItem_DocumentType, &ev); err != nil {
+				return err
+			}
+			v.DocumentType = AugmentedManifestsDocumentTypeFormat(ev)
+			return nil
+		case schemas.DatasetAugmentedManifestsListItem_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.DatasetAugmentedManifestsListItem_S3Uri, v.S3Uri)
+		case schemas.DatasetAugmentedManifestsListItem_SourceDocumentsS3Uri:
+			v.SourceDocumentsS3Uri = new(string)
+			return d.ReadString(schemas.DatasetAugmentedManifestsListItem_SourceDocumentsS3Uri, v.SourceDocumentsS3Uri)
+		}
+		return nil
+	})
+}
+
 // Describes the dataset input data configuration for a document classifier model.
 //
 // For more information on how the input file is formatted, see [Preparing training data] in the Comprehend
@@ -433,6 +1052,34 @@ type DatasetDocumentClassifierInputDataConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DatasetDocumentClassifierInputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetDocumentClassifierInputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetDocumentClassifierInputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LabelDelimiter != nil {
+		s.WriteString(schemas.DatasetDocumentClassifierInputDataConfig_LabelDelimiter, *v.LabelDelimiter)
+	}
+	if v.S3Uri != nil {
+		s.WriteString(schemas.DatasetDocumentClassifierInputDataConfig_S3Uri, *v.S3Uri)
+	}
+}
+func (v *DatasetDocumentClassifierInputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetDocumentClassifierInputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetDocumentClassifierInputDataConfig_LabelDelimiter:
+			v.LabelDelimiter = new(string)
+			return d.ReadString(schemas.DatasetDocumentClassifierInputDataConfig_LabelDelimiter, v.LabelDelimiter)
+		case schemas.DatasetDocumentClassifierInputDataConfig_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.DatasetDocumentClassifierInputDataConfig_S3Uri, v.S3Uri)
+		}
+		return nil
+	})
+}
+
 // Describes the annotations associated with a entity recognizer.
 type DatasetEntityRecognizerAnnotations struct {
 
@@ -444,6 +1091,28 @@ type DatasetEntityRecognizerAnnotations struct {
 	S3Uri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DatasetEntityRecognizerAnnotations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetEntityRecognizerAnnotations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetEntityRecognizerAnnotations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Uri != nil {
+		s.WriteString(schemas.DatasetEntityRecognizerAnnotations_S3Uri, *v.S3Uri)
+	}
+}
+func (v *DatasetEntityRecognizerAnnotations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetEntityRecognizerAnnotations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetEntityRecognizerAnnotations_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.DatasetEntityRecognizerAnnotations_S3Uri, v.S3Uri)
+		}
+		return nil
+	})
 }
 
 // Describes the documents submitted with a dataset for an entity recognizer model.
@@ -466,6 +1135,38 @@ type DatasetEntityRecognizerDocuments struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DatasetEntityRecognizerDocuments) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetEntityRecognizerDocuments)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetEntityRecognizerDocuments) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputFormat != "" {
+		s.WriteString(schemas.DatasetEntityRecognizerDocuments_InputFormat, string(v.InputFormat))
+	}
+	if v.S3Uri != nil {
+		s.WriteString(schemas.DatasetEntityRecognizerDocuments_S3Uri, *v.S3Uri)
+	}
+}
+func (v *DatasetEntityRecognizerDocuments) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetEntityRecognizerDocuments, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetEntityRecognizerDocuments_InputFormat:
+			var ev string
+			if err := d.ReadString(schemas.DatasetEntityRecognizerDocuments_InputFormat, &ev); err != nil {
+				return err
+			}
+			v.InputFormat = InputFormat(ev)
+			return nil
+		case schemas.DatasetEntityRecognizerDocuments_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.DatasetEntityRecognizerDocuments_S3Uri, v.S3Uri)
+		}
+		return nil
+	})
+}
+
 // Describes the dataset entity list for an entity recognizer model.
 //
 // For more information on how the input file is formatted, see [Preparing training data] in the Comprehend
@@ -480,6 +1181,28 @@ type DatasetEntityRecognizerEntityList struct {
 	S3Uri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DatasetEntityRecognizerEntityList) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetEntityRecognizerEntityList)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetEntityRecognizerEntityList) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Uri != nil {
+		s.WriteString(schemas.DatasetEntityRecognizerEntityList_S3Uri, *v.S3Uri)
+	}
+}
+func (v *DatasetEntityRecognizerEntityList) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetEntityRecognizerEntityList, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetEntityRecognizerEntityList_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.DatasetEntityRecognizerEntityList_S3Uri, v.S3Uri)
+		}
+		return nil
+	})
 }
 
 // Specifies the format and location of the input data. You must provide either
@@ -501,6 +1224,46 @@ type DatasetEntityRecognizerInputDataConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DatasetEntityRecognizerInputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetEntityRecognizerInputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetEntityRecognizerInputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Annotations != nil {
+		s.WriteStruct(schemas.DatasetEntityRecognizerInputDataConfig_Annotations)
+		v.Annotations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Documents != nil {
+		s.WriteStruct(schemas.DatasetEntityRecognizerInputDataConfig_Documents)
+		v.Documents.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EntityList != nil {
+		s.WriteStruct(schemas.DatasetEntityRecognizerInputDataConfig_EntityList)
+		v.EntityList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DatasetEntityRecognizerInputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetEntityRecognizerInputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetEntityRecognizerInputDataConfig_Annotations:
+			v.Annotations = &DatasetEntityRecognizerAnnotations{}
+			return v.Annotations.Deserialize(d)
+		case schemas.DatasetEntityRecognizerInputDataConfig_Documents:
+			v.Documents = &DatasetEntityRecognizerDocuments{}
+			return v.Documents.Deserialize(d)
+		case schemas.DatasetEntityRecognizerInputDataConfig_EntityList:
+			v.EntityList = &DatasetEntityRecognizerEntityList{}
+			return v.EntityList.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Filter the datasets based on creation time or dataset status.
 type DatasetFilter struct {
 
@@ -517,6 +1280,54 @@ type DatasetFilter struct {
 	Status DatasetStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *DatasetFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.DatasetFilter_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.DatasetFilter_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.DatasetType != "" {
+		s.WriteString(schemas.DatasetFilter_DatasetType, string(v.DatasetType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DatasetFilter_Status, string(v.Status))
+	}
+}
+func (v *DatasetFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetFilter_CreationTimeAfter:
+			v.CreationTimeAfter = new(time.Time)
+			return d.ReadTime(schemas.DatasetFilter_CreationTimeAfter, v.CreationTimeAfter)
+		case schemas.DatasetFilter_CreationTimeBefore:
+			v.CreationTimeBefore = new(time.Time)
+			return d.ReadTime(schemas.DatasetFilter_CreationTimeBefore, v.CreationTimeBefore)
+		case schemas.DatasetFilter_DatasetType:
+			var ev string
+			if err := d.ReadString(schemas.DatasetFilter_DatasetType, &ev); err != nil {
+				return err
+			}
+			v.DatasetType = DatasetType(ev)
+			return nil
+		case schemas.DatasetFilter_Status:
+			var ev string
+			if err := d.ReadString(schemas.DatasetFilter_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = DatasetStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Specifies the format and location of the input data for the dataset.
@@ -545,6 +1356,51 @@ type DatasetInputDataConfig struct {
 	EntityRecognizerInputDataConfig *DatasetEntityRecognizerInputDataConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *DatasetInputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetInputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetInputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatasetAugmentedManifestsList(s, schemas.DatasetInputDataConfig_AugmentedManifests, v.AugmentedManifests)
+	if v.DataFormat != "" {
+		s.WriteString(schemas.DatasetInputDataConfig_DataFormat, string(v.DataFormat))
+	}
+	if v.DocumentClassifierInputDataConfig != nil {
+		s.WriteStruct(schemas.DatasetInputDataConfig_DocumentClassifierInputDataConfig)
+		v.DocumentClassifierInputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EntityRecognizerInputDataConfig != nil {
+		s.WriteStruct(schemas.DatasetInputDataConfig_EntityRecognizerInputDataConfig)
+		v.EntityRecognizerInputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DatasetInputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetInputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetInputDataConfig_AugmentedManifests:
+			return deserializeDatasetAugmentedManifestsList(d, schemas.DatasetInputDataConfig_AugmentedManifests, &v.AugmentedManifests)
+		case schemas.DatasetInputDataConfig_DataFormat:
+			var ev string
+			if err := d.ReadString(schemas.DatasetInputDataConfig_DataFormat, &ev); err != nil {
+				return err
+			}
+			v.DataFormat = DatasetDataFormat(ev)
+			return nil
+		case schemas.DatasetInputDataConfig_DocumentClassifierInputDataConfig:
+			v.DocumentClassifierInputDataConfig = &DatasetDocumentClassifierInputDataConfig{}
+			return v.DocumentClassifierInputDataConfig.Deserialize(d)
+		case schemas.DatasetInputDataConfig_EntityRecognizerInputDataConfig:
+			v.EntityRecognizerInputDataConfig = &DatasetEntityRecognizerInputDataConfig{}
+			return v.EntityRecognizerInputDataConfig.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Properties associated with the dataset.
@@ -584,6 +1440,90 @@ type DatasetProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DatasetProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DatasetProperties_CreationTime, *v.CreationTime)
+	}
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.DatasetProperties_DatasetArn, *v.DatasetArn)
+	}
+	if v.DatasetName != nil {
+		s.WriteString(schemas.DatasetProperties_DatasetName, *v.DatasetName)
+	}
+	if v.DatasetS3Uri != nil {
+		s.WriteString(schemas.DatasetProperties_DatasetS3Uri, *v.DatasetS3Uri)
+	}
+	if v.DatasetType != "" {
+		s.WriteString(schemas.DatasetProperties_DatasetType, string(v.DatasetType))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DatasetProperties_Description, *v.Description)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DatasetProperties_EndTime, *v.EndTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DatasetProperties_Message, *v.Message)
+	}
+	if v.NumberOfDocuments != nil {
+		s.WriteInt64(schemas.DatasetProperties_NumberOfDocuments, *v.NumberOfDocuments)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DatasetProperties_Status, string(v.Status))
+	}
+}
+func (v *DatasetProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetProperties_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DatasetProperties_CreationTime, v.CreationTime)
+		case schemas.DatasetProperties_DatasetArn:
+			v.DatasetArn = new(string)
+			return d.ReadString(schemas.DatasetProperties_DatasetArn, v.DatasetArn)
+		case schemas.DatasetProperties_DatasetName:
+			v.DatasetName = new(string)
+			return d.ReadString(schemas.DatasetProperties_DatasetName, v.DatasetName)
+		case schemas.DatasetProperties_DatasetS3Uri:
+			v.DatasetS3Uri = new(string)
+			return d.ReadString(schemas.DatasetProperties_DatasetS3Uri, v.DatasetS3Uri)
+		case schemas.DatasetProperties_DatasetType:
+			var ev string
+			if err := d.ReadString(schemas.DatasetProperties_DatasetType, &ev); err != nil {
+				return err
+			}
+			v.DatasetType = DatasetType(ev)
+			return nil
+		case schemas.DatasetProperties_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DatasetProperties_Description, v.Description)
+		case schemas.DatasetProperties_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.DatasetProperties_EndTime, v.EndTime)
+		case schemas.DatasetProperties_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DatasetProperties_Message, v.Message)
+		case schemas.DatasetProperties_NumberOfDocuments:
+			v.NumberOfDocuments = new(int64)
+			return d.ReadInt64(schemas.DatasetProperties_NumberOfDocuments, v.NumberOfDocuments)
+		case schemas.DatasetProperties_Status:
+			var ev string
+			if err := d.ReadString(schemas.DatasetProperties_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = DatasetStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies the class that categorizes the document being analyzed
 type DocumentClass struct {
 
@@ -600,6 +1540,40 @@ type DocumentClass struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DocumentClass) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentClass)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentClass) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DocumentClass_Name, *v.Name)
+	}
+	if v.Page != nil {
+		s.WriteInt32(schemas.DocumentClass_Page, *v.Page)
+	}
+	if v.Score != nil {
+		s.WriteFloat32(schemas.DocumentClass_Score, *v.Score)
+	}
+}
+func (v *DocumentClass) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentClass, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentClass_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DocumentClass_Name, v.Name)
+		case schemas.DocumentClass_Page:
+			v.Page = new(int32)
+			return d.ReadInt32(schemas.DocumentClass_Page, v.Page)
+		case schemas.DocumentClass_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.DocumentClass_Score, v.Score)
+		}
+		return nil
+	})
+}
+
 // Configuration required for a document classification model.
 type DocumentClassificationConfig struct {
 
@@ -613,6 +1587,35 @@ type DocumentClassificationConfig struct {
 	Labels []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DocumentClassificationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentClassificationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentClassificationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLabelsList(s, schemas.DocumentClassificationConfig_Labels, v.Labels)
+	if v.Mode != "" {
+		s.WriteString(schemas.DocumentClassificationConfig_Mode, string(v.Mode))
+	}
+}
+func (v *DocumentClassificationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentClassificationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentClassificationConfig_Labels:
+			return deserializeLabelsList(d, schemas.DocumentClassificationConfig_Labels, &v.Labels)
+		case schemas.DocumentClassificationConfig_Mode:
+			var ev string
+			if err := d.ReadString(schemas.DocumentClassificationConfig_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = DocumentClassifierMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Provides information for filtering a list of document classification jobs. For
@@ -638,6 +1641,50 @@ type DocumentClassificationJobFilter struct {
 	SubmitTimeBefore *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *DocumentClassificationJobFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentClassificationJobFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentClassificationJobFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobName != nil {
+		s.WriteString(schemas.DocumentClassificationJobFilter_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.DocumentClassificationJobFilter_JobStatus, string(v.JobStatus))
+	}
+	if v.SubmitTimeAfter != nil {
+		s.WriteTime(schemas.DocumentClassificationJobFilter_SubmitTimeAfter, *v.SubmitTimeAfter)
+	}
+	if v.SubmitTimeBefore != nil {
+		s.WriteTime(schemas.DocumentClassificationJobFilter_SubmitTimeBefore, *v.SubmitTimeBefore)
+	}
+}
+func (v *DocumentClassificationJobFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentClassificationJobFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentClassificationJobFilter_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.DocumentClassificationJobFilter_JobName, v.JobName)
+		case schemas.DocumentClassificationJobFilter_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.DocumentClassificationJobFilter_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.DocumentClassificationJobFilter_SubmitTimeAfter:
+			v.SubmitTimeAfter = new(time.Time)
+			return d.ReadTime(schemas.DocumentClassificationJobFilter_SubmitTimeAfter, v.SubmitTimeAfter)
+		case schemas.DocumentClassificationJobFilter_SubmitTimeBefore:
+			v.SubmitTimeBefore = new(time.Time)
+			return d.ReadTime(schemas.DocumentClassificationJobFilter_SubmitTimeBefore, v.SubmitTimeBefore)
+		}
+		return nil
+	})
 }
 
 // Provides information about a document classification job.
@@ -713,6 +1760,116 @@ type DocumentClassificationJobProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DocumentClassificationJobProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentClassificationJobProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentClassificationJobProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.DocumentClassificationJobProperties_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.DocumentClassifierArn != nil {
+		s.WriteString(schemas.DocumentClassificationJobProperties_DocumentClassifierArn, *v.DocumentClassifierArn)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DocumentClassificationJobProperties_EndTime, *v.EndTime)
+	}
+	if v.FlywheelArn != nil {
+		s.WriteString(schemas.DocumentClassificationJobProperties_FlywheelArn, *v.FlywheelArn)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.DocumentClassificationJobProperties_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.DocumentClassificationJobProperties_JobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.DocumentClassificationJobProperties_JobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.DocumentClassificationJobProperties_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.DocumentClassificationJobProperties_JobStatus, string(v.JobStatus))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DocumentClassificationJobProperties_Message, *v.Message)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.DocumentClassificationJobProperties_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SubmitTime != nil {
+		s.WriteTime(schemas.DocumentClassificationJobProperties_SubmitTime, *v.SubmitTime)
+	}
+	if v.VolumeKmsKeyId != nil {
+		s.WriteString(schemas.DocumentClassificationJobProperties_VolumeKmsKeyId, *v.VolumeKmsKeyId)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.DocumentClassificationJobProperties_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DocumentClassificationJobProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentClassificationJobProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentClassificationJobProperties_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.DocumentClassificationJobProperties_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.DocumentClassificationJobProperties_DocumentClassifierArn:
+			v.DocumentClassifierArn = new(string)
+			return d.ReadString(schemas.DocumentClassificationJobProperties_DocumentClassifierArn, v.DocumentClassifierArn)
+		case schemas.DocumentClassificationJobProperties_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.DocumentClassificationJobProperties_EndTime, v.EndTime)
+		case schemas.DocumentClassificationJobProperties_FlywheelArn:
+			v.FlywheelArn = new(string)
+			return d.ReadString(schemas.DocumentClassificationJobProperties_FlywheelArn, v.FlywheelArn)
+		case schemas.DocumentClassificationJobProperties_InputDataConfig:
+			v.InputDataConfig = &InputDataConfig{}
+			return v.InputDataConfig.Deserialize(d)
+		case schemas.DocumentClassificationJobProperties_JobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.DocumentClassificationJobProperties_JobArn, v.JobArn)
+		case schemas.DocumentClassificationJobProperties_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.DocumentClassificationJobProperties_JobId, v.JobId)
+		case schemas.DocumentClassificationJobProperties_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.DocumentClassificationJobProperties_JobName, v.JobName)
+		case schemas.DocumentClassificationJobProperties_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.DocumentClassificationJobProperties_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.DocumentClassificationJobProperties_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DocumentClassificationJobProperties_Message, v.Message)
+		case schemas.DocumentClassificationJobProperties_OutputDataConfig:
+			v.OutputDataConfig = &OutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.DocumentClassificationJobProperties_SubmitTime:
+			v.SubmitTime = new(time.Time)
+			return d.ReadTime(schemas.DocumentClassificationJobProperties_SubmitTime, v.SubmitTime)
+		case schemas.DocumentClassificationJobProperties_VolumeKmsKeyId:
+			v.VolumeKmsKeyId = new(string)
+			return d.ReadString(schemas.DocumentClassificationJobProperties_VolumeKmsKeyId, v.VolumeKmsKeyId)
+		case schemas.DocumentClassificationJobProperties_VpcConfig:
+			v.VpcConfig = &VpcConfig{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The location of the training documents. This parameter is required in a request
 // to create a semi-structured document classification model.
 type DocumentClassifierDocuments struct {
@@ -727,6 +1884,34 @@ type DocumentClassifierDocuments struct {
 	TestS3Uri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DocumentClassifierDocuments) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentClassifierDocuments)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentClassifierDocuments) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Uri != nil {
+		s.WriteString(schemas.DocumentClassifierDocuments_S3Uri, *v.S3Uri)
+	}
+	if v.TestS3Uri != nil {
+		s.WriteString(schemas.DocumentClassifierDocuments_TestS3Uri, *v.TestS3Uri)
+	}
+}
+func (v *DocumentClassifierDocuments) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentClassifierDocuments, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentClassifierDocuments_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.DocumentClassifierDocuments_S3Uri, v.S3Uri)
+		case schemas.DocumentClassifierDocuments_TestS3Uri:
+			v.TestS3Uri = new(string)
+			return d.ReadString(schemas.DocumentClassifierDocuments_TestS3Uri, v.TestS3Uri)
+		}
+		return nil
+	})
 }
 
 // Provides information for filtering a list of document classifiers. You can only
@@ -751,6 +1936,50 @@ type DocumentClassifierFilter struct {
 	SubmitTimeBefore *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *DocumentClassifierFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentClassifierFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentClassifierFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentClassifierName != nil {
+		s.WriteString(schemas.DocumentClassifierFilter_DocumentClassifierName, *v.DocumentClassifierName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DocumentClassifierFilter_Status, string(v.Status))
+	}
+	if v.SubmitTimeAfter != nil {
+		s.WriteTime(schemas.DocumentClassifierFilter_SubmitTimeAfter, *v.SubmitTimeAfter)
+	}
+	if v.SubmitTimeBefore != nil {
+		s.WriteTime(schemas.DocumentClassifierFilter_SubmitTimeBefore, *v.SubmitTimeBefore)
+	}
+}
+func (v *DocumentClassifierFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentClassifierFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentClassifierFilter_DocumentClassifierName:
+			v.DocumentClassifierName = new(string)
+			return d.ReadString(schemas.DocumentClassifierFilter_DocumentClassifierName, v.DocumentClassifierName)
+		case schemas.DocumentClassifierFilter_Status:
+			var ev string
+			if err := d.ReadString(schemas.DocumentClassifierFilter_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ModelStatus(ev)
+			return nil
+		case schemas.DocumentClassifierFilter_SubmitTimeAfter:
+			v.SubmitTimeAfter = new(time.Time)
+			return d.ReadTime(schemas.DocumentClassifierFilter_SubmitTimeAfter, v.SubmitTimeAfter)
+		case schemas.DocumentClassifierFilter_SubmitTimeBefore:
+			v.SubmitTimeBefore = new(time.Time)
+			return d.ReadTime(schemas.DocumentClassifierFilter_SubmitTimeBefore, v.SubmitTimeBefore)
+		}
+		return nil
+	})
 }
 
 // The input properties for training a document classifier.
@@ -843,6 +2072,79 @@ type DocumentClassifierInputDataConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DocumentClassifierInputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentClassifierInputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentClassifierInputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDocumentClassifierAugmentedManifestsList(s, schemas.DocumentClassifierInputDataConfig_AugmentedManifests, v.AugmentedManifests)
+	if v.DataFormat != "" {
+		s.WriteString(schemas.DocumentClassifierInputDataConfig_DataFormat, string(v.DataFormat))
+	}
+	if v.DocumentReaderConfig != nil {
+		s.WriteStruct(schemas.DocumentClassifierInputDataConfig_DocumentReaderConfig)
+		v.DocumentReaderConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DocumentType != "" {
+		s.WriteString(schemas.DocumentClassifierInputDataConfig_DocumentType, string(v.DocumentType))
+	}
+	if v.Documents != nil {
+		s.WriteStruct(schemas.DocumentClassifierInputDataConfig_Documents)
+		v.Documents.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LabelDelimiter != nil {
+		s.WriteString(schemas.DocumentClassifierInputDataConfig_LabelDelimiter, *v.LabelDelimiter)
+	}
+	if v.S3Uri != nil {
+		s.WriteString(schemas.DocumentClassifierInputDataConfig_S3Uri, *v.S3Uri)
+	}
+	if v.TestS3Uri != nil {
+		s.WriteString(schemas.DocumentClassifierInputDataConfig_TestS3Uri, *v.TestS3Uri)
+	}
+}
+func (v *DocumentClassifierInputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentClassifierInputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentClassifierInputDataConfig_AugmentedManifests:
+			return deserializeDocumentClassifierAugmentedManifestsList(d, schemas.DocumentClassifierInputDataConfig_AugmentedManifests, &v.AugmentedManifests)
+		case schemas.DocumentClassifierInputDataConfig_DataFormat:
+			var ev string
+			if err := d.ReadString(schemas.DocumentClassifierInputDataConfig_DataFormat, &ev); err != nil {
+				return err
+			}
+			v.DataFormat = DocumentClassifierDataFormat(ev)
+			return nil
+		case schemas.DocumentClassifierInputDataConfig_DocumentReaderConfig:
+			v.DocumentReaderConfig = &DocumentReaderConfig{}
+			return v.DocumentReaderConfig.Deserialize(d)
+		case schemas.DocumentClassifierInputDataConfig_DocumentType:
+			var ev string
+			if err := d.ReadString(schemas.DocumentClassifierInputDataConfig_DocumentType, &ev); err != nil {
+				return err
+			}
+			v.DocumentType = DocumentClassifierDocumentTypeFormat(ev)
+			return nil
+		case schemas.DocumentClassifierInputDataConfig_Documents:
+			v.Documents = &DocumentClassifierDocuments{}
+			return v.Documents.Deserialize(d)
+		case schemas.DocumentClassifierInputDataConfig_LabelDelimiter:
+			v.LabelDelimiter = new(string)
+			return d.ReadString(schemas.DocumentClassifierInputDataConfig_LabelDelimiter, v.LabelDelimiter)
+		case schemas.DocumentClassifierInputDataConfig_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.DocumentClassifierInputDataConfig_S3Uri, v.S3Uri)
+		case schemas.DocumentClassifierInputDataConfig_TestS3Uri:
+			v.TestS3Uri = new(string)
+			return d.ReadString(schemas.DocumentClassifierInputDataConfig_TestS3Uri, v.TestS3Uri)
+		}
+		return nil
+	})
+}
+
 // Provide the location for output data from a custom classifier job. This field
 // is mandatory if you are training a native document model.
 type DocumentClassifierOutputDataConfig struct {
@@ -878,6 +2180,40 @@ type DocumentClassifierOutputDataConfig struct {
 	S3Uri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DocumentClassifierOutputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentClassifierOutputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentClassifierOutputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlywheelStatsS3Prefix != nil {
+		s.WriteString(schemas.DocumentClassifierOutputDataConfig_FlywheelStatsS3Prefix, *v.FlywheelStatsS3Prefix)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.DocumentClassifierOutputDataConfig_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.S3Uri != nil {
+		s.WriteString(schemas.DocumentClassifierOutputDataConfig_S3Uri, *v.S3Uri)
+	}
+}
+func (v *DocumentClassifierOutputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentClassifierOutputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentClassifierOutputDataConfig_FlywheelStatsS3Prefix:
+			v.FlywheelStatsS3Prefix = new(string)
+			return d.ReadString(schemas.DocumentClassifierOutputDataConfig_FlywheelStatsS3Prefix, v.FlywheelStatsS3Prefix)
+		case schemas.DocumentClassifierOutputDataConfig_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.DocumentClassifierOutputDataConfig_KmsKeyId, v.KmsKeyId)
+		case schemas.DocumentClassifierOutputDataConfig_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.DocumentClassifierOutputDataConfig_S3Uri, v.S3Uri)
+		}
+		return nil
+	})
 }
 
 // Provides information about a document classifier.
@@ -981,6 +2317,156 @@ type DocumentClassifierProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DocumentClassifierProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentClassifierProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentClassifierProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClassifierMetadata != nil {
+		s.WriteStruct(schemas.DocumentClassifierProperties_ClassifierMetadata)
+		v.ClassifierMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.DocumentClassifierProperties_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.DocumentClassifierArn != nil {
+		s.WriteString(schemas.DocumentClassifierProperties_DocumentClassifierArn, *v.DocumentClassifierArn)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DocumentClassifierProperties_EndTime, *v.EndTime)
+	}
+	if v.FlywheelArn != nil {
+		s.WriteString(schemas.DocumentClassifierProperties_FlywheelArn, *v.FlywheelArn)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.DocumentClassifierProperties_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.DocumentClassifierProperties_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DocumentClassifierProperties_Message, *v.Message)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.DocumentClassifierProperties_Mode, string(v.Mode))
+	}
+	if v.ModelKmsKeyId != nil {
+		s.WriteString(schemas.DocumentClassifierProperties_ModelKmsKeyId, *v.ModelKmsKeyId)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.DocumentClassifierProperties_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceModelArn != nil {
+		s.WriteString(schemas.DocumentClassifierProperties_SourceModelArn, *v.SourceModelArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DocumentClassifierProperties_Status, string(v.Status))
+	}
+	if v.SubmitTime != nil {
+		s.WriteTime(schemas.DocumentClassifierProperties_SubmitTime, *v.SubmitTime)
+	}
+	if v.TrainingEndTime != nil {
+		s.WriteTime(schemas.DocumentClassifierProperties_TrainingEndTime, *v.TrainingEndTime)
+	}
+	if v.TrainingStartTime != nil {
+		s.WriteTime(schemas.DocumentClassifierProperties_TrainingStartTime, *v.TrainingStartTime)
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.DocumentClassifierProperties_VersionName, *v.VersionName)
+	}
+	if v.VolumeKmsKeyId != nil {
+		s.WriteString(schemas.DocumentClassifierProperties_VolumeKmsKeyId, *v.VolumeKmsKeyId)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.DocumentClassifierProperties_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DocumentClassifierProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentClassifierProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentClassifierProperties_ClassifierMetadata:
+			v.ClassifierMetadata = &ClassifierMetadata{}
+			return v.ClassifierMetadata.Deserialize(d)
+		case schemas.DocumentClassifierProperties_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.DocumentClassifierProperties_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.DocumentClassifierProperties_DocumentClassifierArn:
+			v.DocumentClassifierArn = new(string)
+			return d.ReadString(schemas.DocumentClassifierProperties_DocumentClassifierArn, v.DocumentClassifierArn)
+		case schemas.DocumentClassifierProperties_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.DocumentClassifierProperties_EndTime, v.EndTime)
+		case schemas.DocumentClassifierProperties_FlywheelArn:
+			v.FlywheelArn = new(string)
+			return d.ReadString(schemas.DocumentClassifierProperties_FlywheelArn, v.FlywheelArn)
+		case schemas.DocumentClassifierProperties_InputDataConfig:
+			v.InputDataConfig = &DocumentClassifierInputDataConfig{}
+			return v.InputDataConfig.Deserialize(d)
+		case schemas.DocumentClassifierProperties_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.DocumentClassifierProperties_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.DocumentClassifierProperties_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DocumentClassifierProperties_Message, v.Message)
+		case schemas.DocumentClassifierProperties_Mode:
+			var ev string
+			if err := d.ReadString(schemas.DocumentClassifierProperties_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = DocumentClassifierMode(ev)
+			return nil
+		case schemas.DocumentClassifierProperties_ModelKmsKeyId:
+			v.ModelKmsKeyId = new(string)
+			return d.ReadString(schemas.DocumentClassifierProperties_ModelKmsKeyId, v.ModelKmsKeyId)
+		case schemas.DocumentClassifierProperties_OutputDataConfig:
+			v.OutputDataConfig = &DocumentClassifierOutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.DocumentClassifierProperties_SourceModelArn:
+			v.SourceModelArn = new(string)
+			return d.ReadString(schemas.DocumentClassifierProperties_SourceModelArn, v.SourceModelArn)
+		case schemas.DocumentClassifierProperties_Status:
+			var ev string
+			if err := d.ReadString(schemas.DocumentClassifierProperties_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ModelStatus(ev)
+			return nil
+		case schemas.DocumentClassifierProperties_SubmitTime:
+			v.SubmitTime = new(time.Time)
+			return d.ReadTime(schemas.DocumentClassifierProperties_SubmitTime, v.SubmitTime)
+		case schemas.DocumentClassifierProperties_TrainingEndTime:
+			v.TrainingEndTime = new(time.Time)
+			return d.ReadTime(schemas.DocumentClassifierProperties_TrainingEndTime, v.TrainingEndTime)
+		case schemas.DocumentClassifierProperties_TrainingStartTime:
+			v.TrainingStartTime = new(time.Time)
+			return d.ReadTime(schemas.DocumentClassifierProperties_TrainingStartTime, v.TrainingStartTime)
+		case schemas.DocumentClassifierProperties_VersionName:
+			v.VersionName = new(string)
+			return d.ReadString(schemas.DocumentClassifierProperties_VersionName, v.VersionName)
+		case schemas.DocumentClassifierProperties_VolumeKmsKeyId:
+			v.VolumeKmsKeyId = new(string)
+			return d.ReadString(schemas.DocumentClassifierProperties_VolumeKmsKeyId, v.VolumeKmsKeyId)
+		case schemas.DocumentClassifierProperties_VpcConfig:
+			v.VpcConfig = &VpcConfig{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes information about a document classifier and its versions.
 type DocumentClassifierSummary struct {
 
@@ -1003,6 +2489,56 @@ type DocumentClassifierSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DocumentClassifierSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentClassifierSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentClassifierSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentClassifierName != nil {
+		s.WriteString(schemas.DocumentClassifierSummary_DocumentClassifierName, *v.DocumentClassifierName)
+	}
+	if v.LatestVersionCreatedAt != nil {
+		s.WriteTime(schemas.DocumentClassifierSummary_LatestVersionCreatedAt, *v.LatestVersionCreatedAt)
+	}
+	if v.LatestVersionName != nil {
+		s.WriteString(schemas.DocumentClassifierSummary_LatestVersionName, *v.LatestVersionName)
+	}
+	if v.LatestVersionStatus != "" {
+		s.WriteString(schemas.DocumentClassifierSummary_LatestVersionStatus, string(v.LatestVersionStatus))
+	}
+	if v.NumberOfVersions != nil {
+		s.WriteInt32(schemas.DocumentClassifierSummary_NumberOfVersions, *v.NumberOfVersions)
+	}
+}
+func (v *DocumentClassifierSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentClassifierSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentClassifierSummary_DocumentClassifierName:
+			v.DocumentClassifierName = new(string)
+			return d.ReadString(schemas.DocumentClassifierSummary_DocumentClassifierName, v.DocumentClassifierName)
+		case schemas.DocumentClassifierSummary_LatestVersionCreatedAt:
+			v.LatestVersionCreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DocumentClassifierSummary_LatestVersionCreatedAt, v.LatestVersionCreatedAt)
+		case schemas.DocumentClassifierSummary_LatestVersionName:
+			v.LatestVersionName = new(string)
+			return d.ReadString(schemas.DocumentClassifierSummary_LatestVersionName, v.LatestVersionName)
+		case schemas.DocumentClassifierSummary_LatestVersionStatus:
+			var ev string
+			if err := d.ReadString(schemas.DocumentClassifierSummary_LatestVersionStatus, &ev); err != nil {
+				return err
+			}
+			v.LatestVersionStatus = ModelStatus(ev)
+			return nil
+		case schemas.DocumentClassifierSummary_NumberOfVersions:
+			v.NumberOfVersions = new(int32)
+			return d.ReadInt32(schemas.DocumentClassifierSummary_NumberOfVersions, v.NumberOfVersions)
+		}
+		return nil
+	})
+}
+
 // Specifies one of the label or labels that categorize the document being
 // analyzed.
 type DocumentLabel struct {
@@ -1020,6 +2556,40 @@ type DocumentLabel struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DocumentLabel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentLabel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentLabel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DocumentLabel_Name, *v.Name)
+	}
+	if v.Page != nil {
+		s.WriteInt32(schemas.DocumentLabel_Page, *v.Page)
+	}
+	if v.Score != nil {
+		s.WriteFloat32(schemas.DocumentLabel_Score, *v.Score)
+	}
+}
+func (v *DocumentLabel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentLabel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentLabel_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DocumentLabel_Name, v.Name)
+		case schemas.DocumentLabel_Page:
+			v.Page = new(int32)
+			return d.ReadInt32(schemas.DocumentLabel_Page, v.Page)
+		case schemas.DocumentLabel_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.DocumentLabel_Score, v.Score)
+		}
+		return nil
+	})
+}
+
 // Information about the document, discovered during text extraction.
 type DocumentMetadata struct {
 
@@ -1031,6 +2601,31 @@ type DocumentMetadata struct {
 	Pages *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *DocumentMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfExtractedCharacters(s, schemas.DocumentMetadata_ExtractedCharacters, v.ExtractedCharacters)
+	if v.Pages != nil {
+		s.WriteInt32(schemas.DocumentMetadata_Pages, *v.Pages)
+	}
+}
+func (v *DocumentMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentMetadata_ExtractedCharacters:
+			return deserializeListOfExtractedCharacters(d, schemas.DocumentMetadata_ExtractedCharacters, &v.ExtractedCharacters)
+		case schemas.DocumentMetadata_Pages:
+			v.Pages = new(int32)
+			return d.ReadInt32(schemas.DocumentMetadata_Pages, v.Pages)
+		}
+		return nil
+	})
 }
 
 // Provides configuration parameters to override the default actions for
@@ -1091,6 +2686,45 @@ type DocumentReaderConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DocumentReaderConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentReaderConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentReaderConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentReadAction != "" {
+		s.WriteString(schemas.DocumentReaderConfig_DocumentReadAction, string(v.DocumentReadAction))
+	}
+	if v.DocumentReadMode != "" {
+		s.WriteString(schemas.DocumentReaderConfig_DocumentReadMode, string(v.DocumentReadMode))
+	}
+	serializeListOfDocumentReadFeatureTypes(s, schemas.DocumentReaderConfig_FeatureTypes, v.FeatureTypes)
+}
+func (v *DocumentReaderConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentReaderConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentReaderConfig_DocumentReadAction:
+			var ev string
+			if err := d.ReadString(schemas.DocumentReaderConfig_DocumentReadAction, &ev); err != nil {
+				return err
+			}
+			v.DocumentReadAction = DocumentReadAction(ev)
+			return nil
+		case schemas.DocumentReaderConfig_DocumentReadMode:
+			var ev string
+			if err := d.ReadString(schemas.DocumentReaderConfig_DocumentReadMode, &ev); err != nil {
+				return err
+			}
+			v.DocumentReadMode = DocumentReadMode(ev)
+			return nil
+		case schemas.DocumentReaderConfig_FeatureTypes:
+			return deserializeListOfDocumentReadFeatureTypes(d, schemas.DocumentReaderConfig_FeatureTypes, &v.FeatureTypes)
+		}
+		return nil
+	})
+}
+
 // Document type for each page in the document.
 type DocumentTypeListItem struct {
 
@@ -1101,6 +2735,38 @@ type DocumentTypeListItem struct {
 	Type DocumentType
 
 	noSmithyDocumentSerde
+}
+
+func (v *DocumentTypeListItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentTypeListItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentTypeListItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Page != nil {
+		s.WriteInt32(schemas.DocumentTypeListItem_Page, *v.Page)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DocumentTypeListItem_Type, string(v.Type))
+	}
+}
+func (v *DocumentTypeListItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentTypeListItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentTypeListItem_Page:
+			v.Page = new(int32)
+			return d.ReadInt32(schemas.DocumentTypeListItem_Page, v.Page)
+		case schemas.DocumentTypeListItem_Type:
+			var ev string
+			if err := d.ReadString(schemas.DocumentTypeListItem_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = DocumentType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Returns the code for the dominant language in the input text and the level of
@@ -1118,6 +2784,34 @@ type DominantLanguage struct {
 	Score *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *DominantLanguage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DominantLanguage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DominantLanguage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != nil {
+		s.WriteString(schemas.DominantLanguage_LanguageCode, *v.LanguageCode)
+	}
+	if v.Score != nil {
+		s.WriteFloat32(schemas.DominantLanguage_Score, *v.Score)
+	}
+}
+func (v *DominantLanguage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DominantLanguage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DominantLanguage_LanguageCode:
+			v.LanguageCode = new(string)
+			return d.ReadString(schemas.DominantLanguage_LanguageCode, v.LanguageCode)
+		case schemas.DominantLanguage_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.DominantLanguage_Score, v.Score)
+		}
+		return nil
+	})
 }
 
 // Provides information for filtering a list of dominant language detection jobs.
@@ -1142,6 +2836,50 @@ type DominantLanguageDetectionJobFilter struct {
 	SubmitTimeBefore *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *DominantLanguageDetectionJobFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DominantLanguageDetectionJobFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DominantLanguageDetectionJobFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobName != nil {
+		s.WriteString(schemas.DominantLanguageDetectionJobFilter_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.DominantLanguageDetectionJobFilter_JobStatus, string(v.JobStatus))
+	}
+	if v.SubmitTimeAfter != nil {
+		s.WriteTime(schemas.DominantLanguageDetectionJobFilter_SubmitTimeAfter, *v.SubmitTimeAfter)
+	}
+	if v.SubmitTimeBefore != nil {
+		s.WriteTime(schemas.DominantLanguageDetectionJobFilter_SubmitTimeBefore, *v.SubmitTimeBefore)
+	}
+}
+func (v *DominantLanguageDetectionJobFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DominantLanguageDetectionJobFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DominantLanguageDetectionJobFilter_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.DominantLanguageDetectionJobFilter_JobName, v.JobName)
+		case schemas.DominantLanguageDetectionJobFilter_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.DominantLanguageDetectionJobFilter_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.DominantLanguageDetectionJobFilter_SubmitTimeAfter:
+			v.SubmitTimeAfter = new(time.Time)
+			return d.ReadTime(schemas.DominantLanguageDetectionJobFilter_SubmitTimeAfter, v.SubmitTimeAfter)
+		case schemas.DominantLanguageDetectionJobFilter_SubmitTimeBefore:
+			v.SubmitTimeBefore = new(time.Time)
+			return d.ReadTime(schemas.DominantLanguageDetectionJobFilter_SubmitTimeBefore, v.SubmitTimeBefore)
+		}
+		return nil
+	})
 }
 
 // Provides information about a dominant language detection job.
@@ -1211,6 +2949,104 @@ type DominantLanguageDetectionJobProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DominantLanguageDetectionJobProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DominantLanguageDetectionJobProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DominantLanguageDetectionJobProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.DominantLanguageDetectionJobProperties_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DominantLanguageDetectionJobProperties_EndTime, *v.EndTime)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.DominantLanguageDetectionJobProperties_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.DominantLanguageDetectionJobProperties_JobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.DominantLanguageDetectionJobProperties_JobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.DominantLanguageDetectionJobProperties_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.DominantLanguageDetectionJobProperties_JobStatus, string(v.JobStatus))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DominantLanguageDetectionJobProperties_Message, *v.Message)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.DominantLanguageDetectionJobProperties_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SubmitTime != nil {
+		s.WriteTime(schemas.DominantLanguageDetectionJobProperties_SubmitTime, *v.SubmitTime)
+	}
+	if v.VolumeKmsKeyId != nil {
+		s.WriteString(schemas.DominantLanguageDetectionJobProperties_VolumeKmsKeyId, *v.VolumeKmsKeyId)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.DominantLanguageDetectionJobProperties_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DominantLanguageDetectionJobProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DominantLanguageDetectionJobProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DominantLanguageDetectionJobProperties_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.DominantLanguageDetectionJobProperties_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.DominantLanguageDetectionJobProperties_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.DominantLanguageDetectionJobProperties_EndTime, v.EndTime)
+		case schemas.DominantLanguageDetectionJobProperties_InputDataConfig:
+			v.InputDataConfig = &InputDataConfig{}
+			return v.InputDataConfig.Deserialize(d)
+		case schemas.DominantLanguageDetectionJobProperties_JobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.DominantLanguageDetectionJobProperties_JobArn, v.JobArn)
+		case schemas.DominantLanguageDetectionJobProperties_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.DominantLanguageDetectionJobProperties_JobId, v.JobId)
+		case schemas.DominantLanguageDetectionJobProperties_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.DominantLanguageDetectionJobProperties_JobName, v.JobName)
+		case schemas.DominantLanguageDetectionJobProperties_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.DominantLanguageDetectionJobProperties_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.DominantLanguageDetectionJobProperties_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DominantLanguageDetectionJobProperties_Message, v.Message)
+		case schemas.DominantLanguageDetectionJobProperties_OutputDataConfig:
+			v.OutputDataConfig = &OutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.DominantLanguageDetectionJobProperties_SubmitTime:
+			v.SubmitTime = new(time.Time)
+			return d.ReadTime(schemas.DominantLanguageDetectionJobProperties_SubmitTime, v.SubmitTime)
+		case schemas.DominantLanguageDetectionJobProperties_VolumeKmsKeyId:
+			v.VolumeKmsKeyId = new(string)
+			return d.ReadString(schemas.DominantLanguageDetectionJobProperties_VolumeKmsKeyId, v.VolumeKmsKeyId)
+		case schemas.DominantLanguageDetectionJobProperties_VpcConfig:
+			v.VpcConfig = &VpcConfig{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The filter used to determine which endpoints are returned. You can filter jobs
 // on their name, model, status, or the date and time that they were created. You
 // can only set one filter at a time.
@@ -1230,6 +3066,50 @@ type EndpointFilter struct {
 	Status EndpointStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *EndpointFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.EndpointFilter_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.EndpointFilter_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.ModelArn != nil {
+		s.WriteString(schemas.EndpointFilter_ModelArn, *v.ModelArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.EndpointFilter_Status, string(v.Status))
+	}
+}
+func (v *EndpointFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointFilter_CreationTimeAfter:
+			v.CreationTimeAfter = new(time.Time)
+			return d.ReadTime(schemas.EndpointFilter_CreationTimeAfter, v.CreationTimeAfter)
+		case schemas.EndpointFilter_CreationTimeBefore:
+			v.CreationTimeBefore = new(time.Time)
+			return d.ReadTime(schemas.EndpointFilter_CreationTimeBefore, v.CreationTimeBefore)
+		case schemas.EndpointFilter_ModelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.EndpointFilter_ModelArn, v.ModelArn)
+		case schemas.EndpointFilter_Status:
+			var ev string
+			if err := d.ReadString(schemas.EndpointFilter_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = EndpointStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Specifies information about the specified endpoint. For information about
@@ -1286,6 +3166,98 @@ type EndpointProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EndpointProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.EndpointProperties_CreationTime, *v.CreationTime)
+	}
+	if v.CurrentInferenceUnits != nil {
+		s.WriteInt32(schemas.EndpointProperties_CurrentInferenceUnits, *v.CurrentInferenceUnits)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.EndpointProperties_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.DesiredDataAccessRoleArn != nil {
+		s.WriteString(schemas.EndpointProperties_DesiredDataAccessRoleArn, *v.DesiredDataAccessRoleArn)
+	}
+	if v.DesiredInferenceUnits != nil {
+		s.WriteInt32(schemas.EndpointProperties_DesiredInferenceUnits, *v.DesiredInferenceUnits)
+	}
+	if v.DesiredModelArn != nil {
+		s.WriteString(schemas.EndpointProperties_DesiredModelArn, *v.DesiredModelArn)
+	}
+	if v.EndpointArn != nil {
+		s.WriteString(schemas.EndpointProperties_EndpointArn, *v.EndpointArn)
+	}
+	if v.FlywheelArn != nil {
+		s.WriteString(schemas.EndpointProperties_FlywheelArn, *v.FlywheelArn)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.EndpointProperties_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.EndpointProperties_Message, *v.Message)
+	}
+	if v.ModelArn != nil {
+		s.WriteString(schemas.EndpointProperties_ModelArn, *v.ModelArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.EndpointProperties_Status, string(v.Status))
+	}
+}
+func (v *EndpointProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointProperties_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.EndpointProperties_CreationTime, v.CreationTime)
+		case schemas.EndpointProperties_CurrentInferenceUnits:
+			v.CurrentInferenceUnits = new(int32)
+			return d.ReadInt32(schemas.EndpointProperties_CurrentInferenceUnits, v.CurrentInferenceUnits)
+		case schemas.EndpointProperties_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.EndpointProperties_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.EndpointProperties_DesiredDataAccessRoleArn:
+			v.DesiredDataAccessRoleArn = new(string)
+			return d.ReadString(schemas.EndpointProperties_DesiredDataAccessRoleArn, v.DesiredDataAccessRoleArn)
+		case schemas.EndpointProperties_DesiredInferenceUnits:
+			v.DesiredInferenceUnits = new(int32)
+			return d.ReadInt32(schemas.EndpointProperties_DesiredInferenceUnits, v.DesiredInferenceUnits)
+		case schemas.EndpointProperties_DesiredModelArn:
+			v.DesiredModelArn = new(string)
+			return d.ReadString(schemas.EndpointProperties_DesiredModelArn, v.DesiredModelArn)
+		case schemas.EndpointProperties_EndpointArn:
+			v.EndpointArn = new(string)
+			return d.ReadString(schemas.EndpointProperties_EndpointArn, v.EndpointArn)
+		case schemas.EndpointProperties_FlywheelArn:
+			v.FlywheelArn = new(string)
+			return d.ReadString(schemas.EndpointProperties_FlywheelArn, v.FlywheelArn)
+		case schemas.EndpointProperties_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.EndpointProperties_LastModifiedTime, v.LastModifiedTime)
+		case schemas.EndpointProperties_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EndpointProperties_Message, v.Message)
+		case schemas.EndpointProperties_ModelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.EndpointProperties_ModelArn, v.ModelArn)
+		case schemas.EndpointProperties_Status:
+			var ev string
+			if err := d.ReadString(schemas.EndpointProperties_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = EndpointStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Provides information for filtering a list of dominant language detection jobs.
 // For more information, see the operation.
 type EntitiesDetectionJobFilter struct {
@@ -1308,6 +3280,50 @@ type EntitiesDetectionJobFilter struct {
 	SubmitTimeBefore *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *EntitiesDetectionJobFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntitiesDetectionJobFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntitiesDetectionJobFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobName != nil {
+		s.WriteString(schemas.EntitiesDetectionJobFilter_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.EntitiesDetectionJobFilter_JobStatus, string(v.JobStatus))
+	}
+	if v.SubmitTimeAfter != nil {
+		s.WriteTime(schemas.EntitiesDetectionJobFilter_SubmitTimeAfter, *v.SubmitTimeAfter)
+	}
+	if v.SubmitTimeBefore != nil {
+		s.WriteTime(schemas.EntitiesDetectionJobFilter_SubmitTimeBefore, *v.SubmitTimeBefore)
+	}
+}
+func (v *EntitiesDetectionJobFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntitiesDetectionJobFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntitiesDetectionJobFilter_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.EntitiesDetectionJobFilter_JobName, v.JobName)
+		case schemas.EntitiesDetectionJobFilter_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.EntitiesDetectionJobFilter_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.EntitiesDetectionJobFilter_SubmitTimeAfter:
+			v.SubmitTimeAfter = new(time.Time)
+			return d.ReadTime(schemas.EntitiesDetectionJobFilter_SubmitTimeAfter, v.SubmitTimeAfter)
+		case schemas.EntitiesDetectionJobFilter_SubmitTimeBefore:
+			v.SubmitTimeBefore = new(time.Time)
+			return d.ReadTime(schemas.EntitiesDetectionJobFilter_SubmitTimeBefore, v.SubmitTimeBefore)
+		}
+		return nil
+	})
 }
 
 // Provides information about an entities detection job.
@@ -1386,6 +3402,126 @@ type EntitiesDetectionJobProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EntitiesDetectionJobProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntitiesDetectionJobProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntitiesDetectionJobProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.EntitiesDetectionJobProperties_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.EntitiesDetectionJobProperties_EndTime, *v.EndTime)
+	}
+	if v.EntityRecognizerArn != nil {
+		s.WriteString(schemas.EntitiesDetectionJobProperties_EntityRecognizerArn, *v.EntityRecognizerArn)
+	}
+	if v.FlywheelArn != nil {
+		s.WriteString(schemas.EntitiesDetectionJobProperties_FlywheelArn, *v.FlywheelArn)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.EntitiesDetectionJobProperties_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.EntitiesDetectionJobProperties_JobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.EntitiesDetectionJobProperties_JobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.EntitiesDetectionJobProperties_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.EntitiesDetectionJobProperties_JobStatus, string(v.JobStatus))
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.EntitiesDetectionJobProperties_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.EntitiesDetectionJobProperties_Message, *v.Message)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.EntitiesDetectionJobProperties_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SubmitTime != nil {
+		s.WriteTime(schemas.EntitiesDetectionJobProperties_SubmitTime, *v.SubmitTime)
+	}
+	if v.VolumeKmsKeyId != nil {
+		s.WriteString(schemas.EntitiesDetectionJobProperties_VolumeKmsKeyId, *v.VolumeKmsKeyId)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.EntitiesDetectionJobProperties_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EntitiesDetectionJobProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntitiesDetectionJobProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntitiesDetectionJobProperties_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.EntitiesDetectionJobProperties_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.EntitiesDetectionJobProperties_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.EntitiesDetectionJobProperties_EndTime, v.EndTime)
+		case schemas.EntitiesDetectionJobProperties_EntityRecognizerArn:
+			v.EntityRecognizerArn = new(string)
+			return d.ReadString(schemas.EntitiesDetectionJobProperties_EntityRecognizerArn, v.EntityRecognizerArn)
+		case schemas.EntitiesDetectionJobProperties_FlywheelArn:
+			v.FlywheelArn = new(string)
+			return d.ReadString(schemas.EntitiesDetectionJobProperties_FlywheelArn, v.FlywheelArn)
+		case schemas.EntitiesDetectionJobProperties_InputDataConfig:
+			v.InputDataConfig = &InputDataConfig{}
+			return v.InputDataConfig.Deserialize(d)
+		case schemas.EntitiesDetectionJobProperties_JobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.EntitiesDetectionJobProperties_JobArn, v.JobArn)
+		case schemas.EntitiesDetectionJobProperties_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.EntitiesDetectionJobProperties_JobId, v.JobId)
+		case schemas.EntitiesDetectionJobProperties_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.EntitiesDetectionJobProperties_JobName, v.JobName)
+		case schemas.EntitiesDetectionJobProperties_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.EntitiesDetectionJobProperties_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.EntitiesDetectionJobProperties_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.EntitiesDetectionJobProperties_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.EntitiesDetectionJobProperties_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EntitiesDetectionJobProperties_Message, v.Message)
+		case schemas.EntitiesDetectionJobProperties_OutputDataConfig:
+			v.OutputDataConfig = &OutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.EntitiesDetectionJobProperties_SubmitTime:
+			v.SubmitTime = new(time.Time)
+			return d.ReadTime(schemas.EntitiesDetectionJobProperties_SubmitTime, v.SubmitTime)
+		case schemas.EntitiesDetectionJobProperties_VolumeKmsKeyId:
+			v.VolumeKmsKeyId = new(string)
+			return d.ReadString(schemas.EntitiesDetectionJobProperties_VolumeKmsKeyId, v.VolumeKmsKeyId)
+		case schemas.EntitiesDetectionJobProperties_VpcConfig:
+			v.VpcConfig = &VpcConfig{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides information about an entity.
 type Entity struct {
 
@@ -1422,6 +3558,59 @@ type Entity struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Entity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Entity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Entity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginOffset != nil {
+		s.WriteInt32(schemas.Entity_BeginOffset, *v.BeginOffset)
+	}
+	serializeListOfBlockReferences(s, schemas.Entity_BlockReferences, v.BlockReferences)
+	if v.EndOffset != nil {
+		s.WriteInt32(schemas.Entity_EndOffset, *v.EndOffset)
+	}
+	if v.Score != nil {
+		s.WriteFloat32(schemas.Entity_Score, *v.Score)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.Entity_Text, *v.Text)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Entity_Type, string(v.Type))
+	}
+}
+func (v *Entity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Entity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Entity_BeginOffset:
+			v.BeginOffset = new(int32)
+			return d.ReadInt32(schemas.Entity_BeginOffset, v.BeginOffset)
+		case schemas.Entity_BlockReferences:
+			return deserializeListOfBlockReferences(d, schemas.Entity_BlockReferences, &v.BlockReferences)
+		case schemas.Entity_EndOffset:
+			v.EndOffset = new(int32)
+			return d.ReadInt32(schemas.Entity_EndOffset, v.EndOffset)
+		case schemas.Entity_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.Entity_Score, v.Score)
+		case schemas.Entity_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.Entity_Text, v.Text)
+		case schemas.Entity_Type:
+			var ev string
+			if err := d.ReadString(schemas.Entity_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = EntityType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies one of the label or labels that categorize the personally
 // identifiable information (PII) entity being analyzed.
 type EntityLabel struct {
@@ -1436,6 +3625,38 @@ type EntityLabel struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EntityLabel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityLabel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityLabel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.EntityLabel_Name, string(v.Name))
+	}
+	if v.Score != nil {
+		s.WriteFloat32(schemas.EntityLabel_Score, *v.Score)
+	}
+}
+func (v *EntityLabel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityLabel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityLabel_Name:
+			var ev string
+			if err := d.ReadString(schemas.EntityLabel_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = PiiEntityType(ev)
+			return nil
+		case schemas.EntityLabel_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.EntityLabel_Score, v.Score)
+		}
+		return nil
+	})
+}
+
 // Configuration required for an entity recognition model.
 type EntityRecognitionConfig struct {
 
@@ -1445,6 +3666,25 @@ type EntityRecognitionConfig struct {
 	EntityTypes []EntityTypesListItem
 
 	noSmithyDocumentSerde
+}
+
+func (v *EntityRecognitionConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityRecognitionConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityRecognitionConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntityTypesList(s, schemas.EntityRecognitionConfig_EntityTypes, v.EntityTypes)
+}
+func (v *EntityRecognitionConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityRecognitionConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityRecognitionConfig_EntityTypes:
+			return deserializeEntityTypesList(d, schemas.EntityRecognitionConfig_EntityTypes, &v.EntityTypes)
+		}
+		return nil
+	})
 }
 
 // Describes the annotations associated with a entity recognizer.
@@ -1463,6 +3703,34 @@ type EntityRecognizerAnnotations struct {
 	TestS3Uri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EntityRecognizerAnnotations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityRecognizerAnnotations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityRecognizerAnnotations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Uri != nil {
+		s.WriteString(schemas.EntityRecognizerAnnotations_S3Uri, *v.S3Uri)
+	}
+	if v.TestS3Uri != nil {
+		s.WriteString(schemas.EntityRecognizerAnnotations_TestS3Uri, *v.TestS3Uri)
+	}
+}
+func (v *EntityRecognizerAnnotations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityRecognizerAnnotations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityRecognizerAnnotations_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.EntityRecognizerAnnotations_S3Uri, v.S3Uri)
+		case schemas.EntityRecognizerAnnotations_TestS3Uri:
+			v.TestS3Uri = new(string)
+			return d.ReadString(schemas.EntityRecognizerAnnotations_TestS3Uri, v.TestS3Uri)
+		}
+		return nil
+	})
 }
 
 // Describes the training documents submitted with an entity recognizer.
@@ -1491,6 +3759,44 @@ type EntityRecognizerDocuments struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EntityRecognizerDocuments) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityRecognizerDocuments)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityRecognizerDocuments) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputFormat != "" {
+		s.WriteString(schemas.EntityRecognizerDocuments_InputFormat, string(v.InputFormat))
+	}
+	if v.S3Uri != nil {
+		s.WriteString(schemas.EntityRecognizerDocuments_S3Uri, *v.S3Uri)
+	}
+	if v.TestS3Uri != nil {
+		s.WriteString(schemas.EntityRecognizerDocuments_TestS3Uri, *v.TestS3Uri)
+	}
+}
+func (v *EntityRecognizerDocuments) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityRecognizerDocuments, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityRecognizerDocuments_InputFormat:
+			var ev string
+			if err := d.ReadString(schemas.EntityRecognizerDocuments_InputFormat, &ev); err != nil {
+				return err
+			}
+			v.InputFormat = InputFormat(ev)
+			return nil
+		case schemas.EntityRecognizerDocuments_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.EntityRecognizerDocuments_S3Uri, v.S3Uri)
+		case schemas.EntityRecognizerDocuments_TestS3Uri:
+			v.TestS3Uri = new(string)
+			return d.ReadString(schemas.EntityRecognizerDocuments_TestS3Uri, v.TestS3Uri)
+		}
+		return nil
+	})
+}
+
 // Describes the entity list submitted with an entity recognizer.
 type EntityRecognizerEntityList struct {
 
@@ -1501,6 +3807,28 @@ type EntityRecognizerEntityList struct {
 	S3Uri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EntityRecognizerEntityList) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityRecognizerEntityList)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityRecognizerEntityList) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Uri != nil {
+		s.WriteString(schemas.EntityRecognizerEntityList_S3Uri, *v.S3Uri)
+	}
+}
+func (v *EntityRecognizerEntityList) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityRecognizerEntityList, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityRecognizerEntityList_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.EntityRecognizerEntityList_S3Uri, v.S3Uri)
+		}
+		return nil
+	})
 }
 
 // Detailed information about the accuracy of an entity recognizer.
@@ -1525,6 +3853,40 @@ type EntityRecognizerEvaluationMetrics struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EntityRecognizerEvaluationMetrics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityRecognizerEvaluationMetrics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityRecognizerEvaluationMetrics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.F1Score != nil {
+		s.WriteFloat64(schemas.EntityRecognizerEvaluationMetrics_F1Score, *v.F1Score)
+	}
+	if v.Precision != nil {
+		s.WriteFloat64(schemas.EntityRecognizerEvaluationMetrics_Precision, *v.Precision)
+	}
+	if v.Recall != nil {
+		s.WriteFloat64(schemas.EntityRecognizerEvaluationMetrics_Recall, *v.Recall)
+	}
+}
+func (v *EntityRecognizerEvaluationMetrics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityRecognizerEvaluationMetrics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityRecognizerEvaluationMetrics_F1Score:
+			v.F1Score = new(float64)
+			return d.ReadFloat64(schemas.EntityRecognizerEvaluationMetrics_F1Score, v.F1Score)
+		case schemas.EntityRecognizerEvaluationMetrics_Precision:
+			v.Precision = new(float64)
+			return d.ReadFloat64(schemas.EntityRecognizerEvaluationMetrics_Precision, v.Precision)
+		case schemas.EntityRecognizerEvaluationMetrics_Recall:
+			v.Recall = new(float64)
+			return d.ReadFloat64(schemas.EntityRecognizerEvaluationMetrics_Recall, v.Recall)
+		}
+		return nil
+	})
+}
+
 // Provides information for filtering a list of entity recognizers. You can only
 // specify one filtering parameter in a request. For more information, see the
 // ListEntityRecognizers operation./>
@@ -1547,6 +3909,50 @@ type EntityRecognizerFilter struct {
 	SubmitTimeBefore *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *EntityRecognizerFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityRecognizerFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityRecognizerFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecognizerName != nil {
+		s.WriteString(schemas.EntityRecognizerFilter_RecognizerName, *v.RecognizerName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.EntityRecognizerFilter_Status, string(v.Status))
+	}
+	if v.SubmitTimeAfter != nil {
+		s.WriteTime(schemas.EntityRecognizerFilter_SubmitTimeAfter, *v.SubmitTimeAfter)
+	}
+	if v.SubmitTimeBefore != nil {
+		s.WriteTime(schemas.EntityRecognizerFilter_SubmitTimeBefore, *v.SubmitTimeBefore)
+	}
+}
+func (v *EntityRecognizerFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityRecognizerFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityRecognizerFilter_RecognizerName:
+			v.RecognizerName = new(string)
+			return d.ReadString(schemas.EntityRecognizerFilter_RecognizerName, v.RecognizerName)
+		case schemas.EntityRecognizerFilter_Status:
+			var ev string
+			if err := d.ReadString(schemas.EntityRecognizerFilter_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ModelStatus(ev)
+			return nil
+		case schemas.EntityRecognizerFilter_SubmitTimeAfter:
+			v.SubmitTimeAfter = new(time.Time)
+			return d.ReadTime(schemas.EntityRecognizerFilter_SubmitTimeAfter, v.SubmitTimeAfter)
+		case schemas.EntityRecognizerFilter_SubmitTimeBefore:
+			v.SubmitTimeBefore = new(time.Time)
+			return d.ReadTime(schemas.EntityRecognizerFilter_SubmitTimeBefore, v.SubmitTimeBefore)
+		}
+		return nil
+	})
 }
 
 // Specifies the format and location of the input data.
@@ -1610,6 +4016,62 @@ type EntityRecognizerInputDataConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EntityRecognizerInputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityRecognizerInputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityRecognizerInputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Annotations != nil {
+		s.WriteStruct(schemas.EntityRecognizerInputDataConfig_Annotations)
+		v.Annotations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEntityRecognizerAugmentedManifestsList(s, schemas.EntityRecognizerInputDataConfig_AugmentedManifests, v.AugmentedManifests)
+	if v.DataFormat != "" {
+		s.WriteString(schemas.EntityRecognizerInputDataConfig_DataFormat, string(v.DataFormat))
+	}
+	if v.Documents != nil {
+		s.WriteStruct(schemas.EntityRecognizerInputDataConfig_Documents)
+		v.Documents.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EntityList != nil {
+		s.WriteStruct(schemas.EntityRecognizerInputDataConfig_EntityList)
+		v.EntityList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEntityTypesList(s, schemas.EntityRecognizerInputDataConfig_EntityTypes, v.EntityTypes)
+}
+func (v *EntityRecognizerInputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityRecognizerInputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityRecognizerInputDataConfig_Annotations:
+			v.Annotations = &EntityRecognizerAnnotations{}
+			return v.Annotations.Deserialize(d)
+		case schemas.EntityRecognizerInputDataConfig_AugmentedManifests:
+			return deserializeEntityRecognizerAugmentedManifestsList(d, schemas.EntityRecognizerInputDataConfig_AugmentedManifests, &v.AugmentedManifests)
+		case schemas.EntityRecognizerInputDataConfig_DataFormat:
+			var ev string
+			if err := d.ReadString(schemas.EntityRecognizerInputDataConfig_DataFormat, &ev); err != nil {
+				return err
+			}
+			v.DataFormat = EntityRecognizerDataFormat(ev)
+			return nil
+		case schemas.EntityRecognizerInputDataConfig_Documents:
+			v.Documents = &EntityRecognizerDocuments{}
+			return v.Documents.Deserialize(d)
+		case schemas.EntityRecognizerInputDataConfig_EntityList:
+			v.EntityList = &EntityRecognizerEntityList{}
+			return v.EntityList.Deserialize(d)
+		case schemas.EntityRecognizerInputDataConfig_EntityTypes:
+			return deserializeEntityTypesList(d, schemas.EntityRecognizerInputDataConfig_EntityTypes, &v.EntityTypes)
+		}
+		return nil
+	})
+}
+
 // Detailed information about an entity recognizer.
 type EntityRecognizerMetadata struct {
 
@@ -1628,6 +4090,45 @@ type EntityRecognizerMetadata struct {
 	NumberOfTrainedDocuments *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *EntityRecognizerMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityRecognizerMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityRecognizerMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntityRecognizerMetadataEntityTypesList(s, schemas.EntityRecognizerMetadata_EntityTypes, v.EntityTypes)
+	if v.EvaluationMetrics != nil {
+		s.WriteStruct(schemas.EntityRecognizerMetadata_EvaluationMetrics)
+		v.EvaluationMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NumberOfTestDocuments != nil {
+		s.WriteInt32(schemas.EntityRecognizerMetadata_NumberOfTestDocuments, *v.NumberOfTestDocuments)
+	}
+	if v.NumberOfTrainedDocuments != nil {
+		s.WriteInt32(schemas.EntityRecognizerMetadata_NumberOfTrainedDocuments, *v.NumberOfTrainedDocuments)
+	}
+}
+func (v *EntityRecognizerMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityRecognizerMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityRecognizerMetadata_EntityTypes:
+			return deserializeEntityRecognizerMetadataEntityTypesList(d, schemas.EntityRecognizerMetadata_EntityTypes, &v.EntityTypes)
+		case schemas.EntityRecognizerMetadata_EvaluationMetrics:
+			v.EvaluationMetrics = &EntityRecognizerEvaluationMetrics{}
+			return v.EvaluationMetrics.Deserialize(d)
+		case schemas.EntityRecognizerMetadata_NumberOfTestDocuments:
+			v.NumberOfTestDocuments = new(int32)
+			return d.ReadInt32(schemas.EntityRecognizerMetadata_NumberOfTestDocuments, v.NumberOfTestDocuments)
+		case schemas.EntityRecognizerMetadata_NumberOfTrainedDocuments:
+			v.NumberOfTrainedDocuments = new(int32)
+			return d.ReadInt32(schemas.EntityRecognizerMetadata_NumberOfTrainedDocuments, v.NumberOfTrainedDocuments)
+		}
+		return nil
+	})
 }
 
 // Individual item from the list of entity types in the metadata of an entity
@@ -1649,6 +4150,42 @@ type EntityRecognizerMetadataEntityTypesListItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EntityRecognizerMetadataEntityTypesListItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityRecognizerMetadataEntityTypesListItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityRecognizerMetadataEntityTypesListItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationMetrics != nil {
+		s.WriteStruct(schemas.EntityRecognizerMetadataEntityTypesListItem_EvaluationMetrics)
+		v.EvaluationMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NumberOfTrainMentions != nil {
+		s.WriteInt32(schemas.EntityRecognizerMetadataEntityTypesListItem_NumberOfTrainMentions, *v.NumberOfTrainMentions)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.EntityRecognizerMetadataEntityTypesListItem_Type, *v.Type)
+	}
+}
+func (v *EntityRecognizerMetadataEntityTypesListItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityRecognizerMetadataEntityTypesListItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityRecognizerMetadataEntityTypesListItem_EvaluationMetrics:
+			v.EvaluationMetrics = &EntityTypesEvaluationMetrics{}
+			return v.EvaluationMetrics.Deserialize(d)
+		case schemas.EntityRecognizerMetadataEntityTypesListItem_NumberOfTrainMentions:
+			v.NumberOfTrainMentions = new(int32)
+			return d.ReadInt32(schemas.EntityRecognizerMetadataEntityTypesListItem_NumberOfTrainMentions, v.NumberOfTrainMentions)
+		case schemas.EntityRecognizerMetadataEntityTypesListItem_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.EntityRecognizerMetadataEntityTypesListItem_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Output data configuration.
 type EntityRecognizerOutputDataConfig struct {
 
@@ -1656,6 +4193,28 @@ type EntityRecognizerOutputDataConfig struct {
 	FlywheelStatsS3Prefix *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EntityRecognizerOutputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityRecognizerOutputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityRecognizerOutputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlywheelStatsS3Prefix != nil {
+		s.WriteString(schemas.EntityRecognizerOutputDataConfig_FlywheelStatsS3Prefix, *v.FlywheelStatsS3Prefix)
+	}
+}
+func (v *EntityRecognizerOutputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityRecognizerOutputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityRecognizerOutputDataConfig_FlywheelStatsS3Prefix:
+			v.FlywheelStatsS3Prefix = new(string)
+			return d.ReadString(schemas.EntityRecognizerOutputDataConfig_FlywheelStatsS3Prefix, v.FlywheelStatsS3Prefix)
+		}
+		return nil
+	})
 }
 
 // Describes information about an entity recognizer.
@@ -1740,6 +4299,146 @@ type EntityRecognizerProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EntityRecognizerProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityRecognizerProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityRecognizerProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.EntityRecognizerProperties_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.EntityRecognizerProperties_EndTime, *v.EndTime)
+	}
+	if v.EntityRecognizerArn != nil {
+		s.WriteString(schemas.EntityRecognizerProperties_EntityRecognizerArn, *v.EntityRecognizerArn)
+	}
+	if v.FlywheelArn != nil {
+		s.WriteString(schemas.EntityRecognizerProperties_FlywheelArn, *v.FlywheelArn)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.EntityRecognizerProperties_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.EntityRecognizerProperties_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.EntityRecognizerProperties_Message, *v.Message)
+	}
+	if v.ModelKmsKeyId != nil {
+		s.WriteString(schemas.EntityRecognizerProperties_ModelKmsKeyId, *v.ModelKmsKeyId)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.EntityRecognizerProperties_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RecognizerMetadata != nil {
+		s.WriteStruct(schemas.EntityRecognizerProperties_RecognizerMetadata)
+		v.RecognizerMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceModelArn != nil {
+		s.WriteString(schemas.EntityRecognizerProperties_SourceModelArn, *v.SourceModelArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.EntityRecognizerProperties_Status, string(v.Status))
+	}
+	if v.SubmitTime != nil {
+		s.WriteTime(schemas.EntityRecognizerProperties_SubmitTime, *v.SubmitTime)
+	}
+	if v.TrainingEndTime != nil {
+		s.WriteTime(schemas.EntityRecognizerProperties_TrainingEndTime, *v.TrainingEndTime)
+	}
+	if v.TrainingStartTime != nil {
+		s.WriteTime(schemas.EntityRecognizerProperties_TrainingStartTime, *v.TrainingStartTime)
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.EntityRecognizerProperties_VersionName, *v.VersionName)
+	}
+	if v.VolumeKmsKeyId != nil {
+		s.WriteString(schemas.EntityRecognizerProperties_VolumeKmsKeyId, *v.VolumeKmsKeyId)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.EntityRecognizerProperties_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EntityRecognizerProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityRecognizerProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityRecognizerProperties_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.EntityRecognizerProperties_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.EntityRecognizerProperties_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.EntityRecognizerProperties_EndTime, v.EndTime)
+		case schemas.EntityRecognizerProperties_EntityRecognizerArn:
+			v.EntityRecognizerArn = new(string)
+			return d.ReadString(schemas.EntityRecognizerProperties_EntityRecognizerArn, v.EntityRecognizerArn)
+		case schemas.EntityRecognizerProperties_FlywheelArn:
+			v.FlywheelArn = new(string)
+			return d.ReadString(schemas.EntityRecognizerProperties_FlywheelArn, v.FlywheelArn)
+		case schemas.EntityRecognizerProperties_InputDataConfig:
+			v.InputDataConfig = &EntityRecognizerInputDataConfig{}
+			return v.InputDataConfig.Deserialize(d)
+		case schemas.EntityRecognizerProperties_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.EntityRecognizerProperties_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.EntityRecognizerProperties_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EntityRecognizerProperties_Message, v.Message)
+		case schemas.EntityRecognizerProperties_ModelKmsKeyId:
+			v.ModelKmsKeyId = new(string)
+			return d.ReadString(schemas.EntityRecognizerProperties_ModelKmsKeyId, v.ModelKmsKeyId)
+		case schemas.EntityRecognizerProperties_OutputDataConfig:
+			v.OutputDataConfig = &EntityRecognizerOutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.EntityRecognizerProperties_RecognizerMetadata:
+			v.RecognizerMetadata = &EntityRecognizerMetadata{}
+			return v.RecognizerMetadata.Deserialize(d)
+		case schemas.EntityRecognizerProperties_SourceModelArn:
+			v.SourceModelArn = new(string)
+			return d.ReadString(schemas.EntityRecognizerProperties_SourceModelArn, v.SourceModelArn)
+		case schemas.EntityRecognizerProperties_Status:
+			var ev string
+			if err := d.ReadString(schemas.EntityRecognizerProperties_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ModelStatus(ev)
+			return nil
+		case schemas.EntityRecognizerProperties_SubmitTime:
+			v.SubmitTime = new(time.Time)
+			return d.ReadTime(schemas.EntityRecognizerProperties_SubmitTime, v.SubmitTime)
+		case schemas.EntityRecognizerProperties_TrainingEndTime:
+			v.TrainingEndTime = new(time.Time)
+			return d.ReadTime(schemas.EntityRecognizerProperties_TrainingEndTime, v.TrainingEndTime)
+		case schemas.EntityRecognizerProperties_TrainingStartTime:
+			v.TrainingStartTime = new(time.Time)
+			return d.ReadTime(schemas.EntityRecognizerProperties_TrainingStartTime, v.TrainingStartTime)
+		case schemas.EntityRecognizerProperties_VersionName:
+			v.VersionName = new(string)
+			return d.ReadString(schemas.EntityRecognizerProperties_VersionName, v.VersionName)
+		case schemas.EntityRecognizerProperties_VolumeKmsKeyId:
+			v.VolumeKmsKeyId = new(string)
+			return d.ReadString(schemas.EntityRecognizerProperties_VolumeKmsKeyId, v.VolumeKmsKeyId)
+		case schemas.EntityRecognizerProperties_VpcConfig:
+			v.VpcConfig = &VpcConfig{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes the information about an entity recognizer and its versions.
 type EntityRecognizerSummary struct {
 
@@ -1760,6 +4459,56 @@ type EntityRecognizerSummary struct {
 	RecognizerName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EntityRecognizerSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityRecognizerSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityRecognizerSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LatestVersionCreatedAt != nil {
+		s.WriteTime(schemas.EntityRecognizerSummary_LatestVersionCreatedAt, *v.LatestVersionCreatedAt)
+	}
+	if v.LatestVersionName != nil {
+		s.WriteString(schemas.EntityRecognizerSummary_LatestVersionName, *v.LatestVersionName)
+	}
+	if v.LatestVersionStatus != "" {
+		s.WriteString(schemas.EntityRecognizerSummary_LatestVersionStatus, string(v.LatestVersionStatus))
+	}
+	if v.NumberOfVersions != nil {
+		s.WriteInt32(schemas.EntityRecognizerSummary_NumberOfVersions, *v.NumberOfVersions)
+	}
+	if v.RecognizerName != nil {
+		s.WriteString(schemas.EntityRecognizerSummary_RecognizerName, *v.RecognizerName)
+	}
+}
+func (v *EntityRecognizerSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityRecognizerSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityRecognizerSummary_LatestVersionCreatedAt:
+			v.LatestVersionCreatedAt = new(time.Time)
+			return d.ReadTime(schemas.EntityRecognizerSummary_LatestVersionCreatedAt, v.LatestVersionCreatedAt)
+		case schemas.EntityRecognizerSummary_LatestVersionName:
+			v.LatestVersionName = new(string)
+			return d.ReadString(schemas.EntityRecognizerSummary_LatestVersionName, v.LatestVersionName)
+		case schemas.EntityRecognizerSummary_LatestVersionStatus:
+			var ev string
+			if err := d.ReadString(schemas.EntityRecognizerSummary_LatestVersionStatus, &ev); err != nil {
+				return err
+			}
+			v.LatestVersionStatus = ModelStatus(ev)
+			return nil
+		case schemas.EntityRecognizerSummary_NumberOfVersions:
+			v.NumberOfVersions = new(int32)
+			return d.ReadInt32(schemas.EntityRecognizerSummary_NumberOfVersions, v.NumberOfVersions)
+		case schemas.EntityRecognizerSummary_RecognizerName:
+			v.RecognizerName = new(string)
+			return d.ReadString(schemas.EntityRecognizerSummary_RecognizerName, v.RecognizerName)
+		}
+		return nil
+	})
 }
 
 // Detailed information about the accuracy of an entity recognizer for a specific
@@ -1785,6 +4534,40 @@ type EntityTypesEvaluationMetrics struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EntityTypesEvaluationMetrics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityTypesEvaluationMetrics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityTypesEvaluationMetrics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.F1Score != nil {
+		s.WriteFloat64(schemas.EntityTypesEvaluationMetrics_F1Score, *v.F1Score)
+	}
+	if v.Precision != nil {
+		s.WriteFloat64(schemas.EntityTypesEvaluationMetrics_Precision, *v.Precision)
+	}
+	if v.Recall != nil {
+		s.WriteFloat64(schemas.EntityTypesEvaluationMetrics_Recall, *v.Recall)
+	}
+}
+func (v *EntityTypesEvaluationMetrics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityTypesEvaluationMetrics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityTypesEvaluationMetrics_F1Score:
+			v.F1Score = new(float64)
+			return d.ReadFloat64(schemas.EntityTypesEvaluationMetrics_F1Score, v.F1Score)
+		case schemas.EntityTypesEvaluationMetrics_Precision:
+			v.Precision = new(float64)
+			return d.ReadFloat64(schemas.EntityTypesEvaluationMetrics_Precision, v.Precision)
+		case schemas.EntityTypesEvaluationMetrics_Recall:
+			v.Recall = new(float64)
+			return d.ReadFloat64(schemas.EntityTypesEvaluationMetrics_Recall, v.Recall)
+		}
+		return nil
+	})
+}
+
 // An entity type within a labeled training dataset that Amazon Comprehend uses to
 // train a custom entity recognizer.
 type EntityTypesListItem struct {
@@ -1800,6 +4583,28 @@ type EntityTypesListItem struct {
 	Type *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EntityTypesListItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityTypesListItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityTypesListItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.EntityTypesListItem_Type, *v.Type)
+	}
+}
+func (v *EntityTypesListItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityTypesListItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityTypesListItem_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.EntityTypesListItem_Type, v.Type)
+		}
+		return nil
+	})
 }
 
 // Text extraction encountered one or more page-level errors in the input document.
@@ -1837,6 +4642,44 @@ type ErrorsListItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ErrorsListItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorsListItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorsListItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.ErrorsListItem_ErrorCode, string(v.ErrorCode))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.ErrorsListItem_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.Page != nil {
+		s.WriteInt32(schemas.ErrorsListItem_Page, *v.Page)
+	}
+}
+func (v *ErrorsListItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorsListItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorsListItem_ErrorCode:
+			var ev string
+			if err := d.ReadString(schemas.ErrorsListItem_ErrorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = PageBasedErrorCode(ev)
+			return nil
+		case schemas.ErrorsListItem_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.ErrorsListItem_ErrorMessage, v.ErrorMessage)
+		case schemas.ErrorsListItem_Page:
+			v.Page = new(int32)
+			return d.ReadInt32(schemas.ErrorsListItem_Page, v.Page)
+		}
+		return nil
+	})
+}
+
 // Provides information for filtering a list of event detection jobs.
 type EventsDetectionJobFilter struct {
 
@@ -1858,6 +4701,50 @@ type EventsDetectionJobFilter struct {
 	SubmitTimeBefore *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *EventsDetectionJobFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventsDetectionJobFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventsDetectionJobFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobName != nil {
+		s.WriteString(schemas.EventsDetectionJobFilter_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.EventsDetectionJobFilter_JobStatus, string(v.JobStatus))
+	}
+	if v.SubmitTimeAfter != nil {
+		s.WriteTime(schemas.EventsDetectionJobFilter_SubmitTimeAfter, *v.SubmitTimeAfter)
+	}
+	if v.SubmitTimeBefore != nil {
+		s.WriteTime(schemas.EventsDetectionJobFilter_SubmitTimeBefore, *v.SubmitTimeBefore)
+	}
+}
+func (v *EventsDetectionJobFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventsDetectionJobFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventsDetectionJobFilter_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.EventsDetectionJobFilter_JobName, v.JobName)
+		case schemas.EventsDetectionJobFilter_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.EventsDetectionJobFilter_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.EventsDetectionJobFilter_SubmitTimeAfter:
+			v.SubmitTimeAfter = new(time.Time)
+			return d.ReadTime(schemas.EventsDetectionJobFilter_SubmitTimeAfter, v.SubmitTimeAfter)
+		case schemas.EventsDetectionJobFilter_SubmitTimeBefore:
+			v.SubmitTimeBefore = new(time.Time)
+			return d.ReadTime(schemas.EventsDetectionJobFilter_SubmitTimeBefore, v.SubmitTimeBefore)
+		}
+		return nil
+	})
 }
 
 // Provides information about an events detection job.
@@ -1914,6 +4801,103 @@ type EventsDetectionJobProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventsDetectionJobProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventsDetectionJobProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventsDetectionJobProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.EventsDetectionJobProperties_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.EventsDetectionJobProperties_EndTime, *v.EndTime)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.EventsDetectionJobProperties_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.EventsDetectionJobProperties_JobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.EventsDetectionJobProperties_JobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.EventsDetectionJobProperties_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.EventsDetectionJobProperties_JobStatus, string(v.JobStatus))
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.EventsDetectionJobProperties_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.EventsDetectionJobProperties_Message, *v.Message)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.EventsDetectionJobProperties_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SubmitTime != nil {
+		s.WriteTime(schemas.EventsDetectionJobProperties_SubmitTime, *v.SubmitTime)
+	}
+	serializeTargetEventTypes(s, schemas.EventsDetectionJobProperties_TargetEventTypes, v.TargetEventTypes)
+}
+func (v *EventsDetectionJobProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventsDetectionJobProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventsDetectionJobProperties_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.EventsDetectionJobProperties_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.EventsDetectionJobProperties_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.EventsDetectionJobProperties_EndTime, v.EndTime)
+		case schemas.EventsDetectionJobProperties_InputDataConfig:
+			v.InputDataConfig = &InputDataConfig{}
+			return v.InputDataConfig.Deserialize(d)
+		case schemas.EventsDetectionJobProperties_JobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.EventsDetectionJobProperties_JobArn, v.JobArn)
+		case schemas.EventsDetectionJobProperties_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.EventsDetectionJobProperties_JobId, v.JobId)
+		case schemas.EventsDetectionJobProperties_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.EventsDetectionJobProperties_JobName, v.JobName)
+		case schemas.EventsDetectionJobProperties_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.EventsDetectionJobProperties_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.EventsDetectionJobProperties_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.EventsDetectionJobProperties_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.EventsDetectionJobProperties_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EventsDetectionJobProperties_Message, v.Message)
+		case schemas.EventsDetectionJobProperties_OutputDataConfig:
+			v.OutputDataConfig = &OutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.EventsDetectionJobProperties_SubmitTime:
+			v.SubmitTime = new(time.Time)
+			return d.ReadTime(schemas.EventsDetectionJobProperties_SubmitTime, v.SubmitTime)
+		case schemas.EventsDetectionJobProperties_TargetEventTypes:
+			return deserializeTargetEventTypes(d, schemas.EventsDetectionJobProperties_TargetEventTypes, &v.TargetEventTypes)
+		}
+		return nil
+	})
+}
+
 // Array of the number of characters extracted from each page.
 type ExtractedCharactersListItem struct {
 
@@ -1924,6 +4908,34 @@ type ExtractedCharactersListItem struct {
 	Page *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExtractedCharactersListItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtractedCharactersListItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtractedCharactersListItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt32(schemas.ExtractedCharactersListItem_Count, *v.Count)
+	}
+	if v.Page != nil {
+		s.WriteInt32(schemas.ExtractedCharactersListItem_Page, *v.Page)
+	}
+}
+func (v *ExtractedCharactersListItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtractedCharactersListItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtractedCharactersListItem_Count:
+			v.Count = new(int32)
+			return d.ReadInt32(schemas.ExtractedCharactersListItem_Count, v.Count)
+		case schemas.ExtractedCharactersListItem_Page:
+			v.Page = new(int32)
+			return d.ReadInt32(schemas.ExtractedCharactersListItem_Page, v.Page)
+		}
+		return nil
+	})
 }
 
 // Filter the flywheels based on creation time or flywheel status.
@@ -1941,6 +4953,44 @@ type FlywheelFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FlywheelFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlywheelFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlywheelFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.FlywheelFilter_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.FlywheelFilter_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.FlywheelFilter_Status, string(v.Status))
+	}
+}
+func (v *FlywheelFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FlywheelFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FlywheelFilter_CreationTimeAfter:
+			v.CreationTimeAfter = new(time.Time)
+			return d.ReadTime(schemas.FlywheelFilter_CreationTimeAfter, v.CreationTimeAfter)
+		case schemas.FlywheelFilter_CreationTimeBefore:
+			v.CreationTimeBefore = new(time.Time)
+			return d.ReadTime(schemas.FlywheelFilter_CreationTimeBefore, v.CreationTimeBefore)
+		case schemas.FlywheelFilter_Status:
+			var ev string
+			if err := d.ReadString(schemas.FlywheelFilter_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = FlywheelStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Filter the flywheel iterations based on creation time.
 type FlywheelIterationFilter struct {
 
@@ -1953,6 +5003,34 @@ type FlywheelIterationFilter struct {
 	CreationTimeBefore *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *FlywheelIterationFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlywheelIterationFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlywheelIterationFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.FlywheelIterationFilter_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.FlywheelIterationFilter_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+}
+func (v *FlywheelIterationFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FlywheelIterationFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FlywheelIterationFilter_CreationTimeAfter:
+			v.CreationTimeAfter = new(time.Time)
+			return d.ReadTime(schemas.FlywheelIterationFilter_CreationTimeAfter, v.CreationTimeAfter)
+		case schemas.FlywheelIterationFilter_CreationTimeBefore:
+			v.CreationTimeBefore = new(time.Time)
+			return d.ReadTime(schemas.FlywheelIterationFilter_CreationTimeBefore, v.CreationTimeBefore)
+		}
+		return nil
+	})
 }
 
 // The configuration properties of a flywheel iteration.
@@ -1994,6 +5072,96 @@ type FlywheelIterationProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FlywheelIterationProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlywheelIterationProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlywheelIterationProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.FlywheelIterationProperties_CreationTime, *v.CreationTime)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.FlywheelIterationProperties_EndTime, *v.EndTime)
+	}
+	if v.EvaluatedModelArn != nil {
+		s.WriteString(schemas.FlywheelIterationProperties_EvaluatedModelArn, *v.EvaluatedModelArn)
+	}
+	if v.EvaluatedModelMetrics != nil {
+		s.WriteStruct(schemas.FlywheelIterationProperties_EvaluatedModelMetrics)
+		v.EvaluatedModelMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EvaluationManifestS3Prefix != nil {
+		s.WriteString(schemas.FlywheelIterationProperties_EvaluationManifestS3Prefix, *v.EvaluationManifestS3Prefix)
+	}
+	if v.FlywheelArn != nil {
+		s.WriteString(schemas.FlywheelIterationProperties_FlywheelArn, *v.FlywheelArn)
+	}
+	if v.FlywheelIterationId != nil {
+		s.WriteString(schemas.FlywheelIterationProperties_FlywheelIterationId, *v.FlywheelIterationId)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.FlywheelIterationProperties_Message, *v.Message)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.FlywheelIterationProperties_Status, string(v.Status))
+	}
+	if v.TrainedModelArn != nil {
+		s.WriteString(schemas.FlywheelIterationProperties_TrainedModelArn, *v.TrainedModelArn)
+	}
+	if v.TrainedModelMetrics != nil {
+		s.WriteStruct(schemas.FlywheelIterationProperties_TrainedModelMetrics)
+		v.TrainedModelMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FlywheelIterationProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FlywheelIterationProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FlywheelIterationProperties_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.FlywheelIterationProperties_CreationTime, v.CreationTime)
+		case schemas.FlywheelIterationProperties_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.FlywheelIterationProperties_EndTime, v.EndTime)
+		case schemas.FlywheelIterationProperties_EvaluatedModelArn:
+			v.EvaluatedModelArn = new(string)
+			return d.ReadString(schemas.FlywheelIterationProperties_EvaluatedModelArn, v.EvaluatedModelArn)
+		case schemas.FlywheelIterationProperties_EvaluatedModelMetrics:
+			v.EvaluatedModelMetrics = &FlywheelModelEvaluationMetrics{}
+			return v.EvaluatedModelMetrics.Deserialize(d)
+		case schemas.FlywheelIterationProperties_EvaluationManifestS3Prefix:
+			v.EvaluationManifestS3Prefix = new(string)
+			return d.ReadString(schemas.FlywheelIterationProperties_EvaluationManifestS3Prefix, v.EvaluationManifestS3Prefix)
+		case schemas.FlywheelIterationProperties_FlywheelArn:
+			v.FlywheelArn = new(string)
+			return d.ReadString(schemas.FlywheelIterationProperties_FlywheelArn, v.FlywheelArn)
+		case schemas.FlywheelIterationProperties_FlywheelIterationId:
+			v.FlywheelIterationId = new(string)
+			return d.ReadString(schemas.FlywheelIterationProperties_FlywheelIterationId, v.FlywheelIterationId)
+		case schemas.FlywheelIterationProperties_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.FlywheelIterationProperties_Message, v.Message)
+		case schemas.FlywheelIterationProperties_Status:
+			var ev string
+			if err := d.ReadString(schemas.FlywheelIterationProperties_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = FlywheelIterationStatus(ev)
+			return nil
+		case schemas.FlywheelIterationProperties_TrainedModelArn:
+			v.TrainedModelArn = new(string)
+			return d.ReadString(schemas.FlywheelIterationProperties_TrainedModelArn, v.TrainedModelArn)
+		case schemas.FlywheelIterationProperties_TrainedModelMetrics:
+			v.TrainedModelMetrics = &FlywheelModelEvaluationMetrics{}
+			return v.TrainedModelMetrics.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The evaluation metrics associated with the evaluated model.
 type FlywheelModelEvaluationMetrics struct {
 
@@ -2010,6 +5178,46 @@ type FlywheelModelEvaluationMetrics struct {
 	AverageRecall *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *FlywheelModelEvaluationMetrics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlywheelModelEvaluationMetrics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlywheelModelEvaluationMetrics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AverageAccuracy != nil {
+		s.WriteFloat64(schemas.FlywheelModelEvaluationMetrics_AverageAccuracy, *v.AverageAccuracy)
+	}
+	if v.AverageF1Score != nil {
+		s.WriteFloat64(schemas.FlywheelModelEvaluationMetrics_AverageF1Score, *v.AverageF1Score)
+	}
+	if v.AveragePrecision != nil {
+		s.WriteFloat64(schemas.FlywheelModelEvaluationMetrics_AveragePrecision, *v.AveragePrecision)
+	}
+	if v.AverageRecall != nil {
+		s.WriteFloat64(schemas.FlywheelModelEvaluationMetrics_AverageRecall, *v.AverageRecall)
+	}
+}
+func (v *FlywheelModelEvaluationMetrics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FlywheelModelEvaluationMetrics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FlywheelModelEvaluationMetrics_AverageAccuracy:
+			v.AverageAccuracy = new(float64)
+			return d.ReadFloat64(schemas.FlywheelModelEvaluationMetrics_AverageAccuracy, v.AverageAccuracy)
+		case schemas.FlywheelModelEvaluationMetrics_AverageF1Score:
+			v.AverageF1Score = new(float64)
+			return d.ReadFloat64(schemas.FlywheelModelEvaluationMetrics_AverageF1Score, v.AverageF1Score)
+		case schemas.FlywheelModelEvaluationMetrics_AveragePrecision:
+			v.AveragePrecision = new(float64)
+			return d.ReadFloat64(schemas.FlywheelModelEvaluationMetrics_AveragePrecision, v.AveragePrecision)
+		case schemas.FlywheelModelEvaluationMetrics_AverageRecall:
+			v.AverageRecall = new(float64)
+			return d.ReadFloat64(schemas.FlywheelModelEvaluationMetrics_AverageRecall, v.AverageRecall)
+		}
+		return nil
+	})
 }
 
 // The flywheel properties.
@@ -2055,6 +5263,106 @@ type FlywheelProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FlywheelProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlywheelProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlywheelProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveModelArn != nil {
+		s.WriteString(schemas.FlywheelProperties_ActiveModelArn, *v.ActiveModelArn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.FlywheelProperties_CreationTime, *v.CreationTime)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.FlywheelProperties_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.DataLakeS3Uri != nil {
+		s.WriteString(schemas.FlywheelProperties_DataLakeS3Uri, *v.DataLakeS3Uri)
+	}
+	if v.DataSecurityConfig != nil {
+		s.WriteStruct(schemas.FlywheelProperties_DataSecurityConfig)
+		v.DataSecurityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FlywheelArn != nil {
+		s.WriteString(schemas.FlywheelProperties_FlywheelArn, *v.FlywheelArn)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.FlywheelProperties_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.LatestFlywheelIteration != nil {
+		s.WriteString(schemas.FlywheelProperties_LatestFlywheelIteration, *v.LatestFlywheelIteration)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.FlywheelProperties_Message, *v.Message)
+	}
+	if v.ModelType != "" {
+		s.WriteString(schemas.FlywheelProperties_ModelType, string(v.ModelType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.FlywheelProperties_Status, string(v.Status))
+	}
+	if v.TaskConfig != nil {
+		s.WriteStruct(schemas.FlywheelProperties_TaskConfig)
+		v.TaskConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FlywheelProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FlywheelProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FlywheelProperties_ActiveModelArn:
+			v.ActiveModelArn = new(string)
+			return d.ReadString(schemas.FlywheelProperties_ActiveModelArn, v.ActiveModelArn)
+		case schemas.FlywheelProperties_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.FlywheelProperties_CreationTime, v.CreationTime)
+		case schemas.FlywheelProperties_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.FlywheelProperties_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.FlywheelProperties_DataLakeS3Uri:
+			v.DataLakeS3Uri = new(string)
+			return d.ReadString(schemas.FlywheelProperties_DataLakeS3Uri, v.DataLakeS3Uri)
+		case schemas.FlywheelProperties_DataSecurityConfig:
+			v.DataSecurityConfig = &DataSecurityConfig{}
+			return v.DataSecurityConfig.Deserialize(d)
+		case schemas.FlywheelProperties_FlywheelArn:
+			v.FlywheelArn = new(string)
+			return d.ReadString(schemas.FlywheelProperties_FlywheelArn, v.FlywheelArn)
+		case schemas.FlywheelProperties_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.FlywheelProperties_LastModifiedTime, v.LastModifiedTime)
+		case schemas.FlywheelProperties_LatestFlywheelIteration:
+			v.LatestFlywheelIteration = new(string)
+			return d.ReadString(schemas.FlywheelProperties_LatestFlywheelIteration, v.LatestFlywheelIteration)
+		case schemas.FlywheelProperties_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.FlywheelProperties_Message, v.Message)
+		case schemas.FlywheelProperties_ModelType:
+			var ev string
+			if err := d.ReadString(schemas.FlywheelProperties_ModelType, &ev); err != nil {
+				return err
+			}
+			v.ModelType = ModelType(ev)
+			return nil
+		case schemas.FlywheelProperties_Status:
+			var ev string
+			if err := d.ReadString(schemas.FlywheelProperties_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = FlywheelStatus(ev)
+			return nil
+		case schemas.FlywheelProperties_TaskConfig:
+			v.TaskConfig = &TaskConfig{}
+			return v.TaskConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Flywheel summary information.
 type FlywheelSummary struct {
 
@@ -2088,6 +5396,84 @@ type FlywheelSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FlywheelSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlywheelSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlywheelSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveModelArn != nil {
+		s.WriteString(schemas.FlywheelSummary_ActiveModelArn, *v.ActiveModelArn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.FlywheelSummary_CreationTime, *v.CreationTime)
+	}
+	if v.DataLakeS3Uri != nil {
+		s.WriteString(schemas.FlywheelSummary_DataLakeS3Uri, *v.DataLakeS3Uri)
+	}
+	if v.FlywheelArn != nil {
+		s.WriteString(schemas.FlywheelSummary_FlywheelArn, *v.FlywheelArn)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.FlywheelSummary_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.LatestFlywheelIteration != nil {
+		s.WriteString(schemas.FlywheelSummary_LatestFlywheelIteration, *v.LatestFlywheelIteration)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.FlywheelSummary_Message, *v.Message)
+	}
+	if v.ModelType != "" {
+		s.WriteString(schemas.FlywheelSummary_ModelType, string(v.ModelType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.FlywheelSummary_Status, string(v.Status))
+	}
+}
+func (v *FlywheelSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FlywheelSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FlywheelSummary_ActiveModelArn:
+			v.ActiveModelArn = new(string)
+			return d.ReadString(schemas.FlywheelSummary_ActiveModelArn, v.ActiveModelArn)
+		case schemas.FlywheelSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.FlywheelSummary_CreationTime, v.CreationTime)
+		case schemas.FlywheelSummary_DataLakeS3Uri:
+			v.DataLakeS3Uri = new(string)
+			return d.ReadString(schemas.FlywheelSummary_DataLakeS3Uri, v.DataLakeS3Uri)
+		case schemas.FlywheelSummary_FlywheelArn:
+			v.FlywheelArn = new(string)
+			return d.ReadString(schemas.FlywheelSummary_FlywheelArn, v.FlywheelArn)
+		case schemas.FlywheelSummary_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.FlywheelSummary_LastModifiedTime, v.LastModifiedTime)
+		case schemas.FlywheelSummary_LatestFlywheelIteration:
+			v.LatestFlywheelIteration = new(string)
+			return d.ReadString(schemas.FlywheelSummary_LatestFlywheelIteration, v.LatestFlywheelIteration)
+		case schemas.FlywheelSummary_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.FlywheelSummary_Message, v.Message)
+		case schemas.FlywheelSummary_ModelType:
+			var ev string
+			if err := d.ReadString(schemas.FlywheelSummary_ModelType, &ev); err != nil {
+				return err
+			}
+			v.ModelType = ModelType(ev)
+			return nil
+		case schemas.FlywheelSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.FlywheelSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = FlywheelStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information about the location of items on a document page.
 //
 // For additional information, see [Geometry] in the Amazon Textract API reference.
@@ -2103,6 +5489,33 @@ type Geometry struct {
 	Polygon []Point
 
 	noSmithyDocumentSerde
+}
+
+func (v *Geometry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Geometry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Geometry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BoundingBox != nil {
+		s.WriteStruct(schemas.Geometry_BoundingBox)
+		v.BoundingBox.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePolygon(s, schemas.Geometry_Polygon, v.Polygon)
+}
+func (v *Geometry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Geometry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Geometry_BoundingBox:
+			v.BoundingBox = &BoundingBox{}
+			return v.BoundingBox.Deserialize(d)
+		case schemas.Geometry_Polygon:
+			return deserializePolygon(d, schemas.Geometry_Polygon, &v.Polygon)
+		}
+		return nil
+	})
 }
 
 // The input properties for an inference job. The document reader config field
@@ -2138,6 +5551,46 @@ type InputDataConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentReaderConfig != nil {
+		s.WriteStruct(schemas.InputDataConfig_DocumentReaderConfig)
+		v.DocumentReaderConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputFormat != "" {
+		s.WriteString(schemas.InputDataConfig_InputFormat, string(v.InputFormat))
+	}
+	if v.S3Uri != nil {
+		s.WriteString(schemas.InputDataConfig_S3Uri, *v.S3Uri)
+	}
+}
+func (v *InputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputDataConfig_DocumentReaderConfig:
+			v.DocumentReaderConfig = &DocumentReaderConfig{}
+			return v.DocumentReaderConfig.Deserialize(d)
+		case schemas.InputDataConfig_InputFormat:
+			var ev string
+			if err := d.ReadString(schemas.InputDataConfig_InputFormat, &ev); err != nil {
+				return err
+			}
+			v.InputFormat = InputFormat(ev)
+			return nil
+		case schemas.InputDataConfig_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.InputDataConfig_S3Uri, v.S3Uri)
+		}
+		return nil
+	})
+}
+
 // Provides additional detail about why the request failed.
 type InvalidRequestDetail struct {
 
@@ -2169,6 +5622,32 @@ type InvalidRequestDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvalidRequestDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidRequestDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidRequestDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reason != "" {
+		s.WriteString(schemas.InvalidRequestDetail_Reason, string(v.Reason))
+	}
+}
+func (v *InvalidRequestDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidRequestDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidRequestDetail_Reason:
+			var ev string
+			if err := d.ReadString(schemas.InvalidRequestDetail_Reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = InvalidRequestDetailReason(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes a key noun phrase.
 type KeyPhrase struct {
 
@@ -2188,6 +5667,46 @@ type KeyPhrase struct {
 	Text *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KeyPhrase) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyPhrase)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeyPhrase) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginOffset != nil {
+		s.WriteInt32(schemas.KeyPhrase_BeginOffset, *v.BeginOffset)
+	}
+	if v.EndOffset != nil {
+		s.WriteInt32(schemas.KeyPhrase_EndOffset, *v.EndOffset)
+	}
+	if v.Score != nil {
+		s.WriteFloat32(schemas.KeyPhrase_Score, *v.Score)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.KeyPhrase_Text, *v.Text)
+	}
+}
+func (v *KeyPhrase) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeyPhrase, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeyPhrase_BeginOffset:
+			v.BeginOffset = new(int32)
+			return d.ReadInt32(schemas.KeyPhrase_BeginOffset, v.BeginOffset)
+		case schemas.KeyPhrase_EndOffset:
+			v.EndOffset = new(int32)
+			return d.ReadInt32(schemas.KeyPhrase_EndOffset, v.EndOffset)
+		case schemas.KeyPhrase_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.KeyPhrase_Score, v.Score)
+		case schemas.KeyPhrase_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.KeyPhrase_Text, v.Text)
+		}
+		return nil
+	})
 }
 
 // Provides information for filtering a list of dominant language detection jobs.
@@ -2212,6 +5731,50 @@ type KeyPhrasesDetectionJobFilter struct {
 	SubmitTimeBefore *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *KeyPhrasesDetectionJobFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyPhrasesDetectionJobFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeyPhrasesDetectionJobFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobName != nil {
+		s.WriteString(schemas.KeyPhrasesDetectionJobFilter_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.KeyPhrasesDetectionJobFilter_JobStatus, string(v.JobStatus))
+	}
+	if v.SubmitTimeAfter != nil {
+		s.WriteTime(schemas.KeyPhrasesDetectionJobFilter_SubmitTimeAfter, *v.SubmitTimeAfter)
+	}
+	if v.SubmitTimeBefore != nil {
+		s.WriteTime(schemas.KeyPhrasesDetectionJobFilter_SubmitTimeBefore, *v.SubmitTimeBefore)
+	}
+}
+func (v *KeyPhrasesDetectionJobFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeyPhrasesDetectionJobFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeyPhrasesDetectionJobFilter_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.KeyPhrasesDetectionJobFilter_JobName, v.JobName)
+		case schemas.KeyPhrasesDetectionJobFilter_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.KeyPhrasesDetectionJobFilter_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.KeyPhrasesDetectionJobFilter_SubmitTimeAfter:
+			v.SubmitTimeAfter = new(time.Time)
+			return d.ReadTime(schemas.KeyPhrasesDetectionJobFilter_SubmitTimeAfter, v.SubmitTimeAfter)
+		case schemas.KeyPhrasesDetectionJobFilter_SubmitTimeBefore:
+			v.SubmitTimeBefore = new(time.Time)
+			return d.ReadTime(schemas.KeyPhrasesDetectionJobFilter_SubmitTimeBefore, v.SubmitTimeBefore)
+		}
+		return nil
+	})
 }
 
 // Provides information about a key phrases detection job.
@@ -2283,6 +5846,114 @@ type KeyPhrasesDetectionJobProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KeyPhrasesDetectionJobProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyPhrasesDetectionJobProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeyPhrasesDetectionJobProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.KeyPhrasesDetectionJobProperties_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.KeyPhrasesDetectionJobProperties_EndTime, *v.EndTime)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.KeyPhrasesDetectionJobProperties_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.KeyPhrasesDetectionJobProperties_JobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.KeyPhrasesDetectionJobProperties_JobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.KeyPhrasesDetectionJobProperties_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.KeyPhrasesDetectionJobProperties_JobStatus, string(v.JobStatus))
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.KeyPhrasesDetectionJobProperties_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.KeyPhrasesDetectionJobProperties_Message, *v.Message)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.KeyPhrasesDetectionJobProperties_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SubmitTime != nil {
+		s.WriteTime(schemas.KeyPhrasesDetectionJobProperties_SubmitTime, *v.SubmitTime)
+	}
+	if v.VolumeKmsKeyId != nil {
+		s.WriteString(schemas.KeyPhrasesDetectionJobProperties_VolumeKmsKeyId, *v.VolumeKmsKeyId)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.KeyPhrasesDetectionJobProperties_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *KeyPhrasesDetectionJobProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeyPhrasesDetectionJobProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeyPhrasesDetectionJobProperties_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.KeyPhrasesDetectionJobProperties_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.KeyPhrasesDetectionJobProperties_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.KeyPhrasesDetectionJobProperties_EndTime, v.EndTime)
+		case schemas.KeyPhrasesDetectionJobProperties_InputDataConfig:
+			v.InputDataConfig = &InputDataConfig{}
+			return v.InputDataConfig.Deserialize(d)
+		case schemas.KeyPhrasesDetectionJobProperties_JobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.KeyPhrasesDetectionJobProperties_JobArn, v.JobArn)
+		case schemas.KeyPhrasesDetectionJobProperties_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.KeyPhrasesDetectionJobProperties_JobId, v.JobId)
+		case schemas.KeyPhrasesDetectionJobProperties_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.KeyPhrasesDetectionJobProperties_JobName, v.JobName)
+		case schemas.KeyPhrasesDetectionJobProperties_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.KeyPhrasesDetectionJobProperties_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.KeyPhrasesDetectionJobProperties_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.KeyPhrasesDetectionJobProperties_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.KeyPhrasesDetectionJobProperties_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.KeyPhrasesDetectionJobProperties_Message, v.Message)
+		case schemas.KeyPhrasesDetectionJobProperties_OutputDataConfig:
+			v.OutputDataConfig = &OutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.KeyPhrasesDetectionJobProperties_SubmitTime:
+			v.SubmitTime = new(time.Time)
+			return d.ReadTime(schemas.KeyPhrasesDetectionJobProperties_SubmitTime, v.SubmitTime)
+		case schemas.KeyPhrasesDetectionJobProperties_VolumeKmsKeyId:
+			v.VolumeKmsKeyId = new(string)
+			return d.ReadString(schemas.KeyPhrasesDetectionJobProperties_VolumeKmsKeyId, v.VolumeKmsKeyId)
+		case schemas.KeyPhrasesDetectionJobProperties_VpcConfig:
+			v.VpcConfig = &VpcConfig{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains the sentiment and sentiment score for one mention of an entity.
 //
 // For more information about targeted sentiment, see [Targeted sentiment] in the Amazon Comprehend
@@ -2299,6 +5970,40 @@ type MentionSentiment struct {
 	SentimentScore *SentimentScore
 
 	noSmithyDocumentSerde
+}
+
+func (v *MentionSentiment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MentionSentiment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MentionSentiment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Sentiment != "" {
+		s.WriteString(schemas.MentionSentiment_Sentiment, string(v.Sentiment))
+	}
+	if v.SentimentScore != nil {
+		s.WriteStruct(schemas.MentionSentiment_SentimentScore)
+		v.SentimentScore.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MentionSentiment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MentionSentiment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MentionSentiment_Sentiment:
+			var ev string
+			if err := d.ReadString(schemas.MentionSentiment_Sentiment, &ev); err != nil {
+				return err
+			}
+			v.Sentiment = SentimentType(ev)
+			return nil
+		case schemas.MentionSentiment_SentimentScore:
+			v.SentimentScore = &SentimentScore{}
+			return v.SentimentScore.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Provides configuration parameters for the output of inference jobs.
@@ -2342,6 +6047,34 @@ type OutputDataConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OutputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.OutputDataConfig_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.S3Uri != nil {
+		s.WriteString(schemas.OutputDataConfig_S3Uri, *v.S3Uri)
+	}
+}
+func (v *OutputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputDataConfig_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.OutputDataConfig_KmsKeyId, v.KmsKeyId)
+		case schemas.OutputDataConfig_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.OutputDataConfig_S3Uri, v.S3Uri)
+		}
+		return nil
+	})
+}
+
 // Identifies the part of speech represented by the token and gives the confidence
 // that Amazon Comprehend has that the part of speech was correctly identified. For
 // more information about the parts of speech that Amazon Comprehend can identify,
@@ -2358,6 +6091,38 @@ type PartOfSpeechTag struct {
 	Tag PartOfSpeechTagType
 
 	noSmithyDocumentSerde
+}
+
+func (v *PartOfSpeechTag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PartOfSpeechTag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PartOfSpeechTag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Score != nil {
+		s.WriteFloat32(schemas.PartOfSpeechTag_Score, *v.Score)
+	}
+	if v.Tag != "" {
+		s.WriteString(schemas.PartOfSpeechTag_Tag, string(v.Tag))
+	}
+}
+func (v *PartOfSpeechTag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PartOfSpeechTag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PartOfSpeechTag_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.PartOfSpeechTag_Score, v.Score)
+		case schemas.PartOfSpeechTag_Tag:
+			var ev string
+			if err := d.ReadString(schemas.PartOfSpeechTag_Tag, &ev); err != nil {
+				return err
+			}
+			v.Tag = PartOfSpeechTagType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Provides information for filtering a list of PII entity detection jobs.
@@ -2381,6 +6146,50 @@ type PiiEntitiesDetectionJobFilter struct {
 	SubmitTimeBefore *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *PiiEntitiesDetectionJobFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PiiEntitiesDetectionJobFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PiiEntitiesDetectionJobFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobName != nil {
+		s.WriteString(schemas.PiiEntitiesDetectionJobFilter_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.PiiEntitiesDetectionJobFilter_JobStatus, string(v.JobStatus))
+	}
+	if v.SubmitTimeAfter != nil {
+		s.WriteTime(schemas.PiiEntitiesDetectionJobFilter_SubmitTimeAfter, *v.SubmitTimeAfter)
+	}
+	if v.SubmitTimeBefore != nil {
+		s.WriteTime(schemas.PiiEntitiesDetectionJobFilter_SubmitTimeBefore, *v.SubmitTimeBefore)
+	}
+}
+func (v *PiiEntitiesDetectionJobFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PiiEntitiesDetectionJobFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PiiEntitiesDetectionJobFilter_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.PiiEntitiesDetectionJobFilter_JobName, v.JobName)
+		case schemas.PiiEntitiesDetectionJobFilter_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.PiiEntitiesDetectionJobFilter_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.PiiEntitiesDetectionJobFilter_SubmitTimeAfter:
+			v.SubmitTimeAfter = new(time.Time)
+			return d.ReadTime(schemas.PiiEntitiesDetectionJobFilter_SubmitTimeAfter, v.SubmitTimeAfter)
+		case schemas.PiiEntitiesDetectionJobFilter_SubmitTimeBefore:
+			v.SubmitTimeBefore = new(time.Time)
+			return d.ReadTime(schemas.PiiEntitiesDetectionJobFilter_SubmitTimeBefore, v.SubmitTimeBefore)
+		}
+		return nil
+	})
 }
 
 // Provides information about a PII entities detection job.
@@ -2445,6 +6254,118 @@ type PiiEntitiesDetectionJobProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PiiEntitiesDetectionJobProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PiiEntitiesDetectionJobProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PiiEntitiesDetectionJobProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.PiiEntitiesDetectionJobProperties_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.PiiEntitiesDetectionJobProperties_EndTime, *v.EndTime)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.PiiEntitiesDetectionJobProperties_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.PiiEntitiesDetectionJobProperties_JobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.PiiEntitiesDetectionJobProperties_JobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.PiiEntitiesDetectionJobProperties_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.PiiEntitiesDetectionJobProperties_JobStatus, string(v.JobStatus))
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.PiiEntitiesDetectionJobProperties_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.PiiEntitiesDetectionJobProperties_Message, *v.Message)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.PiiEntitiesDetectionJobProperties_Mode, string(v.Mode))
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.PiiEntitiesDetectionJobProperties_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RedactionConfig != nil {
+		s.WriteStruct(schemas.PiiEntitiesDetectionJobProperties_RedactionConfig)
+		v.RedactionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SubmitTime != nil {
+		s.WriteTime(schemas.PiiEntitiesDetectionJobProperties_SubmitTime, *v.SubmitTime)
+	}
+}
+func (v *PiiEntitiesDetectionJobProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PiiEntitiesDetectionJobProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PiiEntitiesDetectionJobProperties_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.PiiEntitiesDetectionJobProperties_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.PiiEntitiesDetectionJobProperties_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.PiiEntitiesDetectionJobProperties_EndTime, v.EndTime)
+		case schemas.PiiEntitiesDetectionJobProperties_InputDataConfig:
+			v.InputDataConfig = &InputDataConfig{}
+			return v.InputDataConfig.Deserialize(d)
+		case schemas.PiiEntitiesDetectionJobProperties_JobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.PiiEntitiesDetectionJobProperties_JobArn, v.JobArn)
+		case schemas.PiiEntitiesDetectionJobProperties_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.PiiEntitiesDetectionJobProperties_JobId, v.JobId)
+		case schemas.PiiEntitiesDetectionJobProperties_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.PiiEntitiesDetectionJobProperties_JobName, v.JobName)
+		case schemas.PiiEntitiesDetectionJobProperties_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.PiiEntitiesDetectionJobProperties_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.PiiEntitiesDetectionJobProperties_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.PiiEntitiesDetectionJobProperties_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.PiiEntitiesDetectionJobProperties_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PiiEntitiesDetectionJobProperties_Message, v.Message)
+		case schemas.PiiEntitiesDetectionJobProperties_Mode:
+			var ev string
+			if err := d.ReadString(schemas.PiiEntitiesDetectionJobProperties_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = PiiEntitiesDetectionMode(ev)
+			return nil
+		case schemas.PiiEntitiesDetectionJobProperties_OutputDataConfig:
+			v.OutputDataConfig = &PiiOutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.PiiEntitiesDetectionJobProperties_RedactionConfig:
+			v.RedactionConfig = &RedactionConfig{}
+			return v.RedactionConfig.Deserialize(d)
+		case schemas.PiiEntitiesDetectionJobProperties_SubmitTime:
+			v.SubmitTime = new(time.Time)
+			return d.ReadTime(schemas.PiiEntitiesDetectionJobProperties_SubmitTime, v.SubmitTime)
+		}
+		return nil
+	})
+}
+
 // Provides information about a PII entity.
 type PiiEntity struct {
 
@@ -2464,6 +6385,50 @@ type PiiEntity struct {
 	Type PiiEntityType
 
 	noSmithyDocumentSerde
+}
+
+func (v *PiiEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PiiEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PiiEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginOffset != nil {
+		s.WriteInt32(schemas.PiiEntity_BeginOffset, *v.BeginOffset)
+	}
+	if v.EndOffset != nil {
+		s.WriteInt32(schemas.PiiEntity_EndOffset, *v.EndOffset)
+	}
+	if v.Score != nil {
+		s.WriteFloat32(schemas.PiiEntity_Score, *v.Score)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.PiiEntity_Type, string(v.Type))
+	}
+}
+func (v *PiiEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PiiEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PiiEntity_BeginOffset:
+			v.BeginOffset = new(int32)
+			return d.ReadInt32(schemas.PiiEntity_BeginOffset, v.BeginOffset)
+		case schemas.PiiEntity_EndOffset:
+			v.EndOffset = new(int32)
+			return d.ReadInt32(schemas.PiiEntity_EndOffset, v.EndOffset)
+		case schemas.PiiEntity_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.PiiEntity_Score, v.Score)
+		case schemas.PiiEntity_Type:
+			var ev string
+			if err := d.ReadString(schemas.PiiEntity_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = PiiEntityType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Provides configuration parameters for the output of PII entity detection jobs.
@@ -2486,6 +6451,34 @@ type PiiOutputDataConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PiiOutputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PiiOutputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PiiOutputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.PiiOutputDataConfig_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.S3Uri != nil {
+		s.WriteString(schemas.PiiOutputDataConfig_S3Uri, *v.S3Uri)
+	}
+}
+func (v *PiiOutputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PiiOutputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PiiOutputDataConfig_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.PiiOutputDataConfig_KmsKeyId, v.KmsKeyId)
+		case schemas.PiiOutputDataConfig_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.PiiOutputDataConfig_S3Uri, v.S3Uri)
+		}
+		return nil
+	})
+}
+
 // The X and Y coordinates of a point on a document page.
 //
 // For additional information, see [Point] in the Amazon Textract API reference.
@@ -2500,6 +6493,34 @@ type Point struct {
 	Y *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *Point) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Point)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Point) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.X != nil {
+		s.WriteFloat32(schemas.Point_X, *v.X)
+	}
+	if v.Y != nil {
+		s.WriteFloat32(schemas.Point_Y, *v.Y)
+	}
+}
+func (v *Point) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Point, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Point_X:
+			v.X = new(float32)
+			return d.ReadFloat32(schemas.Point_X, v.X)
+		case schemas.Point_Y:
+			v.Y = new(float32)
+			return d.ReadFloat32(schemas.Point_Y, v.Y)
+		}
+		return nil
+	})
 }
 
 // Provides configuration parameters for PII entity redaction.
@@ -2519,6 +6540,41 @@ type RedactionConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RedactionConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedactionConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedactionConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaskCharacter != nil {
+		s.WriteString(schemas.RedactionConfig_MaskCharacter, *v.MaskCharacter)
+	}
+	if v.MaskMode != "" {
+		s.WriteString(schemas.RedactionConfig_MaskMode, string(v.MaskMode))
+	}
+	serializeListOfPiiEntityTypes(s, schemas.RedactionConfig_PiiEntityTypes, v.PiiEntityTypes)
+}
+func (v *RedactionConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedactionConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RedactionConfig_MaskCharacter:
+			v.MaskCharacter = new(string)
+			return d.ReadString(schemas.RedactionConfig_MaskCharacter, v.MaskCharacter)
+		case schemas.RedactionConfig_MaskMode:
+			var ev string
+			if err := d.ReadString(schemas.RedactionConfig_MaskMode, &ev); err != nil {
+				return err
+			}
+			v.MaskMode = PiiEntitiesDetectionMaskMode(ev)
+			return nil
+		case schemas.RedactionConfig_PiiEntityTypes:
+			return deserializeListOfPiiEntityTypes(d, schemas.RedactionConfig_PiiEntityTypes, &v.PiiEntityTypes)
+		}
+		return nil
+	})
+}
+
 // List of child blocks for the current block.
 type RelationshipsListItem struct {
 
@@ -2529,6 +6585,35 @@ type RelationshipsListItem struct {
 	Type RelationshipType
 
 	noSmithyDocumentSerde
+}
+
+func (v *RelationshipsListItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RelationshipsListItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RelationshipsListItem) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.RelationshipsListItem_Ids, v.Ids)
+	if v.Type != "" {
+		s.WriteString(schemas.RelationshipsListItem_Type, string(v.Type))
+	}
+}
+func (v *RelationshipsListItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RelationshipsListItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RelationshipsListItem_Ids:
+			return deserializeStringList(d, schemas.RelationshipsListItem_Ids, &v.Ids)
+		case schemas.RelationshipsListItem_Type:
+			var ev string
+			if err := d.ReadString(schemas.RelationshipsListItem_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = RelationshipType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Provides information for filtering a list of dominant language detection jobs.
@@ -2553,6 +6638,50 @@ type SentimentDetectionJobFilter struct {
 	SubmitTimeBefore *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *SentimentDetectionJobFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SentimentDetectionJobFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SentimentDetectionJobFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobName != nil {
+		s.WriteString(schemas.SentimentDetectionJobFilter_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.SentimentDetectionJobFilter_JobStatus, string(v.JobStatus))
+	}
+	if v.SubmitTimeAfter != nil {
+		s.WriteTime(schemas.SentimentDetectionJobFilter_SubmitTimeAfter, *v.SubmitTimeAfter)
+	}
+	if v.SubmitTimeBefore != nil {
+		s.WriteTime(schemas.SentimentDetectionJobFilter_SubmitTimeBefore, *v.SubmitTimeBefore)
+	}
+}
+func (v *SentimentDetectionJobFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SentimentDetectionJobFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SentimentDetectionJobFilter_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.SentimentDetectionJobFilter_JobName, v.JobName)
+		case schemas.SentimentDetectionJobFilter_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.SentimentDetectionJobFilter_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.SentimentDetectionJobFilter_SubmitTimeAfter:
+			v.SubmitTimeAfter = new(time.Time)
+			return d.ReadTime(schemas.SentimentDetectionJobFilter_SubmitTimeAfter, v.SubmitTimeAfter)
+		case schemas.SentimentDetectionJobFilter_SubmitTimeBefore:
+			v.SubmitTimeBefore = new(time.Time)
+			return d.ReadTime(schemas.SentimentDetectionJobFilter_SubmitTimeBefore, v.SubmitTimeBefore)
+		}
+		return nil
+	})
 }
 
 // Provides information about a sentiment detection job.
@@ -2625,6 +6754,114 @@ type SentimentDetectionJobProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SentimentDetectionJobProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SentimentDetectionJobProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SentimentDetectionJobProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.SentimentDetectionJobProperties_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.SentimentDetectionJobProperties_EndTime, *v.EndTime)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.SentimentDetectionJobProperties_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.SentimentDetectionJobProperties_JobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.SentimentDetectionJobProperties_JobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.SentimentDetectionJobProperties_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.SentimentDetectionJobProperties_JobStatus, string(v.JobStatus))
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.SentimentDetectionJobProperties_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.SentimentDetectionJobProperties_Message, *v.Message)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.SentimentDetectionJobProperties_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SubmitTime != nil {
+		s.WriteTime(schemas.SentimentDetectionJobProperties_SubmitTime, *v.SubmitTime)
+	}
+	if v.VolumeKmsKeyId != nil {
+		s.WriteString(schemas.SentimentDetectionJobProperties_VolumeKmsKeyId, *v.VolumeKmsKeyId)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.SentimentDetectionJobProperties_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SentimentDetectionJobProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SentimentDetectionJobProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SentimentDetectionJobProperties_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.SentimentDetectionJobProperties_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.SentimentDetectionJobProperties_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.SentimentDetectionJobProperties_EndTime, v.EndTime)
+		case schemas.SentimentDetectionJobProperties_InputDataConfig:
+			v.InputDataConfig = &InputDataConfig{}
+			return v.InputDataConfig.Deserialize(d)
+		case schemas.SentimentDetectionJobProperties_JobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.SentimentDetectionJobProperties_JobArn, v.JobArn)
+		case schemas.SentimentDetectionJobProperties_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.SentimentDetectionJobProperties_JobId, v.JobId)
+		case schemas.SentimentDetectionJobProperties_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.SentimentDetectionJobProperties_JobName, v.JobName)
+		case schemas.SentimentDetectionJobProperties_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.SentimentDetectionJobProperties_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.SentimentDetectionJobProperties_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.SentimentDetectionJobProperties_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.SentimentDetectionJobProperties_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SentimentDetectionJobProperties_Message, v.Message)
+		case schemas.SentimentDetectionJobProperties_OutputDataConfig:
+			v.OutputDataConfig = &OutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.SentimentDetectionJobProperties_SubmitTime:
+			v.SubmitTime = new(time.Time)
+			return d.ReadTime(schemas.SentimentDetectionJobProperties_SubmitTime, v.SubmitTime)
+		case schemas.SentimentDetectionJobProperties_VolumeKmsKeyId:
+			v.VolumeKmsKeyId = new(string)
+			return d.ReadString(schemas.SentimentDetectionJobProperties_VolumeKmsKeyId, v.VolumeKmsKeyId)
+		case schemas.SentimentDetectionJobProperties_VpcConfig:
+			v.VpcConfig = &VpcConfig{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes the level of confidence that Amazon Comprehend has in the accuracy of
 // its detection of sentiments.
 type SentimentScore struct {
@@ -2646,6 +6883,46 @@ type SentimentScore struct {
 	Positive *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *SentimentScore) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SentimentScore)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SentimentScore) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mixed != nil {
+		s.WriteFloat32(schemas.SentimentScore_Mixed, *v.Mixed)
+	}
+	if v.Negative != nil {
+		s.WriteFloat32(schemas.SentimentScore_Negative, *v.Negative)
+	}
+	if v.Neutral != nil {
+		s.WriteFloat32(schemas.SentimentScore_Neutral, *v.Neutral)
+	}
+	if v.Positive != nil {
+		s.WriteFloat32(schemas.SentimentScore_Positive, *v.Positive)
+	}
+}
+func (v *SentimentScore) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SentimentScore, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SentimentScore_Mixed:
+			v.Mixed = new(float32)
+			return d.ReadFloat32(schemas.SentimentScore_Mixed, v.Mixed)
+		case schemas.SentimentScore_Negative:
+			v.Negative = new(float32)
+			return d.ReadFloat32(schemas.SentimentScore_Negative, v.Negative)
+		case schemas.SentimentScore_Neutral:
+			v.Neutral = new(float32)
+			return d.ReadFloat32(schemas.SentimentScore_Neutral, v.Neutral)
+		case schemas.SentimentScore_Positive:
+			v.Positive = new(float32)
+			return d.ReadFloat32(schemas.SentimentScore_Positive, v.Positive)
+		}
+		return nil
+	})
 }
 
 // Represents a work in the input text that was recognized and assigned a part of
@@ -2676,6 +6953,54 @@ type SyntaxToken struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SyntaxToken) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SyntaxToken)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SyntaxToken) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginOffset != nil {
+		s.WriteInt32(schemas.SyntaxToken_BeginOffset, *v.BeginOffset)
+	}
+	if v.EndOffset != nil {
+		s.WriteInt32(schemas.SyntaxToken_EndOffset, *v.EndOffset)
+	}
+	if v.PartOfSpeech != nil {
+		s.WriteStruct(schemas.SyntaxToken_PartOfSpeech)
+		v.PartOfSpeech.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.SyntaxToken_Text, *v.Text)
+	}
+	if v.TokenId != nil {
+		s.WriteInt32(schemas.SyntaxToken_TokenId, *v.TokenId)
+	}
+}
+func (v *SyntaxToken) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SyntaxToken, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SyntaxToken_BeginOffset:
+			v.BeginOffset = new(int32)
+			return d.ReadInt32(schemas.SyntaxToken_BeginOffset, v.BeginOffset)
+		case schemas.SyntaxToken_EndOffset:
+			v.EndOffset = new(int32)
+			return d.ReadInt32(schemas.SyntaxToken_EndOffset, v.EndOffset)
+		case schemas.SyntaxToken_PartOfSpeech:
+			v.PartOfSpeech = &PartOfSpeechTag{}
+			return v.PartOfSpeech.Deserialize(d)
+		case schemas.SyntaxToken_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.SyntaxToken_Text, v.Text)
+		case schemas.SyntaxToken_TokenId:
+			v.TokenId = new(int32)
+			return d.ReadInt32(schemas.SyntaxToken_TokenId, v.TokenId)
+		}
+		return nil
+	})
+}
+
 // A key-value pair that adds as a metadata to a resource used by Amazon
 // Comprehend. For example, a tag with the key-value pair ‘Department’:’Sales’
 // might be added to a resource to indicate its use by a particular department.
@@ -2696,6 +7021,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Provides information for filtering a list of dominant language detection jobs.
@@ -2720,6 +7073,50 @@ type TargetedSentimentDetectionJobFilter struct {
 	SubmitTimeBefore *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *TargetedSentimentDetectionJobFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetedSentimentDetectionJobFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetedSentimentDetectionJobFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobName != nil {
+		s.WriteString(schemas.TargetedSentimentDetectionJobFilter_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.TargetedSentimentDetectionJobFilter_JobStatus, string(v.JobStatus))
+	}
+	if v.SubmitTimeAfter != nil {
+		s.WriteTime(schemas.TargetedSentimentDetectionJobFilter_SubmitTimeAfter, *v.SubmitTimeAfter)
+	}
+	if v.SubmitTimeBefore != nil {
+		s.WriteTime(schemas.TargetedSentimentDetectionJobFilter_SubmitTimeBefore, *v.SubmitTimeBefore)
+	}
+}
+func (v *TargetedSentimentDetectionJobFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetedSentimentDetectionJobFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetedSentimentDetectionJobFilter_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.TargetedSentimentDetectionJobFilter_JobName, v.JobName)
+		case schemas.TargetedSentimentDetectionJobFilter_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.TargetedSentimentDetectionJobFilter_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.TargetedSentimentDetectionJobFilter_SubmitTimeAfter:
+			v.SubmitTimeAfter = new(time.Time)
+			return d.ReadTime(schemas.TargetedSentimentDetectionJobFilter_SubmitTimeAfter, v.SubmitTimeAfter)
+		case schemas.TargetedSentimentDetectionJobFilter_SubmitTimeBefore:
+			v.SubmitTimeBefore = new(time.Time)
+			return d.ReadTime(schemas.TargetedSentimentDetectionJobFilter_SubmitTimeBefore, v.SubmitTimeBefore)
+		}
+		return nil
+	})
 }
 
 // Provides information about a targeted sentiment detection job.
@@ -2790,6 +7187,114 @@ type TargetedSentimentDetectionJobProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TargetedSentimentDetectionJobProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetedSentimentDetectionJobProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetedSentimentDetectionJobProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.TargetedSentimentDetectionJobProperties_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.TargetedSentimentDetectionJobProperties_EndTime, *v.EndTime)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.TargetedSentimentDetectionJobProperties_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.TargetedSentimentDetectionJobProperties_JobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.TargetedSentimentDetectionJobProperties_JobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.TargetedSentimentDetectionJobProperties_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.TargetedSentimentDetectionJobProperties_JobStatus, string(v.JobStatus))
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.TargetedSentimentDetectionJobProperties_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.TargetedSentimentDetectionJobProperties_Message, *v.Message)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.TargetedSentimentDetectionJobProperties_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SubmitTime != nil {
+		s.WriteTime(schemas.TargetedSentimentDetectionJobProperties_SubmitTime, *v.SubmitTime)
+	}
+	if v.VolumeKmsKeyId != nil {
+		s.WriteString(schemas.TargetedSentimentDetectionJobProperties_VolumeKmsKeyId, *v.VolumeKmsKeyId)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.TargetedSentimentDetectionJobProperties_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TargetedSentimentDetectionJobProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetedSentimentDetectionJobProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetedSentimentDetectionJobProperties_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.TargetedSentimentDetectionJobProperties_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.TargetedSentimentDetectionJobProperties_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.TargetedSentimentDetectionJobProperties_EndTime, v.EndTime)
+		case schemas.TargetedSentimentDetectionJobProperties_InputDataConfig:
+			v.InputDataConfig = &InputDataConfig{}
+			return v.InputDataConfig.Deserialize(d)
+		case schemas.TargetedSentimentDetectionJobProperties_JobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.TargetedSentimentDetectionJobProperties_JobArn, v.JobArn)
+		case schemas.TargetedSentimentDetectionJobProperties_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.TargetedSentimentDetectionJobProperties_JobId, v.JobId)
+		case schemas.TargetedSentimentDetectionJobProperties_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.TargetedSentimentDetectionJobProperties_JobName, v.JobName)
+		case schemas.TargetedSentimentDetectionJobProperties_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.TargetedSentimentDetectionJobProperties_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.TargetedSentimentDetectionJobProperties_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.TargetedSentimentDetectionJobProperties_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.TargetedSentimentDetectionJobProperties_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TargetedSentimentDetectionJobProperties_Message, v.Message)
+		case schemas.TargetedSentimentDetectionJobProperties_OutputDataConfig:
+			v.OutputDataConfig = &OutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.TargetedSentimentDetectionJobProperties_SubmitTime:
+			v.SubmitTime = new(time.Time)
+			return d.ReadTime(schemas.TargetedSentimentDetectionJobProperties_SubmitTime, v.SubmitTime)
+		case schemas.TargetedSentimentDetectionJobProperties_VolumeKmsKeyId:
+			v.VolumeKmsKeyId = new(string)
+			return d.ReadString(schemas.TargetedSentimentDetectionJobProperties_VolumeKmsKeyId, v.VolumeKmsKeyId)
+		case schemas.TargetedSentimentDetectionJobProperties_VpcConfig:
+			v.VpcConfig = &VpcConfig{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Information about one of the entities found by targeted sentiment analysis.
 //
 // For more information about targeted sentiment, see [Targeted sentiment] in the Amazon Comprehend
@@ -2809,6 +7314,28 @@ type TargetedSentimentEntity struct {
 	Mentions []TargetedSentimentMention
 
 	noSmithyDocumentSerde
+}
+
+func (v *TargetedSentimentEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetedSentimentEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetedSentimentEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfDescriptiveMentionIndices(s, schemas.TargetedSentimentEntity_DescriptiveMentionIndex, v.DescriptiveMentionIndex)
+	serializeListOfMentions(s, schemas.TargetedSentimentEntity_Mentions, v.Mentions)
+}
+func (v *TargetedSentimentEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetedSentimentEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetedSentimentEntity_DescriptiveMentionIndex:
+			return deserializeListOfDescriptiveMentionIndices(d, schemas.TargetedSentimentEntity_DescriptiveMentionIndex, &v.DescriptiveMentionIndex)
+		case schemas.TargetedSentimentEntity_Mentions:
+			return deserializeListOfMentions(d, schemas.TargetedSentimentEntity_Mentions, &v.Mentions)
+		}
+		return nil
+	})
 }
 
 // Information about one mention of an entity. The mention information includes
@@ -2848,6 +7375,70 @@ type TargetedSentimentMention struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TargetedSentimentMention) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetedSentimentMention)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetedSentimentMention) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginOffset != nil {
+		s.WriteInt32(schemas.TargetedSentimentMention_BeginOffset, *v.BeginOffset)
+	}
+	if v.EndOffset != nil {
+		s.WriteInt32(schemas.TargetedSentimentMention_EndOffset, *v.EndOffset)
+	}
+	if v.GroupScore != nil {
+		s.WriteFloat32(schemas.TargetedSentimentMention_GroupScore, *v.GroupScore)
+	}
+	if v.MentionSentiment != nil {
+		s.WriteStruct(schemas.TargetedSentimentMention_MentionSentiment)
+		v.MentionSentiment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Score != nil {
+		s.WriteFloat32(schemas.TargetedSentimentMention_Score, *v.Score)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.TargetedSentimentMention_Text, *v.Text)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.TargetedSentimentMention_Type, string(v.Type))
+	}
+}
+func (v *TargetedSentimentMention) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetedSentimentMention, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetedSentimentMention_BeginOffset:
+			v.BeginOffset = new(int32)
+			return d.ReadInt32(schemas.TargetedSentimentMention_BeginOffset, v.BeginOffset)
+		case schemas.TargetedSentimentMention_EndOffset:
+			v.EndOffset = new(int32)
+			return d.ReadInt32(schemas.TargetedSentimentMention_EndOffset, v.EndOffset)
+		case schemas.TargetedSentimentMention_GroupScore:
+			v.GroupScore = new(float32)
+			return d.ReadFloat32(schemas.TargetedSentimentMention_GroupScore, v.GroupScore)
+		case schemas.TargetedSentimentMention_MentionSentiment:
+			v.MentionSentiment = &MentionSentiment{}
+			return v.MentionSentiment.Deserialize(d)
+		case schemas.TargetedSentimentMention_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.TargetedSentimentMention_Score, v.Score)
+		case schemas.TargetedSentimentMention_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.TargetedSentimentMention_Text, v.Text)
+		case schemas.TargetedSentimentMention_Type:
+			var ev string
+			if err := d.ReadString(schemas.TargetedSentimentMention_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = TargetedSentimentEntityType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Configuration about the model associated with a flywheel.
 type TaskConfig struct {
 
@@ -2865,6 +7456,48 @@ type TaskConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TaskConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentClassificationConfig != nil {
+		s.WriteStruct(schemas.TaskConfig_DocumentClassificationConfig)
+		v.DocumentClassificationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EntityRecognitionConfig != nil {
+		s.WriteStruct(schemas.TaskConfig_EntityRecognitionConfig)
+		v.EntityRecognitionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.TaskConfig_LanguageCode, string(v.LanguageCode))
+	}
+}
+func (v *TaskConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskConfig_DocumentClassificationConfig:
+			v.DocumentClassificationConfig = &DocumentClassificationConfig{}
+			return v.DocumentClassificationConfig.Deserialize(d)
+		case schemas.TaskConfig_EntityRecognitionConfig:
+			v.EntityRecognitionConfig = &EntityRecognitionConfig{}
+			return v.EntityRecognitionConfig.Deserialize(d)
+		case schemas.TaskConfig_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.TaskConfig_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // One of the of text strings. Each string has a size limit of 1KB.
 type TextSegment struct {
 
@@ -2874,6 +7507,28 @@ type TextSegment struct {
 	Text *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TextSegment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TextSegment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TextSegment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Text != nil {
+		s.WriteString(schemas.TextSegment_Text, *v.Text)
+	}
+}
+func (v *TextSegment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TextSegment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TextSegment_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.TextSegment_Text, v.Text)
+		}
+		return nil
+	})
 }
 
 // Provides information for filtering topic detection jobs. For more information,
@@ -2898,6 +7553,50 @@ type TopicsDetectionJobFilter struct {
 	SubmitTimeBefore *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *TopicsDetectionJobFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TopicsDetectionJobFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TopicsDetectionJobFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobName != nil {
+		s.WriteString(schemas.TopicsDetectionJobFilter_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.TopicsDetectionJobFilter_JobStatus, string(v.JobStatus))
+	}
+	if v.SubmitTimeAfter != nil {
+		s.WriteTime(schemas.TopicsDetectionJobFilter_SubmitTimeAfter, *v.SubmitTimeAfter)
+	}
+	if v.SubmitTimeBefore != nil {
+		s.WriteTime(schemas.TopicsDetectionJobFilter_SubmitTimeBefore, *v.SubmitTimeBefore)
+	}
+}
+func (v *TopicsDetectionJobFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TopicsDetectionJobFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TopicsDetectionJobFilter_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.TopicsDetectionJobFilter_JobName, v.JobName)
+		case schemas.TopicsDetectionJobFilter_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.TopicsDetectionJobFilter_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.TopicsDetectionJobFilter_SubmitTimeAfter:
+			v.SubmitTimeAfter = new(time.Time)
+			return d.ReadTime(schemas.TopicsDetectionJobFilter_SubmitTimeAfter, v.SubmitTimeAfter)
+		case schemas.TopicsDetectionJobFilter_SubmitTimeBefore:
+			v.SubmitTimeBefore = new(time.Time)
+			return d.ReadTime(schemas.TopicsDetectionJobFilter_SubmitTimeBefore, v.SubmitTimeBefore)
+		}
+		return nil
+	})
 }
 
 // Provides information about a topic detection job.
@@ -2969,6 +7668,110 @@ type TopicsDetectionJobProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TopicsDetectionJobProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TopicsDetectionJobProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TopicsDetectionJobProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.TopicsDetectionJobProperties_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.TopicsDetectionJobProperties_EndTime, *v.EndTime)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.TopicsDetectionJobProperties_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.TopicsDetectionJobProperties_JobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.TopicsDetectionJobProperties_JobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.TopicsDetectionJobProperties_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.TopicsDetectionJobProperties_JobStatus, string(v.JobStatus))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.TopicsDetectionJobProperties_Message, *v.Message)
+	}
+	if v.NumberOfTopics != nil {
+		s.WriteInt32(schemas.TopicsDetectionJobProperties_NumberOfTopics, *v.NumberOfTopics)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.TopicsDetectionJobProperties_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SubmitTime != nil {
+		s.WriteTime(schemas.TopicsDetectionJobProperties_SubmitTime, *v.SubmitTime)
+	}
+	if v.VolumeKmsKeyId != nil {
+		s.WriteString(schemas.TopicsDetectionJobProperties_VolumeKmsKeyId, *v.VolumeKmsKeyId)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.TopicsDetectionJobProperties_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TopicsDetectionJobProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TopicsDetectionJobProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TopicsDetectionJobProperties_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.TopicsDetectionJobProperties_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.TopicsDetectionJobProperties_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.TopicsDetectionJobProperties_EndTime, v.EndTime)
+		case schemas.TopicsDetectionJobProperties_InputDataConfig:
+			v.InputDataConfig = &InputDataConfig{}
+			return v.InputDataConfig.Deserialize(d)
+		case schemas.TopicsDetectionJobProperties_JobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.TopicsDetectionJobProperties_JobArn, v.JobArn)
+		case schemas.TopicsDetectionJobProperties_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.TopicsDetectionJobProperties_JobId, v.JobId)
+		case schemas.TopicsDetectionJobProperties_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.TopicsDetectionJobProperties_JobName, v.JobName)
+		case schemas.TopicsDetectionJobProperties_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.TopicsDetectionJobProperties_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.TopicsDetectionJobProperties_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TopicsDetectionJobProperties_Message, v.Message)
+		case schemas.TopicsDetectionJobProperties_NumberOfTopics:
+			v.NumberOfTopics = new(int32)
+			return d.ReadInt32(schemas.TopicsDetectionJobProperties_NumberOfTopics, v.NumberOfTopics)
+		case schemas.TopicsDetectionJobProperties_OutputDataConfig:
+			v.OutputDataConfig = &OutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.TopicsDetectionJobProperties_SubmitTime:
+			v.SubmitTime = new(time.Time)
+			return d.ReadTime(schemas.TopicsDetectionJobProperties_SubmitTime, v.SubmitTime)
+		case schemas.TopicsDetectionJobProperties_VolumeKmsKeyId:
+			v.VolumeKmsKeyId = new(string)
+			return d.ReadString(schemas.TopicsDetectionJobProperties_VolumeKmsKeyId, v.VolumeKmsKeyId)
+		case schemas.TopicsDetectionJobProperties_VpcConfig:
+			v.VpcConfig = &VpcConfig{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Toxic content analysis result for one string. For more information about
 // toxicity detection, see [Toxicity detection]in the Amazon Comprehend Developer Guide
 //
@@ -2985,6 +7788,38 @@ type ToxicContent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ToxicContent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ToxicContent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ToxicContent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.ToxicContent_Name, string(v.Name))
+	}
+	if v.Score != nil {
+		s.WriteFloat32(schemas.ToxicContent_Score, *v.Score)
+	}
+}
+func (v *ToxicContent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ToxicContent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ToxicContent_Name:
+			var ev string
+			if err := d.ReadString(schemas.ToxicContent_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = ToxicContentType(ev)
+			return nil
+		case schemas.ToxicContent_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.ToxicContent_Score, v.Score)
+		}
+		return nil
+	})
+}
+
 // Toxicity analysis result for one string. For more information about toxicity
 // detection, see [Toxicity detection]in the Amazon Comprehend Developer Guide.
 //
@@ -2999,6 +7834,31 @@ type ToxicLabels struct {
 	Toxicity *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ToxicLabels) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ToxicLabels)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ToxicLabels) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfToxicContent(s, schemas.ToxicLabels_Labels, v.Labels)
+	if v.Toxicity != nil {
+		s.WriteFloat32(schemas.ToxicLabels_Toxicity, *v.Toxicity)
+	}
+}
+func (v *ToxicLabels) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ToxicLabels, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ToxicLabels_Labels:
+			return deserializeListOfToxicContent(d, schemas.ToxicLabels_Labels, &v.Labels)
+		case schemas.ToxicLabels_Toxicity:
+			v.Toxicity = new(float32)
+			return d.ReadFloat32(schemas.ToxicLabels_Toxicity, v.Toxicity)
+		}
+		return nil
+	})
 }
 
 // Data security configuration.
@@ -3023,6 +7883,42 @@ type UpdateDataSecurityConfig struct {
 	VpcConfig *VpcConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateDataSecurityConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataSecurityConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataSecurityConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelKmsKeyId != nil {
+		s.WriteString(schemas.UpdateDataSecurityConfig_ModelKmsKeyId, *v.ModelKmsKeyId)
+	}
+	if v.VolumeKmsKeyId != nil {
+		s.WriteString(schemas.UpdateDataSecurityConfig_VolumeKmsKeyId, *v.VolumeKmsKeyId)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.UpdateDataSecurityConfig_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateDataSecurityConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataSecurityConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataSecurityConfig_ModelKmsKeyId:
+			v.ModelKmsKeyId = new(string)
+			return d.ReadString(schemas.UpdateDataSecurityConfig_ModelKmsKeyId, v.ModelKmsKeyId)
+		case schemas.UpdateDataSecurityConfig_VolumeKmsKeyId:
+			v.VolumeKmsKeyId = new(string)
+			return d.ReadString(schemas.UpdateDataSecurityConfig_VolumeKmsKeyId, v.VolumeKmsKeyId)
+		case schemas.UpdateDataSecurityConfig_VpcConfig:
+			v.VpcConfig = &VpcConfig{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 //	Configuration parameters for an optional private Virtual Private Cloud (VPC)
@@ -3056,6 +7952,28 @@ type VpcConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VpcConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSecurityGroupIds(s, schemas.VpcConfig_SecurityGroupIds, v.SecurityGroupIds)
+	serializeSubnets(s, schemas.VpcConfig_Subnets, v.Subnets)
+}
+func (v *VpcConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcConfig_SecurityGroupIds:
+			return deserializeSecurityGroupIds(d, schemas.VpcConfig_SecurityGroupIds, &v.SecurityGroupIds)
+		case schemas.VpcConfig_Subnets:
+			return deserializeSubnets(d, schemas.VpcConfig_Subnets, &v.Subnets)
+		}
+		return nil
+	})
+}
+
 // The system identified one of the following warnings while processing the input
 // document:
 //
@@ -3076,6 +7994,44 @@ type WarningsListItem struct {
 	WarnMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WarningsListItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WarningsListItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WarningsListItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Page != nil {
+		s.WriteInt32(schemas.WarningsListItem_Page, *v.Page)
+	}
+	if v.WarnCode != "" {
+		s.WriteString(schemas.WarningsListItem_WarnCode, string(v.WarnCode))
+	}
+	if v.WarnMessage != nil {
+		s.WriteString(schemas.WarningsListItem_WarnMessage, *v.WarnMessage)
+	}
+}
+func (v *WarningsListItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WarningsListItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WarningsListItem_Page:
+			v.Page = new(int32)
+			return d.ReadInt32(schemas.WarningsListItem_Page, v.Page)
+		case schemas.WarningsListItem_WarnCode:
+			var ev string
+			if err := d.ReadString(schemas.WarningsListItem_WarnCode, &ev); err != nil {
+				return err
+			}
+			v.WarnCode = PageBasedWarningCode(ev)
+			return nil
+		case schemas.WarningsListItem_WarnMessage:
+			v.WarnMessage = new(string)
+			return d.ReadString(schemas.WarningsListItem_WarnMessage, v.WarnMessage)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

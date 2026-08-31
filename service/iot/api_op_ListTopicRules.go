@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type ListTopicRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTopicRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTopicRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTopicRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTopicRulesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTopicRulesRequest_nextToken, *v.NextToken)
+	}
+	if v.RuleDisabled != nil {
+		s.WriteBool(schemas.ListTopicRulesRequest_ruleDisabled, *v.RuleDisabled)
+	}
+	if v.Topic != nil {
+		s.WriteString(schemas.ListTopicRulesRequest_topic, *v.Topic)
+	}
+}
+
 // The output from the ListTopicRules operation.
 type ListTopicRulesOutput struct {
 
@@ -64,13 +87,35 @@ type ListTopicRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTopicRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTopicRulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTopicRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTopicRulesResponse_nextToken, *v.NextToken)
+	}
+	serializeTopicRuleList(s, schemas.ListTopicRulesResponse_rules, v.Rules)
+}
+func (v *ListTopicRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTopicRulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTopicRulesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTopicRulesResponse_nextToken, v.NextToken)
+		case schemas.ListTopicRulesResponse_rules:
+			return deserializeTopicRuleList(d, schemas.ListTopicRulesResponse_rules, &v.Rules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTopicRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTopicRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTopicRules, schemas.ListTopicRulesRequest, schemas.ListTopicRulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTopicRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTopicRules, schemas.ListTopicRulesRequest, schemas.ListTopicRulesResponse), output: &ListTopicRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

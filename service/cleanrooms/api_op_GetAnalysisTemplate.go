@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,34 @@ type GetAnalysisTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAnalysisTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnalysisTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnalysisTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisTemplateIdentifier != nil {
+		s.WriteString(schemas.GetAnalysisTemplateInput_analysisTemplateIdentifier, *v.AnalysisTemplateIdentifier)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.GetAnalysisTemplateInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+func (v *GetAnalysisTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAnalysisTemplateInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAnalysisTemplateInput_analysisTemplateIdentifier:
+			v.AnalysisTemplateIdentifier = new(string)
+			return d.ReadString(schemas.GetAnalysisTemplateInput_analysisTemplateIdentifier, v.AnalysisTemplateIdentifier)
+		case schemas.GetAnalysisTemplateInput_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.GetAnalysisTemplateInput_membershipIdentifier, v.MembershipIdentifier)
+		}
+		return nil
+	})
+}
+
 type GetAnalysisTemplateOutput struct {
 
 	// The analysis template.
@@ -52,13 +82,34 @@ type GetAnalysisTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAnalysisTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnalysisTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnalysisTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisTemplate != nil {
+		s.WriteStruct(schemas.GetAnalysisTemplateOutput_analysisTemplate)
+		v.AnalysisTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAnalysisTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAnalysisTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAnalysisTemplateOutput_analysisTemplate:
+			v.AnalysisTemplate = &types.AnalysisTemplate{}
+			return v.AnalysisTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAnalysisTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAnalysisTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnalysisTemplate, schemas.GetAnalysisTemplateInput, schemas.GetAnalysisTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAnalysisTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnalysisTemplate, schemas.GetAnalysisTemplateInput, schemas.GetAnalysisTemplateOutput), output: &GetAnalysisTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

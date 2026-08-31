@@ -4,6 +4,8 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,19 @@ type DisassociateLensesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateLensesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateLensesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateLensesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLensAliases(s, schemas.DisassociateLensesInput_LensAliases, v.LensAliases)
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.DisassociateLensesInput_WorkloadId, *v.WorkloadId)
+	}
+}
+
 type DisassociateLensesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +70,26 @@ type DisassociateLensesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateLensesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateLensesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateLensesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateLensesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateLenses{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateLenses, schemas.DisassociateLensesInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateLenses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateLenses, schemas.DisassociateLensesInput, nil), output: &DisassociateLensesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package appflow
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appflow/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,27 @@ type DescribeConnectorEntityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectorEntityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectorEntityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectorEntityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiVersion != nil {
+		s.WriteString(schemas.DescribeConnectorEntityRequest_apiVersion, *v.ApiVersion)
+	}
+	if v.ConnectorEntityName != nil {
+		s.WriteString(schemas.DescribeConnectorEntityRequest_connectorEntityName, *v.ConnectorEntityName)
+	}
+	if v.ConnectorProfileName != nil {
+		s.WriteString(schemas.DescribeConnectorEntityRequest_connectorProfileName, *v.ConnectorProfileName)
+	}
+	if v.ConnectorType != "" {
+		s.WriteString(schemas.DescribeConnectorEntityRequest_connectorType, string(v.ConnectorType))
+	}
+}
+
 type DescribeConnectorEntityOutput struct {
 
 	//  Describes the fields for that connector entity. For example, for an account
@@ -60,13 +83,29 @@ type DescribeConnectorEntityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectorEntityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectorEntityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectorEntityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectorEntityFieldList(s, schemas.DescribeConnectorEntityResponse_connectorEntityFields, v.ConnectorEntityFields)
+}
+func (v *DescribeConnectorEntityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConnectorEntityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConnectorEntityResponse_connectorEntityFields:
+			return deserializeConnectorEntityFieldList(d, schemas.DescribeConnectorEntityResponse_connectorEntityFields, &v.ConnectorEntityFields)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConnectorEntityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeConnectorEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectorEntity, schemas.DescribeConnectorEntityRequest, schemas.DescribeConnectorEntityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeConnectorEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectorEntity, schemas.DescribeConnectorEntityRequest, schemas.DescribeConnectorEntityResponse), output: &DescribeConnectorEntityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

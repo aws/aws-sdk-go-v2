@@ -4,7 +4,9 @@ package codedeploy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,19 @@ type BatchGetDeploymentGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetDeploymentGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetDeploymentGroupsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetDeploymentGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.BatchGetDeploymentGroupsInput_applicationName, *v.ApplicationName)
+	}
+	serializeDeploymentGroupsList(s, schemas.BatchGetDeploymentGroupsInput_deploymentGroupNames, v.DeploymentGroupNames)
+}
+
 // Represents the output of a BatchGetDeploymentGroups operation.
 type BatchGetDeploymentGroupsOutput struct {
 
@@ -56,13 +71,35 @@ type BatchGetDeploymentGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetDeploymentGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetDeploymentGroupsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetDeploymentGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeploymentGroupInfoList(s, schemas.BatchGetDeploymentGroupsOutput_deploymentGroupsInfo, v.DeploymentGroupsInfo)
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchGetDeploymentGroupsOutput_errorMessage, *v.ErrorMessage)
+	}
+}
+func (v *BatchGetDeploymentGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetDeploymentGroupsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetDeploymentGroupsOutput_deploymentGroupsInfo:
+			return deserializeDeploymentGroupInfoList(d, schemas.BatchGetDeploymentGroupsOutput_deploymentGroupsInfo, &v.DeploymentGroupsInfo)
+		case schemas.BatchGetDeploymentGroupsOutput_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchGetDeploymentGroupsOutput_errorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetDeploymentGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetDeploymentGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetDeploymentGroups, schemas.BatchGetDeploymentGroupsInput, schemas.BatchGetDeploymentGroupsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetDeploymentGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetDeploymentGroups, schemas.BatchGetDeploymentGroupsInput, schemas.BatchGetDeploymentGroupsOutput), output: &BatchGetDeploymentGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

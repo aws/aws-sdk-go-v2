@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -46,6 +48,24 @@ type GetTaskTemplateInput struct {
 	SnapshotVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetTaskTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTaskTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTaskTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GetTaskTemplateRequest_InstanceId, *v.InstanceId)
+	}
+	if v.SnapshotVersion != nil {
+		s.WriteString(schemas.GetTaskTemplateRequest_SnapshotVersion, *v.SnapshotVersion)
+	}
+	if v.TaskTemplateId != nil {
+		s.WriteString(schemas.GetTaskTemplateRequest_TaskTemplateId, *v.TaskTemplateId)
+	}
 }
 
 type GetTaskTemplateOutput struct {
@@ -117,13 +137,112 @@ type GetTaskTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTaskTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTaskTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTaskTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetTaskTemplateResponse_Arn, *v.Arn)
+	}
+	if v.Constraints != nil {
+		s.WriteStruct(schemas.GetTaskTemplateResponse_Constraints)
+		v.Constraints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContactFlowId != nil {
+		s.WriteString(schemas.GetTaskTemplateResponse_ContactFlowId, *v.ContactFlowId)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.GetTaskTemplateResponse_CreatedTime, *v.CreatedTime)
+	}
+	if v.Defaults != nil {
+		s.WriteStruct(schemas.GetTaskTemplateResponse_Defaults)
+		v.Defaults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetTaskTemplateResponse_Description, *v.Description)
+	}
+	serializeTaskTemplateFields(s, schemas.GetTaskTemplateResponse_Fields, v.Fields)
+	if v.Id != nil {
+		s.WriteString(schemas.GetTaskTemplateResponse_Id, *v.Id)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GetTaskTemplateResponse_InstanceId, *v.InstanceId)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.GetTaskTemplateResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetTaskTemplateResponse_Name, *v.Name)
+	}
+	if v.SelfAssignFlowId != nil {
+		s.WriteString(schemas.GetTaskTemplateResponse_SelfAssignFlowId, *v.SelfAssignFlowId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetTaskTemplateResponse_Status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.GetTaskTemplateResponse_Tags, v.Tags)
+}
+func (v *GetTaskTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTaskTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTaskTemplateResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetTaskTemplateResponse_Arn, v.Arn)
+		case schemas.GetTaskTemplateResponse_Constraints:
+			v.Constraints = &types.TaskTemplateConstraints{}
+			return v.Constraints.Deserialize(d)
+		case schemas.GetTaskTemplateResponse_ContactFlowId:
+			v.ContactFlowId = new(string)
+			return d.ReadString(schemas.GetTaskTemplateResponse_ContactFlowId, v.ContactFlowId)
+		case schemas.GetTaskTemplateResponse_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.GetTaskTemplateResponse_CreatedTime, v.CreatedTime)
+		case schemas.GetTaskTemplateResponse_Defaults:
+			v.Defaults = &types.TaskTemplateDefaults{}
+			return v.Defaults.Deserialize(d)
+		case schemas.GetTaskTemplateResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetTaskTemplateResponse_Description, v.Description)
+		case schemas.GetTaskTemplateResponse_Fields:
+			return deserializeTaskTemplateFields(d, schemas.GetTaskTemplateResponse_Fields, &v.Fields)
+		case schemas.GetTaskTemplateResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetTaskTemplateResponse_Id, v.Id)
+		case schemas.GetTaskTemplateResponse_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.GetTaskTemplateResponse_InstanceId, v.InstanceId)
+		case schemas.GetTaskTemplateResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.GetTaskTemplateResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.GetTaskTemplateResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetTaskTemplateResponse_Name, v.Name)
+		case schemas.GetTaskTemplateResponse_SelfAssignFlowId:
+			v.SelfAssignFlowId = new(string)
+			return d.ReadString(schemas.GetTaskTemplateResponse_SelfAssignFlowId, v.SelfAssignFlowId)
+		case schemas.GetTaskTemplateResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetTaskTemplateResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TaskTemplateStatus(ev)
+			return nil
+		case schemas.GetTaskTemplateResponse_Tags:
+			return deserializeTagMap(d, schemas.GetTaskTemplateResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTaskTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTaskTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTaskTemplate, schemas.GetTaskTemplateRequest, schemas.GetTaskTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTaskTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTaskTemplate, schemas.GetTaskTemplateRequest, schemas.GetTaskTemplateResponse), output: &GetTaskTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package internetmonitor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -57,6 +59,40 @@ type GetHealthEventInput struct {
 	LinkedAccountId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetHealthEventInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetHealthEventInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetHealthEventInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventId != nil {
+		s.WriteString(schemas.GetHealthEventInput_EventId, *v.EventId)
+	}
+	if v.LinkedAccountId != nil {
+		s.WriteString(schemas.GetHealthEventInput_LinkedAccountId, *v.LinkedAccountId)
+	}
+	if v.MonitorName != nil {
+		s.WriteString(schemas.GetHealthEventInput_MonitorName, *v.MonitorName)
+	}
+}
+func (v *GetHealthEventInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetHealthEventInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetHealthEventInput_EventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.GetHealthEventInput_EventId, v.EventId)
+		case schemas.GetHealthEventInput_LinkedAccountId:
+			v.LinkedAccountId = new(string)
+			return d.ReadString(schemas.GetHealthEventInput_LinkedAccountId, v.LinkedAccountId)
+		case schemas.GetHealthEventInput_MonitorName:
+			v.MonitorName = new(string)
+			return d.ReadString(schemas.GetHealthEventInput_MonitorName, v.MonitorName)
+		}
+		return nil
+	})
 }
 
 type GetHealthEventOutput struct {
@@ -121,13 +157,96 @@ type GetHealthEventOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetHealthEventOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetHealthEventOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetHealthEventOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetHealthEventOutput_CreatedAt, *v.CreatedAt)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.GetHealthEventOutput_EndedAt, *v.EndedAt)
+	}
+	if v.EventArn != nil {
+		s.WriteString(schemas.GetHealthEventOutput_EventArn, *v.EventArn)
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.GetHealthEventOutput_EventId, *v.EventId)
+	}
+	if v.HealthScoreThreshold != 0 {
+		s.WriteFloat64(schemas.GetHealthEventOutput_HealthScoreThreshold, v.HealthScoreThreshold)
+	}
+	if v.ImpactType != "" {
+		s.WriteString(schemas.GetHealthEventOutput_ImpactType, string(v.ImpactType))
+	}
+	serializeImpactedLocationsList(s, schemas.GetHealthEventOutput_ImpactedLocations, v.ImpactedLocations)
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetHealthEventOutput_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.PercentOfTotalTrafficImpacted != nil {
+		s.WriteFloat64(schemas.GetHealthEventOutput_PercentOfTotalTrafficImpacted, *v.PercentOfTotalTrafficImpacted)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetHealthEventOutput_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetHealthEventOutput_Status, string(v.Status))
+	}
+}
+func (v *GetHealthEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetHealthEventOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetHealthEventOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetHealthEventOutput_CreatedAt, v.CreatedAt)
+		case schemas.GetHealthEventOutput_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.GetHealthEventOutput_EndedAt, v.EndedAt)
+		case schemas.GetHealthEventOutput_EventArn:
+			v.EventArn = new(string)
+			return d.ReadString(schemas.GetHealthEventOutput_EventArn, v.EventArn)
+		case schemas.GetHealthEventOutput_EventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.GetHealthEventOutput_EventId, v.EventId)
+		case schemas.GetHealthEventOutput_HealthScoreThreshold:
+			return d.ReadFloat64(schemas.GetHealthEventOutput_HealthScoreThreshold, &v.HealthScoreThreshold)
+		case schemas.GetHealthEventOutput_ImpactType:
+			var ev string
+			if err := d.ReadString(schemas.GetHealthEventOutput_ImpactType, &ev); err != nil {
+				return err
+			}
+			v.ImpactType = types.HealthEventImpactType(ev)
+			return nil
+		case schemas.GetHealthEventOutput_ImpactedLocations:
+			return deserializeImpactedLocationsList(d, schemas.GetHealthEventOutput_ImpactedLocations, &v.ImpactedLocations)
+		case schemas.GetHealthEventOutput_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetHealthEventOutput_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetHealthEventOutput_PercentOfTotalTrafficImpacted:
+			v.PercentOfTotalTrafficImpacted = new(float64)
+			return d.ReadFloat64(schemas.GetHealthEventOutput_PercentOfTotalTrafficImpacted, v.PercentOfTotalTrafficImpacted)
+		case schemas.GetHealthEventOutput_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetHealthEventOutput_StartedAt, v.StartedAt)
+		case schemas.GetHealthEventOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetHealthEventOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.HealthEventStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetHealthEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetHealthEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHealthEvent, schemas.GetHealthEventInput, schemas.GetHealthEventOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetHealthEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHealthEvent, schemas.GetHealthEventInput, schemas.GetHealthEventOutput), output: &GetHealthEventOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

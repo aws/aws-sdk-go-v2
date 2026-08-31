@@ -4,7 +4,9 @@ package apprunner
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,21 @@ type DeleteAutoScalingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAutoScalingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAutoScalingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAutoScalingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingConfigurationArn != nil {
+		s.WriteString(schemas.DeleteAutoScalingConfigurationRequest_AutoScalingConfigurationArn, *v.AutoScalingConfigurationArn)
+	}
+	if v.DeleteAllRevisions != false {
+		s.WriteBool(schemas.DeleteAutoScalingConfigurationRequest_DeleteAllRevisions, v.DeleteAllRevisions)
+	}
+}
+
 type DeleteAutoScalingConfigurationOutput struct {
 
 	// A description of the App Runner auto scaling configuration that this request
@@ -64,13 +81,34 @@ type DeleteAutoScalingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAutoScalingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAutoScalingConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAutoScalingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingConfiguration != nil {
+		s.WriteStruct(schemas.DeleteAutoScalingConfigurationResponse_AutoScalingConfiguration)
+		v.AutoScalingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteAutoScalingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAutoScalingConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAutoScalingConfigurationResponse_AutoScalingConfiguration:
+			v.AutoScalingConfiguration = &types.AutoScalingConfiguration{}
+			return v.AutoScalingConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAutoScalingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteAutoScalingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAutoScalingConfiguration, schemas.DeleteAutoScalingConfigurationRequest, schemas.DeleteAutoScalingConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteAutoScalingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAutoScalingConfiguration, schemas.DeleteAutoScalingConfigurationRequest, schemas.DeleteAutoScalingConfigurationResponse), output: &DeleteAutoScalingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

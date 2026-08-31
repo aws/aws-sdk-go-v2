@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,29 @@ type UpdateFlywheelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFlywheelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlywheelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlywheelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveModelArn != nil {
+		s.WriteString(schemas.UpdateFlywheelRequest_ActiveModelArn, *v.ActiveModelArn)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.UpdateFlywheelRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.DataSecurityConfig != nil {
+		s.WriteStruct(schemas.UpdateFlywheelRequest_DataSecurityConfig)
+		v.DataSecurityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FlywheelArn != nil {
+		s.WriteString(schemas.UpdateFlywheelRequest_FlywheelArn, *v.FlywheelArn)
+	}
+}
+
 type UpdateFlywheelOutput struct {
 
 	// The flywheel properties.
@@ -55,13 +80,34 @@ type UpdateFlywheelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFlywheelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlywheelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlywheelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlywheelProperties != nil {
+		s.WriteStruct(schemas.UpdateFlywheelResponse_FlywheelProperties)
+		v.FlywheelProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateFlywheelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFlywheelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFlywheelResponse_FlywheelProperties:
+			v.FlywheelProperties = &types.FlywheelProperties{}
+			return v.FlywheelProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFlywheelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateFlywheel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlywheel, schemas.UpdateFlywheelRequest, schemas.UpdateFlywheelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateFlywheel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlywheel, schemas.UpdateFlywheelRequest, schemas.UpdateFlywheelResponse), output: &UpdateFlywheelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

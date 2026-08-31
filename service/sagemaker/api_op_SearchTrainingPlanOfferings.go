@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -96,6 +98,40 @@ type SearchTrainingPlanOfferingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchTrainingPlanOfferingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchTrainingPlanOfferingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchTrainingPlanOfferingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurationHours != nil {
+		s.WriteInt64(schemas.SearchTrainingPlanOfferingsRequest_DurationHours, *v.DurationHours)
+	}
+	if v.EndTimeBefore != nil {
+		s.WriteTime(schemas.SearchTrainingPlanOfferingsRequest_EndTimeBefore, *v.EndTimeBefore)
+	}
+	if v.InstanceCount != nil {
+		s.WriteInt32(schemas.SearchTrainingPlanOfferingsRequest_InstanceCount, *v.InstanceCount)
+	}
+	if v.InstanceType != "" {
+		s.WriteString(schemas.SearchTrainingPlanOfferingsRequest_InstanceType, string(v.InstanceType))
+	}
+	if v.StartTimeAfter != nil {
+		s.WriteTime(schemas.SearchTrainingPlanOfferingsRequest_StartTimeAfter, *v.StartTimeAfter)
+	}
+	serializeSageMakerResourceNames(s, schemas.SearchTrainingPlanOfferingsRequest_TargetResources, v.TargetResources)
+	if v.TrainingPlanArn != nil {
+		s.WriteString(schemas.SearchTrainingPlanOfferingsRequest_TrainingPlanArn, *v.TrainingPlanArn)
+	}
+	if v.UltraServerCount != nil {
+		s.WriteInt32(schemas.SearchTrainingPlanOfferingsRequest_UltraServerCount, *v.UltraServerCount)
+	}
+	if v.UltraServerType != nil {
+		s.WriteString(schemas.SearchTrainingPlanOfferingsRequest_UltraServerType, *v.UltraServerType)
+	}
+}
+
 type SearchTrainingPlanOfferingsOutput struct {
 
 	// A list of training plan offerings that match the search criteria.
@@ -115,13 +151,32 @@ type SearchTrainingPlanOfferingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchTrainingPlanOfferingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchTrainingPlanOfferingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchTrainingPlanOfferingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTrainingPlanExtensionOfferings(s, schemas.SearchTrainingPlanOfferingsResponse_TrainingPlanExtensionOfferings, v.TrainingPlanExtensionOfferings)
+	serializeTrainingPlanOfferings(s, schemas.SearchTrainingPlanOfferingsResponse_TrainingPlanOfferings, v.TrainingPlanOfferings)
+}
+func (v *SearchTrainingPlanOfferingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchTrainingPlanOfferingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchTrainingPlanOfferingsResponse_TrainingPlanExtensionOfferings:
+			return deserializeTrainingPlanExtensionOfferings(d, schemas.SearchTrainingPlanOfferingsResponse_TrainingPlanExtensionOfferings, &v.TrainingPlanExtensionOfferings)
+		case schemas.SearchTrainingPlanOfferingsResponse_TrainingPlanOfferings:
+			return deserializeTrainingPlanOfferings(d, schemas.SearchTrainingPlanOfferingsResponse_TrainingPlanOfferings, &v.TrainingPlanOfferings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchTrainingPlanOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchTrainingPlanOfferings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchTrainingPlanOfferings, schemas.SearchTrainingPlanOfferingsRequest, schemas.SearchTrainingPlanOfferingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSearchTrainingPlanOfferings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchTrainingPlanOfferings, schemas.SearchTrainingPlanOfferingsRequest, schemas.SearchTrainingPlanOfferingsResponse), output: &SearchTrainingPlanOfferingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

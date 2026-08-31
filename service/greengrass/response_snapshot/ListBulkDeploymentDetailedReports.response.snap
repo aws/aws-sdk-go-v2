@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Deployments":[{"CreatedAt":"__CreatedAt__","DeploymentArn":"__DeploymentArn__","DeploymentId":"__DeploymentId__","DeploymentStatus":"__DeploymentStatus__","DeploymentType":"NewDeployment","ErrorDetails":[{"DetailedErrorCode":"__DetailedErrorCode__","DetailedErrorMessage":"__DetailedErrorMessage__"},{"DetailedErrorCode":"__DetailedErrorCode__","DetailedErrorMessage":"__DetailedErrorMessage__"}],"ErrorMessage":"__ErrorMessage__","GroupArn":"__GroupArn__"},{"CreatedAt":"__CreatedAt__","DeploymentArn":"__DeploymentArn__","DeploymentId":"__DeploymentId__","DeploymentStatus":"__DeploymentStatus__","DeploymentType":"NewDeployment","ErrorDetails":[{"DetailedErrorCode":"__DetailedErrorCode__","DetailedErrorMessage":"__DetailedErrorMessage__"},{"DetailedErrorCode":"__DetailedErrorCode__","DetailedErrorMessage":"__DetailedErrorMessage__"}],"ErrorMessage":"__ErrorMessage__","GroupArn":"__GroupArn__"}],"NextToken":"__NextToken__"}

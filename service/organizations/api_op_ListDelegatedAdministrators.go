@@ -5,7 +5,9 @@ package organizations
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type ListDelegatedAdministratorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDelegatedAdministratorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDelegatedAdministratorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDelegatedAdministratorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDelegatedAdministratorsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDelegatedAdministratorsRequest_NextToken, *v.NextToken)
+	}
+	if v.ServicePrincipal != nil {
+		s.WriteString(schemas.ListDelegatedAdministratorsRequest_ServicePrincipal, *v.ServicePrincipal)
+	}
+}
+
 type ListDelegatedAdministratorsOutput struct {
 
 	// The list of delegated administrators in your organization.
@@ -69,13 +89,35 @@ type ListDelegatedAdministratorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDelegatedAdministratorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDelegatedAdministratorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDelegatedAdministratorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDelegatedAdministrators(s, schemas.ListDelegatedAdministratorsResponse_DelegatedAdministrators, v.DelegatedAdministrators)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDelegatedAdministratorsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDelegatedAdministratorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDelegatedAdministratorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDelegatedAdministratorsResponse_DelegatedAdministrators:
+			return deserializeDelegatedAdministrators(d, schemas.ListDelegatedAdministratorsResponse_DelegatedAdministrators, &v.DelegatedAdministrators)
+		case schemas.ListDelegatedAdministratorsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDelegatedAdministratorsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDelegatedAdministratorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDelegatedAdministrators{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDelegatedAdministrators, schemas.ListDelegatedAdministratorsRequest, schemas.ListDelegatedAdministratorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDelegatedAdministrators{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDelegatedAdministrators, schemas.ListDelegatedAdministratorsRequest, schemas.ListDelegatedAdministratorsResponse), output: &ListDelegatedAdministratorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

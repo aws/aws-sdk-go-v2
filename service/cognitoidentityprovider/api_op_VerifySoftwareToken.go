@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,27 @@ type VerifySoftwareTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifySoftwareTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifySoftwareTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifySoftwareTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.VerifySoftwareTokenRequest_AccessToken, *v.AccessToken)
+	}
+	if v.FriendlyDeviceName != nil {
+		s.WriteString(schemas.VerifySoftwareTokenRequest_FriendlyDeviceName, *v.FriendlyDeviceName)
+	}
+	if v.Session != nil {
+		s.WriteString(schemas.VerifySoftwareTokenRequest_Session, *v.Session)
+	}
+	if v.UserCode != nil {
+		s.WriteString(schemas.VerifySoftwareTokenRequest_UserCode, *v.UserCode)
+	}
+}
+
 type VerifySoftwareTokenOutput struct {
 
 	// This session ID satisfies an MFA_SETUP challenge. Supply the session ID in your
@@ -74,13 +97,42 @@ type VerifySoftwareTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifySoftwareTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifySoftwareTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifySoftwareTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Session != nil {
+		s.WriteString(schemas.VerifySoftwareTokenResponse_Session, *v.Session)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.VerifySoftwareTokenResponse_Status, string(v.Status))
+	}
+}
+func (v *VerifySoftwareTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VerifySoftwareTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VerifySoftwareTokenResponse_Session:
+			v.Session = new(string)
+			return d.ReadString(schemas.VerifySoftwareTokenResponse_Session, v.Session)
+		case schemas.VerifySoftwareTokenResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.VerifySoftwareTokenResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.VerifySoftwareTokenResponseType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationVerifySoftwareTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpVerifySoftwareToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifySoftwareToken, schemas.VerifySoftwareTokenRequest, schemas.VerifySoftwareTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpVerifySoftwareToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifySoftwareToken, schemas.VerifySoftwareTokenRequest, schemas.VerifySoftwareTokenResponse), output: &VerifySoftwareTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

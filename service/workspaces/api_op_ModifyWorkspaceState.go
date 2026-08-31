@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type ModifyWorkspaceStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyWorkspaceStateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyWorkspaceStateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyWorkspaceStateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.ModifyWorkspaceStateRequest_WorkspaceId, *v.WorkspaceId)
+	}
+	if v.WorkspaceState != "" {
+		s.WriteString(schemas.ModifyWorkspaceStateRequest_WorkspaceState, string(v.WorkspaceState))
+	}
+}
+
 type ModifyWorkspaceStateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +68,26 @@ type ModifyWorkspaceStateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyWorkspaceStateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyWorkspaceStateResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyWorkspaceStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ModifyWorkspaceStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyWorkspaceStateResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyWorkspaceStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyWorkspaceState{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyWorkspaceState, schemas.ModifyWorkspaceStateRequest, schemas.ModifyWorkspaceStateResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpModifyWorkspaceState{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyWorkspaceState, schemas.ModifyWorkspaceStateRequest, schemas.ModifyWorkspaceStateResult), output: &ModifyWorkspaceStateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

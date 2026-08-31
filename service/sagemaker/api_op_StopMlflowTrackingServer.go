@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type StopMlflowTrackingServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopMlflowTrackingServerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopMlflowTrackingServerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopMlflowTrackingServerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrackingServerName != nil {
+		s.WriteString(schemas.StopMlflowTrackingServerRequest_TrackingServerName, *v.TrackingServerName)
+	}
+}
+
 type StopMlflowTrackingServerOutput struct {
 
 	// The ARN of the stopped tracking server.
@@ -44,13 +58,32 @@ type StopMlflowTrackingServerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopMlflowTrackingServerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopMlflowTrackingServerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopMlflowTrackingServerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrackingServerArn != nil {
+		s.WriteString(schemas.StopMlflowTrackingServerResponse_TrackingServerArn, *v.TrackingServerArn)
+	}
+}
+func (v *StopMlflowTrackingServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopMlflowTrackingServerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopMlflowTrackingServerResponse_TrackingServerArn:
+			v.TrackingServerArn = new(string)
+			return d.ReadString(schemas.StopMlflowTrackingServerResponse_TrackingServerArn, v.TrackingServerArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopMlflowTrackingServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopMlflowTrackingServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopMlflowTrackingServer, schemas.StopMlflowTrackingServerRequest, schemas.StopMlflowTrackingServerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopMlflowTrackingServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopMlflowTrackingServer, schemas.StopMlflowTrackingServerRequest, schemas.StopMlflowTrackingServerResponse), output: &StopMlflowTrackingServerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

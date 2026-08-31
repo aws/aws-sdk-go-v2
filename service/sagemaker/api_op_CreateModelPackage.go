@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -188,6 +190,102 @@ type CreateModelPackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelPackageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelPackageInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelPackageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalInferenceSpecifications(s, schemas.CreateModelPackageInput_AdditionalInferenceSpecifications, v.AdditionalInferenceSpecifications)
+	if v.CertifyForMarketplace != nil {
+		s.WriteBool(schemas.CreateModelPackageInput_CertifyForMarketplace, *v.CertifyForMarketplace)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateModelPackageInput_ClientToken, *v.ClientToken)
+	}
+	serializeCustomerMetadataMap(s, schemas.CreateModelPackageInput_CustomerMetadataProperties, v.CustomerMetadataProperties)
+	if v.Domain != nil {
+		s.WriteString(schemas.CreateModelPackageInput_Domain, *v.Domain)
+	}
+	if v.DriftCheckBaselines != nil {
+		s.WriteStruct(schemas.CreateModelPackageInput_DriftCheckBaselines)
+		v.DriftCheckBaselines.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InferenceSpecification != nil {
+		s.WriteStruct(schemas.CreateModelPackageInput_InferenceSpecification)
+		v.InferenceSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ManagedStorageType != "" {
+		s.WriteString(schemas.CreateModelPackageInput_ManagedStorageType, string(v.ManagedStorageType))
+	}
+	if v.MetadataProperties != nil {
+		s.WriteStruct(schemas.CreateModelPackageInput_MetadataProperties)
+		v.MetadataProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelApprovalStatus != "" {
+		s.WriteString(schemas.CreateModelPackageInput_ModelApprovalStatus, string(v.ModelApprovalStatus))
+	}
+	if v.ModelCard != nil {
+		s.WriteStruct(schemas.CreateModelPackageInput_ModelCard)
+		v.ModelCard.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelLifeCycle != nil {
+		s.WriteStruct(schemas.CreateModelPackageInput_ModelLifeCycle)
+		v.ModelLifeCycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelMetrics != nil {
+		s.WriteStruct(schemas.CreateModelPackageInput_ModelMetrics)
+		v.ModelMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelPackageDescription != nil {
+		s.WriteString(schemas.CreateModelPackageInput_ModelPackageDescription, *v.ModelPackageDescription)
+	}
+	if v.ModelPackageGroupName != nil {
+		s.WriteString(schemas.CreateModelPackageInput_ModelPackageGroupName, *v.ModelPackageGroupName)
+	}
+	if v.ModelPackageName != nil {
+		s.WriteString(schemas.CreateModelPackageInput_ModelPackageName, *v.ModelPackageName)
+	}
+	if v.ModelPackageRegistrationType != "" {
+		s.WriteString(schemas.CreateModelPackageInput_ModelPackageRegistrationType, string(v.ModelPackageRegistrationType))
+	}
+	if v.SamplePayloadUrl != nil {
+		s.WriteString(schemas.CreateModelPackageInput_SamplePayloadUrl, *v.SamplePayloadUrl)
+	}
+	if v.SecurityConfig != nil {
+		s.WriteStruct(schemas.CreateModelPackageInput_SecurityConfig)
+		v.SecurityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SkipModelValidation != "" {
+		s.WriteString(schemas.CreateModelPackageInput_SkipModelValidation, string(v.SkipModelValidation))
+	}
+	if v.SourceAlgorithmSpecification != nil {
+		s.WriteStruct(schemas.CreateModelPackageInput_SourceAlgorithmSpecification)
+		v.SourceAlgorithmSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceUri != nil {
+		s.WriteString(schemas.CreateModelPackageInput_SourceUri, *v.SourceUri)
+	}
+	serializeTagList(s, schemas.CreateModelPackageInput_Tags, v.Tags)
+	if v.Task != nil {
+		s.WriteString(schemas.CreateModelPackageInput_Task, *v.Task)
+	}
+	if v.ValidationSpecification != nil {
+		s.WriteStruct(schemas.CreateModelPackageInput_ValidationSpecification)
+		v.ValidationSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateModelPackageOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new model package.
@@ -201,13 +299,32 @@ type CreateModelPackageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelPackageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelPackageOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelPackageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelPackageArn != nil {
+		s.WriteString(schemas.CreateModelPackageOutput_ModelPackageArn, *v.ModelPackageArn)
+	}
+}
+func (v *CreateModelPackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateModelPackageOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateModelPackageOutput_ModelPackageArn:
+			v.ModelPackageArn = new(string)
+			return d.ReadString(schemas.CreateModelPackageOutput_ModelPackageArn, v.ModelPackageArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateModelPackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateModelPackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelPackage, schemas.CreateModelPackageInput, schemas.CreateModelPackageOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateModelPackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelPackage, schemas.CreateModelPackageInput, schemas.CreateModelPackageOutput), output: &CreateModelPackageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

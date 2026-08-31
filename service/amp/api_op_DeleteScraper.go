@@ -5,7 +5,9 @@ package amp
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/amp/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DeleteScraperInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteScraperInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteScraperRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteScraperInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteScraperRequest_clientToken, *v.ClientToken)
+	}
+	if v.ScraperId != nil {
+		s.WriteString(schemas.DeleteScraperRequest_scraperId, *v.ScraperId)
+	}
+}
+
 // Represents the output of a DeleteScraper operation.
 type DeleteScraperOutput struct {
 
@@ -60,13 +77,40 @@ type DeleteScraperOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteScraperOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteScraperResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteScraperOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScraperId != nil {
+		s.WriteString(schemas.DeleteScraperResponse_scraperId, *v.ScraperId)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.DeleteScraperResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteScraperOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteScraperResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteScraperResponse_scraperId:
+			v.ScraperId = new(string)
+			return d.ReadString(schemas.DeleteScraperResponse_scraperId, v.ScraperId)
+		case schemas.DeleteScraperResponse_status:
+			v.Status = &types.ScraperStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteScraperMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteScraper{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteScraper, schemas.DeleteScraperRequest, schemas.DeleteScraperResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteScraper{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteScraper, schemas.DeleteScraperRequest, schemas.DeleteScraperResponse), output: &DeleteScraperOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,27 @@ type CreateCoreDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCoreDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCoreDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCoreDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmznClientToken != nil {
+		s.WriteString(schemas.CreateCoreDefinitionRequest_AmznClientToken, *v.AmznClientToken)
+	}
+	if v.InitialVersion != nil {
+		s.WriteStruct(schemas.CreateCoreDefinitionRequest_InitialVersion)
+		v.InitialVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCoreDefinitionRequest_Name, *v.Name)
+	}
+	serializeTags(s, schemas.CreateCoreDefinitionRequest_tags, v.Tags)
+}
+
 type CreateCoreDefinitionOutput struct {
 
 	// The ARN of the definition.
@@ -73,13 +96,68 @@ type CreateCoreDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCoreDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCoreDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCoreDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateCoreDefinitionResponse_Arn, *v.Arn)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteString(schemas.CreateCoreDefinitionResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateCoreDefinitionResponse_Id, *v.Id)
+	}
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteString(schemas.CreateCoreDefinitionResponse_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	if v.LatestVersion != nil {
+		s.WriteString(schemas.CreateCoreDefinitionResponse_LatestVersion, *v.LatestVersion)
+	}
+	if v.LatestVersionArn != nil {
+		s.WriteString(schemas.CreateCoreDefinitionResponse_LatestVersionArn, *v.LatestVersionArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCoreDefinitionResponse_Name, *v.Name)
+	}
+}
+func (v *CreateCoreDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCoreDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCoreDefinitionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateCoreDefinitionResponse_Arn, v.Arn)
+		case schemas.CreateCoreDefinitionResponse_CreationTimestamp:
+			v.CreationTimestamp = new(string)
+			return d.ReadString(schemas.CreateCoreDefinitionResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.CreateCoreDefinitionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateCoreDefinitionResponse_Id, v.Id)
+		case schemas.CreateCoreDefinitionResponse_LastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(string)
+			return d.ReadString(schemas.CreateCoreDefinitionResponse_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.CreateCoreDefinitionResponse_LatestVersion:
+			v.LatestVersion = new(string)
+			return d.ReadString(schemas.CreateCoreDefinitionResponse_LatestVersion, v.LatestVersion)
+		case schemas.CreateCoreDefinitionResponse_LatestVersionArn:
+			v.LatestVersionArn = new(string)
+			return d.ReadString(schemas.CreateCoreDefinitionResponse_LatestVersionArn, v.LatestVersionArn)
+		case schemas.CreateCoreDefinitionResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateCoreDefinitionResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCoreDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCoreDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCoreDefinition, schemas.CreateCoreDefinitionRequest, schemas.CreateCoreDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCoreDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCoreDefinition, schemas.CreateCoreDefinitionRequest, schemas.CreateCoreDefinitionResponse), output: &CreateCoreDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

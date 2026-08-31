@@ -4,7 +4,9 @@ package organizations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -47,6 +49,21 @@ type TerminateResponsibilityTransferInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateResponsibilityTransferInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateResponsibilityTransferRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateResponsibilityTransferInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTimestamp != nil {
+		s.WriteTime(schemas.TerminateResponsibilityTransferRequest_EndTimestamp, *v.EndTimestamp)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.TerminateResponsibilityTransferRequest_Id, *v.Id)
+	}
+}
+
 type TerminateResponsibilityTransferOutput struct {
 
 	// A ResponsibilityTransfer object. Contains details for a transfer.
@@ -58,13 +75,34 @@ type TerminateResponsibilityTransferOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateResponsibilityTransferOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateResponsibilityTransferResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateResponsibilityTransferOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResponsibilityTransfer != nil {
+		s.WriteStruct(schemas.TerminateResponsibilityTransferResponse_ResponsibilityTransfer)
+		v.ResponsibilityTransfer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TerminateResponsibilityTransferOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TerminateResponsibilityTransferResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TerminateResponsibilityTransferResponse_ResponsibilityTransfer:
+			v.ResponsibilityTransfer = &types.ResponsibilityTransfer{}
+			return v.ResponsibilityTransfer.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTerminateResponsibilityTransferMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTerminateResponsibilityTransfer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateResponsibilityTransfer, schemas.TerminateResponsibilityTransferRequest, schemas.TerminateResponsibilityTransferResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTerminateResponsibilityTransfer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateResponsibilityTransfer, schemas.TerminateResponsibilityTransferRequest, schemas.TerminateResponsibilityTransferResponse), output: &TerminateResponsibilityTransferOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

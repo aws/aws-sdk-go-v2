@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -99,6 +101,32 @@ type DetectEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectEntitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectEntitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bytes != nil {
+		s.WriteBlob(schemas.DetectEntitiesRequest_Bytes, v.Bytes)
+	}
+	if v.DocumentReaderConfig != nil {
+		s.WriteStruct(schemas.DetectEntitiesRequest_DocumentReaderConfig)
+		v.DocumentReaderConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointArn != nil {
+		s.WriteString(schemas.DetectEntitiesRequest_EndpointArn, *v.EndpointArn)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.DetectEntitiesRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.DetectEntitiesRequest_Text, *v.Text)
+	}
+}
+
 type DetectEntitiesOutput struct {
 
 	// Information about each block of text in the input document. Blocks are nested.
@@ -140,13 +168,46 @@ type DetectEntitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectEntitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfBlocks(s, schemas.DetectEntitiesResponse_Blocks, v.Blocks)
+	if v.DocumentMetadata != nil {
+		s.WriteStruct(schemas.DetectEntitiesResponse_DocumentMetadata)
+		v.DocumentMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeListOfDocumentType(s, schemas.DetectEntitiesResponse_DocumentType, v.DocumentType)
+	serializeListOfEntities(s, schemas.DetectEntitiesResponse_Entities, v.Entities)
+	serializeListOfErrors(s, schemas.DetectEntitiesResponse_Errors, v.Errors)
+}
+func (v *DetectEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectEntitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectEntitiesResponse_Blocks:
+			return deserializeListOfBlocks(d, schemas.DetectEntitiesResponse_Blocks, &v.Blocks)
+		case schemas.DetectEntitiesResponse_DocumentMetadata:
+			v.DocumentMetadata = &types.DocumentMetadata{}
+			return v.DocumentMetadata.Deserialize(d)
+		case schemas.DetectEntitiesResponse_DocumentType:
+			return deserializeListOfDocumentType(d, schemas.DetectEntitiesResponse_DocumentType, &v.DocumentType)
+		case schemas.DetectEntitiesResponse_Entities:
+			return deserializeListOfEntities(d, schemas.DetectEntitiesResponse_Entities, &v.Entities)
+		case schemas.DetectEntitiesResponse_Errors:
+			return deserializeListOfErrors(d, schemas.DetectEntitiesResponse_Errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectEntities, schemas.DetectEntitiesRequest, schemas.DetectEntitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetectEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectEntities, schemas.DetectEntitiesRequest, schemas.DetectEntitiesResponse), output: &DetectEntitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

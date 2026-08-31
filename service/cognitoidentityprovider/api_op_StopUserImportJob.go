@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type StopUserImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopUserImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopUserImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopUserImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopUserImportJobRequest_JobId, *v.JobId)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.StopUserImportJobRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 // Represents the response from the server to the request to stop the user import
 // job.
 type StopUserImportJobOutput struct {
@@ -58,13 +75,34 @@ type StopUserImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopUserImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopUserImportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopUserImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserImportJob != nil {
+		s.WriteStruct(schemas.StopUserImportJobResponse_UserImportJob)
+		v.UserImportJob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StopUserImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopUserImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopUserImportJobResponse_UserImportJob:
+			v.UserImportJob = &types.UserImportJobType{}
+			return v.UserImportJob.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopUserImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopUserImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopUserImportJob, schemas.StopUserImportJobRequest, schemas.StopUserImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopUserImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopUserImportJob, schemas.StopUserImportJobRequest, schemas.StopUserImportJobResponse), output: &StopUserImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

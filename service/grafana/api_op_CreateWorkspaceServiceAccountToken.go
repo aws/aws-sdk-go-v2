@@ -4,7 +4,9 @@ package grafana
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/grafana/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/grafana/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,27 @@ type CreateWorkspaceServiceAccountTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkspaceServiceAccountTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkspaceServiceAccountTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkspaceServiceAccountTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateWorkspaceServiceAccountTokenRequest_name, *v.Name)
+	}
+	if v.SecondsToLive != nil {
+		s.WriteInt32(schemas.CreateWorkspaceServiceAccountTokenRequest_secondsToLive, *v.SecondsToLive)
+	}
+	if v.ServiceAccountId != nil {
+		s.WriteString(schemas.CreateWorkspaceServiceAccountTokenRequest_serviceAccountId, *v.ServiceAccountId)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.CreateWorkspaceServiceAccountTokenRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+
 type CreateWorkspaceServiceAccountTokenOutput struct {
 
 	// The ID of the service account where the token was created.
@@ -88,13 +111,46 @@ type CreateWorkspaceServiceAccountTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkspaceServiceAccountTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkspaceServiceAccountTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkspaceServiceAccountTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceAccountId != nil {
+		s.WriteString(schemas.CreateWorkspaceServiceAccountTokenResponse_serviceAccountId, *v.ServiceAccountId)
+	}
+	if v.ServiceAccountToken != nil {
+		s.WriteStruct(schemas.CreateWorkspaceServiceAccountTokenResponse_serviceAccountToken)
+		v.ServiceAccountToken.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.CreateWorkspaceServiceAccountTokenResponse_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *CreateWorkspaceServiceAccountTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkspaceServiceAccountTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkspaceServiceAccountTokenResponse_serviceAccountId:
+			v.ServiceAccountId = new(string)
+			return d.ReadString(schemas.CreateWorkspaceServiceAccountTokenResponse_serviceAccountId, v.ServiceAccountId)
+		case schemas.CreateWorkspaceServiceAccountTokenResponse_serviceAccountToken:
+			v.ServiceAccountToken = &types.ServiceAccountTokenSummaryWithKey{}
+			return v.ServiceAccountToken.Deserialize(d)
+		case schemas.CreateWorkspaceServiceAccountTokenResponse_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.CreateWorkspaceServiceAccountTokenResponse_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkspaceServiceAccountTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorkspaceServiceAccountToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspaceServiceAccountToken, schemas.CreateWorkspaceServiceAccountTokenRequest, schemas.CreateWorkspaceServiceAccountTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWorkspaceServiceAccountToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspaceServiceAccountToken, schemas.CreateWorkspaceServiceAccountTokenRequest, schemas.CreateWorkspaceServiceAccountTokenResponse), output: &CreateWorkspaceServiceAccountTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

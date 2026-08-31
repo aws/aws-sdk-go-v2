@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,36 @@ type UpdateAgentStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAgentStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAgentStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAgentStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentStatusId != nil {
+		s.WriteString(schemas.UpdateAgentStatusRequest_AgentStatusId, *v.AgentStatusId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAgentStatusRequest_Description, *v.Description)
+	}
+	if v.DisplayOrder != nil {
+		s.WriteInt32(schemas.UpdateAgentStatusRequest_DisplayOrder, *v.DisplayOrder)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateAgentStatusRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAgentStatusRequest_Name, *v.Name)
+	}
+	if v.ResetOrderNumber != false {
+		s.WriteBool(schemas.UpdateAgentStatusRequest_ResetOrderNumber, v.ResetOrderNumber)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.UpdateAgentStatusRequest_State, string(v.State))
+	}
+}
+
 type UpdateAgentStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -64,13 +96,26 @@ type UpdateAgentStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAgentStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAgentStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateAgentStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAgentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAgentStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgentStatus, schemas.UpdateAgentStatusRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAgentStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgentStatus, schemas.UpdateAgentStatusRequest, nil), output: &UpdateAgentStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

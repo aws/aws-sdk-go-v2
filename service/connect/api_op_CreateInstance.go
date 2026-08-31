@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,34 @@ type CreateInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateInstanceRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.CreateInstanceRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.IdentityManagementType != "" {
+		s.WriteString(schemas.CreateInstanceRequest_IdentityManagementType, string(v.IdentityManagementType))
+	}
+	if v.InboundCallsEnabled != nil {
+		s.WriteBool(schemas.CreateInstanceRequest_InboundCallsEnabled, *v.InboundCallsEnabled)
+	}
+	if v.InstanceAlias != nil {
+		s.WriteString(schemas.CreateInstanceRequest_InstanceAlias, *v.InstanceAlias)
+	}
+	if v.OutboundCallsEnabled != nil {
+		s.WriteBool(schemas.CreateInstanceRequest_OutboundCallsEnabled, *v.OutboundCallsEnabled)
+	}
+	serializeTagMap(s, schemas.CreateInstanceRequest_Tags, v.Tags)
+}
+
 type CreateInstanceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the instance.
@@ -87,13 +117,38 @@ type CreateInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateInstanceResponse_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateInstanceResponse_Id, *v.Id)
+	}
+}
+func (v *CreateInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateInstanceResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateInstanceResponse_Arn, v.Arn)
+		case schemas.CreateInstanceResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateInstanceResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInstance, schemas.CreateInstanceRequest, schemas.CreateInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInstance, schemas.CreateInstanceRequest, schemas.CreateInstanceResponse), output: &CreateInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DetectKeyPhrasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectKeyPhrasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectKeyPhrasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectKeyPhrasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.DetectKeyPhrasesRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.DetectKeyPhrasesRequest_Text, *v.Text)
+	}
+}
+
 type DetectKeyPhrasesOutput struct {
 
 	// A collection of key phrases that Amazon Comprehend identified in the input
@@ -56,13 +73,29 @@ type DetectKeyPhrasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectKeyPhrasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectKeyPhrasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectKeyPhrasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfKeyPhrases(s, schemas.DetectKeyPhrasesResponse_KeyPhrases, v.KeyPhrases)
+}
+func (v *DetectKeyPhrasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectKeyPhrasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectKeyPhrasesResponse_KeyPhrases:
+			return deserializeListOfKeyPhrases(d, schemas.DetectKeyPhrasesResponse_KeyPhrases, &v.KeyPhrases)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectKeyPhrasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectKeyPhrases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectKeyPhrases, schemas.DetectKeyPhrasesRequest, schemas.DetectKeyPhrasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetectKeyPhrases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectKeyPhrases, schemas.DetectKeyPhrasesRequest, schemas.DetectKeyPhrasesResponse), output: &DetectKeyPhrasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

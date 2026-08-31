@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type ListCertificatesByCAInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCertificatesByCAInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCertificatesByCARequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCertificatesByCAInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AscendingOrder != false {
+		s.WriteBool(schemas.ListCertificatesByCARequest_ascendingOrder, v.AscendingOrder)
+	}
+	if v.CaCertificateId != nil {
+		s.WriteString(schemas.ListCertificatesByCARequest_caCertificateId, *v.CaCertificateId)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListCertificatesByCARequest_marker, *v.Marker)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListCertificatesByCARequest_pageSize, *v.PageSize)
+	}
+}
+
 // The output of the ListCertificatesByCA operation.
 type ListCertificatesByCAOutput struct {
 
@@ -67,13 +90,35 @@ type ListCertificatesByCAOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCertificatesByCAOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCertificatesByCAResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCertificatesByCAOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCertificates(s, schemas.ListCertificatesByCAResponse_certificates, v.Certificates)
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListCertificatesByCAResponse_nextMarker, *v.NextMarker)
+	}
+}
+func (v *ListCertificatesByCAOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCertificatesByCAResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCertificatesByCAResponse_certificates:
+			return deserializeCertificates(d, schemas.ListCertificatesByCAResponse_certificates, &v.Certificates)
+		case schemas.ListCertificatesByCAResponse_nextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListCertificatesByCAResponse_nextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCertificatesByCAMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCertificatesByCA{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCertificatesByCA, schemas.ListCertificatesByCARequest, schemas.ListCertificatesByCAResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCertificatesByCA{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCertificatesByCA, schemas.ListCertificatesByCARequest, schemas.ListCertificatesByCAResponse), output: &ListCertificatesByCAOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

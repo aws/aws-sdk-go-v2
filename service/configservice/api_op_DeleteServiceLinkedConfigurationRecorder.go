@@ -4,6 +4,8 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,21 @@ type DeleteServiceLinkedConfigurationRecorderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceLinkedConfigurationRecorderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceLinkedConfigurationRecorderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceLinkedConfigurationRecorderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteServiceLinkedConfigurationRecorderRequest_Arn, *v.Arn)
+	}
+	if v.ServicePrincipal != nil {
+		s.WriteString(schemas.DeleteServiceLinkedConfigurationRecorderRequest_ServicePrincipal, *v.ServicePrincipal)
+	}
+}
+
 type DeleteServiceLinkedConfigurationRecorderOutput struct {
 
 	// The Amazon Resource Name (ARN) of the specified configuration recorder.
@@ -72,13 +89,38 @@ type DeleteServiceLinkedConfigurationRecorderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceLinkedConfigurationRecorderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceLinkedConfigurationRecorderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceLinkedConfigurationRecorderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteServiceLinkedConfigurationRecorderResponse_Arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteServiceLinkedConfigurationRecorderResponse_Name, *v.Name)
+	}
+}
+func (v *DeleteServiceLinkedConfigurationRecorderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteServiceLinkedConfigurationRecorderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteServiceLinkedConfigurationRecorderResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteServiceLinkedConfigurationRecorderResponse_Arn, v.Arn)
+		case schemas.DeleteServiceLinkedConfigurationRecorderResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteServiceLinkedConfigurationRecorderResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteServiceLinkedConfigurationRecorderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteServiceLinkedConfigurationRecorder{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceLinkedConfigurationRecorder, schemas.DeleteServiceLinkedConfigurationRecorderRequest, schemas.DeleteServiceLinkedConfigurationRecorderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteServiceLinkedConfigurationRecorder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceLinkedConfigurationRecorder, schemas.DeleteServiceLinkedConfigurationRecorderRequest, schemas.DeleteServiceLinkedConfigurationRecorderResponse), output: &DeleteServiceLinkedConfigurationRecorderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

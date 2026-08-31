@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,30 @@ type UpdateLocationEfsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLocationEfsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLocationEfsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLocationEfsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPointArn != nil {
+		s.WriteString(schemas.UpdateLocationEfsRequest_AccessPointArn, *v.AccessPointArn)
+	}
+	if v.FileSystemAccessRoleArn != nil {
+		s.WriteString(schemas.UpdateLocationEfsRequest_FileSystemAccessRoleArn, *v.FileSystemAccessRoleArn)
+	}
+	if v.InTransitEncryption != "" {
+		s.WriteString(schemas.UpdateLocationEfsRequest_InTransitEncryption, string(v.InTransitEncryption))
+	}
+	if v.LocationArn != nil {
+		s.WriteString(schemas.UpdateLocationEfsRequest_LocationArn, *v.LocationArn)
+	}
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.UpdateLocationEfsRequest_Subdirectory, *v.Subdirectory)
+	}
+}
+
 type UpdateLocationEfsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -81,13 +107,26 @@ type UpdateLocationEfsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLocationEfsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLocationEfsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLocationEfsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateLocationEfsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLocationEfsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLocationEfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLocationEfs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLocationEfs, schemas.UpdateLocationEfsRequest, schemas.UpdateLocationEfsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateLocationEfs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLocationEfs, schemas.UpdateLocationEfsRequest, schemas.UpdateLocationEfsResponse), output: &UpdateLocationEfsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

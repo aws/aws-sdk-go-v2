@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,22 @@ type CreateLoggerDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLoggerDefinitionVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLoggerDefinitionVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLoggerDefinitionVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmznClientToken != nil {
+		s.WriteString(schemas.CreateLoggerDefinitionVersionRequest_AmznClientToken, *v.AmznClientToken)
+	}
+	if v.LoggerDefinitionId != nil {
+		s.WriteString(schemas.CreateLoggerDefinitionVersionRequest_LoggerDefinitionId, *v.LoggerDefinitionId)
+	}
+	serialize__listOfLogger(s, schemas.CreateLoggerDefinitionVersionRequest_Loggers, v.Loggers)
+}
+
 type CreateLoggerDefinitionVersionOutput struct {
 
 	// The ARN of the version.
@@ -60,13 +78,50 @@ type CreateLoggerDefinitionVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLoggerDefinitionVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLoggerDefinitionVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLoggerDefinitionVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateLoggerDefinitionVersionResponse_Arn, *v.Arn)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteString(schemas.CreateLoggerDefinitionVersionResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateLoggerDefinitionVersionResponse_Id, *v.Id)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.CreateLoggerDefinitionVersionResponse_Version, *v.Version)
+	}
+}
+func (v *CreateLoggerDefinitionVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLoggerDefinitionVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLoggerDefinitionVersionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateLoggerDefinitionVersionResponse_Arn, v.Arn)
+		case schemas.CreateLoggerDefinitionVersionResponse_CreationTimestamp:
+			v.CreationTimestamp = new(string)
+			return d.ReadString(schemas.CreateLoggerDefinitionVersionResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.CreateLoggerDefinitionVersionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateLoggerDefinitionVersionResponse_Id, v.Id)
+		case schemas.CreateLoggerDefinitionVersionResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.CreateLoggerDefinitionVersionResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLoggerDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLoggerDefinitionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLoggerDefinitionVersion, schemas.CreateLoggerDefinitionVersionRequest, schemas.CreateLoggerDefinitionVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLoggerDefinitionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLoggerDefinitionVersion, schemas.CreateLoggerDefinitionVersionRequest, schemas.CreateLoggerDefinitionVersionResponse), output: &CreateLoggerDefinitionVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

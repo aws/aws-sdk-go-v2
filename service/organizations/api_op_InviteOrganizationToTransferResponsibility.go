@@ -4,7 +4,9 @@ package organizations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -78,6 +80,33 @@ type InviteOrganizationToTransferResponsibilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InviteOrganizationToTransferResponsibilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InviteOrganizationToTransferResponsibilityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InviteOrganizationToTransferResponsibilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Notes != nil {
+		s.WriteString(schemas.InviteOrganizationToTransferResponsibilityRequest_Notes, *v.Notes)
+	}
+	if v.SourceName != nil {
+		s.WriteString(schemas.InviteOrganizationToTransferResponsibilityRequest_SourceName, *v.SourceName)
+	}
+	if v.StartTimestamp != nil {
+		s.WriteTime(schemas.InviteOrganizationToTransferResponsibilityRequest_StartTimestamp, *v.StartTimestamp)
+	}
+	serializeTags(s, schemas.InviteOrganizationToTransferResponsibilityRequest_Tags, v.Tags)
+	if v.Target != nil {
+		s.WriteStruct(schemas.InviteOrganizationToTransferResponsibilityRequest_Target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.InviteOrganizationToTransferResponsibilityRequest_Type, string(v.Type))
+	}
+}
+
 type InviteOrganizationToTransferResponsibilityOutput struct {
 
 	// Contains details for a handshake. A handshake is the secure exchange of
@@ -93,13 +122,34 @@ type InviteOrganizationToTransferResponsibilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InviteOrganizationToTransferResponsibilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InviteOrganizationToTransferResponsibilityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InviteOrganizationToTransferResponsibilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Handshake != nil {
+		s.WriteStruct(schemas.InviteOrganizationToTransferResponsibilityResponse_Handshake)
+		v.Handshake.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InviteOrganizationToTransferResponsibilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InviteOrganizationToTransferResponsibilityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InviteOrganizationToTransferResponsibilityResponse_Handshake:
+			v.Handshake = &types.Handshake{}
+			return v.Handshake.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInviteOrganizationToTransferResponsibilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpInviteOrganizationToTransferResponsibility{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InviteOrganizationToTransferResponsibility, schemas.InviteOrganizationToTransferResponsibilityRequest, schemas.InviteOrganizationToTransferResponsibilityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpInviteOrganizationToTransferResponsibility{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InviteOrganizationToTransferResponsibility, schemas.InviteOrganizationToTransferResponsibilityRequest, schemas.InviteOrganizationToTransferResponsibilityResponse), output: &InviteOrganizationToTransferResponsibilityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

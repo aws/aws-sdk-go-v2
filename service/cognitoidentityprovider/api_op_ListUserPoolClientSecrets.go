@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type ListUserPoolClientSecretsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserPoolClientSecretsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUserPoolClientSecretsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUserPoolClientSecretsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.ListUserPoolClientSecretsRequest_ClientId, *v.ClientId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUserPoolClientSecretsRequest_NextToken, *v.NextToken)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.ListUserPoolClientSecretsRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 // The response containing the list of client secret metadata. This response does
 // not include a NextToken field as all secrets are returned in a single response.
 type ListUserPoolClientSecretsOutput struct {
@@ -73,13 +93,35 @@ type ListUserPoolClientSecretsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserPoolClientSecretsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUserPoolClientSecretsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUserPoolClientSecretsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClientSecretDescriptorListType(s, schemas.ListUserPoolClientSecretsResponse_ClientSecrets, v.ClientSecrets)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUserPoolClientSecretsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListUserPoolClientSecretsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUserPoolClientSecretsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUserPoolClientSecretsResponse_ClientSecrets:
+			return deserializeClientSecretDescriptorListType(d, schemas.ListUserPoolClientSecretsResponse_ClientSecrets, &v.ClientSecrets)
+		case schemas.ListUserPoolClientSecretsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUserPoolClientSecretsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUserPoolClientSecretsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListUserPoolClientSecrets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserPoolClientSecrets, schemas.ListUserPoolClientSecretsRequest, schemas.ListUserPoolClientSecretsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListUserPoolClientSecrets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserPoolClientSecrets, schemas.ListUserPoolClientSecretsRequest, schemas.ListUserPoolClientSecretsResponse), output: &ListUserPoolClientSecretsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type DeleteViewVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteViewVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteViewVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteViewVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteViewVersionRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ViewId != nil {
+		s.WriteString(schemas.DeleteViewVersionRequest_ViewId, *v.ViewId)
+	}
+	if v.ViewVersion != nil {
+		s.WriteInt32(schemas.DeleteViewVersionRequest_ViewVersion, *v.ViewVersion)
+	}
+}
+
 type DeleteViewVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +71,26 @@ type DeleteViewVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteViewVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteViewVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteViewVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteViewVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteViewVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteViewVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteViewVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteViewVersion, schemas.DeleteViewVersionRequest, schemas.DeleteViewVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteViewVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteViewVersion, schemas.DeleteViewVersionRequest, schemas.DeleteViewVersionResponse), output: &DeleteViewVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

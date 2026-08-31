@@ -4,7 +4,9 @@ package codedeploy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,22 @@ type ListOnPremisesInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOnPremisesInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOnPremisesInstancesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOnPremisesInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOnPremisesInstancesInput_nextToken, *v.NextToken)
+	}
+	if v.RegistrationStatus != "" {
+		s.WriteString(schemas.ListOnPremisesInstancesInput_registrationStatus, string(v.RegistrationStatus))
+	}
+	serializeTagFilterList(s, schemas.ListOnPremisesInstancesInput_tagFilters, v.TagFilters)
+}
+
 // Represents the output of the list on-premises instances operation.
 type ListOnPremisesInstancesOutput struct {
 
@@ -67,13 +85,35 @@ type ListOnPremisesInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOnPremisesInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOnPremisesInstancesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOnPremisesInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstanceNameList(s, schemas.ListOnPremisesInstancesOutput_instanceNames, v.InstanceNames)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOnPremisesInstancesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListOnPremisesInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOnPremisesInstancesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOnPremisesInstancesOutput_instanceNames:
+			return deserializeInstanceNameList(d, schemas.ListOnPremisesInstancesOutput_instanceNames, &v.InstanceNames)
+		case schemas.ListOnPremisesInstancesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOnPremisesInstancesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOnPremisesInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListOnPremisesInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOnPremisesInstances, schemas.ListOnPremisesInstancesInput, schemas.ListOnPremisesInstancesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListOnPremisesInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOnPremisesInstances, schemas.ListOnPremisesInstancesInput, schemas.ListOnPremisesInstancesOutput), output: &ListOnPremisesInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

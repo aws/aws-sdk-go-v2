@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -90,6 +92,59 @@ type UpdateSlotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSlotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSlotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSlotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.UpdateSlotRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.UpdateSlotRequest_botVersion, *v.BotVersion)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSlotRequest_description, *v.Description)
+	}
+	if v.IntentId != nil {
+		s.WriteString(schemas.UpdateSlotRequest_intentId, *v.IntentId)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.UpdateSlotRequest_localeId, *v.LocaleId)
+	}
+	if v.MultipleValuesSetting != nil {
+		s.WriteStruct(schemas.UpdateSlotRequest_multipleValuesSetting)
+		v.MultipleValuesSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ObfuscationSetting != nil {
+		s.WriteStruct(schemas.UpdateSlotRequest_obfuscationSetting)
+		v.ObfuscationSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SlotId != nil {
+		s.WriteString(schemas.UpdateSlotRequest_slotId, *v.SlotId)
+	}
+	if v.SlotName != nil {
+		s.WriteString(schemas.UpdateSlotRequest_slotName, *v.SlotName)
+	}
+	if v.SlotTypeId != nil {
+		s.WriteString(schemas.UpdateSlotRequest_slotTypeId, *v.SlotTypeId)
+	}
+	if v.SubSlotSetting != nil {
+		s.WriteStruct(schemas.UpdateSlotRequest_subSlotSetting)
+		v.SubSlotSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ValueElicitationSetting != nil {
+		s.WriteStruct(schemas.UpdateSlotRequest_valueElicitationSetting)
+		v.ValueElicitationSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateSlotOutput struct {
 
 	// The identifier of the bot that contains the slot.
@@ -143,13 +198,118 @@ type UpdateSlotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSlotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSlotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSlotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.UpdateSlotResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.UpdateSlotResponse_botVersion, *v.BotVersion)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.UpdateSlotResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSlotResponse_description, *v.Description)
+	}
+	if v.IntentId != nil {
+		s.WriteString(schemas.UpdateSlotResponse_intentId, *v.IntentId)
+	}
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.UpdateSlotResponse_lastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.UpdateSlotResponse_localeId, *v.LocaleId)
+	}
+	if v.MultipleValuesSetting != nil {
+		s.WriteStruct(schemas.UpdateSlotResponse_multipleValuesSetting)
+		v.MultipleValuesSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ObfuscationSetting != nil {
+		s.WriteStruct(schemas.UpdateSlotResponse_obfuscationSetting)
+		v.ObfuscationSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SlotId != nil {
+		s.WriteString(schemas.UpdateSlotResponse_slotId, *v.SlotId)
+	}
+	if v.SlotName != nil {
+		s.WriteString(schemas.UpdateSlotResponse_slotName, *v.SlotName)
+	}
+	if v.SlotTypeId != nil {
+		s.WriteString(schemas.UpdateSlotResponse_slotTypeId, *v.SlotTypeId)
+	}
+	if v.SubSlotSetting != nil {
+		s.WriteStruct(schemas.UpdateSlotResponse_subSlotSetting)
+		v.SubSlotSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ValueElicitationSetting != nil {
+		s.WriteStruct(schemas.UpdateSlotResponse_valueElicitationSetting)
+		v.ValueElicitationSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateSlotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSlotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSlotResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.UpdateSlotResponse_botId, v.BotId)
+		case schemas.UpdateSlotResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.UpdateSlotResponse_botVersion, v.BotVersion)
+		case schemas.UpdateSlotResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateSlotResponse_creationDateTime, v.CreationDateTime)
+		case schemas.UpdateSlotResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateSlotResponse_description, v.Description)
+		case schemas.UpdateSlotResponse_intentId:
+			v.IntentId = new(string)
+			return d.ReadString(schemas.UpdateSlotResponse_intentId, v.IntentId)
+		case schemas.UpdateSlotResponse_lastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateSlotResponse_lastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.UpdateSlotResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.UpdateSlotResponse_localeId, v.LocaleId)
+		case schemas.UpdateSlotResponse_multipleValuesSetting:
+			v.MultipleValuesSetting = &types.MultipleValuesSetting{}
+			return v.MultipleValuesSetting.Deserialize(d)
+		case schemas.UpdateSlotResponse_obfuscationSetting:
+			v.ObfuscationSetting = &types.ObfuscationSetting{}
+			return v.ObfuscationSetting.Deserialize(d)
+		case schemas.UpdateSlotResponse_slotId:
+			v.SlotId = new(string)
+			return d.ReadString(schemas.UpdateSlotResponse_slotId, v.SlotId)
+		case schemas.UpdateSlotResponse_slotName:
+			v.SlotName = new(string)
+			return d.ReadString(schemas.UpdateSlotResponse_slotName, v.SlotName)
+		case schemas.UpdateSlotResponse_slotTypeId:
+			v.SlotTypeId = new(string)
+			return d.ReadString(schemas.UpdateSlotResponse_slotTypeId, v.SlotTypeId)
+		case schemas.UpdateSlotResponse_subSlotSetting:
+			v.SubSlotSetting = &types.SubSlotSetting{}
+			return v.SubSlotSetting.Deserialize(d)
+		case schemas.UpdateSlotResponse_valueElicitationSetting:
+			v.ValueElicitationSetting = &types.SlotValueElicitationSetting{}
+			return v.ValueElicitationSetting.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSlotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSlot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSlot, schemas.UpdateSlotRequest, schemas.UpdateSlotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSlot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSlot, schemas.UpdateSlotRequest, schemas.UpdateSlotResponse), output: &UpdateSlotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListLoggerDefinitionVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLoggerDefinitionVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLoggerDefinitionVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLoggerDefinitionVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoggerDefinitionId != nil {
+		s.WriteString(schemas.ListLoggerDefinitionVersionsRequest_LoggerDefinitionId, *v.LoggerDefinitionId)
+	}
+	if v.MaxResults != nil {
+		s.WriteString(schemas.ListLoggerDefinitionVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLoggerDefinitionVersionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListLoggerDefinitionVersionsOutput struct {
 
 	// The token for the next set of results, or ''null'' if there are no additional
@@ -56,13 +76,35 @@ type ListLoggerDefinitionVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLoggerDefinitionVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLoggerDefinitionVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLoggerDefinitionVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLoggerDefinitionVersionsResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfVersionInformation(s, schemas.ListLoggerDefinitionVersionsResponse_Versions, v.Versions)
+}
+func (v *ListLoggerDefinitionVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLoggerDefinitionVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLoggerDefinitionVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLoggerDefinitionVersionsResponse_NextToken, v.NextToken)
+		case schemas.ListLoggerDefinitionVersionsResponse_Versions:
+			return deserialize__listOfVersionInformation(d, schemas.ListLoggerDefinitionVersionsResponse_Versions, &v.Versions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLoggerDefinitionVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLoggerDefinitionVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLoggerDefinitionVersions, schemas.ListLoggerDefinitionVersionsRequest, schemas.ListLoggerDefinitionVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLoggerDefinitionVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLoggerDefinitionVersions, schemas.ListLoggerDefinitionVersionsRequest, schemas.ListLoggerDefinitionVersionsResponse), output: &ListLoggerDefinitionVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

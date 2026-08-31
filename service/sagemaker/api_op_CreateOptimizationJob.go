@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -136,6 +138,51 @@ type CreateOptimizationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOptimizationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOptimizationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOptimizationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentInstanceType != "" {
+		s.WriteString(schemas.CreateOptimizationJobRequest_DeploymentInstanceType, string(v.DeploymentInstanceType))
+	}
+	if v.MaxInstanceCount != nil {
+		s.WriteInt32(schemas.CreateOptimizationJobRequest_MaxInstanceCount, *v.MaxInstanceCount)
+	}
+	if v.ModelSource != nil {
+		s.WriteStruct(schemas.CreateOptimizationJobRequest_ModelSource)
+		v.ModelSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeOptimizationConfigs(s, schemas.CreateOptimizationJobRequest_OptimizationConfigs, v.OptimizationConfigs)
+	serializeOptimizationJobEnvironmentVariables(s, schemas.CreateOptimizationJobRequest_OptimizationEnvironment, v.OptimizationEnvironment)
+	if v.OptimizationJobName != nil {
+		s.WriteString(schemas.CreateOptimizationJobRequest_OptimizationJobName, *v.OptimizationJobName)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.CreateOptimizationJobRequest_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateOptimizationJobRequest_RoleArn, *v.RoleArn)
+	}
+	if v.StoppingCondition != nil {
+		s.WriteStruct(schemas.CreateOptimizationJobRequest_StoppingCondition)
+		v.StoppingCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateOptimizationJobRequest_Tags, v.Tags)
+	serializeOptimizationJobTrainingPlanArns(s, schemas.CreateOptimizationJobRequest_TrainingPlanArns, v.TrainingPlanArns)
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateOptimizationJobRequest_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateOptimizationJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the optimization job.
@@ -149,13 +196,32 @@ type CreateOptimizationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOptimizationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOptimizationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOptimizationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OptimizationJobArn != nil {
+		s.WriteString(schemas.CreateOptimizationJobResponse_OptimizationJobArn, *v.OptimizationJobArn)
+	}
+}
+func (v *CreateOptimizationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOptimizationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOptimizationJobResponse_OptimizationJobArn:
+			v.OptimizationJobArn = new(string)
+			return d.ReadString(schemas.CreateOptimizationJobResponse_OptimizationJobArn, v.OptimizationJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateOptimizationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateOptimizationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOptimizationJob, schemas.CreateOptimizationJobRequest, schemas.CreateOptimizationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateOptimizationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOptimizationJob, schemas.CreateOptimizationJobRequest, schemas.CreateOptimizationJobResponse), output: &CreateOptimizationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

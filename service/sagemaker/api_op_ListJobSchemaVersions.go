@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type ListJobSchemaVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobSchemaVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobSchemaVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobSchemaVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobCategory != "" {
+		s.WriteString(schemas.ListJobSchemaVersionsRequest_JobCategory, string(v.JobCategory))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListJobSchemaVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJobSchemaVersionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListJobSchemaVersionsOutput struct {
 
 	// An array of JobConfigSchemaVersionSummary objects listing the available schema
@@ -68,13 +88,35 @@ type ListJobSchemaVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobSchemaVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobSchemaVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobSchemaVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobConfigSchemas(s, schemas.ListJobSchemaVersionsResponse_JobConfigSchemas, v.JobConfigSchemas)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJobSchemaVersionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListJobSchemaVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListJobSchemaVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListJobSchemaVersionsResponse_JobConfigSchemas:
+			return deserializeJobConfigSchemas(d, schemas.ListJobSchemaVersionsResponse_JobConfigSchemas, &v.JobConfigSchemas)
+		case schemas.ListJobSchemaVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListJobSchemaVersionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListJobSchemaVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListJobSchemaVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobSchemaVersions, schemas.ListJobSchemaVersionsRequest, schemas.ListJobSchemaVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListJobSchemaVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobSchemaVersions, schemas.ListJobSchemaVersionsRequest, schemas.ListJobSchemaVersionsResponse), output: &ListJobSchemaVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

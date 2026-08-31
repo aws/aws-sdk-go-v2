@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -52,6 +54,27 @@ type ListSecurityProfileApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityProfileApplicationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityProfileApplicationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityProfileApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListSecurityProfileApplicationsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSecurityProfileApplicationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityProfileApplicationsRequest_NextToken, *v.NextToken)
+	}
+	if v.SecurityProfileId != nil {
+		s.WriteString(schemas.ListSecurityProfileApplicationsRequest_SecurityProfileId, *v.SecurityProfileId)
+	}
+}
+
 type ListSecurityProfileApplicationsOutput struct {
 
 	// A list of the third-party application's metadata.
@@ -72,13 +95,47 @@ type ListSecurityProfileApplicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityProfileApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityProfileApplicationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityProfileApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApplications(s, schemas.ListSecurityProfileApplicationsResponse_Applications, v.Applications)
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.ListSecurityProfileApplicationsResponse_LastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ListSecurityProfileApplicationsResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityProfileApplicationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListSecurityProfileApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSecurityProfileApplicationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSecurityProfileApplicationsResponse_Applications:
+			return deserializeApplications(d, schemas.ListSecurityProfileApplicationsResponse_Applications, &v.Applications)
+		case schemas.ListSecurityProfileApplicationsResponse_LastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.ListSecurityProfileApplicationsResponse_LastModifiedRegion, v.LastModifiedRegion)
+		case schemas.ListSecurityProfileApplicationsResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ListSecurityProfileApplicationsResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.ListSecurityProfileApplicationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSecurityProfileApplicationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSecurityProfileApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSecurityProfileApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityProfileApplications, schemas.ListSecurityProfileApplicationsRequest, schemas.ListSecurityProfileApplicationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSecurityProfileApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityProfileApplications, schemas.ListSecurityProfileApplicationsRequest, schemas.ListSecurityProfileApplicationsResponse), output: &ListSecurityProfileApplicationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

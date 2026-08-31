@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type AddUserPoolClientSecretInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddUserPoolClientSecretInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddUserPoolClientSecretRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddUserPoolClientSecretInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.AddUserPoolClientSecretRequest_ClientId, *v.ClientId)
+	}
+	if v.ClientSecret != nil {
+		s.WriteString(schemas.AddUserPoolClientSecretRequest_ClientSecret, *v.ClientSecret)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AddUserPoolClientSecretRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 // The response from creating a new client secret.
 type AddUserPoolClientSecretOutput struct {
 
@@ -61,13 +81,34 @@ type AddUserPoolClientSecretOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddUserPoolClientSecretOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddUserPoolClientSecretResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddUserPoolClientSecretOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientSecretDescriptor != nil {
+		s.WriteStruct(schemas.AddUserPoolClientSecretResponse_ClientSecretDescriptor)
+		v.ClientSecretDescriptor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AddUserPoolClientSecretOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddUserPoolClientSecretResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddUserPoolClientSecretResponse_ClientSecretDescriptor:
+			v.ClientSecretDescriptor = &types.ClientSecretDescriptorType{}
+			return v.ClientSecretDescriptor.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddUserPoolClientSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddUserPoolClientSecret{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddUserPoolClientSecret, schemas.AddUserPoolClientSecretRequest, schemas.AddUserPoolClientSecretResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddUserPoolClientSecret{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddUserPoolClientSecret, schemas.AddUserPoolClientSecretRequest, schemas.AddUserPoolClientSecretResponse), output: &AddUserPoolClientSecretOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type StartTestCaseExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTestCaseExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTestCaseExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTestCaseExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartTestCaseExecutionRequest_ClientToken, *v.ClientToken)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartTestCaseExecutionRequest_InstanceId, *v.InstanceId)
+	}
+	if v.TestCaseId != nil {
+		s.WriteString(schemas.StartTestCaseExecutionRequest_TestCaseId, *v.TestCaseId)
+	}
+}
+
 type StartTestCaseExecutionOutput struct {
 
 	// The status of a test case execution.
@@ -64,13 +84,48 @@ type StartTestCaseExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTestCaseExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTestCaseExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTestCaseExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.StartTestCaseExecutionResponse_Status, string(v.Status))
+	}
+	if v.TestCaseExecutionId != nil {
+		s.WriteString(schemas.StartTestCaseExecutionResponse_TestCaseExecutionId, *v.TestCaseExecutionId)
+	}
+	if v.TestCaseId != nil {
+		s.WriteString(schemas.StartTestCaseExecutionResponse_TestCaseId, *v.TestCaseId)
+	}
+}
+func (v *StartTestCaseExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTestCaseExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTestCaseExecutionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.StartTestCaseExecutionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TestCaseExecutionStatus(ev)
+			return nil
+		case schemas.StartTestCaseExecutionResponse_TestCaseExecutionId:
+			v.TestCaseExecutionId = new(string)
+			return d.ReadString(schemas.StartTestCaseExecutionResponse_TestCaseExecutionId, v.TestCaseExecutionId)
+		case schemas.StartTestCaseExecutionResponse_TestCaseId:
+			v.TestCaseId = new(string)
+			return d.ReadString(schemas.StartTestCaseExecutionResponse_TestCaseId, v.TestCaseId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartTestCaseExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartTestCaseExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTestCaseExecution, schemas.StartTestCaseExecutionRequest, schemas.StartTestCaseExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartTestCaseExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTestCaseExecution, schemas.StartTestCaseExecutionRequest, schemas.StartTestCaseExecutionResponse), output: &StartTestCaseExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

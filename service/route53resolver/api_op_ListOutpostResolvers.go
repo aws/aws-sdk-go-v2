@@ -5,7 +5,9 @@ package route53resolver
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListOutpostResolversInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOutpostResolversInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOutpostResolversRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOutpostResolversInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOutpostResolversRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOutpostResolversRequest_NextToken, *v.NextToken)
+	}
+	if v.OutpostArn != nil {
+		s.WriteString(schemas.ListOutpostResolversRequest_OutpostArn, *v.OutpostArn)
+	}
+}
+
 type ListOutpostResolversOutput struct {
 
 	// If more than MaxResults Resolvers match the specified criteria, you can submit
@@ -59,13 +79,35 @@ type ListOutpostResolversOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOutpostResolversOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOutpostResolversResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOutpostResolversOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOutpostResolversResponse_NextToken, *v.NextToken)
+	}
+	serializeOutpostResolverList(s, schemas.ListOutpostResolversResponse_OutpostResolvers, v.OutpostResolvers)
+}
+func (v *ListOutpostResolversOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOutpostResolversResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOutpostResolversResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOutpostResolversResponse_NextToken, v.NextToken)
+		case schemas.ListOutpostResolversResponse_OutpostResolvers:
+			return deserializeOutpostResolverList(d, schemas.ListOutpostResolversResponse_OutpostResolvers, &v.OutpostResolvers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOutpostResolversMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListOutpostResolvers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOutpostResolvers, schemas.ListOutpostResolversRequest, schemas.ListOutpostResolversResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListOutpostResolvers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOutpostResolvers, schemas.ListOutpostResolversRequest, schemas.ListOutpostResolversResponse), output: &ListOutpostResolversOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

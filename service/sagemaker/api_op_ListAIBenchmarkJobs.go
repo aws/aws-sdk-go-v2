@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -59,6 +61,39 @@ type ListAIBenchmarkJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAIBenchmarkJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAIBenchmarkJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAIBenchmarkJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListAIBenchmarkJobsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListAIBenchmarkJobsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAIBenchmarkJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListAIBenchmarkJobsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAIBenchmarkJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListAIBenchmarkJobsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListAIBenchmarkJobsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListAIBenchmarkJobsRequest_StatusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListAIBenchmarkJobsOutput struct {
 
 	// An array of AIBenchmarkJobSummary objects, one for each benchmark job that
@@ -77,13 +112,35 @@ type ListAIBenchmarkJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAIBenchmarkJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAIBenchmarkJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAIBenchmarkJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAIBenchmarkJobSummaryList(s, schemas.ListAIBenchmarkJobsResponse_AIBenchmarkJobs, v.AIBenchmarkJobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAIBenchmarkJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAIBenchmarkJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAIBenchmarkJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAIBenchmarkJobsResponse_AIBenchmarkJobs:
+			return deserializeAIBenchmarkJobSummaryList(d, schemas.ListAIBenchmarkJobsResponse_AIBenchmarkJobs, &v.AIBenchmarkJobs)
+		case schemas.ListAIBenchmarkJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAIBenchmarkJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAIBenchmarkJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAIBenchmarkJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAIBenchmarkJobs, schemas.ListAIBenchmarkJobsRequest, schemas.ListAIBenchmarkJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAIBenchmarkJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAIBenchmarkJobs, schemas.ListAIBenchmarkJobsRequest, schemas.ListAIBenchmarkJobsResponse), output: &ListAIBenchmarkJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListWorkloadsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkloadsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkloadsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkloadsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkloadsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkloadsInput_NextToken, *v.NextToken)
+	}
+	if v.WorkloadNamePrefix != nil {
+		s.WriteString(schemas.ListWorkloadsInput_WorkloadNamePrefix, *v.WorkloadNamePrefix)
+	}
+}
+
 // Output of a list workloads call.
 type ListWorkloadsOutput struct {
 
@@ -56,13 +76,35 @@ type ListWorkloadsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkloadsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkloadsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkloadsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkloadsOutput_NextToken, *v.NextToken)
+	}
+	serializeWorkloadSummaries(s, schemas.ListWorkloadsOutput_WorkloadSummaries, v.WorkloadSummaries)
+}
+func (v *ListWorkloadsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkloadsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkloadsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkloadsOutput_NextToken, v.NextToken)
+		case schemas.ListWorkloadsOutput_WorkloadSummaries:
+			return deserializeWorkloadSummaries(d, schemas.ListWorkloadsOutput_WorkloadSummaries, &v.WorkloadSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkloadsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorkloads{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkloads, schemas.ListWorkloadsInput, schemas.ListWorkloadsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWorkloads{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkloads, schemas.ListWorkloadsInput, schemas.ListWorkloadsOutput), output: &ListWorkloadsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

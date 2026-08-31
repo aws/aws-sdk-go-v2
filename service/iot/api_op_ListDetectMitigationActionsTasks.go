@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -60,6 +62,27 @@ type ListDetectMitigationActionsTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDetectMitigationActionsTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDetectMitigationActionsTasksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDetectMitigationActionsTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListDetectMitigationActionsTasksRequest_endTime, *v.EndTime)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDetectMitigationActionsTasksRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDetectMitigationActionsTasksRequest_nextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListDetectMitigationActionsTasksRequest_startTime, *v.StartTime)
+	}
+}
+
 type ListDetectMitigationActionsTasksOutput struct {
 
 	//  A token that can be used to retrieve the next set of results, or null if there
@@ -75,13 +98,35 @@ type ListDetectMitigationActionsTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDetectMitigationActionsTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDetectMitigationActionsTasksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDetectMitigationActionsTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDetectMitigationActionsTasksResponse_nextToken, *v.NextToken)
+	}
+	serializeDetectMitigationActionsTaskSummaryList(s, schemas.ListDetectMitigationActionsTasksResponse_tasks, v.Tasks)
+}
+func (v *ListDetectMitigationActionsTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDetectMitigationActionsTasksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDetectMitigationActionsTasksResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDetectMitigationActionsTasksResponse_nextToken, v.NextToken)
+		case schemas.ListDetectMitigationActionsTasksResponse_tasks:
+			return deserializeDetectMitigationActionsTaskSummaryList(d, schemas.ListDetectMitigationActionsTasksResponse_tasks, &v.Tasks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDetectMitigationActionsTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDetectMitigationActionsTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDetectMitigationActionsTasks, schemas.ListDetectMitigationActionsTasksRequest, schemas.ListDetectMitigationActionsTasksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDetectMitigationActionsTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDetectMitigationActionsTasks, schemas.ListDetectMitigationActionsTasksRequest, schemas.ListDetectMitigationActionsTasksResponse), output: &ListDetectMitigationActionsTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

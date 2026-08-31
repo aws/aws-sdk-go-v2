@@ -5,7 +5,9 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,25 @@ type ListLifecyclePoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLifecyclePoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLifecyclePoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLifecyclePoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLifecyclePoliciesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLifecyclePoliciesRequest_nextToken, *v.NextToken)
+	}
+	serializeLifecycleResourceFilter(s, schemas.ListLifecyclePoliciesRequest_resources, v.Resources)
+	if v.Type != "" {
+		s.WriteString(schemas.ListLifecyclePoliciesRequest_type, string(v.Type))
+	}
+}
+
 type ListLifecyclePoliciesOutput struct {
 
 	// Details about the requested lifecycle policies.
@@ -67,13 +88,35 @@ type ListLifecyclePoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLifecyclePoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLifecyclePoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLifecyclePoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLifecyclePolicySummaries(s, schemas.ListLifecyclePoliciesResponse_lifecyclePolicySummaries, v.LifecyclePolicySummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLifecyclePoliciesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListLifecyclePoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLifecyclePoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLifecyclePoliciesResponse_lifecyclePolicySummaries:
+			return deserializeLifecyclePolicySummaries(d, schemas.ListLifecyclePoliciesResponse_lifecyclePolicySummaries, &v.LifecyclePolicySummaries)
+		case schemas.ListLifecyclePoliciesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLifecyclePoliciesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLifecyclePoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListLifecyclePolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLifecyclePolicies, schemas.ListLifecyclePoliciesRequest, schemas.ListLifecyclePoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListLifecyclePolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLifecyclePolicies, schemas.ListLifecyclePoliciesRequest, schemas.ListLifecyclePoliciesResponse), output: &ListLifecyclePoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

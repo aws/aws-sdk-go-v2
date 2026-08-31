@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type StopProcessingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopProcessingJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopProcessingJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopProcessingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProcessingJobName != nil {
+		s.WriteString(schemas.StopProcessingJobRequest_ProcessingJobName, *v.ProcessingJobName)
+	}
+}
+
 type StopProcessingJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type StopProcessingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopProcessingJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopProcessingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopProcessingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopProcessingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopProcessingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopProcessingJob, schemas.StopProcessingJobRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopProcessingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopProcessingJob, schemas.StopProcessingJobRequest, nil), output: &StopProcessingJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

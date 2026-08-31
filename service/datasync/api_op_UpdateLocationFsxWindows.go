@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -77,6 +79,40 @@ type UpdateLocationFsxWindowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLocationFsxWindowsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLocationFsxWindowsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLocationFsxWindowsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CmkSecretConfig != nil {
+		s.WriteStruct(schemas.UpdateLocationFsxWindowsRequest_CmkSecretConfig)
+		v.CmkSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomSecretConfig != nil {
+		s.WriteStruct(schemas.UpdateLocationFsxWindowsRequest_CustomSecretConfig)
+		v.CustomSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.UpdateLocationFsxWindowsRequest_Domain, *v.Domain)
+	}
+	if v.LocationArn != nil {
+		s.WriteString(schemas.UpdateLocationFsxWindowsRequest_LocationArn, *v.LocationArn)
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.UpdateLocationFsxWindowsRequest_Password, *v.Password)
+	}
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.UpdateLocationFsxWindowsRequest_Subdirectory, *v.Subdirectory)
+	}
+	if v.User != nil {
+		s.WriteString(schemas.UpdateLocationFsxWindowsRequest_User, *v.User)
+	}
+}
+
 type UpdateLocationFsxWindowsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -84,13 +120,26 @@ type UpdateLocationFsxWindowsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLocationFsxWindowsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLocationFsxWindowsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLocationFsxWindowsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateLocationFsxWindowsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLocationFsxWindowsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLocationFsxWindowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLocationFsxWindows{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLocationFsxWindows, schemas.UpdateLocationFsxWindowsRequest, schemas.UpdateLocationFsxWindowsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateLocationFsxWindows{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLocationFsxWindows, schemas.UpdateLocationFsxWindowsRequest, schemas.UpdateLocationFsxWindowsResponse), output: &UpdateLocationFsxWindowsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

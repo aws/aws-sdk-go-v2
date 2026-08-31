@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -95,6 +97,50 @@ type UpdateDomainConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationProtocol != "" {
+		s.WriteString(schemas.UpdateDomainConfigurationRequest_applicationProtocol, string(v.ApplicationProtocol))
+	}
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.UpdateDomainConfigurationRequest_authenticationType, string(v.AuthenticationType))
+	}
+	if v.AuthorizerConfig != nil {
+		s.WriteStruct(schemas.UpdateDomainConfigurationRequest_authorizerConfig)
+		v.AuthorizerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientCertificateConfig != nil {
+		s.WriteStruct(schemas.UpdateDomainConfigurationRequest_clientCertificateConfig)
+		v.ClientCertificateConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainConfigurationName != nil {
+		s.WriteString(schemas.UpdateDomainConfigurationRequest_domainConfigurationName, *v.DomainConfigurationName)
+	}
+	if v.DomainConfigurationStatus != "" {
+		s.WriteString(schemas.UpdateDomainConfigurationRequest_domainConfigurationStatus, string(v.DomainConfigurationStatus))
+	}
+	if v.RemoveAuthorizerConfig != false {
+		s.WriteBool(schemas.UpdateDomainConfigurationRequest_removeAuthorizerConfig, v.RemoveAuthorizerConfig)
+	}
+	if v.ServerCertificateConfig != nil {
+		s.WriteStruct(schemas.UpdateDomainConfigurationRequest_serverCertificateConfig)
+		v.ServerCertificateConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TlsConfig != nil {
+		s.WriteStruct(schemas.UpdateDomainConfigurationRequest_tlsConfig)
+		v.TlsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateDomainConfigurationOutput struct {
 
 	// The ARN of the domain configuration that was updated.
@@ -109,13 +155,38 @@ type UpdateDomainConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainConfigurationArn != nil {
+		s.WriteString(schemas.UpdateDomainConfigurationResponse_domainConfigurationArn, *v.DomainConfigurationArn)
+	}
+	if v.DomainConfigurationName != nil {
+		s.WriteString(schemas.UpdateDomainConfigurationResponse_domainConfigurationName, *v.DomainConfigurationName)
+	}
+}
+func (v *UpdateDomainConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDomainConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDomainConfigurationResponse_domainConfigurationArn:
+			v.DomainConfigurationArn = new(string)
+			return d.ReadString(schemas.UpdateDomainConfigurationResponse_domainConfigurationArn, v.DomainConfigurationArn)
+		case schemas.UpdateDomainConfigurationResponse_domainConfigurationName:
+			v.DomainConfigurationName = new(string)
+			return d.ReadString(schemas.UpdateDomainConfigurationResponse_domainConfigurationName, v.DomainConfigurationName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDomainConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDomainConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomainConfiguration, schemas.UpdateDomainConfigurationRequest, schemas.UpdateDomainConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDomainConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomainConfiguration, schemas.UpdateDomainConfigurationRequest, schemas.UpdateDomainConfigurationResponse), output: &UpdateDomainConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

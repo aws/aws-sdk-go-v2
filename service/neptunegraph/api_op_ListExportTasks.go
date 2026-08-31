@@ -5,7 +5,9 @@ package neptunegraph
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -40,6 +42,23 @@ type ListExportTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExportTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExportTasksInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExportTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphIdentifier != nil {
+		s.WriteString(schemas.ListExportTasksInput_graphIdentifier, *v.GraphIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListExportTasksInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExportTasksInput_nextToken, *v.NextToken)
+	}
+}
 func (in *ListExportTasksInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ApiType = ptr.String("ControlPlane")
@@ -61,13 +80,35 @@ type ListExportTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExportTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExportTasksOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExportTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExportTasksOutput_nextToken, *v.NextToken)
+	}
+	serializeExportTaskSummaryList(s, schemas.ListExportTasksOutput_tasks, v.Tasks)
+}
+func (v *ListExportTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListExportTasksOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListExportTasksOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListExportTasksOutput_nextToken, v.NextToken)
+		case schemas.ListExportTasksOutput_tasks:
+			return deserializeExportTaskSummaryList(d, schemas.ListExportTasksOutput_tasks, &v.Tasks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListExportTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListExportTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExportTasks, schemas.ListExportTasksInput, schemas.ListExportTasksOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListExportTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExportTasks, schemas.ListExportTasksInput, schemas.ListExportTasksOutput), output: &ListExportTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

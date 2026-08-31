@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type DeleteCertificateProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCertificateProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCertificateProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCertificateProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateProviderName != nil {
+		s.WriteString(schemas.DeleteCertificateProviderRequest_certificateProviderName, *v.CertificateProviderName)
+	}
+}
+
 type DeleteCertificateProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +62,26 @@ type DeleteCertificateProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCertificateProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCertificateProviderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCertificateProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCertificateProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCertificateProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCertificateProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCertificateProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCertificateProvider, schemas.DeleteCertificateProviderRequest, schemas.DeleteCertificateProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCertificateProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCertificateProvider, schemas.DeleteCertificateProviderRequest, schemas.DeleteCertificateProviderResponse), output: &DeleteCertificateProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

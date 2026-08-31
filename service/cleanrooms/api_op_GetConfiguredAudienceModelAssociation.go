@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type GetConfiguredAudienceModelAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfiguredAudienceModelAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfiguredAudienceModelAssociationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfiguredAudienceModelAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfiguredAudienceModelAssociationIdentifier != nil {
+		s.WriteString(schemas.GetConfiguredAudienceModelAssociationInput_configuredAudienceModelAssociationIdentifier, *v.ConfiguredAudienceModelAssociationIdentifier)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.GetConfiguredAudienceModelAssociationInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+
 type GetConfiguredAudienceModelAssociationOutput struct {
 
 	// Information about the configured audience model association that you requested.
@@ -54,13 +71,34 @@ type GetConfiguredAudienceModelAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfiguredAudienceModelAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfiguredAudienceModelAssociationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfiguredAudienceModelAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfiguredAudienceModelAssociation != nil {
+		s.WriteStruct(schemas.GetConfiguredAudienceModelAssociationOutput_configuredAudienceModelAssociation)
+		v.ConfiguredAudienceModelAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetConfiguredAudienceModelAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfiguredAudienceModelAssociationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfiguredAudienceModelAssociationOutput_configuredAudienceModelAssociation:
+			v.ConfiguredAudienceModelAssociation = &types.ConfiguredAudienceModelAssociation{}
+			return v.ConfiguredAudienceModelAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConfiguredAudienceModelAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfiguredAudienceModelAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguredAudienceModelAssociation, schemas.GetConfiguredAudienceModelAssociationInput, schemas.GetConfiguredAudienceModelAssociationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConfiguredAudienceModelAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguredAudienceModelAssociation, schemas.GetConfiguredAudienceModelAssociationInput, schemas.GetConfiguredAudienceModelAssociationOutput), output: &GetConfiguredAudienceModelAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -51,6 +53,29 @@ type StartTestExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTestExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTestExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTestExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiMode != "" {
+		s.WriteString(schemas.StartTestExecutionRequest_apiMode, string(v.ApiMode))
+	}
+	if v.Target != nil {
+		s.WriteStruct(schemas.StartTestExecutionRequest_target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TestExecutionModality != "" {
+		s.WriteString(schemas.StartTestExecutionRequest_testExecutionModality, string(v.TestExecutionModality))
+	}
+	if v.TestSetId != nil {
+		s.WriteString(schemas.StartTestExecutionRequest_testSetId, *v.TestSetId)
+	}
+}
+
 type StartTestExecutionOutput struct {
 
 	// Indicates whether we use streaming or non-streaming APIs for the test set
@@ -80,13 +105,72 @@ type StartTestExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTestExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTestExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTestExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiMode != "" {
+		s.WriteString(schemas.StartTestExecutionResponse_apiMode, string(v.ApiMode))
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.StartTestExecutionResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.Target != nil {
+		s.WriteStruct(schemas.StartTestExecutionResponse_target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TestExecutionId != nil {
+		s.WriteString(schemas.StartTestExecutionResponse_testExecutionId, *v.TestExecutionId)
+	}
+	if v.TestExecutionModality != "" {
+		s.WriteString(schemas.StartTestExecutionResponse_testExecutionModality, string(v.TestExecutionModality))
+	}
+	if v.TestSetId != nil {
+		s.WriteString(schemas.StartTestExecutionResponse_testSetId, *v.TestSetId)
+	}
+}
+func (v *StartTestExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTestExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTestExecutionResponse_apiMode:
+			var ev string
+			if err := d.ReadString(schemas.StartTestExecutionResponse_apiMode, &ev); err != nil {
+				return err
+			}
+			v.ApiMode = types.TestExecutionApiMode(ev)
+			return nil
+		case schemas.StartTestExecutionResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.StartTestExecutionResponse_creationDateTime, v.CreationDateTime)
+		case schemas.StartTestExecutionResponse_target:
+			v.Target = &types.TestExecutionTarget{}
+			return v.Target.Deserialize(d)
+		case schemas.StartTestExecutionResponse_testExecutionId:
+			v.TestExecutionId = new(string)
+			return d.ReadString(schemas.StartTestExecutionResponse_testExecutionId, v.TestExecutionId)
+		case schemas.StartTestExecutionResponse_testExecutionModality:
+			var ev string
+			if err := d.ReadString(schemas.StartTestExecutionResponse_testExecutionModality, &ev); err != nil {
+				return err
+			}
+			v.TestExecutionModality = types.TestExecutionModality(ev)
+			return nil
+		case schemas.StartTestExecutionResponse_testSetId:
+			v.TestSetId = new(string)
+			return d.ReadString(schemas.StartTestExecutionResponse_testSetId, v.TestSetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartTestExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartTestExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTestExecution, schemas.StartTestExecutionRequest, schemas.StartTestExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartTestExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTestExecution, schemas.StartTestExecutionRequest, schemas.StartTestExecutionResponse), output: &StartTestExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

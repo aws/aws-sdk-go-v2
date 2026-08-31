@@ -5,7 +5,9 @@ package apprunner
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,27 @@ type ListAutoScalingConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutoScalingConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutoScalingConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutoScalingConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingConfigurationName != nil {
+		s.WriteString(schemas.ListAutoScalingConfigurationsRequest_AutoScalingConfigurationName, *v.AutoScalingConfigurationName)
+	}
+	if v.LatestOnly != false {
+		s.WriteBool(schemas.ListAutoScalingConfigurationsRequest_LatestOnly, v.LatestOnly)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAutoScalingConfigurationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutoScalingConfigurationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAutoScalingConfigurationsOutput struct {
 
 	// A list of summary information records for auto scaling configurations. In a
@@ -82,13 +105,35 @@ type ListAutoScalingConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutoScalingConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutoScalingConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutoScalingConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutoScalingConfigurationSummaryList(s, schemas.ListAutoScalingConfigurationsResponse_AutoScalingConfigurationSummaryList, v.AutoScalingConfigurationSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutoScalingConfigurationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAutoScalingConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAutoScalingConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAutoScalingConfigurationsResponse_AutoScalingConfigurationSummaryList:
+			return deserializeAutoScalingConfigurationSummaryList(d, schemas.ListAutoScalingConfigurationsResponse_AutoScalingConfigurationSummaryList, &v.AutoScalingConfigurationSummaryList)
+		case schemas.ListAutoScalingConfigurationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAutoScalingConfigurationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAutoScalingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListAutoScalingConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutoScalingConfigurations, schemas.ListAutoScalingConfigurationsRequest, schemas.ListAutoScalingConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListAutoScalingConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutoScalingConfigurations, schemas.ListAutoScalingConfigurationsRequest, schemas.ListAutoScalingConfigurationsResponse), output: &ListAutoScalingConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

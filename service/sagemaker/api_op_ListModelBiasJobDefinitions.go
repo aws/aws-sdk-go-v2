@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -59,6 +61,39 @@ type ListModelBiasJobDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelBiasJobDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelBiasJobDefinitionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelBiasJobDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListModelBiasJobDefinitionsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListModelBiasJobDefinitionsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.ListModelBiasJobDefinitionsRequest_EndpointName, *v.EndpointName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListModelBiasJobDefinitionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListModelBiasJobDefinitionsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelBiasJobDefinitionsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListModelBiasJobDefinitionsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListModelBiasJobDefinitionsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListModelBiasJobDefinitionsOutput struct {
 
 	// A JSON array in which each element is a summary for a model bias jobs.
@@ -76,13 +111,35 @@ type ListModelBiasJobDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelBiasJobDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelBiasJobDefinitionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelBiasJobDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMonitoringJobDefinitionSummaryList(s, schemas.ListModelBiasJobDefinitionsResponse_JobDefinitionSummaries, v.JobDefinitionSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelBiasJobDefinitionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListModelBiasJobDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListModelBiasJobDefinitionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListModelBiasJobDefinitionsResponse_JobDefinitionSummaries:
+			return deserializeMonitoringJobDefinitionSummaryList(d, schemas.ListModelBiasJobDefinitionsResponse_JobDefinitionSummaries, &v.JobDefinitionSummaries)
+		case schemas.ListModelBiasJobDefinitionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListModelBiasJobDefinitionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListModelBiasJobDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListModelBiasJobDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelBiasJobDefinitions, schemas.ListModelBiasJobDefinitionsRequest, schemas.ListModelBiasJobDefinitionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListModelBiasJobDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelBiasJobDefinitions, schemas.ListModelBiasJobDefinitionsRequest, schemas.ListModelBiasJobDefinitionsResponse), output: &ListModelBiasJobDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

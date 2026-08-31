@@ -4,6 +4,8 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -62,6 +64,33 @@ type CreateStreamingURLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamingURLInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamingURLRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamingURLInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreateStreamingURLRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.FleetName != nil {
+		s.WriteString(schemas.CreateStreamingURLRequest_FleetName, *v.FleetName)
+	}
+	if v.SessionContext != nil {
+		s.WriteString(schemas.CreateStreamingURLRequest_SessionContext, *v.SessionContext)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.CreateStreamingURLRequest_StackName, *v.StackName)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.CreateStreamingURLRequest_UserId, *v.UserId)
+	}
+	if v.Validity != nil {
+		s.WriteInt64(schemas.CreateStreamingURLRequest_Validity, *v.Validity)
+	}
+}
+
 type CreateStreamingURLOutput struct {
 
 	// The elapsed time, in seconds after the Unix epoch, when this URL expires.
@@ -76,13 +105,38 @@ type CreateStreamingURLOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamingURLOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamingURLResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamingURLOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Expires != nil {
+		s.WriteTime(schemas.CreateStreamingURLResult_Expires, *v.Expires)
+	}
+	if v.StreamingURL != nil {
+		s.WriteString(schemas.CreateStreamingURLResult_StreamingURL, *v.StreamingURL)
+	}
+}
+func (v *CreateStreamingURLOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStreamingURLResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStreamingURLResult_Expires:
+			v.Expires = new(time.Time)
+			return d.ReadTime(schemas.CreateStreamingURLResult_Expires, v.Expires)
+		case schemas.CreateStreamingURLResult_StreamingURL:
+			v.StreamingURL = new(string)
+			return d.ReadString(schemas.CreateStreamingURLResult_StreamingURL, v.StreamingURL)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStreamingURLMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateStreamingURL{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStreamingURL, schemas.CreateStreamingURLRequest, schemas.CreateStreamingURLResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateStreamingURL{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStreamingURL, schemas.CreateStreamingURLRequest, schemas.CreateStreamingURLResult), output: &CreateStreamingURLOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

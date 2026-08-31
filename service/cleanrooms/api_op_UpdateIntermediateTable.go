@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,28 @@ type UpdateIntermediateTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIntermediateTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIntermediateTableInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIntermediateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIntermediateTableColumnList(s, schemas.UpdateIntermediateTableInput_columns, v.Columns)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateIntermediateTableInput_description, *v.Description)
+	}
+	if v.IntermediateTableIdentifier != nil {
+		s.WriteString(schemas.UpdateIntermediateTableInput_intermediateTableIdentifier, *v.IntermediateTableIdentifier)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.UpdateIntermediateTableInput_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.UpdateIntermediateTableInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+
 type UpdateIntermediateTableOutput struct {
 
 	// The updated intermediate table.
@@ -65,13 +89,34 @@ type UpdateIntermediateTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIntermediateTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIntermediateTableOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIntermediateTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntermediateTable != nil {
+		s.WriteStruct(schemas.UpdateIntermediateTableOutput_intermediateTable)
+		v.IntermediateTable.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateIntermediateTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIntermediateTableOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIntermediateTableOutput_intermediateTable:
+			v.IntermediateTable = &types.IntermediateTable{}
+			return v.IntermediateTable.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIntermediateTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIntermediateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIntermediateTable, schemas.UpdateIntermediateTableInput, schemas.UpdateIntermediateTableOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIntermediateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIntermediateTable, schemas.UpdateIntermediateTableInput, schemas.UpdateIntermediateTableOutput), output: &UpdateIntermediateTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

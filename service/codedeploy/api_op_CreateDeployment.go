@@ -4,7 +4,9 @@ package codedeploy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -126,6 +128,59 @@ type CreateDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeploymentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.CreateDeploymentInput_applicationName, *v.ApplicationName)
+	}
+	if v.AutoRollbackConfiguration != nil {
+		s.WriteStruct(schemas.CreateDeploymentInput_autoRollbackConfiguration)
+		v.AutoRollbackConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeploymentConfigName != nil {
+		s.WriteString(schemas.CreateDeploymentInput_deploymentConfigName, *v.DeploymentConfigName)
+	}
+	if v.DeploymentGroupName != nil {
+		s.WriteString(schemas.CreateDeploymentInput_deploymentGroupName, *v.DeploymentGroupName)
+	}
+	if v.DeploymentMode != "" {
+		s.WriteString(schemas.CreateDeploymentInput_deploymentMode, string(v.DeploymentMode))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDeploymentInput_description, *v.Description)
+	}
+	if v.FileExistsBehavior != "" {
+		s.WriteString(schemas.CreateDeploymentInput_fileExistsBehavior, string(v.FileExistsBehavior))
+	}
+	if v.IgnoreApplicationStopFailures != false {
+		s.WriteBool(schemas.CreateDeploymentInput_ignoreApplicationStopFailures, v.IgnoreApplicationStopFailures)
+	}
+	if v.OverrideAlarmConfiguration != nil {
+		s.WriteStruct(schemas.CreateDeploymentInput_overrideAlarmConfiguration)
+		v.OverrideAlarmConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Revision != nil {
+		s.WriteStruct(schemas.CreateDeploymentInput_revision)
+		v.Revision.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetInstances != nil {
+		s.WriteStruct(schemas.CreateDeploymentInput_targetInstances)
+		v.TargetInstances.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateOutdatedInstancesOnly != false {
+		s.WriteBool(schemas.CreateDeploymentInput_updateOutdatedInstancesOnly, v.UpdateOutdatedInstancesOnly)
+	}
+}
+
 // Represents the output of a CreateDeployment operation.
 type CreateDeploymentOutput struct {
 
@@ -138,13 +193,32 @@ type CreateDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeploymentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.CreateDeploymentOutput_deploymentId, *v.DeploymentId)
+	}
+}
+func (v *CreateDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDeploymentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDeploymentOutput_deploymentId:
+			v.DeploymentId = new(string)
+			return d.ReadString(schemas.CreateDeploymentOutput_deploymentId, v.DeploymentId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeployment, schemas.CreateDeploymentInput, schemas.CreateDeploymentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeployment, schemas.CreateDeploymentInput, schemas.CreateDeploymentOutput), output: &CreateDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

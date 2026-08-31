@@ -5,7 +5,9 @@ package comprehend
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListEntityRecognizerSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntityRecognizerSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntityRecognizerSummariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntityRecognizerSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEntityRecognizerSummariesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntityRecognizerSummariesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListEntityRecognizerSummariesOutput struct {
 
 	// The list entity recognizer summaries.
@@ -50,13 +67,35 @@ type ListEntityRecognizerSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntityRecognizerSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntityRecognizerSummariesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntityRecognizerSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntityRecognizerSummariesList(s, schemas.ListEntityRecognizerSummariesResponse_EntityRecognizerSummariesList, v.EntityRecognizerSummariesList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntityRecognizerSummariesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEntityRecognizerSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEntityRecognizerSummariesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEntityRecognizerSummariesResponse_EntityRecognizerSummariesList:
+			return deserializeEntityRecognizerSummariesList(d, schemas.ListEntityRecognizerSummariesResponse_EntityRecognizerSummariesList, &v.EntityRecognizerSummariesList)
+		case schemas.ListEntityRecognizerSummariesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEntityRecognizerSummariesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEntityRecognizerSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEntityRecognizerSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntityRecognizerSummaries, schemas.ListEntityRecognizerSummariesRequest, schemas.ListEntityRecognizerSummariesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListEntityRecognizerSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntityRecognizerSummaries, schemas.ListEntityRecognizerSummariesRequest, schemas.ListEntityRecognizerSummariesResponse), output: &ListEntityRecognizerSummariesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

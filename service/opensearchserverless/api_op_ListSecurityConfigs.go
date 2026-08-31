@@ -5,7 +5,9 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,44 @@ type ListSecurityConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityConfigsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSecurityConfigsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityConfigsRequest_nextToken, *v.NextToken)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListSecurityConfigsRequest_type, string(v.Type))
+	}
+}
+func (v *ListSecurityConfigsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSecurityConfigsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSecurityConfigsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListSecurityConfigsRequest_maxResults, v.MaxResults)
+		case schemas.ListSecurityConfigsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSecurityConfigsRequest_nextToken, v.NextToken)
+		case schemas.ListSecurityConfigsRequest_type:
+			var ev string
+			if err := d.ReadString(schemas.ListSecurityConfigsRequest_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.SecurityConfigType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type ListSecurityConfigsOutput struct {
 
 	// When nextToken is returned, there are more results available. The value of
@@ -63,13 +103,35 @@ type ListSecurityConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityConfigsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityConfigsResponse_nextToken, *v.NextToken)
+	}
+	serializeSecurityConfigSummaries(s, schemas.ListSecurityConfigsResponse_securityConfigSummaries, v.SecurityConfigSummaries)
+}
+func (v *ListSecurityConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSecurityConfigsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSecurityConfigsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSecurityConfigsResponse_nextToken, v.NextToken)
+		case schemas.ListSecurityConfigsResponse_securityConfigSummaries:
+			return deserializeSecurityConfigSummaries(d, schemas.ListSecurityConfigsResponse_securityConfigSummaries, &v.SecurityConfigSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSecurityConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListSecurityConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityConfigs, schemas.ListSecurityConfigsRequest, schemas.ListSecurityConfigsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListSecurityConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityConfigs, schemas.ListSecurityConfigsRequest, schemas.ListSecurityConfigsResponse), output: &ListSecurityConfigsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

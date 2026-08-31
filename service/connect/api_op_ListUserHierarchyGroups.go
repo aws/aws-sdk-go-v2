@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type ListUserHierarchyGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserHierarchyGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUserHierarchyGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUserHierarchyGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListUserHierarchyGroupsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListUserHierarchyGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUserHierarchyGroupsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListUserHierarchyGroupsOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.
@@ -66,13 +86,35 @@ type ListUserHierarchyGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserHierarchyGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUserHierarchyGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUserHierarchyGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUserHierarchyGroupsResponse_NextToken, *v.NextToken)
+	}
+	serializeHierarchyGroupSummaryList(s, schemas.ListUserHierarchyGroupsResponse_UserHierarchyGroupSummaryList, v.UserHierarchyGroupSummaryList)
+}
+func (v *ListUserHierarchyGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUserHierarchyGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUserHierarchyGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUserHierarchyGroupsResponse_NextToken, v.NextToken)
+		case schemas.ListUserHierarchyGroupsResponse_UserHierarchyGroupSummaryList:
+			return deserializeHierarchyGroupSummaryList(d, schemas.ListUserHierarchyGroupsResponse_UserHierarchyGroupSummaryList, &v.UserHierarchyGroupSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUserHierarchyGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListUserHierarchyGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserHierarchyGroups, schemas.ListUserHierarchyGroupsRequest, schemas.ListUserHierarchyGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListUserHierarchyGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserHierarchyGroups, schemas.ListUserHierarchyGroupsRequest, schemas.ListUserHierarchyGroupsResponse), output: &ListUserHierarchyGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

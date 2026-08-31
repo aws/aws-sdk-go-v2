@@ -4,7 +4,9 @@ package mailmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,28 @@ type UpdateRelayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRelayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRelayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRelayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRelayAuthentication(s, schemas.UpdateRelayRequest_Authentication, v.Authentication)
+	if v.RelayId != nil {
+		s.WriteString(schemas.UpdateRelayRequest_RelayId, *v.RelayId)
+	}
+	if v.RelayName != nil {
+		s.WriteString(schemas.UpdateRelayRequest_RelayName, *v.RelayName)
+	}
+	if v.ServerName != nil {
+		s.WriteString(schemas.UpdateRelayRequest_ServerName, *v.ServerName)
+	}
+	if v.ServerPort != nil {
+		s.WriteInt32(schemas.UpdateRelayRequest_ServerPort, *v.ServerPort)
+	}
+}
+
 type UpdateRelayOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +78,26 @@ type UpdateRelayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRelayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRelayResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRelayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateRelayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRelayResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRelayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateRelay{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRelay, schemas.UpdateRelayRequest, schemas.UpdateRelayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateRelay{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRelay, schemas.UpdateRelayRequest, schemas.UpdateRelayResponse), output: &UpdateRelayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type GetLineageGroupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLineageGroupPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLineageGroupPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLineageGroupPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LineageGroupName != nil {
+		s.WriteString(schemas.GetLineageGroupPolicyRequest_LineageGroupName, *v.LineageGroupName)
+	}
+}
+
 type GetLineageGroupPolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the lineage group.
@@ -47,13 +61,38 @@ type GetLineageGroupPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLineageGroupPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLineageGroupPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLineageGroupPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LineageGroupArn != nil {
+		s.WriteString(schemas.GetLineageGroupPolicyResponse_LineageGroupArn, *v.LineageGroupArn)
+	}
+	if v.ResourcePolicy != nil {
+		s.WriteString(schemas.GetLineageGroupPolicyResponse_ResourcePolicy, *v.ResourcePolicy)
+	}
+}
+func (v *GetLineageGroupPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLineageGroupPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLineageGroupPolicyResponse_LineageGroupArn:
+			v.LineageGroupArn = new(string)
+			return d.ReadString(schemas.GetLineageGroupPolicyResponse_LineageGroupArn, v.LineageGroupArn)
+		case schemas.GetLineageGroupPolicyResponse_ResourcePolicy:
+			v.ResourcePolicy = new(string)
+			return d.ReadString(schemas.GetLineageGroupPolicyResponse_ResourcePolicy, v.ResourcePolicy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLineageGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetLineageGroupPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLineageGroupPolicy, schemas.GetLineageGroupPolicyRequest, schemas.GetLineageGroupPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetLineageGroupPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLineageGroupPolicy, schemas.GetLineageGroupPolicyRequest, schemas.GetLineageGroupPolicyResponse), output: &GetLineageGroupPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

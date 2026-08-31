@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,22 @@ type BatchAssociateAnalyticsDataSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateAnalyticsDataSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateAnalyticsDataSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateAnalyticsDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataSetIds(s, schemas.BatchAssociateAnalyticsDataSetRequest_DataSetIds, v.DataSetIds)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.BatchAssociateAnalyticsDataSetRequest_InstanceId, *v.InstanceId)
+	}
+	if v.TargetAccountId != nil {
+		s.WriteString(schemas.BatchAssociateAnalyticsDataSetRequest_TargetAccountId, *v.TargetAccountId)
+	}
+}
+
 type BatchAssociateAnalyticsDataSetOutput struct {
 
 	// Information about associations that are successfully created: DataSetId ,
@@ -65,13 +83,32 @@ type BatchAssociateAnalyticsDataSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateAnalyticsDataSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateAnalyticsDataSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateAnalyticsDataSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalyticsDataAssociationResults(s, schemas.BatchAssociateAnalyticsDataSetResponse_Created, v.Created)
+	serializeErrorResults(s, schemas.BatchAssociateAnalyticsDataSetResponse_Errors, v.Errors)
+}
+func (v *BatchAssociateAnalyticsDataSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAssociateAnalyticsDataSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAssociateAnalyticsDataSetResponse_Created:
+			return deserializeAnalyticsDataAssociationResults(d, schemas.BatchAssociateAnalyticsDataSetResponse_Created, &v.Created)
+		case schemas.BatchAssociateAnalyticsDataSetResponse_Errors:
+			return deserializeErrorResults(d, schemas.BatchAssociateAnalyticsDataSetResponse_Errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchAssociateAnalyticsDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchAssociateAnalyticsDataSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateAnalyticsDataSet, schemas.BatchAssociateAnalyticsDataSetRequest, schemas.BatchAssociateAnalyticsDataSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchAssociateAnalyticsDataSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateAnalyticsDataSet, schemas.BatchAssociateAnalyticsDataSetRequest, schemas.BatchAssociateAnalyticsDataSetResponse), output: &BatchAssociateAnalyticsDataSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

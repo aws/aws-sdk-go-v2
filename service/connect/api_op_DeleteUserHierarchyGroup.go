@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DeleteUserHierarchyGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUserHierarchyGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUserHierarchyGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUserHierarchyGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HierarchyGroupId != nil {
+		s.WriteString(schemas.DeleteUserHierarchyGroupRequest_HierarchyGroupId, *v.HierarchyGroupId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteUserHierarchyGroupRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DeleteUserHierarchyGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +66,26 @@ type DeleteUserHierarchyGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUserHierarchyGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUserHierarchyGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteUserHierarchyGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteUserHierarchyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteUserHierarchyGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUserHierarchyGroup, schemas.DeleteUserHierarchyGroupRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteUserHierarchyGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUserHierarchyGroup, schemas.DeleteUserHierarchyGroupRequest, nil), output: &DeleteUserHierarchyGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

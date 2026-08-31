@@ -5,6 +5,8 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -84,6 +86,28 @@ type ImportPhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportPhoneNumberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportPhoneNumberRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportPhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ImportPhoneNumberRequest_ClientToken, *v.ClientToken)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ImportPhoneNumberRequest_InstanceId, *v.InstanceId)
+	}
+	if v.PhoneNumberDescription != nil {
+		s.WriteString(schemas.ImportPhoneNumberRequest_PhoneNumberDescription, *v.PhoneNumberDescription)
+	}
+	if v.SourcePhoneNumberArn != nil {
+		s.WriteString(schemas.ImportPhoneNumberRequest_SourcePhoneNumberArn, *v.SourcePhoneNumberArn)
+	}
+	serializeTagMap(s, schemas.ImportPhoneNumberRequest_Tags, v.Tags)
+}
+
 type ImportPhoneNumberOutput struct {
 
 	// The Amazon Resource Name (ARN) of the phone number.
@@ -98,13 +122,38 @@ type ImportPhoneNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportPhoneNumberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportPhoneNumberResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportPhoneNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PhoneNumberArn != nil {
+		s.WriteString(schemas.ImportPhoneNumberResponse_PhoneNumberArn, *v.PhoneNumberArn)
+	}
+	if v.PhoneNumberId != nil {
+		s.WriteString(schemas.ImportPhoneNumberResponse_PhoneNumberId, *v.PhoneNumberId)
+	}
+}
+func (v *ImportPhoneNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportPhoneNumberResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportPhoneNumberResponse_PhoneNumberArn:
+			v.PhoneNumberArn = new(string)
+			return d.ReadString(schemas.ImportPhoneNumberResponse_PhoneNumberArn, v.PhoneNumberArn)
+		case schemas.ImportPhoneNumberResponse_PhoneNumberId:
+			v.PhoneNumberId = new(string)
+			return d.ReadString(schemas.ImportPhoneNumberResponse_PhoneNumberId, v.PhoneNumberId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportPhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportPhoneNumber, schemas.ImportPhoneNumberRequest, schemas.ImportPhoneNumberResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportPhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportPhoneNumber, schemas.ImportPhoneNumberRequest, schemas.ImportPhoneNumberResponse), output: &ImportPhoneNumberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

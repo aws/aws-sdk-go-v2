@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type CreatePresignedMlflowAppUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePresignedMlflowAppUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePresignedMlflowAppUrlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePresignedMlflowAppUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreatePresignedMlflowAppUrlRequest_Arn, *v.Arn)
+	}
+	if v.ExpiresInSeconds != nil {
+		s.WriteInt32(schemas.CreatePresignedMlflowAppUrlRequest_ExpiresInSeconds, *v.ExpiresInSeconds)
+	}
+	if v.SessionExpirationDurationInSeconds != nil {
+		s.WriteInt32(schemas.CreatePresignedMlflowAppUrlRequest_SessionExpirationDurationInSeconds, *v.SessionExpirationDurationInSeconds)
+	}
+}
+
 type CreatePresignedMlflowAppUrlOutput struct {
 
 	// A presigned URL with an authorization token.
@@ -55,13 +75,32 @@ type CreatePresignedMlflowAppUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePresignedMlflowAppUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePresignedMlflowAppUrlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePresignedMlflowAppUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizedUrl != nil {
+		s.WriteString(schemas.CreatePresignedMlflowAppUrlResponse_AuthorizedUrl, *v.AuthorizedUrl)
+	}
+}
+func (v *CreatePresignedMlflowAppUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePresignedMlflowAppUrlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePresignedMlflowAppUrlResponse_AuthorizedUrl:
+			v.AuthorizedUrl = new(string)
+			return d.ReadString(schemas.CreatePresignedMlflowAppUrlResponse_AuthorizedUrl, v.AuthorizedUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePresignedMlflowAppUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePresignedMlflowAppUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePresignedMlflowAppUrl, schemas.CreatePresignedMlflowAppUrlRequest, schemas.CreatePresignedMlflowAppUrlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePresignedMlflowAppUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePresignedMlflowAppUrl, schemas.CreatePresignedMlflowAppUrlRequest, schemas.CreatePresignedMlflowAppUrlResponse), output: &CreatePresignedMlflowAppUrlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

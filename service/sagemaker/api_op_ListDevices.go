@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -47,6 +49,30 @@ type ListDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDevicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDevicesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceFleetName != nil {
+		s.WriteString(schemas.ListDevicesRequest_DeviceFleetName, *v.DeviceFleetName)
+	}
+	if v.LatestHeartbeatAfter != nil {
+		s.WriteTime(schemas.ListDevicesRequest_LatestHeartbeatAfter, *v.LatestHeartbeatAfter)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDevicesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.ListDevicesRequest_ModelName, *v.ModelName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDevicesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDevicesOutput struct {
 
 	// Summary of devices.
@@ -64,13 +90,35 @@ type ListDevicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDevicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDevicesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeviceSummaries(s, schemas.ListDevicesResponse_DeviceSummaries, v.DeviceSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDevicesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDevicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDevicesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDevicesResponse_DeviceSummaries:
+			return deserializeDeviceSummaries(d, schemas.ListDevicesResponse_DeviceSummaries, &v.DeviceSummaries)
+		case schemas.ListDevicesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDevicesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevices, schemas.ListDevicesRequest, schemas.ListDevicesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevices, schemas.ListDevicesRequest, schemas.ListDevicesResponse), output: &ListDevicesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

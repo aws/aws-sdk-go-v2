@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,25 @@ type DescribeRemediationExceptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRemediationExceptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRemediationExceptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRemediationExceptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigRuleName != nil {
+		s.WriteString(schemas.DescribeRemediationExceptionsRequest_ConfigRuleName, *v.ConfigRuleName)
+	}
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.DescribeRemediationExceptionsRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRemediationExceptionsRequest_NextToken, *v.NextToken)
+	}
+	serializeRemediationExceptionResourceKeys(s, schemas.DescribeRemediationExceptionsRequest_ResourceKeys, v.ResourceKeys)
+}
+
 type DescribeRemediationExceptionsOutput struct {
 
 	// The nextToken string returned in a previous request that you use to request the
@@ -76,13 +97,35 @@ type DescribeRemediationExceptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRemediationExceptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRemediationExceptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRemediationExceptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRemediationExceptionsResponse_NextToken, *v.NextToken)
+	}
+	serializeRemediationExceptions(s, schemas.DescribeRemediationExceptionsResponse_RemediationExceptions, v.RemediationExceptions)
+}
+func (v *DescribeRemediationExceptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRemediationExceptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRemediationExceptionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeRemediationExceptionsResponse_NextToken, v.NextToken)
+		case schemas.DescribeRemediationExceptionsResponse_RemediationExceptions:
+			return deserializeRemediationExceptions(d, schemas.DescribeRemediationExceptionsResponse_RemediationExceptions, &v.RemediationExceptions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRemediationExceptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRemediationExceptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRemediationExceptions, schemas.DescribeRemediationExceptionsRequest, schemas.DescribeRemediationExceptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeRemediationExceptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRemediationExceptions, schemas.DescribeRemediationExceptionsRequest, schemas.DescribeRemediationExceptionsResponse), output: &DescribeRemediationExceptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

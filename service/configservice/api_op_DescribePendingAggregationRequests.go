@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DescribePendingAggregationRequestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePendingAggregationRequestsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePendingAggregationRequestsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePendingAggregationRequestsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.DescribePendingAggregationRequestsRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribePendingAggregationRequestsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribePendingAggregationRequestsOutput struct {
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -53,13 +70,35 @@ type DescribePendingAggregationRequestsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePendingAggregationRequestsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePendingAggregationRequestsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePendingAggregationRequestsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribePendingAggregationRequestsResponse_NextToken, *v.NextToken)
+	}
+	serializePendingAggregationRequestList(s, schemas.DescribePendingAggregationRequestsResponse_PendingAggregationRequests, v.PendingAggregationRequests)
+}
+func (v *DescribePendingAggregationRequestsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePendingAggregationRequestsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePendingAggregationRequestsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribePendingAggregationRequestsResponse_NextToken, v.NextToken)
+		case schemas.DescribePendingAggregationRequestsResponse_PendingAggregationRequests:
+			return deserializePendingAggregationRequestList(d, schemas.DescribePendingAggregationRequestsResponse_PendingAggregationRequests, &v.PendingAggregationRequests)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePendingAggregationRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePendingAggregationRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePendingAggregationRequests, schemas.DescribePendingAggregationRequestsRequest, schemas.DescribePendingAggregationRequestsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePendingAggregationRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePendingAggregationRequests, schemas.DescribePendingAggregationRequestsRequest, schemas.DescribePendingAggregationRequestsResponse), output: &DescribePendingAggregationRequestsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

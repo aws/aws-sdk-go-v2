@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -37,6 +38,27 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccessDeniedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessDeniedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessDeniedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AccessDeniedException_Message, *v.Message)
+	}
+}
+func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessDeniedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccessDeniedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation that you attempted requires you to have the
 // iam:CreateServiceLinkedRole for organizations.amazonaws.com permission so that
@@ -70,6 +92,37 @@ func (e *AccessDeniedForDependencyException) ErrorCode() string {
 func (e *AccessDeniedForDependencyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *AccessDeniedForDependencyException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessDeniedForDependencyException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessDeniedForDependencyException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AccessDeniedForDependencyException_Message, *v.Message)
+	}
+	if v.Reason != "" {
+		s.WriteString(schemas.AccessDeniedForDependencyException_Reason, string(v.Reason))
+	}
+}
+func (v *AccessDeniedForDependencyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessDeniedForDependencyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessDeniedForDependencyException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccessDeniedForDependencyException_Message, v.Message)
+		case schemas.AccessDeniedForDependencyException_Reason:
+			var ev string
+			if err := d.ReadString(schemas.AccessDeniedForDependencyException_Reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = AccessDeniedForDependencyExceptionReason(ev)
+			return nil
+		}
+		return nil
+	})
+}
 
 // You attempted to close an account that is already closed.
 type AccountAlreadyClosedException struct {
@@ -96,6 +149,27 @@ func (e *AccountAlreadyClosedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccountAlreadyClosedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccountAlreadyClosedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountAlreadyClosedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountAlreadyClosedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AccountAlreadyClosedException_Message, *v.Message)
+	}
+}
+func (v *AccountAlreadyClosedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountAlreadyClosedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountAlreadyClosedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccountAlreadyClosedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified account is already a delegated administrator for this Amazon Web
 // Services service.
@@ -123,6 +197,27 @@ func (e *AccountAlreadyRegisteredException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccountAlreadyRegisteredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccountAlreadyRegisteredException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountAlreadyRegisteredException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountAlreadyRegisteredException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AccountAlreadyRegisteredException_Message, *v.Message)
+	}
+}
+func (v *AccountAlreadyRegisteredException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountAlreadyRegisteredException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountAlreadyRegisteredException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccountAlreadyRegisteredException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 //	We can't find an Amazon Web Services account with the AccountId that you
 //
@@ -152,6 +247,27 @@ func (e *AccountNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccountNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccountNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AccountNotFoundException_Message, *v.Message)
+	}
+}
+func (v *AccountNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccountNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified account is not a delegated administrator for this Amazon Web
 // Services service.
@@ -179,6 +295,27 @@ func (e *AccountNotRegisteredException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccountNotRegisteredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccountNotRegisteredException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountNotRegisteredException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountNotRegisteredException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AccountNotRegisteredException_Message, *v.Message)
+	}
+}
+func (v *AccountNotRegisteredException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountNotRegisteredException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountNotRegisteredException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccountNotRegisteredException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You can't invite an existing account to your organization until you verify that
 // you own the email address associated with the management account. For more
@@ -209,6 +346,27 @@ func (e *AccountOwnerNotVerifiedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccountOwnerNotVerifiedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccountOwnerNotVerifiedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountOwnerNotVerifiedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountOwnerNotVerifiedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AccountOwnerNotVerifiedException_Message, *v.Message)
+	}
+}
+func (v *AccountOwnerNotVerifiedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountOwnerNotVerifiedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountOwnerNotVerifiedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccountOwnerNotVerifiedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // This account is already a member of an organization. An account can belong to
 // only one organization at a time.
@@ -236,6 +394,27 @@ func (e *AlreadyInOrganizationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AlreadyInOrganizationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AlreadyInOrganizationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AlreadyInOrganizationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AlreadyInOrganizationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AlreadyInOrganizationException_Message, *v.Message)
+	}
+}
+func (v *AlreadyInOrganizationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AlreadyInOrganizationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AlreadyInOrganizationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AlreadyInOrganizationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Your account isn't a member of an organization. To make this request, you must
 // use the credentials of an account that belongs to an organization.
@@ -263,6 +442,27 @@ func (e *AWSOrganizationsNotInUseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AWSOrganizationsNotInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AWSOrganizationsNotInUseException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AWSOrganizationsNotInUseException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AWSOrganizationsNotInUseException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AWSOrganizationsNotInUseException_Message, *v.Message)
+	}
+}
+func (v *AWSOrganizationsNotInUseException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AWSOrganizationsNotInUseException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AWSOrganizationsNotInUseException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AWSOrganizationsNotInUseException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We can't find an organizational unit (OU) or Amazon Web Services account with
 // the ChildId that you specified.
@@ -290,6 +490,27 @@ func (e *ChildNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ChildNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ChildNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChildNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChildNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ChildNotFoundException_Message, *v.Message)
+	}
+}
+func (v *ChildNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChildNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChildNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ChildNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The target of the operation is currently being modified by a different request.
 // Try again later.
@@ -317,6 +538,27 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConcurrentModificationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConcurrentModificationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConcurrentModificationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConcurrentModificationException_Message, *v.Message)
+	}
+}
+func (v *ConcurrentModificationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConcurrentModificationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConcurrentModificationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConcurrentModificationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request failed because it conflicts with the current state of the specified
 // resource.
@@ -344,6 +586,27 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConflictException_Message, *v.Message)
+	}
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Performing this operation violates a minimum or maximum value limit. For
 // example, attempting to remove the last service control policy (SCP) from an OU
@@ -587,6 +850,37 @@ func (e *ConstraintViolationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConstraintViolationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConstraintViolationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConstraintViolationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConstraintViolationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConstraintViolationException_Message, *v.Message)
+	}
+	if v.Reason != "" {
+		s.WriteString(schemas.ConstraintViolationException_Reason, string(v.Reason))
+	}
+}
+func (v *ConstraintViolationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConstraintViolationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConstraintViolationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConstraintViolationException_Message, v.Message)
+		case schemas.ConstraintViolationException_Reason:
+			var ev string
+			if err := d.ReadString(schemas.ConstraintViolationException_Reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = ConstraintViolationExceptionReason(ev)
+			return nil
+		}
+		return nil
+	})
+}
 
 // We can't find an create account request with the CreateAccountRequestId that
 // you specified.
@@ -615,6 +909,27 @@ func (e *CreateAccountStatusNotFoundException) ErrorCode() string {
 }
 func (e *CreateAccountStatusNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *CreateAccountStatusNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccountStatusNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccountStatusNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CreateAccountStatusNotFoundException_Message, *v.Message)
+	}
+}
+func (v *CreateAccountStatusNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAccountStatusNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAccountStatusNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CreateAccountStatusNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // We can't find the destination container (a root or OU) with the ParentId that
@@ -645,6 +960,27 @@ func (e *DestinationParentNotFoundException) ErrorCode() string {
 func (e *DestinationParentNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *DestinationParentNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationParentNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DestinationParentNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DestinationParentNotFoundException_Message, *v.Message)
+	}
+}
+func (v *DestinationParentNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DestinationParentNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DestinationParentNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DestinationParentNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // That account is already present in the specified destination.
 type DuplicateAccountException struct {
@@ -671,6 +1007,27 @@ func (e *DuplicateAccountException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DuplicateAccountException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DuplicateAccountException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DuplicateAccountException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DuplicateAccountException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DuplicateAccountException_Message, *v.Message)
+	}
+}
+func (v *DuplicateAccountException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DuplicateAccountException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DuplicateAccountException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DuplicateAccountException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A handshake with the same action and target already exists. For example, if you
 // invited an account to join your organization, the invited account might already
@@ -701,6 +1058,27 @@ func (e *DuplicateHandshakeException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DuplicateHandshakeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DuplicateHandshakeException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DuplicateHandshakeException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DuplicateHandshakeException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DuplicateHandshakeException_Message, *v.Message)
+	}
+}
+func (v *DuplicateHandshakeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DuplicateHandshakeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DuplicateHandshakeException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DuplicateHandshakeException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An OU with the same name already exists.
 type DuplicateOrganizationalUnitException struct {
@@ -728,6 +1106,27 @@ func (e *DuplicateOrganizationalUnitException) ErrorCode() string {
 }
 func (e *DuplicateOrganizationalUnitException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *DuplicateOrganizationalUnitException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DuplicateOrganizationalUnitException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DuplicateOrganizationalUnitException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DuplicateOrganizationalUnitException_Message, *v.Message)
+	}
+}
+func (v *DuplicateOrganizationalUnitException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DuplicateOrganizationalUnitException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DuplicateOrganizationalUnitException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DuplicateOrganizationalUnitException_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // The selected policy is already attached to the specified target.
@@ -757,6 +1156,27 @@ func (e *DuplicatePolicyAttachmentException) ErrorCode() string {
 func (e *DuplicatePolicyAttachmentException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *DuplicatePolicyAttachmentException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DuplicatePolicyAttachmentException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DuplicatePolicyAttachmentException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DuplicatePolicyAttachmentException_Message, *v.Message)
+	}
+}
+func (v *DuplicatePolicyAttachmentException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DuplicatePolicyAttachmentException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DuplicatePolicyAttachmentException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DuplicatePolicyAttachmentException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A policy with the same name already exists.
 type DuplicatePolicyException struct {
@@ -783,6 +1203,27 @@ func (e *DuplicatePolicyException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DuplicatePolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DuplicatePolicyException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DuplicatePolicyException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DuplicatePolicyException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DuplicatePolicyException_Message, *v.Message)
+	}
+}
+func (v *DuplicatePolicyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DuplicatePolicyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DuplicatePolicyException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DuplicatePolicyException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // If you ran this action on the management account, this policy type is not
 // enabled. If you ran the action on a member account, the account doesn't have an
@@ -812,6 +1253,27 @@ func (e *EffectivePolicyNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EffectivePolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *EffectivePolicyNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EffectivePolicyNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EffectivePolicyNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EffectivePolicyNotFoundException_Message, *v.Message)
+	}
+}
+func (v *EffectivePolicyNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EffectivePolicyNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EffectivePolicyNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EffectivePolicyNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Organizations couldn't perform the operation because your organization hasn't
 // finished initializing. This can take up to an hour. Try again later. If after
@@ -842,6 +1304,27 @@ func (e *FinalizingOrganizationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *FinalizingOrganizationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *FinalizingOrganizationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FinalizingOrganizationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FinalizingOrganizationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.FinalizingOrganizationException_Message, *v.Message)
+	}
+}
+func (v *FinalizingOrganizationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FinalizingOrganizationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FinalizingOrganizationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.FinalizingOrganizationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified handshake is already in the requested state. For example, you
 // can't accept a handshake that was already accepted.
@@ -869,6 +1352,27 @@ func (e *HandshakeAlreadyInStateException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *HandshakeAlreadyInStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *HandshakeAlreadyInStateException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HandshakeAlreadyInStateException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HandshakeAlreadyInStateException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.HandshakeAlreadyInStateException_Message, *v.Message)
+	}
+}
+func (v *HandshakeAlreadyInStateException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HandshakeAlreadyInStateException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HandshakeAlreadyInStateException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.HandshakeAlreadyInStateException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The requested operation would violate the constraint identified in the reason
 // code.
@@ -961,6 +1465,37 @@ func (e *HandshakeConstraintViolationException) ErrorCode() string {
 func (e *HandshakeConstraintViolationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *HandshakeConstraintViolationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HandshakeConstraintViolationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HandshakeConstraintViolationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.HandshakeConstraintViolationException_Message, *v.Message)
+	}
+	if v.Reason != "" {
+		s.WriteString(schemas.HandshakeConstraintViolationException_Reason, string(v.Reason))
+	}
+}
+func (v *HandshakeConstraintViolationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HandshakeConstraintViolationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HandshakeConstraintViolationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.HandshakeConstraintViolationException_Message, v.Message)
+		case schemas.HandshakeConstraintViolationException_Reason:
+			var ev string
+			if err := d.ReadString(schemas.HandshakeConstraintViolationException_Reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = HandshakeConstraintViolationExceptionReason(ev)
+			return nil
+		}
+		return nil
+	})
+}
 
 // We can't find a handshake with the HandshakeId that you specified.
 type HandshakeNotFoundException struct {
@@ -987,6 +1522,27 @@ func (e *HandshakeNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *HandshakeNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *HandshakeNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HandshakeNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HandshakeNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.HandshakeNotFoundException_Message, *v.Message)
+	}
+}
+func (v *HandshakeNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HandshakeNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HandshakeNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.HandshakeNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You can't perform the operation on the handshake in its current state. For
 // example, you can't cancel a handshake that was already accepted or accept a
@@ -1016,6 +1572,27 @@ func (e *InvalidHandshakeTransitionException) ErrorCode() string {
 }
 func (e *InvalidHandshakeTransitionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *InvalidHandshakeTransitionException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidHandshakeTransitionException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidHandshakeTransitionException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidHandshakeTransitionException_Message, *v.Message)
+	}
+}
+func (v *InvalidHandshakeTransitionException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidHandshakeTransitionException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidHandshakeTransitionException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidHandshakeTransitionException_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // The requested operation failed because you provided invalid values for one or
@@ -1160,6 +1737,37 @@ func (e *InvalidInputException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidInputException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidInputException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidInputException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidInputException_Message, *v.Message)
+	}
+	if v.Reason != "" {
+		s.WriteString(schemas.InvalidInputException_Reason, string(v.Reason))
+	}
+}
+func (v *InvalidInputException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidInputException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidInputException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidInputException_Message, v.Message)
+		case schemas.InvalidInputException_Reason:
+			var ev string
+			if err := d.ReadString(schemas.InvalidInputException_Reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = InvalidInputExceptionReason(ev)
+			return nil
+		}
+		return nil
+	})
+}
 
 // The responsibility transfer can't transition to the requested state because
 // it's not in a valid state for this operation.
@@ -1188,6 +1796,27 @@ func (e *InvalidResponsibilityTransferTransitionException) ErrorCode() string {
 }
 func (e *InvalidResponsibilityTransferTransitionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *InvalidResponsibilityTransferTransitionException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidResponsibilityTransferTransitionException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidResponsibilityTransferTransitionException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidResponsibilityTransferTransitionException_Message, *v.Message)
+	}
+}
+func (v *InvalidResponsibilityTransferTransitionException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidResponsibilityTransferTransitionException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidResponsibilityTransferTransitionException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidResponsibilityTransferTransitionException_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // The provided policy document doesn't meet the requirements of the specified
@@ -1219,6 +1848,27 @@ func (e *MalformedPolicyDocumentException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MalformedPolicyDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *MalformedPolicyDocumentException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MalformedPolicyDocumentException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedPolicyDocumentException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.MalformedPolicyDocumentException_Message, *v.Message)
+	}
+}
+func (v *MalformedPolicyDocumentException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MalformedPolicyDocumentException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MalformedPolicyDocumentException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MalformedPolicyDocumentException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You can't remove a management account from an organization. If you want the
 // management account to become a member account in another organization, you must
@@ -1249,6 +1899,27 @@ func (e *MasterCannotLeaveOrganizationException) ErrorCode() string {
 func (e *MasterCannotLeaveOrganizationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *MasterCannotLeaveOrganizationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MasterCannotLeaveOrganizationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MasterCannotLeaveOrganizationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.MasterCannotLeaveOrganizationException_Message, *v.Message)
+	}
+}
+func (v *MasterCannotLeaveOrganizationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MasterCannotLeaveOrganizationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MasterCannotLeaveOrganizationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MasterCannotLeaveOrganizationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified OU is not empty. Move all accounts to another root or to other
 // OUs, remove all child OUs, and try the operation again.
@@ -1278,6 +1949,27 @@ func (e *OrganizationalUnitNotEmptyException) ErrorCode() string {
 func (e *OrganizationalUnitNotEmptyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *OrganizationalUnitNotEmptyException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationalUnitNotEmptyException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationalUnitNotEmptyException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.OrganizationalUnitNotEmptyException_Message, *v.Message)
+	}
+}
+func (v *OrganizationalUnitNotEmptyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationalUnitNotEmptyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationalUnitNotEmptyException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.OrganizationalUnitNotEmptyException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We can't find an OU with the OrganizationalUnitId that you specified.
 type OrganizationalUnitNotFoundException struct {
@@ -1306,6 +1998,27 @@ func (e *OrganizationalUnitNotFoundException) ErrorCode() string {
 func (e *OrganizationalUnitNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *OrganizationalUnitNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationalUnitNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationalUnitNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.OrganizationalUnitNotFoundException_Message, *v.Message)
+	}
+}
+func (v *OrganizationalUnitNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationalUnitNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationalUnitNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.OrganizationalUnitNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The organization isn't empty. To delete an organization, you must first remove
 // all accounts except the management account.
@@ -1333,6 +2046,27 @@ func (e *OrganizationNotEmptyException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *OrganizationNotEmptyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *OrganizationNotEmptyException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationNotEmptyException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationNotEmptyException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.OrganizationNotEmptyException_Message, *v.Message)
+	}
+}
+func (v *OrganizationNotEmptyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationNotEmptyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationNotEmptyException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.OrganizationNotEmptyException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We can't find a root or OU with the ParentId that you specified.
 type ParentNotFoundException struct {
@@ -1359,6 +2093,27 @@ func (e *ParentNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ParentNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ParentNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParentNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParentNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ParentNotFoundException_Message, *v.Message)
+	}
+}
+func (v *ParentNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParentNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParentNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ParentNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Changes to the effective policy are in progress, and its contents can't be
 // returned. Try the operation again later.
@@ -1386,6 +2141,27 @@ func (e *PolicyChangesInProgressException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PolicyChangesInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PolicyChangesInProgressException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyChangesInProgressException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyChangesInProgressException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PolicyChangesInProgressException_Message, *v.Message)
+	}
+}
+func (v *PolicyChangesInProgressException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyChangesInProgressException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyChangesInProgressException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PolicyChangesInProgressException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The policy is attached to one or more entities. You must detach it from all
 // roots, OUs, and accounts before performing this operation.
@@ -1413,6 +2189,27 @@ func (e *PolicyInUseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PolicyInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PolicyInUseException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyInUseException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyInUseException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PolicyInUseException_Message, *v.Message)
+	}
+}
+func (v *PolicyInUseException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyInUseException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyInUseException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PolicyInUseException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The policy isn't attached to the specified target in the specified root.
 type PolicyNotAttachedException struct {
@@ -1439,6 +2236,27 @@ func (e *PolicyNotAttachedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PolicyNotAttachedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PolicyNotAttachedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyNotAttachedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyNotAttachedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PolicyNotAttachedException_Message, *v.Message)
+	}
+}
+func (v *PolicyNotAttachedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyNotAttachedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyNotAttachedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PolicyNotAttachedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We can't find a policy with the PolicyId that you specified.
 type PolicyNotFoundException struct {
@@ -1465,6 +2283,27 @@ func (e *PolicyNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PolicyNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PolicyNotFoundException_Message, *v.Message)
+	}
+}
+func (v *PolicyNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PolicyNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified policy type is already enabled in the specified root.
 type PolicyTypeAlreadyEnabledException struct {
@@ -1491,6 +2330,27 @@ func (e *PolicyTypeAlreadyEnabledException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PolicyTypeAlreadyEnabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PolicyTypeAlreadyEnabledException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyTypeAlreadyEnabledException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyTypeAlreadyEnabledException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PolicyTypeAlreadyEnabledException_Message, *v.Message)
+	}
+}
+func (v *PolicyTypeAlreadyEnabledException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyTypeAlreadyEnabledException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyTypeAlreadyEnabledException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PolicyTypeAlreadyEnabledException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You can't use the specified policy type with the feature set currently enabled
 // for this organization. For example, you can enable SCPs only after you enable
@@ -1524,6 +2384,27 @@ func (e *PolicyTypeNotAvailableForOrganizationException) ErrorCode() string {
 func (e *PolicyTypeNotAvailableForOrganizationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *PolicyTypeNotAvailableForOrganizationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyTypeNotAvailableForOrganizationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyTypeNotAvailableForOrganizationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PolicyTypeNotAvailableForOrganizationException_Message, *v.Message)
+	}
+}
+func (v *PolicyTypeNotAvailableForOrganizationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyTypeNotAvailableForOrganizationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyTypeNotAvailableForOrganizationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PolicyTypeNotAvailableForOrganizationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified policy type isn't currently enabled in this root. You can't
 // attach policies of the specified type to entities in a root until you enable
@@ -1555,6 +2436,27 @@ func (e *PolicyTypeNotEnabledException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PolicyTypeNotEnabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PolicyTypeNotEnabledException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyTypeNotEnabledException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyTypeNotEnabledException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PolicyTypeNotEnabledException_Message, *v.Message)
+	}
+}
+func (v *PolicyTypeNotEnabledException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyTypeNotEnabledException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyTypeNotEnabledException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PolicyTypeNotEnabledException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We can't find a resource policy request with the parameter that you specified.
 type ResourcePolicyNotFoundException struct {
@@ -1581,6 +2483,27 @@ func (e *ResourcePolicyNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourcePolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourcePolicyNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourcePolicyNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourcePolicyNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourcePolicyNotFoundException_Message, *v.Message)
+	}
+}
+func (v *ResourcePolicyNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourcePolicyNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourcePolicyNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourcePolicyNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The responsibility transfer is already in the status that you specified.
 type ResponsibilityTransferAlreadyInStatusException struct {
@@ -1608,6 +2531,27 @@ func (e *ResponsibilityTransferAlreadyInStatusException) ErrorCode() string {
 }
 func (e *ResponsibilityTransferAlreadyInStatusException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *ResponsibilityTransferAlreadyInStatusException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponsibilityTransferAlreadyInStatusException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponsibilityTransferAlreadyInStatusException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResponsibilityTransferAlreadyInStatusException_Message, *v.Message)
+	}
+}
+func (v *ResponsibilityTransferAlreadyInStatusException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponsibilityTransferAlreadyInStatusException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResponsibilityTransferAlreadyInStatusException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResponsibilityTransferAlreadyInStatusException_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // We can't find a transfer that you specified.
@@ -1637,6 +2581,27 @@ func (e *ResponsibilityTransferNotFoundException) ErrorCode() string {
 func (e *ResponsibilityTransferNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *ResponsibilityTransferNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponsibilityTransferNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponsibilityTransferNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResponsibilityTransferNotFoundException_Message, *v.Message)
+	}
+}
+func (v *ResponsibilityTransferNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponsibilityTransferNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResponsibilityTransferNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResponsibilityTransferNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We can't find a root with the RootId that you specified.
 type RootNotFoundException struct {
@@ -1663,6 +2628,27 @@ func (e *RootNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RootNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *RootNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RootNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RootNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.RootNotFoundException_Message, *v.Message)
+	}
+}
+func (v *RootNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RootNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RootNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RootNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Organizations can't complete your request because of an internal service error.
 // Try again later.
@@ -1690,6 +2676,27 @@ func (e *ServiceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServiceException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceException_Message, *v.Message)
+	}
+}
+func (v *ServiceException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We can't find a source root or OU with the ParentId that you specified.
 type SourceParentNotFoundException struct {
@@ -1716,6 +2723,27 @@ func (e *SourceParentNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *SourceParentNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *SourceParentNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceParentNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceParentNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.SourceParentNotFoundException_Message, *v.Message)
+	}
+}
+func (v *SourceParentNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceParentNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceParentNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SourceParentNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // We can't find a root, OU, account, or policy with the TargetId that you
 // specified.
@@ -1743,6 +2771,27 @@ func (e *TargetNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TargetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TargetNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TargetNotFoundException_Message, *v.Message)
+	}
+}
+func (v *TargetNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TargetNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You have sent too many requests in too short a period of time. The quota helps
 // protect against denial-of-service attacks. Try again later.
@@ -1777,6 +2826,33 @@ func (e *TooManyRequestsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyRequestsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyRequestsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyRequestsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyRequestsException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.TooManyRequestsException_Type, *v.Type)
+	}
+}
+func (v *TooManyRequestsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyRequestsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyRequestsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyRequestsException_Message, v.Message)
+		case schemas.TooManyRequestsException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.TooManyRequestsException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // This action isn't available in the current Amazon Web Services Region.
 type UnsupportedAPIEndpointException struct {
@@ -1803,3 +2879,24 @@ func (e *UnsupportedAPIEndpointException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedAPIEndpointException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnsupportedAPIEndpointException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsupportedAPIEndpointException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsupportedAPIEndpointException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnsupportedAPIEndpointException_Message, *v.Message)
+	}
+}
+func (v *UnsupportedAPIEndpointException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsupportedAPIEndpointException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsupportedAPIEndpointException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnsupportedAPIEndpointException_Message, v.Message)
+		}
+		return nil
+	})
+}

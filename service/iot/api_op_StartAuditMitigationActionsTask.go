@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,27 @@ type StartAuditMitigationActionsTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAuditMitigationActionsTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAuditMitigationActionsTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAuditMitigationActionsTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuditCheckToActionsMapping(s, schemas.StartAuditMitigationActionsTaskRequest_auditCheckToActionsMapping, v.AuditCheckToActionsMapping)
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartAuditMitigationActionsTaskRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Target != nil {
+		s.WriteStruct(schemas.StartAuditMitigationActionsTaskRequest_target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.StartAuditMitigationActionsTaskRequest_taskId, *v.TaskId)
+	}
+}
+
 type StartAuditMitigationActionsTaskOutput struct {
 
 	// The unique identifier for the audit mitigation task. This matches the taskId
@@ -73,13 +96,32 @@ type StartAuditMitigationActionsTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAuditMitigationActionsTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAuditMitigationActionsTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAuditMitigationActionsTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.StartAuditMitigationActionsTaskResponse_taskId, *v.TaskId)
+	}
+}
+func (v *StartAuditMitigationActionsTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAuditMitigationActionsTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAuditMitigationActionsTaskResponse_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.StartAuditMitigationActionsTaskResponse_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartAuditMitigationActionsTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartAuditMitigationActionsTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAuditMitigationActionsTask, schemas.StartAuditMitigationActionsTaskRequest, schemas.StartAuditMitigationActionsTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartAuditMitigationActionsTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAuditMitigationActionsTask, schemas.StartAuditMitigationActionsTaskRequest, schemas.StartAuditMitigationActionsTaskResponse), output: &StartAuditMitigationActionsTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

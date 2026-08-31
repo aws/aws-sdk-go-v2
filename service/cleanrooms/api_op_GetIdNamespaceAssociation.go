@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetIdNamespaceAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdNamespaceAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdNamespaceAssociationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdNamespaceAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdNamespaceAssociationIdentifier != nil {
+		s.WriteString(schemas.GetIdNamespaceAssociationInput_idNamespaceAssociationIdentifier, *v.IdNamespaceAssociationIdentifier)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.GetIdNamespaceAssociationInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+
 type GetIdNamespaceAssociationOutput struct {
 
 	// The ID namespace association that you requested.
@@ -53,13 +70,34 @@ type GetIdNamespaceAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdNamespaceAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdNamespaceAssociationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdNamespaceAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdNamespaceAssociation != nil {
+		s.WriteStruct(schemas.GetIdNamespaceAssociationOutput_idNamespaceAssociation)
+		v.IdNamespaceAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetIdNamespaceAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIdNamespaceAssociationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIdNamespaceAssociationOutput_idNamespaceAssociation:
+			v.IdNamespaceAssociation = &types.IdNamespaceAssociation{}
+			return v.IdNamespaceAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIdNamespaceAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIdNamespaceAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdNamespaceAssociation, schemas.GetIdNamespaceAssociationInput, schemas.GetIdNamespaceAssociationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIdNamespaceAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdNamespaceAssociation, schemas.GetIdNamespaceAssociationInput, schemas.GetIdNamespaceAssociationOutput), output: &GetIdNamespaceAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

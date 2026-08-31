@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteImageBuilderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteImageBuilderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteImageBuilderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteImageBuilderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteImageBuilderRequest_Name, *v.Name)
+	}
+}
+
 type DeleteImageBuilderOutput struct {
 
 	// Information about the image builder.
@@ -45,13 +59,34 @@ type DeleteImageBuilderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteImageBuilderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteImageBuilderResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteImageBuilderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageBuilder != nil {
+		s.WriteStruct(schemas.DeleteImageBuilderResult_ImageBuilder)
+		v.ImageBuilder.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteImageBuilderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteImageBuilderResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteImageBuilderResult_ImageBuilder:
+			v.ImageBuilder = &types.ImageBuilder{}
+			return v.ImageBuilder.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteImageBuilderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteImageBuilder{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteImageBuilder, schemas.DeleteImageBuilderRequest, schemas.DeleteImageBuilderResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteImageBuilder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteImageBuilder, schemas.DeleteImageBuilderRequest, schemas.DeleteImageBuilderResult), output: &DeleteImageBuilderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

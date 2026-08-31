@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,33 @@ type CreateArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateArtifactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateArtifactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateArtifactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactName != nil {
+		s.WriteString(schemas.CreateArtifactRequest_ArtifactName, *v.ArtifactName)
+	}
+	if v.ArtifactType != nil {
+		s.WriteString(schemas.CreateArtifactRequest_ArtifactType, *v.ArtifactType)
+	}
+	if v.MetadataProperties != nil {
+		s.WriteStruct(schemas.CreateArtifactRequest_MetadataProperties)
+		v.MetadataProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeArtifactProperties(s, schemas.CreateArtifactRequest_Properties, v.Properties)
+	if v.Source != nil {
+		s.WriteStruct(schemas.CreateArtifactRequest_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateArtifactRequest_Tags, v.Tags)
+}
+
 type CreateArtifactOutput struct {
 
 	// The Amazon Resource Name (ARN) of the artifact.
@@ -67,13 +96,32 @@ type CreateArtifactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateArtifactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateArtifactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateArtifactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactArn != nil {
+		s.WriteString(schemas.CreateArtifactResponse_ArtifactArn, *v.ArtifactArn)
+	}
+}
+func (v *CreateArtifactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateArtifactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateArtifactResponse_ArtifactArn:
+			v.ArtifactArn = new(string)
+			return d.ReadString(schemas.CreateArtifactResponse_ArtifactArn, v.ArtifactArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateArtifact, schemas.CreateArtifactRequest, schemas.CreateArtifactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateArtifact, schemas.CreateArtifactRequest, schemas.CreateArtifactResponse), output: &CreateArtifactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

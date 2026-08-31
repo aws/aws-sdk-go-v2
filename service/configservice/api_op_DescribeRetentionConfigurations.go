@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,19 @@ type DescribeRetentionConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRetentionConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRetentionConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRetentionConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRetentionConfigurationsRequest_NextToken, *v.NextToken)
+	}
+	serializeRetentionConfigurationNameList(s, schemas.DescribeRetentionConfigurationsRequest_RetentionConfigurationNames, v.RetentionConfigurationNames)
+}
+
 type DescribeRetentionConfigurationsOutput struct {
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -62,13 +77,35 @@ type DescribeRetentionConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRetentionConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRetentionConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRetentionConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRetentionConfigurationsResponse_NextToken, *v.NextToken)
+	}
+	serializeRetentionConfigurationList(s, schemas.DescribeRetentionConfigurationsResponse_RetentionConfigurations, v.RetentionConfigurations)
+}
+func (v *DescribeRetentionConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRetentionConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRetentionConfigurationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeRetentionConfigurationsResponse_NextToken, v.NextToken)
+		case schemas.DescribeRetentionConfigurationsResponse_RetentionConfigurations:
+			return deserializeRetentionConfigurationList(d, schemas.DescribeRetentionConfigurationsResponse_RetentionConfigurations, &v.RetentionConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRetentionConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRetentionConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRetentionConfigurations, schemas.DescribeRetentionConfigurationsRequest, schemas.DescribeRetentionConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeRetentionConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRetentionConfigurations, schemas.DescribeRetentionConfigurationsRequest, schemas.DescribeRetentionConfigurationsResponse), output: &DescribeRetentionConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,15 @@ type GetRegistrationCodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRegistrationCodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRegistrationCodeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRegistrationCodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 // The output from the GetRegistrationCode operation.
 type GetRegistrationCodeOutput struct {
 
@@ -48,13 +59,32 @@ type GetRegistrationCodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRegistrationCodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRegistrationCodeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRegistrationCodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistrationCode != nil {
+		s.WriteString(schemas.GetRegistrationCodeResponse_registrationCode, *v.RegistrationCode)
+	}
+}
+func (v *GetRegistrationCodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRegistrationCodeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRegistrationCodeResponse_registrationCode:
+			v.RegistrationCode = new(string)
+			return d.ReadString(schemas.GetRegistrationCodeResponse_registrationCode, v.RegistrationCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRegistrationCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRegistrationCode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRegistrationCode, schemas.GetRegistrationCodeRequest, schemas.GetRegistrationCodeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRegistrationCode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRegistrationCode, schemas.GetRegistrationCodeRequest, schemas.GetRegistrationCodeResponse), output: &GetRegistrationCodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

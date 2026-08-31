@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","id":"__Id__","lastModifiedAt":"2000-01-01T00:00:00Z","lastModifiedBy":"__LastModifiedBy__","metadata":"__Document__","recommendationArn":"__RecommendationArn__","type":"AWS_RESOURCE"},{"createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","id":"__Id__","lastModifiedAt":"2000-01-01T00:00:00Z","lastModifiedBy":"__LastModifiedBy__","metadata":"__Document__","recommendationArn":"__RecommendationArn__","type":"AWS_RESOURCE"}],"nextToken":"__NextToken__"}

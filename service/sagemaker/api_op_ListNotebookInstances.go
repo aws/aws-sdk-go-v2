@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -88,6 +90,54 @@ type ListNotebookInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNotebookInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNotebookInstancesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNotebookInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalCodeRepositoryEquals != nil {
+		s.WriteString(schemas.ListNotebookInstancesInput_AdditionalCodeRepositoryEquals, *v.AdditionalCodeRepositoryEquals)
+	}
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListNotebookInstancesInput_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListNotebookInstancesInput_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.DefaultCodeRepositoryContains != nil {
+		s.WriteString(schemas.ListNotebookInstancesInput_DefaultCodeRepositoryContains, *v.DefaultCodeRepositoryContains)
+	}
+	if v.LastModifiedTimeAfter != nil {
+		s.WriteTime(schemas.ListNotebookInstancesInput_LastModifiedTimeAfter, *v.LastModifiedTimeAfter)
+	}
+	if v.LastModifiedTimeBefore != nil {
+		s.WriteTime(schemas.ListNotebookInstancesInput_LastModifiedTimeBefore, *v.LastModifiedTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListNotebookInstancesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListNotebookInstancesInput_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNotebookInstancesInput_NextToken, *v.NextToken)
+	}
+	if v.NotebookInstanceLifecycleConfigNameContains != nil {
+		s.WriteString(schemas.ListNotebookInstancesInput_NotebookInstanceLifecycleConfigNameContains, *v.NotebookInstanceLifecycleConfigNameContains)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListNotebookInstancesInput_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListNotebookInstancesInput_SortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListNotebookInstancesInput_StatusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListNotebookInstancesOutput struct {
 
 	// If the response to the previous ListNotebookInstances request was truncated,
@@ -104,13 +154,35 @@ type ListNotebookInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNotebookInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNotebookInstancesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNotebookInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNotebookInstancesOutput_NextToken, *v.NextToken)
+	}
+	serializeNotebookInstanceSummaryList(s, schemas.ListNotebookInstancesOutput_NotebookInstances, v.NotebookInstances)
+}
+func (v *ListNotebookInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNotebookInstancesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNotebookInstancesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNotebookInstancesOutput_NextToken, v.NextToken)
+		case schemas.ListNotebookInstancesOutput_NotebookInstances:
+			return deserializeNotebookInstanceSummaryList(d, schemas.ListNotebookInstancesOutput_NotebookInstances, &v.NotebookInstances)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNotebookInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListNotebookInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNotebookInstances, schemas.ListNotebookInstancesInput, schemas.ListNotebookInstancesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListNotebookInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNotebookInstances, schemas.ListNotebookInstancesInput, schemas.ListNotebookInstancesOutput), output: &ListNotebookInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

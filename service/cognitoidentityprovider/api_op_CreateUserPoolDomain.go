@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -107,6 +109,34 @@ type CreateUserPoolDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserPoolDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserPoolDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserPoolDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomDomainConfig != nil {
+		s.WriteStruct(schemas.CreateUserPoolDomainRequest_CustomDomainConfig)
+		v.CustomDomainConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.CreateUserPoolDomainRequest_Domain, *v.Domain)
+	}
+	if v.ManagedLoginVersion != nil {
+		s.WriteInt32(schemas.CreateUserPoolDomainRequest_ManagedLoginVersion, *v.ManagedLoginVersion)
+	}
+	if v.Routing != nil {
+		s.WriteStruct(schemas.CreateUserPoolDomainRequest_Routing)
+		v.Routing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.CreateUserPoolDomainRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type CreateUserPoolDomainOutput struct {
 
 	// The fully-qualified domain name (FQDN) of the Amazon CloudFront distribution
@@ -130,13 +160,46 @@ type CreateUserPoolDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserPoolDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserPoolDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserPoolDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudFrontDomain != nil {
+		s.WriteString(schemas.CreateUserPoolDomainResponse_CloudFrontDomain, *v.CloudFrontDomain)
+	}
+	if v.ManagedLoginVersion != nil {
+		s.WriteInt32(schemas.CreateUserPoolDomainResponse_ManagedLoginVersion, *v.ManagedLoginVersion)
+	}
+	if v.Routing != nil {
+		s.WriteStruct(schemas.CreateUserPoolDomainResponse_Routing)
+		v.Routing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateUserPoolDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUserPoolDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUserPoolDomainResponse_CloudFrontDomain:
+			v.CloudFrontDomain = new(string)
+			return d.ReadString(schemas.CreateUserPoolDomainResponse_CloudFrontDomain, v.CloudFrontDomain)
+		case schemas.CreateUserPoolDomainResponse_ManagedLoginVersion:
+			v.ManagedLoginVersion = new(int32)
+			return d.ReadInt32(schemas.CreateUserPoolDomainResponse_ManagedLoginVersion, v.ManagedLoginVersion)
+		case schemas.CreateUserPoolDomainResponse_Routing:
+			v.Routing = &types.RoutingType{}
+			return v.Routing.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUserPoolDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateUserPoolDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserPoolDomain, schemas.CreateUserPoolDomainRequest, schemas.CreateUserPoolDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateUserPoolDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserPoolDomain, schemas.CreateUserPoolDomainRequest, schemas.CreateUserPoolDomainResponse), output: &CreateUserPoolDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

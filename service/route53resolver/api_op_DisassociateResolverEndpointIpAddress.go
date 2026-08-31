@@ -4,7 +4,9 @@ package route53resolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,23 @@ type DisassociateResolverEndpointIpAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateResolverEndpointIpAddressInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateResolverEndpointIpAddressRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateResolverEndpointIpAddressInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpAddress != nil {
+		s.WriteStruct(schemas.DisassociateResolverEndpointIpAddressRequest_IpAddress)
+		v.IpAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResolverEndpointId != nil {
+		s.WriteString(schemas.DisassociateResolverEndpointIpAddressRequest_ResolverEndpointId, *v.ResolverEndpointId)
+	}
+}
+
 type DisassociateResolverEndpointIpAddressOutput struct {
 
 	// The response to an DisassociateResolverEndpointIpAddress request.
@@ -57,13 +76,34 @@ type DisassociateResolverEndpointIpAddressOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateResolverEndpointIpAddressOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateResolverEndpointIpAddressResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateResolverEndpointIpAddressOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverEndpoint != nil {
+		s.WriteStruct(schemas.DisassociateResolverEndpointIpAddressResponse_ResolverEndpoint)
+		v.ResolverEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DisassociateResolverEndpointIpAddressOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateResolverEndpointIpAddressResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateResolverEndpointIpAddressResponse_ResolverEndpoint:
+			v.ResolverEndpoint = &types.ResolverEndpoint{}
+			return v.ResolverEndpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateResolverEndpointIpAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateResolverEndpointIpAddress{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateResolverEndpointIpAddress, schemas.DisassociateResolverEndpointIpAddressRequest, schemas.DisassociateResolverEndpointIpAddressResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateResolverEndpointIpAddress{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateResolverEndpointIpAddress, schemas.DisassociateResolverEndpointIpAddressRequest, schemas.DisassociateResolverEndpointIpAddressResponse), output: &DisassociateResolverEndpointIpAddressOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

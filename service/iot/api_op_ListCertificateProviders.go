@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ListCertificateProvidersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCertificateProvidersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCertificateProvidersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCertificateProvidersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AscendingOrder != false {
+		s.WriteBool(schemas.ListCertificateProvidersRequest_ascendingOrder, v.AscendingOrder)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCertificateProvidersRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListCertificateProvidersOutput struct {
 
 	// The list of certificate providers in your Amazon Web Services account.
@@ -53,13 +70,35 @@ type ListCertificateProvidersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCertificateProvidersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCertificateProvidersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCertificateProvidersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCertificateProviders(s, schemas.ListCertificateProvidersResponse_certificateProviders, v.CertificateProviders)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCertificateProvidersResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCertificateProvidersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCertificateProvidersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCertificateProvidersResponse_certificateProviders:
+			return deserializeCertificateProviders(d, schemas.ListCertificateProvidersResponse_certificateProviders, &v.CertificateProviders)
+		case schemas.ListCertificateProvidersResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCertificateProvidersResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCertificateProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCertificateProviders{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCertificateProviders, schemas.ListCertificateProvidersRequest, schemas.ListCertificateProvidersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCertificateProviders{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCertificateProviders, schemas.ListCertificateProvidersRequest, schemas.ListCertificateProvidersResponse), output: &ListCertificateProvidersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -58,6 +60,39 @@ type ListModelCardsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelCardsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelCardsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelCardsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListModelCardsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListModelCardsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListModelCardsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.ModelCardStatus != "" {
+		s.WriteString(schemas.ListModelCardsRequest_ModelCardStatus, string(v.ModelCardStatus))
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListModelCardsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelCardsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListModelCardsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListModelCardsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListModelCardsOutput struct {
 
 	// The summaries of the listed model cards.
@@ -75,13 +110,35 @@ type ListModelCardsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelCardsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelCardsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelCardsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeModelCardSummaryList(s, schemas.ListModelCardsResponse_ModelCardSummaries, v.ModelCardSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelCardsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListModelCardsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListModelCardsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListModelCardsResponse_ModelCardSummaries:
+			return deserializeModelCardSummaryList(d, schemas.ListModelCardsResponse_ModelCardSummaries, &v.ModelCardSummaries)
+		case schemas.ListModelCardsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListModelCardsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListModelCardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListModelCards{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelCards, schemas.ListModelCardsRequest, schemas.ListModelCardsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListModelCards{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelCards, schemas.ListModelCardsRequest, schemas.ListModelCardsResponse), output: &ListModelCardsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

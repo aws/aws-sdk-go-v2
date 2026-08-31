@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -33,6 +35,62 @@ type CSVInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CSVInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CSVInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CSVInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Comments != nil {
+		s.WriteString(schemas.CSVInput_Comments, *v.Comments)
+	}
+	if v.FieldDelimiter != nil {
+		s.WriteString(schemas.CSVInput_FieldDelimiter, *v.FieldDelimiter)
+	}
+	if v.FileHeaderInfo != "" {
+		s.WriteString(schemas.CSVInput_FileHeaderInfo, string(v.FileHeaderInfo))
+	}
+	if v.QuoteCharacter != nil {
+		s.WriteString(schemas.CSVInput_QuoteCharacter, *v.QuoteCharacter)
+	}
+	if v.QuoteEscapeCharacter != nil {
+		s.WriteString(schemas.CSVInput_QuoteEscapeCharacter, *v.QuoteEscapeCharacter)
+	}
+	if v.RecordDelimiter != nil {
+		s.WriteString(schemas.CSVInput_RecordDelimiter, *v.RecordDelimiter)
+	}
+}
+func (v *CSVInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CSVInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CSVInput_Comments:
+			v.Comments = new(string)
+			return d.ReadString(schemas.CSVInput_Comments, v.Comments)
+		case schemas.CSVInput_FieldDelimiter:
+			v.FieldDelimiter = new(string)
+			return d.ReadString(schemas.CSVInput_FieldDelimiter, v.FieldDelimiter)
+		case schemas.CSVInput_FileHeaderInfo:
+			var ev string
+			if err := d.ReadString(schemas.CSVInput_FileHeaderInfo, &ev); err != nil {
+				return err
+			}
+			v.FileHeaderInfo = FileHeaderInfo(ev)
+			return nil
+		case schemas.CSVInput_QuoteCharacter:
+			v.QuoteCharacter = new(string)
+			return d.ReadString(schemas.CSVInput_QuoteCharacter, v.QuoteCharacter)
+		case schemas.CSVInput_QuoteEscapeCharacter:
+			v.QuoteEscapeCharacter = new(string)
+			return d.ReadString(schemas.CSVInput_QuoteEscapeCharacter, v.QuoteEscapeCharacter)
+		case schemas.CSVInput_RecordDelimiter:
+			v.RecordDelimiter = new(string)
+			return d.ReadString(schemas.CSVInput_RecordDelimiter, v.RecordDelimiter)
+		}
+		return nil
+	})
+}
+
 // Contains information about the comma-separated value (CSV) file that the job
 // results are stored in.
 type CSVOutput struct {
@@ -58,6 +116,56 @@ type CSVOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CSVOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CSVOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CSVOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldDelimiter != nil {
+		s.WriteString(schemas.CSVOutput_FieldDelimiter, *v.FieldDelimiter)
+	}
+	if v.QuoteCharacter != nil {
+		s.WriteString(schemas.CSVOutput_QuoteCharacter, *v.QuoteCharacter)
+	}
+	if v.QuoteEscapeCharacter != nil {
+		s.WriteString(schemas.CSVOutput_QuoteEscapeCharacter, *v.QuoteEscapeCharacter)
+	}
+	if v.QuoteFields != "" {
+		s.WriteString(schemas.CSVOutput_QuoteFields, string(v.QuoteFields))
+	}
+	if v.RecordDelimiter != nil {
+		s.WriteString(schemas.CSVOutput_RecordDelimiter, *v.RecordDelimiter)
+	}
+}
+func (v *CSVOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CSVOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CSVOutput_FieldDelimiter:
+			v.FieldDelimiter = new(string)
+			return d.ReadString(schemas.CSVOutput_FieldDelimiter, v.FieldDelimiter)
+		case schemas.CSVOutput_QuoteCharacter:
+			v.QuoteCharacter = new(string)
+			return d.ReadString(schemas.CSVOutput_QuoteCharacter, v.QuoteCharacter)
+		case schemas.CSVOutput_QuoteEscapeCharacter:
+			v.QuoteEscapeCharacter = new(string)
+			return d.ReadString(schemas.CSVOutput_QuoteEscapeCharacter, v.QuoteEscapeCharacter)
+		case schemas.CSVOutput_QuoteFields:
+			var ev string
+			if err := d.ReadString(schemas.CSVOutput_QuoteFields, &ev); err != nil {
+				return err
+			}
+			v.QuoteFields = QuoteFields(ev)
+			return nil
+		case schemas.CSVOutput_RecordDelimiter:
+			v.RecordDelimiter = new(string)
+			return d.ReadString(schemas.CSVOutput_RecordDelimiter, v.RecordDelimiter)
+		}
+		return nil
+	})
+}
+
 // Data retrieval policy.
 type DataRetrievalPolicy struct {
 
@@ -66,6 +174,25 @@ type DataRetrievalPolicy struct {
 	Rules []DataRetrievalRule
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataRetrievalPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataRetrievalPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataRetrievalPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataRetrievalRulesList(s, schemas.DataRetrievalPolicy_Rules, v.Rules)
+}
+func (v *DataRetrievalPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataRetrievalPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataRetrievalPolicy_Rules:
+			return deserializeDataRetrievalRulesList(d, schemas.DataRetrievalPolicy_Rules, &v.Rules)
+		}
+		return nil
+	})
 }
 
 // Data retrieval policy rule.
@@ -84,6 +211,34 @@ type DataRetrievalRule struct {
 	Strategy *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataRetrievalRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataRetrievalRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataRetrievalRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BytesPerHour != nil {
+		s.WriteInt64(schemas.DataRetrievalRule_BytesPerHour, *v.BytesPerHour)
+	}
+	if v.Strategy != nil {
+		s.WriteString(schemas.DataRetrievalRule_Strategy, *v.Strategy)
+	}
+}
+func (v *DataRetrievalRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataRetrievalRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataRetrievalRule_BytesPerHour:
+			v.BytesPerHour = new(int64)
+			return d.ReadInt64(schemas.DataRetrievalRule_BytesPerHour, v.BytesPerHour)
+		case schemas.DataRetrievalRule_Strategy:
+			v.Strategy = new(string)
+			return d.ReadString(schemas.DataRetrievalRule_Strategy, v.Strategy)
+		}
+		return nil
+	})
 }
 
 // Contains the Amazon Glacier response to your request.
@@ -118,6 +273,56 @@ type DescribeVaultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVaultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVaultOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVaultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteString(schemas.DescribeVaultOutput_CreationDate, *v.CreationDate)
+	}
+	if v.LastInventoryDate != nil {
+		s.WriteString(schemas.DescribeVaultOutput_LastInventoryDate, *v.LastInventoryDate)
+	}
+	if v.NumberOfArchives != 0 {
+		s.WriteInt64(schemas.DescribeVaultOutput_NumberOfArchives, v.NumberOfArchives)
+	}
+	if v.SizeInBytes != 0 {
+		s.WriteInt64(schemas.DescribeVaultOutput_SizeInBytes, v.SizeInBytes)
+	}
+	if v.VaultARN != nil {
+		s.WriteString(schemas.DescribeVaultOutput_VaultARN, *v.VaultARN)
+	}
+	if v.VaultName != nil {
+		s.WriteString(schemas.DescribeVaultOutput_VaultName, *v.VaultName)
+	}
+}
+func (v *DescribeVaultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVaultOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVaultOutput_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.DescribeVaultOutput_CreationDate, v.CreationDate)
+		case schemas.DescribeVaultOutput_LastInventoryDate:
+			v.LastInventoryDate = new(string)
+			return d.ReadString(schemas.DescribeVaultOutput_LastInventoryDate, v.LastInventoryDate)
+		case schemas.DescribeVaultOutput_NumberOfArchives:
+			return d.ReadInt64(schemas.DescribeVaultOutput_NumberOfArchives, &v.NumberOfArchives)
+		case schemas.DescribeVaultOutput_SizeInBytes:
+			return d.ReadInt64(schemas.DescribeVaultOutput_SizeInBytes, &v.SizeInBytes)
+		case schemas.DescribeVaultOutput_VaultARN:
+			v.VaultARN = new(string)
+			return d.ReadString(schemas.DescribeVaultOutput_VaultARN, v.VaultARN)
+		case schemas.DescribeVaultOutput_VaultName:
+			v.VaultName = new(string)
+			return d.ReadString(schemas.DescribeVaultOutput_VaultName, v.VaultName)
+		}
+		return nil
+	})
+}
+
 // Contains information about the encryption used to store the job results in
 // Amazon S3.
 type Encryption struct {
@@ -136,6 +341,44 @@ type Encryption struct {
 	KMSKeyId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Encryption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Encryption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Encryption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionType != "" {
+		s.WriteString(schemas.Encryption_EncryptionType, string(v.EncryptionType))
+	}
+	if v.KMSContext != nil {
+		s.WriteString(schemas.Encryption_KMSContext, *v.KMSContext)
+	}
+	if v.KMSKeyId != nil {
+		s.WriteString(schemas.Encryption_KMSKeyId, *v.KMSKeyId)
+	}
+}
+func (v *Encryption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Encryption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Encryption_EncryptionType:
+			var ev string
+			if err := d.ReadString(schemas.Encryption_EncryptionType, &ev); err != nil {
+				return err
+			}
+			v.EncryptionType = EncryptionType(ev)
+			return nil
+		case schemas.Encryption_KMSContext:
+			v.KMSContext = new(string)
+			return d.ReadString(schemas.Encryption_KMSContext, v.KMSContext)
+		case schemas.Encryption_KMSKeyId:
+			v.KMSKeyId = new(string)
+			return d.ReadString(schemas.Encryption_KMSKeyId, v.KMSKeyId)
+		}
+		return nil
+	})
 }
 
 // Contains the description of an Amazon S3 Glacier job.
@@ -243,6 +486,161 @@ type GlacierJobDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GlacierJobDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GlacierJobDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GlacierJobDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.GlacierJobDescription_Action, string(v.Action))
+	}
+	if v.ArchiveId != nil {
+		s.WriteString(schemas.GlacierJobDescription_ArchiveId, *v.ArchiveId)
+	}
+	if v.ArchiveSHA256TreeHash != nil {
+		s.WriteString(schemas.GlacierJobDescription_ArchiveSHA256TreeHash, *v.ArchiveSHA256TreeHash)
+	}
+	if v.ArchiveSizeInBytes != nil {
+		s.WriteInt64(schemas.GlacierJobDescription_ArchiveSizeInBytes, *v.ArchiveSizeInBytes)
+	}
+	if v.Completed != false {
+		s.WriteBool(schemas.GlacierJobDescription_Completed, v.Completed)
+	}
+	if v.CompletionDate != nil {
+		s.WriteString(schemas.GlacierJobDescription_CompletionDate, *v.CompletionDate)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.GlacierJobDescription_CreationDate, *v.CreationDate)
+	}
+	if v.InventoryRetrievalParameters != nil {
+		s.WriteStruct(schemas.GlacierJobDescription_InventoryRetrievalParameters)
+		v.InventoryRetrievalParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InventorySizeInBytes != nil {
+		s.WriteInt64(schemas.GlacierJobDescription_InventorySizeInBytes, *v.InventorySizeInBytes)
+	}
+	if v.JobDescription != nil {
+		s.WriteString(schemas.GlacierJobDescription_JobDescription, *v.JobDescription)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GlacierJobDescription_JobId, *v.JobId)
+	}
+	if v.JobOutputPath != nil {
+		s.WriteString(schemas.GlacierJobDescription_JobOutputPath, *v.JobOutputPath)
+	}
+	if v.OutputLocation != nil {
+		s.WriteStruct(schemas.GlacierJobDescription_OutputLocation)
+		v.OutputLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetrievalByteRange != nil {
+		s.WriteString(schemas.GlacierJobDescription_RetrievalByteRange, *v.RetrievalByteRange)
+	}
+	if v.SHA256TreeHash != nil {
+		s.WriteString(schemas.GlacierJobDescription_SHA256TreeHash, *v.SHA256TreeHash)
+	}
+	if v.SNSTopic != nil {
+		s.WriteString(schemas.GlacierJobDescription_SNSTopic, *v.SNSTopic)
+	}
+	if v.SelectParameters != nil {
+		s.WriteStruct(schemas.GlacierJobDescription_SelectParameters)
+		v.SelectParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StatusCode != "" {
+		s.WriteString(schemas.GlacierJobDescription_StatusCode, string(v.StatusCode))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GlacierJobDescription_StatusMessage, *v.StatusMessage)
+	}
+	if v.Tier != nil {
+		s.WriteString(schemas.GlacierJobDescription_Tier, *v.Tier)
+	}
+	if v.VaultARN != nil {
+		s.WriteString(schemas.GlacierJobDescription_VaultARN, *v.VaultARN)
+	}
+}
+func (v *GlacierJobDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GlacierJobDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GlacierJobDescription_Action:
+			var ev string
+			if err := d.ReadString(schemas.GlacierJobDescription_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = ActionCode(ev)
+			return nil
+		case schemas.GlacierJobDescription_ArchiveId:
+			v.ArchiveId = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_ArchiveId, v.ArchiveId)
+		case schemas.GlacierJobDescription_ArchiveSHA256TreeHash:
+			v.ArchiveSHA256TreeHash = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_ArchiveSHA256TreeHash, v.ArchiveSHA256TreeHash)
+		case schemas.GlacierJobDescription_ArchiveSizeInBytes:
+			v.ArchiveSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.GlacierJobDescription_ArchiveSizeInBytes, v.ArchiveSizeInBytes)
+		case schemas.GlacierJobDescription_Completed:
+			return d.ReadBool(schemas.GlacierJobDescription_Completed, &v.Completed)
+		case schemas.GlacierJobDescription_CompletionDate:
+			v.CompletionDate = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_CompletionDate, v.CompletionDate)
+		case schemas.GlacierJobDescription_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_CreationDate, v.CreationDate)
+		case schemas.GlacierJobDescription_InventoryRetrievalParameters:
+			v.InventoryRetrievalParameters = &InventoryRetrievalJobDescription{}
+			return v.InventoryRetrievalParameters.Deserialize(d)
+		case schemas.GlacierJobDescription_InventorySizeInBytes:
+			v.InventorySizeInBytes = new(int64)
+			return d.ReadInt64(schemas.GlacierJobDescription_InventorySizeInBytes, v.InventorySizeInBytes)
+		case schemas.GlacierJobDescription_JobDescription:
+			v.JobDescription = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_JobDescription, v.JobDescription)
+		case schemas.GlacierJobDescription_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_JobId, v.JobId)
+		case schemas.GlacierJobDescription_JobOutputPath:
+			v.JobOutputPath = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_JobOutputPath, v.JobOutputPath)
+		case schemas.GlacierJobDescription_OutputLocation:
+			v.OutputLocation = &OutputLocation{}
+			return v.OutputLocation.Deserialize(d)
+		case schemas.GlacierJobDescription_RetrievalByteRange:
+			v.RetrievalByteRange = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_RetrievalByteRange, v.RetrievalByteRange)
+		case schemas.GlacierJobDescription_SHA256TreeHash:
+			v.SHA256TreeHash = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_SHA256TreeHash, v.SHA256TreeHash)
+		case schemas.GlacierJobDescription_SNSTopic:
+			v.SNSTopic = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_SNSTopic, v.SNSTopic)
+		case schemas.GlacierJobDescription_SelectParameters:
+			v.SelectParameters = &SelectParameters{}
+			return v.SelectParameters.Deserialize(d)
+		case schemas.GlacierJobDescription_StatusCode:
+			var ev string
+			if err := d.ReadString(schemas.GlacierJobDescription_StatusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = StatusCode(ev)
+			return nil
+		case schemas.GlacierJobDescription_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_StatusMessage, v.StatusMessage)
+		case schemas.GlacierJobDescription_Tier:
+			v.Tier = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_Tier, v.Tier)
+		case schemas.GlacierJobDescription_VaultARN:
+			v.VaultARN = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_VaultARN, v.VaultARN)
+		}
+		return nil
+	})
+}
+
 // Contains information about a grant.
 type Grant struct {
 
@@ -253,6 +651,40 @@ type Grant struct {
 	Permission Permission
 
 	noSmithyDocumentSerde
+}
+
+func (v *Grant) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Grant)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Grant) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Grantee != nil {
+		s.WriteStruct(schemas.Grant_Grantee)
+		v.Grantee.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Permission != "" {
+		s.WriteString(schemas.Grant_Permission, string(v.Permission))
+	}
+}
+func (v *Grant) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Grant, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Grant_Grantee:
+			v.Grantee = &Grantee{}
+			return v.Grantee.Deserialize(d)
+		case schemas.Grant_Permission:
+			var ev string
+			if err := d.ReadString(schemas.Grant_Permission, &ev); err != nil {
+				return err
+			}
+			v.Permission = Permission(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains information about the grantee.
@@ -278,6 +710,56 @@ type Grantee struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Grantee) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Grantee)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Grantee) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.Grantee_DisplayName, *v.DisplayName)
+	}
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.Grantee_EmailAddress, *v.EmailAddress)
+	}
+	if v.ID != nil {
+		s.WriteString(schemas.Grantee_ID, *v.ID)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Grantee_Type, string(v.Type))
+	}
+	if v.URI != nil {
+		s.WriteString(schemas.Grantee_URI, *v.URI)
+	}
+}
+func (v *Grantee) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Grantee, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Grantee_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.Grantee_DisplayName, v.DisplayName)
+		case schemas.Grantee_EmailAddress:
+			v.EmailAddress = new(string)
+			return d.ReadString(schemas.Grantee_EmailAddress, v.EmailAddress)
+		case schemas.Grantee_ID:
+			v.ID = new(string)
+			return d.ReadString(schemas.Grantee_ID, v.ID)
+		case schemas.Grantee_Type:
+			var ev string
+			if err := d.ReadString(schemas.Grantee_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = Type(ev)
+			return nil
+		case schemas.Grantee_URI:
+			v.URI = new(string)
+			return d.ReadString(schemas.Grantee_URI, v.URI)
+		}
+		return nil
+	})
+}
+
 // Describes how the archive is serialized.
 type InputSerialization struct {
 
@@ -285,6 +767,30 @@ type InputSerialization struct {
 	Csv *CSVInput
 
 	noSmithyDocumentSerde
+}
+
+func (v *InputSerialization) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputSerialization)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputSerialization) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Csv != nil {
+		s.WriteStruct(schemas.InputSerialization_csv)
+		v.Csv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InputSerialization) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputSerialization, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputSerialization_csv:
+			v.Csv = &CSVInput{}
+			return v.Csv.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes the options for a range inventory retrieval job.
@@ -322,6 +828,52 @@ type InventoryRetrievalJobDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InventoryRetrievalJobDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InventoryRetrievalJobDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InventoryRetrievalJobDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndDate != nil {
+		s.WriteString(schemas.InventoryRetrievalJobDescription_EndDate, *v.EndDate)
+	}
+	if v.Format != nil {
+		s.WriteString(schemas.InventoryRetrievalJobDescription_Format, *v.Format)
+	}
+	if v.Limit != nil {
+		s.WriteString(schemas.InventoryRetrievalJobDescription_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.InventoryRetrievalJobDescription_Marker, *v.Marker)
+	}
+	if v.StartDate != nil {
+		s.WriteString(schemas.InventoryRetrievalJobDescription_StartDate, *v.StartDate)
+	}
+}
+func (v *InventoryRetrievalJobDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InventoryRetrievalJobDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InventoryRetrievalJobDescription_EndDate:
+			v.EndDate = new(string)
+			return d.ReadString(schemas.InventoryRetrievalJobDescription_EndDate, v.EndDate)
+		case schemas.InventoryRetrievalJobDescription_Format:
+			v.Format = new(string)
+			return d.ReadString(schemas.InventoryRetrievalJobDescription_Format, v.Format)
+		case schemas.InventoryRetrievalJobDescription_Limit:
+			v.Limit = new(string)
+			return d.ReadString(schemas.InventoryRetrievalJobDescription_Limit, v.Limit)
+		case schemas.InventoryRetrievalJobDescription_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.InventoryRetrievalJobDescription_Marker, v.Marker)
+		case schemas.InventoryRetrievalJobDescription_StartDate:
+			v.StartDate = new(string)
+			return d.ReadString(schemas.InventoryRetrievalJobDescription_StartDate, v.StartDate)
+		}
+		return nil
+	})
+}
+
 // Provides options for specifying a range inventory retrieval job.
 type InventoryRetrievalJobInput struct {
 
@@ -346,6 +898,46 @@ type InventoryRetrievalJobInput struct {
 	StartDate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InventoryRetrievalJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InventoryRetrievalJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InventoryRetrievalJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndDate != nil {
+		s.WriteString(schemas.InventoryRetrievalJobInput_EndDate, *v.EndDate)
+	}
+	if v.Limit != nil {
+		s.WriteString(schemas.InventoryRetrievalJobInput_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.InventoryRetrievalJobInput_Marker, *v.Marker)
+	}
+	if v.StartDate != nil {
+		s.WriteString(schemas.InventoryRetrievalJobInput_StartDate, *v.StartDate)
+	}
+}
+func (v *InventoryRetrievalJobInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InventoryRetrievalJobInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InventoryRetrievalJobInput_EndDate:
+			v.EndDate = new(string)
+			return d.ReadString(schemas.InventoryRetrievalJobInput_EndDate, v.EndDate)
+		case schemas.InventoryRetrievalJobInput_Limit:
+			v.Limit = new(string)
+			return d.ReadString(schemas.InventoryRetrievalJobInput_Limit, v.Limit)
+		case schemas.InventoryRetrievalJobInput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.InventoryRetrievalJobInput_Marker, v.Marker)
+		case schemas.InventoryRetrievalJobInput_StartDate:
+			v.StartDate = new(string)
+			return d.ReadString(schemas.InventoryRetrievalJobInput_StartDate, v.StartDate)
+		}
+		return nil
+	})
 }
 
 // Provides options for defining a job.
@@ -405,6 +997,88 @@ type JobParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JobParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveId != nil {
+		s.WriteString(schemas.JobParameters_ArchiveId, *v.ArchiveId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.JobParameters_Description, *v.Description)
+	}
+	if v.Format != nil {
+		s.WriteString(schemas.JobParameters_Format, *v.Format)
+	}
+	if v.InventoryRetrievalParameters != nil {
+		s.WriteStruct(schemas.JobParameters_InventoryRetrievalParameters)
+		v.InventoryRetrievalParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputLocation != nil {
+		s.WriteStruct(schemas.JobParameters_OutputLocation)
+		v.OutputLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetrievalByteRange != nil {
+		s.WriteString(schemas.JobParameters_RetrievalByteRange, *v.RetrievalByteRange)
+	}
+	if v.SNSTopic != nil {
+		s.WriteString(schemas.JobParameters_SNSTopic, *v.SNSTopic)
+	}
+	if v.SelectParameters != nil {
+		s.WriteStruct(schemas.JobParameters_SelectParameters)
+		v.SelectParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Tier != nil {
+		s.WriteString(schemas.JobParameters_Tier, *v.Tier)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.JobParameters_Type, *v.Type)
+	}
+}
+func (v *JobParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobParameters_ArchiveId:
+			v.ArchiveId = new(string)
+			return d.ReadString(schemas.JobParameters_ArchiveId, v.ArchiveId)
+		case schemas.JobParameters_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.JobParameters_Description, v.Description)
+		case schemas.JobParameters_Format:
+			v.Format = new(string)
+			return d.ReadString(schemas.JobParameters_Format, v.Format)
+		case schemas.JobParameters_InventoryRetrievalParameters:
+			v.InventoryRetrievalParameters = &InventoryRetrievalJobInput{}
+			return v.InventoryRetrievalParameters.Deserialize(d)
+		case schemas.JobParameters_OutputLocation:
+			v.OutputLocation = &OutputLocation{}
+			return v.OutputLocation.Deserialize(d)
+		case schemas.JobParameters_RetrievalByteRange:
+			v.RetrievalByteRange = new(string)
+			return d.ReadString(schemas.JobParameters_RetrievalByteRange, v.RetrievalByteRange)
+		case schemas.JobParameters_SNSTopic:
+			v.SNSTopic = new(string)
+			return d.ReadString(schemas.JobParameters_SNSTopic, v.SNSTopic)
+		case schemas.JobParameters_SelectParameters:
+			v.SelectParameters = &SelectParameters{}
+			return v.SelectParameters.Deserialize(d)
+		case schemas.JobParameters_Tier:
+			v.Tier = new(string)
+			return d.ReadString(schemas.JobParameters_Tier, v.Tier)
+		case schemas.JobParameters_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.JobParameters_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Contains information about the location where the select job results are stored.
 type OutputLocation struct {
 
@@ -414,6 +1088,30 @@ type OutputLocation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OutputLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputLocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputLocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3 != nil {
+		s.WriteStruct(schemas.OutputLocation_S3)
+		v.S3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OutputLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputLocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputLocation_S3:
+			v.S3 = &S3Location{}
+			return v.S3.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes how the select output is serialized.
 type OutputSerialization struct {
 
@@ -421,6 +1119,30 @@ type OutputSerialization struct {
 	Csv *CSVOutput
 
 	noSmithyDocumentSerde
+}
+
+func (v *OutputSerialization) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputSerialization)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputSerialization) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Csv != nil {
+		s.WriteStruct(schemas.OutputSerialization_csv)
+		v.Csv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OutputSerialization) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputSerialization, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputSerialization_csv:
+			v.Csv = &CSVOutput{}
+			return v.Csv.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A list of the part sizes of the multipart upload.
@@ -434,6 +1156,34 @@ type PartListElement struct {
 	SHA256TreeHash *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PartListElement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PartListElement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PartListElement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RangeInBytes != nil {
+		s.WriteString(schemas.PartListElement_RangeInBytes, *v.RangeInBytes)
+	}
+	if v.SHA256TreeHash != nil {
+		s.WriteString(schemas.PartListElement_SHA256TreeHash, *v.SHA256TreeHash)
+	}
+}
+func (v *PartListElement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PartListElement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PartListElement_RangeInBytes:
+			v.RangeInBytes = new(string)
+			return d.ReadString(schemas.PartListElement_RangeInBytes, v.RangeInBytes)
+		case schemas.PartListElement_SHA256TreeHash:
+			v.SHA256TreeHash = new(string)
+			return d.ReadString(schemas.PartListElement_SHA256TreeHash, v.SHA256TreeHash)
+		}
+		return nil
+	})
 }
 
 // The definition for a provisioned capacity unit.
@@ -451,6 +1201,40 @@ type ProvisionedCapacityDescription struct {
 	StartDate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProvisionedCapacityDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProvisionedCapacityDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProvisionedCapacityDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityId != nil {
+		s.WriteString(schemas.ProvisionedCapacityDescription_CapacityId, *v.CapacityId)
+	}
+	if v.ExpirationDate != nil {
+		s.WriteString(schemas.ProvisionedCapacityDescription_ExpirationDate, *v.ExpirationDate)
+	}
+	if v.StartDate != nil {
+		s.WriteString(schemas.ProvisionedCapacityDescription_StartDate, *v.StartDate)
+	}
+}
+func (v *ProvisionedCapacityDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProvisionedCapacityDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProvisionedCapacityDescription_CapacityId:
+			v.CapacityId = new(string)
+			return d.ReadString(schemas.ProvisionedCapacityDescription_CapacityId, v.CapacityId)
+		case schemas.ProvisionedCapacityDescription_ExpirationDate:
+			v.ExpirationDate = new(string)
+			return d.ReadString(schemas.ProvisionedCapacityDescription_ExpirationDate, v.ExpirationDate)
+		case schemas.ProvisionedCapacityDescription_StartDate:
+			v.StartDate = new(string)
+			return d.ReadString(schemas.ProvisionedCapacityDescription_StartDate, v.StartDate)
+		}
+		return nil
+	})
 }
 
 // Contains information about the location in Amazon S3 where the select job
@@ -485,6 +1269,71 @@ type S3Location struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3Location) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Location)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Location) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessControlPolicyList(s, schemas.S3Location_AccessControlList, v.AccessControlList)
+	if v.BucketName != nil {
+		s.WriteString(schemas.S3Location_BucketName, *v.BucketName)
+	}
+	if v.CannedACL != "" {
+		s.WriteString(schemas.S3Location_CannedACL, string(v.CannedACL))
+	}
+	if v.Encryption != nil {
+		s.WriteStruct(schemas.S3Location_Encryption)
+		v.Encryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.S3Location_Prefix, *v.Prefix)
+	}
+	if v.StorageClass != "" {
+		s.WriteString(schemas.S3Location_StorageClass, string(v.StorageClass))
+	}
+	serializehashmap(s, schemas.S3Location_Tagging, v.Tagging)
+	serializehashmap(s, schemas.S3Location_UserMetadata, v.UserMetadata)
+}
+func (v *S3Location) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Location, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Location_AccessControlList:
+			return deserializeAccessControlPolicyList(d, schemas.S3Location_AccessControlList, &v.AccessControlList)
+		case schemas.S3Location_BucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.S3Location_BucketName, v.BucketName)
+		case schemas.S3Location_CannedACL:
+			var ev string
+			if err := d.ReadString(schemas.S3Location_CannedACL, &ev); err != nil {
+				return err
+			}
+			v.CannedACL = CannedACL(ev)
+			return nil
+		case schemas.S3Location_Encryption:
+			v.Encryption = &Encryption{}
+			return v.Encryption.Deserialize(d)
+		case schemas.S3Location_Prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.S3Location_Prefix, v.Prefix)
+		case schemas.S3Location_StorageClass:
+			var ev string
+			if err := d.ReadString(schemas.S3Location_StorageClass, &ev); err != nil {
+				return err
+			}
+			v.StorageClass = StorageClass(ev)
+			return nil
+		case schemas.S3Location_Tagging:
+			return deserializehashmap(d, schemas.S3Location_Tagging, &v.Tagging)
+		case schemas.S3Location_UserMetadata:
+			return deserializehashmap(d, schemas.S3Location_UserMetadata, &v.UserMetadata)
+		}
+		return nil
+	})
+}
+
 // Contains information about the parameters used for a select.
 type SelectParameters struct {
 
@@ -501,6 +1350,54 @@ type SelectParameters struct {
 	OutputSerialization *OutputSerialization
 
 	noSmithyDocumentSerde
+}
+
+func (v *SelectParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SelectParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SelectParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Expression != nil {
+		s.WriteString(schemas.SelectParameters_Expression, *v.Expression)
+	}
+	if v.ExpressionType != "" {
+		s.WriteString(schemas.SelectParameters_ExpressionType, string(v.ExpressionType))
+	}
+	if v.InputSerialization != nil {
+		s.WriteStruct(schemas.SelectParameters_InputSerialization)
+		v.InputSerialization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputSerialization != nil {
+		s.WriteStruct(schemas.SelectParameters_OutputSerialization)
+		v.OutputSerialization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SelectParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SelectParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SelectParameters_Expression:
+			v.Expression = new(string)
+			return d.ReadString(schemas.SelectParameters_Expression, v.Expression)
+		case schemas.SelectParameters_ExpressionType:
+			var ev string
+			if err := d.ReadString(schemas.SelectParameters_ExpressionType, &ev); err != nil {
+				return err
+			}
+			v.ExpressionType = ExpressionType(ev)
+			return nil
+		case schemas.SelectParameters_InputSerialization:
+			v.InputSerialization = &InputSerialization{}
+			return v.InputSerialization.Deserialize(d)
+		case schemas.SelectParameters_OutputSerialization:
+			v.OutputSerialization = &OutputSerialization{}
+			return v.OutputSerialization.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A list of in-progress multipart uploads for a vault.
@@ -527,6 +1424,51 @@ type UploadListElement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UploadListElement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UploadListElement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UploadListElement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveDescription != nil {
+		s.WriteString(schemas.UploadListElement_ArchiveDescription, *v.ArchiveDescription)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.UploadListElement_CreationDate, *v.CreationDate)
+	}
+	if v.MultipartUploadId != nil {
+		s.WriteString(schemas.UploadListElement_MultipartUploadId, *v.MultipartUploadId)
+	}
+	if v.PartSizeInBytes != 0 {
+		s.WriteInt64(schemas.UploadListElement_PartSizeInBytes, v.PartSizeInBytes)
+	}
+	if v.VaultARN != nil {
+		s.WriteString(schemas.UploadListElement_VaultARN, *v.VaultARN)
+	}
+}
+func (v *UploadListElement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UploadListElement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UploadListElement_ArchiveDescription:
+			v.ArchiveDescription = new(string)
+			return d.ReadString(schemas.UploadListElement_ArchiveDescription, v.ArchiveDescription)
+		case schemas.UploadListElement_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.UploadListElement_CreationDate, v.CreationDate)
+		case schemas.UploadListElement_MultipartUploadId:
+			v.MultipartUploadId = new(string)
+			return d.ReadString(schemas.UploadListElement_MultipartUploadId, v.MultipartUploadId)
+		case schemas.UploadListElement_PartSizeInBytes:
+			return d.ReadInt64(schemas.UploadListElement_PartSizeInBytes, &v.PartSizeInBytes)
+		case schemas.UploadListElement_VaultARN:
+			v.VaultARN = new(string)
+			return d.ReadString(schemas.UploadListElement_VaultARN, v.VaultARN)
+		}
+		return nil
+	})
+}
+
 // Contains the vault access policy.
 type VaultAccessPolicy struct {
 
@@ -536,6 +1478,28 @@ type VaultAccessPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VaultAccessPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VaultAccessPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VaultAccessPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.VaultAccessPolicy_Policy, *v.Policy)
+	}
+}
+func (v *VaultAccessPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VaultAccessPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VaultAccessPolicy_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.VaultAccessPolicy_Policy, v.Policy)
+		}
+		return nil
+	})
+}
+
 // Contains the vault lock policy.
 type VaultLockPolicy struct {
 
@@ -543,6 +1507,28 @@ type VaultLockPolicy struct {
 	Policy *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VaultLockPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VaultLockPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VaultLockPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.VaultLockPolicy_Policy, *v.Policy)
+	}
+}
+func (v *VaultLockPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VaultLockPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VaultLockPolicy_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.VaultLockPolicy_Policy, v.Policy)
+		}
+		return nil
+	})
 }
 
 // Represents a vault's notification configuration.
@@ -557,6 +1543,31 @@ type VaultNotificationConfig struct {
 	SNSTopic *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VaultNotificationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VaultNotificationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VaultNotificationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNotificationEventList(s, schemas.VaultNotificationConfig_Events, v.Events)
+	if v.SNSTopic != nil {
+		s.WriteString(schemas.VaultNotificationConfig_SNSTopic, *v.SNSTopic)
+	}
+}
+func (v *VaultNotificationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VaultNotificationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VaultNotificationConfig_Events:
+			return deserializeNotificationEventList(d, schemas.VaultNotificationConfig_Events, &v.Events)
+		case schemas.VaultNotificationConfig_SNSTopic:
+			v.SNSTopic = new(string)
+			return d.ReadString(schemas.VaultNotificationConfig_SNSTopic, v.SNSTopic)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

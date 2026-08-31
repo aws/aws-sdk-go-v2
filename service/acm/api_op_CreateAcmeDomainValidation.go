@@ -5,7 +5,9 @@ package acm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/acm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -54,6 +56,25 @@ type CreateAcmeDomainValidationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAcmeDomainValidationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAcmeDomainValidationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAcmeDomainValidationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcmeEndpointArn != nil {
+		s.WriteString(schemas.CreateAcmeDomainValidationRequest_AcmeEndpointArn, *v.AcmeEndpointArn)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.CreateAcmeDomainValidationRequest_DomainName, *v.DomainName)
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.CreateAcmeDomainValidationRequest_IdempotencyToken, *v.IdempotencyToken)
+	}
+	serializePrevalidationOptions(s, schemas.CreateAcmeDomainValidationRequest_PrevalidationOptions, v.PrevalidationOptions)
+	serializeTagList(s, schemas.CreateAcmeDomainValidationRequest_Tags, v.Tags)
+}
 func (in *CreateAcmeDomainValidationInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ServiceType = ptr.String("ACM-ACME")
@@ -72,13 +93,32 @@ type CreateAcmeDomainValidationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAcmeDomainValidationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAcmeDomainValidationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAcmeDomainValidationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcmeDomainValidationArn != nil {
+		s.WriteString(schemas.CreateAcmeDomainValidationResponse_AcmeDomainValidationArn, *v.AcmeDomainValidationArn)
+	}
+}
+func (v *CreateAcmeDomainValidationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAcmeDomainValidationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAcmeDomainValidationResponse_AcmeDomainValidationArn:
+			v.AcmeDomainValidationArn = new(string)
+			return d.ReadString(schemas.CreateAcmeDomainValidationResponse_AcmeDomainValidationArn, v.AcmeDomainValidationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAcmeDomainValidationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAcmeDomainValidation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAcmeDomainValidation, schemas.CreateAcmeDomainValidationRequest, schemas.CreateAcmeDomainValidationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAcmeDomainValidation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAcmeDomainValidation, schemas.CreateAcmeDomainValidationRequest, schemas.CreateAcmeDomainValidationResponse), output: &CreateAcmeDomainValidationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

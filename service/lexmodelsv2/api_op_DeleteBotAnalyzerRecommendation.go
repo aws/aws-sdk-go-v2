@@ -4,6 +4,8 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type DeleteBotAnalyzerRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBotAnalyzerRecommendationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBotAnalyzerRecommendationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBotAnalyzerRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotAnalyzerRequestId != nil {
+		s.WriteString(schemas.DeleteBotAnalyzerRecommendationRequest_botAnalyzerRequestId, *v.BotAnalyzerRequestId)
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.DeleteBotAnalyzerRecommendationRequest_botId, *v.BotId)
+	}
+}
+
 type DeleteBotAnalyzerRecommendationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +69,26 @@ type DeleteBotAnalyzerRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBotAnalyzerRecommendationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBotAnalyzerRecommendationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBotAnalyzerRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteBotAnalyzerRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBotAnalyzerRecommendationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBotAnalyzerRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBotAnalyzerRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBotAnalyzerRecommendation, schemas.DeleteBotAnalyzerRecommendationRequest, schemas.DeleteBotAnalyzerRecommendationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBotAnalyzerRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBotAnalyzerRecommendation, schemas.DeleteBotAnalyzerRecommendationRequest, schemas.DeleteBotAnalyzerRecommendationResponse), output: &DeleteBotAnalyzerRecommendationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

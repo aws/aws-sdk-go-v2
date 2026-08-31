@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,15 @@ type CreateContainerServiceRegistryLoginInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContainerServiceRegistryLoginInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContainerServiceRegistryLoginRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContainerServiceRegistryLoginInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type CreateContainerServiceRegistryLoginOutput struct {
 
 	// An object that describes the log in information for the container service
@@ -60,13 +71,34 @@ type CreateContainerServiceRegistryLoginOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContainerServiceRegistryLoginOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContainerServiceRegistryLoginResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContainerServiceRegistryLoginOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryLogin != nil {
+		s.WriteStruct(schemas.CreateContainerServiceRegistryLoginResult_registryLogin)
+		v.RegistryLogin.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateContainerServiceRegistryLoginOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateContainerServiceRegistryLoginResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateContainerServiceRegistryLoginResult_registryLogin:
+			v.RegistryLogin = &types.ContainerServiceRegistryLogin{}
+			return v.RegistryLogin.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateContainerServiceRegistryLoginMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateContainerServiceRegistryLogin{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContainerServiceRegistryLogin, schemas.CreateContainerServiceRegistryLoginRequest, schemas.CreateContainerServiceRegistryLoginResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateContainerServiceRegistryLogin{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContainerServiceRegistryLogin, schemas.CreateContainerServiceRegistryLoginRequest, schemas.CreateContainerServiceRegistryLoginResult), output: &CreateContainerServiceRegistryLoginOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

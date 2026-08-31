@@ -5,7 +5,9 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -36,6 +38,18 @@ type DescribeImportInput struct {
 	ImportId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeImportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImportId != nil {
+		s.WriteString(schemas.DescribeImportRequest_importId, *v.ImportId)
+	}
 }
 
 type DescribeImportOutput struct {
@@ -78,13 +92,87 @@ type DescribeImportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.DescribeImportResponse_creationDateTime, *v.CreationDateTime)
+	}
+	serializeFailureReasons(s, schemas.DescribeImportResponse_failureReasons, v.FailureReasons)
+	if v.ImportId != nil {
+		s.WriteString(schemas.DescribeImportResponse_importId, *v.ImportId)
+	}
+	if v.ImportStatus != "" {
+		s.WriteString(schemas.DescribeImportResponse_importStatus, string(v.ImportStatus))
+	}
+	if v.ImportedResourceId != nil {
+		s.WriteString(schemas.DescribeImportResponse_importedResourceId, *v.ImportedResourceId)
+	}
+	if v.ImportedResourceName != nil {
+		s.WriteString(schemas.DescribeImportResponse_importedResourceName, *v.ImportedResourceName)
+	}
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.DescribeImportResponse_lastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.MergeStrategy != "" {
+		s.WriteString(schemas.DescribeImportResponse_mergeStrategy, string(v.MergeStrategy))
+	}
+	if v.ResourceSpecification != nil {
+		s.WriteStruct(schemas.DescribeImportResponse_resourceSpecification)
+		v.ResourceSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeImportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeImportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeImportResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeImportResponse_creationDateTime, v.CreationDateTime)
+		case schemas.DescribeImportResponse_failureReasons:
+			return deserializeFailureReasons(d, schemas.DescribeImportResponse_failureReasons, &v.FailureReasons)
+		case schemas.DescribeImportResponse_importId:
+			v.ImportId = new(string)
+			return d.ReadString(schemas.DescribeImportResponse_importId, v.ImportId)
+		case schemas.DescribeImportResponse_importStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeImportResponse_importStatus, &ev); err != nil {
+				return err
+			}
+			v.ImportStatus = types.ImportStatus(ev)
+			return nil
+		case schemas.DescribeImportResponse_importedResourceId:
+			v.ImportedResourceId = new(string)
+			return d.ReadString(schemas.DescribeImportResponse_importedResourceId, v.ImportedResourceId)
+		case schemas.DescribeImportResponse_importedResourceName:
+			v.ImportedResourceName = new(string)
+			return d.ReadString(schemas.DescribeImportResponse_importedResourceName, v.ImportedResourceName)
+		case schemas.DescribeImportResponse_lastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeImportResponse_lastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.DescribeImportResponse_mergeStrategy:
+			var ev string
+			if err := d.ReadString(schemas.DescribeImportResponse_mergeStrategy, &ev); err != nil {
+				return err
+			}
+			v.MergeStrategy = types.MergeStrategy(ev)
+			return nil
+		case schemas.DescribeImportResponse_resourceSpecification:
+			v.ResourceSpecification = &types.ImportResourceSpecification{}
+			return v.ResourceSpecification.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeImportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImport, schemas.DescribeImportRequest, schemas.DescribeImportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImport, schemas.DescribeImportRequest, schemas.DescribeImportResponse), output: &DescribeImportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package managedblockchain
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,30 @@ type ListNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNodesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNodesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNodesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListNodesInput_MaxResults, *v.MaxResults)
+	}
+	if v.MemberId != nil {
+		s.WriteString(schemas.ListNodesInput_MemberId, *v.MemberId)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.ListNodesInput_NetworkId, *v.NetworkId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNodesInput_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListNodesInput_Status, string(v.Status))
+	}
+}
+
 type ListNodesOutput struct {
 
 	// The pagination token that indicates the next set of results to retrieve.
@@ -67,13 +93,35 @@ type ListNodesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNodesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNodesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNodesOutput_NextToken, *v.NextToken)
+	}
+	serializeNodeSummaryList(s, schemas.ListNodesOutput_Nodes, v.Nodes)
+}
+func (v *ListNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNodesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNodesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNodesOutput_NextToken, v.NextToken)
+		case schemas.ListNodesOutput_Nodes:
+			return deserializeNodeSummaryList(d, schemas.ListNodesOutput_Nodes, &v.Nodes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNodes, schemas.ListNodesInput, schemas.ListNodesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNodes, schemas.ListNodesInput, schemas.ListNodesOutput), output: &ListNodesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

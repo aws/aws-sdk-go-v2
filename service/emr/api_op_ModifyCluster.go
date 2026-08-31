@@ -4,6 +4,8 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ModifyClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyClusterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.ModifyClusterInput_ClusterId, *v.ClusterId)
+	}
+	if v.ExtendedSupport != nil {
+		s.WriteBool(schemas.ModifyClusterInput_ExtendedSupport, *v.ExtendedSupport)
+	}
+	if v.StepConcurrencyLevel != nil {
+		s.WriteInt32(schemas.ModifyClusterInput_StepConcurrencyLevel, *v.StepConcurrencyLevel)
+	}
+}
+
 type ModifyClusterOutput struct {
 
 	// Reserved.
@@ -57,13 +77,38 @@ type ModifyClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyClusterOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExtendedSupport != nil {
+		s.WriteBool(schemas.ModifyClusterOutput_ExtendedSupport, *v.ExtendedSupport)
+	}
+	if v.StepConcurrencyLevel != nil {
+		s.WriteInt32(schemas.ModifyClusterOutput_StepConcurrencyLevel, *v.StepConcurrencyLevel)
+	}
+}
+func (v *ModifyClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyClusterOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyClusterOutput_ExtendedSupport:
+			v.ExtendedSupport = new(bool)
+			return d.ReadBool(schemas.ModifyClusterOutput_ExtendedSupport, v.ExtendedSupport)
+		case schemas.ModifyClusterOutput_StepConcurrencyLevel:
+			v.StepConcurrencyLevel = new(int32)
+			return d.ReadInt32(schemas.ModifyClusterOutput_StepConcurrencyLevel, v.StepConcurrencyLevel)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyCluster, schemas.ModifyClusterInput, schemas.ModifyClusterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpModifyCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyCluster, schemas.ModifyClusterInput, schemas.ModifyClusterOutput), output: &ModifyClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

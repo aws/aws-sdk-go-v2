@@ -5,7 +5,9 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,47 @@ type ListAccessPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccessPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccessPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccessPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAccessPoliciesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccessPoliciesRequest_nextToken, *v.NextToken)
+	}
+	serializeResourceFilter(s, schemas.ListAccessPoliciesRequest_resource, v.Resource)
+	if v.Type != "" {
+		s.WriteString(schemas.ListAccessPoliciesRequest_type, string(v.Type))
+	}
+}
+func (v *ListAccessPoliciesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccessPoliciesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccessPoliciesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListAccessPoliciesRequest_maxResults, v.MaxResults)
+		case schemas.ListAccessPoliciesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccessPoliciesRequest_nextToken, v.NextToken)
+		case schemas.ListAccessPoliciesRequest_resource:
+			return deserializeResourceFilter(d, schemas.ListAccessPoliciesRequest_resource, &v.Resource)
+		case schemas.ListAccessPoliciesRequest_type:
+			var ev string
+			if err := d.ReadString(schemas.ListAccessPoliciesRequest_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.AccessPolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type ListAccessPoliciesOutput struct {
 
 	// Details about the requested access policies.
@@ -63,13 +106,35 @@ type ListAccessPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccessPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccessPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccessPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessPolicySummaries(s, schemas.ListAccessPoliciesResponse_accessPolicySummaries, v.AccessPolicySummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccessPoliciesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAccessPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccessPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccessPoliciesResponse_accessPolicySummaries:
+			return deserializeAccessPolicySummaries(d, schemas.ListAccessPoliciesResponse_accessPolicySummaries, &v.AccessPolicySummaries)
+		case schemas.ListAccessPoliciesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccessPoliciesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAccessPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListAccessPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessPolicies, schemas.ListAccessPoliciesRequest, schemas.ListAccessPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListAccessPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessPolicies, schemas.ListAccessPoliciesRequest, schemas.ListAccessPoliciesResponse), output: &ListAccessPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

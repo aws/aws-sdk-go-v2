@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type DescribeImageAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImageAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImageAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImageAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImageAssociatedResourceTypeList(s, schemas.DescribeImageAssociationsRequest_AssociatedResourceTypes, v.AssociatedResourceTypes)
+	if v.ImageId != nil {
+		s.WriteString(schemas.DescribeImageAssociationsRequest_ImageId, *v.ImageId)
+	}
+}
+
 type DescribeImageAssociationsOutput struct {
 
 	// List of information about the specified associations.
@@ -50,13 +65,29 @@ type DescribeImageAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImageAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImageAssociationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImageAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImageResourceAssociationList(s, schemas.DescribeImageAssociationsResult_Associations, v.Associations)
+}
+func (v *DescribeImageAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeImageAssociationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeImageAssociationsResult_Associations:
+			return deserializeImageResourceAssociationList(d, schemas.DescribeImageAssociationsResult_Associations, &v.Associations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeImageAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeImageAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImageAssociations, schemas.DescribeImageAssociationsRequest, schemas.DescribeImageAssociationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeImageAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImageAssociations, schemas.DescribeImageAssociationsRequest, schemas.DescribeImageAssociationsResult), output: &DescribeImageAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

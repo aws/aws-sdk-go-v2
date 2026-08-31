@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -46,6 +48,27 @@ type DescribeHubContentInput struct {
 	HubContentVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeHubContentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHubContentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHubContentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HubContentName != nil {
+		s.WriteString(schemas.DescribeHubContentRequest_HubContentName, *v.HubContentName)
+	}
+	if v.HubContentType != "" {
+		s.WriteString(schemas.DescribeHubContentRequest_HubContentType, string(v.HubContentType))
+	}
+	if v.HubContentVersion != nil {
+		s.WriteString(schemas.DescribeHubContentRequest_HubContentVersion, *v.HubContentVersion)
+	}
+	if v.HubName != nil {
+		s.WriteString(schemas.DescribeHubContentRequest_HubName, *v.HubName)
+	}
 }
 
 type DescribeHubContentOutput struct {
@@ -139,13 +162,152 @@ type DescribeHubContentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHubContentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHubContentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHubContentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeHubContentResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DocumentSchemaVersion != nil {
+		s.WriteString(schemas.DescribeHubContentResponse_DocumentSchemaVersion, *v.DocumentSchemaVersion)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeHubContentResponse_FailureReason, *v.FailureReason)
+	}
+	if v.HubArn != nil {
+		s.WriteString(schemas.DescribeHubContentResponse_HubArn, *v.HubArn)
+	}
+	if v.HubContentArn != nil {
+		s.WriteString(schemas.DescribeHubContentResponse_HubContentArn, *v.HubContentArn)
+	}
+	serializeHubContentDependencyList(s, schemas.DescribeHubContentResponse_HubContentDependencies, v.HubContentDependencies)
+	if v.HubContentDescription != nil {
+		s.WriteString(schemas.DescribeHubContentResponse_HubContentDescription, *v.HubContentDescription)
+	}
+	if v.HubContentDisplayName != nil {
+		s.WriteString(schemas.DescribeHubContentResponse_HubContentDisplayName, *v.HubContentDisplayName)
+	}
+	if v.HubContentDocument != nil {
+		s.WriteString(schemas.DescribeHubContentResponse_HubContentDocument, *v.HubContentDocument)
+	}
+	if v.HubContentMarkdown != nil {
+		s.WriteString(schemas.DescribeHubContentResponse_HubContentMarkdown, *v.HubContentMarkdown)
+	}
+	if v.HubContentName != nil {
+		s.WriteString(schemas.DescribeHubContentResponse_HubContentName, *v.HubContentName)
+	}
+	serializeHubContentSearchKeywordList(s, schemas.DescribeHubContentResponse_HubContentSearchKeywords, v.HubContentSearchKeywords)
+	if v.HubContentStatus != "" {
+		s.WriteString(schemas.DescribeHubContentResponse_HubContentStatus, string(v.HubContentStatus))
+	}
+	if v.HubContentType != "" {
+		s.WriteString(schemas.DescribeHubContentResponse_HubContentType, string(v.HubContentType))
+	}
+	if v.HubContentVersion != nil {
+		s.WriteString(schemas.DescribeHubContentResponse_HubContentVersion, *v.HubContentVersion)
+	}
+	if v.HubName != nil {
+		s.WriteString(schemas.DescribeHubContentResponse_HubName, *v.HubName)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeHubContentResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.ReferenceMinVersion != nil {
+		s.WriteString(schemas.DescribeHubContentResponse_ReferenceMinVersion, *v.ReferenceMinVersion)
+	}
+	if v.SageMakerPublicHubContentArn != nil {
+		s.WriteString(schemas.DescribeHubContentResponse_SageMakerPublicHubContentArn, *v.SageMakerPublicHubContentArn)
+	}
+	if v.SupportStatus != "" {
+		s.WriteString(schemas.DescribeHubContentResponse_SupportStatus, string(v.SupportStatus))
+	}
+}
+func (v *DescribeHubContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeHubContentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeHubContentResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeHubContentResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeHubContentResponse_DocumentSchemaVersion:
+			v.DocumentSchemaVersion = new(string)
+			return d.ReadString(schemas.DescribeHubContentResponse_DocumentSchemaVersion, v.DocumentSchemaVersion)
+		case schemas.DescribeHubContentResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeHubContentResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeHubContentResponse_HubArn:
+			v.HubArn = new(string)
+			return d.ReadString(schemas.DescribeHubContentResponse_HubArn, v.HubArn)
+		case schemas.DescribeHubContentResponse_HubContentArn:
+			v.HubContentArn = new(string)
+			return d.ReadString(schemas.DescribeHubContentResponse_HubContentArn, v.HubContentArn)
+		case schemas.DescribeHubContentResponse_HubContentDependencies:
+			return deserializeHubContentDependencyList(d, schemas.DescribeHubContentResponse_HubContentDependencies, &v.HubContentDependencies)
+		case schemas.DescribeHubContentResponse_HubContentDescription:
+			v.HubContentDescription = new(string)
+			return d.ReadString(schemas.DescribeHubContentResponse_HubContentDescription, v.HubContentDescription)
+		case schemas.DescribeHubContentResponse_HubContentDisplayName:
+			v.HubContentDisplayName = new(string)
+			return d.ReadString(schemas.DescribeHubContentResponse_HubContentDisplayName, v.HubContentDisplayName)
+		case schemas.DescribeHubContentResponse_HubContentDocument:
+			v.HubContentDocument = new(string)
+			return d.ReadString(schemas.DescribeHubContentResponse_HubContentDocument, v.HubContentDocument)
+		case schemas.DescribeHubContentResponse_HubContentMarkdown:
+			v.HubContentMarkdown = new(string)
+			return d.ReadString(schemas.DescribeHubContentResponse_HubContentMarkdown, v.HubContentMarkdown)
+		case schemas.DescribeHubContentResponse_HubContentName:
+			v.HubContentName = new(string)
+			return d.ReadString(schemas.DescribeHubContentResponse_HubContentName, v.HubContentName)
+		case schemas.DescribeHubContentResponse_HubContentSearchKeywords:
+			return deserializeHubContentSearchKeywordList(d, schemas.DescribeHubContentResponse_HubContentSearchKeywords, &v.HubContentSearchKeywords)
+		case schemas.DescribeHubContentResponse_HubContentStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeHubContentResponse_HubContentStatus, &ev); err != nil {
+				return err
+			}
+			v.HubContentStatus = types.HubContentStatus(ev)
+			return nil
+		case schemas.DescribeHubContentResponse_HubContentType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeHubContentResponse_HubContentType, &ev); err != nil {
+				return err
+			}
+			v.HubContentType = types.HubContentType(ev)
+			return nil
+		case schemas.DescribeHubContentResponse_HubContentVersion:
+			v.HubContentVersion = new(string)
+			return d.ReadString(schemas.DescribeHubContentResponse_HubContentVersion, v.HubContentVersion)
+		case schemas.DescribeHubContentResponse_HubName:
+			v.HubName = new(string)
+			return d.ReadString(schemas.DescribeHubContentResponse_HubName, v.HubName)
+		case schemas.DescribeHubContentResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeHubContentResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeHubContentResponse_ReferenceMinVersion:
+			v.ReferenceMinVersion = new(string)
+			return d.ReadString(schemas.DescribeHubContentResponse_ReferenceMinVersion, v.ReferenceMinVersion)
+		case schemas.DescribeHubContentResponse_SageMakerPublicHubContentArn:
+			v.SageMakerPublicHubContentArn = new(string)
+			return d.ReadString(schemas.DescribeHubContentResponse_SageMakerPublicHubContentArn, v.SageMakerPublicHubContentArn)
+		case schemas.DescribeHubContentResponse_SupportStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeHubContentResponse_SupportStatus, &ev); err != nil {
+				return err
+			}
+			v.SupportStatus = types.HubContentSupportStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeHubContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeHubContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHubContent, schemas.DescribeHubContentRequest, schemas.DescribeHubContentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeHubContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHubContent, schemas.DescribeHubContentRequest, schemas.DescribeHubContentResponse), output: &DescribeHubContentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

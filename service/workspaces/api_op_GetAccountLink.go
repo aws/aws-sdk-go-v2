@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,21 @@ type GetAccountLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountLinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountLinkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LinkId != nil {
+		s.WriteString(schemas.GetAccountLinkRequest_LinkId, *v.LinkId)
+	}
+	if v.LinkedAccountId != nil {
+		s.WriteString(schemas.GetAccountLinkRequest_LinkedAccountId, *v.LinkedAccountId)
+	}
+}
+
 type GetAccountLinkOutput struct {
 
 	// The account link of the account link to retrieve.
@@ -46,13 +63,34 @@ type GetAccountLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountLinkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountLinkResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountLink != nil {
+		s.WriteStruct(schemas.GetAccountLinkResult_AccountLink)
+		v.AccountLink.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAccountLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccountLinkResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccountLinkResult_AccountLink:
+			v.AccountLink = &types.AccountLink{}
+			return v.AccountLink.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccountLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAccountLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountLink, schemas.GetAccountLinkRequest, schemas.GetAccountLinkResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAccountLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountLink, schemas.GetAccountLinkRequest, schemas.GetAccountLinkResult), output: &GetAccountLinkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

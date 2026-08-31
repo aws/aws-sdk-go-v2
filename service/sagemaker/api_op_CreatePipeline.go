@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,44 @@ type CreatePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePipelineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePipelineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreatePipelineRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ParallelismConfiguration != nil {
+		s.WriteStruct(schemas.CreatePipelineRequest_ParallelismConfiguration)
+		v.ParallelismConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PipelineDefinition != nil {
+		s.WriteString(schemas.CreatePipelineRequest_PipelineDefinition, *v.PipelineDefinition)
+	}
+	if v.PipelineDefinitionS3Location != nil {
+		s.WriteStruct(schemas.CreatePipelineRequest_PipelineDefinitionS3Location)
+		v.PipelineDefinitionS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PipelineDescription != nil {
+		s.WriteString(schemas.CreatePipelineRequest_PipelineDescription, *v.PipelineDescription)
+	}
+	if v.PipelineDisplayName != nil {
+		s.WriteString(schemas.CreatePipelineRequest_PipelineDisplayName, *v.PipelineDisplayName)
+	}
+	if v.PipelineName != nil {
+		s.WriteString(schemas.CreatePipelineRequest_PipelineName, *v.PipelineName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreatePipelineRequest_RoleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.CreatePipelineRequest_Tags, v.Tags)
+}
+
 type CreatePipelineOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created pipeline.
@@ -80,13 +120,32 @@ type CreatePipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePipelineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePipelineResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineArn != nil {
+		s.WriteString(schemas.CreatePipelineResponse_PipelineArn, *v.PipelineArn)
+	}
+}
+func (v *CreatePipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePipelineResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePipelineResponse_PipelineArn:
+			v.PipelineArn = new(string)
+			return d.ReadString(schemas.CreatePipelineResponse_PipelineArn, v.PipelineArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePipeline, schemas.CreatePipelineRequest, schemas.CreatePipelineResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePipeline, schemas.CreatePipelineRequest, schemas.CreatePipelineResponse), output: &CreatePipelineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

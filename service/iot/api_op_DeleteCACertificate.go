@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type DeleteCACertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCACertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCACertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCACertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateId != nil {
+		s.WriteString(schemas.DeleteCACertificateRequest_certificateId, *v.CertificateId)
+	}
+}
+
 // The output for the DeleteCACertificate operation.
 type DeleteCACertificateOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -47,13 +61,26 @@ type DeleteCACertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCACertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCACertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCACertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCACertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCACertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCACertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCACertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCACertificate, schemas.DeleteCACertificateRequest, schemas.DeleteCACertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCACertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCACertificate, schemas.DeleteCACertificateRequest, schemas.DeleteCACertificateResponse), output: &DeleteCACertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

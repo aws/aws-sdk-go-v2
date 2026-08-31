@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,19 @@ type UpdateRelationalDatabaseParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRelationalDatabaseParametersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRelationalDatabaseParametersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRelationalDatabaseParametersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRelationalDatabaseParameterList(s, schemas.UpdateRelationalDatabaseParametersRequest_parameters, v.Parameters)
+	if v.RelationalDatabaseName != nil {
+		s.WriteString(schemas.UpdateRelationalDatabaseParametersRequest_relationalDatabaseName, *v.RelationalDatabaseName)
+	}
+}
+
 type UpdateRelationalDatabaseParametersOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -65,13 +80,29 @@ type UpdateRelationalDatabaseParametersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRelationalDatabaseParametersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRelationalDatabaseParametersResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRelationalDatabaseParametersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.UpdateRelationalDatabaseParametersResult_operations, v.Operations)
+}
+func (v *UpdateRelationalDatabaseParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRelationalDatabaseParametersResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRelationalDatabaseParametersResult_operations:
+			return deserializeOperationList(d, schemas.UpdateRelationalDatabaseParametersResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRelationalDatabaseParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateRelationalDatabaseParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRelationalDatabaseParameters, schemas.UpdateRelationalDatabaseParametersRequest, schemas.UpdateRelationalDatabaseParametersResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateRelationalDatabaseParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRelationalDatabaseParameters, schemas.UpdateRelationalDatabaseParametersRequest, schemas.UpdateRelationalDatabaseParametersResult), output: &UpdateRelationalDatabaseParametersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

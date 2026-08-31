@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -41,6 +43,24 @@ type UpdateTestSetInput struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateTestSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTestSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTestSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateTestSetRequest_description, *v.Description)
+	}
+	if v.TestSetId != nil {
+		s.WriteString(schemas.UpdateTestSetRequest_testSetId, *v.TestSetId)
+	}
+	if v.TestSetName != nil {
+		s.WriteString(schemas.UpdateTestSetRequest_testSetName, *v.TestSetName)
+	}
 }
 
 type UpdateTestSetOutput struct {
@@ -82,13 +102,96 @@ type UpdateTestSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTestSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTestSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTestSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.UpdateTestSetResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateTestSetResponse_description, *v.Description)
+	}
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.UpdateTestSetResponse_lastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.Modality != "" {
+		s.WriteString(schemas.UpdateTestSetResponse_modality, string(v.Modality))
+	}
+	if v.NumTurns != nil {
+		s.WriteInt32(schemas.UpdateTestSetResponse_numTurns, *v.NumTurns)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateTestSetResponse_roleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateTestSetResponse_status, string(v.Status))
+	}
+	if v.StorageLocation != nil {
+		s.WriteStruct(schemas.UpdateTestSetResponse_storageLocation)
+		v.StorageLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TestSetId != nil {
+		s.WriteString(schemas.UpdateTestSetResponse_testSetId, *v.TestSetId)
+	}
+	if v.TestSetName != nil {
+		s.WriteString(schemas.UpdateTestSetResponse_testSetName, *v.TestSetName)
+	}
+}
+func (v *UpdateTestSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTestSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTestSetResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateTestSetResponse_creationDateTime, v.CreationDateTime)
+		case schemas.UpdateTestSetResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateTestSetResponse_description, v.Description)
+		case schemas.UpdateTestSetResponse_lastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateTestSetResponse_lastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.UpdateTestSetResponse_modality:
+			var ev string
+			if err := d.ReadString(schemas.UpdateTestSetResponse_modality, &ev); err != nil {
+				return err
+			}
+			v.Modality = types.TestSetModality(ev)
+			return nil
+		case schemas.UpdateTestSetResponse_numTurns:
+			v.NumTurns = new(int32)
+			return d.ReadInt32(schemas.UpdateTestSetResponse_numTurns, v.NumTurns)
+		case schemas.UpdateTestSetResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.UpdateTestSetResponse_roleArn, v.RoleArn)
+		case schemas.UpdateTestSetResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateTestSetResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TestSetStatus(ev)
+			return nil
+		case schemas.UpdateTestSetResponse_storageLocation:
+			v.StorageLocation = &types.TestSetStorageLocation{}
+			return v.StorageLocation.Deserialize(d)
+		case schemas.UpdateTestSetResponse_testSetId:
+			v.TestSetId = new(string)
+			return d.ReadString(schemas.UpdateTestSetResponse_testSetId, v.TestSetId)
+		case schemas.UpdateTestSetResponse_testSetName:
+			v.TestSetName = new(string)
+			return d.ReadString(schemas.UpdateTestSetResponse_testSetName, v.TestSetName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTestSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTestSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTestSet, schemas.UpdateTestSetRequest, schemas.UpdateTestSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTestSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTestSet, schemas.UpdateTestSetRequest, schemas.UpdateTestSetResponse), output: &UpdateTestSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DescribeTopicsDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTopicsDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTopicsDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTopicsDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeTopicsDetectionJobRequest_JobId, *v.JobId)
+	}
+}
+
 type DescribeTopicsDetectionJobOutput struct {
 
 	// The list of properties for the requested job.
@@ -46,13 +60,34 @@ type DescribeTopicsDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTopicsDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTopicsDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTopicsDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TopicsDetectionJobProperties != nil {
+		s.WriteStruct(schemas.DescribeTopicsDetectionJobResponse_TopicsDetectionJobProperties)
+		v.TopicsDetectionJobProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeTopicsDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTopicsDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTopicsDetectionJobResponse_TopicsDetectionJobProperties:
+			v.TopicsDetectionJobProperties = &types.TopicsDetectionJobProperties{}
+			return v.TopicsDetectionJobProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTopicsDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTopicsDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTopicsDetectionJob, schemas.DescribeTopicsDetectionJobRequest, schemas.DescribeTopicsDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTopicsDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTopicsDetectionJob, schemas.DescribeTopicsDetectionJobRequest, schemas.DescribeTopicsDetectionJobResponse), output: &DescribeTopicsDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

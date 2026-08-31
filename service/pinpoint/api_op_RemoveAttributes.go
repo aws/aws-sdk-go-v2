@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,26 @@ type RemoveAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.RemoveAttributesRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.AttributeType != nil {
+		s.WriteString(schemas.RemoveAttributesRequest_AttributeType, *v.AttributeType)
+	}
+	if v.UpdateAttributesRequest != nil {
+		s.WriteStruct(schemas.RemoveAttributesRequest_UpdateAttributesRequest)
+		v.UpdateAttributesRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type RemoveAttributesOutput struct {
 
 	// Provides information about the type and the names of attributes that were
@@ -73,13 +95,34 @@ type RemoveAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributesResource != nil {
+		s.WriteStruct(schemas.RemoveAttributesResponse_AttributesResource)
+		v.AttributesResource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RemoveAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveAttributesResponse_AttributesResource:
+			v.AttributesResource = &types.AttributesResource{}
+			return v.AttributesResource.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveAttributes, schemas.RemoveAttributesRequest, schemas.RemoveAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveAttributes, schemas.RemoveAttributesRequest, schemas.RemoveAttributesResponse), output: &RemoveAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

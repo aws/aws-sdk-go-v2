@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -70,6 +72,42 @@ type ListAppImageConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppImageConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppImageConfigsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppImageConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListAppImageConfigsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListAppImageConfigsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAppImageConfigsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.ModifiedTimeAfter != nil {
+		s.WriteTime(schemas.ListAppImageConfigsRequest_ModifiedTimeAfter, *v.ModifiedTimeAfter)
+	}
+	if v.ModifiedTimeBefore != nil {
+		s.WriteTime(schemas.ListAppImageConfigsRequest_ModifiedTimeBefore, *v.ModifiedTimeBefore)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListAppImageConfigsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppImageConfigsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListAppImageConfigsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListAppImageConfigsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListAppImageConfigsOutput struct {
 
 	// A list of AppImageConfigs and their properties.
@@ -84,13 +122,35 @@ type ListAppImageConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppImageConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppImageConfigsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppImageConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAppImageConfigList(s, schemas.ListAppImageConfigsResponse_AppImageConfigs, v.AppImageConfigs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppImageConfigsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAppImageConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppImageConfigsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppImageConfigsResponse_AppImageConfigs:
+			return deserializeAppImageConfigList(d, schemas.ListAppImageConfigsResponse_AppImageConfigs, &v.AppImageConfigs)
+		case schemas.ListAppImageConfigsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppImageConfigsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAppImageConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAppImageConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppImageConfigs, schemas.ListAppImageConfigsRequest, schemas.ListAppImageConfigsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAppImageConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppImageConfigs, schemas.ListAppImageConfigsRequest, schemas.ListAppImageConfigsResponse), output: &ListAppImageConfigsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

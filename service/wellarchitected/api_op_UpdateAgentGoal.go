@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,31 @@ type UpdateAgentGoalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAgentGoalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAgentGoalRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAgentGoalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateAgentGoalRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAgentGoalRequest_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateAgentGoalRequest_id, *v.Id)
+	}
+	serializePillars(s, schemas.UpdateAgentGoalRequest_pillars, v.Pillars)
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.UpdateAgentGoalRequest_profileArn, *v.ProfileArn)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.UpdateAgentGoalRequest_title, *v.Title)
+	}
+}
+
 type UpdateAgentGoalOutput struct {
 
 	// The updated goal summary.
@@ -67,13 +94,34 @@ type UpdateAgentGoalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAgentGoalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAgentGoalResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAgentGoalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Goal != nil {
+		s.WriteStruct(schemas.UpdateAgentGoalResponse_goal)
+		v.Goal.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAgentGoalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAgentGoalResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAgentGoalResponse_goal:
+			v.Goal = &types.GoalSummary{}
+			return v.Goal.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAgentGoalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAgentGoal{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgentGoal, schemas.UpdateAgentGoalRequest, schemas.UpdateAgentGoalResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAgentGoal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgentGoal, schemas.UpdateAgentGoalRequest, schemas.UpdateAgentGoalResponse), output: &UpdateAgentGoalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

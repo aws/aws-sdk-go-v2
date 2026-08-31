@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,25 @@ type GetComplianceDetailsByConfigRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComplianceDetailsByConfigRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComplianceDetailsByConfigRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComplianceDetailsByConfigRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComplianceTypes(s, schemas.GetComplianceDetailsByConfigRuleRequest_ComplianceTypes, v.ComplianceTypes)
+	if v.ConfigRuleName != nil {
+		s.WriteString(schemas.GetComplianceDetailsByConfigRuleRequest_ConfigRuleName, *v.ConfigRuleName)
+	}
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.GetComplianceDetailsByConfigRuleRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetComplianceDetailsByConfigRuleRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetComplianceDetailsByConfigRuleOutput struct {
 
 	// Indicates whether the Amazon Web Services resource complies with the specified
@@ -70,13 +91,35 @@ type GetComplianceDetailsByConfigRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComplianceDetailsByConfigRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComplianceDetailsByConfigRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComplianceDetailsByConfigRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEvaluationResults(s, schemas.GetComplianceDetailsByConfigRuleResponse_EvaluationResults, v.EvaluationResults)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetComplianceDetailsByConfigRuleResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetComplianceDetailsByConfigRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetComplianceDetailsByConfigRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetComplianceDetailsByConfigRuleResponse_EvaluationResults:
+			return deserializeEvaluationResults(d, schemas.GetComplianceDetailsByConfigRuleResponse_EvaluationResults, &v.EvaluationResults)
+		case schemas.GetComplianceDetailsByConfigRuleResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetComplianceDetailsByConfigRuleResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetComplianceDetailsByConfigRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetComplianceDetailsByConfigRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComplianceDetailsByConfigRule, schemas.GetComplianceDetailsByConfigRuleRequest, schemas.GetComplianceDetailsByConfigRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetComplianceDetailsByConfigRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComplianceDetailsByConfigRule, schemas.GetComplianceDetailsByConfigRuleRequest, schemas.GetComplianceDetailsByConfigRuleResponse), output: &GetComplianceDetailsByConfigRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

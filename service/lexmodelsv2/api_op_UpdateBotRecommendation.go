@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -61,6 +63,32 @@ type UpdateBotRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBotRecommendationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBotRecommendationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBotRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.UpdateBotRecommendationRequest_botId, *v.BotId)
+	}
+	if v.BotRecommendationId != nil {
+		s.WriteString(schemas.UpdateBotRecommendationRequest_botRecommendationId, *v.BotRecommendationId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.UpdateBotRecommendationRequest_botVersion, *v.BotVersion)
+	}
+	if v.EncryptionSetting != nil {
+		s.WriteStruct(schemas.UpdateBotRecommendationRequest_encryptionSetting)
+		v.EncryptionSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.UpdateBotRecommendationRequest_localeId, *v.LocaleId)
+	}
+}
+
 type UpdateBotRecommendationOutput struct {
 
 	// The unique identifier of the bot containing the bot recommendation that has
@@ -106,13 +134,88 @@ type UpdateBotRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBotRecommendationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBotRecommendationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBotRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.UpdateBotRecommendationResponse_botId, *v.BotId)
+	}
+	if v.BotRecommendationId != nil {
+		s.WriteString(schemas.UpdateBotRecommendationResponse_botRecommendationId, *v.BotRecommendationId)
+	}
+	if v.BotRecommendationStatus != "" {
+		s.WriteString(schemas.UpdateBotRecommendationResponse_botRecommendationStatus, string(v.BotRecommendationStatus))
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.UpdateBotRecommendationResponse_botVersion, *v.BotVersion)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.UpdateBotRecommendationResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.EncryptionSetting != nil {
+		s.WriteStruct(schemas.UpdateBotRecommendationResponse_encryptionSetting)
+		v.EncryptionSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.UpdateBotRecommendationResponse_lastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.UpdateBotRecommendationResponse_localeId, *v.LocaleId)
+	}
+	if v.TranscriptSourceSetting != nil {
+		s.WriteStruct(schemas.UpdateBotRecommendationResponse_transcriptSourceSetting)
+		v.TranscriptSourceSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateBotRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBotRecommendationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBotRecommendationResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.UpdateBotRecommendationResponse_botId, v.BotId)
+		case schemas.UpdateBotRecommendationResponse_botRecommendationId:
+			v.BotRecommendationId = new(string)
+			return d.ReadString(schemas.UpdateBotRecommendationResponse_botRecommendationId, v.BotRecommendationId)
+		case schemas.UpdateBotRecommendationResponse_botRecommendationStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateBotRecommendationResponse_botRecommendationStatus, &ev); err != nil {
+				return err
+			}
+			v.BotRecommendationStatus = types.BotRecommendationStatus(ev)
+			return nil
+		case schemas.UpdateBotRecommendationResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.UpdateBotRecommendationResponse_botVersion, v.BotVersion)
+		case schemas.UpdateBotRecommendationResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateBotRecommendationResponse_creationDateTime, v.CreationDateTime)
+		case schemas.UpdateBotRecommendationResponse_encryptionSetting:
+			v.EncryptionSetting = &types.EncryptionSetting{}
+			return v.EncryptionSetting.Deserialize(d)
+		case schemas.UpdateBotRecommendationResponse_lastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateBotRecommendationResponse_lastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.UpdateBotRecommendationResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.UpdateBotRecommendationResponse_localeId, v.LocaleId)
+		case schemas.UpdateBotRecommendationResponse_transcriptSourceSetting:
+			v.TranscriptSourceSetting = &types.TranscriptSourceSetting{}
+			return v.TranscriptSourceSetting.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBotRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBotRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBotRecommendation, schemas.UpdateBotRecommendationRequest, schemas.UpdateBotRecommendationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBotRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBotRecommendation, schemas.UpdateBotRecommendationRequest, schemas.UpdateBotRecommendationResponse), output: &UpdateBotRecommendationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

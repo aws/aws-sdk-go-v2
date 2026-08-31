@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListLoggerDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLoggerDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLoggerDefinitionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLoggerDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteString(schemas.ListLoggerDefinitionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLoggerDefinitionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListLoggerDefinitionsOutput struct {
 
 	// Information about a definition.
@@ -51,13 +68,35 @@ type ListLoggerDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLoggerDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLoggerDefinitionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLoggerDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfDefinitionInformation(s, schemas.ListLoggerDefinitionsResponse_Definitions, v.Definitions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLoggerDefinitionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLoggerDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLoggerDefinitionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLoggerDefinitionsResponse_Definitions:
+			return deserialize__listOfDefinitionInformation(d, schemas.ListLoggerDefinitionsResponse_Definitions, &v.Definitions)
+		case schemas.ListLoggerDefinitionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLoggerDefinitionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLoggerDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLoggerDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLoggerDefinitions, schemas.ListLoggerDefinitionsRequest, schemas.ListLoggerDefinitionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLoggerDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLoggerDefinitions, schemas.ListLoggerDefinitionsRequest, schemas.ListLoggerDefinitionsResponse), output: &ListLoggerDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

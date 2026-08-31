@@ -4,7 +4,9 @@ package route53resolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,23 @@ type UpdateResolverRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResolverRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResolverRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResolverRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Config != nil {
+		s.WriteStruct(schemas.UpdateResolverRuleRequest_Config)
+		v.Config.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResolverRuleId != nil {
+		s.WriteString(schemas.UpdateResolverRuleRequest_ResolverRuleId, *v.ResolverRuleId)
+	}
+}
+
 type UpdateResolverRuleOutput struct {
 
 	// The response to an UpdateResolverRule request.
@@ -52,13 +71,34 @@ type UpdateResolverRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResolverRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResolverRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResolverRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverRule != nil {
+		s.WriteStruct(schemas.UpdateResolverRuleResponse_ResolverRule)
+		v.ResolverRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateResolverRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResolverRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateResolverRuleResponse_ResolverRule:
+			v.ResolverRule = &types.ResolverRule{}
+			return v.ResolverRule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateResolverRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateResolverRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResolverRule, schemas.UpdateResolverRuleRequest, schemas.UpdateResolverRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateResolverRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResolverRule, schemas.UpdateResolverRuleRequest, schemas.UpdateResolverRuleResponse), output: &UpdateResolverRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

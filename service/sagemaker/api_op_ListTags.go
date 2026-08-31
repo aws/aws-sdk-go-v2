@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTagsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTagsInput_NextToken, *v.NextToken)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ListTagsInput_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type ListTagsOutput struct {
 
 	//  If response is truncated, SageMaker includes a token in the response. You can
@@ -58,13 +78,35 @@ type ListTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTagsOutput_NextToken, *v.NextToken)
+	}
+	serializeTagList(s, schemas.ListTagsOutput_Tags, v.Tags)
+}
+func (v *ListTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTagsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTagsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTagsOutput_NextToken, v.NextToken)
+		case schemas.ListTagsOutput_Tags:
+			return deserializeTagList(d, schemas.ListTagsOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTags, schemas.ListTagsInput, schemas.ListTagsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTags, schemas.ListTagsInput, schemas.ListTagsOutput), output: &ListTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package m2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,62 @@ type UpdateEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplyDuringMaintenanceWindow != false {
+		s.WriteBool(schemas.UpdateEnvironmentRequest_applyDuringMaintenanceWindow, v.ApplyDuringMaintenanceWindow)
+	}
+	if v.DesiredCapacity != nil {
+		s.WriteInt32(schemas.UpdateEnvironmentRequest_desiredCapacity, *v.DesiredCapacity)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.UpdateEnvironmentRequest_engineVersion, *v.EngineVersion)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.UpdateEnvironmentRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.ForceUpdate != false {
+		s.WriteBool(schemas.UpdateEnvironmentRequest_forceUpdate, v.ForceUpdate)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.UpdateEnvironmentRequest_instanceType, *v.InstanceType)
+	}
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.UpdateEnvironmentRequest_preferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+}
+func (v *UpdateEnvironmentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEnvironmentRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEnvironmentRequest_applyDuringMaintenanceWindow:
+			return d.ReadBool(schemas.UpdateEnvironmentRequest_applyDuringMaintenanceWindow, &v.ApplyDuringMaintenanceWindow)
+		case schemas.UpdateEnvironmentRequest_desiredCapacity:
+			v.DesiredCapacity = new(int32)
+			return d.ReadInt32(schemas.UpdateEnvironmentRequest_desiredCapacity, v.DesiredCapacity)
+		case schemas.UpdateEnvironmentRequest_engineVersion:
+			v.EngineVersion = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentRequest_engineVersion, v.EngineVersion)
+		case schemas.UpdateEnvironmentRequest_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentRequest_environmentId, v.EnvironmentId)
+		case schemas.UpdateEnvironmentRequest_forceUpdate:
+			return d.ReadBool(schemas.UpdateEnvironmentRequest_forceUpdate, &v.ForceUpdate)
+		case schemas.UpdateEnvironmentRequest_instanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentRequest_instanceType, v.InstanceType)
+		case schemas.UpdateEnvironmentRequest_preferredMaintenanceWindow:
+			v.PreferredMaintenanceWindow = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentRequest_preferredMaintenanceWindow, v.PreferredMaintenanceWindow)
+		}
+		return nil
+	})
+}
+
 type UpdateEnvironmentOutput struct {
 
 	// The unique identifier of the runtime environment that was updated.
@@ -84,13 +142,32 @@ type UpdateEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEnvironmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.UpdateEnvironmentResponse_environmentId, *v.EnvironmentId)
+	}
+}
+func (v *UpdateEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEnvironmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEnvironmentResponse_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentResponse_environmentId, v.EnvironmentId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironment, schemas.UpdateEnvironmentRequest, schemas.UpdateEnvironmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironment, schemas.UpdateEnvironmentRequest, schemas.UpdateEnvironmentResponse), output: &UpdateEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

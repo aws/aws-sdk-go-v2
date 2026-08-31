@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeTestExecutionInput struct {
 	TestExecutionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeTestExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTestExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTestExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TestExecutionId != nil {
+		s.WriteString(schemas.DescribeTestExecutionRequest_testExecutionId, *v.TestExecutionId)
+	}
 }
 
 type DescribeTestExecutionOutput struct {
@@ -76,13 +90,97 @@ type DescribeTestExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTestExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTestExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTestExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiMode != "" {
+		s.WriteString(schemas.DescribeTestExecutionResponse_apiMode, string(v.ApiMode))
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.DescribeTestExecutionResponse_creationDateTime, *v.CreationDateTime)
+	}
+	serializeFailureReasons(s, schemas.DescribeTestExecutionResponse_failureReasons, v.FailureReasons)
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.DescribeTestExecutionResponse_lastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.Target != nil {
+		s.WriteStruct(schemas.DescribeTestExecutionResponse_target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TestExecutionId != nil {
+		s.WriteString(schemas.DescribeTestExecutionResponse_testExecutionId, *v.TestExecutionId)
+	}
+	if v.TestExecutionModality != "" {
+		s.WriteString(schemas.DescribeTestExecutionResponse_testExecutionModality, string(v.TestExecutionModality))
+	}
+	if v.TestExecutionStatus != "" {
+		s.WriteString(schemas.DescribeTestExecutionResponse_testExecutionStatus, string(v.TestExecutionStatus))
+	}
+	if v.TestSetId != nil {
+		s.WriteString(schemas.DescribeTestExecutionResponse_testSetId, *v.TestSetId)
+	}
+	if v.TestSetName != nil {
+		s.WriteString(schemas.DescribeTestExecutionResponse_testSetName, *v.TestSetName)
+	}
+}
+func (v *DescribeTestExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTestExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTestExecutionResponse_apiMode:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTestExecutionResponse_apiMode, &ev); err != nil {
+				return err
+			}
+			v.ApiMode = types.TestExecutionApiMode(ev)
+			return nil
+		case schemas.DescribeTestExecutionResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTestExecutionResponse_creationDateTime, v.CreationDateTime)
+		case schemas.DescribeTestExecutionResponse_failureReasons:
+			return deserializeFailureReasons(d, schemas.DescribeTestExecutionResponse_failureReasons, &v.FailureReasons)
+		case schemas.DescribeTestExecutionResponse_lastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTestExecutionResponse_lastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.DescribeTestExecutionResponse_target:
+			v.Target = &types.TestExecutionTarget{}
+			return v.Target.Deserialize(d)
+		case schemas.DescribeTestExecutionResponse_testExecutionId:
+			v.TestExecutionId = new(string)
+			return d.ReadString(schemas.DescribeTestExecutionResponse_testExecutionId, v.TestExecutionId)
+		case schemas.DescribeTestExecutionResponse_testExecutionModality:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTestExecutionResponse_testExecutionModality, &ev); err != nil {
+				return err
+			}
+			v.TestExecutionModality = types.TestExecutionModality(ev)
+			return nil
+		case schemas.DescribeTestExecutionResponse_testExecutionStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTestExecutionResponse_testExecutionStatus, &ev); err != nil {
+				return err
+			}
+			v.TestExecutionStatus = types.TestExecutionStatus(ev)
+			return nil
+		case schemas.DescribeTestExecutionResponse_testSetId:
+			v.TestSetId = new(string)
+			return d.ReadString(schemas.DescribeTestExecutionResponse_testSetId, v.TestSetId)
+		case schemas.DescribeTestExecutionResponse_testSetName:
+			v.TestSetName = new(string)
+			return d.ReadString(schemas.DescribeTestExecutionResponse_testSetName, v.TestSetName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTestExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeTestExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTestExecution, schemas.DescribeTestExecutionRequest, schemas.DescribeTestExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeTestExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTestExecution, schemas.DescribeTestExecutionRequest, schemas.DescribeTestExecutionResponse), output: &DescribeTestExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

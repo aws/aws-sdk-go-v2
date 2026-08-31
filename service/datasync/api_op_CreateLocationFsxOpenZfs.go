@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,28 @@ type CreateLocationFsxOpenZfsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationFsxOpenZfsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationFsxOpenZfsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationFsxOpenZfsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FsxFilesystemArn != nil {
+		s.WriteString(schemas.CreateLocationFsxOpenZfsRequest_FsxFilesystemArn, *v.FsxFilesystemArn)
+	}
+	if v.Protocol != nil {
+		s.WriteStruct(schemas.CreateLocationFsxOpenZfsRequest_Protocol)
+		v.Protocol.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEc2SecurityGroupArnList(s, schemas.CreateLocationFsxOpenZfsRequest_SecurityGroupArns, v.SecurityGroupArns)
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.CreateLocationFsxOpenZfsRequest_Subdirectory, *v.Subdirectory)
+	}
+	serializeInputTagList(s, schemas.CreateLocationFsxOpenZfsRequest_Tags, v.Tags)
+}
+
 type CreateLocationFsxOpenZfsOutput struct {
 
 	// The ARN of the FSx for OpenZFS file system location that you created.
@@ -75,13 +99,32 @@ type CreateLocationFsxOpenZfsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationFsxOpenZfsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationFsxOpenZfsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationFsxOpenZfsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.CreateLocationFsxOpenZfsResponse_LocationArn, *v.LocationArn)
+	}
+}
+func (v *CreateLocationFsxOpenZfsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLocationFsxOpenZfsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLocationFsxOpenZfsResponse_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.CreateLocationFsxOpenZfsResponse_LocationArn, v.LocationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLocationFsxOpenZfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLocationFsxOpenZfs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationFsxOpenZfs, schemas.CreateLocationFsxOpenZfsRequest, schemas.CreateLocationFsxOpenZfsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLocationFsxOpenZfs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationFsxOpenZfs, schemas.CreateLocationFsxOpenZfsRequest, schemas.CreateLocationFsxOpenZfsResponse), output: &CreateLocationFsxOpenZfsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

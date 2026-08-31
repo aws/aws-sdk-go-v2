@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -160,6 +162,34 @@ type GetRelationalDatabaseMetricDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRelationalDatabaseMetricDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRelationalDatabaseMetricDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRelationalDatabaseMetricDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetRelationalDatabaseMetricDataRequest_endTime, *v.EndTime)
+	}
+	if v.MetricName != "" {
+		s.WriteString(schemas.GetRelationalDatabaseMetricDataRequest_metricName, string(v.MetricName))
+	}
+	if v.Period != nil {
+		s.WriteInt32(schemas.GetRelationalDatabaseMetricDataRequest_period, *v.Period)
+	}
+	if v.RelationalDatabaseName != nil {
+		s.WriteString(schemas.GetRelationalDatabaseMetricDataRequest_relationalDatabaseName, *v.RelationalDatabaseName)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetRelationalDatabaseMetricDataRequest_startTime, *v.StartTime)
+	}
+	serializeMetricStatisticList(s, schemas.GetRelationalDatabaseMetricDataRequest_statistics, v.Statistics)
+	if v.Unit != "" {
+		s.WriteString(schemas.GetRelationalDatabaseMetricDataRequest_unit, string(v.Unit))
+	}
+}
+
 type GetRelationalDatabaseMetricDataOutput struct {
 
 	// An array of objects that describe the metric data returned.
@@ -174,13 +204,39 @@ type GetRelationalDatabaseMetricDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRelationalDatabaseMetricDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRelationalDatabaseMetricDataResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRelationalDatabaseMetricDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricDatapointList(s, schemas.GetRelationalDatabaseMetricDataResult_metricData, v.MetricData)
+	if v.MetricName != "" {
+		s.WriteString(schemas.GetRelationalDatabaseMetricDataResult_metricName, string(v.MetricName))
+	}
+}
+func (v *GetRelationalDatabaseMetricDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRelationalDatabaseMetricDataResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRelationalDatabaseMetricDataResult_metricData:
+			return deserializeMetricDatapointList(d, schemas.GetRelationalDatabaseMetricDataResult_metricData, &v.MetricData)
+		case schemas.GetRelationalDatabaseMetricDataResult_metricName:
+			var ev string
+			if err := d.ReadString(schemas.GetRelationalDatabaseMetricDataResult_metricName, &ev); err != nil {
+				return err
+			}
+			v.MetricName = types.RelationalDatabaseMetricName(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRelationalDatabaseMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRelationalDatabaseMetricData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRelationalDatabaseMetricData, schemas.GetRelationalDatabaseMetricDataRequest, schemas.GetRelationalDatabaseMetricDataResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRelationalDatabaseMetricData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRelationalDatabaseMetricData, schemas.GetRelationalDatabaseMetricDataRequest, schemas.GetRelationalDatabaseMetricDataResult), output: &GetRelationalDatabaseMetricDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

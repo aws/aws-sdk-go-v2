@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type ListContactFlowModuleAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContactFlowModuleAliasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContactFlowModuleAliasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContactFlowModuleAliasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactFlowModuleId != nil {
+		s.WriteString(schemas.ListContactFlowModuleAliasesRequest_ContactFlowModuleId, *v.ContactFlowModuleId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListContactFlowModuleAliasesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListContactFlowModuleAliasesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContactFlowModuleAliasesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListContactFlowModuleAliasesOutput struct {
 
 	// Information about the flow module aliases.
@@ -65,13 +88,35 @@ type ListContactFlowModuleAliasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContactFlowModuleAliasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContactFlowModuleAliasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContactFlowModuleAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContactFlowModuleAliasSummaryList(s, schemas.ListContactFlowModuleAliasesResponse_ContactFlowModuleAliasSummaryList, v.ContactFlowModuleAliasSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContactFlowModuleAliasesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListContactFlowModuleAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListContactFlowModuleAliasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListContactFlowModuleAliasesResponse_ContactFlowModuleAliasSummaryList:
+			return deserializeContactFlowModuleAliasSummaryList(d, schemas.ListContactFlowModuleAliasesResponse_ContactFlowModuleAliasSummaryList, &v.ContactFlowModuleAliasSummaryList)
+		case schemas.ListContactFlowModuleAliasesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListContactFlowModuleAliasesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListContactFlowModuleAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListContactFlowModuleAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContactFlowModuleAliases, schemas.ListContactFlowModuleAliasesRequest, schemas.ListContactFlowModuleAliasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListContactFlowModuleAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContactFlowModuleAliases, schemas.ListContactFlowModuleAliasesRequest, schemas.ListContactFlowModuleAliasesResponse), output: &ListContactFlowModuleAliasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,18 @@ type DescribeCompilationJobInput struct {
 	CompilationJobName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeCompilationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCompilationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCompilationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompilationJobName != nil {
+		s.WriteString(schemas.DescribeCompilationJobRequest_CompilationJobName, *v.CompilationJobName)
+	}
 }
 
 type DescribeCompilationJobOutput struct {
@@ -148,13 +162,152 @@ type DescribeCompilationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCompilationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCompilationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCompilationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompilationEndTime != nil {
+		s.WriteTime(schemas.DescribeCompilationJobResponse_CompilationEndTime, *v.CompilationEndTime)
+	}
+	if v.CompilationJobArn != nil {
+		s.WriteString(schemas.DescribeCompilationJobResponse_CompilationJobArn, *v.CompilationJobArn)
+	}
+	if v.CompilationJobName != nil {
+		s.WriteString(schemas.DescribeCompilationJobResponse_CompilationJobName, *v.CompilationJobName)
+	}
+	if v.CompilationJobStatus != "" {
+		s.WriteString(schemas.DescribeCompilationJobResponse_CompilationJobStatus, string(v.CompilationJobStatus))
+	}
+	if v.CompilationStartTime != nil {
+		s.WriteTime(schemas.DescribeCompilationJobResponse_CompilationStartTime, *v.CompilationStartTime)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeCompilationJobResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DerivedInformation != nil {
+		s.WriteStruct(schemas.DescribeCompilationJobResponse_DerivedInformation)
+		v.DerivedInformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeCompilationJobResponse_FailureReason, *v.FailureReason)
+	}
+	if v.InferenceImage != nil {
+		s.WriteString(schemas.DescribeCompilationJobResponse_InferenceImage, *v.InferenceImage)
+	}
+	if v.InputConfig != nil {
+		s.WriteStruct(schemas.DescribeCompilationJobResponse_InputConfig)
+		v.InputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeCompilationJobResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.ModelArtifacts != nil {
+		s.WriteStruct(schemas.DescribeCompilationJobResponse_ModelArtifacts)
+		v.ModelArtifacts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelDigests != nil {
+		s.WriteStruct(schemas.DescribeCompilationJobResponse_ModelDigests)
+		v.ModelDigests.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelPackageVersionArn != nil {
+		s.WriteString(schemas.DescribeCompilationJobResponse_ModelPackageVersionArn, *v.ModelPackageVersionArn)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.DescribeCompilationJobResponse_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeCompilationJobResponse_RoleArn, *v.RoleArn)
+	}
+	if v.StoppingCondition != nil {
+		s.WriteStruct(schemas.DescribeCompilationJobResponse_StoppingCondition)
+		v.StoppingCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.DescribeCompilationJobResponse_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeCompilationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCompilationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCompilationJobResponse_CompilationEndTime:
+			v.CompilationEndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeCompilationJobResponse_CompilationEndTime, v.CompilationEndTime)
+		case schemas.DescribeCompilationJobResponse_CompilationJobArn:
+			v.CompilationJobArn = new(string)
+			return d.ReadString(schemas.DescribeCompilationJobResponse_CompilationJobArn, v.CompilationJobArn)
+		case schemas.DescribeCompilationJobResponse_CompilationJobName:
+			v.CompilationJobName = new(string)
+			return d.ReadString(schemas.DescribeCompilationJobResponse_CompilationJobName, v.CompilationJobName)
+		case schemas.DescribeCompilationJobResponse_CompilationJobStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeCompilationJobResponse_CompilationJobStatus, &ev); err != nil {
+				return err
+			}
+			v.CompilationJobStatus = types.CompilationJobStatus(ev)
+			return nil
+		case schemas.DescribeCompilationJobResponse_CompilationStartTime:
+			v.CompilationStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeCompilationJobResponse_CompilationStartTime, v.CompilationStartTime)
+		case schemas.DescribeCompilationJobResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeCompilationJobResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeCompilationJobResponse_DerivedInformation:
+			v.DerivedInformation = &types.DerivedInformation{}
+			return v.DerivedInformation.Deserialize(d)
+		case schemas.DescribeCompilationJobResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeCompilationJobResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeCompilationJobResponse_InferenceImage:
+			v.InferenceImage = new(string)
+			return d.ReadString(schemas.DescribeCompilationJobResponse_InferenceImage, v.InferenceImage)
+		case schemas.DescribeCompilationJobResponse_InputConfig:
+			v.InputConfig = &types.InputConfig{}
+			return v.InputConfig.Deserialize(d)
+		case schemas.DescribeCompilationJobResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeCompilationJobResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeCompilationJobResponse_ModelArtifacts:
+			v.ModelArtifacts = &types.ModelArtifacts{}
+			return v.ModelArtifacts.Deserialize(d)
+		case schemas.DescribeCompilationJobResponse_ModelDigests:
+			v.ModelDigests = &types.ModelDigests{}
+			return v.ModelDigests.Deserialize(d)
+		case schemas.DescribeCompilationJobResponse_ModelPackageVersionArn:
+			v.ModelPackageVersionArn = new(string)
+			return d.ReadString(schemas.DescribeCompilationJobResponse_ModelPackageVersionArn, v.ModelPackageVersionArn)
+		case schemas.DescribeCompilationJobResponse_OutputConfig:
+			v.OutputConfig = &types.OutputConfig{}
+			return v.OutputConfig.Deserialize(d)
+		case schemas.DescribeCompilationJobResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeCompilationJobResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeCompilationJobResponse_StoppingCondition:
+			v.StoppingCondition = &types.StoppingCondition{}
+			return v.StoppingCondition.Deserialize(d)
+		case schemas.DescribeCompilationJobResponse_VpcConfig:
+			v.VpcConfig = &types.NeoVpcConfig{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCompilationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCompilationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCompilationJob, schemas.DescribeCompilationJobRequest, schemas.DescribeCompilationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCompilationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCompilationJob, schemas.DescribeCompilationJobRequest, schemas.DescribeCompilationJobResponse), output: &DescribeCompilationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -61,6 +63,21 @@ type AdminGetUserInput struct {
 	Username *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AdminGetUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminGetUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminGetUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AdminGetUserRequest_UserPoolId, *v.UserPoolId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.AdminGetUserRequest_Username, *v.Username)
+	}
 }
 
 // Represents the response from the server from the request to get the specified
@@ -128,13 +145,74 @@ type AdminGetUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminGetUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminGetUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminGetUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != false {
+		s.WriteBool(schemas.AdminGetUserResponse_Enabled, v.Enabled)
+	}
+	serializeMFAOptionListType(s, schemas.AdminGetUserResponse_MFAOptions, v.MFAOptions)
+	if v.PreferredMfaSetting != nil {
+		s.WriteString(schemas.AdminGetUserResponse_PreferredMfaSetting, *v.PreferredMfaSetting)
+	}
+	serializeAttributeListType(s, schemas.AdminGetUserResponse_UserAttributes, v.UserAttributes)
+	if v.UserCreateDate != nil {
+		s.WriteTime(schemas.AdminGetUserResponse_UserCreateDate, *v.UserCreateDate)
+	}
+	if v.UserLastModifiedDate != nil {
+		s.WriteTime(schemas.AdminGetUserResponse_UserLastModifiedDate, *v.UserLastModifiedDate)
+	}
+	serializeUserMFASettingListType(s, schemas.AdminGetUserResponse_UserMFASettingList, v.UserMFASettingList)
+	if v.UserStatus != "" {
+		s.WriteString(schemas.AdminGetUserResponse_UserStatus, string(v.UserStatus))
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.AdminGetUserResponse_Username, *v.Username)
+	}
+}
+func (v *AdminGetUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminGetUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdminGetUserResponse_Enabled:
+			return d.ReadBool(schemas.AdminGetUserResponse_Enabled, &v.Enabled)
+		case schemas.AdminGetUserResponse_MFAOptions:
+			return deserializeMFAOptionListType(d, schemas.AdminGetUserResponse_MFAOptions, &v.MFAOptions)
+		case schemas.AdminGetUserResponse_PreferredMfaSetting:
+			v.PreferredMfaSetting = new(string)
+			return d.ReadString(schemas.AdminGetUserResponse_PreferredMfaSetting, v.PreferredMfaSetting)
+		case schemas.AdminGetUserResponse_UserAttributes:
+			return deserializeAttributeListType(d, schemas.AdminGetUserResponse_UserAttributes, &v.UserAttributes)
+		case schemas.AdminGetUserResponse_UserCreateDate:
+			v.UserCreateDate = new(time.Time)
+			return d.ReadTime(schemas.AdminGetUserResponse_UserCreateDate, v.UserCreateDate)
+		case schemas.AdminGetUserResponse_UserLastModifiedDate:
+			v.UserLastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.AdminGetUserResponse_UserLastModifiedDate, v.UserLastModifiedDate)
+		case schemas.AdminGetUserResponse_UserMFASettingList:
+			return deserializeUserMFASettingListType(d, schemas.AdminGetUserResponse_UserMFASettingList, &v.UserMFASettingList)
+		case schemas.AdminGetUserResponse_UserStatus:
+			var ev string
+			if err := d.ReadString(schemas.AdminGetUserResponse_UserStatus, &ev); err != nil {
+				return err
+			}
+			v.UserStatus = types.UserStatusType(ev)
+			return nil
+		case schemas.AdminGetUserResponse_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.AdminGetUserResponse_Username, v.Username)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdminGetUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminGetUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminGetUser, schemas.AdminGetUserRequest, schemas.AdminGetUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminGetUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminGetUser, schemas.AdminGetUserRequest, schemas.AdminGetUserResponse), output: &AdminGetUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

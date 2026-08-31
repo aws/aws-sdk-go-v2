@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -63,6 +65,42 @@ type ListImageVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImageVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImageVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImageVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListImageVersionsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListImageVersionsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.ImageName != nil {
+		s.WriteString(schemas.ListImageVersionsRequest_ImageName, *v.ImageName)
+	}
+	if v.LastModifiedTimeAfter != nil {
+		s.WriteTime(schemas.ListImageVersionsRequest_LastModifiedTimeAfter, *v.LastModifiedTimeAfter)
+	}
+	if v.LastModifiedTimeBefore != nil {
+		s.WriteTime(schemas.ListImageVersionsRequest_LastModifiedTimeBefore, *v.LastModifiedTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListImageVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImageVersionsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListImageVersionsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListImageVersionsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListImageVersionsOutput struct {
 
 	// A list of versions and their properties.
@@ -77,13 +115,35 @@ type ListImageVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImageVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImageVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImageVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImageVersions(s, schemas.ListImageVersionsResponse_ImageVersions, v.ImageVersions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImageVersionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListImageVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListImageVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListImageVersionsResponse_ImageVersions:
+			return deserializeImageVersions(d, schemas.ListImageVersionsResponse_ImageVersions, &v.ImageVersions)
+		case schemas.ListImageVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListImageVersionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListImageVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListImageVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImageVersions, schemas.ListImageVersionsRequest, schemas.ListImageVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListImageVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImageVersions, schemas.ListImageVersionsRequest, schemas.ListImageVersionsResponse), output: &ListImageVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

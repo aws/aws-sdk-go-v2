@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListCoreDefinitionVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCoreDefinitionVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCoreDefinitionVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCoreDefinitionVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreDefinitionId != nil {
+		s.WriteString(schemas.ListCoreDefinitionVersionsRequest_CoreDefinitionId, *v.CoreDefinitionId)
+	}
+	if v.MaxResults != nil {
+		s.WriteString(schemas.ListCoreDefinitionVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCoreDefinitionVersionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListCoreDefinitionVersionsOutput struct {
 
 	// The token for the next set of results, or ''null'' if there are no additional
@@ -56,13 +76,35 @@ type ListCoreDefinitionVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCoreDefinitionVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCoreDefinitionVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCoreDefinitionVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCoreDefinitionVersionsResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfVersionInformation(s, schemas.ListCoreDefinitionVersionsResponse_Versions, v.Versions)
+}
+func (v *ListCoreDefinitionVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCoreDefinitionVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCoreDefinitionVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCoreDefinitionVersionsResponse_NextToken, v.NextToken)
+		case schemas.ListCoreDefinitionVersionsResponse_Versions:
+			return deserialize__listOfVersionInformation(d, schemas.ListCoreDefinitionVersionsResponse_Versions, &v.Versions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCoreDefinitionVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCoreDefinitionVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCoreDefinitionVersions, schemas.ListCoreDefinitionVersionsRequest, schemas.ListCoreDefinitionVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCoreDefinitionVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCoreDefinitionVersions, schemas.ListCoreDefinitionVersionsRequest, schemas.ListCoreDefinitionVersionsResponse), output: &ListCoreDefinitionVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type DeregisterDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterDevicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterDevicesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterDevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceFleetName != nil {
+		s.WriteString(schemas.DeregisterDevicesRequest_DeviceFleetName, *v.DeviceFleetName)
+	}
+	serializeDeviceNames(s, schemas.DeregisterDevicesRequest_DeviceNames, v.DeviceNames)
+}
+
 type DeregisterDevicesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +61,26 @@ type DeregisterDevicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterDevicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeregisterDevicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterDevices, schemas.DeregisterDevicesRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeregisterDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterDevices, schemas.DeregisterDevicesRequest, nil), output: &DeregisterDevicesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

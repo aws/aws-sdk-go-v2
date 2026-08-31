@@ -4,6 +4,8 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,21 @@ type AssociateSoftwareTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSoftwareTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSoftwareTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSoftwareTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.AssociateSoftwareTokenRequest_AccessToken, *v.AccessToken)
+	}
+	if v.Session != nil {
+		s.WriteString(schemas.AssociateSoftwareTokenRequest_Session, *v.Session)
+	}
+}
+
 type AssociateSoftwareTokenOutput struct {
 
 	// A unique generated shared secret code that is used by the TOTP algorithm to
@@ -71,13 +88,38 @@ type AssociateSoftwareTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSoftwareTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSoftwareTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSoftwareTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecretCode != nil {
+		s.WriteString(schemas.AssociateSoftwareTokenResponse_SecretCode, *v.SecretCode)
+	}
+	if v.Session != nil {
+		s.WriteString(schemas.AssociateSoftwareTokenResponse_Session, *v.Session)
+	}
+}
+func (v *AssociateSoftwareTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateSoftwareTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateSoftwareTokenResponse_SecretCode:
+			v.SecretCode = new(string)
+			return d.ReadString(schemas.AssociateSoftwareTokenResponse_SecretCode, v.SecretCode)
+		case schemas.AssociateSoftwareTokenResponse_Session:
+			v.Session = new(string)
+			return d.ReadString(schemas.AssociateSoftwareTokenResponse_Session, v.Session)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateSoftwareTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateSoftwareToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSoftwareToken, schemas.AssociateSoftwareTokenRequest, schemas.AssociateSoftwareTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateSoftwareToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSoftwareToken, schemas.AssociateSoftwareTokenRequest, schemas.AssociateSoftwareTokenResponse), output: &AssociateSoftwareTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

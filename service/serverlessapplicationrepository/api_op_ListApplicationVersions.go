@@ -5,7 +5,9 @@ package serverlessapplicationrepository
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListApplicationVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ListApplicationVersionsRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListApplicationVersionsRequest_MaxItems, *v.MaxItems)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationVersionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListApplicationVersionsOutput struct {
 
 	// The token to request the next page of results.
@@ -55,13 +75,35 @@ type ListApplicationVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationVersionsResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfVersionSummary(s, schemas.ListApplicationVersionsResponse_Versions, v.Versions)
+}
+func (v *ListApplicationVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListApplicationVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListApplicationVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListApplicationVersionsResponse_NextToken, v.NextToken)
+		case schemas.ListApplicationVersionsResponse_Versions:
+			return deserialize__listOfVersionSummary(d, schemas.ListApplicationVersionsResponse_Versions, &v.Versions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListApplicationVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListApplicationVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationVersions, schemas.ListApplicationVersionsRequest, schemas.ListApplicationVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListApplicationVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationVersions, schemas.ListApplicationVersionsRequest, schemas.ListApplicationVersionsResponse), output: &ListApplicationVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

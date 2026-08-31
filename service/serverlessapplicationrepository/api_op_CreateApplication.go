@@ -4,7 +4,9 @@ package serverlessapplicationrepository
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -140,6 +142,58 @@ type CreateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Author != nil {
+		s.WriteString(schemas.CreateApplicationRequest_Author, *v.Author)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateApplicationRequest_Description, *v.Description)
+	}
+	if v.HomePageUrl != nil {
+		s.WriteString(schemas.CreateApplicationRequest_HomePageUrl, *v.HomePageUrl)
+	}
+	serialize__listOf__string(s, schemas.CreateApplicationRequest_Labels, v.Labels)
+	if v.LicenseBody != nil {
+		s.WriteString(schemas.CreateApplicationRequest_LicenseBody, *v.LicenseBody)
+	}
+	if v.LicenseUrl != nil {
+		s.WriteString(schemas.CreateApplicationRequest_LicenseUrl, *v.LicenseUrl)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateApplicationRequest_Name, *v.Name)
+	}
+	if v.ReadmeBody != nil {
+		s.WriteString(schemas.CreateApplicationRequest_ReadmeBody, *v.ReadmeBody)
+	}
+	if v.ReadmeUrl != nil {
+		s.WriteString(schemas.CreateApplicationRequest_ReadmeUrl, *v.ReadmeUrl)
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.CreateApplicationRequest_SemanticVersion, *v.SemanticVersion)
+	}
+	if v.SourceCodeArchiveUrl != nil {
+		s.WriteString(schemas.CreateApplicationRequest_SourceCodeArchiveUrl, *v.SourceCodeArchiveUrl)
+	}
+	if v.SourceCodeUrl != nil {
+		s.WriteString(schemas.CreateApplicationRequest_SourceCodeUrl, *v.SourceCodeUrl)
+	}
+	if v.SpdxLicenseId != nil {
+		s.WriteString(schemas.CreateApplicationRequest_SpdxLicenseId, *v.SpdxLicenseId)
+	}
+	if v.TemplateBody != nil {
+		s.WriteString(schemas.CreateApplicationRequest_TemplateBody, *v.TemplateBody)
+	}
+	if v.TemplateUrl != nil {
+		s.WriteString(schemas.CreateApplicationRequest_TemplateUrl, *v.TemplateUrl)
+	}
+}
+
 type CreateApplicationOutput struct {
 
 	// The application Amazon Resource Name (ARN).
@@ -212,13 +266,103 @@ type CreateApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreateApplicationResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.Author != nil {
+		s.WriteString(schemas.CreateApplicationResponse_Author, *v.Author)
+	}
+	if v.CreationTime != nil {
+		s.WriteString(schemas.CreateApplicationResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateApplicationResponse_Description, *v.Description)
+	}
+	if v.HomePageUrl != nil {
+		s.WriteString(schemas.CreateApplicationResponse_HomePageUrl, *v.HomePageUrl)
+	}
+	if v.IsVerifiedAuthor != nil {
+		s.WriteBool(schemas.CreateApplicationResponse_IsVerifiedAuthor, *v.IsVerifiedAuthor)
+	}
+	serialize__listOf__string(s, schemas.CreateApplicationResponse_Labels, v.Labels)
+	if v.LicenseUrl != nil {
+		s.WriteString(schemas.CreateApplicationResponse_LicenseUrl, *v.LicenseUrl)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateApplicationResponse_Name, *v.Name)
+	}
+	if v.ReadmeUrl != nil {
+		s.WriteString(schemas.CreateApplicationResponse_ReadmeUrl, *v.ReadmeUrl)
+	}
+	if v.SpdxLicenseId != nil {
+		s.WriteString(schemas.CreateApplicationResponse_SpdxLicenseId, *v.SpdxLicenseId)
+	}
+	if v.VerifiedAuthorUrl != nil {
+		s.WriteString(schemas.CreateApplicationResponse_VerifiedAuthorUrl, *v.VerifiedAuthorUrl)
+	}
+	if v.Version != nil {
+		s.WriteStruct(schemas.CreateApplicationResponse_Version)
+		v.Version.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateApplicationResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.CreateApplicationResponse_ApplicationId, v.ApplicationId)
+		case schemas.CreateApplicationResponse_Author:
+			v.Author = new(string)
+			return d.ReadString(schemas.CreateApplicationResponse_Author, v.Author)
+		case schemas.CreateApplicationResponse_CreationTime:
+			v.CreationTime = new(string)
+			return d.ReadString(schemas.CreateApplicationResponse_CreationTime, v.CreationTime)
+		case schemas.CreateApplicationResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateApplicationResponse_Description, v.Description)
+		case schemas.CreateApplicationResponse_HomePageUrl:
+			v.HomePageUrl = new(string)
+			return d.ReadString(schemas.CreateApplicationResponse_HomePageUrl, v.HomePageUrl)
+		case schemas.CreateApplicationResponse_IsVerifiedAuthor:
+			v.IsVerifiedAuthor = new(bool)
+			return d.ReadBool(schemas.CreateApplicationResponse_IsVerifiedAuthor, v.IsVerifiedAuthor)
+		case schemas.CreateApplicationResponse_Labels:
+			return deserialize__listOf__string(d, schemas.CreateApplicationResponse_Labels, &v.Labels)
+		case schemas.CreateApplicationResponse_LicenseUrl:
+			v.LicenseUrl = new(string)
+			return d.ReadString(schemas.CreateApplicationResponse_LicenseUrl, v.LicenseUrl)
+		case schemas.CreateApplicationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateApplicationResponse_Name, v.Name)
+		case schemas.CreateApplicationResponse_ReadmeUrl:
+			v.ReadmeUrl = new(string)
+			return d.ReadString(schemas.CreateApplicationResponse_ReadmeUrl, v.ReadmeUrl)
+		case schemas.CreateApplicationResponse_SpdxLicenseId:
+			v.SpdxLicenseId = new(string)
+			return d.ReadString(schemas.CreateApplicationResponse_SpdxLicenseId, v.SpdxLicenseId)
+		case schemas.CreateApplicationResponse_VerifiedAuthorUrl:
+			v.VerifiedAuthorUrl = new(string)
+			return d.ReadString(schemas.CreateApplicationResponse_VerifiedAuthorUrl, v.VerifiedAuthorUrl)
+		case schemas.CreateApplicationResponse_Version:
+			v.Version = &types.Version{}
+			return v.Version.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplication, schemas.CreateApplicationRequest, schemas.CreateApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplication, schemas.CreateApplicationRequest, schemas.CreateApplicationResponse), output: &CreateApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,30 @@ type GetPersistentAppUIPresignedURLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPersistentAppUIPresignedURLInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPersistentAppUIPresignedURLInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPersistentAppUIPresignedURLInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetPersistentAppUIPresignedURLInput_ApplicationId, *v.ApplicationId)
+	}
+	if v.AuthProxyCall != nil {
+		s.WriteBool(schemas.GetPersistentAppUIPresignedURLInput_AuthProxyCall, *v.AuthProxyCall)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.GetPersistentAppUIPresignedURLInput_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.PersistentAppUIId != nil {
+		s.WriteString(schemas.GetPersistentAppUIPresignedURLInput_PersistentAppUIId, *v.PersistentAppUIId)
+	}
+	if v.PersistentAppUIType != "" {
+		s.WriteString(schemas.GetPersistentAppUIPresignedURLInput_PersistentAppUIType, string(v.PersistentAppUIType))
+	}
+}
+
 type GetPersistentAppUIPresignedURLOutput struct {
 
 	// The returned presigned URL.
@@ -61,13 +87,38 @@ type GetPersistentAppUIPresignedURLOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPersistentAppUIPresignedURLOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPersistentAppUIPresignedURLOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPersistentAppUIPresignedURLOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PresignedURL != nil {
+		s.WriteString(schemas.GetPersistentAppUIPresignedURLOutput_PresignedURL, *v.PresignedURL)
+	}
+	if v.PresignedURLReady != nil {
+		s.WriteBool(schemas.GetPersistentAppUIPresignedURLOutput_PresignedURLReady, *v.PresignedURLReady)
+	}
+}
+func (v *GetPersistentAppUIPresignedURLOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPersistentAppUIPresignedURLOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPersistentAppUIPresignedURLOutput_PresignedURL:
+			v.PresignedURL = new(string)
+			return d.ReadString(schemas.GetPersistentAppUIPresignedURLOutput_PresignedURL, v.PresignedURL)
+		case schemas.GetPersistentAppUIPresignedURLOutput_PresignedURLReady:
+			v.PresignedURLReady = new(bool)
+			return d.ReadBool(schemas.GetPersistentAppUIPresignedURLOutput_PresignedURLReady, v.PresignedURLReady)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPersistentAppUIPresignedURLMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPersistentAppUIPresignedURL{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPersistentAppUIPresignedURL, schemas.GetPersistentAppUIPresignedURLInput, schemas.GetPersistentAppUIPresignedURLOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetPersistentAppUIPresignedURL{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPersistentAppUIPresignedURL, schemas.GetPersistentAppUIPresignedURLInput, schemas.GetPersistentAppUIPresignedURLOutput), output: &GetPersistentAppUIPresignedURLOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

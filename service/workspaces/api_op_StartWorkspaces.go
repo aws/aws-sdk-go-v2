@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,16 @@ type StartWorkspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartWorkspacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartWorkspacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartWorkspacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStartWorkspaceRequests(s, schemas.StartWorkspacesRequest_StartWorkspaceRequests, v.StartWorkspaceRequests)
+}
+
 type StartWorkspacesOutput struct {
 
 	// Information about the WorkSpaces that could not be started.
@@ -48,13 +60,29 @@ type StartWorkspacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartWorkspacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartWorkspacesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartWorkspacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedStartWorkspaceRequests(s, schemas.StartWorkspacesResult_FailedRequests, v.FailedRequests)
+}
+func (v *StartWorkspacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartWorkspacesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartWorkspacesResult_FailedRequests:
+			return deserializeFailedStartWorkspaceRequests(d, schemas.StartWorkspacesResult_FailedRequests, &v.FailedRequests)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartWorkspaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartWorkspaces, schemas.StartWorkspacesRequest, schemas.StartWorkspacesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartWorkspaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartWorkspaces, schemas.StartWorkspacesRequest, schemas.StartWorkspacesResult), output: &StartWorkspacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

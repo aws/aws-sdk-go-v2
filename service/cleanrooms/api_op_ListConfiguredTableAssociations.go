@@ -5,7 +5,9 @@ package cleanrooms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,40 @@ type ListConfiguredTableAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfiguredTableAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfiguredTableAssociationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfiguredTableAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConfiguredTableAssociationsInput_maxResults, *v.MaxResults)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.ListConfiguredTableAssociationsInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfiguredTableAssociationsInput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListConfiguredTableAssociationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConfiguredTableAssociationsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConfiguredTableAssociationsInput_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListConfiguredTableAssociationsInput_maxResults, v.MaxResults)
+		case schemas.ListConfiguredTableAssociationsInput_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.ListConfiguredTableAssociationsInput_membershipIdentifier, v.MembershipIdentifier)
+		case schemas.ListConfiguredTableAssociationsInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConfiguredTableAssociationsInput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListConfiguredTableAssociationsOutput struct {
 
 	// The retrieved list of configured table associations.
@@ -60,13 +96,35 @@ type ListConfiguredTableAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfiguredTableAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfiguredTableAssociationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfiguredTableAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfiguredTableAssociationSummaryList(s, schemas.ListConfiguredTableAssociationsOutput_configuredTableAssociationSummaries, v.ConfiguredTableAssociationSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfiguredTableAssociationsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListConfiguredTableAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConfiguredTableAssociationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConfiguredTableAssociationsOutput_configuredTableAssociationSummaries:
+			return deserializeConfiguredTableAssociationSummaryList(d, schemas.ListConfiguredTableAssociationsOutput_configuredTableAssociationSummaries, &v.ConfiguredTableAssociationSummaries)
+		case schemas.ListConfiguredTableAssociationsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConfiguredTableAssociationsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConfiguredTableAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConfiguredTableAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfiguredTableAssociations, schemas.ListConfiguredTableAssociationsInput, schemas.ListConfiguredTableAssociationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConfiguredTableAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfiguredTableAssociations, schemas.ListConfiguredTableAssociationsInput, schemas.ListConfiguredTableAssociationsOutput), output: &ListConfiguredTableAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

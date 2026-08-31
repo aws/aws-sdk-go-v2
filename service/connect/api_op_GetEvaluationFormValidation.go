@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -53,6 +55,24 @@ type GetEvaluationFormValidationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEvaluationFormValidationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEvaluationFormValidationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEvaluationFormValidationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationFormId != nil {
+		s.WriteString(schemas.GetEvaluationFormValidationRequest_EvaluationFormId, *v.EvaluationFormId)
+	}
+	if v.EvaluationFormVersion != nil {
+		s.WriteInt32(schemas.GetEvaluationFormValidationRequest_EvaluationFormVersion, *v.EvaluationFormVersion)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GetEvaluationFormValidationRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type GetEvaluationFormValidationOutput struct {
 
 	// The unique identifier for the evaluation form.
@@ -91,13 +111,60 @@ type GetEvaluationFormValidationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEvaluationFormValidationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEvaluationFormValidationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEvaluationFormValidationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationFormId != nil {
+		s.WriteString(schemas.GetEvaluationFormValidationResponse_EvaluationFormId, *v.EvaluationFormId)
+	}
+	s.WriteInt32(schemas.GetEvaluationFormValidationResponse_EvaluationFormVersion, v.EvaluationFormVersion)
+	if v.FailureReason != nil {
+		s.WriteString(schemas.GetEvaluationFormValidationResponse_FailureReason, *v.FailureReason)
+	}
+	serializeEvaluationFormValidationFindingList(s, schemas.GetEvaluationFormValidationResponse_Findings, v.Findings)
+	if v.StartedTime != nil {
+		s.WriteTime(schemas.GetEvaluationFormValidationResponse_StartedTime, *v.StartedTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetEvaluationFormValidationResponse_Status, string(v.Status))
+	}
+}
+func (v *GetEvaluationFormValidationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEvaluationFormValidationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEvaluationFormValidationResponse_EvaluationFormId:
+			v.EvaluationFormId = new(string)
+			return d.ReadString(schemas.GetEvaluationFormValidationResponse_EvaluationFormId, v.EvaluationFormId)
+		case schemas.GetEvaluationFormValidationResponse_EvaluationFormVersion:
+			return d.ReadInt32(schemas.GetEvaluationFormValidationResponse_EvaluationFormVersion, &v.EvaluationFormVersion)
+		case schemas.GetEvaluationFormValidationResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.GetEvaluationFormValidationResponse_FailureReason, v.FailureReason)
+		case schemas.GetEvaluationFormValidationResponse_Findings:
+			return deserializeEvaluationFormValidationFindingList(d, schemas.GetEvaluationFormValidationResponse_Findings, &v.Findings)
+		case schemas.GetEvaluationFormValidationResponse_StartedTime:
+			v.StartedTime = new(time.Time)
+			return d.ReadTime(schemas.GetEvaluationFormValidationResponse_StartedTime, v.StartedTime)
+		case schemas.GetEvaluationFormValidationResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetEvaluationFormValidationResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.EvaluationFormValidationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEvaluationFormValidationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEvaluationFormValidation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEvaluationFormValidation, schemas.GetEvaluationFormValidationRequest, schemas.GetEvaluationFormValidationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEvaluationFormValidation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEvaluationFormValidation, schemas.GetEvaluationFormValidationRequest, schemas.GetEvaluationFormValidationResponse), output: &GetEvaluationFormValidationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

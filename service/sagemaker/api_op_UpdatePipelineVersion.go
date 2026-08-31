@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,27 @@ type UpdatePipelineVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePipelineVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePipelineVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePipelineVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineArn != nil {
+		s.WriteString(schemas.UpdatePipelineVersionRequest_PipelineArn, *v.PipelineArn)
+	}
+	if v.PipelineVersionDescription != nil {
+		s.WriteString(schemas.UpdatePipelineVersionRequest_PipelineVersionDescription, *v.PipelineVersionDescription)
+	}
+	if v.PipelineVersionDisplayName != nil {
+		s.WriteString(schemas.UpdatePipelineVersionRequest_PipelineVersionDisplayName, *v.PipelineVersionDisplayName)
+	}
+	if v.PipelineVersionId != nil {
+		s.WriteInt64(schemas.UpdatePipelineVersionRequest_PipelineVersionId, *v.PipelineVersionId)
+	}
+}
+
 type UpdatePipelineVersionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the pipeline.
@@ -58,13 +81,38 @@ type UpdatePipelineVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePipelineVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePipelineVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePipelineVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineArn != nil {
+		s.WriteString(schemas.UpdatePipelineVersionResponse_PipelineArn, *v.PipelineArn)
+	}
+	if v.PipelineVersionId != nil {
+		s.WriteInt64(schemas.UpdatePipelineVersionResponse_PipelineVersionId, *v.PipelineVersionId)
+	}
+}
+func (v *UpdatePipelineVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePipelineVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePipelineVersionResponse_PipelineArn:
+			v.PipelineArn = new(string)
+			return d.ReadString(schemas.UpdatePipelineVersionResponse_PipelineArn, v.PipelineArn)
+		case schemas.UpdatePipelineVersionResponse_PipelineVersionId:
+			v.PipelineVersionId = new(int64)
+			return d.ReadInt64(schemas.UpdatePipelineVersionResponse_PipelineVersionId, v.PipelineVersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePipelineVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePipelineVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePipelineVersion, schemas.UpdatePipelineVersionRequest, schemas.UpdatePipelineVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdatePipelineVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePipelineVersion, schemas.UpdatePipelineVersionRequest, schemas.UpdatePipelineVersionResponse), output: &UpdatePipelineVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

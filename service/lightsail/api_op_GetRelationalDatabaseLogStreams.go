@@ -4,6 +4,8 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetRelationalDatabaseLogStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRelationalDatabaseLogStreamsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRelationalDatabaseLogStreamsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRelationalDatabaseLogStreamsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RelationalDatabaseName != nil {
+		s.WriteString(schemas.GetRelationalDatabaseLogStreamsRequest_relationalDatabaseName, *v.RelationalDatabaseName)
+	}
+}
+
 type GetRelationalDatabaseLogStreamsOutput struct {
 
 	// An object describing the result of your get relational database log streams
@@ -46,13 +60,29 @@ type GetRelationalDatabaseLogStreamsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRelationalDatabaseLogStreamsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRelationalDatabaseLogStreamsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRelationalDatabaseLogStreamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.GetRelationalDatabaseLogStreamsResult_logStreams, v.LogStreams)
+}
+func (v *GetRelationalDatabaseLogStreamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRelationalDatabaseLogStreamsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRelationalDatabaseLogStreamsResult_logStreams:
+			return deserializeStringList(d, schemas.GetRelationalDatabaseLogStreamsResult_logStreams, &v.LogStreams)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRelationalDatabaseLogStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRelationalDatabaseLogStreams{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRelationalDatabaseLogStreams, schemas.GetRelationalDatabaseLogStreamsRequest, schemas.GetRelationalDatabaseLogStreamsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRelationalDatabaseLogStreams{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRelationalDatabaseLogStreams, schemas.GetRelationalDatabaseLogStreamsRequest, schemas.GetRelationalDatabaseLogStreamsResult), output: &GetRelationalDatabaseLogStreamsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

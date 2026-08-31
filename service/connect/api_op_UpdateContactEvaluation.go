@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,24 @@ type UpdateContactEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContactEvaluationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContactEvaluationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContactEvaluationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEvaluationAnswersInputMap(s, schemas.UpdateContactEvaluationRequest_Answers, v.Answers)
+	if v.EvaluationId != nil {
+		s.WriteString(schemas.UpdateContactEvaluationRequest_EvaluationId, *v.EvaluationId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateContactEvaluationRequest_InstanceId, *v.InstanceId)
+	}
+	serializeEvaluationNotesMap(s, schemas.UpdateContactEvaluationRequest_Notes, v.Notes)
+	serializeEvaluatorUserUnion(s, schemas.UpdateContactEvaluationRequest_UpdatedBy, v.UpdatedBy)
+}
+
 type UpdateContactEvaluationOutput struct {
 
 	// The Amazon Resource Name (ARN) for the contact evaluation resource.
@@ -73,13 +93,38 @@ type UpdateContactEvaluationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContactEvaluationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContactEvaluationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContactEvaluationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationArn != nil {
+		s.WriteString(schemas.UpdateContactEvaluationResponse_EvaluationArn, *v.EvaluationArn)
+	}
+	if v.EvaluationId != nil {
+		s.WriteString(schemas.UpdateContactEvaluationResponse_EvaluationId, *v.EvaluationId)
+	}
+}
+func (v *UpdateContactEvaluationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateContactEvaluationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateContactEvaluationResponse_EvaluationArn:
+			v.EvaluationArn = new(string)
+			return d.ReadString(schemas.UpdateContactEvaluationResponse_EvaluationArn, v.EvaluationArn)
+		case schemas.UpdateContactEvaluationResponse_EvaluationId:
+			v.EvaluationId = new(string)
+			return d.ReadString(schemas.UpdateContactEvaluationResponse_EvaluationId, v.EvaluationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateContactEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateContactEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContactEvaluation, schemas.UpdateContactEvaluationRequest, schemas.UpdateContactEvaluationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateContactEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContactEvaluation, schemas.UpdateContactEvaluationRequest, schemas.UpdateContactEvaluationResponse), output: &UpdateContactEvaluationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

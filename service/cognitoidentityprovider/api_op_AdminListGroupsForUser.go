@@ -5,7 +5,9 @@ package cognitoidentityprovider
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,27 @@ type AdminListGroupsForUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminListGroupsForUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminListGroupsForUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminListGroupsForUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.AdminListGroupsForUserRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.AdminListGroupsForUserRequest_NextToken, *v.NextToken)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AdminListGroupsForUserRequest_UserPoolId, *v.UserPoolId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.AdminListGroupsForUserRequest_Username, *v.Username)
+	}
+}
+
 type AdminListGroupsForUserOutput struct {
 
 	// An array of groups and information about them.
@@ -90,13 +113,35 @@ type AdminListGroupsForUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminListGroupsForUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminListGroupsForUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminListGroupsForUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroupListType(s, schemas.AdminListGroupsForUserResponse_Groups, v.Groups)
+	if v.NextToken != nil {
+		s.WriteString(schemas.AdminListGroupsForUserResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *AdminListGroupsForUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminListGroupsForUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdminListGroupsForUserResponse_Groups:
+			return deserializeGroupListType(d, schemas.AdminListGroupsForUserResponse_Groups, &v.Groups)
+		case schemas.AdminListGroupsForUserResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.AdminListGroupsForUserResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdminListGroupsForUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminListGroupsForUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminListGroupsForUser, schemas.AdminListGroupsForUserRequest, schemas.AdminListGroupsForUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminListGroupsForUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminListGroupsForUser, schemas.AdminListGroupsForUserRequest, schemas.AdminListGroupsForUserResponse), output: &AdminListGroupsForUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

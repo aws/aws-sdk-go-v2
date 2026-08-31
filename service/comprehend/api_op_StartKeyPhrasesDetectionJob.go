@@ -5,7 +5,9 @@ package comprehend
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -87,6 +89,46 @@ type StartKeyPhrasesDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartKeyPhrasesDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartKeyPhrasesDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartKeyPhrasesDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartKeyPhrasesDetectionJobRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.StartKeyPhrasesDetectionJobRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.StartKeyPhrasesDetectionJobRequest_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.StartKeyPhrasesDetectionJobRequest_JobName, *v.JobName)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.StartKeyPhrasesDetectionJobRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.StartKeyPhrasesDetectionJobRequest_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.StartKeyPhrasesDetectionJobRequest_Tags, v.Tags)
+	if v.VolumeKmsKeyId != nil {
+		s.WriteString(schemas.StartKeyPhrasesDetectionJobRequest_VolumeKmsKeyId, *v.VolumeKmsKeyId)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.StartKeyPhrasesDetectionJobRequest_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartKeyPhrasesDetectionJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the key phrase detection job. It is a unique,
@@ -122,13 +164,48 @@ type StartKeyPhrasesDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartKeyPhrasesDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartKeyPhrasesDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartKeyPhrasesDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobArn != nil {
+		s.WriteString(schemas.StartKeyPhrasesDetectionJobResponse_JobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.StartKeyPhrasesDetectionJobResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.StartKeyPhrasesDetectionJobResponse_JobStatus, string(v.JobStatus))
+	}
+}
+func (v *StartKeyPhrasesDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartKeyPhrasesDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartKeyPhrasesDetectionJobResponse_JobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.StartKeyPhrasesDetectionJobResponse_JobArn, v.JobArn)
+		case schemas.StartKeyPhrasesDetectionJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartKeyPhrasesDetectionJobResponse_JobId, v.JobId)
+		case schemas.StartKeyPhrasesDetectionJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartKeyPhrasesDetectionJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartKeyPhrasesDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartKeyPhrasesDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartKeyPhrasesDetectionJob, schemas.StartKeyPhrasesDetectionJobRequest, schemas.StartKeyPhrasesDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartKeyPhrasesDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartKeyPhrasesDetectionJob, schemas.StartKeyPhrasesDetectionJobRequest, schemas.StartKeyPhrasesDetectionJobResponse), output: &StartKeyPhrasesDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

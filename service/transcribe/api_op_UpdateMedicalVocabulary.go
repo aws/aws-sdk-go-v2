@@ -4,7 +4,9 @@ package transcribe
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -54,6 +56,24 @@ type UpdateMedicalVocabularyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMedicalVocabularyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMedicalVocabularyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMedicalVocabularyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.UpdateMedicalVocabularyRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.VocabularyFileUri != nil {
+		s.WriteString(schemas.UpdateMedicalVocabularyRequest_VocabularyFileUri, *v.VocabularyFileUri)
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.UpdateMedicalVocabularyRequest_VocabularyName, *v.VocabularyName)
+	}
+}
+
 type UpdateMedicalVocabularyOutput struct {
 
 	// The language code you selected for your custom medical vocabulary. US English (
@@ -79,13 +99,58 @@ type UpdateMedicalVocabularyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMedicalVocabularyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMedicalVocabularyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMedicalVocabularyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.UpdateMedicalVocabularyResponse_LanguageCode, string(v.LanguageCode))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.UpdateMedicalVocabularyResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.UpdateMedicalVocabularyResponse_VocabularyName, *v.VocabularyName)
+	}
+	if v.VocabularyState != "" {
+		s.WriteString(schemas.UpdateMedicalVocabularyResponse_VocabularyState, string(v.VocabularyState))
+	}
+}
+func (v *UpdateMedicalVocabularyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMedicalVocabularyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMedicalVocabularyResponse_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.UpdateMedicalVocabularyResponse_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = types.LanguageCode(ev)
+			return nil
+		case schemas.UpdateMedicalVocabularyResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateMedicalVocabularyResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.UpdateMedicalVocabularyResponse_VocabularyName:
+			v.VocabularyName = new(string)
+			return d.ReadString(schemas.UpdateMedicalVocabularyResponse_VocabularyName, v.VocabularyName)
+		case schemas.UpdateMedicalVocabularyResponse_VocabularyState:
+			var ev string
+			if err := d.ReadString(schemas.UpdateMedicalVocabularyResponse_VocabularyState, &ev); err != nil {
+				return err
+			}
+			v.VocabularyState = types.VocabularyState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMedicalVocabularyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateMedicalVocabulary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMedicalVocabulary, schemas.UpdateMedicalVocabularyRequest, schemas.UpdateMedicalVocabularyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateMedicalVocabulary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMedicalVocabulary, schemas.UpdateMedicalVocabularyRequest, schemas.UpdateMedicalVocabularyResponse), output: &UpdateMedicalVocabularyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

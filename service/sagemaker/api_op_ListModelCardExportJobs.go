@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -66,6 +68,45 @@ type ListModelCardExportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelCardExportJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelCardExportJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelCardExportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListModelCardExportJobsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListModelCardExportJobsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListModelCardExportJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.ModelCardExportJobNameContains != nil {
+		s.WriteString(schemas.ListModelCardExportJobsRequest_ModelCardExportJobNameContains, *v.ModelCardExportJobNameContains)
+	}
+	if v.ModelCardName != nil {
+		s.WriteString(schemas.ListModelCardExportJobsRequest_ModelCardName, *v.ModelCardName)
+	}
+	if v.ModelCardVersion != nil {
+		s.WriteInt32(schemas.ListModelCardExportJobsRequest_ModelCardVersion, *v.ModelCardVersion)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelCardExportJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListModelCardExportJobsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListModelCardExportJobsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListModelCardExportJobsRequest_StatusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListModelCardExportJobsOutput struct {
 
 	// The summaries of the listed model card export jobs.
@@ -83,13 +124,35 @@ type ListModelCardExportJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelCardExportJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelCardExportJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelCardExportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeModelCardExportJobSummaryList(s, schemas.ListModelCardExportJobsResponse_ModelCardExportJobSummaries, v.ModelCardExportJobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelCardExportJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListModelCardExportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListModelCardExportJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListModelCardExportJobsResponse_ModelCardExportJobSummaries:
+			return deserializeModelCardExportJobSummaryList(d, schemas.ListModelCardExportJobsResponse_ModelCardExportJobSummaries, &v.ModelCardExportJobSummaries)
+		case schemas.ListModelCardExportJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListModelCardExportJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListModelCardExportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListModelCardExportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelCardExportJobs, schemas.ListModelCardExportJobsRequest, schemas.ListModelCardExportJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListModelCardExportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelCardExportJobs, schemas.ListModelCardExportJobsRequest, schemas.ListModelCardExportJobsResponse), output: &ListModelCardExportJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

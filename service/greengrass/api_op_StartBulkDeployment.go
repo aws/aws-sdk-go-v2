@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,25 @@ type StartBulkDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartBulkDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartBulkDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartBulkDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmznClientToken != nil {
+		s.WriteString(schemas.StartBulkDeploymentRequest_AmznClientToken, *v.AmznClientToken)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.StartBulkDeploymentRequest_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.InputFileUri != nil {
+		s.WriteString(schemas.StartBulkDeploymentRequest_InputFileUri, *v.InputFileUri)
+	}
+	serializeTags(s, schemas.StartBulkDeploymentRequest_tags, v.Tags)
+}
+
 type StartBulkDeploymentOutput struct {
 
 	// The ARN of the bulk deployment.
@@ -71,13 +92,38 @@ type StartBulkDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartBulkDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartBulkDeploymentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartBulkDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BulkDeploymentArn != nil {
+		s.WriteString(schemas.StartBulkDeploymentResponse_BulkDeploymentArn, *v.BulkDeploymentArn)
+	}
+	if v.BulkDeploymentId != nil {
+		s.WriteString(schemas.StartBulkDeploymentResponse_BulkDeploymentId, *v.BulkDeploymentId)
+	}
+}
+func (v *StartBulkDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartBulkDeploymentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartBulkDeploymentResponse_BulkDeploymentArn:
+			v.BulkDeploymentArn = new(string)
+			return d.ReadString(schemas.StartBulkDeploymentResponse_BulkDeploymentArn, v.BulkDeploymentArn)
+		case schemas.StartBulkDeploymentResponse_BulkDeploymentId:
+			v.BulkDeploymentId = new(string)
+			return d.ReadString(schemas.StartBulkDeploymentResponse_BulkDeploymentId, v.BulkDeploymentId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartBulkDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartBulkDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartBulkDeployment, schemas.StartBulkDeploymentRequest, schemas.StartBulkDeploymentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartBulkDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartBulkDeployment, schemas.StartBulkDeploymentRequest, schemas.StartBulkDeploymentResponse), output: &StartBulkDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

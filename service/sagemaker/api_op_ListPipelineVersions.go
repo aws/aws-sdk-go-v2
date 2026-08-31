@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -55,6 +57,33 @@ type ListPipelineVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPipelineVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPipelineVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPipelineVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAfter != nil {
+		s.WriteTime(schemas.ListPipelineVersionsRequest_CreatedAfter, *v.CreatedAfter)
+	}
+	if v.CreatedBefore != nil {
+		s.WriteTime(schemas.ListPipelineVersionsRequest_CreatedBefore, *v.CreatedBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPipelineVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPipelineVersionsRequest_NextToken, *v.NextToken)
+	}
+	if v.PipelineName != nil {
+		s.WriteString(schemas.ListPipelineVersionsRequest_PipelineName, *v.PipelineName)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListPipelineVersionsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListPipelineVersionsOutput struct {
 
 	// If the result of the previous ListPipelineVersions request was truncated, the
@@ -74,13 +103,35 @@ type ListPipelineVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPipelineVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPipelineVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPipelineVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPipelineVersionsResponse_NextToken, *v.NextToken)
+	}
+	serializePipelineVersionSummaryList(s, schemas.ListPipelineVersionsResponse_PipelineVersionSummaries, v.PipelineVersionSummaries)
+}
+func (v *ListPipelineVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPipelineVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPipelineVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPipelineVersionsResponse_NextToken, v.NextToken)
+		case schemas.ListPipelineVersionsResponse_PipelineVersionSummaries:
+			return deserializePipelineVersionSummaryList(d, schemas.ListPipelineVersionsResponse_PipelineVersionSummaries, &v.PipelineVersionSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPipelineVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPipelineVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPipelineVersions, schemas.ListPipelineVersionsRequest, schemas.ListPipelineVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPipelineVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPipelineVersions, schemas.ListPipelineVersionsRequest, schemas.ListPipelineVersionsResponse), output: &ListPipelineVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

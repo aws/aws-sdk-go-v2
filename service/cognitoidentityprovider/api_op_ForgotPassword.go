@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -133,6 +135,35 @@ type ForgotPasswordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ForgotPasswordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForgotPasswordRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForgotPasswordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyticsMetadata != nil {
+		s.WriteStruct(schemas.ForgotPasswordRequest_AnalyticsMetadata)
+		v.AnalyticsMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.ForgotPasswordRequest_ClientId, *v.ClientId)
+	}
+	serializeClientMetadataType(s, schemas.ForgotPasswordRequest_ClientMetadata, v.ClientMetadata)
+	if v.SecretHash != nil {
+		s.WriteString(schemas.ForgotPasswordRequest_SecretHash, *v.SecretHash)
+	}
+	if v.UserContextData != nil {
+		s.WriteStruct(schemas.ForgotPasswordRequest_UserContextData)
+		v.UserContextData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.ForgotPasswordRequest_Username, *v.Username)
+	}
+}
+
 // The response from Amazon Cognito to a request to reset a password.
 type ForgotPasswordOutput struct {
 
@@ -146,13 +177,34 @@ type ForgotPasswordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ForgotPasswordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForgotPasswordResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForgotPasswordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeDeliveryDetails != nil {
+		s.WriteStruct(schemas.ForgotPasswordResponse_CodeDeliveryDetails)
+		v.CodeDeliveryDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ForgotPasswordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ForgotPasswordResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ForgotPasswordResponse_CodeDeliveryDetails:
+			v.CodeDeliveryDetails = &types.CodeDeliveryDetailsType{}
+			return v.CodeDeliveryDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationForgotPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpForgotPassword{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ForgotPassword, schemas.ForgotPasswordRequest, schemas.ForgotPasswordResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpForgotPassword{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ForgotPassword, schemas.ForgotPasswordRequest, schemas.ForgotPasswordResponse), output: &ForgotPasswordOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

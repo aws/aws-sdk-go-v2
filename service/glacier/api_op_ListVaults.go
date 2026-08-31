@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,24 @@ type ListVaultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVaultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVaultsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVaultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListVaultsInput_accountId, *v.AccountId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListVaultsInput_limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListVaultsInput_marker, *v.Marker)
+	}
+}
+
 // Contains the Amazon Glacier response to your request.
 type ListVaultsOutput struct {
 
@@ -89,13 +109,35 @@ type ListVaultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVaultsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVaultsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVaultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListVaultsOutput_Marker, *v.Marker)
+	}
+	serializeVaultList(s, schemas.ListVaultsOutput_VaultList, v.VaultList)
+}
+func (v *ListVaultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVaultsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVaultsOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListVaultsOutput_Marker, v.Marker)
+		case schemas.ListVaultsOutput_VaultList:
+			return deserializeVaultList(d, schemas.ListVaultsOutput_VaultList, &v.VaultList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVaultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVaults{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVaults, schemas.ListVaultsInput, schemas.ListVaultsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListVaults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVaults, schemas.ListVaultsInput, schemas.ListVaultsOutput), output: &ListVaultsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

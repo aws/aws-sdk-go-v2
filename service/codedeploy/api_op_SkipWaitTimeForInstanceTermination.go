@@ -4,6 +4,8 @@ package codedeploy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type SkipWaitTimeForInstanceTerminationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SkipWaitTimeForInstanceTerminationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SkipWaitTimeForInstanceTerminationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SkipWaitTimeForInstanceTerminationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.SkipWaitTimeForInstanceTerminationInput_deploymentId, *v.DeploymentId)
+	}
+}
+
 type SkipWaitTimeForInstanceTerminationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type SkipWaitTimeForInstanceTerminationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SkipWaitTimeForInstanceTerminationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SkipWaitTimeForInstanceTerminationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SkipWaitTimeForInstanceTerminationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSkipWaitTimeForInstanceTerminationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSkipWaitTimeForInstanceTermination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SkipWaitTimeForInstanceTermination, schemas.SkipWaitTimeForInstanceTerminationInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSkipWaitTimeForInstanceTermination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SkipWaitTimeForInstanceTermination, schemas.SkipWaitTimeForInstanceTerminationInput, nil), output: &SkipWaitTimeForInstanceTerminationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package transcribe
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -50,6 +52,18 @@ type GetTranscriptionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTranscriptionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTranscriptionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTranscriptionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TranscriptionJobName != nil {
+		s.WriteString(schemas.GetTranscriptionJobRequest_TranscriptionJobName, *v.TranscriptionJobName)
+	}
+}
+
 type GetTranscriptionJobOutput struct {
 
 	// Provides detailed information about the specified transcription job, including
@@ -62,13 +76,34 @@ type GetTranscriptionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTranscriptionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTranscriptionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTranscriptionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TranscriptionJob != nil {
+		s.WriteStruct(schemas.GetTranscriptionJobResponse_TranscriptionJob)
+		v.TranscriptionJob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTranscriptionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTranscriptionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTranscriptionJobResponse_TranscriptionJob:
+			v.TranscriptionJob = &types.TranscriptionJob{}
+			return v.TranscriptionJob.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTranscriptionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTranscriptionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTranscriptionJob, schemas.GetTranscriptionJobRequest, schemas.GetTranscriptionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTranscriptionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTranscriptionJob, schemas.GetTranscriptionJobRequest, schemas.GetTranscriptionJobResponse), output: &GetTranscriptionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

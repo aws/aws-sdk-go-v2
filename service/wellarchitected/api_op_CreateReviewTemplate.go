@@ -5,6 +5,8 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,29 @@ type CreateReviewTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReviewTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReviewTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReviewTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateReviewTemplateInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateReviewTemplateInput_Description, *v.Description)
+	}
+	serializeReviewTemplateLenses(s, schemas.CreateReviewTemplateInput_Lenses, v.Lenses)
+	if v.Notes != nil {
+		s.WriteString(schemas.CreateReviewTemplateInput_Notes, *v.Notes)
+	}
+	serializeTagMap(s, schemas.CreateReviewTemplateInput_Tags, v.Tags)
+	if v.TemplateName != nil {
+		s.WriteString(schemas.CreateReviewTemplateInput_TemplateName, *v.TemplateName)
+	}
+}
+
 type CreateReviewTemplateOutput struct {
 
 	// The review template ARN.
@@ -89,13 +114,32 @@ type CreateReviewTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReviewTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReviewTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReviewTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.CreateReviewTemplateOutput_TemplateArn, *v.TemplateArn)
+	}
+}
+func (v *CreateReviewTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateReviewTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateReviewTemplateOutput_TemplateArn:
+			v.TemplateArn = new(string)
+			return d.ReadString(schemas.CreateReviewTemplateOutput_TemplateArn, v.TemplateArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateReviewTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateReviewTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReviewTemplate, schemas.CreateReviewTemplateInput, schemas.CreateReviewTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateReviewTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReviewTemplate, schemas.CreateReviewTemplateInput, schemas.CreateReviewTemplateOutput), output: &CreateReviewTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

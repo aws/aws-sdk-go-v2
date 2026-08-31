@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribeBatchSegmentJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBatchSegmentJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBatchSegmentJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBatchSegmentJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchSegmentJobArn != nil {
+		s.WriteString(schemas.DescribeBatchSegmentJobRequest_batchSegmentJobArn, *v.BatchSegmentJobArn)
+	}
+}
+
 type DescribeBatchSegmentJobOutput struct {
 
 	// Information on the specified batch segment job.
@@ -47,13 +61,34 @@ type DescribeBatchSegmentJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBatchSegmentJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBatchSegmentJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBatchSegmentJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchSegmentJob != nil {
+		s.WriteStruct(schemas.DescribeBatchSegmentJobResponse_batchSegmentJob)
+		v.BatchSegmentJob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeBatchSegmentJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeBatchSegmentJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeBatchSegmentJobResponse_batchSegmentJob:
+			v.BatchSegmentJob = &types.BatchSegmentJob{}
+			return v.BatchSegmentJob.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBatchSegmentJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeBatchSegmentJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBatchSegmentJob, schemas.DescribeBatchSegmentJobRequest, schemas.DescribeBatchSegmentJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeBatchSegmentJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBatchSegmentJob, schemas.DescribeBatchSegmentJobRequest, schemas.DescribeBatchSegmentJobResponse), output: &DescribeBatchSegmentJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

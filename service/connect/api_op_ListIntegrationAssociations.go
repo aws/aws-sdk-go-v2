@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,30 @@ type ListIntegrationAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntegrationAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntegrationAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntegrationAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListIntegrationAssociationsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.IntegrationArn != nil {
+		s.WriteString(schemas.ListIntegrationAssociationsRequest_IntegrationArn, *v.IntegrationArn)
+	}
+	if v.IntegrationType != "" {
+		s.WriteString(schemas.ListIntegrationAssociationsRequest_IntegrationType, string(v.IntegrationType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIntegrationAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIntegrationAssociationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListIntegrationAssociationsOutput struct {
 
 	// The associations.
@@ -66,13 +92,35 @@ type ListIntegrationAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntegrationAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntegrationAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntegrationAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIntegrationAssociationSummaryList(s, schemas.ListIntegrationAssociationsResponse_IntegrationAssociationSummaryList, v.IntegrationAssociationSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIntegrationAssociationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListIntegrationAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIntegrationAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIntegrationAssociationsResponse_IntegrationAssociationSummaryList:
+			return deserializeIntegrationAssociationSummaryList(d, schemas.ListIntegrationAssociationsResponse_IntegrationAssociationSummaryList, &v.IntegrationAssociationSummaryList)
+		case schemas.ListIntegrationAssociationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIntegrationAssociationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIntegrationAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIntegrationAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntegrationAssociations, schemas.ListIntegrationAssociationsRequest, schemas.ListIntegrationAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIntegrationAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntegrationAssociations, schemas.ListIntegrationAssociationsRequest, schemas.ListIntegrationAssociationsResponse), output: &ListIntegrationAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

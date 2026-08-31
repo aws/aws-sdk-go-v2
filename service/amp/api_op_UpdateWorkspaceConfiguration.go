@@ -5,7 +5,9 @@ package amp
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/amp/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,31 @@ type UpdateWorkspaceConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkspaceConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspaceConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspaceConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateWorkspaceConfigurationRequest_clientToken, *v.ClientToken)
+	}
+	serializeLimitsPerLabelSetList(s, schemas.UpdateWorkspaceConfigurationRequest_limitsPerLabelSet, v.LimitsPerLabelSet)
+	if v.OutOfOrderTimeWindowInSeconds != nil {
+		s.WriteInt32(schemas.UpdateWorkspaceConfigurationRequest_outOfOrderTimeWindowInSeconds, *v.OutOfOrderTimeWindowInSeconds)
+	}
+	if v.RetentionPeriodInDays != nil {
+		s.WriteInt32(schemas.UpdateWorkspaceConfigurationRequest_retentionPeriodInDays, *v.RetentionPeriodInDays)
+	}
+	if v.RuleQueryOffsetInSeconds != nil {
+		s.WriteInt32(schemas.UpdateWorkspaceConfigurationRequest_ruleQueryOffsetInSeconds, *v.RuleQueryOffsetInSeconds)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.UpdateWorkspaceConfigurationRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+
 type UpdateWorkspaceConfigurationOutput struct {
 
 	// The status of the workspace configuration.
@@ -74,13 +101,34 @@ type UpdateWorkspaceConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkspaceConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspaceConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspaceConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteStruct(schemas.UpdateWorkspaceConfigurationResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateWorkspaceConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkspaceConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWorkspaceConfigurationResponse_status:
+			v.Status = &types.WorkspaceConfigurationStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkspaceConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWorkspaceConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspaceConfiguration, schemas.UpdateWorkspaceConfigurationRequest, schemas.UpdateWorkspaceConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWorkspaceConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspaceConfiguration, schemas.UpdateWorkspaceConfigurationRequest, schemas.UpdateWorkspaceConfigurationResponse), output: &UpdateWorkspaceConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

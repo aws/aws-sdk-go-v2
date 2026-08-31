@@ -5,7 +5,9 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,47 @@ type ListSecurityPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSecurityPoliciesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityPoliciesRequest_nextToken, *v.NextToken)
+	}
+	serializeResourceFilter(s, schemas.ListSecurityPoliciesRequest_resource, v.Resource)
+	if v.Type != "" {
+		s.WriteString(schemas.ListSecurityPoliciesRequest_type, string(v.Type))
+	}
+}
+func (v *ListSecurityPoliciesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSecurityPoliciesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSecurityPoliciesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListSecurityPoliciesRequest_maxResults, v.MaxResults)
+		case schemas.ListSecurityPoliciesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSecurityPoliciesRequest_nextToken, v.NextToken)
+		case schemas.ListSecurityPoliciesRequest_resource:
+			return deserializeResourceFilter(d, schemas.ListSecurityPoliciesRequest_resource, &v.Resource)
+		case schemas.ListSecurityPoliciesRequest_type:
+			var ev string
+			if err := d.ReadString(schemas.ListSecurityPoliciesRequest_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.SecurityPolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type ListSecurityPoliciesOutput struct {
 
 	// When nextToken is returned, there are more results available. The value of
@@ -63,13 +106,35 @@ type ListSecurityPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityPoliciesResponse_nextToken, *v.NextToken)
+	}
+	serializeSecurityPolicySummaries(s, schemas.ListSecurityPoliciesResponse_securityPolicySummaries, v.SecurityPolicySummaries)
+}
+func (v *ListSecurityPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSecurityPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSecurityPoliciesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSecurityPoliciesResponse_nextToken, v.NextToken)
+		case schemas.ListSecurityPoliciesResponse_securityPolicySummaries:
+			return deserializeSecurityPolicySummaries(d, schemas.ListSecurityPoliciesResponse_securityPolicySummaries, &v.SecurityPolicySummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSecurityPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListSecurityPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityPolicies, schemas.ListSecurityPoliciesRequest, schemas.ListSecurityPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListSecurityPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityPolicies, schemas.ListSecurityPoliciesRequest, schemas.ListSecurityPoliciesResponse), output: &ListSecurityPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

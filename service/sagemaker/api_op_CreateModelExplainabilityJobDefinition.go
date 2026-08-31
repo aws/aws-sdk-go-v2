@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -77,6 +79,57 @@ type CreateModelExplainabilityJobDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelExplainabilityJobDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelExplainabilityJobDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelExplainabilityJobDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobDefinitionName != nil {
+		s.WriteString(schemas.CreateModelExplainabilityJobDefinitionRequest_JobDefinitionName, *v.JobDefinitionName)
+	}
+	if v.JobResources != nil {
+		s.WriteStruct(schemas.CreateModelExplainabilityJobDefinitionRequest_JobResources)
+		v.JobResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelExplainabilityAppSpecification != nil {
+		s.WriteStruct(schemas.CreateModelExplainabilityJobDefinitionRequest_ModelExplainabilityAppSpecification)
+		v.ModelExplainabilityAppSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelExplainabilityBaselineConfig != nil {
+		s.WriteStruct(schemas.CreateModelExplainabilityJobDefinitionRequest_ModelExplainabilityBaselineConfig)
+		v.ModelExplainabilityBaselineConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelExplainabilityJobInput != nil {
+		s.WriteStruct(schemas.CreateModelExplainabilityJobDefinitionRequest_ModelExplainabilityJobInput)
+		v.ModelExplainabilityJobInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelExplainabilityJobOutputConfig != nil {
+		s.WriteStruct(schemas.CreateModelExplainabilityJobDefinitionRequest_ModelExplainabilityJobOutputConfig)
+		v.ModelExplainabilityJobOutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkConfig != nil {
+		s.WriteStruct(schemas.CreateModelExplainabilityJobDefinitionRequest_NetworkConfig)
+		v.NetworkConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateModelExplainabilityJobDefinitionRequest_RoleArn, *v.RoleArn)
+	}
+	if v.StoppingCondition != nil {
+		s.WriteStruct(schemas.CreateModelExplainabilityJobDefinitionRequest_StoppingCondition)
+		v.StoppingCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateModelExplainabilityJobDefinitionRequest_Tags, v.Tags)
+}
+
 type CreateModelExplainabilityJobDefinitionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model explainability job.
@@ -90,13 +143,32 @@ type CreateModelExplainabilityJobDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelExplainabilityJobDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelExplainabilityJobDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelExplainabilityJobDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobDefinitionArn != nil {
+		s.WriteString(schemas.CreateModelExplainabilityJobDefinitionResponse_JobDefinitionArn, *v.JobDefinitionArn)
+	}
+}
+func (v *CreateModelExplainabilityJobDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateModelExplainabilityJobDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateModelExplainabilityJobDefinitionResponse_JobDefinitionArn:
+			v.JobDefinitionArn = new(string)
+			return d.ReadString(schemas.CreateModelExplainabilityJobDefinitionResponse_JobDefinitionArn, v.JobDefinitionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateModelExplainabilityJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateModelExplainabilityJobDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelExplainabilityJobDefinition, schemas.CreateModelExplainabilityJobDefinitionRequest, schemas.CreateModelExplainabilityJobDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateModelExplainabilityJobDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelExplainabilityJobDefinition, schemas.CreateModelExplainabilityJobDefinitionRequest, schemas.CreateModelExplainabilityJobDefinitionResponse), output: &CreateModelExplainabilityJobDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

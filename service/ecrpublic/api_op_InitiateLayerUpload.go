@@ -4,6 +4,8 @@ package ecrpublic
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecrpublic/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type InitiateLayerUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InitiateLayerUploadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InitiateLayerUploadRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InitiateLayerUploadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryId != nil {
+		s.WriteString(schemas.InitiateLayerUploadRequest_registryId, *v.RegistryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.InitiateLayerUploadRequest_repositoryName, *v.RepositoryName)
+	}
+}
+
 type InitiateLayerUploadOutput struct {
 
 	// The size, in bytes, that Amazon ECR expects future layer part uploads to be.
@@ -61,13 +78,38 @@ type InitiateLayerUploadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InitiateLayerUploadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InitiateLayerUploadResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InitiateLayerUploadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PartSize != nil {
+		s.WriteInt64(schemas.InitiateLayerUploadResponse_partSize, *v.PartSize)
+	}
+	if v.UploadId != nil {
+		s.WriteString(schemas.InitiateLayerUploadResponse_uploadId, *v.UploadId)
+	}
+}
+func (v *InitiateLayerUploadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InitiateLayerUploadResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InitiateLayerUploadResponse_partSize:
+			v.PartSize = new(int64)
+			return d.ReadInt64(schemas.InitiateLayerUploadResponse_partSize, v.PartSize)
+		case schemas.InitiateLayerUploadResponse_uploadId:
+			v.UploadId = new(string)
+			return d.ReadString(schemas.InitiateLayerUploadResponse_uploadId, v.UploadId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInitiateLayerUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpInitiateLayerUpload{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InitiateLayerUpload, schemas.InitiateLayerUploadRequest, schemas.InitiateLayerUploadResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpInitiateLayerUpload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InitiateLayerUpload, schemas.InitiateLayerUploadRequest, schemas.InitiateLayerUploadResponse), output: &InitiateLayerUploadOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -91,6 +93,51 @@ type UpdateModelPackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateModelPackageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateModelPackageInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateModelPackageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalInferenceSpecifications(s, schemas.UpdateModelPackageInput_AdditionalInferenceSpecificationsToAdd, v.AdditionalInferenceSpecificationsToAdd)
+	if v.ApprovalDescription != nil {
+		s.WriteString(schemas.UpdateModelPackageInput_ApprovalDescription, *v.ApprovalDescription)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateModelPackageInput_ClientToken, *v.ClientToken)
+	}
+	serializeCustomerMetadataMap(s, schemas.UpdateModelPackageInput_CustomerMetadataProperties, v.CustomerMetadataProperties)
+	serializeCustomerMetadataKeyList(s, schemas.UpdateModelPackageInput_CustomerMetadataPropertiesToRemove, v.CustomerMetadataPropertiesToRemove)
+	if v.InferenceSpecification != nil {
+		s.WriteStruct(schemas.UpdateModelPackageInput_InferenceSpecification)
+		v.InferenceSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelApprovalStatus != "" {
+		s.WriteString(schemas.UpdateModelPackageInput_ModelApprovalStatus, string(v.ModelApprovalStatus))
+	}
+	if v.ModelCard != nil {
+		s.WriteStruct(schemas.UpdateModelPackageInput_ModelCard)
+		v.ModelCard.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelLifeCycle != nil {
+		s.WriteStruct(schemas.UpdateModelPackageInput_ModelLifeCycle)
+		v.ModelLifeCycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelPackageArn != nil {
+		s.WriteString(schemas.UpdateModelPackageInput_ModelPackageArn, *v.ModelPackageArn)
+	}
+	if v.ModelPackageRegistrationType != "" {
+		s.WriteString(schemas.UpdateModelPackageInput_ModelPackageRegistrationType, string(v.ModelPackageRegistrationType))
+	}
+	if v.SourceUri != nil {
+		s.WriteString(schemas.UpdateModelPackageInput_SourceUri, *v.SourceUri)
+	}
+}
+
 type UpdateModelPackageOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model.
@@ -104,13 +151,32 @@ type UpdateModelPackageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateModelPackageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateModelPackageOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateModelPackageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelPackageArn != nil {
+		s.WriteString(schemas.UpdateModelPackageOutput_ModelPackageArn, *v.ModelPackageArn)
+	}
+}
+func (v *UpdateModelPackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateModelPackageOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateModelPackageOutput_ModelPackageArn:
+			v.ModelPackageArn = new(string)
+			return d.ReadString(schemas.UpdateModelPackageOutput_ModelPackageArn, v.ModelPackageArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateModelPackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateModelPackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateModelPackage, schemas.UpdateModelPackageInput, schemas.UpdateModelPackageOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateModelPackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateModelPackage, schemas.UpdateModelPackageInput, schemas.UpdateModelPackageOutput), output: &UpdateModelPackageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

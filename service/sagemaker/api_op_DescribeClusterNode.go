@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type DescribeClusterNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterNodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterNodeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.DescribeClusterNodeRequest_ClusterName, *v.ClusterName)
+	}
+	if v.NodeId != nil {
+		s.WriteString(schemas.DescribeClusterNodeRequest_NodeId, *v.NodeId)
+	}
+	if v.NodeLogicalId != nil {
+		s.WriteString(schemas.DescribeClusterNodeRequest_NodeLogicalId, *v.NodeLogicalId)
+	}
+}
+
 type DescribeClusterNodeOutput struct {
 
 	// The details of the SageMaker HyperPod cluster node.
@@ -58,13 +78,34 @@ type DescribeClusterNodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterNodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterNodeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterNodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NodeDetails != nil {
+		s.WriteStruct(schemas.DescribeClusterNodeResponse_NodeDetails)
+		v.NodeDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeClusterNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeClusterNodeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeClusterNodeResponse_NodeDetails:
+			v.NodeDetails = &types.ClusterNodeDetails{}
+			return v.NodeDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeClusterNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeClusterNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterNode, schemas.DescribeClusterNodeRequest, schemas.DescribeClusterNodeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeClusterNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterNode, schemas.DescribeClusterNodeRequest, schemas.DescribeClusterNodeResponse), output: &DescribeClusterNodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

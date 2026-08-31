@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,27 @@ type ListAssociatedContactsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssociatedContactsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssociatedContactsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssociatedContactsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.ListAssociatedContactsRequest_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListAssociatedContactsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssociatedContactsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssociatedContactsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAssociatedContactsOutput struct {
 
 	// List of the contact summary for all the contacts in contact tree associated
@@ -65,13 +88,35 @@ type ListAssociatedContactsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssociatedContactsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssociatedContactsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssociatedContactsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssociatedContactSummaryList(s, schemas.ListAssociatedContactsResponse_ContactSummaryList, v.ContactSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssociatedContactsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAssociatedContactsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssociatedContactsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssociatedContactsResponse_ContactSummaryList:
+			return deserializeAssociatedContactSummaryList(d, schemas.ListAssociatedContactsResponse_ContactSummaryList, &v.ContactSummaryList)
+		case schemas.ListAssociatedContactsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssociatedContactsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssociatedContactsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssociatedContacts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociatedContacts, schemas.ListAssociatedContactsRequest, schemas.ListAssociatedContactsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssociatedContacts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociatedContacts, schemas.ListAssociatedContactsRequest, schemas.ListAssociatedContactsResponse), output: &ListAssociatedContactsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

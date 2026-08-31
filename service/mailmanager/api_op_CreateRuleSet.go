@@ -5,7 +5,9 @@ package mailmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,23 @@ type CreateRuleSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRuleSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRuleSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRuleSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRuleSetRequest_ClientToken, *v.ClientToken)
+	}
+	if v.RuleSetName != nil {
+		s.WriteString(schemas.CreateRuleSetRequest_RuleSetName, *v.RuleSetName)
+	}
+	serializeRules(s, schemas.CreateRuleSetRequest_Rules, v.Rules)
+	serializeTagList(s, schemas.CreateRuleSetRequest_Tags, v.Tags)
+}
+
 type CreateRuleSetOutput struct {
 
 	// The identifier of the created rule set.
@@ -61,13 +80,32 @@ type CreateRuleSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRuleSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRuleSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRuleSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleSetId != nil {
+		s.WriteString(schemas.CreateRuleSetResponse_RuleSetId, *v.RuleSetId)
+	}
+}
+func (v *CreateRuleSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRuleSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRuleSetResponse_RuleSetId:
+			v.RuleSetId = new(string)
+			return d.ReadString(schemas.CreateRuleSetResponse_RuleSetId, v.RuleSetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRuleSet, schemas.CreateRuleSetRequest, schemas.CreateRuleSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRuleSet, schemas.CreateRuleSetRequest, schemas.CreateRuleSetResponse), output: &CreateRuleSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

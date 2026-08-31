@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,24 @@ type RegisterContainerImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterContainerImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterContainerImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterContainerImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Digest != nil {
+		s.WriteString(schemas.RegisterContainerImageRequest_digest, *v.Digest)
+	}
+	if v.Label != nil {
+		s.WriteString(schemas.RegisterContainerImageRequest_label, *v.Label)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.RegisterContainerImageRequest_serviceName, *v.ServiceName)
+	}
+}
+
 type RegisterContainerImageOutput struct {
 
 	// An object that describes a container image that is registered to a Lightsail
@@ -81,13 +101,34 @@ type RegisterContainerImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterContainerImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterContainerImageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterContainerImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerImage != nil {
+		s.WriteStruct(schemas.RegisterContainerImageResult_containerImage)
+		v.ContainerImage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RegisterContainerImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterContainerImageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterContainerImageResult_containerImage:
+			v.ContainerImage = &types.ContainerImage{}
+			return v.ContainerImage.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterContainerImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterContainerImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterContainerImage, schemas.RegisterContainerImageRequest, schemas.RegisterContainerImageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterContainerImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterContainerImage, schemas.RegisterContainerImageRequest, schemas.RegisterContainerImageResult), output: &RegisterContainerImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package cleanrooms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListIdNamespaceAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdNamespaceAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdNamespaceAssociationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdNamespaceAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIdNamespaceAssociationsInput_maxResults, *v.MaxResults)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.ListIdNamespaceAssociationsInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdNamespaceAssociationsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListIdNamespaceAssociationsOutput struct {
 
 	// The summary information of the ID namespace associations that you requested.
@@ -60,13 +80,35 @@ type ListIdNamespaceAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdNamespaceAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdNamespaceAssociationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdNamespaceAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdNamespaceAssociationSummaryList(s, schemas.ListIdNamespaceAssociationsOutput_idNamespaceAssociationSummaries, v.IdNamespaceAssociationSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdNamespaceAssociationsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListIdNamespaceAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIdNamespaceAssociationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIdNamespaceAssociationsOutput_idNamespaceAssociationSummaries:
+			return deserializeIdNamespaceAssociationSummaryList(d, schemas.ListIdNamespaceAssociationsOutput_idNamespaceAssociationSummaries, &v.IdNamespaceAssociationSummaries)
+		case schemas.ListIdNamespaceAssociationsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIdNamespaceAssociationsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIdNamespaceAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIdNamespaceAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdNamespaceAssociations, schemas.ListIdNamespaceAssociationsInput, schemas.ListIdNamespaceAssociationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIdNamespaceAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdNamespaceAssociations, schemas.ListIdNamespaceAssociationsInput, schemas.ListIdNamespaceAssociationsOutput), output: &ListIdNamespaceAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

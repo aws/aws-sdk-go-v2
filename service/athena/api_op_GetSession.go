@@ -4,7 +4,9 @@ package athena
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type GetSessionInput struct {
 	SessionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetSessionRequest_SessionId, *v.SessionId)
+	}
 }
 
 type GetSessionOutput struct {
@@ -75,13 +89,96 @@ type GetSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.GetSessionResponse_Description, *v.Description)
+	}
+	if v.EngineConfiguration != nil {
+		s.WriteStruct(schemas.GetSessionResponse_EngineConfiguration)
+		v.EngineConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.GetSessionResponse_EngineVersion, *v.EngineVersion)
+	}
+	if v.MonitoringConfiguration != nil {
+		s.WriteStruct(schemas.GetSessionResponse_MonitoringConfiguration)
+		v.MonitoringConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NotebookVersion != nil {
+		s.WriteString(schemas.GetSessionResponse_NotebookVersion, *v.NotebookVersion)
+	}
+	if v.SessionConfiguration != nil {
+		s.WriteStruct(schemas.GetSessionResponse_SessionConfiguration)
+		v.SessionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetSessionResponse_SessionId, *v.SessionId)
+	}
+	if v.Statistics != nil {
+		s.WriteStruct(schemas.GetSessionResponse_Statistics)
+		v.Statistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.GetSessionResponse_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkGroup != nil {
+		s.WriteString(schemas.GetSessionResponse_WorkGroup, *v.WorkGroup)
+	}
+}
+func (v *GetSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSessionResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetSessionResponse_Description, v.Description)
+		case schemas.GetSessionResponse_EngineConfiguration:
+			v.EngineConfiguration = &types.EngineConfiguration{}
+			return v.EngineConfiguration.Deserialize(d)
+		case schemas.GetSessionResponse_EngineVersion:
+			v.EngineVersion = new(string)
+			return d.ReadString(schemas.GetSessionResponse_EngineVersion, v.EngineVersion)
+		case schemas.GetSessionResponse_MonitoringConfiguration:
+			v.MonitoringConfiguration = &types.MonitoringConfiguration{}
+			return v.MonitoringConfiguration.Deserialize(d)
+		case schemas.GetSessionResponse_NotebookVersion:
+			v.NotebookVersion = new(string)
+			return d.ReadString(schemas.GetSessionResponse_NotebookVersion, v.NotebookVersion)
+		case schemas.GetSessionResponse_SessionConfiguration:
+			v.SessionConfiguration = &types.SessionConfiguration{}
+			return v.SessionConfiguration.Deserialize(d)
+		case schemas.GetSessionResponse_SessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.GetSessionResponse_SessionId, v.SessionId)
+		case schemas.GetSessionResponse_Statistics:
+			v.Statistics = &types.SessionStatistics{}
+			return v.Statistics.Deserialize(d)
+		case schemas.GetSessionResponse_Status:
+			v.Status = &types.SessionStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.GetSessionResponse_WorkGroup:
+			v.WorkGroup = new(string)
+			return d.ReadString(schemas.GetSessionResponse_WorkGroup, v.WorkGroup)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSession, schemas.GetSessionRequest, schemas.GetSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSession, schemas.GetSessionRequest, schemas.GetSessionResponse), output: &GetSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

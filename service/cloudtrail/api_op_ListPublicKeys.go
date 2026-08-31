@@ -5,7 +5,9 @@ package cloudtrail
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -51,6 +53,24 @@ type ListPublicKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPublicKeysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPublicKeysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPublicKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListPublicKeysRequest_EndTime, *v.EndTime)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPublicKeysRequest_NextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListPublicKeysRequest_StartTime, *v.StartTime)
+	}
+}
+
 // Returns the objects or data listed below if successful. Otherwise, returns an
 // error.
 type ListPublicKeysOutput struct {
@@ -69,13 +89,35 @@ type ListPublicKeysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPublicKeysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPublicKeysResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPublicKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPublicKeysResponse_NextToken, *v.NextToken)
+	}
+	serializePublicKeyList(s, schemas.ListPublicKeysResponse_PublicKeyList, v.PublicKeyList)
+}
+func (v *ListPublicKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPublicKeysResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPublicKeysResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPublicKeysResponse_NextToken, v.NextToken)
+		case schemas.ListPublicKeysResponse_PublicKeyList:
+			return deserializePublicKeyList(d, schemas.ListPublicKeysResponse_PublicKeyList, &v.PublicKeyList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPublicKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPublicKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPublicKeys, schemas.ListPublicKeysRequest, schemas.ListPublicKeysResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPublicKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPublicKeys, schemas.ListPublicKeysRequest, schemas.ListPublicKeysResponse), output: &ListPublicKeysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

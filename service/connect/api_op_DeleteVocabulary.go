@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DeleteVocabularyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVocabularyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVocabularyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVocabularyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteVocabularyRequest_InstanceId, *v.InstanceId)
+	}
+	if v.VocabularyId != nil {
+		s.WriteString(schemas.DeleteVocabularyRequest_VocabularyId, *v.VocabularyId)
+	}
+}
+
 type DeleteVocabularyOutput struct {
 
 	// The current state of the custom vocabulary.
@@ -65,13 +82,48 @@ type DeleteVocabularyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVocabularyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVocabularyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVocabularyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.DeleteVocabularyResponse_State, string(v.State))
+	}
+	if v.VocabularyArn != nil {
+		s.WriteString(schemas.DeleteVocabularyResponse_VocabularyArn, *v.VocabularyArn)
+	}
+	if v.VocabularyId != nil {
+		s.WriteString(schemas.DeleteVocabularyResponse_VocabularyId, *v.VocabularyId)
+	}
+}
+func (v *DeleteVocabularyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVocabularyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVocabularyResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DeleteVocabularyResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.VocabularyState(ev)
+			return nil
+		case schemas.DeleteVocabularyResponse_VocabularyArn:
+			v.VocabularyArn = new(string)
+			return d.ReadString(schemas.DeleteVocabularyResponse_VocabularyArn, v.VocabularyArn)
+		case schemas.DeleteVocabularyResponse_VocabularyId:
+			v.VocabularyId = new(string)
+			return d.ReadString(schemas.DeleteVocabularyResponse_VocabularyId, v.VocabularyId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVocabularyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVocabulary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVocabulary, schemas.DeleteVocabularyRequest, schemas.DeleteVocabularyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteVocabulary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVocabulary, schemas.DeleteVocabularyRequest, schemas.DeleteVocabularyResponse), output: &DeleteVocabularyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

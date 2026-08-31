@@ -4,7 +4,9 @@ package schemas
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/schemas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/schemas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -58,6 +60,31 @@ type CreateSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSchemaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSchemaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteString(schemas.CreateSchemaRequest_Content, *v.Content)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateSchemaRequest_Description, *v.Description)
+	}
+	if v.RegistryName != nil {
+		s.WriteString(schemas.CreateSchemaRequest_RegistryName, *v.RegistryName)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.CreateSchemaRequest_SchemaName, *v.SchemaName)
+	}
+	serializeTags(s, schemas.CreateSchemaRequest_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateSchemaRequest_Type, string(v.Type))
+	}
+}
+
 type CreateSchemaOutput struct {
 
 	// The description of the schema.
@@ -90,13 +117,71 @@ type CreateSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSchemaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSchemaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateSchemaResponse_Description, *v.Description)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.CreateSchemaResponse_LastModified, *v.LastModified)
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.CreateSchemaResponse_SchemaArn, *v.SchemaArn)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.CreateSchemaResponse_SchemaName, *v.SchemaName)
+	}
+	if v.SchemaVersion != nil {
+		s.WriteString(schemas.CreateSchemaResponse_SchemaVersion, *v.SchemaVersion)
+	}
+	serializeTags(s, schemas.CreateSchemaResponse_Tags, v.Tags)
+	if v.Type != nil {
+		s.WriteString(schemas.CreateSchemaResponse_Type, *v.Type)
+	}
+	if v.VersionCreatedDate != nil {
+		s.WriteTime(schemas.CreateSchemaResponse_VersionCreatedDate, *v.VersionCreatedDate)
+	}
+}
+func (v *CreateSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSchemaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSchemaResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateSchemaResponse_Description, v.Description)
+		case schemas.CreateSchemaResponse_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.CreateSchemaResponse_LastModified, v.LastModified)
+		case schemas.CreateSchemaResponse_SchemaArn:
+			v.SchemaArn = new(string)
+			return d.ReadString(schemas.CreateSchemaResponse_SchemaArn, v.SchemaArn)
+		case schemas.CreateSchemaResponse_SchemaName:
+			v.SchemaName = new(string)
+			return d.ReadString(schemas.CreateSchemaResponse_SchemaName, v.SchemaName)
+		case schemas.CreateSchemaResponse_SchemaVersion:
+			v.SchemaVersion = new(string)
+			return d.ReadString(schemas.CreateSchemaResponse_SchemaVersion, v.SchemaVersion)
+		case schemas.CreateSchemaResponse_Tags:
+			return deserializeTags(d, schemas.CreateSchemaResponse_Tags, &v.Tags)
+		case schemas.CreateSchemaResponse_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.CreateSchemaResponse_Type, v.Type)
+		case schemas.CreateSchemaResponse_VersionCreatedDate:
+			v.VersionCreatedDate = new(time.Time)
+			return d.ReadTime(schemas.CreateSchemaResponse_VersionCreatedDate, v.VersionCreatedDate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSchema, schemas.CreateSchemaRequest, schemas.CreateSchemaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSchema, schemas.CreateSchemaRequest, schemas.CreateSchemaResponse), output: &CreateSchemaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

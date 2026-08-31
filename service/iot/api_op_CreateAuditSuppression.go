@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -65,6 +67,35 @@ type CreateAuditSuppressionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAuditSuppressionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAuditSuppressionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAuditSuppressionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CheckName != nil {
+		s.WriteString(schemas.CreateAuditSuppressionRequest_checkName, *v.CheckName)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateAuditSuppressionRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAuditSuppressionRequest_description, *v.Description)
+	}
+	if v.ExpirationDate != nil {
+		s.WriteTime(schemas.CreateAuditSuppressionRequest_expirationDate, *v.ExpirationDate)
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteStruct(schemas.CreateAuditSuppressionRequest_resourceIdentifier)
+		v.ResourceIdentifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SuppressIndefinitely != nil {
+		s.WriteBool(schemas.CreateAuditSuppressionRequest_suppressIndefinitely, *v.SuppressIndefinitely)
+	}
+}
+
 type CreateAuditSuppressionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -72,13 +103,26 @@ type CreateAuditSuppressionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAuditSuppressionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAuditSuppressionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAuditSuppressionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateAuditSuppressionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAuditSuppressionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAuditSuppressionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAuditSuppression{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAuditSuppression, schemas.CreateAuditSuppressionRequest, schemas.CreateAuditSuppressionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAuditSuppression{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAuditSuppression, schemas.CreateAuditSuppressionRequest, schemas.CreateAuditSuppressionResponse), output: &CreateAuditSuppressionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

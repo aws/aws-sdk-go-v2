@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteCodeRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCodeRepositoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCodeRepositoryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCodeRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeRepositoryName != nil {
+		s.WriteString(schemas.DeleteCodeRepositoryInput_CodeRepositoryName, *v.CodeRepositoryName)
+	}
+}
+
 type DeleteCodeRepositoryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteCodeRepositoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCodeRepositoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCodeRepositoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCodeRepositoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCodeRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCodeRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCodeRepository, schemas.DeleteCodeRepositoryInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteCodeRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCodeRepository, schemas.DeleteCodeRepositoryInput, nil), output: &DeleteCodeRepositoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

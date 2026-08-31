@@ -4,6 +4,8 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,21 @@ type AdminDeleteSoftwareTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminDeleteSoftwareTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminDeleteSoftwareTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminDeleteSoftwareTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AdminDeleteSoftwareTokenRequest_UserPoolId, *v.UserPoolId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.AdminDeleteSoftwareTokenRequest_Username, *v.Username)
+	}
+}
+
 type AdminDeleteSoftwareTokenOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,13 +85,26 @@ type AdminDeleteSoftwareTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminDeleteSoftwareTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminDeleteSoftwareTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminDeleteSoftwareTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AdminDeleteSoftwareTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminDeleteSoftwareTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdminDeleteSoftwareTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminDeleteSoftwareToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminDeleteSoftwareToken, schemas.AdminDeleteSoftwareTokenRequest, schemas.AdminDeleteSoftwareTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminDeleteSoftwareToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminDeleteSoftwareToken, schemas.AdminDeleteSoftwareTokenRequest, schemas.AdminDeleteSoftwareTokenResponse), output: &AdminDeleteSoftwareTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package apprunner
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,21 @@ type CreateVpcConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVpcConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVpcConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVpcConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.CreateVpcConnectorRequest_SecurityGroups, v.SecurityGroups)
+	serializeStringList(s, schemas.CreateVpcConnectorRequest_Subnets, v.Subnets)
+	serializeTagList(s, schemas.CreateVpcConnectorRequest_Tags, v.Tags)
+	if v.VpcConnectorName != nil {
+		s.WriteString(schemas.CreateVpcConnectorRequest_VpcConnectorName, *v.VpcConnectorName)
+	}
+}
+
 type CreateVpcConnectorOutput struct {
 
 	// A description of the App Runner VPC connector that's created by this request.
@@ -69,13 +86,34 @@ type CreateVpcConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVpcConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVpcConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVpcConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcConnector != nil {
+		s.WriteStruct(schemas.CreateVpcConnectorResponse_VpcConnector)
+		v.VpcConnector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateVpcConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVpcConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVpcConnectorResponse_VpcConnector:
+			v.VpcConnector = &types.VpcConnector{}
+			return v.VpcConnector.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVpcConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateVpcConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVpcConnector, schemas.CreateVpcConnectorRequest, schemas.CreateVpcConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateVpcConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVpcConnector, schemas.CreateVpcConnectorRequest, schemas.CreateVpcConnectorResponse), output: &CreateVpcConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package acm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/acm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -49,6 +51,22 @@ type PutAccountConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpiryEvents != nil {
+		s.WriteStruct(schemas.PutAccountConfigurationRequest_ExpiryEvents)
+		v.ExpiryEvents.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.PutAccountConfigurationRequest_IdempotencyToken, *v.IdempotencyToken)
+	}
+}
 func (in *PutAccountConfigurationInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ServiceType = ptr.String("ACM")
@@ -61,13 +79,26 @@ type PutAccountConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutAccountConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAccountConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutAccountConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountConfiguration, schemas.PutAccountConfigurationRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutAccountConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountConfiguration, schemas.PutAccountConfigurationRequest, nil), output: &PutAccountConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

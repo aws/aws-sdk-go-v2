@@ -5,7 +5,9 @@ package apprunner
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type ListVpcConnectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVpcConnectorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVpcConnectorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVpcConnectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListVpcConnectorsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVpcConnectorsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListVpcConnectorsOutput struct {
 
 	// A list of information records for VPC connectors. In a paginated request, the
@@ -62,13 +79,35 @@ type ListVpcConnectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVpcConnectorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVpcConnectorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVpcConnectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVpcConnectorsResponse_NextToken, *v.NextToken)
+	}
+	serializeVpcConnectors(s, schemas.ListVpcConnectorsResponse_VpcConnectors, v.VpcConnectors)
+}
+func (v *ListVpcConnectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVpcConnectorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVpcConnectorsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVpcConnectorsResponse_NextToken, v.NextToken)
+		case schemas.ListVpcConnectorsResponse_VpcConnectors:
+			return deserializeVpcConnectors(d, schemas.ListVpcConnectorsResponse_VpcConnectors, &v.VpcConnectors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVpcConnectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListVpcConnectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVpcConnectors, schemas.ListVpcConnectorsRequest, schemas.ListVpcConnectorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListVpcConnectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVpcConnectors, schemas.ListVpcConnectorsRequest, schemas.ListVpcConnectorsResponse), output: &ListVpcConnectorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

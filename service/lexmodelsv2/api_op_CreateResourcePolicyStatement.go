@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -89,6 +91,30 @@ type CreateResourcePolicyStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResourcePolicyStatementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourcePolicyStatementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourcePolicyStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.CreateResourcePolicyStatementRequest_action, v.Action)
+	serializeConditionMap(s, schemas.CreateResourcePolicyStatementRequest_condition, v.Condition)
+	if v.Effect != "" {
+		s.WriteString(schemas.CreateResourcePolicyStatementRequest_effect, string(v.Effect))
+	}
+	if v.ExpectedRevisionId != nil {
+		s.WriteString(schemas.CreateResourcePolicyStatementRequest_expectedRevisionId, *v.ExpectedRevisionId)
+	}
+	serializePrincipalList(s, schemas.CreateResourcePolicyStatementRequest_principal, v.Principal)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.CreateResourcePolicyStatementRequest_resourceArn, *v.ResourceArn)
+	}
+	if v.StatementId != nil {
+		s.WriteString(schemas.CreateResourcePolicyStatementRequest_statementId, *v.StatementId)
+	}
+}
+
 type CreateResourcePolicyStatementOutput struct {
 
 	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy
@@ -106,13 +132,38 @@ type CreateResourcePolicyStatementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResourcePolicyStatementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourcePolicyStatementResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourcePolicyStatementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.CreateResourcePolicyStatementResponse_resourceArn, *v.ResourceArn)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.CreateResourcePolicyStatementResponse_revisionId, *v.RevisionId)
+	}
+}
+func (v *CreateResourcePolicyStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateResourcePolicyStatementResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateResourcePolicyStatementResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.CreateResourcePolicyStatementResponse_resourceArn, v.ResourceArn)
+		case schemas.CreateResourcePolicyStatementResponse_revisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.CreateResourcePolicyStatementResponse_revisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateResourcePolicyStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateResourcePolicyStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResourcePolicyStatement, schemas.CreateResourcePolicyStatementRequest, schemas.CreateResourcePolicyStatementResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateResourcePolicyStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResourcePolicyStatement, schemas.CreateResourcePolicyStatementRequest, schemas.CreateResourcePolicyStatementResponse), output: &CreateResourcePolicyStatementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

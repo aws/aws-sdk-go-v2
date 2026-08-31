@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -92,6 +94,43 @@ type CreateQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateQueueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateQueueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateQueueRequest_Description, *v.Description)
+	}
+	serializeEmailAddressConfigList(s, schemas.CreateQueueRequest_EmailAddressesConfig, v.EmailAddressesConfig)
+	if v.HoursOfOperationId != nil {
+		s.WriteString(schemas.CreateQueueRequest_HoursOfOperationId, *v.HoursOfOperationId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateQueueRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxContacts != nil {
+		s.WriteInt32(schemas.CreateQueueRequest_MaxContacts, *v.MaxContacts)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateQueueRequest_Name, *v.Name)
+	}
+	if v.OutboundCallerConfig != nil {
+		s.WriteStruct(schemas.CreateQueueRequest_OutboundCallerConfig)
+		v.OutboundCallerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutboundEmailConfig != nil {
+		s.WriteStruct(schemas.CreateQueueRequest_OutboundEmailConfig)
+		v.OutboundEmailConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeQuickConnectsList(s, schemas.CreateQueueRequest_QuickConnectIds, v.QuickConnectIds)
+	serializeTagMap(s, schemas.CreateQueueRequest_Tags, v.Tags)
+}
+
 type CreateQueueOutput struct {
 
 	// The Amazon Resource Name (ARN) of the queue.
@@ -106,13 +145,38 @@ type CreateQueueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateQueueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateQueueResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateQueueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueueArn != nil {
+		s.WriteString(schemas.CreateQueueResponse_QueueArn, *v.QueueArn)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.CreateQueueResponse_QueueId, *v.QueueId)
+	}
+}
+func (v *CreateQueueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateQueueResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateQueueResponse_QueueArn:
+			v.QueueArn = new(string)
+			return d.ReadString(schemas.CreateQueueResponse_QueueArn, v.QueueArn)
+		case schemas.CreateQueueResponse_QueueId:
+			v.QueueId = new(string)
+			return d.ReadString(schemas.CreateQueueResponse_QueueId, v.QueueId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQueue, schemas.CreateQueueRequest, schemas.CreateQueueResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQueue, schemas.CreateQueueRequest, schemas.CreateQueueResponse), output: &CreateQueueOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

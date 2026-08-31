@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -37,6 +39,21 @@ type DescribePartnerAppInput struct {
 	IncludeAvailableUpgrade *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribePartnerAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePartnerAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePartnerAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribePartnerAppRequest_Arn, *v.Arn)
+	}
+	if v.IncludeAvailableUpgrade != nil {
+		s.WriteBool(schemas.DescribePartnerAppRequest_IncludeAvailableUpgrade, *v.IncludeAvailableUpgrade)
+	}
 }
 
 type DescribePartnerAppOutput struct {
@@ -146,13 +163,168 @@ type DescribePartnerAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePartnerAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePartnerAppResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePartnerAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationConfig != nil {
+		s.WriteStruct(schemas.DescribePartnerAppResponse_ApplicationConfig)
+		v.ApplicationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribePartnerAppResponse_Arn, *v.Arn)
+	}
+	if v.AuthType != "" {
+		s.WriteString(schemas.DescribePartnerAppResponse_AuthType, string(v.AuthType))
+	}
+	if v.AvailableUpgrade != nil {
+		s.WriteStruct(schemas.DescribePartnerAppResponse_AvailableUpgrade)
+		v.AvailableUpgrade.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BaseUrl != nil {
+		s.WriteString(schemas.DescribePartnerAppResponse_BaseUrl, *v.BaseUrl)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribePartnerAppResponse_CreationTime, *v.CreationTime)
+	}
+	if v.CurrentVersionEolDate != nil {
+		s.WriteTime(schemas.DescribePartnerAppResponse_CurrentVersionEolDate, *v.CurrentVersionEolDate)
+	}
+	if v.EnableAutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.DescribePartnerAppResponse_EnableAutoMinorVersionUpgrade, *v.EnableAutoMinorVersionUpgrade)
+	}
+	if v.EnableIamSessionBasedIdentity != nil {
+		s.WriteBool(schemas.DescribePartnerAppResponse_EnableIamSessionBasedIdentity, *v.EnableIamSessionBasedIdentity)
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.DescribePartnerAppResponse_Error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.DescribePartnerAppResponse_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.IdcConfig != nil {
+		s.WriteStruct(schemas.DescribePartnerAppResponse_IdcConfig)
+		v.IdcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.DescribePartnerAppResponse_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribePartnerAppResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.MaintenanceConfig != nil {
+		s.WriteStruct(schemas.DescribePartnerAppResponse_MaintenanceConfig)
+		v.MaintenanceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribePartnerAppResponse_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribePartnerAppResponse_Status, string(v.Status))
+	}
+	if v.Tier != nil {
+		s.WriteString(schemas.DescribePartnerAppResponse_Tier, *v.Tier)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DescribePartnerAppResponse_Type, string(v.Type))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.DescribePartnerAppResponse_Version, *v.Version)
+	}
+}
+func (v *DescribePartnerAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePartnerAppResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePartnerAppResponse_ApplicationConfig:
+			v.ApplicationConfig = &types.PartnerAppConfig{}
+			return v.ApplicationConfig.Deserialize(d)
+		case schemas.DescribePartnerAppResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribePartnerAppResponse_Arn, v.Arn)
+		case schemas.DescribePartnerAppResponse_AuthType:
+			var ev string
+			if err := d.ReadString(schemas.DescribePartnerAppResponse_AuthType, &ev); err != nil {
+				return err
+			}
+			v.AuthType = types.PartnerAppAuthType(ev)
+			return nil
+		case schemas.DescribePartnerAppResponse_AvailableUpgrade:
+			v.AvailableUpgrade = &types.AvailableUpgrade{}
+			return v.AvailableUpgrade.Deserialize(d)
+		case schemas.DescribePartnerAppResponse_BaseUrl:
+			v.BaseUrl = new(string)
+			return d.ReadString(schemas.DescribePartnerAppResponse_BaseUrl, v.BaseUrl)
+		case schemas.DescribePartnerAppResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribePartnerAppResponse_CreationTime, v.CreationTime)
+		case schemas.DescribePartnerAppResponse_CurrentVersionEolDate:
+			v.CurrentVersionEolDate = new(time.Time)
+			return d.ReadTime(schemas.DescribePartnerAppResponse_CurrentVersionEolDate, v.CurrentVersionEolDate)
+		case schemas.DescribePartnerAppResponse_EnableAutoMinorVersionUpgrade:
+			v.EnableAutoMinorVersionUpgrade = new(bool)
+			return d.ReadBool(schemas.DescribePartnerAppResponse_EnableAutoMinorVersionUpgrade, v.EnableAutoMinorVersionUpgrade)
+		case schemas.DescribePartnerAppResponse_EnableIamSessionBasedIdentity:
+			v.EnableIamSessionBasedIdentity = new(bool)
+			return d.ReadBool(schemas.DescribePartnerAppResponse_EnableIamSessionBasedIdentity, v.EnableIamSessionBasedIdentity)
+		case schemas.DescribePartnerAppResponse_Error:
+			v.Error = &types.ErrorInfo{}
+			return v.Error.Deserialize(d)
+		case schemas.DescribePartnerAppResponse_ExecutionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.DescribePartnerAppResponse_ExecutionRoleArn, v.ExecutionRoleArn)
+		case schemas.DescribePartnerAppResponse_IdcConfig:
+			v.IdcConfig = &types.IdcConfigOutput{}
+			return v.IdcConfig.Deserialize(d)
+		case schemas.DescribePartnerAppResponse_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.DescribePartnerAppResponse_KmsKeyId, v.KmsKeyId)
+		case schemas.DescribePartnerAppResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribePartnerAppResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribePartnerAppResponse_MaintenanceConfig:
+			v.MaintenanceConfig = &types.PartnerAppMaintenanceConfig{}
+			return v.MaintenanceConfig.Deserialize(d)
+		case schemas.DescribePartnerAppResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribePartnerAppResponse_Name, v.Name)
+		case schemas.DescribePartnerAppResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribePartnerAppResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PartnerAppStatus(ev)
+			return nil
+		case schemas.DescribePartnerAppResponse_Tier:
+			v.Tier = new(string)
+			return d.ReadString(schemas.DescribePartnerAppResponse_Tier, v.Tier)
+		case schemas.DescribePartnerAppResponse_Type:
+			var ev string
+			if err := d.ReadString(schemas.DescribePartnerAppResponse_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.PartnerAppType(ev)
+			return nil
+		case schemas.DescribePartnerAppResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.DescribePartnerAppResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePartnerAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePartnerApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePartnerApp, schemas.DescribePartnerAppRequest, schemas.DescribePartnerAppResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePartnerApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePartnerApp, schemas.DescribePartnerAppRequest, schemas.DescribePartnerAppResponse), output: &DescribePartnerAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

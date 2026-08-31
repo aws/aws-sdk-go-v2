@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,31 @@ type CreateAgentStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAgentStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAgentStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAgentStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAgentStatusRequest_Description, *v.Description)
+	}
+	if v.DisplayOrder != nil {
+		s.WriteInt32(schemas.CreateAgentStatusRequest_DisplayOrder, *v.DisplayOrder)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateAgentStatusRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAgentStatusRequest_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CreateAgentStatusRequest_State, string(v.State))
+	}
+	serializeTagMap(s, schemas.CreateAgentStatusRequest_Tags, v.Tags)
+}
+
 type CreateAgentStatusOutput struct {
 
 	// The Amazon Resource Name (ARN) of the agent status.
@@ -71,13 +98,38 @@ type CreateAgentStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAgentStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAgentStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAgentStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentStatusARN != nil {
+		s.WriteString(schemas.CreateAgentStatusResponse_AgentStatusARN, *v.AgentStatusARN)
+	}
+	if v.AgentStatusId != nil {
+		s.WriteString(schemas.CreateAgentStatusResponse_AgentStatusId, *v.AgentStatusId)
+	}
+}
+func (v *CreateAgentStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAgentStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAgentStatusResponse_AgentStatusARN:
+			v.AgentStatusARN = new(string)
+			return d.ReadString(schemas.CreateAgentStatusResponse_AgentStatusARN, v.AgentStatusARN)
+		case schemas.CreateAgentStatusResponse_AgentStatusId:
+			v.AgentStatusId = new(string)
+			return d.ReadString(schemas.CreateAgentStatusResponse_AgentStatusId, v.AgentStatusId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAgentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAgentStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgentStatus, schemas.CreateAgentStatusRequest, schemas.CreateAgentStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAgentStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgentStatus, schemas.CreateAgentStatusRequest, schemas.CreateAgentStatusResponse), output: &CreateAgentStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

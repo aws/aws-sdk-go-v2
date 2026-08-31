@@ -4,7 +4,9 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,27 @@ type GetAnswerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAnswerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnswerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnswerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LensAlias != nil {
+		s.WriteString(schemas.GetAnswerInput_LensAlias, *v.LensAlias)
+	}
+	if v.MilestoneNumber != nil {
+		s.WriteInt32(schemas.GetAnswerInput_MilestoneNumber, *v.MilestoneNumber)
+	}
+	if v.QuestionId != nil {
+		s.WriteString(schemas.GetAnswerInput_QuestionId, *v.QuestionId)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.GetAnswerInput_WorkloadId, *v.WorkloadId)
+	}
+}
+
 // Output of a get answer call.
 type GetAnswerOutput struct {
 
@@ -102,13 +125,58 @@ type GetAnswerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAnswerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnswerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnswerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Answer != nil {
+		s.WriteStruct(schemas.GetAnswerOutput_Answer)
+		v.Answer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LensAlias != nil {
+		s.WriteString(schemas.GetAnswerOutput_LensAlias, *v.LensAlias)
+	}
+	if v.LensArn != nil {
+		s.WriteString(schemas.GetAnswerOutput_LensArn, *v.LensArn)
+	}
+	if v.MilestoneNumber != nil {
+		s.WriteInt32(schemas.GetAnswerOutput_MilestoneNumber, *v.MilestoneNumber)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.GetAnswerOutput_WorkloadId, *v.WorkloadId)
+	}
+}
+func (v *GetAnswerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAnswerOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAnswerOutput_Answer:
+			v.Answer = &types.Answer{}
+			return v.Answer.Deserialize(d)
+		case schemas.GetAnswerOutput_LensAlias:
+			v.LensAlias = new(string)
+			return d.ReadString(schemas.GetAnswerOutput_LensAlias, v.LensAlias)
+		case schemas.GetAnswerOutput_LensArn:
+			v.LensArn = new(string)
+			return d.ReadString(schemas.GetAnswerOutput_LensArn, v.LensArn)
+		case schemas.GetAnswerOutput_MilestoneNumber:
+			v.MilestoneNumber = new(int32)
+			return d.ReadInt32(schemas.GetAnswerOutput_MilestoneNumber, v.MilestoneNumber)
+		case schemas.GetAnswerOutput_WorkloadId:
+			v.WorkloadId = new(string)
+			return d.ReadString(schemas.GetAnswerOutput_WorkloadId, v.WorkloadId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAnswerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAnswer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnswer, schemas.GetAnswerInput, schemas.GetAnswerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAnswer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnswer, schemas.GetAnswerInput, schemas.GetAnswerOutput), output: &GetAnswerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

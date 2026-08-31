@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type AssociateRoleToGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateRoleToGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateRoleToGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateRoleToGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.AssociateRoleToGroupRequest_GroupId, *v.GroupId)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.AssociateRoleToGroupRequest_RoleArn, *v.RoleArn)
+	}
+}
+
 type AssociateRoleToGroupOutput struct {
 
 	// The time, in milliseconds since the epoch, when the role ARN was associated
@@ -53,13 +70,32 @@ type AssociateRoleToGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateRoleToGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateRoleToGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateRoleToGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedAt != nil {
+		s.WriteString(schemas.AssociateRoleToGroupResponse_AssociatedAt, *v.AssociatedAt)
+	}
+}
+func (v *AssociateRoleToGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateRoleToGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateRoleToGroupResponse_AssociatedAt:
+			v.AssociatedAt = new(string)
+			return d.ReadString(schemas.AssociateRoleToGroupResponse_AssociatedAt, v.AssociatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateRoleToGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateRoleToGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateRoleToGroup, schemas.AssociateRoleToGroupRequest, schemas.AssociateRoleToGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateRoleToGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateRoleToGroup, schemas.AssociateRoleToGroupRequest, schemas.AssociateRoleToGroupResponse), output: &AssociateRoleToGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

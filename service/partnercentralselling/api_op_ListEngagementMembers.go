@@ -5,7 +5,9 @@ package partnercentralselling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,27 @@ type ListEngagementMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEngagementMembersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEngagementMembersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEngagementMembersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.ListEngagementMembersRequest_Catalog, *v.Catalog)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.ListEngagementMembersRequest_Identifier, *v.Identifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEngagementMembersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEngagementMembersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListEngagementMembersOutput struct {
 
 	//  Provides a list of engagement members.
@@ -69,13 +92,35 @@ type ListEngagementMembersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEngagementMembersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEngagementMembersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEngagementMembersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEngagementMembers(s, schemas.ListEngagementMembersResponse_EngagementMemberList, v.EngagementMemberList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEngagementMembersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEngagementMembersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEngagementMembersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEngagementMembersResponse_EngagementMemberList:
+			return deserializeEngagementMembers(d, schemas.ListEngagementMembersResponse_EngagementMemberList, &v.EngagementMemberList)
+		case schemas.ListEngagementMembersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEngagementMembersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEngagementMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListEngagementMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEngagementMembers, schemas.ListEngagementMembersRequest, schemas.ListEngagementMembersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListEngagementMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEngagementMembers, schemas.ListEngagementMembersRequest, schemas.ListEngagementMembersResponse), output: &ListEngagementMembersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

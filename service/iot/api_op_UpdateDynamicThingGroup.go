@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,35 @@ type UpdateDynamicThingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDynamicThingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDynamicThingGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDynamicThingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpectedVersion != nil {
+		s.WriteInt64(schemas.UpdateDynamicThingGroupRequest_expectedVersion, *v.ExpectedVersion)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.UpdateDynamicThingGroupRequest_indexName, *v.IndexName)
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.UpdateDynamicThingGroupRequest_queryString, *v.QueryString)
+	}
+	if v.QueryVersion != nil {
+		s.WriteString(schemas.UpdateDynamicThingGroupRequest_queryVersion, *v.QueryVersion)
+	}
+	if v.ThingGroupName != nil {
+		s.WriteString(schemas.UpdateDynamicThingGroupRequest_thingGroupName, *v.ThingGroupName)
+	}
+	if v.ThingGroupProperties != nil {
+		s.WriteStruct(schemas.UpdateDynamicThingGroupRequest_thingGroupProperties)
+		v.ThingGroupProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateDynamicThingGroupOutput struct {
 
 	// The dynamic thing group version.
@@ -71,13 +102,31 @@ type UpdateDynamicThingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDynamicThingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDynamicThingGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDynamicThingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Version != 0 {
+		s.WriteInt64(schemas.UpdateDynamicThingGroupResponse_version, v.Version)
+	}
+}
+func (v *UpdateDynamicThingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDynamicThingGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDynamicThingGroupResponse_version:
+			return d.ReadInt64(schemas.UpdateDynamicThingGroupResponse_version, &v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDynamicThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDynamicThingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDynamicThingGroup, schemas.UpdateDynamicThingGroupRequest, schemas.UpdateDynamicThingGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDynamicThingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDynamicThingGroup, schemas.UpdateDynamicThingGroupRequest, schemas.UpdateDynamicThingGroupResponse), output: &UpdateDynamicThingGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

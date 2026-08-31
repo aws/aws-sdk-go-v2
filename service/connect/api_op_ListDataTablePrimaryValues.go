@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,29 @@ type ListDataTablePrimaryValuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataTablePrimaryValuesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataTablePrimaryValuesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataTablePrimaryValuesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataTableId != nil {
+		s.WriteString(schemas.ListDataTablePrimaryValuesRequest_DataTableId, *v.DataTableId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListDataTablePrimaryValuesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataTablePrimaryValuesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataTablePrimaryValuesRequest_NextToken, *v.NextToken)
+	}
+	serializePrimaryAttributeValueFilters(s, schemas.ListDataTablePrimaryValuesRequest_PrimaryAttributeValues, v.PrimaryAttributeValues)
+	serializeRecordIds(s, schemas.ListDataTablePrimaryValuesRequest_RecordIds, v.RecordIds)
+}
+
 type ListDataTablePrimaryValuesOutput struct {
 
 	// A list of primary value combinations with their record IDs and modification
@@ -76,13 +101,35 @@ type ListDataTablePrimaryValuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataTablePrimaryValuesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataTablePrimaryValuesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataTablePrimaryValuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataTablePrimaryValuesResponse_NextToken, *v.NextToken)
+	}
+	serializePrimaryValuesList(s, schemas.ListDataTablePrimaryValuesResponse_PrimaryValuesList, v.PrimaryValuesList)
+}
+func (v *ListDataTablePrimaryValuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataTablePrimaryValuesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataTablePrimaryValuesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataTablePrimaryValuesResponse_NextToken, v.NextToken)
+		case schemas.ListDataTablePrimaryValuesResponse_PrimaryValuesList:
+			return deserializePrimaryValuesList(d, schemas.ListDataTablePrimaryValuesResponse_PrimaryValuesList, &v.PrimaryValuesList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataTablePrimaryValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataTablePrimaryValues{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataTablePrimaryValues, schemas.ListDataTablePrimaryValuesRequest, schemas.ListDataTablePrimaryValuesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataTablePrimaryValues{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataTablePrimaryValues, schemas.ListDataTablePrimaryValuesRequest, schemas.ListDataTablePrimaryValuesResponse), output: &ListDataTablePrimaryValuesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

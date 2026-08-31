@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,24 @@ type ListUserImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserImportJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUserImportJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUserImportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListUserImportJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.PaginationToken != nil {
+		s.WriteString(schemas.ListUserImportJobsRequest_PaginationToken, *v.PaginationToken)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.ListUserImportJobsRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 // Represents the response from the server to the request to list the user import
 // jobs.
 type ListUserImportJobsOutput struct {
@@ -87,13 +107,35 @@ type ListUserImportJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserImportJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUserImportJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUserImportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PaginationToken != nil {
+		s.WriteString(schemas.ListUserImportJobsResponse_PaginationToken, *v.PaginationToken)
+	}
+	serializeUserImportJobsListType(s, schemas.ListUserImportJobsResponse_UserImportJobs, v.UserImportJobs)
+}
+func (v *ListUserImportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUserImportJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUserImportJobsResponse_PaginationToken:
+			v.PaginationToken = new(string)
+			return d.ReadString(schemas.ListUserImportJobsResponse_PaginationToken, v.PaginationToken)
+		case schemas.ListUserImportJobsResponse_UserImportJobs:
+			return deserializeUserImportJobsListType(d, schemas.ListUserImportJobsResponse_UserImportJobs, &v.UserImportJobs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUserImportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListUserImportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserImportJobs, schemas.ListUserImportJobsRequest, schemas.ListUserImportJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListUserImportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserImportJobs, schemas.ListUserImportJobsRequest, schemas.ListUserImportJobsResponse), output: &ListUserImportJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

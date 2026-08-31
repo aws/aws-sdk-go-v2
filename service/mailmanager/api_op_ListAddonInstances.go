@@ -5,7 +5,9 @@ package mailmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ListAddonInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAddonInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAddonInstancesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAddonInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAddonInstancesRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListAddonInstancesRequest_PageSize, *v.PageSize)
+	}
+}
+
 type ListAddonInstancesOutput struct {
 
 	// The list of ingress endpoints.
@@ -54,13 +71,35 @@ type ListAddonInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAddonInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAddonInstancesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAddonInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAddonInstances(s, schemas.ListAddonInstancesResponse_AddonInstances, v.AddonInstances)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAddonInstancesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAddonInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAddonInstancesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAddonInstancesResponse_AddonInstances:
+			return deserializeAddonInstances(d, schemas.ListAddonInstancesResponse_AddonInstances, &v.AddonInstances)
+		case schemas.ListAddonInstancesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAddonInstancesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAddonInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListAddonInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAddonInstances, schemas.ListAddonInstancesRequest, schemas.ListAddonInstancesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListAddonInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAddonInstances, schemas.ListAddonInstancesRequest, schemas.ListAddonInstancesResponse), output: &ListAddonInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

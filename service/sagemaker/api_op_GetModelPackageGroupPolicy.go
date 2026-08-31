@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type GetModelPackageGroupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetModelPackageGroupPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelPackageGroupPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelPackageGroupPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelPackageGroupName != nil {
+		s.WriteString(schemas.GetModelPackageGroupPolicyInput_ModelPackageGroupName, *v.ModelPackageGroupName)
+	}
+}
+
 type GetModelPackageGroupPolicyOutput struct {
 
 	// The resource policy for the model group.
@@ -50,13 +64,32 @@ type GetModelPackageGroupPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetModelPackageGroupPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelPackageGroupPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelPackageGroupPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourcePolicy != nil {
+		s.WriteString(schemas.GetModelPackageGroupPolicyOutput_ResourcePolicy, *v.ResourcePolicy)
+	}
+}
+func (v *GetModelPackageGroupPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetModelPackageGroupPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetModelPackageGroupPolicyOutput_ResourcePolicy:
+			v.ResourcePolicy = new(string)
+			return d.ReadString(schemas.GetModelPackageGroupPolicyOutput_ResourcePolicy, v.ResourcePolicy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetModelPackageGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetModelPackageGroupPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModelPackageGroupPolicy, schemas.GetModelPackageGroupPolicyInput, schemas.GetModelPackageGroupPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetModelPackageGroupPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModelPackageGroupPolicy, schemas.GetModelPackageGroupPolicyInput, schemas.GetModelPackageGroupPolicyOutput), output: &GetModelPackageGroupPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

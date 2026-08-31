@@ -5,7 +5,9 @@ package partnercentralselling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -79,6 +81,34 @@ type ListOpportunityFromEngagementTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOpportunityFromEngagementTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOpportunityFromEngagementTasksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOpportunityFromEngagementTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.ListOpportunityFromEngagementTasksRequest_Catalog, *v.Catalog)
+	}
+	serializeContextIdentifiers(s, schemas.ListOpportunityFromEngagementTasksRequest_ContextIdentifier, v.ContextIdentifier)
+	serializeEngagementIdentifiers(s, schemas.ListOpportunityFromEngagementTasksRequest_EngagementIdentifier, v.EngagementIdentifier)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOpportunityFromEngagementTasksRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOpportunityFromEngagementTasksRequest_NextToken, *v.NextToken)
+	}
+	serializeOpportunityIdentifiers(s, schemas.ListOpportunityFromEngagementTasksRequest_OpportunityIdentifier, v.OpportunityIdentifier)
+	if v.Sort != nil {
+		s.WriteStruct(schemas.ListOpportunityFromEngagementTasksRequest_Sort)
+		v.Sort.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTaskIdentifiers(s, schemas.ListOpportunityFromEngagementTasksRequest_TaskIdentifier, v.TaskIdentifier)
+	serializeTaskStatuses(s, schemas.ListOpportunityFromEngagementTasksRequest_TaskStatus, v.TaskStatus)
+}
+
 type ListOpportunityFromEngagementTasksOutput struct {
 
 	// A token used for pagination to retrieve the next page of results. If there are
@@ -98,13 +128,35 @@ type ListOpportunityFromEngagementTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOpportunityFromEngagementTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOpportunityFromEngagementTasksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOpportunityFromEngagementTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOpportunityFromEngagementTasksResponse_NextToken, *v.NextToken)
+	}
+	serializeListOpportunityFromEngagementTaskSummaries(s, schemas.ListOpportunityFromEngagementTasksResponse_TaskSummaries, v.TaskSummaries)
+}
+func (v *ListOpportunityFromEngagementTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOpportunityFromEngagementTasksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOpportunityFromEngagementTasksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOpportunityFromEngagementTasksResponse_NextToken, v.NextToken)
+		case schemas.ListOpportunityFromEngagementTasksResponse_TaskSummaries:
+			return deserializeListOpportunityFromEngagementTaskSummaries(d, schemas.ListOpportunityFromEngagementTasksResponse_TaskSummaries, &v.TaskSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOpportunityFromEngagementTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListOpportunityFromEngagementTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOpportunityFromEngagementTasks, schemas.ListOpportunityFromEngagementTasksRequest, schemas.ListOpportunityFromEngagementTasksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListOpportunityFromEngagementTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOpportunityFromEngagementTasks, schemas.ListOpportunityFromEngagementTasksRequest, schemas.ListOpportunityFromEngagementTasksResponse), output: &ListOpportunityFromEngagementTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

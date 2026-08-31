@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeTrainingPlanInput struct {
 	TrainingPlanName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeTrainingPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTrainingPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTrainingPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrainingPlanName != nil {
+		s.WriteString(schemas.DescribeTrainingPlanRequest_TrainingPlanName, *v.TrainingPlanName)
+	}
 }
 
 type DescribeTrainingPlanOutput struct {
@@ -126,13 +140,132 @@ type DescribeTrainingPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTrainingPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTrainingPlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTrainingPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailableInstanceCount != nil {
+		s.WriteInt32(schemas.DescribeTrainingPlanResponse_AvailableInstanceCount, *v.AvailableInstanceCount)
+	}
+	if v.AvailableSpareInstanceCount != nil {
+		s.WriteInt32(schemas.DescribeTrainingPlanResponse_AvailableSpareInstanceCount, *v.AvailableSpareInstanceCount)
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.DescribeTrainingPlanResponse_CurrencyCode, *v.CurrencyCode)
+	}
+	if v.DurationHours != nil {
+		s.WriteInt64(schemas.DescribeTrainingPlanResponse_DurationHours, *v.DurationHours)
+	}
+	if v.DurationMinutes != nil {
+		s.WriteInt64(schemas.DescribeTrainingPlanResponse_DurationMinutes, *v.DurationMinutes)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DescribeTrainingPlanResponse_EndTime, *v.EndTime)
+	}
+	if v.InUseInstanceCount != nil {
+		s.WriteInt32(schemas.DescribeTrainingPlanResponse_InUseInstanceCount, *v.InUseInstanceCount)
+	}
+	serializeReservedCapacitySummaries(s, schemas.DescribeTrainingPlanResponse_ReservedCapacitySummaries, v.ReservedCapacitySummaries)
+	if v.StartTime != nil {
+		s.WriteTime(schemas.DescribeTrainingPlanResponse_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeTrainingPlanResponse_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.DescribeTrainingPlanResponse_StatusMessage, *v.StatusMessage)
+	}
+	serializeSageMakerResourceNames(s, schemas.DescribeTrainingPlanResponse_TargetResources, v.TargetResources)
+	if v.TotalInstanceCount != nil {
+		s.WriteInt32(schemas.DescribeTrainingPlanResponse_TotalInstanceCount, *v.TotalInstanceCount)
+	}
+	if v.TotalUltraServerCount != nil {
+		s.WriteInt32(schemas.DescribeTrainingPlanResponse_TotalUltraServerCount, *v.TotalUltraServerCount)
+	}
+	if v.TrainingPlanArn != nil {
+		s.WriteString(schemas.DescribeTrainingPlanResponse_TrainingPlanArn, *v.TrainingPlanArn)
+	}
+	if v.TrainingPlanName != nil {
+		s.WriteString(schemas.DescribeTrainingPlanResponse_TrainingPlanName, *v.TrainingPlanName)
+	}
+	if v.UnhealthyInstanceCount != nil {
+		s.WriteInt32(schemas.DescribeTrainingPlanResponse_UnhealthyInstanceCount, *v.UnhealthyInstanceCount)
+	}
+	if v.UpfrontFee != nil {
+		s.WriteString(schemas.DescribeTrainingPlanResponse_UpfrontFee, *v.UpfrontFee)
+	}
+}
+func (v *DescribeTrainingPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTrainingPlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTrainingPlanResponse_AvailableInstanceCount:
+			v.AvailableInstanceCount = new(int32)
+			return d.ReadInt32(schemas.DescribeTrainingPlanResponse_AvailableInstanceCount, v.AvailableInstanceCount)
+		case schemas.DescribeTrainingPlanResponse_AvailableSpareInstanceCount:
+			v.AvailableSpareInstanceCount = new(int32)
+			return d.ReadInt32(schemas.DescribeTrainingPlanResponse_AvailableSpareInstanceCount, v.AvailableSpareInstanceCount)
+		case schemas.DescribeTrainingPlanResponse_CurrencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.DescribeTrainingPlanResponse_CurrencyCode, v.CurrencyCode)
+		case schemas.DescribeTrainingPlanResponse_DurationHours:
+			v.DurationHours = new(int64)
+			return d.ReadInt64(schemas.DescribeTrainingPlanResponse_DurationHours, v.DurationHours)
+		case schemas.DescribeTrainingPlanResponse_DurationMinutes:
+			v.DurationMinutes = new(int64)
+			return d.ReadInt64(schemas.DescribeTrainingPlanResponse_DurationMinutes, v.DurationMinutes)
+		case schemas.DescribeTrainingPlanResponse_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTrainingPlanResponse_EndTime, v.EndTime)
+		case schemas.DescribeTrainingPlanResponse_InUseInstanceCount:
+			v.InUseInstanceCount = new(int32)
+			return d.ReadInt32(schemas.DescribeTrainingPlanResponse_InUseInstanceCount, v.InUseInstanceCount)
+		case schemas.DescribeTrainingPlanResponse_ReservedCapacitySummaries:
+			return deserializeReservedCapacitySummaries(d, schemas.DescribeTrainingPlanResponse_ReservedCapacitySummaries, &v.ReservedCapacitySummaries)
+		case schemas.DescribeTrainingPlanResponse_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTrainingPlanResponse_StartTime, v.StartTime)
+		case schemas.DescribeTrainingPlanResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTrainingPlanResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TrainingPlanStatus(ev)
+			return nil
+		case schemas.DescribeTrainingPlanResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.DescribeTrainingPlanResponse_StatusMessage, v.StatusMessage)
+		case schemas.DescribeTrainingPlanResponse_TargetResources:
+			return deserializeSageMakerResourceNames(d, schemas.DescribeTrainingPlanResponse_TargetResources, &v.TargetResources)
+		case schemas.DescribeTrainingPlanResponse_TotalInstanceCount:
+			v.TotalInstanceCount = new(int32)
+			return d.ReadInt32(schemas.DescribeTrainingPlanResponse_TotalInstanceCount, v.TotalInstanceCount)
+		case schemas.DescribeTrainingPlanResponse_TotalUltraServerCount:
+			v.TotalUltraServerCount = new(int32)
+			return d.ReadInt32(schemas.DescribeTrainingPlanResponse_TotalUltraServerCount, v.TotalUltraServerCount)
+		case schemas.DescribeTrainingPlanResponse_TrainingPlanArn:
+			v.TrainingPlanArn = new(string)
+			return d.ReadString(schemas.DescribeTrainingPlanResponse_TrainingPlanArn, v.TrainingPlanArn)
+		case schemas.DescribeTrainingPlanResponse_TrainingPlanName:
+			v.TrainingPlanName = new(string)
+			return d.ReadString(schemas.DescribeTrainingPlanResponse_TrainingPlanName, v.TrainingPlanName)
+		case schemas.DescribeTrainingPlanResponse_UnhealthyInstanceCount:
+			v.UnhealthyInstanceCount = new(int32)
+			return d.ReadInt32(schemas.DescribeTrainingPlanResponse_UnhealthyInstanceCount, v.UnhealthyInstanceCount)
+		case schemas.DescribeTrainingPlanResponse_UpfrontFee:
+			v.UpfrontFee = new(string)
+			return d.ReadString(schemas.DescribeTrainingPlanResponse_UpfrontFee, v.UpfrontFee)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTrainingPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTrainingPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrainingPlan, schemas.DescribeTrainingPlanRequest, schemas.DescribeTrainingPlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTrainingPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrainingPlan, schemas.DescribeTrainingPlanRequest, schemas.DescribeTrainingPlanResponse), output: &DescribeTrainingPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

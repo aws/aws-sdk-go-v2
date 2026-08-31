@@ -5,7 +5,9 @@ package appflow
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appflow/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,29 @@ type UpdateConnectorRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectorRegistrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectorRegistrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectorRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateConnectorRegistrationRequest_clientToken, *v.ClientToken)
+	}
+	if v.ConnectorLabel != nil {
+		s.WriteString(schemas.UpdateConnectorRegistrationRequest_connectorLabel, *v.ConnectorLabel)
+	}
+	if v.ConnectorProvisioningConfig != nil {
+		s.WriteStruct(schemas.UpdateConnectorRegistrationRequest_connectorProvisioningConfig)
+		v.ConnectorProvisioningConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateConnectorRegistrationRequest_description, *v.Description)
+	}
+}
+
 type UpdateConnectorRegistrationOutput struct {
 
 	// The ARN of the connector being updated.
@@ -74,13 +99,32 @@ type UpdateConnectorRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectorRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectorRegistrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectorRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.UpdateConnectorRegistrationResponse_connectorArn, *v.ConnectorArn)
+	}
+}
+func (v *UpdateConnectorRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConnectorRegistrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConnectorRegistrationResponse_connectorArn:
+			v.ConnectorArn = new(string)
+			return d.ReadString(schemas.UpdateConnectorRegistrationResponse_connectorArn, v.ConnectorArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConnectorRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConnectorRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectorRegistration, schemas.UpdateConnectorRegistrationRequest, schemas.UpdateConnectorRegistrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateConnectorRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectorRegistration, schemas.UpdateConnectorRegistrationRequest, schemas.UpdateConnectorRegistrationResponse), output: &UpdateConnectorRegistrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

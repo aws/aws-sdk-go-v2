@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,16 @@ type StartOnDemandAuditTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartOnDemandAuditTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartOnDemandAuditTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartOnDemandAuditTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTargetAuditCheckNames(s, schemas.StartOnDemandAuditTaskRequest_targetCheckNames, v.TargetCheckNames)
+}
+
 type StartOnDemandAuditTaskOutput struct {
 
 	// The ID of the on-demand audit you started.
@@ -52,13 +64,32 @@ type StartOnDemandAuditTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartOnDemandAuditTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartOnDemandAuditTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartOnDemandAuditTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.StartOnDemandAuditTaskResponse_taskId, *v.TaskId)
+	}
+}
+func (v *StartOnDemandAuditTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartOnDemandAuditTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartOnDemandAuditTaskResponse_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.StartOnDemandAuditTaskResponse_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartOnDemandAuditTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartOnDemandAuditTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartOnDemandAuditTask, schemas.StartOnDemandAuditTaskRequest, schemas.StartOnDemandAuditTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartOnDemandAuditTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartOnDemandAuditTask, schemas.StartOnDemandAuditTaskRequest, schemas.StartOnDemandAuditTaskResponse), output: &StartOnDemandAuditTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -84,6 +86,24 @@ type AssociateContactWithUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateContactWithUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateContactWithUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateContactWithUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.AssociateContactWithUserRequest_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.AssociateContactWithUserRequest_InstanceId, *v.InstanceId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.AssociateContactWithUserRequest_UserId, *v.UserId)
+	}
+}
+
 type AssociateContactWithUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -91,13 +111,26 @@ type AssociateContactWithUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateContactWithUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateContactWithUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateContactWithUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateContactWithUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateContactWithUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateContactWithUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateContactWithUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateContactWithUser, schemas.AssociateContactWithUserRequest, schemas.AssociateContactWithUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateContactWithUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateContactWithUser, schemas.AssociateContactWithUserRequest, schemas.AssociateContactWithUserResponse), output: &AssociateContactWithUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

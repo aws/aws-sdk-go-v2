@@ -4,7 +4,9 @@ package m2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/m2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,34 @@ type GetDeploymentInput struct {
 	DeploymentId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetDeploymentRequest_applicationId, *v.ApplicationId)
+	}
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.GetDeploymentRequest_deploymentId, *v.DeploymentId)
+	}
+}
+func (v *GetDeploymentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDeploymentRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDeploymentRequest_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.GetDeploymentRequest_applicationId, v.ApplicationId)
+		case schemas.GetDeploymentRequest_deploymentId:
+			v.DeploymentId = new(string)
+			return d.ReadString(schemas.GetDeploymentRequest_deploymentId, v.DeploymentId)
+		}
+		return nil
+	})
 }
 
 type GetDeploymentOutput struct {
@@ -81,13 +111,72 @@ type GetDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeploymentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetDeploymentResponse_applicationId, *v.ApplicationId)
+	}
+	if v.ApplicationVersion != nil {
+		s.WriteInt32(schemas.GetDeploymentResponse_applicationVersion, *v.ApplicationVersion)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetDeploymentResponse_creationTime, *v.CreationTime)
+	}
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.GetDeploymentResponse_deploymentId, *v.DeploymentId)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.GetDeploymentResponse_environmentId, *v.EnvironmentId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetDeploymentResponse_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.GetDeploymentResponse_statusReason, *v.StatusReason)
+	}
+}
+func (v *GetDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDeploymentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDeploymentResponse_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.GetDeploymentResponse_applicationId, v.ApplicationId)
+		case schemas.GetDeploymentResponse_applicationVersion:
+			v.ApplicationVersion = new(int32)
+			return d.ReadInt32(schemas.GetDeploymentResponse_applicationVersion, v.ApplicationVersion)
+		case schemas.GetDeploymentResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetDeploymentResponse_creationTime, v.CreationTime)
+		case schemas.GetDeploymentResponse_deploymentId:
+			v.DeploymentId = new(string)
+			return d.ReadString(schemas.GetDeploymentResponse_deploymentId, v.DeploymentId)
+		case schemas.GetDeploymentResponse_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.GetDeploymentResponse_environmentId, v.EnvironmentId)
+		case schemas.GetDeploymentResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetDeploymentResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DeploymentLifecycle(ev)
+			return nil
+		case schemas.GetDeploymentResponse_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.GetDeploymentResponse_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeployment, schemas.GetDeploymentRequest, schemas.GetDeploymentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeployment, schemas.GetDeploymentRequest, schemas.GetDeploymentResponse), output: &GetDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

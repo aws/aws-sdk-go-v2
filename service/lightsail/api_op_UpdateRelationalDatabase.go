@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -136,6 +138,48 @@ type UpdateRelationalDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRelationalDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRelationalDatabaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRelationalDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplyImmediately != nil {
+		s.WriteBool(schemas.UpdateRelationalDatabaseRequest_applyImmediately, *v.ApplyImmediately)
+	}
+	if v.CaCertificateIdentifier != nil {
+		s.WriteString(schemas.UpdateRelationalDatabaseRequest_caCertificateIdentifier, *v.CaCertificateIdentifier)
+	}
+	if v.DisableBackupRetention != nil {
+		s.WriteBool(schemas.UpdateRelationalDatabaseRequest_disableBackupRetention, *v.DisableBackupRetention)
+	}
+	if v.EnableBackupRetention != nil {
+		s.WriteBool(schemas.UpdateRelationalDatabaseRequest_enableBackupRetention, *v.EnableBackupRetention)
+	}
+	if v.MasterUserPassword != nil {
+		s.WriteString(schemas.UpdateRelationalDatabaseRequest_masterUserPassword, *v.MasterUserPassword)
+	}
+	if v.PreferredBackupWindow != nil {
+		s.WriteString(schemas.UpdateRelationalDatabaseRequest_preferredBackupWindow, *v.PreferredBackupWindow)
+	}
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.UpdateRelationalDatabaseRequest_preferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+	if v.PubliclyAccessible != nil {
+		s.WriteBool(schemas.UpdateRelationalDatabaseRequest_publiclyAccessible, *v.PubliclyAccessible)
+	}
+	if v.RelationalDatabaseBlueprintId != nil {
+		s.WriteString(schemas.UpdateRelationalDatabaseRequest_relationalDatabaseBlueprintId, *v.RelationalDatabaseBlueprintId)
+	}
+	if v.RelationalDatabaseName != nil {
+		s.WriteString(schemas.UpdateRelationalDatabaseRequest_relationalDatabaseName, *v.RelationalDatabaseName)
+	}
+	if v.RotateMasterUserPassword != nil {
+		s.WriteBool(schemas.UpdateRelationalDatabaseRequest_rotateMasterUserPassword, *v.RotateMasterUserPassword)
+	}
+}
+
 type UpdateRelationalDatabaseOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -149,13 +193,29 @@ type UpdateRelationalDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRelationalDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRelationalDatabaseResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRelationalDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.UpdateRelationalDatabaseResult_operations, v.Operations)
+}
+func (v *UpdateRelationalDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRelationalDatabaseResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRelationalDatabaseResult_operations:
+			return deserializeOperationList(d, schemas.UpdateRelationalDatabaseResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRelationalDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateRelationalDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRelationalDatabase, schemas.UpdateRelationalDatabaseRequest, schemas.UpdateRelationalDatabaseResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateRelationalDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRelationalDatabase, schemas.UpdateRelationalDatabaseRequest, schemas.UpdateRelationalDatabaseResult), output: &UpdateRelationalDatabaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

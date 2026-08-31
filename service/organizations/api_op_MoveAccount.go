@@ -4,6 +4,8 @@ package organizations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,24 @@ type MoveAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MoveAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MoveAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MoveAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.MoveAccountRequest_AccountId, *v.AccountId)
+	}
+	if v.DestinationParentId != nil {
+		s.WriteString(schemas.MoveAccountRequest_DestinationParentId, *v.DestinationParentId)
+	}
+	if v.SourceParentId != nil {
+		s.WriteString(schemas.MoveAccountRequest_SourceParentId, *v.SourceParentId)
+	}
+}
+
 type MoveAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -81,13 +101,26 @@ type MoveAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MoveAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MoveAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *MoveAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMoveAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMoveAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MoveAccount, schemas.MoveAccountRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpMoveAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MoveAccount, schemas.MoveAccountRequest, nil), output: &MoveAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type DeleteDocumentClassifierInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDocumentClassifierInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDocumentClassifierRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDocumentClassifierInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentClassifierArn != nil {
+		s.WriteString(schemas.DeleteDocumentClassifierRequest_DocumentClassifierArn, *v.DocumentClassifierArn)
+	}
+}
+
 type DeleteDocumentClassifierOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +62,26 @@ type DeleteDocumentClassifierOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDocumentClassifierOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDocumentClassifierResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDocumentClassifierOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteDocumentClassifierOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDocumentClassifierResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDocumentClassifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDocumentClassifier{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDocumentClassifier, schemas.DeleteDocumentClassifierRequest, schemas.DeleteDocumentClassifierResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteDocumentClassifier{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDocumentClassifier, schemas.DeleteDocumentClassifierRequest, schemas.DeleteDocumentClassifierResponse), output: &DeleteDocumentClassifierOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

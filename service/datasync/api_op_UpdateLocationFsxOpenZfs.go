@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,26 @@ type UpdateLocationFsxOpenZfsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLocationFsxOpenZfsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLocationFsxOpenZfsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLocationFsxOpenZfsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.UpdateLocationFsxOpenZfsRequest_LocationArn, *v.LocationArn)
+	}
+	if v.Protocol != nil {
+		s.WriteStruct(schemas.UpdateLocationFsxOpenZfsRequest_Protocol)
+		v.Protocol.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.UpdateLocationFsxOpenZfsRequest_Subdirectory, *v.Subdirectory)
+	}
+}
+
 type UpdateLocationFsxOpenZfsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,13 +81,26 @@ type UpdateLocationFsxOpenZfsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLocationFsxOpenZfsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLocationFsxOpenZfsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLocationFsxOpenZfsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateLocationFsxOpenZfsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLocationFsxOpenZfsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLocationFsxOpenZfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLocationFsxOpenZfs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLocationFsxOpenZfs, schemas.UpdateLocationFsxOpenZfsRequest, schemas.UpdateLocationFsxOpenZfsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateLocationFsxOpenZfs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLocationFsxOpenZfs, schemas.UpdateLocationFsxOpenZfsRequest, schemas.UpdateLocationFsxOpenZfsResponse), output: &UpdateLocationFsxOpenZfsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

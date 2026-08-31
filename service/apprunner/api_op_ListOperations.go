@@ -5,7 +5,9 @@ package apprunner
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,24 @@ type ListOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOperationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOperationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOperationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOperationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOperationsRequest_NextToken, *v.NextToken)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.ListOperationsRequest_ServiceArn, *v.ServiceArn)
+	}
+}
+
 type ListOperationsOutput struct {
 
 	// The token that you can pass in a subsequent request to get the next result
@@ -69,13 +89,35 @@ type ListOperationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOperationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOperationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOperationsResponse_NextToken, *v.NextToken)
+	}
+	serializeOperationSummaryList(s, schemas.ListOperationsResponse_OperationSummaryList, v.OperationSummaryList)
+}
+func (v *ListOperationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOperationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOperationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOperationsResponse_NextToken, v.NextToken)
+		case schemas.ListOperationsResponse_OperationSummaryList:
+			return deserializeOperationSummaryList(d, schemas.ListOperationsResponse_OperationSummaryList, &v.OperationSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOperations, schemas.ListOperationsRequest, schemas.ListOperationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOperations, schemas.ListOperationsRequest, schemas.ListOperationsResponse), output: &ListOperationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package neptunegraph
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	"time"
@@ -69,6 +71,33 @@ type RestoreGraphFromSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreGraphFromSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreGraphFromSnapshotInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreGraphFromSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.RestoreGraphFromSnapshotInput_deletionProtection, *v.DeletionProtection)
+	}
+	if v.GraphName != nil {
+		s.WriteString(schemas.RestoreGraphFromSnapshotInput_graphName, *v.GraphName)
+	}
+	if v.ProvisionedMemory != nil {
+		s.WriteInt32(schemas.RestoreGraphFromSnapshotInput_provisionedMemory, *v.ProvisionedMemory)
+	}
+	if v.PublicConnectivity != nil {
+		s.WriteBool(schemas.RestoreGraphFromSnapshotInput_publicConnectivity, *v.PublicConnectivity)
+	}
+	if v.ReplicaCount != nil {
+		s.WriteInt32(schemas.RestoreGraphFromSnapshotInput_replicaCount, *v.ReplicaCount)
+	}
+	if v.SnapshotIdentifier != nil {
+		s.WriteString(schemas.RestoreGraphFromSnapshotInput_snapshotIdentifier, *v.SnapshotIdentifier)
+	}
+	serializeTagMap(s, schemas.RestoreGraphFromSnapshotInput_tags, v.Tags)
+}
 func (in *RestoreGraphFromSnapshotInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ApiType = ptr.String("ControlPlane")
@@ -135,13 +164,122 @@ type RestoreGraphFromSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreGraphFromSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreGraphFromSnapshotOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreGraphFromSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RestoreGraphFromSnapshotOutput_arn, *v.Arn)
+	}
+	if v.BuildNumber != nil {
+		s.WriteString(schemas.RestoreGraphFromSnapshotOutput_buildNumber, *v.BuildNumber)
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.RestoreGraphFromSnapshotOutput_createTime, *v.CreateTime)
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.RestoreGraphFromSnapshotOutput_deletionProtection, *v.DeletionProtection)
+	}
+	if v.Endpoint != nil {
+		s.WriteString(schemas.RestoreGraphFromSnapshotOutput_endpoint, *v.Endpoint)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RestoreGraphFromSnapshotOutput_id, *v.Id)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.RestoreGraphFromSnapshotOutput_kmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RestoreGraphFromSnapshotOutput_name, *v.Name)
+	}
+	if v.ProvisionedMemory != nil {
+		s.WriteInt32(schemas.RestoreGraphFromSnapshotOutput_provisionedMemory, *v.ProvisionedMemory)
+	}
+	if v.PublicConnectivity != nil {
+		s.WriteBool(schemas.RestoreGraphFromSnapshotOutput_publicConnectivity, *v.PublicConnectivity)
+	}
+	if v.ReplicaCount != nil {
+		s.WriteInt32(schemas.RestoreGraphFromSnapshotOutput_replicaCount, *v.ReplicaCount)
+	}
+	if v.SourceSnapshotId != nil {
+		s.WriteString(schemas.RestoreGraphFromSnapshotOutput_sourceSnapshotId, *v.SourceSnapshotId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RestoreGraphFromSnapshotOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.RestoreGraphFromSnapshotOutput_statusReason, *v.StatusReason)
+	}
+	if v.VectorSearchConfiguration != nil {
+		s.WriteStruct(schemas.RestoreGraphFromSnapshotOutput_vectorSearchConfiguration)
+		v.VectorSearchConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RestoreGraphFromSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreGraphFromSnapshotOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreGraphFromSnapshotOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RestoreGraphFromSnapshotOutput_arn, v.Arn)
+		case schemas.RestoreGraphFromSnapshotOutput_buildNumber:
+			v.BuildNumber = new(string)
+			return d.ReadString(schemas.RestoreGraphFromSnapshotOutput_buildNumber, v.BuildNumber)
+		case schemas.RestoreGraphFromSnapshotOutput_createTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.RestoreGraphFromSnapshotOutput_createTime, v.CreateTime)
+		case schemas.RestoreGraphFromSnapshotOutput_deletionProtection:
+			v.DeletionProtection = new(bool)
+			return d.ReadBool(schemas.RestoreGraphFromSnapshotOutput_deletionProtection, v.DeletionProtection)
+		case schemas.RestoreGraphFromSnapshotOutput_endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.RestoreGraphFromSnapshotOutput_endpoint, v.Endpoint)
+		case schemas.RestoreGraphFromSnapshotOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RestoreGraphFromSnapshotOutput_id, v.Id)
+		case schemas.RestoreGraphFromSnapshotOutput_kmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.RestoreGraphFromSnapshotOutput_kmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.RestoreGraphFromSnapshotOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RestoreGraphFromSnapshotOutput_name, v.Name)
+		case schemas.RestoreGraphFromSnapshotOutput_provisionedMemory:
+			v.ProvisionedMemory = new(int32)
+			return d.ReadInt32(schemas.RestoreGraphFromSnapshotOutput_provisionedMemory, v.ProvisionedMemory)
+		case schemas.RestoreGraphFromSnapshotOutput_publicConnectivity:
+			v.PublicConnectivity = new(bool)
+			return d.ReadBool(schemas.RestoreGraphFromSnapshotOutput_publicConnectivity, v.PublicConnectivity)
+		case schemas.RestoreGraphFromSnapshotOutput_replicaCount:
+			v.ReplicaCount = new(int32)
+			return d.ReadInt32(schemas.RestoreGraphFromSnapshotOutput_replicaCount, v.ReplicaCount)
+		case schemas.RestoreGraphFromSnapshotOutput_sourceSnapshotId:
+			v.SourceSnapshotId = new(string)
+			return d.ReadString(schemas.RestoreGraphFromSnapshotOutput_sourceSnapshotId, v.SourceSnapshotId)
+		case schemas.RestoreGraphFromSnapshotOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.RestoreGraphFromSnapshotOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.GraphStatus(ev)
+			return nil
+		case schemas.RestoreGraphFromSnapshotOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.RestoreGraphFromSnapshotOutput_statusReason, v.StatusReason)
+		case schemas.RestoreGraphFromSnapshotOutput_vectorSearchConfiguration:
+			v.VectorSearchConfiguration = &types.VectorSearchConfiguration{}
+			return v.VectorSearchConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestoreGraphFromSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRestoreGraphFromSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreGraphFromSnapshot, schemas.RestoreGraphFromSnapshotInput, schemas.RestoreGraphFromSnapshotOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRestoreGraphFromSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreGraphFromSnapshot, schemas.RestoreGraphFromSnapshotInput, schemas.RestoreGraphFromSnapshotOutput), output: &RestoreGraphFromSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteEventTrackerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEventTrackerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEventTrackerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEventTrackerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventTrackerArn != nil {
+		s.WriteString(schemas.DeleteEventTrackerRequest_eventTrackerArn, *v.EventTrackerArn)
+	}
+}
+
 type DeleteEventTrackerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type DeleteEventTrackerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEventTrackerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEventTrackerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteEventTrackerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEventTrackerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteEventTracker{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEventTracker, schemas.DeleteEventTrackerRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteEventTracker{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEventTracker, schemas.DeleteEventTrackerRequest, nil), output: &DeleteEventTrackerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,56 @@ type CreateSecurityPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSecurityPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSecurityPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSecurityPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateSecurityPolicyRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateSecurityPolicyRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSecurityPolicyRequest_name, *v.Name)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.CreateSecurityPolicyRequest_policy, *v.Policy)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateSecurityPolicyRequest_type, string(v.Type))
+	}
+}
+func (v *CreateSecurityPolicyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSecurityPolicyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSecurityPolicyRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateSecurityPolicyRequest_clientToken, v.ClientToken)
+		case schemas.CreateSecurityPolicyRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateSecurityPolicyRequest_description, v.Description)
+		case schemas.CreateSecurityPolicyRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateSecurityPolicyRequest_name, v.Name)
+		case schemas.CreateSecurityPolicyRequest_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.CreateSecurityPolicyRequest_policy, v.Policy)
+		case schemas.CreateSecurityPolicyRequest_type:
+			var ev string
+			if err := d.ReadString(schemas.CreateSecurityPolicyRequest_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.SecurityPolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type CreateSecurityPolicyOutput struct {
 
 	// Details about the created security policy.
@@ -70,13 +122,34 @@ type CreateSecurityPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSecurityPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSecurityPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSecurityPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecurityPolicyDetail != nil {
+		s.WriteStruct(schemas.CreateSecurityPolicyResponse_securityPolicyDetail)
+		v.SecurityPolicyDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSecurityPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSecurityPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSecurityPolicyResponse_securityPolicyDetail:
+			v.SecurityPolicyDetail = &types.SecurityPolicyDetail{}
+			return v.SecurityPolicyDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSecurityPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateSecurityPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityPolicy, schemas.CreateSecurityPolicyRequest, schemas.CreateSecurityPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateSecurityPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityPolicy, schemas.CreateSecurityPolicyRequest, schemas.CreateSecurityPolicyResponse), output: &CreateSecurityPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

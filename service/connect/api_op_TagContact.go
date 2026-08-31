@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,22 @@ type TagContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TagContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.TagContactRequest_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.TagContactRequest_InstanceId, *v.InstanceId)
+	}
+	serializeContactTagMap(s, schemas.TagContactRequest_Tags, v.Tags)
+}
+
 type TagContactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,13 +77,26 @@ type TagContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TagContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *TagContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTagContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTagContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TagContact, schemas.TagContactRequest, schemas.TagContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTagContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TagContact, schemas.TagContactRequest, schemas.TagContactResponse), output: &TagContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

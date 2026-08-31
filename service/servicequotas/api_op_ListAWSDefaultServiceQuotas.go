@@ -5,7 +5,9 @@ package servicequotas
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,24 @@ type ListAWSDefaultServiceQuotasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAWSDefaultServiceQuotasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAWSDefaultServiceQuotasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAWSDefaultServiceQuotasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAWSDefaultServiceQuotasRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAWSDefaultServiceQuotasRequest_NextToken, *v.NextToken)
+	}
+	if v.ServiceCode != nil {
+		s.WriteString(schemas.ListAWSDefaultServiceQuotasRequest_ServiceCode, *v.ServiceCode)
+	}
+}
+
 type ListAWSDefaultServiceQuotasOutput struct {
 
 	// If present, indicates that more output is available than is included in the
@@ -72,13 +92,35 @@ type ListAWSDefaultServiceQuotasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAWSDefaultServiceQuotasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAWSDefaultServiceQuotasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAWSDefaultServiceQuotasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAWSDefaultServiceQuotasResponse_NextToken, *v.NextToken)
+	}
+	serializeServiceQuotaListDefinition(s, schemas.ListAWSDefaultServiceQuotasResponse_Quotas, v.Quotas)
+}
+func (v *ListAWSDefaultServiceQuotasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAWSDefaultServiceQuotasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAWSDefaultServiceQuotasResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAWSDefaultServiceQuotasResponse_NextToken, v.NextToken)
+		case schemas.ListAWSDefaultServiceQuotasResponse_Quotas:
+			return deserializeServiceQuotaListDefinition(d, schemas.ListAWSDefaultServiceQuotasResponse_Quotas, &v.Quotas)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAWSDefaultServiceQuotasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAWSDefaultServiceQuotas{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAWSDefaultServiceQuotas, schemas.ListAWSDefaultServiceQuotasRequest, schemas.ListAWSDefaultServiceQuotasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAWSDefaultServiceQuotas{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAWSDefaultServiceQuotas, schemas.ListAWSDefaultServiceQuotasRequest, schemas.ListAWSDefaultServiceQuotasResponse), output: &ListAWSDefaultServiceQuotasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

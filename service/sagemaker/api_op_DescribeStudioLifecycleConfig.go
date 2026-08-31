@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type DescribeStudioLifecycleConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStudioLifecycleConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStudioLifecycleConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStudioLifecycleConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StudioLifecycleConfigName != nil {
+		s.WriteString(schemas.DescribeStudioLifecycleConfigRequest_StudioLifecycleConfigName, *v.StudioLifecycleConfigName)
+	}
+}
+
 type DescribeStudioLifecycleConfigOutput struct {
 
 	// The creation time of the Amazon SageMaker AI Studio Lifecycle Configuration.
@@ -63,13 +77,66 @@ type DescribeStudioLifecycleConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStudioLifecycleConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStudioLifecycleConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStudioLifecycleConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeStudioLifecycleConfigResponse_CreationTime, *v.CreationTime)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeStudioLifecycleConfigResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.StudioLifecycleConfigAppType != "" {
+		s.WriteString(schemas.DescribeStudioLifecycleConfigResponse_StudioLifecycleConfigAppType, string(v.StudioLifecycleConfigAppType))
+	}
+	if v.StudioLifecycleConfigArn != nil {
+		s.WriteString(schemas.DescribeStudioLifecycleConfigResponse_StudioLifecycleConfigArn, *v.StudioLifecycleConfigArn)
+	}
+	if v.StudioLifecycleConfigContent != nil {
+		s.WriteString(schemas.DescribeStudioLifecycleConfigResponse_StudioLifecycleConfigContent, *v.StudioLifecycleConfigContent)
+	}
+	if v.StudioLifecycleConfigName != nil {
+		s.WriteString(schemas.DescribeStudioLifecycleConfigResponse_StudioLifecycleConfigName, *v.StudioLifecycleConfigName)
+	}
+}
+func (v *DescribeStudioLifecycleConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeStudioLifecycleConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeStudioLifecycleConfigResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeStudioLifecycleConfigResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeStudioLifecycleConfigResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeStudioLifecycleConfigResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeStudioLifecycleConfigResponse_StudioLifecycleConfigAppType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeStudioLifecycleConfigResponse_StudioLifecycleConfigAppType, &ev); err != nil {
+				return err
+			}
+			v.StudioLifecycleConfigAppType = types.StudioLifecycleConfigAppType(ev)
+			return nil
+		case schemas.DescribeStudioLifecycleConfigResponse_StudioLifecycleConfigArn:
+			v.StudioLifecycleConfigArn = new(string)
+			return d.ReadString(schemas.DescribeStudioLifecycleConfigResponse_StudioLifecycleConfigArn, v.StudioLifecycleConfigArn)
+		case schemas.DescribeStudioLifecycleConfigResponse_StudioLifecycleConfigContent:
+			v.StudioLifecycleConfigContent = new(string)
+			return d.ReadString(schemas.DescribeStudioLifecycleConfigResponse_StudioLifecycleConfigContent, v.StudioLifecycleConfigContent)
+		case schemas.DescribeStudioLifecycleConfigResponse_StudioLifecycleConfigName:
+			v.StudioLifecycleConfigName = new(string)
+			return d.ReadString(schemas.DescribeStudioLifecycleConfigResponse_StudioLifecycleConfigName, v.StudioLifecycleConfigName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeStudioLifecycleConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeStudioLifecycleConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStudioLifecycleConfig, schemas.DescribeStudioLifecycleConfigRequest, schemas.DescribeStudioLifecycleConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeStudioLifecycleConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStudioLifecycleConfig, schemas.DescribeStudioLifecycleConfigRequest, schemas.DescribeStudioLifecycleConfigResponse), output: &DescribeStudioLifecycleConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

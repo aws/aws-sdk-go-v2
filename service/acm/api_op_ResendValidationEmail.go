@@ -4,6 +4,8 @@ package acm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/acm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -75,6 +77,23 @@ type ResendValidationEmailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResendValidationEmailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResendValidationEmailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResendValidationEmailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.ResendValidationEmailRequest_CertificateArn, *v.CertificateArn)
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.ResendValidationEmailRequest_Domain, *v.Domain)
+	}
+	if v.ValidationDomain != nil {
+		s.WriteString(schemas.ResendValidationEmailRequest_ValidationDomain, *v.ValidationDomain)
+	}
+}
 func (in *ResendValidationEmailInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ServiceType = ptr.String("ACM")
@@ -87,13 +106,26 @@ type ResendValidationEmailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResendValidationEmailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResendValidationEmailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ResendValidationEmailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResendValidationEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResendValidationEmail{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResendValidationEmail, schemas.ResendValidationEmailRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpResendValidationEmail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResendValidationEmail, schemas.ResendValidationEmailRequest, nil), output: &ResendValidationEmailOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

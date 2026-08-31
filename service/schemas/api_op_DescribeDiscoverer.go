@@ -4,7 +4,9 @@ package schemas
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/schemas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/schemas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type DescribeDiscovererInput struct {
 	DiscovererId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeDiscovererInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDiscovererRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDiscovererInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DiscovererId != nil {
+		s.WriteString(schemas.DescribeDiscovererRequest_DiscovererId, *v.DiscovererId)
+	}
 }
 
 type DescribeDiscovererOutput struct {
@@ -64,13 +78,69 @@ type DescribeDiscovererOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDiscovererOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDiscovererResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDiscovererOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossAccount != nil {
+		s.WriteBool(schemas.DescribeDiscovererResponse_CrossAccount, *v.CrossAccount)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeDiscovererResponse_Description, *v.Description)
+	}
+	if v.DiscovererArn != nil {
+		s.WriteString(schemas.DescribeDiscovererResponse_DiscovererArn, *v.DiscovererArn)
+	}
+	if v.DiscovererId != nil {
+		s.WriteString(schemas.DescribeDiscovererResponse_DiscovererId, *v.DiscovererId)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.DescribeDiscovererResponse_SourceArn, *v.SourceArn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DescribeDiscovererResponse_State, string(v.State))
+	}
+	serializeTags(s, schemas.DescribeDiscovererResponse_Tags, v.Tags)
+}
+func (v *DescribeDiscovererOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDiscovererResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDiscovererResponse_CrossAccount:
+			v.CrossAccount = new(bool)
+			return d.ReadBool(schemas.DescribeDiscovererResponse_CrossAccount, v.CrossAccount)
+		case schemas.DescribeDiscovererResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeDiscovererResponse_Description, v.Description)
+		case schemas.DescribeDiscovererResponse_DiscovererArn:
+			v.DiscovererArn = new(string)
+			return d.ReadString(schemas.DescribeDiscovererResponse_DiscovererArn, v.DiscovererArn)
+		case schemas.DescribeDiscovererResponse_DiscovererId:
+			v.DiscovererId = new(string)
+			return d.ReadString(schemas.DescribeDiscovererResponse_DiscovererId, v.DiscovererId)
+		case schemas.DescribeDiscovererResponse_SourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.DescribeDiscovererResponse_SourceArn, v.SourceArn)
+		case schemas.DescribeDiscovererResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDiscovererResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.DiscovererState(ev)
+			return nil
+		case schemas.DescribeDiscovererResponse_Tags:
+			return deserializeTags(d, schemas.DescribeDiscovererResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDiscovererMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDiscoverer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDiscoverer, schemas.DescribeDiscovererRequest, schemas.DescribeDiscovererResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDiscoverer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDiscoverer, schemas.DescribeDiscovererRequest, schemas.DescribeDiscovererResponse), output: &DescribeDiscovererOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

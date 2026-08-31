@@ -4,7 +4,9 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -37,6 +39,21 @@ type GetAgentRecommendationInput struct {
 	RemediationType types.RemediationType
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetAgentRecommendationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentRecommendationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecommendationArn != nil {
+		s.WriteString(schemas.GetAgentRecommendationRequest_recommendationArn, *v.RecommendationArn)
+	}
+	if v.RemediationType != "" {
+		s.WriteString(schemas.GetAgentRecommendationRequest_remediationType, string(v.RemediationType))
+	}
 }
 
 type GetAgentRecommendationOutput struct {
@@ -178,13 +195,208 @@ type GetAgentRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgentRecommendationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentRecommendationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.GetAgentRecommendationResponse_applications, v.Applications)
+	serializeStringList(s, schemas.GetAgentRecommendationResponse_awsServices, v.AwsServices)
+	serializeStringList(s, schemas.GetAgentRecommendationResponse_businessUnits, v.BusinessUnits)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetAgentRecommendationResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetAgentRecommendationResponse_createdBy, *v.CreatedBy)
+	}
+	serializeCrossPillarBenefits(s, schemas.GetAgentRecommendationResponse_crossPillarBenefits, v.CrossPillarBenefits)
+	if v.Description != nil {
+		s.WriteString(schemas.GetAgentRecommendationResponse_description, *v.Description)
+	}
+	if v.Effort != "" {
+		s.WriteString(schemas.GetAgentRecommendationResponse_effort, string(v.Effort))
+	}
+	serializeRecommendationGoals(s, schemas.GetAgentRecommendationResponse_goals, v.Goals)
+	serializeHighlights(s, schemas.GetAgentRecommendationResponse_highlights, v.Highlights)
+	if v.Impact != "" {
+		s.WriteString(schemas.GetAgentRecommendationResponse_impact, string(v.Impact))
+	}
+	serializeImpactDetails(s, schemas.GetAgentRecommendationResponse_impactDetails, v.ImpactDetails)
+	serializeInsightList(s, schemas.GetAgentRecommendationResponse_insights, v.Insights)
+	if v.LastModifiedAt != nil {
+		s.WriteTime(schemas.GetAgentRecommendationResponse_lastModifiedAt, *v.LastModifiedAt)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteString(schemas.GetAgentRecommendationResponse_lastModifiedBy, *v.LastModifiedBy)
+	}
+	if v.NumberOfResources != nil {
+		s.WriteInt32(schemas.GetAgentRecommendationResponse_numberOfResources, *v.NumberOfResources)
+	}
+	if v.Pillar != "" {
+		s.WriteString(schemas.GetAgentRecommendationResponse_pillar, string(v.Pillar))
+	}
+	if v.Priority != "" {
+		s.WriteString(schemas.GetAgentRecommendationResponse_priority, string(v.Priority))
+	}
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.GetAgentRecommendationResponse_profileArn, *v.ProfileArn)
+	}
+	if v.RecommendationArn != nil {
+		s.WriteString(schemas.GetAgentRecommendationResponse_recommendationArn, *v.RecommendationArn)
+	}
+	if v.RemediationSummary != nil {
+		s.WriteStruct(schemas.GetAgentRecommendationResponse_remediationSummary)
+		v.RemediationSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAgentRecommendationRemediations(s, schemas.GetAgentRecommendationResponse_remediations, v.Remediations)
+	if v.Roi != nil {
+		s.WriteStruct(schemas.GetAgentRecommendationResponse_roi)
+		v.Roi.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRecommendationSourceList(s, schemas.GetAgentRecommendationResponse_sources, v.Sources)
+	if v.State != "" {
+		s.WriteString(schemas.GetAgentRecommendationResponse_state, string(v.State))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetAgentRecommendationResponse_status, string(v.Status))
+	}
+	serializeTags(s, schemas.GetAgentRecommendationResponse_tags, v.Tags)
+	if v.Title != nil {
+		s.WriteString(schemas.GetAgentRecommendationResponse_title, *v.Title)
+	}
+	serializeTradeOffs(s, schemas.GetAgentRecommendationResponse_tradeOffs, v.TradeOffs)
+	if v.Type != "" {
+		s.WriteString(schemas.GetAgentRecommendationResponse_type, string(v.Type))
+	}
+	if v.UpdateReason != nil {
+		s.WriteString(schemas.GetAgentRecommendationResponse_updateReason, *v.UpdateReason)
+	}
+}
+func (v *GetAgentRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAgentRecommendationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAgentRecommendationResponse_applications:
+			return deserializeStringList(d, schemas.GetAgentRecommendationResponse_applications, &v.Applications)
+		case schemas.GetAgentRecommendationResponse_awsServices:
+			return deserializeStringList(d, schemas.GetAgentRecommendationResponse_awsServices, &v.AwsServices)
+		case schemas.GetAgentRecommendationResponse_businessUnits:
+			return deserializeStringList(d, schemas.GetAgentRecommendationResponse_businessUnits, &v.BusinessUnits)
+		case schemas.GetAgentRecommendationResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAgentRecommendationResponse_createdAt, v.CreatedAt)
+		case schemas.GetAgentRecommendationResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetAgentRecommendationResponse_createdBy, v.CreatedBy)
+		case schemas.GetAgentRecommendationResponse_crossPillarBenefits:
+			return deserializeCrossPillarBenefits(d, schemas.GetAgentRecommendationResponse_crossPillarBenefits, &v.CrossPillarBenefits)
+		case schemas.GetAgentRecommendationResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetAgentRecommendationResponse_description, v.Description)
+		case schemas.GetAgentRecommendationResponse_effort:
+			var ev string
+			if err := d.ReadString(schemas.GetAgentRecommendationResponse_effort, &ev); err != nil {
+				return err
+			}
+			v.Effort = types.Effort(ev)
+			return nil
+		case schemas.GetAgentRecommendationResponse_goals:
+			return deserializeRecommendationGoals(d, schemas.GetAgentRecommendationResponse_goals, &v.Goals)
+		case schemas.GetAgentRecommendationResponse_highlights:
+			return deserializeHighlights(d, schemas.GetAgentRecommendationResponse_highlights, &v.Highlights)
+		case schemas.GetAgentRecommendationResponse_impact:
+			var ev string
+			if err := d.ReadString(schemas.GetAgentRecommendationResponse_impact, &ev); err != nil {
+				return err
+			}
+			v.Impact = types.ImpactCategory(ev)
+			return nil
+		case schemas.GetAgentRecommendationResponse_impactDetails:
+			return deserializeImpactDetails(d, schemas.GetAgentRecommendationResponse_impactDetails, &v.ImpactDetails)
+		case schemas.GetAgentRecommendationResponse_insights:
+			return deserializeInsightList(d, schemas.GetAgentRecommendationResponse_insights, &v.Insights)
+		case schemas.GetAgentRecommendationResponse_lastModifiedAt:
+			v.LastModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAgentRecommendationResponse_lastModifiedAt, v.LastModifiedAt)
+		case schemas.GetAgentRecommendationResponse_lastModifiedBy:
+			v.LastModifiedBy = new(string)
+			return d.ReadString(schemas.GetAgentRecommendationResponse_lastModifiedBy, v.LastModifiedBy)
+		case schemas.GetAgentRecommendationResponse_numberOfResources:
+			v.NumberOfResources = new(int32)
+			return d.ReadInt32(schemas.GetAgentRecommendationResponse_numberOfResources, v.NumberOfResources)
+		case schemas.GetAgentRecommendationResponse_pillar:
+			var ev string
+			if err := d.ReadString(schemas.GetAgentRecommendationResponse_pillar, &ev); err != nil {
+				return err
+			}
+			v.Pillar = types.Pillar(ev)
+			return nil
+		case schemas.GetAgentRecommendationResponse_priority:
+			var ev string
+			if err := d.ReadString(schemas.GetAgentRecommendationResponse_priority, &ev); err != nil {
+				return err
+			}
+			v.Priority = types.Priority(ev)
+			return nil
+		case schemas.GetAgentRecommendationResponse_profileArn:
+			v.ProfileArn = new(string)
+			return d.ReadString(schemas.GetAgentRecommendationResponse_profileArn, v.ProfileArn)
+		case schemas.GetAgentRecommendationResponse_recommendationArn:
+			v.RecommendationArn = new(string)
+			return d.ReadString(schemas.GetAgentRecommendationResponse_recommendationArn, v.RecommendationArn)
+		case schemas.GetAgentRecommendationResponse_remediationSummary:
+			v.RemediationSummary = &types.RemediationSummary{}
+			return v.RemediationSummary.Deserialize(d)
+		case schemas.GetAgentRecommendationResponse_remediations:
+			return deserializeAgentRecommendationRemediations(d, schemas.GetAgentRecommendationResponse_remediations, &v.Remediations)
+		case schemas.GetAgentRecommendationResponse_roi:
+			v.Roi = &types.Roi{}
+			return v.Roi.Deserialize(d)
+		case schemas.GetAgentRecommendationResponse_sources:
+			return deserializeRecommendationSourceList(d, schemas.GetAgentRecommendationResponse_sources, &v.Sources)
+		case schemas.GetAgentRecommendationResponse_state:
+			var ev string
+			if err := d.ReadString(schemas.GetAgentRecommendationResponse_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.RecommendationState(ev)
+			return nil
+		case schemas.GetAgentRecommendationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetAgentRecommendationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RecommendationStatus(ev)
+			return nil
+		case schemas.GetAgentRecommendationResponse_tags:
+			return deserializeTags(d, schemas.GetAgentRecommendationResponse_tags, &v.Tags)
+		case schemas.GetAgentRecommendationResponse_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.GetAgentRecommendationResponse_title, v.Title)
+		case schemas.GetAgentRecommendationResponse_tradeOffs:
+			return deserializeTradeOffs(d, schemas.GetAgentRecommendationResponse_tradeOffs, &v.TradeOffs)
+		case schemas.GetAgentRecommendationResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.GetAgentRecommendationResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.RecommendationType(ev)
+			return nil
+		case schemas.GetAgentRecommendationResponse_updateReason:
+			v.UpdateReason = new(string)
+			return d.ReadString(schemas.GetAgentRecommendationResponse_updateReason, v.UpdateReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAgentRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAgentRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentRecommendation, schemas.GetAgentRecommendationRequest, schemas.GetAgentRecommendationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAgentRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentRecommendation, schemas.GetAgentRecommendationRequest, schemas.GetAgentRecommendationResponse), output: &GetAgentRecommendationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

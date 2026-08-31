@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeTestSetInput struct {
 	TestSetId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeTestSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTestSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTestSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TestSetId != nil {
+		s.WriteString(schemas.DescribeTestSetRequest_testSetId, *v.TestSetId)
+	}
 }
 
 type DescribeTestSetOutput struct {
@@ -74,13 +88,96 @@ type DescribeTestSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTestSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTestSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTestSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.DescribeTestSetResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeTestSetResponse_description, *v.Description)
+	}
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.DescribeTestSetResponse_lastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.Modality != "" {
+		s.WriteString(schemas.DescribeTestSetResponse_modality, string(v.Modality))
+	}
+	if v.NumTurns != nil {
+		s.WriteInt32(schemas.DescribeTestSetResponse_numTurns, *v.NumTurns)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeTestSetResponse_roleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeTestSetResponse_status, string(v.Status))
+	}
+	if v.StorageLocation != nil {
+		s.WriteStruct(schemas.DescribeTestSetResponse_storageLocation)
+		v.StorageLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TestSetId != nil {
+		s.WriteString(schemas.DescribeTestSetResponse_testSetId, *v.TestSetId)
+	}
+	if v.TestSetName != nil {
+		s.WriteString(schemas.DescribeTestSetResponse_testSetName, *v.TestSetName)
+	}
+}
+func (v *DescribeTestSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTestSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTestSetResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTestSetResponse_creationDateTime, v.CreationDateTime)
+		case schemas.DescribeTestSetResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeTestSetResponse_description, v.Description)
+		case schemas.DescribeTestSetResponse_lastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTestSetResponse_lastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.DescribeTestSetResponse_modality:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTestSetResponse_modality, &ev); err != nil {
+				return err
+			}
+			v.Modality = types.TestSetModality(ev)
+			return nil
+		case schemas.DescribeTestSetResponse_numTurns:
+			v.NumTurns = new(int32)
+			return d.ReadInt32(schemas.DescribeTestSetResponse_numTurns, v.NumTurns)
+		case schemas.DescribeTestSetResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeTestSetResponse_roleArn, v.RoleArn)
+		case schemas.DescribeTestSetResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTestSetResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TestSetStatus(ev)
+			return nil
+		case schemas.DescribeTestSetResponse_storageLocation:
+			v.StorageLocation = &types.TestSetStorageLocation{}
+			return v.StorageLocation.Deserialize(d)
+		case schemas.DescribeTestSetResponse_testSetId:
+			v.TestSetId = new(string)
+			return d.ReadString(schemas.DescribeTestSetResponse_testSetId, v.TestSetId)
+		case schemas.DescribeTestSetResponse_testSetName:
+			v.TestSetName = new(string)
+			return d.ReadString(schemas.DescribeTestSetResponse_testSetName, v.TestSetName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTestSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeTestSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTestSet, schemas.DescribeTestSetRequest, schemas.DescribeTestSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeTestSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTestSet, schemas.DescribeTestSetRequest, schemas.DescribeTestSetResponse), output: &DescribeTestSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

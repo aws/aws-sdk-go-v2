@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -36,6 +38,52 @@ type AgentListEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AgentListEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentListEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgentListEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentArn != nil {
+		s.WriteString(schemas.AgentListEntry_AgentArn, *v.AgentArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AgentListEntry_Name, *v.Name)
+	}
+	if v.Platform != nil {
+		s.WriteStruct(schemas.AgentListEntry_Platform)
+		v.Platform.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AgentListEntry_Status, string(v.Status))
+	}
+}
+func (v *AgentListEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgentListEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgentListEntry_AgentArn:
+			v.AgentArn = new(string)
+			return d.ReadString(schemas.AgentListEntry_AgentArn, v.AgentArn)
+		case schemas.AgentListEntry_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AgentListEntry_Name, v.Name)
+		case schemas.AgentListEntry_Platform:
+			v.Platform = &Platform{}
+			return v.Platform.Deserialize(d)
+		case schemas.AgentListEntry_Status:
+			var ev string
+			if err := d.ReadString(schemas.AgentListEntry_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = AgentStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The shared access signature (SAS) configuration that allows DataSync to access
 // your Microsoft Azure Blob Storage.
 //
@@ -56,6 +104,28 @@ type AzureBlobSasConfiguration struct {
 	Token *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AzureBlobSasConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AzureBlobSasConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AzureBlobSasConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Token != nil {
+		s.WriteString(schemas.AzureBlobSasConfiguration_Token, *v.Token)
+	}
+}
+func (v *AzureBlobSasConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AzureBlobSasConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AzureBlobSasConfiguration_Token:
+			v.Token = new(string)
+			return d.ReadString(schemas.AzureBlobSasConfiguration_Token, v.Token)
+		}
+		return nil
+	})
 }
 
 // Specifies configuration information for a DataSync-managed secret, such as an
@@ -81,6 +151,34 @@ type CmkSecretConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CmkSecretConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CmkSecretConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CmkSecretConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.CmkSecretConfig_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.SecretArn != nil {
+		s.WriteString(schemas.CmkSecretConfig_SecretArn, *v.SecretArn)
+	}
+}
+func (v *CmkSecretConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CmkSecretConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CmkSecretConfig_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.CmkSecretConfig_KmsKeyArn, v.KmsKeyArn)
+		case schemas.CmkSecretConfig_SecretArn:
+			v.SecretArn = new(string)
+			return d.ReadString(schemas.CmkSecretConfig_SecretArn, v.SecretArn)
+		}
+		return nil
+	})
+}
+
 // Specifies configuration information for a customer-managed Secrets Manager
 // secret where a storage location credentials is stored in Secrets Manager as
 // plain text (for authentication token, secret key, or password) or as binary (for
@@ -100,6 +198,34 @@ type CustomSecretConfig struct {
 	SecretArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomSecretConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomSecretConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomSecretConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecretAccessRoleArn != nil {
+		s.WriteString(schemas.CustomSecretConfig_SecretAccessRoleArn, *v.SecretAccessRoleArn)
+	}
+	if v.SecretArn != nil {
+		s.WriteString(schemas.CustomSecretConfig_SecretArn, *v.SecretArn)
+	}
+}
+func (v *CustomSecretConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomSecretConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomSecretConfig_SecretAccessRoleArn:
+			v.SecretAccessRoleArn = new(string)
+			return d.ReadString(schemas.CustomSecretConfig_SecretAccessRoleArn, v.SecretAccessRoleArn)
+		case schemas.CustomSecretConfig_SecretArn:
+			v.SecretArn = new(string)
+			return d.ReadString(schemas.CustomSecretConfig_SecretArn, v.SecretArn)
+		}
+		return nil
+	})
 }
 
 // The subnet and security groups that DataSync uses to connect to one of your
@@ -134,6 +260,31 @@ type Ec2Config struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Ec2Config) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Ec2Config)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Ec2Config) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEc2SecurityGroupArnList(s, schemas.Ec2Config_SecurityGroupArns, v.SecurityGroupArns)
+	if v.SubnetArn != nil {
+		s.WriteString(schemas.Ec2Config_SubnetArn, *v.SubnetArn)
+	}
+}
+func (v *Ec2Config) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Ec2Config, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Ec2Config_SecurityGroupArns:
+			return deserializeEc2SecurityGroupArnList(d, schemas.Ec2Config_SecurityGroupArns, &v.SecurityGroupArns)
+		case schemas.Ec2Config_SubnetArn:
+			v.SubnetArn = new(string)
+			return d.ReadString(schemas.Ec2Config_SubnetArn, v.SubnetArn)
+		}
+		return nil
+	})
+}
+
 // Specifies which files, folders, and objects to include or exclude when
 // transferring files from source to destination.
 type FilterRule struct {
@@ -147,6 +298,38 @@ type FilterRule struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FilterRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FilterRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FilterRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterType != "" {
+		s.WriteString(schemas.FilterRule_FilterType, string(v.FilterType))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.FilterRule_Value, *v.Value)
+	}
+}
+func (v *FilterRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FilterRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FilterRule_FilterType:
+			var ev string
+			if err := d.ReadString(schemas.FilterRule_FilterType, &ev); err != nil {
+				return err
+			}
+			v.FilterType = FilterType(ev)
+			return nil
+		case schemas.FilterRule_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.FilterRule_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Specifies the data transfer protocol that DataSync uses to access your Amazon
@@ -165,6 +348,38 @@ type FsxProtocol struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FsxProtocol) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FsxProtocol)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FsxProtocol) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NFS != nil {
+		s.WriteStruct(schemas.FsxProtocol_NFS)
+		v.NFS.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SMB != nil {
+		s.WriteStruct(schemas.FsxProtocol_SMB)
+		v.SMB.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FsxProtocol) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FsxProtocol, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FsxProtocol_NFS:
+			v.NFS = &FsxProtocolNfs{}
+			return v.NFS.Deserialize(d)
+		case schemas.FsxProtocol_SMB:
+			v.SMB = &FsxProtocolSmb{}
+			return v.SMB.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies the Network File System (NFS) protocol configuration that DataSync
 // uses to access your FSx for OpenZFS file system or FSx for ONTAP file system's
 // storage virtual machine (SVM).
@@ -174,6 +389,30 @@ type FsxProtocolNfs struct {
 	MountOptions *NfsMountOptions
 
 	noSmithyDocumentSerde
+}
+
+func (v *FsxProtocolNfs) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FsxProtocolNfs)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FsxProtocolNfs) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MountOptions != nil {
+		s.WriteStruct(schemas.FsxProtocolNfs_MountOptions)
+		v.MountOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FsxProtocolNfs) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FsxProtocolNfs, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FsxProtocolNfs_MountOptions:
+			v.MountOptions = &NfsMountOptions{}
+			return v.MountOptions.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies the Server Message Block (SMB) protocol configuration that DataSync
@@ -255,6 +494,72 @@ type FsxProtocolSmb struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FsxProtocolSmb) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FsxProtocolSmb)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FsxProtocolSmb) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CmkSecretConfig != nil {
+		s.WriteStruct(schemas.FsxProtocolSmb_CmkSecretConfig)
+		v.CmkSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomSecretConfig != nil {
+		s.WriteStruct(schemas.FsxProtocolSmb_CustomSecretConfig)
+		v.CustomSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.FsxProtocolSmb_Domain, *v.Domain)
+	}
+	if v.ManagedSecretConfig != nil {
+		s.WriteStruct(schemas.FsxProtocolSmb_ManagedSecretConfig)
+		v.ManagedSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MountOptions != nil {
+		s.WriteStruct(schemas.FsxProtocolSmb_MountOptions)
+		v.MountOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.FsxProtocolSmb_Password, *v.Password)
+	}
+	if v.User != nil {
+		s.WriteString(schemas.FsxProtocolSmb_User, *v.User)
+	}
+}
+func (v *FsxProtocolSmb) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FsxProtocolSmb, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FsxProtocolSmb_CmkSecretConfig:
+			v.CmkSecretConfig = &CmkSecretConfig{}
+			return v.CmkSecretConfig.Deserialize(d)
+		case schemas.FsxProtocolSmb_CustomSecretConfig:
+			v.CustomSecretConfig = &CustomSecretConfig{}
+			return v.CustomSecretConfig.Deserialize(d)
+		case schemas.FsxProtocolSmb_Domain:
+			v.Domain = new(string)
+			return d.ReadString(schemas.FsxProtocolSmb_Domain, v.Domain)
+		case schemas.FsxProtocolSmb_ManagedSecretConfig:
+			v.ManagedSecretConfig = &ManagedSecretConfig{}
+			return v.ManagedSecretConfig.Deserialize(d)
+		case schemas.FsxProtocolSmb_MountOptions:
+			v.MountOptions = &SmbMountOptions{}
+			return v.MountOptions.Deserialize(d)
+		case schemas.FsxProtocolSmb_Password:
+			v.Password = new(string)
+			return d.ReadString(schemas.FsxProtocolSmb_Password, v.Password)
+		case schemas.FsxProtocolSmb_User:
+			v.User = new(string)
+			return d.ReadString(schemas.FsxProtocolSmb_User, v.User)
+		}
+		return nil
+	})
+}
+
 // Specifies the data transfer protocol that DataSync uses to access your Amazon
 // FSx file system.
 //
@@ -273,6 +578,38 @@ type FsxUpdateProtocol struct {
 	SMB *FsxUpdateProtocolSmb
 
 	noSmithyDocumentSerde
+}
+
+func (v *FsxUpdateProtocol) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FsxUpdateProtocol)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FsxUpdateProtocol) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NFS != nil {
+		s.WriteStruct(schemas.FsxUpdateProtocol_NFS)
+		v.NFS.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SMB != nil {
+		s.WriteStruct(schemas.FsxUpdateProtocol_SMB)
+		v.SMB.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FsxUpdateProtocol) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FsxUpdateProtocol, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FsxUpdateProtocol_NFS:
+			v.NFS = &FsxProtocolNfs{}
+			return v.NFS.Deserialize(d)
+		case schemas.FsxUpdateProtocol_SMB:
+			v.SMB = &FsxUpdateProtocolSmb{}
+			return v.SMB.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies the Server Message Block (SMB) protocol configuration that DataSync
@@ -319,6 +656,64 @@ type FsxUpdateProtocolSmb struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FsxUpdateProtocolSmb) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FsxUpdateProtocolSmb)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FsxUpdateProtocolSmb) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CmkSecretConfig != nil {
+		s.WriteStruct(schemas.FsxUpdateProtocolSmb_CmkSecretConfig)
+		v.CmkSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomSecretConfig != nil {
+		s.WriteStruct(schemas.FsxUpdateProtocolSmb_CustomSecretConfig)
+		v.CustomSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.FsxUpdateProtocolSmb_Domain, *v.Domain)
+	}
+	if v.MountOptions != nil {
+		s.WriteStruct(schemas.FsxUpdateProtocolSmb_MountOptions)
+		v.MountOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.FsxUpdateProtocolSmb_Password, *v.Password)
+	}
+	if v.User != nil {
+		s.WriteString(schemas.FsxUpdateProtocolSmb_User, *v.User)
+	}
+}
+func (v *FsxUpdateProtocolSmb) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FsxUpdateProtocolSmb, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FsxUpdateProtocolSmb_CmkSecretConfig:
+			v.CmkSecretConfig = &CmkSecretConfig{}
+			return v.CmkSecretConfig.Deserialize(d)
+		case schemas.FsxUpdateProtocolSmb_CustomSecretConfig:
+			v.CustomSecretConfig = &CustomSecretConfig{}
+			return v.CustomSecretConfig.Deserialize(d)
+		case schemas.FsxUpdateProtocolSmb_Domain:
+			v.Domain = new(string)
+			return d.ReadString(schemas.FsxUpdateProtocolSmb_Domain, v.Domain)
+		case schemas.FsxUpdateProtocolSmb_MountOptions:
+			v.MountOptions = &SmbMountOptions{}
+			return v.MountOptions.Deserialize(d)
+		case schemas.FsxUpdateProtocolSmb_Password:
+			v.Password = new(string)
+			return d.ReadString(schemas.FsxUpdateProtocolSmb_Password, v.Password)
+		case schemas.FsxUpdateProtocolSmb_User:
+			v.User = new(string)
+			return d.ReadString(schemas.FsxUpdateProtocolSmb_User, v.User)
+		}
+		return nil
+	})
+}
+
 // The NameNode of the Hadoop Distributed File System (HDFS). The NameNode manages
 // the file system's namespace. The NameNode performs operations such as opening,
 // closing, and renaming files and directories. The NameNode contains the
@@ -338,6 +733,34 @@ type HdfsNameNode struct {
 	Port *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *HdfsNameNode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HdfsNameNode)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HdfsNameNode) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Hostname != nil {
+		s.WriteString(schemas.HdfsNameNode_Hostname, *v.Hostname)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.HdfsNameNode_Port, *v.Port)
+	}
+}
+func (v *HdfsNameNode) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HdfsNameNode, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HdfsNameNode_Hostname:
+			v.Hostname = new(string)
+			return d.ReadString(schemas.HdfsNameNode_Hostname, v.Hostname)
+		case schemas.HdfsNameNode_Port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.HdfsNameNode_Port, v.Port)
+		}
+		return nil
+	})
 }
 
 // Narrow down the list of resources returned by ListLocations . For example, to
@@ -368,6 +791,45 @@ type LocationFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LocationFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LocationFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LocationFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.LocationFilter_Name, string(v.Name))
+	}
+	if v.Operator != "" {
+		s.WriteString(schemas.LocationFilter_Operator, string(v.Operator))
+	}
+	serializeFilterValues(s, schemas.LocationFilter_Values, v.Values)
+}
+func (v *LocationFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LocationFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LocationFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.LocationFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = LocationFilterName(ev)
+			return nil
+		case schemas.LocationFilter_Operator:
+			var ev string
+			if err := d.ReadString(schemas.LocationFilter_Operator, &ev); err != nil {
+				return err
+			}
+			v.Operator = Operator(ev)
+			return nil
+		case schemas.LocationFilter_Values:
+			return deserializeFilterValues(d, schemas.LocationFilter_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Represents a single entry in a list of locations. LocationListEntry returns an
@@ -404,6 +866,34 @@ type LocationListEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LocationListEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LocationListEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LocationListEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.LocationListEntry_LocationArn, *v.LocationArn)
+	}
+	if v.LocationUri != nil {
+		s.WriteString(schemas.LocationListEntry_LocationUri, *v.LocationUri)
+	}
+}
+func (v *LocationListEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LocationListEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LocationListEntry_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.LocationListEntry_LocationArn, v.LocationArn)
+		case schemas.LocationListEntry_LocationUri:
+			v.LocationUri = new(string)
+			return d.ReadString(schemas.LocationListEntry_LocationUri, v.LocationUri)
+		}
+		return nil
+	})
+}
+
 // Specifies configuration information for a DataSync-managed secret, such as an
 // authentication token or set of credentials that DataSync uses to access a
 // specific transfer location. DataSync uses the default Amazon Web
@@ -414,6 +904,28 @@ type ManagedSecretConfig struct {
 	SecretArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ManagedSecretConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedSecretConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedSecretConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecretArn != nil {
+		s.WriteString(schemas.ManagedSecretConfig_SecretArn, *v.SecretArn)
+	}
+}
+func (v *ManagedSecretConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedSecretConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedSecretConfig_SecretArn:
+			v.SecretArn = new(string)
+			return d.ReadString(schemas.ManagedSecretConfig_SecretArn, v.SecretArn)
+		}
+		return nil
+	})
 }
 
 // Configures a manifest, which is a list of files or objects that you want
@@ -445,6 +957,50 @@ type ManifestConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ManifestConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManifestConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManifestConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.ManifestConfig_Action, string(v.Action))
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.ManifestConfig_Format, string(v.Format))
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.ManifestConfig_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ManifestConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManifestConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManifestConfig_Action:
+			var ev string
+			if err := d.ReadString(schemas.ManifestConfig_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = ManifestAction(ev)
+			return nil
+		case schemas.ManifestConfig_Format:
+			var ev string
+			if err := d.ReadString(schemas.ManifestConfig_Format, &ev); err != nil {
+				return err
+			}
+			v.Format = ManifestFormat(ev)
+			return nil
+		case schemas.ManifestConfig_Source:
+			v.Source = &SourceManifestConfig{}
+			return v.Source.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies how DataSync can access a location using the NFS protocol.
 type NfsMountOptions struct {
 
@@ -472,6 +1028,32 @@ type NfsMountOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NfsMountOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NfsMountOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NfsMountOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Version != "" {
+		s.WriteString(schemas.NfsMountOptions_Version, string(v.Version))
+	}
+}
+func (v *NfsMountOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NfsMountOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NfsMountOptions_Version:
+			var ev string
+			if err := d.ReadString(schemas.NfsMountOptions_Version, &ev); err != nil {
+				return err
+			}
+			v.Version = NfsVersion(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The DataSync agents that can connect to your Network File System (NFS) file
 // server.
 type OnPremConfig struct {
@@ -487,6 +1069,25 @@ type OnPremConfig struct {
 	AgentArns []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OnPremConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OnPremConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OnPremConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentArnList(s, schemas.OnPremConfig_AgentArns, v.AgentArns)
+}
+func (v *OnPremConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OnPremConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OnPremConfig_AgentArns:
+			return deserializeAgentArnList(d, schemas.OnPremConfig_AgentArns, &v.AgentArns)
+		}
+		return nil
+	})
 }
 
 // Indicates how your transfer task is configured. These options include how
@@ -748,6 +1349,168 @@ type Options struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Options) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Options)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Options) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Atime != "" {
+		s.WriteString(schemas.Options_Atime, string(v.Atime))
+	}
+	if v.BytesPerSecond != nil {
+		s.WriteInt64(schemas.Options_BytesPerSecond, *v.BytesPerSecond)
+	}
+	if v.Gid != "" {
+		s.WriteString(schemas.Options_Gid, string(v.Gid))
+	}
+	if v.LogLevel != "" {
+		s.WriteString(schemas.Options_LogLevel, string(v.LogLevel))
+	}
+	if v.Mtime != "" {
+		s.WriteString(schemas.Options_Mtime, string(v.Mtime))
+	}
+	if v.ObjectTags != "" {
+		s.WriteString(schemas.Options_ObjectTags, string(v.ObjectTags))
+	}
+	if v.OverwriteMode != "" {
+		s.WriteString(schemas.Options_OverwriteMode, string(v.OverwriteMode))
+	}
+	if v.PosixPermissions != "" {
+		s.WriteString(schemas.Options_PosixPermissions, string(v.PosixPermissions))
+	}
+	if v.PreserveDeletedFiles != "" {
+		s.WriteString(schemas.Options_PreserveDeletedFiles, string(v.PreserveDeletedFiles))
+	}
+	if v.PreserveDevices != "" {
+		s.WriteString(schemas.Options_PreserveDevices, string(v.PreserveDevices))
+	}
+	if v.SecurityDescriptorCopyFlags != "" {
+		s.WriteString(schemas.Options_SecurityDescriptorCopyFlags, string(v.SecurityDescriptorCopyFlags))
+	}
+	if v.TaskQueueing != "" {
+		s.WriteString(schemas.Options_TaskQueueing, string(v.TaskQueueing))
+	}
+	if v.TransferMode != "" {
+		s.WriteString(schemas.Options_TransferMode, string(v.TransferMode))
+	}
+	if v.Uid != "" {
+		s.WriteString(schemas.Options_Uid, string(v.Uid))
+	}
+	if v.VerifyMode != "" {
+		s.WriteString(schemas.Options_VerifyMode, string(v.VerifyMode))
+	}
+}
+func (v *Options) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Options, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Options_Atime:
+			var ev string
+			if err := d.ReadString(schemas.Options_Atime, &ev); err != nil {
+				return err
+			}
+			v.Atime = Atime(ev)
+			return nil
+		case schemas.Options_BytesPerSecond:
+			v.BytesPerSecond = new(int64)
+			return d.ReadInt64(schemas.Options_BytesPerSecond, v.BytesPerSecond)
+		case schemas.Options_Gid:
+			var ev string
+			if err := d.ReadString(schemas.Options_Gid, &ev); err != nil {
+				return err
+			}
+			v.Gid = Gid(ev)
+			return nil
+		case schemas.Options_LogLevel:
+			var ev string
+			if err := d.ReadString(schemas.Options_LogLevel, &ev); err != nil {
+				return err
+			}
+			v.LogLevel = LogLevel(ev)
+			return nil
+		case schemas.Options_Mtime:
+			var ev string
+			if err := d.ReadString(schemas.Options_Mtime, &ev); err != nil {
+				return err
+			}
+			v.Mtime = Mtime(ev)
+			return nil
+		case schemas.Options_ObjectTags:
+			var ev string
+			if err := d.ReadString(schemas.Options_ObjectTags, &ev); err != nil {
+				return err
+			}
+			v.ObjectTags = ObjectTags(ev)
+			return nil
+		case schemas.Options_OverwriteMode:
+			var ev string
+			if err := d.ReadString(schemas.Options_OverwriteMode, &ev); err != nil {
+				return err
+			}
+			v.OverwriteMode = OverwriteMode(ev)
+			return nil
+		case schemas.Options_PosixPermissions:
+			var ev string
+			if err := d.ReadString(schemas.Options_PosixPermissions, &ev); err != nil {
+				return err
+			}
+			v.PosixPermissions = PosixPermissions(ev)
+			return nil
+		case schemas.Options_PreserveDeletedFiles:
+			var ev string
+			if err := d.ReadString(schemas.Options_PreserveDeletedFiles, &ev); err != nil {
+				return err
+			}
+			v.PreserveDeletedFiles = PreserveDeletedFiles(ev)
+			return nil
+		case schemas.Options_PreserveDevices:
+			var ev string
+			if err := d.ReadString(schemas.Options_PreserveDevices, &ev); err != nil {
+				return err
+			}
+			v.PreserveDevices = PreserveDevices(ev)
+			return nil
+		case schemas.Options_SecurityDescriptorCopyFlags:
+			var ev string
+			if err := d.ReadString(schemas.Options_SecurityDescriptorCopyFlags, &ev); err != nil {
+				return err
+			}
+			v.SecurityDescriptorCopyFlags = SmbSecurityDescriptorCopyFlags(ev)
+			return nil
+		case schemas.Options_TaskQueueing:
+			var ev string
+			if err := d.ReadString(schemas.Options_TaskQueueing, &ev); err != nil {
+				return err
+			}
+			v.TaskQueueing = TaskQueueing(ev)
+			return nil
+		case schemas.Options_TransferMode:
+			var ev string
+			if err := d.ReadString(schemas.Options_TransferMode, &ev); err != nil {
+				return err
+			}
+			v.TransferMode = TransferMode(ev)
+			return nil
+		case schemas.Options_Uid:
+			var ev string
+			if err := d.ReadString(schemas.Options_Uid, &ev); err != nil {
+				return err
+			}
+			v.Uid = Uid(ev)
+			return nil
+		case schemas.Options_VerifyMode:
+			var ev string
+			if err := d.ReadString(schemas.Options_VerifyMode, &ev); err != nil {
+				return err
+			}
+			v.VerifyMode = VerifyMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The platform-related details about the DataSync agent, such as the version
 // number.
 type Platform struct {
@@ -756,6 +1519,28 @@ type Platform struct {
 	Version *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Platform) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Platform)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Platform) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Version != nil {
+		s.WriteString(schemas.Platform_Version, *v.Version)
+	}
+}
+func (v *Platform) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Platform, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Platform_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.Platform_Version, v.Version)
+		}
+		return nil
+	})
 }
 
 // Specifies how your DataSync agent connects to Amazon Web Services using a [virtual private cloud (VPC) service endpoint]. An
@@ -783,6 +1568,40 @@ type PrivateLinkConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PrivateLinkConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrivateLinkConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrivateLinkConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PrivateLinkEndpoint != nil {
+		s.WriteString(schemas.PrivateLinkConfig_PrivateLinkEndpoint, *v.PrivateLinkEndpoint)
+	}
+	serializePLSecurityGroupArnList(s, schemas.PrivateLinkConfig_SecurityGroupArns, v.SecurityGroupArns)
+	serializePLSubnetArnList(s, schemas.PrivateLinkConfig_SubnetArns, v.SubnetArns)
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.PrivateLinkConfig_VpcEndpointId, *v.VpcEndpointId)
+	}
+}
+func (v *PrivateLinkConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrivateLinkConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrivateLinkConfig_PrivateLinkEndpoint:
+			v.PrivateLinkEndpoint = new(string)
+			return d.ReadString(schemas.PrivateLinkConfig_PrivateLinkEndpoint, v.PrivateLinkEndpoint)
+		case schemas.PrivateLinkConfig_SecurityGroupArns:
+			return deserializePLSecurityGroupArnList(d, schemas.PrivateLinkConfig_SecurityGroupArns, &v.SecurityGroupArns)
+		case schemas.PrivateLinkConfig_SubnetArns:
+			return deserializePLSubnetArnList(d, schemas.PrivateLinkConfig_SubnetArns, &v.SubnetArns)
+		case schemas.PrivateLinkConfig_VpcEndpointId:
+			v.VpcEndpointId = new(string)
+			return d.ReadString(schemas.PrivateLinkConfig_VpcEndpointId, v.VpcEndpointId)
+		}
+		return nil
+	})
+}
+
 // The Quality of Protection (QOP) configuration specifies the Remote Procedure
 // Call (RPC) and data transfer privacy settings configured on the Hadoop
 // Distributed File System (HDFS) cluster.
@@ -801,6 +1620,42 @@ type QopConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QopConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QopConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QopConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataTransferProtection != "" {
+		s.WriteString(schemas.QopConfiguration_DataTransferProtection, string(v.DataTransferProtection))
+	}
+	if v.RpcProtection != "" {
+		s.WriteString(schemas.QopConfiguration_RpcProtection, string(v.RpcProtection))
+	}
+}
+func (v *QopConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QopConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QopConfiguration_DataTransferProtection:
+			var ev string
+			if err := d.ReadString(schemas.QopConfiguration_DataTransferProtection, &ev); err != nil {
+				return err
+			}
+			v.DataTransferProtection = HdfsDataTransferProtection(ev)
+			return nil
+		case schemas.QopConfiguration_RpcProtection:
+			var ev string
+			if err := d.ReadString(schemas.QopConfiguration_RpcProtection, &ev); err != nil {
+				return err
+			}
+			v.RpcProtection = HdfsRpcProtection(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies where DataSync uploads your [task report].
 //
 // [task report]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
@@ -810,6 +1665,30 @@ type ReportDestination struct {
 	S3 *ReportDestinationS3
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReportDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3 != nil {
+		s.WriteStruct(schemas.ReportDestination_S3)
+		v.S3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ReportDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReportDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReportDestination_S3:
+			v.S3 = &ReportDestinationS3{}
+			return v.S3.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies the Amazon S3 bucket where DataSync uploads your [task report].
@@ -836,6 +1715,40 @@ type ReportDestinationS3 struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReportDestinationS3) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportDestinationS3)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportDestinationS3) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketAccessRoleArn != nil {
+		s.WriteString(schemas.ReportDestinationS3_BucketAccessRoleArn, *v.BucketAccessRoleArn)
+	}
+	if v.S3BucketArn != nil {
+		s.WriteString(schemas.ReportDestinationS3_S3BucketArn, *v.S3BucketArn)
+	}
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.ReportDestinationS3_Subdirectory, *v.Subdirectory)
+	}
+}
+func (v *ReportDestinationS3) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReportDestinationS3, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReportDestinationS3_BucketAccessRoleArn:
+			v.BucketAccessRoleArn = new(string)
+			return d.ReadString(schemas.ReportDestinationS3_BucketAccessRoleArn, v.BucketAccessRoleArn)
+		case schemas.ReportDestinationS3_S3BucketArn:
+			v.S3BucketArn = new(string)
+			return d.ReadString(schemas.ReportDestinationS3_S3BucketArn, v.S3BucketArn)
+		case schemas.ReportDestinationS3_Subdirectory:
+			v.Subdirectory = new(string)
+			return d.ReadString(schemas.ReportDestinationS3_Subdirectory, v.Subdirectory)
+		}
+		return nil
+	})
+}
+
 // Specifies the level of detail for a particular aspect of your DataSync [task report].
 //
 // [task report]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
@@ -853,6 +1766,32 @@ type ReportOverride struct {
 	ReportLevel ReportLevel
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReportOverride) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportOverride)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportOverride) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportLevel != "" {
+		s.WriteString(schemas.ReportOverride_ReportLevel, string(v.ReportLevel))
+	}
+}
+func (v *ReportOverride) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReportOverride, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReportOverride_ReportLevel:
+			var ev string
+			if err := d.ReadString(schemas.ReportOverride_ReportLevel, &ev); err != nil {
+				return err
+			}
+			v.ReportLevel = ReportLevel(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The level of detail included in each aspect of your DataSync [task report].
@@ -882,6 +1821,54 @@ type ReportOverrides struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReportOverrides) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportOverrides)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportOverrides) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Deleted != nil {
+		s.WriteStruct(schemas.ReportOverrides_Deleted)
+		v.Deleted.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Skipped != nil {
+		s.WriteStruct(schemas.ReportOverrides_Skipped)
+		v.Skipped.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Transferred != nil {
+		s.WriteStruct(schemas.ReportOverrides_Transferred)
+		v.Transferred.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Verified != nil {
+		s.WriteStruct(schemas.ReportOverrides_Verified)
+		v.Verified.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ReportOverrides) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReportOverrides, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReportOverrides_Deleted:
+			v.Deleted = &ReportOverride{}
+			return v.Deleted.Deserialize(d)
+		case schemas.ReportOverrides_Skipped:
+			v.Skipped = &ReportOverride{}
+			return v.Skipped.Deserialize(d)
+		case schemas.ReportOverrides_Transferred:
+			v.Transferred = &ReportOverride{}
+			return v.Transferred.Deserialize(d)
+		case schemas.ReportOverrides_Verified:
+			v.Verified = &ReportOverride{}
+			return v.Verified.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Indicates whether DataSync created a complete [task report] for your transfer.
 //
 // [task report]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
@@ -901,6 +1888,44 @@ type ReportResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReportResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.ReportResult_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorDetail != nil {
+		s.WriteString(schemas.ReportResult_ErrorDetail, *v.ErrorDetail)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ReportResult_Status, string(v.Status))
+	}
+}
+func (v *ReportResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReportResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReportResult_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.ReportResult_ErrorCode, v.ErrorCode)
+		case schemas.ReportResult_ErrorDetail:
+			v.ErrorDetail = new(string)
+			return d.ReadString(schemas.ReportResult_ErrorDetail, v.ErrorDetail)
+		case schemas.ReportResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.ReportResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = PhaseStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies the Amazon Resource Name (ARN) of the Identity and Access Management
 // (IAM) role that DataSync uses to access your S3 bucket.
 //
@@ -915,6 +1940,28 @@ type S3Config struct {
 	BucketAccessRoleArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3Config) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Config)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Config) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketAccessRoleArn != nil {
+		s.WriteString(schemas.S3Config_BucketAccessRoleArn, *v.BucketAccessRoleArn)
+	}
+}
+func (v *S3Config) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Config, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Config_BucketAccessRoleArn:
+			v.BucketAccessRoleArn = new(string)
+			return d.ReadString(schemas.S3Config_BucketAccessRoleArn, v.BucketAccessRoleArn)
+		}
+		return nil
+	})
 }
 
 // Specifies the S3 bucket where you're hosting the manifest that you want
@@ -950,6 +1997,46 @@ type S3ManifestConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3ManifestConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3ManifestConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3ManifestConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketAccessRoleArn != nil {
+		s.WriteString(schemas.S3ManifestConfig_BucketAccessRoleArn, *v.BucketAccessRoleArn)
+	}
+	if v.ManifestObjectPath != nil {
+		s.WriteString(schemas.S3ManifestConfig_ManifestObjectPath, *v.ManifestObjectPath)
+	}
+	if v.ManifestObjectVersionId != nil {
+		s.WriteString(schemas.S3ManifestConfig_ManifestObjectVersionId, *v.ManifestObjectVersionId)
+	}
+	if v.S3BucketArn != nil {
+		s.WriteString(schemas.S3ManifestConfig_S3BucketArn, *v.S3BucketArn)
+	}
+}
+func (v *S3ManifestConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3ManifestConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3ManifestConfig_BucketAccessRoleArn:
+			v.BucketAccessRoleArn = new(string)
+			return d.ReadString(schemas.S3ManifestConfig_BucketAccessRoleArn, v.BucketAccessRoleArn)
+		case schemas.S3ManifestConfig_ManifestObjectPath:
+			v.ManifestObjectPath = new(string)
+			return d.ReadString(schemas.S3ManifestConfig_ManifestObjectPath, v.ManifestObjectPath)
+		case schemas.S3ManifestConfig_ManifestObjectVersionId:
+			v.ManifestObjectVersionId = new(string)
+			return d.ReadString(schemas.S3ManifestConfig_ManifestObjectVersionId, v.ManifestObjectVersionId)
+		case schemas.S3ManifestConfig_S3BucketArn:
+			v.S3BucketArn = new(string)
+			return d.ReadString(schemas.S3ManifestConfig_S3BucketArn, v.S3BucketArn)
+		}
+		return nil
+	})
+}
+
 // Specifies the version of the Server Message Block (SMB) protocol that DataSync
 // uses to access an SMB file server.
 type SmbMountOptions struct {
@@ -983,6 +2070,32 @@ type SmbMountOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SmbMountOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SmbMountOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SmbMountOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Version != "" {
+		s.WriteString(schemas.SmbMountOptions_Version, string(v.Version))
+	}
+}
+func (v *SmbMountOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmbMountOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SmbMountOptions_Version:
+			var ev string
+			if err := d.ReadString(schemas.SmbMountOptions_Version, &ev); err != nil {
+				return err
+			}
+			v.Version = SmbVersion(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies the manifest that you want DataSync to use and where it's hosted. For
 // more information and configuration examples, see [Specifying what DataSync transfers by using a manifest].
 //
@@ -995,6 +2108,30 @@ type SourceManifestConfig struct {
 	S3 *S3ManifestConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *SourceManifestConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceManifestConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceManifestConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3 != nil {
+		s.WriteStruct(schemas.SourceManifestConfig_S3)
+		v.S3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SourceManifestConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceManifestConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceManifestConfig_S3:
+			v.S3 = &S3ManifestConfig{}
+			return v.S3.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A key-value pair representing a single tag that's been applied to an Amazon Web
@@ -1010,6 +2147,34 @@ type TagListEntry struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TagListEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagListEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagListEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.TagListEntry_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.TagListEntry_Value, *v.Value)
+	}
+}
+func (v *TagListEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagListEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagListEntry_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.TagListEntry_Key, v.Key)
+		case schemas.TagListEntry_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.TagListEntry_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // The number of files or objects that DataSync fails to prepare, transfer,
@@ -1037,6 +2202,42 @@ type TaskExecutionFilesFailedDetail struct {
 	Verify int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *TaskExecutionFilesFailedDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskExecutionFilesFailedDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskExecutionFilesFailedDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Delete != 0 {
+		s.WriteInt64(schemas.TaskExecutionFilesFailedDetail_Delete, v.Delete)
+	}
+	if v.Prepare != 0 {
+		s.WriteInt64(schemas.TaskExecutionFilesFailedDetail_Prepare, v.Prepare)
+	}
+	if v.Transfer != 0 {
+		s.WriteInt64(schemas.TaskExecutionFilesFailedDetail_Transfer, v.Transfer)
+	}
+	if v.Verify != 0 {
+		s.WriteInt64(schemas.TaskExecutionFilesFailedDetail_Verify, v.Verify)
+	}
+}
+func (v *TaskExecutionFilesFailedDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskExecutionFilesFailedDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskExecutionFilesFailedDetail_Delete:
+			return d.ReadInt64(schemas.TaskExecutionFilesFailedDetail_Delete, &v.Delete)
+		case schemas.TaskExecutionFilesFailedDetail_Prepare:
+			return d.ReadInt64(schemas.TaskExecutionFilesFailedDetail_Prepare, &v.Prepare)
+		case schemas.TaskExecutionFilesFailedDetail_Transfer:
+			return d.ReadInt64(schemas.TaskExecutionFilesFailedDetail_Transfer, &v.Transfer)
+		case schemas.TaskExecutionFilesFailedDetail_Verify:
+			return d.ReadInt64(schemas.TaskExecutionFilesFailedDetail_Verify, &v.Verify)
+		}
+		return nil
+	})
 }
 
 // The number of files or objects that DataSync finds at your locations.
@@ -1071,6 +2272,32 @@ type TaskExecutionFilesListedDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TaskExecutionFilesListedDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskExecutionFilesListedDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskExecutionFilesListedDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AtDestinationForDelete != 0 {
+		s.WriteInt64(schemas.TaskExecutionFilesListedDetail_AtDestinationForDelete, v.AtDestinationForDelete)
+	}
+	if v.AtSource != 0 {
+		s.WriteInt64(schemas.TaskExecutionFilesListedDetail_AtSource, v.AtSource)
+	}
+}
+func (v *TaskExecutionFilesListedDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskExecutionFilesListedDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskExecutionFilesListedDetail_AtDestinationForDelete:
+			return d.ReadInt64(schemas.TaskExecutionFilesListedDetail_AtDestinationForDelete, &v.AtDestinationForDelete)
+		case schemas.TaskExecutionFilesListedDetail_AtSource:
+			return d.ReadInt64(schemas.TaskExecutionFilesListedDetail_AtSource, &v.AtSource)
+		}
+		return nil
+	})
+}
+
 // The number of directories that DataSync fails to list, prepare, transfer,
 // verify, and delete during your task execution.
 //
@@ -1100,6 +2327,47 @@ type TaskExecutionFoldersFailedDetail struct {
 	Verify int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *TaskExecutionFoldersFailedDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskExecutionFoldersFailedDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskExecutionFoldersFailedDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Delete != 0 {
+		s.WriteInt64(schemas.TaskExecutionFoldersFailedDetail_Delete, v.Delete)
+	}
+	if v.List != 0 {
+		s.WriteInt64(schemas.TaskExecutionFoldersFailedDetail_List, v.List)
+	}
+	if v.Prepare != 0 {
+		s.WriteInt64(schemas.TaskExecutionFoldersFailedDetail_Prepare, v.Prepare)
+	}
+	if v.Transfer != 0 {
+		s.WriteInt64(schemas.TaskExecutionFoldersFailedDetail_Transfer, v.Transfer)
+	}
+	if v.Verify != 0 {
+		s.WriteInt64(schemas.TaskExecutionFoldersFailedDetail_Verify, v.Verify)
+	}
+}
+func (v *TaskExecutionFoldersFailedDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskExecutionFoldersFailedDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskExecutionFoldersFailedDetail_Delete:
+			return d.ReadInt64(schemas.TaskExecutionFoldersFailedDetail_Delete, &v.Delete)
+		case schemas.TaskExecutionFoldersFailedDetail_List:
+			return d.ReadInt64(schemas.TaskExecutionFoldersFailedDetail_List, &v.List)
+		case schemas.TaskExecutionFoldersFailedDetail_Prepare:
+			return d.ReadInt64(schemas.TaskExecutionFoldersFailedDetail_Prepare, &v.Prepare)
+		case schemas.TaskExecutionFoldersFailedDetail_Transfer:
+			return d.ReadInt64(schemas.TaskExecutionFoldersFailedDetail_Transfer, &v.Transfer)
+		case schemas.TaskExecutionFoldersFailedDetail_Verify:
+			return d.ReadInt64(schemas.TaskExecutionFoldersFailedDetail_Verify, &v.Verify)
+		}
+		return nil
+	})
 }
 
 // The number of directories that DataSync finds at your locations.
@@ -1134,6 +2402,32 @@ type TaskExecutionFoldersListedDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TaskExecutionFoldersListedDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskExecutionFoldersListedDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskExecutionFoldersListedDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AtDestinationForDelete != 0 {
+		s.WriteInt64(schemas.TaskExecutionFoldersListedDetail_AtDestinationForDelete, v.AtDestinationForDelete)
+	}
+	if v.AtSource != 0 {
+		s.WriteInt64(schemas.TaskExecutionFoldersListedDetail_AtSource, v.AtSource)
+	}
+}
+func (v *TaskExecutionFoldersListedDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskExecutionFoldersListedDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskExecutionFoldersListedDetail_AtDestinationForDelete:
+			return d.ReadInt64(schemas.TaskExecutionFoldersListedDetail_AtDestinationForDelete, &v.AtDestinationForDelete)
+		case schemas.TaskExecutionFoldersListedDetail_AtSource:
+			return d.ReadInt64(schemas.TaskExecutionFoldersListedDetail_AtSource, &v.AtSource)
+		}
+		return nil
+	})
+}
+
 // Represents a single entry in a list of DataSync task executions that's returned
 // with the [ListTaskExecutions]operation.
 //
@@ -1154,6 +2448,48 @@ type TaskExecutionListEntry struct {
 	TaskMode TaskMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *TaskExecutionListEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskExecutionListEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskExecutionListEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.TaskExecutionListEntry_Status, string(v.Status))
+	}
+	if v.TaskExecutionArn != nil {
+		s.WriteString(schemas.TaskExecutionListEntry_TaskExecutionArn, *v.TaskExecutionArn)
+	}
+	if v.TaskMode != "" {
+		s.WriteString(schemas.TaskExecutionListEntry_TaskMode, string(v.TaskMode))
+	}
+}
+func (v *TaskExecutionListEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskExecutionListEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskExecutionListEntry_Status:
+			var ev string
+			if err := d.ReadString(schemas.TaskExecutionListEntry_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = TaskExecutionStatus(ev)
+			return nil
+		case schemas.TaskExecutionListEntry_TaskExecutionArn:
+			v.TaskExecutionArn = new(string)
+			return d.ReadString(schemas.TaskExecutionListEntry_TaskExecutionArn, v.TaskExecutionArn)
+		case schemas.TaskExecutionListEntry_TaskMode:
+			var ev string
+			if err := d.ReadString(schemas.TaskExecutionListEntry_TaskMode, &ev); err != nil {
+				return err
+			}
+			v.TaskMode = TaskMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Provides detailed information about the result of your DataSync task execution.
@@ -1222,6 +2558,88 @@ type TaskExecutionResultDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TaskExecutionResultDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskExecutionResultDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskExecutionResultDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.TaskExecutionResultDetail_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorDetail != nil {
+		s.WriteString(schemas.TaskExecutionResultDetail_ErrorDetail, *v.ErrorDetail)
+	}
+	if v.PrepareDuration != nil {
+		s.WriteInt64(schemas.TaskExecutionResultDetail_PrepareDuration, *v.PrepareDuration)
+	}
+	if v.PrepareStatus != "" {
+		s.WriteString(schemas.TaskExecutionResultDetail_PrepareStatus, string(v.PrepareStatus))
+	}
+	if v.TotalDuration != nil {
+		s.WriteInt64(schemas.TaskExecutionResultDetail_TotalDuration, *v.TotalDuration)
+	}
+	if v.TransferDuration != nil {
+		s.WriteInt64(schemas.TaskExecutionResultDetail_TransferDuration, *v.TransferDuration)
+	}
+	if v.TransferStatus != "" {
+		s.WriteString(schemas.TaskExecutionResultDetail_TransferStatus, string(v.TransferStatus))
+	}
+	if v.VerifyDuration != nil {
+		s.WriteInt64(schemas.TaskExecutionResultDetail_VerifyDuration, *v.VerifyDuration)
+	}
+	if v.VerifyStatus != "" {
+		s.WriteString(schemas.TaskExecutionResultDetail_VerifyStatus, string(v.VerifyStatus))
+	}
+}
+func (v *TaskExecutionResultDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskExecutionResultDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskExecutionResultDetail_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.TaskExecutionResultDetail_ErrorCode, v.ErrorCode)
+		case schemas.TaskExecutionResultDetail_ErrorDetail:
+			v.ErrorDetail = new(string)
+			return d.ReadString(schemas.TaskExecutionResultDetail_ErrorDetail, v.ErrorDetail)
+		case schemas.TaskExecutionResultDetail_PrepareDuration:
+			v.PrepareDuration = new(int64)
+			return d.ReadInt64(schemas.TaskExecutionResultDetail_PrepareDuration, v.PrepareDuration)
+		case schemas.TaskExecutionResultDetail_PrepareStatus:
+			var ev string
+			if err := d.ReadString(schemas.TaskExecutionResultDetail_PrepareStatus, &ev); err != nil {
+				return err
+			}
+			v.PrepareStatus = PhaseStatus(ev)
+			return nil
+		case schemas.TaskExecutionResultDetail_TotalDuration:
+			v.TotalDuration = new(int64)
+			return d.ReadInt64(schemas.TaskExecutionResultDetail_TotalDuration, v.TotalDuration)
+		case schemas.TaskExecutionResultDetail_TransferDuration:
+			v.TransferDuration = new(int64)
+			return d.ReadInt64(schemas.TaskExecutionResultDetail_TransferDuration, v.TransferDuration)
+		case schemas.TaskExecutionResultDetail_TransferStatus:
+			var ev string
+			if err := d.ReadString(schemas.TaskExecutionResultDetail_TransferStatus, &ev); err != nil {
+				return err
+			}
+			v.TransferStatus = PhaseStatus(ev)
+			return nil
+		case schemas.TaskExecutionResultDetail_VerifyDuration:
+			v.VerifyDuration = new(int64)
+			return d.ReadInt64(schemas.TaskExecutionResultDetail_VerifyDuration, v.VerifyDuration)
+		case schemas.TaskExecutionResultDetail_VerifyStatus:
+			var ev string
+			if err := d.ReadString(schemas.TaskExecutionResultDetail_VerifyStatus, &ev); err != nil {
+				return err
+			}
+			v.VerifyStatus = PhaseStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // You can use API filters to narrow down the list of resources returned by
 // ListTasks . For example, to retrieve all tasks on a source location, you can use
 // ListTasks with filter name LocationId and Operator Equals with the ARN for the
@@ -1253,6 +2671,45 @@ type TaskFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TaskFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.TaskFilter_Name, string(v.Name))
+	}
+	if v.Operator != "" {
+		s.WriteString(schemas.TaskFilter_Operator, string(v.Operator))
+	}
+	serializeFilterValues(s, schemas.TaskFilter_Values, v.Values)
+}
+func (v *TaskFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.TaskFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = TaskFilterName(ev)
+			return nil
+		case schemas.TaskFilter_Operator:
+			var ev string
+			if err := d.ReadString(schemas.TaskFilter_Operator, &ev); err != nil {
+				return err
+			}
+			v.Operator = Operator(ev)
+			return nil
+		case schemas.TaskFilter_Values:
+			return deserializeFilterValues(d, schemas.TaskFilter_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Represents a single entry in a list of tasks. TaskListEntry returns an array
 // that contains a list of tasks when the [ListTasks]operation is called. A task includes the
 // source and destination file systems to sync and the options to use for the
@@ -1276,6 +2733,54 @@ type TaskListEntry struct {
 	TaskMode TaskMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *TaskListEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskListEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskListEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.TaskListEntry_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.TaskListEntry_Status, string(v.Status))
+	}
+	if v.TaskArn != nil {
+		s.WriteString(schemas.TaskListEntry_TaskArn, *v.TaskArn)
+	}
+	if v.TaskMode != "" {
+		s.WriteString(schemas.TaskListEntry_TaskMode, string(v.TaskMode))
+	}
+}
+func (v *TaskListEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskListEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskListEntry_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TaskListEntry_Name, v.Name)
+		case schemas.TaskListEntry_Status:
+			var ev string
+			if err := d.ReadString(schemas.TaskListEntry_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = TaskStatus(ev)
+			return nil
+		case schemas.TaskListEntry_TaskArn:
+			v.TaskArn = new(string)
+			return d.ReadString(schemas.TaskListEntry_TaskArn, v.TaskArn)
+		case schemas.TaskListEntry_TaskMode:
+			var ev string
+			if err := d.ReadString(schemas.TaskListEntry_TaskMode, &ev); err != nil {
+				return err
+			}
+			v.TaskMode = TaskMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Specifies how you want to configure a task report, which provides detailed
@@ -1328,6 +2833,68 @@ type TaskReportConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TaskReportConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskReportConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskReportConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteStruct(schemas.TaskReportConfig_Destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ObjectVersionIds != "" {
+		s.WriteString(schemas.TaskReportConfig_ObjectVersionIds, string(v.ObjectVersionIds))
+	}
+	if v.OutputType != "" {
+		s.WriteString(schemas.TaskReportConfig_OutputType, string(v.OutputType))
+	}
+	if v.Overrides != nil {
+		s.WriteStruct(schemas.TaskReportConfig_Overrides)
+		v.Overrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReportLevel != "" {
+		s.WriteString(schemas.TaskReportConfig_ReportLevel, string(v.ReportLevel))
+	}
+}
+func (v *TaskReportConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskReportConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskReportConfig_Destination:
+			v.Destination = &ReportDestination{}
+			return v.Destination.Deserialize(d)
+		case schemas.TaskReportConfig_ObjectVersionIds:
+			var ev string
+			if err := d.ReadString(schemas.TaskReportConfig_ObjectVersionIds, &ev); err != nil {
+				return err
+			}
+			v.ObjectVersionIds = ObjectVersionIds(ev)
+			return nil
+		case schemas.TaskReportConfig_OutputType:
+			var ev string
+			if err := d.ReadString(schemas.TaskReportConfig_OutputType, &ev); err != nil {
+				return err
+			}
+			v.OutputType = ReportOutputType(ev)
+			return nil
+		case schemas.TaskReportConfig_Overrides:
+			v.Overrides = &ReportOverrides{}
+			return v.Overrides.Deserialize(d)
+		case schemas.TaskReportConfig_ReportLevel:
+			var ev string
+			if err := d.ReadString(schemas.TaskReportConfig_ReportLevel, &ev); err != nil {
+				return err
+			}
+			v.ReportLevel = ReportLevel(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Configures your DataSync task to run on a [schedule] (at a minimum interval of 1 hour).
 //
 // [schedule]: https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html
@@ -1368,6 +2935,38 @@ type TaskSchedule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TaskSchedule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskSchedule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskSchedule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScheduleExpression != nil {
+		s.WriteString(schemas.TaskSchedule_ScheduleExpression, *v.ScheduleExpression)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.TaskSchedule_Status, string(v.Status))
+	}
+}
+func (v *TaskSchedule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskSchedule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskSchedule_ScheduleExpression:
+			v.ScheduleExpression = new(string)
+			return d.ReadString(schemas.TaskSchedule_ScheduleExpression, v.ScheduleExpression)
+		case schemas.TaskSchedule_Status:
+			var ev string
+			if err := d.ReadString(schemas.TaskSchedule_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ScheduleStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Provides information about your DataSync [task schedule].
 //
 // [task schedule]: https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html
@@ -1402,6 +3001,44 @@ type TaskScheduleDetails struct {
 	StatusUpdateTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *TaskScheduleDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskScheduleDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskScheduleDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisabledBy != "" {
+		s.WriteString(schemas.TaskScheduleDetails_DisabledBy, string(v.DisabledBy))
+	}
+	if v.DisabledReason != nil {
+		s.WriteString(schemas.TaskScheduleDetails_DisabledReason, *v.DisabledReason)
+	}
+	if v.StatusUpdateTime != nil {
+		s.WriteTime(schemas.TaskScheduleDetails_StatusUpdateTime, *v.StatusUpdateTime)
+	}
+}
+func (v *TaskScheduleDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskScheduleDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskScheduleDetails_DisabledBy:
+			var ev string
+			if err := d.ReadString(schemas.TaskScheduleDetails_DisabledBy, &ev); err != nil {
+				return err
+			}
+			v.DisabledBy = ScheduleDisabledBy(ev)
+			return nil
+		case schemas.TaskScheduleDetails_DisabledReason:
+			v.DisabledReason = new(string)
+			return d.ReadString(schemas.TaskScheduleDetails_DisabledReason, v.DisabledReason)
+		case schemas.TaskScheduleDetails_StatusUpdateTime:
+			v.StatusUpdateTime = new(time.Time)
+			return d.ReadTime(schemas.TaskScheduleDetails_StatusUpdateTime, v.StatusUpdateTime)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,23 @@ type ReplaceTopicRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReplaceTopicRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplaceTopicRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplaceTopicRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleName != nil {
+		s.WriteString(schemas.ReplaceTopicRuleRequest_ruleName, *v.RuleName)
+	}
+	if v.TopicRulePayload != nil {
+		s.WriteStruct(schemas.ReplaceTopicRuleRequest_topicRulePayload)
+		v.TopicRulePayload.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ReplaceTopicRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +72,26 @@ type ReplaceTopicRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReplaceTopicRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplaceTopicRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ReplaceTopicRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationReplaceTopicRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpReplaceTopicRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReplaceTopicRule, schemas.ReplaceTopicRuleRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpReplaceTopicRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReplaceTopicRule, schemas.ReplaceTopicRuleRequest, nil), output: &ReplaceTopicRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

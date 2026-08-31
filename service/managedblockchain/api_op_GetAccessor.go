@@ -4,7 +4,9 @@ package managedblockchain
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetAccessorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccessorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccessorInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccessorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessorId != nil {
+		s.WriteString(schemas.GetAccessorInput_AccessorId, *v.AccessorId)
+	}
+}
+
 type GetAccessorOutput struct {
 
 	// The properties of the accessor.
@@ -47,13 +61,34 @@ type GetAccessorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccessorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccessorOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccessorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accessor != nil {
+		s.WriteStruct(schemas.GetAccessorOutput_Accessor)
+		v.Accessor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAccessorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccessorOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccessorOutput_Accessor:
+			v.Accessor = &types.Accessor{}
+			return v.Accessor.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccessorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAccessor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccessor, schemas.GetAccessorInput, schemas.GetAccessorOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAccessor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccessor, schemas.GetAccessorInput, schemas.GetAccessorOutput), output: &GetAccessorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

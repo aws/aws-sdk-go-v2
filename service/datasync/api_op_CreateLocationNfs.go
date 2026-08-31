@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,32 @@ type CreateLocationNfsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationNfsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationNfsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationNfsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MountOptions != nil {
+		s.WriteStruct(schemas.CreateLocationNfsRequest_MountOptions)
+		v.MountOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OnPremConfig != nil {
+		s.WriteStruct(schemas.CreateLocationNfsRequest_OnPremConfig)
+		v.OnPremConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServerHostname != nil {
+		s.WriteString(schemas.CreateLocationNfsRequest_ServerHostname, *v.ServerHostname)
+	}
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.CreateLocationNfsRequest_Subdirectory, *v.Subdirectory)
+	}
+	serializeInputTagList(s, schemas.CreateLocationNfsRequest_Tags, v.Tags)
+}
+
 // CreateLocationNfsResponse
 type CreateLocationNfsOutput struct {
 
@@ -82,13 +110,32 @@ type CreateLocationNfsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationNfsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationNfsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationNfsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.CreateLocationNfsResponse_LocationArn, *v.LocationArn)
+	}
+}
+func (v *CreateLocationNfsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLocationNfsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLocationNfsResponse_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.CreateLocationNfsResponse_LocationArn, v.LocationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLocationNfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLocationNfs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationNfs, schemas.CreateLocationNfsRequest, schemas.CreateLocationNfsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLocationNfs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationNfs, schemas.CreateLocationNfsRequest, schemas.CreateLocationNfsResponse), output: &CreateLocationNfsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

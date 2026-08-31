@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -95,6 +97,45 @@ type UpdateSecurityProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSecurityProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSecurityProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSecurityProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalMetricsToRetainList(s, schemas.UpdateSecurityProfileRequest_additionalMetricsToRetain, v.AdditionalMetricsToRetain)
+	serializeAdditionalMetricsToRetainV2List(s, schemas.UpdateSecurityProfileRequest_additionalMetricsToRetainV2, v.AdditionalMetricsToRetainV2)
+	serializeAlertTargets(s, schemas.UpdateSecurityProfileRequest_alertTargets, v.AlertTargets)
+	serializeBehaviors(s, schemas.UpdateSecurityProfileRequest_behaviors, v.Behaviors)
+	if v.DeleteAdditionalMetricsToRetain != false {
+		s.WriteBool(schemas.UpdateSecurityProfileRequest_deleteAdditionalMetricsToRetain, v.DeleteAdditionalMetricsToRetain)
+	}
+	if v.DeleteAlertTargets != false {
+		s.WriteBool(schemas.UpdateSecurityProfileRequest_deleteAlertTargets, v.DeleteAlertTargets)
+	}
+	if v.DeleteBehaviors != false {
+		s.WriteBool(schemas.UpdateSecurityProfileRequest_deleteBehaviors, v.DeleteBehaviors)
+	}
+	if v.DeleteMetricsExportConfig != false {
+		s.WriteBool(schemas.UpdateSecurityProfileRequest_deleteMetricsExportConfig, v.DeleteMetricsExportConfig)
+	}
+	if v.ExpectedVersion != nil {
+		s.WriteInt64(schemas.UpdateSecurityProfileRequest_expectedVersion, *v.ExpectedVersion)
+	}
+	if v.MetricsExportConfig != nil {
+		s.WriteStruct(schemas.UpdateSecurityProfileRequest_metricsExportConfig)
+		v.MetricsExportConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecurityProfileDescription != nil {
+		s.WriteString(schemas.UpdateSecurityProfileRequest_securityProfileDescription, *v.SecurityProfileDescription)
+	}
+	if v.SecurityProfileName != nil {
+		s.WriteString(schemas.UpdateSecurityProfileRequest_securityProfileName, *v.SecurityProfileName)
+	}
+}
+
 type UpdateSecurityProfileOutput struct {
 
 	//  Please use UpdateSecurityProfileResponse$additionalMetricsToRetainV2 instead.
@@ -145,13 +186,81 @@ type UpdateSecurityProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSecurityProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSecurityProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSecurityProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalMetricsToRetainList(s, schemas.UpdateSecurityProfileResponse_additionalMetricsToRetain, v.AdditionalMetricsToRetain)
+	serializeAdditionalMetricsToRetainV2List(s, schemas.UpdateSecurityProfileResponse_additionalMetricsToRetainV2, v.AdditionalMetricsToRetainV2)
+	serializeAlertTargets(s, schemas.UpdateSecurityProfileResponse_alertTargets, v.AlertTargets)
+	serializeBehaviors(s, schemas.UpdateSecurityProfileResponse_behaviors, v.Behaviors)
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.UpdateSecurityProfileResponse_creationDate, *v.CreationDate)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.UpdateSecurityProfileResponse_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.MetricsExportConfig != nil {
+		s.WriteStruct(schemas.UpdateSecurityProfileResponse_metricsExportConfig)
+		v.MetricsExportConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecurityProfileArn != nil {
+		s.WriteString(schemas.UpdateSecurityProfileResponse_securityProfileArn, *v.SecurityProfileArn)
+	}
+	if v.SecurityProfileDescription != nil {
+		s.WriteString(schemas.UpdateSecurityProfileResponse_securityProfileDescription, *v.SecurityProfileDescription)
+	}
+	if v.SecurityProfileName != nil {
+		s.WriteString(schemas.UpdateSecurityProfileResponse_securityProfileName, *v.SecurityProfileName)
+	}
+	if v.Version != 0 {
+		s.WriteInt64(schemas.UpdateSecurityProfileResponse_version, v.Version)
+	}
+}
+func (v *UpdateSecurityProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSecurityProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSecurityProfileResponse_additionalMetricsToRetain:
+			return deserializeAdditionalMetricsToRetainList(d, schemas.UpdateSecurityProfileResponse_additionalMetricsToRetain, &v.AdditionalMetricsToRetain)
+		case schemas.UpdateSecurityProfileResponse_additionalMetricsToRetainV2:
+			return deserializeAdditionalMetricsToRetainV2List(d, schemas.UpdateSecurityProfileResponse_additionalMetricsToRetainV2, &v.AdditionalMetricsToRetainV2)
+		case schemas.UpdateSecurityProfileResponse_alertTargets:
+			return deserializeAlertTargets(d, schemas.UpdateSecurityProfileResponse_alertTargets, &v.AlertTargets)
+		case schemas.UpdateSecurityProfileResponse_behaviors:
+			return deserializeBehaviors(d, schemas.UpdateSecurityProfileResponse_behaviors, &v.Behaviors)
+		case schemas.UpdateSecurityProfileResponse_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.UpdateSecurityProfileResponse_creationDate, v.CreationDate)
+		case schemas.UpdateSecurityProfileResponse_lastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.UpdateSecurityProfileResponse_lastModifiedDate, v.LastModifiedDate)
+		case schemas.UpdateSecurityProfileResponse_metricsExportConfig:
+			v.MetricsExportConfig = &types.MetricsExportConfig{}
+			return v.MetricsExportConfig.Deserialize(d)
+		case schemas.UpdateSecurityProfileResponse_securityProfileArn:
+			v.SecurityProfileArn = new(string)
+			return d.ReadString(schemas.UpdateSecurityProfileResponse_securityProfileArn, v.SecurityProfileArn)
+		case schemas.UpdateSecurityProfileResponse_securityProfileDescription:
+			v.SecurityProfileDescription = new(string)
+			return d.ReadString(schemas.UpdateSecurityProfileResponse_securityProfileDescription, v.SecurityProfileDescription)
+		case schemas.UpdateSecurityProfileResponse_securityProfileName:
+			v.SecurityProfileName = new(string)
+			return d.ReadString(schemas.UpdateSecurityProfileResponse_securityProfileName, v.SecurityProfileName)
+		case schemas.UpdateSecurityProfileResponse_version:
+			return d.ReadInt64(schemas.UpdateSecurityProfileResponse_version, &v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSecurityProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSecurityProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSecurityProfile, schemas.UpdateSecurityProfileRequest, schemas.UpdateSecurityProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSecurityProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSecurityProfile, schemas.UpdateSecurityProfileRequest, schemas.UpdateSecurityProfileResponse), output: &UpdateSecurityProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

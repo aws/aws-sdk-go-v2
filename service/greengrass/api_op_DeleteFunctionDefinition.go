@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteFunctionDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFunctionDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFunctionDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFunctionDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FunctionDefinitionId != nil {
+		s.WriteString(schemas.DeleteFunctionDefinitionRequest_FunctionDefinitionId, *v.FunctionDefinitionId)
+	}
+}
+
 type DeleteFunctionDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteFunctionDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFunctionDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFunctionDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFunctionDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteFunctionDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFunctionDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFunctionDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteFunctionDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFunctionDefinition, schemas.DeleteFunctionDefinitionRequest, schemas.DeleteFunctionDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteFunctionDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFunctionDefinition, schemas.DeleteFunctionDefinitionRequest, schemas.DeleteFunctionDefinitionResponse), output: &DeleteFunctionDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type StartNotebookInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNotebookInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNotebookInstanceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNotebookInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotebookInstanceName != nil {
+		s.WriteString(schemas.StartNotebookInstanceInput_NotebookInstanceName, *v.NotebookInstanceName)
+	}
+}
+
 type StartNotebookInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +58,26 @@ type StartNotebookInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNotebookInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNotebookInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartNotebookInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartNotebookInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartNotebookInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNotebookInstance, schemas.StartNotebookInstanceInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartNotebookInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNotebookInstance, schemas.StartNotebookInstanceInput, nil), output: &StartNotebookInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

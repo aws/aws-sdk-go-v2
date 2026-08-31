@@ -5,7 +5,9 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,30 @@ type ListCustomVocabularyItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomVocabularyItemsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomVocabularyItemsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomVocabularyItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListCustomVocabularyItemsRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListCustomVocabularyItemsRequest_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListCustomVocabularyItemsRequest_localeId, *v.LocaleId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCustomVocabularyItemsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomVocabularyItemsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListCustomVocabularyItemsOutput struct {
 
 	// The identifier of the bot associated with this custom vocabulary.
@@ -81,13 +107,53 @@ type ListCustomVocabularyItemsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomVocabularyItemsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomVocabularyItemsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomVocabularyItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListCustomVocabularyItemsResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListCustomVocabularyItemsResponse_botVersion, *v.BotVersion)
+	}
+	serializeCustomVocabularyItems(s, schemas.ListCustomVocabularyItemsResponse_customVocabularyItems, v.CustomVocabularyItems)
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListCustomVocabularyItemsResponse_localeId, *v.LocaleId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomVocabularyItemsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCustomVocabularyItemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomVocabularyItemsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomVocabularyItemsResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.ListCustomVocabularyItemsResponse_botId, v.BotId)
+		case schemas.ListCustomVocabularyItemsResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.ListCustomVocabularyItemsResponse_botVersion, v.BotVersion)
+		case schemas.ListCustomVocabularyItemsResponse_customVocabularyItems:
+			return deserializeCustomVocabularyItems(d, schemas.ListCustomVocabularyItemsResponse_customVocabularyItems, &v.CustomVocabularyItems)
+		case schemas.ListCustomVocabularyItemsResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.ListCustomVocabularyItemsResponse_localeId, v.LocaleId)
+		case schemas.ListCustomVocabularyItemsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCustomVocabularyItemsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCustomVocabularyItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCustomVocabularyItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomVocabularyItems, schemas.ListCustomVocabularyItemsRequest, schemas.ListCustomVocabularyItemsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCustomVocabularyItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomVocabularyItems, schemas.ListCustomVocabularyItemsRequest, schemas.ListCustomVocabularyItemsResponse), output: &ListCustomVocabularyItemsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

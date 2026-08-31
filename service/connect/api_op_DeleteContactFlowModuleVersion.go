@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type DeleteContactFlowModuleVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContactFlowModuleVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContactFlowModuleVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContactFlowModuleVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactFlowModuleId != nil {
+		s.WriteString(schemas.DeleteContactFlowModuleVersionRequest_ContactFlowModuleId, *v.ContactFlowModuleId)
+	}
+	if v.ContactFlowModuleVersion != nil {
+		s.WriteInt64(schemas.DeleteContactFlowModuleVersionRequest_ContactFlowModuleVersion, *v.ContactFlowModuleVersion)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteContactFlowModuleVersionRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DeleteContactFlowModuleVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +73,26 @@ type DeleteContactFlowModuleVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContactFlowModuleVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContactFlowModuleVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContactFlowModuleVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteContactFlowModuleVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteContactFlowModuleVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteContactFlowModuleVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteContactFlowModuleVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContactFlowModuleVersion, schemas.DeleteContactFlowModuleVersionRequest, schemas.DeleteContactFlowModuleVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteContactFlowModuleVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContactFlowModuleVersion, schemas.DeleteContactFlowModuleVersionRequest, schemas.DeleteContactFlowModuleVersionResponse), output: &DeleteContactFlowModuleVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

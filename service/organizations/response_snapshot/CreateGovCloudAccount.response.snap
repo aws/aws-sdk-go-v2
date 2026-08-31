@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSOrganizationsV20161128.CreateGovCloudAccount
+
+{"CreateAccountStatus":{"AccountId":"__AccountId__","AccountName":"__AccountName__","CompletedTimestamp":946684800,"FailureReason":"ACCOUNT_LIMIT_EXCEEDED","GovCloudAccountId":"__GovCloudAccountId__","Id":"__Id__","RequestedTimestamp":946684800,"State":"IN_PROGRESS"}}

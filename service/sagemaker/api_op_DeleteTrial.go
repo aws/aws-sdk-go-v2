@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteTrialInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTrialInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTrialRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTrialInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrialName != nil {
+		s.WriteString(schemas.DeleteTrialRequest_TrialName, *v.TrialName)
+	}
+}
+
 type DeleteTrialOutput struct {
 
 	// The Amazon Resource Name (ARN) of the trial that is being deleted.
@@ -47,13 +61,32 @@ type DeleteTrialOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTrialOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTrialResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTrialOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrialArn != nil {
+		s.WriteString(schemas.DeleteTrialResponse_TrialArn, *v.TrialArn)
+	}
+}
+func (v *DeleteTrialOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTrialResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteTrialResponse_TrialArn:
+			v.TrialArn = new(string)
+			return d.ReadString(schemas.DeleteTrialResponse_TrialArn, v.TrialArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTrialMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteTrial{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTrial, schemas.DeleteTrialRequest, schemas.DeleteTrialResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteTrial{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTrial, schemas.DeleteTrialRequest, schemas.DeleteTrialResponse), output: &DeleteTrialOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

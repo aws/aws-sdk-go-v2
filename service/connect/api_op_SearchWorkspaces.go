@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,34 @@ type SearchWorkspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchWorkspacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchWorkspacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchWorkspacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchWorkspacesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchWorkspacesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchWorkspacesRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchCriteria != nil {
+		s.WriteStruct(schemas.SearchWorkspacesRequest_SearchCriteria)
+		v.SearchCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchFilter != nil {
+		s.WriteStruct(schemas.SearchWorkspacesRequest_SearchFilter)
+		v.SearchFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchWorkspacesOutput struct {
 
 	// The approximate total number of workspaces that match the search criteria.
@@ -68,13 +98,41 @@ type SearchWorkspacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchWorkspacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchWorkspacesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchWorkspacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTotalCount != nil {
+		s.WriteInt64(schemas.SearchWorkspacesResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchWorkspacesResponse_NextToken, *v.NextToken)
+	}
+	serializeWorkspaceSearchSummaryList(s, schemas.SearchWorkspacesResponse_Workspaces, v.Workspaces)
+}
+func (v *SearchWorkspacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchWorkspacesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchWorkspacesResponse_ApproximateTotalCount:
+			v.ApproximateTotalCount = new(int64)
+			return d.ReadInt64(schemas.SearchWorkspacesResponse_ApproximateTotalCount, v.ApproximateTotalCount)
+		case schemas.SearchWorkspacesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchWorkspacesResponse_NextToken, v.NextToken)
+		case schemas.SearchWorkspacesResponse_Workspaces:
+			return deserializeWorkspaceSearchSummaryList(d, schemas.SearchWorkspacesResponse_Workspaces, &v.Workspaces)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchWorkspaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchWorkspaces, schemas.SearchWorkspacesRequest, schemas.SearchWorkspacesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchWorkspaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchWorkspaces, schemas.SearchWorkspacesRequest, schemas.SearchWorkspacesResponse), output: &SearchWorkspacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

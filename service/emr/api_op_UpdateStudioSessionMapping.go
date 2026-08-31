@@ -4,7 +4,9 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,30 @@ type UpdateStudioSessionMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStudioSessionMappingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStudioSessionMappingInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStudioSessionMappingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityId != nil {
+		s.WriteString(schemas.UpdateStudioSessionMappingInput_IdentityId, *v.IdentityId)
+	}
+	if v.IdentityName != nil {
+		s.WriteString(schemas.UpdateStudioSessionMappingInput_IdentityName, *v.IdentityName)
+	}
+	if v.IdentityType != "" {
+		s.WriteString(schemas.UpdateStudioSessionMappingInput_IdentityType, string(v.IdentityType))
+	}
+	if v.SessionPolicyArn != nil {
+		s.WriteString(schemas.UpdateStudioSessionMappingInput_SessionPolicyArn, *v.SessionPolicyArn)
+	}
+	if v.StudioId != nil {
+		s.WriteString(schemas.UpdateStudioSessionMappingInput_StudioId, *v.StudioId)
+	}
+}
+
 type UpdateStudioSessionMappingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -69,13 +95,26 @@ type UpdateStudioSessionMappingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStudioSessionMappingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStudioSessionMappingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateStudioSessionMappingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateStudioSessionMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateStudioSessionMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStudioSessionMapping, schemas.UpdateStudioSessionMappingInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateStudioSessionMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStudioSessionMapping, schemas.UpdateStudioSessionMappingInput, nil), output: &UpdateStudioSessionMappingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

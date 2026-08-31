@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,26 @@ type UpdateBillingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBillingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBillingGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBillingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingGroupName != nil {
+		s.WriteString(schemas.UpdateBillingGroupRequest_billingGroupName, *v.BillingGroupName)
+	}
+	if v.BillingGroupProperties != nil {
+		s.WriteStruct(schemas.UpdateBillingGroupRequest_billingGroupProperties)
+		v.BillingGroupProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExpectedVersion != nil {
+		s.WriteInt64(schemas.UpdateBillingGroupRequest_expectedVersion, *v.ExpectedVersion)
+	}
+}
+
 type UpdateBillingGroupOutput struct {
 
 	// The latest version of the billing group.
@@ -59,13 +81,31 @@ type UpdateBillingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBillingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBillingGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBillingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Version != 0 {
+		s.WriteInt64(schemas.UpdateBillingGroupResponse_version, v.Version)
+	}
+}
+func (v *UpdateBillingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBillingGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBillingGroupResponse_version:
+			return d.ReadInt64(schemas.UpdateBillingGroupResponse_version, &v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBillingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBillingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBillingGroup, schemas.UpdateBillingGroupRequest, schemas.UpdateBillingGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBillingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBillingGroup, schemas.UpdateBillingGroupRequest, schemas.UpdateBillingGroupResponse), output: &UpdateBillingGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

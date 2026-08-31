@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -36,6 +38,18 @@ type DescribeLineageGroupInput struct {
 	LineageGroupName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeLineageGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLineageGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLineageGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LineageGroupName != nil {
+		s.WriteString(schemas.DescribeLineageGroupRequest_LineageGroupName, *v.LineageGroupName)
+	}
 }
 
 type DescribeLineageGroupOutput struct {
@@ -70,13 +84,78 @@ type DescribeLineageGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLineageGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLineageGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLineageGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.DescribeLineageGroupResponse_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeLineageGroupResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeLineageGroupResponse_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.DescribeLineageGroupResponse_DisplayName, *v.DisplayName)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteStruct(schemas.DescribeLineageGroupResponse_LastModifiedBy)
+		v.LastModifiedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeLineageGroupResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.LineageGroupArn != nil {
+		s.WriteString(schemas.DescribeLineageGroupResponse_LineageGroupArn, *v.LineageGroupArn)
+	}
+	if v.LineageGroupName != nil {
+		s.WriteString(schemas.DescribeLineageGroupResponse_LineageGroupName, *v.LineageGroupName)
+	}
+}
+func (v *DescribeLineageGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLineageGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLineageGroupResponse_CreatedBy:
+			v.CreatedBy = &types.UserContext{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.DescribeLineageGroupResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeLineageGroupResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeLineageGroupResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeLineageGroupResponse_Description, v.Description)
+		case schemas.DescribeLineageGroupResponse_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.DescribeLineageGroupResponse_DisplayName, v.DisplayName)
+		case schemas.DescribeLineageGroupResponse_LastModifiedBy:
+			v.LastModifiedBy = &types.UserContext{}
+			return v.LastModifiedBy.Deserialize(d)
+		case schemas.DescribeLineageGroupResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeLineageGroupResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeLineageGroupResponse_LineageGroupArn:
+			v.LineageGroupArn = new(string)
+			return d.ReadString(schemas.DescribeLineageGroupResponse_LineageGroupArn, v.LineageGroupArn)
+		case schemas.DescribeLineageGroupResponse_LineageGroupName:
+			v.LineageGroupName = new(string)
+			return d.ReadString(schemas.DescribeLineageGroupResponse_LineageGroupName, v.LineageGroupName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLineageGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLineageGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLineageGroup, schemas.DescribeLineageGroupRequest, schemas.DescribeLineageGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLineageGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLineageGroup, schemas.DescribeLineageGroupRequest, schemas.DescribeLineageGroupResponse), output: &DescribeLineageGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

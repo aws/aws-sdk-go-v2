@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type CreateStandbyWorkspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStandbyWorkspacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStandbyWorkspacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStandbyWorkspacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PrimaryRegion != nil {
+		s.WriteString(schemas.CreateStandbyWorkspacesRequest_PrimaryRegion, *v.PrimaryRegion)
+	}
+	serializeStandbyWorkspacesList(s, schemas.CreateStandbyWorkspacesRequest_StandbyWorkspaces, v.StandbyWorkspaces)
+}
+
 type CreateStandbyWorkspacesOutput struct {
 
 	// Information about the standby WorkSpace that could not be created.
@@ -53,13 +68,32 @@ type CreateStandbyWorkspacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStandbyWorkspacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStandbyWorkspacesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStandbyWorkspacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedCreateStandbyWorkspacesRequestList(s, schemas.CreateStandbyWorkspacesResult_FailedStandbyRequests, v.FailedStandbyRequests)
+	serializePendingCreateStandbyWorkspacesRequestList(s, schemas.CreateStandbyWorkspacesResult_PendingStandbyRequests, v.PendingStandbyRequests)
+}
+func (v *CreateStandbyWorkspacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStandbyWorkspacesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStandbyWorkspacesResult_FailedStandbyRequests:
+			return deserializeFailedCreateStandbyWorkspacesRequestList(d, schemas.CreateStandbyWorkspacesResult_FailedStandbyRequests, &v.FailedStandbyRequests)
+		case schemas.CreateStandbyWorkspacesResult_PendingStandbyRequests:
+			return deserializePendingCreateStandbyWorkspacesRequestList(d, schemas.CreateStandbyWorkspacesResult_PendingStandbyRequests, &v.PendingStandbyRequests)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStandbyWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateStandbyWorkspaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStandbyWorkspaces, schemas.CreateStandbyWorkspacesRequest, schemas.CreateStandbyWorkspacesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateStandbyWorkspaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStandbyWorkspaces, schemas.CreateStandbyWorkspacesRequest, schemas.CreateStandbyWorkspacesResult), output: &CreateStandbyWorkspacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

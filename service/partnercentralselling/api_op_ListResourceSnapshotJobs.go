@@ -5,7 +5,9 @@ package partnercentralselling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,35 @@ type ListResourceSnapshotJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceSnapshotJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceSnapshotJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceSnapshotJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.ListResourceSnapshotJobsRequest_Catalog, *v.Catalog)
+	}
+	if v.EngagementIdentifier != nil {
+		s.WriteString(schemas.ListResourceSnapshotJobsRequest_EngagementIdentifier, *v.EngagementIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResourceSnapshotJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceSnapshotJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.Sort != nil {
+		s.WriteStruct(schemas.ListResourceSnapshotJobsRequest_Sort)
+		v.Sort.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListResourceSnapshotJobsRequest_Status, string(v.Status))
+	}
+}
+
 type ListResourceSnapshotJobsOutput struct {
 
 	//  An array of resource snapshot job summary objects.
@@ -73,13 +104,35 @@ type ListResourceSnapshotJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceSnapshotJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceSnapshotJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceSnapshotJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceSnapshotJobsResponse_NextToken, *v.NextToken)
+	}
+	serializeResourceSnapshotJobSummaryList(s, schemas.ListResourceSnapshotJobsResponse_ResourceSnapshotJobSummaries, v.ResourceSnapshotJobSummaries)
+}
+func (v *ListResourceSnapshotJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourceSnapshotJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourceSnapshotJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourceSnapshotJobsResponse_NextToken, v.NextToken)
+		case schemas.ListResourceSnapshotJobsResponse_ResourceSnapshotJobSummaries:
+			return deserializeResourceSnapshotJobSummaryList(d, schemas.ListResourceSnapshotJobsResponse_ResourceSnapshotJobSummaries, &v.ResourceSnapshotJobSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResourceSnapshotJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListResourceSnapshotJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceSnapshotJobs, schemas.ListResourceSnapshotJobsRequest, schemas.ListResourceSnapshotJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListResourceSnapshotJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceSnapshotJobs, schemas.ListResourceSnapshotJobsRequest, schemas.ListResourceSnapshotJobsResponse), output: &ListResourceSnapshotJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

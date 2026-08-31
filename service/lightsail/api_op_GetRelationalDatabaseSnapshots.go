@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetRelationalDatabaseSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRelationalDatabaseSnapshotsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRelationalDatabaseSnapshotsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRelationalDatabaseSnapshotsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PageToken != nil {
+		s.WriteString(schemas.GetRelationalDatabaseSnapshotsRequest_pageToken, *v.PageToken)
+	}
+}
+
 type GetRelationalDatabaseSnapshotsOutput struct {
 
 	// The token to advance to the next page of results from your request.
@@ -56,13 +70,35 @@ type GetRelationalDatabaseSnapshotsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRelationalDatabaseSnapshotsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRelationalDatabaseSnapshotsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRelationalDatabaseSnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetRelationalDatabaseSnapshotsResult_nextPageToken, *v.NextPageToken)
+	}
+	serializeRelationalDatabaseSnapshotList(s, schemas.GetRelationalDatabaseSnapshotsResult_relationalDatabaseSnapshots, v.RelationalDatabaseSnapshots)
+}
+func (v *GetRelationalDatabaseSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRelationalDatabaseSnapshotsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRelationalDatabaseSnapshotsResult_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetRelationalDatabaseSnapshotsResult_nextPageToken, v.NextPageToken)
+		case schemas.GetRelationalDatabaseSnapshotsResult_relationalDatabaseSnapshots:
+			return deserializeRelationalDatabaseSnapshotList(d, schemas.GetRelationalDatabaseSnapshotsResult_relationalDatabaseSnapshots, &v.RelationalDatabaseSnapshots)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRelationalDatabaseSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRelationalDatabaseSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRelationalDatabaseSnapshots, schemas.GetRelationalDatabaseSnapshotsRequest, schemas.GetRelationalDatabaseSnapshotsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRelationalDatabaseSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRelationalDatabaseSnapshots, schemas.GetRelationalDatabaseSnapshotsRequest, schemas.GetRelationalDatabaseSnapshotsResult), output: &GetRelationalDatabaseSnapshotsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

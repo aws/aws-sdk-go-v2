@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type DeleteWorkspaceMediaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkspaceMediaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkspaceMediaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkspaceMediaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteWorkspaceMediaRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MediaType != "" {
+		s.WriteString(schemas.DeleteWorkspaceMediaRequest_MediaType, string(v.MediaType))
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DeleteWorkspaceMediaRequest_WorkspaceId, *v.WorkspaceId)
+	}
+}
+
 type DeleteWorkspaceMediaOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +75,26 @@ type DeleteWorkspaceMediaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkspaceMediaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkspaceMediaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkspaceMediaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteWorkspaceMediaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWorkspaceMediaResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWorkspaceMediaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWorkspaceMedia{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkspaceMedia, schemas.DeleteWorkspaceMediaRequest, schemas.DeleteWorkspaceMediaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteWorkspaceMedia{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkspaceMedia, schemas.DeleteWorkspaceMediaRequest, schemas.DeleteWorkspaceMediaResponse), output: &DeleteWorkspaceMediaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,6 +5,8 @@ package codedeploy
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type ListDeploymentConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeploymentConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDeploymentConfigsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDeploymentConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDeploymentConfigsInput_nextToken, *v.NextToken)
+	}
+}
+
 // Represents the output of a ListDeploymentConfigs operation.
 type ListDeploymentConfigsOutput struct {
 
@@ -53,13 +67,35 @@ type ListDeploymentConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeploymentConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDeploymentConfigsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDeploymentConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeploymentConfigsList(s, schemas.ListDeploymentConfigsOutput_deploymentConfigsList, v.DeploymentConfigsList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDeploymentConfigsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDeploymentConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDeploymentConfigsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDeploymentConfigsOutput_deploymentConfigsList:
+			return deserializeDeploymentConfigsList(d, schemas.ListDeploymentConfigsOutput_deploymentConfigsList, &v.DeploymentConfigsList)
+		case schemas.ListDeploymentConfigsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDeploymentConfigsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDeploymentConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDeploymentConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeploymentConfigs, schemas.ListDeploymentConfigsInput, schemas.ListDeploymentConfigsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDeploymentConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeploymentConfigs, schemas.ListDeploymentConfigsInput, schemas.ListDeploymentConfigsOutput), output: &ListDeploymentConfigsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

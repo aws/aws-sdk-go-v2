@@ -5,7 +5,9 @@ package organizations
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,24 @@ type ListParentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListParentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListParentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListParentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChildId != nil {
+		s.WriteString(schemas.ListParentsRequest_ChildId, *v.ChildId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListParentsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListParentsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListParentsOutput struct {
 
 	// If present, indicates that more output is available than is included in the
@@ -88,13 +108,35 @@ type ListParentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListParentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListParentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListParentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListParentsResponse_NextToken, *v.NextToken)
+	}
+	serializeParents(s, schemas.ListParentsResponse_Parents, v.Parents)
+}
+func (v *ListParentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListParentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListParentsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListParentsResponse_NextToken, v.NextToken)
+		case schemas.ListParentsResponse_Parents:
+			return deserializeParents(d, schemas.ListParentsResponse_Parents, &v.Parents)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListParentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListParents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListParents, schemas.ListParentsRequest, schemas.ListParentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListParents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListParents, schemas.ListParentsRequest, schemas.ListParentsResponse), output: &ListParentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,26 @@ type CreateDiskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDiskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDiskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDiskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAddOnRequestList(s, schemas.CreateDiskRequest_addOns, v.AddOns)
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CreateDiskRequest_availabilityZone, *v.AvailabilityZone)
+	}
+	if v.DiskName != nil {
+		s.WriteString(schemas.CreateDiskRequest_diskName, *v.DiskName)
+	}
+	if v.SizeInGb != nil {
+		s.WriteInt32(schemas.CreateDiskRequest_sizeInGb, *v.SizeInGb)
+	}
+	serializeTagList(s, schemas.CreateDiskRequest_tags, v.Tags)
+}
+
 type CreateDiskOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -76,13 +98,29 @@ type CreateDiskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDiskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDiskResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDiskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.CreateDiskResult_operations, v.Operations)
+}
+func (v *CreateDiskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDiskResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDiskResult_operations:
+			return deserializeOperationList(d, schemas.CreateDiskResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDiskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDisk{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDisk, schemas.CreateDiskRequest, schemas.CreateDiskResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDisk{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDisk, schemas.CreateDiskRequest, schemas.CreateDiskResult), output: &CreateDiskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

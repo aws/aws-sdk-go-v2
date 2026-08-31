@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,49 @@ type UpdateJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AbortConfig != nil {
+		s.WriteStruct(schemas.UpdateJobRequest_abortConfig)
+		v.AbortConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateJobRequest_description, *v.Description)
+	}
+	if v.JobExecutionsRetryConfig != nil {
+		s.WriteStruct(schemas.UpdateJobRequest_jobExecutionsRetryConfig)
+		v.JobExecutionsRetryConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobExecutionsRolloutConfig != nil {
+		s.WriteStruct(schemas.UpdateJobRequest_jobExecutionsRolloutConfig)
+		v.JobExecutionsRolloutConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.UpdateJobRequest_jobId, *v.JobId)
+	}
+	if v.NamespaceId != nil {
+		s.WriteString(schemas.UpdateJobRequest_namespaceId, *v.NamespaceId)
+	}
+	if v.PresignedUrlConfig != nil {
+		s.WriteStruct(schemas.UpdateJobRequest_presignedUrlConfig)
+		v.PresignedUrlConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimeoutConfig != nil {
+		s.WriteStruct(schemas.UpdateJobRequest_timeoutConfig)
+		v.TimeoutConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -80,13 +125,26 @@ type UpdateJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateJob, schemas.UpdateJobRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateJob, schemas.UpdateJobRequest, nil), output: &UpdateJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

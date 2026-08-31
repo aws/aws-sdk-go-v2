@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -39,6 +40,18 @@ type DescribeProcessingJobInput struct {
 	ProcessingJobName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeProcessingJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProcessingJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProcessingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProcessingJobName != nil {
+		s.WriteString(schemas.DescribeProcessingJobRequest_ProcessingJobName, *v.ProcessingJobName)
+	}
 }
 
 type DescribeProcessingJobOutput struct {
@@ -131,13 +144,162 @@ type DescribeProcessingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProcessingJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProcessingJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProcessingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppSpecification != nil {
+		s.WriteStruct(schemas.DescribeProcessingJobResponse_AppSpecification)
+		v.AppSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutoMLJobArn != nil {
+		s.WriteString(schemas.DescribeProcessingJobResponse_AutoMLJobArn, *v.AutoMLJobArn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeProcessingJobResponse_CreationTime, *v.CreationTime)
+	}
+	serializeProcessingEnvironmentMap(s, schemas.DescribeProcessingJobResponse_Environment, v.Environment)
+	if v.ExitMessage != nil {
+		s.WriteString(schemas.DescribeProcessingJobResponse_ExitMessage, *v.ExitMessage)
+	}
+	if v.ExperimentConfig != nil {
+		s.WriteStruct(schemas.DescribeProcessingJobResponse_ExperimentConfig)
+		v.ExperimentConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeProcessingJobResponse_FailureReason, *v.FailureReason)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeProcessingJobResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.MonitoringScheduleArn != nil {
+		s.WriteString(schemas.DescribeProcessingJobResponse_MonitoringScheduleArn, *v.MonitoringScheduleArn)
+	}
+	if v.NetworkConfig != nil {
+		s.WriteStruct(schemas.DescribeProcessingJobResponse_NetworkConfig)
+		v.NetworkConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProcessingEndTime != nil {
+		s.WriteTime(schemas.DescribeProcessingJobResponse_ProcessingEndTime, *v.ProcessingEndTime)
+	}
+	serializeProcessingInputs(s, schemas.DescribeProcessingJobResponse_ProcessingInputs, v.ProcessingInputs)
+	if v.ProcessingJobArn != nil {
+		s.WriteString(schemas.DescribeProcessingJobResponse_ProcessingJobArn, *v.ProcessingJobArn)
+	}
+	if v.ProcessingJobName != nil {
+		s.WriteString(schemas.DescribeProcessingJobResponse_ProcessingJobName, *v.ProcessingJobName)
+	}
+	if v.ProcessingJobStatus != "" {
+		s.WriteString(schemas.DescribeProcessingJobResponse_ProcessingJobStatus, string(v.ProcessingJobStatus))
+	}
+	if v.ProcessingOutputConfig != nil {
+		s.WriteStruct(schemas.DescribeProcessingJobResponse_ProcessingOutputConfig)
+		v.ProcessingOutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProcessingResources != nil {
+		s.WriteStruct(schemas.DescribeProcessingJobResponse_ProcessingResources)
+		v.ProcessingResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProcessingStartTime != nil {
+		s.WriteTime(schemas.DescribeProcessingJobResponse_ProcessingStartTime, *v.ProcessingStartTime)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeProcessingJobResponse_RoleArn, *v.RoleArn)
+	}
+	if v.StoppingCondition != nil {
+		s.WriteStruct(schemas.DescribeProcessingJobResponse_StoppingCondition)
+		v.StoppingCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrainingJobArn != nil {
+		s.WriteString(schemas.DescribeProcessingJobResponse_TrainingJobArn, *v.TrainingJobArn)
+	}
+}
+func (v *DescribeProcessingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeProcessingJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeProcessingJobResponse_AppSpecification:
+			v.AppSpecification = &types.AppSpecification{}
+			return v.AppSpecification.Deserialize(d)
+		case schemas.DescribeProcessingJobResponse_AutoMLJobArn:
+			v.AutoMLJobArn = new(string)
+			return d.ReadString(schemas.DescribeProcessingJobResponse_AutoMLJobArn, v.AutoMLJobArn)
+		case schemas.DescribeProcessingJobResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeProcessingJobResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeProcessingJobResponse_Environment:
+			return deserializeProcessingEnvironmentMap(d, schemas.DescribeProcessingJobResponse_Environment, &v.Environment)
+		case schemas.DescribeProcessingJobResponse_ExitMessage:
+			v.ExitMessage = new(string)
+			return d.ReadString(schemas.DescribeProcessingJobResponse_ExitMessage, v.ExitMessage)
+		case schemas.DescribeProcessingJobResponse_ExperimentConfig:
+			v.ExperimentConfig = &types.ExperimentConfig{}
+			return v.ExperimentConfig.Deserialize(d)
+		case schemas.DescribeProcessingJobResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeProcessingJobResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeProcessingJobResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeProcessingJobResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeProcessingJobResponse_MonitoringScheduleArn:
+			v.MonitoringScheduleArn = new(string)
+			return d.ReadString(schemas.DescribeProcessingJobResponse_MonitoringScheduleArn, v.MonitoringScheduleArn)
+		case schemas.DescribeProcessingJobResponse_NetworkConfig:
+			v.NetworkConfig = &types.NetworkConfig{}
+			return v.NetworkConfig.Deserialize(d)
+		case schemas.DescribeProcessingJobResponse_ProcessingEndTime:
+			v.ProcessingEndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeProcessingJobResponse_ProcessingEndTime, v.ProcessingEndTime)
+		case schemas.DescribeProcessingJobResponse_ProcessingInputs:
+			return deserializeProcessingInputs(d, schemas.DescribeProcessingJobResponse_ProcessingInputs, &v.ProcessingInputs)
+		case schemas.DescribeProcessingJobResponse_ProcessingJobArn:
+			v.ProcessingJobArn = new(string)
+			return d.ReadString(schemas.DescribeProcessingJobResponse_ProcessingJobArn, v.ProcessingJobArn)
+		case schemas.DescribeProcessingJobResponse_ProcessingJobName:
+			v.ProcessingJobName = new(string)
+			return d.ReadString(schemas.DescribeProcessingJobResponse_ProcessingJobName, v.ProcessingJobName)
+		case schemas.DescribeProcessingJobResponse_ProcessingJobStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeProcessingJobResponse_ProcessingJobStatus, &ev); err != nil {
+				return err
+			}
+			v.ProcessingJobStatus = types.ProcessingJobStatus(ev)
+			return nil
+		case schemas.DescribeProcessingJobResponse_ProcessingOutputConfig:
+			v.ProcessingOutputConfig = &types.ProcessingOutputConfig{}
+			return v.ProcessingOutputConfig.Deserialize(d)
+		case schemas.DescribeProcessingJobResponse_ProcessingResources:
+			v.ProcessingResources = &types.ProcessingResources{}
+			return v.ProcessingResources.Deserialize(d)
+		case schemas.DescribeProcessingJobResponse_ProcessingStartTime:
+			v.ProcessingStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeProcessingJobResponse_ProcessingStartTime, v.ProcessingStartTime)
+		case schemas.DescribeProcessingJobResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeProcessingJobResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeProcessingJobResponse_StoppingCondition:
+			v.StoppingCondition = &types.ProcessingStoppingCondition{}
+			return v.StoppingCondition.Deserialize(d)
+		case schemas.DescribeProcessingJobResponse_TrainingJobArn:
+			v.TrainingJobArn = new(string)
+			return d.ReadString(schemas.DescribeProcessingJobResponse_TrainingJobArn, v.TrainingJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeProcessingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeProcessingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProcessingJob, schemas.DescribeProcessingJobRequest, schemas.DescribeProcessingJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeProcessingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProcessingJob, schemas.DescribeProcessingJobRequest, schemas.DescribeProcessingJobResponse), output: &DescribeProcessingJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

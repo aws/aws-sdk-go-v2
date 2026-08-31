@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,36 @@ type CreateRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRuleActions(s, schemas.CreateRuleRequest_Actions, v.Actions)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRuleRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Function != nil {
+		s.WriteString(schemas.CreateRuleRequest_Function, *v.Function)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateRuleRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRuleRequest_Name, *v.Name)
+	}
+	if v.PublishStatus != "" {
+		s.WriteString(schemas.CreateRuleRequest_PublishStatus, string(v.PublishStatus))
+	}
+	if v.TriggerEventSource != nil {
+		s.WriteStruct(schemas.CreateRuleRequest_TriggerEventSource)
+		v.TriggerEventSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateRuleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the rule.
@@ -92,13 +124,38 @@ type CreateRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleArn != nil {
+		s.WriteString(schemas.CreateRuleResponse_RuleArn, *v.RuleArn)
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.CreateRuleResponse_RuleId, *v.RuleId)
+	}
+}
+func (v *CreateRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRuleResponse_RuleArn:
+			v.RuleArn = new(string)
+			return d.ReadString(schemas.CreateRuleResponse_RuleArn, v.RuleArn)
+		case schemas.CreateRuleResponse_RuleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.CreateRuleResponse_RuleId, v.RuleId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRule, schemas.CreateRuleRequest, schemas.CreateRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRule, schemas.CreateRuleRequest, schemas.CreateRuleResponse), output: &CreateRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

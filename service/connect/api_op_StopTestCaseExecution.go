@@ -5,6 +5,8 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type StopTestCaseExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopTestCaseExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopTestCaseExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopTestCaseExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StopTestCaseExecutionRequest_ClientToken, *v.ClientToken)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StopTestCaseExecutionRequest_InstanceId, *v.InstanceId)
+	}
+	if v.TestCaseExecutionId != nil {
+		s.WriteString(schemas.StopTestCaseExecutionRequest_TestCaseExecutionId, *v.TestCaseExecutionId)
+	}
+	if v.TestCaseId != nil {
+		s.WriteString(schemas.StopTestCaseExecutionRequest_TestCaseId, *v.TestCaseId)
+	}
+}
+
 type StopTestCaseExecutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,13 +81,26 @@ type StopTestCaseExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopTestCaseExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopTestCaseExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopTestCaseExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopTestCaseExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopTestCaseExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopTestCaseExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopTestCaseExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopTestCaseExecution, schemas.StopTestCaseExecutionRequest, schemas.StopTestCaseExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopTestCaseExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopTestCaseExecution, schemas.StopTestCaseExecutionRequest, schemas.StopTestCaseExecutionResponse), output: &StopTestCaseExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

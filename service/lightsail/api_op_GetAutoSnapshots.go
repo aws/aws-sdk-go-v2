@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type GetAutoSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutoSnapshotsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutoSnapshotsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutoSnapshotsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceName != nil {
+		s.WriteString(schemas.GetAutoSnapshotsRequest_resourceName, *v.ResourceName)
+	}
+}
+
 type GetAutoSnapshotsOutput struct {
 
 	// An array of objects that describe the automatic snapshots that are available
@@ -57,13 +71,45 @@ type GetAutoSnapshotsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutoSnapshotsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutoSnapshotsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutoSnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutoSnapshotDetailsList(s, schemas.GetAutoSnapshotsResult_autoSnapshots, v.AutoSnapshots)
+	if v.ResourceName != nil {
+		s.WriteString(schemas.GetAutoSnapshotsResult_resourceName, *v.ResourceName)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.GetAutoSnapshotsResult_resourceType, string(v.ResourceType))
+	}
+}
+func (v *GetAutoSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAutoSnapshotsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAutoSnapshotsResult_autoSnapshots:
+			return deserializeAutoSnapshotDetailsList(d, schemas.GetAutoSnapshotsResult_autoSnapshots, &v.AutoSnapshots)
+		case schemas.GetAutoSnapshotsResult_resourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.GetAutoSnapshotsResult_resourceName, v.ResourceName)
+		case schemas.GetAutoSnapshotsResult_resourceType:
+			var ev string
+			if err := d.ReadString(schemas.GetAutoSnapshotsResult_resourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = types.ResourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAutoSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAutoSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutoSnapshots, schemas.GetAutoSnapshotsRequest, schemas.GetAutoSnapshotsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAutoSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutoSnapshots, schemas.GetAutoSnapshotsRequest, schemas.GetAutoSnapshotsResult), output: &GetAutoSnapshotsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

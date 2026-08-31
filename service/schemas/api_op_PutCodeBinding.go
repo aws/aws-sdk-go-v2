@@ -4,7 +4,9 @@ package schemas
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/schemas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/schemas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -48,6 +50,27 @@ type PutCodeBindingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutCodeBindingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutCodeBindingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutCodeBindingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Language != nil {
+		s.WriteString(schemas.PutCodeBindingRequest_Language, *v.Language)
+	}
+	if v.RegistryName != nil {
+		s.WriteString(schemas.PutCodeBindingRequest_RegistryName, *v.RegistryName)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.PutCodeBindingRequest_SchemaName, *v.SchemaName)
+	}
+	if v.SchemaVersion != nil {
+		s.WriteString(schemas.PutCodeBindingRequest_SchemaVersion, *v.SchemaVersion)
+	}
+}
+
 type PutCodeBindingOutput struct {
 
 	// The time and date that the code binding was created.
@@ -68,13 +91,54 @@ type PutCodeBindingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutCodeBindingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutCodeBindingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutCodeBindingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.PutCodeBindingResponse_CreationDate, *v.CreationDate)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.PutCodeBindingResponse_LastModified, *v.LastModified)
+	}
+	if v.SchemaVersion != nil {
+		s.WriteString(schemas.PutCodeBindingResponse_SchemaVersion, *v.SchemaVersion)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.PutCodeBindingResponse_Status, string(v.Status))
+	}
+}
+func (v *PutCodeBindingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutCodeBindingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutCodeBindingResponse_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.PutCodeBindingResponse_CreationDate, v.CreationDate)
+		case schemas.PutCodeBindingResponse_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.PutCodeBindingResponse_LastModified, v.LastModified)
+		case schemas.PutCodeBindingResponse_SchemaVersion:
+			v.SchemaVersion = new(string)
+			return d.ReadString(schemas.PutCodeBindingResponse_SchemaVersion, v.SchemaVersion)
+		case schemas.PutCodeBindingResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.PutCodeBindingResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CodeGenerationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutCodeBindingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutCodeBinding{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutCodeBinding, schemas.PutCodeBindingRequest, schemas.PutCodeBindingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutCodeBinding{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutCodeBinding, schemas.PutCodeBindingRequest, schemas.PutCodeBindingResponse), output: &PutCodeBindingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type StartInferenceExperimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartInferenceExperimentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartInferenceExperimentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartInferenceExperimentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.StartInferenceExperimentRequest_Name, *v.Name)
+	}
+}
+
 type StartInferenceExperimentOutput struct {
 
 	// The ARN of the started inference experiment to start.
@@ -46,13 +60,32 @@ type StartInferenceExperimentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartInferenceExperimentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartInferenceExperimentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartInferenceExperimentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InferenceExperimentArn != nil {
+		s.WriteString(schemas.StartInferenceExperimentResponse_InferenceExperimentArn, *v.InferenceExperimentArn)
+	}
+}
+func (v *StartInferenceExperimentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartInferenceExperimentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartInferenceExperimentResponse_InferenceExperimentArn:
+			v.InferenceExperimentArn = new(string)
+			return d.ReadString(schemas.StartInferenceExperimentResponse_InferenceExperimentArn, v.InferenceExperimentArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartInferenceExperimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartInferenceExperiment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartInferenceExperiment, schemas.StartInferenceExperimentRequest, schemas.StartInferenceExperimentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartInferenceExperiment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartInferenceExperiment, schemas.StartInferenceExperimentRequest, schemas.StartInferenceExperimentResponse), output: &StartInferenceExperimentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

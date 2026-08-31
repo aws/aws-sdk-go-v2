@@ -5,7 +5,9 @@ package mailmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,29 @@ type CreateRelayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRelayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRelayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRelayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRelayAuthentication(s, schemas.CreateRelayRequest_Authentication, v.Authentication)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRelayRequest_ClientToken, *v.ClientToken)
+	}
+	if v.RelayName != nil {
+		s.WriteString(schemas.CreateRelayRequest_RelayName, *v.RelayName)
+	}
+	if v.ServerName != nil {
+		s.WriteString(schemas.CreateRelayRequest_ServerName, *v.ServerName)
+	}
+	if v.ServerPort != nil {
+		s.WriteInt32(schemas.CreateRelayRequest_ServerPort, *v.ServerPort)
+	}
+	serializeTagList(s, schemas.CreateRelayRequest_Tags, v.Tags)
+}
+
 type CreateRelayOutput struct {
 
 	// A unique identifier of the created relay resource.
@@ -73,13 +98,32 @@ type CreateRelayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRelayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRelayResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRelayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RelayId != nil {
+		s.WriteString(schemas.CreateRelayResponse_RelayId, *v.RelayId)
+	}
+}
+func (v *CreateRelayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRelayResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRelayResponse_RelayId:
+			v.RelayId = new(string)
+			return d.ReadString(schemas.CreateRelayResponse_RelayId, v.RelayId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRelayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateRelay{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRelay, schemas.CreateRelayRequest, schemas.CreateRelayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateRelay{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRelay, schemas.CreateRelayRequest, schemas.CreateRelayResponse), output: &CreateRelayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

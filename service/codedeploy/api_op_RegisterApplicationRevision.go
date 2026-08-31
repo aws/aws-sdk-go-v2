@@ -4,7 +4,9 @@ package codedeploy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,26 @@ type RegisterApplicationRevisionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterApplicationRevisionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterApplicationRevisionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterApplicationRevisionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.RegisterApplicationRevisionInput_applicationName, *v.ApplicationName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RegisterApplicationRevisionInput_description, *v.Description)
+	}
+	if v.Revision != nil {
+		s.WriteStruct(schemas.RegisterApplicationRevisionInput_revision)
+		v.Revision.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type RegisterApplicationRevisionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +74,26 @@ type RegisterApplicationRevisionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterApplicationRevisionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterApplicationRevisionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RegisterApplicationRevisionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterApplicationRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterApplicationRevision{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterApplicationRevision, schemas.RegisterApplicationRevisionInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterApplicationRevision{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterApplicationRevision, schemas.RegisterApplicationRevisionInput, nil), output: &RegisterApplicationRevisionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

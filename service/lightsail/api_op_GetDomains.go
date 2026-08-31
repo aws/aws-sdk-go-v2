@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDomainsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDomainsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDomainsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PageToken != nil {
+		s.WriteString(schemas.GetDomainsRequest_pageToken, *v.PageToken)
+	}
+}
+
 type GetDomainsOutput struct {
 
 	// An array of key-value pairs containing information about each of the domain
@@ -56,13 +70,35 @@ type GetDomainsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDomainsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDomainsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDomainsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDomainList(s, schemas.GetDomainsResult_domains, v.Domains)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetDomainsResult_nextPageToken, *v.NextPageToken)
+	}
+}
+func (v *GetDomainsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDomainsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDomainsResult_domains:
+			return deserializeDomainList(d, schemas.GetDomainsResult_domains, &v.Domains)
+		case schemas.GetDomainsResult_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetDomainsResult_nextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDomains{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomains, schemas.GetDomainsRequest, schemas.GetDomainsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDomains{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomains, schemas.GetDomainsRequest, schemas.GetDomainsResult), output: &GetDomainsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

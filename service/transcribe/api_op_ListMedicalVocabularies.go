@@ -5,7 +5,9 @@ package transcribe
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,27 @@ type ListMedicalVocabulariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMedicalVocabulariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMedicalVocabulariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMedicalVocabulariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMedicalVocabulariesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListMedicalVocabulariesRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMedicalVocabulariesRequest_NextToken, *v.NextToken)
+	}
+	if v.StateEquals != "" {
+		s.WriteString(schemas.ListMedicalVocabulariesRequest_StateEquals, string(v.StateEquals))
+	}
+}
+
 type ListMedicalVocabulariesOutput struct {
 
 	// If NextToken is present in your response, it indicates that not all results are
@@ -81,13 +104,45 @@ type ListMedicalVocabulariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMedicalVocabulariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMedicalVocabulariesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMedicalVocabulariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMedicalVocabulariesResponse_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListMedicalVocabulariesResponse_Status, string(v.Status))
+	}
+	serializeVocabularies(s, schemas.ListMedicalVocabulariesResponse_Vocabularies, v.Vocabularies)
+}
+func (v *ListMedicalVocabulariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMedicalVocabulariesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMedicalVocabulariesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMedicalVocabulariesResponse_NextToken, v.NextToken)
+		case schemas.ListMedicalVocabulariesResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.ListMedicalVocabulariesResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.VocabularyState(ev)
+			return nil
+		case schemas.ListMedicalVocabulariesResponse_Vocabularies:
+			return deserializeVocabularies(d, schemas.ListMedicalVocabulariesResponse_Vocabularies, &v.Vocabularies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMedicalVocabulariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMedicalVocabularies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMedicalVocabularies, schemas.ListMedicalVocabulariesRequest, schemas.ListMedicalVocabulariesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMedicalVocabularies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMedicalVocabularies, schemas.ListMedicalVocabulariesRequest, schemas.ListMedicalVocabulariesResponse), output: &ListMedicalVocabulariesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type ListCollectionGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCollectionGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCollectionGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCollectionGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCollectionGroupsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCollectionGroupsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListCollectionGroupsOutput struct {
 
 	// Details about each collection group.
@@ -57,13 +74,35 @@ type ListCollectionGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCollectionGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCollectionGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCollectionGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCollectionGroupSummaries(s, schemas.ListCollectionGroupsResponse_collectionGroupSummaries, v.CollectionGroupSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCollectionGroupsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCollectionGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCollectionGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCollectionGroupsResponse_collectionGroupSummaries:
+			return deserializeCollectionGroupSummaries(d, schemas.ListCollectionGroupsResponse_collectionGroupSummaries, &v.CollectionGroupSummaries)
+		case schemas.ListCollectionGroupsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCollectionGroupsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCollectionGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListCollectionGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollectionGroups, schemas.ListCollectionGroupsRequest, schemas.ListCollectionGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListCollectionGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollectionGroups, schemas.ListCollectionGroupsRequest, schemas.ListCollectionGroupsResponse), output: &ListCollectionGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type ModifyEndpointEncryptionModeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyEndpointEncryptionModeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyEndpointEncryptionModeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyEndpointEncryptionModeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.ModifyEndpointEncryptionModeRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.EndpointEncryptionMode != "" {
+		s.WriteString(schemas.ModifyEndpointEncryptionModeRequest_EndpointEncryptionMode, string(v.EndpointEncryptionMode))
+	}
+}
+
 type ModifyEndpointEncryptionModeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +65,26 @@ type ModifyEndpointEncryptionModeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyEndpointEncryptionModeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyEndpointEncryptionModeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyEndpointEncryptionModeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ModifyEndpointEncryptionModeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyEndpointEncryptionModeResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyEndpointEncryptionModeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyEndpointEncryptionMode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyEndpointEncryptionMode, schemas.ModifyEndpointEncryptionModeRequest, schemas.ModifyEndpointEncryptionModeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpModifyEndpointEncryptionMode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyEndpointEncryptionMode, schemas.ModifyEndpointEncryptionModeRequest, schemas.ModifyEndpointEncryptionModeResponse), output: &ModifyEndpointEncryptionModeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetGcmChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGcmChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGcmChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGcmChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetGcmChannelRequest_ApplicationId, *v.ApplicationId)
+	}
+}
+
 type GetGcmChannelOutput struct {
 
 	// Provides information about the status and settings of the GCM channel for an
@@ -52,13 +66,34 @@ type GetGcmChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGcmChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGcmChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGcmChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GCMChannelResponse != nil {
+		s.WriteStruct(schemas.GetGcmChannelResponse_GCMChannelResponse)
+		v.GCMChannelResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetGcmChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGcmChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGcmChannelResponse_GCMChannelResponse:
+			v.GCMChannelResponse = &types.GCMChannelResponse{}
+			return v.GCMChannelResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGcmChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGcmChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGcmChannel, schemas.GetGcmChannelRequest, schemas.GetGcmChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGcmChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGcmChannel, schemas.GetGcmChannelRequest, schemas.GetGcmChannelResponse), output: &GetGcmChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

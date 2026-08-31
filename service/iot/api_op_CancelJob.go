@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,27 @@ type CancelJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Comment != nil {
+		s.WriteString(schemas.CancelJobRequest_comment, *v.Comment)
+	}
+	if v.Force != false {
+		s.WriteBool(schemas.CancelJobRequest_force, v.Force)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.CancelJobRequest_jobId, *v.JobId)
+	}
+	if v.ReasonCode != nil {
+		s.WriteString(schemas.CancelJobRequest_reasonCode, *v.ReasonCode)
+	}
+}
+
 type CancelJobOutput struct {
 
 	// A short text description of the job.
@@ -70,13 +93,44 @@ type CancelJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CancelJobResponse_description, *v.Description)
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.CancelJobResponse_jobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.CancelJobResponse_jobId, *v.JobId)
+	}
+}
+func (v *CancelJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelJobResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CancelJobResponse_description, v.Description)
+		case schemas.CancelJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.CancelJobResponse_jobArn, v.JobArn)
+		case schemas.CancelJobResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.CancelJobResponse_jobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelJob, schemas.CancelJobRequest, schemas.CancelJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelJob, schemas.CancelJobRequest, schemas.CancelJobResponse), output: &CancelJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

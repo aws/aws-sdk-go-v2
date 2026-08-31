@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -75,6 +77,45 @@ type ListClusterEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClusterEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClusterEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClusterEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ListClusterEventsRequest_ClusterName, *v.ClusterName)
+	}
+	if v.EventTimeAfter != nil {
+		s.WriteTime(schemas.ListClusterEventsRequest_EventTimeAfter, *v.EventTimeAfter)
+	}
+	if v.EventTimeBefore != nil {
+		s.WriteTime(schemas.ListClusterEventsRequest_EventTimeBefore, *v.EventTimeBefore)
+	}
+	if v.InstanceGroupName != nil {
+		s.WriteString(schemas.ListClusterEventsRequest_InstanceGroupName, *v.InstanceGroupName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListClusterEventsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClusterEventsRequest_NextToken, *v.NextToken)
+	}
+	if v.NodeId != nil {
+		s.WriteString(schemas.ListClusterEventsRequest_NodeId, *v.NodeId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.ListClusterEventsRequest_ResourceType, string(v.ResourceType))
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListClusterEventsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListClusterEventsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListClusterEventsOutput struct {
 
 	// A list of event summaries matching the specified criteria.
@@ -90,13 +131,35 @@ type ListClusterEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClusterEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClusterEventsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClusterEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClusterEventSummaries(s, schemas.ListClusterEventsResponse_Events, v.Events)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClusterEventsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListClusterEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListClusterEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListClusterEventsResponse_Events:
+			return deserializeClusterEventSummaries(d, schemas.ListClusterEventsResponse_Events, &v.Events)
+		case schemas.ListClusterEventsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListClusterEventsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListClusterEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListClusterEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClusterEvents, schemas.ListClusterEventsRequest, schemas.ListClusterEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListClusterEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClusterEvents, schemas.ListClusterEventsRequest, schemas.ListClusterEventsResponse), output: &ListClusterEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

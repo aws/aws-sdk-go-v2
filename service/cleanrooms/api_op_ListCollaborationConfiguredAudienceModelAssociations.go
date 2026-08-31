@@ -5,7 +5,9 @@ package cleanrooms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListCollaborationConfiguredAudienceModelAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCollaborationConfiguredAudienceModelAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCollaborationConfiguredAudienceModelAssociationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCollaborationConfiguredAudienceModelAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.ListCollaborationConfiguredAudienceModelAssociationsInput_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCollaborationConfiguredAudienceModelAssociationsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCollaborationConfiguredAudienceModelAssociationsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListCollaborationConfiguredAudienceModelAssociationsOutput struct {
 
 	// The metadata of the configured audience model association within a
@@ -61,13 +81,35 @@ type ListCollaborationConfiguredAudienceModelAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCollaborationConfiguredAudienceModelAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCollaborationConfiguredAudienceModelAssociationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCollaborationConfiguredAudienceModelAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCollaborationConfiguredAudienceModelAssociationSummaryList(s, schemas.ListCollaborationConfiguredAudienceModelAssociationsOutput_collaborationConfiguredAudienceModelAssociationSummaries, v.CollaborationConfiguredAudienceModelAssociationSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCollaborationConfiguredAudienceModelAssociationsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCollaborationConfiguredAudienceModelAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCollaborationConfiguredAudienceModelAssociationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCollaborationConfiguredAudienceModelAssociationsOutput_collaborationConfiguredAudienceModelAssociationSummaries:
+			return deserializeCollaborationConfiguredAudienceModelAssociationSummaryList(d, schemas.ListCollaborationConfiguredAudienceModelAssociationsOutput_collaborationConfiguredAudienceModelAssociationSummaries, &v.CollaborationConfiguredAudienceModelAssociationSummaries)
+		case schemas.ListCollaborationConfiguredAudienceModelAssociationsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCollaborationConfiguredAudienceModelAssociationsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCollaborationConfiguredAudienceModelAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCollaborationConfiguredAudienceModelAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollaborationConfiguredAudienceModelAssociations, schemas.ListCollaborationConfiguredAudienceModelAssociationsInput, schemas.ListCollaborationConfiguredAudienceModelAssociationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCollaborationConfiguredAudienceModelAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollaborationConfiguredAudienceModelAssociations, schemas.ListCollaborationConfiguredAudienceModelAssociationsInput, schemas.ListCollaborationConfiguredAudienceModelAssociationsOutput), output: &ListCollaborationConfiguredAudienceModelAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

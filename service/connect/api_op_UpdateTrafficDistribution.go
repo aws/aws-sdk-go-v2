@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,33 @@ type UpdateTrafficDistributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTrafficDistributionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTrafficDistributionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTrafficDistributionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentConfig != nil {
+		s.WriteStruct(schemas.UpdateTrafficDistributionRequest_AgentConfig)
+		v.AgentConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateTrafficDistributionRequest_Id, *v.Id)
+	}
+	if v.SignInConfig != nil {
+		s.WriteStruct(schemas.UpdateTrafficDistributionRequest_SignInConfig)
+		v.SignInConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TelephonyConfig != nil {
+		s.WriteStruct(schemas.UpdateTrafficDistributionRequest_TelephonyConfig)
+		v.TelephonyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateTrafficDistributionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -74,13 +103,26 @@ type UpdateTrafficDistributionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTrafficDistributionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTrafficDistributionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTrafficDistributionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateTrafficDistributionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTrafficDistributionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTrafficDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTrafficDistribution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTrafficDistribution, schemas.UpdateTrafficDistributionRequest, schemas.UpdateTrafficDistributionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTrafficDistribution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTrafficDistribution, schemas.UpdateTrafficDistributionRequest, schemas.UpdateTrafficDistributionResponse), output: &UpdateTrafficDistributionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

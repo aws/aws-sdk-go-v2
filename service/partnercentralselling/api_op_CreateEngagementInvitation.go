@@ -5,7 +5,9 @@ package partnercentralselling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,29 @@ type CreateEngagementInvitationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEngagementInvitationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEngagementInvitationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEngagementInvitationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.CreateEngagementInvitationRequest_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateEngagementInvitationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.EngagementIdentifier != nil {
+		s.WriteString(schemas.CreateEngagementInvitationRequest_EngagementIdentifier, *v.EngagementIdentifier)
+	}
+	if v.Invitation != nil {
+		s.WriteStruct(schemas.CreateEngagementInvitationRequest_Invitation)
+		v.Invitation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateEngagementInvitationOutput struct {
 
 	//  The Amazon Resource Name (ARN) that uniquely identifies the engagement
@@ -81,13 +106,38 @@ type CreateEngagementInvitationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEngagementInvitationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEngagementInvitationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEngagementInvitationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateEngagementInvitationResponse_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateEngagementInvitationResponse_Id, *v.Id)
+	}
+}
+func (v *CreateEngagementInvitationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEngagementInvitationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEngagementInvitationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateEngagementInvitationResponse_Arn, v.Arn)
+		case schemas.CreateEngagementInvitationResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateEngagementInvitationResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEngagementInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateEngagementInvitation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEngagementInvitation, schemas.CreateEngagementInvitationRequest, schemas.CreateEngagementInvitationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateEngagementInvitation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEngagementInvitation, schemas.CreateEngagementInvitationRequest, schemas.CreateEngagementInvitationResponse), output: &CreateEngagementInvitationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

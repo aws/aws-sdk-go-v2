@@ -4,7 +4,9 @@ package amp
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amp/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type DescribeScraperLoggingConfigurationInput struct {
 	ScraperId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeScraperLoggingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScraperLoggingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScraperLoggingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScraperId != nil {
+		s.WriteString(schemas.DescribeScraperLoggingConfigurationRequest_scraperId, *v.ScraperId)
+	}
 }
 
 type DescribeScraperLoggingConfigurationOutput struct {
@@ -69,13 +83,52 @@ type DescribeScraperLoggingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScraperLoggingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScraperLoggingConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScraperLoggingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeScraperLoggingDestination(s, schemas.DescribeScraperLoggingConfigurationResponse_loggingDestination, v.LoggingDestination)
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.DescribeScraperLoggingConfigurationResponse_modifiedAt, *v.ModifiedAt)
+	}
+	serializeScraperComponents(s, schemas.DescribeScraperLoggingConfigurationResponse_scraperComponents, v.ScraperComponents)
+	if v.ScraperId != nil {
+		s.WriteString(schemas.DescribeScraperLoggingConfigurationResponse_scraperId, *v.ScraperId)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.DescribeScraperLoggingConfigurationResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeScraperLoggingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeScraperLoggingConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeScraperLoggingConfigurationResponse_loggingDestination:
+			return deserializeScraperLoggingDestination(d, schemas.DescribeScraperLoggingConfigurationResponse_loggingDestination, &v.LoggingDestination)
+		case schemas.DescribeScraperLoggingConfigurationResponse_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeScraperLoggingConfigurationResponse_modifiedAt, v.ModifiedAt)
+		case schemas.DescribeScraperLoggingConfigurationResponse_scraperComponents:
+			return deserializeScraperComponents(d, schemas.DescribeScraperLoggingConfigurationResponse_scraperComponents, &v.ScraperComponents)
+		case schemas.DescribeScraperLoggingConfigurationResponse_scraperId:
+			v.ScraperId = new(string)
+			return d.ReadString(schemas.DescribeScraperLoggingConfigurationResponse_scraperId, v.ScraperId)
+		case schemas.DescribeScraperLoggingConfigurationResponse_status:
+			v.Status = &types.ScraperLoggingConfigurationStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeScraperLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeScraperLoggingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScraperLoggingConfiguration, schemas.DescribeScraperLoggingConfigurationRequest, schemas.DescribeScraperLoggingConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeScraperLoggingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScraperLoggingConfiguration, schemas.DescribeScraperLoggingConfigurationRequest, schemas.DescribeScraperLoggingConfigurationResponse), output: &DescribeScraperLoggingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

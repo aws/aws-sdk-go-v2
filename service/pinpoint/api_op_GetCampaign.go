@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type GetCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCampaignInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCampaignRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCampaignInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetCampaignRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.CampaignId != nil {
+		s.WriteString(schemas.GetCampaignRequest_CampaignId, *v.CampaignId)
+	}
+}
+
 type GetCampaignOutput struct {
 
 	// Provides information about the status, configuration, and other settings for a
@@ -55,13 +72,34 @@ type GetCampaignOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCampaignOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCampaignResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCampaignOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CampaignResponse != nil {
+		s.WriteStruct(schemas.GetCampaignResponse_CampaignResponse)
+		v.CampaignResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCampaignOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCampaignResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCampaignResponse_CampaignResponse:
+			v.CampaignResponse = &types.CampaignResponse{}
+			return v.CampaignResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCampaign{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCampaign, schemas.GetCampaignRequest, schemas.GetCampaignResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCampaign{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCampaign, schemas.GetCampaignRequest, schemas.GetCampaignResponse), output: &GetCampaignOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

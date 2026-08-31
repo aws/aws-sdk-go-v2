@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,33 @@ type ListUserProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUserProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUserProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdEquals != nil {
+		s.WriteString(schemas.ListUserProfilesRequest_DomainIdEquals, *v.DomainIdEquals)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListUserProfilesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUserProfilesRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListUserProfilesRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListUserProfilesRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.UserProfileNameContains != nil {
+		s.WriteString(schemas.ListUserProfilesRequest_UserProfileNameContains, *v.UserProfileNameContains)
+	}
+}
+
 type ListUserProfilesOutput struct {
 
 	// If the previous response was truncated, you will receive this token. Use it in
@@ -69,13 +98,35 @@ type ListUserProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUserProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUserProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUserProfilesResponse_NextToken, *v.NextToken)
+	}
+	serializeUserProfileList(s, schemas.ListUserProfilesResponse_UserProfiles, v.UserProfiles)
+}
+func (v *ListUserProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUserProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUserProfilesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUserProfilesResponse_NextToken, v.NextToken)
+		case schemas.ListUserProfilesResponse_UserProfiles:
+			return deserializeUserProfileList(d, schemas.ListUserProfilesResponse_UserProfiles, &v.UserProfiles)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUserProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListUserProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserProfiles, schemas.ListUserProfilesRequest, schemas.ListUserProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListUserProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserProfiles, schemas.ListUserProfilesRequest, schemas.ListUserProfilesResponse), output: &ListUserProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

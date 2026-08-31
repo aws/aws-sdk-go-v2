@@ -5,7 +5,9 @@ package emr
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -52,6 +54,25 @@ type ListClustersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClustersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClustersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClustersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClusterStateList(s, schemas.ListClustersInput_ClusterStates, v.ClusterStates)
+	if v.CreatedAfter != nil {
+		s.WriteTime(schemas.ListClustersInput_CreatedAfter, *v.CreatedAfter)
+	}
+	if v.CreatedBefore != nil {
+		s.WriteTime(schemas.ListClustersInput_CreatedBefore, *v.CreatedBefore)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListClustersInput_Marker, *v.Marker)
+	}
+}
+
 // This contains a ClusterSummaryList with the cluster details; for example, the
 // cluster IDs, names, and status.
 type ListClustersOutput struct {
@@ -68,13 +89,35 @@ type ListClustersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClustersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClustersOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClustersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClusterSummaryList(s, schemas.ListClustersOutput_Clusters, v.Clusters)
+	if v.Marker != nil {
+		s.WriteString(schemas.ListClustersOutput_Marker, *v.Marker)
+	}
+}
+func (v *ListClustersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListClustersOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListClustersOutput_Clusters:
+			return deserializeClusterSummaryList(d, schemas.ListClustersOutput_Clusters, &v.Clusters)
+		case schemas.ListClustersOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListClustersOutput_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListClusters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClusters, schemas.ListClustersInput, schemas.ListClustersOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListClusters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClusters, schemas.ListClustersInput, schemas.ListClustersOutput), output: &ListClustersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package organizations
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -93,6 +95,27 @@ type ListEffectivePolicyValidationErrorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEffectivePolicyValidationErrorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEffectivePolicyValidationErrorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEffectivePolicyValidationErrorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListEffectivePolicyValidationErrorsRequest_AccountId, *v.AccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEffectivePolicyValidationErrorsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEffectivePolicyValidationErrorsRequest_NextToken, *v.NextToken)
+	}
+	if v.PolicyType != "" {
+		s.WriteString(schemas.ListEffectivePolicyValidationErrorsRequest_PolicyType, string(v.PolicyType))
+	}
+}
+
 type ListEffectivePolicyValidationErrorsOutput struct {
 
 	// The ID of the specified account.
@@ -159,13 +182,63 @@ type ListEffectivePolicyValidationErrorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEffectivePolicyValidationErrorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEffectivePolicyValidationErrorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEffectivePolicyValidationErrorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListEffectivePolicyValidationErrorsResponse_AccountId, *v.AccountId)
+	}
+	serializeEffectivePolicyValidationErrors(s, schemas.ListEffectivePolicyValidationErrorsResponse_EffectivePolicyValidationErrors, v.EffectivePolicyValidationErrors)
+	if v.EvaluationTimestamp != nil {
+		s.WriteTime(schemas.ListEffectivePolicyValidationErrorsResponse_EvaluationTimestamp, *v.EvaluationTimestamp)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEffectivePolicyValidationErrorsResponse_NextToken, *v.NextToken)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.ListEffectivePolicyValidationErrorsResponse_Path, *v.Path)
+	}
+	if v.PolicyType != "" {
+		s.WriteString(schemas.ListEffectivePolicyValidationErrorsResponse_PolicyType, string(v.PolicyType))
+	}
+}
+func (v *ListEffectivePolicyValidationErrorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEffectivePolicyValidationErrorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEffectivePolicyValidationErrorsResponse_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ListEffectivePolicyValidationErrorsResponse_AccountId, v.AccountId)
+		case schemas.ListEffectivePolicyValidationErrorsResponse_EffectivePolicyValidationErrors:
+			return deserializeEffectivePolicyValidationErrors(d, schemas.ListEffectivePolicyValidationErrorsResponse_EffectivePolicyValidationErrors, &v.EffectivePolicyValidationErrors)
+		case schemas.ListEffectivePolicyValidationErrorsResponse_EvaluationTimestamp:
+			v.EvaluationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ListEffectivePolicyValidationErrorsResponse_EvaluationTimestamp, v.EvaluationTimestamp)
+		case schemas.ListEffectivePolicyValidationErrorsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEffectivePolicyValidationErrorsResponse_NextToken, v.NextToken)
+		case schemas.ListEffectivePolicyValidationErrorsResponse_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.ListEffectivePolicyValidationErrorsResponse_Path, v.Path)
+		case schemas.ListEffectivePolicyValidationErrorsResponse_PolicyType:
+			var ev string
+			if err := d.ReadString(schemas.ListEffectivePolicyValidationErrorsResponse_PolicyType, &ev); err != nil {
+				return err
+			}
+			v.PolicyType = types.EffectivePolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEffectivePolicyValidationErrorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEffectivePolicyValidationErrors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEffectivePolicyValidationErrors, schemas.ListEffectivePolicyValidationErrorsRequest, schemas.ListEffectivePolicyValidationErrorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListEffectivePolicyValidationErrors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEffectivePolicyValidationErrors, schemas.ListEffectivePolicyValidationErrorsRequest, schemas.ListEffectivePolicyValidationErrorsResponse), output: &ListEffectivePolicyValidationErrorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

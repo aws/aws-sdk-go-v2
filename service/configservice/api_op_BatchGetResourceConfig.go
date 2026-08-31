@@ -4,7 +4,9 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,16 @@ type BatchGetResourceConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetResourceConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetResourceConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetResourceConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceKeys(s, schemas.BatchGetResourceConfigRequest_resourceKeys, v.ResourceKeys)
+}
+
 type BatchGetResourceConfigOutput struct {
 
 	// A list that contains the current configuration of one or more resources.
@@ -63,13 +75,32 @@ type BatchGetResourceConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetResourceConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetResourceConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetResourceConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBaseConfigurationItems(s, schemas.BatchGetResourceConfigResponse_baseConfigurationItems, v.BaseConfigurationItems)
+	serializeResourceKeys(s, schemas.BatchGetResourceConfigResponse_unprocessedResourceKeys, v.UnprocessedResourceKeys)
+}
+func (v *BatchGetResourceConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetResourceConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetResourceConfigResponse_baseConfigurationItems:
+			return deserializeBaseConfigurationItems(d, schemas.BatchGetResourceConfigResponse_baseConfigurationItems, &v.BaseConfigurationItems)
+		case schemas.BatchGetResourceConfigResponse_unprocessedResourceKeys:
+			return deserializeResourceKeys(d, schemas.BatchGetResourceConfigResponse_unprocessedResourceKeys, &v.UnprocessedResourceKeys)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetResourceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetResourceConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetResourceConfig, schemas.BatchGetResourceConfigRequest, schemas.BatchGetResourceConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetResourceConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetResourceConfig, schemas.BatchGetResourceConfigRequest, schemas.BatchGetResourceConfigResponse), output: &BatchGetResourceConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

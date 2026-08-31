@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DeleteExtractionDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteExtractionDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteExtractionDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteExtractionDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExtractionDefinitionId != nil {
+		s.WriteString(schemas.DeleteExtractionDefinitionRequest_ExtractionDefinitionId, *v.ExtractionDefinitionId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteExtractionDefinitionRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DeleteExtractionDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +65,26 @@ type DeleteExtractionDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteExtractionDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteExtractionDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteExtractionDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteExtractionDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteExtractionDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteExtractionDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteExtractionDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteExtractionDefinition, schemas.DeleteExtractionDefinitionRequest, schemas.DeleteExtractionDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteExtractionDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteExtractionDefinition, schemas.DeleteExtractionDefinitionRequest, schemas.DeleteExtractionDefinitionResponse), output: &DeleteExtractionDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

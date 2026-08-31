@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type DeleteHubContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteHubContentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteHubContentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteHubContentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HubContentName != nil {
+		s.WriteString(schemas.DeleteHubContentRequest_HubContentName, *v.HubContentName)
+	}
+	if v.HubContentType != "" {
+		s.WriteString(schemas.DeleteHubContentRequest_HubContentType, string(v.HubContentType))
+	}
+	if v.HubContentVersion != nil {
+		s.WriteString(schemas.DeleteHubContentRequest_HubContentVersion, *v.HubContentVersion)
+	}
+	if v.HubName != nil {
+		s.WriteString(schemas.DeleteHubContentRequest_HubName, *v.HubName)
+	}
+}
+
 type DeleteHubContentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,13 +79,26 @@ type DeleteHubContentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteHubContentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteHubContentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteHubContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteHubContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteHubContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHubContent, schemas.DeleteHubContentRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteHubContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHubContent, schemas.DeleteHubContentRequest, nil), output: &DeleteHubContentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

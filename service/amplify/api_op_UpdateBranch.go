@@ -4,7 +4,9 @@ package amplify
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -122,6 +124,75 @@ type UpdateBranchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBranchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBranchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBranchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.UpdateBranchRequest_appId, *v.AppId)
+	}
+	if v.Backend != nil {
+		s.WriteStruct(schemas.UpdateBranchRequest_backend)
+		v.Backend.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BackendEnvironmentArn != nil {
+		s.WriteString(schemas.UpdateBranchRequest_backendEnvironmentArn, *v.BackendEnvironmentArn)
+	}
+	if v.BasicAuthCredentials != nil {
+		s.WriteString(schemas.UpdateBranchRequest_basicAuthCredentials, *v.BasicAuthCredentials)
+	}
+	if v.BranchName != nil {
+		s.WriteString(schemas.UpdateBranchRequest_branchName, *v.BranchName)
+	}
+	if v.BuildSpec != nil {
+		s.WriteString(schemas.UpdateBranchRequest_buildSpec, *v.BuildSpec)
+	}
+	if v.ComputeRoleArn != nil {
+		s.WriteString(schemas.UpdateBranchRequest_computeRoleArn, *v.ComputeRoleArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateBranchRequest_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateBranchRequest_displayName, *v.DisplayName)
+	}
+	if v.EnableAutoBuild != nil {
+		s.WriteBool(schemas.UpdateBranchRequest_enableAutoBuild, *v.EnableAutoBuild)
+	}
+	if v.EnableBasicAuth != nil {
+		s.WriteBool(schemas.UpdateBranchRequest_enableBasicAuth, *v.EnableBasicAuth)
+	}
+	if v.EnableNotification != nil {
+		s.WriteBool(schemas.UpdateBranchRequest_enableNotification, *v.EnableNotification)
+	}
+	if v.EnablePerformanceMode != nil {
+		s.WriteBool(schemas.UpdateBranchRequest_enablePerformanceMode, *v.EnablePerformanceMode)
+	}
+	if v.EnablePullRequestPreview != nil {
+		s.WriteBool(schemas.UpdateBranchRequest_enablePullRequestPreview, *v.EnablePullRequestPreview)
+	}
+	if v.EnableSkewProtection != nil {
+		s.WriteBool(schemas.UpdateBranchRequest_enableSkewProtection, *v.EnableSkewProtection)
+	}
+	serializeEnvironmentVariables(s, schemas.UpdateBranchRequest_environmentVariables, v.EnvironmentVariables)
+	if v.Framework != nil {
+		s.WriteString(schemas.UpdateBranchRequest_framework, *v.Framework)
+	}
+	if v.PullRequestEnvironmentName != nil {
+		s.WriteString(schemas.UpdateBranchRequest_pullRequestEnvironmentName, *v.PullRequestEnvironmentName)
+	}
+	if v.Stage != "" {
+		s.WriteString(schemas.UpdateBranchRequest_stage, string(v.Stage))
+	}
+	if v.Ttl != nil {
+		s.WriteString(schemas.UpdateBranchRequest_ttl, *v.Ttl)
+	}
+}
+
 // The result structure for the update branch request.
 type UpdateBranchOutput struct {
 
@@ -136,13 +207,34 @@ type UpdateBranchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBranchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBranchResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBranchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Branch != nil {
+		s.WriteStruct(schemas.UpdateBranchResult_branch)
+		v.Branch.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateBranchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBranchResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBranchResult_branch:
+			v.Branch = &types.Branch{}
+			return v.Branch.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBranchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBranch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBranch, schemas.UpdateBranchRequest, schemas.UpdateBranchResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBranch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBranch, schemas.UpdateBranchRequest, schemas.UpdateBranchResult), output: &UpdateBranchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

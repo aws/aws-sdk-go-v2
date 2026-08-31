@@ -4,6 +4,8 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -27,6 +29,15 @@ type IsVpcPeeredInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IsVpcPeeredInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IsVpcPeeredRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IsVpcPeeredInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type IsVpcPeeredOutput struct {
 
 	// Returns true if the Lightsail VPC is peered; otherwise, false .
@@ -38,13 +49,32 @@ type IsVpcPeeredOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IsVpcPeeredOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IsVpcPeeredResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IsVpcPeeredOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsPeered != nil {
+		s.WriteBool(schemas.IsVpcPeeredResult_isPeered, *v.IsPeered)
+	}
+}
+func (v *IsVpcPeeredOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IsVpcPeeredResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IsVpcPeeredResult_isPeered:
+			v.IsPeered = new(bool)
+			return d.ReadBool(schemas.IsVpcPeeredResult_isPeered, v.IsPeered)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationIsVpcPeeredMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpIsVpcPeered{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IsVpcPeered, schemas.IsVpcPeeredRequest, schemas.IsVpcPeeredResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpIsVpcPeered{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IsVpcPeered, schemas.IsVpcPeeredRequest, schemas.IsVpcPeeredResult), output: &IsVpcPeeredOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

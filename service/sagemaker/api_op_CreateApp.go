@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,39 @@ type CreateAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppName != nil {
+		s.WriteString(schemas.CreateAppRequest_AppName, *v.AppName)
+	}
+	if v.AppType != "" {
+		s.WriteString(schemas.CreateAppRequest_AppType, string(v.AppType))
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.CreateAppRequest_DomainId, *v.DomainId)
+	}
+	if v.RecoveryMode != nil {
+		s.WriteBool(schemas.CreateAppRequest_RecoveryMode, *v.RecoveryMode)
+	}
+	if v.ResourceSpec != nil {
+		s.WriteStruct(schemas.CreateAppRequest_ResourceSpec)
+		v.ResourceSpec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.CreateAppRequest_SpaceName, *v.SpaceName)
+	}
+	serializeTagList(s, schemas.CreateAppRequest_Tags, v.Tags)
+	if v.UserProfileName != nil {
+		s.WriteString(schemas.CreateAppRequest_UserProfileName, *v.UserProfileName)
+	}
+}
+
 type CreateAppOutput struct {
 
 	// The Amazon Resource Name (ARN) of the app.
@@ -82,13 +117,32 @@ type CreateAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAppResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.CreateAppResponse_AppArn, *v.AppArn)
+	}
+}
+func (v *CreateAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAppResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAppResponse_AppArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.CreateAppResponse_AppArn, v.AppArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApp, schemas.CreateAppRequest, schemas.CreateAppResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApp, schemas.CreateAppRequest, schemas.CreateAppResponse), output: &CreateAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

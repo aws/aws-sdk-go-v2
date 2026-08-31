@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -64,6 +66,39 @@ type ListDataQualityJobDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataQualityJobDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataQualityJobDefinitionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataQualityJobDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListDataQualityJobDefinitionsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListDataQualityJobDefinitionsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.ListDataQualityJobDefinitionsRequest_EndpointName, *v.EndpointName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataQualityJobDefinitionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListDataQualityJobDefinitionsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataQualityJobDefinitionsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListDataQualityJobDefinitionsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListDataQualityJobDefinitionsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListDataQualityJobDefinitionsOutput struct {
 
 	// A list of data quality monitoring job definitions.
@@ -82,13 +117,35 @@ type ListDataQualityJobDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataQualityJobDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataQualityJobDefinitionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataQualityJobDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMonitoringJobDefinitionSummaryList(s, schemas.ListDataQualityJobDefinitionsResponse_JobDefinitionSummaries, v.JobDefinitionSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataQualityJobDefinitionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDataQualityJobDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataQualityJobDefinitionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataQualityJobDefinitionsResponse_JobDefinitionSummaries:
+			return deserializeMonitoringJobDefinitionSummaryList(d, schemas.ListDataQualityJobDefinitionsResponse_JobDefinitionSummaries, &v.JobDefinitionSummaries)
+		case schemas.ListDataQualityJobDefinitionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataQualityJobDefinitionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataQualityJobDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDataQualityJobDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataQualityJobDefinitions, schemas.ListDataQualityJobDefinitionsRequest, schemas.ListDataQualityJobDefinitionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDataQualityJobDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataQualityJobDefinitions, schemas.ListDataQualityJobDefinitionsRequest, schemas.ListDataQualityJobDefinitionsResponse), output: &ListDataQualityJobDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

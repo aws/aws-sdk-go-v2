@@ -4,6 +4,8 @@ package mailmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type RegisterMemberToAddressListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterMemberToAddressListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterMemberToAddressListRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterMemberToAddressListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteString(schemas.RegisterMemberToAddressListRequest_Address, *v.Address)
+	}
+	if v.AddressListId != nil {
+		s.WriteString(schemas.RegisterMemberToAddressListRequest_AddressListId, *v.AddressListId)
+	}
+}
+
 type RegisterMemberToAddressListOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type RegisterMemberToAddressListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterMemberToAddressListOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterMemberToAddressListResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterMemberToAddressListOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RegisterMemberToAddressListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterMemberToAddressListResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterMemberToAddressListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpRegisterMemberToAddressList{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterMemberToAddressList, schemas.RegisterMemberToAddressListRequest, schemas.RegisterMemberToAddressListResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpRegisterMemberToAddressList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterMemberToAddressList, schemas.RegisterMemberToAddressListRequest, schemas.RegisterMemberToAddressListResponse), output: &RegisterMemberToAddressListOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

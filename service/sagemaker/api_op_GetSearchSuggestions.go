@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,23 @@ type GetSearchSuggestionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSearchSuggestionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSearchSuggestionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSearchSuggestionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Resource != "" {
+		s.WriteString(schemas.GetSearchSuggestionsRequest_Resource, string(v.Resource))
+	}
+	if v.SuggestionQuery != nil {
+		s.WriteStruct(schemas.GetSearchSuggestionsRequest_SuggestionQuery)
+		v.SuggestionQuery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetSearchSuggestionsOutput struct {
 
 	// A list of property names for a Resource that match a SuggestionQuery .
@@ -50,13 +69,29 @@ type GetSearchSuggestionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSearchSuggestionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSearchSuggestionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSearchSuggestionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePropertyNameSuggestionList(s, schemas.GetSearchSuggestionsResponse_PropertyNameSuggestions, v.PropertyNameSuggestions)
+}
+func (v *GetSearchSuggestionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSearchSuggestionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSearchSuggestionsResponse_PropertyNameSuggestions:
+			return deserializePropertyNameSuggestionList(d, schemas.GetSearchSuggestionsResponse_PropertyNameSuggestions, &v.PropertyNameSuggestions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSearchSuggestionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSearchSuggestions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSearchSuggestions, schemas.GetSearchSuggestionsRequest, schemas.GetSearchSuggestionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSearchSuggestions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSearchSuggestions, schemas.GetSearchSuggestionsRequest, schemas.GetSearchSuggestionsResponse), output: &GetSearchSuggestionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

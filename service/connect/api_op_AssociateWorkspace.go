@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,22 @@ type AssociateWorkspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateWorkspaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateWorkspaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.AssociateWorkspaceRequest_InstanceId, *v.InstanceId)
+	}
+	serializeWorkspaceResourceArnList(s, schemas.AssociateWorkspaceRequest_ResourceArns, v.ResourceArns)
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.AssociateWorkspaceRequest_WorkspaceId, *v.WorkspaceId)
+	}
+}
+
 type AssociateWorkspaceOutput struct {
 
 	// A list of resources that failed to be associated with the workspace, including
@@ -64,13 +82,32 @@ type AssociateWorkspaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateWorkspaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateWorkspaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateWorkspaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedBatchAssociationSummaryList(s, schemas.AssociateWorkspaceResponse_FailedList, v.FailedList)
+	serializeSuccessfulBatchAssociationSummaryList(s, schemas.AssociateWorkspaceResponse_SuccessfulList, v.SuccessfulList)
+}
+func (v *AssociateWorkspaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateWorkspaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateWorkspaceResponse_FailedList:
+			return deserializeFailedBatchAssociationSummaryList(d, schemas.AssociateWorkspaceResponse_FailedList, &v.FailedList)
+		case schemas.AssociateWorkspaceResponse_SuccessfulList:
+			return deserializeSuccessfulBatchAssociationSummaryList(d, schemas.AssociateWorkspaceResponse_SuccessfulList, &v.SuccessfulList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateWorkspace, schemas.AssociateWorkspaceRequest, schemas.AssociateWorkspaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateWorkspace, schemas.AssociateWorkspaceRequest, schemas.AssociateWorkspaceResponse), output: &AssociateWorkspaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

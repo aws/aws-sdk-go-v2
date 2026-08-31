@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,20 @@ type CreateTopicRuleDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTopicRuleDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTopicRuleDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTopicRuleDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationConfiguration != nil {
+		s.WriteStruct(schemas.CreateTopicRuleDestinationRequest_destinationConfiguration)
+		v.DestinationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateTopicRuleDestinationOutput struct {
 
 	// The topic rule destination.
@@ -50,13 +66,34 @@ type CreateTopicRuleDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTopicRuleDestinationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTopicRuleDestinationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTopicRuleDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TopicRuleDestination != nil {
+		s.WriteStruct(schemas.CreateTopicRuleDestinationResponse_topicRuleDestination)
+		v.TopicRuleDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateTopicRuleDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTopicRuleDestinationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTopicRuleDestinationResponse_topicRuleDestination:
+			v.TopicRuleDestination = &types.TopicRuleDestination{}
+			return v.TopicRuleDestination.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTopicRuleDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTopicRuleDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTopicRuleDestination, schemas.CreateTopicRuleDestinationRequest, schemas.CreateTopicRuleDestinationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTopicRuleDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTopicRuleDestination, schemas.CreateTopicRuleDestinationRequest, schemas.CreateTopicRuleDestinationResponse), output: &CreateTopicRuleDestinationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

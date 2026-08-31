@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -21,6 +23,42 @@ type BatchCreateFirewallRuleError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateFirewallRuleError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateFirewallRuleError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateFirewallRuleError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.BatchCreateFirewallRuleError_Code, *v.Code)
+	}
+	if v.FirewallRule != nil {
+		s.WriteStruct(schemas.BatchCreateFirewallRuleError_FirewallRule)
+		v.FirewallRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.BatchCreateFirewallRuleError_Message, *v.Message)
+	}
+}
+func (v *BatchCreateFirewallRuleError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateFirewallRuleError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateFirewallRuleError_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.BatchCreateFirewallRuleError_Code, v.Code)
+		case schemas.BatchCreateFirewallRuleError_FirewallRule:
+			v.FirewallRule = &CreateFirewallRuleEntry{}
+			return v.FirewallRule.Deserialize(d)
+		case schemas.BatchCreateFirewallRuleError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BatchCreateFirewallRuleError_Message, v.Message)
+		}
+		return nil
+	})
+}
+
 // An error that occurred while deleting a firewall rule in a batch operation.
 type BatchDeleteFirewallRuleError struct {
 
@@ -36,6 +74,42 @@ type BatchDeleteFirewallRuleError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteFirewallRuleError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteFirewallRuleError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteFirewallRuleError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.BatchDeleteFirewallRuleError_Code, *v.Code)
+	}
+	if v.FirewallRule != nil {
+		s.WriteStruct(schemas.BatchDeleteFirewallRuleError_FirewallRule)
+		v.FirewallRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.BatchDeleteFirewallRuleError_Message, *v.Message)
+	}
+}
+func (v *BatchDeleteFirewallRuleError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteFirewallRuleError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteFirewallRuleError_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.BatchDeleteFirewallRuleError_Code, v.Code)
+		case schemas.BatchDeleteFirewallRuleError_FirewallRule:
+			v.FirewallRule = &DeleteFirewallRuleEntry{}
+			return v.FirewallRule.Deserialize(d)
+		case schemas.BatchDeleteFirewallRuleError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BatchDeleteFirewallRuleError_Message, v.Message)
+		}
+		return nil
+	})
+}
+
 // An error that occurred while updating a firewall rule in a batch operation.
 type BatchUpdateFirewallRuleError struct {
 
@@ -49,6 +123,42 @@ type BatchUpdateFirewallRuleError struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchUpdateFirewallRuleError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateFirewallRuleError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateFirewallRuleError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.BatchUpdateFirewallRuleError_Code, *v.Code)
+	}
+	if v.FirewallRule != nil {
+		s.WriteStruct(schemas.BatchUpdateFirewallRuleError_FirewallRule)
+		v.FirewallRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.BatchUpdateFirewallRuleError_Message, *v.Message)
+	}
+}
+func (v *BatchUpdateFirewallRuleError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateFirewallRuleError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateFirewallRuleError_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.BatchUpdateFirewallRuleError_Code, v.Code)
+		case schemas.BatchUpdateFirewallRuleError_FirewallRule:
+			v.FirewallRule = &UpdateFirewallRuleEntry{}
+			return v.FirewallRule.Deserialize(d)
+		case schemas.BatchUpdateFirewallRuleError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BatchUpdateFirewallRuleError_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // The details for creating a single firewall rule in a batch operation.
@@ -225,6 +335,138 @@ type CreateFirewallRuleEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFirewallRuleEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFirewallRuleEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFirewallRuleEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.CreateFirewallRuleEntry_Action, string(v.Action))
+	}
+	if v.BlockOverrideDnsType != "" {
+		s.WriteString(schemas.CreateFirewallRuleEntry_BlockOverrideDnsType, string(v.BlockOverrideDnsType))
+	}
+	if v.BlockOverrideDomain != nil {
+		s.WriteString(schemas.CreateFirewallRuleEntry_BlockOverrideDomain, *v.BlockOverrideDomain)
+	}
+	if v.BlockOverrideTtl != nil {
+		s.WriteInt32(schemas.CreateFirewallRuleEntry_BlockOverrideTtl, *v.BlockOverrideTtl)
+	}
+	if v.BlockResponse != "" {
+		s.WriteString(schemas.CreateFirewallRuleEntry_BlockResponse, string(v.BlockResponse))
+	}
+	if v.ConfidenceThreshold != "" {
+		s.WriteString(schemas.CreateFirewallRuleEntry_ConfidenceThreshold, string(v.ConfidenceThreshold))
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreateFirewallRuleEntry_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.DnsThreatProtection != "" {
+		s.WriteString(schemas.CreateFirewallRuleEntry_DnsThreatProtection, string(v.DnsThreatProtection))
+	}
+	if v.FirewallDomainListId != nil {
+		s.WriteString(schemas.CreateFirewallRuleEntry_FirewallDomainListId, *v.FirewallDomainListId)
+	}
+	if v.FirewallDomainRedirectionAction != "" {
+		s.WriteString(schemas.CreateFirewallRuleEntry_FirewallDomainRedirectionAction, string(v.FirewallDomainRedirectionAction))
+	}
+	if v.FirewallRuleGroupId != nil {
+		s.WriteString(schemas.CreateFirewallRuleEntry_FirewallRuleGroupId, *v.FirewallRuleGroupId)
+	}
+	if v.FirewallRuleType != nil {
+		s.WriteStruct(schemas.CreateFirewallRuleEntry_FirewallRuleType)
+		v.FirewallRuleType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateFirewallRuleEntry_Name, *v.Name)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.CreateFirewallRuleEntry_Priority, *v.Priority)
+	}
+	if v.Qtype != nil {
+		s.WriteString(schemas.CreateFirewallRuleEntry_Qtype, *v.Qtype)
+	}
+}
+func (v *CreateFirewallRuleEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFirewallRuleEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFirewallRuleEntry_Action:
+			var ev string
+			if err := d.ReadString(schemas.CreateFirewallRuleEntry_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = Action(ev)
+			return nil
+		case schemas.CreateFirewallRuleEntry_BlockOverrideDnsType:
+			var ev string
+			if err := d.ReadString(schemas.CreateFirewallRuleEntry_BlockOverrideDnsType, &ev); err != nil {
+				return err
+			}
+			v.BlockOverrideDnsType = BlockOverrideDnsType(ev)
+			return nil
+		case schemas.CreateFirewallRuleEntry_BlockOverrideDomain:
+			v.BlockOverrideDomain = new(string)
+			return d.ReadString(schemas.CreateFirewallRuleEntry_BlockOverrideDomain, v.BlockOverrideDomain)
+		case schemas.CreateFirewallRuleEntry_BlockOverrideTtl:
+			v.BlockOverrideTtl = new(int32)
+			return d.ReadInt32(schemas.CreateFirewallRuleEntry_BlockOverrideTtl, v.BlockOverrideTtl)
+		case schemas.CreateFirewallRuleEntry_BlockResponse:
+			var ev string
+			if err := d.ReadString(schemas.CreateFirewallRuleEntry_BlockResponse, &ev); err != nil {
+				return err
+			}
+			v.BlockResponse = BlockResponse(ev)
+			return nil
+		case schemas.CreateFirewallRuleEntry_ConfidenceThreshold:
+			var ev string
+			if err := d.ReadString(schemas.CreateFirewallRuleEntry_ConfidenceThreshold, &ev); err != nil {
+				return err
+			}
+			v.ConfidenceThreshold = ConfidenceThreshold(ev)
+			return nil
+		case schemas.CreateFirewallRuleEntry_CreatorRequestId:
+			v.CreatorRequestId = new(string)
+			return d.ReadString(schemas.CreateFirewallRuleEntry_CreatorRequestId, v.CreatorRequestId)
+		case schemas.CreateFirewallRuleEntry_DnsThreatProtection:
+			var ev string
+			if err := d.ReadString(schemas.CreateFirewallRuleEntry_DnsThreatProtection, &ev); err != nil {
+				return err
+			}
+			v.DnsThreatProtection = DnsThreatProtection(ev)
+			return nil
+		case schemas.CreateFirewallRuleEntry_FirewallDomainListId:
+			v.FirewallDomainListId = new(string)
+			return d.ReadString(schemas.CreateFirewallRuleEntry_FirewallDomainListId, v.FirewallDomainListId)
+		case schemas.CreateFirewallRuleEntry_FirewallDomainRedirectionAction:
+			var ev string
+			if err := d.ReadString(schemas.CreateFirewallRuleEntry_FirewallDomainRedirectionAction, &ev); err != nil {
+				return err
+			}
+			v.FirewallDomainRedirectionAction = FirewallDomainRedirectionAction(ev)
+			return nil
+		case schemas.CreateFirewallRuleEntry_FirewallRuleGroupId:
+			v.FirewallRuleGroupId = new(string)
+			return d.ReadString(schemas.CreateFirewallRuleEntry_FirewallRuleGroupId, v.FirewallRuleGroupId)
+		case schemas.CreateFirewallRuleEntry_FirewallRuleType:
+			v.FirewallRuleType = &FirewallRuleType{}
+			return v.FirewallRuleType.Deserialize(d)
+		case schemas.CreateFirewallRuleEntry_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateFirewallRuleEntry_Name, v.Name)
+		case schemas.CreateFirewallRuleEntry_Priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.CreateFirewallRuleEntry_Priority, v.Priority)
+		case schemas.CreateFirewallRuleEntry_Qtype:
+			v.Qtype = new(string)
+			return d.ReadString(schemas.CreateFirewallRuleEntry_Qtype, v.Qtype)
+		}
+		return nil
+	})
+}
+
 // The details for deleting a single firewall rule in a batch operation.
 type DeleteFirewallRuleEntry struct {
 
@@ -243,6 +485,46 @@ type DeleteFirewallRuleEntry struct {
 	Qtype *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteFirewallRuleEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFirewallRuleEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFirewallRuleEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallDomainListId != nil {
+		s.WriteString(schemas.DeleteFirewallRuleEntry_FirewallDomainListId, *v.FirewallDomainListId)
+	}
+	if v.FirewallRuleGroupId != nil {
+		s.WriteString(schemas.DeleteFirewallRuleEntry_FirewallRuleGroupId, *v.FirewallRuleGroupId)
+	}
+	if v.FirewallThreatProtectionId != nil {
+		s.WriteString(schemas.DeleteFirewallRuleEntry_FirewallThreatProtectionId, *v.FirewallThreatProtectionId)
+	}
+	if v.Qtype != nil {
+		s.WriteString(schemas.DeleteFirewallRuleEntry_Qtype, *v.Qtype)
+	}
+}
+func (v *DeleteFirewallRuleEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFirewallRuleEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFirewallRuleEntry_FirewallDomainListId:
+			v.FirewallDomainListId = new(string)
+			return d.ReadString(schemas.DeleteFirewallRuleEntry_FirewallDomainListId, v.FirewallDomainListId)
+		case schemas.DeleteFirewallRuleEntry_FirewallRuleGroupId:
+			v.FirewallRuleGroupId = new(string)
+			return d.ReadString(schemas.DeleteFirewallRuleEntry_FirewallRuleGroupId, v.FirewallRuleGroupId)
+		case schemas.DeleteFirewallRuleEntry_FirewallThreatProtectionId:
+			v.FirewallThreatProtectionId = new(string)
+			return d.ReadString(schemas.DeleteFirewallRuleEntry_FirewallThreatProtectionId, v.FirewallThreatProtectionId)
+		case schemas.DeleteFirewallRuleEntry_Qtype:
+			v.Qtype = new(string)
+			return d.ReadString(schemas.DeleteFirewallRuleEntry_Qtype, v.Qtype)
+		}
+		return nil
+	})
 }
 
 // The configuration for a DNS threat protection rule type within the rule type
@@ -281,6 +563,38 @@ type DnsThreatProtectionRuleTypeConfig struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DnsThreatProtectionRuleTypeConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DnsThreatProtectionRuleTypeConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DnsThreatProtectionRuleTypeConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfidenceThreshold != "" {
+		s.WriteString(schemas.DnsThreatProtectionRuleTypeConfig_ConfidenceThreshold, string(v.ConfidenceThreshold))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.DnsThreatProtectionRuleTypeConfig_Value, *v.Value)
+	}
+}
+func (v *DnsThreatProtectionRuleTypeConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DnsThreatProtectionRuleTypeConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DnsThreatProtectionRuleTypeConfig_ConfidenceThreshold:
+			var ev string
+			if err := d.ReadString(schemas.DnsThreatProtectionRuleTypeConfig_ConfidenceThreshold, &ev); err != nil {
+				return err
+			}
+			v.ConfidenceThreshold = ConfidenceThreshold(ev)
+			return nil
+		case schemas.DnsThreatProtectionRuleTypeConfig_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.DnsThreatProtectionRuleTypeConfig_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // For Resolver list operations ([ListResolverEndpoints] , [ListResolverRules], [ListResolverRuleAssociations], [ListResolverQueryLogConfigs], [ListResolverQueryLogConfigAssociations]), and [ListResolverDnssecConfigs]), an optional specification to
@@ -468,6 +782,31 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Filter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Filter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.Filter_Name, *v.Name)
+	}
+	serializeFilterValues(s, schemas.Filter_Values, v.Values)
+}
+func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Filter_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Filter_Name, v.Name)
+		case schemas.Filter_Values:
+			return deserializeFilterValues(d, schemas.Filter_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // The configuration for a content category-based filtering rule. This specifies
 // which content category to use for DNS query evaluation.
 type FirewallAdvancedContentCategoryConfig struct {
@@ -481,6 +820,28 @@ type FirewallAdvancedContentCategoryConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FirewallAdvancedContentCategoryConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirewallAdvancedContentCategoryConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirewallAdvancedContentCategoryConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Category != nil {
+		s.WriteString(schemas.FirewallAdvancedContentCategoryConfig_Category, *v.Category)
+	}
+}
+func (v *FirewallAdvancedContentCategoryConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirewallAdvancedContentCategoryConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirewallAdvancedContentCategoryConfig_Category:
+			v.Category = new(string)
+			return d.ReadString(schemas.FirewallAdvancedContentCategoryConfig_Category, v.Category)
+		}
+		return nil
+	})
+}
+
 // The configuration for a threat category-based filtering rule. This specifies
 // which threat category to use for DNS query evaluation.
 type FirewallAdvancedThreatCategoryConfig struct {
@@ -492,6 +853,28 @@ type FirewallAdvancedThreatCategoryConfig struct {
 	Category *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FirewallAdvancedThreatCategoryConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirewallAdvancedThreatCategoryConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirewallAdvancedThreatCategoryConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Category != nil {
+		s.WriteString(schemas.FirewallAdvancedThreatCategoryConfig_Category, *v.Category)
+	}
+}
+func (v *FirewallAdvancedThreatCategoryConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirewallAdvancedThreatCategoryConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirewallAdvancedThreatCategoryConfig_Category:
+			v.Category = new(string)
+			return d.ReadString(schemas.FirewallAdvancedThreatCategoryConfig_Category, v.Category)
+		}
+		return nil
+	})
 }
 
 // Configuration of the firewall behavior provided by DNS Firewall for a single
@@ -524,6 +907,50 @@ type FirewallConfig struct {
 	ResourceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FirewallConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirewallConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirewallConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallFailOpen != "" {
+		s.WriteString(schemas.FirewallConfig_FirewallFailOpen, string(v.FirewallFailOpen))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.FirewallConfig_Id, *v.Id)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.FirewallConfig_OwnerId, *v.OwnerId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.FirewallConfig_ResourceId, *v.ResourceId)
+	}
+}
+func (v *FirewallConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirewallConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirewallConfig_FirewallFailOpen:
+			var ev string
+			if err := d.ReadString(schemas.FirewallConfig_FirewallFailOpen, &ev); err != nil {
+				return err
+			}
+			v.FirewallFailOpen = FirewallFailOpenStatus(ev)
+			return nil
+		case schemas.FirewallConfig_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.FirewallConfig_Id, v.Id)
+		case schemas.FirewallConfig_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.FirewallConfig_OwnerId, v.OwnerId)
+		case schemas.FirewallConfig_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.FirewallConfig_ResourceId, v.ResourceId)
+		}
+		return nil
+	})
 }
 
 // High-level information about a list of firewall domains for use in a FirewallRule. This is
@@ -577,6 +1004,102 @@ type FirewallDomainList struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FirewallDomainList) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirewallDomainList)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirewallDomainList) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.FirewallDomainList_Arn, *v.Arn)
+	}
+	if v.Category != nil {
+		s.WriteString(schemas.FirewallDomainList_Category, *v.Category)
+	}
+	if v.CreationTime != nil {
+		s.WriteString(schemas.FirewallDomainList_CreationTime, *v.CreationTime)
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.FirewallDomainList_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.DomainCount != nil {
+		s.WriteInt32(schemas.FirewallDomainList_DomainCount, *v.DomainCount)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.FirewallDomainList_Id, *v.Id)
+	}
+	if v.ManagedListType != "" {
+		s.WriteString(schemas.FirewallDomainList_ManagedListType, string(v.ManagedListType))
+	}
+	if v.ManagedOwnerName != nil {
+		s.WriteString(schemas.FirewallDomainList_ManagedOwnerName, *v.ManagedOwnerName)
+	}
+	if v.ModificationTime != nil {
+		s.WriteString(schemas.FirewallDomainList_ModificationTime, *v.ModificationTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FirewallDomainList_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.FirewallDomainList_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.FirewallDomainList_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *FirewallDomainList) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirewallDomainList, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirewallDomainList_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.FirewallDomainList_Arn, v.Arn)
+		case schemas.FirewallDomainList_Category:
+			v.Category = new(string)
+			return d.ReadString(schemas.FirewallDomainList_Category, v.Category)
+		case schemas.FirewallDomainList_CreationTime:
+			v.CreationTime = new(string)
+			return d.ReadString(schemas.FirewallDomainList_CreationTime, v.CreationTime)
+		case schemas.FirewallDomainList_CreatorRequestId:
+			v.CreatorRequestId = new(string)
+			return d.ReadString(schemas.FirewallDomainList_CreatorRequestId, v.CreatorRequestId)
+		case schemas.FirewallDomainList_DomainCount:
+			v.DomainCount = new(int32)
+			return d.ReadInt32(schemas.FirewallDomainList_DomainCount, v.DomainCount)
+		case schemas.FirewallDomainList_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.FirewallDomainList_Id, v.Id)
+		case schemas.FirewallDomainList_ManagedListType:
+			var ev string
+			if err := d.ReadString(schemas.FirewallDomainList_ManagedListType, &ev); err != nil {
+				return err
+			}
+			v.ManagedListType = DomainListType(ev)
+			return nil
+		case schemas.FirewallDomainList_ManagedOwnerName:
+			v.ManagedOwnerName = new(string)
+			return d.ReadString(schemas.FirewallDomainList_ManagedOwnerName, v.ManagedOwnerName)
+		case schemas.FirewallDomainList_ModificationTime:
+			v.ModificationTime = new(string)
+			return d.ReadString(schemas.FirewallDomainList_ModificationTime, v.ModificationTime)
+		case schemas.FirewallDomainList_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FirewallDomainList_Name, v.Name)
+		case schemas.FirewallDomainList_Status:
+			var ev string
+			if err := d.ReadString(schemas.FirewallDomainList_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = FirewallDomainListStatus(ev)
+			return nil
+		case schemas.FirewallDomainList_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.FirewallDomainList_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 // Minimal high-level information for a firewall domain list. The action ListFirewallDomainLists returns
 // an array of these objects.
 //
@@ -609,6 +1132,68 @@ type FirewallDomainListMetadata struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FirewallDomainListMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirewallDomainListMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirewallDomainListMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.FirewallDomainListMetadata_Arn, *v.Arn)
+	}
+	if v.Category != nil {
+		s.WriteString(schemas.FirewallDomainListMetadata_Category, *v.Category)
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.FirewallDomainListMetadata_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.FirewallDomainListMetadata_Id, *v.Id)
+	}
+	if v.ManagedListType != "" {
+		s.WriteString(schemas.FirewallDomainListMetadata_ManagedListType, string(v.ManagedListType))
+	}
+	if v.ManagedOwnerName != nil {
+		s.WriteString(schemas.FirewallDomainListMetadata_ManagedOwnerName, *v.ManagedOwnerName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FirewallDomainListMetadata_Name, *v.Name)
+	}
+}
+func (v *FirewallDomainListMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirewallDomainListMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirewallDomainListMetadata_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.FirewallDomainListMetadata_Arn, v.Arn)
+		case schemas.FirewallDomainListMetadata_Category:
+			v.Category = new(string)
+			return d.ReadString(schemas.FirewallDomainListMetadata_Category, v.Category)
+		case schemas.FirewallDomainListMetadata_CreatorRequestId:
+			v.CreatorRequestId = new(string)
+			return d.ReadString(schemas.FirewallDomainListMetadata_CreatorRequestId, v.CreatorRequestId)
+		case schemas.FirewallDomainListMetadata_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.FirewallDomainListMetadata_Id, v.Id)
+		case schemas.FirewallDomainListMetadata_ManagedListType:
+			var ev string
+			if err := d.ReadString(schemas.FirewallDomainListMetadata_ManagedListType, &ev); err != nil {
+				return err
+			}
+			v.ManagedListType = DomainListType(ev)
+			return nil
+		case schemas.FirewallDomainListMetadata_ManagedOwnerName:
+			v.ManagedOwnerName = new(string)
+			return d.ReadString(schemas.FirewallDomainListMetadata_ManagedOwnerName, v.ManagedOwnerName)
+		case schemas.FirewallDomainListMetadata_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FirewallDomainListMetadata_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // A single firewall rule in a rule group.
@@ -799,6 +1384,168 @@ type FirewallRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FirewallRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirewallRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirewallRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.FirewallRule_Action, string(v.Action))
+	}
+	if v.BlockOverrideDnsType != "" {
+		s.WriteString(schemas.FirewallRule_BlockOverrideDnsType, string(v.BlockOverrideDnsType))
+	}
+	if v.BlockOverrideDomain != nil {
+		s.WriteString(schemas.FirewallRule_BlockOverrideDomain, *v.BlockOverrideDomain)
+	}
+	if v.BlockOverrideTtl != nil {
+		s.WriteInt32(schemas.FirewallRule_BlockOverrideTtl, *v.BlockOverrideTtl)
+	}
+	if v.BlockResponse != "" {
+		s.WriteString(schemas.FirewallRule_BlockResponse, string(v.BlockResponse))
+	}
+	if v.ConfidenceThreshold != "" {
+		s.WriteString(schemas.FirewallRule_ConfidenceThreshold, string(v.ConfidenceThreshold))
+	}
+	if v.CreationTime != nil {
+		s.WriteString(schemas.FirewallRule_CreationTime, *v.CreationTime)
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.FirewallRule_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.DnsThreatProtection != "" {
+		s.WriteString(schemas.FirewallRule_DnsThreatProtection, string(v.DnsThreatProtection))
+	}
+	if v.FirewallDomainListId != nil {
+		s.WriteString(schemas.FirewallRule_FirewallDomainListId, *v.FirewallDomainListId)
+	}
+	if v.FirewallDomainRedirectionAction != "" {
+		s.WriteString(schemas.FirewallRule_FirewallDomainRedirectionAction, string(v.FirewallDomainRedirectionAction))
+	}
+	if v.FirewallRuleGroupId != nil {
+		s.WriteString(schemas.FirewallRule_FirewallRuleGroupId, *v.FirewallRuleGroupId)
+	}
+	if v.FirewallRuleType != nil {
+		s.WriteStruct(schemas.FirewallRule_FirewallRuleType)
+		v.FirewallRuleType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FirewallThreatProtectionId != nil {
+		s.WriteString(schemas.FirewallRule_FirewallThreatProtectionId, *v.FirewallThreatProtectionId)
+	}
+	if v.ModificationTime != nil {
+		s.WriteString(schemas.FirewallRule_ModificationTime, *v.ModificationTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FirewallRule_Name, *v.Name)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.FirewallRule_Priority, *v.Priority)
+	}
+	if v.Qtype != nil {
+		s.WriteString(schemas.FirewallRule_Qtype, *v.Qtype)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.FirewallRule_Status, *v.Status)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.FirewallRule_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *FirewallRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirewallRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirewallRule_Action:
+			var ev string
+			if err := d.ReadString(schemas.FirewallRule_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = Action(ev)
+			return nil
+		case schemas.FirewallRule_BlockOverrideDnsType:
+			var ev string
+			if err := d.ReadString(schemas.FirewallRule_BlockOverrideDnsType, &ev); err != nil {
+				return err
+			}
+			v.BlockOverrideDnsType = BlockOverrideDnsType(ev)
+			return nil
+		case schemas.FirewallRule_BlockOverrideDomain:
+			v.BlockOverrideDomain = new(string)
+			return d.ReadString(schemas.FirewallRule_BlockOverrideDomain, v.BlockOverrideDomain)
+		case schemas.FirewallRule_BlockOverrideTtl:
+			v.BlockOverrideTtl = new(int32)
+			return d.ReadInt32(schemas.FirewallRule_BlockOverrideTtl, v.BlockOverrideTtl)
+		case schemas.FirewallRule_BlockResponse:
+			var ev string
+			if err := d.ReadString(schemas.FirewallRule_BlockResponse, &ev); err != nil {
+				return err
+			}
+			v.BlockResponse = BlockResponse(ev)
+			return nil
+		case schemas.FirewallRule_ConfidenceThreshold:
+			var ev string
+			if err := d.ReadString(schemas.FirewallRule_ConfidenceThreshold, &ev); err != nil {
+				return err
+			}
+			v.ConfidenceThreshold = ConfidenceThreshold(ev)
+			return nil
+		case schemas.FirewallRule_CreationTime:
+			v.CreationTime = new(string)
+			return d.ReadString(schemas.FirewallRule_CreationTime, v.CreationTime)
+		case schemas.FirewallRule_CreatorRequestId:
+			v.CreatorRequestId = new(string)
+			return d.ReadString(schemas.FirewallRule_CreatorRequestId, v.CreatorRequestId)
+		case schemas.FirewallRule_DnsThreatProtection:
+			var ev string
+			if err := d.ReadString(schemas.FirewallRule_DnsThreatProtection, &ev); err != nil {
+				return err
+			}
+			v.DnsThreatProtection = DnsThreatProtection(ev)
+			return nil
+		case schemas.FirewallRule_FirewallDomainListId:
+			v.FirewallDomainListId = new(string)
+			return d.ReadString(schemas.FirewallRule_FirewallDomainListId, v.FirewallDomainListId)
+		case schemas.FirewallRule_FirewallDomainRedirectionAction:
+			var ev string
+			if err := d.ReadString(schemas.FirewallRule_FirewallDomainRedirectionAction, &ev); err != nil {
+				return err
+			}
+			v.FirewallDomainRedirectionAction = FirewallDomainRedirectionAction(ev)
+			return nil
+		case schemas.FirewallRule_FirewallRuleGroupId:
+			v.FirewallRuleGroupId = new(string)
+			return d.ReadString(schemas.FirewallRule_FirewallRuleGroupId, v.FirewallRuleGroupId)
+		case schemas.FirewallRule_FirewallRuleType:
+			v.FirewallRuleType = &FirewallRuleType{}
+			return v.FirewallRuleType.Deserialize(d)
+		case schemas.FirewallRule_FirewallThreatProtectionId:
+			v.FirewallThreatProtectionId = new(string)
+			return d.ReadString(schemas.FirewallRule_FirewallThreatProtectionId, v.FirewallThreatProtectionId)
+		case schemas.FirewallRule_ModificationTime:
+			v.ModificationTime = new(string)
+			return d.ReadString(schemas.FirewallRule_ModificationTime, v.ModificationTime)
+		case schemas.FirewallRule_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FirewallRule_Name, v.Name)
+		case schemas.FirewallRule_Priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.FirewallRule_Priority, v.Priority)
+		case schemas.FirewallRule_Qtype:
+			v.Qtype = new(string)
+			return d.ReadString(schemas.FirewallRule_Qtype, v.Qtype)
+		case schemas.FirewallRule_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.FirewallRule_Status, v.Status)
+		case schemas.FirewallRule_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.FirewallRule_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 // High-level information for a firewall rule group. A firewall rule group is a
 // collection of rules that DNS Firewall uses to filter DNS network traffic for a
 // VPC. To retrieve the rules for the rule group, call ListFirewallRules.
@@ -846,6 +1593,96 @@ type FirewallRuleGroup struct {
 	StatusMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FirewallRuleGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirewallRuleGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirewallRuleGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.FirewallRuleGroup_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteString(schemas.FirewallRuleGroup_CreationTime, *v.CreationTime)
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.FirewallRuleGroup_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.FirewallRuleGroup_Id, *v.Id)
+	}
+	if v.ModificationTime != nil {
+		s.WriteString(schemas.FirewallRuleGroup_ModificationTime, *v.ModificationTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FirewallRuleGroup_Name, *v.Name)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.FirewallRuleGroup_OwnerId, *v.OwnerId)
+	}
+	if v.RuleCount != nil {
+		s.WriteInt32(schemas.FirewallRuleGroup_RuleCount, *v.RuleCount)
+	}
+	if v.ShareStatus != "" {
+		s.WriteString(schemas.FirewallRuleGroup_ShareStatus, string(v.ShareStatus))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.FirewallRuleGroup_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.FirewallRuleGroup_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *FirewallRuleGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirewallRuleGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirewallRuleGroup_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.FirewallRuleGroup_Arn, v.Arn)
+		case schemas.FirewallRuleGroup_CreationTime:
+			v.CreationTime = new(string)
+			return d.ReadString(schemas.FirewallRuleGroup_CreationTime, v.CreationTime)
+		case schemas.FirewallRuleGroup_CreatorRequestId:
+			v.CreatorRequestId = new(string)
+			return d.ReadString(schemas.FirewallRuleGroup_CreatorRequestId, v.CreatorRequestId)
+		case schemas.FirewallRuleGroup_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.FirewallRuleGroup_Id, v.Id)
+		case schemas.FirewallRuleGroup_ModificationTime:
+			v.ModificationTime = new(string)
+			return d.ReadString(schemas.FirewallRuleGroup_ModificationTime, v.ModificationTime)
+		case schemas.FirewallRuleGroup_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FirewallRuleGroup_Name, v.Name)
+		case schemas.FirewallRuleGroup_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.FirewallRuleGroup_OwnerId, v.OwnerId)
+		case schemas.FirewallRuleGroup_RuleCount:
+			v.RuleCount = new(int32)
+			return d.ReadInt32(schemas.FirewallRuleGroup_RuleCount, v.RuleCount)
+		case schemas.FirewallRuleGroup_ShareStatus:
+			var ev string
+			if err := d.ReadString(schemas.FirewallRuleGroup_ShareStatus, &ev); err != nil {
+				return err
+			}
+			v.ShareStatus = ShareStatus(ev)
+			return nil
+		case schemas.FirewallRuleGroup_Status:
+			var ev string
+			if err := d.ReadString(schemas.FirewallRuleGroup_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = FirewallRuleGroupStatus(ev)
+			return nil
+		case schemas.FirewallRuleGroup_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.FirewallRuleGroup_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
 }
 
 // An association between a firewall rule group and a VPC, which enables DNS
@@ -903,6 +1740,108 @@ type FirewallRuleGroupAssociation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FirewallRuleGroupAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirewallRuleGroupAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirewallRuleGroupAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.FirewallRuleGroupAssociation_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteString(schemas.FirewallRuleGroupAssociation_CreationTime, *v.CreationTime)
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.FirewallRuleGroupAssociation_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.FirewallRuleGroupId != nil {
+		s.WriteString(schemas.FirewallRuleGroupAssociation_FirewallRuleGroupId, *v.FirewallRuleGroupId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.FirewallRuleGroupAssociation_Id, *v.Id)
+	}
+	if v.ManagedOwnerName != nil {
+		s.WriteString(schemas.FirewallRuleGroupAssociation_ManagedOwnerName, *v.ManagedOwnerName)
+	}
+	if v.ModificationTime != nil {
+		s.WriteString(schemas.FirewallRuleGroupAssociation_ModificationTime, *v.ModificationTime)
+	}
+	if v.MutationProtection != "" {
+		s.WriteString(schemas.FirewallRuleGroupAssociation_MutationProtection, string(v.MutationProtection))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FirewallRuleGroupAssociation_Name, *v.Name)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.FirewallRuleGroupAssociation_Priority, *v.Priority)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.FirewallRuleGroupAssociation_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.FirewallRuleGroupAssociation_StatusMessage, *v.StatusMessage)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.FirewallRuleGroupAssociation_VpcId, *v.VpcId)
+	}
+}
+func (v *FirewallRuleGroupAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirewallRuleGroupAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirewallRuleGroupAssociation_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.FirewallRuleGroupAssociation_Arn, v.Arn)
+		case schemas.FirewallRuleGroupAssociation_CreationTime:
+			v.CreationTime = new(string)
+			return d.ReadString(schemas.FirewallRuleGroupAssociation_CreationTime, v.CreationTime)
+		case schemas.FirewallRuleGroupAssociation_CreatorRequestId:
+			v.CreatorRequestId = new(string)
+			return d.ReadString(schemas.FirewallRuleGroupAssociation_CreatorRequestId, v.CreatorRequestId)
+		case schemas.FirewallRuleGroupAssociation_FirewallRuleGroupId:
+			v.FirewallRuleGroupId = new(string)
+			return d.ReadString(schemas.FirewallRuleGroupAssociation_FirewallRuleGroupId, v.FirewallRuleGroupId)
+		case schemas.FirewallRuleGroupAssociation_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.FirewallRuleGroupAssociation_Id, v.Id)
+		case schemas.FirewallRuleGroupAssociation_ManagedOwnerName:
+			v.ManagedOwnerName = new(string)
+			return d.ReadString(schemas.FirewallRuleGroupAssociation_ManagedOwnerName, v.ManagedOwnerName)
+		case schemas.FirewallRuleGroupAssociation_ModificationTime:
+			v.ModificationTime = new(string)
+			return d.ReadString(schemas.FirewallRuleGroupAssociation_ModificationTime, v.ModificationTime)
+		case schemas.FirewallRuleGroupAssociation_MutationProtection:
+			var ev string
+			if err := d.ReadString(schemas.FirewallRuleGroupAssociation_MutationProtection, &ev); err != nil {
+				return err
+			}
+			v.MutationProtection = MutationProtectionStatus(ev)
+			return nil
+		case schemas.FirewallRuleGroupAssociation_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FirewallRuleGroupAssociation_Name, v.Name)
+		case schemas.FirewallRuleGroupAssociation_Priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.FirewallRuleGroupAssociation_Priority, v.Priority)
+		case schemas.FirewallRuleGroupAssociation_Status:
+			var ev string
+			if err := d.ReadString(schemas.FirewallRuleGroupAssociation_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = FirewallRuleGroupAssociationStatus(ev)
+			return nil
+		case schemas.FirewallRuleGroupAssociation_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.FirewallRuleGroupAssociation_StatusMessage, v.StatusMessage)
+		case schemas.FirewallRuleGroupAssociation_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.FirewallRuleGroupAssociation_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // Minimal high-level information for a firewall rule group. The action ListFirewallRuleGroups returns
 // an array of these objects.
 //
@@ -936,6 +1875,62 @@ type FirewallRuleGroupMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FirewallRuleGroupMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirewallRuleGroupMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirewallRuleGroupMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.FirewallRuleGroupMetadata_Arn, *v.Arn)
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.FirewallRuleGroupMetadata_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.FirewallRuleGroupMetadata_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FirewallRuleGroupMetadata_Name, *v.Name)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.FirewallRuleGroupMetadata_OwnerId, *v.OwnerId)
+	}
+	if v.ShareStatus != "" {
+		s.WriteString(schemas.FirewallRuleGroupMetadata_ShareStatus, string(v.ShareStatus))
+	}
+}
+func (v *FirewallRuleGroupMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirewallRuleGroupMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirewallRuleGroupMetadata_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.FirewallRuleGroupMetadata_Arn, v.Arn)
+		case schemas.FirewallRuleGroupMetadata_CreatorRequestId:
+			v.CreatorRequestId = new(string)
+			return d.ReadString(schemas.FirewallRuleGroupMetadata_CreatorRequestId, v.CreatorRequestId)
+		case schemas.FirewallRuleGroupMetadata_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.FirewallRuleGroupMetadata_Id, v.Id)
+		case schemas.FirewallRuleGroupMetadata_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FirewallRuleGroupMetadata_Name, v.Name)
+		case schemas.FirewallRuleGroupMetadata_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.FirewallRuleGroupMetadata_OwnerId, v.OwnerId)
+		case schemas.FirewallRuleGroupMetadata_ShareStatus:
+			var ev string
+			if err := d.ReadString(schemas.FirewallRuleGroupMetadata_ShareStatus, &ev); err != nil {
+				return err
+			}
+			v.ShareStatus = ShareStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The rule-type configuration for a DNS Firewall rule. FirewallRuleType is a
 // tagged union — exactly one member must be set per rule, and the member
 // determines what the rule matches against. This shape is mutually exclusive with
@@ -967,6 +1962,54 @@ type FirewallRuleType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FirewallRuleType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirewallRuleType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirewallRuleType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DnsThreatProtection != nil {
+		s.WriteStruct(schemas.FirewallRuleType_DnsThreatProtection)
+		v.DnsThreatProtection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FirewallAdvancedContentCategory != nil {
+		s.WriteStruct(schemas.FirewallRuleType_FirewallAdvancedContentCategory)
+		v.FirewallAdvancedContentCategory.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FirewallAdvancedThreatCategory != nil {
+		s.WriteStruct(schemas.FirewallRuleType_FirewallAdvancedThreatCategory)
+		v.FirewallAdvancedThreatCategory.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PartnerThreatProtection != nil {
+		s.WriteStruct(schemas.FirewallRuleType_PartnerThreatProtection)
+		v.PartnerThreatProtection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FirewallRuleType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirewallRuleType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirewallRuleType_DnsThreatProtection:
+			v.DnsThreatProtection = &DnsThreatProtectionRuleTypeConfig{}
+			return v.DnsThreatProtection.Deserialize(d)
+		case schemas.FirewallRuleType_FirewallAdvancedContentCategory:
+			v.FirewallAdvancedContentCategory = &FirewallAdvancedContentCategoryConfig{}
+			return v.FirewallAdvancedContentCategory.Deserialize(d)
+		case schemas.FirewallRuleType_FirewallAdvancedThreatCategory:
+			v.FirewallAdvancedThreatCategory = &FirewallAdvancedThreatCategoryConfig{}
+			return v.FirewallAdvancedThreatCategory.Deserialize(d)
+		case schemas.FirewallRuleType_PartnerThreatProtection:
+			v.PartnerThreatProtection = &PartnerThreatProtectionConfig{}
+			return v.PartnerThreatProtection.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The definition of an available rule type that can be used in DNS Firewall
 // rules. This is returned by ListFirewallRuleTypes.
 type FirewallRuleTypeDefinition struct {
@@ -994,6 +2037,54 @@ type FirewallRuleTypeDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FirewallRuleTypeDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirewallRuleTypeDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirewallRuleTypeDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.FirewallRuleTypeDefinition_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.FirewallRuleTypeDefinition_DisplayName, *v.DisplayName)
+	}
+	if v.RuleType != nil {
+		s.WriteString(schemas.FirewallRuleTypeDefinition_RuleType, *v.RuleType)
+	}
+	if v.SubscriptionInfo != nil {
+		s.WriteStruct(schemas.FirewallRuleTypeDefinition_SubscriptionInfo)
+		v.SubscriptionInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.FirewallRuleTypeDefinition_Value, *v.Value)
+	}
+}
+func (v *FirewallRuleTypeDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirewallRuleTypeDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirewallRuleTypeDefinition_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.FirewallRuleTypeDefinition_Description, v.Description)
+		case schemas.FirewallRuleTypeDefinition_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.FirewallRuleTypeDefinition_DisplayName, v.DisplayName)
+		case schemas.FirewallRuleTypeDefinition_RuleType:
+			v.RuleType = new(string)
+			return d.ReadString(schemas.FirewallRuleTypeDefinition_RuleType, v.RuleType)
+		case schemas.FirewallRuleTypeDefinition_SubscriptionInfo:
+			v.SubscriptionInfo = &SubscriptionInfo{}
+			return v.SubscriptionInfo.Deserialize(d)
+		case schemas.FirewallRuleTypeDefinition_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.FirewallRuleTypeDefinition_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // In a [CreateResolverEndpoint] request, the IP address that DNS queries originate from (for outbound
 // endpoints) or that you forward DNS queries to (for inbound endpoints).
 // IpAddressRequest also includes the ID of the subnet that contains the IP address.
@@ -1013,6 +2104,40 @@ type IpAddressRequest struct {
 	Ipv6 *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *IpAddressRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IpAddressRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IpAddressRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ip != nil {
+		s.WriteString(schemas.IpAddressRequest_Ip, *v.Ip)
+	}
+	if v.Ipv6 != nil {
+		s.WriteString(schemas.IpAddressRequest_Ipv6, *v.Ipv6)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.IpAddressRequest_SubnetId, *v.SubnetId)
+	}
+}
+func (v *IpAddressRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IpAddressRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IpAddressRequest_Ip:
+			v.Ip = new(string)
+			return d.ReadString(schemas.IpAddressRequest_Ip, v.Ip)
+		case schemas.IpAddressRequest_Ipv6:
+			v.Ipv6 = new(string)
+			return d.ReadString(schemas.IpAddressRequest_Ipv6, v.Ipv6)
+		case schemas.IpAddressRequest_SubnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.IpAddressRequest_SubnetId, v.SubnetId)
+		}
+		return nil
+	})
 }
 
 // In the response to a [GetResolverEndpoint] request, information about the IP addresses that the
@@ -1050,6 +2175,74 @@ type IpAddressResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IpAddressResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IpAddressResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IpAddressResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteString(schemas.IpAddressResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Ip != nil {
+		s.WriteString(schemas.IpAddressResponse_Ip, *v.Ip)
+	}
+	if v.IpId != nil {
+		s.WriteString(schemas.IpAddressResponse_IpId, *v.IpId)
+	}
+	if v.Ipv6 != nil {
+		s.WriteString(schemas.IpAddressResponse_Ipv6, *v.Ipv6)
+	}
+	if v.ModificationTime != nil {
+		s.WriteString(schemas.IpAddressResponse_ModificationTime, *v.ModificationTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.IpAddressResponse_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.IpAddressResponse_StatusMessage, *v.StatusMessage)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.IpAddressResponse_SubnetId, *v.SubnetId)
+	}
+}
+func (v *IpAddressResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IpAddressResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IpAddressResponse_CreationTime:
+			v.CreationTime = new(string)
+			return d.ReadString(schemas.IpAddressResponse_CreationTime, v.CreationTime)
+		case schemas.IpAddressResponse_Ip:
+			v.Ip = new(string)
+			return d.ReadString(schemas.IpAddressResponse_Ip, v.Ip)
+		case schemas.IpAddressResponse_IpId:
+			v.IpId = new(string)
+			return d.ReadString(schemas.IpAddressResponse_IpId, v.IpId)
+		case schemas.IpAddressResponse_Ipv6:
+			v.Ipv6 = new(string)
+			return d.ReadString(schemas.IpAddressResponse_Ipv6, v.Ipv6)
+		case schemas.IpAddressResponse_ModificationTime:
+			v.ModificationTime = new(string)
+			return d.ReadString(schemas.IpAddressResponse_ModificationTime, v.ModificationTime)
+		case schemas.IpAddressResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.IpAddressResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = IpAddressStatus(ev)
+			return nil
+		case schemas.IpAddressResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.IpAddressResponse_StatusMessage, v.StatusMessage)
+		case schemas.IpAddressResponse_SubnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.IpAddressResponse_SubnetId, v.SubnetId)
+		}
+		return nil
+	})
+}
+
 // In an [UpdateResolverEndpoint] request, information about an IP address to update.
 //
 // [UpdateResolverEndpoint]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_UpdateResolverEndpoint.html
@@ -1074,6 +2267,46 @@ type IpAddressUpdate struct {
 	SubnetId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *IpAddressUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IpAddressUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IpAddressUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ip != nil {
+		s.WriteString(schemas.IpAddressUpdate_Ip, *v.Ip)
+	}
+	if v.IpId != nil {
+		s.WriteString(schemas.IpAddressUpdate_IpId, *v.IpId)
+	}
+	if v.Ipv6 != nil {
+		s.WriteString(schemas.IpAddressUpdate_Ipv6, *v.Ipv6)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.IpAddressUpdate_SubnetId, *v.SubnetId)
+	}
+}
+func (v *IpAddressUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IpAddressUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IpAddressUpdate_Ip:
+			v.Ip = new(string)
+			return d.ReadString(schemas.IpAddressUpdate_Ip, v.Ip)
+		case schemas.IpAddressUpdate_IpId:
+			v.IpId = new(string)
+			return d.ReadString(schemas.IpAddressUpdate_IpId, v.IpId)
+		case schemas.IpAddressUpdate_Ipv6:
+			v.Ipv6 = new(string)
+			return d.ReadString(schemas.IpAddressUpdate_Ipv6, v.Ipv6)
+		case schemas.IpAddressUpdate_SubnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.IpAddressUpdate_SubnetId, v.SubnetId)
+		}
+		return nil
+	})
 }
 
 // A complex type that contains settings for an existing Resolver on an Outpost.
@@ -1119,6 +2352,92 @@ type OutpostResolver struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OutpostResolver) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutpostResolver)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutpostResolver) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.OutpostResolver_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteString(schemas.OutpostResolver_CreationTime, *v.CreationTime)
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.OutpostResolver_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.OutpostResolver_Id, *v.Id)
+	}
+	if v.InstanceCount != nil {
+		s.WriteInt32(schemas.OutpostResolver_InstanceCount, *v.InstanceCount)
+	}
+	if v.ModificationTime != nil {
+		s.WriteString(schemas.OutpostResolver_ModificationTime, *v.ModificationTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.OutpostResolver_Name, *v.Name)
+	}
+	if v.OutpostArn != nil {
+		s.WriteString(schemas.OutpostResolver_OutpostArn, *v.OutpostArn)
+	}
+	if v.PreferredInstanceType != nil {
+		s.WriteString(schemas.OutpostResolver_PreferredInstanceType, *v.PreferredInstanceType)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.OutpostResolver_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.OutpostResolver_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *OutpostResolver) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutpostResolver, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutpostResolver_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.OutpostResolver_Arn, v.Arn)
+		case schemas.OutpostResolver_CreationTime:
+			v.CreationTime = new(string)
+			return d.ReadString(schemas.OutpostResolver_CreationTime, v.CreationTime)
+		case schemas.OutpostResolver_CreatorRequestId:
+			v.CreatorRequestId = new(string)
+			return d.ReadString(schemas.OutpostResolver_CreatorRequestId, v.CreatorRequestId)
+		case schemas.OutpostResolver_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.OutpostResolver_Id, v.Id)
+		case schemas.OutpostResolver_InstanceCount:
+			v.InstanceCount = new(int32)
+			return d.ReadInt32(schemas.OutpostResolver_InstanceCount, v.InstanceCount)
+		case schemas.OutpostResolver_ModificationTime:
+			v.ModificationTime = new(string)
+			return d.ReadString(schemas.OutpostResolver_ModificationTime, v.ModificationTime)
+		case schemas.OutpostResolver_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.OutpostResolver_Name, v.Name)
+		case schemas.OutpostResolver_OutpostArn:
+			v.OutpostArn = new(string)
+			return d.ReadString(schemas.OutpostResolver_OutpostArn, v.OutpostArn)
+		case schemas.OutpostResolver_PreferredInstanceType:
+			v.PreferredInstanceType = new(string)
+			return d.ReadString(schemas.OutpostResolver_PreferredInstanceType, v.PreferredInstanceType)
+		case schemas.OutpostResolver_Status:
+			var ev string
+			if err := d.ReadString(schemas.OutpostResolver_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = OutpostResolverStatus(ev)
+			return nil
+		case schemas.OutpostResolver_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.OutpostResolver_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 // The configuration for a partner threat-protection rule. To enumerate the
 // partners available in your account, call ListFirewallRuleTypeswith RuleType set to
 // PartnerThreatProtection — each returned FirewallRuleTypeDefinition includes a SubscriptionInfo identifying the AWS
@@ -1133,6 +2452,28 @@ type PartnerThreatProtectionConfig struct {
 	Partner *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PartnerThreatProtectionConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PartnerThreatProtectionConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PartnerThreatProtectionConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Partner != nil {
+		s.WriteString(schemas.PartnerThreatProtectionConfig_Partner, *v.Partner)
+	}
+}
+func (v *PartnerThreatProtectionConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PartnerThreatProtectionConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PartnerThreatProtectionConfig_Partner:
+			v.Partner = new(string)
+			return d.ReadString(schemas.PartnerThreatProtectionConfig_Partner, v.Partner)
+		}
+		return nil
+	})
 }
 
 // A complex type that contains information about a Resolver configuration for a
@@ -1167,6 +2508,50 @@ type ResolverConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResolverConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResolverConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResolverConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutodefinedReverse != "" {
+		s.WriteString(schemas.ResolverConfig_AutodefinedReverse, string(v.AutodefinedReverse))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ResolverConfig_Id, *v.Id)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.ResolverConfig_OwnerId, *v.OwnerId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.ResolverConfig_ResourceId, *v.ResourceId)
+	}
+}
+func (v *ResolverConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResolverConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResolverConfig_AutodefinedReverse:
+			var ev string
+			if err := d.ReadString(schemas.ResolverConfig_AutodefinedReverse, &ev); err != nil {
+				return err
+			}
+			v.AutodefinedReverse = ResolverAutodefinedReverseStatus(ev)
+			return nil
+		case schemas.ResolverConfig_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ResolverConfig_Id, v.Id)
+		case schemas.ResolverConfig_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.ResolverConfig_OwnerId, v.OwnerId)
+		case schemas.ResolverConfig_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.ResolverConfig_ResourceId, v.ResourceId)
+		}
+		return nil
+	})
+}
+
 // A complex type that contains information about a configuration for DNSSEC
 // validation.
 type ResolverDnssecConfig struct {
@@ -1195,6 +2580,50 @@ type ResolverDnssecConfig struct {
 	ValidationStatus ResolverDNSSECValidationStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResolverDnssecConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResolverDnssecConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResolverDnssecConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ResolverDnssecConfig_Id, *v.Id)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.ResolverDnssecConfig_OwnerId, *v.OwnerId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.ResolverDnssecConfig_ResourceId, *v.ResourceId)
+	}
+	if v.ValidationStatus != "" {
+		s.WriteString(schemas.ResolverDnssecConfig_ValidationStatus, string(v.ValidationStatus))
+	}
+}
+func (v *ResolverDnssecConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResolverDnssecConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResolverDnssecConfig_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ResolverDnssecConfig_Id, v.Id)
+		case schemas.ResolverDnssecConfig_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.ResolverDnssecConfig_OwnerId, v.OwnerId)
+		case schemas.ResolverDnssecConfig_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.ResolverDnssecConfig_ResourceId, v.ResourceId)
+		case schemas.ResolverDnssecConfig_ValidationStatus:
+			var ev string
+			if err := d.ReadString(schemas.ResolverDnssecConfig_ValidationStatus, &ev); err != nil {
+				return err
+			}
+			v.ValidationStatus = ResolverDNSSECValidationStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // In the response to a [CreateResolverEndpoint], [DeleteResolverEndpoint], [GetResolverEndpoint], Updates the name, or ResolverEndpointType for an
@@ -1361,6 +2790,148 @@ type ResolverEndpoint struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResolverEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResolverEndpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResolverEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ResolverEndpoint_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteString(schemas.ResolverEndpoint_CreationTime, *v.CreationTime)
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.ResolverEndpoint_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.Direction != "" {
+		s.WriteString(schemas.ResolverEndpoint_Direction, string(v.Direction))
+	}
+	if v.Dns64Enabled != nil {
+		s.WriteBool(schemas.ResolverEndpoint_Dns64Enabled, *v.Dns64Enabled)
+	}
+	if v.HostVPCId != nil {
+		s.WriteString(schemas.ResolverEndpoint_HostVPCId, *v.HostVPCId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ResolverEndpoint_Id, *v.Id)
+	}
+	if v.IpAddressCount != nil {
+		s.WriteInt32(schemas.ResolverEndpoint_IpAddressCount, *v.IpAddressCount)
+	}
+	if v.Ipv6InternetAccessEnabled != nil {
+		s.WriteBool(schemas.ResolverEndpoint_Ipv6InternetAccessEnabled, *v.Ipv6InternetAccessEnabled)
+	}
+	if v.ModificationTime != nil {
+		s.WriteString(schemas.ResolverEndpoint_ModificationTime, *v.ModificationTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ResolverEndpoint_Name, *v.Name)
+	}
+	if v.OutpostArn != nil {
+		s.WriteString(schemas.ResolverEndpoint_OutpostArn, *v.OutpostArn)
+	}
+	if v.PreferredInstanceType != nil {
+		s.WriteString(schemas.ResolverEndpoint_PreferredInstanceType, *v.PreferredInstanceType)
+	}
+	serializeProtocolList(s, schemas.ResolverEndpoint_Protocols, v.Protocols)
+	if v.ResolverEndpointType != "" {
+		s.WriteString(schemas.ResolverEndpoint_ResolverEndpointType, string(v.ResolverEndpointType))
+	}
+	if v.RniEnhancedMetricsEnabled != nil {
+		s.WriteBool(schemas.ResolverEndpoint_RniEnhancedMetricsEnabled, *v.RniEnhancedMetricsEnabled)
+	}
+	serializeSecurityGroupIds(s, schemas.ResolverEndpoint_SecurityGroupIds, v.SecurityGroupIds)
+	if v.Status != "" {
+		s.WriteString(schemas.ResolverEndpoint_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ResolverEndpoint_StatusMessage, *v.StatusMessage)
+	}
+	if v.TargetNameServerMetricsEnabled != nil {
+		s.WriteBool(schemas.ResolverEndpoint_TargetNameServerMetricsEnabled, *v.TargetNameServerMetricsEnabled)
+	}
+}
+func (v *ResolverEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResolverEndpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResolverEndpoint_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ResolverEndpoint_Arn, v.Arn)
+		case schemas.ResolverEndpoint_CreationTime:
+			v.CreationTime = new(string)
+			return d.ReadString(schemas.ResolverEndpoint_CreationTime, v.CreationTime)
+		case schemas.ResolverEndpoint_CreatorRequestId:
+			v.CreatorRequestId = new(string)
+			return d.ReadString(schemas.ResolverEndpoint_CreatorRequestId, v.CreatorRequestId)
+		case schemas.ResolverEndpoint_Direction:
+			var ev string
+			if err := d.ReadString(schemas.ResolverEndpoint_Direction, &ev); err != nil {
+				return err
+			}
+			v.Direction = ResolverEndpointDirection(ev)
+			return nil
+		case schemas.ResolverEndpoint_Dns64Enabled:
+			v.Dns64Enabled = new(bool)
+			return d.ReadBool(schemas.ResolverEndpoint_Dns64Enabled, v.Dns64Enabled)
+		case schemas.ResolverEndpoint_HostVPCId:
+			v.HostVPCId = new(string)
+			return d.ReadString(schemas.ResolverEndpoint_HostVPCId, v.HostVPCId)
+		case schemas.ResolverEndpoint_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ResolverEndpoint_Id, v.Id)
+		case schemas.ResolverEndpoint_IpAddressCount:
+			v.IpAddressCount = new(int32)
+			return d.ReadInt32(schemas.ResolverEndpoint_IpAddressCount, v.IpAddressCount)
+		case schemas.ResolverEndpoint_Ipv6InternetAccessEnabled:
+			v.Ipv6InternetAccessEnabled = new(bool)
+			return d.ReadBool(schemas.ResolverEndpoint_Ipv6InternetAccessEnabled, v.Ipv6InternetAccessEnabled)
+		case schemas.ResolverEndpoint_ModificationTime:
+			v.ModificationTime = new(string)
+			return d.ReadString(schemas.ResolverEndpoint_ModificationTime, v.ModificationTime)
+		case schemas.ResolverEndpoint_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ResolverEndpoint_Name, v.Name)
+		case schemas.ResolverEndpoint_OutpostArn:
+			v.OutpostArn = new(string)
+			return d.ReadString(schemas.ResolverEndpoint_OutpostArn, v.OutpostArn)
+		case schemas.ResolverEndpoint_PreferredInstanceType:
+			v.PreferredInstanceType = new(string)
+			return d.ReadString(schemas.ResolverEndpoint_PreferredInstanceType, v.PreferredInstanceType)
+		case schemas.ResolverEndpoint_Protocols:
+			return deserializeProtocolList(d, schemas.ResolverEndpoint_Protocols, &v.Protocols)
+		case schemas.ResolverEndpoint_ResolverEndpointType:
+			var ev string
+			if err := d.ReadString(schemas.ResolverEndpoint_ResolverEndpointType, &ev); err != nil {
+				return err
+			}
+			v.ResolverEndpointType = ResolverEndpointType(ev)
+			return nil
+		case schemas.ResolverEndpoint_RniEnhancedMetricsEnabled:
+			v.RniEnhancedMetricsEnabled = new(bool)
+			return d.ReadBool(schemas.ResolverEndpoint_RniEnhancedMetricsEnabled, v.RniEnhancedMetricsEnabled)
+		case schemas.ResolverEndpoint_SecurityGroupIds:
+			return deserializeSecurityGroupIds(d, schemas.ResolverEndpoint_SecurityGroupIds, &v.SecurityGroupIds)
+		case schemas.ResolverEndpoint_Status:
+			var ev string
+			if err := d.ReadString(schemas.ResolverEndpoint_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ResolverEndpointStatus(ev)
+			return nil
+		case schemas.ResolverEndpoint_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ResolverEndpoint_StatusMessage, v.StatusMessage)
+		case schemas.ResolverEndpoint_TargetNameServerMetricsEnabled:
+			v.TargetNameServerMetricsEnabled = new(bool)
+			return d.ReadBool(schemas.ResolverEndpoint_TargetNameServerMetricsEnabled, v.TargetNameServerMetricsEnabled)
+		}
+		return nil
+	})
+}
+
 // In the response to a [CreateResolverQueryLogConfig], [DeleteResolverQueryLogConfig], [GetResolverQueryLogConfig], or [ListResolverQueryLogConfigs] request, a complex type that contains settings
 // for one query logging configuration.
 //
@@ -1426,6 +2997,89 @@ type ResolverQueryLogConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResolverQueryLogConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResolverQueryLogConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResolverQueryLogConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ResolverQueryLogConfig_Arn, *v.Arn)
+	}
+	if v.AssociationCount != 0 {
+		s.WriteInt32(schemas.ResolverQueryLogConfig_AssociationCount, v.AssociationCount)
+	}
+	if v.CreationTime != nil {
+		s.WriteString(schemas.ResolverQueryLogConfig_CreationTime, *v.CreationTime)
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.ResolverQueryLogConfig_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.DestinationArn != nil {
+		s.WriteString(schemas.ResolverQueryLogConfig_DestinationArn, *v.DestinationArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ResolverQueryLogConfig_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ResolverQueryLogConfig_Name, *v.Name)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.ResolverQueryLogConfig_OwnerId, *v.OwnerId)
+	}
+	if v.ShareStatus != "" {
+		s.WriteString(schemas.ResolverQueryLogConfig_ShareStatus, string(v.ShareStatus))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ResolverQueryLogConfig_Status, string(v.Status))
+	}
+}
+func (v *ResolverQueryLogConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResolverQueryLogConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResolverQueryLogConfig_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ResolverQueryLogConfig_Arn, v.Arn)
+		case schemas.ResolverQueryLogConfig_AssociationCount:
+			return d.ReadInt32(schemas.ResolverQueryLogConfig_AssociationCount, &v.AssociationCount)
+		case schemas.ResolverQueryLogConfig_CreationTime:
+			v.CreationTime = new(string)
+			return d.ReadString(schemas.ResolverQueryLogConfig_CreationTime, v.CreationTime)
+		case schemas.ResolverQueryLogConfig_CreatorRequestId:
+			v.CreatorRequestId = new(string)
+			return d.ReadString(schemas.ResolverQueryLogConfig_CreatorRequestId, v.CreatorRequestId)
+		case schemas.ResolverQueryLogConfig_DestinationArn:
+			v.DestinationArn = new(string)
+			return d.ReadString(schemas.ResolverQueryLogConfig_DestinationArn, v.DestinationArn)
+		case schemas.ResolverQueryLogConfig_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ResolverQueryLogConfig_Id, v.Id)
+		case schemas.ResolverQueryLogConfig_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ResolverQueryLogConfig_Name, v.Name)
+		case schemas.ResolverQueryLogConfig_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.ResolverQueryLogConfig_OwnerId, v.OwnerId)
+		case schemas.ResolverQueryLogConfig_ShareStatus:
+			var ev string
+			if err := d.ReadString(schemas.ResolverQueryLogConfig_ShareStatus, &ev); err != nil {
+				return err
+			}
+			v.ShareStatus = ShareStatus(ev)
+			return nil
+		case schemas.ResolverQueryLogConfig_Status:
+			var ev string
+			if err := d.ReadString(schemas.ResolverQueryLogConfig_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ResolverQueryLogConfigStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // In the response to an [AssociateResolverQueryLogConfig], [DisassociateResolverQueryLogConfig], [GetResolverQueryLogConfigAssociation], or [ListResolverQueryLogConfigAssociations], request, a complex type that contains settings
 // for a specified association between an Amazon VPC and a query logging
 // configuration.
@@ -1481,6 +3135,72 @@ type ResolverQueryLogConfigAssociation struct {
 	Status ResolverQueryLogConfigAssociationStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResolverQueryLogConfigAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResolverQueryLogConfigAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResolverQueryLogConfigAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteString(schemas.ResolverQueryLogConfigAssociation_CreationTime, *v.CreationTime)
+	}
+	if v.Error != "" {
+		s.WriteString(schemas.ResolverQueryLogConfigAssociation_Error, string(v.Error))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.ResolverQueryLogConfigAssociation_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ResolverQueryLogConfigAssociation_Id, *v.Id)
+	}
+	if v.ResolverQueryLogConfigId != nil {
+		s.WriteString(schemas.ResolverQueryLogConfigAssociation_ResolverQueryLogConfigId, *v.ResolverQueryLogConfigId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.ResolverQueryLogConfigAssociation_ResourceId, *v.ResourceId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ResolverQueryLogConfigAssociation_Status, string(v.Status))
+	}
+}
+func (v *ResolverQueryLogConfigAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResolverQueryLogConfigAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResolverQueryLogConfigAssociation_CreationTime:
+			v.CreationTime = new(string)
+			return d.ReadString(schemas.ResolverQueryLogConfigAssociation_CreationTime, v.CreationTime)
+		case schemas.ResolverQueryLogConfigAssociation_Error:
+			var ev string
+			if err := d.ReadString(schemas.ResolverQueryLogConfigAssociation_Error, &ev); err != nil {
+				return err
+			}
+			v.Error = ResolverQueryLogConfigAssociationError(ev)
+			return nil
+		case schemas.ResolverQueryLogConfigAssociation_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.ResolverQueryLogConfigAssociation_ErrorMessage, v.ErrorMessage)
+		case schemas.ResolverQueryLogConfigAssociation_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ResolverQueryLogConfigAssociation_Id, v.Id)
+		case schemas.ResolverQueryLogConfigAssociation_ResolverQueryLogConfigId:
+			v.ResolverQueryLogConfigId = new(string)
+			return d.ReadString(schemas.ResolverQueryLogConfigAssociation_ResolverQueryLogConfigId, v.ResolverQueryLogConfigId)
+		case schemas.ResolverQueryLogConfigAssociation_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.ResolverQueryLogConfigAssociation_ResourceId, v.ResourceId)
+		case schemas.ResolverQueryLogConfigAssociation_Status:
+			var ev string
+			if err := d.ReadString(schemas.ResolverQueryLogConfigAssociation_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ResolverQueryLogConfigAssociationStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // For queries that originate in your VPC, detailed information about a Resolver
@@ -1575,6 +3295,121 @@ type ResolverRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResolverRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResolverRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResolverRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ResolverRule_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteString(schemas.ResolverRule_CreationTime, *v.CreationTime)
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.ResolverRule_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.DelegationRecord != nil {
+		s.WriteString(schemas.ResolverRule_DelegationRecord, *v.DelegationRecord)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.ResolverRule_DomainName, *v.DomainName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ResolverRule_Id, *v.Id)
+	}
+	if v.ModificationTime != nil {
+		s.WriteString(schemas.ResolverRule_ModificationTime, *v.ModificationTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ResolverRule_Name, *v.Name)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.ResolverRule_OwnerId, *v.OwnerId)
+	}
+	if v.ResolverEndpointId != nil {
+		s.WriteString(schemas.ResolverRule_ResolverEndpointId, *v.ResolverEndpointId)
+	}
+	if v.RuleType != "" {
+		s.WriteString(schemas.ResolverRule_RuleType, string(v.RuleType))
+	}
+	if v.ShareStatus != "" {
+		s.WriteString(schemas.ResolverRule_ShareStatus, string(v.ShareStatus))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ResolverRule_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ResolverRule_StatusMessage, *v.StatusMessage)
+	}
+	serializeTargetList(s, schemas.ResolverRule_TargetIps, v.TargetIps)
+}
+func (v *ResolverRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResolverRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResolverRule_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ResolverRule_Arn, v.Arn)
+		case schemas.ResolverRule_CreationTime:
+			v.CreationTime = new(string)
+			return d.ReadString(schemas.ResolverRule_CreationTime, v.CreationTime)
+		case schemas.ResolverRule_CreatorRequestId:
+			v.CreatorRequestId = new(string)
+			return d.ReadString(schemas.ResolverRule_CreatorRequestId, v.CreatorRequestId)
+		case schemas.ResolverRule_DelegationRecord:
+			v.DelegationRecord = new(string)
+			return d.ReadString(schemas.ResolverRule_DelegationRecord, v.DelegationRecord)
+		case schemas.ResolverRule_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.ResolverRule_DomainName, v.DomainName)
+		case schemas.ResolverRule_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ResolverRule_Id, v.Id)
+		case schemas.ResolverRule_ModificationTime:
+			v.ModificationTime = new(string)
+			return d.ReadString(schemas.ResolverRule_ModificationTime, v.ModificationTime)
+		case schemas.ResolverRule_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ResolverRule_Name, v.Name)
+		case schemas.ResolverRule_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.ResolverRule_OwnerId, v.OwnerId)
+		case schemas.ResolverRule_ResolverEndpointId:
+			v.ResolverEndpointId = new(string)
+			return d.ReadString(schemas.ResolverRule_ResolverEndpointId, v.ResolverEndpointId)
+		case schemas.ResolverRule_RuleType:
+			var ev string
+			if err := d.ReadString(schemas.ResolverRule_RuleType, &ev); err != nil {
+				return err
+			}
+			v.RuleType = RuleTypeOption(ev)
+			return nil
+		case schemas.ResolverRule_ShareStatus:
+			var ev string
+			if err := d.ReadString(schemas.ResolverRule_ShareStatus, &ev); err != nil {
+				return err
+			}
+			v.ShareStatus = ShareStatus(ev)
+			return nil
+		case schemas.ResolverRule_Status:
+			var ev string
+			if err := d.ReadString(schemas.ResolverRule_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ResolverRuleStatus(ev)
+			return nil
+		case schemas.ResolverRule_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ResolverRule_StatusMessage, v.StatusMessage)
+		case schemas.ResolverRule_TargetIps:
+			return deserializeTargetList(d, schemas.ResolverRule_TargetIps, &v.TargetIps)
+		}
+		return nil
+	})
+}
+
 // In the response to an [AssociateResolverRule], [DisassociateResolverRule], or [ListResolverRuleAssociations] request, provides information about an
 // association between a Resolver rule and a VPC. The association determines which
 // DNS queries that originate in the VPC are forwarded to your network.
@@ -1615,6 +3450,62 @@ type ResolverRuleAssociation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResolverRuleAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResolverRuleAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResolverRuleAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ResolverRuleAssociation_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ResolverRuleAssociation_Name, *v.Name)
+	}
+	if v.ResolverRuleId != nil {
+		s.WriteString(schemas.ResolverRuleAssociation_ResolverRuleId, *v.ResolverRuleId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ResolverRuleAssociation_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ResolverRuleAssociation_StatusMessage, *v.StatusMessage)
+	}
+	if v.VPCId != nil {
+		s.WriteString(schemas.ResolverRuleAssociation_VPCId, *v.VPCId)
+	}
+}
+func (v *ResolverRuleAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResolverRuleAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResolverRuleAssociation_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ResolverRuleAssociation_Id, v.Id)
+		case schemas.ResolverRuleAssociation_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ResolverRuleAssociation_Name, v.Name)
+		case schemas.ResolverRuleAssociation_ResolverRuleId:
+			v.ResolverRuleId = new(string)
+			return d.ReadString(schemas.ResolverRuleAssociation_ResolverRuleId, v.ResolverRuleId)
+		case schemas.ResolverRuleAssociation_Status:
+			var ev string
+			if err := d.ReadString(schemas.ResolverRuleAssociation_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ResolverRuleAssociationStatus(ev)
+			return nil
+		case schemas.ResolverRuleAssociation_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ResolverRuleAssociation_StatusMessage, v.StatusMessage)
+		case schemas.ResolverRuleAssociation_VPCId:
+			v.VPCId = new(string)
+			return d.ReadString(schemas.ResolverRuleAssociation_VPCId, v.VPCId)
+		}
+		return nil
+	})
+}
+
 // In an [UpdateResolverRule] request, information about the changes that you want to make.
 //
 // [UpdateResolverRule]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_UpdateResolverRule.html
@@ -1639,6 +3530,37 @@ type ResolverRuleConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResolverRuleConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResolverRuleConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResolverRuleConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ResolverRuleConfig_Name, *v.Name)
+	}
+	if v.ResolverEndpointId != nil {
+		s.WriteString(schemas.ResolverRuleConfig_ResolverEndpointId, *v.ResolverEndpointId)
+	}
+	serializeTargetList(s, schemas.ResolverRuleConfig_TargetIps, v.TargetIps)
+}
+func (v *ResolverRuleConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResolverRuleConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResolverRuleConfig_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ResolverRuleConfig_Name, v.Name)
+		case schemas.ResolverRuleConfig_ResolverEndpointId:
+			v.ResolverEndpointId = new(string)
+			return d.ReadString(schemas.ResolverRuleConfig_ResolverEndpointId, v.ResolverEndpointId)
+		case schemas.ResolverRuleConfig_TargetIps:
+			return deserializeTargetList(d, schemas.ResolverRuleConfig_TargetIps, &v.TargetIps)
+		}
+		return nil
+	})
+}
+
 // Identifies the AWS Marketplace product that backs a partner-managed rule type.
 // Returned as part of FirewallRuleTypeDefinitionwhen the rule type variant requires an active customer
 // subscription to the named product.
@@ -1654,6 +3576,34 @@ type SubscriptionInfo struct {
 	VendorName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SubscriptionInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubscriptionInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubscriptionInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProductId != nil {
+		s.WriteString(schemas.SubscriptionInfo_ProductId, *v.ProductId)
+	}
+	if v.VendorName != nil {
+		s.WriteString(schemas.SubscriptionInfo_VendorName, *v.VendorName)
+	}
+}
+func (v *SubscriptionInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubscriptionInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubscriptionInfo_ProductId:
+			v.ProductId = new(string)
+			return d.ReadString(schemas.SubscriptionInfo_ProductId, v.ProductId)
+		case schemas.SubscriptionInfo_VendorName:
+			v.VendorName = new(string)
+			return d.ReadString(schemas.SubscriptionInfo_VendorName, v.VendorName)
+		}
+		return nil
+	})
 }
 
 // One tag that you want to add to the specified resource. A tag consists of a Key
@@ -1674,6 +3624,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // In a [CreateResolverRule] request, an array of the IPs that you want to forward DNS queries to.
@@ -1699,6 +3677,56 @@ type TargetAddress struct {
 	ServerNameIndication *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TargetAddress) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetAddress)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetAddress) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ip != nil {
+		s.WriteString(schemas.TargetAddress_Ip, *v.Ip)
+	}
+	if v.Ipv6 != nil {
+		s.WriteString(schemas.TargetAddress_Ipv6, *v.Ipv6)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.TargetAddress_Port, *v.Port)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.TargetAddress_Protocol, string(v.Protocol))
+	}
+	if v.ServerNameIndication != nil {
+		s.WriteString(schemas.TargetAddress_ServerNameIndication, *v.ServerNameIndication)
+	}
+}
+func (v *TargetAddress) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetAddress, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetAddress_Ip:
+			v.Ip = new(string)
+			return d.ReadString(schemas.TargetAddress_Ip, v.Ip)
+		case schemas.TargetAddress_Ipv6:
+			v.Ipv6 = new(string)
+			return d.ReadString(schemas.TargetAddress_Ipv6, v.Ipv6)
+		case schemas.TargetAddress_Port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.TargetAddress_Port, v.Port)
+		case schemas.TargetAddress_Protocol:
+			var ev string
+			if err := d.ReadString(schemas.TargetAddress_Protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = Protocol(ev)
+			return nil
+		case schemas.TargetAddress_ServerNameIndication:
+			v.ServerNameIndication = new(string)
+			return d.ReadString(schemas.TargetAddress_ServerNameIndication, v.ServerNameIndication)
+		}
+		return nil
+	})
 }
 
 // The details for updating a single firewall rule in a batch operation.
@@ -1864,6 +3892,138 @@ type UpdateFirewallRuleEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFirewallRuleEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFirewallRuleEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFirewallRuleEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.UpdateFirewallRuleEntry_Action, string(v.Action))
+	}
+	if v.BlockOverrideDnsType != "" {
+		s.WriteString(schemas.UpdateFirewallRuleEntry_BlockOverrideDnsType, string(v.BlockOverrideDnsType))
+	}
+	if v.BlockOverrideDomain != nil {
+		s.WriteString(schemas.UpdateFirewallRuleEntry_BlockOverrideDomain, *v.BlockOverrideDomain)
+	}
+	if v.BlockOverrideTtl != nil {
+		s.WriteInt32(schemas.UpdateFirewallRuleEntry_BlockOverrideTtl, *v.BlockOverrideTtl)
+	}
+	if v.BlockResponse != "" {
+		s.WriteString(schemas.UpdateFirewallRuleEntry_BlockResponse, string(v.BlockResponse))
+	}
+	if v.ConfidenceThreshold != "" {
+		s.WriteString(schemas.UpdateFirewallRuleEntry_ConfidenceThreshold, string(v.ConfidenceThreshold))
+	}
+	if v.DnsThreatProtection != "" {
+		s.WriteString(schemas.UpdateFirewallRuleEntry_DnsThreatProtection, string(v.DnsThreatProtection))
+	}
+	if v.FirewallDomainListId != nil {
+		s.WriteString(schemas.UpdateFirewallRuleEntry_FirewallDomainListId, *v.FirewallDomainListId)
+	}
+	if v.FirewallDomainRedirectionAction != "" {
+		s.WriteString(schemas.UpdateFirewallRuleEntry_FirewallDomainRedirectionAction, string(v.FirewallDomainRedirectionAction))
+	}
+	if v.FirewallRuleGroupId != nil {
+		s.WriteString(schemas.UpdateFirewallRuleEntry_FirewallRuleGroupId, *v.FirewallRuleGroupId)
+	}
+	if v.FirewallRuleType != nil {
+		s.WriteStruct(schemas.UpdateFirewallRuleEntry_FirewallRuleType)
+		v.FirewallRuleType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FirewallThreatProtectionId != nil {
+		s.WriteString(schemas.UpdateFirewallRuleEntry_FirewallThreatProtectionId, *v.FirewallThreatProtectionId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateFirewallRuleEntry_Name, *v.Name)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.UpdateFirewallRuleEntry_Priority, *v.Priority)
+	}
+	if v.Qtype != nil {
+		s.WriteString(schemas.UpdateFirewallRuleEntry_Qtype, *v.Qtype)
+	}
+}
+func (v *UpdateFirewallRuleEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFirewallRuleEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFirewallRuleEntry_Action:
+			var ev string
+			if err := d.ReadString(schemas.UpdateFirewallRuleEntry_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = Action(ev)
+			return nil
+		case schemas.UpdateFirewallRuleEntry_BlockOverrideDnsType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateFirewallRuleEntry_BlockOverrideDnsType, &ev); err != nil {
+				return err
+			}
+			v.BlockOverrideDnsType = BlockOverrideDnsType(ev)
+			return nil
+		case schemas.UpdateFirewallRuleEntry_BlockOverrideDomain:
+			v.BlockOverrideDomain = new(string)
+			return d.ReadString(schemas.UpdateFirewallRuleEntry_BlockOverrideDomain, v.BlockOverrideDomain)
+		case schemas.UpdateFirewallRuleEntry_BlockOverrideTtl:
+			v.BlockOverrideTtl = new(int32)
+			return d.ReadInt32(schemas.UpdateFirewallRuleEntry_BlockOverrideTtl, v.BlockOverrideTtl)
+		case schemas.UpdateFirewallRuleEntry_BlockResponse:
+			var ev string
+			if err := d.ReadString(schemas.UpdateFirewallRuleEntry_BlockResponse, &ev); err != nil {
+				return err
+			}
+			v.BlockResponse = BlockResponse(ev)
+			return nil
+		case schemas.UpdateFirewallRuleEntry_ConfidenceThreshold:
+			var ev string
+			if err := d.ReadString(schemas.UpdateFirewallRuleEntry_ConfidenceThreshold, &ev); err != nil {
+				return err
+			}
+			v.ConfidenceThreshold = ConfidenceThreshold(ev)
+			return nil
+		case schemas.UpdateFirewallRuleEntry_DnsThreatProtection:
+			var ev string
+			if err := d.ReadString(schemas.UpdateFirewallRuleEntry_DnsThreatProtection, &ev); err != nil {
+				return err
+			}
+			v.DnsThreatProtection = DnsThreatProtection(ev)
+			return nil
+		case schemas.UpdateFirewallRuleEntry_FirewallDomainListId:
+			v.FirewallDomainListId = new(string)
+			return d.ReadString(schemas.UpdateFirewallRuleEntry_FirewallDomainListId, v.FirewallDomainListId)
+		case schemas.UpdateFirewallRuleEntry_FirewallDomainRedirectionAction:
+			var ev string
+			if err := d.ReadString(schemas.UpdateFirewallRuleEntry_FirewallDomainRedirectionAction, &ev); err != nil {
+				return err
+			}
+			v.FirewallDomainRedirectionAction = FirewallDomainRedirectionAction(ev)
+			return nil
+		case schemas.UpdateFirewallRuleEntry_FirewallRuleGroupId:
+			v.FirewallRuleGroupId = new(string)
+			return d.ReadString(schemas.UpdateFirewallRuleEntry_FirewallRuleGroupId, v.FirewallRuleGroupId)
+		case schemas.UpdateFirewallRuleEntry_FirewallRuleType:
+			v.FirewallRuleType = &FirewallRuleType{}
+			return v.FirewallRuleType.Deserialize(d)
+		case schemas.UpdateFirewallRuleEntry_FirewallThreatProtectionId:
+			v.FirewallThreatProtectionId = new(string)
+			return d.ReadString(schemas.UpdateFirewallRuleEntry_FirewallThreatProtectionId, v.FirewallThreatProtectionId)
+		case schemas.UpdateFirewallRuleEntry_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateFirewallRuleEntry_Name, v.Name)
+		case schemas.UpdateFirewallRuleEntry_Priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.UpdateFirewallRuleEntry_Priority, v.Priority)
+		case schemas.UpdateFirewallRuleEntry_Qtype:
+			v.Qtype = new(string)
+			return d.ReadString(schemas.UpdateFirewallRuleEntry_Qtype, v.Qtype)
+		}
+		return nil
+	})
+}
+
 //	Provides information about the IP address type in response to [UpdateResolverEndpoint].
 //
 // [UpdateResolverEndpoint]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_UpdateResolverEndpoint.html
@@ -1880,6 +4040,34 @@ type UpdateIpAddress struct {
 	Ipv6 *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateIpAddress) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIpAddress)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIpAddress) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpId != nil {
+		s.WriteString(schemas.UpdateIpAddress_IpId, *v.IpId)
+	}
+	if v.Ipv6 != nil {
+		s.WriteString(schemas.UpdateIpAddress_Ipv6, *v.Ipv6)
+	}
+}
+func (v *UpdateIpAddress) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIpAddress, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIpAddress_IpId:
+			v.IpId = new(string)
+			return d.ReadString(schemas.UpdateIpAddress_IpId, v.IpId)
+		case schemas.UpdateIpAddress_Ipv6:
+			v.Ipv6 = new(string)
+			return d.ReadString(schemas.UpdateIpAddress_Ipv6, v.Ipv6)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

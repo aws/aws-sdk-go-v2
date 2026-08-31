@@ -4,7 +4,9 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetAgentContextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgentContextInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentContextRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentContextInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetAgentContextRequest_id, *v.Id)
+	}
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.GetAgentContextRequest_profileArn, *v.ProfileArn)
+	}
+}
+
 type GetAgentContextOutput struct {
 
 	// The retrieved context summary.
@@ -53,13 +70,34 @@ type GetAgentContextOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgentContextOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentContextResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentContextOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Context != nil {
+		s.WriteStruct(schemas.GetAgentContextResponse_context)
+		v.Context.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAgentContextOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAgentContextResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAgentContextResponse_context:
+			v.Context = &types.ContextSummary{}
+			return v.Context.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAgentContextMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAgentContext{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentContext, schemas.GetAgentContextRequest, schemas.GetAgentContextResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAgentContext{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentContext, schemas.GetAgentContextRequest, schemas.GetAgentContextResponse), output: &GetAgentContextOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

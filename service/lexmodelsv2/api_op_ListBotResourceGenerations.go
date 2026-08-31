@@ -5,7 +5,9 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,35 @@ type ListBotResourceGenerationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBotResourceGenerationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBotResourceGenerationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBotResourceGenerationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListBotResourceGenerationsRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListBotResourceGenerationsRequest_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListBotResourceGenerationsRequest_localeId, *v.LocaleId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBotResourceGenerationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBotResourceGenerationsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != nil {
+		s.WriteStruct(schemas.ListBotResourceGenerationsRequest_sortBy)
+		v.SortBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListBotResourceGenerationsOutput struct {
 
 	// The unique identifier of the bot for which the generation requests were made.
@@ -83,13 +114,53 @@ type ListBotResourceGenerationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBotResourceGenerationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBotResourceGenerationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBotResourceGenerationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListBotResourceGenerationsResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListBotResourceGenerationsResponse_botVersion, *v.BotVersion)
+	}
+	serializeGenerationSummaryList(s, schemas.ListBotResourceGenerationsResponse_generationSummaries, v.GenerationSummaries)
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListBotResourceGenerationsResponse_localeId, *v.LocaleId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBotResourceGenerationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListBotResourceGenerationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBotResourceGenerationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBotResourceGenerationsResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.ListBotResourceGenerationsResponse_botId, v.BotId)
+		case schemas.ListBotResourceGenerationsResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.ListBotResourceGenerationsResponse_botVersion, v.BotVersion)
+		case schemas.ListBotResourceGenerationsResponse_generationSummaries:
+			return deserializeGenerationSummaryList(d, schemas.ListBotResourceGenerationsResponse_generationSummaries, &v.GenerationSummaries)
+		case schemas.ListBotResourceGenerationsResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.ListBotResourceGenerationsResponse_localeId, v.LocaleId)
+		case schemas.ListBotResourceGenerationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBotResourceGenerationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBotResourceGenerationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBotResourceGenerations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBotResourceGenerations, schemas.ListBotResourceGenerationsRequest, schemas.ListBotResourceGenerationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBotResourceGenerations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBotResourceGenerations, schemas.ListBotResourceGenerationsRequest, schemas.ListBotResourceGenerationsResponse), output: &ListBotResourceGenerationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

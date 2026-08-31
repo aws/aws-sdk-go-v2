@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","things":[{"attributes":{"key0":"__Value__"},"thingArn":"__ThingArn__","thingName":"__ThingName__","thingTypeName":"__ThingTypeName__","version":1},{"attributes":{"key0":"__Value__"},"thingArn":"__ThingArn__","thingName":"__ThingName__","thingTypeName":"__ThingTypeName__","version":1}]}

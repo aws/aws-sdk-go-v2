@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,25 @@ type UpdateResourceServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourceServerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResourceServerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourceServerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateResourceServerRequest_Identifier, *v.Identifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateResourceServerRequest_Name, *v.Name)
+	}
+	serializeResourceServerScopeListType(s, schemas.UpdateResourceServerRequest_Scopes, v.Scopes)
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.UpdateResourceServerRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type UpdateResourceServerOutput struct {
 
 	// The updated details of the requested resource server.
@@ -86,13 +107,34 @@ type UpdateResourceServerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourceServerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResourceServerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourceServerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceServer != nil {
+		s.WriteStruct(schemas.UpdateResourceServerResponse_ResourceServer)
+		v.ResourceServer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateResourceServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResourceServerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateResourceServerResponse_ResourceServer:
+			v.ResourceServer = &types.ResourceServerType{}
+			return v.ResourceServer.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateResourceServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateResourceServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResourceServer, schemas.UpdateResourceServerRequest, schemas.UpdateResourceServerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateResourceServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResourceServer, schemas.UpdateResourceServerRequest, schemas.UpdateResourceServerResponse), output: &UpdateResourceServerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

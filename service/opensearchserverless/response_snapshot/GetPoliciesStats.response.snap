@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchServerless.GetPoliciesStats
+
+{"AccessPolicyStats":{"DataPolicyCount":1},"LifecyclePolicyStats":{"RetentionPolicyCount":1},"SecurityConfigStats":{"SamlConfigCount":1},"SecurityPolicyStats":{"EncryptionPolicyCount":1,"NetworkPolicyCount":1},"TotalPolicyCount":1}

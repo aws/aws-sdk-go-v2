@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -36,6 +38,18 @@ type DescribeLocationEfsInput struct {
 	LocationArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeLocationEfsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLocationEfsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLocationEfsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.DescribeLocationEfsRequest_LocationArn, *v.LocationArn)
+	}
 }
 
 // DescribeLocationEfsResponse
@@ -82,13 +96,74 @@ type DescribeLocationEfsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLocationEfsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLocationEfsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLocationEfsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPointArn != nil {
+		s.WriteString(schemas.DescribeLocationEfsResponse_AccessPointArn, *v.AccessPointArn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeLocationEfsResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Ec2Config != nil {
+		s.WriteStruct(schemas.DescribeLocationEfsResponse_Ec2Config)
+		v.Ec2Config.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FileSystemAccessRoleArn != nil {
+		s.WriteString(schemas.DescribeLocationEfsResponse_FileSystemAccessRoleArn, *v.FileSystemAccessRoleArn)
+	}
+	if v.InTransitEncryption != "" {
+		s.WriteString(schemas.DescribeLocationEfsResponse_InTransitEncryption, string(v.InTransitEncryption))
+	}
+	if v.LocationArn != nil {
+		s.WriteString(schemas.DescribeLocationEfsResponse_LocationArn, *v.LocationArn)
+	}
+	if v.LocationUri != nil {
+		s.WriteString(schemas.DescribeLocationEfsResponse_LocationUri, *v.LocationUri)
+	}
+}
+func (v *DescribeLocationEfsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLocationEfsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLocationEfsResponse_AccessPointArn:
+			v.AccessPointArn = new(string)
+			return d.ReadString(schemas.DescribeLocationEfsResponse_AccessPointArn, v.AccessPointArn)
+		case schemas.DescribeLocationEfsResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeLocationEfsResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeLocationEfsResponse_Ec2Config:
+			v.Ec2Config = &types.Ec2Config{}
+			return v.Ec2Config.Deserialize(d)
+		case schemas.DescribeLocationEfsResponse_FileSystemAccessRoleArn:
+			v.FileSystemAccessRoleArn = new(string)
+			return d.ReadString(schemas.DescribeLocationEfsResponse_FileSystemAccessRoleArn, v.FileSystemAccessRoleArn)
+		case schemas.DescribeLocationEfsResponse_InTransitEncryption:
+			var ev string
+			if err := d.ReadString(schemas.DescribeLocationEfsResponse_InTransitEncryption, &ev); err != nil {
+				return err
+			}
+			v.InTransitEncryption = types.EfsInTransitEncryption(ev)
+			return nil
+		case schemas.DescribeLocationEfsResponse_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.DescribeLocationEfsResponse_LocationArn, v.LocationArn)
+		case schemas.DescribeLocationEfsResponse_LocationUri:
+			v.LocationUri = new(string)
+			return d.ReadString(schemas.DescribeLocationEfsResponse_LocationUri, v.LocationUri)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLocationEfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLocationEfs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLocationEfs, schemas.DescribeLocationEfsRequest, schemas.DescribeLocationEfsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLocationEfs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLocationEfs, schemas.DescribeLocationEfsRequest, schemas.DescribeLocationEfsResponse), output: &DescribeLocationEfsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -111,6 +113,115 @@ type CreateCollaborationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCollaborationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCollaborationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCollaborationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAllowedResultRegions(s, schemas.CreateCollaborationInput_allowedResultRegions, v.AllowedResultRegions)
+	if v.AnalyticsEngine != "" {
+		s.WriteString(schemas.CreateCollaborationInput_analyticsEngine, string(v.AnalyticsEngine))
+	}
+	serializeAutoApprovedChangeTypeList(s, schemas.CreateCollaborationInput_autoApprovedChangeRequestTypes, v.AutoApprovedChangeRequestTypes)
+	if v.CreatorDisplayName != nil {
+		s.WriteString(schemas.CreateCollaborationInput_creatorDisplayName, *v.CreatorDisplayName)
+	}
+	if v.CreatorMLMemberAbilities != nil {
+		s.WriteStruct(schemas.CreateCollaborationInput_creatorMLMemberAbilities)
+		v.CreatorMLMemberAbilities.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMemberAbilities(s, schemas.CreateCollaborationInput_creatorMemberAbilities, v.CreatorMemberAbilities)
+	if v.CreatorPaymentConfiguration != nil {
+		s.WriteStruct(schemas.CreateCollaborationInput_creatorPaymentConfiguration)
+		v.CreatorPaymentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataEncryptionMetadata != nil {
+		s.WriteStruct(schemas.CreateCollaborationInput_dataEncryptionMetadata)
+		v.DataEncryptionMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateCollaborationInput_description, *v.Description)
+	}
+	if v.IsMetricsEnabled != nil {
+		s.WriteBool(schemas.CreateCollaborationInput_isMetricsEnabled, *v.IsMetricsEnabled)
+	}
+	if v.JobLogStatus != "" {
+		s.WriteString(schemas.CreateCollaborationInput_jobLogStatus, string(v.JobLogStatus))
+	}
+	serializeMemberList(s, schemas.CreateCollaborationInput_members, v.Members)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCollaborationInput_name, *v.Name)
+	}
+	if v.QueryLogStatus != "" {
+		s.WriteString(schemas.CreateCollaborationInput_queryLogStatus, string(v.QueryLogStatus))
+	}
+	serializeTagMap(s, schemas.CreateCollaborationInput_tags, v.Tags)
+}
+func (v *CreateCollaborationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCollaborationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCollaborationInput_allowedResultRegions:
+			return deserializeAllowedResultRegions(d, schemas.CreateCollaborationInput_allowedResultRegions, &v.AllowedResultRegions)
+		case schemas.CreateCollaborationInput_analyticsEngine:
+			var ev string
+			if err := d.ReadString(schemas.CreateCollaborationInput_analyticsEngine, &ev); err != nil {
+				return err
+			}
+			v.AnalyticsEngine = types.AnalyticsEngine(ev)
+			return nil
+		case schemas.CreateCollaborationInput_autoApprovedChangeRequestTypes:
+			return deserializeAutoApprovedChangeTypeList(d, schemas.CreateCollaborationInput_autoApprovedChangeRequestTypes, &v.AutoApprovedChangeRequestTypes)
+		case schemas.CreateCollaborationInput_creatorDisplayName:
+			v.CreatorDisplayName = new(string)
+			return d.ReadString(schemas.CreateCollaborationInput_creatorDisplayName, v.CreatorDisplayName)
+		case schemas.CreateCollaborationInput_creatorMLMemberAbilities:
+			v.CreatorMLMemberAbilities = &types.MLMemberAbilities{}
+			return v.CreatorMLMemberAbilities.Deserialize(d)
+		case schemas.CreateCollaborationInput_creatorMemberAbilities:
+			return deserializeMemberAbilities(d, schemas.CreateCollaborationInput_creatorMemberAbilities, &v.CreatorMemberAbilities)
+		case schemas.CreateCollaborationInput_creatorPaymentConfiguration:
+			v.CreatorPaymentConfiguration = &types.PaymentConfiguration{}
+			return v.CreatorPaymentConfiguration.Deserialize(d)
+		case schemas.CreateCollaborationInput_dataEncryptionMetadata:
+			v.DataEncryptionMetadata = &types.DataEncryptionMetadata{}
+			return v.DataEncryptionMetadata.Deserialize(d)
+		case schemas.CreateCollaborationInput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateCollaborationInput_description, v.Description)
+		case schemas.CreateCollaborationInput_isMetricsEnabled:
+			v.IsMetricsEnabled = new(bool)
+			return d.ReadBool(schemas.CreateCollaborationInput_isMetricsEnabled, v.IsMetricsEnabled)
+		case schemas.CreateCollaborationInput_jobLogStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateCollaborationInput_jobLogStatus, &ev); err != nil {
+				return err
+			}
+			v.JobLogStatus = types.CollaborationJobLogStatus(ev)
+			return nil
+		case schemas.CreateCollaborationInput_members:
+			return deserializeMemberList(d, schemas.CreateCollaborationInput_members, &v.Members)
+		case schemas.CreateCollaborationInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateCollaborationInput_name, v.Name)
+		case schemas.CreateCollaborationInput_queryLogStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateCollaborationInput_queryLogStatus, &ev); err != nil {
+				return err
+			}
+			v.QueryLogStatus = types.CollaborationQueryLogStatus(ev)
+			return nil
+		case schemas.CreateCollaborationInput_tags:
+			return deserializeTagMap(d, schemas.CreateCollaborationInput_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateCollaborationOutput struct {
 
 	// The collaboration.
@@ -124,13 +235,34 @@ type CreateCollaborationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCollaborationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCollaborationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCollaborationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Collaboration != nil {
+		s.WriteStruct(schemas.CreateCollaborationOutput_collaboration)
+		v.Collaboration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateCollaborationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCollaborationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCollaborationOutput_collaboration:
+			v.Collaboration = &types.Collaboration{}
+			return v.Collaboration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCollaborationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCollaboration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCollaboration, schemas.CreateCollaborationInput, schemas.CreateCollaborationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCollaboration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCollaboration, schemas.CreateCollaborationInput, schemas.CreateCollaborationOutput), output: &CreateCollaborationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

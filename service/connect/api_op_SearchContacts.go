@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,39 @@ type SearchContactsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchContactsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchContactsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchContactsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchContactsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchContactsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchContactsRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchCriteria != nil {
+		s.WriteStruct(schemas.SearchContactsRequest_SearchCriteria)
+		v.SearchCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Sort != nil {
+		s.WriteStruct(schemas.SearchContactsRequest_Sort)
+		v.Sort.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimeRange != nil {
+		s.WriteStruct(schemas.SearchContactsRequest_TimeRange)
+		v.TimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchContactsOutput struct {
 
 	// Information about the contacts.
@@ -73,13 +108,41 @@ type SearchContactsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchContactsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchContactsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchContactsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContacts(s, schemas.SearchContactsResponse_Contacts, v.Contacts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchContactsResponse_NextToken, *v.NextToken)
+	}
+	if v.TotalCount != nil {
+		s.WriteInt64(schemas.SearchContactsResponse_TotalCount, *v.TotalCount)
+	}
+}
+func (v *SearchContactsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchContactsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchContactsResponse_Contacts:
+			return deserializeContacts(d, schemas.SearchContactsResponse_Contacts, &v.Contacts)
+		case schemas.SearchContactsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchContactsResponse_NextToken, v.NextToken)
+		case schemas.SearchContactsResponse_TotalCount:
+			v.TotalCount = new(int64)
+			return d.ReadInt64(schemas.SearchContactsResponse_TotalCount, v.TotalCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchContactsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchContacts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchContacts, schemas.SearchContactsRequest, schemas.SearchContactsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchContacts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchContacts, schemas.SearchContactsRequest, schemas.SearchContactsResponse), output: &SearchContactsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

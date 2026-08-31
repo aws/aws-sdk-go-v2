@@ -4,7 +4,9 @@ package schemas
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/schemas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/schemas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,19 @@ type GetDiscoveredSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDiscoveredSchemaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDiscoveredSchemaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDiscoveredSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfGetDiscoveredSchemaVersionItemInput(s, schemas.GetDiscoveredSchemaRequest_Events, v.Events)
+	if v.Type != "" {
+		s.WriteString(schemas.GetDiscoveredSchemaRequest_Type, string(v.Type))
+	}
+}
+
 type GetDiscoveredSchemaOutput struct {
 
 	// The source of the schema definition.
@@ -52,13 +67,32 @@ type GetDiscoveredSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDiscoveredSchemaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDiscoveredSchemaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDiscoveredSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteString(schemas.GetDiscoveredSchemaResponse_Content, *v.Content)
+	}
+}
+func (v *GetDiscoveredSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDiscoveredSchemaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDiscoveredSchemaResponse_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.GetDiscoveredSchemaResponse_Content, v.Content)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDiscoveredSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDiscoveredSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDiscoveredSchema, schemas.GetDiscoveredSchemaRequest, schemas.GetDiscoveredSchemaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDiscoveredSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDiscoveredSchema, schemas.GetDiscoveredSchemaRequest, schemas.GetDiscoveredSchemaResponse), output: &GetDiscoveredSchemaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

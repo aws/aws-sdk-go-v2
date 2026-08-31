@@ -4,6 +4,8 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -84,6 +86,21 @@ type AdminUserGlobalSignOutInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminUserGlobalSignOutInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminUserGlobalSignOutRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminUserGlobalSignOutInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AdminUserGlobalSignOutRequest_UserPoolId, *v.UserPoolId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.AdminUserGlobalSignOutRequest_Username, *v.Username)
+	}
+}
+
 // The global sign-out response, as an administrator.
 type AdminUserGlobalSignOutOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -92,13 +109,26 @@ type AdminUserGlobalSignOutOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminUserGlobalSignOutOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminUserGlobalSignOutResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminUserGlobalSignOutOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AdminUserGlobalSignOutOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminUserGlobalSignOutResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdminUserGlobalSignOutMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminUserGlobalSignOut{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminUserGlobalSignOut, schemas.AdminUserGlobalSignOutRequest, schemas.AdminUserGlobalSignOutResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminUserGlobalSignOut{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminUserGlobalSignOut, schemas.AdminUserGlobalSignOutRequest, schemas.AdminUserGlobalSignOutResponse), output: &AdminUserGlobalSignOutOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

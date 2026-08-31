@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -61,6 +63,42 @@ type ListFeatureGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFeatureGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFeatureGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFeatureGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListFeatureGroupsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListFeatureGroupsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.FeatureGroupStatusEquals != "" {
+		s.WriteString(schemas.ListFeatureGroupsRequest_FeatureGroupStatusEquals, string(v.FeatureGroupStatusEquals))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFeatureGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListFeatureGroupsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFeatureGroupsRequest_NextToken, *v.NextToken)
+	}
+	if v.OfflineStoreStatusEquals != "" {
+		s.WriteString(schemas.ListFeatureGroupsRequest_OfflineStoreStatusEquals, string(v.OfflineStoreStatusEquals))
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListFeatureGroupsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListFeatureGroupsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListFeatureGroupsOutput struct {
 
 	// A summary of feature groups.
@@ -77,13 +115,35 @@ type ListFeatureGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFeatureGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFeatureGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFeatureGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFeatureGroupSummaries(s, schemas.ListFeatureGroupsResponse_FeatureGroupSummaries, v.FeatureGroupSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFeatureGroupsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFeatureGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFeatureGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFeatureGroupsResponse_FeatureGroupSummaries:
+			return deserializeFeatureGroupSummaries(d, schemas.ListFeatureGroupsResponse_FeatureGroupSummaries, &v.FeatureGroupSummaries)
+		case schemas.ListFeatureGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFeatureGroupsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFeatureGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFeatureGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFeatureGroups, schemas.ListFeatureGroupsRequest, schemas.ListFeatureGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListFeatureGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFeatureGroups, schemas.ListFeatureGroupsRequest, schemas.ListFeatureGroupsResponse), output: &ListFeatureGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

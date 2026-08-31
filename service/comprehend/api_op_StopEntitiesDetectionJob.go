@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,18 @@ type StopEntitiesDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopEntitiesDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopEntitiesDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopEntitiesDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopEntitiesDetectionJobRequest_JobId, *v.JobId)
+	}
+}
+
 type StopEntitiesDetectionJobOutput struct {
 
 	// The identifier of the entities detection job to stop.
@@ -61,13 +75,42 @@ type StopEntitiesDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopEntitiesDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopEntitiesDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopEntitiesDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopEntitiesDetectionJobResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.StopEntitiesDetectionJobResponse_JobStatus, string(v.JobStatus))
+	}
+}
+func (v *StopEntitiesDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopEntitiesDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopEntitiesDetectionJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StopEntitiesDetectionJobResponse_JobId, v.JobId)
+		case schemas.StopEntitiesDetectionJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.StopEntitiesDetectionJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopEntitiesDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopEntitiesDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopEntitiesDetectionJob, schemas.StopEntitiesDetectionJobRequest, schemas.StopEntitiesDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopEntitiesDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopEntitiesDetectionJob, schemas.StopEntitiesDetectionJobRequest, schemas.StopEntitiesDetectionJobResponse), output: &StopEntitiesDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

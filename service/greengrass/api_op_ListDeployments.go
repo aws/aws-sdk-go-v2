@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeploymentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDeploymentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.ListDeploymentsRequest_GroupId, *v.GroupId)
+	}
+	if v.MaxResults != nil {
+		s.WriteString(schemas.ListDeploymentsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDeploymentsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDeploymentsOutput struct {
 
 	// A list of deployments for the requested groups.
@@ -56,13 +76,35 @@ type ListDeploymentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDeploymentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeployments(s, schemas.ListDeploymentsResponse_Deployments, v.Deployments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDeploymentsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDeploymentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDeploymentsResponse_Deployments:
+			return deserializeDeployments(d, schemas.ListDeploymentsResponse_Deployments, &v.Deployments)
+		case schemas.ListDeploymentsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDeploymentsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeployments, schemas.ListDeploymentsRequest, schemas.ListDeploymentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeployments, schemas.ListDeploymentsRequest, schemas.ListDeploymentsResponse), output: &ListDeploymentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type GetConfiguredTableAssociationAnalysisRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfiguredTableAssociationAnalysisRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfiguredTableAssociationAnalysisRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfiguredTableAssociationAnalysisRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisRuleType != "" {
+		s.WriteString(schemas.GetConfiguredTableAssociationAnalysisRuleInput_analysisRuleType, string(v.AnalysisRuleType))
+	}
+	if v.ConfiguredTableAssociationIdentifier != nil {
+		s.WriteString(schemas.GetConfiguredTableAssociationAnalysisRuleInput_configuredTableAssociationIdentifier, *v.ConfiguredTableAssociationIdentifier)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.GetConfiguredTableAssociationAnalysisRuleInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+
 type GetConfiguredTableAssociationAnalysisRuleOutput struct {
 
 	// The analysis rule for the conﬁgured table association. In the console, the
@@ -61,13 +81,34 @@ type GetConfiguredTableAssociationAnalysisRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfiguredTableAssociationAnalysisRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfiguredTableAssociationAnalysisRuleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfiguredTableAssociationAnalysisRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisRule != nil {
+		s.WriteStruct(schemas.GetConfiguredTableAssociationAnalysisRuleOutput_analysisRule)
+		v.AnalysisRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetConfiguredTableAssociationAnalysisRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfiguredTableAssociationAnalysisRuleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfiguredTableAssociationAnalysisRuleOutput_analysisRule:
+			v.AnalysisRule = &types.ConfiguredTableAssociationAnalysisRule{}
+			return v.AnalysisRule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConfiguredTableAssociationAnalysisRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfiguredTableAssociationAnalysisRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguredTableAssociationAnalysisRule, schemas.GetConfiguredTableAssociationAnalysisRuleInput, schemas.GetConfiguredTableAssociationAnalysisRuleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConfiguredTableAssociationAnalysisRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguredTableAssociationAnalysisRule, schemas.GetConfiguredTableAssociationAnalysisRuleInput, schemas.GetConfiguredTableAssociationAnalysisRuleOutput), output: &GetConfiguredTableAssociationAnalysisRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,28 @@ type UpdateDataTablePrimaryValuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataTablePrimaryValuesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataTablePrimaryValuesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataTablePrimaryValuesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataTableId != nil {
+		s.WriteString(schemas.UpdateDataTablePrimaryValuesRequest_DataTableId, *v.DataTableId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateDataTablePrimaryValuesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.LockVersion != nil {
+		s.WriteStruct(schemas.UpdateDataTablePrimaryValuesRequest_LockVersion)
+		v.LockVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePrimaryValuesSet(s, schemas.UpdateDataTablePrimaryValuesRequest_NewPrimaryValues, v.NewPrimaryValues)
+	serializePrimaryValuesSet(s, schemas.UpdateDataTablePrimaryValuesRequest_PrimaryValues, v.PrimaryValues)
+}
+
 type UpdateDataTablePrimaryValuesOutput struct {
 
 	// The updated lock version information for the data table and affected components
@@ -79,13 +103,34 @@ type UpdateDataTablePrimaryValuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataTablePrimaryValuesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataTablePrimaryValuesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataTablePrimaryValuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LockVersion != nil {
+		s.WriteStruct(schemas.UpdateDataTablePrimaryValuesResponse_LockVersion)
+		v.LockVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateDataTablePrimaryValuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataTablePrimaryValuesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataTablePrimaryValuesResponse_LockVersion:
+			v.LockVersion = &types.DataTableLockVersion{}
+			return v.LockVersion.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataTablePrimaryValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataTablePrimaryValues{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataTablePrimaryValues, schemas.UpdateDataTablePrimaryValuesRequest, schemas.UpdateDataTablePrimaryValuesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataTablePrimaryValues{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataTablePrimaryValues, schemas.UpdateDataTablePrimaryValuesRequest, schemas.UpdateDataTablePrimaryValuesResponse), output: &UpdateDataTablePrimaryValuesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

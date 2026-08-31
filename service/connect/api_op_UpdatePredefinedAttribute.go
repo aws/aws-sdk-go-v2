@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,28 @@ type UpdatePredefinedAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePredefinedAttributeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePredefinedAttributeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePredefinedAttributeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeConfiguration != nil {
+		s.WriteStruct(schemas.UpdatePredefinedAttributeRequest_AttributeConfiguration)
+		v.AttributeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdatePredefinedAttributeRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdatePredefinedAttributeRequest_Name, *v.Name)
+	}
+	serializePredefinedAttributePurposeNameList(s, schemas.UpdatePredefinedAttributeRequest_Purposes, v.Purposes)
+	serializePredefinedAttributeValues(s, schemas.UpdatePredefinedAttributeRequest_Values, v.Values)
+}
+
 type UpdatePredefinedAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -82,13 +106,26 @@ type UpdatePredefinedAttributeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePredefinedAttributeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePredefinedAttributeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdatePredefinedAttributeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePredefinedAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePredefinedAttribute{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePredefinedAttribute, schemas.UpdatePredefinedAttributeRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePredefinedAttribute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePredefinedAttribute, schemas.UpdatePredefinedAttributeRequest, nil), output: &UpdatePredefinedAttributeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

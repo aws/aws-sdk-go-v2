@@ -5,7 +5,9 @@ package apprunner
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type ListConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConnectionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConnectionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConnectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionName != nil {
+		s.WriteString(schemas.ListConnectionsRequest_ConnectionName, *v.ConnectionName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConnectionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConnectionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListConnectionsOutput struct {
 
 	// A list of summary information records for connections. In a paginated request,
@@ -67,13 +87,35 @@ type ListConnectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConnectionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConnectionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectionSummaryList(s, schemas.ListConnectionsResponse_ConnectionSummaryList, v.ConnectionSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConnectionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConnectionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConnectionsResponse_ConnectionSummaryList:
+			return deserializeConnectionSummaryList(d, schemas.ListConnectionsResponse_ConnectionSummaryList, &v.ConnectionSummaryList)
+		case schemas.ListConnectionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConnectionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnections, schemas.ListConnectionsRequest, schemas.ListConnectionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnections, schemas.ListConnectionsRequest, schemas.ListConnectionsResponse), output: &ListConnectionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

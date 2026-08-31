@@ -5,7 +5,9 @@ package dsql
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dsql/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dsql/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ListClustersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClustersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClustersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClustersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListClustersInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClustersInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListClustersOutput struct {
 
 	// An array of the returned clusters.
@@ -57,13 +74,35 @@ type ListClustersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClustersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClustersOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClustersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClusterList(s, schemas.ListClustersOutput_clusters, v.Clusters)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClustersOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListClustersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListClustersOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListClustersOutput_clusters:
+			return deserializeClusterList(d, schemas.ListClustersOutput_clusters, &v.Clusters)
+		case schemas.ListClustersOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListClustersOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListClusters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClusters, schemas.ListClustersInput, schemas.ListClustersOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListClusters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClusters, schemas.ListClustersInput, schemas.ListClustersOutput), output: &ListClustersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package athena
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,29 @@ type UpdateWorkGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationUpdates != nil {
+		s.WriteStruct(schemas.UpdateWorkGroupInput_ConfigurationUpdates)
+		v.ConfigurationUpdates.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateWorkGroupInput_Description, *v.Description)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.UpdateWorkGroupInput_State, string(v.State))
+	}
+	if v.WorkGroup != nil {
+		s.WriteString(schemas.UpdateWorkGroupInput_WorkGroup, *v.WorkGroup)
+	}
+}
+
 type UpdateWorkGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +76,26 @@ type UpdateWorkGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateWorkGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateWorkGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkGroup, schemas.UpdateWorkGroupInput, schemas.UpdateWorkGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateWorkGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkGroup, schemas.UpdateWorkGroupInput, schemas.UpdateWorkGroupOutput), output: &UpdateWorkGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

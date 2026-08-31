@@ -5,7 +5,9 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -36,6 +38,18 @@ type DescribeBotInput struct {
 	BotId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeBotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.DescribeBotRequest_botId, *v.BotId)
+	}
 }
 
 type DescribeBotOutput struct {
@@ -90,13 +104,110 @@ type DescribeBotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.DescribeBotResponse_botId, *v.BotId)
+	}
+	serializeBotMembers(s, schemas.DescribeBotResponse_botMembers, v.BotMembers)
+	if v.BotName != nil {
+		s.WriteString(schemas.DescribeBotResponse_botName, *v.BotName)
+	}
+	if v.BotStatus != "" {
+		s.WriteString(schemas.DescribeBotResponse_botStatus, string(v.BotStatus))
+	}
+	if v.BotType != "" {
+		s.WriteString(schemas.DescribeBotResponse_botType, string(v.BotType))
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.DescribeBotResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.DataPrivacy != nil {
+		s.WriteStruct(schemas.DescribeBotResponse_dataPrivacy)
+		v.DataPrivacy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeBotResponse_description, *v.Description)
+	}
+	if v.ErrorLogSettings != nil {
+		s.WriteStruct(schemas.DescribeBotResponse_errorLogSettings)
+		v.ErrorLogSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFailureReasons(s, schemas.DescribeBotResponse_failureReasons, v.FailureReasons)
+	if v.IdleSessionTTLInSeconds != nil {
+		s.WriteInt32(schemas.DescribeBotResponse_idleSessionTTLInSeconds, *v.IdleSessionTTLInSeconds)
+	}
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.DescribeBotResponse_lastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeBotResponse_roleArn, *v.RoleArn)
+	}
+}
+func (v *DescribeBotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeBotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeBotResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.DescribeBotResponse_botId, v.BotId)
+		case schemas.DescribeBotResponse_botMembers:
+			return deserializeBotMembers(d, schemas.DescribeBotResponse_botMembers, &v.BotMembers)
+		case schemas.DescribeBotResponse_botName:
+			v.BotName = new(string)
+			return d.ReadString(schemas.DescribeBotResponse_botName, v.BotName)
+		case schemas.DescribeBotResponse_botStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeBotResponse_botStatus, &ev); err != nil {
+				return err
+			}
+			v.BotStatus = types.BotStatus(ev)
+			return nil
+		case schemas.DescribeBotResponse_botType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeBotResponse_botType, &ev); err != nil {
+				return err
+			}
+			v.BotType = types.BotType(ev)
+			return nil
+		case schemas.DescribeBotResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeBotResponse_creationDateTime, v.CreationDateTime)
+		case schemas.DescribeBotResponse_dataPrivacy:
+			v.DataPrivacy = &types.DataPrivacy{}
+			return v.DataPrivacy.Deserialize(d)
+		case schemas.DescribeBotResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeBotResponse_description, v.Description)
+		case schemas.DescribeBotResponse_errorLogSettings:
+			v.ErrorLogSettings = &types.ErrorLogSettings{}
+			return v.ErrorLogSettings.Deserialize(d)
+		case schemas.DescribeBotResponse_failureReasons:
+			return deserializeFailureReasons(d, schemas.DescribeBotResponse_failureReasons, &v.FailureReasons)
+		case schemas.DescribeBotResponse_idleSessionTTLInSeconds:
+			v.IdleSessionTTLInSeconds = new(int32)
+			return d.ReadInt32(schemas.DescribeBotResponse_idleSessionTTLInSeconds, v.IdleSessionTTLInSeconds)
+		case schemas.DescribeBotResponse_lastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeBotResponse_lastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.DescribeBotResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeBotResponse_roleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBot, schemas.DescribeBotRequest, schemas.DescribeBotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBot, schemas.DescribeBotRequest, schemas.DescribeBotResponse), output: &DescribeBotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

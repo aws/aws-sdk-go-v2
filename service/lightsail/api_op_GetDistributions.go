@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type GetDistributionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDistributionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDistributionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDistributionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DistributionName != nil {
+		s.WriteString(schemas.GetDistributionsRequest_distributionName, *v.DistributionName)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.GetDistributionsRequest_pageToken, *v.PageToken)
+	}
+}
+
 type GetDistributionsOutput struct {
 
 	// An array of objects that describe your distributions.
@@ -62,13 +79,35 @@ type GetDistributionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDistributionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDistributionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDistributionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDistributionList(s, schemas.GetDistributionsResult_distributions, v.Distributions)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetDistributionsResult_nextPageToken, *v.NextPageToken)
+	}
+}
+func (v *GetDistributionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDistributionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDistributionsResult_distributions:
+			return deserializeDistributionList(d, schemas.GetDistributionsResult_distributions, &v.Distributions)
+		case schemas.GetDistributionsResult_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetDistributionsResult_nextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDistributionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDistributions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDistributions, schemas.GetDistributionsRequest, schemas.GetDistributionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDistributions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDistributions, schemas.GetDistributionsRequest, schemas.GetDistributionsResult), output: &GetDistributionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

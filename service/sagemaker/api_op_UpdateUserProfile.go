@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,26 @@ type UpdateUserProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.UpdateUserProfileRequest_DomainId, *v.DomainId)
+	}
+	if v.UserProfileName != nil {
+		s.WriteString(schemas.UpdateUserProfileRequest_UserProfileName, *v.UserProfileName)
+	}
+	if v.UserSettings != nil {
+		s.WriteStruct(schemas.UpdateUserProfileRequest_UserSettings)
+		v.UserSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateUserProfileOutput struct {
 
 	// The user profile Amazon Resource Name (ARN).
@@ -53,13 +75,32 @@ type UpdateUserProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserProfileArn != nil {
+		s.WriteString(schemas.UpdateUserProfileResponse_UserProfileArn, *v.UserProfileArn)
+	}
+}
+func (v *UpdateUserProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateUserProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateUserProfileResponse_UserProfileArn:
+			v.UserProfileArn = new(string)
+			return d.ReadString(schemas.UpdateUserProfileResponse_UserProfileArn, v.UserProfileArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateUserProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateUserProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserProfile, schemas.UpdateUserProfileRequest, schemas.UpdateUserProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateUserProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserProfile, schemas.UpdateUserProfileRequest, schemas.UpdateUserProfileResponse), output: &UpdateUserProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,30 @@ type ListProfileSharesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProfileSharesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProfileSharesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProfileSharesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProfileSharesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProfileSharesInput_NextToken, *v.NextToken)
+	}
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.ListProfileSharesInput_ProfileArn, *v.ProfileArn)
+	}
+	if v.SharedWithPrefix != nil {
+		s.WriteString(schemas.ListProfileSharesInput_SharedWithPrefix, *v.SharedWithPrefix)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListProfileSharesInput_Status, string(v.Status))
+	}
+}
+
 type ListProfileSharesOutput struct {
 
 	// The token to use to retrieve the next set of results.
@@ -62,13 +88,35 @@ type ListProfileSharesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProfileSharesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProfileSharesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProfileSharesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProfileSharesOutput_NextToken, *v.NextToken)
+	}
+	serializeProfileShareSummaries(s, schemas.ListProfileSharesOutput_ProfileShareSummaries, v.ProfileShareSummaries)
+}
+func (v *ListProfileSharesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProfileSharesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProfileSharesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProfileSharesOutput_NextToken, v.NextToken)
+		case schemas.ListProfileSharesOutput_ProfileShareSummaries:
+			return deserializeProfileShareSummaries(d, schemas.ListProfileSharesOutput_ProfileShareSummaries, &v.ProfileShareSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProfileSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProfileShares{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfileShares, schemas.ListProfileSharesInput, schemas.ListProfileSharesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProfileShares{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfileShares, schemas.ListProfileSharesInput, schemas.ListProfileSharesOutput), output: &ListProfileSharesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DescribeAggregationAuthorizationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAggregationAuthorizationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAggregationAuthorizationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAggregationAuthorizationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.DescribeAggregationAuthorizationsRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAggregationAuthorizationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeAggregationAuthorizationsOutput struct {
 
 	// Returns a list of authorizations granted to various aggregator accounts and
@@ -55,13 +72,35 @@ type DescribeAggregationAuthorizationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAggregationAuthorizationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAggregationAuthorizationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAggregationAuthorizationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAggregationAuthorizationList(s, schemas.DescribeAggregationAuthorizationsResponse_AggregationAuthorizations, v.AggregationAuthorizations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAggregationAuthorizationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAggregationAuthorizationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAggregationAuthorizationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAggregationAuthorizationsResponse_AggregationAuthorizations:
+			return deserializeAggregationAuthorizationList(d, schemas.DescribeAggregationAuthorizationsResponse_AggregationAuthorizations, &v.AggregationAuthorizations)
+		case schemas.DescribeAggregationAuthorizationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAggregationAuthorizationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAggregationAuthorizationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAggregationAuthorizations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAggregationAuthorizations, schemas.DescribeAggregationAuthorizationsRequest, schemas.DescribeAggregationAuthorizationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAggregationAuthorizations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAggregationAuthorizations, schemas.DescribeAggregationAuthorizationsRequest, schemas.DescribeAggregationAuthorizationsResponse), output: &DescribeAggregationAuthorizationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

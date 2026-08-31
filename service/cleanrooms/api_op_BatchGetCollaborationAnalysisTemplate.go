@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,31 @@ type BatchGetCollaborationAnalysisTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCollaborationAnalysisTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetCollaborationAnalysisTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetCollaborationAnalysisTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalysisTemplateArnList(s, schemas.BatchGetCollaborationAnalysisTemplateInput_analysisTemplateArns, v.AnalysisTemplateArns)
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.BatchGetCollaborationAnalysisTemplateInput_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+}
+func (v *BatchGetCollaborationAnalysisTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetCollaborationAnalysisTemplateInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetCollaborationAnalysisTemplateInput_analysisTemplateArns:
+			return deserializeAnalysisTemplateArnList(d, schemas.BatchGetCollaborationAnalysisTemplateInput_analysisTemplateArns, &v.AnalysisTemplateArns)
+		case schemas.BatchGetCollaborationAnalysisTemplateInput_collaborationIdentifier:
+			v.CollaborationIdentifier = new(string)
+			return d.ReadString(schemas.BatchGetCollaborationAnalysisTemplateInput_collaborationIdentifier, v.CollaborationIdentifier)
+		}
+		return nil
+	})
+}
+
 type BatchGetCollaborationAnalysisTemplateOutput struct {
 
 	// The retrieved list of analysis templates within a collaboration.
@@ -62,13 +89,32 @@ type BatchGetCollaborationAnalysisTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCollaborationAnalysisTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetCollaborationAnalysisTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetCollaborationAnalysisTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCollaborationAnalysisTemplateList(s, schemas.BatchGetCollaborationAnalysisTemplateOutput_collaborationAnalysisTemplates, v.CollaborationAnalysisTemplates)
+	serializeBatchGetCollaborationAnalysisTemplateErrorList(s, schemas.BatchGetCollaborationAnalysisTemplateOutput_errors, v.Errors)
+}
+func (v *BatchGetCollaborationAnalysisTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetCollaborationAnalysisTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetCollaborationAnalysisTemplateOutput_collaborationAnalysisTemplates:
+			return deserializeCollaborationAnalysisTemplateList(d, schemas.BatchGetCollaborationAnalysisTemplateOutput_collaborationAnalysisTemplates, &v.CollaborationAnalysisTemplates)
+		case schemas.BatchGetCollaborationAnalysisTemplateOutput_errors:
+			return deserializeBatchGetCollaborationAnalysisTemplateErrorList(d, schemas.BatchGetCollaborationAnalysisTemplateOutput_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetCollaborationAnalysisTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetCollaborationAnalysisTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCollaborationAnalysisTemplate, schemas.BatchGetCollaborationAnalysisTemplateInput, schemas.BatchGetCollaborationAnalysisTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetCollaborationAnalysisTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCollaborationAnalysisTemplate, schemas.BatchGetCollaborationAnalysisTemplateInput, schemas.BatchGetCollaborationAnalysisTemplateOutput), output: &BatchGetCollaborationAnalysisTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,28 @@ type GetComplianceDetailsByResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComplianceDetailsByResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComplianceDetailsByResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComplianceDetailsByResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComplianceTypes(s, schemas.GetComplianceDetailsByResourceRequest_ComplianceTypes, v.ComplianceTypes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetComplianceDetailsByResourceRequest_NextToken, *v.NextToken)
+	}
+	if v.ResourceEvaluationId != nil {
+		s.WriteString(schemas.GetComplianceDetailsByResourceRequest_ResourceEvaluationId, *v.ResourceEvaluationId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.GetComplianceDetailsByResourceRequest_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.GetComplianceDetailsByResourceRequest_ResourceType, *v.ResourceType)
+	}
+}
+
 type GetComplianceDetailsByResourceOutput struct {
 
 	// Indicates whether the specified Amazon Web Services resource complies each
@@ -74,13 +98,35 @@ type GetComplianceDetailsByResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComplianceDetailsByResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComplianceDetailsByResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComplianceDetailsByResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEvaluationResults(s, schemas.GetComplianceDetailsByResourceResponse_EvaluationResults, v.EvaluationResults)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetComplianceDetailsByResourceResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetComplianceDetailsByResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetComplianceDetailsByResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetComplianceDetailsByResourceResponse_EvaluationResults:
+			return deserializeEvaluationResults(d, schemas.GetComplianceDetailsByResourceResponse_EvaluationResults, &v.EvaluationResults)
+		case schemas.GetComplianceDetailsByResourceResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetComplianceDetailsByResourceResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetComplianceDetailsByResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetComplianceDetailsByResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComplianceDetailsByResource, schemas.GetComplianceDetailsByResourceRequest, schemas.GetComplianceDetailsByResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetComplianceDetailsByResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComplianceDetailsByResource, schemas.GetComplianceDetailsByResourceRequest, schemas.GetComplianceDetailsByResourceResponse), output: &GetComplianceDetailsByResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

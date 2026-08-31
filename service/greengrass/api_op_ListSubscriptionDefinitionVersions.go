@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListSubscriptionDefinitionVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSubscriptionDefinitionVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSubscriptionDefinitionVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSubscriptionDefinitionVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteString(schemas.ListSubscriptionDefinitionVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSubscriptionDefinitionVersionsRequest_NextToken, *v.NextToken)
+	}
+	if v.SubscriptionDefinitionId != nil {
+		s.WriteString(schemas.ListSubscriptionDefinitionVersionsRequest_SubscriptionDefinitionId, *v.SubscriptionDefinitionId)
+	}
+}
+
 type ListSubscriptionDefinitionVersionsOutput struct {
 
 	// The token for the next set of results, or ''null'' if there are no additional
@@ -56,13 +76,35 @@ type ListSubscriptionDefinitionVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSubscriptionDefinitionVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSubscriptionDefinitionVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSubscriptionDefinitionVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSubscriptionDefinitionVersionsResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfVersionInformation(s, schemas.ListSubscriptionDefinitionVersionsResponse_Versions, v.Versions)
+}
+func (v *ListSubscriptionDefinitionVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSubscriptionDefinitionVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSubscriptionDefinitionVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSubscriptionDefinitionVersionsResponse_NextToken, v.NextToken)
+		case schemas.ListSubscriptionDefinitionVersionsResponse_Versions:
+			return deserialize__listOfVersionInformation(d, schemas.ListSubscriptionDefinitionVersionsResponse_Versions, &v.Versions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSubscriptionDefinitionVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSubscriptionDefinitionVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubscriptionDefinitionVersions, schemas.ListSubscriptionDefinitionVersionsRequest, schemas.ListSubscriptionDefinitionVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSubscriptionDefinitionVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubscriptionDefinitionVersions, schemas.ListSubscriptionDefinitionVersionsRequest, schemas.ListSubscriptionDefinitionVersionsResponse), output: &ListSubscriptionDefinitionVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

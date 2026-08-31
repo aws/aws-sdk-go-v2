@@ -4,6 +4,8 @@ package organizations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -104,6 +106,21 @@ type AttachPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyId != nil {
+		s.WriteString(schemas.AttachPolicyRequest_PolicyId, *v.PolicyId)
+	}
+	if v.TargetId != nil {
+		s.WriteString(schemas.AttachPolicyRequest_TargetId, *v.TargetId)
+	}
+}
+
 type AttachPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -111,13 +128,26 @@ type AttachPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AttachPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAttachPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAttachPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachPolicy, schemas.AttachPolicyRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAttachPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachPolicy, schemas.AttachPolicyRequest, nil), output: &AttachPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -51,6 +53,21 @@ type DescribeJobInput struct {
 	JobName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobCategory != "" {
+		s.WriteString(schemas.DescribeJobRequest_JobCategory, string(v.JobCategory))
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.DescribeJobRequest_JobName, *v.JobName)
+	}
 }
 
 type DescribeJobOutput struct {
@@ -125,13 +142,116 @@ type DescribeJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeJobResponse_CreationTime, *v.CreationTime)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DescribeJobResponse_EndTime, *v.EndTime)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeJobResponse_FailureReason, *v.FailureReason)
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.DescribeJobResponse_JobArn, *v.JobArn)
+	}
+	if v.JobCategory != "" {
+		s.WriteString(schemas.DescribeJobResponse_JobCategory, string(v.JobCategory))
+	}
+	if v.JobConfigDocument != nil {
+		s.WriteString(schemas.DescribeJobResponse_JobConfigDocument, *v.JobConfigDocument)
+	}
+	if v.JobConfigSchemaVersion != nil {
+		s.WriteString(schemas.DescribeJobResponse_JobConfigSchemaVersion, *v.JobConfigSchemaVersion)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.DescribeJobResponse_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.DescribeJobResponse_JobStatus, string(v.JobStatus))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeJobResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeJobResponse_RoleArn, *v.RoleArn)
+	}
+	if v.SecondaryStatus != "" {
+		s.WriteString(schemas.DescribeJobResponse_SecondaryStatus, string(v.SecondaryStatus))
+	}
+	serializeJobSecondaryStatusTransitions(s, schemas.DescribeJobResponse_SecondaryStatusTransitions, v.SecondaryStatusTransitions)
+	serializeTagList(s, schemas.DescribeJobResponse_Tags, v.Tags)
+}
+func (v *DescribeJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeJobResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeJobResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeJobResponse_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeJobResponse_EndTime, v.EndTime)
+		case schemas.DescribeJobResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeJobResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeJobResponse_JobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.DescribeJobResponse_JobArn, v.JobArn)
+		case schemas.DescribeJobResponse_JobCategory:
+			var ev string
+			if err := d.ReadString(schemas.DescribeJobResponse_JobCategory, &ev); err != nil {
+				return err
+			}
+			v.JobCategory = types.JobCategory(ev)
+			return nil
+		case schemas.DescribeJobResponse_JobConfigDocument:
+			v.JobConfigDocument = new(string)
+			return d.ReadString(schemas.DescribeJobResponse_JobConfigDocument, v.JobConfigDocument)
+		case schemas.DescribeJobResponse_JobConfigSchemaVersion:
+			v.JobConfigSchemaVersion = new(string)
+			return d.ReadString(schemas.DescribeJobResponse_JobConfigSchemaVersion, v.JobConfigSchemaVersion)
+		case schemas.DescribeJobResponse_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.DescribeJobResponse_JobName, v.JobName)
+		case schemas.DescribeJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		case schemas.DescribeJobResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeJobResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeJobResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeJobResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeJobResponse_SecondaryStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeJobResponse_SecondaryStatus, &ev); err != nil {
+				return err
+			}
+			v.SecondaryStatus = types.JobSecondaryStatus(ev)
+			return nil
+		case schemas.DescribeJobResponse_SecondaryStatusTransitions:
+			return deserializeJobSecondaryStatusTransitions(d, schemas.DescribeJobResponse_SecondaryStatusTransitions, &v.SecondaryStatusTransitions)
+		case schemas.DescribeJobResponse_Tags:
+			return deserializeTagList(d, schemas.DescribeJobResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeJob, schemas.DescribeJobRequest, schemas.DescribeJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeJob, schemas.DescribeJobRequest, schemas.DescribeJobResponse), output: &DescribeJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

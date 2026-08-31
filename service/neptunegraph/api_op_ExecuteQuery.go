@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/document"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -81,6 +82,33 @@ type ExecuteQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteQueryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExplainMode != "" {
+		s.WriteString(schemas.ExecuteQueryInput_explainMode, string(v.ExplainMode))
+	}
+	if v.GraphIdentifier != nil {
+		s.WriteString(schemas.ExecuteQueryInput_graphIdentifier, *v.GraphIdentifier)
+	}
+	if v.Language != "" {
+		s.WriteString(schemas.ExecuteQueryInput_language, string(v.Language))
+	}
+	serializeDocumentValuedMap(s, schemas.ExecuteQueryInput_parameters, v.Parameters)
+	if v.PlanCache != "" {
+		s.WriteString(schemas.ExecuteQueryInput_planCache, string(v.PlanCache))
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.ExecuteQueryInput_queryString, *v.QueryString)
+	}
+	if v.QueryTimeoutMilliseconds != nil {
+		s.WriteInt32(schemas.ExecuteQueryInput_queryTimeoutMilliseconds, *v.QueryTimeoutMilliseconds)
+	}
+}
 func (in *ExecuteQueryInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ApiType = ptr.String("DataPlane")
@@ -99,13 +127,34 @@ type ExecuteQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteQueryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ExecuteQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecuteQueryOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+func (v *ExecuteQueryOutput) GetPayloadStream() io.Reader { return v.Payload }
+
+var _ smithy.StreamingInput = (*ExecuteQueryOutput)(nil)
+
+func (v *ExecuteQueryOutput) SetPayloadStream(r io.ReadCloser) { v.Payload = r }
+
+var _ smithy.StreamingOutput = (*ExecuteQueryOutput)(nil)
+
 func (c *Client) addOperationExecuteQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpExecuteQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteQuery, schemas.ExecuteQueryInput, schemas.ExecuteQueryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExecuteQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteQuery, schemas.ExecuteQueryInput, schemas.ExecuteQueryOutput), output: &ExecuteQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

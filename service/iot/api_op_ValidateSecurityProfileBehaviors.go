@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,16 @@ type ValidateSecurityProfileBehaviorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateSecurityProfileBehaviorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateSecurityProfileBehaviorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateSecurityProfileBehaviorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBehaviors(s, schemas.ValidateSecurityProfileBehaviorsRequest_behaviors, v.Behaviors)
+}
+
 type ValidateSecurityProfileBehaviorsOutput struct {
 
 	// True if the behaviors were valid.
@@ -59,13 +71,34 @@ type ValidateSecurityProfileBehaviorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateSecurityProfileBehaviorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateSecurityProfileBehaviorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateSecurityProfileBehaviorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Valid != false {
+		s.WriteBool(schemas.ValidateSecurityProfileBehaviorsResponse_valid, v.Valid)
+	}
+	serializeValidationErrors(s, schemas.ValidateSecurityProfileBehaviorsResponse_validationErrors, v.ValidationErrors)
+}
+func (v *ValidateSecurityProfileBehaviorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidateSecurityProfileBehaviorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidateSecurityProfileBehaviorsResponse_valid:
+			return d.ReadBool(schemas.ValidateSecurityProfileBehaviorsResponse_valid, &v.Valid)
+		case schemas.ValidateSecurityProfileBehaviorsResponse_validationErrors:
+			return deserializeValidationErrors(d, schemas.ValidateSecurityProfileBehaviorsResponse_validationErrors, &v.ValidationErrors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationValidateSecurityProfileBehaviorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpValidateSecurityProfileBehaviors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateSecurityProfileBehaviors, schemas.ValidateSecurityProfileBehaviorsRequest, schemas.ValidateSecurityProfileBehaviorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpValidateSecurityProfileBehaviors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateSecurityProfileBehaviors, schemas.ValidateSecurityProfileBehaviorsRequest, schemas.ValidateSecurityProfileBehaviorsResponse), output: &ValidateSecurityProfileBehaviorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

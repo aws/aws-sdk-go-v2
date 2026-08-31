@@ -4,7 +4,9 @@ package organizations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,15 @@ type EnableAllFeaturesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableAllFeaturesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableAllFeaturesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableAllFeaturesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type EnableAllFeaturesOutput struct {
 
 	// A structure that contains details about the handshake created to support this
@@ -70,13 +81,34 @@ type EnableAllFeaturesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableAllFeaturesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableAllFeaturesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableAllFeaturesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Handshake != nil {
+		s.WriteStruct(schemas.EnableAllFeaturesResponse_Handshake)
+		v.Handshake.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EnableAllFeaturesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnableAllFeaturesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnableAllFeaturesResponse_Handshake:
+			v.Handshake = &types.Handshake{}
+			return v.Handshake.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableAllFeaturesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableAllFeatures{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableAllFeatures, schemas.EnableAllFeaturesRequest, schemas.EnableAllFeaturesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpEnableAllFeatures{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableAllFeatures, schemas.EnableAllFeaturesRequest, schemas.EnableAllFeaturesResponse), output: &EnableAllFeaturesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

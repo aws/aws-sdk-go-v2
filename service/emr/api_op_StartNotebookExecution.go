@@ -4,7 +4,9 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,53 @@ type StartNotebookExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNotebookExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNotebookExecutionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNotebookExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EditorId != nil {
+		s.WriteString(schemas.StartNotebookExecutionInput_EditorId, *v.EditorId)
+	}
+	serializeEnvironmentVariablesMap(s, schemas.StartNotebookExecutionInput_EnvironmentVariables, v.EnvironmentVariables)
+	if v.ExecutionEngine != nil {
+		s.WriteStruct(schemas.StartNotebookExecutionInput_ExecutionEngine)
+		v.ExecutionEngine.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NotebookExecutionName != nil {
+		s.WriteString(schemas.StartNotebookExecutionInput_NotebookExecutionName, *v.NotebookExecutionName)
+	}
+	if v.NotebookInstanceSecurityGroupId != nil {
+		s.WriteString(schemas.StartNotebookExecutionInput_NotebookInstanceSecurityGroupId, *v.NotebookInstanceSecurityGroupId)
+	}
+	if v.NotebookParams != nil {
+		s.WriteString(schemas.StartNotebookExecutionInput_NotebookParams, *v.NotebookParams)
+	}
+	if v.NotebookS3Location != nil {
+		s.WriteStruct(schemas.StartNotebookExecutionInput_NotebookS3Location)
+		v.NotebookS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputNotebookFormat != "" {
+		s.WriteString(schemas.StartNotebookExecutionInput_OutputNotebookFormat, string(v.OutputNotebookFormat))
+	}
+	if v.OutputNotebookS3Location != nil {
+		s.WriteStruct(schemas.StartNotebookExecutionInput_OutputNotebookS3Location)
+		v.OutputNotebookS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RelativePath != nil {
+		s.WriteString(schemas.StartNotebookExecutionInput_RelativePath, *v.RelativePath)
+	}
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.StartNotebookExecutionInput_ServiceRole, *v.ServiceRole)
+	}
+	serializeTagList(s, schemas.StartNotebookExecutionInput_Tags, v.Tags)
+}
+
 type StartNotebookExecutionOutput struct {
 
 	// The unique identifier of the notebook execution.
@@ -93,13 +142,32 @@ type StartNotebookExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNotebookExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNotebookExecutionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNotebookExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotebookExecutionId != nil {
+		s.WriteString(schemas.StartNotebookExecutionOutput_NotebookExecutionId, *v.NotebookExecutionId)
+	}
+}
+func (v *StartNotebookExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartNotebookExecutionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartNotebookExecutionOutput_NotebookExecutionId:
+			v.NotebookExecutionId = new(string)
+			return d.ReadString(schemas.StartNotebookExecutionOutput_NotebookExecutionId, v.NotebookExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartNotebookExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartNotebookExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNotebookExecution, schemas.StartNotebookExecutionInput, schemas.StartNotebookExecutionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartNotebookExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNotebookExecution, schemas.StartNotebookExecutionInput, schemas.StartNotebookExecutionOutput), output: &StartNotebookExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

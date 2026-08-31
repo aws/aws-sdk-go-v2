@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,33 @@ type UpdateAppImageConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAppImageConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAppImageConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAppImageConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppImageConfigName != nil {
+		s.WriteString(schemas.UpdateAppImageConfigRequest_AppImageConfigName, *v.AppImageConfigName)
+	}
+	if v.CodeEditorAppImageConfig != nil {
+		s.WriteStruct(schemas.UpdateAppImageConfigRequest_CodeEditorAppImageConfig)
+		v.CodeEditorAppImageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JupyterLabAppImageConfig != nil {
+		s.WriteStruct(schemas.UpdateAppImageConfigRequest_JupyterLabAppImageConfig)
+		v.JupyterLabAppImageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KernelGatewayImageConfig != nil {
+		s.WriteStruct(schemas.UpdateAppImageConfigRequest_KernelGatewayImageConfig)
+		v.KernelGatewayImageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateAppImageConfigOutput struct {
 
 	// The ARN for the AppImageConfig.
@@ -54,13 +83,32 @@ type UpdateAppImageConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAppImageConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAppImageConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAppImageConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppImageConfigArn != nil {
+		s.WriteString(schemas.UpdateAppImageConfigResponse_AppImageConfigArn, *v.AppImageConfigArn)
+	}
+}
+func (v *UpdateAppImageConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAppImageConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAppImageConfigResponse_AppImageConfigArn:
+			v.AppImageConfigArn = new(string)
+			return d.ReadString(schemas.UpdateAppImageConfigResponse_AppImageConfigArn, v.AppImageConfigArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAppImageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAppImageConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAppImageConfig, schemas.UpdateAppImageConfigRequest, schemas.UpdateAppImageConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateAppImageConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAppImageConfig, schemas.UpdateAppImageConfigRequest, schemas.UpdateAppImageConfigResponse), output: &UpdateAppImageConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

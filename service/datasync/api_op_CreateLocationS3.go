@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -104,6 +106,31 @@ type CreateLocationS3Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationS3Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationS3Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationS3Input) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentArnList(s, schemas.CreateLocationS3Request_AgentArns, v.AgentArns)
+	if v.S3BucketArn != nil {
+		s.WriteString(schemas.CreateLocationS3Request_S3BucketArn, *v.S3BucketArn)
+	}
+	if v.S3Config != nil {
+		s.WriteStruct(schemas.CreateLocationS3Request_S3Config)
+		v.S3Config.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3StorageClass != "" {
+		s.WriteString(schemas.CreateLocationS3Request_S3StorageClass, string(v.S3StorageClass))
+	}
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.CreateLocationS3Request_Subdirectory, *v.Subdirectory)
+	}
+	serializeInputTagList(s, schemas.CreateLocationS3Request_Tags, v.Tags)
+}
+
 // CreateLocationS3Response
 type CreateLocationS3Output struct {
 
@@ -116,13 +143,32 @@ type CreateLocationS3Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationS3Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationS3Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationS3Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.CreateLocationS3Response_LocationArn, *v.LocationArn)
+	}
+}
+func (v *CreateLocationS3Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLocationS3Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLocationS3Response_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.CreateLocationS3Response_LocationArn, v.LocationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLocationS3Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLocationS3{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationS3, schemas.CreateLocationS3Request, schemas.CreateLocationS3Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLocationS3{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationS3, schemas.CreateLocationS3Request, schemas.CreateLocationS3Response), output: &CreateLocationS3Output{}}, middleware.After); err != nil {
 		return err
 	}
 

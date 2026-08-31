@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListAnalyticsDataLakeDataSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnalyticsDataLakeDataSetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnalyticsDataLakeDataSetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnalyticsDataLakeDataSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListAnalyticsDataLakeDataSetsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAnalyticsDataLakeDataSetsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnalyticsDataLakeDataSetsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAnalyticsDataLakeDataSetsOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.
@@ -60,13 +80,35 @@ type ListAnalyticsDataLakeDataSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnalyticsDataLakeDataSetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnalyticsDataLakeDataSetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnalyticsDataLakeDataSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnalyticsDataLakeDataSetsResponse_NextToken, *v.NextToken)
+	}
+	serializeAnalyticsDataSetsResults(s, schemas.ListAnalyticsDataLakeDataSetsResponse_Results, v.Results)
+}
+func (v *ListAnalyticsDataLakeDataSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAnalyticsDataLakeDataSetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAnalyticsDataLakeDataSetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAnalyticsDataLakeDataSetsResponse_NextToken, v.NextToken)
+		case schemas.ListAnalyticsDataLakeDataSetsResponse_Results:
+			return deserializeAnalyticsDataSetsResults(d, schemas.ListAnalyticsDataLakeDataSetsResponse_Results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAnalyticsDataLakeDataSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAnalyticsDataLakeDataSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnalyticsDataLakeDataSets, schemas.ListAnalyticsDataLakeDataSetsRequest, schemas.ListAnalyticsDataLakeDataSetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAnalyticsDataLakeDataSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnalyticsDataLakeDataSets, schemas.ListAnalyticsDataLakeDataSetsRequest, schemas.ListAnalyticsDataLakeDataSetsResponse), output: &ListAnalyticsDataLakeDataSetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

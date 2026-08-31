@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,24 @@ type DeleteAttachedFileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAttachedFileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAttachedFileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAttachedFileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedResourceArn != nil {
+		s.WriteString(schemas.DeleteAttachedFileRequest_AssociatedResourceArn, *v.AssociatedResourceArn)
+	}
+	if v.FileId != nil {
+		s.WriteString(schemas.DeleteAttachedFileRequest_FileId, *v.FileId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteAttachedFileRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 // Response from DeleteAttachedFile API
 type DeleteAttachedFileOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -61,13 +81,26 @@ type DeleteAttachedFileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAttachedFileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAttachedFileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAttachedFileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAttachedFileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAttachedFileResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAttachedFileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAttachedFile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAttachedFile, schemas.DeleteAttachedFileRequest, schemas.DeleteAttachedFileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAttachedFile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAttachedFile, schemas.DeleteAttachedFileRequest, schemas.DeleteAttachedFileResponse), output: &DeleteAttachedFileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

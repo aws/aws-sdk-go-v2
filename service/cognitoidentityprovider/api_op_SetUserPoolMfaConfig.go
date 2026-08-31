@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,41 @@ type SetUserPoolMfaConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetUserPoolMfaConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetUserPoolMfaConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetUserPoolMfaConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailMfaConfiguration != nil {
+		s.WriteStruct(schemas.SetUserPoolMfaConfigRequest_EmailMfaConfiguration)
+		v.EmailMfaConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MfaConfiguration != "" {
+		s.WriteString(schemas.SetUserPoolMfaConfigRequest_MfaConfiguration, string(v.MfaConfiguration))
+	}
+	if v.SmsMfaConfiguration != nil {
+		s.WriteStruct(schemas.SetUserPoolMfaConfigRequest_SmsMfaConfiguration)
+		v.SmsMfaConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SoftwareTokenMfaConfiguration != nil {
+		s.WriteStruct(schemas.SetUserPoolMfaConfigRequest_SoftwareTokenMfaConfiguration)
+		v.SoftwareTokenMfaConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.SetUserPoolMfaConfigRequest_UserPoolId, *v.UserPoolId)
+	}
+	if v.WebAuthnConfiguration != nil {
+		s.WriteStruct(schemas.SetUserPoolMfaConfigRequest_WebAuthnConfiguration)
+		v.WebAuthnConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SetUserPoolMfaConfigOutput struct {
 
 	// Shows configuration for user pool email message MFA and sign-in with one-time
@@ -132,13 +169,68 @@ type SetUserPoolMfaConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetUserPoolMfaConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetUserPoolMfaConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetUserPoolMfaConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailMfaConfiguration != nil {
+		s.WriteStruct(schemas.SetUserPoolMfaConfigResponse_EmailMfaConfiguration)
+		v.EmailMfaConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MfaConfiguration != "" {
+		s.WriteString(schemas.SetUserPoolMfaConfigResponse_MfaConfiguration, string(v.MfaConfiguration))
+	}
+	if v.SmsMfaConfiguration != nil {
+		s.WriteStruct(schemas.SetUserPoolMfaConfigResponse_SmsMfaConfiguration)
+		v.SmsMfaConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SoftwareTokenMfaConfiguration != nil {
+		s.WriteStruct(schemas.SetUserPoolMfaConfigResponse_SoftwareTokenMfaConfiguration)
+		v.SoftwareTokenMfaConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WebAuthnConfiguration != nil {
+		s.WriteStruct(schemas.SetUserPoolMfaConfigResponse_WebAuthnConfiguration)
+		v.WebAuthnConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SetUserPoolMfaConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetUserPoolMfaConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetUserPoolMfaConfigResponse_EmailMfaConfiguration:
+			v.EmailMfaConfiguration = &types.EmailMfaConfigType{}
+			return v.EmailMfaConfiguration.Deserialize(d)
+		case schemas.SetUserPoolMfaConfigResponse_MfaConfiguration:
+			var ev string
+			if err := d.ReadString(schemas.SetUserPoolMfaConfigResponse_MfaConfiguration, &ev); err != nil {
+				return err
+			}
+			v.MfaConfiguration = types.UserPoolMfaType(ev)
+			return nil
+		case schemas.SetUserPoolMfaConfigResponse_SmsMfaConfiguration:
+			v.SmsMfaConfiguration = &types.SmsMfaConfigType{}
+			return v.SmsMfaConfiguration.Deserialize(d)
+		case schemas.SetUserPoolMfaConfigResponse_SoftwareTokenMfaConfiguration:
+			v.SoftwareTokenMfaConfiguration = &types.SoftwareTokenMfaConfigType{}
+			return v.SoftwareTokenMfaConfiguration.Deserialize(d)
+		case schemas.SetUserPoolMfaConfigResponse_WebAuthnConfiguration:
+			v.WebAuthnConfiguration = &types.WebAuthnConfigurationType{}
+			return v.WebAuthnConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetUserPoolMfaConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetUserPoolMfaConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetUserPoolMfaConfig, schemas.SetUserPoolMfaConfigRequest, schemas.SetUserPoolMfaConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSetUserPoolMfaConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetUserPoolMfaConfig, schemas.SetUserPoolMfaConfigRequest, schemas.SetUserPoolMfaConfigResponse), output: &SetUserPoolMfaConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

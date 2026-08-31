@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,23 @@ type CreateLocationFsxLustreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationFsxLustreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationFsxLustreRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationFsxLustreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FsxFilesystemArn != nil {
+		s.WriteString(schemas.CreateLocationFsxLustreRequest_FsxFilesystemArn, *v.FsxFilesystemArn)
+	}
+	serializeEc2SecurityGroupArnList(s, schemas.CreateLocationFsxLustreRequest_SecurityGroupArns, v.SecurityGroupArns)
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.CreateLocationFsxLustreRequest_Subdirectory, *v.Subdirectory)
+	}
+	serializeInputTagList(s, schemas.CreateLocationFsxLustreRequest_Tags, v.Tags)
+}
+
 type CreateLocationFsxLustreOutput struct {
 
 	// The Amazon Resource Name (ARN) of the FSx for Lustre file system location that
@@ -77,13 +96,32 @@ type CreateLocationFsxLustreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationFsxLustreOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationFsxLustreResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationFsxLustreOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.CreateLocationFsxLustreResponse_LocationArn, *v.LocationArn)
+	}
+}
+func (v *CreateLocationFsxLustreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLocationFsxLustreResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLocationFsxLustreResponse_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.CreateLocationFsxLustreResponse_LocationArn, v.LocationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLocationFsxLustreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLocationFsxLustre{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationFsxLustre, schemas.CreateLocationFsxLustreRequest, schemas.CreateLocationFsxLustreResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLocationFsxLustre{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationFsxLustre, schemas.CreateLocationFsxLustreRequest, schemas.CreateLocationFsxLustreResponse), output: &CreateLocationFsxLustreOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

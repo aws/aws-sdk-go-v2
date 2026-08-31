@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,38 @@ type GetConfiguredTableAnalysisRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfiguredTableAnalysisRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfiguredTableAnalysisRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfiguredTableAnalysisRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisRuleType != "" {
+		s.WriteString(schemas.GetConfiguredTableAnalysisRuleInput_analysisRuleType, string(v.AnalysisRuleType))
+	}
+	if v.ConfiguredTableIdentifier != nil {
+		s.WriteString(schemas.GetConfiguredTableAnalysisRuleInput_configuredTableIdentifier, *v.ConfiguredTableIdentifier)
+	}
+}
+func (v *GetConfiguredTableAnalysisRuleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfiguredTableAnalysisRuleInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfiguredTableAnalysisRuleInput_analysisRuleType:
+			var ev string
+			if err := d.ReadString(schemas.GetConfiguredTableAnalysisRuleInput_analysisRuleType, &ev); err != nil {
+				return err
+			}
+			v.AnalysisRuleType = types.ConfiguredTableAnalysisRuleType(ev)
+			return nil
+		case schemas.GetConfiguredTableAnalysisRuleInput_configuredTableIdentifier:
+			v.ConfiguredTableIdentifier = new(string)
+			return d.ReadString(schemas.GetConfiguredTableAnalysisRuleInput_configuredTableIdentifier, v.ConfiguredTableIdentifier)
+		}
+		return nil
+	})
+}
+
 type GetConfiguredTableAnalysisRuleOutput struct {
 
 	// The entire analysis rule output.
@@ -54,13 +88,34 @@ type GetConfiguredTableAnalysisRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfiguredTableAnalysisRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfiguredTableAnalysisRuleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfiguredTableAnalysisRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisRule != nil {
+		s.WriteStruct(schemas.GetConfiguredTableAnalysisRuleOutput_analysisRule)
+		v.AnalysisRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetConfiguredTableAnalysisRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfiguredTableAnalysisRuleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfiguredTableAnalysisRuleOutput_analysisRule:
+			v.AnalysisRule = &types.ConfiguredTableAnalysisRule{}
+			return v.AnalysisRule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConfiguredTableAnalysisRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfiguredTableAnalysisRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguredTableAnalysisRule, schemas.GetConfiguredTableAnalysisRuleInput, schemas.GetConfiguredTableAnalysisRuleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConfiguredTableAnalysisRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguredTableAnalysisRule, schemas.GetConfiguredTableAnalysisRuleInput, schemas.GetConfiguredTableAnalysisRuleOutput), output: &GetConfiguredTableAnalysisRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

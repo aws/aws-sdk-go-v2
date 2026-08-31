@@ -4,7 +4,9 @@ package m2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/m2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,28 @@ type GetEnvironmentInput struct {
 	EnvironmentId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.GetEnvironmentRequest_environmentId, *v.EnvironmentId)
+	}
+}
+func (v *GetEnvironmentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEnvironmentRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEnvironmentRequest_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.GetEnvironmentRequest_environmentId, v.EnvironmentId)
+		}
+		return nil
+	})
 }
 
 type GetEnvironmentOutput struct {
@@ -143,13 +167,167 @@ type GetEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnvironmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActualCapacity != nil {
+		s.WriteInt32(schemas.GetEnvironmentResponse_actualCapacity, *v.ActualCapacity)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetEnvironmentResponse_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetEnvironmentResponse_description, *v.Description)
+	}
+	if v.EngineType != "" {
+		s.WriteString(schemas.GetEnvironmentResponse_engineType, string(v.EngineType))
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.GetEnvironmentResponse_engineVersion, *v.EngineVersion)
+	}
+	if v.EnvironmentArn != nil {
+		s.WriteString(schemas.GetEnvironmentResponse_environmentArn, *v.EnvironmentArn)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.GetEnvironmentResponse_environmentId, *v.EnvironmentId)
+	}
+	if v.HighAvailabilityConfig != nil {
+		s.WriteStruct(schemas.GetEnvironmentResponse_highAvailabilityConfig)
+		v.HighAvailabilityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.GetEnvironmentResponse_instanceType, *v.InstanceType)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.GetEnvironmentResponse_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.LoadBalancerArn != nil {
+		s.WriteString(schemas.GetEnvironmentResponse_loadBalancerArn, *v.LoadBalancerArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetEnvironmentResponse_name, *v.Name)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.GetEnvironmentResponse_networkType, string(v.NetworkType))
+	}
+	if v.PendingMaintenance != nil {
+		s.WriteStruct(schemas.GetEnvironmentResponse_pendingMaintenance)
+		v.PendingMaintenance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.GetEnvironmentResponse_preferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+	if v.PubliclyAccessible != false {
+		s.WriteBool(schemas.GetEnvironmentResponse_publiclyAccessible, v.PubliclyAccessible)
+	}
+	serializeString50List(s, schemas.GetEnvironmentResponse_securityGroupIds, v.SecurityGroupIds)
+	if v.Status != "" {
+		s.WriteString(schemas.GetEnvironmentResponse_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.GetEnvironmentResponse_statusReason, *v.StatusReason)
+	}
+	serializeStorageConfigurationList(s, schemas.GetEnvironmentResponse_storageConfigurations, v.StorageConfigurations)
+	serializeString50List(s, schemas.GetEnvironmentResponse_subnetIds, v.SubnetIds)
+	serializeTagMap(s, schemas.GetEnvironmentResponse_tags, v.Tags)
+	if v.VpcId != nil {
+		s.WriteString(schemas.GetEnvironmentResponse_vpcId, *v.VpcId)
+	}
+}
+func (v *GetEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEnvironmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEnvironmentResponse_actualCapacity:
+			v.ActualCapacity = new(int32)
+			return d.ReadInt32(schemas.GetEnvironmentResponse_actualCapacity, v.ActualCapacity)
+		case schemas.GetEnvironmentResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetEnvironmentResponse_creationTime, v.CreationTime)
+		case schemas.GetEnvironmentResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetEnvironmentResponse_description, v.Description)
+		case schemas.GetEnvironmentResponse_engineType:
+			var ev string
+			if err := d.ReadString(schemas.GetEnvironmentResponse_engineType, &ev); err != nil {
+				return err
+			}
+			v.EngineType = types.EngineType(ev)
+			return nil
+		case schemas.GetEnvironmentResponse_engineVersion:
+			v.EngineVersion = new(string)
+			return d.ReadString(schemas.GetEnvironmentResponse_engineVersion, v.EngineVersion)
+		case schemas.GetEnvironmentResponse_environmentArn:
+			v.EnvironmentArn = new(string)
+			return d.ReadString(schemas.GetEnvironmentResponse_environmentArn, v.EnvironmentArn)
+		case schemas.GetEnvironmentResponse_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.GetEnvironmentResponse_environmentId, v.EnvironmentId)
+		case schemas.GetEnvironmentResponse_highAvailabilityConfig:
+			v.HighAvailabilityConfig = &types.HighAvailabilityConfig{}
+			return v.HighAvailabilityConfig.Deserialize(d)
+		case schemas.GetEnvironmentResponse_instanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.GetEnvironmentResponse_instanceType, v.InstanceType)
+		case schemas.GetEnvironmentResponse_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.GetEnvironmentResponse_kmsKeyId, v.KmsKeyId)
+		case schemas.GetEnvironmentResponse_loadBalancerArn:
+			v.LoadBalancerArn = new(string)
+			return d.ReadString(schemas.GetEnvironmentResponse_loadBalancerArn, v.LoadBalancerArn)
+		case schemas.GetEnvironmentResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetEnvironmentResponse_name, v.Name)
+		case schemas.GetEnvironmentResponse_networkType:
+			var ev string
+			if err := d.ReadString(schemas.GetEnvironmentResponse_networkType, &ev); err != nil {
+				return err
+			}
+			v.NetworkType = types.NetworkType(ev)
+			return nil
+		case schemas.GetEnvironmentResponse_pendingMaintenance:
+			v.PendingMaintenance = &types.PendingMaintenance{}
+			return v.PendingMaintenance.Deserialize(d)
+		case schemas.GetEnvironmentResponse_preferredMaintenanceWindow:
+			v.PreferredMaintenanceWindow = new(string)
+			return d.ReadString(schemas.GetEnvironmentResponse_preferredMaintenanceWindow, v.PreferredMaintenanceWindow)
+		case schemas.GetEnvironmentResponse_publiclyAccessible:
+			return d.ReadBool(schemas.GetEnvironmentResponse_publiclyAccessible, &v.PubliclyAccessible)
+		case schemas.GetEnvironmentResponse_securityGroupIds:
+			return deserializeString50List(d, schemas.GetEnvironmentResponse_securityGroupIds, &v.SecurityGroupIds)
+		case schemas.GetEnvironmentResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetEnvironmentResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.EnvironmentLifecycle(ev)
+			return nil
+		case schemas.GetEnvironmentResponse_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.GetEnvironmentResponse_statusReason, v.StatusReason)
+		case schemas.GetEnvironmentResponse_storageConfigurations:
+			return deserializeStorageConfigurationList(d, schemas.GetEnvironmentResponse_storageConfigurations, &v.StorageConfigurations)
+		case schemas.GetEnvironmentResponse_subnetIds:
+			return deserializeString50List(d, schemas.GetEnvironmentResponse_subnetIds, &v.SubnetIds)
+		case schemas.GetEnvironmentResponse_tags:
+			return deserializeTagMap(d, schemas.GetEnvironmentResponse_tags, &v.Tags)
+		case schemas.GetEnvironmentResponse_vpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.GetEnvironmentResponse_vpcId, v.VpcId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironment, schemas.GetEnvironmentRequest, schemas.GetEnvironmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironment, schemas.GetEnvironmentRequest, schemas.GetEnvironmentResponse), output: &GetEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

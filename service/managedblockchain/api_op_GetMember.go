@@ -4,7 +4,9 @@ package managedblockchain
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type GetMemberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMemberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMemberInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMemberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MemberId != nil {
+		s.WriteString(schemas.GetMemberInput_MemberId, *v.MemberId)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.GetMemberInput_NetworkId, *v.NetworkId)
+	}
+}
+
 type GetMemberOutput struct {
 
 	// The properties of a member.
@@ -52,13 +69,34 @@ type GetMemberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMemberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMemberOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMemberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Member != nil {
+		s.WriteStruct(schemas.GetMemberOutput_Member)
+		v.Member.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetMemberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMemberOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMemberOutput_Member:
+			v.Member = &types.Member{}
+			return v.Member.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMember{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMember, schemas.GetMemberInput, schemas.GetMemberOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMember{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMember, schemas.GetMemberInput, schemas.GetMemberOutput), output: &GetMemberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,23 @@ type PutAutoTerminationPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAutoTerminationPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAutoTerminationPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAutoTerminationPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoTerminationPolicy != nil {
+		s.WriteStruct(schemas.PutAutoTerminationPolicyInput_AutoTerminationPolicy)
+		v.AutoTerminationPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.PutAutoTerminationPolicyInput_ClusterId, *v.ClusterId)
+	}
+}
+
 type PutAutoTerminationPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +73,26 @@ type PutAutoTerminationPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAutoTerminationPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAutoTerminationPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAutoTerminationPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutAutoTerminationPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAutoTerminationPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAutoTerminationPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutAutoTerminationPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAutoTerminationPolicy, schemas.PutAutoTerminationPolicyInput, schemas.PutAutoTerminationPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutAutoTerminationPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAutoTerminationPolicy, schemas.PutAutoTerminationPolicyInput, schemas.PutAutoTerminationPolicyOutput), output: &PutAutoTerminationPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

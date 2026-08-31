@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -81,6 +83,60 @@ type ListMonitoringExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMonitoringExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMonitoringExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMonitoringExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListMonitoringExecutionsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListMonitoringExecutionsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.ListMonitoringExecutionsRequest_EndpointName, *v.EndpointName)
+	}
+	if v.LastModifiedTimeAfter != nil {
+		s.WriteTime(schemas.ListMonitoringExecutionsRequest_LastModifiedTimeAfter, *v.LastModifiedTimeAfter)
+	}
+	if v.LastModifiedTimeBefore != nil {
+		s.WriteTime(schemas.ListMonitoringExecutionsRequest_LastModifiedTimeBefore, *v.LastModifiedTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMonitoringExecutionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MonitoringJobDefinitionName != nil {
+		s.WriteString(schemas.ListMonitoringExecutionsRequest_MonitoringJobDefinitionName, *v.MonitoringJobDefinitionName)
+	}
+	if v.MonitoringScheduleName != nil {
+		s.WriteString(schemas.ListMonitoringExecutionsRequest_MonitoringScheduleName, *v.MonitoringScheduleName)
+	}
+	if v.MonitoringTypeEquals != "" {
+		s.WriteString(schemas.ListMonitoringExecutionsRequest_MonitoringTypeEquals, string(v.MonitoringTypeEquals))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMonitoringExecutionsRequest_NextToken, *v.NextToken)
+	}
+	if v.ScheduledTimeAfter != nil {
+		s.WriteTime(schemas.ListMonitoringExecutionsRequest_ScheduledTimeAfter, *v.ScheduledTimeAfter)
+	}
+	if v.ScheduledTimeBefore != nil {
+		s.WriteTime(schemas.ListMonitoringExecutionsRequest_ScheduledTimeBefore, *v.ScheduledTimeBefore)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListMonitoringExecutionsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListMonitoringExecutionsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListMonitoringExecutionsRequest_StatusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListMonitoringExecutionsOutput struct {
 
 	// A JSON array in which each element is a summary for a monitoring execution.
@@ -98,13 +154,35 @@ type ListMonitoringExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMonitoringExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMonitoringExecutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMonitoringExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMonitoringExecutionSummaryList(s, schemas.ListMonitoringExecutionsResponse_MonitoringExecutionSummaries, v.MonitoringExecutionSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMonitoringExecutionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListMonitoringExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMonitoringExecutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMonitoringExecutionsResponse_MonitoringExecutionSummaries:
+			return deserializeMonitoringExecutionSummaryList(d, schemas.ListMonitoringExecutionsResponse_MonitoringExecutionSummaries, &v.MonitoringExecutionSummaries)
+		case schemas.ListMonitoringExecutionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMonitoringExecutionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMonitoringExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMonitoringExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMonitoringExecutions, schemas.ListMonitoringExecutionsRequest, schemas.ListMonitoringExecutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMonitoringExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMonitoringExecutions, schemas.ListMonitoringExecutionsRequest, schemas.ListMonitoringExecutionsResponse), output: &ListMonitoringExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package mailmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -32,6 +34,18 @@ type GetAddressListInput struct {
 	AddressListId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetAddressListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAddressListRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAddressListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressListId != nil {
+		s.WriteString(schemas.GetAddressListRequest_AddressListId, *v.AddressListId)
+	}
 }
 
 type GetAddressListOutput struct {
@@ -67,13 +81,56 @@ type GetAddressListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAddressListOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAddressListResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAddressListOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressListArn != nil {
+		s.WriteString(schemas.GetAddressListResponse_AddressListArn, *v.AddressListArn)
+	}
+	if v.AddressListId != nil {
+		s.WriteString(schemas.GetAddressListResponse_AddressListId, *v.AddressListId)
+	}
+	if v.AddressListName != nil {
+		s.WriteString(schemas.GetAddressListResponse_AddressListName, *v.AddressListName)
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.GetAddressListResponse_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteTime(schemas.GetAddressListResponse_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+}
+func (v *GetAddressListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAddressListResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAddressListResponse_AddressListArn:
+			v.AddressListArn = new(string)
+			return d.ReadString(schemas.GetAddressListResponse_AddressListArn, v.AddressListArn)
+		case schemas.GetAddressListResponse_AddressListId:
+			v.AddressListId = new(string)
+			return d.ReadString(schemas.GetAddressListResponse_AddressListId, v.AddressListId)
+		case schemas.GetAddressListResponse_AddressListName:
+			v.AddressListName = new(string)
+			return d.ReadString(schemas.GetAddressListResponse_AddressListName, v.AddressListName)
+		case schemas.GetAddressListResponse_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetAddressListResponse_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.GetAddressListResponse_LastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetAddressListResponse_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAddressListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetAddressList{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAddressList, schemas.GetAddressListRequest, schemas.GetAddressListResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetAddressList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAddressList, schemas.GetAddressListRequest, schemas.GetAddressListResponse), output: &GetAddressListOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

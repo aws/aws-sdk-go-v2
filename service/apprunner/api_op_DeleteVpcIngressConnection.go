@@ -4,7 +4,9 @@ package apprunner
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,18 @@ type DeleteVpcIngressConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVpcIngressConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVpcIngressConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVpcIngressConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcIngressConnectionArn != nil {
+		s.WriteString(schemas.DeleteVpcIngressConnectionRequest_VpcIngressConnectionArn, *v.VpcIngressConnectionArn)
+	}
+}
+
 type DeleteVpcIngressConnectionOutput struct {
 
 	// A description of the App Runner VPC Ingress Connection that this request just
@@ -59,13 +73,34 @@ type DeleteVpcIngressConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVpcIngressConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVpcIngressConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVpcIngressConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcIngressConnection != nil {
+		s.WriteStruct(schemas.DeleteVpcIngressConnectionResponse_VpcIngressConnection)
+		v.VpcIngressConnection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteVpcIngressConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVpcIngressConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVpcIngressConnectionResponse_VpcIngressConnection:
+			v.VpcIngressConnection = &types.VpcIngressConnection{}
+			return v.VpcIngressConnection.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVpcIngressConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteVpcIngressConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVpcIngressConnection, schemas.DeleteVpcIngressConnectionRequest, schemas.DeleteVpcIngressConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteVpcIngressConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVpcIngressConnection, schemas.DeleteVpcIngressConnectionRequest, schemas.DeleteVpcIngressConnectionResponse), output: &DeleteVpcIngressConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -36,6 +38,18 @@ type DescribeTaskInput struct {
 	TaskArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskArn != nil {
+		s.WriteString(schemas.DescribeTaskRequest_TaskArn, *v.TaskArn)
+	}
 }
 
 // DescribeTaskResponse
@@ -146,13 +160,152 @@ type DescribeTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogGroupArn != nil {
+		s.WriteString(schemas.DescribeTaskResponse_CloudWatchLogGroupArn, *v.CloudWatchLogGroupArn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeTaskResponse_CreationTime, *v.CreationTime)
+	}
+	if v.CurrentTaskExecutionArn != nil {
+		s.WriteString(schemas.DescribeTaskResponse_CurrentTaskExecutionArn, *v.CurrentTaskExecutionArn)
+	}
+	if v.DestinationLocationArn != nil {
+		s.WriteString(schemas.DescribeTaskResponse_DestinationLocationArn, *v.DestinationLocationArn)
+	}
+	serializeDestinationNetworkInterfaceArns(s, schemas.DescribeTaskResponse_DestinationNetworkInterfaceArns, v.DestinationNetworkInterfaceArns)
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.DescribeTaskResponse_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorDetail != nil {
+		s.WriteString(schemas.DescribeTaskResponse_ErrorDetail, *v.ErrorDetail)
+	}
+	serializeFilterList(s, schemas.DescribeTaskResponse_Excludes, v.Excludes)
+	serializeFilterList(s, schemas.DescribeTaskResponse_Includes, v.Includes)
+	if v.ManifestConfig != nil {
+		s.WriteStruct(schemas.DescribeTaskResponse_ManifestConfig)
+		v.ManifestConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeTaskResponse_Name, *v.Name)
+	}
+	if v.Options != nil {
+		s.WriteStruct(schemas.DescribeTaskResponse_Options)
+		v.Options.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Schedule != nil {
+		s.WriteStruct(schemas.DescribeTaskResponse_Schedule)
+		v.Schedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScheduleDetails != nil {
+		s.WriteStruct(schemas.DescribeTaskResponse_ScheduleDetails)
+		v.ScheduleDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceLocationArn != nil {
+		s.WriteString(schemas.DescribeTaskResponse_SourceLocationArn, *v.SourceLocationArn)
+	}
+	serializeSourceNetworkInterfaceArns(s, schemas.DescribeTaskResponse_SourceNetworkInterfaceArns, v.SourceNetworkInterfaceArns)
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeTaskResponse_Status, string(v.Status))
+	}
+	if v.TaskArn != nil {
+		s.WriteString(schemas.DescribeTaskResponse_TaskArn, *v.TaskArn)
+	}
+	if v.TaskMode != "" {
+		s.WriteString(schemas.DescribeTaskResponse_TaskMode, string(v.TaskMode))
+	}
+	if v.TaskReportConfig != nil {
+		s.WriteStruct(schemas.DescribeTaskResponse_TaskReportConfig)
+		v.TaskReportConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTaskResponse_CloudWatchLogGroupArn:
+			v.CloudWatchLogGroupArn = new(string)
+			return d.ReadString(schemas.DescribeTaskResponse_CloudWatchLogGroupArn, v.CloudWatchLogGroupArn)
+		case schemas.DescribeTaskResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTaskResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeTaskResponse_CurrentTaskExecutionArn:
+			v.CurrentTaskExecutionArn = new(string)
+			return d.ReadString(schemas.DescribeTaskResponse_CurrentTaskExecutionArn, v.CurrentTaskExecutionArn)
+		case schemas.DescribeTaskResponse_DestinationLocationArn:
+			v.DestinationLocationArn = new(string)
+			return d.ReadString(schemas.DescribeTaskResponse_DestinationLocationArn, v.DestinationLocationArn)
+		case schemas.DescribeTaskResponse_DestinationNetworkInterfaceArns:
+			return deserializeDestinationNetworkInterfaceArns(d, schemas.DescribeTaskResponse_DestinationNetworkInterfaceArns, &v.DestinationNetworkInterfaceArns)
+		case schemas.DescribeTaskResponse_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.DescribeTaskResponse_ErrorCode, v.ErrorCode)
+		case schemas.DescribeTaskResponse_ErrorDetail:
+			v.ErrorDetail = new(string)
+			return d.ReadString(schemas.DescribeTaskResponse_ErrorDetail, v.ErrorDetail)
+		case schemas.DescribeTaskResponse_Excludes:
+			return deserializeFilterList(d, schemas.DescribeTaskResponse_Excludes, &v.Excludes)
+		case schemas.DescribeTaskResponse_Includes:
+			return deserializeFilterList(d, schemas.DescribeTaskResponse_Includes, &v.Includes)
+		case schemas.DescribeTaskResponse_ManifestConfig:
+			v.ManifestConfig = &types.ManifestConfig{}
+			return v.ManifestConfig.Deserialize(d)
+		case schemas.DescribeTaskResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeTaskResponse_Name, v.Name)
+		case schemas.DescribeTaskResponse_Options:
+			v.Options = &types.Options{}
+			return v.Options.Deserialize(d)
+		case schemas.DescribeTaskResponse_Schedule:
+			v.Schedule = &types.TaskSchedule{}
+			return v.Schedule.Deserialize(d)
+		case schemas.DescribeTaskResponse_ScheduleDetails:
+			v.ScheduleDetails = &types.TaskScheduleDetails{}
+			return v.ScheduleDetails.Deserialize(d)
+		case schemas.DescribeTaskResponse_SourceLocationArn:
+			v.SourceLocationArn = new(string)
+			return d.ReadString(schemas.DescribeTaskResponse_SourceLocationArn, v.SourceLocationArn)
+		case schemas.DescribeTaskResponse_SourceNetworkInterfaceArns:
+			return deserializeSourceNetworkInterfaceArns(d, schemas.DescribeTaskResponse_SourceNetworkInterfaceArns, &v.SourceNetworkInterfaceArns)
+		case schemas.DescribeTaskResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTaskResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TaskStatus(ev)
+			return nil
+		case schemas.DescribeTaskResponse_TaskArn:
+			v.TaskArn = new(string)
+			return d.ReadString(schemas.DescribeTaskResponse_TaskArn, v.TaskArn)
+		case schemas.DescribeTaskResponse_TaskMode:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTaskResponse_TaskMode, &ev); err != nil {
+				return err
+			}
+			v.TaskMode = types.TaskMode(ev)
+			return nil
+		case schemas.DescribeTaskResponse_TaskReportConfig:
+			v.TaskReportConfig = &types.TaskReportConfig{}
+			return v.TaskReportConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTask, schemas.DescribeTaskRequest, schemas.DescribeTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTask, schemas.DescribeTaskRequest, schemas.DescribeTaskResponse), output: &DescribeTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,6 +5,8 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,24 @@ type DeleteWorkloadShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkloadShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkloadShareInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkloadShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.DeleteWorkloadShareInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ShareId != nil {
+		s.WriteString(schemas.DeleteWorkloadShareInput_ShareId, *v.ShareId)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.DeleteWorkloadShareInput_WorkloadId, *v.WorkloadId)
+	}
+}
+
 type DeleteWorkloadShareOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -64,13 +84,26 @@ type DeleteWorkloadShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkloadShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkloadShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteWorkloadShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWorkloadShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWorkloadShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkloadShare, schemas.DeleteWorkloadShareInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteWorkloadShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkloadShare, schemas.DeleteWorkloadShareInput, nil), output: &DeleteWorkloadShareOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

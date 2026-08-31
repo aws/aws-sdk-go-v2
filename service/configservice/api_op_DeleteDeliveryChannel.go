@@ -4,6 +4,8 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type DeleteDeliveryChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDeliveryChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDeliveryChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDeliveryChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryChannelName != nil {
+		s.WriteString(schemas.DeleteDeliveryChannelRequest_DeliveryChannelName, *v.DeliveryChannelName)
+	}
+}
+
 type DeleteDeliveryChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +60,26 @@ type DeleteDeliveryChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDeliveryChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDeliveryChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteDeliveryChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDeliveryChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDeliveryChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDeliveryChannel, schemas.DeleteDeliveryChannelRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteDeliveryChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDeliveryChannel, schemas.DeleteDeliveryChannelRequest, nil), output: &DeleteDeliveryChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

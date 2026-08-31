@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,33 @@ type StartContactEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartContactEvaluationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartContactEvaluationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartContactEvaluationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoEvaluationConfiguration != nil {
+		s.WriteStruct(schemas.StartContactEvaluationRequest_AutoEvaluationConfiguration)
+		v.AutoEvaluationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartContactEvaluationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartContactEvaluationRequest_ContactId, *v.ContactId)
+	}
+	if v.EvaluationFormId != nil {
+		s.WriteString(schemas.StartContactEvaluationRequest_EvaluationFormId, *v.EvaluationFormId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartContactEvaluationRequest_InstanceId, *v.InstanceId)
+	}
+	serializeTagMap(s, schemas.StartContactEvaluationRequest_Tags, v.Tags)
+}
+
 type StartContactEvaluationOutput struct {
 
 	// The Amazon Resource Name (ARN) for the contact evaluation resource.
@@ -87,13 +116,38 @@ type StartContactEvaluationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartContactEvaluationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartContactEvaluationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartContactEvaluationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationArn != nil {
+		s.WriteString(schemas.StartContactEvaluationResponse_EvaluationArn, *v.EvaluationArn)
+	}
+	if v.EvaluationId != nil {
+		s.WriteString(schemas.StartContactEvaluationResponse_EvaluationId, *v.EvaluationId)
+	}
+}
+func (v *StartContactEvaluationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartContactEvaluationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartContactEvaluationResponse_EvaluationArn:
+			v.EvaluationArn = new(string)
+			return d.ReadString(schemas.StartContactEvaluationResponse_EvaluationArn, v.EvaluationArn)
+		case schemas.StartContactEvaluationResponse_EvaluationId:
+			v.EvaluationId = new(string)
+			return d.ReadString(schemas.StartContactEvaluationResponse_EvaluationId, v.EvaluationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartContactEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartContactEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartContactEvaluation, schemas.StartContactEvaluationRequest, schemas.StartContactEvaluationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartContactEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartContactEvaluation, schemas.StartContactEvaluationRequest, schemas.StartContactEvaluationResponse), output: &StartContactEvaluationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

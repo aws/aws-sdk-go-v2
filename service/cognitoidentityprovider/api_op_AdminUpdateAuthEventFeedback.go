@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -83,6 +85,27 @@ type AdminUpdateAuthEventFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminUpdateAuthEventFeedbackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminUpdateAuthEventFeedbackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminUpdateAuthEventFeedbackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventId != nil {
+		s.WriteString(schemas.AdminUpdateAuthEventFeedbackRequest_EventId, *v.EventId)
+	}
+	if v.FeedbackValue != "" {
+		s.WriteString(schemas.AdminUpdateAuthEventFeedbackRequest_FeedbackValue, string(v.FeedbackValue))
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AdminUpdateAuthEventFeedbackRequest_UserPoolId, *v.UserPoolId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.AdminUpdateAuthEventFeedbackRequest_Username, *v.Username)
+	}
+}
+
 type AdminUpdateAuthEventFeedbackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -90,13 +113,26 @@ type AdminUpdateAuthEventFeedbackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminUpdateAuthEventFeedbackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminUpdateAuthEventFeedbackResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminUpdateAuthEventFeedbackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AdminUpdateAuthEventFeedbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminUpdateAuthEventFeedbackResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdminUpdateAuthEventFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminUpdateAuthEventFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminUpdateAuthEventFeedback, schemas.AdminUpdateAuthEventFeedbackRequest, schemas.AdminUpdateAuthEventFeedbackResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminUpdateAuthEventFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminUpdateAuthEventFeedback, schemas.AdminUpdateAuthEventFeedbackRequest, schemas.AdminUpdateAuthEventFeedbackResponse), output: &AdminUpdateAuthEventFeedbackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

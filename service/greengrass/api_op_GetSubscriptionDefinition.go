@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -31,6 +33,18 @@ type GetSubscriptionDefinitionInput struct {
 	SubscriptionDefinitionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSubscriptionDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSubscriptionDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSubscriptionDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubscriptionDefinitionId != nil {
+		s.WriteString(schemas.GetSubscriptionDefinitionRequest_SubscriptionDefinitionId, *v.SubscriptionDefinitionId)
+	}
 }
 
 type GetSubscriptionDefinitionOutput struct {
@@ -65,13 +79,71 @@ type GetSubscriptionDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSubscriptionDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSubscriptionDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSubscriptionDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetSubscriptionDefinitionResponse_Arn, *v.Arn)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteString(schemas.GetSubscriptionDefinitionResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetSubscriptionDefinitionResponse_Id, *v.Id)
+	}
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteString(schemas.GetSubscriptionDefinitionResponse_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	if v.LatestVersion != nil {
+		s.WriteString(schemas.GetSubscriptionDefinitionResponse_LatestVersion, *v.LatestVersion)
+	}
+	if v.LatestVersionArn != nil {
+		s.WriteString(schemas.GetSubscriptionDefinitionResponse_LatestVersionArn, *v.LatestVersionArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetSubscriptionDefinitionResponse_Name, *v.Name)
+	}
+	serializeTags(s, schemas.GetSubscriptionDefinitionResponse_tags, v.Tags)
+}
+func (v *GetSubscriptionDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSubscriptionDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSubscriptionDefinitionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetSubscriptionDefinitionResponse_Arn, v.Arn)
+		case schemas.GetSubscriptionDefinitionResponse_CreationTimestamp:
+			v.CreationTimestamp = new(string)
+			return d.ReadString(schemas.GetSubscriptionDefinitionResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.GetSubscriptionDefinitionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetSubscriptionDefinitionResponse_Id, v.Id)
+		case schemas.GetSubscriptionDefinitionResponse_LastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(string)
+			return d.ReadString(schemas.GetSubscriptionDefinitionResponse_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.GetSubscriptionDefinitionResponse_LatestVersion:
+			v.LatestVersion = new(string)
+			return d.ReadString(schemas.GetSubscriptionDefinitionResponse_LatestVersion, v.LatestVersion)
+		case schemas.GetSubscriptionDefinitionResponse_LatestVersionArn:
+			v.LatestVersionArn = new(string)
+			return d.ReadString(schemas.GetSubscriptionDefinitionResponse_LatestVersionArn, v.LatestVersionArn)
+		case schemas.GetSubscriptionDefinitionResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetSubscriptionDefinitionResponse_Name, v.Name)
+		case schemas.GetSubscriptionDefinitionResponse_tags:
+			return deserializeTags(d, schemas.GetSubscriptionDefinitionResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSubscriptionDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSubscriptionDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSubscriptionDefinition, schemas.GetSubscriptionDefinitionRequest, schemas.GetSubscriptionDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSubscriptionDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSubscriptionDefinition, schemas.GetSubscriptionDefinitionRequest, schemas.GetSubscriptionDefinitionResponse), output: &GetSubscriptionDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

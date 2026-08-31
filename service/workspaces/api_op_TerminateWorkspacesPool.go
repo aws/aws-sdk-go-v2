@@ -4,6 +4,8 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type TerminateWorkspacesPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateWorkspacesPoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateWorkspacesPoolRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateWorkspacesPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PoolId != nil {
+		s.WriteString(schemas.TerminateWorkspacesPoolRequest_PoolId, *v.PoolId)
+	}
+}
+
 type TerminateWorkspacesPoolOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +61,26 @@ type TerminateWorkspacesPoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateWorkspacesPoolOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateWorkspacesPoolResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateWorkspacesPoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *TerminateWorkspacesPoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TerminateWorkspacesPoolResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTerminateWorkspacesPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTerminateWorkspacesPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateWorkspacesPool, schemas.TerminateWorkspacesPoolRequest, schemas.TerminateWorkspacesPoolResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTerminateWorkspacesPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateWorkspacesPool, schemas.TerminateWorkspacesPoolRequest, schemas.TerminateWorkspacesPoolResult), output: &TerminateWorkspacesPoolOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

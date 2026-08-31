@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,22 @@ type AssociateUserProficienciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateUserProficienciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateUserProficienciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateUserProficienciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.AssociateUserProficienciesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.AssociateUserProficienciesRequest_UserId, *v.UserId)
+	}
+	serializeUserProficiencyList(s, schemas.AssociateUserProficienciesRequest_UserProficiencies, v.UserProficiencies)
+}
+
 type AssociateUserProficienciesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +70,26 @@ type AssociateUserProficienciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateUserProficienciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateUserProficienciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateUserProficienciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateUserProficienciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateUserProficiencies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateUserProficiencies, schemas.AssociateUserProficienciesRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateUserProficiencies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateUserProficiencies, schemas.AssociateUserProficienciesRequest, nil), output: &AssociateUserProficienciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

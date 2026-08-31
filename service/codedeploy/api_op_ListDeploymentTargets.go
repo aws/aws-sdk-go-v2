@@ -4,6 +4,8 @@ package codedeploy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,22 @@ type ListDeploymentTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeploymentTargetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDeploymentTargetsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDeploymentTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.ListDeploymentTargetsInput_deploymentId, *v.DeploymentId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDeploymentTargetsInput_nextToken, *v.NextToken)
+	}
+	serializeTargetFilters(s, schemas.ListDeploymentTargetsInput_targetFilters, v.TargetFilters)
+}
+
 type ListDeploymentTargetsOutput struct {
 
 	//  If a large amount of information is returned, a token identifier is also
@@ -62,13 +80,35 @@ type ListDeploymentTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeploymentTargetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDeploymentTargetsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDeploymentTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDeploymentTargetsOutput_nextToken, *v.NextToken)
+	}
+	serializeTargetIdList(s, schemas.ListDeploymentTargetsOutput_targetIds, v.TargetIds)
+}
+func (v *ListDeploymentTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDeploymentTargetsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDeploymentTargetsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDeploymentTargetsOutput_nextToken, v.NextToken)
+		case schemas.ListDeploymentTargetsOutput_targetIds:
+			return deserializeTargetIdList(d, schemas.ListDeploymentTargetsOutput_targetIds, &v.TargetIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDeploymentTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDeploymentTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeploymentTargets, schemas.ListDeploymentTargetsInput, schemas.ListDeploymentTargetsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDeploymentTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeploymentTargets, schemas.ListDeploymentTargetsInput, schemas.ListDeploymentTargetsOutput), output: &ListDeploymentTargetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

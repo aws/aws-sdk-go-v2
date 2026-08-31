@@ -5,7 +5,9 @@ package cleanrooms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,44 @@ type ListCollaborationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCollaborationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCollaborationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCollaborationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCollaborationsInput_maxResults, *v.MaxResults)
+	}
+	if v.MemberStatus != "" {
+		s.WriteString(schemas.ListCollaborationsInput_memberStatus, string(v.MemberStatus))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCollaborationsInput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCollaborationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCollaborationsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCollaborationsInput_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListCollaborationsInput_maxResults, v.MaxResults)
+		case schemas.ListCollaborationsInput_memberStatus:
+			var ev string
+			if err := d.ReadString(schemas.ListCollaborationsInput_memberStatus, &ev); err != nil {
+				return err
+			}
+			v.MemberStatus = types.FilterableMemberStatus(ev)
+			return nil
+		case schemas.ListCollaborationsInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCollaborationsInput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListCollaborationsOutput struct {
 
 	// The list of collaborations.
@@ -57,13 +97,35 @@ type ListCollaborationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCollaborationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCollaborationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCollaborationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCollaborationSummaryList(s, schemas.ListCollaborationsOutput_collaborationList, v.CollaborationList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCollaborationsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCollaborationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCollaborationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCollaborationsOutput_collaborationList:
+			return deserializeCollaborationSummaryList(d, schemas.ListCollaborationsOutput_collaborationList, &v.CollaborationList)
+		case schemas.ListCollaborationsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCollaborationsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCollaborationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCollaborations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollaborations, schemas.ListCollaborationsInput, schemas.ListCollaborationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCollaborations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollaborations, schemas.ListCollaborationsInput, schemas.ListCollaborationsOutput), output: &ListCollaborationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

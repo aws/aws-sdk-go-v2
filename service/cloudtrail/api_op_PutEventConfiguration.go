@@ -4,7 +4,9 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,26 @@ type PutEventConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEventConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEventConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEventConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAggregationConfigurations(s, schemas.PutEventConfigurationRequest_AggregationConfigurations, v.AggregationConfigurations)
+	serializeContextKeySelectors(s, schemas.PutEventConfigurationRequest_ContextKeySelectors, v.ContextKeySelectors)
+	if v.EventDataStore != nil {
+		s.WriteString(schemas.PutEventConfigurationRequest_EventDataStore, *v.EventDataStore)
+	}
+	if v.MaxEventSize != "" {
+		s.WriteString(schemas.PutEventConfigurationRequest_MaxEventSize, string(v.MaxEventSize))
+	}
+	if v.TrailName != nil {
+		s.WriteString(schemas.PutEventConfigurationRequest_TrailName, *v.TrailName)
+	}
+}
+
 type PutEventConfigurationOutput struct {
 
 	// A list of aggregation configurations that are configured for the trail.
@@ -75,13 +97,54 @@ type PutEventConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEventConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEventConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEventConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAggregationConfigurations(s, schemas.PutEventConfigurationResponse_AggregationConfigurations, v.AggregationConfigurations)
+	serializeContextKeySelectors(s, schemas.PutEventConfigurationResponse_ContextKeySelectors, v.ContextKeySelectors)
+	if v.EventDataStoreArn != nil {
+		s.WriteString(schemas.PutEventConfigurationResponse_EventDataStoreArn, *v.EventDataStoreArn)
+	}
+	if v.MaxEventSize != "" {
+		s.WriteString(schemas.PutEventConfigurationResponse_MaxEventSize, string(v.MaxEventSize))
+	}
+	if v.TrailARN != nil {
+		s.WriteString(schemas.PutEventConfigurationResponse_TrailARN, *v.TrailARN)
+	}
+}
+func (v *PutEventConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutEventConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutEventConfigurationResponse_AggregationConfigurations:
+			return deserializeAggregationConfigurations(d, schemas.PutEventConfigurationResponse_AggregationConfigurations, &v.AggregationConfigurations)
+		case schemas.PutEventConfigurationResponse_ContextKeySelectors:
+			return deserializeContextKeySelectors(d, schemas.PutEventConfigurationResponse_ContextKeySelectors, &v.ContextKeySelectors)
+		case schemas.PutEventConfigurationResponse_EventDataStoreArn:
+			v.EventDataStoreArn = new(string)
+			return d.ReadString(schemas.PutEventConfigurationResponse_EventDataStoreArn, v.EventDataStoreArn)
+		case schemas.PutEventConfigurationResponse_MaxEventSize:
+			var ev string
+			if err := d.ReadString(schemas.PutEventConfigurationResponse_MaxEventSize, &ev); err != nil {
+				return err
+			}
+			v.MaxEventSize = types.MaxEventSize(ev)
+			return nil
+		case schemas.PutEventConfigurationResponse_TrailARN:
+			v.TrailARN = new(string)
+			return d.ReadString(schemas.PutEventConfigurationResponse_TrailARN, v.TrailARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutEventConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutEventConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEventConfiguration, schemas.PutEventConfigurationRequest, schemas.PutEventConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutEventConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEventConfiguration, schemas.PutEventConfigurationRequest, schemas.PutEventConfigurationResponse), output: &PutEventConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

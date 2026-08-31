@@ -4,6 +4,8 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type DisallowIntermediateTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisallowIntermediateTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisallowIntermediateTableInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisallowIntermediateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeDescendants != nil {
+		s.WriteBool(schemas.DisallowIntermediateTableInput_includeDescendants, *v.IncludeDescendants)
+	}
+	if v.IntermediateTableName != nil {
+		s.WriteString(schemas.DisallowIntermediateTableInput_intermediateTableName, *v.IntermediateTableName)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.DisallowIntermediateTableInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+
 type DisallowIntermediateTableOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +73,26 @@ type DisallowIntermediateTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisallowIntermediateTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisallowIntermediateTableOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisallowIntermediateTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisallowIntermediateTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisallowIntermediateTableOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisallowIntermediateTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisallowIntermediateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisallowIntermediateTable, schemas.DisallowIntermediateTableInput, schemas.DisallowIntermediateTableOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisallowIntermediateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisallowIntermediateTable, schemas.DisallowIntermediateTableInput, schemas.DisallowIntermediateTableOutput), output: &DisallowIntermediateTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

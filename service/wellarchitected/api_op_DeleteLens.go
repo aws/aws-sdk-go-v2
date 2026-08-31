@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,24 @@ type DeleteLensInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLensInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLensInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLensInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.DeleteLensInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.LensAlias != nil {
+		s.WriteString(schemas.DeleteLensInput_LensAlias, *v.LensAlias)
+	}
+	if v.LensStatus != "" {
+		s.WriteString(schemas.DeleteLensInput_LensStatus, string(v.LensStatus))
+	}
+}
+
 type DeleteLensOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -87,13 +107,26 @@ type DeleteLensOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLensOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLensOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteLensOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLensMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLens{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLens, schemas.DeleteLensInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteLens{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLens, schemas.DeleteLensInput, nil), output: &DeleteLensOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

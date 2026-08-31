@@ -4,7 +4,9 @@ package apprunner
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type DescribeAutoScalingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAutoScalingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAutoScalingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAutoScalingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingConfigurationArn != nil {
+		s.WriteString(schemas.DescribeAutoScalingConfigurationRequest_AutoScalingConfigurationArn, *v.AutoScalingConfigurationArn)
+	}
+}
+
 type DescribeAutoScalingConfigurationOutput struct {
 
 	// A full description of the App Runner auto scaling configuration that you
@@ -54,13 +68,34 @@ type DescribeAutoScalingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAutoScalingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAutoScalingConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAutoScalingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingConfiguration != nil {
+		s.WriteStruct(schemas.DescribeAutoScalingConfigurationResponse_AutoScalingConfiguration)
+		v.AutoScalingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAutoScalingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAutoScalingConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAutoScalingConfigurationResponse_AutoScalingConfiguration:
+			v.AutoScalingConfiguration = &types.AutoScalingConfiguration{}
+			return v.AutoScalingConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAutoScalingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeAutoScalingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAutoScalingConfiguration, schemas.DescribeAutoScalingConfigurationRequest, schemas.DescribeAutoScalingConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeAutoScalingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAutoScalingConfiguration, schemas.DescribeAutoScalingConfigurationRequest, schemas.DescribeAutoScalingConfigurationResponse), output: &DescribeAutoScalingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

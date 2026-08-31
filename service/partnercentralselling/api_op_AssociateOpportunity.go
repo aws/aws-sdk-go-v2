@@ -4,7 +4,9 @@ package partnercentralselling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -94,6 +96,27 @@ type AssociateOpportunityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateOpportunityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateOpportunityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateOpportunityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.AssociateOpportunityRequest_Catalog, *v.Catalog)
+	}
+	if v.OpportunityIdentifier != nil {
+		s.WriteString(schemas.AssociateOpportunityRequest_OpportunityIdentifier, *v.OpportunityIdentifier)
+	}
+	if v.RelatedEntityIdentifier != nil {
+		s.WriteString(schemas.AssociateOpportunityRequest_RelatedEntityIdentifier, *v.RelatedEntityIdentifier)
+	}
+	if v.RelatedEntityType != "" {
+		s.WriteString(schemas.AssociateOpportunityRequest_RelatedEntityType, string(v.RelatedEntityType))
+	}
+}
+
 type AssociateOpportunityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -101,13 +124,26 @@ type AssociateOpportunityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateOpportunityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateOpportunityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateOpportunityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateOpportunityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAssociateOpportunity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateOpportunity, schemas.AssociateOpportunityRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAssociateOpportunity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateOpportunity, schemas.AssociateOpportunityRequest, nil), output: &AssociateOpportunityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

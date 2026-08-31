@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,21 @@ type UpdateBucketBundleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBucketBundleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBucketBundleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBucketBundleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.UpdateBucketBundleRequest_bucketName, *v.BucketName)
+	}
+	if v.BundleId != nil {
+		s.WriteString(schemas.UpdateBucketBundleRequest_bundleId, *v.BundleId)
+	}
+}
+
 type UpdateBucketBundleOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -73,13 +90,29 @@ type UpdateBucketBundleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBucketBundleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBucketBundleResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBucketBundleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.UpdateBucketBundleResult_operations, v.Operations)
+}
+func (v *UpdateBucketBundleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBucketBundleResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBucketBundleResult_operations:
+			return deserializeOperationList(d, schemas.UpdateBucketBundleResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBucketBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateBucketBundle{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBucketBundle, schemas.UpdateBucketBundleRequest, schemas.UpdateBucketBundleResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateBucketBundle{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBucketBundle, schemas.UpdateBucketBundleRequest, schemas.UpdateBucketBundleResult), output: &UpdateBucketBundleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

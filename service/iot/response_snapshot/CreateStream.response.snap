@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"description":"__Description__","streamArn":"__StreamArn__","streamId":"__StreamId__","streamVersion":1}

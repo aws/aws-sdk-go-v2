@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -77,6 +79,31 @@ type CreateVocabularyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVocabularyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVocabularyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVocabularyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateVocabularyRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.CreateVocabularyRequest_Content, *v.Content)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateVocabularyRequest_InstanceId, *v.InstanceId)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.CreateVocabularyRequest_LanguageCode, string(v.LanguageCode))
+	}
+	serializeTagMap(s, schemas.CreateVocabularyRequest_Tags, v.Tags)
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.CreateVocabularyRequest_VocabularyName, *v.VocabularyName)
+	}
+}
+
 type CreateVocabularyOutput struct {
 
 	// The current state of the custom vocabulary.
@@ -100,13 +127,48 @@ type CreateVocabularyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVocabularyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVocabularyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVocabularyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.CreateVocabularyResponse_State, string(v.State))
+	}
+	if v.VocabularyArn != nil {
+		s.WriteString(schemas.CreateVocabularyResponse_VocabularyArn, *v.VocabularyArn)
+	}
+	if v.VocabularyId != nil {
+		s.WriteString(schemas.CreateVocabularyResponse_VocabularyId, *v.VocabularyId)
+	}
+}
+func (v *CreateVocabularyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVocabularyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVocabularyResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.CreateVocabularyResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.VocabularyState(ev)
+			return nil
+		case schemas.CreateVocabularyResponse_VocabularyArn:
+			v.VocabularyArn = new(string)
+			return d.ReadString(schemas.CreateVocabularyResponse_VocabularyArn, v.VocabularyArn)
+		case schemas.CreateVocabularyResponse_VocabularyId:
+			v.VocabularyId = new(string)
+			return d.ReadString(schemas.CreateVocabularyResponse_VocabularyId, v.VocabularyId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVocabularyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVocabulary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVocabulary, schemas.CreateVocabularyRequest, schemas.CreateVocabularyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateVocabulary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVocabulary, schemas.CreateVocabularyRequest, schemas.CreateVocabularyResponse), output: &CreateVocabularyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

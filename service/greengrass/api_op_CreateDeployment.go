@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,30 @@ type CreateDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmznClientToken != nil {
+		s.WriteString(schemas.CreateDeploymentRequest_AmznClientToken, *v.AmznClientToken)
+	}
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.CreateDeploymentRequest_DeploymentId, *v.DeploymentId)
+	}
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.CreateDeploymentRequest_DeploymentType, string(v.DeploymentType))
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.CreateDeploymentRequest_GroupId, *v.GroupId)
+	}
+	if v.GroupVersionId != nil {
+		s.WriteString(schemas.CreateDeploymentRequest_GroupVersionId, *v.GroupVersionId)
+	}
+}
+
 type CreateDeploymentOutput struct {
 
 	// The ARN of the deployment.
@@ -64,13 +90,38 @@ type CreateDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeploymentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentArn != nil {
+		s.WriteString(schemas.CreateDeploymentResponse_DeploymentArn, *v.DeploymentArn)
+	}
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.CreateDeploymentResponse_DeploymentId, *v.DeploymentId)
+	}
+}
+func (v *CreateDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDeploymentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDeploymentResponse_DeploymentArn:
+			v.DeploymentArn = new(string)
+			return d.ReadString(schemas.CreateDeploymentResponse_DeploymentArn, v.DeploymentArn)
+		case schemas.CreateDeploymentResponse_DeploymentId:
+			v.DeploymentId = new(string)
+			return d.ReadString(schemas.CreateDeploymentResponse_DeploymentId, v.DeploymentId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeployment, schemas.CreateDeploymentRequest, schemas.CreateDeploymentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeployment, schemas.CreateDeploymentRequest, schemas.CreateDeploymentResponse), output: &CreateDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

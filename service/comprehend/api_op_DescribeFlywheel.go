@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DescribeFlywheelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFlywheelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFlywheelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFlywheelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlywheelArn != nil {
+		s.WriteString(schemas.DescribeFlywheelRequest_FlywheelArn, *v.FlywheelArn)
+	}
+}
+
 type DescribeFlywheelOutput struct {
 
 	// The flywheel properties.
@@ -48,13 +62,34 @@ type DescribeFlywheelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFlywheelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFlywheelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFlywheelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlywheelProperties != nil {
+		s.WriteStruct(schemas.DescribeFlywheelResponse_FlywheelProperties)
+		v.FlywheelProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeFlywheelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFlywheelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFlywheelResponse_FlywheelProperties:
+			v.FlywheelProperties = &types.FlywheelProperties{}
+			return v.FlywheelProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFlywheelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFlywheel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFlywheel, schemas.DescribeFlywheelRequest, schemas.DescribeFlywheelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeFlywheel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFlywheel, schemas.DescribeFlywheelRequest, schemas.DescribeFlywheelResponse), output: &DescribeFlywheelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

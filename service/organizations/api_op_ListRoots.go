@@ -5,7 +5,9 @@ package organizations
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,21 @@ type ListRootsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRootsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRootsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRootsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRootsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRootsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListRootsOutput struct {
 
 	// If present, indicates that more output is available than is included in the
@@ -73,13 +90,35 @@ type ListRootsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRootsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRootsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRootsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRootsResponse_NextToken, *v.NextToken)
+	}
+	serializeRoots(s, schemas.ListRootsResponse_Roots, v.Roots)
+}
+func (v *ListRootsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRootsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRootsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRootsResponse_NextToken, v.NextToken)
+		case schemas.ListRootsResponse_Roots:
+			return deserializeRoots(d, schemas.ListRootsResponse_Roots, &v.Roots)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRootsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRoots{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoots, schemas.ListRootsRequest, schemas.ListRootsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListRoots{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoots, schemas.ListRootsRequest, schemas.ListRootsResponse), output: &ListRootsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

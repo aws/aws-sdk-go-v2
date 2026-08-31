@@ -4,7 +4,9 @@ package serverlessapplicationrepository
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetApplicationPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetApplicationPolicyRequest_ApplicationId, *v.ApplicationId)
+	}
+}
+
 type GetApplicationPolicyOutput struct {
 
 	// An array of policy statements applied to the application.
@@ -45,13 +59,29 @@ type GetApplicationPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfApplicationPolicyStatement(s, schemas.GetApplicationPolicyResponse_Statements, v.Statements)
+}
+func (v *GetApplicationPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApplicationPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApplicationPolicyResponse_Statements:
+			return deserialize__listOfApplicationPolicyStatement(d, schemas.GetApplicationPolicyResponse_Statements, &v.Statements)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApplicationPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApplicationPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplicationPolicy, schemas.GetApplicationPolicyRequest, schemas.GetApplicationPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApplicationPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplicationPolicy, schemas.GetApplicationPolicyRequest, schemas.GetApplicationPolicyResponse), output: &GetApplicationPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

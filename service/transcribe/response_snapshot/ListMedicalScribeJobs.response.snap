@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Transcribe.ListMedicalScribeJobs
+
+{"MedicalScribeJobSummaries":[{"CompletionTime":946684800,"CreationTime":946684800,"FailureReason":"__FailureReason__","LanguageCode":"en-US","MedicalScribeJobName":"__MedicalScribeJobName__","MedicalScribeJobStatus":"QUEUED","StartTime":946684800},{"CompletionTime":946684800,"CreationTime":946684800,"FailureReason":"__FailureReason__","LanguageCode":"en-US","MedicalScribeJobName":"__MedicalScribeJobName__","MedicalScribeJobStatus":"QUEUED","StartTime":946684800}],"NextToken":"__NextToken__","Status":"QUEUED"}

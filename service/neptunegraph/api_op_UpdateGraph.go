@@ -4,7 +4,9 @@ package neptunegraph
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	"time"
@@ -50,6 +52,26 @@ type UpdateGraphInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGraphInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGraphInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGraphInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.UpdateGraphInput_deletionProtection, *v.DeletionProtection)
+	}
+	if v.GraphIdentifier != nil {
+		s.WriteString(schemas.UpdateGraphInput_graphIdentifier, *v.GraphIdentifier)
+	}
+	if v.ProvisionedMemory != nil {
+		s.WriteInt32(schemas.UpdateGraphInput_provisionedMemory, *v.ProvisionedMemory)
+	}
+	if v.PublicConnectivity != nil {
+		s.WriteBool(schemas.UpdateGraphInput_publicConnectivity, *v.PublicConnectivity)
+	}
+}
 func (in *UpdateGraphInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ApiType = ptr.String("ControlPlane")
@@ -116,13 +138,122 @@ type UpdateGraphOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGraphOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGraphOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGraphOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateGraphOutput_arn, *v.Arn)
+	}
+	if v.BuildNumber != nil {
+		s.WriteString(schemas.UpdateGraphOutput_buildNumber, *v.BuildNumber)
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.UpdateGraphOutput_createTime, *v.CreateTime)
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.UpdateGraphOutput_deletionProtection, *v.DeletionProtection)
+	}
+	if v.Endpoint != nil {
+		s.WriteString(schemas.UpdateGraphOutput_endpoint, *v.Endpoint)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateGraphOutput_id, *v.Id)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.UpdateGraphOutput_kmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateGraphOutput_name, *v.Name)
+	}
+	if v.ProvisionedMemory != nil {
+		s.WriteInt32(schemas.UpdateGraphOutput_provisionedMemory, *v.ProvisionedMemory)
+	}
+	if v.PublicConnectivity != nil {
+		s.WriteBool(schemas.UpdateGraphOutput_publicConnectivity, *v.PublicConnectivity)
+	}
+	if v.ReplicaCount != nil {
+		s.WriteInt32(schemas.UpdateGraphOutput_replicaCount, *v.ReplicaCount)
+	}
+	if v.SourceSnapshotId != nil {
+		s.WriteString(schemas.UpdateGraphOutput_sourceSnapshotId, *v.SourceSnapshotId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateGraphOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.UpdateGraphOutput_statusReason, *v.StatusReason)
+	}
+	if v.VectorSearchConfiguration != nil {
+		s.WriteStruct(schemas.UpdateGraphOutput_vectorSearchConfiguration)
+		v.VectorSearchConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateGraphOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGraphOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGraphOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateGraphOutput_arn, v.Arn)
+		case schemas.UpdateGraphOutput_buildNumber:
+			v.BuildNumber = new(string)
+			return d.ReadString(schemas.UpdateGraphOutput_buildNumber, v.BuildNumber)
+		case schemas.UpdateGraphOutput_createTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateGraphOutput_createTime, v.CreateTime)
+		case schemas.UpdateGraphOutput_deletionProtection:
+			v.DeletionProtection = new(bool)
+			return d.ReadBool(schemas.UpdateGraphOutput_deletionProtection, v.DeletionProtection)
+		case schemas.UpdateGraphOutput_endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.UpdateGraphOutput_endpoint, v.Endpoint)
+		case schemas.UpdateGraphOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateGraphOutput_id, v.Id)
+		case schemas.UpdateGraphOutput_kmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.UpdateGraphOutput_kmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.UpdateGraphOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateGraphOutput_name, v.Name)
+		case schemas.UpdateGraphOutput_provisionedMemory:
+			v.ProvisionedMemory = new(int32)
+			return d.ReadInt32(schemas.UpdateGraphOutput_provisionedMemory, v.ProvisionedMemory)
+		case schemas.UpdateGraphOutput_publicConnectivity:
+			v.PublicConnectivity = new(bool)
+			return d.ReadBool(schemas.UpdateGraphOutput_publicConnectivity, v.PublicConnectivity)
+		case schemas.UpdateGraphOutput_replicaCount:
+			v.ReplicaCount = new(int32)
+			return d.ReadInt32(schemas.UpdateGraphOutput_replicaCount, v.ReplicaCount)
+		case schemas.UpdateGraphOutput_sourceSnapshotId:
+			v.SourceSnapshotId = new(string)
+			return d.ReadString(schemas.UpdateGraphOutput_sourceSnapshotId, v.SourceSnapshotId)
+		case schemas.UpdateGraphOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateGraphOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.GraphStatus(ev)
+			return nil
+		case schemas.UpdateGraphOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.UpdateGraphOutput_statusReason, v.StatusReason)
+		case schemas.UpdateGraphOutput_vectorSearchConfiguration:
+			v.VectorSearchConfiguration = &types.VectorSearchConfiguration{}
+			return v.VectorSearchConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGraph{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGraph, schemas.UpdateGraphInput, schemas.UpdateGraphOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateGraph{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGraph, schemas.UpdateGraphInput, schemas.UpdateGraphOutput), output: &UpdateGraphOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

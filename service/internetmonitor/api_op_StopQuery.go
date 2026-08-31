@@ -4,6 +4,8 @@ package internetmonitor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type StopQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopQueryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitorName != nil {
+		s.WriteString(schemas.StopQueryInput_MonitorName, *v.MonitorName)
+	}
+	if v.QueryId != nil {
+		s.WriteString(schemas.StopQueryInput_QueryId, *v.QueryId)
+	}
+}
+
 type StopQueryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type StopQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopQueryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopQueryOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopQuery, schemas.StopQueryInput, schemas.StopQueryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopQuery, schemas.StopQueryInput, schemas.StopQueryOutput), output: &StopQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

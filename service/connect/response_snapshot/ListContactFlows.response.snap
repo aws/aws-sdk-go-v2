@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ContactFlowSummaryList":[{"Arn":"__Arn__","ContactFlowState":"ACTIVE","ContactFlowStatus":"PUBLISHED","ContactFlowType":"CONTACT_FLOW","Id":"__Id__","Name":"__Name__"},{"Arn":"__Arn__","ContactFlowState":"ACTIVE","ContactFlowStatus":"PUBLISHED","ContactFlowType":"CONTACT_FLOW","Id":"__Id__","Name":"__Name__"}],"NextToken":"__NextToken__"}

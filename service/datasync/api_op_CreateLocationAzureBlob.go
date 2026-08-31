@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -130,6 +132,47 @@ type CreateLocationAzureBlobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationAzureBlobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationAzureBlobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationAzureBlobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessTier != "" {
+		s.WriteString(schemas.CreateLocationAzureBlobRequest_AccessTier, string(v.AccessTier))
+	}
+	serializeAgentArnList(s, schemas.CreateLocationAzureBlobRequest_AgentArns, v.AgentArns)
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.CreateLocationAzureBlobRequest_AuthenticationType, string(v.AuthenticationType))
+	}
+	if v.BlobType != "" {
+		s.WriteString(schemas.CreateLocationAzureBlobRequest_BlobType, string(v.BlobType))
+	}
+	if v.CmkSecretConfig != nil {
+		s.WriteStruct(schemas.CreateLocationAzureBlobRequest_CmkSecretConfig)
+		v.CmkSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContainerUrl != nil {
+		s.WriteString(schemas.CreateLocationAzureBlobRequest_ContainerUrl, *v.ContainerUrl)
+	}
+	if v.CustomSecretConfig != nil {
+		s.WriteStruct(schemas.CreateLocationAzureBlobRequest_CustomSecretConfig)
+		v.CustomSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SasConfiguration != nil {
+		s.WriteStruct(schemas.CreateLocationAzureBlobRequest_SasConfiguration)
+		v.SasConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.CreateLocationAzureBlobRequest_Subdirectory, *v.Subdirectory)
+	}
+	serializeInputTagList(s, schemas.CreateLocationAzureBlobRequest_Tags, v.Tags)
+}
+
 type CreateLocationAzureBlobOutput struct {
 
 	// The ARN of the Azure Blob Storage transfer location that you created.
@@ -141,13 +184,32 @@ type CreateLocationAzureBlobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationAzureBlobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationAzureBlobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationAzureBlobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.CreateLocationAzureBlobResponse_LocationArn, *v.LocationArn)
+	}
+}
+func (v *CreateLocationAzureBlobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLocationAzureBlobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLocationAzureBlobResponse_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.CreateLocationAzureBlobResponse_LocationArn, v.LocationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLocationAzureBlobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLocationAzureBlob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationAzureBlob, schemas.CreateLocationAzureBlobRequest, schemas.CreateLocationAzureBlobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLocationAzureBlob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationAzureBlob, schemas.CreateLocationAzureBlobRequest, schemas.CreateLocationAzureBlobResponse), output: &CreateLocationAzureBlobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

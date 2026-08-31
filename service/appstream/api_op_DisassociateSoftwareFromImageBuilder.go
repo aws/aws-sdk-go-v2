@@ -4,6 +4,8 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,19 @@ type DisassociateSoftwareFromImageBuilderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateSoftwareFromImageBuilderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateSoftwareFromImageBuilderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateSoftwareFromImageBuilderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageBuilderName != nil {
+		s.WriteString(schemas.DisassociateSoftwareFromImageBuilderRequest_ImageBuilderName, *v.ImageBuilderName)
+	}
+	serializeStringList(s, schemas.DisassociateSoftwareFromImageBuilderRequest_SoftwareNames, v.SoftwareNames)
+}
+
 type DisassociateSoftwareFromImageBuilderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -97,13 +112,26 @@ type DisassociateSoftwareFromImageBuilderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateSoftwareFromImageBuilderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateSoftwareFromImageBuilderResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateSoftwareFromImageBuilderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateSoftwareFromImageBuilderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateSoftwareFromImageBuilderResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateSoftwareFromImageBuilderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDisassociateSoftwareFromImageBuilder{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateSoftwareFromImageBuilder, schemas.DisassociateSoftwareFromImageBuilderRequest, schemas.DisassociateSoftwareFromImageBuilderResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDisassociateSoftwareFromImageBuilder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateSoftwareFromImageBuilder, schemas.DisassociateSoftwareFromImageBuilderRequest, schemas.DisassociateSoftwareFromImageBuilderResult), output: &DisassociateSoftwareFromImageBuilderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

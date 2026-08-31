@@ -5,7 +5,9 @@ package partnercentralselling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,36 @@ type ListEngagementResourceAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEngagementResourceAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEngagementResourceAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEngagementResourceAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.ListEngagementResourceAssociationsRequest_Catalog, *v.Catalog)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.ListEngagementResourceAssociationsRequest_CreatedBy, *v.CreatedBy)
+	}
+	if v.EngagementIdentifier != nil {
+		s.WriteString(schemas.ListEngagementResourceAssociationsRequest_EngagementIdentifier, *v.EngagementIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEngagementResourceAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEngagementResourceAssociationsRequest_NextToken, *v.NextToken)
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.ListEngagementResourceAssociationsRequest_ResourceIdentifier, *v.ResourceIdentifier)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.ListEngagementResourceAssociationsRequest_ResourceType, string(v.ResourceType))
+	}
+}
+
 type ListEngagementResourceAssociationsOutput struct {
 
 	//  A list of engagement-resource association summaries.
@@ -85,13 +117,35 @@ type ListEngagementResourceAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEngagementResourceAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEngagementResourceAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEngagementResourceAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEngagementResourceAssociationSummaryList(s, schemas.ListEngagementResourceAssociationsResponse_EngagementResourceAssociationSummaries, v.EngagementResourceAssociationSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEngagementResourceAssociationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEngagementResourceAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEngagementResourceAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEngagementResourceAssociationsResponse_EngagementResourceAssociationSummaries:
+			return deserializeEngagementResourceAssociationSummaryList(d, schemas.ListEngagementResourceAssociationsResponse_EngagementResourceAssociationSummaries, &v.EngagementResourceAssociationSummaries)
+		case schemas.ListEngagementResourceAssociationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEngagementResourceAssociationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEngagementResourceAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListEngagementResourceAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEngagementResourceAssociations, schemas.ListEngagementResourceAssociationsRequest, schemas.ListEngagementResourceAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListEngagementResourceAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEngagementResourceAssociations, schemas.ListEngagementResourceAssociationsRequest, schemas.ListEngagementResourceAssociationsResponse), output: &ListEngagementResourceAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

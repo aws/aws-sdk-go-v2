@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,30 @@ type SelectAggregateResourceConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SelectAggregateResourceConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SelectAggregateResourceConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SelectAggregateResourceConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationAggregatorName != nil {
+		s.WriteString(schemas.SelectAggregateResourceConfigRequest_ConfigurationAggregatorName, *v.ConfigurationAggregatorName)
+	}
+	if v.Expression != nil {
+		s.WriteString(schemas.SelectAggregateResourceConfigRequest_Expression, *v.Expression)
+	}
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.SelectAggregateResourceConfigRequest_Limit, v.Limit)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.SelectAggregateResourceConfigRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SelectAggregateResourceConfigRequest_NextToken, *v.NextToken)
+	}
+}
+
 type SelectAggregateResourceConfigOutput struct {
 
 	// The nextToken string returned in a previous request that you use to request the
@@ -87,13 +113,43 @@ type SelectAggregateResourceConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SelectAggregateResourceConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SelectAggregateResourceConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SelectAggregateResourceConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.SelectAggregateResourceConfigResponse_NextToken, *v.NextToken)
+	}
+	if v.QueryInfo != nil {
+		s.WriteStruct(schemas.SelectAggregateResourceConfigResponse_QueryInfo)
+		v.QueryInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResults(s, schemas.SelectAggregateResourceConfigResponse_Results, v.Results)
+}
+func (v *SelectAggregateResourceConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SelectAggregateResourceConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SelectAggregateResourceConfigResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SelectAggregateResourceConfigResponse_NextToken, v.NextToken)
+		case schemas.SelectAggregateResourceConfigResponse_QueryInfo:
+			v.QueryInfo = &types.QueryInfo{}
+			return v.QueryInfo.Deserialize(d)
+		case schemas.SelectAggregateResourceConfigResponse_Results:
+			return deserializeResults(d, schemas.SelectAggregateResourceConfigResponse_Results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSelectAggregateResourceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSelectAggregateResourceConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SelectAggregateResourceConfig, schemas.SelectAggregateResourceConfigRequest, schemas.SelectAggregateResourceConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSelectAggregateResourceConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SelectAggregateResourceConfig, schemas.SelectAggregateResourceConfigRequest, schemas.SelectAggregateResourceConfigResponse), output: &SelectAggregateResourceConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

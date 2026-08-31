@@ -4,6 +4,8 @@ package route53resolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetFirewallRuleGroupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFirewallRuleGroupPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFirewallRuleGroupPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFirewallRuleGroupPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetFirewallRuleGroupPolicyRequest_Arn, *v.Arn)
+	}
+}
+
 type GetFirewallRuleGroupPolicyOutput struct {
 
 	// The Identity and Access Management (Amazon Web Services IAM) policy for sharing
@@ -48,13 +62,32 @@ type GetFirewallRuleGroupPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFirewallRuleGroupPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFirewallRuleGroupPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFirewallRuleGroupPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallRuleGroupPolicy != nil {
+		s.WriteString(schemas.GetFirewallRuleGroupPolicyResponse_FirewallRuleGroupPolicy, *v.FirewallRuleGroupPolicy)
+	}
+}
+func (v *GetFirewallRuleGroupPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFirewallRuleGroupPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFirewallRuleGroupPolicyResponse_FirewallRuleGroupPolicy:
+			v.FirewallRuleGroupPolicy = new(string)
+			return d.ReadString(schemas.GetFirewallRuleGroupPolicyResponse_FirewallRuleGroupPolicy, v.FirewallRuleGroupPolicy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFirewallRuleGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetFirewallRuleGroupPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFirewallRuleGroupPolicy, schemas.GetFirewallRuleGroupPolicyRequest, schemas.GetFirewallRuleGroupPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetFirewallRuleGroupPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFirewallRuleGroupPolicy, schemas.GetFirewallRuleGroupPolicyRequest, schemas.GetFirewallRuleGroupPolicyResponse), output: &GetFirewallRuleGroupPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,22 @@ type CreateConnectorDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectorDefinitionVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectorDefinitionVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectorDefinitionVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmznClientToken != nil {
+		s.WriteString(schemas.CreateConnectorDefinitionVersionRequest_AmznClientToken, *v.AmznClientToken)
+	}
+	if v.ConnectorDefinitionId != nil {
+		s.WriteString(schemas.CreateConnectorDefinitionVersionRequest_ConnectorDefinitionId, *v.ConnectorDefinitionId)
+	}
+	serialize__listOfConnector(s, schemas.CreateConnectorDefinitionVersionRequest_Connectors, v.Connectors)
+}
+
 type CreateConnectorDefinitionVersionOutput struct {
 
 	// The ARN of the version.
@@ -61,13 +79,50 @@ type CreateConnectorDefinitionVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectorDefinitionVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectorDefinitionVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectorDefinitionVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateConnectorDefinitionVersionResponse_Arn, *v.Arn)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteString(schemas.CreateConnectorDefinitionVersionResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateConnectorDefinitionVersionResponse_Id, *v.Id)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.CreateConnectorDefinitionVersionResponse_Version, *v.Version)
+	}
+}
+func (v *CreateConnectorDefinitionVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectorDefinitionVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectorDefinitionVersionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateConnectorDefinitionVersionResponse_Arn, v.Arn)
+		case schemas.CreateConnectorDefinitionVersionResponse_CreationTimestamp:
+			v.CreationTimestamp = new(string)
+			return d.ReadString(schemas.CreateConnectorDefinitionVersionResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.CreateConnectorDefinitionVersionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateConnectorDefinitionVersionResponse_Id, v.Id)
+		case schemas.CreateConnectorDefinitionVersionResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.CreateConnectorDefinitionVersionResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConnectorDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConnectorDefinitionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnectorDefinitionVersion, schemas.CreateConnectorDefinitionVersionRequest, schemas.CreateConnectorDefinitionVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConnectorDefinitionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnectorDefinitionVersion, schemas.CreateConnectorDefinitionVersionRequest, schemas.CreateConnectorDefinitionVersionResponse), output: &CreateConnectorDefinitionVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

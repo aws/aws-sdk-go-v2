@@ -5,7 +5,9 @@ package datasync
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,21 @@ type ListAgentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAgentsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentsRequest_NextToken, *v.NextToken)
+	}
+}
+
 // ListAgentsResponse
 type ListAgentsOutput struct {
 
@@ -71,13 +88,35 @@ type ListAgentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentList(s, schemas.ListAgentsResponse_Agents, v.Agents)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAgentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAgentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAgentsResponse_Agents:
+			return deserializeAgentList(d, schemas.ListAgentsResponse_Agents, &v.Agents)
+		case schemas.ListAgentsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAgentsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAgentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAgents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgents, schemas.ListAgentsRequest, schemas.ListAgentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAgents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgents, schemas.ListAgentsRequest, schemas.ListAgentsResponse), output: &ListAgentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

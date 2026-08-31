@@ -5,7 +5,9 @@ package managedblockchain
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -86,6 +88,46 @@ type CreateNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNetworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNetworkInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateNetworkInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateNetworkInput_Description, *v.Description)
+	}
+	if v.Framework != "" {
+		s.WriteString(schemas.CreateNetworkInput_Framework, string(v.Framework))
+	}
+	if v.FrameworkConfiguration != nil {
+		s.WriteStruct(schemas.CreateNetworkInput_FrameworkConfiguration)
+		v.FrameworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FrameworkVersion != nil {
+		s.WriteString(schemas.CreateNetworkInput_FrameworkVersion, *v.FrameworkVersion)
+	}
+	if v.MemberConfiguration != nil {
+		s.WriteStruct(schemas.CreateNetworkInput_MemberConfiguration)
+		v.MemberConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateNetworkInput_Name, *v.Name)
+	}
+	serializeInputTagMap(s, schemas.CreateNetworkInput_Tags, v.Tags)
+	if v.VotingPolicy != nil {
+		s.WriteStruct(schemas.CreateNetworkInput_VotingPolicy)
+		v.VotingPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateNetworkOutput struct {
 
 	// The unique identifier for the first member within the network.
@@ -100,13 +142,38 @@ type CreateNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNetworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNetworkOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNetworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MemberId != nil {
+		s.WriteString(schemas.CreateNetworkOutput_MemberId, *v.MemberId)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.CreateNetworkOutput_NetworkId, *v.NetworkId)
+	}
+}
+func (v *CreateNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNetworkOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNetworkOutput_MemberId:
+			v.MemberId = new(string)
+			return d.ReadString(schemas.CreateNetworkOutput_MemberId, v.MemberId)
+		case schemas.CreateNetworkOutput_NetworkId:
+			v.NetworkId = new(string)
+			return d.ReadString(schemas.CreateNetworkOutput_NetworkId, v.NetworkId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNetwork, schemas.CreateNetworkInput, schemas.CreateNetworkOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNetwork, schemas.CreateNetworkInput, schemas.CreateNetworkOutput), output: &CreateNetworkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

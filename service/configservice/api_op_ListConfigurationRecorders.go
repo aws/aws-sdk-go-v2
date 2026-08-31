@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,22 @@ type ListConfigurationRecordersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationRecordersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationRecordersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationRecordersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationRecorderFilterList(s, schemas.ListConfigurationRecordersRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConfigurationRecordersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigurationRecordersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListConfigurationRecordersOutput struct {
 
 	// A list of ConfigurationRecorderSummary objects that includes.
@@ -58,13 +76,35 @@ type ListConfigurationRecordersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationRecordersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationRecordersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationRecordersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationRecorderSummaries(s, schemas.ListConfigurationRecordersResponse_ConfigurationRecorderSummaries, v.ConfigurationRecorderSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigurationRecordersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListConfigurationRecordersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConfigurationRecordersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConfigurationRecordersResponse_ConfigurationRecorderSummaries:
+			return deserializeConfigurationRecorderSummaries(d, schemas.ListConfigurationRecordersResponse_ConfigurationRecorderSummaries, &v.ConfigurationRecorderSummaries)
+		case schemas.ListConfigurationRecordersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConfigurationRecordersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConfigurationRecordersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListConfigurationRecorders{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationRecorders, schemas.ListConfigurationRecordersRequest, schemas.ListConfigurationRecordersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListConfigurationRecorders{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationRecorders, schemas.ListConfigurationRecordersRequest, schemas.ListConfigurationRecordersResponse), output: &ListConfigurationRecordersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

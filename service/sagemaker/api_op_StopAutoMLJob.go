@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type StopAutoMLJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopAutoMLJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopAutoMLJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopAutoMLJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoMLJobName != nil {
+		s.WriteString(schemas.StopAutoMLJobRequest_AutoMLJobName, *v.AutoMLJobName)
+	}
+}
+
 type StopAutoMLJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type StopAutoMLJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopAutoMLJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopAutoMLJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopAutoMLJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopAutoMLJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopAutoMLJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopAutoMLJob, schemas.StopAutoMLJobRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopAutoMLJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopAutoMLJob, schemas.StopAutoMLJobRequest, nil), output: &StopAutoMLJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

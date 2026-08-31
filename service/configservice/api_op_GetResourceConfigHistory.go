@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -90,6 +92,36 @@ type GetResourceConfigHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceConfigHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceConfigHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceConfigHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChronologicalOrder != "" {
+		s.WriteString(schemas.GetResourceConfigHistoryRequest_chronologicalOrder, string(v.ChronologicalOrder))
+	}
+	if v.EarlierTime != nil {
+		s.WriteTime(schemas.GetResourceConfigHistoryRequest_earlierTime, *v.EarlierTime)
+	}
+	if v.LaterTime != nil {
+		s.WriteTime(schemas.GetResourceConfigHistoryRequest_laterTime, *v.LaterTime)
+	}
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.GetResourceConfigHistoryRequest_limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetResourceConfigHistoryRequest_nextToken, *v.NextToken)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.GetResourceConfigHistoryRequest_resourceId, *v.ResourceId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.GetResourceConfigHistoryRequest_resourceType, string(v.ResourceType))
+	}
+}
+
 // The output for the GetResourceConfigHistory action.
 type GetResourceConfigHistoryOutput struct {
 
@@ -107,13 +139,35 @@ type GetResourceConfigHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceConfigHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceConfigHistoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceConfigHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationItemList(s, schemas.GetResourceConfigHistoryResponse_configurationItems, v.ConfigurationItems)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetResourceConfigHistoryResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetResourceConfigHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourceConfigHistoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourceConfigHistoryResponse_configurationItems:
+			return deserializeConfigurationItemList(d, schemas.GetResourceConfigHistoryResponse_configurationItems, &v.ConfigurationItems)
+		case schemas.GetResourceConfigHistoryResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetResourceConfigHistoryResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourceConfigHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetResourceConfigHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceConfigHistory, schemas.GetResourceConfigHistoryRequest, schemas.GetResourceConfigHistoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetResourceConfigHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceConfigHistory, schemas.GetResourceConfigHistoryRequest, schemas.GetResourceConfigHistoryResponse), output: &GetResourceConfigHistoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

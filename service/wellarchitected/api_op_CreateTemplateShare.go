@@ -5,6 +5,8 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,24 @@ type CreateTemplateShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTemplateShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTemplateShareInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTemplateShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateTemplateShareInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.SharedWith != nil {
+		s.WriteString(schemas.CreateTemplateShareInput_SharedWith, *v.SharedWith)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.CreateTemplateShareInput_TemplateArn, *v.TemplateArn)
+	}
+}
+
 type CreateTemplateShareOutput struct {
 
 	// The ID associated with the share.
@@ -86,13 +106,38 @@ type CreateTemplateShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTemplateShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTemplateShareOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTemplateShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ShareId != nil {
+		s.WriteString(schemas.CreateTemplateShareOutput_ShareId, *v.ShareId)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.CreateTemplateShareOutput_TemplateArn, *v.TemplateArn)
+	}
+}
+func (v *CreateTemplateShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTemplateShareOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTemplateShareOutput_ShareId:
+			v.ShareId = new(string)
+			return d.ReadString(schemas.CreateTemplateShareOutput_ShareId, v.ShareId)
+		case schemas.CreateTemplateShareOutput_TemplateArn:
+			v.TemplateArn = new(string)
+			return d.ReadString(schemas.CreateTemplateShareOutput_TemplateArn, v.TemplateArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTemplateShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTemplateShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTemplateShare, schemas.CreateTemplateShareInput, schemas.CreateTemplateShareOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTemplateShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTemplateShare, schemas.CreateTemplateShareInput, schemas.CreateTemplateShareOutput), output: &CreateTemplateShareOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

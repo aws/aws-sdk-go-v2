@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,27 @@ type DescribeApplicationFleetAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicationFleetAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationFleetAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationFleetAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.DescribeApplicationFleetAssociationsRequest_ApplicationArn, *v.ApplicationArn)
+	}
+	if v.FleetName != nil {
+		s.WriteString(schemas.DescribeApplicationFleetAssociationsRequest_FleetName, *v.FleetName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeApplicationFleetAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeApplicationFleetAssociationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeApplicationFleetAssociationsOutput struct {
 
 	// The application fleet associations in the list.
@@ -58,13 +81,35 @@ type DescribeApplicationFleetAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicationFleetAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationFleetAssociationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationFleetAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApplicationFleetAssociationList(s, schemas.DescribeApplicationFleetAssociationsResult_ApplicationFleetAssociations, v.ApplicationFleetAssociations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeApplicationFleetAssociationsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeApplicationFleetAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeApplicationFleetAssociationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeApplicationFleetAssociationsResult_ApplicationFleetAssociations:
+			return deserializeApplicationFleetAssociationList(d, schemas.DescribeApplicationFleetAssociationsResult_ApplicationFleetAssociations, &v.ApplicationFleetAssociations)
+		case schemas.DescribeApplicationFleetAssociationsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeApplicationFleetAssociationsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeApplicationFleetAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeApplicationFleetAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplicationFleetAssociations, schemas.DescribeApplicationFleetAssociationsRequest, schemas.DescribeApplicationFleetAssociationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeApplicationFleetAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplicationFleetAssociations, schemas.DescribeApplicationFleetAssociationsRequest, schemas.DescribeApplicationFleetAssociationsResult), output: &DescribeApplicationFleetAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

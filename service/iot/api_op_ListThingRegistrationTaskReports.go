@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type ListThingRegistrationTaskReportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThingRegistrationTaskReportsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThingRegistrationTaskReportsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThingRegistrationTaskReportsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListThingRegistrationTaskReportsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThingRegistrationTaskReportsRequest_nextToken, *v.NextToken)
+	}
+	if v.ReportType != "" {
+		s.WriteString(schemas.ListThingRegistrationTaskReportsRequest_reportType, string(v.ReportType))
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.ListThingRegistrationTaskReportsRequest_taskId, *v.TaskId)
+	}
+}
+
 type ListThingRegistrationTaskReportsOutput struct {
 
 	// The token to use to get the next set of results, or null if there are no
@@ -65,13 +88,45 @@ type ListThingRegistrationTaskReportsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThingRegistrationTaskReportsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThingRegistrationTaskReportsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThingRegistrationTaskReportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThingRegistrationTaskReportsResponse_nextToken, *v.NextToken)
+	}
+	if v.ReportType != "" {
+		s.WriteString(schemas.ListThingRegistrationTaskReportsResponse_reportType, string(v.ReportType))
+	}
+	serializeS3FileUrlList(s, schemas.ListThingRegistrationTaskReportsResponse_resourceLinks, v.ResourceLinks)
+}
+func (v *ListThingRegistrationTaskReportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListThingRegistrationTaskReportsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListThingRegistrationTaskReportsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListThingRegistrationTaskReportsResponse_nextToken, v.NextToken)
+		case schemas.ListThingRegistrationTaskReportsResponse_reportType:
+			var ev string
+			if err := d.ReadString(schemas.ListThingRegistrationTaskReportsResponse_reportType, &ev); err != nil {
+				return err
+			}
+			v.ReportType = types.ReportType(ev)
+			return nil
+		case schemas.ListThingRegistrationTaskReportsResponse_resourceLinks:
+			return deserializeS3FileUrlList(d, schemas.ListThingRegistrationTaskReportsResponse_resourceLinks, &v.ResourceLinks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListThingRegistrationTaskReportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListThingRegistrationTaskReports{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThingRegistrationTaskReports, schemas.ListThingRegistrationTaskReportsRequest, schemas.ListThingRegistrationTaskReportsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListThingRegistrationTaskReports{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThingRegistrationTaskReports, schemas.ListThingRegistrationTaskReportsRequest, schemas.ListThingRegistrationTaskReportsResponse), output: &ListThingRegistrationTaskReportsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -143,6 +145,20 @@ type PutEventSelectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEventSelectorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEventSelectorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEventSelectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdvancedEventSelectors(s, schemas.PutEventSelectorsRequest_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	serializeEventSelectors(s, schemas.PutEventSelectorsRequest_EventSelectors, v.EventSelectors)
+	if v.TrailName != nil {
+		s.WriteString(schemas.PutEventSelectorsRequest_TrailName, *v.TrailName)
+	}
+}
+
 type PutEventSelectorsOutput struct {
 
 	// Specifies the advanced event selectors configured for your trail.
@@ -163,13 +179,38 @@ type PutEventSelectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEventSelectorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEventSelectorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEventSelectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdvancedEventSelectors(s, schemas.PutEventSelectorsResponse_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	serializeEventSelectors(s, schemas.PutEventSelectorsResponse_EventSelectors, v.EventSelectors)
+	if v.TrailARN != nil {
+		s.WriteString(schemas.PutEventSelectorsResponse_TrailARN, *v.TrailARN)
+	}
+}
+func (v *PutEventSelectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutEventSelectorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutEventSelectorsResponse_AdvancedEventSelectors:
+			return deserializeAdvancedEventSelectors(d, schemas.PutEventSelectorsResponse_AdvancedEventSelectors, &v.AdvancedEventSelectors)
+		case schemas.PutEventSelectorsResponse_EventSelectors:
+			return deserializeEventSelectors(d, schemas.PutEventSelectorsResponse_EventSelectors, &v.EventSelectors)
+		case schemas.PutEventSelectorsResponse_TrailARN:
+			v.TrailARN = new(string)
+			return d.ReadString(schemas.PutEventSelectorsResponse_TrailARN, v.TrailARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutEventSelectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutEventSelectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEventSelectors, schemas.PutEventSelectorsRequest, schemas.PutEventSelectorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutEventSelectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEventSelectors, schemas.PutEventSelectorsRequest, schemas.PutEventSelectorsResponse), output: &PutEventSelectorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

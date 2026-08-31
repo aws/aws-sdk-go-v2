@@ -4,7 +4,9 @@ package serverlessapplicationrepository
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -138,6 +140,46 @@ type CreateCloudFormationChangeSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCloudFormationChangeSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCloudFormationChangeSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCloudFormationChangeSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreateCloudFormationChangeSetRequest_ApplicationId, *v.ApplicationId)
+	}
+	serialize__listOf__string(s, schemas.CreateCloudFormationChangeSetRequest_Capabilities, v.Capabilities)
+	if v.ChangeSetName != nil {
+		s.WriteString(schemas.CreateCloudFormationChangeSetRequest_ChangeSetName, *v.ChangeSetName)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateCloudFormationChangeSetRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateCloudFormationChangeSetRequest_Description, *v.Description)
+	}
+	serialize__listOf__string(s, schemas.CreateCloudFormationChangeSetRequest_NotificationArns, v.NotificationArns)
+	serialize__listOfParameterValue(s, schemas.CreateCloudFormationChangeSetRequest_ParameterOverrides, v.ParameterOverrides)
+	serialize__listOf__string(s, schemas.CreateCloudFormationChangeSetRequest_ResourceTypes, v.ResourceTypes)
+	if v.RollbackConfiguration != nil {
+		s.WriteStruct(schemas.CreateCloudFormationChangeSetRequest_RollbackConfiguration)
+		v.RollbackConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.CreateCloudFormationChangeSetRequest_SemanticVersion, *v.SemanticVersion)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.CreateCloudFormationChangeSetRequest_StackName, *v.StackName)
+	}
+	serialize__listOfTag(s, schemas.CreateCloudFormationChangeSetRequest_Tags, v.Tags)
+	if v.TemplateId != nil {
+		s.WriteString(schemas.CreateCloudFormationChangeSetRequest_TemplateId, *v.TemplateId)
+	}
+}
+
 type CreateCloudFormationChangeSetOutput struct {
 
 	// The application Amazon Resource Name (ARN).
@@ -166,13 +208,50 @@ type CreateCloudFormationChangeSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCloudFormationChangeSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCloudFormationChangeSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCloudFormationChangeSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreateCloudFormationChangeSetResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.ChangeSetId != nil {
+		s.WriteString(schemas.CreateCloudFormationChangeSetResponse_ChangeSetId, *v.ChangeSetId)
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.CreateCloudFormationChangeSetResponse_SemanticVersion, *v.SemanticVersion)
+	}
+	if v.StackId != nil {
+		s.WriteString(schemas.CreateCloudFormationChangeSetResponse_StackId, *v.StackId)
+	}
+}
+func (v *CreateCloudFormationChangeSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCloudFormationChangeSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCloudFormationChangeSetResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.CreateCloudFormationChangeSetResponse_ApplicationId, v.ApplicationId)
+		case schemas.CreateCloudFormationChangeSetResponse_ChangeSetId:
+			v.ChangeSetId = new(string)
+			return d.ReadString(schemas.CreateCloudFormationChangeSetResponse_ChangeSetId, v.ChangeSetId)
+		case schemas.CreateCloudFormationChangeSetResponse_SemanticVersion:
+			v.SemanticVersion = new(string)
+			return d.ReadString(schemas.CreateCloudFormationChangeSetResponse_SemanticVersion, v.SemanticVersion)
+		case schemas.CreateCloudFormationChangeSetResponse_StackId:
+			v.StackId = new(string)
+			return d.ReadString(schemas.CreateCloudFormationChangeSetResponse_StackId, v.StackId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCloudFormationChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCloudFormationChangeSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCloudFormationChangeSet, schemas.CreateCloudFormationChangeSetRequest, schemas.CreateCloudFormationChangeSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCloudFormationChangeSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCloudFormationChangeSet, schemas.CreateCloudFormationChangeSetRequest, schemas.CreateCloudFormationChangeSetResponse), output: &CreateCloudFormationChangeSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

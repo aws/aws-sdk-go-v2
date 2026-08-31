@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,28 @@ type GetPercentilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPercentilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPercentilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPercentilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationField != nil {
+		s.WriteString(schemas.GetPercentilesRequest_aggregationField, *v.AggregationField)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.GetPercentilesRequest_indexName, *v.IndexName)
+	}
+	serializePercentList(s, schemas.GetPercentilesRequest_percents, v.Percents)
+	if v.QueryString != nil {
+		s.WriteString(schemas.GetPercentilesRequest_queryString, *v.QueryString)
+	}
+	if v.QueryVersion != nil {
+		s.WriteString(schemas.GetPercentilesRequest_queryVersion, *v.QueryVersion)
+	}
+}
+
 type GetPercentilesOutput struct {
 
 	// The percentile values of the aggregated fields.
@@ -70,13 +94,29 @@ type GetPercentilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPercentilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPercentilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPercentilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePercentiles(s, schemas.GetPercentilesResponse_percentiles, v.Percentiles)
+}
+func (v *GetPercentilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPercentilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPercentilesResponse_percentiles:
+			return deserializePercentiles(d, schemas.GetPercentilesResponse_percentiles, &v.Percentiles)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPercentilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPercentiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPercentiles, schemas.GetPercentilesRequest, schemas.GetPercentilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPercentiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPercentiles, schemas.GetPercentilesRequest, schemas.GetPercentilesResponse), output: &GetPercentilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DeleteRoutingProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRoutingProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRoutingProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRoutingProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteRoutingProfileRequest_InstanceId, *v.InstanceId)
+	}
+	if v.RoutingProfileId != nil {
+		s.WriteString(schemas.DeleteRoutingProfileRequest_RoutingProfileId, *v.RoutingProfileId)
+	}
+}
+
 type DeleteRoutingProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +65,26 @@ type DeleteRoutingProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRoutingProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRoutingProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteRoutingProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRoutingProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRoutingProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRoutingProfile, schemas.DeleteRoutingProfileRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRoutingProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRoutingProfile, schemas.DeleteRoutingProfileRequest, nil), output: &DeleteRoutingProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

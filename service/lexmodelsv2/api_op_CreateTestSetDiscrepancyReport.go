@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -40,6 +42,23 @@ type CreateTestSetDiscrepancyReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTestSetDiscrepancyReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTestSetDiscrepancyReportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTestSetDiscrepancyReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Target != nil {
+		s.WriteStruct(schemas.CreateTestSetDiscrepancyReportRequest_target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TestSetId != nil {
+		s.WriteString(schemas.CreateTestSetDiscrepancyReportRequest_testSetId, *v.TestSetId)
+	}
+}
+
 type CreateTestSetDiscrepancyReportOutput struct {
 
 	// The creation date and time for the test set discrepancy report.
@@ -60,13 +79,52 @@ type CreateTestSetDiscrepancyReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTestSetDiscrepancyReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTestSetDiscrepancyReportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTestSetDiscrepancyReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.CreateTestSetDiscrepancyReportResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.Target != nil {
+		s.WriteStruct(schemas.CreateTestSetDiscrepancyReportResponse_target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TestSetDiscrepancyReportId != nil {
+		s.WriteString(schemas.CreateTestSetDiscrepancyReportResponse_testSetDiscrepancyReportId, *v.TestSetDiscrepancyReportId)
+	}
+	if v.TestSetId != nil {
+		s.WriteString(schemas.CreateTestSetDiscrepancyReportResponse_testSetId, *v.TestSetId)
+	}
+}
+func (v *CreateTestSetDiscrepancyReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTestSetDiscrepancyReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTestSetDiscrepancyReportResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.CreateTestSetDiscrepancyReportResponse_creationDateTime, v.CreationDateTime)
+		case schemas.CreateTestSetDiscrepancyReportResponse_target:
+			v.Target = &types.TestSetDiscrepancyReportResourceTarget{}
+			return v.Target.Deserialize(d)
+		case schemas.CreateTestSetDiscrepancyReportResponse_testSetDiscrepancyReportId:
+			v.TestSetDiscrepancyReportId = new(string)
+			return d.ReadString(schemas.CreateTestSetDiscrepancyReportResponse_testSetDiscrepancyReportId, v.TestSetDiscrepancyReportId)
+		case schemas.CreateTestSetDiscrepancyReportResponse_testSetId:
+			v.TestSetId = new(string)
+			return d.ReadString(schemas.CreateTestSetDiscrepancyReportResponse_testSetId, v.TestSetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTestSetDiscrepancyReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTestSetDiscrepancyReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTestSetDiscrepancyReport, schemas.CreateTestSetDiscrepancyReportRequest, schemas.CreateTestSetDiscrepancyReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTestSetDiscrepancyReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTestSetDiscrepancyReport, schemas.CreateTestSetDiscrepancyReportRequest, schemas.CreateTestSetDiscrepancyReportResponse), output: &CreateTestSetDiscrepancyReportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

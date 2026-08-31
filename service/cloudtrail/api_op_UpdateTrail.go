@@ -4,6 +4,8 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -145,6 +147,48 @@ type UpdateTrailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTrailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTrailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTrailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogsLogGroupArn != nil {
+		s.WriteString(schemas.UpdateTrailRequest_CloudWatchLogsLogGroupArn, *v.CloudWatchLogsLogGroupArn)
+	}
+	if v.CloudWatchLogsRoleArn != nil {
+		s.WriteString(schemas.UpdateTrailRequest_CloudWatchLogsRoleArn, *v.CloudWatchLogsRoleArn)
+	}
+	if v.EnableLogFileValidation != nil {
+		s.WriteBool(schemas.UpdateTrailRequest_EnableLogFileValidation, *v.EnableLogFileValidation)
+	}
+	if v.IncludeGlobalServiceEvents != nil {
+		s.WriteBool(schemas.UpdateTrailRequest_IncludeGlobalServiceEvents, *v.IncludeGlobalServiceEvents)
+	}
+	if v.IsMultiRegionTrail != nil {
+		s.WriteBool(schemas.UpdateTrailRequest_IsMultiRegionTrail, *v.IsMultiRegionTrail)
+	}
+	if v.IsOrganizationTrail != nil {
+		s.WriteBool(schemas.UpdateTrailRequest_IsOrganizationTrail, *v.IsOrganizationTrail)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.UpdateTrailRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateTrailRequest_Name, *v.Name)
+	}
+	if v.S3BucketName != nil {
+		s.WriteString(schemas.UpdateTrailRequest_S3BucketName, *v.S3BucketName)
+	}
+	if v.S3KeyPrefix != nil {
+		s.WriteString(schemas.UpdateTrailRequest_S3KeyPrefix, *v.S3KeyPrefix)
+	}
+	if v.SnsTopicName != nil {
+		s.WriteString(schemas.UpdateTrailRequest_SnsTopicName, *v.SnsTopicName)
+	}
+}
+
 // Returns the objects or data listed below if successful. Otherwise, returns an
 // error.
 type UpdateTrailOutput struct {
@@ -213,13 +257,104 @@ type UpdateTrailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTrailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTrailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTrailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogsLogGroupArn != nil {
+		s.WriteString(schemas.UpdateTrailResponse_CloudWatchLogsLogGroupArn, *v.CloudWatchLogsLogGroupArn)
+	}
+	if v.CloudWatchLogsRoleArn != nil {
+		s.WriteString(schemas.UpdateTrailResponse_CloudWatchLogsRoleArn, *v.CloudWatchLogsRoleArn)
+	}
+	if v.IncludeGlobalServiceEvents != nil {
+		s.WriteBool(schemas.UpdateTrailResponse_IncludeGlobalServiceEvents, *v.IncludeGlobalServiceEvents)
+	}
+	if v.IsMultiRegionTrail != nil {
+		s.WriteBool(schemas.UpdateTrailResponse_IsMultiRegionTrail, *v.IsMultiRegionTrail)
+	}
+	if v.IsOrganizationTrail != nil {
+		s.WriteBool(schemas.UpdateTrailResponse_IsOrganizationTrail, *v.IsOrganizationTrail)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.UpdateTrailResponse_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.LogFileValidationEnabled != nil {
+		s.WriteBool(schemas.UpdateTrailResponse_LogFileValidationEnabled, *v.LogFileValidationEnabled)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateTrailResponse_Name, *v.Name)
+	}
+	if v.S3BucketName != nil {
+		s.WriteString(schemas.UpdateTrailResponse_S3BucketName, *v.S3BucketName)
+	}
+	if v.S3KeyPrefix != nil {
+		s.WriteString(schemas.UpdateTrailResponse_S3KeyPrefix, *v.S3KeyPrefix)
+	}
+	if v.SnsTopicARN != nil {
+		s.WriteString(schemas.UpdateTrailResponse_SnsTopicARN, *v.SnsTopicARN)
+	}
+	if v.SnsTopicName != nil {
+		s.WriteString(schemas.UpdateTrailResponse_SnsTopicName, *v.SnsTopicName)
+	}
+	if v.TrailARN != nil {
+		s.WriteString(schemas.UpdateTrailResponse_TrailARN, *v.TrailARN)
+	}
+}
+func (v *UpdateTrailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTrailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTrailResponse_CloudWatchLogsLogGroupArn:
+			v.CloudWatchLogsLogGroupArn = new(string)
+			return d.ReadString(schemas.UpdateTrailResponse_CloudWatchLogsLogGroupArn, v.CloudWatchLogsLogGroupArn)
+		case schemas.UpdateTrailResponse_CloudWatchLogsRoleArn:
+			v.CloudWatchLogsRoleArn = new(string)
+			return d.ReadString(schemas.UpdateTrailResponse_CloudWatchLogsRoleArn, v.CloudWatchLogsRoleArn)
+		case schemas.UpdateTrailResponse_IncludeGlobalServiceEvents:
+			v.IncludeGlobalServiceEvents = new(bool)
+			return d.ReadBool(schemas.UpdateTrailResponse_IncludeGlobalServiceEvents, v.IncludeGlobalServiceEvents)
+		case schemas.UpdateTrailResponse_IsMultiRegionTrail:
+			v.IsMultiRegionTrail = new(bool)
+			return d.ReadBool(schemas.UpdateTrailResponse_IsMultiRegionTrail, v.IsMultiRegionTrail)
+		case schemas.UpdateTrailResponse_IsOrganizationTrail:
+			v.IsOrganizationTrail = new(bool)
+			return d.ReadBool(schemas.UpdateTrailResponse_IsOrganizationTrail, v.IsOrganizationTrail)
+		case schemas.UpdateTrailResponse_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.UpdateTrailResponse_KmsKeyId, v.KmsKeyId)
+		case schemas.UpdateTrailResponse_LogFileValidationEnabled:
+			v.LogFileValidationEnabled = new(bool)
+			return d.ReadBool(schemas.UpdateTrailResponse_LogFileValidationEnabled, v.LogFileValidationEnabled)
+		case schemas.UpdateTrailResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateTrailResponse_Name, v.Name)
+		case schemas.UpdateTrailResponse_S3BucketName:
+			v.S3BucketName = new(string)
+			return d.ReadString(schemas.UpdateTrailResponse_S3BucketName, v.S3BucketName)
+		case schemas.UpdateTrailResponse_S3KeyPrefix:
+			v.S3KeyPrefix = new(string)
+			return d.ReadString(schemas.UpdateTrailResponse_S3KeyPrefix, v.S3KeyPrefix)
+		case schemas.UpdateTrailResponse_SnsTopicARN:
+			v.SnsTopicARN = new(string)
+			return d.ReadString(schemas.UpdateTrailResponse_SnsTopicARN, v.SnsTopicARN)
+		case schemas.UpdateTrailResponse_SnsTopicName:
+			v.SnsTopicName = new(string)
+			return d.ReadString(schemas.UpdateTrailResponse_SnsTopicName, v.SnsTopicName)
+		case schemas.UpdateTrailResponse_TrailARN:
+			v.TrailARN = new(string)
+			return d.ReadString(schemas.UpdateTrailResponse_TrailARN, v.TrailARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTrailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateTrail{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTrail, schemas.UpdateTrailRequest, schemas.UpdateTrailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateTrail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTrail, schemas.UpdateTrailRequest, schemas.UpdateTrailResponse), output: &UpdateTrailOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,18 @@ type CreateProvisioningClaimInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProvisioningClaimInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProvisioningClaimRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProvisioningClaimInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateName != nil {
+		s.WriteString(schemas.CreateProvisioningClaimRequest_templateName, *v.TemplateName)
+	}
+}
+
 type CreateProvisioningClaimOutput struct {
 
 	// The ID of the certificate.
@@ -59,13 +73,52 @@ type CreateProvisioningClaimOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProvisioningClaimOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProvisioningClaimResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProvisioningClaimOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateId != nil {
+		s.WriteString(schemas.CreateProvisioningClaimResponse_certificateId, *v.CertificateId)
+	}
+	if v.CertificatePem != nil {
+		s.WriteString(schemas.CreateProvisioningClaimResponse_certificatePem, *v.CertificatePem)
+	}
+	if v.Expiration != nil {
+		s.WriteTime(schemas.CreateProvisioningClaimResponse_expiration, *v.Expiration)
+	}
+	if v.KeyPair != nil {
+		s.WriteStruct(schemas.CreateProvisioningClaimResponse_keyPair)
+		v.KeyPair.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateProvisioningClaimOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProvisioningClaimResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProvisioningClaimResponse_certificateId:
+			v.CertificateId = new(string)
+			return d.ReadString(schemas.CreateProvisioningClaimResponse_certificateId, v.CertificateId)
+		case schemas.CreateProvisioningClaimResponse_certificatePem:
+			v.CertificatePem = new(string)
+			return d.ReadString(schemas.CreateProvisioningClaimResponse_certificatePem, v.CertificatePem)
+		case schemas.CreateProvisioningClaimResponse_expiration:
+			v.Expiration = new(time.Time)
+			return d.ReadTime(schemas.CreateProvisioningClaimResponse_expiration, v.Expiration)
+		case schemas.CreateProvisioningClaimResponse_keyPair:
+			v.KeyPair = &types.KeyPair{}
+			return v.KeyPair.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProvisioningClaimMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProvisioningClaim{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProvisioningClaim, schemas.CreateProvisioningClaimRequest, schemas.CreateProvisioningClaimResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProvisioningClaim{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProvisioningClaim, schemas.CreateProvisioningClaimRequest, schemas.CreateProvisioningClaimResponse), output: &CreateProvisioningClaimOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

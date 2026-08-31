@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,25 @@ type AssociateTargetsWithJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateTargetsWithJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateTargetsWithJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateTargetsWithJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Comment != nil {
+		s.WriteString(schemas.AssociateTargetsWithJobRequest_comment, *v.Comment)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.AssociateTargetsWithJobRequest_jobId, *v.JobId)
+	}
+	if v.NamespaceId != nil {
+		s.WriteString(schemas.AssociateTargetsWithJobRequest_namespaceId, *v.NamespaceId)
+	}
+	serializeJobTargets(s, schemas.AssociateTargetsWithJobRequest_targets, v.Targets)
+}
+
 type AssociateTargetsWithJobOutput struct {
 
 	// A short text description of the job.
@@ -84,13 +105,44 @@ type AssociateTargetsWithJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateTargetsWithJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateTargetsWithJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateTargetsWithJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.AssociateTargetsWithJobResponse_description, *v.Description)
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.AssociateTargetsWithJobResponse_jobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.AssociateTargetsWithJobResponse_jobId, *v.JobId)
+	}
+}
+func (v *AssociateTargetsWithJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateTargetsWithJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateTargetsWithJobResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AssociateTargetsWithJobResponse_description, v.Description)
+		case schemas.AssociateTargetsWithJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.AssociateTargetsWithJobResponse_jobArn, v.JobArn)
+		case schemas.AssociateTargetsWithJobResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.AssociateTargetsWithJobResponse_jobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateTargetsWithJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateTargetsWithJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateTargetsWithJob, schemas.AssociateTargetsWithJobRequest, schemas.AssociateTargetsWithJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateTargetsWithJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateTargetsWithJob, schemas.AssociateTargetsWithJobRequest, schemas.AssociateTargetsWithJobResponse), output: &AssociateTargetsWithJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

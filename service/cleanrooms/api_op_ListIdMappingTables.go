@@ -5,7 +5,9 @@ package cleanrooms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListIdMappingTablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdMappingTablesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdMappingTablesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdMappingTablesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIdMappingTablesInput_maxResults, *v.MaxResults)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.ListIdMappingTablesInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdMappingTablesInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListIdMappingTablesOutput struct {
 
 	// The summary information of the ID mapping tables that you requested.
@@ -60,13 +80,35 @@ type ListIdMappingTablesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdMappingTablesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdMappingTablesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdMappingTablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdMappingTableSummaryList(s, schemas.ListIdMappingTablesOutput_idMappingTableSummaries, v.IdMappingTableSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdMappingTablesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListIdMappingTablesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIdMappingTablesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIdMappingTablesOutput_idMappingTableSummaries:
+			return deserializeIdMappingTableSummaryList(d, schemas.ListIdMappingTablesOutput_idMappingTableSummaries, &v.IdMappingTableSummaries)
+		case schemas.ListIdMappingTablesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIdMappingTablesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIdMappingTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIdMappingTables{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdMappingTables, schemas.ListIdMappingTablesInput, schemas.ListIdMappingTablesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIdMappingTables{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdMappingTables, schemas.ListIdMappingTablesInput, schemas.ListIdMappingTablesOutput), output: &ListIdMappingTablesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

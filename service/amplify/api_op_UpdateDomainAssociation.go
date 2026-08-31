@@ -4,7 +4,9 @@ package amplify
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,34 @@ type UpdateDomainAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.UpdateDomainAssociationRequest_appId, *v.AppId)
+	}
+	serializeAutoSubDomainCreationPatterns(s, schemas.UpdateDomainAssociationRequest_autoSubDomainCreationPatterns, v.AutoSubDomainCreationPatterns)
+	if v.AutoSubDomainIAMRole != nil {
+		s.WriteString(schemas.UpdateDomainAssociationRequest_autoSubDomainIAMRole, *v.AutoSubDomainIAMRole)
+	}
+	if v.CertificateSettings != nil {
+		s.WriteStruct(schemas.UpdateDomainAssociationRequest_certificateSettings)
+		v.CertificateSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpdateDomainAssociationRequest_domainName, *v.DomainName)
+	}
+	if v.EnableAutoSubDomain != nil {
+		s.WriteBool(schemas.UpdateDomainAssociationRequest_enableAutoSubDomain, *v.EnableAutoSubDomain)
+	}
+	serializeSubDomainSettings(s, schemas.UpdateDomainAssociationRequest_subDomainSettings, v.SubDomainSettings)
+}
+
 // The result structure for the update domain association request.
 type UpdateDomainAssociationOutput struct {
 
@@ -71,13 +101,34 @@ type UpdateDomainAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainAssociationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainAssociation != nil {
+		s.WriteStruct(schemas.UpdateDomainAssociationResult_domainAssociation)
+		v.DomainAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateDomainAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDomainAssociationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDomainAssociationResult_domainAssociation:
+			v.DomainAssociation = &types.DomainAssociation{}
+			return v.DomainAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDomainAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDomainAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomainAssociation, schemas.UpdateDomainAssociationRequest, schemas.UpdateDomainAssociationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDomainAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomainAssociation, schemas.UpdateDomainAssociationRequest, schemas.UpdateDomainAssociationResult), output: &UpdateDomainAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteRecommenderConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRecommenderConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRecommenderConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRecommenderConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecommenderId != nil {
+		s.WriteString(schemas.DeleteRecommenderConfigurationRequest_RecommenderId, *v.RecommenderId)
+	}
+}
+
 type DeleteRecommenderConfigurationOutput struct {
 
 	// Provides information about Amazon Pinpoint configuration settings for
@@ -49,13 +63,34 @@ type DeleteRecommenderConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRecommenderConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRecommenderConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRecommenderConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecommenderConfigurationResponse != nil {
+		s.WriteStruct(schemas.DeleteRecommenderConfigurationResponse_RecommenderConfigurationResponse)
+		v.RecommenderConfigurationResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteRecommenderConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRecommenderConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRecommenderConfigurationResponse_RecommenderConfigurationResponse:
+			v.RecommenderConfigurationResponse = &types.RecommenderConfigurationResponse{}
+			return v.RecommenderConfigurationResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRecommenderConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRecommenderConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRecommenderConfiguration, schemas.DeleteRecommenderConfigurationRequest, schemas.DeleteRecommenderConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRecommenderConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRecommenderConfiguration, schemas.DeleteRecommenderConfigurationRequest, schemas.DeleteRecommenderConfigurationResponse), output: &DeleteRecommenderConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

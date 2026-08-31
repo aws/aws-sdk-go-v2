@@ -5,7 +5,9 @@ package workspaces
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,22 @@ type ListAccountLinksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccountLinksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccountLinksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccountLinksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLinkStatusFilterList(s, schemas.ListAccountLinksRequest_LinkStatusFilter, v.LinkStatusFilter)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAccountLinksRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccountLinksRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAccountLinksOutput struct {
 
 	// Information about the account links.
@@ -55,13 +73,35 @@ type ListAccountLinksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccountLinksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccountLinksResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccountLinksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountLinkList(s, schemas.ListAccountLinksResult_AccountLinks, v.AccountLinks)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccountLinksResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAccountLinksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccountLinksResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccountLinksResult_AccountLinks:
+			return deserializeAccountLinkList(d, schemas.ListAccountLinksResult_AccountLinks, &v.AccountLinks)
+		case schemas.ListAccountLinksResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccountLinksResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAccountLinksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAccountLinks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountLinks, schemas.ListAccountLinksRequest, schemas.ListAccountLinksResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAccountLinks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountLinks, schemas.ListAccountLinksRequest, schemas.ListAccountLinksResult), output: &ListAccountLinksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

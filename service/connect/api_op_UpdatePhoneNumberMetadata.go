@@ -5,6 +5,8 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type UpdatePhoneNumberMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePhoneNumberMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePhoneNumberMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePhoneNumberMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdatePhoneNumberMetadataRequest_ClientToken, *v.ClientToken)
+	}
+	if v.PhoneNumberDescription != nil {
+		s.WriteString(schemas.UpdatePhoneNumberMetadataRequest_PhoneNumberDescription, *v.PhoneNumberDescription)
+	}
+	if v.PhoneNumberId != nil {
+		s.WriteString(schemas.UpdatePhoneNumberMetadataRequest_PhoneNumberId, *v.PhoneNumberId)
+	}
+}
+
 type UpdatePhoneNumberMetadataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,13 +76,26 @@ type UpdatePhoneNumberMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePhoneNumberMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePhoneNumberMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdatePhoneNumberMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePhoneNumberMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePhoneNumberMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePhoneNumberMetadata, schemas.UpdatePhoneNumberMetadataRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePhoneNumberMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePhoneNumberMetadata, schemas.UpdatePhoneNumberMetadataRequest, nil), output: &UpdatePhoneNumberMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

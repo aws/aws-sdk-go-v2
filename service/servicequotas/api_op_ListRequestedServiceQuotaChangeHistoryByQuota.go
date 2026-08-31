@@ -5,7 +5,9 @@ package servicequotas
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,33 @@ type ListRequestedServiceQuotaChangeHistoryByQuotaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRequestedServiceQuotaChangeHistoryByQuotaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRequestedServiceQuotaChangeHistoryByQuotaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRequestedServiceQuotaChangeHistoryByQuotaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRequestedServiceQuotaChangeHistoryByQuotaRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRequestedServiceQuotaChangeHistoryByQuotaRequest_NextToken, *v.NextToken)
+	}
+	if v.QuotaCode != nil {
+		s.WriteString(schemas.ListRequestedServiceQuotaChangeHistoryByQuotaRequest_QuotaCode, *v.QuotaCode)
+	}
+	if v.QuotaRequestedAtLevel != "" {
+		s.WriteString(schemas.ListRequestedServiceQuotaChangeHistoryByQuotaRequest_QuotaRequestedAtLevel, string(v.QuotaRequestedAtLevel))
+	}
+	if v.ServiceCode != nil {
+		s.WriteString(schemas.ListRequestedServiceQuotaChangeHistoryByQuotaRequest_ServiceCode, *v.ServiceCode)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListRequestedServiceQuotaChangeHistoryByQuotaRequest_Status, string(v.Status))
+	}
+}
+
 type ListRequestedServiceQuotaChangeHistoryByQuotaOutput struct {
 
 	// If present, indicates that more output is available than is included in the
@@ -88,13 +117,35 @@ type ListRequestedServiceQuotaChangeHistoryByQuotaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRequestedServiceQuotaChangeHistoryByQuotaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRequestedServiceQuotaChangeHistoryByQuotaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRequestedServiceQuotaChangeHistoryByQuotaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRequestedServiceQuotaChangeHistoryByQuotaResponse_NextToken, *v.NextToken)
+	}
+	serializeRequestedServiceQuotaChangeHistoryListDefinition(s, schemas.ListRequestedServiceQuotaChangeHistoryByQuotaResponse_RequestedQuotas, v.RequestedQuotas)
+}
+func (v *ListRequestedServiceQuotaChangeHistoryByQuotaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRequestedServiceQuotaChangeHistoryByQuotaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRequestedServiceQuotaChangeHistoryByQuotaResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRequestedServiceQuotaChangeHistoryByQuotaResponse_NextToken, v.NextToken)
+		case schemas.ListRequestedServiceQuotaChangeHistoryByQuotaResponse_RequestedQuotas:
+			return deserializeRequestedServiceQuotaChangeHistoryListDefinition(d, schemas.ListRequestedServiceQuotaChangeHistoryByQuotaResponse_RequestedQuotas, &v.RequestedQuotas)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRequestedServiceQuotaChangeHistoryByQuotaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRequestedServiceQuotaChangeHistoryByQuota{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRequestedServiceQuotaChangeHistoryByQuota, schemas.ListRequestedServiceQuotaChangeHistoryByQuotaRequest, schemas.ListRequestedServiceQuotaChangeHistoryByQuotaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListRequestedServiceQuotaChangeHistoryByQuota{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRequestedServiceQuotaChangeHistoryByQuota, schemas.ListRequestedServiceQuotaChangeHistoryByQuotaRequest, schemas.ListRequestedServiceQuotaChangeHistoryByQuotaResponse), output: &ListRequestedServiceQuotaChangeHistoryByQuotaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package cleanrooms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListIntermediateTablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntermediateTablesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntermediateTablesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntermediateTablesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIntermediateTablesInput_maxResults, *v.MaxResults)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.ListIntermediateTablesInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIntermediateTablesInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListIntermediateTablesOutput struct {
 
 	// The list of intermediate table summaries.
@@ -60,13 +80,35 @@ type ListIntermediateTablesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntermediateTablesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntermediateTablesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntermediateTablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIntermediateTableSummaryList(s, schemas.ListIntermediateTablesOutput_intermediateTableSummaries, v.IntermediateTableSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIntermediateTablesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListIntermediateTablesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIntermediateTablesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIntermediateTablesOutput_intermediateTableSummaries:
+			return deserializeIntermediateTableSummaryList(d, schemas.ListIntermediateTablesOutput_intermediateTableSummaries, &v.IntermediateTableSummaries)
+		case schemas.ListIntermediateTablesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIntermediateTablesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIntermediateTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIntermediateTables{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntermediateTables, schemas.ListIntermediateTablesInput, schemas.ListIntermediateTablesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIntermediateTables{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntermediateTables, schemas.ListIntermediateTablesInput, schemas.ListIntermediateTablesOutput), output: &ListIntermediateTablesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

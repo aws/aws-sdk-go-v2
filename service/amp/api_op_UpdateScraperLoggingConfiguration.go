@@ -4,7 +4,9 @@ package amp
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amp/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,20 @@ type UpdateScraperLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateScraperLoggingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateScraperLoggingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateScraperLoggingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeScraperLoggingDestination(s, schemas.UpdateScraperLoggingConfigurationRequest_loggingDestination, v.LoggingDestination)
+	serializeScraperComponents(s, schemas.UpdateScraperLoggingConfigurationRequest_scraperComponents, v.ScraperComponents)
+	if v.ScraperId != nil {
+		s.WriteString(schemas.UpdateScraperLoggingConfigurationRequest_scraperId, *v.ScraperId)
+	}
+}
+
 type UpdateScraperLoggingConfigurationOutput struct {
 
 	// The status of the updated scraper logging configuration.
@@ -56,13 +72,34 @@ type UpdateScraperLoggingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateScraperLoggingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateScraperLoggingConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateScraperLoggingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteStruct(schemas.UpdateScraperLoggingConfigurationResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateScraperLoggingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateScraperLoggingConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateScraperLoggingConfigurationResponse_status:
+			v.Status = &types.ScraperLoggingConfigurationStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateScraperLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateScraperLoggingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScraperLoggingConfiguration, schemas.UpdateScraperLoggingConfigurationRequest, schemas.UpdateScraperLoggingConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateScraperLoggingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScraperLoggingConfiguration, schemas.UpdateScraperLoggingConfigurationRequest, schemas.UpdateScraperLoggingConfigurationResponse), output: &UpdateScraperLoggingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteIntermediateTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIntermediateTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIntermediateTableInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIntermediateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntermediateTableIdentifier != nil {
+		s.WriteString(schemas.DeleteIntermediateTableInput_intermediateTableIdentifier, *v.IntermediateTableIdentifier)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.DeleteIntermediateTableInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+
 type DeleteIntermediateTableOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type DeleteIntermediateTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIntermediateTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIntermediateTableOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIntermediateTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteIntermediateTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIntermediateTableOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteIntermediateTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteIntermediateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIntermediateTable, schemas.DeleteIntermediateTableInput, schemas.DeleteIntermediateTableOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteIntermediateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIntermediateTable, schemas.DeleteIntermediateTableInput, schemas.DeleteIntermediateTableOutput), output: &DeleteIntermediateTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

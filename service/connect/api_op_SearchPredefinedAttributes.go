@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,29 @@ type SearchPredefinedAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchPredefinedAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchPredefinedAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchPredefinedAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchPredefinedAttributesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchPredefinedAttributesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchPredefinedAttributesRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchCriteria != nil {
+		s.WriteStruct(schemas.SearchPredefinedAttributesRequest_SearchCriteria)
+		v.SearchCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchPredefinedAttributesOutput struct {
 
 	// The approximate number of predefined attributes which matched your search query.
@@ -83,13 +108,41 @@ type SearchPredefinedAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchPredefinedAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchPredefinedAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchPredefinedAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTotalCount != nil {
+		s.WriteInt64(schemas.SearchPredefinedAttributesResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchPredefinedAttributesResponse_NextToken, *v.NextToken)
+	}
+	serializePredefinedAttributeSearchSummaryList(s, schemas.SearchPredefinedAttributesResponse_PredefinedAttributes, v.PredefinedAttributes)
+}
+func (v *SearchPredefinedAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchPredefinedAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchPredefinedAttributesResponse_ApproximateTotalCount:
+			v.ApproximateTotalCount = new(int64)
+			return d.ReadInt64(schemas.SearchPredefinedAttributesResponse_ApproximateTotalCount, v.ApproximateTotalCount)
+		case schemas.SearchPredefinedAttributesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchPredefinedAttributesResponse_NextToken, v.NextToken)
+		case schemas.SearchPredefinedAttributesResponse_PredefinedAttributes:
+			return deserializePredefinedAttributeSearchSummaryList(d, schemas.SearchPredefinedAttributesResponse_PredefinedAttributes, &v.PredefinedAttributes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchPredefinedAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchPredefinedAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchPredefinedAttributes, schemas.SearchPredefinedAttributesRequest, schemas.SearchPredefinedAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchPredefinedAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchPredefinedAttributes, schemas.SearchPredefinedAttributesRequest, schemas.SearchPredefinedAttributesResponse), output: &SearchPredefinedAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

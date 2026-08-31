@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,22 @@ type DescribeConformancePacksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConformancePacksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConformancePacksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConformancePacksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConformancePackNamesList(s, schemas.DescribeConformancePacksRequest_ConformancePackNames, v.ConformancePackNames)
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.DescribeConformancePacksRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConformancePacksRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeConformancePacksOutput struct {
 
 	// Returns a list of ConformancePackDetail objects.
@@ -57,13 +75,35 @@ type DescribeConformancePacksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConformancePacksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConformancePacksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConformancePacksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConformancePackDetailList(s, schemas.DescribeConformancePacksResponse_ConformancePackDetails, v.ConformancePackDetails)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConformancePacksResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeConformancePacksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConformancePacksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConformancePacksResponse_ConformancePackDetails:
+			return deserializeConformancePackDetailList(d, schemas.DescribeConformancePacksResponse_ConformancePackDetails, &v.ConformancePackDetails)
+		case schemas.DescribeConformancePacksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeConformancePacksResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConformancePacksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConformancePacks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConformancePacks, schemas.DescribeConformancePacksRequest, schemas.DescribeConformancePacksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeConformancePacks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConformancePacks, schemas.DescribeConformancePacksRequest, schemas.DescribeConformancePacksResponse), output: &DescribeConformancePacksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

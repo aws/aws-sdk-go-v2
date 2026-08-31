@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type GetPrivacyBudgetTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPrivacyBudgetTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPrivacyBudgetTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPrivacyBudgetTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.GetPrivacyBudgetTemplateInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.PrivacyBudgetTemplateIdentifier != nil {
+		s.WriteString(schemas.GetPrivacyBudgetTemplateInput_privacyBudgetTemplateIdentifier, *v.PrivacyBudgetTemplateIdentifier)
+	}
+}
+
 type GetPrivacyBudgetTemplateOutput struct {
 
 	// Returns the details of the privacy budget template that you requested.
@@ -54,13 +71,34 @@ type GetPrivacyBudgetTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPrivacyBudgetTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPrivacyBudgetTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPrivacyBudgetTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PrivacyBudgetTemplate != nil {
+		s.WriteStruct(schemas.GetPrivacyBudgetTemplateOutput_privacyBudgetTemplate)
+		v.PrivacyBudgetTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetPrivacyBudgetTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPrivacyBudgetTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPrivacyBudgetTemplateOutput_privacyBudgetTemplate:
+			v.PrivacyBudgetTemplate = &types.PrivacyBudgetTemplate{}
+			return v.PrivacyBudgetTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPrivacyBudgetTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPrivacyBudgetTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPrivacyBudgetTemplate, schemas.GetPrivacyBudgetTemplateInput, schemas.GetPrivacyBudgetTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPrivacyBudgetTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPrivacyBudgetTemplate, schemas.GetPrivacyBudgetTemplateInput, schemas.GetPrivacyBudgetTemplateOutput), output: &GetPrivacyBudgetTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

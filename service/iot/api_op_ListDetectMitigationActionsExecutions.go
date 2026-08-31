@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -66,6 +68,36 @@ type ListDetectMitigationActionsExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDetectMitigationActionsExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDetectMitigationActionsExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDetectMitigationActionsExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListDetectMitigationActionsExecutionsRequest_endTime, *v.EndTime)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDetectMitigationActionsExecutionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDetectMitigationActionsExecutionsRequest_nextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListDetectMitigationActionsExecutionsRequest_startTime, *v.StartTime)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.ListDetectMitigationActionsExecutionsRequest_taskId, *v.TaskId)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.ListDetectMitigationActionsExecutionsRequest_thingName, *v.ThingName)
+	}
+	if v.ViolationId != nil {
+		s.WriteString(schemas.ListDetectMitigationActionsExecutionsRequest_violationId, *v.ViolationId)
+	}
+}
+
 type ListDetectMitigationActionsExecutionsOutput struct {
 
 	//  List of actions executions.
@@ -81,13 +113,35 @@ type ListDetectMitigationActionsExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDetectMitigationActionsExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDetectMitigationActionsExecutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDetectMitigationActionsExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDetectMitigationActionExecutionList(s, schemas.ListDetectMitigationActionsExecutionsResponse_actionsExecutions, v.ActionsExecutions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDetectMitigationActionsExecutionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDetectMitigationActionsExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDetectMitigationActionsExecutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDetectMitigationActionsExecutionsResponse_actionsExecutions:
+			return deserializeDetectMitigationActionExecutionList(d, schemas.ListDetectMitigationActionsExecutionsResponse_actionsExecutions, &v.ActionsExecutions)
+		case schemas.ListDetectMitigationActionsExecutionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDetectMitigationActionsExecutionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDetectMitigationActionsExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDetectMitigationActionsExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDetectMitigationActionsExecutions, schemas.ListDetectMitigationActionsExecutionsRequest, schemas.ListDetectMitigationActionsExecutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDetectMitigationActionsExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDetectMitigationActionsExecutions, schemas.ListDetectMitigationActionsExecutionsRequest, schemas.ListDetectMitigationActionsExecutionsResponse), output: &ListDetectMitigationActionsExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

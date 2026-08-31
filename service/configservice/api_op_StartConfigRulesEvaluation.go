@@ -4,6 +4,8 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,16 @@ type StartConfigRulesEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartConfigRulesEvaluationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConfigRulesEvaluationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartConfigRulesEvaluationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeReevaluateConfigRuleNames(s, schemas.StartConfigRulesEvaluationRequest_ConfigRuleNames, v.ConfigRuleNames)
+}
+
 // The output when you start the evaluation for the specified Config rule.
 type StartConfigRulesEvaluationOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -69,13 +81,26 @@ type StartConfigRulesEvaluationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartConfigRulesEvaluationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConfigRulesEvaluationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartConfigRulesEvaluationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartConfigRulesEvaluationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartConfigRulesEvaluationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartConfigRulesEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartConfigRulesEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartConfigRulesEvaluation, schemas.StartConfigRulesEvaluationRequest, schemas.StartConfigRulesEvaluationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartConfigRulesEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartConfigRulesEvaluation, schemas.StartConfigRulesEvaluationRequest, schemas.StartConfigRulesEvaluationResponse), output: &StartConfigRulesEvaluationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

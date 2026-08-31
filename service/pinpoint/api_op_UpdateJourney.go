@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,26 @@ type UpdateJourneyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateJourneyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateJourneyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateJourneyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.UpdateJourneyRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.JourneyId != nil {
+		s.WriteString(schemas.UpdateJourneyRequest_JourneyId, *v.JourneyId)
+	}
+	if v.WriteJourneyRequest != nil {
+		s.WriteStruct(schemas.UpdateJourneyRequest_WriteJourneyRequest)
+		v.WriteJourneyRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateJourneyOutput struct {
 
 	// Provides information about the status, configuration, and other settings for a
@@ -59,13 +81,34 @@ type UpdateJourneyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateJourneyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateJourneyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateJourneyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JourneyResponse != nil {
+		s.WriteStruct(schemas.UpdateJourneyResponse_JourneyResponse)
+		v.JourneyResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateJourneyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateJourneyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateJourneyResponse_JourneyResponse:
+			v.JourneyResponse = &types.JourneyResponse{}
+			return v.JourneyResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateJourneyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateJourney{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateJourney, schemas.UpdateJourneyRequest, schemas.UpdateJourneyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateJourney{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateJourney, schemas.UpdateJourneyRequest, schemas.UpdateJourneyResponse), output: &UpdateJourneyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

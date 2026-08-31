@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -36,6 +38,18 @@ type DescribeAgentInput struct {
 	AgentArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeAgentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAgentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentArn != nil {
+		s.WriteString(schemas.DescribeAgentRequest_AgentArn, *v.AgentArn)
+	}
 }
 
 // DescribeAgentResponse
@@ -85,13 +99,86 @@ type DescribeAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAgentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAgentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentArn != nil {
+		s.WriteString(schemas.DescribeAgentResponse_AgentArn, *v.AgentArn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeAgentResponse_CreationTime, *v.CreationTime)
+	}
+	if v.EndpointType != "" {
+		s.WriteString(schemas.DescribeAgentResponse_EndpointType, string(v.EndpointType))
+	}
+	if v.LastConnectionTime != nil {
+		s.WriteTime(schemas.DescribeAgentResponse_LastConnectionTime, *v.LastConnectionTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeAgentResponse_Name, *v.Name)
+	}
+	if v.Platform != nil {
+		s.WriteStruct(schemas.DescribeAgentResponse_Platform)
+		v.Platform.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PrivateLinkConfig != nil {
+		s.WriteStruct(schemas.DescribeAgentResponse_PrivateLinkConfig)
+		v.PrivateLinkConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeAgentResponse_Status, string(v.Status))
+	}
+}
+func (v *DescribeAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAgentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAgentResponse_AgentArn:
+			v.AgentArn = new(string)
+			return d.ReadString(schemas.DescribeAgentResponse_AgentArn, v.AgentArn)
+		case schemas.DescribeAgentResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeAgentResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeAgentResponse_EndpointType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAgentResponse_EndpointType, &ev); err != nil {
+				return err
+			}
+			v.EndpointType = types.EndpointType(ev)
+			return nil
+		case schemas.DescribeAgentResponse_LastConnectionTime:
+			v.LastConnectionTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeAgentResponse_LastConnectionTime, v.LastConnectionTime)
+		case schemas.DescribeAgentResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeAgentResponse_Name, v.Name)
+		case schemas.DescribeAgentResponse_Platform:
+			v.Platform = &types.Platform{}
+			return v.Platform.Deserialize(d)
+		case schemas.DescribeAgentResponse_PrivateLinkConfig:
+			v.PrivateLinkConfig = &types.PrivateLinkConfig{}
+			return v.PrivateLinkConfig.Deserialize(d)
+		case schemas.DescribeAgentResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAgentResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AgentStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAgent, schemas.DescribeAgentRequest, schemas.DescribeAgentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAgent, schemas.DescribeAgentRequest, schemas.DescribeAgentResponse), output: &DescribeAgentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

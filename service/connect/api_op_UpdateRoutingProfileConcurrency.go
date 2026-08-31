@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,22 @@ type UpdateRoutingProfileConcurrencyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRoutingProfileConcurrencyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRoutingProfileConcurrencyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRoutingProfileConcurrencyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateRoutingProfileConcurrencyRequest_InstanceId, *v.InstanceId)
+	}
+	serializeMediaConcurrencies(s, schemas.UpdateRoutingProfileConcurrencyRequest_MediaConcurrencies, v.MediaConcurrencies)
+	if v.RoutingProfileId != nil {
+		s.WriteString(schemas.UpdateRoutingProfileConcurrencyRequest_RoutingProfileId, *v.RoutingProfileId)
+	}
+}
+
 type UpdateRoutingProfileConcurrencyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +73,26 @@ type UpdateRoutingProfileConcurrencyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRoutingProfileConcurrencyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRoutingProfileConcurrencyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateRoutingProfileConcurrencyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRoutingProfileConcurrencyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRoutingProfileConcurrency{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRoutingProfileConcurrency, schemas.UpdateRoutingProfileConcurrencyRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRoutingProfileConcurrency{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRoutingProfileConcurrency, schemas.UpdateRoutingProfileConcurrencyRequest, nil), output: &UpdateRoutingProfileConcurrencyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

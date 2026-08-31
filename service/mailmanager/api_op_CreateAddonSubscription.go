@@ -5,7 +5,9 @@ package mailmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,22 @@ type CreateAddonSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAddonSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAddonSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAddonSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonName != nil {
+		s.WriteString(schemas.CreateAddonSubscriptionRequest_AddonName, *v.AddonName)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAddonSubscriptionRequest_ClientToken, *v.ClientToken)
+	}
+	serializeTagList(s, schemas.CreateAddonSubscriptionRequest_Tags, v.Tags)
+}
+
 type CreateAddonSubscriptionOutput struct {
 
 	// The unique ID of the Add On subscription created by this API.
@@ -59,13 +77,32 @@ type CreateAddonSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAddonSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAddonSubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAddonSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonSubscriptionId != nil {
+		s.WriteString(schemas.CreateAddonSubscriptionResponse_AddonSubscriptionId, *v.AddonSubscriptionId)
+	}
+}
+func (v *CreateAddonSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAddonSubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAddonSubscriptionResponse_AddonSubscriptionId:
+			v.AddonSubscriptionId = new(string)
+			return d.ReadString(schemas.CreateAddonSubscriptionResponse_AddonSubscriptionId, v.AddonSubscriptionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAddonSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateAddonSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAddonSubscription, schemas.CreateAddonSubscriptionRequest, schemas.CreateAddonSubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateAddonSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAddonSubscription, schemas.CreateAddonSubscriptionRequest, schemas.CreateAddonSubscriptionResponse), output: &CreateAddonSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

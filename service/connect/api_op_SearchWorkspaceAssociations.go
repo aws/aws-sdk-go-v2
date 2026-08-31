@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,34 @@ type SearchWorkspaceAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchWorkspaceAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchWorkspaceAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchWorkspaceAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchWorkspaceAssociationsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchWorkspaceAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchWorkspaceAssociationsRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchCriteria != nil {
+		s.WriteStruct(schemas.SearchWorkspaceAssociationsRequest_SearchCriteria)
+		v.SearchCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchFilter != nil {
+		s.WriteStruct(schemas.SearchWorkspaceAssociationsRequest_SearchFilter)
+		v.SearchFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchWorkspaceAssociationsOutput struct {
 
 	// The approximate total number of workspace associations that match the search
@@ -70,13 +100,41 @@ type SearchWorkspaceAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchWorkspaceAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchWorkspaceAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchWorkspaceAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTotalCount != nil {
+		s.WriteInt64(schemas.SearchWorkspaceAssociationsResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchWorkspaceAssociationsResponse_NextToken, *v.NextToken)
+	}
+	serializeWorkspaceAssociationSearchSummaryList(s, schemas.SearchWorkspaceAssociationsResponse_WorkspaceAssociations, v.WorkspaceAssociations)
+}
+func (v *SearchWorkspaceAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchWorkspaceAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchWorkspaceAssociationsResponse_ApproximateTotalCount:
+			v.ApproximateTotalCount = new(int64)
+			return d.ReadInt64(schemas.SearchWorkspaceAssociationsResponse_ApproximateTotalCount, v.ApproximateTotalCount)
+		case schemas.SearchWorkspaceAssociationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchWorkspaceAssociationsResponse_NextToken, v.NextToken)
+		case schemas.SearchWorkspaceAssociationsResponse_WorkspaceAssociations:
+			return deserializeWorkspaceAssociationSearchSummaryList(d, schemas.SearchWorkspaceAssociationsResponse_WorkspaceAssociations, &v.WorkspaceAssociations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchWorkspaceAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchWorkspaceAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchWorkspaceAssociations, schemas.SearchWorkspaceAssociationsRequest, schemas.SearchWorkspaceAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchWorkspaceAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchWorkspaceAssociations, schemas.SearchWorkspaceAssociationsRequest, schemas.SearchWorkspaceAssociationsResponse), output: &SearchWorkspaceAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

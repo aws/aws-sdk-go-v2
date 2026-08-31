@@ -5,7 +5,9 @@ package comprehend
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,26 @@ type ListPiiEntitiesDetectionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPiiEntitiesDetectionJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPiiEntitiesDetectionJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPiiEntitiesDetectionJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListPiiEntitiesDetectionJobsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPiiEntitiesDetectionJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPiiEntitiesDetectionJobsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListPiiEntitiesDetectionJobsOutput struct {
 
 	// Identifies the next page of results to return.
@@ -55,13 +77,35 @@ type ListPiiEntitiesDetectionJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPiiEntitiesDetectionJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPiiEntitiesDetectionJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPiiEntitiesDetectionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPiiEntitiesDetectionJobsResponse_NextToken, *v.NextToken)
+	}
+	serializePiiEntitiesDetectionJobPropertiesList(s, schemas.ListPiiEntitiesDetectionJobsResponse_PiiEntitiesDetectionJobPropertiesList, v.PiiEntitiesDetectionJobPropertiesList)
+}
+func (v *ListPiiEntitiesDetectionJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPiiEntitiesDetectionJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPiiEntitiesDetectionJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPiiEntitiesDetectionJobsResponse_NextToken, v.NextToken)
+		case schemas.ListPiiEntitiesDetectionJobsResponse_PiiEntitiesDetectionJobPropertiesList:
+			return deserializePiiEntitiesDetectionJobPropertiesList(d, schemas.ListPiiEntitiesDetectionJobsResponse_PiiEntitiesDetectionJobPropertiesList, &v.PiiEntitiesDetectionJobPropertiesList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPiiEntitiesDetectionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPiiEntitiesDetectionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPiiEntitiesDetectionJobs, schemas.ListPiiEntitiesDetectionJobsRequest, schemas.ListPiiEntitiesDetectionJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPiiEntitiesDetectionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPiiEntitiesDetectionJobs, schemas.ListPiiEntitiesDetectionJobsRequest, schemas.ListPiiEntitiesDetectionJobsResponse), output: &ListPiiEntitiesDetectionJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

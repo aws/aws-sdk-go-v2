@@ -5,6 +5,8 @@ package glacier
 import (
 	"context"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type ListTagsForVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForVaultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsForVaultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForVaultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListTagsForVaultInput_accountId, *v.AccountId)
+	}
+	if v.VaultName != nil {
+		s.WriteString(schemas.ListTagsForVaultInput_vaultName, *v.VaultName)
+	}
+}
+
 // Contains the Amazon Glacier response to your request.
 type ListTagsForVaultOutput struct {
 
@@ -59,13 +76,29 @@ type ListTagsForVaultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForVaultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsForVaultOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForVaultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTagMap(s, schemas.ListTagsForVaultOutput_Tags, v.Tags)
+}
+func (v *ListTagsForVaultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTagsForVaultOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTagsForVaultOutput_Tags:
+			return deserializeTagMap(d, schemas.ListTagsForVaultOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTagsForVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTagsForVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForVault, schemas.ListTagsForVaultInput, schemas.ListTagsForVaultOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTagsForVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForVault, schemas.ListTagsForVaultInput, schemas.ListTagsForVaultOutput), output: &ListTagsForVaultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

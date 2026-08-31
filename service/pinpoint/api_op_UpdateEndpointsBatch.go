@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,23 @@ type UpdateEndpointsBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEndpointsBatchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEndpointsBatchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEndpointsBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.UpdateEndpointsBatchRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.EndpointBatchRequest != nil {
+		s.WriteStruct(schemas.UpdateEndpointsBatchRequest_EndpointBatchRequest)
+		v.EndpointBatchRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateEndpointsBatchOutput struct {
 
 	// Provides information about an API request or response.
@@ -58,13 +77,34 @@ type UpdateEndpointsBatchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEndpointsBatchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEndpointsBatchResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEndpointsBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageBody != nil {
+		s.WriteStruct(schemas.UpdateEndpointsBatchResponse_MessageBody)
+		v.MessageBody.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateEndpointsBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEndpointsBatchResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEndpointsBatchResponse_MessageBody:
+			v.MessageBody = &types.MessageBody{}
+			return v.MessageBody.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEndpointsBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEndpointsBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEndpointsBatch, schemas.UpdateEndpointsBatchRequest, schemas.UpdateEndpointsBatchResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEndpointsBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEndpointsBatch, schemas.UpdateEndpointsBatchRequest, schemas.UpdateEndpointsBatchResponse), output: &UpdateEndpointsBatchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

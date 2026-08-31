@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -84,6 +86,22 @@ type GetDiscoveredResourceCountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDiscoveredResourceCountsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDiscoveredResourceCountsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDiscoveredResourceCountsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.GetDiscoveredResourceCountsRequest_limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDiscoveredResourceCountsRequest_nextToken, *v.NextToken)
+	}
+	serializeResourceTypes(s, schemas.GetDiscoveredResourceCountsRequest_resourceTypes, v.ResourceTypes)
+}
+
 type GetDiscoveredResourceCountsOutput struct {
 
 	// The string that you use in a subsequent request to get the next page of results
@@ -116,13 +134,40 @@ type GetDiscoveredResourceCountsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDiscoveredResourceCountsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDiscoveredResourceCountsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDiscoveredResourceCountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDiscoveredResourceCountsResponse_nextToken, *v.NextToken)
+	}
+	serializeResourceCounts(s, schemas.GetDiscoveredResourceCountsResponse_resourceCounts, v.ResourceCounts)
+	if v.TotalDiscoveredResources != 0 {
+		s.WriteInt64(schemas.GetDiscoveredResourceCountsResponse_totalDiscoveredResources, v.TotalDiscoveredResources)
+	}
+}
+func (v *GetDiscoveredResourceCountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDiscoveredResourceCountsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDiscoveredResourceCountsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetDiscoveredResourceCountsResponse_nextToken, v.NextToken)
+		case schemas.GetDiscoveredResourceCountsResponse_resourceCounts:
+			return deserializeResourceCounts(d, schemas.GetDiscoveredResourceCountsResponse_resourceCounts, &v.ResourceCounts)
+		case schemas.GetDiscoveredResourceCountsResponse_totalDiscoveredResources:
+			return d.ReadInt64(schemas.GetDiscoveredResourceCountsResponse_totalDiscoveredResources, &v.TotalDiscoveredResources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDiscoveredResourceCountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDiscoveredResourceCounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDiscoveredResourceCounts, schemas.GetDiscoveredResourceCountsRequest, schemas.GetDiscoveredResourceCountsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDiscoveredResourceCounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDiscoveredResourceCounts, schemas.GetDiscoveredResourceCountsRequest, schemas.GetDiscoveredResourceCountsResponse), output: &GetDiscoveredResourceCountsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

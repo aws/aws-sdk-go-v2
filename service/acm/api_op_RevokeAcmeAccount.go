@@ -4,6 +4,8 @@ package acm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/acm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -40,6 +42,20 @@ type RevokeAcmeAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeAcmeAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeAcmeAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeAcmeAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountUrl != nil {
+		s.WriteString(schemas.RevokeAcmeAccountRequest_AccountUrl, *v.AccountUrl)
+	}
+	if v.AcmeEndpointArn != nil {
+		s.WriteString(schemas.RevokeAcmeAccountRequest_AcmeEndpointArn, *v.AcmeEndpointArn)
+	}
+}
 func (in *RevokeAcmeAccountInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ServiceType = ptr.String("ACM-ACME")
@@ -52,13 +68,26 @@ type RevokeAcmeAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeAcmeAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeAcmeAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RevokeAcmeAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRevokeAcmeAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRevokeAcmeAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeAcmeAccount, schemas.RevokeAcmeAccountRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRevokeAcmeAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeAcmeAccount, schemas.RevokeAcmeAccountRequest, nil), output: &RevokeAcmeAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

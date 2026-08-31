@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,34 @@ type SearchPromptsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchPromptsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchPromptsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchPromptsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchPromptsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchPromptsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchPromptsRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchCriteria != nil {
+		s.WriteStruct(schemas.SearchPromptsRequest_SearchCriteria)
+		v.SearchCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchFilter != nil {
+		s.WriteStruct(schemas.SearchPromptsRequest_SearchFilter)
+		v.SearchFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchPromptsOutput struct {
 
 	// The total number of quick connects which matched your search query.
@@ -68,13 +98,41 @@ type SearchPromptsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchPromptsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchPromptsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchPromptsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTotalCount != nil {
+		s.WriteInt64(schemas.SearchPromptsResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchPromptsResponse_NextToken, *v.NextToken)
+	}
+	serializePromptList(s, schemas.SearchPromptsResponse_Prompts, v.Prompts)
+}
+func (v *SearchPromptsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchPromptsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchPromptsResponse_ApproximateTotalCount:
+			v.ApproximateTotalCount = new(int64)
+			return d.ReadInt64(schemas.SearchPromptsResponse_ApproximateTotalCount, v.ApproximateTotalCount)
+		case schemas.SearchPromptsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchPromptsResponse_NextToken, v.NextToken)
+		case schemas.SearchPromptsResponse_Prompts:
+			return deserializePromptList(d, schemas.SearchPromptsResponse_Prompts, &v.Prompts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchPromptsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchPrompts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchPrompts, schemas.SearchPromptsRequest, schemas.SearchPromptsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchPrompts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchPrompts, schemas.SearchPromptsRequest, schemas.SearchPromptsResponse), output: &SearchPromptsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

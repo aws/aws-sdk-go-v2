@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,24 @@ type GetBlueprintsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBlueprintsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBlueprintsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBlueprintsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppCategory != "" {
+		s.WriteString(schemas.GetBlueprintsRequest_appCategory, string(v.AppCategory))
+	}
+	if v.IncludeInactive != nil {
+		s.WriteBool(schemas.GetBlueprintsRequest_includeInactive, *v.IncludeInactive)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.GetBlueprintsRequest_pageToken, *v.PageToken)
+	}
+}
+
 type GetBlueprintsOutput struct {
 
 	// An array of key-value pairs that contains information about the available
@@ -73,13 +93,35 @@ type GetBlueprintsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBlueprintsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBlueprintsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBlueprintsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBlueprintList(s, schemas.GetBlueprintsResult_blueprints, v.Blueprints)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetBlueprintsResult_nextPageToken, *v.NextPageToken)
+	}
+}
+func (v *GetBlueprintsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBlueprintsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBlueprintsResult_blueprints:
+			return deserializeBlueprintList(d, schemas.GetBlueprintsResult_blueprints, &v.Blueprints)
+		case schemas.GetBlueprintsResult_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetBlueprintsResult_nextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBlueprintsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetBlueprints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBlueprints, schemas.GetBlueprintsRequest, schemas.GetBlueprintsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetBlueprints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBlueprints, schemas.GetBlueprintsRequest, schemas.GetBlueprintsResult), output: &GetBlueprintsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

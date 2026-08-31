@@ -4,6 +4,8 @@ package organizations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -91,6 +93,18 @@ type DisableAWSServiceAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableAWSServiceAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableAWSServiceAccessRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableAWSServiceAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServicePrincipal != nil {
+		s.WriteString(schemas.DisableAWSServiceAccessRequest_ServicePrincipal, *v.ServicePrincipal)
+	}
+}
+
 type DisableAWSServiceAccessOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -98,13 +112,26 @@ type DisableAWSServiceAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableAWSServiceAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableAWSServiceAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisableAWSServiceAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableAWSServiceAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableAWSServiceAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableAWSServiceAccess, schemas.DisableAWSServiceAccessRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisableAWSServiceAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableAWSServiceAccess, schemas.DisableAWSServiceAccessRequest, nil), output: &DisableAWSServiceAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

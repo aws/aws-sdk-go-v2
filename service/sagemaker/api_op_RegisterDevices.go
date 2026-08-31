@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,20 @@ type RegisterDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterDevicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterDevicesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterDevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceFleetName != nil {
+		s.WriteString(schemas.RegisterDevicesRequest_DeviceFleetName, *v.DeviceFleetName)
+	}
+	serializeDevices(s, schemas.RegisterDevicesRequest_Devices, v.Devices)
+	serializeTagList(s, schemas.RegisterDevicesRequest_Tags, v.Tags)
+}
+
 type RegisterDevicesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +65,26 @@ type RegisterDevicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterDevicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RegisterDevicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterDevices, schemas.RegisterDevicesRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterDevices, schemas.RegisterDevicesRequest, nil), output: &RegisterDevicesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

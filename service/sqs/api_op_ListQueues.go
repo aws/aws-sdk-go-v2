@@ -5,6 +5,8 @@ package sqs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,24 @@ type ListQueuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueuesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueuesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueuesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListQueuesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueuesRequest_NextToken, *v.NextToken)
+	}
+	if v.QueueNamePrefix != nil {
+		s.WriteString(schemas.ListQueuesRequest_QueueNamePrefix, *v.QueueNamePrefix)
+	}
+}
+
 // A list of your queues.
 type ListQueuesOutput struct {
 
@@ -75,13 +95,35 @@ type ListQueuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueuesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueuesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueuesResult_NextToken, *v.NextToken)
+	}
+	serializeQueueUrlList(s, schemas.ListQueuesResult_QueueUrls, v.QueueUrls)
+}
+func (v *ListQueuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListQueuesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListQueuesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListQueuesResult_NextToken, v.NextToken)
+		case schemas.ListQueuesResult_QueueUrls:
+			return deserializeQueueUrlList(d, schemas.ListQueuesResult_QueueUrls, &v.QueueUrls)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListQueues{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueues, schemas.ListQueuesRequest, schemas.ListQueuesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListQueues{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueues, schemas.ListQueuesRequest, schemas.ListQueuesResult), output: &ListQueuesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

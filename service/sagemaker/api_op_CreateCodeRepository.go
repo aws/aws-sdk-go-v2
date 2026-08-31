@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,24 @@ type CreateCodeRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCodeRepositoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCodeRepositoryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCodeRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeRepositoryName != nil {
+		s.WriteString(schemas.CreateCodeRepositoryInput_CodeRepositoryName, *v.CodeRepositoryName)
+	}
+	if v.GitConfig != nil {
+		s.WriteStruct(schemas.CreateCodeRepositoryInput_GitConfig)
+		v.GitConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateCodeRepositoryInput_Tags, v.Tags)
+}
+
 type CreateCodeRepositoryOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new repository.
@@ -70,13 +90,32 @@ type CreateCodeRepositoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCodeRepositoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCodeRepositoryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCodeRepositoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeRepositoryArn != nil {
+		s.WriteString(schemas.CreateCodeRepositoryOutput_CodeRepositoryArn, *v.CodeRepositoryArn)
+	}
+}
+func (v *CreateCodeRepositoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCodeRepositoryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCodeRepositoryOutput_CodeRepositoryArn:
+			v.CodeRepositoryArn = new(string)
+			return d.ReadString(schemas.CreateCodeRepositoryOutput_CodeRepositoryArn, v.CodeRepositoryArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCodeRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCodeRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCodeRepository, schemas.CreateCodeRepositoryInput, schemas.CreateCodeRepositoryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCodeRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCodeRepository, schemas.CreateCodeRepositoryInput, schemas.CreateCodeRepositoryOutput), output: &CreateCodeRepositoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

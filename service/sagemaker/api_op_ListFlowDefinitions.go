@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -51,6 +53,30 @@ type ListFlowDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFlowDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFlowDefinitionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFlowDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListFlowDefinitionsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListFlowDefinitionsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFlowDefinitionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFlowDefinitionsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListFlowDefinitionsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListFlowDefinitionsOutput struct {
 
 	// An array of objects describing the flow definitions.
@@ -67,13 +93,35 @@ type ListFlowDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFlowDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFlowDefinitionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFlowDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFlowDefinitionSummaries(s, schemas.ListFlowDefinitionsResponse_FlowDefinitionSummaries, v.FlowDefinitionSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFlowDefinitionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFlowDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFlowDefinitionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFlowDefinitionsResponse_FlowDefinitionSummaries:
+			return deserializeFlowDefinitionSummaries(d, schemas.ListFlowDefinitionsResponse_FlowDefinitionSummaries, &v.FlowDefinitionSummaries)
+		case schemas.ListFlowDefinitionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFlowDefinitionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFlowDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFlowDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFlowDefinitions, schemas.ListFlowDefinitionsRequest, schemas.ListFlowDefinitionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListFlowDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFlowDefinitions, schemas.ListFlowDefinitionsRequest, schemas.ListFlowDefinitionsResponse), output: &ListFlowDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

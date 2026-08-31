@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,36 @@ type CreateViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateViewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateViewRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateViewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateViewRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Content != nil {
+		s.WriteStruct(schemas.CreateViewRequest_Content)
+		v.Content.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateViewRequest_Description, *v.Description)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateViewRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateViewRequest_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateViewRequest_Status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.CreateViewRequest_Tags, v.Tags)
+}
+
 type CreateViewOutput struct {
 
 	// A view resource object. Contains metadata and content necessary to render the
@@ -86,13 +118,34 @@ type CreateViewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateViewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateViewResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateViewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.View != nil {
+		s.WriteStruct(schemas.CreateViewResponse_View)
+		v.View.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateViewResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateViewResponse_View:
+			v.View = &types.View{}
+			return v.View.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateView{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateView, schemas.CreateViewRequest, schemas.CreateViewResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateView{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateView, schemas.CreateViewRequest, schemas.CreateViewResponse), output: &CreateViewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

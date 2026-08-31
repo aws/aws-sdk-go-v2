@@ -4,7 +4,9 @@ package mailmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,22 @@ type UpdateArchiveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateArchiveInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateArchiveRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateArchiveInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveId != nil {
+		s.WriteString(schemas.UpdateArchiveRequest_ArchiveId, *v.ArchiveId)
+	}
+	if v.ArchiveName != nil {
+		s.WriteString(schemas.UpdateArchiveRequest_ArchiveName, *v.ArchiveName)
+	}
+	serializeArchiveRetention(s, schemas.UpdateArchiveRequest_Retention, v.Retention)
+}
+
 // The response indicating if the archive update succeeded or failed.
 //
 // On success, returns an HTTP 200 status code. On failure, returns an error
@@ -52,13 +70,26 @@ type UpdateArchiveOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateArchiveOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateArchiveResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateArchiveOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateArchiveOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateArchiveResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateArchive{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateArchive, schemas.UpdateArchiveRequest, schemas.UpdateArchiveResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateArchive{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateArchive, schemas.UpdateArchiveRequest, schemas.UpdateArchiveResponse), output: &UpdateArchiveOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

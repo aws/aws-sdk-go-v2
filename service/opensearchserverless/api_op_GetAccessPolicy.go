@@ -4,7 +4,9 @@ package opensearchserverless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,38 @@ type GetAccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccessPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccessPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccessPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetAccessPolicyRequest_name, *v.Name)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GetAccessPolicyRequest_type, string(v.Type))
+	}
+}
+func (v *GetAccessPolicyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccessPolicyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccessPolicyRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetAccessPolicyRequest_name, v.Name)
+		case schemas.GetAccessPolicyRequest_type:
+			var ev string
+			if err := d.ReadString(schemas.GetAccessPolicyRequest_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.AccessPolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type GetAccessPolicyOutput struct {
 
 	// Details about the requested access policy.
@@ -52,13 +86,34 @@ type GetAccessPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccessPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccessPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccessPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPolicyDetail != nil {
+		s.WriteStruct(schemas.GetAccessPolicyResponse_accessPolicyDetail)
+		v.AccessPolicyDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAccessPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccessPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccessPolicyResponse_accessPolicyDetail:
+			v.AccessPolicyDetail = &types.AccessPolicyDetail{}
+			return v.AccessPolicyDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetAccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccessPolicy, schemas.GetAccessPolicyRequest, schemas.GetAccessPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetAccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccessPolicy, schemas.GetAccessPolicyRequest, schemas.GetAccessPolicyResponse), output: &GetAccessPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

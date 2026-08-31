@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeAlgorithmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAlgorithmInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAlgorithmRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAlgorithmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlgorithmArn != nil {
+		s.WriteString(schemas.DescribeAlgorithmRequest_algorithmArn, *v.AlgorithmArn)
+	}
+}
+
 type DescribeAlgorithmOutput struct {
 
 	// A listing of the properties of the algorithm.
@@ -45,13 +59,34 @@ type DescribeAlgorithmOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAlgorithmOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAlgorithmResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAlgorithmOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Algorithm != nil {
+		s.WriteStruct(schemas.DescribeAlgorithmResponse_algorithm)
+		v.Algorithm.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAlgorithmOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAlgorithmResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAlgorithmResponse_algorithm:
+			v.Algorithm = &types.Algorithm{}
+			return v.Algorithm.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAlgorithmMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAlgorithm{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAlgorithm, schemas.DescribeAlgorithmRequest, schemas.DescribeAlgorithmResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAlgorithm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAlgorithm, schemas.DescribeAlgorithmRequest, schemas.DescribeAlgorithmResponse), output: &DescribeAlgorithmOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

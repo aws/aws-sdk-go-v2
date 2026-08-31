@@ -4,7 +4,9 @@ package route53resolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteResolverRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResolverRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResolverRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResolverRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverRuleId != nil {
+		s.WriteString(schemas.DeleteResolverRuleRequest_ResolverRuleId, *v.ResolverRuleId)
+	}
+}
+
 type DeleteResolverRuleOutput struct {
 
 	// Information about the DeleteResolverRule request, including the status of the
@@ -50,13 +64,34 @@ type DeleteResolverRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResolverRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResolverRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResolverRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverRule != nil {
+		s.WriteStruct(schemas.DeleteResolverRuleResponse_ResolverRule)
+		v.ResolverRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteResolverRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResolverRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteResolverRuleResponse_ResolverRule:
+			v.ResolverRule = &types.ResolverRule{}
+			return v.ResolverRule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteResolverRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteResolverRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResolverRule, schemas.DeleteResolverRuleRequest, schemas.DeleteResolverRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteResolverRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResolverRule, schemas.DeleteResolverRuleRequest, schemas.DeleteResolverRuleResponse), output: &DeleteResolverRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

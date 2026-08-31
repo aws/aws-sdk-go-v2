@@ -4,7 +4,9 @@ package organizations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -88,6 +90,21 @@ type DescribeEffectivePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEffectivePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEffectivePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEffectivePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyType != "" {
+		s.WriteString(schemas.DescribeEffectivePolicyRequest_PolicyType, string(v.PolicyType))
+	}
+	if v.TargetId != nil {
+		s.WriteString(schemas.DescribeEffectivePolicyRequest_TargetId, *v.TargetId)
+	}
+}
+
 type DescribeEffectivePolicyOutput struct {
 
 	// The contents of the effective policy.
@@ -99,13 +116,34 @@ type DescribeEffectivePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEffectivePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEffectivePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEffectivePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EffectivePolicy != nil {
+		s.WriteStruct(schemas.DescribeEffectivePolicyResponse_EffectivePolicy)
+		v.EffectivePolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeEffectivePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEffectivePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEffectivePolicyResponse_EffectivePolicy:
+			v.EffectivePolicy = &types.EffectivePolicy{}
+			return v.EffectivePolicy.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEffectivePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEffectivePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEffectivePolicy, schemas.DescribeEffectivePolicyRequest, schemas.DescribeEffectivePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEffectivePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEffectivePolicy, schemas.DescribeEffectivePolicyRequest, schemas.DescribeEffectivePolicyResponse), output: &DescribeEffectivePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,24 @@ type PopulateIdMappingTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PopulateIdMappingTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PopulateIdMappingTableInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PopulateIdMappingTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdMappingTableIdentifier != nil {
+		s.WriteString(schemas.PopulateIdMappingTableInput_idMappingTableIdentifier, *v.IdMappingTableIdentifier)
+	}
+	if v.JobType != "" {
+		s.WriteString(schemas.PopulateIdMappingTableInput_jobType, string(v.JobType))
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.PopulateIdMappingTableInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+
 type PopulateIdMappingTableOutput struct {
 
 	// The unique identifier of the mapping job that will populate the ID mapping
@@ -73,13 +93,32 @@ type PopulateIdMappingTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PopulateIdMappingTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PopulateIdMappingTableOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PopulateIdMappingTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdMappingJobId != nil {
+		s.WriteString(schemas.PopulateIdMappingTableOutput_idMappingJobId, *v.IdMappingJobId)
+	}
+}
+func (v *PopulateIdMappingTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PopulateIdMappingTableOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PopulateIdMappingTableOutput_idMappingJobId:
+			v.IdMappingJobId = new(string)
+			return d.ReadString(schemas.PopulateIdMappingTableOutput_idMappingJobId, v.IdMappingJobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPopulateIdMappingTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPopulateIdMappingTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PopulateIdMappingTable, schemas.PopulateIdMappingTableInput, schemas.PopulateIdMappingTableOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPopulateIdMappingTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PopulateIdMappingTable, schemas.PopulateIdMappingTableInput, schemas.PopulateIdMappingTableOutput), output: &PopulateIdMappingTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

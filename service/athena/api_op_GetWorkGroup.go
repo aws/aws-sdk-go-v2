@@ -4,7 +4,9 @@ package athena
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetWorkGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkGroup != nil {
+		s.WriteString(schemas.GetWorkGroupInput_WorkGroup, *v.WorkGroup)
+	}
+}
+
 type GetWorkGroupOutput struct {
 
 	// Information about the workgroup.
@@ -45,13 +59,34 @@ type GetWorkGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkGroup != nil {
+		s.WriteStruct(schemas.GetWorkGroupOutput_WorkGroup)
+		v.WorkGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetWorkGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWorkGroupOutput_WorkGroup:
+			v.WorkGroup = &types.WorkGroup{}
+			return v.WorkGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWorkGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetWorkGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkGroup, schemas.GetWorkGroupInput, schemas.GetWorkGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetWorkGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkGroup, schemas.GetWorkGroupInput, schemas.GetWorkGroupOutput), output: &GetWorkGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

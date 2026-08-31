@@ -5,7 +5,9 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,29 @@ type UpdateCollectionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCollectionGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCollectionGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCollectionGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityLimits != nil {
+		s.WriteStruct(schemas.UpdateCollectionGroupRequest_capacityLimits)
+		v.CapacityLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateCollectionGroupRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateCollectionGroupRequest_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateCollectionGroupRequest_id, *v.Id)
+	}
+}
+
 type UpdateCollectionGroupOutput struct {
 
 	// Details about the updated collection group.
@@ -56,13 +81,34 @@ type UpdateCollectionGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCollectionGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCollectionGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCollectionGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UpdateCollectionGroupDetail != nil {
+		s.WriteStruct(schemas.UpdateCollectionGroupResponse_updateCollectionGroupDetail)
+		v.UpdateCollectionGroupDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateCollectionGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCollectionGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCollectionGroupResponse_updateCollectionGroupDetail:
+			v.UpdateCollectionGroupDetail = &types.UpdateCollectionGroupDetail{}
+			return v.UpdateCollectionGroupDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCollectionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateCollectionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCollectionGroup, schemas.UpdateCollectionGroupRequest, schemas.UpdateCollectionGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateCollectionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCollectionGroup, schemas.UpdateCollectionGroupRequest, schemas.UpdateCollectionGroupResponse), output: &UpdateCollectionGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package organizations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -99,6 +101,21 @@ type EnablePolicyTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnablePolicyTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnablePolicyTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnablePolicyTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyType != "" {
+		s.WriteString(schemas.EnablePolicyTypeRequest_PolicyType, string(v.PolicyType))
+	}
+	if v.RootId != nil {
+		s.WriteString(schemas.EnablePolicyTypeRequest_RootId, *v.RootId)
+	}
+}
+
 type EnablePolicyTypeOutput struct {
 
 	// A structure that shows the root with the updated list of enabled policy types.
@@ -110,13 +127,34 @@ type EnablePolicyTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnablePolicyTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnablePolicyTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnablePolicyTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Root != nil {
+		s.WriteStruct(schemas.EnablePolicyTypeResponse_Root)
+		v.Root.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EnablePolicyTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnablePolicyTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnablePolicyTypeResponse_Root:
+			v.Root = &types.Root{}
+			return v.Root.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnablePolicyTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnablePolicyType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnablePolicyType, schemas.EnablePolicyTypeRequest, schemas.EnablePolicyTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpEnablePolicyType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnablePolicyType, schemas.EnablePolicyTypeRequest, schemas.EnablePolicyTypeResponse), output: &EnablePolicyTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

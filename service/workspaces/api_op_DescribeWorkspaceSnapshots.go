@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeWorkspaceSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspaceSnapshotsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspaceSnapshotsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspaceSnapshotsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DescribeWorkspaceSnapshotsRequest_WorkspaceId, *v.WorkspaceId)
+	}
+}
+
 type DescribeWorkspaceSnapshotsOutput struct {
 
 	// Information about the snapshots that can be used to rebuild a WorkSpace. These
@@ -50,13 +64,32 @@ type DescribeWorkspaceSnapshotsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspaceSnapshotsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspaceSnapshotsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspaceSnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSnapshotList(s, schemas.DescribeWorkspaceSnapshotsResult_RebuildSnapshots, v.RebuildSnapshots)
+	serializeSnapshotList(s, schemas.DescribeWorkspaceSnapshotsResult_RestoreSnapshots, v.RestoreSnapshots)
+}
+func (v *DescribeWorkspaceSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWorkspaceSnapshotsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWorkspaceSnapshotsResult_RebuildSnapshots:
+			return deserializeSnapshotList(d, schemas.DescribeWorkspaceSnapshotsResult_RebuildSnapshots, &v.RebuildSnapshots)
+		case schemas.DescribeWorkspaceSnapshotsResult_RestoreSnapshots:
+			return deserializeSnapshotList(d, schemas.DescribeWorkspaceSnapshotsResult_RestoreSnapshots, &v.RestoreSnapshots)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWorkspaceSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWorkspaceSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspaceSnapshots, schemas.DescribeWorkspaceSnapshotsRequest, schemas.DescribeWorkspaceSnapshotsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeWorkspaceSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspaceSnapshots, schemas.DescribeWorkspaceSnapshotsRequest, schemas.DescribeWorkspaceSnapshotsResult), output: &DescribeWorkspaceSnapshotsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

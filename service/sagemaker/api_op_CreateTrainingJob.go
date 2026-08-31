@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -318,6 +320,121 @@ type CreateTrainingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrainingJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTrainingJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTrainingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlgorithmSpecification != nil {
+		s.WriteStruct(schemas.CreateTrainingJobRequest_AlgorithmSpecification)
+		v.AlgorithmSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CheckpointConfig != nil {
+		s.WriteStruct(schemas.CreateTrainingJobRequest_CheckpointConfig)
+		v.CheckpointConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DebugHookConfig != nil {
+		s.WriteStruct(schemas.CreateTrainingJobRequest_DebugHookConfig)
+		v.DebugHookConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDebugRuleConfigurations(s, schemas.CreateTrainingJobRequest_DebugRuleConfigurations, v.DebugRuleConfigurations)
+	if v.EnableInterContainerTrafficEncryption != nil {
+		s.WriteBool(schemas.CreateTrainingJobRequest_EnableInterContainerTrafficEncryption, *v.EnableInterContainerTrafficEncryption)
+	}
+	if v.EnableManagedSpotTraining != nil {
+		s.WriteBool(schemas.CreateTrainingJobRequest_EnableManagedSpotTraining, *v.EnableManagedSpotTraining)
+	}
+	if v.EnableNetworkIsolation != nil {
+		s.WriteBool(schemas.CreateTrainingJobRequest_EnableNetworkIsolation, *v.EnableNetworkIsolation)
+	}
+	serializeTrainingEnvironmentMap(s, schemas.CreateTrainingJobRequest_Environment, v.Environment)
+	if v.ExperimentConfig != nil {
+		s.WriteStruct(schemas.CreateTrainingJobRequest_ExperimentConfig)
+		v.ExperimentConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeHyperParameters(s, schemas.CreateTrainingJobRequest_HyperParameters, v.HyperParameters)
+	if v.InfraCheckConfig != nil {
+		s.WriteStruct(schemas.CreateTrainingJobRequest_InfraCheckConfig)
+		v.InfraCheckConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeInputDataConfig(s, schemas.CreateTrainingJobRequest_InputDataConfig, v.InputDataConfig)
+	if v.MlflowConfig != nil {
+		s.WriteStruct(schemas.CreateTrainingJobRequest_MlflowConfig)
+		v.MlflowConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelPackageConfig != nil {
+		s.WriteStruct(schemas.CreateTrainingJobRequest_ModelPackageConfig)
+		v.ModelPackageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.CreateTrainingJobRequest_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProfilerConfig != nil {
+		s.WriteStruct(schemas.CreateTrainingJobRequest_ProfilerConfig)
+		v.ProfilerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeProfilerRuleConfigurations(s, schemas.CreateTrainingJobRequest_ProfilerRuleConfigurations, v.ProfilerRuleConfigurations)
+	if v.RemoteDebugConfig != nil {
+		s.WriteStruct(schemas.CreateTrainingJobRequest_RemoteDebugConfig)
+		v.RemoteDebugConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceConfig != nil {
+		s.WriteStruct(schemas.CreateTrainingJobRequest_ResourceConfig)
+		v.ResourceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryStrategy != nil {
+		s.WriteStruct(schemas.CreateTrainingJobRequest_RetryStrategy)
+		v.RetryStrategy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateTrainingJobRequest_RoleArn, *v.RoleArn)
+	}
+	if v.ServerlessJobConfig != nil {
+		s.WriteStruct(schemas.CreateTrainingJobRequest_ServerlessJobConfig)
+		v.ServerlessJobConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SessionChainingConfig != nil {
+		s.WriteStruct(schemas.CreateTrainingJobRequest_SessionChainingConfig)
+		v.SessionChainingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StoppingCondition != nil {
+		s.WriteStruct(schemas.CreateTrainingJobRequest_StoppingCondition)
+		v.StoppingCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateTrainingJobRequest_Tags, v.Tags)
+	if v.TensorBoardOutputConfig != nil {
+		s.WriteStruct(schemas.CreateTrainingJobRequest_TensorBoardOutputConfig)
+		v.TensorBoardOutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrainingJobName != nil {
+		s.WriteString(schemas.CreateTrainingJobRequest_TrainingJobName, *v.TrainingJobName)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateTrainingJobRequest_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateTrainingJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the training job.
@@ -331,13 +448,32 @@ type CreateTrainingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrainingJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTrainingJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTrainingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrainingJobArn != nil {
+		s.WriteString(schemas.CreateTrainingJobResponse_TrainingJobArn, *v.TrainingJobArn)
+	}
+}
+func (v *CreateTrainingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTrainingJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTrainingJobResponse_TrainingJobArn:
+			v.TrainingJobArn = new(string)
+			return d.ReadString(schemas.CreateTrainingJobResponse_TrainingJobArn, v.TrainingJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTrainingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTrainingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrainingJob, schemas.CreateTrainingJobRequest, schemas.CreateTrainingJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateTrainingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrainingJob, schemas.CreateTrainingJobRequest, schemas.CreateTrainingJobResponse), output: &CreateTrainingJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

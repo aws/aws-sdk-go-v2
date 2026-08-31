@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,19 @@ type BatchDetectEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDetectEntitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetectEntitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetectEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.BatchDetectEntitiesRequest_LanguageCode, string(v.LanguageCode))
+	}
+	serializeCustomerInputStringList(s, schemas.BatchDetectEntitiesRequest_TextList, v.TextList)
+}
+
 type BatchDetectEntitiesOutput struct {
 
 	// A list containing one object for each document that contained an error. The
@@ -70,13 +85,32 @@ type BatchDetectEntitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDetectEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetectEntitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetectEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchItemErrorList(s, schemas.BatchDetectEntitiesResponse_ErrorList, v.ErrorList)
+	serializeListOfDetectEntitiesResult(s, schemas.BatchDetectEntitiesResponse_ResultList, v.ResultList)
+}
+func (v *BatchDetectEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDetectEntitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDetectEntitiesResponse_ErrorList:
+			return deserializeBatchItemErrorList(d, schemas.BatchDetectEntitiesResponse_ErrorList, &v.ErrorList)
+		case schemas.BatchDetectEntitiesResponse_ResultList:
+			return deserializeListOfDetectEntitiesResult(d, schemas.BatchDetectEntitiesResponse_ResultList, &v.ResultList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDetectEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDetectEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDetectEntities, schemas.BatchDetectEntitiesRequest, schemas.BatchDetectEntitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDetectEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDetectEntities, schemas.BatchDetectEntitiesRequest, schemas.BatchDetectEntitiesResponse), output: &BatchDetectEntitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

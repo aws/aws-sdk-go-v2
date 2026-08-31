@@ -5,7 +5,9 @@ package neptunegraph
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -49,6 +51,23 @@ type ListGraphSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGraphSnapshotsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGraphSnapshotsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGraphSnapshotsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphIdentifier != nil {
+		s.WriteString(schemas.ListGraphSnapshotsInput_graphIdentifier, *v.GraphIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGraphSnapshotsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGraphSnapshotsInput_nextToken, *v.NextToken)
+	}
+}
 func (in *ListGraphSnapshotsInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ApiType = ptr.String("ControlPlane")
@@ -74,13 +93,35 @@ type ListGraphSnapshotsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGraphSnapshotsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGraphSnapshotsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGraphSnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGraphSnapshotSummaryList(s, schemas.ListGraphSnapshotsOutput_graphSnapshots, v.GraphSnapshots)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGraphSnapshotsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListGraphSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGraphSnapshotsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGraphSnapshotsOutput_graphSnapshots:
+			return deserializeGraphSnapshotSummaryList(d, schemas.ListGraphSnapshotsOutput_graphSnapshots, &v.GraphSnapshots)
+		case schemas.ListGraphSnapshotsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGraphSnapshotsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGraphSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGraphSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGraphSnapshots, schemas.ListGraphSnapshotsInput, schemas.ListGraphSnapshotsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGraphSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGraphSnapshots, schemas.ListGraphSnapshotsInput, schemas.ListGraphSnapshotsOutput), output: &ListGraphSnapshotsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

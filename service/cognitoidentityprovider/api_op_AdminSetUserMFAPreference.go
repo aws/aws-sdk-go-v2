@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -88,6 +90,41 @@ type AdminSetUserMFAPreferenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminSetUserMFAPreferenceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminSetUserMFAPreferenceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminSetUserMFAPreferenceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailMfaSettings != nil {
+		s.WriteStruct(schemas.AdminSetUserMFAPreferenceRequest_EmailMfaSettings)
+		v.EmailMfaSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SMSMfaSettings != nil {
+		s.WriteStruct(schemas.AdminSetUserMFAPreferenceRequest_SMSMfaSettings)
+		v.SMSMfaSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SoftwareTokenMfaSettings != nil {
+		s.WriteStruct(schemas.AdminSetUserMFAPreferenceRequest_SoftwareTokenMfaSettings)
+		v.SoftwareTokenMfaSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AdminSetUserMFAPreferenceRequest_UserPoolId, *v.UserPoolId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.AdminSetUserMFAPreferenceRequest_Username, *v.Username)
+	}
+	if v.WebAuthnMfaSettings != nil {
+		s.WriteStruct(schemas.AdminSetUserMFAPreferenceRequest_WebAuthnMfaSettings)
+		v.WebAuthnMfaSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type AdminSetUserMFAPreferenceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -95,13 +132,26 @@ type AdminSetUserMFAPreferenceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminSetUserMFAPreferenceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminSetUserMFAPreferenceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminSetUserMFAPreferenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AdminSetUserMFAPreferenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminSetUserMFAPreferenceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdminSetUserMFAPreferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminSetUserMFAPreference{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminSetUserMFAPreference, schemas.AdminSetUserMFAPreferenceRequest, schemas.AdminSetUserMFAPreferenceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminSetUserMFAPreference{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminSetUserMFAPreference, schemas.AdminSetUserMFAPreferenceRequest, schemas.AdminSetUserMFAPreferenceResponse), output: &AdminSetUserMFAPreferenceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

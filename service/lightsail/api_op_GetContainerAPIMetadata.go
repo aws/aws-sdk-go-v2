@@ -4,6 +4,8 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type GetContainerAPIMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContainerAPIMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContainerAPIMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContainerAPIMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetContainerAPIMetadataOutput struct {
 
 	// Metadata about Lightsail containers, such as the current version of the
@@ -40,13 +51,29 @@ type GetContainerAPIMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContainerAPIMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContainerAPIMetadataResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContainerAPIMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContainerServiceMetadataEntryList(s, schemas.GetContainerAPIMetadataResult_metadata, v.Metadata)
+}
+func (v *GetContainerAPIMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetContainerAPIMetadataResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetContainerAPIMetadataResult_metadata:
+			return deserializeContainerServiceMetadataEntryList(d, schemas.GetContainerAPIMetadataResult_metadata, &v.Metadata)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetContainerAPIMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetContainerAPIMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContainerAPIMetadata, schemas.GetContainerAPIMetadataRequest, schemas.GetContainerAPIMetadataResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetContainerAPIMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContainerAPIMetadata, schemas.GetContainerAPIMetadataRequest, schemas.GetContainerAPIMetadataResult), output: &GetContainerAPIMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

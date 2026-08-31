@@ -4,7 +4,9 @@ package amp
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amp/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DescribeQueryLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeQueryLoggingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQueryLoggingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQueryLoggingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DescribeQueryLoggingConfigurationRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+
 type DescribeQueryLoggingConfigurationOutput struct {
 
 	// The detailed information about the query logging configuration for the
@@ -49,13 +63,34 @@ type DescribeQueryLoggingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeQueryLoggingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQueryLoggingConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQueryLoggingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryLoggingConfiguration != nil {
+		s.WriteStruct(schemas.DescribeQueryLoggingConfigurationResponse_queryLoggingConfiguration)
+		v.QueryLoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeQueryLoggingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeQueryLoggingConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeQueryLoggingConfigurationResponse_queryLoggingConfiguration:
+			v.QueryLoggingConfiguration = &types.QueryLoggingConfigurationMetadata{}
+			return v.QueryLoggingConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeQueryLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeQueryLoggingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQueryLoggingConfiguration, schemas.DescribeQueryLoggingConfigurationRequest, schemas.DescribeQueryLoggingConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeQueryLoggingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQueryLoggingConfiguration, schemas.DescribeQueryLoggingConfigurationRequest, schemas.DescribeQueryLoggingConfigurationResponse), output: &DescribeQueryLoggingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

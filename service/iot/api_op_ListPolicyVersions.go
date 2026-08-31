@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type ListPolicyVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPolicyVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPolicyVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPolicyVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyName != nil {
+		s.WriteString(schemas.ListPolicyVersionsRequest_policyName, *v.PolicyName)
+	}
+}
+
 // The output from the ListPolicyVersions operation.
 type ListPolicyVersionsOutput struct {
 
@@ -51,13 +65,29 @@ type ListPolicyVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPolicyVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPolicyVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPolicyVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePolicyVersions(s, schemas.ListPolicyVersionsResponse_policyVersions, v.PolicyVersions)
+}
+func (v *ListPolicyVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPolicyVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPolicyVersionsResponse_policyVersions:
+			return deserializePolicyVersions(d, schemas.ListPolicyVersionsResponse_policyVersions, &v.PolicyVersions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPolicyVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPolicyVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyVersions, schemas.ListPolicyVersionsRequest, schemas.ListPolicyVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPolicyVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyVersions, schemas.ListPolicyVersionsRequest, schemas.ListPolicyVersionsResponse), output: &ListPolicyVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

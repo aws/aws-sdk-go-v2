@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,39 @@ type TestInvokeAuthorizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestInvokeAuthorizerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestInvokeAuthorizerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestInvokeAuthorizerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizerName != nil {
+		s.WriteString(schemas.TestInvokeAuthorizerRequest_authorizerName, *v.AuthorizerName)
+	}
+	if v.HttpContext != nil {
+		s.WriteStruct(schemas.TestInvokeAuthorizerRequest_httpContext)
+		v.HttpContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MqttContext != nil {
+		s.WriteStruct(schemas.TestInvokeAuthorizerRequest_mqttContext)
+		v.MqttContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TlsContext != nil {
+		s.WriteStruct(schemas.TestInvokeAuthorizerRequest_tlsContext)
+		v.TlsContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Token != nil {
+		s.WriteString(schemas.TestInvokeAuthorizerRequest_token, *v.Token)
+	}
+	if v.TokenSignature != nil {
+		s.WriteString(schemas.TestInvokeAuthorizerRequest_tokenSignature, *v.TokenSignature)
+	}
+}
+
 type TestInvokeAuthorizerOutput struct {
 
 	// The number of seconds after which the connection is terminated.
@@ -79,13 +114,53 @@ type TestInvokeAuthorizerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestInvokeAuthorizerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestInvokeAuthorizerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestInvokeAuthorizerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisconnectAfterInSeconds != nil {
+		s.WriteInt32(schemas.TestInvokeAuthorizerResponse_disconnectAfterInSeconds, *v.DisconnectAfterInSeconds)
+	}
+	if v.IsAuthenticated != nil {
+		s.WriteBool(schemas.TestInvokeAuthorizerResponse_isAuthenticated, *v.IsAuthenticated)
+	}
+	serializePolicyDocuments(s, schemas.TestInvokeAuthorizerResponse_policyDocuments, v.PolicyDocuments)
+	if v.PrincipalId != nil {
+		s.WriteString(schemas.TestInvokeAuthorizerResponse_principalId, *v.PrincipalId)
+	}
+	if v.RefreshAfterInSeconds != nil {
+		s.WriteInt32(schemas.TestInvokeAuthorizerResponse_refreshAfterInSeconds, *v.RefreshAfterInSeconds)
+	}
+}
+func (v *TestInvokeAuthorizerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestInvokeAuthorizerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestInvokeAuthorizerResponse_disconnectAfterInSeconds:
+			v.DisconnectAfterInSeconds = new(int32)
+			return d.ReadInt32(schemas.TestInvokeAuthorizerResponse_disconnectAfterInSeconds, v.DisconnectAfterInSeconds)
+		case schemas.TestInvokeAuthorizerResponse_isAuthenticated:
+			v.IsAuthenticated = new(bool)
+			return d.ReadBool(schemas.TestInvokeAuthorizerResponse_isAuthenticated, v.IsAuthenticated)
+		case schemas.TestInvokeAuthorizerResponse_policyDocuments:
+			return deserializePolicyDocuments(d, schemas.TestInvokeAuthorizerResponse_policyDocuments, &v.PolicyDocuments)
+		case schemas.TestInvokeAuthorizerResponse_principalId:
+			v.PrincipalId = new(string)
+			return d.ReadString(schemas.TestInvokeAuthorizerResponse_principalId, v.PrincipalId)
+		case schemas.TestInvokeAuthorizerResponse_refreshAfterInSeconds:
+			v.RefreshAfterInSeconds = new(int32)
+			return d.ReadInt32(schemas.TestInvokeAuthorizerResponse_refreshAfterInSeconds, v.RefreshAfterInSeconds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestInvokeAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTestInvokeAuthorizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestInvokeAuthorizer, schemas.TestInvokeAuthorizerRequest, schemas.TestInvokeAuthorizerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTestInvokeAuthorizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestInvokeAuthorizer, schemas.TestInvokeAuthorizerRequest, schemas.TestInvokeAuthorizerResponse), output: &TestInvokeAuthorizerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

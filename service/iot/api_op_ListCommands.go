@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,30 @@ type ListCommandsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCommandsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCommandsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCommandsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommandParameterName != nil {
+		s.WriteString(schemas.ListCommandsRequest_commandParameterName, *v.CommandParameterName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCommandsRequest_maxResults, *v.MaxResults)
+	}
+	if v.Namespace != "" {
+		s.WriteString(schemas.ListCommandsRequest_namespace, string(v.Namespace))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCommandsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListCommandsRequest_sortOrder, string(v.SortOrder))
+	}
+}
+
 type ListCommandsOutput struct {
 
 	// The list of commands.
@@ -69,13 +95,35 @@ type ListCommandsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCommandsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCommandsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCommandsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCommandSummaryList(s, schemas.ListCommandsResponse_commands, v.Commands)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCommandsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCommandsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCommandsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCommandsResponse_commands:
+			return deserializeCommandSummaryList(d, schemas.ListCommandsResponse_commands, &v.Commands)
+		case schemas.ListCommandsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCommandsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCommandsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCommands{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCommands, schemas.ListCommandsRequest, schemas.ListCommandsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCommands{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCommands, schemas.ListCommandsRequest, schemas.ListCommandsResponse), output: &ListCommandsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

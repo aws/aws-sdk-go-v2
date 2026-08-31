@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,34 @@ type SearchContactFlowModulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchContactFlowModulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchContactFlowModulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchContactFlowModulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchContactFlowModulesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchContactFlowModulesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchContactFlowModulesRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchCriteria != nil {
+		s.WriteStruct(schemas.SearchContactFlowModulesRequest_SearchCriteria)
+		v.SearchCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchFilter != nil {
+		s.WriteStruct(schemas.SearchContactFlowModulesRequest_SearchFilter)
+		v.SearchFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchContactFlowModulesOutput struct {
 
 	// The total number of flows which matched your search query.
@@ -71,13 +101,41 @@ type SearchContactFlowModulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchContactFlowModulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchContactFlowModulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchContactFlowModulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTotalCount != nil {
+		s.WriteInt64(schemas.SearchContactFlowModulesResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
+	}
+	serializeContactFlowModuleSearchSummaryList(s, schemas.SearchContactFlowModulesResponse_ContactFlowModules, v.ContactFlowModules)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchContactFlowModulesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *SearchContactFlowModulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchContactFlowModulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchContactFlowModulesResponse_ApproximateTotalCount:
+			v.ApproximateTotalCount = new(int64)
+			return d.ReadInt64(schemas.SearchContactFlowModulesResponse_ApproximateTotalCount, v.ApproximateTotalCount)
+		case schemas.SearchContactFlowModulesResponse_ContactFlowModules:
+			return deserializeContactFlowModuleSearchSummaryList(d, schemas.SearchContactFlowModulesResponse_ContactFlowModules, &v.ContactFlowModules)
+		case schemas.SearchContactFlowModulesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchContactFlowModulesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchContactFlowModulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchContactFlowModules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchContactFlowModules, schemas.SearchContactFlowModulesRequest, schemas.SearchContactFlowModulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchContactFlowModules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchContactFlowModules, schemas.SearchContactFlowModulesRequest, schemas.SearchContactFlowModulesResponse), output: &SearchContactFlowModulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

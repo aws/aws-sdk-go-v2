@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -84,6 +86,52 @@ type UpdatePartnerAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePartnerAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePartnerAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePartnerAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppVersion != nil {
+		s.WriteString(schemas.UpdatePartnerAppRequest_AppVersion, *v.AppVersion)
+	}
+	if v.ApplicationConfig != nil {
+		s.WriteStruct(schemas.UpdatePartnerAppRequest_ApplicationConfig)
+		v.ApplicationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdatePartnerAppRequest_Arn, *v.Arn)
+	}
+	if v.AuthType != "" {
+		s.WriteString(schemas.UpdatePartnerAppRequest_AuthType, string(v.AuthType))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdatePartnerAppRequest_ClientToken, *v.ClientToken)
+	}
+	if v.EnableAutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.UpdatePartnerAppRequest_EnableAutoMinorVersionUpgrade, *v.EnableAutoMinorVersionUpgrade)
+	}
+	if v.EnableIamSessionBasedIdentity != nil {
+		s.WriteBool(schemas.UpdatePartnerAppRequest_EnableIamSessionBasedIdentity, *v.EnableIamSessionBasedIdentity)
+	}
+	if v.IdcConfig != nil {
+		s.WriteStruct(schemas.UpdatePartnerAppRequest_IdcConfig)
+		v.IdcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaintenanceConfig != nil {
+		s.WriteStruct(schemas.UpdatePartnerAppRequest_MaintenanceConfig)
+		v.MaintenanceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.UpdatePartnerAppRequest_Tags, v.Tags)
+	if v.Tier != nil {
+		s.WriteString(schemas.UpdatePartnerAppRequest_Tier, *v.Tier)
+	}
+}
+
 type UpdatePartnerAppOutput struct {
 
 	// The ARN of the SageMaker Partner AI App that was updated.
@@ -95,13 +143,32 @@ type UpdatePartnerAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePartnerAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePartnerAppResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePartnerAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdatePartnerAppResponse_Arn, *v.Arn)
+	}
+}
+func (v *UpdatePartnerAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePartnerAppResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePartnerAppResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdatePartnerAppResponse_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePartnerAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePartnerApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePartnerApp, schemas.UpdatePartnerAppRequest, schemas.UpdatePartnerAppResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdatePartnerApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePartnerApp, schemas.UpdatePartnerAppRequest, schemas.UpdatePartnerAppResponse), output: &UpdatePartnerAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

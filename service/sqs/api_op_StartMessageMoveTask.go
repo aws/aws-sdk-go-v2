@@ -4,6 +4,8 @@ package sqs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,24 @@ type StartMessageMoveTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMessageMoveTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMessageMoveTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMessageMoveTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationArn != nil {
+		s.WriteString(schemas.StartMessageMoveTaskRequest_DestinationArn, *v.DestinationArn)
+	}
+	if v.MaxNumberOfMessagesPerSecond != nil {
+		s.WriteInt32(schemas.StartMessageMoveTaskRequest_MaxNumberOfMessagesPerSecond, *v.MaxNumberOfMessagesPerSecond)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.StartMessageMoveTaskRequest_SourceArn, *v.SourceArn)
+	}
+}
+
 type StartMessageMoveTaskOutput struct {
 
 	// An identifier associated with a message movement task. You can use this
@@ -78,13 +98,32 @@ type StartMessageMoveTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMessageMoveTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMessageMoveTaskResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMessageMoveTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskHandle != nil {
+		s.WriteString(schemas.StartMessageMoveTaskResult_TaskHandle, *v.TaskHandle)
+	}
+}
+func (v *StartMessageMoveTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMessageMoveTaskResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMessageMoveTaskResult_TaskHandle:
+			v.TaskHandle = new(string)
+			return d.ReadString(schemas.StartMessageMoveTaskResult_TaskHandle, v.TaskHandle)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMessageMoveTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartMessageMoveTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMessageMoveTask, schemas.StartMessageMoveTaskRequest, schemas.StartMessageMoveTaskResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartMessageMoveTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMessageMoveTask, schemas.StartMessageMoveTaskRequest, schemas.StartMessageMoveTaskResult), output: &StartMessageMoveTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

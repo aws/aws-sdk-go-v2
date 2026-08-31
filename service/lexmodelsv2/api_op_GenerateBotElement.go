@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type GenerateBotElementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateBotElementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateBotElementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateBotElementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.GenerateBotElementRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.GenerateBotElementRequest_botVersion, *v.BotVersion)
+	}
+	if v.IntentId != nil {
+		s.WriteString(schemas.GenerateBotElementRequest_intentId, *v.IntentId)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.GenerateBotElementRequest_localeId, *v.LocaleId)
+	}
+}
+
 type GenerateBotElementOutput struct {
 
 	// The unique bot Id for the bot which received the response.
@@ -72,13 +95,53 @@ type GenerateBotElementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateBotElementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateBotElementResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateBotElementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.GenerateBotElementResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.GenerateBotElementResponse_botVersion, *v.BotVersion)
+	}
+	if v.IntentId != nil {
+		s.WriteString(schemas.GenerateBotElementResponse_intentId, *v.IntentId)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.GenerateBotElementResponse_localeId, *v.LocaleId)
+	}
+	serializeSampleUtterancesList(s, schemas.GenerateBotElementResponse_sampleUtterances, v.SampleUtterances)
+}
+func (v *GenerateBotElementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerateBotElementResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerateBotElementResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.GenerateBotElementResponse_botId, v.BotId)
+		case schemas.GenerateBotElementResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.GenerateBotElementResponse_botVersion, v.BotVersion)
+		case schemas.GenerateBotElementResponse_intentId:
+			v.IntentId = new(string)
+			return d.ReadString(schemas.GenerateBotElementResponse_intentId, v.IntentId)
+		case schemas.GenerateBotElementResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.GenerateBotElementResponse_localeId, v.LocaleId)
+		case schemas.GenerateBotElementResponse_sampleUtterances:
+			return deserializeSampleUtterancesList(d, schemas.GenerateBotElementResponse_sampleUtterances, &v.SampleUtterances)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGenerateBotElementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGenerateBotElement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateBotElement, schemas.GenerateBotElementRequest, schemas.GenerateBotElementResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGenerateBotElement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateBotElement, schemas.GenerateBotElementRequest, schemas.GenerateBotElementResponse), output: &GenerateBotElementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -43,6 +45,18 @@ type DescribeTaskExecutionInput struct {
 	TaskExecutionArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeTaskExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTaskExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTaskExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskExecutionArn != nil {
+		s.WriteString(schemas.DescribeTaskExecutionRequest_TaskExecutionArn, *v.TaskExecutionArn)
+	}
 }
 
 // DescribeTaskExecutionResponse
@@ -371,13 +385,245 @@ type DescribeTaskExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTaskExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTaskExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTaskExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BytesCompressed != 0 {
+		s.WriteInt64(schemas.DescribeTaskExecutionResponse_BytesCompressed, v.BytesCompressed)
+	}
+	if v.BytesTransferred != 0 {
+		s.WriteInt64(schemas.DescribeTaskExecutionResponse_BytesTransferred, v.BytesTransferred)
+	}
+	if v.BytesWritten != 0 {
+		s.WriteInt64(schemas.DescribeTaskExecutionResponse_BytesWritten, v.BytesWritten)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DescribeTaskExecutionResponse_EndTime, *v.EndTime)
+	}
+	if v.EstimatedBytesToTransfer != 0 {
+		s.WriteInt64(schemas.DescribeTaskExecutionResponse_EstimatedBytesToTransfer, v.EstimatedBytesToTransfer)
+	}
+	if v.EstimatedFilesToDelete != 0 {
+		s.WriteInt64(schemas.DescribeTaskExecutionResponse_EstimatedFilesToDelete, v.EstimatedFilesToDelete)
+	}
+	if v.EstimatedFilesToTransfer != 0 {
+		s.WriteInt64(schemas.DescribeTaskExecutionResponse_EstimatedFilesToTransfer, v.EstimatedFilesToTransfer)
+	}
+	if v.EstimatedFoldersToDelete != nil {
+		s.WriteInt64(schemas.DescribeTaskExecutionResponse_EstimatedFoldersToDelete, *v.EstimatedFoldersToDelete)
+	}
+	if v.EstimatedFoldersToTransfer != nil {
+		s.WriteInt64(schemas.DescribeTaskExecutionResponse_EstimatedFoldersToTransfer, *v.EstimatedFoldersToTransfer)
+	}
+	serializeFilterList(s, schemas.DescribeTaskExecutionResponse_Excludes, v.Excludes)
+	if v.FilesDeleted != 0 {
+		s.WriteInt64(schemas.DescribeTaskExecutionResponse_FilesDeleted, v.FilesDeleted)
+	}
+	if v.FilesFailed != nil {
+		s.WriteStruct(schemas.DescribeTaskExecutionResponse_FilesFailed)
+		v.FilesFailed.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FilesListed != nil {
+		s.WriteStruct(schemas.DescribeTaskExecutionResponse_FilesListed)
+		v.FilesListed.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FilesPrepared != 0 {
+		s.WriteInt64(schemas.DescribeTaskExecutionResponse_FilesPrepared, v.FilesPrepared)
+	}
+	if v.FilesSkipped != 0 {
+		s.WriteInt64(schemas.DescribeTaskExecutionResponse_FilesSkipped, v.FilesSkipped)
+	}
+	if v.FilesTransferred != 0 {
+		s.WriteInt64(schemas.DescribeTaskExecutionResponse_FilesTransferred, v.FilesTransferred)
+	}
+	if v.FilesVerified != 0 {
+		s.WriteInt64(schemas.DescribeTaskExecutionResponse_FilesVerified, v.FilesVerified)
+	}
+	if v.FoldersDeleted != nil {
+		s.WriteInt64(schemas.DescribeTaskExecutionResponse_FoldersDeleted, *v.FoldersDeleted)
+	}
+	if v.FoldersFailed != nil {
+		s.WriteStruct(schemas.DescribeTaskExecutionResponse_FoldersFailed)
+		v.FoldersFailed.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FoldersListed != nil {
+		s.WriteStruct(schemas.DescribeTaskExecutionResponse_FoldersListed)
+		v.FoldersListed.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FoldersPrepared != nil {
+		s.WriteInt64(schemas.DescribeTaskExecutionResponse_FoldersPrepared, *v.FoldersPrepared)
+	}
+	if v.FoldersSkipped != nil {
+		s.WriteInt64(schemas.DescribeTaskExecutionResponse_FoldersSkipped, *v.FoldersSkipped)
+	}
+	if v.FoldersTransferred != nil {
+		s.WriteInt64(schemas.DescribeTaskExecutionResponse_FoldersTransferred, *v.FoldersTransferred)
+	}
+	if v.FoldersVerified != nil {
+		s.WriteInt64(schemas.DescribeTaskExecutionResponse_FoldersVerified, *v.FoldersVerified)
+	}
+	serializeFilterList(s, schemas.DescribeTaskExecutionResponse_Includes, v.Includes)
+	if v.LaunchTime != nil {
+		s.WriteTime(schemas.DescribeTaskExecutionResponse_LaunchTime, *v.LaunchTime)
+	}
+	if v.ManifestConfig != nil {
+		s.WriteStruct(schemas.DescribeTaskExecutionResponse_ManifestConfig)
+		v.ManifestConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Options != nil {
+		s.WriteStruct(schemas.DescribeTaskExecutionResponse_Options)
+		v.Options.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReportResult != nil {
+		s.WriteStruct(schemas.DescribeTaskExecutionResponse_ReportResult)
+		v.ReportResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Result != nil {
+		s.WriteStruct(schemas.DescribeTaskExecutionResponse_Result)
+		v.Result.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.DescribeTaskExecutionResponse_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeTaskExecutionResponse_Status, string(v.Status))
+	}
+	if v.TaskExecutionArn != nil {
+		s.WriteString(schemas.DescribeTaskExecutionResponse_TaskExecutionArn, *v.TaskExecutionArn)
+	}
+	if v.TaskMode != "" {
+		s.WriteString(schemas.DescribeTaskExecutionResponse_TaskMode, string(v.TaskMode))
+	}
+	if v.TaskReportConfig != nil {
+		s.WriteStruct(schemas.DescribeTaskExecutionResponse_TaskReportConfig)
+		v.TaskReportConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeTaskExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTaskExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTaskExecutionResponse_BytesCompressed:
+			return d.ReadInt64(schemas.DescribeTaskExecutionResponse_BytesCompressed, &v.BytesCompressed)
+		case schemas.DescribeTaskExecutionResponse_BytesTransferred:
+			return d.ReadInt64(schemas.DescribeTaskExecutionResponse_BytesTransferred, &v.BytesTransferred)
+		case schemas.DescribeTaskExecutionResponse_BytesWritten:
+			return d.ReadInt64(schemas.DescribeTaskExecutionResponse_BytesWritten, &v.BytesWritten)
+		case schemas.DescribeTaskExecutionResponse_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTaskExecutionResponse_EndTime, v.EndTime)
+		case schemas.DescribeTaskExecutionResponse_EstimatedBytesToTransfer:
+			return d.ReadInt64(schemas.DescribeTaskExecutionResponse_EstimatedBytesToTransfer, &v.EstimatedBytesToTransfer)
+		case schemas.DescribeTaskExecutionResponse_EstimatedFilesToDelete:
+			return d.ReadInt64(schemas.DescribeTaskExecutionResponse_EstimatedFilesToDelete, &v.EstimatedFilesToDelete)
+		case schemas.DescribeTaskExecutionResponse_EstimatedFilesToTransfer:
+			return d.ReadInt64(schemas.DescribeTaskExecutionResponse_EstimatedFilesToTransfer, &v.EstimatedFilesToTransfer)
+		case schemas.DescribeTaskExecutionResponse_EstimatedFoldersToDelete:
+			v.EstimatedFoldersToDelete = new(int64)
+			return d.ReadInt64(schemas.DescribeTaskExecutionResponse_EstimatedFoldersToDelete, v.EstimatedFoldersToDelete)
+		case schemas.DescribeTaskExecutionResponse_EstimatedFoldersToTransfer:
+			v.EstimatedFoldersToTransfer = new(int64)
+			return d.ReadInt64(schemas.DescribeTaskExecutionResponse_EstimatedFoldersToTransfer, v.EstimatedFoldersToTransfer)
+		case schemas.DescribeTaskExecutionResponse_Excludes:
+			return deserializeFilterList(d, schemas.DescribeTaskExecutionResponse_Excludes, &v.Excludes)
+		case schemas.DescribeTaskExecutionResponse_FilesDeleted:
+			return d.ReadInt64(schemas.DescribeTaskExecutionResponse_FilesDeleted, &v.FilesDeleted)
+		case schemas.DescribeTaskExecutionResponse_FilesFailed:
+			v.FilesFailed = &types.TaskExecutionFilesFailedDetail{}
+			return v.FilesFailed.Deserialize(d)
+		case schemas.DescribeTaskExecutionResponse_FilesListed:
+			v.FilesListed = &types.TaskExecutionFilesListedDetail{}
+			return v.FilesListed.Deserialize(d)
+		case schemas.DescribeTaskExecutionResponse_FilesPrepared:
+			return d.ReadInt64(schemas.DescribeTaskExecutionResponse_FilesPrepared, &v.FilesPrepared)
+		case schemas.DescribeTaskExecutionResponse_FilesSkipped:
+			return d.ReadInt64(schemas.DescribeTaskExecutionResponse_FilesSkipped, &v.FilesSkipped)
+		case schemas.DescribeTaskExecutionResponse_FilesTransferred:
+			return d.ReadInt64(schemas.DescribeTaskExecutionResponse_FilesTransferred, &v.FilesTransferred)
+		case schemas.DescribeTaskExecutionResponse_FilesVerified:
+			return d.ReadInt64(schemas.DescribeTaskExecutionResponse_FilesVerified, &v.FilesVerified)
+		case schemas.DescribeTaskExecutionResponse_FoldersDeleted:
+			v.FoldersDeleted = new(int64)
+			return d.ReadInt64(schemas.DescribeTaskExecutionResponse_FoldersDeleted, v.FoldersDeleted)
+		case schemas.DescribeTaskExecutionResponse_FoldersFailed:
+			v.FoldersFailed = &types.TaskExecutionFoldersFailedDetail{}
+			return v.FoldersFailed.Deserialize(d)
+		case schemas.DescribeTaskExecutionResponse_FoldersListed:
+			v.FoldersListed = &types.TaskExecutionFoldersListedDetail{}
+			return v.FoldersListed.Deserialize(d)
+		case schemas.DescribeTaskExecutionResponse_FoldersPrepared:
+			v.FoldersPrepared = new(int64)
+			return d.ReadInt64(schemas.DescribeTaskExecutionResponse_FoldersPrepared, v.FoldersPrepared)
+		case schemas.DescribeTaskExecutionResponse_FoldersSkipped:
+			v.FoldersSkipped = new(int64)
+			return d.ReadInt64(schemas.DescribeTaskExecutionResponse_FoldersSkipped, v.FoldersSkipped)
+		case schemas.DescribeTaskExecutionResponse_FoldersTransferred:
+			v.FoldersTransferred = new(int64)
+			return d.ReadInt64(schemas.DescribeTaskExecutionResponse_FoldersTransferred, v.FoldersTransferred)
+		case schemas.DescribeTaskExecutionResponse_FoldersVerified:
+			v.FoldersVerified = new(int64)
+			return d.ReadInt64(schemas.DescribeTaskExecutionResponse_FoldersVerified, v.FoldersVerified)
+		case schemas.DescribeTaskExecutionResponse_Includes:
+			return deserializeFilterList(d, schemas.DescribeTaskExecutionResponse_Includes, &v.Includes)
+		case schemas.DescribeTaskExecutionResponse_LaunchTime:
+			v.LaunchTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTaskExecutionResponse_LaunchTime, v.LaunchTime)
+		case schemas.DescribeTaskExecutionResponse_ManifestConfig:
+			v.ManifestConfig = &types.ManifestConfig{}
+			return v.ManifestConfig.Deserialize(d)
+		case schemas.DescribeTaskExecutionResponse_Options:
+			v.Options = &types.Options{}
+			return v.Options.Deserialize(d)
+		case schemas.DescribeTaskExecutionResponse_ReportResult:
+			v.ReportResult = &types.ReportResult{}
+			return v.ReportResult.Deserialize(d)
+		case schemas.DescribeTaskExecutionResponse_Result:
+			v.Result = &types.TaskExecutionResultDetail{}
+			return v.Result.Deserialize(d)
+		case schemas.DescribeTaskExecutionResponse_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTaskExecutionResponse_StartTime, v.StartTime)
+		case schemas.DescribeTaskExecutionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTaskExecutionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TaskExecutionStatus(ev)
+			return nil
+		case schemas.DescribeTaskExecutionResponse_TaskExecutionArn:
+			v.TaskExecutionArn = new(string)
+			return d.ReadString(schemas.DescribeTaskExecutionResponse_TaskExecutionArn, v.TaskExecutionArn)
+		case schemas.DescribeTaskExecutionResponse_TaskMode:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTaskExecutionResponse_TaskMode, &ev); err != nil {
+				return err
+			}
+			v.TaskMode = types.TaskMode(ev)
+			return nil
+		case schemas.DescribeTaskExecutionResponse_TaskReportConfig:
+			v.TaskReportConfig = &types.TaskReportConfig{}
+			return v.TaskReportConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTaskExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTaskExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTaskExecution, schemas.DescribeTaskExecutionRequest, schemas.DescribeTaskExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTaskExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTaskExecution, schemas.DescribeTaskExecutionRequest, schemas.DescribeTaskExecutionResponse), output: &DescribeTaskExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

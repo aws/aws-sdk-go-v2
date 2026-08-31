@@ -5,6 +5,8 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,21 @@ type DeleteReviewTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReviewTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReviewTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReviewTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.DeleteReviewTemplateInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.DeleteReviewTemplateInput_TemplateArn, *v.TemplateArn)
+	}
+}
+
 type DeleteReviewTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -63,13 +80,26 @@ type DeleteReviewTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReviewTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReviewTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteReviewTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteReviewTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteReviewTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReviewTemplate, schemas.DeleteReviewTemplateInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteReviewTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReviewTemplate, schemas.DeleteReviewTemplateInput, nil), output: &DeleteReviewTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

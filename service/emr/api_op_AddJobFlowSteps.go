@@ -4,7 +4,9 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,22 @@ type AddJobFlowStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddJobFlowStepsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddJobFlowStepsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddJobFlowStepsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.AddJobFlowStepsInput_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.JobFlowId != nil {
+		s.WriteString(schemas.AddJobFlowStepsInput_JobFlowId, *v.JobFlowId)
+	}
+	serializeStepConfigList(s, schemas.AddJobFlowStepsInput_Steps, v.Steps)
+}
+
 // The output for the AddJobFlowSteps operation.
 type AddJobFlowStepsOutput struct {
 
@@ -84,13 +102,29 @@ type AddJobFlowStepsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddJobFlowStepsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddJobFlowStepsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddJobFlowStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStepIdsList(s, schemas.AddJobFlowStepsOutput_StepIds, v.StepIds)
+}
+func (v *AddJobFlowStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddJobFlowStepsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddJobFlowStepsOutput_StepIds:
+			return deserializeStepIdsList(d, schemas.AddJobFlowStepsOutput_StepIds, &v.StepIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddJobFlowStepsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddJobFlowSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddJobFlowSteps, schemas.AddJobFlowStepsInput, schemas.AddJobFlowStepsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddJobFlowSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddJobFlowSteps, schemas.AddJobFlowStepsInput, schemas.AddJobFlowStepsOutput), output: &AddJobFlowStepsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

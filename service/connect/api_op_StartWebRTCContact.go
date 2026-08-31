@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -98,6 +100,43 @@ type StartWebRTCContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartWebRTCContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartWebRTCContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartWebRTCContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowedCapabilities != nil {
+		s.WriteStruct(schemas.StartWebRTCContactRequest_AllowedCapabilities)
+		v.AllowedCapabilities.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAttributes(s, schemas.StartWebRTCContactRequest_Attributes, v.Attributes)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartWebRTCContactRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ContactFlowId != nil {
+		s.WriteString(schemas.StartWebRTCContactRequest_ContactFlowId, *v.ContactFlowId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.StartWebRTCContactRequest_Description, *v.Description)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartWebRTCContactRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ParticipantDetails != nil {
+		s.WriteStruct(schemas.StartWebRTCContactRequest_ParticipantDetails)
+		v.ParticipantDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeContactReferences(s, schemas.StartWebRTCContactRequest_References, v.References)
+	if v.RelatedContactId != nil {
+		s.WriteString(schemas.StartWebRTCContactRequest_RelatedContactId, *v.RelatedContactId)
+	}
+	serializeSegmentAttributes(s, schemas.StartWebRTCContactRequest_SegmentAttributes, v.SegmentAttributes)
+}
+
 type StartWebRTCContactOutput struct {
 
 	// Information required for the client application (mobile application or website)
@@ -123,13 +162,52 @@ type StartWebRTCContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartWebRTCContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartWebRTCContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartWebRTCContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionData != nil {
+		s.WriteStruct(schemas.StartWebRTCContactResponse_ConnectionData)
+		v.ConnectionData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartWebRTCContactResponse_ContactId, *v.ContactId)
+	}
+	if v.ParticipantId != nil {
+		s.WriteString(schemas.StartWebRTCContactResponse_ParticipantId, *v.ParticipantId)
+	}
+	if v.ParticipantToken != nil {
+		s.WriteString(schemas.StartWebRTCContactResponse_ParticipantToken, *v.ParticipantToken)
+	}
+}
+func (v *StartWebRTCContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartWebRTCContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartWebRTCContactResponse_ConnectionData:
+			v.ConnectionData = &types.ConnectionData{}
+			return v.ConnectionData.Deserialize(d)
+		case schemas.StartWebRTCContactResponse_ContactId:
+			v.ContactId = new(string)
+			return d.ReadString(schemas.StartWebRTCContactResponse_ContactId, v.ContactId)
+		case schemas.StartWebRTCContactResponse_ParticipantId:
+			v.ParticipantId = new(string)
+			return d.ReadString(schemas.StartWebRTCContactResponse_ParticipantId, v.ParticipantId)
+		case schemas.StartWebRTCContactResponse_ParticipantToken:
+			v.ParticipantToken = new(string)
+			return d.ReadString(schemas.StartWebRTCContactResponse_ParticipantToken, v.ParticipantToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartWebRTCContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartWebRTCContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartWebRTCContact, schemas.StartWebRTCContactRequest, schemas.StartWebRTCContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartWebRTCContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartWebRTCContact, schemas.StartWebRTCContactRequest, schemas.StartWebRTCContactResponse), output: &StartWebRTCContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

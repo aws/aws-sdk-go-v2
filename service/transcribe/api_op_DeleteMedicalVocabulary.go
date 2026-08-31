@@ -4,6 +4,8 @@ package transcribe
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteMedicalVocabularyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMedicalVocabularyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMedicalVocabularyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMedicalVocabularyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.DeleteMedicalVocabularyRequest_VocabularyName, *v.VocabularyName)
+	}
+}
+
 type DeleteMedicalVocabularyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type DeleteMedicalVocabularyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMedicalVocabularyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMedicalVocabularyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteMedicalVocabularyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMedicalVocabularyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMedicalVocabulary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMedicalVocabulary, schemas.DeleteMedicalVocabularyRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteMedicalVocabulary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMedicalVocabulary, schemas.DeleteMedicalVocabularyRequest, nil), output: &DeleteMedicalVocabularyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

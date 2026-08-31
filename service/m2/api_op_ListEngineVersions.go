@@ -5,7 +5,9 @@ package m2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/m2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,44 @@ type ListEngineVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEngineVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEngineVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEngineVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EngineType != "" {
+		s.WriteString(schemas.ListEngineVersionsRequest_engineType, string(v.EngineType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEngineVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEngineVersionsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEngineVersionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEngineVersionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEngineVersionsRequest_engineType:
+			var ev string
+			if err := d.ReadString(schemas.ListEngineVersionsRequest_engineType, &ev); err != nil {
+				return err
+			}
+			v.EngineType = types.EngineType(ev)
+			return nil
+		case schemas.ListEngineVersionsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListEngineVersionsRequest_maxResults, v.MaxResults)
+		case schemas.ListEngineVersionsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEngineVersionsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListEngineVersionsOutput struct {
 
 	// Returns the engine versions.
@@ -58,13 +98,35 @@ type ListEngineVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEngineVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEngineVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEngineVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEngineVersionsSummaryList(s, schemas.ListEngineVersionsResponse_engineVersions, v.EngineVersions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEngineVersionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEngineVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEngineVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEngineVersionsResponse_engineVersions:
+			return deserializeEngineVersionsSummaryList(d, schemas.ListEngineVersionsResponse_engineVersions, &v.EngineVersions)
+		case schemas.ListEngineVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEngineVersionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEngineVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEngineVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEngineVersions, schemas.ListEngineVersionsRequest, schemas.ListEngineVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEngineVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEngineVersions, schemas.ListEngineVersionsRequest, schemas.ListEngineVersionsResponse), output: &ListEngineVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package cognitoidentity
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,27 @@ type ListIdentitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdentitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdentitiesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdentitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HideDisabled != false {
+		s.WriteBool(schemas.ListIdentitiesInput_HideDisabled, v.HideDisabled)
+	}
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.ListIdentitiesInput_IdentityPoolId, *v.IdentityPoolId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIdentitiesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdentitiesInput_NextToken, *v.NextToken)
+	}
+}
+
 // The response to a ListIdentities request.
 type ListIdentitiesOutput struct {
 
@@ -68,13 +91,41 @@ type ListIdentitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdentitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdentitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdentitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentitiesList(s, schemas.ListIdentitiesResponse_Identities, v.Identities)
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.ListIdentitiesResponse_IdentityPoolId, *v.IdentityPoolId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdentitiesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListIdentitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIdentitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIdentitiesResponse_Identities:
+			return deserializeIdentitiesList(d, schemas.ListIdentitiesResponse_Identities, &v.Identities)
+		case schemas.ListIdentitiesResponse_IdentityPoolId:
+			v.IdentityPoolId = new(string)
+			return d.ReadString(schemas.ListIdentitiesResponse_IdentityPoolId, v.IdentityPoolId)
+		case schemas.ListIdentitiesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIdentitiesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIdentitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListIdentities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentities, schemas.ListIdentitiesInput, schemas.ListIdentitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListIdentities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentities, schemas.ListIdentitiesInput, schemas.ListIdentitiesResponse), output: &ListIdentitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

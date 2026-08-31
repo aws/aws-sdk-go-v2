@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,34 @@ type GetConfiguredTableAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfiguredTableAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfiguredTableAssociationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfiguredTableAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfiguredTableAssociationIdentifier != nil {
+		s.WriteString(schemas.GetConfiguredTableAssociationInput_configuredTableAssociationIdentifier, *v.ConfiguredTableAssociationIdentifier)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.GetConfiguredTableAssociationInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+func (v *GetConfiguredTableAssociationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfiguredTableAssociationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfiguredTableAssociationInput_configuredTableAssociationIdentifier:
+			v.ConfiguredTableAssociationIdentifier = new(string)
+			return d.ReadString(schemas.GetConfiguredTableAssociationInput_configuredTableAssociationIdentifier, v.ConfiguredTableAssociationIdentifier)
+		case schemas.GetConfiguredTableAssociationInput_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.GetConfiguredTableAssociationInput_membershipIdentifier, v.MembershipIdentifier)
+		}
+		return nil
+	})
+}
+
 type GetConfiguredTableAssociationOutput struct {
 
 	// The entire configured table association object.
@@ -54,13 +84,34 @@ type GetConfiguredTableAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfiguredTableAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfiguredTableAssociationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfiguredTableAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfiguredTableAssociation != nil {
+		s.WriteStruct(schemas.GetConfiguredTableAssociationOutput_configuredTableAssociation)
+		v.ConfiguredTableAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetConfiguredTableAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfiguredTableAssociationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfiguredTableAssociationOutput_configuredTableAssociation:
+			v.ConfiguredTableAssociation = &types.ConfiguredTableAssociation{}
+			return v.ConfiguredTableAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConfiguredTableAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfiguredTableAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguredTableAssociation, schemas.GetConfiguredTableAssociationInput, schemas.GetConfiguredTableAssociationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConfiguredTableAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguredTableAssociation, schemas.GetConfiguredTableAssociationInput, schemas.GetConfiguredTableAssociationOutput), output: &GetConfiguredTableAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

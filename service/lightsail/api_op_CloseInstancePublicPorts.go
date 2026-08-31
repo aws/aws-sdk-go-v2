@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,23 @@ type CloseInstancePublicPortsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CloseInstancePublicPortsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloseInstancePublicPortsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloseInstancePublicPortsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceName != nil {
+		s.WriteString(schemas.CloseInstancePublicPortsRequest_instanceName, *v.InstanceName)
+	}
+	if v.PortInfo != nil {
+		s.WriteStruct(schemas.CloseInstancePublicPortsRequest_portInfo)
+		v.PortInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CloseInstancePublicPortsOutput struct {
 
 	// An object that describes the result of the action, such as the status of the
@@ -58,13 +77,34 @@ type CloseInstancePublicPortsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CloseInstancePublicPortsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloseInstancePublicPortsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloseInstancePublicPortsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Operation != nil {
+		s.WriteStruct(schemas.CloseInstancePublicPortsResult_operation)
+		v.Operation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CloseInstancePublicPortsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloseInstancePublicPortsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloseInstancePublicPortsResult_operation:
+			v.Operation = &types.Operation{}
+			return v.Operation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCloseInstancePublicPortsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCloseInstancePublicPorts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CloseInstancePublicPorts, schemas.CloseInstancePublicPortsRequest, schemas.CloseInstancePublicPortsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCloseInstancePublicPorts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CloseInstancePublicPorts, schemas.CloseInstancePublicPortsRequest, schemas.CloseInstancePublicPortsResult), output: &CloseInstancePublicPortsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

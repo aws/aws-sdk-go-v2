@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,26 @@ type UpdateFeatureMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFeatureMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFeatureMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFeatureMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFeatureMetadataRequest_Description, *v.Description)
+	}
+	if v.FeatureGroupName != nil {
+		s.WriteString(schemas.UpdateFeatureMetadataRequest_FeatureGroupName, *v.FeatureGroupName)
+	}
+	if v.FeatureName != nil {
+		s.WriteString(schemas.UpdateFeatureMetadataRequest_FeatureName, *v.FeatureName)
+	}
+	serializeFeatureParameterAdditions(s, schemas.UpdateFeatureMetadataRequest_ParameterAdditions, v.ParameterAdditions)
+	serializeFeatureParameterRemovals(s, schemas.UpdateFeatureMetadataRequest_ParameterRemovals, v.ParameterRemovals)
+}
+
 type UpdateFeatureMetadataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +79,26 @@ type UpdateFeatureMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFeatureMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFeatureMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateFeatureMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFeatureMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateFeatureMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFeatureMetadata, schemas.UpdateFeatureMetadataRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateFeatureMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFeatureMetadata, schemas.UpdateFeatureMetadataRequest, nil), output: &UpdateFeatureMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

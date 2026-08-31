@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type StartMonitoringScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMonitoringScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMonitoringScheduleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMonitoringScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitoringScheduleName != nil {
+		s.WriteString(schemas.StartMonitoringScheduleRequest_MonitoringScheduleName, *v.MonitoringScheduleName)
+	}
+}
+
 type StartMonitoringScheduleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type StartMonitoringScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMonitoringScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMonitoringScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartMonitoringScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMonitoringScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMonitoringSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMonitoringSchedule, schemas.StartMonitoringScheduleRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMonitoringSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMonitoringSchedule, schemas.StartMonitoringScheduleRequest, nil), output: &StartMonitoringScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

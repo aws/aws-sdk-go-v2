@@ -4,7 +4,9 @@ package apprunner
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type DescribeObservabilityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeObservabilityConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeObservabilityConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeObservabilityConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObservabilityConfigurationArn != nil {
+		s.WriteString(schemas.DescribeObservabilityConfigurationRequest_ObservabilityConfigurationArn, *v.ObservabilityConfigurationArn)
+	}
+}
+
 type DescribeObservabilityConfigurationOutput struct {
 
 	// A full description of the App Runner observability configuration that you
@@ -53,13 +67,34 @@ type DescribeObservabilityConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeObservabilityConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeObservabilityConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeObservabilityConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObservabilityConfiguration != nil {
+		s.WriteStruct(schemas.DescribeObservabilityConfigurationResponse_ObservabilityConfiguration)
+		v.ObservabilityConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeObservabilityConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeObservabilityConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeObservabilityConfigurationResponse_ObservabilityConfiguration:
+			v.ObservabilityConfiguration = &types.ObservabilityConfiguration{}
+			return v.ObservabilityConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeObservabilityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeObservabilityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeObservabilityConfiguration, schemas.DescribeObservabilityConfigurationRequest, schemas.DescribeObservabilityConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeObservabilityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeObservabilityConfiguration, schemas.DescribeObservabilityConfigurationRequest, schemas.DescribeObservabilityConfigurationResponse), output: &DescribeObservabilityConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

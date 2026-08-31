@@ -5,7 +5,9 @@ package partnercentralselling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,36 @@ type ListEngagementInvitationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEngagementInvitationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEngagementInvitationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEngagementInvitationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.ListEngagementInvitationsRequest_Catalog, *v.Catalog)
+	}
+	serializeEngagementIdentifiers(s, schemas.ListEngagementInvitationsRequest_EngagementIdentifier, v.EngagementIdentifier)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEngagementInvitationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEngagementInvitationsRequest_NextToken, *v.NextToken)
+	}
+	if v.ParticipantType != "" {
+		s.WriteString(schemas.ListEngagementInvitationsRequest_ParticipantType, string(v.ParticipantType))
+	}
+	serializeEngagementInvitationsPayloadType(s, schemas.ListEngagementInvitationsRequest_PayloadType, v.PayloadType)
+	serializeAwsAccountIdOrAliasList(s, schemas.ListEngagementInvitationsRequest_SenderAwsAccountId, v.SenderAwsAccountId)
+	if v.Sort != nil {
+		s.WriteStruct(schemas.ListEngagementInvitationsRequest_Sort)
+		v.Sort.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeInvitationStatusList(s, schemas.ListEngagementInvitationsRequest_Status, v.Status)
+}
+
 type ListEngagementInvitationsOutput struct {
 
 	// An array containing summaries of engagement invitations. Each summary includes
@@ -94,13 +126,35 @@ type ListEngagementInvitationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEngagementInvitationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEngagementInvitationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEngagementInvitationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEngagementInvitationSummaries(s, schemas.ListEngagementInvitationsResponse_EngagementInvitationSummaries, v.EngagementInvitationSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEngagementInvitationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEngagementInvitationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEngagementInvitationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEngagementInvitationsResponse_EngagementInvitationSummaries:
+			return deserializeEngagementInvitationSummaries(d, schemas.ListEngagementInvitationsResponse_EngagementInvitationSummaries, &v.EngagementInvitationSummaries)
+		case schemas.ListEngagementInvitationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEngagementInvitationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEngagementInvitationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListEngagementInvitations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEngagementInvitations, schemas.ListEngagementInvitationsRequest, schemas.ListEngagementInvitationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListEngagementInvitations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEngagementInvitations, schemas.ListEngagementInvitationsRequest, schemas.ListEngagementInvitationsResponse), output: &ListEngagementInvitationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,26 @@ type UpdateUserPhoneConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserPhoneConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserPhoneConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserPhoneConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateUserPhoneConfigRequest_InstanceId, *v.InstanceId)
+	}
+	if v.PhoneConfig != nil {
+		s.WriteStruct(schemas.UpdateUserPhoneConfigRequest_PhoneConfig)
+		v.PhoneConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.UpdateUserPhoneConfigRequest_UserId, *v.UserId)
+	}
+}
+
 type UpdateUserPhoneConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,13 +84,26 @@ type UpdateUserPhoneConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserPhoneConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserPhoneConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateUserPhoneConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateUserPhoneConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateUserPhoneConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserPhoneConfig, schemas.UpdateUserPhoneConfigRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateUserPhoneConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserPhoneConfig, schemas.UpdateUserPhoneConfigRequest, nil), output: &UpdateUserPhoneConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

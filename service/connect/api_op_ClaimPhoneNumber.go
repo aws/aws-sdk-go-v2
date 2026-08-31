@@ -5,6 +5,8 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -95,6 +97,31 @@ type ClaimPhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClaimPhoneNumberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClaimPhoneNumberRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClaimPhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ClaimPhoneNumberRequest_ClientToken, *v.ClientToken)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ClaimPhoneNumberRequest_InstanceId, *v.InstanceId)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.ClaimPhoneNumberRequest_PhoneNumber, *v.PhoneNumber)
+	}
+	if v.PhoneNumberDescription != nil {
+		s.WriteString(schemas.ClaimPhoneNumberRequest_PhoneNumberDescription, *v.PhoneNumberDescription)
+	}
+	serializeTagMap(s, schemas.ClaimPhoneNumberRequest_Tags, v.Tags)
+	if v.TargetArn != nil {
+		s.WriteString(schemas.ClaimPhoneNumberRequest_TargetArn, *v.TargetArn)
+	}
+}
+
 type ClaimPhoneNumberOutput struct {
 
 	// The Amazon Resource Name (ARN) of the phone number.
@@ -109,13 +136,38 @@ type ClaimPhoneNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClaimPhoneNumberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClaimPhoneNumberResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClaimPhoneNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PhoneNumberArn != nil {
+		s.WriteString(schemas.ClaimPhoneNumberResponse_PhoneNumberArn, *v.PhoneNumberArn)
+	}
+	if v.PhoneNumberId != nil {
+		s.WriteString(schemas.ClaimPhoneNumberResponse_PhoneNumberId, *v.PhoneNumberId)
+	}
+}
+func (v *ClaimPhoneNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClaimPhoneNumberResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClaimPhoneNumberResponse_PhoneNumberArn:
+			v.PhoneNumberArn = new(string)
+			return d.ReadString(schemas.ClaimPhoneNumberResponse_PhoneNumberArn, v.PhoneNumberArn)
+		case schemas.ClaimPhoneNumberResponse_PhoneNumberId:
+			v.PhoneNumberId = new(string)
+			return d.ReadString(schemas.ClaimPhoneNumberResponse_PhoneNumberId, v.PhoneNumberId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationClaimPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpClaimPhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ClaimPhoneNumber, schemas.ClaimPhoneNumberRequest, schemas.ClaimPhoneNumberResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpClaimPhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ClaimPhoneNumber, schemas.ClaimPhoneNumberRequest, schemas.ClaimPhoneNumberResponse), output: &ClaimPhoneNumberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

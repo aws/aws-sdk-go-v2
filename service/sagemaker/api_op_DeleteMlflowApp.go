@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteMlflowAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMlflowAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMlflowAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMlflowAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteMlflowAppRequest_Arn, *v.Arn)
+	}
+}
+
 type DeleteMlflowAppOutput struct {
 
 	// The ARN of the deleted MLflow App.
@@ -44,13 +58,32 @@ type DeleteMlflowAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMlflowAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMlflowAppResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMlflowAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteMlflowAppResponse_Arn, *v.Arn)
+	}
+}
+func (v *DeleteMlflowAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMlflowAppResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteMlflowAppResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteMlflowAppResponse_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMlflowAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMlflowApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMlflowApp, schemas.DeleteMlflowAppRequest, schemas.DeleteMlflowAppResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteMlflowApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMlflowApp, schemas.DeleteMlflowAppRequest, schemas.DeleteMlflowAppResponse), output: &DeleteMlflowAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

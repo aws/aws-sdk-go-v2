@@ -5,7 +5,9 @@ package schemas
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/schemas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/schemas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type ListSchemaVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSchemaVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSchemaVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSchemaVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListSchemaVersionsRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSchemaVersionsRequest_NextToken, *v.NextToken)
+	}
+	if v.RegistryName != nil {
+		s.WriteString(schemas.ListSchemaVersionsRequest_RegistryName, *v.RegistryName)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.ListSchemaVersionsRequest_SchemaName, *v.SchemaName)
+	}
+}
+
 type ListSchemaVersionsOutput struct {
 
 	// The token that specifies the next page of results to return. To request the
@@ -63,13 +86,35 @@ type ListSchemaVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSchemaVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSchemaVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSchemaVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSchemaVersionsResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfSchemaVersionSummary(s, schemas.ListSchemaVersionsResponse_SchemaVersions, v.SchemaVersions)
+}
+func (v *ListSchemaVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSchemaVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSchemaVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSchemaVersionsResponse_NextToken, v.NextToken)
+		case schemas.ListSchemaVersionsResponse_SchemaVersions:
+			return deserialize__listOfSchemaVersionSummary(d, schemas.ListSchemaVersionsResponse_SchemaVersions, &v.SchemaVersions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSchemaVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSchemaVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSchemaVersions, schemas.ListSchemaVersionsRequest, schemas.ListSchemaVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSchemaVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSchemaVersions, schemas.ListSchemaVersionsRequest, schemas.ListSchemaVersionsResponse), output: &ListSchemaVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

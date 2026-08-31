@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,24 @@ type ListRelatedResourcesForAuditFindingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRelatedResourcesForAuditFindingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRelatedResourcesForAuditFindingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRelatedResourcesForAuditFindingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FindingId != nil {
+		s.WriteString(schemas.ListRelatedResourcesForAuditFindingRequest_findingId, *v.FindingId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRelatedResourcesForAuditFindingRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRelatedResourcesForAuditFindingRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListRelatedResourcesForAuditFindingOutput struct {
 
 	// A token that can be used to retrieve the next set of results, or null for the
@@ -85,13 +105,35 @@ type ListRelatedResourcesForAuditFindingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRelatedResourcesForAuditFindingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRelatedResourcesForAuditFindingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRelatedResourcesForAuditFindingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRelatedResourcesForAuditFindingResponse_nextToken, *v.NextToken)
+	}
+	serializeRelatedResources(s, schemas.ListRelatedResourcesForAuditFindingResponse_relatedResources, v.RelatedResources)
+}
+func (v *ListRelatedResourcesForAuditFindingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRelatedResourcesForAuditFindingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRelatedResourcesForAuditFindingResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRelatedResourcesForAuditFindingResponse_nextToken, v.NextToken)
+		case schemas.ListRelatedResourcesForAuditFindingResponse_relatedResources:
+			return deserializeRelatedResources(d, schemas.ListRelatedResourcesForAuditFindingResponse_relatedResources, &v.RelatedResources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRelatedResourcesForAuditFindingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRelatedResourcesForAuditFinding{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRelatedResourcesForAuditFinding, schemas.ListRelatedResourcesForAuditFindingRequest, schemas.ListRelatedResourcesForAuditFindingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRelatedResourcesForAuditFinding{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRelatedResourcesForAuditFinding, schemas.ListRelatedResourcesForAuditFindingRequest, schemas.ListRelatedResourcesForAuditFindingResponse), output: &ListRelatedResourcesForAuditFindingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

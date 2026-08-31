@@ -4,7 +4,9 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetAgentGoalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgentGoalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentGoalRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentGoalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetAgentGoalRequest_id, *v.Id)
+	}
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.GetAgentGoalRequest_profileArn, *v.ProfileArn)
+	}
+}
+
 type GetAgentGoalOutput struct {
 
 	// The retrieved goal summary.
@@ -52,13 +69,34 @@ type GetAgentGoalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgentGoalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentGoalResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentGoalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Goal != nil {
+		s.WriteStruct(schemas.GetAgentGoalResponse_goal)
+		v.Goal.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAgentGoalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAgentGoalResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAgentGoalResponse_goal:
+			v.Goal = &types.GoalSummary{}
+			return v.Goal.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAgentGoalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAgentGoal{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentGoal, schemas.GetAgentGoalRequest, schemas.GetAgentGoalResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAgentGoal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentGoal, schemas.GetAgentGoalRequest, schemas.GetAgentGoalResponse), output: &GetAgentGoalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

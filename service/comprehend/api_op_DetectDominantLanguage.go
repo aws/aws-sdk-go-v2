@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DetectDominantLanguageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectDominantLanguageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectDominantLanguageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectDominantLanguageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Text != nil {
+		s.WriteString(schemas.DetectDominantLanguageRequest_Text, *v.Text)
+	}
+}
+
 type DetectDominantLanguageOutput struct {
 
 	// Array of languages that Amazon Comprehend detected in the input text. The array
@@ -57,13 +71,29 @@ type DetectDominantLanguageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectDominantLanguageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectDominantLanguageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectDominantLanguageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfDominantLanguages(s, schemas.DetectDominantLanguageResponse_Languages, v.Languages)
+}
+func (v *DetectDominantLanguageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectDominantLanguageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectDominantLanguageResponse_Languages:
+			return deserializeListOfDominantLanguages(d, schemas.DetectDominantLanguageResponse_Languages, &v.Languages)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectDominantLanguageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectDominantLanguage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectDominantLanguage, schemas.DetectDominantLanguageRequest, schemas.DetectDominantLanguageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetectDominantLanguage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectDominantLanguage, schemas.DetectDominantLanguageRequest, schemas.DetectDominantLanguageResponse), output: &DetectDominantLanguageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

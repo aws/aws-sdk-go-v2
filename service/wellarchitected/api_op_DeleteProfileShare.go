@@ -5,6 +5,8 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,24 @@ type DeleteProfileShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProfileShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProfileShareInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProfileShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.DeleteProfileShareInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.DeleteProfileShareInput_ProfileArn, *v.ProfileArn)
+	}
+	if v.ShareId != nil {
+		s.WriteString(schemas.DeleteProfileShareInput_ShareId, *v.ShareId)
+	}
+}
+
 type DeleteProfileShareOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,13 +82,26 @@ type DeleteProfileShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProfileShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProfileShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteProfileShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProfileShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteProfileShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProfileShare, schemas.DeleteProfileShareInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteProfileShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProfileShare, schemas.DeleteProfileShareInput, nil), output: &DeleteProfileShareOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

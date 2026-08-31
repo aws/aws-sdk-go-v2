@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,30 @@ type ListStageDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStageDevicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStageDevicesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStageDevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EdgeDeploymentPlanName != nil {
+		s.WriteString(schemas.ListStageDevicesRequest_EdgeDeploymentPlanName, *v.EdgeDeploymentPlanName)
+	}
+	if v.ExcludeDevicesDeployedInOtherStage != nil {
+		s.WriteBool(schemas.ListStageDevicesRequest_ExcludeDevicesDeployedInOtherStage, *v.ExcludeDevicesDeployedInOtherStage)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStageDevicesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStageDevicesRequest_NextToken, *v.NextToken)
+	}
+	if v.StageName != nil {
+		s.WriteString(schemas.ListStageDevicesRequest_StageName, *v.StageName)
+	}
+}
+
 type ListStageDevicesOutput struct {
 
 	// List of summaries of devices allocated to the stage.
@@ -67,13 +93,35 @@ type ListStageDevicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStageDevicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStageDevicesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStageDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeviceDeploymentSummaries(s, schemas.ListStageDevicesResponse_DeviceDeploymentSummaries, v.DeviceDeploymentSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStageDevicesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListStageDevicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStageDevicesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStageDevicesResponse_DeviceDeploymentSummaries:
+			return deserializeDeviceDeploymentSummaries(d, schemas.ListStageDevicesResponse_DeviceDeploymentSummaries, &v.DeviceDeploymentSummaries)
+		case schemas.ListStageDevicesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStageDevicesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStageDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListStageDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStageDevices, schemas.ListStageDevicesRequest, schemas.ListStageDevicesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListStageDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStageDevices, schemas.ListStageDevicesRequest, schemas.ListStageDevicesResponse), output: &ListStageDevicesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

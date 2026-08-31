@@ -4,7 +4,9 @@ package opensearchserverless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,16 @@ type BatchGetLifecyclePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetLifecyclePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetLifecyclePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetLifecyclePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLifecyclePolicyIdentifiers(s, schemas.BatchGetLifecyclePolicyRequest_identifiers, v.Identifiers)
+}
+
 type BatchGetLifecyclePolicyOutput struct {
 
 	// A list of lifecycle policies matched to the input policy name and policy type.
@@ -51,13 +63,32 @@ type BatchGetLifecyclePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetLifecyclePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetLifecyclePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetLifecyclePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLifecyclePolicyDetails(s, schemas.BatchGetLifecyclePolicyResponse_lifecyclePolicyDetails, v.LifecyclePolicyDetails)
+	serializeLifecyclePolicyErrorDetails(s, schemas.BatchGetLifecyclePolicyResponse_lifecyclePolicyErrorDetails, v.LifecyclePolicyErrorDetails)
+}
+func (v *BatchGetLifecyclePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetLifecyclePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetLifecyclePolicyResponse_lifecyclePolicyDetails:
+			return deserializeLifecyclePolicyDetails(d, schemas.BatchGetLifecyclePolicyResponse_lifecyclePolicyDetails, &v.LifecyclePolicyDetails)
+		case schemas.BatchGetLifecyclePolicyResponse_lifecyclePolicyErrorDetails:
+			return deserializeLifecyclePolicyErrorDetails(d, schemas.BatchGetLifecyclePolicyResponse_lifecyclePolicyErrorDetails, &v.LifecyclePolicyErrorDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchGetLifecyclePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetLifecyclePolicy, schemas.BatchGetLifecyclePolicyRequest, schemas.BatchGetLifecyclePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchGetLifecyclePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetLifecyclePolicy, schemas.BatchGetLifecyclePolicyRequest, schemas.BatchGetLifecyclePolicyResponse), output: &BatchGetLifecyclePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

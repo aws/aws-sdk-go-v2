@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type DescribeAIBenchmarkJobInput struct {
 	AIBenchmarkJobName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeAIBenchmarkJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAIBenchmarkJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAIBenchmarkJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIBenchmarkJobName != nil {
+		s.WriteString(schemas.DescribeAIBenchmarkJobRequest_AIBenchmarkJobName, *v.AIBenchmarkJobName)
+	}
 }
 
 type DescribeAIBenchmarkJobOutput struct {
@@ -101,13 +115,106 @@ type DescribeAIBenchmarkJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAIBenchmarkJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAIBenchmarkJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAIBenchmarkJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIBenchmarkJobArn != nil {
+		s.WriteString(schemas.DescribeAIBenchmarkJobResponse_AIBenchmarkJobArn, *v.AIBenchmarkJobArn)
+	}
+	if v.AIBenchmarkJobName != nil {
+		s.WriteString(schemas.DescribeAIBenchmarkJobResponse_AIBenchmarkJobName, *v.AIBenchmarkJobName)
+	}
+	if v.AIBenchmarkJobStatus != "" {
+		s.WriteString(schemas.DescribeAIBenchmarkJobResponse_AIBenchmarkJobStatus, string(v.AIBenchmarkJobStatus))
+	}
+	if v.AIWorkloadConfigIdentifier != nil {
+		s.WriteString(schemas.DescribeAIBenchmarkJobResponse_AIWorkloadConfigIdentifier, *v.AIWorkloadConfigIdentifier)
+	}
+	serializeAIBenchmarkTarget(s, schemas.DescribeAIBenchmarkJobResponse_BenchmarkTarget, v.BenchmarkTarget)
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeAIBenchmarkJobResponse_CreationTime, *v.CreationTime)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DescribeAIBenchmarkJobResponse_EndTime, *v.EndTime)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeAIBenchmarkJobResponse_FailureReason, *v.FailureReason)
+	}
+	if v.NetworkConfig != nil {
+		s.WriteStruct(schemas.DescribeAIBenchmarkJobResponse_NetworkConfig)
+		v.NetworkConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.DescribeAIBenchmarkJobResponse_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeAIBenchmarkJobResponse_RoleArn, *v.RoleArn)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.DescribeAIBenchmarkJobResponse_StartTime, *v.StartTime)
+	}
+	serializeTagList(s, schemas.DescribeAIBenchmarkJobResponse_Tags, v.Tags)
+}
+func (v *DescribeAIBenchmarkJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAIBenchmarkJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAIBenchmarkJobResponse_AIBenchmarkJobArn:
+			v.AIBenchmarkJobArn = new(string)
+			return d.ReadString(schemas.DescribeAIBenchmarkJobResponse_AIBenchmarkJobArn, v.AIBenchmarkJobArn)
+		case schemas.DescribeAIBenchmarkJobResponse_AIBenchmarkJobName:
+			v.AIBenchmarkJobName = new(string)
+			return d.ReadString(schemas.DescribeAIBenchmarkJobResponse_AIBenchmarkJobName, v.AIBenchmarkJobName)
+		case schemas.DescribeAIBenchmarkJobResponse_AIBenchmarkJobStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAIBenchmarkJobResponse_AIBenchmarkJobStatus, &ev); err != nil {
+				return err
+			}
+			v.AIBenchmarkJobStatus = types.AIBenchmarkJobStatus(ev)
+			return nil
+		case schemas.DescribeAIBenchmarkJobResponse_AIWorkloadConfigIdentifier:
+			v.AIWorkloadConfigIdentifier = new(string)
+			return d.ReadString(schemas.DescribeAIBenchmarkJobResponse_AIWorkloadConfigIdentifier, v.AIWorkloadConfigIdentifier)
+		case schemas.DescribeAIBenchmarkJobResponse_BenchmarkTarget:
+			return deserializeAIBenchmarkTarget(d, schemas.DescribeAIBenchmarkJobResponse_BenchmarkTarget, &v.BenchmarkTarget)
+		case schemas.DescribeAIBenchmarkJobResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeAIBenchmarkJobResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeAIBenchmarkJobResponse_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeAIBenchmarkJobResponse_EndTime, v.EndTime)
+		case schemas.DescribeAIBenchmarkJobResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeAIBenchmarkJobResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeAIBenchmarkJobResponse_NetworkConfig:
+			v.NetworkConfig = &types.AIBenchmarkNetworkConfig{}
+			return v.NetworkConfig.Deserialize(d)
+		case schemas.DescribeAIBenchmarkJobResponse_OutputConfig:
+			v.OutputConfig = &types.AIBenchmarkOutputResult{}
+			return v.OutputConfig.Deserialize(d)
+		case schemas.DescribeAIBenchmarkJobResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeAIBenchmarkJobResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeAIBenchmarkJobResponse_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeAIBenchmarkJobResponse_StartTime, v.StartTime)
+		case schemas.DescribeAIBenchmarkJobResponse_Tags:
+			return deserializeTagList(d, schemas.DescribeAIBenchmarkJobResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAIBenchmarkJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAIBenchmarkJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAIBenchmarkJob, schemas.DescribeAIBenchmarkJobRequest, schemas.DescribeAIBenchmarkJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAIBenchmarkJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAIBenchmarkJob, schemas.DescribeAIBenchmarkJobRequest, schemas.DescribeAIBenchmarkJobResponse), output: &DescribeAIBenchmarkJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

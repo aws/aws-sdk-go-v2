@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type RejectAccountLinkInvitationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectAccountLinkInvitationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectAccountLinkInvitationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectAccountLinkInvitationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.RejectAccountLinkInvitationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.RejectAccountLinkInvitationRequest_LinkId, *v.LinkId)
+	}
+}
+
 type RejectAccountLinkInvitationOutput struct {
 
 	// Information about the account link.
@@ -48,13 +65,34 @@ type RejectAccountLinkInvitationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectAccountLinkInvitationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectAccountLinkInvitationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectAccountLinkInvitationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountLink != nil {
+		s.WriteStruct(schemas.RejectAccountLinkInvitationResult_AccountLink)
+		v.AccountLink.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RejectAccountLinkInvitationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RejectAccountLinkInvitationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RejectAccountLinkInvitationResult_AccountLink:
+			v.AccountLink = &types.AccountLink{}
+			return v.AccountLink.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRejectAccountLinkInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRejectAccountLinkInvitation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectAccountLinkInvitation, schemas.RejectAccountLinkInvitationRequest, schemas.RejectAccountLinkInvitationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRejectAccountLinkInvitation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectAccountLinkInvitation, schemas.RejectAccountLinkInvitationRequest, schemas.RejectAccountLinkInvitationResult), output: &RejectAccountLinkInvitationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

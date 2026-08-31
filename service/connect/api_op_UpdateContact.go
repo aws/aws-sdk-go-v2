@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -102,6 +104,49 @@ type UpdateContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.UpdateContactRequest_ContactId, *v.ContactId)
+	}
+	if v.CustomerEndpoint != nil {
+		s.WriteStruct(schemas.UpdateContactRequest_CustomerEndpoint)
+		v.CustomerEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateContactRequest_Description, *v.Description)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateContactRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateContactRequest_Name, *v.Name)
+	}
+	if v.QueueInfo != nil {
+		s.WriteStruct(schemas.UpdateContactRequest_QueueInfo)
+		v.QueueInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeContactReferences(s, schemas.UpdateContactRequest_References, v.References)
+	serializeSegmentAttributes(s, schemas.UpdateContactRequest_SegmentAttributes, v.SegmentAttributes)
+	if v.SystemEndpoint != nil {
+		s.WriteStruct(schemas.UpdateContactRequest_SystemEndpoint)
+		v.SystemEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserInfo != nil {
+		s.WriteStruct(schemas.UpdateContactRequest_UserInfo)
+		v.UserInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateContactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -109,13 +154,26 @@ type UpdateContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContact, schemas.UpdateContactRequest, schemas.UpdateContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContact, schemas.UpdateContactRequest, schemas.UpdateContactResponse), output: &UpdateContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

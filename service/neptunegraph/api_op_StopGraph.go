@@ -4,7 +4,9 @@ package neptunegraph
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	"time"
@@ -36,6 +38,17 @@ type StopGraphInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopGraphInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopGraphInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopGraphInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphIdentifier != nil {
+		s.WriteString(schemas.StopGraphInput_graphIdentifier, *v.GraphIdentifier)
+	}
+}
 func (in *StopGraphInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ApiType = ptr.String("ControlPlane")
@@ -103,13 +116,122 @@ type StopGraphOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopGraphOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopGraphOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopGraphOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StopGraphOutput_arn, *v.Arn)
+	}
+	if v.BuildNumber != nil {
+		s.WriteString(schemas.StopGraphOutput_buildNumber, *v.BuildNumber)
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.StopGraphOutput_createTime, *v.CreateTime)
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.StopGraphOutput_deletionProtection, *v.DeletionProtection)
+	}
+	if v.Endpoint != nil {
+		s.WriteString(schemas.StopGraphOutput_endpoint, *v.Endpoint)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.StopGraphOutput_id, *v.Id)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.StopGraphOutput_kmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StopGraphOutput_name, *v.Name)
+	}
+	if v.ProvisionedMemory != nil {
+		s.WriteInt32(schemas.StopGraphOutput_provisionedMemory, *v.ProvisionedMemory)
+	}
+	if v.PublicConnectivity != nil {
+		s.WriteBool(schemas.StopGraphOutput_publicConnectivity, *v.PublicConnectivity)
+	}
+	if v.ReplicaCount != nil {
+		s.WriteInt32(schemas.StopGraphOutput_replicaCount, *v.ReplicaCount)
+	}
+	if v.SourceSnapshotId != nil {
+		s.WriteString(schemas.StopGraphOutput_sourceSnapshotId, *v.SourceSnapshotId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StopGraphOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.StopGraphOutput_statusReason, *v.StatusReason)
+	}
+	if v.VectorSearchConfiguration != nil {
+		s.WriteStruct(schemas.StopGraphOutput_vectorSearchConfiguration)
+		v.VectorSearchConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StopGraphOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopGraphOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopGraphOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StopGraphOutput_arn, v.Arn)
+		case schemas.StopGraphOutput_buildNumber:
+			v.BuildNumber = new(string)
+			return d.ReadString(schemas.StopGraphOutput_buildNumber, v.BuildNumber)
+		case schemas.StopGraphOutput_createTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.StopGraphOutput_createTime, v.CreateTime)
+		case schemas.StopGraphOutput_deletionProtection:
+			v.DeletionProtection = new(bool)
+			return d.ReadBool(schemas.StopGraphOutput_deletionProtection, v.DeletionProtection)
+		case schemas.StopGraphOutput_endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.StopGraphOutput_endpoint, v.Endpoint)
+		case schemas.StopGraphOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StopGraphOutput_id, v.Id)
+		case schemas.StopGraphOutput_kmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.StopGraphOutput_kmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.StopGraphOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StopGraphOutput_name, v.Name)
+		case schemas.StopGraphOutput_provisionedMemory:
+			v.ProvisionedMemory = new(int32)
+			return d.ReadInt32(schemas.StopGraphOutput_provisionedMemory, v.ProvisionedMemory)
+		case schemas.StopGraphOutput_publicConnectivity:
+			v.PublicConnectivity = new(bool)
+			return d.ReadBool(schemas.StopGraphOutput_publicConnectivity, v.PublicConnectivity)
+		case schemas.StopGraphOutput_replicaCount:
+			v.ReplicaCount = new(int32)
+			return d.ReadInt32(schemas.StopGraphOutput_replicaCount, v.ReplicaCount)
+		case schemas.StopGraphOutput_sourceSnapshotId:
+			v.SourceSnapshotId = new(string)
+			return d.ReadString(schemas.StopGraphOutput_sourceSnapshotId, v.SourceSnapshotId)
+		case schemas.StopGraphOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.StopGraphOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.GraphStatus(ev)
+			return nil
+		case schemas.StopGraphOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.StopGraphOutput_statusReason, v.StatusReason)
+		case schemas.StopGraphOutput_vectorSearchConfiguration:
+			v.VectorSearchConfiguration = &types.VectorSearchConfiguration{}
+			return v.VectorSearchConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopGraph{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopGraph, schemas.StopGraphInput, schemas.StopGraphOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopGraph{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopGraph, schemas.StopGraphInput, schemas.StopGraphOutput), output: &StopGraphOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

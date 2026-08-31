@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,30 @@ type ListLensSharesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLensSharesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLensSharesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLensSharesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LensAlias != nil {
+		s.WriteString(schemas.ListLensSharesInput_LensAlias, *v.LensAlias)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLensSharesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLensSharesInput_NextToken, *v.NextToken)
+	}
+	if v.SharedWithPrefix != nil {
+		s.WriteString(schemas.ListLensSharesInput_SharedWithPrefix, *v.SharedWithPrefix)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListLensSharesInput_Status, string(v.Status))
+	}
+}
+
 type ListLensSharesOutput struct {
 
 	// A list of lens share summaries.
@@ -74,13 +100,35 @@ type ListLensSharesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLensSharesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLensSharesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLensSharesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLensShareSummaries(s, schemas.ListLensSharesOutput_LensShareSummaries, v.LensShareSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLensSharesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLensSharesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLensSharesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLensSharesOutput_LensShareSummaries:
+			return deserializeLensShareSummaries(d, schemas.ListLensSharesOutput_LensShareSummaries, &v.LensShareSummaries)
+		case schemas.ListLensSharesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLensSharesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLensSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLensShares{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLensShares, schemas.ListLensSharesInput, schemas.ListLensSharesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLensShares{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLensShares, schemas.ListLensSharesInput, schemas.ListLensSharesOutput), output: &ListLensSharesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

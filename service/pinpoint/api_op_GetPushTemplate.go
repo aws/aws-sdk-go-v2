@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,21 @@ type GetPushTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPushTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPushTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPushTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateName != nil {
+		s.WriteString(schemas.GetPushTemplateRequest_TemplateName, *v.TemplateName)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.GetPushTemplateRequest_Version, *v.Version)
+	}
+}
+
 type GetPushTemplateOutput struct {
 
 	// Provides information about the content and settings for a message template that
@@ -76,13 +93,34 @@ type GetPushTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPushTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPushTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPushTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PushNotificationTemplateResponse != nil {
+		s.WriteStruct(schemas.GetPushTemplateResponse_PushNotificationTemplateResponse)
+		v.PushNotificationTemplateResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetPushTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPushTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPushTemplateResponse_PushNotificationTemplateResponse:
+			v.PushNotificationTemplateResponse = &types.PushNotificationTemplateResponse{}
+			return v.PushNotificationTemplateResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPushTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPushTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPushTemplate, schemas.GetPushTemplateRequest, schemas.GetPushTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPushTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPushTemplate, schemas.GetPushTemplateRequest, schemas.GetPushTemplateResponse), output: &GetPushTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,24 @@ type UpdateDeviceStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDeviceStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDeviceStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDeviceStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.UpdateDeviceStatusRequest_AccessToken, *v.AccessToken)
+	}
+	if v.DeviceKey != nil {
+		s.WriteString(schemas.UpdateDeviceStatusRequest_DeviceKey, *v.DeviceKey)
+	}
+	if v.DeviceRememberedStatus != "" {
+		s.WriteString(schemas.UpdateDeviceStatusRequest_DeviceRememberedStatus, string(v.DeviceRememberedStatus))
+	}
+}
+
 // The response to the request to update the device status.
 type UpdateDeviceStatusOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -72,13 +92,26 @@ type UpdateDeviceStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDeviceStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDeviceStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDeviceStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateDeviceStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDeviceStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDeviceStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDeviceStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDeviceStatus, schemas.UpdateDeviceStatusRequest, schemas.UpdateDeviceStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDeviceStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDeviceStatus, schemas.UpdateDeviceStatusRequest, schemas.UpdateDeviceStatusResponse), output: &UpdateDeviceStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

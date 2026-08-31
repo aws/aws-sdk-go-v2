@@ -5,7 +5,9 @@ package neptunegraph
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -46,6 +48,20 @@ type ListGraphsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGraphsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGraphsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGraphsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGraphsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGraphsInput_nextToken, *v.NextToken)
+	}
+}
 func (in *ListGraphsInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ApiType = ptr.String("ControlPlane")
@@ -71,13 +87,35 @@ type ListGraphsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGraphsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGraphsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGraphsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGraphSummaryList(s, schemas.ListGraphsOutput_graphs, v.Graphs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGraphsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListGraphsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGraphsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGraphsOutput_graphs:
+			return deserializeGraphSummaryList(d, schemas.ListGraphsOutput_graphs, &v.Graphs)
+		case schemas.ListGraphsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGraphsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGraphsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGraphs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGraphs, schemas.ListGraphsInput, schemas.ListGraphsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGraphs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGraphs, schemas.ListGraphsInput, schemas.ListGraphsOutput), output: &ListGraphsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

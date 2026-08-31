@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,46 @@ type CreateWorkspacesPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkspacesPoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkspacesPoolRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkspacesPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationSettings != nil {
+		s.WriteStruct(schemas.CreateWorkspacesPoolRequest_ApplicationSettings)
+		v.ApplicationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BundleId != nil {
+		s.WriteString(schemas.CreateWorkspacesPoolRequest_BundleId, *v.BundleId)
+	}
+	if v.Capacity != nil {
+		s.WriteStruct(schemas.CreateWorkspacesPoolRequest_Capacity)
+		v.Capacity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateWorkspacesPoolRequest_Description, *v.Description)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.CreateWorkspacesPoolRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.PoolName != nil {
+		s.WriteString(schemas.CreateWorkspacesPoolRequest_PoolName, *v.PoolName)
+	}
+	if v.RunningMode != "" {
+		s.WriteString(schemas.CreateWorkspacesPoolRequest_RunningMode, string(v.RunningMode))
+	}
+	serializeTagList(s, schemas.CreateWorkspacesPoolRequest_Tags, v.Tags)
+	if v.TimeoutSettings != nil {
+		s.WriteStruct(schemas.CreateWorkspacesPoolRequest_TimeoutSettings)
+		v.TimeoutSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateWorkspacesPoolOutput struct {
 
 	// Indicates the pool to create.
@@ -84,13 +126,34 @@ type CreateWorkspacesPoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkspacesPoolOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkspacesPoolResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkspacesPoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspacesPool != nil {
+		s.WriteStruct(schemas.CreateWorkspacesPoolResult_WorkspacesPool)
+		v.WorkspacesPool.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateWorkspacesPoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkspacesPoolResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkspacesPoolResult_WorkspacesPool:
+			v.WorkspacesPool = &types.WorkspacesPool{}
+			return v.WorkspacesPool.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkspacesPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateWorkspacesPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspacesPool, schemas.CreateWorkspacesPoolRequest, schemas.CreateWorkspacesPoolResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateWorkspacesPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspacesPool, schemas.CreateWorkspacesPoolRequest, schemas.CreateWorkspacesPoolResult), output: &CreateWorkspacesPoolOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

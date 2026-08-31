@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetEmailChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEmailChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEmailChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEmailChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetEmailChannelRequest_ApplicationId, *v.ApplicationId)
+	}
+}
+
 type GetEmailChannelOutput struct {
 
 	// Provides information about the status and settings of the email channel for an
@@ -50,13 +64,34 @@ type GetEmailChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEmailChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEmailChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEmailChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailChannelResponse != nil {
+		s.WriteStruct(schemas.GetEmailChannelResponse_EmailChannelResponse)
+		v.EmailChannelResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetEmailChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEmailChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEmailChannelResponse_EmailChannelResponse:
+			v.EmailChannelResponse = &types.EmailChannelResponse{}
+			return v.EmailChannelResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEmailChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEmailChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEmailChannel, schemas.GetEmailChannelRequest, schemas.GetEmailChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEmailChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEmailChannel, schemas.GetEmailChannelRequest, schemas.GetEmailChannelResponse), output: &GetEmailChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

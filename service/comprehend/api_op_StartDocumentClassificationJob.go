@@ -5,7 +5,9 @@ package comprehend
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -87,6 +89,49 @@ type StartDocumentClassificationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDocumentClassificationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDocumentClassificationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDocumentClassificationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartDocumentClassificationJobRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.StartDocumentClassificationJobRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.DocumentClassifierArn != nil {
+		s.WriteString(schemas.StartDocumentClassificationJobRequest_DocumentClassifierArn, *v.DocumentClassifierArn)
+	}
+	if v.FlywheelArn != nil {
+		s.WriteString(schemas.StartDocumentClassificationJobRequest_FlywheelArn, *v.FlywheelArn)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.StartDocumentClassificationJobRequest_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.StartDocumentClassificationJobRequest_JobName, *v.JobName)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.StartDocumentClassificationJobRequest_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.StartDocumentClassificationJobRequest_Tags, v.Tags)
+	if v.VolumeKmsKeyId != nil {
+		s.WriteString(schemas.StartDocumentClassificationJobRequest_VolumeKmsKeyId, *v.VolumeKmsKeyId)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.StartDocumentClassificationJobRequest_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartDocumentClassificationJobOutput struct {
 
 	// The ARN of the custom classification model.
@@ -131,13 +176,54 @@ type StartDocumentClassificationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDocumentClassificationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDocumentClassificationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDocumentClassificationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentClassifierArn != nil {
+		s.WriteString(schemas.StartDocumentClassificationJobResponse_DocumentClassifierArn, *v.DocumentClassifierArn)
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.StartDocumentClassificationJobResponse_JobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.StartDocumentClassificationJobResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.StartDocumentClassificationJobResponse_JobStatus, string(v.JobStatus))
+	}
+}
+func (v *StartDocumentClassificationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDocumentClassificationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDocumentClassificationJobResponse_DocumentClassifierArn:
+			v.DocumentClassifierArn = new(string)
+			return d.ReadString(schemas.StartDocumentClassificationJobResponse_DocumentClassifierArn, v.DocumentClassifierArn)
+		case schemas.StartDocumentClassificationJobResponse_JobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.StartDocumentClassificationJobResponse_JobArn, v.JobArn)
+		case schemas.StartDocumentClassificationJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartDocumentClassificationJobResponse_JobId, v.JobId)
+		case schemas.StartDocumentClassificationJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartDocumentClassificationJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDocumentClassificationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartDocumentClassificationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDocumentClassificationJob, schemas.StartDocumentClassificationJobRequest, schemas.StartDocumentClassificationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartDocumentClassificationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDocumentClassificationJob, schemas.StartDocumentClassificationJobRequest, schemas.StartDocumentClassificationJobResponse), output: &StartDocumentClassificationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

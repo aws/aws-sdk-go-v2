@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -42,6 +44,21 @@ type CreateBotReplicaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBotReplicaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBotReplicaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBotReplicaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.CreateBotReplicaRequest_botId, *v.BotId)
+	}
+	if v.ReplicaRegion != nil {
+		s.WriteString(schemas.CreateBotReplicaRequest_replicaRegion, *v.ReplicaRegion)
+	}
+}
+
 type CreateBotReplicaOutput struct {
 
 	// The unique bot ID of the replicated bot generated.
@@ -65,13 +82,60 @@ type CreateBotReplicaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBotReplicaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBotReplicaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBotReplicaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.CreateBotReplicaResponse_botId, *v.BotId)
+	}
+	if v.BotReplicaStatus != "" {
+		s.WriteString(schemas.CreateBotReplicaResponse_botReplicaStatus, string(v.BotReplicaStatus))
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.CreateBotReplicaResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.ReplicaRegion != nil {
+		s.WriteString(schemas.CreateBotReplicaResponse_replicaRegion, *v.ReplicaRegion)
+	}
+	if v.SourceRegion != nil {
+		s.WriteString(schemas.CreateBotReplicaResponse_sourceRegion, *v.SourceRegion)
+	}
+}
+func (v *CreateBotReplicaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBotReplicaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBotReplicaResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.CreateBotReplicaResponse_botId, v.BotId)
+		case schemas.CreateBotReplicaResponse_botReplicaStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateBotReplicaResponse_botReplicaStatus, &ev); err != nil {
+				return err
+			}
+			v.BotReplicaStatus = types.BotReplicaStatus(ev)
+			return nil
+		case schemas.CreateBotReplicaResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.CreateBotReplicaResponse_creationDateTime, v.CreationDateTime)
+		case schemas.CreateBotReplicaResponse_replicaRegion:
+			v.ReplicaRegion = new(string)
+			return d.ReadString(schemas.CreateBotReplicaResponse_replicaRegion, v.ReplicaRegion)
+		case schemas.CreateBotReplicaResponse_sourceRegion:
+			v.SourceRegion = new(string)
+			return d.ReadString(schemas.CreateBotReplicaResponse_sourceRegion, v.SourceRegion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBotReplicaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBotReplica{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBotReplica, schemas.CreateBotReplicaRequest, schemas.CreateBotReplicaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateBotReplica{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBotReplica, schemas.CreateBotReplicaRequest, schemas.CreateBotReplicaResponse), output: &CreateBotReplicaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

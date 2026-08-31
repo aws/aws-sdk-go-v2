@@ -5,7 +5,9 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,29 @@ type ListBuiltInSlotTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBuiltInSlotTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBuiltInSlotTypesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBuiltInSlotTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListBuiltInSlotTypesRequest_localeId, *v.LocaleId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBuiltInSlotTypesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBuiltInSlotTypesRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != nil {
+		s.WriteStruct(schemas.ListBuiltInSlotTypesRequest_sortBy)
+		v.SortBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListBuiltInSlotTypesOutput struct {
 
 	// Summary information for the built-in slot types that meet the filter criteria
@@ -77,13 +102,41 @@ type ListBuiltInSlotTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBuiltInSlotTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBuiltInSlotTypesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBuiltInSlotTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBuiltInSlotTypeSummaryList(s, schemas.ListBuiltInSlotTypesResponse_builtInSlotTypeSummaries, v.BuiltInSlotTypeSummaries)
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListBuiltInSlotTypesResponse_localeId, *v.LocaleId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBuiltInSlotTypesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListBuiltInSlotTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBuiltInSlotTypesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBuiltInSlotTypesResponse_builtInSlotTypeSummaries:
+			return deserializeBuiltInSlotTypeSummaryList(d, schemas.ListBuiltInSlotTypesResponse_builtInSlotTypeSummaries, &v.BuiltInSlotTypeSummaries)
+		case schemas.ListBuiltInSlotTypesResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.ListBuiltInSlotTypesResponse_localeId, v.LocaleId)
+		case schemas.ListBuiltInSlotTypesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBuiltInSlotTypesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBuiltInSlotTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBuiltInSlotTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBuiltInSlotTypes, schemas.ListBuiltInSlotTypesRequest, schemas.ListBuiltInSlotTypesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBuiltInSlotTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBuiltInSlotTypes, schemas.ListBuiltInSlotTypesRequest, schemas.ListBuiltInSlotTypesResponse), output: &ListBuiltInSlotTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,22 @@ type BatchDisassociateAnalyticsDataSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDisassociateAnalyticsDataSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDisassociateAnalyticsDataSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDisassociateAnalyticsDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataSetIds(s, schemas.BatchDisassociateAnalyticsDataSetRequest_DataSetIds, v.DataSetIds)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.BatchDisassociateAnalyticsDataSetRequest_InstanceId, *v.InstanceId)
+	}
+	if v.TargetAccountId != nil {
+		s.WriteString(schemas.BatchDisassociateAnalyticsDataSetRequest_TargetAccountId, *v.TargetAccountId)
+	}
+}
+
 type BatchDisassociateAnalyticsDataSetOutput struct {
 
 	// An array of successfully disassociated dataset identifiers.
@@ -63,13 +81,32 @@ type BatchDisassociateAnalyticsDataSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDisassociateAnalyticsDataSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDisassociateAnalyticsDataSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDisassociateAnalyticsDataSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataSetIds(s, schemas.BatchDisassociateAnalyticsDataSetResponse_Deleted, v.Deleted)
+	serializeErrorResults(s, schemas.BatchDisassociateAnalyticsDataSetResponse_Errors, v.Errors)
+}
+func (v *BatchDisassociateAnalyticsDataSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDisassociateAnalyticsDataSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDisassociateAnalyticsDataSetResponse_Deleted:
+			return deserializeDataSetIds(d, schemas.BatchDisassociateAnalyticsDataSetResponse_Deleted, &v.Deleted)
+		case schemas.BatchDisassociateAnalyticsDataSetResponse_Errors:
+			return deserializeErrorResults(d, schemas.BatchDisassociateAnalyticsDataSetResponse_Errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDisassociateAnalyticsDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDisassociateAnalyticsDataSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateAnalyticsDataSet, schemas.BatchDisassociateAnalyticsDataSetRequest, schemas.BatchDisassociateAnalyticsDataSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDisassociateAnalyticsDataSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateAnalyticsDataSet, schemas.BatchDisassociateAnalyticsDataSetRequest, schemas.BatchDisassociateAnalyticsDataSetResponse), output: &BatchDisassociateAnalyticsDataSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type StopThingRegistrationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopThingRegistrationTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopThingRegistrationTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopThingRegistrationTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.StopThingRegistrationTaskRequest_taskId, *v.TaskId)
+	}
+}
+
 type StopThingRegistrationTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +58,26 @@ type StopThingRegistrationTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopThingRegistrationTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopThingRegistrationTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopThingRegistrationTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopThingRegistrationTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopThingRegistrationTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopThingRegistrationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopThingRegistrationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopThingRegistrationTask, schemas.StopThingRegistrationTaskRequest, schemas.StopThingRegistrationTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopThingRegistrationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopThingRegistrationTask, schemas.StopThingRegistrationTaskRequest, schemas.StopThingRegistrationTaskResponse), output: &StopThingRegistrationTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

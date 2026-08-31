@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,27 @@ type AdminListDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminListDevicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminListDevicesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminListDevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.AdminListDevicesRequest_Limit, *v.Limit)
+	}
+	if v.PaginationToken != nil {
+		s.WriteString(schemas.AdminListDevicesRequest_PaginationToken, *v.PaginationToken)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AdminListDevicesRequest_UserPoolId, *v.UserPoolId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.AdminListDevicesRequest_Username, *v.Username)
+	}
+}
+
 // Lists the device's response, as an administrator.
 type AdminListDevicesOutput struct {
 
@@ -94,13 +117,35 @@ type AdminListDevicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminListDevicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminListDevicesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminListDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeviceListType(s, schemas.AdminListDevicesResponse_Devices, v.Devices)
+	if v.PaginationToken != nil {
+		s.WriteString(schemas.AdminListDevicesResponse_PaginationToken, *v.PaginationToken)
+	}
+}
+func (v *AdminListDevicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminListDevicesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdminListDevicesResponse_Devices:
+			return deserializeDeviceListType(d, schemas.AdminListDevicesResponse_Devices, &v.Devices)
+		case schemas.AdminListDevicesResponse_PaginationToken:
+			v.PaginationToken = new(string)
+			return d.ReadString(schemas.AdminListDevicesResponse_PaginationToken, v.PaginationToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdminListDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminListDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminListDevices, schemas.AdminListDevicesRequest, schemas.AdminListDevicesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminListDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminListDevices, schemas.AdminListDevicesRequest, schemas.AdminListDevicesResponse), output: &AdminListDevicesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

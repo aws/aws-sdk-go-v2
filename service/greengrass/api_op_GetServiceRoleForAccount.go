@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -27,6 +29,15 @@ type GetServiceRoleForAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceRoleForAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceRoleForAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceRoleForAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetServiceRoleForAccountOutput struct {
 
 	// The time when the service role was associated with the account.
@@ -41,13 +52,38 @@ type GetServiceRoleForAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceRoleForAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceRoleForAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceRoleForAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedAt != nil {
+		s.WriteString(schemas.GetServiceRoleForAccountResponse_AssociatedAt, *v.AssociatedAt)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetServiceRoleForAccountResponse_RoleArn, *v.RoleArn)
+	}
+}
+func (v *GetServiceRoleForAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceRoleForAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceRoleForAccountResponse_AssociatedAt:
+			v.AssociatedAt = new(string)
+			return d.ReadString(schemas.GetServiceRoleForAccountResponse_AssociatedAt, v.AssociatedAt)
+		case schemas.GetServiceRoleForAccountResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetServiceRoleForAccountResponse_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceRoleForAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetServiceRoleForAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceRoleForAccount, schemas.GetServiceRoleForAccountRequest, schemas.GetServiceRoleForAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetServiceRoleForAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceRoleForAccount, schemas.GetServiceRoleForAccountRequest, schemas.GetServiceRoleForAccountResponse), output: &GetServiceRoleForAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

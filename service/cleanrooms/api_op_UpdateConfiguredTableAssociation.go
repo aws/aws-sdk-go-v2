@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,46 @@ type UpdateConfiguredTableAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfiguredTableAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfiguredTableAssociationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfiguredTableAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfiguredTableAssociationIdentifier != nil {
+		s.WriteString(schemas.UpdateConfiguredTableAssociationInput_configuredTableAssociationIdentifier, *v.ConfiguredTableAssociationIdentifier)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateConfiguredTableAssociationInput_description, *v.Description)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.UpdateConfiguredTableAssociationInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateConfiguredTableAssociationInput_roleArn, *v.RoleArn)
+	}
+}
+func (v *UpdateConfiguredTableAssociationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConfiguredTableAssociationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConfiguredTableAssociationInput_configuredTableAssociationIdentifier:
+			v.ConfiguredTableAssociationIdentifier = new(string)
+			return d.ReadString(schemas.UpdateConfiguredTableAssociationInput_configuredTableAssociationIdentifier, v.ConfiguredTableAssociationIdentifier)
+		case schemas.UpdateConfiguredTableAssociationInput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateConfiguredTableAssociationInput_description, v.Description)
+		case schemas.UpdateConfiguredTableAssociationInput_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.UpdateConfiguredTableAssociationInput_membershipIdentifier, v.MembershipIdentifier)
+		case schemas.UpdateConfiguredTableAssociationInput_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.UpdateConfiguredTableAssociationInput_roleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
+
 type UpdateConfiguredTableAssociationOutput struct {
 
 	// The entire updated configured table association.
@@ -61,13 +103,34 @@ type UpdateConfiguredTableAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfiguredTableAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfiguredTableAssociationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfiguredTableAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfiguredTableAssociation != nil {
+		s.WriteStruct(schemas.UpdateConfiguredTableAssociationOutput_configuredTableAssociation)
+		v.ConfiguredTableAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateConfiguredTableAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConfiguredTableAssociationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConfiguredTableAssociationOutput_configuredTableAssociation:
+			v.ConfiguredTableAssociation = &types.ConfiguredTableAssociation{}
+			return v.ConfiguredTableAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConfiguredTableAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConfiguredTableAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfiguredTableAssociation, schemas.UpdateConfiguredTableAssociationInput, schemas.UpdateConfiguredTableAssociationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateConfiguredTableAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfiguredTableAssociation, schemas.UpdateConfiguredTableAssociationInput, schemas.UpdateConfiguredTableAssociationOutput), output: &UpdateConfiguredTableAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -157,6 +159,55 @@ type CreateEndpointConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEndpointConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEndpointConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEndpointConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AsyncInferenceConfig != nil {
+		s.WriteStruct(schemas.CreateEndpointConfigInput_AsyncInferenceConfig)
+		v.AsyncInferenceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataCaptureConfig != nil {
+		s.WriteStruct(schemas.CreateEndpointConfigInput_DataCaptureConfig)
+		v.DataCaptureConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EnableNetworkIsolation != nil {
+		s.WriteBool(schemas.CreateEndpointConfigInput_EnableNetworkIsolation, *v.EnableNetworkIsolation)
+	}
+	if v.EndpointConfigName != nil {
+		s.WriteString(schemas.CreateEndpointConfigInput_EndpointConfigName, *v.EndpointConfigName)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.CreateEndpointConfigInput_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.ExplainerConfig != nil {
+		s.WriteStruct(schemas.CreateEndpointConfigInput_ExplainerConfig)
+		v.ExplainerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateEndpointConfigInput_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.MetricsConfig != nil {
+		s.WriteStruct(schemas.CreateEndpointConfigInput_MetricsConfig)
+		v.MetricsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeProductionVariantList(s, schemas.CreateEndpointConfigInput_ProductionVariants, v.ProductionVariants)
+	serializeProductionVariantList(s, schemas.CreateEndpointConfigInput_ShadowProductionVariants, v.ShadowProductionVariants)
+	serializeTagList(s, schemas.CreateEndpointConfigInput_Tags, v.Tags)
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateEndpointConfigInput_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateEndpointConfigOutput struct {
 
 	// The Amazon Resource Name (ARN) of the endpoint configuration.
@@ -170,13 +221,32 @@ type CreateEndpointConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEndpointConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEndpointConfigOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEndpointConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointConfigArn != nil {
+		s.WriteString(schemas.CreateEndpointConfigOutput_EndpointConfigArn, *v.EndpointConfigArn)
+	}
+}
+func (v *CreateEndpointConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEndpointConfigOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEndpointConfigOutput_EndpointConfigArn:
+			v.EndpointConfigArn = new(string)
+			return d.ReadString(schemas.CreateEndpointConfigOutput_EndpointConfigArn, v.EndpointConfigArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEndpointConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEndpointConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEndpointConfig, schemas.CreateEndpointConfigInput, schemas.CreateEndpointConfigOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateEndpointConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEndpointConfig, schemas.CreateEndpointConfigInput, schemas.CreateEndpointConfigOutput), output: &CreateEndpointConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

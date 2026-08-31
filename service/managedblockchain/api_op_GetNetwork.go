@@ -4,7 +4,9 @@ package managedblockchain
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNetworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNetworkInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkId != nil {
+		s.WriteString(schemas.GetNetworkInput_NetworkId, *v.NetworkId)
+	}
+}
+
 type GetNetworkOutput struct {
 
 	// An object containing network configuration parameters.
@@ -47,13 +61,34 @@ type GetNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNetworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNetworkOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Network != nil {
+		s.WriteStruct(schemas.GetNetworkOutput_Network)
+		v.Network.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNetworkOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNetworkOutput_Network:
+			v.Network = &types.Network{}
+			return v.Network.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetwork, schemas.GetNetworkInput, schemas.GetNetworkOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetwork, schemas.GetNetworkInput, schemas.GetNetworkOutput), output: &GetNetworkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

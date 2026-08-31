@@ -5,7 +5,9 @@ package m2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/m2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type ListBatchJobDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBatchJobDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBatchJobDefinitionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBatchJobDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ListBatchJobDefinitionsRequest_applicationId, *v.ApplicationId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBatchJobDefinitionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBatchJobDefinitionsRequest_nextToken, *v.NextToken)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.ListBatchJobDefinitionsRequest_prefix, *v.Prefix)
+	}
+}
+
 type ListBatchJobDefinitionsOutput struct {
 
 	// The list of batch job definitions.
@@ -66,13 +89,35 @@ type ListBatchJobDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBatchJobDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBatchJobDefinitionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBatchJobDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchJobDefinitions(s, schemas.ListBatchJobDefinitionsResponse_batchJobDefinitions, v.BatchJobDefinitions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBatchJobDefinitionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListBatchJobDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBatchJobDefinitionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBatchJobDefinitionsResponse_batchJobDefinitions:
+			return deserializeBatchJobDefinitions(d, schemas.ListBatchJobDefinitionsResponse_batchJobDefinitions, &v.BatchJobDefinitions)
+		case schemas.ListBatchJobDefinitionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBatchJobDefinitionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBatchJobDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBatchJobDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBatchJobDefinitions, schemas.ListBatchJobDefinitionsRequest, schemas.ListBatchJobDefinitionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBatchJobDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBatchJobDefinitions, schemas.ListBatchJobDefinitionsRequest, schemas.ListBatchJobDefinitionsResponse), output: &ListBatchJobDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

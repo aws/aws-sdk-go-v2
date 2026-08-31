@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type DescribeInstanceStorageConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInstanceStorageConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInstanceStorageConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInstanceStorageConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.DescribeInstanceStorageConfigRequest_AssociationId, *v.AssociationId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeInstanceStorageConfigRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.DescribeInstanceStorageConfigRequest_ResourceType, string(v.ResourceType))
+	}
+}
+
 type DescribeInstanceStorageConfigOutput struct {
 
 	// A valid storage type.
@@ -62,13 +82,34 @@ type DescribeInstanceStorageConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInstanceStorageConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInstanceStorageConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInstanceStorageConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StorageConfig != nil {
+		s.WriteStruct(schemas.DescribeInstanceStorageConfigResponse_StorageConfig)
+		v.StorageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeInstanceStorageConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInstanceStorageConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInstanceStorageConfigResponse_StorageConfig:
+			v.StorageConfig = &types.InstanceStorageConfig{}
+			return v.StorageConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeInstanceStorageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeInstanceStorageConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstanceStorageConfig, schemas.DescribeInstanceStorageConfigRequest, schemas.DescribeInstanceStorageConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeInstanceStorageConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstanceStorageConfig, schemas.DescribeInstanceStorageConfigRequest, schemas.DescribeInstanceStorageConfigResponse), output: &DescribeInstanceStorageConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

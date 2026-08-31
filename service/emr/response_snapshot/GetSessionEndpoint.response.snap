@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ElasticMapReduce.GetSessionEndpoint
+
+{"AuthToken":"__AuthToken__","AuthTokenExpirationTime":946684800,"Credentials":{"UsernamePassword":{"Password":"__Password__","Username":"__Username__"}},"Endpoint":"__Endpoint__"}

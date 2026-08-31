@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteDynamicThingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDynamicThingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDynamicThingGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDynamicThingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpectedVersion != nil {
+		s.WriteInt64(schemas.DeleteDynamicThingGroupRequest_expectedVersion, *v.ExpectedVersion)
+	}
+	if v.ThingGroupName != nil {
+		s.WriteString(schemas.DeleteDynamicThingGroupRequest_thingGroupName, *v.ThingGroupName)
+	}
+}
+
 type DeleteDynamicThingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type DeleteDynamicThingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDynamicThingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDynamicThingGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDynamicThingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteDynamicThingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDynamicThingGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDynamicThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDynamicThingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDynamicThingGroup, schemas.DeleteDynamicThingGroupRequest, schemas.DeleteDynamicThingGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDynamicThingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDynamicThingGroup, schemas.DeleteDynamicThingGroupRequest, schemas.DeleteDynamicThingGroupResponse), output: &DeleteDynamicThingGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

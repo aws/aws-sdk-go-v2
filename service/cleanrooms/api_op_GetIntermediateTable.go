@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type GetIntermediateTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIntermediateTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIntermediateTableInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIntermediateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntermediateTableIdentifier != nil {
+		s.WriteString(schemas.GetIntermediateTableInput_intermediateTableIdentifier, *v.IntermediateTableIdentifier)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.GetIntermediateTableInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+
 type GetIntermediateTableOutput struct {
 
 	// The intermediate table retrieved.
@@ -55,13 +72,34 @@ type GetIntermediateTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIntermediateTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIntermediateTableOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIntermediateTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntermediateTable != nil {
+		s.WriteStruct(schemas.GetIntermediateTableOutput_intermediateTable)
+		v.IntermediateTable.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetIntermediateTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIntermediateTableOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIntermediateTableOutput_intermediateTable:
+			v.IntermediateTable = &types.IntermediateTable{}
+			return v.IntermediateTable.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIntermediateTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIntermediateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntermediateTable, schemas.GetIntermediateTableInput, schemas.GetIntermediateTableOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIntermediateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntermediateTable, schemas.GetIntermediateTableInput, schemas.GetIntermediateTableOutput), output: &GetIntermediateTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

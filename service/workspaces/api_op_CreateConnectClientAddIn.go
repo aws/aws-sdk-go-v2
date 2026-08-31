@@ -4,6 +4,8 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type CreateConnectClientAddInInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectClientAddInInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectClientAddInRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectClientAddInInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateConnectClientAddInRequest_Name, *v.Name)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.CreateConnectClientAddInRequest_ResourceId, *v.ResourceId)
+	}
+	if v.URL != nil {
+		s.WriteString(schemas.CreateConnectClientAddInRequest_URL, *v.URL)
+	}
+}
+
 type CreateConnectClientAddInOutput struct {
 
 	// The client add-in identifier.
@@ -58,13 +78,32 @@ type CreateConnectClientAddInOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectClientAddInOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectClientAddInResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectClientAddInOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddInId != nil {
+		s.WriteString(schemas.CreateConnectClientAddInResult_AddInId, *v.AddInId)
+	}
+}
+func (v *CreateConnectClientAddInOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectClientAddInResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectClientAddInResult_AddInId:
+			v.AddInId = new(string)
+			return d.ReadString(schemas.CreateConnectClientAddInResult_AddInId, v.AddInId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConnectClientAddInMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateConnectClientAddIn{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnectClientAddIn, schemas.CreateConnectClientAddInRequest, schemas.CreateConnectClientAddInResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateConnectClientAddIn{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnectClientAddIn, schemas.CreateConnectClientAddInRequest, schemas.CreateConnectClientAddInResult), output: &CreateConnectClientAddInOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

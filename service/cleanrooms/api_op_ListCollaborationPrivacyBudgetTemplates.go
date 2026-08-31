@@ -5,7 +5,9 @@ package cleanrooms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListCollaborationPrivacyBudgetTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCollaborationPrivacyBudgetTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCollaborationPrivacyBudgetTemplatesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCollaborationPrivacyBudgetTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.ListCollaborationPrivacyBudgetTemplatesInput_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCollaborationPrivacyBudgetTemplatesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCollaborationPrivacyBudgetTemplatesInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListCollaborationPrivacyBudgetTemplatesOutput struct {
 
 	// An array that summarizes the collaboration privacy budget templates. The
@@ -62,13 +82,35 @@ type ListCollaborationPrivacyBudgetTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCollaborationPrivacyBudgetTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCollaborationPrivacyBudgetTemplatesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCollaborationPrivacyBudgetTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCollaborationPrivacyBudgetTemplateSummaryList(s, schemas.ListCollaborationPrivacyBudgetTemplatesOutput_collaborationPrivacyBudgetTemplateSummaries, v.CollaborationPrivacyBudgetTemplateSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCollaborationPrivacyBudgetTemplatesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCollaborationPrivacyBudgetTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCollaborationPrivacyBudgetTemplatesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCollaborationPrivacyBudgetTemplatesOutput_collaborationPrivacyBudgetTemplateSummaries:
+			return deserializeCollaborationPrivacyBudgetTemplateSummaryList(d, schemas.ListCollaborationPrivacyBudgetTemplatesOutput_collaborationPrivacyBudgetTemplateSummaries, &v.CollaborationPrivacyBudgetTemplateSummaries)
+		case schemas.ListCollaborationPrivacyBudgetTemplatesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCollaborationPrivacyBudgetTemplatesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCollaborationPrivacyBudgetTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCollaborationPrivacyBudgetTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollaborationPrivacyBudgetTemplates, schemas.ListCollaborationPrivacyBudgetTemplatesInput, schemas.ListCollaborationPrivacyBudgetTemplatesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCollaborationPrivacyBudgetTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollaborationPrivacyBudgetTemplates, schemas.ListCollaborationPrivacyBudgetTemplatesInput, schemas.ListCollaborationPrivacyBudgetTemplatesOutput), output: &ListCollaborationPrivacyBudgetTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

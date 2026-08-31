@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,24 @@ type ListRoutingProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoutingProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoutingProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoutingProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListRoutingProfilesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRoutingProfilesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRoutingProfilesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListRoutingProfilesOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.
@@ -67,13 +87,35 @@ type ListRoutingProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoutingProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoutingProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoutingProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRoutingProfilesResponse_NextToken, *v.NextToken)
+	}
+	serializeRoutingProfileSummaryList(s, schemas.ListRoutingProfilesResponse_RoutingProfileSummaryList, v.RoutingProfileSummaryList)
+}
+func (v *ListRoutingProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRoutingProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRoutingProfilesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRoutingProfilesResponse_NextToken, v.NextToken)
+		case schemas.ListRoutingProfilesResponse_RoutingProfileSummaryList:
+			return deserializeRoutingProfileSummaryList(d, schemas.ListRoutingProfilesResponse_RoutingProfileSummaryList, &v.RoutingProfileSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRoutingProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRoutingProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoutingProfiles, schemas.ListRoutingProfilesRequest, schemas.ListRoutingProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRoutingProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoutingProfiles, schemas.ListRoutingProfilesRequest, schemas.ListRoutingProfilesResponse), output: &ListRoutingProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

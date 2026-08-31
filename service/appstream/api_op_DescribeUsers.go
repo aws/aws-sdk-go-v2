@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type DescribeUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUsersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUsersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUsersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.DescribeUsersRequest_AuthenticationType, string(v.AuthenticationType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeUsersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeUsersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeUsersOutput struct {
 
 	// The pagination token to use to retrieve the next page of results for this
@@ -57,13 +77,35 @@ type DescribeUsersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUsersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUsersResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUsersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeUsersResult_NextToken, *v.NextToken)
+	}
+	serializeUserList(s, schemas.DescribeUsersResult_Users, v.Users)
+}
+func (v *DescribeUsersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeUsersResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeUsersResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeUsersResult_NextToken, v.NextToken)
+		case schemas.DescribeUsersResult_Users:
+			return deserializeUserList(d, schemas.DescribeUsersResult_Users, &v.Users)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeUsers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUsers, schemas.DescribeUsersRequest, schemas.DescribeUsersResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeUsers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUsers, schemas.DescribeUsersRequest, schemas.DescribeUsersResult), output: &DescribeUsersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

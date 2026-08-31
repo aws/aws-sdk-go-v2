@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribeThemeForStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeThemeForStackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeThemeForStackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeThemeForStackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StackName != nil {
+		s.WriteString(schemas.DescribeThemeForStackRequest_StackName, *v.StackName)
+	}
+}
+
 type DescribeThemeForStackOutput struct {
 
 	//  The theme object that contains the metadata of the custom branding.
@@ -47,13 +61,34 @@ type DescribeThemeForStackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeThemeForStackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeThemeForStackResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeThemeForStackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Theme != nil {
+		s.WriteStruct(schemas.DescribeThemeForStackResult_Theme)
+		v.Theme.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeThemeForStackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeThemeForStackResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeThemeForStackResult_Theme:
+			v.Theme = &types.Theme{}
+			return v.Theme.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeThemeForStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeThemeForStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeThemeForStack, schemas.DescribeThemeForStackRequest, schemas.DescribeThemeForStackResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeThemeForStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeThemeForStack, schemas.DescribeThemeForStackRequest, schemas.DescribeThemeForStackResult), output: &DescribeThemeForStackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

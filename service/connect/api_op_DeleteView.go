@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteViewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteViewRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteViewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteViewRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ViewId != nil {
+		s.WriteString(schemas.DeleteViewRequest_ViewId, *v.ViewId)
+	}
+}
+
 type DeleteViewOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type DeleteViewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteViewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteViewResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteViewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteViewResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteView{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteView, schemas.DeleteViewRequest, schemas.DeleteViewResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteView{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteView, schemas.DeleteViewRequest, schemas.DeleteViewResponse), output: &DeleteViewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

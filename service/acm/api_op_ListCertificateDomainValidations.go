@@ -5,7 +5,9 @@ package acm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/acm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -50,6 +52,23 @@ type ListCertificateDomainValidationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCertificateDomainValidationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCertificateDomainValidationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCertificateDomainValidationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.ListCertificateDomainValidationsRequest_CertificateArn, *v.CertificateArn)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListCertificateDomainValidationsRequest_MaxItems, *v.MaxItems)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCertificateDomainValidationsRequest_NextToken, *v.NextToken)
+	}
+}
 func (in *ListCertificateDomainValidationsInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ServiceType = ptr.String("ACM")
@@ -72,13 +91,35 @@ type ListCertificateDomainValidationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCertificateDomainValidationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCertificateDomainValidationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCertificateDomainValidationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDomainValidationSummaryList(s, schemas.ListCertificateDomainValidationsResponse_DomainValidationSummaryList, v.DomainValidationSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCertificateDomainValidationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCertificateDomainValidationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCertificateDomainValidationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCertificateDomainValidationsResponse_DomainValidationSummaryList:
+			return deserializeDomainValidationSummaryList(d, schemas.ListCertificateDomainValidationsResponse_DomainValidationSummaryList, &v.DomainValidationSummaryList)
+		case schemas.ListCertificateDomainValidationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCertificateDomainValidationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCertificateDomainValidationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCertificateDomainValidations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCertificateDomainValidations, schemas.ListCertificateDomainValidationsRequest, schemas.ListCertificateDomainValidationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCertificateDomainValidations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCertificateDomainValidations, schemas.ListCertificateDomainValidationsRequest, schemas.ListCertificateDomainValidationsResponse), output: &ListCertificateDomainValidationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type ListAttachedFilesConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAttachedFilesConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAttachedFilesConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAttachedFilesConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListAttachedFilesConfigurationsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAttachedFilesConfigurationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAttachedFilesConfigurationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAttachedFilesConfigurationsOutput struct {
 
 	// Information about the attached files configurations.
@@ -65,13 +85,35 @@ type ListAttachedFilesConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAttachedFilesConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAttachedFilesConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAttachedFilesConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttachedFilesConfigurationSummaryList(s, schemas.ListAttachedFilesConfigurationsResponse_AttachedFilesConfigurations, v.AttachedFilesConfigurations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAttachedFilesConfigurationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAttachedFilesConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAttachedFilesConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAttachedFilesConfigurationsResponse_AttachedFilesConfigurations:
+			return deserializeAttachedFilesConfigurationSummaryList(d, schemas.ListAttachedFilesConfigurationsResponse_AttachedFilesConfigurations, &v.AttachedFilesConfigurations)
+		case schemas.ListAttachedFilesConfigurationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAttachedFilesConfigurationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAttachedFilesConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAttachedFilesConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttachedFilesConfigurations, schemas.ListAttachedFilesConfigurationsRequest, schemas.ListAttachedFilesConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAttachedFilesConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttachedFilesConfigurations, schemas.ListAttachedFilesConfigurationsRequest, schemas.ListAttachedFilesConfigurationsResponse), output: &ListAttachedFilesConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,24 @@ type UpdateWorkspaceImagePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkspaceImagePermissionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspaceImagePermissionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspaceImagePermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowCopyImage != nil {
+		s.WriteBool(schemas.UpdateWorkspaceImagePermissionRequest_AllowCopyImage, *v.AllowCopyImage)
+	}
+	if v.ImageId != nil {
+		s.WriteString(schemas.UpdateWorkspaceImagePermissionRequest_ImageId, *v.ImageId)
+	}
+	if v.SharedAccountId != nil {
+		s.WriteString(schemas.UpdateWorkspaceImagePermissionRequest_SharedAccountId, *v.SharedAccountId)
+	}
+}
+
 type UpdateWorkspaceImagePermissionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -78,13 +98,26 @@ type UpdateWorkspaceImagePermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkspaceImagePermissionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspaceImagePermissionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspaceImagePermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateWorkspaceImagePermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkspaceImagePermissionResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkspaceImagePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateWorkspaceImagePermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspaceImagePermission, schemas.UpdateWorkspaceImagePermissionRequest, schemas.UpdateWorkspaceImagePermissionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateWorkspaceImagePermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspaceImagePermission, schemas.UpdateWorkspaceImagePermissionRequest, schemas.UpdateWorkspaceImagePermissionResult), output: &UpdateWorkspaceImagePermissionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

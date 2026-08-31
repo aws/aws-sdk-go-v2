@@ -5,6 +5,8 @@ package codedeploy
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type ListDeploymentGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeploymentGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDeploymentGroupsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDeploymentGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.ListDeploymentGroupsInput_applicationName, *v.ApplicationName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDeploymentGroupsInput_nextToken, *v.NextToken)
+	}
+}
+
 // Represents the output of a ListDeploymentGroups operation.
 type ListDeploymentGroupsOutput struct {
 
@@ -61,13 +78,41 @@ type ListDeploymentGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeploymentGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDeploymentGroupsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDeploymentGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.ListDeploymentGroupsOutput_applicationName, *v.ApplicationName)
+	}
+	serializeDeploymentGroupsList(s, schemas.ListDeploymentGroupsOutput_deploymentGroups, v.DeploymentGroups)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDeploymentGroupsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDeploymentGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDeploymentGroupsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDeploymentGroupsOutput_applicationName:
+			v.ApplicationName = new(string)
+			return d.ReadString(schemas.ListDeploymentGroupsOutput_applicationName, v.ApplicationName)
+		case schemas.ListDeploymentGroupsOutput_deploymentGroups:
+			return deserializeDeploymentGroupsList(d, schemas.ListDeploymentGroupsOutput_deploymentGroups, &v.DeploymentGroups)
+		case schemas.ListDeploymentGroupsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDeploymentGroupsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDeploymentGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDeploymentGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeploymentGroups, schemas.ListDeploymentGroupsInput, schemas.ListDeploymentGroupsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDeploymentGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeploymentGroups, schemas.ListDeploymentGroupsInput, schemas.ListDeploymentGroupsOutput), output: &ListDeploymentGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

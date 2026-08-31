@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -32,6 +34,40 @@ type CognitoIdentityProvider struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CognitoIdentityProvider) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CognitoIdentityProvider)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CognitoIdentityProvider) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.CognitoIdentityProvider_ClientId, *v.ClientId)
+	}
+	if v.ProviderName != nil {
+		s.WriteString(schemas.CognitoIdentityProvider_ProviderName, *v.ProviderName)
+	}
+	if v.ServerSideTokenCheck != nil {
+		s.WriteBool(schemas.CognitoIdentityProvider_ServerSideTokenCheck, *v.ServerSideTokenCheck)
+	}
+}
+func (v *CognitoIdentityProvider) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CognitoIdentityProvider, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CognitoIdentityProvider_ClientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.CognitoIdentityProvider_ClientId, v.ClientId)
+		case schemas.CognitoIdentityProvider_ProviderName:
+			v.ProviderName = new(string)
+			return d.ReadString(schemas.CognitoIdentityProvider_ProviderName, v.ProviderName)
+		case schemas.CognitoIdentityProvider_ServerSideTokenCheck:
+			v.ServerSideTokenCheck = new(bool)
+			return d.ReadBool(schemas.CognitoIdentityProvider_ServerSideTokenCheck, v.ServerSideTokenCheck)
+		}
+		return nil
+	})
+}
+
 // Credentials for the provided identity ID.
 type Credentials struct {
 
@@ -48,6 +84,46 @@ type Credentials struct {
 	SessionToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Credentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Credentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Credentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessKeyId != nil {
+		s.WriteString(schemas.Credentials_AccessKeyId, *v.AccessKeyId)
+	}
+	if v.Expiration != nil {
+		s.WriteTime(schemas.Credentials_Expiration, *v.Expiration)
+	}
+	if v.SecretKey != nil {
+		s.WriteString(schemas.Credentials_SecretKey, *v.SecretKey)
+	}
+	if v.SessionToken != nil {
+		s.WriteString(schemas.Credentials_SessionToken, *v.SessionToken)
+	}
+}
+func (v *Credentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Credentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Credentials_AccessKeyId:
+			v.AccessKeyId = new(string)
+			return d.ReadString(schemas.Credentials_AccessKeyId, v.AccessKeyId)
+		case schemas.Credentials_Expiration:
+			v.Expiration = new(time.Time)
+			return d.ReadTime(schemas.Credentials_Expiration, v.Expiration)
+		case schemas.Credentials_SecretKey:
+			v.SecretKey = new(string)
+			return d.ReadString(schemas.Credentials_SecretKey, v.SecretKey)
+		case schemas.Credentials_SessionToken:
+			v.SessionToken = new(string)
+			return d.ReadString(schemas.Credentials_SessionToken, v.SessionToken)
+		}
+		return nil
+	})
 }
 
 // A description of the identity.
@@ -68,6 +144,43 @@ type IdentityDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IdentityDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdentityDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdentityDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.IdentityDescription_CreationDate, *v.CreationDate)
+	}
+	if v.IdentityId != nil {
+		s.WriteString(schemas.IdentityDescription_IdentityId, *v.IdentityId)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.IdentityDescription_LastModifiedDate, *v.LastModifiedDate)
+	}
+	serializeLoginsList(s, schemas.IdentityDescription_Logins, v.Logins)
+}
+func (v *IdentityDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdentityDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdentityDescription_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.IdentityDescription_CreationDate, v.CreationDate)
+		case schemas.IdentityDescription_IdentityId:
+			v.IdentityId = new(string)
+			return d.ReadString(schemas.IdentityDescription_IdentityId, v.IdentityId)
+		case schemas.IdentityDescription_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.IdentityDescription_LastModifiedDate, v.LastModifiedDate)
+		case schemas.IdentityDescription_Logins:
+			return deserializeLoginsList(d, schemas.IdentityDescription_Logins, &v.Logins)
+		}
+		return nil
+	})
+}
+
 // A description of the identity pool.
 type IdentityPoolShortDescription struct {
 
@@ -78,6 +191,34 @@ type IdentityPoolShortDescription struct {
 	IdentityPoolName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *IdentityPoolShortDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdentityPoolShortDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdentityPoolShortDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.IdentityPoolShortDescription_IdentityPoolId, *v.IdentityPoolId)
+	}
+	if v.IdentityPoolName != nil {
+		s.WriteString(schemas.IdentityPoolShortDescription_IdentityPoolName, *v.IdentityPoolName)
+	}
+}
+func (v *IdentityPoolShortDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdentityPoolShortDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdentityPoolShortDescription_IdentityPoolId:
+			v.IdentityPoolId = new(string)
+			return d.ReadString(schemas.IdentityPoolShortDescription_IdentityPoolId, v.IdentityPoolId)
+		case schemas.IdentityPoolShortDescription_IdentityPoolName:
+			v.IdentityPoolName = new(string)
+			return d.ReadString(schemas.IdentityPoolShortDescription_IdentityPoolName, v.IdentityPoolName)
+		}
+		return nil
+	})
 }
 
 // A rule that maps a claim name, a claim value, and a match type to a role ARN.
@@ -108,6 +249,50 @@ type MappingRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MappingRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MappingRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MappingRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Claim != nil {
+		s.WriteString(schemas.MappingRule_Claim, *v.Claim)
+	}
+	if v.MatchType != "" {
+		s.WriteString(schemas.MappingRule_MatchType, string(v.MatchType))
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.MappingRule_RoleARN, *v.RoleARN)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.MappingRule_Value, *v.Value)
+	}
+}
+func (v *MappingRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MappingRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MappingRule_Claim:
+			v.Claim = new(string)
+			return d.ReadString(schemas.MappingRule_Claim, v.Claim)
+		case schemas.MappingRule_MatchType:
+			var ev string
+			if err := d.ReadString(schemas.MappingRule_MatchType, &ev); err != nil {
+				return err
+			}
+			v.MatchType = MappingRuleMatchType(ev)
+			return nil
+		case schemas.MappingRule_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.MappingRule_RoleARN, v.RoleARN)
+		case schemas.MappingRule_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.MappingRule_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // A role mapping.
 type RoleMapping struct {
 
@@ -133,6 +318,50 @@ type RoleMapping struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RoleMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoleMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoleMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmbiguousRoleResolution != "" {
+		s.WriteString(schemas.RoleMapping_AmbiguousRoleResolution, string(v.AmbiguousRoleResolution))
+	}
+	if v.RulesConfiguration != nil {
+		s.WriteStruct(schemas.RoleMapping_RulesConfiguration)
+		v.RulesConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.RoleMapping_Type, string(v.Type))
+	}
+}
+func (v *RoleMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoleMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoleMapping_AmbiguousRoleResolution:
+			var ev string
+			if err := d.ReadString(schemas.RoleMapping_AmbiguousRoleResolution, &ev); err != nil {
+				return err
+			}
+			v.AmbiguousRoleResolution = AmbiguousRoleResolutionType(ev)
+			return nil
+		case schemas.RoleMapping_RulesConfiguration:
+			v.RulesConfiguration = &RulesConfigurationType{}
+			return v.RulesConfiguration.Deserialize(d)
+		case schemas.RoleMapping_Type:
+			var ev string
+			if err := d.ReadString(schemas.RoleMapping_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = RoleMappingType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A container for rules.
 type RulesConfigurationType struct {
 
@@ -146,6 +375,25 @@ type RulesConfigurationType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RulesConfigurationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RulesConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RulesConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMappingRulesList(s, schemas.RulesConfigurationType_Rules, v.Rules)
+}
+func (v *RulesConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RulesConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RulesConfigurationType_Rules:
+			return deserializeMappingRulesList(d, schemas.RulesConfigurationType_Rules, &v.Rules)
+		}
+		return nil
+	})
+}
+
 // An array of UnprocessedIdentityId objects, each of which contains an ErrorCode
 // and IdentityId.
 type UnprocessedIdentityId struct {
@@ -157,6 +405,38 @@ type UnprocessedIdentityId struct {
 	IdentityId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UnprocessedIdentityId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnprocessedIdentityId)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnprocessedIdentityId) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.UnprocessedIdentityId_ErrorCode, string(v.ErrorCode))
+	}
+	if v.IdentityId != nil {
+		s.WriteString(schemas.UnprocessedIdentityId_IdentityId, *v.IdentityId)
+	}
+}
+func (v *UnprocessedIdentityId) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnprocessedIdentityId, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnprocessedIdentityId_ErrorCode:
+			var ev string
+			if err := d.ReadString(schemas.UnprocessedIdentityId_ErrorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = ErrorCode(ev)
+			return nil
+		case schemas.UnprocessedIdentityId_IdentityId:
+			v.IdentityId = new(string)
+			return d.ReadString(schemas.UnprocessedIdentityId_IdentityId, v.IdentityId)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

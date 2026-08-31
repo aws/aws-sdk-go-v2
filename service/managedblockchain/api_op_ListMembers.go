@@ -5,7 +5,9 @@ package managedblockchain
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,33 @@ type ListMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMembersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMembersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMembersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsOwned != nil {
+		s.WriteBool(schemas.ListMembersInput_IsOwned, *v.IsOwned)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMembersInput_MaxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListMembersInput_Name, *v.Name)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.ListMembersInput_NetworkId, *v.NetworkId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMembersInput_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListMembersInput_Status, string(v.Status))
+	}
+}
+
 type ListMembersOutput struct {
 
 	// An array of MemberSummary objects. Each object contains details about a network
@@ -71,13 +100,35 @@ type ListMembersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMembersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMembersOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMembersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMemberSummaryList(s, schemas.ListMembersOutput_Members, v.Members)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMembersOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListMembersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMembersOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMembersOutput_Members:
+			return deserializeMemberSummaryList(d, schemas.ListMembersOutput_Members, &v.Members)
+		case schemas.ListMembersOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMembersOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMembers, schemas.ListMembersInput, schemas.ListMembersOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMembers, schemas.ListMembersInput, schemas.ListMembersOutput), output: &ListMembersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

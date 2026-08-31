@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -77,6 +79,31 @@ type CreateSecurityProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSecurityProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSecurityProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSecurityProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalMetricsToRetainList(s, schemas.CreateSecurityProfileRequest_additionalMetricsToRetain, v.AdditionalMetricsToRetain)
+	serializeAdditionalMetricsToRetainV2List(s, schemas.CreateSecurityProfileRequest_additionalMetricsToRetainV2, v.AdditionalMetricsToRetainV2)
+	serializeAlertTargets(s, schemas.CreateSecurityProfileRequest_alertTargets, v.AlertTargets)
+	serializeBehaviors(s, schemas.CreateSecurityProfileRequest_behaviors, v.Behaviors)
+	if v.MetricsExportConfig != nil {
+		s.WriteStruct(schemas.CreateSecurityProfileRequest_metricsExportConfig)
+		v.MetricsExportConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecurityProfileDescription != nil {
+		s.WriteString(schemas.CreateSecurityProfileRequest_securityProfileDescription, *v.SecurityProfileDescription)
+	}
+	if v.SecurityProfileName != nil {
+		s.WriteString(schemas.CreateSecurityProfileRequest_securityProfileName, *v.SecurityProfileName)
+	}
+	serializeTagList(s, schemas.CreateSecurityProfileRequest_tags, v.Tags)
+}
+
 type CreateSecurityProfileOutput struct {
 
 	// The ARN of the security profile.
@@ -91,13 +118,38 @@ type CreateSecurityProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSecurityProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSecurityProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSecurityProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecurityProfileArn != nil {
+		s.WriteString(schemas.CreateSecurityProfileResponse_securityProfileArn, *v.SecurityProfileArn)
+	}
+	if v.SecurityProfileName != nil {
+		s.WriteString(schemas.CreateSecurityProfileResponse_securityProfileName, *v.SecurityProfileName)
+	}
+}
+func (v *CreateSecurityProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSecurityProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSecurityProfileResponse_securityProfileArn:
+			v.SecurityProfileArn = new(string)
+			return d.ReadString(schemas.CreateSecurityProfileResponse_securityProfileArn, v.SecurityProfileArn)
+		case schemas.CreateSecurityProfileResponse_securityProfileName:
+			v.SecurityProfileName = new(string)
+			return d.ReadString(schemas.CreateSecurityProfileResponse_securityProfileName, v.SecurityProfileName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSecurityProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSecurityProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityProfile, schemas.CreateSecurityProfileRequest, schemas.CreateSecurityProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSecurityProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityProfile, schemas.CreateSecurityProfileRequest, schemas.CreateSecurityProfileResponse), output: &CreateSecurityProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

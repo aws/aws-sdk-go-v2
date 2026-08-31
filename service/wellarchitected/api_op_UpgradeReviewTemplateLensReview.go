@@ -4,6 +4,8 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,24 @@ type UpgradeReviewTemplateLensReviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpgradeReviewTemplateLensReviewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpgradeReviewTemplateLensReviewInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpgradeReviewTemplateLensReviewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpgradeReviewTemplateLensReviewInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.LensAlias != nil {
+		s.WriteString(schemas.UpgradeReviewTemplateLensReviewInput_LensAlias, *v.LensAlias)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.UpgradeReviewTemplateLensReviewInput_TemplateArn, *v.TemplateArn)
+	}
+}
+
 type UpgradeReviewTemplateLensReviewOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -71,13 +91,26 @@ type UpgradeReviewTemplateLensReviewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpgradeReviewTemplateLensReviewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpgradeReviewTemplateLensReviewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpgradeReviewTemplateLensReviewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpgradeReviewTemplateLensReviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpgradeReviewTemplateLensReview{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpgradeReviewTemplateLensReview, schemas.UpgradeReviewTemplateLensReviewInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpgradeReviewTemplateLensReview{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpgradeReviewTemplateLensReview, schemas.UpgradeReviewTemplateLensReviewInput, nil), output: &UpgradeReviewTemplateLensReviewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

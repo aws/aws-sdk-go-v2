@@ -4,7 +4,9 @@ package servicequotas
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type GetAssociationForServiceQuotaTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssociationForServiceQuotaTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssociationForServiceQuotaTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssociationForServiceQuotaTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetAssociationForServiceQuotaTemplateOutput struct {
 
 	// The association status. If the status is ASSOCIATED , the quota increase
@@ -41,13 +52,36 @@ type GetAssociationForServiceQuotaTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssociationForServiceQuotaTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssociationForServiceQuotaTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssociationForServiceQuotaTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceQuotaTemplateAssociationStatus != "" {
+		s.WriteString(schemas.GetAssociationForServiceQuotaTemplateResponse_ServiceQuotaTemplateAssociationStatus, string(v.ServiceQuotaTemplateAssociationStatus))
+	}
+}
+func (v *GetAssociationForServiceQuotaTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssociationForServiceQuotaTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssociationForServiceQuotaTemplateResponse_ServiceQuotaTemplateAssociationStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetAssociationForServiceQuotaTemplateResponse_ServiceQuotaTemplateAssociationStatus, &ev); err != nil {
+				return err
+			}
+			v.ServiceQuotaTemplateAssociationStatus = types.ServiceQuotaTemplateAssociationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAssociationForServiceQuotaTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAssociationForServiceQuotaTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssociationForServiceQuotaTemplate, schemas.GetAssociationForServiceQuotaTemplateRequest, schemas.GetAssociationForServiceQuotaTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAssociationForServiceQuotaTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssociationForServiceQuotaTemplate, schemas.GetAssociationForServiceQuotaTemplateRequest, schemas.GetAssociationForServiceQuotaTemplateResponse), output: &GetAssociationForServiceQuotaTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

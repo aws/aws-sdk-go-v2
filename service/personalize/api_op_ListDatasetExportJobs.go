@@ -5,7 +5,9 @@ package personalize
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type ListDatasetExportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasetExportJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetExportJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetExportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.ListDatasetExportJobsRequest_datasetArn, *v.DatasetArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDatasetExportJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasetExportJobsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListDatasetExportJobsOutput struct {
 
 	// The list of dataset export jobs.
@@ -62,13 +82,35 @@ type ListDatasetExportJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasetExportJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetExportJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetExportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatasetExportJobs(s, schemas.ListDatasetExportJobsResponse_datasetExportJobs, v.DatasetExportJobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasetExportJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDatasetExportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDatasetExportJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDatasetExportJobsResponse_datasetExportJobs:
+			return deserializeDatasetExportJobs(d, schemas.ListDatasetExportJobsResponse_datasetExportJobs, &v.DatasetExportJobs)
+		case schemas.ListDatasetExportJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDatasetExportJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDatasetExportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDatasetExportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasetExportJobs, schemas.ListDatasetExportJobsRequest, schemas.ListDatasetExportJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDatasetExportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasetExportJobs, schemas.ListDatasetExportJobsRequest, schemas.ListDatasetExportJobsResponse), output: &ListDatasetExportJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

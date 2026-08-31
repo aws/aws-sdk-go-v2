@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type RebootInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceName != nil {
+		s.WriteString(schemas.RebootInstanceRequest_instanceName, *v.InstanceName)
+	}
+}
+
 type RebootInstanceOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -53,13 +67,29 @@ type RebootInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootInstanceResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.RebootInstanceResult_operations, v.Operations)
+}
+func (v *RebootInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RebootInstanceResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RebootInstanceResult_operations:
+			return deserializeOperationList(d, schemas.RebootInstanceResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRebootInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRebootInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootInstance, schemas.RebootInstanceRequest, schemas.RebootInstanceResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRebootInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootInstance, schemas.RebootInstanceRequest, schemas.RebootInstanceResult), output: &RebootInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

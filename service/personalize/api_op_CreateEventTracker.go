@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,22 @@ type CreateEventTrackerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEventTrackerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEventTrackerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEventTrackerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetGroupArn != nil {
+		s.WriteString(schemas.CreateEventTrackerRequest_datasetGroupArn, *v.DatasetGroupArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateEventTrackerRequest_name, *v.Name)
+	}
+	serializeTags(s, schemas.CreateEventTrackerRequest_tags, v.Tags)
+}
+
 type CreateEventTrackerOutput struct {
 
 	// The ARN of the event tracker.
@@ -94,13 +112,38 @@ type CreateEventTrackerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEventTrackerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEventTrackerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEventTrackerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventTrackerArn != nil {
+		s.WriteString(schemas.CreateEventTrackerResponse_eventTrackerArn, *v.EventTrackerArn)
+	}
+	if v.TrackingId != nil {
+		s.WriteString(schemas.CreateEventTrackerResponse_trackingId, *v.TrackingId)
+	}
+}
+func (v *CreateEventTrackerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEventTrackerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEventTrackerResponse_eventTrackerArn:
+			v.EventTrackerArn = new(string)
+			return d.ReadString(schemas.CreateEventTrackerResponse_eventTrackerArn, v.EventTrackerArn)
+		case schemas.CreateEventTrackerResponse_trackingId:
+			v.TrackingId = new(string)
+			return d.ReadString(schemas.CreateEventTrackerResponse_trackingId, v.TrackingId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEventTrackerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEventTracker{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventTracker, schemas.CreateEventTrackerRequest, schemas.CreateEventTrackerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateEventTracker{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventTracker, schemas.CreateEventTrackerRequest, schemas.CreateEventTrackerResponse), output: &CreateEventTrackerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

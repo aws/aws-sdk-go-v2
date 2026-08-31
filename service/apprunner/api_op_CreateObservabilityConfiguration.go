@@ -4,7 +4,9 @@ package apprunner
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,24 @@ type CreateObservabilityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateObservabilityConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateObservabilityConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateObservabilityConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObservabilityConfigurationName != nil {
+		s.WriteString(schemas.CreateObservabilityConfigurationRequest_ObservabilityConfigurationName, *v.ObservabilityConfigurationName)
+	}
+	serializeTagList(s, schemas.CreateObservabilityConfigurationRequest_Tags, v.Tags)
+	if v.TraceConfiguration != nil {
+		s.WriteStruct(schemas.CreateObservabilityConfigurationRequest_TraceConfiguration)
+		v.TraceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateObservabilityConfigurationOutput struct {
 
 	// A description of the App Runner observability configuration that's created by
@@ -82,13 +102,34 @@ type CreateObservabilityConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateObservabilityConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateObservabilityConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateObservabilityConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObservabilityConfiguration != nil {
+		s.WriteStruct(schemas.CreateObservabilityConfigurationResponse_ObservabilityConfiguration)
+		v.ObservabilityConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateObservabilityConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateObservabilityConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateObservabilityConfigurationResponse_ObservabilityConfiguration:
+			v.ObservabilityConfiguration = &types.ObservabilityConfiguration{}
+			return v.ObservabilityConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateObservabilityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateObservabilityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateObservabilityConfiguration, schemas.CreateObservabilityConfigurationRequest, schemas.CreateObservabilityConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateObservabilityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateObservabilityConfiguration, schemas.CreateObservabilityConfigurationRequest, schemas.CreateObservabilityConfigurationResponse), output: &CreateObservabilityConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

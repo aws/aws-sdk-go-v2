@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,72 @@ type UpdateMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMembershipInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultJobResultConfiguration != nil {
+		s.WriteStruct(schemas.UpdateMembershipInput_defaultJobResultConfiguration)
+		v.DefaultJobResultConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultResultConfiguration != nil {
+		s.WriteStruct(schemas.UpdateMembershipInput_defaultResultConfiguration)
+		v.DefaultResultConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobLogStatus != "" {
+		s.WriteString(schemas.UpdateMembershipInput_jobLogStatus, string(v.JobLogStatus))
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.UpdateMembershipInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.MembershipPaymentConfiguration != nil {
+		s.WriteStruct(schemas.UpdateMembershipInput_membershipPaymentConfiguration)
+		v.MembershipPaymentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueryLogStatus != "" {
+		s.WriteString(schemas.UpdateMembershipInput_queryLogStatus, string(v.QueryLogStatus))
+	}
+}
+func (v *UpdateMembershipInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMembershipInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMembershipInput_defaultJobResultConfiguration:
+			v.DefaultJobResultConfiguration = &types.MembershipProtectedJobResultConfiguration{}
+			return v.DefaultJobResultConfiguration.Deserialize(d)
+		case schemas.UpdateMembershipInput_defaultResultConfiguration:
+			v.DefaultResultConfiguration = &types.MembershipProtectedQueryResultConfiguration{}
+			return v.DefaultResultConfiguration.Deserialize(d)
+		case schemas.UpdateMembershipInput_jobLogStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateMembershipInput_jobLogStatus, &ev); err != nil {
+				return err
+			}
+			v.JobLogStatus = types.MembershipJobLogStatus(ev)
+			return nil
+		case schemas.UpdateMembershipInput_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.UpdateMembershipInput_membershipIdentifier, v.MembershipIdentifier)
+		case schemas.UpdateMembershipInput_membershipPaymentConfiguration:
+			v.MembershipPaymentConfiguration = &types.UpdateMembershipPaymentConfiguration{}
+			return v.MembershipPaymentConfiguration.Deserialize(d)
+		case schemas.UpdateMembershipInput_queryLogStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateMembershipInput_queryLogStatus, &ev); err != nil {
+				return err
+			}
+			v.QueryLogStatus = types.MembershipQueryLogStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type UpdateMembershipOutput struct {
 
 	// The membership object.
@@ -73,13 +141,34 @@ type UpdateMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMembershipOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Membership != nil {
+		s.WriteStruct(schemas.UpdateMembershipOutput_membership)
+		v.Membership.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMembershipOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMembershipOutput_membership:
+			v.Membership = &types.Membership{}
+			return v.Membership.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMembership, schemas.UpdateMembershipInput, schemas.UpdateMembershipOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMembership, schemas.UpdateMembershipInput, schemas.UpdateMembershipOutput), output: &UpdateMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

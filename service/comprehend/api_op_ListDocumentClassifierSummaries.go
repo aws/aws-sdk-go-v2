@@ -5,7 +5,9 @@ package comprehend
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListDocumentClassifierSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDocumentClassifierSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDocumentClassifierSummariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDocumentClassifierSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDocumentClassifierSummariesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDocumentClassifierSummariesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDocumentClassifierSummariesOutput struct {
 
 	// The list of summaries of document classifiers.
@@ -50,13 +67,35 @@ type ListDocumentClassifierSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDocumentClassifierSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDocumentClassifierSummariesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDocumentClassifierSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDocumentClassifierSummariesList(s, schemas.ListDocumentClassifierSummariesResponse_DocumentClassifierSummariesList, v.DocumentClassifierSummariesList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDocumentClassifierSummariesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDocumentClassifierSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDocumentClassifierSummariesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDocumentClassifierSummariesResponse_DocumentClassifierSummariesList:
+			return deserializeDocumentClassifierSummariesList(d, schemas.ListDocumentClassifierSummariesResponse_DocumentClassifierSummariesList, &v.DocumentClassifierSummariesList)
+		case schemas.ListDocumentClassifierSummariesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDocumentClassifierSummariesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDocumentClassifierSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDocumentClassifierSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDocumentClassifierSummaries, schemas.ListDocumentClassifierSummariesRequest, schemas.ListDocumentClassifierSummariesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDocumentClassifierSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDocumentClassifierSummaries, schemas.ListDocumentClassifierSummariesRequest, schemas.ListDocumentClassifierSummariesResponse), output: &ListDocumentClassifierSummariesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

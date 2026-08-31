@@ -5,6 +5,8 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,24 @@ type CreateLensShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLensShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLensShareInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLensShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateLensShareInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.LensAlias != nil {
+		s.WriteString(schemas.CreateLensShareInput_LensAlias, *v.LensAlias)
+	}
+	if v.SharedWith != nil {
+		s.WriteString(schemas.CreateLensShareInput_SharedWith, *v.SharedWith)
+	}
+}
+
 type CreateLensShareOutput struct {
 
 	// The ID associated with the share.
@@ -101,13 +121,32 @@ type CreateLensShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLensShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLensShareOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLensShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ShareId != nil {
+		s.WriteString(schemas.CreateLensShareOutput_ShareId, *v.ShareId)
+	}
+}
+func (v *CreateLensShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLensShareOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLensShareOutput_ShareId:
+			v.ShareId = new(string)
+			return d.ReadString(schemas.CreateLensShareOutput_ShareId, v.ShareId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLensShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLensShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLensShare, schemas.CreateLensShareInput, schemas.CreateLensShareOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLensShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLensShare, schemas.CreateLensShareInput, schemas.CreateLensShareOutput), output: &CreateLensShareOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

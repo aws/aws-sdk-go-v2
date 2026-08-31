@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -85,6 +87,29 @@ type UpdateCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCampaignInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCampaignRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCampaignInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CampaignArn != nil {
+		s.WriteString(schemas.UpdateCampaignRequest_campaignArn, *v.CampaignArn)
+	}
+	if v.CampaignConfig != nil {
+		s.WriteStruct(schemas.UpdateCampaignRequest_campaignConfig)
+		v.CampaignConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MinProvisionedTPS != nil {
+		s.WriteInt32(schemas.UpdateCampaignRequest_minProvisionedTPS, *v.MinProvisionedTPS)
+	}
+	if v.SolutionVersionArn != nil {
+		s.WriteString(schemas.UpdateCampaignRequest_solutionVersionArn, *v.SolutionVersionArn)
+	}
+}
+
 type UpdateCampaignOutput struct {
 
 	// The same campaign ARN as given in the request.
@@ -96,13 +121,32 @@ type UpdateCampaignOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCampaignOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCampaignResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCampaignOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CampaignArn != nil {
+		s.WriteString(schemas.UpdateCampaignResponse_campaignArn, *v.CampaignArn)
+	}
+}
+func (v *UpdateCampaignOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCampaignResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCampaignResponse_campaignArn:
+			v.CampaignArn = new(string)
+			return d.ReadString(schemas.UpdateCampaignResponse_campaignArn, v.CampaignArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateCampaign{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCampaign, schemas.UpdateCampaignRequest, schemas.UpdateCampaignResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateCampaign{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCampaign, schemas.UpdateCampaignRequest, schemas.UpdateCampaignResponse), output: &UpdateCampaignOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

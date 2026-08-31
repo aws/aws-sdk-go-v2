@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,39 @@ type UpdatePackageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePackageVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePackageVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePackageVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.UpdatePackageVersionRequest_action, string(v.Action))
+	}
+	if v.Artifact != nil {
+		s.WriteStruct(schemas.UpdatePackageVersionRequest_artifact)
+		v.Artifact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourceAttributes(s, schemas.UpdatePackageVersionRequest_attributes, v.Attributes)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdatePackageVersionRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdatePackageVersionRequest_description, *v.Description)
+	}
+	if v.PackageName != nil {
+		s.WriteString(schemas.UpdatePackageVersionRequest_packageName, *v.PackageName)
+	}
+	if v.Recipe != nil {
+		s.WriteString(schemas.UpdatePackageVersionRequest_recipe, *v.Recipe)
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.UpdatePackageVersionRequest_versionName, *v.VersionName)
+	}
+}
+
 type UpdatePackageVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -83,13 +118,26 @@ type UpdatePackageVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePackageVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePackageVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePackageVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdatePackageVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePackageVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePackageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePackageVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePackageVersion, schemas.UpdatePackageVersionRequest, schemas.UpdatePackageVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePackageVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePackageVersion, schemas.UpdatePackageVersionRequest, schemas.UpdatePackageVersionResponse), output: &UpdatePackageVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type RemoveManagedScalingPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveManagedScalingPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveManagedScalingPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveManagedScalingPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.RemoveManagedScalingPolicyInput_ClusterId, *v.ClusterId)
+	}
+}
+
 type RemoveManagedScalingPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type RemoveManagedScalingPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveManagedScalingPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveManagedScalingPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveManagedScalingPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveManagedScalingPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveManagedScalingPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveManagedScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveManagedScalingPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveManagedScalingPolicy, schemas.RemoveManagedScalingPolicyInput, schemas.RemoveManagedScalingPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRemoveManagedScalingPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveManagedScalingPolicy, schemas.RemoveManagedScalingPolicyInput, schemas.RemoveManagedScalingPolicyOutput), output: &RemoveManagedScalingPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -106,6 +108,39 @@ type CreateInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInstancesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAddOnRequestList(s, schemas.CreateInstancesRequest_addOns, v.AddOns)
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CreateInstancesRequest_availabilityZone, *v.AvailabilityZone)
+	}
+	if v.BlueprintId != nil {
+		s.WriteString(schemas.CreateInstancesRequest_blueprintId, *v.BlueprintId)
+	}
+	if v.BundleId != nil {
+		s.WriteString(schemas.CreateInstancesRequest_bundleId, *v.BundleId)
+	}
+	if v.CustomImageName != nil {
+		s.WriteString(schemas.CreateInstancesRequest_customImageName, *v.CustomImageName)
+	}
+	serializeStringList(s, schemas.CreateInstancesRequest_instanceNames, v.InstanceNames)
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.CreateInstancesRequest_ipAddressType, string(v.IpAddressType))
+	}
+	if v.KeyPairName != nil {
+		s.WriteString(schemas.CreateInstancesRequest_keyPairName, *v.KeyPairName)
+	}
+	serializeTagList(s, schemas.CreateInstancesRequest_tags, v.Tags)
+	if v.UserData != nil {
+		s.WriteString(schemas.CreateInstancesRequest_userData, *v.UserData)
+	}
+}
+
 type CreateInstancesOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -119,13 +154,29 @@ type CreateInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInstancesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.CreateInstancesResult_operations, v.Operations)
+}
+func (v *CreateInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateInstancesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateInstancesResult_operations:
+			return deserializeOperationList(d, schemas.CreateInstancesResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInstances, schemas.CreateInstancesRequest, schemas.CreateInstancesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInstances, schemas.CreateInstancesRequest, schemas.CreateInstancesResult), output: &CreateInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

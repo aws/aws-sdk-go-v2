@@ -4,7 +4,9 @@ package amplify
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type CreateWebhookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWebhookInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWebhookRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWebhookInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.CreateWebhookRequest_appId, *v.AppId)
+	}
+	if v.BranchName != nil {
+		s.WriteString(schemas.CreateWebhookRequest_branchName, *v.BranchName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateWebhookRequest_description, *v.Description)
+	}
+}
+
 // The result structure for the create webhook request.
 type CreateWebhookOutput struct {
 
@@ -57,13 +77,34 @@ type CreateWebhookOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWebhookOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWebhookResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWebhookOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Webhook != nil {
+		s.WriteStruct(schemas.CreateWebhookResult_webhook)
+		v.Webhook.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateWebhookOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWebhookResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWebhookResult_webhook:
+			v.Webhook = &types.Webhook{}
+			return v.Webhook.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWebhookMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWebhook{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWebhook, schemas.CreateWebhookRequest, schemas.CreateWebhookResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWebhook{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWebhook, schemas.CreateWebhookRequest, schemas.CreateWebhookResult), output: &CreateWebhookOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

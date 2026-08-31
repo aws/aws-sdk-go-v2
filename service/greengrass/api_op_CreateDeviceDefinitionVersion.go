@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,22 @@ type CreateDeviceDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeviceDefinitionVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeviceDefinitionVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeviceDefinitionVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmznClientToken != nil {
+		s.WriteString(schemas.CreateDeviceDefinitionVersionRequest_AmznClientToken, *v.AmznClientToken)
+	}
+	if v.DeviceDefinitionId != nil {
+		s.WriteString(schemas.CreateDeviceDefinitionVersionRequest_DeviceDefinitionId, *v.DeviceDefinitionId)
+	}
+	serialize__listOfDevice(s, schemas.CreateDeviceDefinitionVersionRequest_Devices, v.Devices)
+}
+
 type CreateDeviceDefinitionVersionOutput struct {
 
 	// The ARN of the version.
@@ -60,13 +78,50 @@ type CreateDeviceDefinitionVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeviceDefinitionVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeviceDefinitionVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeviceDefinitionVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateDeviceDefinitionVersionResponse_Arn, *v.Arn)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteString(schemas.CreateDeviceDefinitionVersionResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateDeviceDefinitionVersionResponse_Id, *v.Id)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.CreateDeviceDefinitionVersionResponse_Version, *v.Version)
+	}
+}
+func (v *CreateDeviceDefinitionVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDeviceDefinitionVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDeviceDefinitionVersionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateDeviceDefinitionVersionResponse_Arn, v.Arn)
+		case schemas.CreateDeviceDefinitionVersionResponse_CreationTimestamp:
+			v.CreationTimestamp = new(string)
+			return d.ReadString(schemas.CreateDeviceDefinitionVersionResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.CreateDeviceDefinitionVersionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateDeviceDefinitionVersionResponse_Id, v.Id)
+		case schemas.CreateDeviceDefinitionVersionResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.CreateDeviceDefinitionVersionResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDeviceDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDeviceDefinitionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeviceDefinitionVersion, schemas.CreateDeviceDefinitionVersionRequest, schemas.CreateDeviceDefinitionVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDeviceDefinitionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeviceDefinitionVersion, schemas.CreateDeviceDefinitionVersionRequest, schemas.CreateDeviceDefinitionVersionResponse), output: &CreateDeviceDefinitionVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

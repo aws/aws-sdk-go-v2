@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -44,6 +45,18 @@ type DescribeTrainingJobInput struct {
 	TrainingJobName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeTrainingJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTrainingJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTrainingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrainingJobName != nil {
+		s.WriteString(schemas.DescribeTrainingJobRequest_TrainingJobName, *v.TrainingJobName)
+	}
 }
 
 type DescribeTrainingJobOutput struct {
@@ -370,13 +383,351 @@ type DescribeTrainingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTrainingJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTrainingJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTrainingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlgorithmSpecification != nil {
+		s.WriteStruct(schemas.DescribeTrainingJobResponse_AlgorithmSpecification)
+		v.AlgorithmSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutoMLJobArn != nil {
+		s.WriteString(schemas.DescribeTrainingJobResponse_AutoMLJobArn, *v.AutoMLJobArn)
+	}
+	if v.BillableTimeInSeconds != nil {
+		s.WriteInt32(schemas.DescribeTrainingJobResponse_BillableTimeInSeconds, *v.BillableTimeInSeconds)
+	}
+	if v.BillableTokenCount != nil {
+		s.WriteInt64(schemas.DescribeTrainingJobResponse_BillableTokenCount, *v.BillableTokenCount)
+	}
+	if v.CheckpointConfig != nil {
+		s.WriteStruct(schemas.DescribeTrainingJobResponse_CheckpointConfig)
+		v.CheckpointConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeTrainingJobResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DebugHookConfig != nil {
+		s.WriteStruct(schemas.DescribeTrainingJobResponse_DebugHookConfig)
+		v.DebugHookConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDebugRuleConfigurations(s, schemas.DescribeTrainingJobResponse_DebugRuleConfigurations, v.DebugRuleConfigurations)
+	serializeDebugRuleEvaluationStatuses(s, schemas.DescribeTrainingJobResponse_DebugRuleEvaluationStatuses, v.DebugRuleEvaluationStatuses)
+	if v.EnableInterContainerTrafficEncryption != nil {
+		s.WriteBool(schemas.DescribeTrainingJobResponse_EnableInterContainerTrafficEncryption, *v.EnableInterContainerTrafficEncryption)
+	}
+	if v.EnableManagedSpotTraining != nil {
+		s.WriteBool(schemas.DescribeTrainingJobResponse_EnableManagedSpotTraining, *v.EnableManagedSpotTraining)
+	}
+	if v.EnableNetworkIsolation != nil {
+		s.WriteBool(schemas.DescribeTrainingJobResponse_EnableNetworkIsolation, *v.EnableNetworkIsolation)
+	}
+	serializeTrainingEnvironmentMap(s, schemas.DescribeTrainingJobResponse_Environment, v.Environment)
+	if v.ExperimentConfig != nil {
+		s.WriteStruct(schemas.DescribeTrainingJobResponse_ExperimentConfig)
+		v.ExperimentConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeTrainingJobResponse_FailureReason, *v.FailureReason)
+	}
+	serializeFinalMetricDataList(s, schemas.DescribeTrainingJobResponse_FinalMetricDataList, v.FinalMetricDataList)
+	serializeHyperParameters(s, schemas.DescribeTrainingJobResponse_HyperParameters, v.HyperParameters)
+	if v.InfraCheckConfig != nil {
+		s.WriteStruct(schemas.DescribeTrainingJobResponse_InfraCheckConfig)
+		v.InfraCheckConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeInputDataConfig(s, schemas.DescribeTrainingJobResponse_InputDataConfig, v.InputDataConfig)
+	if v.LabelingJobArn != nil {
+		s.WriteString(schemas.DescribeTrainingJobResponse_LabelingJobArn, *v.LabelingJobArn)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeTrainingJobResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.MlflowConfig != nil {
+		s.WriteStruct(schemas.DescribeTrainingJobResponse_MlflowConfig)
+		v.MlflowConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MlflowDetails != nil {
+		s.WriteStruct(schemas.DescribeTrainingJobResponse_MlflowDetails)
+		v.MlflowDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelArtifacts != nil {
+		s.WriteStruct(schemas.DescribeTrainingJobResponse_ModelArtifacts)
+		v.ModelArtifacts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelPackageConfig != nil {
+		s.WriteStruct(schemas.DescribeTrainingJobResponse_ModelPackageConfig)
+		v.ModelPackageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.DescribeTrainingJobResponse_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputModelPackageArn != nil {
+		s.WriteString(schemas.DescribeTrainingJobResponse_OutputModelPackageArn, *v.OutputModelPackageArn)
+	}
+	if v.ProfilerConfig != nil {
+		s.WriteStruct(schemas.DescribeTrainingJobResponse_ProfilerConfig)
+		v.ProfilerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeProfilerRuleConfigurations(s, schemas.DescribeTrainingJobResponse_ProfilerRuleConfigurations, v.ProfilerRuleConfigurations)
+	serializeProfilerRuleEvaluationStatuses(s, schemas.DescribeTrainingJobResponse_ProfilerRuleEvaluationStatuses, v.ProfilerRuleEvaluationStatuses)
+	if v.ProfilingStatus != "" {
+		s.WriteString(schemas.DescribeTrainingJobResponse_ProfilingStatus, string(v.ProfilingStatus))
+	}
+	if v.ProgressInfo != nil {
+		s.WriteStruct(schemas.DescribeTrainingJobResponse_ProgressInfo)
+		v.ProgressInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RemoteDebugConfig != nil {
+		s.WriteStruct(schemas.DescribeTrainingJobResponse_RemoteDebugConfig)
+		v.RemoteDebugConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceConfig != nil {
+		s.WriteStruct(schemas.DescribeTrainingJobResponse_ResourceConfig)
+		v.ResourceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryStrategy != nil {
+		s.WriteStruct(schemas.DescribeTrainingJobResponse_RetryStrategy)
+		v.RetryStrategy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeTrainingJobResponse_RoleArn, *v.RoleArn)
+	}
+	if v.SecondaryStatus != "" {
+		s.WriteString(schemas.DescribeTrainingJobResponse_SecondaryStatus, string(v.SecondaryStatus))
+	}
+	serializeSecondaryStatusTransitions(s, schemas.DescribeTrainingJobResponse_SecondaryStatusTransitions, v.SecondaryStatusTransitions)
+	if v.ServerlessJobConfig != nil {
+		s.WriteStruct(schemas.DescribeTrainingJobResponse_ServerlessJobConfig)
+		v.ServerlessJobConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StoppingCondition != nil {
+		s.WriteStruct(schemas.DescribeTrainingJobResponse_StoppingCondition)
+		v.StoppingCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TensorBoardOutputConfig != nil {
+		s.WriteStruct(schemas.DescribeTrainingJobResponse_TensorBoardOutputConfig)
+		v.TensorBoardOutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrainingEndTime != nil {
+		s.WriteTime(schemas.DescribeTrainingJobResponse_TrainingEndTime, *v.TrainingEndTime)
+	}
+	if v.TrainingJobArn != nil {
+		s.WriteString(schemas.DescribeTrainingJobResponse_TrainingJobArn, *v.TrainingJobArn)
+	}
+	if v.TrainingJobName != nil {
+		s.WriteString(schemas.DescribeTrainingJobResponse_TrainingJobName, *v.TrainingJobName)
+	}
+	if v.TrainingJobStatus != "" {
+		s.WriteString(schemas.DescribeTrainingJobResponse_TrainingJobStatus, string(v.TrainingJobStatus))
+	}
+	if v.TrainingStartTime != nil {
+		s.WriteTime(schemas.DescribeTrainingJobResponse_TrainingStartTime, *v.TrainingStartTime)
+	}
+	if v.TrainingTimeInSeconds != nil {
+		s.WriteInt32(schemas.DescribeTrainingJobResponse_TrainingTimeInSeconds, *v.TrainingTimeInSeconds)
+	}
+	if v.TuningJobArn != nil {
+		s.WriteString(schemas.DescribeTrainingJobResponse_TuningJobArn, *v.TuningJobArn)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.DescribeTrainingJobResponse_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WarmPoolStatus != nil {
+		s.WriteStruct(schemas.DescribeTrainingJobResponse_WarmPoolStatus)
+		v.WarmPoolStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeTrainingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTrainingJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTrainingJobResponse_AlgorithmSpecification:
+			v.AlgorithmSpecification = &types.AlgorithmSpecification{}
+			return v.AlgorithmSpecification.Deserialize(d)
+		case schemas.DescribeTrainingJobResponse_AutoMLJobArn:
+			v.AutoMLJobArn = new(string)
+			return d.ReadString(schemas.DescribeTrainingJobResponse_AutoMLJobArn, v.AutoMLJobArn)
+		case schemas.DescribeTrainingJobResponse_BillableTimeInSeconds:
+			v.BillableTimeInSeconds = new(int32)
+			return d.ReadInt32(schemas.DescribeTrainingJobResponse_BillableTimeInSeconds, v.BillableTimeInSeconds)
+		case schemas.DescribeTrainingJobResponse_BillableTokenCount:
+			v.BillableTokenCount = new(int64)
+			return d.ReadInt64(schemas.DescribeTrainingJobResponse_BillableTokenCount, v.BillableTokenCount)
+		case schemas.DescribeTrainingJobResponse_CheckpointConfig:
+			v.CheckpointConfig = &types.CheckpointConfig{}
+			return v.CheckpointConfig.Deserialize(d)
+		case schemas.DescribeTrainingJobResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTrainingJobResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeTrainingJobResponse_DebugHookConfig:
+			v.DebugHookConfig = &types.DebugHookConfig{}
+			return v.DebugHookConfig.Deserialize(d)
+		case schemas.DescribeTrainingJobResponse_DebugRuleConfigurations:
+			return deserializeDebugRuleConfigurations(d, schemas.DescribeTrainingJobResponse_DebugRuleConfigurations, &v.DebugRuleConfigurations)
+		case schemas.DescribeTrainingJobResponse_DebugRuleEvaluationStatuses:
+			return deserializeDebugRuleEvaluationStatuses(d, schemas.DescribeTrainingJobResponse_DebugRuleEvaluationStatuses, &v.DebugRuleEvaluationStatuses)
+		case schemas.DescribeTrainingJobResponse_EnableInterContainerTrafficEncryption:
+			v.EnableInterContainerTrafficEncryption = new(bool)
+			return d.ReadBool(schemas.DescribeTrainingJobResponse_EnableInterContainerTrafficEncryption, v.EnableInterContainerTrafficEncryption)
+		case schemas.DescribeTrainingJobResponse_EnableManagedSpotTraining:
+			v.EnableManagedSpotTraining = new(bool)
+			return d.ReadBool(schemas.DescribeTrainingJobResponse_EnableManagedSpotTraining, v.EnableManagedSpotTraining)
+		case schemas.DescribeTrainingJobResponse_EnableNetworkIsolation:
+			v.EnableNetworkIsolation = new(bool)
+			return d.ReadBool(schemas.DescribeTrainingJobResponse_EnableNetworkIsolation, v.EnableNetworkIsolation)
+		case schemas.DescribeTrainingJobResponse_Environment:
+			return deserializeTrainingEnvironmentMap(d, schemas.DescribeTrainingJobResponse_Environment, &v.Environment)
+		case schemas.DescribeTrainingJobResponse_ExperimentConfig:
+			v.ExperimentConfig = &types.ExperimentConfig{}
+			return v.ExperimentConfig.Deserialize(d)
+		case schemas.DescribeTrainingJobResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeTrainingJobResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeTrainingJobResponse_FinalMetricDataList:
+			return deserializeFinalMetricDataList(d, schemas.DescribeTrainingJobResponse_FinalMetricDataList, &v.FinalMetricDataList)
+		case schemas.DescribeTrainingJobResponse_HyperParameters:
+			return deserializeHyperParameters(d, schemas.DescribeTrainingJobResponse_HyperParameters, &v.HyperParameters)
+		case schemas.DescribeTrainingJobResponse_InfraCheckConfig:
+			v.InfraCheckConfig = &types.InfraCheckConfig{}
+			return v.InfraCheckConfig.Deserialize(d)
+		case schemas.DescribeTrainingJobResponse_InputDataConfig:
+			return deserializeInputDataConfig(d, schemas.DescribeTrainingJobResponse_InputDataConfig, &v.InputDataConfig)
+		case schemas.DescribeTrainingJobResponse_LabelingJobArn:
+			v.LabelingJobArn = new(string)
+			return d.ReadString(schemas.DescribeTrainingJobResponse_LabelingJobArn, v.LabelingJobArn)
+		case schemas.DescribeTrainingJobResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTrainingJobResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeTrainingJobResponse_MlflowConfig:
+			v.MlflowConfig = &types.MlflowConfig{}
+			return v.MlflowConfig.Deserialize(d)
+		case schemas.DescribeTrainingJobResponse_MlflowDetails:
+			v.MlflowDetails = &types.MlflowDetails{}
+			return v.MlflowDetails.Deserialize(d)
+		case schemas.DescribeTrainingJobResponse_ModelArtifacts:
+			v.ModelArtifacts = &types.ModelArtifacts{}
+			return v.ModelArtifacts.Deserialize(d)
+		case schemas.DescribeTrainingJobResponse_ModelPackageConfig:
+			v.ModelPackageConfig = &types.ModelPackageConfig{}
+			return v.ModelPackageConfig.Deserialize(d)
+		case schemas.DescribeTrainingJobResponse_OutputDataConfig:
+			v.OutputDataConfig = &types.OutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.DescribeTrainingJobResponse_OutputModelPackageArn:
+			v.OutputModelPackageArn = new(string)
+			return d.ReadString(schemas.DescribeTrainingJobResponse_OutputModelPackageArn, v.OutputModelPackageArn)
+		case schemas.DescribeTrainingJobResponse_ProfilerConfig:
+			v.ProfilerConfig = &types.ProfilerConfig{}
+			return v.ProfilerConfig.Deserialize(d)
+		case schemas.DescribeTrainingJobResponse_ProfilerRuleConfigurations:
+			return deserializeProfilerRuleConfigurations(d, schemas.DescribeTrainingJobResponse_ProfilerRuleConfigurations, &v.ProfilerRuleConfigurations)
+		case schemas.DescribeTrainingJobResponse_ProfilerRuleEvaluationStatuses:
+			return deserializeProfilerRuleEvaluationStatuses(d, schemas.DescribeTrainingJobResponse_ProfilerRuleEvaluationStatuses, &v.ProfilerRuleEvaluationStatuses)
+		case schemas.DescribeTrainingJobResponse_ProfilingStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTrainingJobResponse_ProfilingStatus, &ev); err != nil {
+				return err
+			}
+			v.ProfilingStatus = types.ProfilingStatus(ev)
+			return nil
+		case schemas.DescribeTrainingJobResponse_ProgressInfo:
+			v.ProgressInfo = &types.TrainingProgressInfo{}
+			return v.ProgressInfo.Deserialize(d)
+		case schemas.DescribeTrainingJobResponse_RemoteDebugConfig:
+			v.RemoteDebugConfig = &types.RemoteDebugConfig{}
+			return v.RemoteDebugConfig.Deserialize(d)
+		case schemas.DescribeTrainingJobResponse_ResourceConfig:
+			v.ResourceConfig = &types.ResourceConfig{}
+			return v.ResourceConfig.Deserialize(d)
+		case schemas.DescribeTrainingJobResponse_RetryStrategy:
+			v.RetryStrategy = &types.RetryStrategy{}
+			return v.RetryStrategy.Deserialize(d)
+		case schemas.DescribeTrainingJobResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeTrainingJobResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeTrainingJobResponse_SecondaryStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTrainingJobResponse_SecondaryStatus, &ev); err != nil {
+				return err
+			}
+			v.SecondaryStatus = types.SecondaryStatus(ev)
+			return nil
+		case schemas.DescribeTrainingJobResponse_SecondaryStatusTransitions:
+			return deserializeSecondaryStatusTransitions(d, schemas.DescribeTrainingJobResponse_SecondaryStatusTransitions, &v.SecondaryStatusTransitions)
+		case schemas.DescribeTrainingJobResponse_ServerlessJobConfig:
+			v.ServerlessJobConfig = &types.ServerlessJobConfig{}
+			return v.ServerlessJobConfig.Deserialize(d)
+		case schemas.DescribeTrainingJobResponse_StoppingCondition:
+			v.StoppingCondition = &types.StoppingCondition{}
+			return v.StoppingCondition.Deserialize(d)
+		case schemas.DescribeTrainingJobResponse_TensorBoardOutputConfig:
+			v.TensorBoardOutputConfig = &types.TensorBoardOutputConfig{}
+			return v.TensorBoardOutputConfig.Deserialize(d)
+		case schemas.DescribeTrainingJobResponse_TrainingEndTime:
+			v.TrainingEndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTrainingJobResponse_TrainingEndTime, v.TrainingEndTime)
+		case schemas.DescribeTrainingJobResponse_TrainingJobArn:
+			v.TrainingJobArn = new(string)
+			return d.ReadString(schemas.DescribeTrainingJobResponse_TrainingJobArn, v.TrainingJobArn)
+		case schemas.DescribeTrainingJobResponse_TrainingJobName:
+			v.TrainingJobName = new(string)
+			return d.ReadString(schemas.DescribeTrainingJobResponse_TrainingJobName, v.TrainingJobName)
+		case schemas.DescribeTrainingJobResponse_TrainingJobStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTrainingJobResponse_TrainingJobStatus, &ev); err != nil {
+				return err
+			}
+			v.TrainingJobStatus = types.TrainingJobStatus(ev)
+			return nil
+		case schemas.DescribeTrainingJobResponse_TrainingStartTime:
+			v.TrainingStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTrainingJobResponse_TrainingStartTime, v.TrainingStartTime)
+		case schemas.DescribeTrainingJobResponse_TrainingTimeInSeconds:
+			v.TrainingTimeInSeconds = new(int32)
+			return d.ReadInt32(schemas.DescribeTrainingJobResponse_TrainingTimeInSeconds, v.TrainingTimeInSeconds)
+		case schemas.DescribeTrainingJobResponse_TuningJobArn:
+			v.TuningJobArn = new(string)
+			return d.ReadString(schemas.DescribeTrainingJobResponse_TuningJobArn, v.TuningJobArn)
+		case schemas.DescribeTrainingJobResponse_VpcConfig:
+			v.VpcConfig = &types.VpcConfig{}
+			return v.VpcConfig.Deserialize(d)
+		case schemas.DescribeTrainingJobResponse_WarmPoolStatus:
+			v.WarmPoolStatus = &types.WarmPoolStatus{}
+			return v.WarmPoolStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTrainingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTrainingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrainingJob, schemas.DescribeTrainingJobRequest, schemas.DescribeTrainingJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTrainingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrainingJob, schemas.DescribeTrainingJobRequest, schemas.DescribeTrainingJobResponse), output: &DescribeTrainingJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

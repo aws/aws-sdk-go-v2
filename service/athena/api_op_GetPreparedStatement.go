@@ -4,7 +4,9 @@ package athena
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetPreparedStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPreparedStatementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPreparedStatementInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPreparedStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StatementName != nil {
+		s.WriteString(schemas.GetPreparedStatementInput_StatementName, *v.StatementName)
+	}
+	if v.WorkGroup != nil {
+		s.WriteString(schemas.GetPreparedStatementInput_WorkGroup, *v.WorkGroup)
+	}
+}
+
 type GetPreparedStatementOutput struct {
 
 	// The name of the prepared statement that was retrieved.
@@ -51,13 +68,34 @@ type GetPreparedStatementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPreparedStatementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPreparedStatementOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPreparedStatementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PreparedStatement != nil {
+		s.WriteStruct(schemas.GetPreparedStatementOutput_PreparedStatement)
+		v.PreparedStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetPreparedStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPreparedStatementOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPreparedStatementOutput_PreparedStatement:
+			v.PreparedStatement = &types.PreparedStatement{}
+			return v.PreparedStatement.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPreparedStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPreparedStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPreparedStatement, schemas.GetPreparedStatementInput, schemas.GetPreparedStatementOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetPreparedStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPreparedStatement, schemas.GetPreparedStatementInput, schemas.GetPreparedStatementOutput), output: &GetPreparedStatementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

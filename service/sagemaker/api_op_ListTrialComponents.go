@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -74,6 +76,42 @@ type ListTrialComponentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTrialComponentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTrialComponentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTrialComponentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAfter != nil {
+		s.WriteTime(schemas.ListTrialComponentsRequest_CreatedAfter, *v.CreatedAfter)
+	}
+	if v.CreatedBefore != nil {
+		s.WriteTime(schemas.ListTrialComponentsRequest_CreatedBefore, *v.CreatedBefore)
+	}
+	if v.ExperimentName != nil {
+		s.WriteString(schemas.ListTrialComponentsRequest_ExperimentName, *v.ExperimentName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTrialComponentsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTrialComponentsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListTrialComponentsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListTrialComponentsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.ListTrialComponentsRequest_SourceArn, *v.SourceArn)
+	}
+	if v.TrialName != nil {
+		s.WriteString(schemas.ListTrialComponentsRequest_TrialName, *v.TrialName)
+	}
+}
+
 type ListTrialComponentsOutput struct {
 
 	// A token for getting the next set of components, if there are any.
@@ -88,13 +126,35 @@ type ListTrialComponentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTrialComponentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTrialComponentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTrialComponentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTrialComponentsResponse_NextToken, *v.NextToken)
+	}
+	serializeTrialComponentSummaries(s, schemas.ListTrialComponentsResponse_TrialComponentSummaries, v.TrialComponentSummaries)
+}
+func (v *ListTrialComponentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTrialComponentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTrialComponentsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTrialComponentsResponse_NextToken, v.NextToken)
+		case schemas.ListTrialComponentsResponse_TrialComponentSummaries:
+			return deserializeTrialComponentSummaries(d, schemas.ListTrialComponentsResponse_TrialComponentSummaries, &v.TrialComponentSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTrialComponentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTrialComponents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrialComponents, schemas.ListTrialComponentsRequest, schemas.ListTrialComponentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTrialComponents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrialComponents, schemas.ListTrialComponentsRequest, schemas.ListTrialComponentsResponse), output: &ListTrialComponentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

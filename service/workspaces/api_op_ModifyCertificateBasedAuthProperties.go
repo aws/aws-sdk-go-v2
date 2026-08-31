@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ModifyCertificateBasedAuthPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyCertificateBasedAuthPropertiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyCertificateBasedAuthPropertiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyCertificateBasedAuthPropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateBasedAuthProperties != nil {
+		s.WriteStruct(schemas.ModifyCertificateBasedAuthPropertiesRequest_CertificateBasedAuthProperties)
+		v.CertificateBasedAuthProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDeletableCertificateBasedAuthPropertiesList(s, schemas.ModifyCertificateBasedAuthPropertiesRequest_PropertiesToDelete, v.PropertiesToDelete)
+	if v.ResourceId != nil {
+		s.WriteString(schemas.ModifyCertificateBasedAuthPropertiesRequest_ResourceId, *v.ResourceId)
+	}
+}
+
 type ModifyCertificateBasedAuthPropertiesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +68,26 @@ type ModifyCertificateBasedAuthPropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyCertificateBasedAuthPropertiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyCertificateBasedAuthPropertiesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyCertificateBasedAuthPropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ModifyCertificateBasedAuthPropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyCertificateBasedAuthPropertiesResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyCertificateBasedAuthPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyCertificateBasedAuthProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyCertificateBasedAuthProperties, schemas.ModifyCertificateBasedAuthPropertiesRequest, schemas.ModifyCertificateBasedAuthPropertiesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpModifyCertificateBasedAuthProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyCertificateBasedAuthProperties, schemas.ModifyCertificateBasedAuthPropertiesRequest, schemas.ModifyCertificateBasedAuthPropertiesResult), output: &ModifyCertificateBasedAuthPropertiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

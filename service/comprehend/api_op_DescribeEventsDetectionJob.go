@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeEventsDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEventsDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEventsDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEventsDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeEventsDetectionJobRequest_JobId, *v.JobId)
+	}
+}
+
 type DescribeEventsDetectionJobOutput struct {
 
 	// An object that contains the properties associated with an event detection job.
@@ -45,13 +59,34 @@ type DescribeEventsDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEventsDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEventsDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEventsDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventsDetectionJobProperties != nil {
+		s.WriteStruct(schemas.DescribeEventsDetectionJobResponse_EventsDetectionJobProperties)
+		v.EventsDetectionJobProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeEventsDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEventsDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEventsDetectionJobResponse_EventsDetectionJobProperties:
+			v.EventsDetectionJobProperties = &types.EventsDetectionJobProperties{}
+			return v.EventsDetectionJobProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEventsDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEventsDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventsDetectionJob, schemas.DescribeEventsDetectionJobRequest, schemas.DescribeEventsDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEventsDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventsDetectionJob, schemas.DescribeEventsDetectionJobRequest, schemas.DescribeEventsDetectionJobResponse), output: &DescribeEventsDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

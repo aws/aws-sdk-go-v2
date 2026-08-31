@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,18 @@ type DescribeCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCampaignInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCampaignRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCampaignInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CampaignArn != nil {
+		s.WriteString(schemas.DescribeCampaignRequest_campaignArn, *v.CampaignArn)
+	}
+}
+
 type DescribeCampaignOutput struct {
 
 	// The latestCampaignUpdate field is only returned when the campaign has had at
@@ -64,13 +78,34 @@ type DescribeCampaignOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCampaignOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCampaignResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCampaignOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Campaign != nil {
+		s.WriteStruct(schemas.DescribeCampaignResponse_campaign)
+		v.Campaign.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeCampaignOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCampaignResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCampaignResponse_campaign:
+			v.Campaign = &types.Campaign{}
+			return v.Campaign.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCampaign{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCampaign, schemas.DescribeCampaignRequest, schemas.DescribeCampaignResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCampaign{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCampaign, schemas.DescribeCampaignRequest, schemas.DescribeCampaignResponse), output: &DescribeCampaignOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

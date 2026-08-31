@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type DeleteBotLocaleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBotLocaleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBotLocaleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBotLocaleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.DeleteBotLocaleRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.DeleteBotLocaleRequest_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.DeleteBotLocaleRequest_localeId, *v.LocaleId)
+	}
+}
+
 type DeleteBotLocaleOutput struct {
 
 	// The identifier of the bot that contained the deleted locale.
@@ -72,13 +92,54 @@ type DeleteBotLocaleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBotLocaleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBotLocaleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBotLocaleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.DeleteBotLocaleResponse_botId, *v.BotId)
+	}
+	if v.BotLocaleStatus != "" {
+		s.WriteString(schemas.DeleteBotLocaleResponse_botLocaleStatus, string(v.BotLocaleStatus))
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.DeleteBotLocaleResponse_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.DeleteBotLocaleResponse_localeId, *v.LocaleId)
+	}
+}
+func (v *DeleteBotLocaleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBotLocaleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBotLocaleResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.DeleteBotLocaleResponse_botId, v.BotId)
+		case schemas.DeleteBotLocaleResponse_botLocaleStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeleteBotLocaleResponse_botLocaleStatus, &ev); err != nil {
+				return err
+			}
+			v.BotLocaleStatus = types.BotLocaleStatus(ev)
+			return nil
+		case schemas.DeleteBotLocaleResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.DeleteBotLocaleResponse_botVersion, v.BotVersion)
+		case schemas.DeleteBotLocaleResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.DeleteBotLocaleResponse_localeId, v.LocaleId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBotLocaleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBotLocale{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBotLocale, schemas.DeleteBotLocaleRequest, schemas.DeleteBotLocaleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBotLocale{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBotLocale, schemas.DeleteBotLocaleRequest, schemas.DeleteBotLocaleResponse), output: &DeleteBotLocaleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package transcribe
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,27 @@ type ListLanguageModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLanguageModelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLanguageModelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLanguageModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLanguageModelsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListLanguageModelsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLanguageModelsRequest_NextToken, *v.NextToken)
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListLanguageModelsRequest_StatusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListLanguageModelsOutput struct {
 
 	// Provides information about the custom language models that match the criteria
@@ -74,13 +97,35 @@ type ListLanguageModelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLanguageModelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLanguageModelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLanguageModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeModels(s, schemas.ListLanguageModelsResponse_Models, v.Models)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLanguageModelsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLanguageModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLanguageModelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLanguageModelsResponse_Models:
+			return deserializeModels(d, schemas.ListLanguageModelsResponse_Models, &v.Models)
+		case schemas.ListLanguageModelsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLanguageModelsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLanguageModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLanguageModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLanguageModels, schemas.ListLanguageModelsRequest, schemas.ListLanguageModelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListLanguageModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLanguageModels, schemas.ListLanguageModelsRequest, schemas.ListLanguageModelsResponse), output: &ListLanguageModelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

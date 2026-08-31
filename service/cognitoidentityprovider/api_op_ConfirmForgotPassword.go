@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -119,6 +121,41 @@ type ConfirmForgotPasswordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfirmForgotPasswordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmForgotPasswordRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmForgotPasswordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyticsMetadata != nil {
+		s.WriteStruct(schemas.ConfirmForgotPasswordRequest_AnalyticsMetadata)
+		v.AnalyticsMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.ConfirmForgotPasswordRequest_ClientId, *v.ClientId)
+	}
+	serializeClientMetadataType(s, schemas.ConfirmForgotPasswordRequest_ClientMetadata, v.ClientMetadata)
+	if v.ConfirmationCode != nil {
+		s.WriteString(schemas.ConfirmForgotPasswordRequest_ConfirmationCode, *v.ConfirmationCode)
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.ConfirmForgotPasswordRequest_Password, *v.Password)
+	}
+	if v.SecretHash != nil {
+		s.WriteString(schemas.ConfirmForgotPasswordRequest_SecretHash, *v.SecretHash)
+	}
+	if v.UserContextData != nil {
+		s.WriteStruct(schemas.ConfirmForgotPasswordRequest_UserContextData)
+		v.UserContextData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.ConfirmForgotPasswordRequest_Username, *v.Username)
+	}
+}
+
 // The response from the server that results from a user's request to retrieve a
 // forgotten password.
 type ConfirmForgotPasswordOutput struct {
@@ -128,13 +165,26 @@ type ConfirmForgotPasswordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfirmForgotPasswordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmForgotPasswordResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmForgotPasswordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ConfirmForgotPasswordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfirmForgotPasswordResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConfirmForgotPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpConfirmForgotPassword{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmForgotPassword, schemas.ConfirmForgotPasswordRequest, schemas.ConfirmForgotPasswordResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpConfirmForgotPassword{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmForgotPassword, schemas.ConfirmForgotPasswordRequest, schemas.ConfirmForgotPasswordResponse), output: &ConfirmForgotPasswordOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

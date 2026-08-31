@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DescribeStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStreamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamId != nil {
+		s.WriteString(schemas.DescribeStreamRequest_streamId, *v.StreamId)
+	}
+}
+
 type DescribeStreamOutput struct {
 
 	// Information about the stream.
@@ -49,13 +63,34 @@ type DescribeStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStreamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamInfo != nil {
+		s.WriteStruct(schemas.DescribeStreamResponse_streamInfo)
+		v.StreamInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeStreamResponse_streamInfo:
+			v.StreamInfo = &types.StreamInfo{}
+			return v.StreamInfo.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStream, schemas.DescribeStreamRequest, schemas.DescribeStreamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStream, schemas.DescribeStreamRequest, schemas.DescribeStreamResponse), output: &DescribeStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

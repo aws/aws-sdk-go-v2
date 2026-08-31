@@ -4,6 +4,8 @@ package grafana
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/grafana/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,28 @@ type DescribeWorkspaceConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspaceConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspaceConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspaceConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DescribeWorkspaceConfigurationRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *DescribeWorkspaceConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWorkspaceConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWorkspaceConfigurationRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.DescribeWorkspaceConfigurationRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type DescribeWorkspaceConfigurationOutput struct {
 
 	// The configuration string for the workspace that you requested. For more
@@ -54,13 +78,38 @@ type DescribeWorkspaceConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspaceConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspaceConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspaceConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteString(schemas.DescribeWorkspaceConfigurationResponse_configuration, *v.Configuration)
+	}
+	if v.GrafanaVersion != nil {
+		s.WriteString(schemas.DescribeWorkspaceConfigurationResponse_grafanaVersion, *v.GrafanaVersion)
+	}
+}
+func (v *DescribeWorkspaceConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWorkspaceConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWorkspaceConfigurationResponse_configuration:
+			v.Configuration = new(string)
+			return d.ReadString(schemas.DescribeWorkspaceConfigurationResponse_configuration, v.Configuration)
+		case schemas.DescribeWorkspaceConfigurationResponse_grafanaVersion:
+			v.GrafanaVersion = new(string)
+			return d.ReadString(schemas.DescribeWorkspaceConfigurationResponse_grafanaVersion, v.GrafanaVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWorkspaceConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeWorkspaceConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspaceConfiguration, schemas.DescribeWorkspaceConfigurationRequest, schemas.DescribeWorkspaceConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeWorkspaceConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspaceConfiguration, schemas.DescribeWorkspaceConfigurationRequest, schemas.DescribeWorkspaceConfigurationResponse), output: &DescribeWorkspaceConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,34 @@ type CreateIntegrationAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIntegrationAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIntegrationAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIntegrationAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateIntegrationAssociationRequest_InstanceId, *v.InstanceId)
+	}
+	if v.IntegrationArn != nil {
+		s.WriteString(schemas.CreateIntegrationAssociationRequest_IntegrationArn, *v.IntegrationArn)
+	}
+	if v.IntegrationType != "" {
+		s.WriteString(schemas.CreateIntegrationAssociationRequest_IntegrationType, string(v.IntegrationType))
+	}
+	if v.SourceApplicationName != nil {
+		s.WriteString(schemas.CreateIntegrationAssociationRequest_SourceApplicationName, *v.SourceApplicationName)
+	}
+	if v.SourceApplicationUrl != nil {
+		s.WriteString(schemas.CreateIntegrationAssociationRequest_SourceApplicationUrl, *v.SourceApplicationUrl)
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.CreateIntegrationAssociationRequest_SourceType, string(v.SourceType))
+	}
+	serializeTagMap(s, schemas.CreateIntegrationAssociationRequest_Tags, v.Tags)
+}
+
 type CreateIntegrationAssociationOutput struct {
 
 	// The Amazon Resource Name (ARN) for the association.
@@ -82,13 +112,38 @@ type CreateIntegrationAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIntegrationAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIntegrationAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIntegrationAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntegrationAssociationArn != nil {
+		s.WriteString(schemas.CreateIntegrationAssociationResponse_IntegrationAssociationArn, *v.IntegrationAssociationArn)
+	}
+	if v.IntegrationAssociationId != nil {
+		s.WriteString(schemas.CreateIntegrationAssociationResponse_IntegrationAssociationId, *v.IntegrationAssociationId)
+	}
+}
+func (v *CreateIntegrationAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIntegrationAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIntegrationAssociationResponse_IntegrationAssociationArn:
+			v.IntegrationAssociationArn = new(string)
+			return d.ReadString(schemas.CreateIntegrationAssociationResponse_IntegrationAssociationArn, v.IntegrationAssociationArn)
+		case schemas.CreateIntegrationAssociationResponse_IntegrationAssociationId:
+			v.IntegrationAssociationId = new(string)
+			return d.ReadString(schemas.CreateIntegrationAssociationResponse_IntegrationAssociationId, v.IntegrationAssociationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIntegrationAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIntegrationAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIntegrationAssociation, schemas.CreateIntegrationAssociationRequest, schemas.CreateIntegrationAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIntegrationAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIntegrationAssociation, schemas.CreateIntegrationAssociationRequest, schemas.CreateIntegrationAssociationResponse), output: &CreateIntegrationAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

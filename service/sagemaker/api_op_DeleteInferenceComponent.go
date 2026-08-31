@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteInferenceComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInferenceComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInferenceComponentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInferenceComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InferenceComponentName != nil {
+		s.WriteString(schemas.DeleteInferenceComponentInput_InferenceComponentName, *v.InferenceComponentName)
+	}
+}
+
 type DeleteInferenceComponentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteInferenceComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInferenceComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInferenceComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteInferenceComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteInferenceComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteInferenceComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInferenceComponent, schemas.DeleteInferenceComponentInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteInferenceComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInferenceComponent, schemas.DeleteInferenceComponentInput, nil), output: &DeleteInferenceComponentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

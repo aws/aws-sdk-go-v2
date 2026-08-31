@@ -4,6 +4,8 @@ package organizations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,21 @@ type DetachPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetachPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetachPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyId != nil {
+		s.WriteString(schemas.DetachPolicyRequest_PolicyId, *v.PolicyId)
+	}
+	if v.TargetId != nil {
+		s.WriteString(schemas.DetachPolicyRequest_TargetId, *v.TargetId)
+	}
+}
+
 type DetachPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -85,13 +102,26 @@ type DetachPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetachPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DetachPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetachPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetachPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachPolicy, schemas.DetachPolicyRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetachPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachPolicy, schemas.DetachPolicyRequest, nil), output: &DetachPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

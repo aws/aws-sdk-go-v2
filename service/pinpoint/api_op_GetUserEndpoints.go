@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type GetUserEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetUserEndpointsRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.GetUserEndpointsRequest_UserId, *v.UserId)
+	}
+}
+
 type GetUserEndpointsOutput struct {
 
 	// Provides information about all the endpoints that are associated with a user ID.
@@ -54,13 +71,34 @@ type GetUserEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserEndpointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointsResponse != nil {
+		s.WriteStruct(schemas.GetUserEndpointsResponse_EndpointsResponse)
+		v.EndpointsResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetUserEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUserEndpointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUserEndpointsResponse_EndpointsResponse:
+			v.EndpointsResponse = &types.EndpointsResponse{}
+			return v.EndpointsResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUserEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUserEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserEndpoints, schemas.GetUserEndpointsRequest, schemas.GetUserEndpointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUserEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserEndpoints, schemas.GetUserEndpointsRequest, schemas.GetUserEndpointsResponse), output: &GetUserEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

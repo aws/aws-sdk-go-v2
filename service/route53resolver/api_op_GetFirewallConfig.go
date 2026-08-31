@@ -4,7 +4,9 @@ package route53resolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetFirewallConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFirewallConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFirewallConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFirewallConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceId != nil {
+		s.WriteString(schemas.GetFirewallConfigRequest_ResourceId, *v.ResourceId)
+	}
+}
+
 type GetFirewallConfigOutput struct {
 
 	// Configuration of the firewall behavior provided by DNS Firewall for a single
@@ -47,13 +61,34 @@ type GetFirewallConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFirewallConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFirewallConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFirewallConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallConfig != nil {
+		s.WriteStruct(schemas.GetFirewallConfigResponse_FirewallConfig)
+		v.FirewallConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetFirewallConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFirewallConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFirewallConfigResponse_FirewallConfig:
+			v.FirewallConfig = &types.FirewallConfig{}
+			return v.FirewallConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFirewallConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetFirewallConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFirewallConfig, schemas.GetFirewallConfigRequest, schemas.GetFirewallConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetFirewallConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFirewallConfig, schemas.GetFirewallConfigRequest, schemas.GetFirewallConfigResponse), output: &GetFirewallConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

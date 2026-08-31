@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribeSentimentDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSentimentDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSentimentDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSentimentDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeSentimentDetectionJobRequest_JobId, *v.JobId)
+	}
+}
+
 type DescribeSentimentDetectionJobOutput struct {
 
 	// An object that contains the properties associated with a sentiment detection
@@ -48,13 +62,34 @@ type DescribeSentimentDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSentimentDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSentimentDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSentimentDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SentimentDetectionJobProperties != nil {
+		s.WriteStruct(schemas.DescribeSentimentDetectionJobResponse_SentimentDetectionJobProperties)
+		v.SentimentDetectionJobProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeSentimentDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSentimentDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSentimentDetectionJobResponse_SentimentDetectionJobProperties:
+			v.SentimentDetectionJobProperties = &types.SentimentDetectionJobProperties{}
+			return v.SentimentDetectionJobProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSentimentDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSentimentDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSentimentDetectionJob, schemas.DescribeSentimentDetectionJobRequest, schemas.DescribeSentimentDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeSentimentDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSentimentDetectionJob, schemas.DescribeSentimentDetectionJobRequest, schemas.DescribeSentimentDetectionJobResponse), output: &DescribeSentimentDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

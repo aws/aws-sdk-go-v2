@@ -5,7 +5,9 @@ package glacier
 import (
 	"context"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,24 @@ type DescribeJobInput struct {
 	VaultName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeJobInput_accountId, *v.AccountId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeJobInput_jobId, *v.JobId)
+	}
+	if v.VaultName != nil {
+		s.WriteString(schemas.DescribeJobInput_vaultName, *v.VaultName)
+	}
 }
 
 // Contains the description of an Amazon S3 Glacier job.
@@ -179,13 +199,165 @@ type DescribeJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GlacierJobDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.GlacierJobDescription_Action, string(v.Action))
+	}
+	if v.ArchiveId != nil {
+		s.WriteString(schemas.GlacierJobDescription_ArchiveId, *v.ArchiveId)
+	}
+	if v.ArchiveSHA256TreeHash != nil {
+		s.WriteString(schemas.GlacierJobDescription_ArchiveSHA256TreeHash, *v.ArchiveSHA256TreeHash)
+	}
+	if v.ArchiveSizeInBytes != nil {
+		s.WriteInt64(schemas.GlacierJobDescription_ArchiveSizeInBytes, *v.ArchiveSizeInBytes)
+	}
+	if v.Completed != false {
+		s.WriteBool(schemas.GlacierJobDescription_Completed, v.Completed)
+	}
+	if v.CompletionDate != nil {
+		s.WriteString(schemas.GlacierJobDescription_CompletionDate, *v.CompletionDate)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.GlacierJobDescription_CreationDate, *v.CreationDate)
+	}
+	if v.InventoryRetrievalParameters != nil {
+		s.WriteStruct(schemas.GlacierJobDescription_InventoryRetrievalParameters)
+		v.InventoryRetrievalParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InventorySizeInBytes != nil {
+		s.WriteInt64(schemas.GlacierJobDescription_InventorySizeInBytes, *v.InventorySizeInBytes)
+	}
+	if v.JobDescription != nil {
+		s.WriteString(schemas.GlacierJobDescription_JobDescription, *v.JobDescription)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GlacierJobDescription_JobId, *v.JobId)
+	}
+	if v.JobOutputPath != nil {
+		s.WriteString(schemas.GlacierJobDescription_JobOutputPath, *v.JobOutputPath)
+	}
+	if v.OutputLocation != nil {
+		s.WriteStruct(schemas.GlacierJobDescription_OutputLocation)
+		v.OutputLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetrievalByteRange != nil {
+		s.WriteString(schemas.GlacierJobDescription_RetrievalByteRange, *v.RetrievalByteRange)
+	}
+	if v.SHA256TreeHash != nil {
+		s.WriteString(schemas.GlacierJobDescription_SHA256TreeHash, *v.SHA256TreeHash)
+	}
+	if v.SNSTopic != nil {
+		s.WriteString(schemas.GlacierJobDescription_SNSTopic, *v.SNSTopic)
+	}
+	if v.SelectParameters != nil {
+		s.WriteStruct(schemas.GlacierJobDescription_SelectParameters)
+		v.SelectParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StatusCode != "" {
+		s.WriteString(schemas.GlacierJobDescription_StatusCode, string(v.StatusCode))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GlacierJobDescription_StatusMessage, *v.StatusMessage)
+	}
+	if v.Tier != nil {
+		s.WriteString(schemas.GlacierJobDescription_Tier, *v.Tier)
+	}
+	if v.VaultARN != nil {
+		s.WriteString(schemas.GlacierJobDescription_VaultARN, *v.VaultARN)
+	}
+}
+func (v *DescribeJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GlacierJobDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GlacierJobDescription_Action:
+			var ev string
+			if err := d.ReadString(schemas.GlacierJobDescription_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = types.ActionCode(ev)
+			return nil
+		case schemas.GlacierJobDescription_ArchiveId:
+			v.ArchiveId = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_ArchiveId, v.ArchiveId)
+		case schemas.GlacierJobDescription_ArchiveSHA256TreeHash:
+			v.ArchiveSHA256TreeHash = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_ArchiveSHA256TreeHash, v.ArchiveSHA256TreeHash)
+		case schemas.GlacierJobDescription_ArchiveSizeInBytes:
+			v.ArchiveSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.GlacierJobDescription_ArchiveSizeInBytes, v.ArchiveSizeInBytes)
+		case schemas.GlacierJobDescription_Completed:
+			return d.ReadBool(schemas.GlacierJobDescription_Completed, &v.Completed)
+		case schemas.GlacierJobDescription_CompletionDate:
+			v.CompletionDate = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_CompletionDate, v.CompletionDate)
+		case schemas.GlacierJobDescription_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_CreationDate, v.CreationDate)
+		case schemas.GlacierJobDescription_InventoryRetrievalParameters:
+			v.InventoryRetrievalParameters = &types.InventoryRetrievalJobDescription{}
+			return v.InventoryRetrievalParameters.Deserialize(d)
+		case schemas.GlacierJobDescription_InventorySizeInBytes:
+			v.InventorySizeInBytes = new(int64)
+			return d.ReadInt64(schemas.GlacierJobDescription_InventorySizeInBytes, v.InventorySizeInBytes)
+		case schemas.GlacierJobDescription_JobDescription:
+			v.JobDescription = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_JobDescription, v.JobDescription)
+		case schemas.GlacierJobDescription_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_JobId, v.JobId)
+		case schemas.GlacierJobDescription_JobOutputPath:
+			v.JobOutputPath = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_JobOutputPath, v.JobOutputPath)
+		case schemas.GlacierJobDescription_OutputLocation:
+			v.OutputLocation = &types.OutputLocation{}
+			return v.OutputLocation.Deserialize(d)
+		case schemas.GlacierJobDescription_RetrievalByteRange:
+			v.RetrievalByteRange = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_RetrievalByteRange, v.RetrievalByteRange)
+		case schemas.GlacierJobDescription_SHA256TreeHash:
+			v.SHA256TreeHash = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_SHA256TreeHash, v.SHA256TreeHash)
+		case schemas.GlacierJobDescription_SNSTopic:
+			v.SNSTopic = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_SNSTopic, v.SNSTopic)
+		case schemas.GlacierJobDescription_SelectParameters:
+			v.SelectParameters = &types.SelectParameters{}
+			return v.SelectParameters.Deserialize(d)
+		case schemas.GlacierJobDescription_StatusCode:
+			var ev string
+			if err := d.ReadString(schemas.GlacierJobDescription_StatusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = types.StatusCode(ev)
+			return nil
+		case schemas.GlacierJobDescription_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_StatusMessage, v.StatusMessage)
+		case schemas.GlacierJobDescription_Tier:
+			v.Tier = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_Tier, v.Tier)
+		case schemas.GlacierJobDescription_VaultARN:
+			v.VaultARN = new(string)
+			return d.ReadString(schemas.GlacierJobDescription_VaultARN, v.VaultARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeJob, schemas.DescribeJobInput, schemas.GlacierJobDescription)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeJob, schemas.DescribeJobInput, schemas.GlacierJobDescription), output: &DescribeJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

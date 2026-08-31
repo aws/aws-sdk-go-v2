@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type AttachStaticIpInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachStaticIpInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachStaticIpRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachStaticIpInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceName != nil {
+		s.WriteString(schemas.AttachStaticIpRequest_instanceName, *v.InstanceName)
+	}
+	if v.StaticIpName != nil {
+		s.WriteString(schemas.AttachStaticIpRequest_staticIpName, *v.StaticIpName)
+	}
+}
+
 type AttachStaticIpOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -52,13 +69,29 @@ type AttachStaticIpOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachStaticIpOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachStaticIpResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachStaticIpOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.AttachStaticIpResult_operations, v.Operations)
+}
+func (v *AttachStaticIpOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttachStaticIpResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttachStaticIpResult_operations:
+			return deserializeOperationList(d, schemas.AttachStaticIpResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAttachStaticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAttachStaticIp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachStaticIp, schemas.AttachStaticIpRequest, schemas.AttachStaticIpResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAttachStaticIp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachStaticIp, schemas.AttachStaticIpRequest, schemas.AttachStaticIpResult), output: &AttachStaticIpOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DescribeContactEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeContactEvaluationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeContactEvaluationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeContactEvaluationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationId != nil {
+		s.WriteString(schemas.DescribeContactEvaluationRequest_EvaluationId, *v.EvaluationId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeContactEvaluationRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DescribeContactEvaluationOutput struct {
 
 	// Information about the evaluation form completed for a specific contact.
@@ -60,13 +77,42 @@ type DescribeContactEvaluationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeContactEvaluationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeContactEvaluationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeContactEvaluationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Evaluation != nil {
+		s.WriteStruct(schemas.DescribeContactEvaluationResponse_Evaluation)
+		v.Evaluation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EvaluationForm != nil {
+		s.WriteStruct(schemas.DescribeContactEvaluationResponse_EvaluationForm)
+		v.EvaluationForm.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeContactEvaluationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeContactEvaluationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeContactEvaluationResponse_Evaluation:
+			v.Evaluation = &types.Evaluation{}
+			return v.Evaluation.Deserialize(d)
+		case schemas.DescribeContactEvaluationResponse_EvaluationForm:
+			v.EvaluationForm = &types.EvaluationFormContent{}
+			return v.EvaluationForm.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeContactEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeContactEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeContactEvaluation, schemas.DescribeContactEvaluationRequest, schemas.DescribeContactEvaluationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeContactEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeContactEvaluation, schemas.DescribeContactEvaluationRequest, schemas.DescribeContactEvaluationResponse), output: &DescribeContactEvaluationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListUltraServersByReservedCapacity
+
+{"NextToken":"__NextToken__","UltraServers":[{"AvailabilityZone":"__AvailabilityZone__","AvailableInstanceCount":1,"AvailableSpareInstanceCount":1,"ConfiguredSpareInstanceCount":1,"HealthStatus":"OK","InUseInstanceCount":1,"InstanceType":"ml.p4d.24xlarge","TotalInstanceCount":1,"UltraServerId":"__UltraServerId__","UltraServerType":"__UltraServerType__","UnhealthyInstanceCount":1},{"AvailabilityZone":"__AvailabilityZone__","AvailableInstanceCount":1,"AvailableSpareInstanceCount":1,"ConfiguredSpareInstanceCount":1,"HealthStatus":"OK","InUseInstanceCount":1,"InstanceType":"ml.p4d.24xlarge","TotalInstanceCount":1,"UltraServerId":"__UltraServerId__","UltraServerType":"__UltraServerType__","UnhealthyInstanceCount":1}]}

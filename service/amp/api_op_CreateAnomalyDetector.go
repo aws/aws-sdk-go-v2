@@ -5,7 +5,9 @@ package amp
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/amp/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,31 @@ type CreateAnomalyDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAnomalyDetectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAnomalyDetectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAnomalyDetectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.CreateAnomalyDetectorRequest_alias, *v.Alias)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAnomalyDetectorRequest_clientToken, *v.ClientToken)
+	}
+	serializeAnomalyDetectorConfiguration(s, schemas.CreateAnomalyDetectorRequest_configuration, v.Configuration)
+	if v.EvaluationIntervalInSeconds != nil {
+		s.WriteInt32(schemas.CreateAnomalyDetectorRequest_evaluationIntervalInSeconds, *v.EvaluationIntervalInSeconds)
+	}
+	serializePrometheusMetricLabelMap(s, schemas.CreateAnomalyDetectorRequest_labels, v.Labels)
+	serializeAnomalyDetectorMissingDataAction(s, schemas.CreateAnomalyDetectorRequest_missingDataAction, v.MissingDataAction)
+	serializeTagMap(s, schemas.CreateAnomalyDetectorRequest_tags, v.Tags)
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.CreateAnomalyDetectorRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+
 type CreateAnomalyDetectorOutput struct {
 
 	// The unique identifier of the created anomaly detector.
@@ -92,13 +119,49 @@ type CreateAnomalyDetectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAnomalyDetectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAnomalyDetectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAnomalyDetectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalyDetectorId != nil {
+		s.WriteString(schemas.CreateAnomalyDetectorResponse_anomalyDetectorId, *v.AnomalyDetectorId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateAnomalyDetectorResponse_arn, *v.Arn)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.CreateAnomalyDetectorResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateAnomalyDetectorResponse_tags, v.Tags)
+}
+func (v *CreateAnomalyDetectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAnomalyDetectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAnomalyDetectorResponse_anomalyDetectorId:
+			v.AnomalyDetectorId = new(string)
+			return d.ReadString(schemas.CreateAnomalyDetectorResponse_anomalyDetectorId, v.AnomalyDetectorId)
+		case schemas.CreateAnomalyDetectorResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateAnomalyDetectorResponse_arn, v.Arn)
+		case schemas.CreateAnomalyDetectorResponse_status:
+			v.Status = &types.AnomalyDetectorStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.CreateAnomalyDetectorResponse_tags:
+			return deserializeTagMap(d, schemas.CreateAnomalyDetectorResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAnomalyDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAnomalyDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAnomalyDetector, schemas.CreateAnomalyDetectorRequest, schemas.CreateAnomalyDetectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAnomalyDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAnomalyDetector, schemas.CreateAnomalyDetectorRequest, schemas.CreateAnomalyDetectorResponse), output: &CreateAnomalyDetectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

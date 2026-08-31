@@ -4,7 +4,9 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type TerminateSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateSessionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.TerminateSessionInput_ClusterId, *v.ClusterId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.TerminateSessionInput_SessionId, *v.SessionId)
+	}
+}
+
 // Output of the TerminateSession operation.
 type TerminateSessionOutput struct {
 
@@ -65,13 +82,48 @@ type TerminateSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateSessionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.TerminateSessionOutput_ClusterId, *v.ClusterId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.TerminateSessionOutput_SessionId, *v.SessionId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.TerminateSessionOutput_State, string(v.State))
+	}
+}
+func (v *TerminateSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TerminateSessionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TerminateSessionOutput_ClusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.TerminateSessionOutput_ClusterId, v.ClusterId)
+		case schemas.TerminateSessionOutput_SessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.TerminateSessionOutput_SessionId, v.SessionId)
+		case schemas.TerminateSessionOutput_State:
+			var ev string
+			if err := d.ReadString(schemas.TerminateSessionOutput_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.SessionState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTerminateSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTerminateSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateSession, schemas.TerminateSessionInput, schemas.TerminateSessionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTerminateSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateSession, schemas.TerminateSessionInput, schemas.TerminateSessionOutput), output: &TerminateSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

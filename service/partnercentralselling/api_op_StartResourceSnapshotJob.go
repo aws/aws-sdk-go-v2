@@ -4,6 +4,8 @@ package partnercentralselling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type StartResourceSnapshotJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartResourceSnapshotJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartResourceSnapshotJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartResourceSnapshotJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.StartResourceSnapshotJobRequest_Catalog, *v.Catalog)
+	}
+	if v.ResourceSnapshotJobIdentifier != nil {
+		s.WriteString(schemas.StartResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier, *v.ResourceSnapshotJobIdentifier)
+	}
+}
+
 type StartResourceSnapshotJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +67,26 @@ type StartResourceSnapshotJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartResourceSnapshotJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartResourceSnapshotJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartResourceSnapshotJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartResourceSnapshotJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartResourceSnapshotJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartResourceSnapshotJob, schemas.StartResourceSnapshotJobRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartResourceSnapshotJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartResourceSnapshotJob, schemas.StartResourceSnapshotJobRequest, nil), output: &StartResourceSnapshotJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

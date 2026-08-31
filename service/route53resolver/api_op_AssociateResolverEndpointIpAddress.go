@@ -4,7 +4,9 @@ package route53resolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,23 @@ type AssociateResolverEndpointIpAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateResolverEndpointIpAddressInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateResolverEndpointIpAddressRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateResolverEndpointIpAddressInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpAddress != nil {
+		s.WriteStruct(schemas.AssociateResolverEndpointIpAddressRequest_IpAddress)
+		v.IpAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResolverEndpointId != nil {
+		s.WriteString(schemas.AssociateResolverEndpointIpAddressRequest_ResolverEndpointId, *v.ResolverEndpointId)
+	}
+}
+
 type AssociateResolverEndpointIpAddressOutput struct {
 
 	// The response to an AssociateResolverEndpointIpAddress request.
@@ -58,13 +77,34 @@ type AssociateResolverEndpointIpAddressOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateResolverEndpointIpAddressOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateResolverEndpointIpAddressResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateResolverEndpointIpAddressOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverEndpoint != nil {
+		s.WriteStruct(schemas.AssociateResolverEndpointIpAddressResponse_ResolverEndpoint)
+		v.ResolverEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateResolverEndpointIpAddressOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateResolverEndpointIpAddressResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateResolverEndpointIpAddressResponse_ResolverEndpoint:
+			v.ResolverEndpoint = &types.ResolverEndpoint{}
+			return v.ResolverEndpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateResolverEndpointIpAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateResolverEndpointIpAddress{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateResolverEndpointIpAddress, schemas.AssociateResolverEndpointIpAddressRequest, schemas.AssociateResolverEndpointIpAddressResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateResolverEndpointIpAddress{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateResolverEndpointIpAddress, schemas.AssociateResolverEndpointIpAddressRequest, schemas.AssociateResolverEndpointIpAddressResponse), output: &AssociateResolverEndpointIpAddressOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

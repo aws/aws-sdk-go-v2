@@ -4,7 +4,9 @@ package codedeploy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,19 @@ type BatchGetApplicationRevisionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetApplicationRevisionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetApplicationRevisionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetApplicationRevisionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.BatchGetApplicationRevisionsInput_applicationName, *v.ApplicationName)
+	}
+	serializeRevisionLocationList(s, schemas.BatchGetApplicationRevisionsInput_revisions, v.Revisions)
+}
+
 // Represents the output of a BatchGetApplicationRevisions operation.
 type BatchGetApplicationRevisionsOutput struct {
 
@@ -61,13 +76,41 @@ type BatchGetApplicationRevisionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetApplicationRevisionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetApplicationRevisionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetApplicationRevisionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.BatchGetApplicationRevisionsOutput_applicationName, *v.ApplicationName)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchGetApplicationRevisionsOutput_errorMessage, *v.ErrorMessage)
+	}
+	serializeRevisionInfoList(s, schemas.BatchGetApplicationRevisionsOutput_revisions, v.Revisions)
+}
+func (v *BatchGetApplicationRevisionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetApplicationRevisionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetApplicationRevisionsOutput_applicationName:
+			v.ApplicationName = new(string)
+			return d.ReadString(schemas.BatchGetApplicationRevisionsOutput_applicationName, v.ApplicationName)
+		case schemas.BatchGetApplicationRevisionsOutput_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchGetApplicationRevisionsOutput_errorMessage, v.ErrorMessage)
+		case schemas.BatchGetApplicationRevisionsOutput_revisions:
+			return deserializeRevisionInfoList(d, schemas.BatchGetApplicationRevisionsOutput_revisions, &v.Revisions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetApplicationRevisionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetApplicationRevisions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetApplicationRevisions, schemas.BatchGetApplicationRevisionsInput, schemas.BatchGetApplicationRevisionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetApplicationRevisions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetApplicationRevisions, schemas.BatchGetApplicationRevisionsInput, schemas.BatchGetApplicationRevisionsOutput), output: &BatchGetApplicationRevisionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

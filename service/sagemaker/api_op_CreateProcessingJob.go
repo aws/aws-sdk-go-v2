@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -105,6 +107,54 @@ type CreateProcessingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProcessingJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProcessingJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProcessingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppSpecification != nil {
+		s.WriteStruct(schemas.CreateProcessingJobRequest_AppSpecification)
+		v.AppSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeProcessingEnvironmentMap(s, schemas.CreateProcessingJobRequest_Environment, v.Environment)
+	if v.ExperimentConfig != nil {
+		s.WriteStruct(schemas.CreateProcessingJobRequest_ExperimentConfig)
+		v.ExperimentConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkConfig != nil {
+		s.WriteStruct(schemas.CreateProcessingJobRequest_NetworkConfig)
+		v.NetworkConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeProcessingInputs(s, schemas.CreateProcessingJobRequest_ProcessingInputs, v.ProcessingInputs)
+	if v.ProcessingJobName != nil {
+		s.WriteString(schemas.CreateProcessingJobRequest_ProcessingJobName, *v.ProcessingJobName)
+	}
+	if v.ProcessingOutputConfig != nil {
+		s.WriteStruct(schemas.CreateProcessingJobRequest_ProcessingOutputConfig)
+		v.ProcessingOutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProcessingResources != nil {
+		s.WriteStruct(schemas.CreateProcessingJobRequest_ProcessingResources)
+		v.ProcessingResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateProcessingJobRequest_RoleArn, *v.RoleArn)
+	}
+	if v.StoppingCondition != nil {
+		s.WriteStruct(schemas.CreateProcessingJobRequest_StoppingCondition)
+		v.StoppingCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateProcessingJobRequest_Tags, v.Tags)
+}
+
 type CreateProcessingJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the processing job.
@@ -118,13 +168,32 @@ type CreateProcessingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProcessingJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProcessingJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProcessingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProcessingJobArn != nil {
+		s.WriteString(schemas.CreateProcessingJobResponse_ProcessingJobArn, *v.ProcessingJobArn)
+	}
+}
+func (v *CreateProcessingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProcessingJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProcessingJobResponse_ProcessingJobArn:
+			v.ProcessingJobArn = new(string)
+			return d.ReadString(schemas.CreateProcessingJobResponse_ProcessingJobArn, v.ProcessingJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProcessingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateProcessingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProcessingJob, schemas.CreateProcessingJobRequest, schemas.CreateProcessingJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateProcessingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProcessingJob, schemas.CreateProcessingJobRequest, schemas.CreateProcessingJobResponse), output: &CreateProcessingJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

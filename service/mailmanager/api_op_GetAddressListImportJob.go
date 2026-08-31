@@ -4,7 +4,9 @@ package mailmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetAddressListImportJobInput struct {
 	JobId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetAddressListImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAddressListImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAddressListImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetAddressListImportJobRequest_JobId, *v.JobId)
+	}
 }
 
 type GetAddressListImportJobOutput struct {
@@ -93,13 +107,104 @@ type GetAddressListImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAddressListImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAddressListImportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAddressListImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressListId != nil {
+		s.WriteString(schemas.GetAddressListImportJobResponse_AddressListId, *v.AddressListId)
+	}
+	if v.CompletedTimestamp != nil {
+		s.WriteTime(schemas.GetAddressListImportJobResponse_CompletedTimestamp, *v.CompletedTimestamp)
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.GetAddressListImportJobResponse_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.GetAddressListImportJobResponse_Error, *v.Error)
+	}
+	if v.FailedItemsCount != nil {
+		s.WriteInt32(schemas.GetAddressListImportJobResponse_FailedItemsCount, *v.FailedItemsCount)
+	}
+	if v.ImportDataFormat != nil {
+		s.WriteStruct(schemas.GetAddressListImportJobResponse_ImportDataFormat)
+		v.ImportDataFormat.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImportedItemsCount != nil {
+		s.WriteInt32(schemas.GetAddressListImportJobResponse_ImportedItemsCount, *v.ImportedItemsCount)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetAddressListImportJobResponse_JobId, *v.JobId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetAddressListImportJobResponse_Name, *v.Name)
+	}
+	if v.PreSignedUrl != nil {
+		s.WriteString(schemas.GetAddressListImportJobResponse_PreSignedUrl, *v.PreSignedUrl)
+	}
+	if v.StartTimestamp != nil {
+		s.WriteTime(schemas.GetAddressListImportJobResponse_StartTimestamp, *v.StartTimestamp)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetAddressListImportJobResponse_Status, string(v.Status))
+	}
+}
+func (v *GetAddressListImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAddressListImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAddressListImportJobResponse_AddressListId:
+			v.AddressListId = new(string)
+			return d.ReadString(schemas.GetAddressListImportJobResponse_AddressListId, v.AddressListId)
+		case schemas.GetAddressListImportJobResponse_CompletedTimestamp:
+			v.CompletedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetAddressListImportJobResponse_CompletedTimestamp, v.CompletedTimestamp)
+		case schemas.GetAddressListImportJobResponse_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetAddressListImportJobResponse_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.GetAddressListImportJobResponse_Error:
+			v.Error = new(string)
+			return d.ReadString(schemas.GetAddressListImportJobResponse_Error, v.Error)
+		case schemas.GetAddressListImportJobResponse_FailedItemsCount:
+			v.FailedItemsCount = new(int32)
+			return d.ReadInt32(schemas.GetAddressListImportJobResponse_FailedItemsCount, v.FailedItemsCount)
+		case schemas.GetAddressListImportJobResponse_ImportDataFormat:
+			v.ImportDataFormat = &types.ImportDataFormat{}
+			return v.ImportDataFormat.Deserialize(d)
+		case schemas.GetAddressListImportJobResponse_ImportedItemsCount:
+			v.ImportedItemsCount = new(int32)
+			return d.ReadInt32(schemas.GetAddressListImportJobResponse_ImportedItemsCount, v.ImportedItemsCount)
+		case schemas.GetAddressListImportJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GetAddressListImportJobResponse_JobId, v.JobId)
+		case schemas.GetAddressListImportJobResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetAddressListImportJobResponse_Name, v.Name)
+		case schemas.GetAddressListImportJobResponse_PreSignedUrl:
+			v.PreSignedUrl = new(string)
+			return d.ReadString(schemas.GetAddressListImportJobResponse_PreSignedUrl, v.PreSignedUrl)
+		case schemas.GetAddressListImportJobResponse_StartTimestamp:
+			v.StartTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetAddressListImportJobResponse_StartTimestamp, v.StartTimestamp)
+		case schemas.GetAddressListImportJobResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetAddressListImportJobResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ImportJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAddressListImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetAddressListImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAddressListImportJob, schemas.GetAddressListImportJobRequest, schemas.GetAddressListImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetAddressListImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAddressListImportJob, schemas.GetAddressListImportJobRequest, schemas.GetAddressListImportJobResponse), output: &GetAddressListImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

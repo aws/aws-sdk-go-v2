@@ -4,7 +4,9 @@ package ecrpublic
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecrpublic/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecrpublic/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,33 @@ type PutImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageDigest != nil {
+		s.WriteString(schemas.PutImageRequest_imageDigest, *v.ImageDigest)
+	}
+	if v.ImageManifest != nil {
+		s.WriteString(schemas.PutImageRequest_imageManifest, *v.ImageManifest)
+	}
+	if v.ImageManifestMediaType != nil {
+		s.WriteString(schemas.PutImageRequest_imageManifestMediaType, *v.ImageManifestMediaType)
+	}
+	if v.ImageTag != nil {
+		s.WriteString(schemas.PutImageRequest_imageTag, *v.ImageTag)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.PutImageRequest_registryId, *v.RegistryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.PutImageRequest_repositoryName, *v.RepositoryName)
+	}
+}
+
 type PutImageOutput struct {
 
 	// Details of the image uploaded.
@@ -77,13 +106,34 @@ type PutImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutImageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Image != nil {
+		s.WriteStruct(schemas.PutImageResponse_image)
+		v.Image.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutImageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutImageResponse_image:
+			v.Image = &types.Image{}
+			return v.Image.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutImage, schemas.PutImageRequest, schemas.PutImageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutImage, schemas.PutImageRequest, schemas.PutImageResponse), output: &PutImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

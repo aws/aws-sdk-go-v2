@@ -4,7 +4,9 @@ package apprunner
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -104,6 +106,28 @@ type CreateAutoScalingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutoScalingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutoScalingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutoScalingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingConfigurationName != nil {
+		s.WriteString(schemas.CreateAutoScalingConfigurationRequest_AutoScalingConfigurationName, *v.AutoScalingConfigurationName)
+	}
+	if v.MaxConcurrency != nil {
+		s.WriteInt32(schemas.CreateAutoScalingConfigurationRequest_MaxConcurrency, *v.MaxConcurrency)
+	}
+	if v.MaxSize != nil {
+		s.WriteInt32(schemas.CreateAutoScalingConfigurationRequest_MaxSize, *v.MaxSize)
+	}
+	if v.MinSize != nil {
+		s.WriteInt32(schemas.CreateAutoScalingConfigurationRequest_MinSize, *v.MinSize)
+	}
+	serializeTagList(s, schemas.CreateAutoScalingConfigurationRequest_Tags, v.Tags)
+}
+
 type CreateAutoScalingConfigurationOutput struct {
 
 	// A description of the App Runner auto scaling configuration that's created by
@@ -118,13 +142,34 @@ type CreateAutoScalingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutoScalingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutoScalingConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutoScalingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingConfiguration != nil {
+		s.WriteStruct(schemas.CreateAutoScalingConfigurationResponse_AutoScalingConfiguration)
+		v.AutoScalingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAutoScalingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAutoScalingConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAutoScalingConfigurationResponse_AutoScalingConfiguration:
+			v.AutoScalingConfiguration = &types.AutoScalingConfiguration{}
+			return v.AutoScalingConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAutoScalingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateAutoScalingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutoScalingConfiguration, schemas.CreateAutoScalingConfigurationRequest, schemas.CreateAutoScalingConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateAutoScalingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutoScalingConfiguration, schemas.CreateAutoScalingConfigurationRequest, schemas.CreateAutoScalingConfigurationResponse), output: &CreateAutoScalingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

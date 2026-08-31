@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -55,6 +57,19 @@ type UpdateDimensionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDimensionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDimensionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDimensionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDimensionRequest_name, *v.Name)
+	}
+	serializeDimensionStringValues(s, schemas.UpdateDimensionRequest_stringValues, v.StringValues)
+}
+
 type UpdateDimensionOutput struct {
 
 	// The Amazon Resource Name (ARN)of the created dimension.
@@ -84,13 +99,63 @@ type UpdateDimensionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDimensionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDimensionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDimensionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateDimensionResponse_arn, *v.Arn)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.UpdateDimensionResponse_creationDate, *v.CreationDate)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.UpdateDimensionResponse_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDimensionResponse_name, *v.Name)
+	}
+	serializeDimensionStringValues(s, schemas.UpdateDimensionResponse_stringValues, v.StringValues)
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateDimensionResponse_type, string(v.Type))
+	}
+}
+func (v *UpdateDimensionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDimensionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDimensionResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateDimensionResponse_arn, v.Arn)
+		case schemas.UpdateDimensionResponse_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.UpdateDimensionResponse_creationDate, v.CreationDate)
+		case schemas.UpdateDimensionResponse_lastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.UpdateDimensionResponse_lastModifiedDate, v.LastModifiedDate)
+		case schemas.UpdateDimensionResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateDimensionResponse_name, v.Name)
+		case schemas.UpdateDimensionResponse_stringValues:
+			return deserializeDimensionStringValues(d, schemas.UpdateDimensionResponse_stringValues, &v.StringValues)
+		case schemas.UpdateDimensionResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDimensionResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.DimensionType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDimensionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDimension{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDimension, schemas.UpdateDimensionRequest, schemas.UpdateDimensionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDimension{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDimension, schemas.UpdateDimensionRequest, schemas.UpdateDimensionResponse), output: &UpdateDimensionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

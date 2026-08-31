@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -161,6 +163,57 @@ type StartChatContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartChatContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartChatContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartChatContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.StartChatContactRequest_Attributes, v.Attributes)
+	if v.ChatDurationInMinutes != nil {
+		s.WriteInt32(schemas.StartChatContactRequest_ChatDurationInMinutes, *v.ChatDurationInMinutes)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartChatContactRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ContactFlowId != nil {
+		s.WriteString(schemas.StartChatContactRequest_ContactFlowId, *v.ContactFlowId)
+	}
+	if v.CustomerId != nil {
+		s.WriteString(schemas.StartChatContactRequest_CustomerId, *v.CustomerId)
+	}
+	serializeDisconnectOnCustomerExit(s, schemas.StartChatContactRequest_DisconnectOnCustomerExit, v.DisconnectOnCustomerExit)
+	if v.InitialMessage != nil {
+		s.WriteStruct(schemas.StartChatContactRequest_InitialMessage)
+		v.InitialMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartChatContactRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ParticipantConfiguration != nil {
+		s.WriteStruct(schemas.StartChatContactRequest_ParticipantConfiguration)
+		v.ParticipantConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParticipantDetails != nil {
+		s.WriteStruct(schemas.StartChatContactRequest_ParticipantDetails)
+		v.ParticipantDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PersistentChat != nil {
+		s.WriteStruct(schemas.StartChatContactRequest_PersistentChat)
+		v.PersistentChat.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RelatedContactId != nil {
+		s.WriteString(schemas.StartChatContactRequest_RelatedContactId, *v.RelatedContactId)
+	}
+	serializeSegmentAttributes(s, schemas.StartChatContactRequest_SegmentAttributes, v.SegmentAttributes)
+	serializeSupportedMessagingContentTypes(s, schemas.StartChatContactRequest_SupportedMessagingContentTypes, v.SupportedMessagingContentTypes)
+}
+
 type StartChatContactOutput struct {
 
 	// The identifier of this contact within the Connect Customer instance.
@@ -186,13 +239,50 @@ type StartChatContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartChatContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartChatContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartChatContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartChatContactResponse_ContactId, *v.ContactId)
+	}
+	if v.ContinuedFromContactId != nil {
+		s.WriteString(schemas.StartChatContactResponse_ContinuedFromContactId, *v.ContinuedFromContactId)
+	}
+	if v.ParticipantId != nil {
+		s.WriteString(schemas.StartChatContactResponse_ParticipantId, *v.ParticipantId)
+	}
+	if v.ParticipantToken != nil {
+		s.WriteString(schemas.StartChatContactResponse_ParticipantToken, *v.ParticipantToken)
+	}
+}
+func (v *StartChatContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartChatContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartChatContactResponse_ContactId:
+			v.ContactId = new(string)
+			return d.ReadString(schemas.StartChatContactResponse_ContactId, v.ContactId)
+		case schemas.StartChatContactResponse_ContinuedFromContactId:
+			v.ContinuedFromContactId = new(string)
+			return d.ReadString(schemas.StartChatContactResponse_ContinuedFromContactId, v.ContinuedFromContactId)
+		case schemas.StartChatContactResponse_ParticipantId:
+			v.ParticipantId = new(string)
+			return d.ReadString(schemas.StartChatContactResponse_ParticipantId, v.ParticipantId)
+		case schemas.StartChatContactResponse_ParticipantToken:
+			v.ParticipantToken = new(string)
+			return d.ReadString(schemas.StartChatContactResponse_ParticipantToken, v.ParticipantToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartChatContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartChatContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartChatContact, schemas.StartChatContactRequest, schemas.StartChatContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartChatContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartChatContact, schemas.StartChatContactRequest, schemas.StartChatContactResponse), output: &StartChatContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

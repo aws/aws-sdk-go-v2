@@ -4,7 +4,9 @@ package m2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/m2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,34 @@ type GetApplicationVersionInput struct {
 	ApplicationVersion *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetApplicationVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetApplicationVersionRequest_applicationId, *v.ApplicationId)
+	}
+	if v.ApplicationVersion != nil {
+		s.WriteInt32(schemas.GetApplicationVersionRequest_applicationVersion, *v.ApplicationVersion)
+	}
+}
+func (v *GetApplicationVersionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApplicationVersionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApplicationVersionRequest_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.GetApplicationVersionRequest_applicationId, v.ApplicationId)
+		case schemas.GetApplicationVersionRequest_applicationVersion:
+			v.ApplicationVersion = new(int32)
+			return d.ReadInt32(schemas.GetApplicationVersionRequest_applicationVersion, v.ApplicationVersion)
+		}
+		return nil
+	})
 }
 
 type GetApplicationVersionOutput struct {
@@ -80,13 +110,72 @@ type GetApplicationVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationVersion != nil {
+		s.WriteInt32(schemas.GetApplicationVersionResponse_applicationVersion, *v.ApplicationVersion)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetApplicationVersionResponse_creationTime, *v.CreationTime)
+	}
+	if v.DefinitionContent != nil {
+		s.WriteString(schemas.GetApplicationVersionResponse_definitionContent, *v.DefinitionContent)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetApplicationVersionResponse_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetApplicationVersionResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetApplicationVersionResponse_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.GetApplicationVersionResponse_statusReason, *v.StatusReason)
+	}
+}
+func (v *GetApplicationVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApplicationVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApplicationVersionResponse_applicationVersion:
+			v.ApplicationVersion = new(int32)
+			return d.ReadInt32(schemas.GetApplicationVersionResponse_applicationVersion, v.ApplicationVersion)
+		case schemas.GetApplicationVersionResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetApplicationVersionResponse_creationTime, v.CreationTime)
+		case schemas.GetApplicationVersionResponse_definitionContent:
+			v.DefinitionContent = new(string)
+			return d.ReadString(schemas.GetApplicationVersionResponse_definitionContent, v.DefinitionContent)
+		case schemas.GetApplicationVersionResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetApplicationVersionResponse_description, v.Description)
+		case schemas.GetApplicationVersionResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetApplicationVersionResponse_name, v.Name)
+		case schemas.GetApplicationVersionResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetApplicationVersionResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ApplicationVersionLifecycle(ev)
+			return nil
+		case schemas.GetApplicationVersionResponse_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.GetApplicationVersionResponse_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApplicationVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplicationVersion, schemas.GetApplicationVersionRequest, schemas.GetApplicationVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApplicationVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplicationVersion, schemas.GetApplicationVersionRequest, schemas.GetApplicationVersionResponse), output: &GetApplicationVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,22 @@ type ListConnectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConnectorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConnectorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConnectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectorFilterList(s, schemas.ListConnectorsRequest_Filters, v.Filters)
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListConnectorsRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConnectorsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListConnectorsOutput struct {
 
 	// A list of ConnectorSummary objects.
@@ -57,13 +75,35 @@ type ListConnectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConnectorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConnectorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConnectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectorSummaries(s, schemas.ListConnectorsResponse_ConnectorSummaries, v.ConnectorSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConnectorsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListConnectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConnectorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConnectorsResponse_ConnectorSummaries:
+			return deserializeConnectorSummaries(d, schemas.ListConnectorsResponse_ConnectorSummaries, &v.ConnectorSummaries)
+		case schemas.ListConnectorsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConnectorsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConnectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListConnectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectors, schemas.ListConnectorsRequest, schemas.ListConnectorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListConnectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectors, schemas.ListConnectorsRequest, schemas.ListConnectorsResponse), output: &ListConnectorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

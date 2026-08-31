@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -68,6 +70,27 @@ type ListQueueEmailAddressesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueueEmailAddressesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueueEmailAddressesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueueEmailAddressesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListQueueEmailAddressesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListQueueEmailAddressesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueueEmailAddressesRequest_NextToken, *v.NextToken)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.ListQueueEmailAddressesRequest_QueueId, *v.QueueId)
+	}
+}
+
 type ListQueueEmailAddressesOutput struct {
 
 	// List of email address summary information for all email addresses associated
@@ -90,13 +113,47 @@ type ListQueueEmailAddressesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueueEmailAddressesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueueEmailAddressesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueueEmailAddressesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEmailAddressMetadataList(s, schemas.ListQueueEmailAddressesResponse_EmailAddressMetadataList, v.EmailAddressMetadataList)
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.ListQueueEmailAddressesResponse_LastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ListQueueEmailAddressesResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueueEmailAddressesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListQueueEmailAddressesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListQueueEmailAddressesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListQueueEmailAddressesResponse_EmailAddressMetadataList:
+			return deserializeEmailAddressMetadataList(d, schemas.ListQueueEmailAddressesResponse_EmailAddressMetadataList, &v.EmailAddressMetadataList)
+		case schemas.ListQueueEmailAddressesResponse_LastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.ListQueueEmailAddressesResponse_LastModifiedRegion, v.LastModifiedRegion)
+		case schemas.ListQueueEmailAddressesResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ListQueueEmailAddressesResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.ListQueueEmailAddressesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListQueueEmailAddressesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListQueueEmailAddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListQueueEmailAddresses{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueueEmailAddresses, schemas.ListQueueEmailAddressesRequest, schemas.ListQueueEmailAddressesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListQueueEmailAddresses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueueEmailAddresses, schemas.ListQueueEmailAddressesRequest, schemas.ListQueueEmailAddressesResponse), output: &ListQueueEmailAddressesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

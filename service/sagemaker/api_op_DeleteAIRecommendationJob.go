@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteAIRecommendationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAIRecommendationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAIRecommendationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAIRecommendationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIRecommendationJobName != nil {
+		s.WriteString(schemas.DeleteAIRecommendationJobRequest_AIRecommendationJobName, *v.AIRecommendationJobName)
+	}
+}
+
 type DeleteAIRecommendationJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted recommendation job.
@@ -44,13 +58,32 @@ type DeleteAIRecommendationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAIRecommendationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAIRecommendationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAIRecommendationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIRecommendationJobArn != nil {
+		s.WriteString(schemas.DeleteAIRecommendationJobResponse_AIRecommendationJobArn, *v.AIRecommendationJobArn)
+	}
+}
+func (v *DeleteAIRecommendationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAIRecommendationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAIRecommendationJobResponse_AIRecommendationJobArn:
+			v.AIRecommendationJobArn = new(string)
+			return d.ReadString(schemas.DeleteAIRecommendationJobResponse_AIRecommendationJobArn, v.AIRecommendationJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAIRecommendationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAIRecommendationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAIRecommendationJob, schemas.DeleteAIRecommendationJobRequest, schemas.DeleteAIRecommendationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteAIRecommendationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAIRecommendationJob, schemas.DeleteAIRecommendationJobRequest, schemas.DeleteAIRecommendationJobResponse), output: &DeleteAIRecommendationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DeleteAccountAuditConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccountAuditConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccountAuditConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccountAuditConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteScheduledAudits != false {
+		s.WriteBool(schemas.DeleteAccountAuditConfigurationRequest_deleteScheduledAudits, v.DeleteScheduledAudits)
+	}
+}
+
 type DeleteAccountAuditConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +58,26 @@ type DeleteAccountAuditConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccountAuditConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccountAuditConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccountAuditConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAccountAuditConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAccountAuditConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAccountAuditConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAccountAuditConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccountAuditConfiguration, schemas.DeleteAccountAuditConfigurationRequest, schemas.DeleteAccountAuditConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAccountAuditConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccountAuditConfiguration, schemas.DeleteAccountAuditConfigurationRequest, schemas.DeleteAccountAuditConfigurationResponse), output: &DeleteAccountAuditConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

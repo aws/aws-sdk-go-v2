@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -67,6 +69,42 @@ type ListComputeQuotasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComputeQuotasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComputeQuotasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComputeQuotasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.ListComputeQuotasRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.CreatedAfter != nil {
+		s.WriteTime(schemas.ListComputeQuotasRequest_CreatedAfter, *v.CreatedAfter)
+	}
+	if v.CreatedBefore != nil {
+		s.WriteTime(schemas.ListComputeQuotasRequest_CreatedBefore, *v.CreatedBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListComputeQuotasRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListComputeQuotasRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComputeQuotasRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListComputeQuotasRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListComputeQuotasRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListComputeQuotasRequest_Status, string(v.Status))
+	}
+}
+
 type ListComputeQuotasOutput struct {
 
 	// Summaries of the compute allocation definitions.
@@ -82,13 +120,35 @@ type ListComputeQuotasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComputeQuotasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComputeQuotasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComputeQuotasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComputeQuotaSummaryList(s, schemas.ListComputeQuotasResponse_ComputeQuotaSummaries, v.ComputeQuotaSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComputeQuotasResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListComputeQuotasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListComputeQuotasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListComputeQuotasResponse_ComputeQuotaSummaries:
+			return deserializeComputeQuotaSummaryList(d, schemas.ListComputeQuotasResponse_ComputeQuotaSummaries, &v.ComputeQuotaSummaries)
+		case schemas.ListComputeQuotasResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListComputeQuotasResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListComputeQuotasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListComputeQuotas{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComputeQuotas, schemas.ListComputeQuotasRequest, schemas.ListComputeQuotasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListComputeQuotas{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComputeQuotas, schemas.ListComputeQuotasRequest, schemas.ListComputeQuotasResponse), output: &ListComputeQuotasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

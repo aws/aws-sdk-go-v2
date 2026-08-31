@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -71,6 +73,45 @@ type ListHyperParameterTuningJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHyperParameterTuningJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHyperParameterTuningJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHyperParameterTuningJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListHyperParameterTuningJobsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListHyperParameterTuningJobsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.LastModifiedTimeAfter != nil {
+		s.WriteTime(schemas.ListHyperParameterTuningJobsRequest_LastModifiedTimeAfter, *v.LastModifiedTimeAfter)
+	}
+	if v.LastModifiedTimeBefore != nil {
+		s.WriteTime(schemas.ListHyperParameterTuningJobsRequest_LastModifiedTimeBefore, *v.LastModifiedTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListHyperParameterTuningJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListHyperParameterTuningJobsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHyperParameterTuningJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListHyperParameterTuningJobsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListHyperParameterTuningJobsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListHyperParameterTuningJobsRequest_StatusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListHyperParameterTuningJobsOutput struct {
 
 	// A list of [HyperParameterTuningJobSummary] objects that describe the tuning jobs that the
@@ -92,13 +133,35 @@ type ListHyperParameterTuningJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHyperParameterTuningJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHyperParameterTuningJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHyperParameterTuningJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHyperParameterTuningJobSummaries(s, schemas.ListHyperParameterTuningJobsResponse_HyperParameterTuningJobSummaries, v.HyperParameterTuningJobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHyperParameterTuningJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListHyperParameterTuningJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHyperParameterTuningJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHyperParameterTuningJobsResponse_HyperParameterTuningJobSummaries:
+			return deserializeHyperParameterTuningJobSummaries(d, schemas.ListHyperParameterTuningJobsResponse_HyperParameterTuningJobSummaries, &v.HyperParameterTuningJobSummaries)
+		case schemas.ListHyperParameterTuningJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHyperParameterTuningJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHyperParameterTuningJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListHyperParameterTuningJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHyperParameterTuningJobs, schemas.ListHyperParameterTuningJobsRequest, schemas.ListHyperParameterTuningJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListHyperParameterTuningJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHyperParameterTuningJobs, schemas.ListHyperParameterTuningJobsRequest, schemas.ListHyperParameterTuningJobsResponse), output: &ListHyperParameterTuningJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

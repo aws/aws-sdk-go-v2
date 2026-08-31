@@ -5,7 +5,9 @@ package cleanrooms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,27 @@ type ListProtectedJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProtectedJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProtectedJobsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProtectedJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProtectedJobsInput_maxResults, *v.MaxResults)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.ListProtectedJobsInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProtectedJobsInput_nextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListProtectedJobsInput_status, string(v.Status))
+	}
+}
+
 type ListProtectedJobsOutput struct {
 
 	// A list of protected job summaries.
@@ -62,13 +85,35 @@ type ListProtectedJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProtectedJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProtectedJobsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProtectedJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProtectedJobsOutput_nextToken, *v.NextToken)
+	}
+	serializeProtectedJobSummaryList(s, schemas.ListProtectedJobsOutput_protectedJobs, v.ProtectedJobs)
+}
+func (v *ListProtectedJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProtectedJobsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProtectedJobsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProtectedJobsOutput_nextToken, v.NextToken)
+		case schemas.ListProtectedJobsOutput_protectedJobs:
+			return deserializeProtectedJobSummaryList(d, schemas.ListProtectedJobsOutput_protectedJobs, &v.ProtectedJobs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProtectedJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProtectedJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProtectedJobs, schemas.ListProtectedJobsInput, schemas.ListProtectedJobsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProtectedJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProtectedJobs, schemas.ListProtectedJobsInput, schemas.ListProtectedJobsOutput), output: &ListProtectedJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

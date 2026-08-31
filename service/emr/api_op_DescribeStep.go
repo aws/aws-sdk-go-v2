@@ -5,7 +5,9 @@ package emr
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -44,6 +46,21 @@ type DescribeStepInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStepInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStepInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStepInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.DescribeStepInput_ClusterId, *v.ClusterId)
+	}
+	if v.StepId != nil {
+		s.WriteString(schemas.DescribeStepInput_StepId, *v.StepId)
+	}
+}
+
 // This output contains the description of the cluster step.
 type DescribeStepOutput struct {
 
@@ -56,13 +73,34 @@ type DescribeStepOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStepOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStepOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStepOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Step != nil {
+		s.WriteStruct(schemas.DescribeStepOutput_Step)
+		v.Step.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeStepOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeStepOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeStepOutput_Step:
+			v.Step = &types.Step{}
+			return v.Step.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeStepMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStep, schemas.DescribeStepInput, schemas.DescribeStepOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStep, schemas.DescribeStepInput, schemas.DescribeStepOutput), output: &DescribeStepOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

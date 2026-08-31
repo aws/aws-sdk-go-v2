@@ -4,7 +4,9 @@ package codedeploy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,36 @@ type CreateDeploymentConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeploymentConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeploymentConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeploymentConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputePlatform != "" {
+		s.WriteString(schemas.CreateDeploymentConfigInput_computePlatform, string(v.ComputePlatform))
+	}
+	if v.DeploymentConfigName != nil {
+		s.WriteString(schemas.CreateDeploymentConfigInput_deploymentConfigName, *v.DeploymentConfigName)
+	}
+	if v.MinimumHealthyHosts != nil {
+		s.WriteStruct(schemas.CreateDeploymentConfigInput_minimumHealthyHosts)
+		v.MinimumHealthyHosts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrafficRoutingConfig != nil {
+		s.WriteStruct(schemas.CreateDeploymentConfigInput_trafficRoutingConfig)
+		v.TrafficRoutingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ZonalConfig != nil {
+		s.WriteStruct(schemas.CreateDeploymentConfigInput_zonalConfig)
+		v.ZonalConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Represents the output of a CreateDeploymentConfig operation.
 type CreateDeploymentConfigOutput struct {
 
@@ -84,13 +116,32 @@ type CreateDeploymentConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeploymentConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeploymentConfigOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeploymentConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentConfigId != nil {
+		s.WriteString(schemas.CreateDeploymentConfigOutput_deploymentConfigId, *v.DeploymentConfigId)
+	}
+}
+func (v *CreateDeploymentConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDeploymentConfigOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDeploymentConfigOutput_deploymentConfigId:
+			v.DeploymentConfigId = new(string)
+			return d.ReadString(schemas.CreateDeploymentConfigOutput_deploymentConfigId, v.DeploymentConfigId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDeploymentConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDeploymentConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeploymentConfig, schemas.CreateDeploymentConfigInput, schemas.CreateDeploymentConfigOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDeploymentConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeploymentConfig, schemas.CreateDeploymentConfigInput, schemas.CreateDeploymentConfigOutput), output: &CreateDeploymentConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

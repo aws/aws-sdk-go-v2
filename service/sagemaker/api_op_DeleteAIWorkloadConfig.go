@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteAIWorkloadConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAIWorkloadConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAIWorkloadConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAIWorkloadConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIWorkloadConfigName != nil {
+		s.WriteString(schemas.DeleteAIWorkloadConfigRequest_AIWorkloadConfigName, *v.AIWorkloadConfigName)
+	}
+}
+
 type DeleteAIWorkloadConfigOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted AI workload configuration.
@@ -45,13 +59,32 @@ type DeleteAIWorkloadConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAIWorkloadConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAIWorkloadConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAIWorkloadConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIWorkloadConfigArn != nil {
+		s.WriteString(schemas.DeleteAIWorkloadConfigResponse_AIWorkloadConfigArn, *v.AIWorkloadConfigArn)
+	}
+}
+func (v *DeleteAIWorkloadConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAIWorkloadConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAIWorkloadConfigResponse_AIWorkloadConfigArn:
+			v.AIWorkloadConfigArn = new(string)
+			return d.ReadString(schemas.DeleteAIWorkloadConfigResponse_AIWorkloadConfigArn, v.AIWorkloadConfigArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAIWorkloadConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAIWorkloadConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAIWorkloadConfig, schemas.DeleteAIWorkloadConfigRequest, schemas.DeleteAIWorkloadConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteAIWorkloadConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAIWorkloadConfig, schemas.DeleteAIWorkloadConfigRequest, schemas.DeleteAIWorkloadConfigResponse), output: &DeleteAIWorkloadConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

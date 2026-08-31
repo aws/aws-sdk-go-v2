@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,22 @@ type AdminSetUserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminSetUserSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminSetUserSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminSetUserSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMFAOptionListType(s, schemas.AdminSetUserSettingsRequest_MFAOptions, v.MFAOptions)
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AdminSetUserSettingsRequest_UserPoolId, *v.UserPoolId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.AdminSetUserSettingsRequest_Username, *v.Username)
+	}
+}
+
 // Represents the response from the server to set user settings as an
 // administrator.
 type AdminSetUserSettingsOutput struct {
@@ -77,13 +95,26 @@ type AdminSetUserSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminSetUserSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminSetUserSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminSetUserSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AdminSetUserSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminSetUserSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdminSetUserSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminSetUserSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminSetUserSettings, schemas.AdminSetUserSettingsRequest, schemas.AdminSetUserSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminSetUserSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminSetUserSettings, schemas.AdminSetUserSettingsRequest, schemas.AdminSetUserSettingsResponse), output: &AdminSetUserSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

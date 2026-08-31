@@ -4,7 +4,9 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,23 @@ type GetAggregateResourceConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAggregateResourceConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAggregateResourceConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAggregateResourceConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationAggregatorName != nil {
+		s.WriteString(schemas.GetAggregateResourceConfigRequest_ConfigurationAggregatorName, *v.ConfigurationAggregatorName)
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteStruct(schemas.GetAggregateResourceConfigRequest_ResourceIdentifier)
+		v.ResourceIdentifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetAggregateResourceConfigOutput struct {
 
 	// Returns a ConfigurationItem object.
@@ -53,13 +72,34 @@ type GetAggregateResourceConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAggregateResourceConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAggregateResourceConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAggregateResourceConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationItem != nil {
+		s.WriteStruct(schemas.GetAggregateResourceConfigResponse_ConfigurationItem)
+		v.ConfigurationItem.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAggregateResourceConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAggregateResourceConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAggregateResourceConfigResponse_ConfigurationItem:
+			v.ConfigurationItem = &types.ConfigurationItem{}
+			return v.ConfigurationItem.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAggregateResourceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAggregateResourceConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAggregateResourceConfig, schemas.GetAggregateResourceConfigRequest, schemas.GetAggregateResourceConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAggregateResourceConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAggregateResourceConfig, schemas.GetAggregateResourceConfigRequest, schemas.GetAggregateResourceConfigResponse), output: &GetAggregateResourceConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

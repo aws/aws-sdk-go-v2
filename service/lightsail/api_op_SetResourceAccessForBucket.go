@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,24 @@ type SetResourceAccessForBucketInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetResourceAccessForBucketInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetResourceAccessForBucketRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetResourceAccessForBucketInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Access != "" {
+		s.WriteString(schemas.SetResourceAccessForBucketRequest_access, string(v.Access))
+	}
+	if v.BucketName != nil {
+		s.WriteString(schemas.SetResourceAccessForBucketRequest_bucketName, *v.BucketName)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.SetResourceAccessForBucketRequest_resourceName, *v.ResourceName)
+	}
+}
+
 type SetResourceAccessForBucketOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -69,13 +89,29 @@ type SetResourceAccessForBucketOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetResourceAccessForBucketOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetResourceAccessForBucketResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetResourceAccessForBucketOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.SetResourceAccessForBucketResult_operations, v.Operations)
+}
+func (v *SetResourceAccessForBucketOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetResourceAccessForBucketResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetResourceAccessForBucketResult_operations:
+			return deserializeOperationList(d, schemas.SetResourceAccessForBucketResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetResourceAccessForBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetResourceAccessForBucket{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetResourceAccessForBucket, schemas.SetResourceAccessForBucketRequest, schemas.SetResourceAccessForBucketResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSetResourceAccessForBucket{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetResourceAccessForBucket, schemas.SetResourceAccessForBucketRequest, schemas.SetResourceAccessForBucketResult), output: &SetResourceAccessForBucketOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

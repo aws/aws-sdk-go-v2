@@ -5,7 +5,9 @@ package comprehend
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,26 @@ type ListEntityRecognizersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntityRecognizersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntityRecognizersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntityRecognizersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListEntityRecognizersRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEntityRecognizersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntityRecognizersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListEntityRecognizersOutput struct {
 
 	// The list of properties of an entity recognizer.
@@ -61,13 +83,35 @@ type ListEntityRecognizersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntityRecognizersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntityRecognizersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntityRecognizersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntityRecognizerPropertiesList(s, schemas.ListEntityRecognizersResponse_EntityRecognizerPropertiesList, v.EntityRecognizerPropertiesList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntityRecognizersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEntityRecognizersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEntityRecognizersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEntityRecognizersResponse_EntityRecognizerPropertiesList:
+			return deserializeEntityRecognizerPropertiesList(d, schemas.ListEntityRecognizersResponse_EntityRecognizerPropertiesList, &v.EntityRecognizerPropertiesList)
+		case schemas.ListEntityRecognizersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEntityRecognizersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEntityRecognizersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEntityRecognizers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntityRecognizers, schemas.ListEntityRecognizersRequest, schemas.ListEntityRecognizersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListEntityRecognizers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntityRecognizers, schemas.ListEntityRecognizersRequest, schemas.ListEntityRecognizersResponse), output: &ListEntityRecognizersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

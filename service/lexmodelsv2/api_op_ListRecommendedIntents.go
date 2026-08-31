@@ -5,7 +5,9 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,33 @@ type ListRecommendedIntentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendedIntentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommendedIntentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommendedIntentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListRecommendedIntentsRequest_botId, *v.BotId)
+	}
+	if v.BotRecommendationId != nil {
+		s.WriteString(schemas.ListRecommendedIntentsRequest_botRecommendationId, *v.BotRecommendationId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListRecommendedIntentsRequest_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListRecommendedIntentsRequest_localeId, *v.LocaleId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecommendedIntentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommendedIntentsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListRecommendedIntentsOutput struct {
 
 	// The unique identifier of the bot associated with the recommended intent.
@@ -96,13 +125,59 @@ type ListRecommendedIntentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendedIntentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommendedIntentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommendedIntentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListRecommendedIntentsResponse_botId, *v.BotId)
+	}
+	if v.BotRecommendationId != nil {
+		s.WriteString(schemas.ListRecommendedIntentsResponse_botRecommendationId, *v.BotRecommendationId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListRecommendedIntentsResponse_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListRecommendedIntentsResponse_localeId, *v.LocaleId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommendedIntentsResponse_nextToken, *v.NextToken)
+	}
+	serializeRecommendedIntentSummaryList(s, schemas.ListRecommendedIntentsResponse_summaryList, v.SummaryList)
+}
+func (v *ListRecommendedIntentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecommendedIntentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecommendedIntentsResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.ListRecommendedIntentsResponse_botId, v.BotId)
+		case schemas.ListRecommendedIntentsResponse_botRecommendationId:
+			v.BotRecommendationId = new(string)
+			return d.ReadString(schemas.ListRecommendedIntentsResponse_botRecommendationId, v.BotRecommendationId)
+		case schemas.ListRecommendedIntentsResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.ListRecommendedIntentsResponse_botVersion, v.BotVersion)
+		case schemas.ListRecommendedIntentsResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.ListRecommendedIntentsResponse_localeId, v.LocaleId)
+		case schemas.ListRecommendedIntentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecommendedIntentsResponse_nextToken, v.NextToken)
+		case schemas.ListRecommendedIntentsResponse_summaryList:
+			return deserializeRecommendedIntentSummaryList(d, schemas.ListRecommendedIntentsResponse_summaryList, &v.SummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecommendedIntentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRecommendedIntents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendedIntents, schemas.ListRecommendedIntentsRequest, schemas.ListRecommendedIntentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRecommendedIntents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendedIntents, schemas.ListRecommendedIntentsRequest, schemas.ListRecommendedIntentsResponse), output: &ListRecommendedIntentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

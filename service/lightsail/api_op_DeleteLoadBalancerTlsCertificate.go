@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type DeleteLoadBalancerTlsCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLoadBalancerTlsCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLoadBalancerTlsCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLoadBalancerTlsCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateName != nil {
+		s.WriteString(schemas.DeleteLoadBalancerTlsCertificateRequest_certificateName, *v.CertificateName)
+	}
+	if v.Force != nil {
+		s.WriteBool(schemas.DeleteLoadBalancerTlsCertificateRequest_force, *v.Force)
+	}
+	if v.LoadBalancerName != nil {
+		s.WriteString(schemas.DeleteLoadBalancerTlsCertificateRequest_loadBalancerName, *v.LoadBalancerName)
+	}
+}
+
 type DeleteLoadBalancerTlsCertificateOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -65,13 +85,29 @@ type DeleteLoadBalancerTlsCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLoadBalancerTlsCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLoadBalancerTlsCertificateResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLoadBalancerTlsCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.DeleteLoadBalancerTlsCertificateResult_operations, v.Operations)
+}
+func (v *DeleteLoadBalancerTlsCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLoadBalancerTlsCertificateResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteLoadBalancerTlsCertificateResult_operations:
+			return deserializeOperationList(d, schemas.DeleteLoadBalancerTlsCertificateResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLoadBalancerTlsCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLoadBalancerTlsCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLoadBalancerTlsCertificate, schemas.DeleteLoadBalancerTlsCertificateRequest, schemas.DeleteLoadBalancerTlsCertificateResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteLoadBalancerTlsCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLoadBalancerTlsCertificate, schemas.DeleteLoadBalancerTlsCertificateRequest, schemas.DeleteLoadBalancerTlsCertificateResult), output: &DeleteLoadBalancerTlsCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -141,6 +143,41 @@ type CreateEventDataStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEventDataStoreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEventDataStoreRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEventDataStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdvancedEventSelectors(s, schemas.CreateEventDataStoreRequest_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	if v.BillingMode != "" {
+		s.WriteString(schemas.CreateEventDataStoreRequest_BillingMode, string(v.BillingMode))
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateEventDataStoreRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.MultiRegionEnabled != nil {
+		s.WriteBool(schemas.CreateEventDataStoreRequest_MultiRegionEnabled, *v.MultiRegionEnabled)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateEventDataStoreRequest_Name, *v.Name)
+	}
+	if v.OrganizationEnabled != nil {
+		s.WriteBool(schemas.CreateEventDataStoreRequest_OrganizationEnabled, *v.OrganizationEnabled)
+	}
+	if v.RetentionPeriod != nil {
+		s.WriteInt32(schemas.CreateEventDataStoreRequest_RetentionPeriod, *v.RetentionPeriod)
+	}
+	if v.StartIngestion != nil {
+		s.WriteBool(schemas.CreateEventDataStoreRequest_StartIngestion, *v.StartIngestion)
+	}
+	serializeTagsList(s, schemas.CreateEventDataStoreRequest_TagsList, v.TagsList)
+	if v.TerminationProtectionEnabled != nil {
+		s.WriteBool(schemas.CreateEventDataStoreRequest_TerminationProtectionEnabled, *v.TerminationProtectionEnabled)
+	}
+}
+
 type CreateEventDataStoreOutput struct {
 
 	// The advanced event selectors that were used to select the events for the data
@@ -196,13 +233,106 @@ type CreateEventDataStoreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEventDataStoreOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEventDataStoreResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEventDataStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdvancedEventSelectors(s, schemas.CreateEventDataStoreResponse_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	if v.BillingMode != "" {
+		s.WriteString(schemas.CreateEventDataStoreResponse_BillingMode, string(v.BillingMode))
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.CreateEventDataStoreResponse_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.EventDataStoreArn != nil {
+		s.WriteString(schemas.CreateEventDataStoreResponse_EventDataStoreArn, *v.EventDataStoreArn)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateEventDataStoreResponse_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.MultiRegionEnabled != nil {
+		s.WriteBool(schemas.CreateEventDataStoreResponse_MultiRegionEnabled, *v.MultiRegionEnabled)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateEventDataStoreResponse_Name, *v.Name)
+	}
+	if v.OrganizationEnabled != nil {
+		s.WriteBool(schemas.CreateEventDataStoreResponse_OrganizationEnabled, *v.OrganizationEnabled)
+	}
+	if v.RetentionPeriod != nil {
+		s.WriteInt32(schemas.CreateEventDataStoreResponse_RetentionPeriod, *v.RetentionPeriod)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateEventDataStoreResponse_Status, string(v.Status))
+	}
+	serializeTagsList(s, schemas.CreateEventDataStoreResponse_TagsList, v.TagsList)
+	if v.TerminationProtectionEnabled != nil {
+		s.WriteBool(schemas.CreateEventDataStoreResponse_TerminationProtectionEnabled, *v.TerminationProtectionEnabled)
+	}
+	if v.UpdatedTimestamp != nil {
+		s.WriteTime(schemas.CreateEventDataStoreResponse_UpdatedTimestamp, *v.UpdatedTimestamp)
+	}
+}
+func (v *CreateEventDataStoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEventDataStoreResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEventDataStoreResponse_AdvancedEventSelectors:
+			return deserializeAdvancedEventSelectors(d, schemas.CreateEventDataStoreResponse_AdvancedEventSelectors, &v.AdvancedEventSelectors)
+		case schemas.CreateEventDataStoreResponse_BillingMode:
+			var ev string
+			if err := d.ReadString(schemas.CreateEventDataStoreResponse_BillingMode, &ev); err != nil {
+				return err
+			}
+			v.BillingMode = types.BillingMode(ev)
+			return nil
+		case schemas.CreateEventDataStoreResponse_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.CreateEventDataStoreResponse_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.CreateEventDataStoreResponse_EventDataStoreArn:
+			v.EventDataStoreArn = new(string)
+			return d.ReadString(schemas.CreateEventDataStoreResponse_EventDataStoreArn, v.EventDataStoreArn)
+		case schemas.CreateEventDataStoreResponse_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.CreateEventDataStoreResponse_KmsKeyId, v.KmsKeyId)
+		case schemas.CreateEventDataStoreResponse_MultiRegionEnabled:
+			v.MultiRegionEnabled = new(bool)
+			return d.ReadBool(schemas.CreateEventDataStoreResponse_MultiRegionEnabled, v.MultiRegionEnabled)
+		case schemas.CreateEventDataStoreResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateEventDataStoreResponse_Name, v.Name)
+		case schemas.CreateEventDataStoreResponse_OrganizationEnabled:
+			v.OrganizationEnabled = new(bool)
+			return d.ReadBool(schemas.CreateEventDataStoreResponse_OrganizationEnabled, v.OrganizationEnabled)
+		case schemas.CreateEventDataStoreResponse_RetentionPeriod:
+			v.RetentionPeriod = new(int32)
+			return d.ReadInt32(schemas.CreateEventDataStoreResponse_RetentionPeriod, v.RetentionPeriod)
+		case schemas.CreateEventDataStoreResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateEventDataStoreResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.EventDataStoreStatus(ev)
+			return nil
+		case schemas.CreateEventDataStoreResponse_TagsList:
+			return deserializeTagsList(d, schemas.CreateEventDataStoreResponse_TagsList, &v.TagsList)
+		case schemas.CreateEventDataStoreResponse_TerminationProtectionEnabled:
+			v.TerminationProtectionEnabled = new(bool)
+			return d.ReadBool(schemas.CreateEventDataStoreResponse_TerminationProtectionEnabled, v.TerminationProtectionEnabled)
+		case schemas.CreateEventDataStoreResponse_UpdatedTimestamp:
+			v.UpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.CreateEventDataStoreResponse_UpdatedTimestamp, v.UpdatedTimestamp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEventDataStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEventDataStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventDataStore, schemas.CreateEventDataStoreRequest, schemas.CreateEventDataStoreResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateEventDataStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventDataStore, schemas.CreateEventDataStoreRequest, schemas.CreateEventDataStoreResponse), output: &CreateEventDataStoreOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

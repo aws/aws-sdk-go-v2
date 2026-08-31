@@ -4,7 +4,9 @@ package grafana
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/grafana/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/grafana/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,31 @@ type UpdatePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUpdateInstructionBatch(s, schemas.UpdatePermissionsRequest_updateInstructionBatch, v.UpdateInstructionBatch)
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.UpdatePermissionsRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *UpdatePermissionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePermissionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePermissionsRequest_updateInstructionBatch:
+			return deserializeUpdateInstructionBatch(d, schemas.UpdatePermissionsRequest_updateInstructionBatch, &v.UpdateInstructionBatch)
+		case schemas.UpdatePermissionsRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.UpdatePermissionsRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type UpdatePermissionsOutput struct {
 
 	// An array of structures that contain the errors from the operation, if any.
@@ -52,13 +79,29 @@ type UpdatePermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUpdateErrorList(s, schemas.UpdatePermissionsResponse_errors, v.Errors)
+}
+func (v *UpdatePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePermissionsResponse_errors:
+			return deserializeUpdateErrorList(d, schemas.UpdatePermissionsResponse_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePermissions, schemas.UpdatePermissionsRequest, schemas.UpdatePermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePermissions, schemas.UpdatePermissionsRequest, schemas.UpdatePermissionsResponse), output: &UpdatePermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

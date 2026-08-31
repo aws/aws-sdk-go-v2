@@ -5,7 +5,9 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListTestSetRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestSetRecordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestSetRecordsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestSetRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTestSetRecordsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestSetRecordsRequest_nextToken, *v.NextToken)
+	}
+	if v.TestSetId != nil {
+		s.WriteString(schemas.ListTestSetRecordsRequest_testSetId, *v.TestSetId)
+	}
+}
+
 type ListTestSetRecordsOutput struct {
 
 	// A token that indicates whether there are more records to return in a response
@@ -62,13 +82,35 @@ type ListTestSetRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestSetRecordsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestSetRecordsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestSetRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestSetRecordsResponse_nextToken, *v.NextToken)
+	}
+	serializeTestSetTurnRecordList(s, schemas.ListTestSetRecordsResponse_testSetRecords, v.TestSetRecords)
+}
+func (v *ListTestSetRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTestSetRecordsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTestSetRecordsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTestSetRecordsResponse_nextToken, v.NextToken)
+		case schemas.ListTestSetRecordsResponse_testSetRecords:
+			return deserializeTestSetTurnRecordList(d, schemas.ListTestSetRecordsResponse_testSetRecords, &v.TestSetRecords)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTestSetRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTestSetRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestSetRecords, schemas.ListTestSetRecordsRequest, schemas.ListTestSetRecordsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTestSetRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestSetRecords, schemas.ListTestSetRecordsRequest, schemas.ListTestSetRecordsResponse), output: &ListTestSetRecordsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

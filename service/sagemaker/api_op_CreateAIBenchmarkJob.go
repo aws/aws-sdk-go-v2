@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,36 @@ type CreateAIBenchmarkJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAIBenchmarkJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAIBenchmarkJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAIBenchmarkJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIBenchmarkJobName != nil {
+		s.WriteString(schemas.CreateAIBenchmarkJobRequest_AIBenchmarkJobName, *v.AIBenchmarkJobName)
+	}
+	if v.AIWorkloadConfigIdentifier != nil {
+		s.WriteString(schemas.CreateAIBenchmarkJobRequest_AIWorkloadConfigIdentifier, *v.AIWorkloadConfigIdentifier)
+	}
+	serializeAIBenchmarkTarget(s, schemas.CreateAIBenchmarkJobRequest_BenchmarkTarget, v.BenchmarkTarget)
+	if v.NetworkConfig != nil {
+		s.WriteStruct(schemas.CreateAIBenchmarkJobRequest_NetworkConfig)
+		v.NetworkConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.CreateAIBenchmarkJobRequest_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateAIBenchmarkJobRequest_RoleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.CreateAIBenchmarkJobRequest_Tags, v.Tags)
+}
+
 type CreateAIBenchmarkJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created benchmark job.
@@ -83,13 +115,32 @@ type CreateAIBenchmarkJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAIBenchmarkJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAIBenchmarkJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAIBenchmarkJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIBenchmarkJobArn != nil {
+		s.WriteString(schemas.CreateAIBenchmarkJobResponse_AIBenchmarkJobArn, *v.AIBenchmarkJobArn)
+	}
+}
+func (v *CreateAIBenchmarkJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAIBenchmarkJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAIBenchmarkJobResponse_AIBenchmarkJobArn:
+			v.AIBenchmarkJobArn = new(string)
+			return d.ReadString(schemas.CreateAIBenchmarkJobResponse_AIBenchmarkJobArn, v.AIBenchmarkJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAIBenchmarkJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAIBenchmarkJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAIBenchmarkJob, schemas.CreateAIBenchmarkJobRequest, schemas.CreateAIBenchmarkJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAIBenchmarkJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAIBenchmarkJob, schemas.CreateAIBenchmarkJobRequest, schemas.CreateAIBenchmarkJobResponse), output: &CreateAIBenchmarkJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

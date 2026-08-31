@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,22 @@ type CreateInstanceSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInstanceSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInstanceSnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInstanceSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceName != nil {
+		s.WriteString(schemas.CreateInstanceSnapshotRequest_instanceName, *v.InstanceName)
+	}
+	if v.InstanceSnapshotName != nil {
+		s.WriteString(schemas.CreateInstanceSnapshotRequest_instanceSnapshotName, *v.InstanceSnapshotName)
+	}
+	serializeTagList(s, schemas.CreateInstanceSnapshotRequest_tags, v.Tags)
+}
+
 type CreateInstanceSnapshotOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -63,13 +81,29 @@ type CreateInstanceSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInstanceSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInstanceSnapshotResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInstanceSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.CreateInstanceSnapshotResult_operations, v.Operations)
+}
+func (v *CreateInstanceSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateInstanceSnapshotResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateInstanceSnapshotResult_operations:
+			return deserializeOperationList(d, schemas.CreateInstanceSnapshotResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateInstanceSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateInstanceSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInstanceSnapshot, schemas.CreateInstanceSnapshotRequest, schemas.CreateInstanceSnapshotResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateInstanceSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInstanceSnapshot, schemas.CreateInstanceSnapshotRequest, schemas.CreateInstanceSnapshotResult), output: &CreateInstanceSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

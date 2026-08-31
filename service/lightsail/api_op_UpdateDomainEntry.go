@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,23 @@ type UpdateDomainEntryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainEntryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainEntryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainEntryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainEntry != nil {
+		s.WriteStruct(schemas.UpdateDomainEntryRequest_domainEntry)
+		v.DomainEntry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpdateDomainEntryRequest_domainName, *v.DomainName)
+	}
+}
+
 type UpdateDomainEntryOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -58,13 +77,29 @@ type UpdateDomainEntryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainEntryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainEntryResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainEntryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.UpdateDomainEntryResult_operations, v.Operations)
+}
+func (v *UpdateDomainEntryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDomainEntryResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDomainEntryResult_operations:
+			return deserializeOperationList(d, schemas.UpdateDomainEntryResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDomainEntryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDomainEntry{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomainEntry, schemas.UpdateDomainEntryRequest, schemas.UpdateDomainEntryResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDomainEntry{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomainEntry, schemas.UpdateDomainEntryRequest, schemas.UpdateDomainEntryResult), output: &UpdateDomainEntryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

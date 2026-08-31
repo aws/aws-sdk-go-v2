@@ -5,7 +5,9 @@ package cognitoidentityprovider
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,27 @@ type AdminListUserAuthEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminListUserAuthEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminListUserAuthEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminListUserAuthEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.AdminListUserAuthEventsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.AdminListUserAuthEventsRequest_NextToken, *v.NextToken)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AdminListUserAuthEventsRequest_UserPoolId, *v.UserPoolId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.AdminListUserAuthEventsRequest_Username, *v.Username)
+	}
+}
+
 type AdminListUserAuthEventsOutput struct {
 
 	// The response object. It includes the EventID , EventType , CreationDate ,
@@ -90,13 +113,35 @@ type AdminListUserAuthEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminListUserAuthEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminListUserAuthEventsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminListUserAuthEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuthEventsType(s, schemas.AdminListUserAuthEventsResponse_AuthEvents, v.AuthEvents)
+	if v.NextToken != nil {
+		s.WriteString(schemas.AdminListUserAuthEventsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *AdminListUserAuthEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminListUserAuthEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdminListUserAuthEventsResponse_AuthEvents:
+			return deserializeAuthEventsType(d, schemas.AdminListUserAuthEventsResponse_AuthEvents, &v.AuthEvents)
+		case schemas.AdminListUserAuthEventsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.AdminListUserAuthEventsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdminListUserAuthEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminListUserAuthEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminListUserAuthEvents, schemas.AdminListUserAuthEventsRequest, schemas.AdminListUserAuthEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminListUserAuthEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminListUserAuthEvents, schemas.AdminListUserAuthEventsRequest, schemas.AdminListUserAuthEventsResponse), output: &AdminListUserAuthEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

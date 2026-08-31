@@ -4,6 +4,8 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,28 @@ type StartQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartQueryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryS3Uri != nil {
+		s.WriteString(schemas.StartQueryRequest_DeliveryS3Uri, *v.DeliveryS3Uri)
+	}
+	if v.EventDataStoreOwnerAccountId != nil {
+		s.WriteString(schemas.StartQueryRequest_EventDataStoreOwnerAccountId, *v.EventDataStoreOwnerAccountId)
+	}
+	if v.QueryAlias != nil {
+		s.WriteString(schemas.StartQueryRequest_QueryAlias, *v.QueryAlias)
+	}
+	serializeQueryParameters(s, schemas.StartQueryRequest_QueryParameters, v.QueryParameters)
+	if v.QueryStatement != nil {
+		s.WriteString(schemas.StartQueryRequest_QueryStatement, *v.QueryStatement)
+	}
+}
+
 type StartQueryOutput struct {
 
 	//  The account ID of the event data store owner.
@@ -64,13 +88,38 @@ type StartQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartQueryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventDataStoreOwnerAccountId != nil {
+		s.WriteString(schemas.StartQueryResponse_EventDataStoreOwnerAccountId, *v.EventDataStoreOwnerAccountId)
+	}
+	if v.QueryId != nil {
+		s.WriteString(schemas.StartQueryResponse_QueryId, *v.QueryId)
+	}
+}
+func (v *StartQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartQueryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartQueryResponse_EventDataStoreOwnerAccountId:
+			v.EventDataStoreOwnerAccountId = new(string)
+			return d.ReadString(schemas.StartQueryResponse_EventDataStoreOwnerAccountId, v.EventDataStoreOwnerAccountId)
+		case schemas.StartQueryResponse_QueryId:
+			v.QueryId = new(string)
+			return d.ReadString(schemas.StartQueryResponse_QueryId, v.QueryId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQuery, schemas.StartQueryRequest, schemas.StartQueryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQuery, schemas.StartQueryRequest, schemas.StartQueryResponse), output: &StartQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

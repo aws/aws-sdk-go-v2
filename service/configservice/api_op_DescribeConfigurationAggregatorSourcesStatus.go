@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,25 @@ type DescribeConfigurationAggregatorSourcesStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigurationAggregatorSourcesStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationAggregatorSourcesStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationAggregatorSourcesStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationAggregatorName != nil {
+		s.WriteString(schemas.DescribeConfigurationAggregatorSourcesStatusRequest_ConfigurationAggregatorName, *v.ConfigurationAggregatorName)
+	}
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.DescribeConfigurationAggregatorSourcesStatusRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConfigurationAggregatorSourcesStatusRequest_NextToken, *v.NextToken)
+	}
+	serializeAggregatedSourceStatusTypeList(s, schemas.DescribeConfigurationAggregatorSourcesStatusRequest_UpdateStatus, v.UpdateStatus)
+}
+
 type DescribeConfigurationAggregatorSourcesStatusOutput struct {
 
 	// Returns an AggregatedSourceStatus object.
@@ -70,13 +91,35 @@ type DescribeConfigurationAggregatorSourcesStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigurationAggregatorSourcesStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationAggregatorSourcesStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationAggregatorSourcesStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAggregatedSourceStatusList(s, schemas.DescribeConfigurationAggregatorSourcesStatusResponse_AggregatedSourceStatusList, v.AggregatedSourceStatusList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConfigurationAggregatorSourcesStatusResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeConfigurationAggregatorSourcesStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConfigurationAggregatorSourcesStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConfigurationAggregatorSourcesStatusResponse_AggregatedSourceStatusList:
+			return deserializeAggregatedSourceStatusList(d, schemas.DescribeConfigurationAggregatorSourcesStatusResponse_AggregatedSourceStatusList, &v.AggregatedSourceStatusList)
+		case schemas.DescribeConfigurationAggregatorSourcesStatusResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeConfigurationAggregatorSourcesStatusResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConfigurationAggregatorSourcesStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConfigurationAggregatorSourcesStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurationAggregatorSourcesStatus, schemas.DescribeConfigurationAggregatorSourcesStatusRequest, schemas.DescribeConfigurationAggregatorSourcesStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeConfigurationAggregatorSourcesStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurationAggregatorSourcesStatus, schemas.DescribeConfigurationAggregatorSourcesStatusRequest, schemas.DescribeConfigurationAggregatorSourcesStatusResponse), output: &DescribeConfigurationAggregatorSourcesStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribeWorkteamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkteamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkteamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkteamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkteamName != nil {
+		s.WriteString(schemas.DescribeWorkteamRequest_WorkteamName, *v.WorkteamName)
+	}
+}
+
 type DescribeWorkteamOutput struct {
 
 	// A Workteam instance that contains information about the work team.
@@ -49,13 +63,34 @@ type DescribeWorkteamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkteamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkteamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkteamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Workteam != nil {
+		s.WriteStruct(schemas.DescribeWorkteamResponse_Workteam)
+		v.Workteam.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeWorkteamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWorkteamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWorkteamResponse_Workteam:
+			v.Workteam = &types.Workteam{}
+			return v.Workteam.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWorkteamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWorkteam{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkteam, schemas.DescribeWorkteamRequest, schemas.DescribeWorkteamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeWorkteam{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkteam, schemas.DescribeWorkteamRequest, schemas.DescribeWorkteamResponse), output: &DescribeWorkteamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

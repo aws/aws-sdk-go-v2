@@ -4,6 +4,8 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeletePendingAggregationRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePendingAggregationRequestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePendingAggregationRequestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePendingAggregationRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequesterAccountId != nil {
+		s.WriteString(schemas.DeletePendingAggregationRequestRequest_RequesterAccountId, *v.RequesterAccountId)
+	}
+	if v.RequesterAwsRegion != nil {
+		s.WriteString(schemas.DeletePendingAggregationRequestRequest_RequesterAwsRegion, *v.RequesterAwsRegion)
+	}
+}
+
 type DeletePendingAggregationRequestOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type DeletePendingAggregationRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePendingAggregationRequestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePendingAggregationRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeletePendingAggregationRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePendingAggregationRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePendingAggregationRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePendingAggregationRequest, schemas.DeletePendingAggregationRequestRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeletePendingAggregationRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePendingAggregationRequest, schemas.DeletePendingAggregationRequestRequest, nil), output: &DeletePendingAggregationRequestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

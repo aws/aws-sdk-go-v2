@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,23 @@ type UpdateThingRuntimeConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateThingRuntimeConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateThingRuntimeConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateThingRuntimeConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TelemetryConfiguration != nil {
+		s.WriteStruct(schemas.UpdateThingRuntimeConfigurationRequest_TelemetryConfiguration)
+		v.TelemetryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.UpdateThingRuntimeConfigurationRequest_ThingName, *v.ThingName)
+	}
+}
+
 type UpdateThingRuntimeConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +63,26 @@ type UpdateThingRuntimeConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateThingRuntimeConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateThingRuntimeConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateThingRuntimeConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateThingRuntimeConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateThingRuntimeConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateThingRuntimeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateThingRuntimeConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateThingRuntimeConfiguration, schemas.UpdateThingRuntimeConfigurationRequest, schemas.UpdateThingRuntimeConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateThingRuntimeConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateThingRuntimeConfiguration, schemas.UpdateThingRuntimeConfigurationRequest, schemas.UpdateThingRuntimeConfigurationResponse), output: &UpdateThingRuntimeConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

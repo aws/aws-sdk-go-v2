@@ -4,7 +4,9 @@ package transcribe
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type GetCallAnalyticsCategoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCallAnalyticsCategoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCallAnalyticsCategoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCallAnalyticsCategoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CategoryName != nil {
+		s.WriteString(schemas.GetCallAnalyticsCategoryRequest_CategoryName, *v.CategoryName)
+	}
+}
+
 type GetCallAnalyticsCategoryOutput struct {
 
 	// Provides you with the properties of the Call Analytics category you specified
@@ -49,13 +63,34 @@ type GetCallAnalyticsCategoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCallAnalyticsCategoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCallAnalyticsCategoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCallAnalyticsCategoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CategoryProperties != nil {
+		s.WriteStruct(schemas.GetCallAnalyticsCategoryResponse_CategoryProperties)
+		v.CategoryProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCallAnalyticsCategoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCallAnalyticsCategoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCallAnalyticsCategoryResponse_CategoryProperties:
+			v.CategoryProperties = &types.CategoryProperties{}
+			return v.CategoryProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCallAnalyticsCategoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCallAnalyticsCategory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCallAnalyticsCategory, schemas.GetCallAnalyticsCategoryRequest, schemas.GetCallAnalyticsCategoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCallAnalyticsCategory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCallAnalyticsCategory, schemas.GetCallAnalyticsCategoryRequest, schemas.GetCallAnalyticsCategoryResponse), output: &GetCallAnalyticsCategoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

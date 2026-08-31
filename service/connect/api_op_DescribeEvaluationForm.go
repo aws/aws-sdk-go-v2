@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type DescribeEvaluationFormInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEvaluationFormInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEvaluationFormRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEvaluationFormInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationFormId != nil {
+		s.WriteString(schemas.DescribeEvaluationFormRequest_EvaluationFormId, *v.EvaluationFormId)
+	}
+	if v.EvaluationFormVersion != nil {
+		s.WriteInt32(schemas.DescribeEvaluationFormRequest_EvaluationFormVersion, *v.EvaluationFormVersion)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeEvaluationFormRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DescribeEvaluationFormOutput struct {
 
 	// Information about the evaluation form.
@@ -60,13 +80,34 @@ type DescribeEvaluationFormOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEvaluationFormOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEvaluationFormResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEvaluationFormOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationForm != nil {
+		s.WriteStruct(schemas.DescribeEvaluationFormResponse_EvaluationForm)
+		v.EvaluationForm.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeEvaluationFormOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEvaluationFormResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEvaluationFormResponse_EvaluationForm:
+			v.EvaluationForm = &types.EvaluationForm{}
+			return v.EvaluationForm.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEvaluationFormMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeEvaluationForm{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEvaluationForm, schemas.DescribeEvaluationFormRequest, schemas.DescribeEvaluationFormResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeEvaluationForm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEvaluationForm, schemas.DescribeEvaluationFormRequest, schemas.DescribeEvaluationFormResponse), output: &DescribeEvaluationFormOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

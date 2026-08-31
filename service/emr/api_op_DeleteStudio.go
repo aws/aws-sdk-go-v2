@@ -4,6 +4,8 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteStudioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStudioInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStudioInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStudioInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StudioId != nil {
+		s.WriteString(schemas.DeleteStudioInput_StudioId, *v.StudioId)
+	}
+}
+
 type DeleteStudioOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteStudioOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStudioOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStudioOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteStudioOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteStudioMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteStudio{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStudio, schemas.DeleteStudioInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteStudio{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStudio, schemas.DeleteStudioInput, nil), output: &DeleteStudioOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

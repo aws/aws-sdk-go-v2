@@ -5,7 +5,9 @@ package cleanrooms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,50 @@ type ListSchemasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSchemasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSchemasInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSchemasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.ListSchemasInput_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSchemasInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSchemasInput_nextToken, *v.NextToken)
+	}
+	if v.SchemaType != "" {
+		s.WriteString(schemas.ListSchemasInput_schemaType, string(v.SchemaType))
+	}
+}
+func (v *ListSchemasInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSchemasInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSchemasInput_collaborationIdentifier:
+			v.CollaborationIdentifier = new(string)
+			return d.ReadString(schemas.ListSchemasInput_collaborationIdentifier, v.CollaborationIdentifier)
+		case schemas.ListSchemasInput_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListSchemasInput_maxResults, v.MaxResults)
+		case schemas.ListSchemasInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSchemasInput_nextToken, v.NextToken)
+		case schemas.ListSchemasInput_schemaType:
+			var ev string
+			if err := d.ReadString(schemas.ListSchemasInput_schemaType, &ev); err != nil {
+				return err
+			}
+			v.SchemaType = types.SchemaType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type ListSchemasOutput struct {
 
 	// The retrieved list of schemas.
@@ -63,13 +109,35 @@ type ListSchemasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSchemasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSchemasOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSchemasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSchemasOutput_nextToken, *v.NextToken)
+	}
+	serializeSchemaSummaryList(s, schemas.ListSchemasOutput_schemaSummaries, v.SchemaSummaries)
+}
+func (v *ListSchemasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSchemasOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSchemasOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSchemasOutput_nextToken, v.NextToken)
+		case schemas.ListSchemasOutput_schemaSummaries:
+			return deserializeSchemaSummaryList(d, schemas.ListSchemasOutput_schemaSummaries, &v.SchemaSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSchemasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSchemas{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSchemas, schemas.ListSchemasInput, schemas.ListSchemasOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSchemas{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSchemas, schemas.ListSchemasInput, schemas.ListSchemasOutput), output: &ListSchemasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

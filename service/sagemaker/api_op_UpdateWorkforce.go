@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -93,6 +95,36 @@ type UpdateWorkforceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkforceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkforceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkforceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.UpdateWorkforceRequest_IpAddressType, string(v.IpAddressType))
+	}
+	if v.OidcConfig != nil {
+		s.WriteStruct(schemas.UpdateWorkforceRequest_OidcConfig)
+		v.OidcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceIpConfig != nil {
+		s.WriteStruct(schemas.UpdateWorkforceRequest_SourceIpConfig)
+		v.SourceIpConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkforceName != nil {
+		s.WriteString(schemas.UpdateWorkforceRequest_WorkforceName, *v.WorkforceName)
+	}
+	if v.WorkforceVpcConfig != nil {
+		s.WriteStruct(schemas.UpdateWorkforceRequest_WorkforceVpcConfig)
+		v.WorkforceVpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateWorkforceOutput struct {
 
 	// A single private workforce. You can create one private work force in each
@@ -111,13 +143,34 @@ type UpdateWorkforceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkforceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkforceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkforceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Workforce != nil {
+		s.WriteStruct(schemas.UpdateWorkforceResponse_Workforce)
+		v.Workforce.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateWorkforceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkforceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWorkforceResponse_Workforce:
+			v.Workforce = &types.Workforce{}
+			return v.Workforce.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkforceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateWorkforce{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkforce, schemas.UpdateWorkforceRequest, schemas.UpdateWorkforceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateWorkforce{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkforce, schemas.UpdateWorkforceRequest, schemas.UpdateWorkforceResponse), output: &UpdateWorkforceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

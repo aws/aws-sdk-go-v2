@@ -4,7 +4,9 @@ package route53resolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,24 @@ type AssociateResolverRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateResolverRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateResolverRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateResolverRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.AssociateResolverRuleRequest_Name, *v.Name)
+	}
+	if v.ResolverRuleId != nil {
+		s.WriteString(schemas.AssociateResolverRuleRequest_ResolverRuleId, *v.ResolverRuleId)
+	}
+	if v.VPCId != nil {
+		s.WriteString(schemas.AssociateResolverRuleRequest_VPCId, *v.VPCId)
+	}
+}
+
 type AssociateResolverRuleOutput struct {
 
 	// Information about the AssociateResolverRule request, including the status of
@@ -68,13 +88,34 @@ type AssociateResolverRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateResolverRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateResolverRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateResolverRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverRuleAssociation != nil {
+		s.WriteStruct(schemas.AssociateResolverRuleResponse_ResolverRuleAssociation)
+		v.ResolverRuleAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateResolverRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateResolverRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateResolverRuleResponse_ResolverRuleAssociation:
+			v.ResolverRuleAssociation = &types.ResolverRuleAssociation{}
+			return v.ResolverRuleAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateResolverRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateResolverRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateResolverRule, schemas.AssociateResolverRuleRequest, schemas.AssociateResolverRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateResolverRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateResolverRule, schemas.AssociateResolverRuleRequest, schemas.AssociateResolverRuleResponse), output: &AssociateResolverRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

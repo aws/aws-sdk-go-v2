@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -363,6 +365,77 @@ type CreateUserPoolClientInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserPoolClientInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserPoolClientRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserPoolClientInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessTokenValidity != nil {
+		s.WriteInt32(schemas.CreateUserPoolClientRequest_AccessTokenValidity, *v.AccessTokenValidity)
+	}
+	serializeOAuthFlowsType(s, schemas.CreateUserPoolClientRequest_AllowedOAuthFlows, v.AllowedOAuthFlows)
+	if v.AllowedOAuthFlowsUserPoolClient != false {
+		s.WriteBool(schemas.CreateUserPoolClientRequest_AllowedOAuthFlowsUserPoolClient, v.AllowedOAuthFlowsUserPoolClient)
+	}
+	serializeScopeListType(s, schemas.CreateUserPoolClientRequest_AllowedOAuthScopes, v.AllowedOAuthScopes)
+	if v.AnalyticsConfiguration != nil {
+		s.WriteStruct(schemas.CreateUserPoolClientRequest_AnalyticsConfiguration)
+		v.AnalyticsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AuthSessionValidity != nil {
+		s.WriteInt32(schemas.CreateUserPoolClientRequest_AuthSessionValidity, *v.AuthSessionValidity)
+	}
+	serializeCallbackURLsListType(s, schemas.CreateUserPoolClientRequest_CallbackURLs, v.CallbackURLs)
+	if v.ClientName != nil {
+		s.WriteString(schemas.CreateUserPoolClientRequest_ClientName, *v.ClientName)
+	}
+	if v.ClientSecret != nil {
+		s.WriteString(schemas.CreateUserPoolClientRequest_ClientSecret, *v.ClientSecret)
+	}
+	if v.DefaultRedirectURI != nil {
+		s.WriteString(schemas.CreateUserPoolClientRequest_DefaultRedirectURI, *v.DefaultRedirectURI)
+	}
+	if v.EnablePropagateAdditionalUserContextData != nil {
+		s.WriteBool(schemas.CreateUserPoolClientRequest_EnablePropagateAdditionalUserContextData, *v.EnablePropagateAdditionalUserContextData)
+	}
+	if v.EnableTokenRevocation != nil {
+		s.WriteBool(schemas.CreateUserPoolClientRequest_EnableTokenRevocation, *v.EnableTokenRevocation)
+	}
+	serializeExplicitAuthFlowsListType(s, schemas.CreateUserPoolClientRequest_ExplicitAuthFlows, v.ExplicitAuthFlows)
+	if v.GenerateSecret != false {
+		s.WriteBool(schemas.CreateUserPoolClientRequest_GenerateSecret, v.GenerateSecret)
+	}
+	if v.IdTokenValidity != nil {
+		s.WriteInt32(schemas.CreateUserPoolClientRequest_IdTokenValidity, *v.IdTokenValidity)
+	}
+	serializeLogoutURLsListType(s, schemas.CreateUserPoolClientRequest_LogoutURLs, v.LogoutURLs)
+	if v.PreventUserExistenceErrors != "" {
+		s.WriteString(schemas.CreateUserPoolClientRequest_PreventUserExistenceErrors, string(v.PreventUserExistenceErrors))
+	}
+	serializeClientPermissionListType(s, schemas.CreateUserPoolClientRequest_ReadAttributes, v.ReadAttributes)
+	if v.RefreshTokenRotation != nil {
+		s.WriteStruct(schemas.CreateUserPoolClientRequest_RefreshTokenRotation)
+		v.RefreshTokenRotation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RefreshTokenValidity != 0 {
+		s.WriteInt32(schemas.CreateUserPoolClientRequest_RefreshTokenValidity, v.RefreshTokenValidity)
+	}
+	serializeSupportedIdentityProvidersListType(s, schemas.CreateUserPoolClientRequest_SupportedIdentityProviders, v.SupportedIdentityProviders)
+	if v.TokenValidityUnits != nil {
+		s.WriteStruct(schemas.CreateUserPoolClientRequest_TokenValidityUnits)
+		v.TokenValidityUnits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.CreateUserPoolClientRequest_UserPoolId, *v.UserPoolId)
+	}
+	serializeClientPermissionListType(s, schemas.CreateUserPoolClientRequest_WriteAttributes, v.WriteAttributes)
+}
+
 // Represents the response from the server to create a user pool client.
 type CreateUserPoolClientOutput struct {
 
@@ -375,13 +448,34 @@ type CreateUserPoolClientOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserPoolClientOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserPoolClientResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserPoolClientOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserPoolClient != nil {
+		s.WriteStruct(schemas.CreateUserPoolClientResponse_UserPoolClient)
+		v.UserPoolClient.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateUserPoolClientOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUserPoolClientResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUserPoolClientResponse_UserPoolClient:
+			v.UserPoolClient = &types.UserPoolClientType{}
+			return v.UserPoolClient.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUserPoolClientMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateUserPoolClient{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserPoolClient, schemas.CreateUserPoolClientRequest, schemas.CreateUserPoolClientResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateUserPoolClient{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserPoolClient, schemas.CreateUserPoolClientRequest, schemas.CreateUserPoolClientResponse), output: &CreateUserPoolClientOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

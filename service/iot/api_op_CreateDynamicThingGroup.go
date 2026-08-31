@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,33 @@ type CreateDynamicThingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDynamicThingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDynamicThingGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDynamicThingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexName != nil {
+		s.WriteString(schemas.CreateDynamicThingGroupRequest_indexName, *v.IndexName)
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.CreateDynamicThingGroupRequest_queryString, *v.QueryString)
+	}
+	if v.QueryVersion != nil {
+		s.WriteString(schemas.CreateDynamicThingGroupRequest_queryVersion, *v.QueryVersion)
+	}
+	serializeTagList(s, schemas.CreateDynamicThingGroupRequest_tags, v.Tags)
+	if v.ThingGroupName != nil {
+		s.WriteString(schemas.CreateDynamicThingGroupRequest_thingGroupName, *v.ThingGroupName)
+	}
+	if v.ThingGroupProperties != nil {
+		s.WriteStruct(schemas.CreateDynamicThingGroupRequest_thingGroupProperties)
+		v.ThingGroupProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateDynamicThingGroupOutput struct {
 
 	// The dynamic thing group index name.
@@ -90,13 +119,62 @@ type CreateDynamicThingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDynamicThingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDynamicThingGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDynamicThingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexName != nil {
+		s.WriteString(schemas.CreateDynamicThingGroupResponse_indexName, *v.IndexName)
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.CreateDynamicThingGroupResponse_queryString, *v.QueryString)
+	}
+	if v.QueryVersion != nil {
+		s.WriteString(schemas.CreateDynamicThingGroupResponse_queryVersion, *v.QueryVersion)
+	}
+	if v.ThingGroupArn != nil {
+		s.WriteString(schemas.CreateDynamicThingGroupResponse_thingGroupArn, *v.ThingGroupArn)
+	}
+	if v.ThingGroupId != nil {
+		s.WriteString(schemas.CreateDynamicThingGroupResponse_thingGroupId, *v.ThingGroupId)
+	}
+	if v.ThingGroupName != nil {
+		s.WriteString(schemas.CreateDynamicThingGroupResponse_thingGroupName, *v.ThingGroupName)
+	}
+}
+func (v *CreateDynamicThingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDynamicThingGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDynamicThingGroupResponse_indexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.CreateDynamicThingGroupResponse_indexName, v.IndexName)
+		case schemas.CreateDynamicThingGroupResponse_queryString:
+			v.QueryString = new(string)
+			return d.ReadString(schemas.CreateDynamicThingGroupResponse_queryString, v.QueryString)
+		case schemas.CreateDynamicThingGroupResponse_queryVersion:
+			v.QueryVersion = new(string)
+			return d.ReadString(schemas.CreateDynamicThingGroupResponse_queryVersion, v.QueryVersion)
+		case schemas.CreateDynamicThingGroupResponse_thingGroupArn:
+			v.ThingGroupArn = new(string)
+			return d.ReadString(schemas.CreateDynamicThingGroupResponse_thingGroupArn, v.ThingGroupArn)
+		case schemas.CreateDynamicThingGroupResponse_thingGroupId:
+			v.ThingGroupId = new(string)
+			return d.ReadString(schemas.CreateDynamicThingGroupResponse_thingGroupId, v.ThingGroupId)
+		case schemas.CreateDynamicThingGroupResponse_thingGroupName:
+			v.ThingGroupName = new(string)
+			return d.ReadString(schemas.CreateDynamicThingGroupResponse_thingGroupName, v.ThingGroupName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDynamicThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDynamicThingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDynamicThingGroup, schemas.CreateDynamicThingGroupRequest, schemas.CreateDynamicThingGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDynamicThingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDynamicThingGroup, schemas.CreateDynamicThingGroupRequest, schemas.CreateDynamicThingGroupResponse), output: &CreateDynamicThingGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

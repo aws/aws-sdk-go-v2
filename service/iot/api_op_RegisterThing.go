@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,19 @@ type RegisterThingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterThingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterThingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterThingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeParameters(s, schemas.RegisterThingRequest_parameters, v.Parameters)
+	if v.TemplateBody != nil {
+		s.WriteString(schemas.RegisterThingRequest_templateBody, *v.TemplateBody)
+	}
+}
+
 type RegisterThingOutput struct {
 
 	// The certificate data, in PEM format.
@@ -62,13 +77,35 @@ type RegisterThingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterThingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterThingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterThingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificatePem != nil {
+		s.WriteString(schemas.RegisterThingResponse_certificatePem, *v.CertificatePem)
+	}
+	serializeResourceArns(s, schemas.RegisterThingResponse_resourceArns, v.ResourceArns)
+}
+func (v *RegisterThingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterThingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterThingResponse_certificatePem:
+			v.CertificatePem = new(string)
+			return d.ReadString(schemas.RegisterThingResponse_certificatePem, v.CertificatePem)
+		case schemas.RegisterThingResponse_resourceArns:
+			return deserializeResourceArns(d, schemas.RegisterThingResponse_resourceArns, &v.ResourceArns)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterThing{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterThing, schemas.RegisterThingRequest, schemas.RegisterThingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterThing{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterThing, schemas.RegisterThingRequest, schemas.RegisterThingResponse), output: &RegisterThingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

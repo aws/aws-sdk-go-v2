@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetKeyPairsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetKeyPairsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetKeyPairsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetKeyPairsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeDefaultKeyPair != nil {
+		s.WriteBool(schemas.GetKeyPairsRequest_includeDefaultKeyPair, *v.IncludeDefaultKeyPair)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.GetKeyPairsRequest_pageToken, *v.PageToken)
+	}
+}
+
 type GetKeyPairsOutput struct {
 
 	// An array of key-value pairs containing information about the key pairs.
@@ -59,13 +76,35 @@ type GetKeyPairsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetKeyPairsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetKeyPairsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetKeyPairsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeKeyPairList(s, schemas.GetKeyPairsResult_keyPairs, v.KeyPairs)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetKeyPairsResult_nextPageToken, *v.NextPageToken)
+	}
+}
+func (v *GetKeyPairsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetKeyPairsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetKeyPairsResult_keyPairs:
+			return deserializeKeyPairList(d, schemas.GetKeyPairsResult_keyPairs, &v.KeyPairs)
+		case schemas.GetKeyPairsResult_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetKeyPairsResult_nextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetKeyPairsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetKeyPairs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKeyPairs, schemas.GetKeyPairsRequest, schemas.GetKeyPairsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetKeyPairs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKeyPairs, schemas.GetKeyPairsRequest, schemas.GetKeyPairsResult), output: &GetKeyPairsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

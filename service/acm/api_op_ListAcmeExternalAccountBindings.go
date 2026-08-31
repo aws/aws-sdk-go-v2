@@ -5,7 +5,9 @@ package acm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/acm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -42,6 +44,23 @@ type ListAcmeExternalAccountBindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAcmeExternalAccountBindingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAcmeExternalAccountBindingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAcmeExternalAccountBindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcmeEndpointArn != nil {
+		s.WriteString(schemas.ListAcmeExternalAccountBindingsRequest_AcmeEndpointArn, *v.AcmeEndpointArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAcmeExternalAccountBindingsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAcmeExternalAccountBindingsRequest_NextToken, *v.NextToken)
+	}
+}
 func (in *ListAcmeExternalAccountBindingsInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ServiceType = ptr.String("ACM-ACME")
@@ -61,13 +80,35 @@ type ListAcmeExternalAccountBindingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAcmeExternalAccountBindingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAcmeExternalAccountBindingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAcmeExternalAccountBindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAcmeExternalAccountBindingList(s, schemas.ListAcmeExternalAccountBindingsResponse_ExternalAccountBindings, v.ExternalAccountBindings)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAcmeExternalAccountBindingsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAcmeExternalAccountBindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAcmeExternalAccountBindingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAcmeExternalAccountBindingsResponse_ExternalAccountBindings:
+			return deserializeAcmeExternalAccountBindingList(d, schemas.ListAcmeExternalAccountBindingsResponse_ExternalAccountBindings, &v.ExternalAccountBindings)
+		case schemas.ListAcmeExternalAccountBindingsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAcmeExternalAccountBindingsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAcmeExternalAccountBindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAcmeExternalAccountBindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAcmeExternalAccountBindings, schemas.ListAcmeExternalAccountBindingsRequest, schemas.ListAcmeExternalAccountBindingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAcmeExternalAccountBindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAcmeExternalAccountBindings, schemas.ListAcmeExternalAccountBindingsRequest, schemas.ListAcmeExternalAccountBindingsResponse), output: &ListAcmeExternalAccountBindingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

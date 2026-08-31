@@ -5,7 +5,9 @@ package appflow
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appflow/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type DescribeFlowExecutionRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFlowExecutionRecordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFlowExecutionRecordsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFlowExecutionRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowName != nil {
+		s.WriteString(schemas.DescribeFlowExecutionRecordsRequest_flowName, *v.FlowName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeFlowExecutionRecordsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFlowExecutionRecordsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type DescribeFlowExecutionRecordsOutput struct {
 
 	//  Returns a list of all instances when this flow was run.
@@ -57,13 +77,35 @@ type DescribeFlowExecutionRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFlowExecutionRecordsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFlowExecutionRecordsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFlowExecutionRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFlowExecutionList(s, schemas.DescribeFlowExecutionRecordsResponse_flowExecutions, v.FlowExecutions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFlowExecutionRecordsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeFlowExecutionRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFlowExecutionRecordsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFlowExecutionRecordsResponse_flowExecutions:
+			return deserializeFlowExecutionList(d, schemas.DescribeFlowExecutionRecordsResponse_flowExecutions, &v.FlowExecutions)
+		case schemas.DescribeFlowExecutionRecordsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeFlowExecutionRecordsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFlowExecutionRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeFlowExecutionRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFlowExecutionRecords, schemas.DescribeFlowExecutionRecordsRequest, schemas.DescribeFlowExecutionRecordsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeFlowExecutionRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFlowExecutionRecords, schemas.DescribeFlowExecutionRecordsRequest, schemas.DescribeFlowExecutionRecordsResponse), output: &DescribeFlowExecutionRecordsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ListPackagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPackagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPackagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPackagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPackagesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPackagesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListPackagesOutput struct {
 
 	// The token for the next set of results.
@@ -54,13 +71,35 @@ type ListPackagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPackagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPackagesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPackagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPackagesResponse_nextToken, *v.NextToken)
+	}
+	serializePackageSummaryList(s, schemas.ListPackagesResponse_packageSummaries, v.PackageSummaries)
+}
+func (v *ListPackagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPackagesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPackagesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPackagesResponse_nextToken, v.NextToken)
+		case schemas.ListPackagesResponse_packageSummaries:
+			return deserializePackageSummaryList(d, schemas.ListPackagesResponse_packageSummaries, &v.PackageSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPackages, schemas.ListPackagesRequest, schemas.ListPackagesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPackages, schemas.ListPackagesRequest, schemas.ListPackagesResponse), output: &ListPackagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

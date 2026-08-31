@@ -4,7 +4,9 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,16 @@ type PutRemediationConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRemediationConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRemediationConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRemediationConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRemediationConfigurations(s, schemas.PutRemediationConfigurationsRequest_RemediationConfigurations, v.RemediationConfigurations)
+}
+
 type PutRemediationConfigurationsOutput struct {
 
 	// Returns a list of failed remediation batch objects.
@@ -84,13 +96,29 @@ type PutRemediationConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRemediationConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRemediationConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRemediationConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedRemediationBatches(s, schemas.PutRemediationConfigurationsResponse_FailedBatches, v.FailedBatches)
+}
+func (v *PutRemediationConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutRemediationConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutRemediationConfigurationsResponse_FailedBatches:
+			return deserializeFailedRemediationBatches(d, schemas.PutRemediationConfigurationsResponse_FailedBatches, &v.FailedBatches)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutRemediationConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutRemediationConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRemediationConfigurations, schemas.PutRemediationConfigurationsRequest, schemas.PutRemediationConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutRemediationConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRemediationConfigurations, schemas.PutRemediationConfigurationsRequest, schemas.PutRemediationConfigurationsResponse), output: &PutRemediationConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

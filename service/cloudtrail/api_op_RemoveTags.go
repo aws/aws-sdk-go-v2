@@ -4,7 +4,9 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,19 @@ type RemoveTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveTagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceId != nil {
+		s.WriteString(schemas.RemoveTagsRequest_ResourceId, *v.ResourceId)
+	}
+	serializeTagsList(s, schemas.RemoveTagsRequest_TagsList, v.TagsList)
+}
+
 // Returns the objects or data listed below if successful. Otherwise, returns an
 // error.
 type RemoveTagsOutput struct {
@@ -64,13 +79,26 @@ type RemoveTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveTagsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveTagsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveTags, schemas.RemoveTagsRequest, schemas.RemoveTagsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRemoveTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveTags, schemas.RemoveTagsRequest, schemas.RemoveTagsResponse), output: &RemoveTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

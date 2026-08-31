@@ -4,7 +4,9 @@ package transcribe
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -95,6 +97,28 @@ type UpdateVocabularyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVocabularyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVocabularyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVocabularyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.UpdateVocabularyRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.UpdateVocabularyRequest_LanguageCode, string(v.LanguageCode))
+	}
+	serializePhrases(s, schemas.UpdateVocabularyRequest_Phrases, v.Phrases)
+	if v.VocabularyFileUri != nil {
+		s.WriteString(schemas.UpdateVocabularyRequest_VocabularyFileUri, *v.VocabularyFileUri)
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.UpdateVocabularyRequest_VocabularyName, *v.VocabularyName)
+	}
+}
+
 type UpdateVocabularyOutput struct {
 
 	// The language code you selected for your custom vocabulary.
@@ -119,13 +143,58 @@ type UpdateVocabularyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVocabularyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVocabularyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVocabularyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.UpdateVocabularyResponse_LanguageCode, string(v.LanguageCode))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.UpdateVocabularyResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.UpdateVocabularyResponse_VocabularyName, *v.VocabularyName)
+	}
+	if v.VocabularyState != "" {
+		s.WriteString(schemas.UpdateVocabularyResponse_VocabularyState, string(v.VocabularyState))
+	}
+}
+func (v *UpdateVocabularyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVocabularyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVocabularyResponse_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.UpdateVocabularyResponse_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = types.LanguageCode(ev)
+			return nil
+		case schemas.UpdateVocabularyResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateVocabularyResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.UpdateVocabularyResponse_VocabularyName:
+			v.VocabularyName = new(string)
+			return d.ReadString(schemas.UpdateVocabularyResponse_VocabularyName, v.VocabularyName)
+		case schemas.UpdateVocabularyResponse_VocabularyState:
+			var ev string
+			if err := d.ReadString(schemas.UpdateVocabularyResponse_VocabularyState, &ev); err != nil {
+				return err
+			}
+			v.VocabularyState = types.VocabularyState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateVocabularyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateVocabulary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVocabulary, schemas.UpdateVocabularyRequest, schemas.UpdateVocabularyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateVocabulary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVocabulary, schemas.UpdateVocabularyRequest, schemas.UpdateVocabularyResponse), output: &UpdateVocabularyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

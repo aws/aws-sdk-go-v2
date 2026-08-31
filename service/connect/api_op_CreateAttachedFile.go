@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,31 @@ type CreateAttachedFileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAttachedFileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAttachedFileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAttachedFileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedResourceArn != nil {
+		s.WriteString(schemas.CreateAttachedFileRequest_AssociatedResourceArn, *v.AssociatedResourceArn)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAttachedFileRequest_ClientToken, *v.ClientToken)
+	}
+	if v.FileSourceUri != nil {
+		s.WriteString(schemas.CreateAttachedFileRequest_FileSourceUri, *v.FileSourceUri)
+	}
+	if v.FileUseCaseType != "" {
+		s.WriteString(schemas.CreateAttachedFileRequest_FileUseCaseType, string(v.FileUseCaseType))
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateAttachedFileRequest_InstanceId, *v.InstanceId)
+	}
+	serializeTagMap(s, schemas.CreateAttachedFileRequest_Tags, v.Tags)
+}
+
 // Response from CreateAttachedFile API.
 type CreateAttachedFileOutput struct {
 
@@ -104,13 +131,54 @@ type CreateAttachedFileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAttachedFileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAttachedFileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAttachedFileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteString(schemas.CreateAttachedFileResponse_CreationTime, *v.CreationTime)
+	}
+	if v.FileArn != nil {
+		s.WriteString(schemas.CreateAttachedFileResponse_FileArn, *v.FileArn)
+	}
+	if v.FileId != nil {
+		s.WriteString(schemas.CreateAttachedFileResponse_FileId, *v.FileId)
+	}
+	if v.FileStatus != "" {
+		s.WriteString(schemas.CreateAttachedFileResponse_FileStatus, string(v.FileStatus))
+	}
+}
+func (v *CreateAttachedFileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAttachedFileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAttachedFileResponse_CreationTime:
+			v.CreationTime = new(string)
+			return d.ReadString(schemas.CreateAttachedFileResponse_CreationTime, v.CreationTime)
+		case schemas.CreateAttachedFileResponse_FileArn:
+			v.FileArn = new(string)
+			return d.ReadString(schemas.CreateAttachedFileResponse_FileArn, v.FileArn)
+		case schemas.CreateAttachedFileResponse_FileId:
+			v.FileId = new(string)
+			return d.ReadString(schemas.CreateAttachedFileResponse_FileId, v.FileId)
+		case schemas.CreateAttachedFileResponse_FileStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateAttachedFileResponse_FileStatus, &ev); err != nil {
+				return err
+			}
+			v.FileStatus = types.FileStatusType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAttachedFileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAttachedFile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAttachedFile, schemas.CreateAttachedFileRequest, schemas.CreateAttachedFileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAttachedFile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAttachedFile, schemas.CreateAttachedFileRequest, schemas.CreateAttachedFileResponse), output: &CreateAttachedFileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

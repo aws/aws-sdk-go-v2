@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DeleteScheduledAuditInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteScheduledAuditInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteScheduledAuditRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteScheduledAuditInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScheduledAuditName != nil {
+		s.WriteString(schemas.DeleteScheduledAuditRequest_scheduledAuditName, *v.ScheduledAuditName)
+	}
+}
+
 type DeleteScheduledAuditOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +58,26 @@ type DeleteScheduledAuditOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteScheduledAuditOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteScheduledAuditResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteScheduledAuditOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteScheduledAuditOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteScheduledAuditResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteScheduledAuditMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteScheduledAudit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteScheduledAudit, schemas.DeleteScheduledAuditRequest, schemas.DeleteScheduledAuditResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteScheduledAudit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteScheduledAudit, schemas.DeleteScheduledAuditRequest, schemas.DeleteScheduledAuditResponse), output: &DeleteScheduledAuditOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

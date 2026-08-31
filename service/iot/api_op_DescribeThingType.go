@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type DescribeThingTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeThingTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeThingTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeThingTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThingTypeName != nil {
+		s.WriteString(schemas.DescribeThingTypeRequest_thingTypeName, *v.ThingTypeName)
+	}
+}
+
 // The output for the DescribeThingType operation.
 type DescribeThingTypeOutput struct {
 
@@ -67,13 +81,60 @@ type DescribeThingTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeThingTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeThingTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeThingTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThingTypeArn != nil {
+		s.WriteString(schemas.DescribeThingTypeResponse_thingTypeArn, *v.ThingTypeArn)
+	}
+	if v.ThingTypeId != nil {
+		s.WriteString(schemas.DescribeThingTypeResponse_thingTypeId, *v.ThingTypeId)
+	}
+	if v.ThingTypeMetadata != nil {
+		s.WriteStruct(schemas.DescribeThingTypeResponse_thingTypeMetadata)
+		v.ThingTypeMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ThingTypeName != nil {
+		s.WriteString(schemas.DescribeThingTypeResponse_thingTypeName, *v.ThingTypeName)
+	}
+	if v.ThingTypeProperties != nil {
+		s.WriteStruct(schemas.DescribeThingTypeResponse_thingTypeProperties)
+		v.ThingTypeProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeThingTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeThingTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeThingTypeResponse_thingTypeArn:
+			v.ThingTypeArn = new(string)
+			return d.ReadString(schemas.DescribeThingTypeResponse_thingTypeArn, v.ThingTypeArn)
+		case schemas.DescribeThingTypeResponse_thingTypeId:
+			v.ThingTypeId = new(string)
+			return d.ReadString(schemas.DescribeThingTypeResponse_thingTypeId, v.ThingTypeId)
+		case schemas.DescribeThingTypeResponse_thingTypeMetadata:
+			v.ThingTypeMetadata = &types.ThingTypeMetadata{}
+			return v.ThingTypeMetadata.Deserialize(d)
+		case schemas.DescribeThingTypeResponse_thingTypeName:
+			v.ThingTypeName = new(string)
+			return d.ReadString(schemas.DescribeThingTypeResponse_thingTypeName, v.ThingTypeName)
+		case schemas.DescribeThingTypeResponse_thingTypeProperties:
+			v.ThingTypeProperties = &types.ThingTypeProperties{}
+			return v.ThingTypeProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeThingTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeThingType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeThingType, schemas.DescribeThingTypeRequest, schemas.DescribeThingTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeThingType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeThingType, schemas.DescribeThingTypeRequest, schemas.DescribeThingTypeResponse), output: &DescribeThingTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

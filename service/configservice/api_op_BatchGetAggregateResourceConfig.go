@@ -4,7 +4,9 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,19 @@ type BatchGetAggregateResourceConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetAggregateResourceConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetAggregateResourceConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetAggregateResourceConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationAggregatorName != nil {
+		s.WriteString(schemas.BatchGetAggregateResourceConfigRequest_ConfigurationAggregatorName, *v.ConfigurationAggregatorName)
+	}
+	serializeResourceIdentifiersList(s, schemas.BatchGetAggregateResourceConfigRequest_ResourceIdentifiers, v.ResourceIdentifiers)
+}
+
 type BatchGetAggregateResourceConfigOutput struct {
 
 	// A list that contains the current configuration of one or more resources.
@@ -61,13 +76,32 @@ type BatchGetAggregateResourceConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetAggregateResourceConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetAggregateResourceConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetAggregateResourceConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBaseConfigurationItems(s, schemas.BatchGetAggregateResourceConfigResponse_BaseConfigurationItems, v.BaseConfigurationItems)
+	serializeUnprocessedResourceIdentifierList(s, schemas.BatchGetAggregateResourceConfigResponse_UnprocessedResourceIdentifiers, v.UnprocessedResourceIdentifiers)
+}
+func (v *BatchGetAggregateResourceConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetAggregateResourceConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetAggregateResourceConfigResponse_BaseConfigurationItems:
+			return deserializeBaseConfigurationItems(d, schemas.BatchGetAggregateResourceConfigResponse_BaseConfigurationItems, &v.BaseConfigurationItems)
+		case schemas.BatchGetAggregateResourceConfigResponse_UnprocessedResourceIdentifiers:
+			return deserializeUnprocessedResourceIdentifierList(d, schemas.BatchGetAggregateResourceConfigResponse_UnprocessedResourceIdentifiers, &v.UnprocessedResourceIdentifiers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetAggregateResourceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetAggregateResourceConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetAggregateResourceConfig, schemas.BatchGetAggregateResourceConfigRequest, schemas.BatchGetAggregateResourceConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetAggregateResourceConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetAggregateResourceConfig, schemas.BatchGetAggregateResourceConfigRequest, schemas.BatchGetAggregateResourceConfigResponse), output: &BatchGetAggregateResourceConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

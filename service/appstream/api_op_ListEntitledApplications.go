@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,27 @@ type ListEntitledApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntitledApplicationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntitledApplicationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntitledApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntitlementName != nil {
+		s.WriteString(schemas.ListEntitledApplicationsRequest_EntitlementName, *v.EntitlementName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEntitledApplicationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntitledApplicationsRequest_NextToken, *v.NextToken)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.ListEntitledApplicationsRequest_StackName, *v.StackName)
+	}
+}
+
 type ListEntitledApplicationsOutput struct {
 
 	// The entitled applications.
@@ -61,13 +84,35 @@ type ListEntitledApplicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntitledApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntitledApplicationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntitledApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntitledApplicationList(s, schemas.ListEntitledApplicationsResult_EntitledApplications, v.EntitledApplications)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntitledApplicationsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEntitledApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEntitledApplicationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEntitledApplicationsResult_EntitledApplications:
+			return deserializeEntitledApplicationList(d, schemas.ListEntitledApplicationsResult_EntitledApplications, &v.EntitledApplications)
+		case schemas.ListEntitledApplicationsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEntitledApplicationsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEntitledApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListEntitledApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntitledApplications, schemas.ListEntitledApplicationsRequest, schemas.ListEntitledApplicationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListEntitledApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntitledApplications, schemas.ListEntitledApplicationsRequest, schemas.ListEntitledApplicationsResult), output: &ListEntitledApplicationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

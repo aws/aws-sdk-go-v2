@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -49,6 +51,27 @@ type ListUserProficienciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserProficienciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUserProficienciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUserProficienciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListUserProficienciesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListUserProficienciesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUserProficienciesRequest_NextToken, *v.NextToken)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.ListUserProficienciesRequest_UserId, *v.UserId)
+	}
+}
+
 type ListUserProficienciesOutput struct {
 
 	// The region in which a user's proficiencies were last modified.
@@ -69,13 +92,47 @@ type ListUserProficienciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserProficienciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUserProficienciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUserProficienciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.ListUserProficienciesResponse_LastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ListUserProficienciesResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUserProficienciesResponse_NextToken, *v.NextToken)
+	}
+	serializeUserProficiencyList(s, schemas.ListUserProficienciesResponse_UserProficiencyList, v.UserProficiencyList)
+}
+func (v *ListUserProficienciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUserProficienciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUserProficienciesResponse_LastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.ListUserProficienciesResponse_LastModifiedRegion, v.LastModifiedRegion)
+		case schemas.ListUserProficienciesResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ListUserProficienciesResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.ListUserProficienciesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUserProficienciesResponse_NextToken, v.NextToken)
+		case schemas.ListUserProficienciesResponse_UserProficiencyList:
+			return deserializeUserProficiencyList(d, schemas.ListUserProficienciesResponse_UserProficiencyList, &v.UserProficiencyList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUserProficienciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListUserProficiencies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserProficiencies, schemas.ListUserProficienciesRequest, schemas.ListUserProficienciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListUserProficiencies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserProficiencies, schemas.ListUserProficienciesRequest, schemas.ListUserProficienciesResponse), output: &ListUserProficienciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

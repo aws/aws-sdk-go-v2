@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,15 @@ type GetContainerServicePowersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContainerServicePowersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContainerServicePowersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContainerServicePowersInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetContainerServicePowersOutput struct {
 
 	// An array of objects that describe the powers that can be specified for a
@@ -44,13 +55,29 @@ type GetContainerServicePowersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContainerServicePowersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContainerServicePowersResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContainerServicePowersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContainerServicePowerList(s, schemas.GetContainerServicePowersResult_powers, v.Powers)
+}
+func (v *GetContainerServicePowersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetContainerServicePowersResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetContainerServicePowersResult_powers:
+			return deserializeContainerServicePowerList(d, schemas.GetContainerServicePowersResult_powers, &v.Powers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetContainerServicePowersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetContainerServicePowers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContainerServicePowers, schemas.GetContainerServicePowersRequest, schemas.GetContainerServicePowersResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetContainerServicePowers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContainerServicePowers, schemas.GetContainerServicePowersRequest, schemas.GetContainerServicePowersResult), output: &GetContainerServicePowersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

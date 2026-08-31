@@ -4,7 +4,9 @@ package amplify
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -139,6 +141,81 @@ type UpdateAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.UpdateAppRequest_accessToken, *v.AccessToken)
+	}
+	if v.AppId != nil {
+		s.WriteString(schemas.UpdateAppRequest_appId, *v.AppId)
+	}
+	if v.AutoBranchCreationConfig != nil {
+		s.WriteStruct(schemas.UpdateAppRequest_autoBranchCreationConfig)
+		v.AutoBranchCreationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAutoBranchCreationPatterns(s, schemas.UpdateAppRequest_autoBranchCreationPatterns, v.AutoBranchCreationPatterns)
+	if v.BasicAuthCredentials != nil {
+		s.WriteString(schemas.UpdateAppRequest_basicAuthCredentials, *v.BasicAuthCredentials)
+	}
+	if v.BuildSpec != nil {
+		s.WriteString(schemas.UpdateAppRequest_buildSpec, *v.BuildSpec)
+	}
+	if v.CacheConfig != nil {
+		s.WriteStruct(schemas.UpdateAppRequest_cacheConfig)
+		v.CacheConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ComputeRoleArn != nil {
+		s.WriteString(schemas.UpdateAppRequest_computeRoleArn, *v.ComputeRoleArn)
+	}
+	if v.CustomHeaders != nil {
+		s.WriteString(schemas.UpdateAppRequest_customHeaders, *v.CustomHeaders)
+	}
+	serializeCustomRules(s, schemas.UpdateAppRequest_customRules, v.CustomRules)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAppRequest_description, *v.Description)
+	}
+	if v.EnableAutoBranchCreation != nil {
+		s.WriteBool(schemas.UpdateAppRequest_enableAutoBranchCreation, *v.EnableAutoBranchCreation)
+	}
+	if v.EnableBasicAuth != nil {
+		s.WriteBool(schemas.UpdateAppRequest_enableBasicAuth, *v.EnableBasicAuth)
+	}
+	if v.EnableBranchAutoBuild != nil {
+		s.WriteBool(schemas.UpdateAppRequest_enableBranchAutoBuild, *v.EnableBranchAutoBuild)
+	}
+	if v.EnableBranchAutoDeletion != nil {
+		s.WriteBool(schemas.UpdateAppRequest_enableBranchAutoDeletion, *v.EnableBranchAutoDeletion)
+	}
+	serializeEnvironmentVariables(s, schemas.UpdateAppRequest_environmentVariables, v.EnvironmentVariables)
+	if v.IamServiceRoleArn != nil {
+		s.WriteString(schemas.UpdateAppRequest_iamServiceRoleArn, *v.IamServiceRoleArn)
+	}
+	if v.JobConfig != nil {
+		s.WriteStruct(schemas.UpdateAppRequest_jobConfig)
+		v.JobConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAppRequest_name, *v.Name)
+	}
+	if v.OauthToken != nil {
+		s.WriteString(schemas.UpdateAppRequest_oauthToken, *v.OauthToken)
+	}
+	if v.Platform != "" {
+		s.WriteString(schemas.UpdateAppRequest_platform, string(v.Platform))
+	}
+	if v.Repository != nil {
+		s.WriteString(schemas.UpdateAppRequest_repository, *v.Repository)
+	}
+}
+
 // The result structure for an Amplify app update request.
 type UpdateAppOutput struct {
 
@@ -153,13 +230,34 @@ type UpdateAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAppResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.App != nil {
+		s.WriteStruct(schemas.UpdateAppResult_app)
+		v.App.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAppResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAppResult_app:
+			v.App = &types.App{}
+			return v.App.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApp, schemas.UpdateAppRequest, schemas.UpdateAppResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApp, schemas.UpdateAppRequest, schemas.UpdateAppResult), output: &UpdateAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

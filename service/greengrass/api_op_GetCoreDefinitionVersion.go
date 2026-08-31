@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type GetCoreDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCoreDefinitionVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCoreDefinitionVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCoreDefinitionVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreDefinitionId != nil {
+		s.WriteString(schemas.GetCoreDefinitionVersionRequest_CoreDefinitionId, *v.CoreDefinitionId)
+	}
+	if v.CoreDefinitionVersionId != nil {
+		s.WriteString(schemas.GetCoreDefinitionVersionRequest_CoreDefinitionVersionId, *v.CoreDefinitionVersionId)
+	}
+}
+
 type GetCoreDefinitionVersionOutput struct {
 
 	// The ARN of the core definition version.
@@ -72,13 +89,64 @@ type GetCoreDefinitionVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCoreDefinitionVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCoreDefinitionVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCoreDefinitionVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetCoreDefinitionVersionResponse_Arn, *v.Arn)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteString(schemas.GetCoreDefinitionVersionResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Definition != nil {
+		s.WriteStruct(schemas.GetCoreDefinitionVersionResponse_Definition)
+		v.Definition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetCoreDefinitionVersionResponse_Id, *v.Id)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCoreDefinitionVersionResponse_NextToken, *v.NextToken)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.GetCoreDefinitionVersionResponse_Version, *v.Version)
+	}
+}
+func (v *GetCoreDefinitionVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCoreDefinitionVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCoreDefinitionVersionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetCoreDefinitionVersionResponse_Arn, v.Arn)
+		case schemas.GetCoreDefinitionVersionResponse_CreationTimestamp:
+			v.CreationTimestamp = new(string)
+			return d.ReadString(schemas.GetCoreDefinitionVersionResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.GetCoreDefinitionVersionResponse_Definition:
+			v.Definition = &types.CoreDefinitionVersion{}
+			return v.Definition.Deserialize(d)
+		case schemas.GetCoreDefinitionVersionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetCoreDefinitionVersionResponse_Id, v.Id)
+		case schemas.GetCoreDefinitionVersionResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetCoreDefinitionVersionResponse_NextToken, v.NextToken)
+		case schemas.GetCoreDefinitionVersionResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.GetCoreDefinitionVersionResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCoreDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCoreDefinitionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCoreDefinitionVersion, schemas.GetCoreDefinitionVersionRequest, schemas.GetCoreDefinitionVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCoreDefinitionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCoreDefinitionVersion, schemas.GetCoreDefinitionVersionRequest, schemas.GetCoreDefinitionVersionResponse), output: &GetCoreDefinitionVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

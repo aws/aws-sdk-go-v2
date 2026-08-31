@@ -4,7 +4,9 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,21 @@ type GetInsightSelectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInsightSelectorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInsightSelectorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInsightSelectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventDataStore != nil {
+		s.WriteString(schemas.GetInsightSelectorsRequest_EventDataStore, *v.EventDataStore)
+	}
+	if v.TrailName != nil {
+		s.WriteString(schemas.GetInsightSelectorsRequest_TrailName, *v.TrailName)
+	}
+}
+
 type GetInsightSelectorsOutput struct {
 
 	//  The ARN of the source event data store that enabled Insights events.
@@ -95,13 +112,47 @@ type GetInsightSelectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInsightSelectorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInsightSelectorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInsightSelectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventDataStoreArn != nil {
+		s.WriteString(schemas.GetInsightSelectorsResponse_EventDataStoreArn, *v.EventDataStoreArn)
+	}
+	serializeInsightSelectors(s, schemas.GetInsightSelectorsResponse_InsightSelectors, v.InsightSelectors)
+	if v.InsightsDestination != nil {
+		s.WriteString(schemas.GetInsightSelectorsResponse_InsightsDestination, *v.InsightsDestination)
+	}
+	if v.TrailARN != nil {
+		s.WriteString(schemas.GetInsightSelectorsResponse_TrailARN, *v.TrailARN)
+	}
+}
+func (v *GetInsightSelectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInsightSelectorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInsightSelectorsResponse_EventDataStoreArn:
+			v.EventDataStoreArn = new(string)
+			return d.ReadString(schemas.GetInsightSelectorsResponse_EventDataStoreArn, v.EventDataStoreArn)
+		case schemas.GetInsightSelectorsResponse_InsightSelectors:
+			return deserializeInsightSelectors(d, schemas.GetInsightSelectorsResponse_InsightSelectors, &v.InsightSelectors)
+		case schemas.GetInsightSelectorsResponse_InsightsDestination:
+			v.InsightsDestination = new(string)
+			return d.ReadString(schemas.GetInsightSelectorsResponse_InsightsDestination, v.InsightsDestination)
+		case schemas.GetInsightSelectorsResponse_TrailARN:
+			v.TrailARN = new(string)
+			return d.ReadString(schemas.GetInsightSelectorsResponse_TrailARN, v.TrailARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInsightSelectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetInsightSelectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInsightSelectors, schemas.GetInsightSelectorsRequest, schemas.GetInsightSelectorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetInsightSelectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInsightSelectors, schemas.GetInsightSelectorsRequest, schemas.GetInsightSelectorsResponse), output: &GetInsightSelectorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type DisassociateProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateProfilesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeProfileArns(s, schemas.DisassociateProfilesInput_ProfileArns, v.ProfileArns)
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.DisassociateProfilesInput_WorkloadId, *v.WorkloadId)
+	}
+}
+
 type DisassociateProfilesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +61,26 @@ type DisassociateProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateProfiles, schemas.DisassociateProfilesInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateProfiles, schemas.DisassociateProfilesInput, nil), output: &DisassociateProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

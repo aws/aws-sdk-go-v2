@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,27 @@ type ListUseCasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUseCasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUseCasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUseCasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListUseCasesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.IntegrationAssociationId != nil {
+		s.WriteString(schemas.ListUseCasesRequest_IntegrationAssociationId, *v.IntegrationAssociationId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListUseCasesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUseCasesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListUseCasesOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.
@@ -66,13 +89,35 @@ type ListUseCasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUseCasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUseCasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUseCasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUseCasesResponse_NextToken, *v.NextToken)
+	}
+	serializeUseCaseSummaryList(s, schemas.ListUseCasesResponse_UseCaseSummaryList, v.UseCaseSummaryList)
+}
+func (v *ListUseCasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUseCasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUseCasesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUseCasesResponse_NextToken, v.NextToken)
+		case schemas.ListUseCasesResponse_UseCaseSummaryList:
+			return deserializeUseCaseSummaryList(d, schemas.ListUseCasesResponse_UseCaseSummaryList, &v.UseCaseSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUseCasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListUseCases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUseCases, schemas.ListUseCasesRequest, schemas.ListUseCasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListUseCases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUseCases, schemas.ListUseCasesRequest, schemas.ListUseCasesResponse), output: &ListUseCasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

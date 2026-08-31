@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DescribeAgentStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAgentStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAgentStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAgentStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentStatusId != nil {
+		s.WriteString(schemas.DescribeAgentStatusRequest_AgentStatusId, *v.AgentStatusId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeAgentStatusRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DescribeAgentStatusOutput struct {
 
 	// The agent status.
@@ -53,13 +70,34 @@ type DescribeAgentStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAgentStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAgentStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAgentStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentStatus != nil {
+		s.WriteStruct(schemas.DescribeAgentStatusResponse_AgentStatus)
+		v.AgentStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAgentStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAgentStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAgentStatusResponse_AgentStatus:
+			v.AgentStatus = &types.AgentStatus{}
+			return v.AgentStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAgentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAgentStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAgentStatus, schemas.DescribeAgentStatusRequest, schemas.DescribeAgentStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAgentStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAgentStatus, schemas.DescribeAgentStatusRequest, schemas.DescribeAgentStatusResponse), output: &DescribeAgentStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -27,6 +29,15 @@ type DeleteUsageReportSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUsageReportSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUsageReportSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUsageReportSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DeleteUsageReportSubscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -34,13 +45,26 @@ type DeleteUsageReportSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUsageReportSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUsageReportSubscriptionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUsageReportSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteUsageReportSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteUsageReportSubscriptionResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteUsageReportSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteUsageReportSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUsageReportSubscription, schemas.DeleteUsageReportSubscriptionRequest, schemas.DeleteUsageReportSubscriptionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteUsageReportSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUsageReportSubscription, schemas.DeleteUsageReportSubscriptionRequest, schemas.DeleteUsageReportSubscriptionResult), output: &DeleteUsageReportSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

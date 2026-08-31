@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,32 @@ type CreateAgentContextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAgentContextInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAgentContextRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAgentContextInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAgentContextRequest_clientToken, *v.ClientToken)
+	}
+	if v.Content != nil {
+		s.WriteStruct(schemas.CreateAgentContextRequest_content)
+		v.Content.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContextType != "" {
+		s.WriteString(schemas.CreateAgentContextRequest_contextType, string(v.ContextType))
+	}
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.CreateAgentContextRequest_profileArn, *v.ProfileArn)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.CreateAgentContextRequest_title, *v.Title)
+	}
+}
+
 type CreateAgentContextOutput struct {
 
 	// The created context summary.
@@ -69,13 +97,34 @@ type CreateAgentContextOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAgentContextOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAgentContextResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAgentContextOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Context != nil {
+		s.WriteStruct(schemas.CreateAgentContextResponse_context)
+		v.Context.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAgentContextOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAgentContextResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAgentContextResponse_context:
+			v.Context = &types.ContextSummary{}
+			return v.Context.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAgentContextMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAgentContext{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgentContext, schemas.CreateAgentContextRequest, schemas.CreateAgentContextResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAgentContext{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgentContext, schemas.CreateAgentContextRequest, schemas.CreateAgentContextResponse), output: &CreateAgentContextOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

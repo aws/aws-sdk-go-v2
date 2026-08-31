@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,22 @@ type DescribeOrganizationConfigRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOrganizationConfigRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrganizationConfigRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrganizationConfigRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.DescribeOrganizationConfigRulesRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeOrganizationConfigRulesRequest_NextToken, *v.NextToken)
+	}
+	serializeOrganizationConfigRuleNames(s, schemas.DescribeOrganizationConfigRulesRequest_OrganizationConfigRuleNames, v.OrganizationConfigRuleNames)
+}
+
 type DescribeOrganizationConfigRulesOutput struct {
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -77,13 +95,35 @@ type DescribeOrganizationConfigRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOrganizationConfigRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrganizationConfigRulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrganizationConfigRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeOrganizationConfigRulesResponse_NextToken, *v.NextToken)
+	}
+	serializeOrganizationConfigRules(s, schemas.DescribeOrganizationConfigRulesResponse_OrganizationConfigRules, v.OrganizationConfigRules)
+}
+func (v *DescribeOrganizationConfigRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeOrganizationConfigRulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeOrganizationConfigRulesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeOrganizationConfigRulesResponse_NextToken, v.NextToken)
+		case schemas.DescribeOrganizationConfigRulesResponse_OrganizationConfigRules:
+			return deserializeOrganizationConfigRules(d, schemas.DescribeOrganizationConfigRulesResponse_OrganizationConfigRules, &v.OrganizationConfigRules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeOrganizationConfigRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeOrganizationConfigRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationConfigRules, schemas.DescribeOrganizationConfigRulesRequest, schemas.DescribeOrganizationConfigRulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeOrganizationConfigRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationConfigRules, schemas.DescribeOrganizationConfigRulesRequest, schemas.DescribeOrganizationConfigRulesResponse), output: &DescribeOrganizationConfigRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

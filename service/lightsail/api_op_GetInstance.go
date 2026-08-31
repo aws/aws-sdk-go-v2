@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceName != nil {
+		s.WriteString(schemas.GetInstanceRequest_instanceName, *v.InstanceName)
+	}
+}
+
 type GetInstanceOutput struct {
 
 	// An array of key-value pairs containing information about the specified instance.
@@ -46,13 +60,34 @@ type GetInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInstanceResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Instance != nil {
+		s.WriteStruct(schemas.GetInstanceResult_instance)
+		v.Instance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInstanceResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInstanceResult_instance:
+			v.Instance = &types.Instance{}
+			return v.Instance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInstance, schemas.GetInstanceRequest, schemas.GetInstanceResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInstance, schemas.GetInstanceRequest, schemas.GetInstanceResult), output: &GetInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -57,6 +59,39 @@ type ListContextsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContextsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContextsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContextsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContextType != nil {
+		s.WriteString(schemas.ListContextsRequest_ContextType, *v.ContextType)
+	}
+	if v.CreatedAfter != nil {
+		s.WriteTime(schemas.ListContextsRequest_CreatedAfter, *v.CreatedAfter)
+	}
+	if v.CreatedBefore != nil {
+		s.WriteTime(schemas.ListContextsRequest_CreatedBefore, *v.CreatedBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListContextsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContextsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListContextsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListContextsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.SourceUri != nil {
+		s.WriteString(schemas.ListContextsRequest_SourceUri, *v.SourceUri)
+	}
+}
+
 type ListContextsOutput struct {
 
 	// A list of contexts and their properties.
@@ -71,13 +106,35 @@ type ListContextsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContextsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContextsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContextsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContextSummaries(s, schemas.ListContextsResponse_ContextSummaries, v.ContextSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContextsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListContextsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListContextsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListContextsResponse_ContextSummaries:
+			return deserializeContextSummaries(d, schemas.ListContextsResponse_ContextSummaries, &v.ContextSummaries)
+		case schemas.ListContextsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListContextsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListContextsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListContexts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContexts, schemas.ListContextsRequest, schemas.ListContextsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListContexts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContexts, schemas.ListContextsRequest, schemas.ListContextsResponse), output: &ListContextsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

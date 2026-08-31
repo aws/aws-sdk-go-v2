@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -70,6 +72,33 @@ type GetApplicationDateRangeKpiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationDateRangeKpiInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationDateRangeKpiRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationDateRangeKpiInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetApplicationDateRangeKpiRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetApplicationDateRangeKpiRequest_EndTime, *v.EndTime)
+	}
+	if v.KpiName != nil {
+		s.WriteString(schemas.GetApplicationDateRangeKpiRequest_KpiName, *v.KpiName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetApplicationDateRangeKpiRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteString(schemas.GetApplicationDateRangeKpiRequest_PageSize, *v.PageSize)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetApplicationDateRangeKpiRequest_StartTime, *v.StartTime)
+	}
+}
+
 type GetApplicationDateRangeKpiOutput struct {
 
 	// Provides the results of a query that retrieved the data for a standard metric
@@ -84,13 +113,34 @@ type GetApplicationDateRangeKpiOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationDateRangeKpiOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationDateRangeKpiResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationDateRangeKpiOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationDateRangeKpiResponse != nil {
+		s.WriteStruct(schemas.GetApplicationDateRangeKpiResponse_ApplicationDateRangeKpiResponse)
+		v.ApplicationDateRangeKpiResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetApplicationDateRangeKpiOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApplicationDateRangeKpiResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApplicationDateRangeKpiResponse_ApplicationDateRangeKpiResponse:
+			v.ApplicationDateRangeKpiResponse = &types.ApplicationDateRangeKpiResponse{}
+			return v.ApplicationDateRangeKpiResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApplicationDateRangeKpiMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApplicationDateRangeKpi{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplicationDateRangeKpi, schemas.GetApplicationDateRangeKpiRequest, schemas.GetApplicationDateRangeKpiResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApplicationDateRangeKpi{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplicationDateRangeKpi, schemas.GetApplicationDateRangeKpiRequest, schemas.GetApplicationDateRangeKpiResponse), output: &GetApplicationDateRangeKpiOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

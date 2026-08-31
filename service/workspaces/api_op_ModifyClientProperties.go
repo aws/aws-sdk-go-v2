@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,23 @@ type ModifyClientPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyClientPropertiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyClientPropertiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyClientPropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientProperties != nil {
+		s.WriteStruct(schemas.ModifyClientPropertiesRequest_ClientProperties)
+		v.ClientProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.ModifyClientPropertiesRequest_ResourceId, *v.ResourceId)
+	}
+}
+
 type ModifyClientPropertiesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +65,26 @@ type ModifyClientPropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyClientPropertiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyClientPropertiesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyClientPropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ModifyClientPropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyClientPropertiesResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyClientPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyClientProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyClientProperties, schemas.ModifyClientPropertiesRequest, schemas.ModifyClientPropertiesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpModifyClientProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyClientProperties, schemas.ModifyClientPropertiesRequest, schemas.ModifyClientPropertiesResult), output: &ModifyClientPropertiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

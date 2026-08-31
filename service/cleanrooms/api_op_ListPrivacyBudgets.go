@@ -5,7 +5,9 @@ package cleanrooms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,30 @@ type ListPrivacyBudgetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPrivacyBudgetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPrivacyBudgetsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPrivacyBudgetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessBudgetResourceArn != nil {
+		s.WriteString(schemas.ListPrivacyBudgetsInput_accessBudgetResourceArn, *v.AccessBudgetResourceArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPrivacyBudgetsInput_maxResults, *v.MaxResults)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.ListPrivacyBudgetsInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPrivacyBudgetsInput_nextToken, *v.NextToken)
+	}
+	if v.PrivacyBudgetType != "" {
+		s.WriteString(schemas.ListPrivacyBudgetsInput_privacyBudgetType, string(v.PrivacyBudgetType))
+	}
+}
+
 type ListPrivacyBudgetsOutput struct {
 
 	// An array that summarizes the privacy budgets. The summary includes
@@ -73,13 +99,35 @@ type ListPrivacyBudgetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPrivacyBudgetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPrivacyBudgetsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPrivacyBudgetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPrivacyBudgetsOutput_nextToken, *v.NextToken)
+	}
+	serializePrivacyBudgetSummaryList(s, schemas.ListPrivacyBudgetsOutput_privacyBudgetSummaries, v.PrivacyBudgetSummaries)
+}
+func (v *ListPrivacyBudgetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPrivacyBudgetsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPrivacyBudgetsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPrivacyBudgetsOutput_nextToken, v.NextToken)
+		case schemas.ListPrivacyBudgetsOutput_privacyBudgetSummaries:
+			return deserializePrivacyBudgetSummaryList(d, schemas.ListPrivacyBudgetsOutput_privacyBudgetSummaries, &v.PrivacyBudgetSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPrivacyBudgetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPrivacyBudgets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPrivacyBudgets, schemas.ListPrivacyBudgetsInput, schemas.ListPrivacyBudgetsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPrivacyBudgets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPrivacyBudgets, schemas.ListPrivacyBudgetsInput, schemas.ListPrivacyBudgetsOutput), output: &ListPrivacyBudgetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

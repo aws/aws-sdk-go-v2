@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,21 @@ type DescribeFeatureMetadataInput struct {
 	FeatureName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeFeatureMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFeatureMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFeatureMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FeatureGroupName != nil {
+		s.WriteString(schemas.DescribeFeatureMetadataRequest_FeatureGroupName, *v.FeatureGroupName)
+	}
+	if v.FeatureName != nil {
+		s.WriteString(schemas.DescribeFeatureMetadataRequest_FeatureName, *v.FeatureName)
+	}
 }
 
 type DescribeFeatureMetadataOutput struct {
@@ -87,13 +104,75 @@ type DescribeFeatureMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFeatureMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFeatureMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFeatureMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeFeatureMetadataResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeFeatureMetadataResponse_Description, *v.Description)
+	}
+	if v.FeatureGroupArn != nil {
+		s.WriteString(schemas.DescribeFeatureMetadataResponse_FeatureGroupArn, *v.FeatureGroupArn)
+	}
+	if v.FeatureGroupName != nil {
+		s.WriteString(schemas.DescribeFeatureMetadataResponse_FeatureGroupName, *v.FeatureGroupName)
+	}
+	if v.FeatureName != nil {
+		s.WriteString(schemas.DescribeFeatureMetadataResponse_FeatureName, *v.FeatureName)
+	}
+	if v.FeatureType != "" {
+		s.WriteString(schemas.DescribeFeatureMetadataResponse_FeatureType, string(v.FeatureType))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeFeatureMetadataResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	serializeFeatureParameters(s, schemas.DescribeFeatureMetadataResponse_Parameters, v.Parameters)
+}
+func (v *DescribeFeatureMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFeatureMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFeatureMetadataResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeFeatureMetadataResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeFeatureMetadataResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeFeatureMetadataResponse_Description, v.Description)
+		case schemas.DescribeFeatureMetadataResponse_FeatureGroupArn:
+			v.FeatureGroupArn = new(string)
+			return d.ReadString(schemas.DescribeFeatureMetadataResponse_FeatureGroupArn, v.FeatureGroupArn)
+		case schemas.DescribeFeatureMetadataResponse_FeatureGroupName:
+			v.FeatureGroupName = new(string)
+			return d.ReadString(schemas.DescribeFeatureMetadataResponse_FeatureGroupName, v.FeatureGroupName)
+		case schemas.DescribeFeatureMetadataResponse_FeatureName:
+			v.FeatureName = new(string)
+			return d.ReadString(schemas.DescribeFeatureMetadataResponse_FeatureName, v.FeatureName)
+		case schemas.DescribeFeatureMetadataResponse_FeatureType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeFeatureMetadataResponse_FeatureType, &ev); err != nil {
+				return err
+			}
+			v.FeatureType = types.FeatureType(ev)
+			return nil
+		case schemas.DescribeFeatureMetadataResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeFeatureMetadataResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeFeatureMetadataResponse_Parameters:
+			return deserializeFeatureParameters(d, schemas.DescribeFeatureMetadataResponse_Parameters, &v.Parameters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFeatureMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFeatureMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFeatureMetadata, schemas.DescribeFeatureMetadataRequest, schemas.DescribeFeatureMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeFeatureMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFeatureMetadata, schemas.DescribeFeatureMetadataRequest, schemas.DescribeFeatureMetadataResponse), output: &DescribeFeatureMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

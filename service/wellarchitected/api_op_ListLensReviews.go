@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type ListLensReviewsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLensReviewsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLensReviewsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLensReviewsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLensReviewsInput_MaxResults, *v.MaxResults)
+	}
+	if v.MilestoneNumber != nil {
+		s.WriteInt32(schemas.ListLensReviewsInput_MilestoneNumber, *v.MilestoneNumber)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLensReviewsInput_NextToken, *v.NextToken)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.ListLensReviewsInput_WorkloadId, *v.WorkloadId)
+	}
+}
+
 // Output of a list lens reviews call.
 type ListLensReviewsOutput struct {
 
@@ -72,13 +95,47 @@ type ListLensReviewsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLensReviewsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLensReviewsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLensReviewsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLensReviewSummaries(s, schemas.ListLensReviewsOutput_LensReviewSummaries, v.LensReviewSummaries)
+	if v.MilestoneNumber != nil {
+		s.WriteInt32(schemas.ListLensReviewsOutput_MilestoneNumber, *v.MilestoneNumber)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLensReviewsOutput_NextToken, *v.NextToken)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.ListLensReviewsOutput_WorkloadId, *v.WorkloadId)
+	}
+}
+func (v *ListLensReviewsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLensReviewsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLensReviewsOutput_LensReviewSummaries:
+			return deserializeLensReviewSummaries(d, schemas.ListLensReviewsOutput_LensReviewSummaries, &v.LensReviewSummaries)
+		case schemas.ListLensReviewsOutput_MilestoneNumber:
+			v.MilestoneNumber = new(int32)
+			return d.ReadInt32(schemas.ListLensReviewsOutput_MilestoneNumber, v.MilestoneNumber)
+		case schemas.ListLensReviewsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLensReviewsOutput_NextToken, v.NextToken)
+		case schemas.ListLensReviewsOutput_WorkloadId:
+			v.WorkloadId = new(string)
+			return d.ReadString(schemas.ListLensReviewsOutput_WorkloadId, v.WorkloadId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLensReviewsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLensReviews{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLensReviews, schemas.ListLensReviewsInput, schemas.ListLensReviewsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLensReviews{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLensReviews, schemas.ListLensReviewsInput, schemas.ListLensReviewsOutput), output: &ListLensReviewsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type StopAIRecommendationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopAIRecommendationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopAIRecommendationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopAIRecommendationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIRecommendationJobName != nil {
+		s.WriteString(schemas.StopAIRecommendationJobRequest_AIRecommendationJobName, *v.AIRecommendationJobName)
+	}
+}
+
 type StopAIRecommendationJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the stopped recommendation job.
@@ -46,13 +60,32 @@ type StopAIRecommendationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopAIRecommendationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopAIRecommendationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopAIRecommendationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIRecommendationJobArn != nil {
+		s.WriteString(schemas.StopAIRecommendationJobResponse_AIRecommendationJobArn, *v.AIRecommendationJobArn)
+	}
+}
+func (v *StopAIRecommendationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopAIRecommendationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopAIRecommendationJobResponse_AIRecommendationJobArn:
+			v.AIRecommendationJobArn = new(string)
+			return d.ReadString(schemas.StopAIRecommendationJobResponse_AIRecommendationJobArn, v.AIRecommendationJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopAIRecommendationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopAIRecommendationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopAIRecommendationJob, schemas.StopAIRecommendationJobRequest, schemas.StopAIRecommendationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopAIRecommendationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopAIRecommendationJob, schemas.StopAIRecommendationJobRequest, schemas.StopAIRecommendationJobResponse), output: &StopAIRecommendationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

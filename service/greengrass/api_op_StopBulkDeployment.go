@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type StopBulkDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopBulkDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopBulkDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopBulkDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BulkDeploymentId != nil {
+		s.WriteString(schemas.StopBulkDeploymentRequest_BulkDeploymentId, *v.BulkDeploymentId)
+	}
+}
+
 type StopBulkDeploymentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type StopBulkDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopBulkDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopBulkDeploymentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopBulkDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopBulkDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopBulkDeploymentResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopBulkDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopBulkDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopBulkDeployment, schemas.StopBulkDeploymentRequest, schemas.StopBulkDeploymentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopBulkDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopBulkDeployment, schemas.StopBulkDeploymentRequest, schemas.StopBulkDeploymentResponse), output: &StopBulkDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

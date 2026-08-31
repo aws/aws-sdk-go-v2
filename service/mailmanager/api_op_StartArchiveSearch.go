@@ -4,7 +4,9 @@ package mailmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -54,6 +56,32 @@ type StartArchiveSearchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartArchiveSearchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartArchiveSearchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartArchiveSearchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveId != nil {
+		s.WriteString(schemas.StartArchiveSearchRequest_ArchiveId, *v.ArchiveId)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.StartArchiveSearchRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FromTimestamp != nil {
+		s.WriteTime(schemas.StartArchiveSearchRequest_FromTimestamp, *v.FromTimestamp)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.StartArchiveSearchRequest_MaxResults, *v.MaxResults)
+	}
+	if v.ToTimestamp != nil {
+		s.WriteTime(schemas.StartArchiveSearchRequest_ToTimestamp, *v.ToTimestamp)
+	}
+}
+
 // The response from initiating an archive search.
 type StartArchiveSearchOutput struct {
 
@@ -66,13 +94,32 @@ type StartArchiveSearchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartArchiveSearchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartArchiveSearchResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartArchiveSearchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SearchId != nil {
+		s.WriteString(schemas.StartArchiveSearchResponse_SearchId, *v.SearchId)
+	}
+}
+func (v *StartArchiveSearchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartArchiveSearchResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartArchiveSearchResponse_SearchId:
+			v.SearchId = new(string)
+			return d.ReadString(schemas.StartArchiveSearchResponse_SearchId, v.SearchId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartArchiveSearchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStartArchiveSearch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartArchiveSearch, schemas.StartArchiveSearchRequest, schemas.StartArchiveSearchResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStartArchiveSearch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartArchiveSearch, schemas.StartArchiveSearchRequest, schemas.StartArchiveSearchResponse), output: &StartArchiveSearchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

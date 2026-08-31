@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,25 @@ type DescribeConnectionAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectionAliasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectionAliasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectionAliasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectionAliasIdList(s, schemas.DescribeConnectionAliasesRequest_AliasIds, v.AliasIds)
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeConnectionAliasesRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConnectionAliasesRequest_NextToken, *v.NextToken)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DescribeConnectionAliasesRequest_ResourceId, *v.ResourceId)
+	}
+}
+
 type DescribeConnectionAliasesOutput struct {
 
 	// Information about the specified connection aliases.
@@ -60,13 +81,35 @@ type DescribeConnectionAliasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectionAliasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectionAliasesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectionAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectionAliasList(s, schemas.DescribeConnectionAliasesResult_ConnectionAliases, v.ConnectionAliases)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConnectionAliasesResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeConnectionAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConnectionAliasesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConnectionAliasesResult_ConnectionAliases:
+			return deserializeConnectionAliasList(d, schemas.DescribeConnectionAliasesResult_ConnectionAliases, &v.ConnectionAliases)
+		case schemas.DescribeConnectionAliasesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeConnectionAliasesResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConnectionAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConnectionAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectionAliases, schemas.DescribeConnectionAliasesRequest, schemas.DescribeConnectionAliasesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeConnectionAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectionAliases, schemas.DescribeConnectionAliasesRequest, schemas.DescribeConnectionAliasesResult), output: &DescribeConnectionAliasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

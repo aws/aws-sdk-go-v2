@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,34 @@ type SearchSecurityProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchSecurityProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchSecurityProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchSecurityProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchSecurityProfilesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchSecurityProfilesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchSecurityProfilesRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchCriteria != nil {
+		s.WriteStruct(schemas.SearchSecurityProfilesRequest_SearchCriteria)
+		v.SearchCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchFilter != nil {
+		s.WriteStruct(schemas.SearchSecurityProfilesRequest_SearchFilter)
+		v.SearchFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchSecurityProfilesOutput struct {
 
 	// The total number of security profiles which matched your search query.
@@ -82,13 +112,41 @@ type SearchSecurityProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchSecurityProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchSecurityProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchSecurityProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTotalCount != nil {
+		s.WriteInt64(schemas.SearchSecurityProfilesResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchSecurityProfilesResponse_NextToken, *v.NextToken)
+	}
+	serializeSecurityProfilesSearchSummaryList(s, schemas.SearchSecurityProfilesResponse_SecurityProfiles, v.SecurityProfiles)
+}
+func (v *SearchSecurityProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchSecurityProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchSecurityProfilesResponse_ApproximateTotalCount:
+			v.ApproximateTotalCount = new(int64)
+			return d.ReadInt64(schemas.SearchSecurityProfilesResponse_ApproximateTotalCount, v.ApproximateTotalCount)
+		case schemas.SearchSecurityProfilesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchSecurityProfilesResponse_NextToken, v.NextToken)
+		case schemas.SearchSecurityProfilesResponse_SecurityProfiles:
+			return deserializeSecurityProfilesSearchSummaryList(d, schemas.SearchSecurityProfilesResponse_SecurityProfiles, &v.SecurityProfiles)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchSecurityProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchSecurityProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchSecurityProfiles, schemas.SearchSecurityProfilesRequest, schemas.SearchSecurityProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchSecurityProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchSecurityProfiles, schemas.SearchSecurityProfilesRequest, schemas.SearchSecurityProfilesResponse), output: &SearchSecurityProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

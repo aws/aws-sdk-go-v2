@@ -4,7 +4,9 @@ package organizations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -31,6 +33,22 @@ type DescribeResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeResourcePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeResourcePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DescribeResourcePolicyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type DescribeResourcePolicyOutput struct {
 
 	// A structure that contains details about the resource policy.
@@ -42,13 +60,34 @@ type DescribeResourcePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeResourcePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeResourcePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeResourcePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourcePolicy != nil {
+		s.WriteStruct(schemas.DescribeResourcePolicyResponse_ResourcePolicy)
+		v.ResourcePolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeResourcePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeResourcePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeResourcePolicyResponse_ResourcePolicy:
+			v.ResourcePolicy = &types.ResourcePolicy{}
+			return v.ResourcePolicy.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeResourcePolicy, nil, schemas.DescribeResourcePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeResourcePolicy, nil, schemas.DescribeResourcePolicyResponse), output: &DescribeResourcePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

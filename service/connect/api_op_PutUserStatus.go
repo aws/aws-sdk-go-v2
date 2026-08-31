@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type PutUserStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutUserStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutUserStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutUserStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentStatusId != nil {
+		s.WriteString(schemas.PutUserStatusRequest_AgentStatusId, *v.AgentStatusId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.PutUserStatusRequest_InstanceId, *v.InstanceId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.PutUserStatusRequest_UserId, *v.UserId)
+	}
+}
+
 type PutUserStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,13 +79,26 @@ type PutUserStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutUserStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutUserStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutUserStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutUserStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutUserStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutUserStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutUserStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutUserStatus, schemas.PutUserStatusRequest, schemas.PutUserStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutUserStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutUserStatus, schemas.PutUserStatusRequest, schemas.PutUserStatusResponse), output: &PutUserStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

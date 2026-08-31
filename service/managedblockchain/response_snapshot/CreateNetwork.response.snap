@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"MemberId":"__MemberId__","NetworkId":"__NetworkId__"}

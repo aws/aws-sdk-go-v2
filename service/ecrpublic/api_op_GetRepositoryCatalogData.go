@@ -4,7 +4,9 @@ package ecrpublic
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecrpublic/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecrpublic/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetRepositoryCatalogDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRepositoryCatalogDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRepositoryCatalogDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRepositoryCatalogDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryId != nil {
+		s.WriteString(schemas.GetRepositoryCatalogDataRequest_registryId, *v.RegistryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.GetRepositoryCatalogDataRequest_repositoryName, *v.RepositoryName)
+	}
+}
+
 type GetRepositoryCatalogDataOutput struct {
 
 	// The catalog metadata for the repository.
@@ -51,13 +68,34 @@ type GetRepositoryCatalogDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRepositoryCatalogDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRepositoryCatalogDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRepositoryCatalogDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogData != nil {
+		s.WriteStruct(schemas.GetRepositoryCatalogDataResponse_catalogData)
+		v.CatalogData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetRepositoryCatalogDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRepositoryCatalogDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRepositoryCatalogDataResponse_catalogData:
+			v.CatalogData = &types.RepositoryCatalogData{}
+			return v.CatalogData.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRepositoryCatalogDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRepositoryCatalogData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRepositoryCatalogData, schemas.GetRepositoryCatalogDataRequest, schemas.GetRepositoryCatalogDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRepositoryCatalogData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRepositoryCatalogData, schemas.GetRepositoryCatalogDataRequest, schemas.GetRepositoryCatalogDataResponse), output: &GetRepositoryCatalogDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

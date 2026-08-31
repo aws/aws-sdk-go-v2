@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -60,6 +62,34 @@ type StartBotRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartBotRecommendationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartBotRecommendationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartBotRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.StartBotRecommendationRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.StartBotRecommendationRequest_botVersion, *v.BotVersion)
+	}
+	if v.EncryptionSetting != nil {
+		s.WriteStruct(schemas.StartBotRecommendationRequest_encryptionSetting)
+		v.EncryptionSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.StartBotRecommendationRequest_localeId, *v.LocaleId)
+	}
+	if v.TranscriptSourceSetting != nil {
+		s.WriteStruct(schemas.StartBotRecommendationRequest_transcriptSourceSetting)
+		v.TranscriptSourceSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartBotRecommendationOutput struct {
 
 	// The unique identifier of the bot containing the bot recommendation.
@@ -101,13 +131,82 @@ type StartBotRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartBotRecommendationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartBotRecommendationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartBotRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.StartBotRecommendationResponse_botId, *v.BotId)
+	}
+	if v.BotRecommendationId != nil {
+		s.WriteString(schemas.StartBotRecommendationResponse_botRecommendationId, *v.BotRecommendationId)
+	}
+	if v.BotRecommendationStatus != "" {
+		s.WriteString(schemas.StartBotRecommendationResponse_botRecommendationStatus, string(v.BotRecommendationStatus))
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.StartBotRecommendationResponse_botVersion, *v.BotVersion)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.StartBotRecommendationResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.EncryptionSetting != nil {
+		s.WriteStruct(schemas.StartBotRecommendationResponse_encryptionSetting)
+		v.EncryptionSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.StartBotRecommendationResponse_localeId, *v.LocaleId)
+	}
+	if v.TranscriptSourceSetting != nil {
+		s.WriteStruct(schemas.StartBotRecommendationResponse_transcriptSourceSetting)
+		v.TranscriptSourceSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartBotRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartBotRecommendationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartBotRecommendationResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.StartBotRecommendationResponse_botId, v.BotId)
+		case schemas.StartBotRecommendationResponse_botRecommendationId:
+			v.BotRecommendationId = new(string)
+			return d.ReadString(schemas.StartBotRecommendationResponse_botRecommendationId, v.BotRecommendationId)
+		case schemas.StartBotRecommendationResponse_botRecommendationStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartBotRecommendationResponse_botRecommendationStatus, &ev); err != nil {
+				return err
+			}
+			v.BotRecommendationStatus = types.BotRecommendationStatus(ev)
+			return nil
+		case schemas.StartBotRecommendationResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.StartBotRecommendationResponse_botVersion, v.BotVersion)
+		case schemas.StartBotRecommendationResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.StartBotRecommendationResponse_creationDateTime, v.CreationDateTime)
+		case schemas.StartBotRecommendationResponse_encryptionSetting:
+			v.EncryptionSetting = &types.EncryptionSetting{}
+			return v.EncryptionSetting.Deserialize(d)
+		case schemas.StartBotRecommendationResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.StartBotRecommendationResponse_localeId, v.LocaleId)
+		case schemas.StartBotRecommendationResponse_transcriptSourceSetting:
+			v.TranscriptSourceSetting = &types.TranscriptSourceSetting{}
+			return v.TranscriptSourceSetting.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartBotRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartBotRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartBotRecommendation, schemas.StartBotRecommendationRequest, schemas.StartBotRecommendationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartBotRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartBotRecommendation, schemas.StartBotRecommendationRequest, schemas.StartBotRecommendationResponse), output: &StartBotRecommendationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

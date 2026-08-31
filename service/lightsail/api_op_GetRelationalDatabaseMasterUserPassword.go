@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -50,6 +52,21 @@ type GetRelationalDatabaseMasterUserPasswordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRelationalDatabaseMasterUserPasswordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRelationalDatabaseMasterUserPasswordRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRelationalDatabaseMasterUserPasswordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PasswordVersion != "" {
+		s.WriteString(schemas.GetRelationalDatabaseMasterUserPasswordRequest_passwordVersion, string(v.PasswordVersion))
+	}
+	if v.RelationalDatabaseName != nil {
+		s.WriteString(schemas.GetRelationalDatabaseMasterUserPasswordRequest_relationalDatabaseName, *v.RelationalDatabaseName)
+	}
+}
+
 type GetRelationalDatabaseMasterUserPasswordOutput struct {
 
 	// The timestamp when the specified version of the master user password was
@@ -65,13 +82,38 @@ type GetRelationalDatabaseMasterUserPasswordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRelationalDatabaseMasterUserPasswordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRelationalDatabaseMasterUserPasswordResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRelationalDatabaseMasterUserPasswordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetRelationalDatabaseMasterUserPasswordResult_createdAt, *v.CreatedAt)
+	}
+	if v.MasterUserPassword != nil {
+		s.WriteString(schemas.GetRelationalDatabaseMasterUserPasswordResult_masterUserPassword, *v.MasterUserPassword)
+	}
+}
+func (v *GetRelationalDatabaseMasterUserPasswordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRelationalDatabaseMasterUserPasswordResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRelationalDatabaseMasterUserPasswordResult_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetRelationalDatabaseMasterUserPasswordResult_createdAt, v.CreatedAt)
+		case schemas.GetRelationalDatabaseMasterUserPasswordResult_masterUserPassword:
+			v.MasterUserPassword = new(string)
+			return d.ReadString(schemas.GetRelationalDatabaseMasterUserPasswordResult_masterUserPassword, v.MasterUserPassword)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRelationalDatabaseMasterUserPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRelationalDatabaseMasterUserPassword{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRelationalDatabaseMasterUserPassword, schemas.GetRelationalDatabaseMasterUserPasswordRequest, schemas.GetRelationalDatabaseMasterUserPasswordResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRelationalDatabaseMasterUserPassword{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRelationalDatabaseMasterUserPassword, schemas.GetRelationalDatabaseMasterUserPasswordRequest, schemas.GetRelationalDatabaseMasterUserPasswordResult), output: &GetRelationalDatabaseMasterUserPasswordOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

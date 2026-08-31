@@ -4,7 +4,9 @@ package partnercentralselling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -43,6 +45,21 @@ type GetEngagementInvitationInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetEngagementInvitationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEngagementInvitationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEngagementInvitationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetEngagementInvitationRequest_Catalog, *v.Catalog)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetEngagementInvitationRequest_Identifier, *v.Identifier)
+	}
 }
 
 type GetEngagementInvitationOutput struct {
@@ -130,13 +147,135 @@ type GetEngagementInvitationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEngagementInvitationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEngagementInvitationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEngagementInvitationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetEngagementInvitationResponse_Arn, *v.Arn)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetEngagementInvitationResponse_Catalog, *v.Catalog)
+	}
+	if v.EngagementDescription != nil {
+		s.WriteString(schemas.GetEngagementInvitationResponse_EngagementDescription, *v.EngagementDescription)
+	}
+	if v.EngagementId != nil {
+		s.WriteString(schemas.GetEngagementInvitationResponse_EngagementId, *v.EngagementId)
+	}
+	if v.EngagementTitle != nil {
+		s.WriteString(schemas.GetEngagementInvitationResponse_EngagementTitle, *v.EngagementTitle)
+	}
+	if v.EnrichmentContext != nil {
+		s.WriteStruct(schemas.GetEngagementInvitationResponse_EnrichmentContext)
+		v.EnrichmentContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEngagementMemberSummaries(s, schemas.GetEngagementInvitationResponse_ExistingMembers, v.ExistingMembers)
+	if v.ExpirationDate != nil {
+		s.WriteTime(schemas.GetEngagementInvitationResponse_ExpirationDate, *v.ExpirationDate)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetEngagementInvitationResponse_Id, *v.Id)
+	}
+	if v.InvitationDate != nil {
+		s.WriteTime(schemas.GetEngagementInvitationResponse_InvitationDate, *v.InvitationDate)
+	}
+	if v.InvitationMessage != nil {
+		s.WriteString(schemas.GetEngagementInvitationResponse_InvitationMessage, *v.InvitationMessage)
+	}
+	serializePayload(s, schemas.GetEngagementInvitationResponse_Payload, v.Payload)
+	if v.PayloadType != "" {
+		s.WriteString(schemas.GetEngagementInvitationResponse_PayloadType, string(v.PayloadType))
+	}
+	serializeReceiver(s, schemas.GetEngagementInvitationResponse_Receiver, v.Receiver)
+	if v.RejectionReason != nil {
+		s.WriteString(schemas.GetEngagementInvitationResponse_RejectionReason, *v.RejectionReason)
+	}
+	if v.SenderAwsAccountId != nil {
+		s.WriteString(schemas.GetEngagementInvitationResponse_SenderAwsAccountId, *v.SenderAwsAccountId)
+	}
+	if v.SenderCompanyName != nil {
+		s.WriteString(schemas.GetEngagementInvitationResponse_SenderCompanyName, *v.SenderCompanyName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetEngagementInvitationResponse_Status, string(v.Status))
+	}
+}
+func (v *GetEngagementInvitationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEngagementInvitationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEngagementInvitationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetEngagementInvitationResponse_Arn, v.Arn)
+		case schemas.GetEngagementInvitationResponse_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.GetEngagementInvitationResponse_Catalog, v.Catalog)
+		case schemas.GetEngagementInvitationResponse_EngagementDescription:
+			v.EngagementDescription = new(string)
+			return d.ReadString(schemas.GetEngagementInvitationResponse_EngagementDescription, v.EngagementDescription)
+		case schemas.GetEngagementInvitationResponse_EngagementId:
+			v.EngagementId = new(string)
+			return d.ReadString(schemas.GetEngagementInvitationResponse_EngagementId, v.EngagementId)
+		case schemas.GetEngagementInvitationResponse_EngagementTitle:
+			v.EngagementTitle = new(string)
+			return d.ReadString(schemas.GetEngagementInvitationResponse_EngagementTitle, v.EngagementTitle)
+		case schemas.GetEngagementInvitationResponse_EnrichmentContext:
+			v.EnrichmentContext = &types.EnrichmentContext{}
+			return v.EnrichmentContext.Deserialize(d)
+		case schemas.GetEngagementInvitationResponse_ExistingMembers:
+			return deserializeEngagementMemberSummaries(d, schemas.GetEngagementInvitationResponse_ExistingMembers, &v.ExistingMembers)
+		case schemas.GetEngagementInvitationResponse_ExpirationDate:
+			v.ExpirationDate = new(time.Time)
+			return d.ReadTime(schemas.GetEngagementInvitationResponse_ExpirationDate, v.ExpirationDate)
+		case schemas.GetEngagementInvitationResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetEngagementInvitationResponse_Id, v.Id)
+		case schemas.GetEngagementInvitationResponse_InvitationDate:
+			v.InvitationDate = new(time.Time)
+			return d.ReadTime(schemas.GetEngagementInvitationResponse_InvitationDate, v.InvitationDate)
+		case schemas.GetEngagementInvitationResponse_InvitationMessage:
+			v.InvitationMessage = new(string)
+			return d.ReadString(schemas.GetEngagementInvitationResponse_InvitationMessage, v.InvitationMessage)
+		case schemas.GetEngagementInvitationResponse_Payload:
+			return deserializePayload(d, schemas.GetEngagementInvitationResponse_Payload, &v.Payload)
+		case schemas.GetEngagementInvitationResponse_PayloadType:
+			var ev string
+			if err := d.ReadString(schemas.GetEngagementInvitationResponse_PayloadType, &ev); err != nil {
+				return err
+			}
+			v.PayloadType = types.EngagementInvitationPayloadType(ev)
+			return nil
+		case schemas.GetEngagementInvitationResponse_Receiver:
+			return deserializeReceiver(d, schemas.GetEngagementInvitationResponse_Receiver, &v.Receiver)
+		case schemas.GetEngagementInvitationResponse_RejectionReason:
+			v.RejectionReason = new(string)
+			return d.ReadString(schemas.GetEngagementInvitationResponse_RejectionReason, v.RejectionReason)
+		case schemas.GetEngagementInvitationResponse_SenderAwsAccountId:
+			v.SenderAwsAccountId = new(string)
+			return d.ReadString(schemas.GetEngagementInvitationResponse_SenderAwsAccountId, v.SenderAwsAccountId)
+		case schemas.GetEngagementInvitationResponse_SenderCompanyName:
+			v.SenderCompanyName = new(string)
+			return d.ReadString(schemas.GetEngagementInvitationResponse_SenderCompanyName, v.SenderCompanyName)
+		case schemas.GetEngagementInvitationResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetEngagementInvitationResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.InvitationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEngagementInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetEngagementInvitation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEngagementInvitation, schemas.GetEngagementInvitationRequest, schemas.GetEngagementInvitationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetEngagementInvitation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEngagementInvitation, schemas.GetEngagementInvitationRequest, schemas.GetEngagementInvitationResponse), output: &GetEngagementInvitationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

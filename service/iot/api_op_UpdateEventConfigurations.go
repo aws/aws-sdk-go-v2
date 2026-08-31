@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,16 @@ type UpdateEventConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEventConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEventConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEventConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventConfigurations(s, schemas.UpdateEventConfigurationsRequest_eventConfigurations, v.EventConfigurations)
+}
+
 type UpdateEventConfigurationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +55,26 @@ type UpdateEventConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEventConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEventConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEventConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateEventConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEventConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEventConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEventConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEventConfigurations, schemas.UpdateEventConfigurationsRequest, schemas.UpdateEventConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEventConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEventConfigurations, schemas.UpdateEventConfigurationsRequest, schemas.UpdateEventConfigurationsResponse), output: &UpdateEventConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

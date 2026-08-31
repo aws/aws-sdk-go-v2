@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -67,6 +69,48 @@ type ListAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationType != "" {
+		s.WriteString(schemas.ListAssociationsRequest_AssociationType, string(v.AssociationType))
+	}
+	if v.CreatedAfter != nil {
+		s.WriteTime(schemas.ListAssociationsRequest_CreatedAfter, *v.CreatedAfter)
+	}
+	if v.CreatedBefore != nil {
+		s.WriteTime(schemas.ListAssociationsRequest_CreatedBefore, *v.CreatedBefore)
+	}
+	if v.DestinationArn != nil {
+		s.WriteString(schemas.ListAssociationsRequest_DestinationArn, *v.DestinationArn)
+	}
+	if v.DestinationType != nil {
+		s.WriteString(schemas.ListAssociationsRequest_DestinationType, *v.DestinationType)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssociationsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListAssociationsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListAssociationsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.ListAssociationsRequest_SourceArn, *v.SourceArn)
+	}
+	if v.SourceType != nil {
+		s.WriteString(schemas.ListAssociationsRequest_SourceType, *v.SourceType)
+	}
+}
+
 type ListAssociationsOutput struct {
 
 	// A list of associations and their properties.
@@ -81,13 +125,35 @@ type ListAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssociationSummaries(s, schemas.ListAssociationsResponse_AssociationSummaries, v.AssociationSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssociationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssociationsResponse_AssociationSummaries:
+			return deserializeAssociationSummaries(d, schemas.ListAssociationsResponse_AssociationSummaries, &v.AssociationSummaries)
+		case schemas.ListAssociationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssociationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociations, schemas.ListAssociationsRequest, schemas.ListAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociations, schemas.ListAssociationsRequest, schemas.ListAssociationsResponse), output: &ListAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

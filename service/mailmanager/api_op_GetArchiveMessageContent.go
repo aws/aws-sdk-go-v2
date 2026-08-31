@@ -4,7 +4,9 @@ package mailmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type GetArchiveMessageContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetArchiveMessageContentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetArchiveMessageContentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetArchiveMessageContentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchivedMessageId != nil {
+		s.WriteString(schemas.GetArchiveMessageContentRequest_ArchivedMessageId, *v.ArchivedMessageId)
+	}
+}
+
 // The response containing the textual content of the requested archived email
 // message.
 type GetArchiveMessageContentOutput struct {
@@ -50,13 +64,34 @@ type GetArchiveMessageContentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetArchiveMessageContentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetArchiveMessageContentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetArchiveMessageContentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteStruct(schemas.GetArchiveMessageContentResponse_Body)
+		v.Body.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetArchiveMessageContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetArchiveMessageContentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetArchiveMessageContentResponse_Body:
+			v.Body = &types.MessageBody{}
+			return v.Body.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetArchiveMessageContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetArchiveMessageContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetArchiveMessageContent, schemas.GetArchiveMessageContentRequest, schemas.GetArchiveMessageContentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetArchiveMessageContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetArchiveMessageContent, schemas.GetArchiveMessageContentRequest, schemas.GetArchiveMessageContentResponse), output: &GetArchiveMessageContentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

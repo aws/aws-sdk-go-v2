@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,30 @@ type DeleteJobExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteJobExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteJobExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteJobExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionNumber != nil {
+		s.WriteInt64(schemas.DeleteJobExecutionRequest_executionNumber, *v.ExecutionNumber)
+	}
+	if v.Force != false {
+		s.WriteBool(schemas.DeleteJobExecutionRequest_force, v.Force)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.DeleteJobExecutionRequest_jobId, *v.JobId)
+	}
+	if v.NamespaceId != nil {
+		s.WriteString(schemas.DeleteJobExecutionRequest_namespaceId, *v.NamespaceId)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.DeleteJobExecutionRequest_thingName, *v.ThingName)
+	}
+}
+
 type DeleteJobExecutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -82,13 +108,26 @@ type DeleteJobExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteJobExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteJobExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteJobExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteJobExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteJobExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteJobExecution, schemas.DeleteJobExecutionRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteJobExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteJobExecution, schemas.DeleteJobExecutionRequest, nil), output: &DeleteJobExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

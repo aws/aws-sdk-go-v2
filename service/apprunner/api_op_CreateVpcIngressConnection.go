@@ -4,7 +4,9 @@ package apprunner
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,27 @@ type CreateVpcIngressConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVpcIngressConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVpcIngressConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVpcIngressConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IngressVpcConfiguration != nil {
+		s.WriteStruct(schemas.CreateVpcIngressConnectionRequest_IngressVpcConfiguration)
+		v.IngressVpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.CreateVpcIngressConnectionRequest_ServiceArn, *v.ServiceArn)
+	}
+	serializeTagList(s, schemas.CreateVpcIngressConnectionRequest_Tags, v.Tags)
+	if v.VpcIngressConnectionName != nil {
+		s.WriteString(schemas.CreateVpcIngressConnectionRequest_VpcIngressConnectionName, *v.VpcIngressConnectionName)
+	}
+}
+
 type CreateVpcIngressConnectionOutput struct {
 
 	// A description of the App Runner VPC Ingress Connection resource that's created
@@ -69,13 +92,34 @@ type CreateVpcIngressConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVpcIngressConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVpcIngressConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVpcIngressConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcIngressConnection != nil {
+		s.WriteStruct(schemas.CreateVpcIngressConnectionResponse_VpcIngressConnection)
+		v.VpcIngressConnection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateVpcIngressConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVpcIngressConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVpcIngressConnectionResponse_VpcIngressConnection:
+			v.VpcIngressConnection = &types.VpcIngressConnection{}
+			return v.VpcIngressConnection.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVpcIngressConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateVpcIngressConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVpcIngressConnection, schemas.CreateVpcIngressConnectionRequest, schemas.CreateVpcIngressConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateVpcIngressConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVpcIngressConnection, schemas.CreateVpcIngressConnectionRequest, schemas.CreateVpcIngressConnectionResponse), output: &CreateVpcIngressConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

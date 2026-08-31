@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,23 @@ type UpdateRecommenderConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRecommenderConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRecommenderConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRecommenderConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecommenderId != nil {
+		s.WriteString(schemas.UpdateRecommenderConfigurationRequest_RecommenderId, *v.RecommenderId)
+	}
+	if v.UpdateRecommenderConfiguration != nil {
+		s.WriteStruct(schemas.UpdateRecommenderConfigurationRequest_UpdateRecommenderConfiguration)
+		v.UpdateRecommenderConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateRecommenderConfigurationOutput struct {
 
 	// Provides information about Amazon Pinpoint configuration settings for
@@ -55,13 +74,34 @@ type UpdateRecommenderConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRecommenderConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRecommenderConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRecommenderConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecommenderConfigurationResponse != nil {
+		s.WriteStruct(schemas.UpdateRecommenderConfigurationResponse_RecommenderConfigurationResponse)
+		v.RecommenderConfigurationResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateRecommenderConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRecommenderConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRecommenderConfigurationResponse_RecommenderConfigurationResponse:
+			v.RecommenderConfigurationResponse = &types.RecommenderConfigurationResponse{}
+			return v.RecommenderConfigurationResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRecommenderConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRecommenderConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecommenderConfiguration, schemas.UpdateRecommenderConfigurationRequest, schemas.UpdateRecommenderConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRecommenderConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecommenderConfiguration, schemas.UpdateRecommenderConfigurationRequest, schemas.UpdateRecommenderConfigurationResponse), output: &UpdateRecommenderConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

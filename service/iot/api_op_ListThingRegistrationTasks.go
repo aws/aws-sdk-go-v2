@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListThingRegistrationTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThingRegistrationTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThingRegistrationTasksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThingRegistrationTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListThingRegistrationTasksRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThingRegistrationTasksRequest_nextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListThingRegistrationTasksRequest_status, string(v.Status))
+	}
+}
+
 type ListThingRegistrationTasksOutput struct {
 
 	// The token to use to get the next set of results, or null if there are no
@@ -59,13 +79,35 @@ type ListThingRegistrationTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThingRegistrationTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThingRegistrationTasksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThingRegistrationTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThingRegistrationTasksResponse_nextToken, *v.NextToken)
+	}
+	serializeTaskIdList(s, schemas.ListThingRegistrationTasksResponse_taskIds, v.TaskIds)
+}
+func (v *ListThingRegistrationTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListThingRegistrationTasksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListThingRegistrationTasksResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListThingRegistrationTasksResponse_nextToken, v.NextToken)
+		case schemas.ListThingRegistrationTasksResponse_taskIds:
+			return deserializeTaskIdList(d, schemas.ListThingRegistrationTasksResponse_taskIds, &v.TaskIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListThingRegistrationTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListThingRegistrationTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThingRegistrationTasks, schemas.ListThingRegistrationTasksRequest, schemas.ListThingRegistrationTasksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListThingRegistrationTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThingRegistrationTasks, schemas.ListThingRegistrationTasksRequest, schemas.ListThingRegistrationTasksResponse), output: &ListThingRegistrationTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

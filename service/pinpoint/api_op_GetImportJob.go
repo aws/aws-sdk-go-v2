@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type GetImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetImportJobRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetImportJobRequest_JobId, *v.JobId)
+	}
+}
+
 type GetImportJobOutput struct {
 
 	// Provides information about the status and settings of a job that imports
@@ -57,13 +74,34 @@ type GetImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetImportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImportJobResponse != nil {
+		s.WriteStruct(schemas.GetImportJobResponse_ImportJobResponse)
+		v.ImportJobResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetImportJobResponse_ImportJobResponse:
+			v.ImportJobResponse = &types.ImportJobResponse{}
+			return v.ImportJobResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImportJob, schemas.GetImportJobRequest, schemas.GetImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImportJob, schemas.GetImportJobRequest, schemas.GetImportJobResponse), output: &GetImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

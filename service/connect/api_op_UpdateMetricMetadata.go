@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,27 @@ type UpdateMetricMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMetricMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMetricMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMetricMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateMetricMetadataRequest_Description, *v.Description)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateMetricMetadataRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MetricId != nil {
+		s.WriteString(schemas.UpdateMetricMetadataRequest_MetricId, *v.MetricId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateMetricMetadataRequest_Name, *v.Name)
+	}
+}
+
 type UpdateMetricMetadataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +80,26 @@ type UpdateMetricMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMetricMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMetricMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMetricMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateMetricMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMetricMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMetricMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMetricMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMetricMetadata, schemas.UpdateMetricMetadataRequest, schemas.UpdateMetricMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMetricMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMetricMetadata, schemas.UpdateMetricMetadataRequest, schemas.UpdateMetricMetadataResponse), output: &UpdateMetricMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type GetBehaviorModelTrainingSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBehaviorModelTrainingSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBehaviorModelTrainingSummariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBehaviorModelTrainingSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetBehaviorModelTrainingSummariesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetBehaviorModelTrainingSummariesRequest_nextToken, *v.NextToken)
+	}
+	if v.SecurityProfileName != nil {
+		s.WriteString(schemas.GetBehaviorModelTrainingSummariesRequest_securityProfileName, *v.SecurityProfileName)
+	}
+}
+
 type GetBehaviorModelTrainingSummariesOutput struct {
 
 	//  A token that can be used to retrieve the next set of results, or null if there
@@ -66,13 +86,35 @@ type GetBehaviorModelTrainingSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBehaviorModelTrainingSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBehaviorModelTrainingSummariesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBehaviorModelTrainingSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetBehaviorModelTrainingSummariesResponse_nextToken, *v.NextToken)
+	}
+	serializeBehaviorModelTrainingSummaries(s, schemas.GetBehaviorModelTrainingSummariesResponse_summaries, v.Summaries)
+}
+func (v *GetBehaviorModelTrainingSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBehaviorModelTrainingSummariesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBehaviorModelTrainingSummariesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetBehaviorModelTrainingSummariesResponse_nextToken, v.NextToken)
+		case schemas.GetBehaviorModelTrainingSummariesResponse_summaries:
+			return deserializeBehaviorModelTrainingSummaries(d, schemas.GetBehaviorModelTrainingSummariesResponse_summaries, &v.Summaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBehaviorModelTrainingSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBehaviorModelTrainingSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBehaviorModelTrainingSummaries, schemas.GetBehaviorModelTrainingSummariesRequest, schemas.GetBehaviorModelTrainingSummariesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBehaviorModelTrainingSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBehaviorModelTrainingSummaries, schemas.GetBehaviorModelTrainingSummariesRequest, schemas.GetBehaviorModelTrainingSummariesResponse), output: &GetBehaviorModelTrainingSummariesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

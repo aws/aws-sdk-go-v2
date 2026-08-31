@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteSubscriptionDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSubscriptionDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSubscriptionDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSubscriptionDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubscriptionDefinitionId != nil {
+		s.WriteString(schemas.DeleteSubscriptionDefinitionRequest_SubscriptionDefinitionId, *v.SubscriptionDefinitionId)
+	}
+}
+
 type DeleteSubscriptionDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteSubscriptionDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSubscriptionDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSubscriptionDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSubscriptionDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSubscriptionDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSubscriptionDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSubscriptionDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSubscriptionDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSubscriptionDefinition, schemas.DeleteSubscriptionDefinitionRequest, schemas.DeleteSubscriptionDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSubscriptionDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSubscriptionDefinition, schemas.DeleteSubscriptionDefinitionRequest, schemas.DeleteSubscriptionDefinitionResponse), output: &DeleteSubscriptionDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

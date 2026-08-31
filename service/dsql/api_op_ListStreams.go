@@ -5,7 +5,9 @@ package dsql
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dsql/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dsql/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStreamsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStreamsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStreamsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.ListStreamsInput_clusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStreamsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStreamsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListStreamsOutput struct {
 
 	// An array of the returned streams.
@@ -62,13 +82,35 @@ type ListStreamsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStreamsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStreamsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStreamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStreamsOutput_nextToken, *v.NextToken)
+	}
+	serializeStreamList(s, schemas.ListStreamsOutput_streams, v.Streams)
+}
+func (v *ListStreamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStreamsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStreamsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStreamsOutput_nextToken, v.NextToken)
+		case schemas.ListStreamsOutput_streams:
+			return deserializeStreamList(d, schemas.ListStreamsOutput_streams, &v.Streams)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListStreams{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreams, schemas.ListStreamsInput, schemas.ListStreamsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListStreams{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreams, schemas.ListStreamsInput, schemas.ListStreamsOutput), output: &ListStreamsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

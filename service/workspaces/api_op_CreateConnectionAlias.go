@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,19 @@ type CreateConnectionAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectionAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectionAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectionAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionString != nil {
+		s.WriteString(schemas.CreateConnectionAliasRequest_ConnectionString, *v.ConnectionString)
+	}
+	serializeTagList(s, schemas.CreateConnectionAliasRequest_Tags, v.Tags)
+}
+
 type CreateConnectionAliasOutput struct {
 
 	// The identifier of the connection alias.
@@ -57,13 +72,32 @@ type CreateConnectionAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectionAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectionAliasResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectionAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasId != nil {
+		s.WriteString(schemas.CreateConnectionAliasResult_AliasId, *v.AliasId)
+	}
+}
+func (v *CreateConnectionAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectionAliasResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectionAliasResult_AliasId:
+			v.AliasId = new(string)
+			return d.ReadString(schemas.CreateConnectionAliasResult_AliasId, v.AliasId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConnectionAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateConnectionAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnectionAlias, schemas.CreateConnectionAliasRequest, schemas.CreateConnectionAliasResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateConnectionAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnectionAlias, schemas.CreateConnectionAliasRequest, schemas.CreateConnectionAliasResult), output: &CreateConnectionAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

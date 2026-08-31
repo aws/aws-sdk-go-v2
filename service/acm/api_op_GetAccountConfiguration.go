@@ -4,7 +4,9 @@ package acm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/acm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -30,6 +32,21 @@ type GetAccountConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetAccountConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (in *GetAccountConfigurationInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ServiceType = ptr.String("ACM")
@@ -47,13 +64,34 @@ type GetAccountConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpiryEvents != nil {
+		s.WriteStruct(schemas.GetAccountConfigurationResponse_ExpiryEvents)
+		v.ExpiryEvents.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAccountConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccountConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccountConfigurationResponse_ExpiryEvents:
+			v.ExpiryEvents = &types.ExpiryEventsConfiguration{}
+			return v.ExpiryEvents.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccountConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAccountConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountConfiguration, nil, schemas.GetAccountConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAccountConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountConfiguration, nil, schemas.GetAccountConfigurationResponse), output: &GetAccountConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package amplify
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,27 @@ type ListBackendEnvironmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBackendEnvironmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBackendEnvironmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBackendEnvironmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.ListBackendEnvironmentsRequest_appId, *v.AppId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.ListBackendEnvironmentsRequest_environmentName, *v.EnvironmentName)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListBackendEnvironmentsRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBackendEnvironmentsRequest_nextToken, *v.NextToken)
+	}
+}
+
 // The result structure for the list backend environments result.
 type ListBackendEnvironmentsOutput struct {
 
@@ -70,13 +93,35 @@ type ListBackendEnvironmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBackendEnvironmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBackendEnvironmentsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBackendEnvironmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBackendEnvironments(s, schemas.ListBackendEnvironmentsResult_backendEnvironments, v.BackendEnvironments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBackendEnvironmentsResult_nextToken, *v.NextToken)
+	}
+}
+func (v *ListBackendEnvironmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBackendEnvironmentsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBackendEnvironmentsResult_backendEnvironments:
+			return deserializeBackendEnvironments(d, schemas.ListBackendEnvironmentsResult_backendEnvironments, &v.BackendEnvironments)
+		case schemas.ListBackendEnvironmentsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBackendEnvironmentsResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBackendEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBackendEnvironments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBackendEnvironments, schemas.ListBackendEnvironmentsRequest, schemas.ListBackendEnvironmentsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBackendEnvironments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBackendEnvironments, schemas.ListBackendEnvironmentsRequest, schemas.ListBackendEnvironmentsResult), output: &ListBackendEnvironmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

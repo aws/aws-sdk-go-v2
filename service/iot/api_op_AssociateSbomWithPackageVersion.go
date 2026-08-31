@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,29 @@ type AssociateSbomWithPackageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSbomWithPackageVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSbomWithPackageVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSbomWithPackageVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AssociateSbomWithPackageVersionRequest_clientToken, *v.ClientToken)
+	}
+	if v.PackageName != nil {
+		s.WriteString(schemas.AssociateSbomWithPackageVersionRequest_packageName, *v.PackageName)
+	}
+	if v.Sbom != nil {
+		s.WriteStruct(schemas.AssociateSbomWithPackageVersionRequest_sbom)
+		v.Sbom.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.AssociateSbomWithPackageVersionRequest_versionName, *v.VersionName)
+	}
+}
+
 type AssociateSbomWithPackageVersionOutput struct {
 
 	// The name of the new software package.
@@ -79,13 +104,56 @@ type AssociateSbomWithPackageVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSbomWithPackageVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSbomWithPackageVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSbomWithPackageVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PackageName != nil {
+		s.WriteString(schemas.AssociateSbomWithPackageVersionResponse_packageName, *v.PackageName)
+	}
+	if v.Sbom != nil {
+		s.WriteStruct(schemas.AssociateSbomWithPackageVersionResponse_sbom)
+		v.Sbom.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SbomValidationStatus != "" {
+		s.WriteString(schemas.AssociateSbomWithPackageVersionResponse_sbomValidationStatus, string(v.SbomValidationStatus))
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.AssociateSbomWithPackageVersionResponse_versionName, *v.VersionName)
+	}
+}
+func (v *AssociateSbomWithPackageVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateSbomWithPackageVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateSbomWithPackageVersionResponse_packageName:
+			v.PackageName = new(string)
+			return d.ReadString(schemas.AssociateSbomWithPackageVersionResponse_packageName, v.PackageName)
+		case schemas.AssociateSbomWithPackageVersionResponse_sbom:
+			v.Sbom = &types.Sbom{}
+			return v.Sbom.Deserialize(d)
+		case schemas.AssociateSbomWithPackageVersionResponse_sbomValidationStatus:
+			var ev string
+			if err := d.ReadString(schemas.AssociateSbomWithPackageVersionResponse_sbomValidationStatus, &ev); err != nil {
+				return err
+			}
+			v.SbomValidationStatus = types.SbomValidationStatus(ev)
+			return nil
+		case schemas.AssociateSbomWithPackageVersionResponse_versionName:
+			v.VersionName = new(string)
+			return d.ReadString(schemas.AssociateSbomWithPackageVersionResponse_versionName, v.VersionName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateSbomWithPackageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateSbomWithPackageVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSbomWithPackageVersion, schemas.AssociateSbomWithPackageVersionRequest, schemas.AssociateSbomWithPackageVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateSbomWithPackageVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSbomWithPackageVersion, schemas.AssociateSbomWithPackageVersionRequest, schemas.AssociateSbomWithPackageVersionResponse), output: &AssociateSbomWithPackageVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

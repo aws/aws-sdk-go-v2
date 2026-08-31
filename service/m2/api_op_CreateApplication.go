@@ -5,7 +5,9 @@ package m2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/m2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,68 @@ type CreateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateApplicationRequest_clientToken, *v.ClientToken)
+	}
+	serializeDefinition(s, schemas.CreateApplicationRequest_definition, v.Definition)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateApplicationRequest_description, *v.Description)
+	}
+	if v.EngineType != "" {
+		s.WriteString(schemas.CreateApplicationRequest_engineType, string(v.EngineType))
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateApplicationRequest_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateApplicationRequest_name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateApplicationRequest_roleArn, *v.RoleArn)
+	}
+	serializeTagMap(s, schemas.CreateApplicationRequest_tags, v.Tags)
+}
+func (v *CreateApplicationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateApplicationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateApplicationRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateApplicationRequest_clientToken, v.ClientToken)
+		case schemas.CreateApplicationRequest_definition:
+			return deserializeDefinition(d, schemas.CreateApplicationRequest_definition, &v.Definition)
+		case schemas.CreateApplicationRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateApplicationRequest_description, v.Description)
+		case schemas.CreateApplicationRequest_engineType:
+			var ev string
+			if err := d.ReadString(schemas.CreateApplicationRequest_engineType, &ev); err != nil {
+				return err
+			}
+			v.EngineType = types.EngineType(ev)
+			return nil
+		case schemas.CreateApplicationRequest_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.CreateApplicationRequest_kmsKeyId, v.KmsKeyId)
+		case schemas.CreateApplicationRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateApplicationRequest_name, v.Name)
+		case schemas.CreateApplicationRequest_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.CreateApplicationRequest_roleArn, v.RoleArn)
+		case schemas.CreateApplicationRequest_tags:
+			return deserializeTagMap(d, schemas.CreateApplicationRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateApplicationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the application.
@@ -90,13 +154,44 @@ type CreateApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.CreateApplicationResponse_applicationArn, *v.ApplicationArn)
+	}
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreateApplicationResponse_applicationId, *v.ApplicationId)
+	}
+	if v.ApplicationVersion != nil {
+		s.WriteInt32(schemas.CreateApplicationResponse_applicationVersion, *v.ApplicationVersion)
+	}
+}
+func (v *CreateApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateApplicationResponse_applicationArn:
+			v.ApplicationArn = new(string)
+			return d.ReadString(schemas.CreateApplicationResponse_applicationArn, v.ApplicationArn)
+		case schemas.CreateApplicationResponse_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.CreateApplicationResponse_applicationId, v.ApplicationId)
+		case schemas.CreateApplicationResponse_applicationVersion:
+			v.ApplicationVersion = new(int32)
+			return d.ReadInt32(schemas.CreateApplicationResponse_applicationVersion, v.ApplicationVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplication, schemas.CreateApplicationRequest, schemas.CreateApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplication, schemas.CreateApplicationRequest, schemas.CreateApplicationResponse), output: &CreateApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

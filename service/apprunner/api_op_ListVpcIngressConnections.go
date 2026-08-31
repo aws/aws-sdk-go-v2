@@ -5,7 +5,9 @@ package apprunner
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,26 @@ type ListVpcIngressConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVpcIngressConnectionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVpcIngressConnectionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVpcIngressConnectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListVpcIngressConnectionsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListVpcIngressConnectionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVpcIngressConnectionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListVpcIngressConnectionsOutput struct {
 
 	// A list of summary information records for VPC Ingress Connections. In a
@@ -67,13 +89,35 @@ type ListVpcIngressConnectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVpcIngressConnectionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVpcIngressConnectionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVpcIngressConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVpcIngressConnectionsResponse_NextToken, *v.NextToken)
+	}
+	serializeVpcIngressConnectionSummaryList(s, schemas.ListVpcIngressConnectionsResponse_VpcIngressConnectionSummaryList, v.VpcIngressConnectionSummaryList)
+}
+func (v *ListVpcIngressConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVpcIngressConnectionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVpcIngressConnectionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVpcIngressConnectionsResponse_NextToken, v.NextToken)
+		case schemas.ListVpcIngressConnectionsResponse_VpcIngressConnectionSummaryList:
+			return deserializeVpcIngressConnectionSummaryList(d, schemas.ListVpcIngressConnectionsResponse_VpcIngressConnectionSummaryList, &v.VpcIngressConnectionSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVpcIngressConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListVpcIngressConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVpcIngressConnections, schemas.ListVpcIngressConnectionsRequest, schemas.ListVpcIngressConnectionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListVpcIngressConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVpcIngressConnections, schemas.ListVpcIngressConnectionsRequest, schemas.ListVpcIngressConnectionsResponse), output: &ListVpcIngressConnectionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

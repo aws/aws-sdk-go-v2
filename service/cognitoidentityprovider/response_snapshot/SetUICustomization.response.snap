@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.SetUICustomization
+
+{"UICustomization":{"CSS":"__CSS__","CSSVersion":"__CSSVersion__","ClientId":"__ClientId__","CreationDate":946684800,"ImageUrl":"__ImageUrl__","LastModifiedDate":946684800,"UserPoolId":"__UserPoolId__"}}

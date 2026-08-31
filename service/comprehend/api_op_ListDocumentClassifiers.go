@@ -5,7 +5,9 @@ package comprehend
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,26 @@ type ListDocumentClassifiersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDocumentClassifiersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDocumentClassifiersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDocumentClassifiersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListDocumentClassifiersRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDocumentClassifiersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDocumentClassifiersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDocumentClassifiersOutput struct {
 
 	// A list containing the properties of each job returned.
@@ -55,13 +77,35 @@ type ListDocumentClassifiersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDocumentClassifiersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDocumentClassifiersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDocumentClassifiersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDocumentClassifierPropertiesList(s, schemas.ListDocumentClassifiersResponse_DocumentClassifierPropertiesList, v.DocumentClassifierPropertiesList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDocumentClassifiersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDocumentClassifiersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDocumentClassifiersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDocumentClassifiersResponse_DocumentClassifierPropertiesList:
+			return deserializeDocumentClassifierPropertiesList(d, schemas.ListDocumentClassifiersResponse_DocumentClassifierPropertiesList, &v.DocumentClassifierPropertiesList)
+		case schemas.ListDocumentClassifiersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDocumentClassifiersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDocumentClassifiersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDocumentClassifiers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDocumentClassifiers, schemas.ListDocumentClassifiersRequest, schemas.ListDocumentClassifiersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDocumentClassifiers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDocumentClassifiers, schemas.ListDocumentClassifiersRequest, schemas.ListDocumentClassifiersResponse), output: &ListDocumentClassifiersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

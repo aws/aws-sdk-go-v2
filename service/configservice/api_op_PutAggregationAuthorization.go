@@ -4,7 +4,9 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,22 @@ type PutAggregationAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAggregationAuthorizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAggregationAuthorizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAggregationAuthorizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizedAccountId != nil {
+		s.WriteString(schemas.PutAggregationAuthorizationRequest_AuthorizedAccountId, *v.AuthorizedAccountId)
+	}
+	if v.AuthorizedAwsRegion != nil {
+		s.WriteString(schemas.PutAggregationAuthorizationRequest_AuthorizedAwsRegion, *v.AuthorizedAwsRegion)
+	}
+	serializeTagsList(s, schemas.PutAggregationAuthorizationRequest_Tags, v.Tags)
+}
+
 type PutAggregationAuthorizationOutput struct {
 
 	// Returns an AggregationAuthorization object.
@@ -67,13 +85,34 @@ type PutAggregationAuthorizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAggregationAuthorizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAggregationAuthorizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAggregationAuthorizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationAuthorization != nil {
+		s.WriteStruct(schemas.PutAggregationAuthorizationResponse_AggregationAuthorization)
+		v.AggregationAuthorization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutAggregationAuthorizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAggregationAuthorizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAggregationAuthorizationResponse_AggregationAuthorization:
+			v.AggregationAuthorization = &types.AggregationAuthorization{}
+			return v.AggregationAuthorization.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAggregationAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutAggregationAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAggregationAuthorization, schemas.PutAggregationAuthorizationRequest, schemas.PutAggregationAuthorizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutAggregationAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAggregationAuthorization, schemas.PutAggregationAuthorizationRequest, schemas.PutAggregationAuthorizationResponse), output: &PutAggregationAuthorizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

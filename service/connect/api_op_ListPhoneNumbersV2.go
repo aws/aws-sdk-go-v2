@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -77,6 +79,32 @@ type ListPhoneNumbersV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPhoneNumbersV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPhoneNumbersV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPhoneNumbersV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListPhoneNumbersV2Request_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPhoneNumbersV2Request_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPhoneNumbersV2Request_NextToken, *v.NextToken)
+	}
+	serializePhoneNumberCountryCodes(s, schemas.ListPhoneNumbersV2Request_PhoneNumberCountryCodes, v.PhoneNumberCountryCodes)
+	if v.PhoneNumberPrefix != nil {
+		s.WriteString(schemas.ListPhoneNumbersV2Request_PhoneNumberPrefix, *v.PhoneNumberPrefix)
+	}
+	serializePhoneNumberTypes(s, schemas.ListPhoneNumbersV2Request_PhoneNumberTypes, v.PhoneNumberTypes)
+	if v.TargetArn != nil {
+		s.WriteString(schemas.ListPhoneNumbersV2Request_TargetArn, *v.TargetArn)
+	}
+}
+
 type ListPhoneNumbersV2Output struct {
 
 	// Information about phone numbers that have been claimed to your Connect Customer
@@ -92,13 +120,35 @@ type ListPhoneNumbersV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPhoneNumbersV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPhoneNumbersV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPhoneNumbersV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListPhoneNumbersSummaryList(s, schemas.ListPhoneNumbersV2Response_ListPhoneNumbersSummaryList, v.ListPhoneNumbersSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPhoneNumbersV2Response_NextToken, *v.NextToken)
+	}
+}
+func (v *ListPhoneNumbersV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPhoneNumbersV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPhoneNumbersV2Response_ListPhoneNumbersSummaryList:
+			return deserializeListPhoneNumbersSummaryList(d, schemas.ListPhoneNumbersV2Response_ListPhoneNumbersSummaryList, &v.ListPhoneNumbersSummaryList)
+		case schemas.ListPhoneNumbersV2Response_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPhoneNumbersV2Response_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPhoneNumbersV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPhoneNumbersV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPhoneNumbersV2, schemas.ListPhoneNumbersV2Request, schemas.ListPhoneNumbersV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPhoneNumbersV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPhoneNumbersV2, schemas.ListPhoneNumbersV2Request, schemas.ListPhoneNumbersV2Response), output: &ListPhoneNumbersV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type DeleteTrafficDistributionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTrafficDistributionGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTrafficDistributionGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTrafficDistributionGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrafficDistributionGroupId != nil {
+		s.WriteString(schemas.DeleteTrafficDistributionGroupRequest_TrafficDistributionGroupId, *v.TrafficDistributionGroupId)
+	}
+}
+
 type DeleteTrafficDistributionGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +61,26 @@ type DeleteTrafficDistributionGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTrafficDistributionGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTrafficDistributionGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTrafficDistributionGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTrafficDistributionGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTrafficDistributionGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTrafficDistributionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTrafficDistributionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTrafficDistributionGroup, schemas.DeleteTrafficDistributionGroupRequest, schemas.DeleteTrafficDistributionGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTrafficDistributionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTrafficDistributionGroup, schemas.DeleteTrafficDistributionGroupRequest, schemas.DeleteTrafficDistributionGroupResponse), output: &DeleteTrafficDistributionGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

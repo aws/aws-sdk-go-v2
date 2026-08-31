@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -225,6 +227,104 @@ type UpdateUserPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserPoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserPoolRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountRecoverySetting != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_AccountRecoverySetting)
+		v.AccountRecoverySetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AdminCreateUserConfig != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_AdminCreateUserConfig)
+		v.AdminCreateUserConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeVerifiedAttributesListType(s, schemas.UpdateUserPoolRequest_AutoVerifiedAttributes, v.AutoVerifiedAttributes)
+	if v.DeletionProtection != "" {
+		s.WriteString(schemas.UpdateUserPoolRequest_DeletionProtection, string(v.DeletionProtection))
+	}
+	if v.DeviceConfiguration != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_DeviceConfiguration)
+		v.DeviceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EmailConfiguration != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_EmailConfiguration)
+		v.EmailConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EmailVerificationMessage != nil {
+		s.WriteString(schemas.UpdateUserPoolRequest_EmailVerificationMessage, *v.EmailVerificationMessage)
+	}
+	if v.EmailVerificationSubject != nil {
+		s.WriteString(schemas.UpdateUserPoolRequest_EmailVerificationSubject, *v.EmailVerificationSubject)
+	}
+	if v.IssuerConfiguration != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_IssuerConfiguration)
+		v.IssuerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyConfiguration != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_KeyConfiguration)
+		v.KeyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaConfig != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_LambdaConfig)
+		v.LambdaConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MfaConfiguration != "" {
+		s.WriteString(schemas.UpdateUserPoolRequest_MfaConfiguration, string(v.MfaConfiguration))
+	}
+	if v.Policies != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_Policies)
+		v.Policies.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PoolName != nil {
+		s.WriteString(schemas.UpdateUserPoolRequest_PoolName, *v.PoolName)
+	}
+	if v.SmsAuthenticationMessage != nil {
+		s.WriteString(schemas.UpdateUserPoolRequest_SmsAuthenticationMessage, *v.SmsAuthenticationMessage)
+	}
+	if v.SmsConfiguration != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_SmsConfiguration)
+		v.SmsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SmsVerificationMessage != nil {
+		s.WriteString(schemas.UpdateUserPoolRequest_SmsVerificationMessage, *v.SmsVerificationMessage)
+	}
+	if v.UserAttributeUpdateSettings != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_UserAttributeUpdateSettings)
+		v.UserAttributeUpdateSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserPoolAddOns != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_UserPoolAddOns)
+		v.UserPoolAddOns.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.UpdateUserPoolRequest_UserPoolId, *v.UserPoolId)
+	}
+	serializeUserPoolTagsType(s, schemas.UpdateUserPoolRequest_UserPoolTags, v.UserPoolTags)
+	if v.UserPoolTier != "" {
+		s.WriteString(schemas.UpdateUserPoolRequest_UserPoolTier, string(v.UserPoolTier))
+	}
+	if v.VerificationMessageTemplate != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_VerificationMessageTemplate)
+		v.VerificationMessageTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Represents the response from the server when you make a request to update the
 // user pool.
 type UpdateUserPoolOutput struct {
@@ -234,13 +334,26 @@ type UpdateUserPoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserPoolOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserPoolResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserPoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateUserPoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateUserPoolResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateUserPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateUserPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserPool, schemas.UpdateUserPoolRequest, schemas.UpdateUserPoolResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateUserPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserPool, schemas.UpdateUserPoolRequest, schemas.UpdateUserPoolResponse), output: &UpdateUserPoolOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

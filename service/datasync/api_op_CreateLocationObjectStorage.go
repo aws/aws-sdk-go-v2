@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -145,6 +147,51 @@ type CreateLocationObjectStorageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationObjectStorageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationObjectStorageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationObjectStorageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessKey != nil {
+		s.WriteString(schemas.CreateLocationObjectStorageRequest_AccessKey, *v.AccessKey)
+	}
+	serializeAgentArnList(s, schemas.CreateLocationObjectStorageRequest_AgentArns, v.AgentArns)
+	if v.BucketName != nil {
+		s.WriteString(schemas.CreateLocationObjectStorageRequest_BucketName, *v.BucketName)
+	}
+	if v.CmkSecretConfig != nil {
+		s.WriteStruct(schemas.CreateLocationObjectStorageRequest_CmkSecretConfig)
+		v.CmkSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomSecretConfig != nil {
+		s.WriteStruct(schemas.CreateLocationObjectStorageRequest_CustomSecretConfig)
+		v.CustomSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecretKey != nil {
+		s.WriteString(schemas.CreateLocationObjectStorageRequest_SecretKey, *v.SecretKey)
+	}
+	if v.ServerCertificate != nil {
+		s.WriteBlob(schemas.CreateLocationObjectStorageRequest_ServerCertificate, v.ServerCertificate)
+	}
+	if v.ServerHostname != nil {
+		s.WriteString(schemas.CreateLocationObjectStorageRequest_ServerHostname, *v.ServerHostname)
+	}
+	if v.ServerPort != nil {
+		s.WriteInt32(schemas.CreateLocationObjectStorageRequest_ServerPort, *v.ServerPort)
+	}
+	if v.ServerProtocol != "" {
+		s.WriteString(schemas.CreateLocationObjectStorageRequest_ServerProtocol, string(v.ServerProtocol))
+	}
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.CreateLocationObjectStorageRequest_Subdirectory, *v.Subdirectory)
+	}
+	serializeInputTagList(s, schemas.CreateLocationObjectStorageRequest_Tags, v.Tags)
+}
+
 // CreateLocationObjectStorageResponse
 type CreateLocationObjectStorageOutput struct {
 
@@ -157,13 +204,32 @@ type CreateLocationObjectStorageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationObjectStorageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationObjectStorageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationObjectStorageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.CreateLocationObjectStorageResponse_LocationArn, *v.LocationArn)
+	}
+}
+func (v *CreateLocationObjectStorageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLocationObjectStorageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLocationObjectStorageResponse_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.CreateLocationObjectStorageResponse_LocationArn, v.LocationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLocationObjectStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLocationObjectStorage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationObjectStorage, schemas.CreateLocationObjectStorageRequest, schemas.CreateLocationObjectStorageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLocationObjectStorage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationObjectStorage, schemas.CreateLocationObjectStorageRequest, schemas.CreateLocationObjectStorageResponse), output: &CreateLocationObjectStorageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

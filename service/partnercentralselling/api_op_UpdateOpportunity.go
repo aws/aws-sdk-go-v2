@@ -4,7 +4,9 @@ package partnercentralselling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -136,6 +138,59 @@ type UpdateOpportunityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOpportunityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOpportunityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOpportunityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.UpdateOpportunityRequest_Catalog, *v.Catalog)
+	}
+	if v.Customer != nil {
+		s.WriteStruct(schemas.UpdateOpportunityRequest_Customer)
+		v.Customer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateOpportunityRequest_Identifier, *v.Identifier)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.UpdateOpportunityRequest_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.LifeCycle != nil {
+		s.WriteStruct(schemas.UpdateOpportunityRequest_LifeCycle)
+		v.LifeCycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Marketing != nil {
+		s.WriteStruct(schemas.UpdateOpportunityRequest_Marketing)
+		v.Marketing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NationalSecurity != "" {
+		s.WriteString(schemas.UpdateOpportunityRequest_NationalSecurity, string(v.NationalSecurity))
+	}
+	if v.OpportunityType != "" {
+		s.WriteString(schemas.UpdateOpportunityRequest_OpportunityType, string(v.OpportunityType))
+	}
+	if v.PartnerOpportunityIdentifier != nil {
+		s.WriteString(schemas.UpdateOpportunityRequest_PartnerOpportunityIdentifier, *v.PartnerOpportunityIdentifier)
+	}
+	serializePrimaryNeedsFromAws(s, schemas.UpdateOpportunityRequest_PrimaryNeedsFromAws, v.PrimaryNeedsFromAws)
+	if v.Project != nil {
+		s.WriteStruct(schemas.UpdateOpportunityRequest_Project)
+		v.Project.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SoftwareRevenue != nil {
+		s.WriteStruct(schemas.UpdateOpportunityRequest_SoftwareRevenue)
+		v.SoftwareRevenue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateOpportunityOutput struct {
 
 	// Read-only, system generated Opportunity unique identifier.
@@ -154,13 +209,38 @@ type UpdateOpportunityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOpportunityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOpportunityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOpportunityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateOpportunityResponse_Id, *v.Id)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.UpdateOpportunityResponse_LastModifiedDate, *v.LastModifiedDate)
+	}
+}
+func (v *UpdateOpportunityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateOpportunityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateOpportunityResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateOpportunityResponse_Id, v.Id)
+		case schemas.UpdateOpportunityResponse_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.UpdateOpportunityResponse_LastModifiedDate, v.LastModifiedDate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateOpportunityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateOpportunity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOpportunity, schemas.UpdateOpportunityRequest, schemas.UpdateOpportunityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateOpportunity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOpportunity, schemas.UpdateOpportunityRequest, schemas.UpdateOpportunityResponse), output: &UpdateOpportunityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeHubInput struct {
 	HubName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeHubInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHubRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHubInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HubName != nil {
+		s.WriteString(schemas.DescribeHubRequest_HubName, *v.HubName)
+	}
 }
 
 type DescribeHubOutput struct {
@@ -83,13 +97,89 @@ type DescribeHubOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHubOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHubResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHubOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeHubResponse_CreationTime, *v.CreationTime)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeHubResponse_FailureReason, *v.FailureReason)
+	}
+	if v.HubArn != nil {
+		s.WriteString(schemas.DescribeHubResponse_HubArn, *v.HubArn)
+	}
+	if v.HubDescription != nil {
+		s.WriteString(schemas.DescribeHubResponse_HubDescription, *v.HubDescription)
+	}
+	if v.HubDisplayName != nil {
+		s.WriteString(schemas.DescribeHubResponse_HubDisplayName, *v.HubDisplayName)
+	}
+	if v.HubName != nil {
+		s.WriteString(schemas.DescribeHubResponse_HubName, *v.HubName)
+	}
+	serializeHubSearchKeywordList(s, schemas.DescribeHubResponse_HubSearchKeywords, v.HubSearchKeywords)
+	if v.HubStatus != "" {
+		s.WriteString(schemas.DescribeHubResponse_HubStatus, string(v.HubStatus))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeHubResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.S3StorageConfig != nil {
+		s.WriteStruct(schemas.DescribeHubResponse_S3StorageConfig)
+		v.S3StorageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeHubOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeHubResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeHubResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeHubResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeHubResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeHubResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeHubResponse_HubArn:
+			v.HubArn = new(string)
+			return d.ReadString(schemas.DescribeHubResponse_HubArn, v.HubArn)
+		case schemas.DescribeHubResponse_HubDescription:
+			v.HubDescription = new(string)
+			return d.ReadString(schemas.DescribeHubResponse_HubDescription, v.HubDescription)
+		case schemas.DescribeHubResponse_HubDisplayName:
+			v.HubDisplayName = new(string)
+			return d.ReadString(schemas.DescribeHubResponse_HubDisplayName, v.HubDisplayName)
+		case schemas.DescribeHubResponse_HubName:
+			v.HubName = new(string)
+			return d.ReadString(schemas.DescribeHubResponse_HubName, v.HubName)
+		case schemas.DescribeHubResponse_HubSearchKeywords:
+			return deserializeHubSearchKeywordList(d, schemas.DescribeHubResponse_HubSearchKeywords, &v.HubSearchKeywords)
+		case schemas.DescribeHubResponse_HubStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeHubResponse_HubStatus, &ev); err != nil {
+				return err
+			}
+			v.HubStatus = types.HubStatus(ev)
+			return nil
+		case schemas.DescribeHubResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeHubResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeHubResponse_S3StorageConfig:
+			v.S3StorageConfig = &types.HubS3StorageConfig{}
+			return v.S3StorageConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeHubMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeHub{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHub, schemas.DescribeHubRequest, schemas.DescribeHubResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeHub{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHub, schemas.DescribeHubRequest, schemas.DescribeHubResponse), output: &DescribeHubOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

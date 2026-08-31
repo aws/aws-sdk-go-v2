@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,18 @@ type GetFederationTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFederationTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFederationTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFederationTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GetFederationTokenRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type GetFederationTokenOutput struct {
 
 	// The credentials to use for federation.
@@ -69,13 +83,52 @@ type GetFederationTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFederationTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFederationTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFederationTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Credentials != nil {
+		s.WriteStruct(schemas.GetFederationTokenResponse_Credentials)
+		v.Credentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SignInUrl != nil {
+		s.WriteString(schemas.GetFederationTokenResponse_SignInUrl, *v.SignInUrl)
+	}
+	if v.UserArn != nil {
+		s.WriteString(schemas.GetFederationTokenResponse_UserArn, *v.UserArn)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.GetFederationTokenResponse_UserId, *v.UserId)
+	}
+}
+func (v *GetFederationTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFederationTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFederationTokenResponse_Credentials:
+			v.Credentials = &types.Credentials{}
+			return v.Credentials.Deserialize(d)
+		case schemas.GetFederationTokenResponse_SignInUrl:
+			v.SignInUrl = new(string)
+			return d.ReadString(schemas.GetFederationTokenResponse_SignInUrl, v.SignInUrl)
+		case schemas.GetFederationTokenResponse_UserArn:
+			v.UserArn = new(string)
+			return d.ReadString(schemas.GetFederationTokenResponse_UserArn, v.UserArn)
+		case schemas.GetFederationTokenResponse_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.GetFederationTokenResponse_UserId, v.UserId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFederationTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFederationToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFederationToken, schemas.GetFederationTokenRequest, schemas.GetFederationTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFederationToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFederationToken, schemas.GetFederationTokenRequest, schemas.GetFederationTokenResponse), output: &GetFederationTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

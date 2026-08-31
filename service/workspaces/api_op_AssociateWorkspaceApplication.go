@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type AssociateWorkspaceApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateWorkspaceApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateWorkspaceApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateWorkspaceApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.AssociateWorkspaceApplicationRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.AssociateWorkspaceApplicationRequest_WorkspaceId, *v.WorkspaceId)
+	}
+}
+
 type AssociateWorkspaceApplicationOutput struct {
 
 	// Information about the association between the specified WorkSpace and the
@@ -51,13 +68,34 @@ type AssociateWorkspaceApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateWorkspaceApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateWorkspaceApplicationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateWorkspaceApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Association != nil {
+		s.WriteStruct(schemas.AssociateWorkspaceApplicationResult_Association)
+		v.Association.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateWorkspaceApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateWorkspaceApplicationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateWorkspaceApplicationResult_Association:
+			v.Association = &types.WorkspaceResourceAssociation{}
+			return v.Association.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateWorkspaceApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateWorkspaceApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateWorkspaceApplication, schemas.AssociateWorkspaceApplicationRequest, schemas.AssociateWorkspaceApplicationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateWorkspaceApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateWorkspaceApplication, schemas.AssociateWorkspaceApplicationRequest, schemas.AssociateWorkspaceApplicationResult), output: &AssociateWorkspaceApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

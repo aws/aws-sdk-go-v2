@@ -4,6 +4,8 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,21 @@ type MigrateWorkspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MigrateWorkspaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MigrateWorkspaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MigrateWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BundleId != nil {
+		s.WriteString(schemas.MigrateWorkspaceRequest_BundleId, *v.BundleId)
+	}
+	if v.SourceWorkspaceId != nil {
+		s.WriteString(schemas.MigrateWorkspaceRequest_SourceWorkspaceId, *v.SourceWorkspaceId)
+	}
+}
+
 type MigrateWorkspaceOutput struct {
 
 	// The original identifier of the WorkSpace that is being migrated.
@@ -70,13 +87,38 @@ type MigrateWorkspaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MigrateWorkspaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MigrateWorkspaceResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MigrateWorkspaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceWorkspaceId != nil {
+		s.WriteString(schemas.MigrateWorkspaceResult_SourceWorkspaceId, *v.SourceWorkspaceId)
+	}
+	if v.TargetWorkspaceId != nil {
+		s.WriteString(schemas.MigrateWorkspaceResult_TargetWorkspaceId, *v.TargetWorkspaceId)
+	}
+}
+func (v *MigrateWorkspaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MigrateWorkspaceResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MigrateWorkspaceResult_SourceWorkspaceId:
+			v.SourceWorkspaceId = new(string)
+			return d.ReadString(schemas.MigrateWorkspaceResult_SourceWorkspaceId, v.SourceWorkspaceId)
+		case schemas.MigrateWorkspaceResult_TargetWorkspaceId:
+			v.TargetWorkspaceId = new(string)
+			return d.ReadString(schemas.MigrateWorkspaceResult_TargetWorkspaceId, v.TargetWorkspaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMigrateWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMigrateWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MigrateWorkspace, schemas.MigrateWorkspaceRequest, schemas.MigrateWorkspaceResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpMigrateWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MigrateWorkspace, schemas.MigrateWorkspaceRequest, schemas.MigrateWorkspaceResult), output: &MigrateWorkspaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

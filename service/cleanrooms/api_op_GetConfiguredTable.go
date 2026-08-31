@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,28 @@ type GetConfiguredTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfiguredTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfiguredTableInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfiguredTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfiguredTableIdentifier != nil {
+		s.WriteString(schemas.GetConfiguredTableInput_configuredTableIdentifier, *v.ConfiguredTableIdentifier)
+	}
+}
+func (v *GetConfiguredTableInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfiguredTableInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfiguredTableInput_configuredTableIdentifier:
+			v.ConfiguredTableIdentifier = new(string)
+			return d.ReadString(schemas.GetConfiguredTableInput_configuredTableIdentifier, v.ConfiguredTableIdentifier)
+		}
+		return nil
+	})
+}
+
 type GetConfiguredTableOutput struct {
 
 	// The retrieved configured table.
@@ -47,13 +71,34 @@ type GetConfiguredTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfiguredTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfiguredTableOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfiguredTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfiguredTable != nil {
+		s.WriteStruct(schemas.GetConfiguredTableOutput_configuredTable)
+		v.ConfiguredTable.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetConfiguredTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfiguredTableOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfiguredTableOutput_configuredTable:
+			v.ConfiguredTable = &types.ConfiguredTable{}
+			return v.ConfiguredTable.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConfiguredTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfiguredTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguredTable, schemas.GetConfiguredTableInput, schemas.GetConfiguredTableOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConfiguredTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguredTable, schemas.GetConfiguredTableInput, schemas.GetConfiguredTableOutput), output: &GetConfiguredTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

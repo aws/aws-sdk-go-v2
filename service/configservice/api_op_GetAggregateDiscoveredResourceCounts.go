@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,32 @@ type GetAggregateDiscoveredResourceCountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAggregateDiscoveredResourceCountsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAggregateDiscoveredResourceCountsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAggregateDiscoveredResourceCountsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationAggregatorName != nil {
+		s.WriteString(schemas.GetAggregateDiscoveredResourceCountsRequest_ConfigurationAggregatorName, *v.ConfigurationAggregatorName)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.GetAggregateDiscoveredResourceCountsRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GroupByKey != "" {
+		s.WriteString(schemas.GetAggregateDiscoveredResourceCountsRequest_GroupByKey, string(v.GroupByKey))
+	}
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.GetAggregateDiscoveredResourceCountsRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAggregateDiscoveredResourceCountsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetAggregateDiscoveredResourceCountsOutput struct {
 
 	// The total number of resources that are present in an aggregator with the
@@ -83,13 +111,44 @@ type GetAggregateDiscoveredResourceCountsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAggregateDiscoveredResourceCountsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAggregateDiscoveredResourceCountsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAggregateDiscoveredResourceCountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupByKey != nil {
+		s.WriteString(schemas.GetAggregateDiscoveredResourceCountsResponse_GroupByKey, *v.GroupByKey)
+	}
+	serializeGroupedResourceCountList(s, schemas.GetAggregateDiscoveredResourceCountsResponse_GroupedResourceCounts, v.GroupedResourceCounts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAggregateDiscoveredResourceCountsResponse_NextToken, *v.NextToken)
+	}
+	s.WriteInt64(schemas.GetAggregateDiscoveredResourceCountsResponse_TotalDiscoveredResources, v.TotalDiscoveredResources)
+}
+func (v *GetAggregateDiscoveredResourceCountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAggregateDiscoveredResourceCountsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAggregateDiscoveredResourceCountsResponse_GroupByKey:
+			v.GroupByKey = new(string)
+			return d.ReadString(schemas.GetAggregateDiscoveredResourceCountsResponse_GroupByKey, v.GroupByKey)
+		case schemas.GetAggregateDiscoveredResourceCountsResponse_GroupedResourceCounts:
+			return deserializeGroupedResourceCountList(d, schemas.GetAggregateDiscoveredResourceCountsResponse_GroupedResourceCounts, &v.GroupedResourceCounts)
+		case schemas.GetAggregateDiscoveredResourceCountsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetAggregateDiscoveredResourceCountsResponse_NextToken, v.NextToken)
+		case schemas.GetAggregateDiscoveredResourceCountsResponse_TotalDiscoveredResources:
+			return d.ReadInt64(schemas.GetAggregateDiscoveredResourceCountsResponse_TotalDiscoveredResources, &v.TotalDiscoveredResources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAggregateDiscoveredResourceCountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAggregateDiscoveredResourceCounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAggregateDiscoveredResourceCounts, schemas.GetAggregateDiscoveredResourceCountsRequest, schemas.GetAggregateDiscoveredResourceCountsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAggregateDiscoveredResourceCounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAggregateDiscoveredResourceCounts, schemas.GetAggregateDiscoveredResourceCountsRequest, schemas.GetAggregateDiscoveredResourceCountsResponse), output: &GetAggregateDiscoveredResourceCountsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

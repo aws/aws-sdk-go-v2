@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type GetRelationalDatabaseBundlesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRelationalDatabaseBundlesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRelationalDatabaseBundlesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRelationalDatabaseBundlesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeInactive != nil {
+		s.WriteBool(schemas.GetRelationalDatabaseBundlesRequest_includeInactive, *v.IncludeInactive)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.GetRelationalDatabaseBundlesRequest_pageToken, *v.PageToken)
+	}
+}
+
 type GetRelationalDatabaseBundlesOutput struct {
 
 	// An object describing the result of your get relational database bundles request.
@@ -63,13 +80,35 @@ type GetRelationalDatabaseBundlesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRelationalDatabaseBundlesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRelationalDatabaseBundlesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRelationalDatabaseBundlesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRelationalDatabaseBundleList(s, schemas.GetRelationalDatabaseBundlesResult_bundles, v.Bundles)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetRelationalDatabaseBundlesResult_nextPageToken, *v.NextPageToken)
+	}
+}
+func (v *GetRelationalDatabaseBundlesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRelationalDatabaseBundlesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRelationalDatabaseBundlesResult_bundles:
+			return deserializeRelationalDatabaseBundleList(d, schemas.GetRelationalDatabaseBundlesResult_bundles, &v.Bundles)
+		case schemas.GetRelationalDatabaseBundlesResult_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetRelationalDatabaseBundlesResult_nextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRelationalDatabaseBundlesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRelationalDatabaseBundles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRelationalDatabaseBundles, schemas.GetRelationalDatabaseBundlesRequest, schemas.GetRelationalDatabaseBundlesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRelationalDatabaseBundles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRelationalDatabaseBundles, schemas.GetRelationalDatabaseBundlesRequest, schemas.GetRelationalDatabaseBundlesResult), output: &GetRelationalDatabaseBundlesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

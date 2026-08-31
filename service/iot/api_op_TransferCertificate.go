@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,24 @@ type TransferCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TransferCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransferCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransferCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateId != nil {
+		s.WriteString(schemas.TransferCertificateRequest_certificateId, *v.CertificateId)
+	}
+	if v.TargetAwsAccount != nil {
+		s.WriteString(schemas.TransferCertificateRequest_targetAwsAccount, *v.TargetAwsAccount)
+	}
+	if v.TransferMessage != nil {
+		s.WriteString(schemas.TransferCertificateRequest_transferMessage, *v.TransferMessage)
+	}
+}
+
 // The output from the TransferCertificate operation.
 type TransferCertificateOutput struct {
 
@@ -92,13 +112,32 @@ type TransferCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TransferCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransferCertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransferCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransferredCertificateArn != nil {
+		s.WriteString(schemas.TransferCertificateResponse_transferredCertificateArn, *v.TransferredCertificateArn)
+	}
+}
+func (v *TransferCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TransferCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TransferCertificateResponse_transferredCertificateArn:
+			v.TransferredCertificateArn = new(string)
+			return d.ReadString(schemas.TransferCertificateResponse_transferredCertificateArn, v.TransferredCertificateArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTransferCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTransferCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TransferCertificate, schemas.TransferCertificateRequest, schemas.TransferCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTransferCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TransferCertificate, schemas.TransferCertificateRequest, schemas.TransferCertificateResponse), output: &TransferCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type UpdateRoutingProfileNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRoutingProfileNameInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRoutingProfileNameRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRoutingProfileNameInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateRoutingProfileNameRequest_Description, *v.Description)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateRoutingProfileNameRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateRoutingProfileNameRequest_Name, *v.Name)
+	}
+	if v.RoutingProfileId != nil {
+		s.WriteString(schemas.UpdateRoutingProfileNameRequest_RoutingProfileId, *v.RoutingProfileId)
+	}
+}
+
 type UpdateRoutingProfileNameOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +78,26 @@ type UpdateRoutingProfileNameOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRoutingProfileNameOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRoutingProfileNameOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateRoutingProfileNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRoutingProfileNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRoutingProfileName{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRoutingProfileName, schemas.UpdateRoutingProfileNameRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRoutingProfileName{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRoutingProfileName, schemas.UpdateRoutingProfileNameRequest, nil), output: &UpdateRoutingProfileNameOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

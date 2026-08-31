@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,21 @@ type UpdateTopicRuleDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTopicRuleDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTopicRuleDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTopicRuleDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateTopicRuleDestinationRequest_arn, *v.Arn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateTopicRuleDestinationRequest_status, string(v.Status))
+	}
+}
+
 type UpdateTopicRuleDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,13 +85,26 @@ type UpdateTopicRuleDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTopicRuleDestinationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTopicRuleDestinationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTopicRuleDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateTopicRuleDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTopicRuleDestinationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTopicRuleDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTopicRuleDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTopicRuleDestination, schemas.UpdateTopicRuleDestinationRequest, schemas.UpdateTopicRuleDestinationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTopicRuleDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTopicRuleDestination, schemas.UpdateTopicRuleDestinationRequest, schemas.UpdateTopicRuleDestinationResponse), output: &UpdateTopicRuleDestinationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

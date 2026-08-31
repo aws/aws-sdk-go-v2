@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -91,6 +93,58 @@ type UpdateStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessEndpointList(s, schemas.UpdateStackRequest_AccessEndpoints, v.AccessEndpoints)
+	if v.AgentAccessConfig != nil {
+		s.WriteStruct(schemas.UpdateStackRequest_AgentAccessConfig)
+		v.AgentAccessConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationSettings != nil {
+		s.WriteStruct(schemas.UpdateStackRequest_ApplicationSettings)
+		v.ApplicationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStackAttributes(s, schemas.UpdateStackRequest_AttributesToDelete, v.AttributesToDelete)
+	if v.ContentRedirection != nil {
+		s.WriteStruct(schemas.UpdateStackRequest_ContentRedirection)
+		v.ContentRedirection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeleteStorageConnectors != nil {
+		s.WriteBool(schemas.UpdateStackRequest_DeleteStorageConnectors, *v.DeleteStorageConnectors)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateStackRequest_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateStackRequest_DisplayName, *v.DisplayName)
+	}
+	serializeEmbedHostDomains(s, schemas.UpdateStackRequest_EmbedHostDomains, v.EmbedHostDomains)
+	if v.FeedbackURL != nil {
+		s.WriteString(schemas.UpdateStackRequest_FeedbackURL, *v.FeedbackURL)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateStackRequest_Name, *v.Name)
+	}
+	if v.RedirectURL != nil {
+		s.WriteString(schemas.UpdateStackRequest_RedirectURL, *v.RedirectURL)
+	}
+	serializeStorageConnectorList(s, schemas.UpdateStackRequest_StorageConnectors, v.StorageConnectors)
+	if v.StreamingExperienceSettings != nil {
+		s.WriteStruct(schemas.UpdateStackRequest_StreamingExperienceSettings)
+		v.StreamingExperienceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeUserSettingList(s, schemas.UpdateStackRequest_UserSettings, v.UserSettings)
+}
+
 type UpdateStackOutput struct {
 
 	// Information about the stack.
@@ -102,13 +156,34 @@ type UpdateStackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStackResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Stack != nil {
+		s.WriteStruct(schemas.UpdateStackResult_Stack)
+		v.Stack.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateStackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateStackResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateStackResult_Stack:
+			v.Stack = &types.Stack{}
+			return v.Stack.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStack, schemas.UpdateStackRequest, schemas.UpdateStackResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStack, schemas.UpdateStackRequest, schemas.UpdateStackResult), output: &UpdateStackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

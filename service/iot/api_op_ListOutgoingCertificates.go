@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListOutgoingCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOutgoingCertificatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOutgoingCertificatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOutgoingCertificatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AscendingOrder != false {
+		s.WriteBool(schemas.ListOutgoingCertificatesRequest_ascendingOrder, v.AscendingOrder)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListOutgoingCertificatesRequest_marker, *v.Marker)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListOutgoingCertificatesRequest_pageSize, *v.PageSize)
+	}
+}
+
 // The output from the ListOutgoingCertificates operation.
 type ListOutgoingCertificatesOutput struct {
 
@@ -60,13 +80,35 @@ type ListOutgoingCertificatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOutgoingCertificatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOutgoingCertificatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOutgoingCertificatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListOutgoingCertificatesResponse_nextMarker, *v.NextMarker)
+	}
+	serializeOutgoingCertificates(s, schemas.ListOutgoingCertificatesResponse_outgoingCertificates, v.OutgoingCertificates)
+}
+func (v *ListOutgoingCertificatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOutgoingCertificatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOutgoingCertificatesResponse_nextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListOutgoingCertificatesResponse_nextMarker, v.NextMarker)
+		case schemas.ListOutgoingCertificatesResponse_outgoingCertificates:
+			return deserializeOutgoingCertificates(d, schemas.ListOutgoingCertificatesResponse_outgoingCertificates, &v.OutgoingCertificates)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOutgoingCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOutgoingCertificates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOutgoingCertificates, schemas.ListOutgoingCertificatesRequest, schemas.ListOutgoingCertificatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOutgoingCertificates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOutgoingCertificates, schemas.ListOutgoingCertificatesRequest, schemas.ListOutgoingCertificatesResponse), output: &ListOutgoingCertificatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

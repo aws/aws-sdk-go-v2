@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type CreateEdgeDeploymentStageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEdgeDeploymentStageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEdgeDeploymentStageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEdgeDeploymentStageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EdgeDeploymentPlanName != nil {
+		s.WriteString(schemas.CreateEdgeDeploymentStageRequest_EdgeDeploymentPlanName, *v.EdgeDeploymentPlanName)
+	}
+	serializeDeploymentStages(s, schemas.CreateEdgeDeploymentStageRequest_Stages, v.Stages)
+}
+
 type CreateEdgeDeploymentStageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +61,26 @@ type CreateEdgeDeploymentStageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEdgeDeploymentStageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEdgeDeploymentStageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateEdgeDeploymentStageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEdgeDeploymentStageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEdgeDeploymentStage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEdgeDeploymentStage, schemas.CreateEdgeDeploymentStageRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateEdgeDeploymentStage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEdgeDeploymentStage, schemas.CreateEdgeDeploymentStageRequest, nil), output: &CreateEdgeDeploymentStageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
