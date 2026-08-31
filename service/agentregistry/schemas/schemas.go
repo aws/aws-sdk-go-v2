@@ -78,6 +78,12 @@ var AgentSkillsMdDescriptor_dataSchemaVersion *smithy.Schema
 
 var AgentSkillsMdDescriptor_source *smithy.Schema
 
+var AgUiDescriptor = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistry",
+	Name:      "AgUiDescriptor",
+}, smithy.ShapeTypeStructure, 1)
+var AgUiDescriptor_source *smithy.Schema
+
 var BatchGetDiscoverableRegistryRecordError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "BatchGetDiscoverableRegistryRecordError",
@@ -135,7 +141,7 @@ var _DescriptorData = smithy.NewSchema(smithy.ShapeID{
 var Descriptors = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "Descriptors",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 6)
 var Descriptors_mcpServer *smithy.Schema
 
 var Descriptors_a2aAgentCard *smithy.Schema
@@ -143,6 +149,10 @@ var Descriptors_a2aAgentCard *smithy.Schema
 var Descriptors_agentSkillsDefinition *smithy.Schema
 
 var Descriptors_custom *smithy.Schema
+
+var Descriptors_http *smithy.Schema
+
+var Descriptors_agui *smithy.Schema
 
 var DescriptorSource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
@@ -211,6 +221,12 @@ var _FilterValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "FilterValue",
 }, smithy.ShapeTypeString, 0)
+
+var HttpDescriptor = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistry",
+	Name:      "HttpDescriptor",
+}, smithy.ShapeTypeStructure, 1)
+var HttpDescriptor_source *smithy.Schema
 
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
@@ -554,6 +570,8 @@ func init() {
 
 	AgentSkillsDefinitionDescriptor_additionalData = AgentSkillsDefinitionDescriptor.AddMember("additionalData", AgentSkillsAdditionalData)
 
+	AgUiDescriptor_source = AgUiDescriptor.AddMember("source", DescriptorSource)
+
 	BatchGetDiscoverableRegistryRecordErrorCode_RESOURCE_NOT_FOUND = BatchGetDiscoverableRegistryRecordErrorCode.AddMember("RESOURCE_NOT_FOUND", smithyprelude.Unit)
 
 	BatchGetDiscoverableRegistryRecordErrorCode_ACCESS_DENIED = BatchGetDiscoverableRegistryRecordErrorCode.AddMember("ACCESS_DENIED", smithyprelude.Unit)
@@ -586,6 +604,8 @@ func init() {
 
 	McpServerDescriptor_source = McpServerDescriptor.AddMember("source", DescriptorSource)
 
+	HttpDescriptor_source = HttpDescriptor.AddMember("source", DescriptorSource)
+
 	Descriptors_mcpServer = Descriptors.AddMember("mcpServer", McpServerDescriptor)
 
 	Descriptors_a2aAgentCard = Descriptors.AddMember("a2aAgentCard", A2aAgentCardDescriptor)
@@ -593,6 +613,10 @@ func init() {
 	Descriptors_agentSkillsDefinition = Descriptors.AddMember("agentSkillsDefinition", AgentSkillsDefinitionDescriptor)
 
 	Descriptors_custom = Descriptors.AddMember("custom", CustomDescriptor)
+
+	Descriptors_http = Descriptors.AddMember("http", HttpDescriptor)
+
+	Descriptors_agui = Descriptors.AddMember("agui", AgUiDescriptor)
 
 	_DescriptorTypeList_member = _DescriptorTypeList.AddMember("member", smithyprelude.String)
 

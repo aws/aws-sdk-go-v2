@@ -195,6 +195,20 @@ func TestUpdateResponseSnapshot_BatchGetDiscoverableRegistryRecord(t *testing.T)
 					Custom: &types.CustomDescriptor{
 						Data: ptr.String("__Data__"),
 					},
+					Http: &types.HttpDescriptor{
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+							},
+						},
+					},
+					Agui: &types.AgUiDescriptor{
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+							},
+						},
+					},
 				},
 				RecordVersion: ptr.String("__RecordVersion__"),
 				Status:        types.RegistryRecordStatus("DRAFT"),
@@ -251,6 +265,20 @@ func TestUpdateResponseSnapshot_BatchGetDiscoverableRegistryRecord(t *testing.T)
 					},
 					Custom: &types.CustomDescriptor{
 						Data: ptr.String("__Data__"),
+					},
+					Http: &types.HttpDescriptor{
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+							},
+						},
+					},
+					Agui: &types.AgUiDescriptor{
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+							},
+						},
 					},
 				},
 				RecordVersion: ptr.String("__RecordVersion__"),
@@ -408,6 +436,20 @@ func TestUpdateResponseSnapshot_SearchDiscoverableRegistryRecords(t *testing.T) 
 					Custom: &types.CustomDescriptor{
 						Data: ptr.String("__Data__"),
 					},
+					Http: &types.HttpDescriptor{
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+							},
+						},
+					},
+					Agui: &types.AgUiDescriptor{
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+							},
+						},
+					},
 				},
 				RecordVersion: ptr.String("__RecordVersion__"),
 				Status:        types.RegistryRecordStatus("DRAFT"),
@@ -464,6 +506,20 @@ func TestUpdateResponseSnapshot_SearchDiscoverableRegistryRecords(t *testing.T) 
 					},
 					Custom: &types.CustomDescriptor{
 						Data: ptr.String("__Data__"),
+					},
+					Http: &types.HttpDescriptor{
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+							},
+						},
+					},
+					Agui: &types.AgUiDescriptor{
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+							},
+						},
 					},
 				},
 				RecordVersion: ptr.String("__RecordVersion__"),

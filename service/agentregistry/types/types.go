@@ -202,6 +202,42 @@ func (v *AgentSkillsMdDescriptor) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+//	A descriptor for a registry record that exposes an AG-UI protocol endpoint.
+//
+// This descriptor is source-only: it identifies where the endpoint is located and
+// carries no descriptor payload data or schema version.
+type AgUiDescriptor struct {
+
+	//  The source location of the AG-UI protocol endpoint.
+	Source *DescriptorSource
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgUiDescriptor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgUiDescriptor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgUiDescriptor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Source != nil {
+		s.WriteStruct(schemas.AgUiDescriptor_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AgUiDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgUiDescriptor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgUiDescriptor_source:
+			v.Source = &DescriptorSource{}
+			return v.Source.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes why a requested record could not be retrieved.
 type BatchGetDiscoverableRegistryRecordError struct {
 
@@ -316,8 +352,15 @@ type Descriptors struct {
 	// SKILL.
 	AgentSkillsDefinition *AgentSkillsDefinitionDescriptor
 
+	//  The AG-UI descriptor, populated when the record exposes an AG-UI protocol
+	// endpoint.
+	Agui *AgUiDescriptor
+
 	//  The custom descriptor, populated when the record type is CUSTOM.
 	Custom *CustomDescriptor
+
+	//  The HTTP descriptor, populated when the record exposes an HTTP endpoint.
+	Http *HttpDescriptor
 
 	//  The MCP server descriptor, populated when the record type is MCP.
 	McpServer *McpServerDescriptor
@@ -342,9 +385,19 @@ func (v *Descriptors) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AgentSkillsDefinition.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.Agui != nil {
+		s.WriteStruct(schemas.Descriptors_agui)
+		v.Agui.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Custom != nil {
 		s.WriteStruct(schemas.Descriptors_custom)
 		v.Custom.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Http != nil {
+		s.WriteStruct(schemas.Descriptors_http)
+		v.Http.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.McpServer != nil {
@@ -362,9 +415,15 @@ func (v *Descriptors) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Descriptors_agentSkillsDefinition:
 			v.AgentSkillsDefinition = &AgentSkillsDefinitionDescriptor{}
 			return v.AgentSkillsDefinition.Deserialize(d)
+		case schemas.Descriptors_agui:
+			v.Agui = &AgUiDescriptor{}
+			return v.Agui.Deserialize(d)
 		case schemas.Descriptors_custom:
 			v.Custom = &CustomDescriptor{}
 			return v.Custom.Deserialize(d)
+		case schemas.Descriptors_http:
+			v.Http = &HttpDescriptor{}
+			return v.Http.Deserialize(d)
 		case schemas.Descriptors_mcpServer:
 			v.McpServer = &McpServerDescriptor{}
 			return v.McpServer.Deserialize(d)
@@ -600,6 +659,42 @@ func (v *DiscoverableRegistryRecordSummary) Deserialize(d smithy.ShapeDeserializ
 		case schemas.DiscoverableRegistryRecordSummary_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.DiscoverableRegistryRecordSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+//	A descriptor for a registry record that exposes an HTTP endpoint. This
+//
+// descriptor is source-only: it identifies where the endpoint is located and
+// carries no descriptor payload data or schema version.
+type HttpDescriptor struct {
+
+	//  The source location of the HTTP endpoint.
+	Source *DescriptorSource
+
+	noSmithyDocumentSerde
+}
+
+func (v *HttpDescriptor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpDescriptor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpDescriptor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Source != nil {
+		s.WriteStruct(schemas.HttpDescriptor_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *HttpDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpDescriptor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpDescriptor_source:
+			v.Source = &DescriptorSource{}
+			return v.Source.Deserialize(d)
 		}
 		return nil
 	})
