@@ -134,6 +134,19 @@ func TestNewSharedConfig(t *testing.T) {
 				RoleARN: "assume_role_wo_creds_role_arn",
 			},
 		},
+		"Assume role with login session source profile": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "assume_role_w_login_session",
+			Expected: SharedConfig{
+				Profile:           "assume_role_w_login_session",
+				RoleARN:           "assume_role_w_login_session_role_arn",
+				SourceProfileName: "login_session_creds",
+				Source: &SharedConfig{
+					Profile:      "login_session_creds",
+					LoginSession: "login_session_creds_session",
+				},
+			},
+		},
 		"Invalid INI file": {
 			ConfigFilenames: []string{filepath.Join("testdata", "shared_config_invalid_ini")},
 			Profile:         "profile_name",
