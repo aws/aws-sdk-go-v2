@@ -11690,18 +11690,6 @@
         "com.amazonaws.ec2#Blob": {
             "type": "blob"
         },
-        "com.amazonaws.ec2#BlobAttributeValue": {
-            "type": "structure",
-            "members": {
-                "Value": {
-                    "target": "com.amazonaws.ec2#Blob",
-                    "traits": {
-                        "aws.protocols#ec2QueryName": "Value",
-                        "smithy.api#xmlName": "value"
-                    }
-                }
-            }
-        },
         "com.amazonaws.ec2#BlockDeviceMapping": {
             "type": "structure",
             "members": {
@@ -103668,7 +103656,7 @@
                     }
                 },
                 "UserData": {
-                    "target": "com.amazonaws.ec2#BlobAttributeValue",
+                    "target": "com.amazonaws.ec2#SecureBlobAttributeValue",
                     "traits": {
                         "aws.protocols#ec2QueryName": "UserData",
                         "smithy.api#documentation": "<p>Changes the instance's user data to the specified value. User data must be base64-encoded.\n            Depending on the tool or SDK that you're using, the base64-encoding might be performed for you.\n            For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-add-user-data.html\">Work with instance user data</a>.</p>",
@@ -125700,7 +125688,7 @@
                     }
                 },
                 "UploadPolicy": {
-                    "target": "com.amazonaws.ec2#Blob",
+                    "target": "com.amazonaws.ec2#SecureBlob",
                     "traits": {
                         "aws.protocols#ec2QueryName": "UploadPolicy",
                         "smithy.api#documentation": "<p>An Amazon S3 upload policy that gives Amazon EC2 permission to upload items into Amazon S3 on your\n      behalf.</p>",
@@ -127575,6 +127563,28 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^(?=.{20,2048}$)arn:aws[a-z-]*:secretsmanager:[a-z0-9-]+:\\d{12}:secret:[a-zA-Z0-9/_+=.@-]+$"
+            }
+        },
+        "com.amazonaws.ec2#SecureBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.ec2#SecureBlobAttributeValue": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.ec2#SecureBlob",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Value",
+                        "smithy.api#documentation": "<p>The attribute value.</p>",
+                        "smithy.api#xmlName": "value"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a value for a resource attribute that is a Base64-encoded binary data object.</p>"
             }
         },
         "com.amazonaws.ec2#SecurityGroup": {

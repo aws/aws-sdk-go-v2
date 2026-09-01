@@ -914,6 +914,186 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.guardduty#AssociationDetail": {
+            "type": "structure",
+            "members": {
+                "AssociationId": {
+                    "target": "com.amazonaws.guardduty#AssociationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier for the association.</p>",
+                        "smithy.api#jsonName": "associationId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the association.</p>",
+                        "smithy.api#jsonName": "arn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RuleId": {
+                    "target": "com.amazonaws.guardduty#RuleId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier for the custom detection rule.</p>",
+                        "smithy.api#jsonName": "ruleId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.guardduty#AccountId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with this rule association.</p>",
+                        "smithy.api#jsonName": "accountId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.guardduty#AssociationMode",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The rule execution mode. Valid values: <code>LIVE</code> | <code>DRY_RUN</code>.</p>",
+                        "smithy.api#jsonName": "mode",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The timestamp when the association was created.</p>",
+                        "smithy.api#jsonName": "createdAt",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The timestamp when the association was last updated.</p>",
+                        "smithy.api#jsonName": "updatedAt",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExpiresAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the association expires.</p>",
+                        "smithy.api#jsonName": "expiresAt"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the full details of a custom detection rule association.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#AssociationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]{1,64}$"
+            }
+        },
+        "com.amazonaws.guardduty#AssociationMode": {
+            "type": "enum",
+            "members": {
+                "LIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIVE"
+                    }
+                },
+                "DRY_RUN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRY_RUN"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#AssociationSummary": {
+            "type": "structure",
+            "members": {
+                "AssociationId": {
+                    "target": "com.amazonaws.guardduty#AssociationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier for the association.</p>",
+                        "smithy.api#jsonName": "associationId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the association.</p>",
+                        "smithy.api#jsonName": "arn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RuleId": {
+                    "target": "com.amazonaws.guardduty#RuleId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier for the custom detection rule.</p>",
+                        "smithy.api#jsonName": "ruleId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.guardduty#AssociationMode",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The rule execution mode. Valid values: <code>LIVE</code> | <code>DRY_RUN</code>.</p>",
+                        "smithy.api#jsonName": "mode",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The timestamp when the association was created.</p>",
+                        "smithy.api#jsonName": "createdAt",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The timestamp when the association was last updated.</p>",
+                        "smithy.api#jsonName": "updatedAt",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExpiresAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the association expires.</p>",
+                        "smithy.api#jsonName": "expiresAt"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about a custom detection rule association.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#AssociationSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#AssociationSummary"
+            }
+        },
         "com.amazonaws.guardduty#AutoEnableMembers": {
             "type": "enum",
             "members": {
@@ -2440,6 +2620,187 @@
                 }
             }
         },
+        "com.amazonaws.guardduty#CreateCustomDetectionRuleAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#CreateCustomDetectionRuleAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#CreateCustomDetectionRuleAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Enables a custom detection rule for your account by creating an association. You specify the rule and the mode in which it operates.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/custom-detection-rule/association",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#CreateCustomDetectionRuleAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "RuleId": {
+                    "target": "com.amazonaws.guardduty#RuleId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier for the custom detection rule.</p>",
+                        "smithy.api#jsonName": "ruleId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.guardduty#AssociationMode",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The rule execution mode. Valid values: <code>LIVE</code> | <code>DRY_RUN</code>.</p>",
+                        "smithy.api#jsonName": "mode",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.guardduty#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. Maximum 64 characters.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#jsonName": "clientToken"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.guardduty#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be added to the new custom detection rule association resource.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#CreateCustomDetectionRuleAssociationResponse": {
+            "type": "structure",
+            "members": {
+                "RuleAssociation": {
+                    "target": "com.amazonaws.guardduty#AssociationDetail",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The details of the newly created custom detection rule association.</p>",
+                        "smithy.api#jsonName": "ruleAssociation",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.guardduty#CreateCustomDetectionRuleOrgConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#CreateCustomDetectionRuleOrgConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#CreateCustomDetectionRuleOrgConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an organization-level configuration that enables a custom detection rule across your organization. This operation is available only to the delegated administrator account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/custom-detection-rule/org-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#CreateCustomDetectionRuleOrgConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "RuleId": {
+                    "target": "com.amazonaws.guardduty#RuleId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier for the custom detection rule.</p>",
+                        "smithy.api#jsonName": "ruleId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.guardduty#AssociationMode",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The execution mode of the organization configuration. Valid values: <code>LIVE</code> | <code>DRY_RUN</code>.</p>",
+                        "smithy.api#jsonName": "mode",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IncludeAccountIds": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleAccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account IDs to include in the organization configuration. Mutually exclusive with <code>ExcludeAccountIds</code>.</p>",
+                        "smithy.api#jsonName": "includeAccountIds"
+                    }
+                },
+                "ExcludeAccountIds": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleAccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account IDs to exclude from the organization configuration. Mutually exclusive with <code>IncludeAccountIds</code>.</p>",
+                        "smithy.api#jsonName": "excludeAccountIds"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.guardduty#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#jsonName": "clientToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#CreateCustomDetectionRuleOrgConfigurationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.guardduty#CreateDetector": {
             "type": "operation",
             "input": {
@@ -3959,6 +4320,136 @@
                 "smithy.api#documentation": "<p>Contains information on the server side encryption method used in the S3 bucket. See <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html\">S3 Server-Side Encryption</a> for more information.</p>"
             }
         },
+        "com.amazonaws.guardduty#DeleteCustomDetectionRuleAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#DeleteCustomDetectionRuleAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#DeleteCustomDetectionRuleAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disables a custom detection rule by deleting its association. This operation is idempotent.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/custom-detection-rule/rule/{RuleId}/association/{AssociationId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.guardduty#DeleteCustomDetectionRuleAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "RuleId": {
+                    "target": "com.amazonaws.guardduty#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the custom detection rule.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssociationId": {
+                    "target": "com.amazonaws.guardduty#AssociationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the association to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#DeleteCustomDetectionRuleAssociationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.guardduty#DeleteCustomDetectionRuleOrgConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#DeleteCustomDetectionRuleOrgConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#DeleteCustomDetectionRuleOrgConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the organization-level configuration for a custom detection rule. This operation is available only to the delegated administrator account.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/custom-detection-rule/org-configuration/{RuleId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.guardduty#DeleteCustomDetectionRuleOrgConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "RuleId": {
+                    "target": "com.amazonaws.guardduty#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the custom detection rule.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.guardduty#AssociationMode",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The execution mode of the organization configuration to delete. Valid values: <code>LIVE</code> | <code>DRY_RUN</code>.</p>",
+                        "smithy.api#httpQuery": "mode",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#DeleteCustomDetectionRuleOrgConfigurationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.guardduty#DeleteDetector": {
             "type": "operation",
             "input": {
@@ -4945,6 +5436,360 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about the detected behavior.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#DetectionRuleAccountIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#AccountId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50000
+                }
+            }
+        },
+        "com.amazonaws.guardduty#DetectionRuleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:([0-9]*|aws):.+$"
+            }
+        },
+        "com.amazonaws.guardduty#DetectionRuleConfigurationStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "PROCESSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROCESSING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#DetectionRuleDataSource": {
+            "type": "enum",
+            "members": {
+                "CLOUDTRAIL_MANAGEMENT_EVENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CloudTrailManagementEvent"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#DetectionRuleDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.guardduty#DetectionRuleFilter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.guardduty#FilterFieldName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the field to filter by.</p>",
+                        "smithy.api#jsonName": "name",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleFilterValues",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The values to match against the specified filter name.</p>",
+                        "smithy.api#jsonName": "values",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Condition": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleFilterCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The condition to apply to the filter. For example, <code>EQUALS</code> or <code>CONTAINS</code>.</p>",
+                        "smithy.api#jsonName": "condition"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains filter criteria for listing custom detection rules or associations.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#DetectionRuleFilterCondition": {
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
+                    }
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#DetectionRuleFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#DetectionRuleFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.guardduty#DetectionRuleFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9 _.\\-:/]+$"
+            }
+        },
+        "com.amazonaws.guardduty#DetectionRuleFilterValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#DetectionRuleFilterValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.guardduty#DetectionRuleMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.guardduty#DetectionRuleOrgConfiguration": {
+            "type": "structure",
+            "members": {
+                "RuleId": {
+                    "target": "com.amazonaws.guardduty#RuleId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier for the custom detection rule.</p>",
+                        "smithy.api#jsonName": "ruleId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.guardduty#AssociationMode",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The execution mode of the organization configuration. Valid values: <code>LIVE</code> | <code>DRY_RUN</code>.</p>",
+                        "smithy.api#jsonName": "mode",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleConfigurationStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The configuration status. Valid values: <code>ACTIVE</code> | <code>PROCESSING</code> | <code>FAILED</code>.</p>",
+                        "smithy.api#jsonName": "status",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the current configuration status.</p>",
+                        "smithy.api#jsonName": "statusReason"
+                    }
+                },
+                "IncludeAccountIds": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleAccountIds",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of member account IDs included in the organization configuration. Mutually exclusive with <code>ExcludeAccountIds</code>.</p>",
+                        "smithy.api#jsonName": "includeAccountIds",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExcludeAccountIds": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleAccountIds",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of member account IDs excluded from the organization configuration. Mutually exclusive with <code>IncludeAccountIds</code>.</p>",
+                        "smithy.api#jsonName": "excludeAccountIds",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The timestamp when the organization configuration was created.</p>",
+                        "smithy.api#jsonName": "createdAt",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The timestamp when the organization configuration was last updated.</p>",
+                        "smithy.api#jsonName": "updatedAt",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExpiresAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the organization configuration expires.</p>",
+                        "smithy.api#jsonName": "expiresAt"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the organization-level configuration for a custom detection rule.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#DetectionRuleOrgConfigurationSummary": {
+            "type": "structure",
+            "members": {
+                "RuleId": {
+                    "target": "com.amazonaws.guardduty#RuleId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier for the custom detection rule.</p>",
+                        "smithy.api#jsonName": "ruleId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.guardduty#AssociationMode",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The rule execution mode.</p>",
+                        "smithy.api#jsonName": "mode",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleConfigurationStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The configuration status.</p>",
+                        "smithy.api#jsonName": "status",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the current configuration status.</p>",
+                        "smithy.api#jsonName": "statusReason"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The timestamp when the organization configuration was created.</p>",
+                        "smithy.api#jsonName": "createdAt",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The timestamp when the organization configuration was last updated.</p>",
+                        "smithy.api#jsonName": "updatedAt",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExpiresAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the organization configuration expires.</p>",
+                        "smithy.api#jsonName": "expiresAt"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about an organization-level configuration for a custom detection rule.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#DetectionRuleOrgConfigurationSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#DetectionRuleOrgConfigurationSummary"
+            }
+        },
+        "com.amazonaws.guardduty#DetectionRuleServiceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.guardduty#DetectionRuleSeverity": {
+            "type": "enum",
+            "members": {
+                "CRITICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CRITICAL"
+                    }
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIGH"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDIUM"
+                    }
+                },
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOW"
+                    }
+                }
             }
         },
         "com.amazonaws.guardduty#DetectionSource": {
@@ -6580,6 +7425,53 @@
                 }
             }
         },
+        "com.amazonaws.guardduty#FilterFieldName": {
+            "type": "enum",
+            "members": {
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "name"
+                    }
+                },
+                "DESCRIPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "description"
+                    }
+                },
+                "DATA_SOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dataSource"
+                    }
+                },
+                "SEVERITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "severity"
+                    }
+                },
+                "TACTIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "tactic"
+                    }
+                },
+                "TECHNIQUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "technique"
+                    }
+                },
+                "SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "service"
+                    }
+                }
+            }
+        },
         "com.amazonaws.guardduty#FilterName": {
             "type": "string",
             "traits": {
@@ -7327,6 +8219,225 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Represents the count aggregated by the <code>statusCode</code> and <code>resourceType</code>.</p>",
                         "smithy.api#jsonName": "coverageStatistics"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.guardduty#GetCustomDetectionRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#GetCustomDetectionRuleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#GetCustomDetectionRuleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns details for a custom detection rule in GuardDuty, including its detection logic.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/custom-detection-rule/rule/{RuleId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.guardduty#GetCustomDetectionRuleAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#GetCustomDetectionRuleAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#GetCustomDetectionRuleAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns details for a custom detection rule association.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/custom-detection-rule/rule/{RuleId}/association/{AssociationId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.guardduty#GetCustomDetectionRuleAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "RuleId": {
+                    "target": "com.amazonaws.guardduty#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the custom detection rule.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssociationId": {
+                    "target": "com.amazonaws.guardduty#AssociationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the association.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#GetCustomDetectionRuleAssociationResponse": {
+            "type": "structure",
+            "members": {
+                "RuleAssociation": {
+                    "target": "com.amazonaws.guardduty#AssociationDetail",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The details of the custom detection rule association.</p>",
+                        "smithy.api#jsonName": "ruleAssociation",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.guardduty#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the custom detection rule association resource.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.guardduty#GetCustomDetectionRuleOrgConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#GetCustomDetectionRuleOrgConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#GetCustomDetectionRuleOrgConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the organization-level configuration for a custom detection rule.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/custom-detection-rule/org-configuration/{RuleId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.guardduty#GetCustomDetectionRuleOrgConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "RuleId": {
+                    "target": "com.amazonaws.guardduty#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the custom detection rule.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.guardduty#AssociationMode",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The execution mode of the organization configuration to retrieve. Valid values: <code>LIVE</code> | <code>DRY_RUN</code>.</p>",
+                        "smithy.api#httpQuery": "mode",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#GetCustomDetectionRuleOrgConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "Configuration": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleOrgConfiguration",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The details of the organization configuration.</p>",
+                        "smithy.api#jsonName": "configuration",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.guardduty#GetCustomDetectionRuleRequest": {
+            "type": "structure",
+            "members": {
+                "RuleId": {
+                    "target": "com.amazonaws.guardduty#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the custom detection rule.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#GetCustomDetectionRuleResponse": {
+            "type": "structure",
+            "members": {
+                "Rule": {
+                    "target": "com.amazonaws.guardduty#RuleDetail",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The details of the custom detection rule.</p>",
+                        "smithy.api#jsonName": "rule",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -9273,6 +10384,12 @@
                     "target": "com.amazonaws.guardduty#ArchiveFindings"
                 },
                 {
+                    "target": "com.amazonaws.guardduty#CreateCustomDetectionRuleAssociation"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#CreateCustomDetectionRuleOrgConfiguration"
+                },
+                {
                     "target": "com.amazonaws.guardduty#CreateDetector"
                 },
                 {
@@ -9307,6 +10424,12 @@
                 },
                 {
                     "target": "com.amazonaws.guardduty#DeclineInvitations"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#DeleteCustomDetectionRuleAssociation"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#DeleteCustomDetectionRuleOrgConfiguration"
                 },
                 {
                     "target": "com.amazonaws.guardduty#DeleteDetector"
@@ -9367,6 +10490,15 @@
                 },
                 {
                     "target": "com.amazonaws.guardduty#GetCoverageStatistics"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#GetCustomDetectionRule"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#GetCustomDetectionRuleAssociation"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#GetCustomDetectionRuleOrgConfiguration"
                 },
                 {
                     "target": "com.amazonaws.guardduty#GetDetector"
@@ -9430,6 +10562,15 @@
                 },
                 {
                     "target": "com.amazonaws.guardduty#ListCoverage"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#ListCustomDetectionRuleAssociations"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#ListCustomDetectionRuleOrgConfigurations"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#ListCustomDetectionRules"
                 },
                 {
                     "target": "com.amazonaws.guardduty#ListDetectors"
@@ -9496,6 +10637,12 @@
                 },
                 {
                     "target": "com.amazonaws.guardduty#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#UpdateCustomDetectionRuleAssociation"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#UpdateCustomDetectionRuleOrgConfiguration"
                 },
                 {
                     "target": "com.amazonaws.guardduty#UpdateDetector"
@@ -12647,6 +13794,277 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.guardduty#ListCustomDetectionRuleAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#ListCustomDetectionRuleAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#ListCustomDetectionRuleAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns all custom detection rule associations for your account. You can filter by rule ID and mode.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/custom-detection-rule/association",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "RuleAssociations",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.guardduty#ListCustomDetectionRuleAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single page. Minimum value of 1, maximum value of 100.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token from a previous response. Use this token to retrieve the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "RuleId": {
+                    "target": "com.amazonaws.guardduty#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the custom detection rule to filter associations by.</p>",
+                        "smithy.api#httpQuery": "ruleId"
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.guardduty#AssociationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rule execution mode to filter associations by.</p>",
+                        "smithy.api#httpQuery": "mode"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#ListCustomDetectionRuleAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "RuleAssociations": {
+                    "target": "com.amazonaws.guardduty#AssociationSummaryList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of custom detection rule association summaries.</p>",
+                        "smithy.api#jsonName": "ruleAssociations",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token to retrieve the next page of results. If this field is empty, there are no additional results.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.guardduty#ListCustomDetectionRuleOrgConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#ListCustomDetectionRuleOrgConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#ListCustomDetectionRuleOrgConfigurationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns all organization-level configurations for custom detection rules. You can filter the results by status.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/custom-detection-rule/org-configuration",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Configurations",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.guardduty#ListCustomDetectionRuleOrgConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single page. Minimum value of 1, maximum value of 100.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token from a previous response. Use this token to retrieve the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration status to filter by.</p>",
+                        "smithy.api#httpQuery": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#ListCustomDetectionRuleOrgConfigurationsResponse": {
+            "type": "structure",
+            "members": {
+                "Configurations": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleOrgConfigurationSummaryList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of organization configurations for custom detection rules.</p>",
+                        "smithy.api#jsonName": "configurations",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token to retrieve the next page of results. If this field is empty, there are no additional results.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.guardduty#ListCustomDetectionRules": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#ListCustomDetectionRulesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#ListCustomDetectionRulesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns all available custom detection rules in GuardDuty. You can filter the results by data source, severity, tactic, technique, and service.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/custom-detection-rule/rule",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Rules",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.guardduty#ListCustomDetectionRulesRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single page. Minimum value of 1, maximum value of 100.</p>",
+                        "smithy.api#jsonName": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token from a previous response. Use this token to retrieve the next page of results.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of filter criteria to apply when listing custom detection rules.</p>",
+                        "smithy.api#jsonName": "filters"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#ListCustomDetectionRulesResponse": {
+            "type": "structure",
+            "members": {
+                "Rules": {
+                    "target": "com.amazonaws.guardduty#RuleSummaryList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of custom detection rule summaries.</p>",
+                        "smithy.api#jsonName": "rules",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token to retrieve the next page of results. If this field is empty, there are no additional results.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.guardduty#ListDetectors": {
             "type": "operation",
             "input": {
@@ -14930,6 +16348,24 @@
                     "traits": {
                         "smithy.api#enumValue": "DISABLED"
                     }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#MitreTactic": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.guardduty#MitreTechnique": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
                 }
             }
         },
@@ -17378,6 +18814,326 @@
                     "min": 1,
                     "max": 300
                 }
+            }
+        },
+        "com.amazonaws.guardduty#RuleDefinition": {
+            "type": "structure",
+            "members": {
+                "Expression": {
+                    "target": "com.amazonaws.guardduty#RuleExpression",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The detection logic expression for the rule.</p>",
+                        "smithy.api#jsonName": "expression",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the detection logic for a custom detection rule.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#RuleDetail": {
+            "type": "structure",
+            "members": {
+                "RuleId": {
+                    "target": "com.amazonaws.guardduty#RuleId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier for the rule.</p>",
+                        "smithy.api#jsonName": "ruleId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the rule.</p>",
+                        "smithy.api#jsonName": "arn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.guardduty#RuleName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The display name of the rule.</p>",
+                        "smithy.api#jsonName": "name",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleDescription",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A description of what the rule detects.</p>",
+                        "smithy.api#jsonName": "description",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleSeverity",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The severity level assigned to findings generated by this rule.</p>",
+                        "smithy.api#jsonName": "severity",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSource": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleDataSource",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The data source that the rule analyzes.</p>",
+                        "smithy.api#jsonName": "dataSource",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tactic": {
+                    "target": "com.amazonaws.guardduty#MitreTactic",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The MITRE ATT&amp;CK tactic associated with the rule.</p>",
+                        "smithy.api#jsonName": "tactic",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Technique": {
+                    "target": "com.amazonaws.guardduty#MitreTechnique",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The MITRE ATT&amp;CK technique associated with the rule.</p>",
+                        "smithy.api#jsonName": "technique",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Service": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleServiceName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Web Services service associated with the rule.</p>",
+                        "smithy.api#jsonName": "service",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Definition": {
+                    "target": "com.amazonaws.guardduty#RuleDefinition",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The detection logic definition for the rule.</p>",
+                        "smithy.api#jsonName": "definition",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Language": {
+                    "target": "com.amazonaws.guardduty#RuleLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language used for the detection logic expression.</p>",
+                        "smithy.api#jsonName": "language"
+                    }
+                },
+                "Schema": {
+                    "target": "com.amazonaws.guardduty#RuleSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema version used by the rule definition.</p>",
+                        "smithy.api#jsonName": "schema"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The timestamp when the rule was created.</p>",
+                        "smithy.api#jsonName": "createdAt",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the rule was last updated.</p>",
+                        "smithy.api#jsonName": "updatedAt"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the full details of a custom detection rule, including its detection logic.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#RuleExpression": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                }
+            }
+        },
+        "com.amazonaws.guardduty#RuleId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+            }
+        },
+        "com.amazonaws.guardduty#RuleLanguage": {
+            "type": "enum",
+            "members": {
+                "SQL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SQL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#RuleName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.guardduty#RuleSchema": {
+            "type": "enum",
+            "members": {
+                "CLOUD_TRAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CloudTrail"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#RuleSummary": {
+            "type": "structure",
+            "members": {
+                "RuleId": {
+                    "target": "com.amazonaws.guardduty#RuleId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier for the rule.</p>",
+                        "smithy.api#jsonName": "ruleId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the rule.</p>",
+                        "smithy.api#jsonName": "arn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.guardduty#RuleName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The display name of the rule.</p>",
+                        "smithy.api#jsonName": "name",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleDescription",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A description of what the rule detects.</p>",
+                        "smithy.api#jsonName": "description",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleSeverity",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The severity level assigned to findings generated by this rule.</p>",
+                        "smithy.api#jsonName": "severity",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSource": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleDataSource",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The data source that the rule analyzes.</p>",
+                        "smithy.api#jsonName": "dataSource",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tactic": {
+                    "target": "com.amazonaws.guardduty#MitreTactic",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The MITRE ATT&amp;CK tactic associated with the rule.</p>",
+                        "smithy.api#jsonName": "tactic",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Technique": {
+                    "target": "com.amazonaws.guardduty#MitreTechnique",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The MITRE ATT&amp;CK technique associated with the rule.</p>",
+                        "smithy.api#jsonName": "technique",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Service": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleServiceName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Web Services service associated with the rule.</p>",
+                        "smithy.api#jsonName": "service",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Language": {
+                    "target": "com.amazonaws.guardduty#RuleLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language used for the detection logic expression.</p>",
+                        "smithy.api#jsonName": "language"
+                    }
+                },
+                "Schema": {
+                    "target": "com.amazonaws.guardduty#RuleSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema version used by the rule definition.</p>",
+                        "smithy.api#jsonName": "schema"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The timestamp when the rule was created.</p>",
+                        "smithy.api#jsonName": "createdAt",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the rule was last updated.</p>",
+                        "smithy.api#jsonName": "updatedAt"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about a custom detection rule.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#RuleSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#RuleSummary"
             }
         },
         "com.amazonaws.guardduty#RuntimeContext": {
@@ -20450,6 +22206,162 @@
             }
         },
         "com.amazonaws.guardduty#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.guardduty#UpdateCustomDetectionRuleAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#UpdateCustomDetectionRuleAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#UpdateCustomDetectionRuleAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the mode of an existing custom detection rule association.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/custom-detection-rule/rule/{RuleId}/association/{AssociationId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.guardduty#UpdateCustomDetectionRuleAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "RuleId": {
+                    "target": "com.amazonaws.guardduty#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the custom detection rule.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssociationId": {
+                    "target": "com.amazonaws.guardduty#AssociationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the association to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.guardduty#AssociationMode",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The rule execution mode. Valid values: <code>LIVE</code> | <code>DRY_RUN</code>.</p>",
+                        "smithy.api#jsonName": "mode",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#UpdateCustomDetectionRuleAssociationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.guardduty#UpdateCustomDetectionRuleOrgConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#UpdateCustomDetectionRuleOrgConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#UpdateCustomDetectionRuleOrgConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the organization-level configuration for a custom detection rule, including the mode and include/exclude account lists.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/custom-detection-rule/org-configuration/{RuleId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.guardduty#UpdateCustomDetectionRuleOrgConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "RuleId": {
+                    "target": "com.amazonaws.guardduty#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the custom detection rule.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.guardduty#AssociationMode",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The execution mode of the organization configuration. Valid values: <code>LIVE</code> | <code>DRY_RUN</code>.</p>",
+                        "smithy.api#jsonName": "mode",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IncludeAccountIds": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleAccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account IDs to include in the organization configuration. Mutually exclusive with <code>ExcludeAccountIds</code>.</p>",
+                        "smithy.api#jsonName": "includeAccountIds"
+                    }
+                },
+                "ExcludeAccountIds": {
+                    "target": "com.amazonaws.guardduty#DetectionRuleAccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account IDs to exclude from the organization configuration. Mutually exclusive with <code>IncludeAccountIds</code>.</p>",
+                        "smithy.api#jsonName": "excludeAccountIds"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.guardduty#UpdateCustomDetectionRuleOrgConfigurationResponse": {
             "type": "structure",
             "members": {},
             "traits": {
