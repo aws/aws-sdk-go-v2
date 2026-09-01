@@ -1,0 +1,5 @@
+POST /v2/email/update-configuration-sets
+
+Content-Type: application/json
+
+{"ConfigurationSetName":"__ConfigurationSetName__","MessageSecurityOptions":{"SigningScheme":{"DefaultScheme":{}}}}

@@ -1,0 +1,8 @@
+{
+    "id": "1d9dd7dd-cb91-4cad-a683-7d90a3b5c449",
+    "type": "feature",
+    "description": "Update UserData and UploadPolicy shapes to use SecureBlob",
+    "modules": [
+        "service/ec2"
+    ]
+}

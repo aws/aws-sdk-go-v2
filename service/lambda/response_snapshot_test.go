@@ -1003,10 +1003,16 @@ func TestCheckResponseSnapshot_CreateFunction(t *testing.T) {
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 		},
 		SigningProfileVersionArn: ptr.String("__SigningProfileVersionArn__"),
@@ -1132,10 +1138,16 @@ func TestCheckResponseSnapshot_CreateFunction(t *testing.T) {
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 		},
 		CodeSigningConfigArn: ptr.String("__CodeSigningConfigArn__"),
@@ -2880,10 +2892,16 @@ func TestCheckResponseSnapshot_GetFunction(t *testing.T) {
 				{
 					Arn:            ptr.String("__Arn__"),
 					LocalMountPath: ptr.String("__LocalMountPath__"),
+					S3FilesConfig: &types.S3FilesConfig{
+						DirectS3Read: types.DirectS3Read("ENABLED"),
+					},
 				},
 				{
 					Arn:            ptr.String("__Arn__"),
 					LocalMountPath: ptr.String("__LocalMountPath__"),
+					S3FilesConfig: &types.S3FilesConfig{
+						DirectS3Read: types.DirectS3Read("ENABLED"),
+					},
 				},
 			},
 			SigningProfileVersionArn: ptr.String("__SigningProfileVersionArn__"),
@@ -3109,10 +3127,16 @@ func TestCheckResponseSnapshot_GetFunctionConfiguration(t *testing.T) {
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 		},
 		SigningProfileVersionArn: ptr.String("__SigningProfileVersionArn__"),
@@ -4492,10 +4516,16 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 					{
 						Arn:            ptr.String("__Arn__"),
 						LocalMountPath: ptr.String("__LocalMountPath__"),
+						S3FilesConfig: &types.S3FilesConfig{
+							DirectS3Read: types.DirectS3Read("ENABLED"),
+						},
 					},
 					{
 						Arn:            ptr.String("__Arn__"),
 						LocalMountPath: ptr.String("__LocalMountPath__"),
+						S3FilesConfig: &types.S3FilesConfig{
+							DirectS3Read: types.DirectS3Read("ENABLED"),
+						},
 					},
 				},
 				SigningProfileVersionArn: ptr.String("__SigningProfileVersionArn__"),
@@ -4626,10 +4656,16 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 					{
 						Arn:            ptr.String("__Arn__"),
 						LocalMountPath: ptr.String("__LocalMountPath__"),
+						S3FilesConfig: &types.S3FilesConfig{
+							DirectS3Read: types.DirectS3Read("ENABLED"),
+						},
 					},
 					{
 						Arn:            ptr.String("__Arn__"),
 						LocalMountPath: ptr.String("__LocalMountPath__"),
+						S3FilesConfig: &types.S3FilesConfig{
+							DirectS3Read: types.DirectS3Read("ENABLED"),
+						},
 					},
 				},
 				SigningProfileVersionArn: ptr.String("__SigningProfileVersionArn__"),
@@ -5012,10 +5048,16 @@ func TestCheckResponseSnapshot_ListVersionsByFunction(t *testing.T) {
 					{
 						Arn:            ptr.String("__Arn__"),
 						LocalMountPath: ptr.String("__LocalMountPath__"),
+						S3FilesConfig: &types.S3FilesConfig{
+							DirectS3Read: types.DirectS3Read("ENABLED"),
+						},
 					},
 					{
 						Arn:            ptr.String("__Arn__"),
 						LocalMountPath: ptr.String("__LocalMountPath__"),
+						S3FilesConfig: &types.S3FilesConfig{
+							DirectS3Read: types.DirectS3Read("ENABLED"),
+						},
 					},
 				},
 				SigningProfileVersionArn: ptr.String("__SigningProfileVersionArn__"),
@@ -5146,10 +5188,16 @@ func TestCheckResponseSnapshot_ListVersionsByFunction(t *testing.T) {
 					{
 						Arn:            ptr.String("__Arn__"),
 						LocalMountPath: ptr.String("__LocalMountPath__"),
+						S3FilesConfig: &types.S3FilesConfig{
+							DirectS3Read: types.DirectS3Read("ENABLED"),
+						},
 					},
 					{
 						Arn:            ptr.String("__Arn__"),
 						LocalMountPath: ptr.String("__LocalMountPath__"),
+						S3FilesConfig: &types.S3FilesConfig{
+							DirectS3Read: types.DirectS3Read("ENABLED"),
+						},
 					},
 				},
 				SigningProfileVersionArn: ptr.String("__SigningProfileVersionArn__"),
@@ -5369,10 +5417,16 @@ func TestCheckResponseSnapshot_PublishVersion(t *testing.T) {
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 		},
 		SigningProfileVersionArn: ptr.String("__SigningProfileVersionArn__"),
@@ -6432,10 +6486,16 @@ func TestCheckResponseSnapshot_UpdateFunctionCode(t *testing.T) {
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 		},
 		SigningProfileVersionArn: ptr.String("__SigningProfileVersionArn__"),
@@ -6601,10 +6661,16 @@ func TestCheckResponseSnapshot_UpdateFunctionConfiguration(t *testing.T) {
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 		},
 		SigningProfileVersionArn: ptr.String("__SigningProfileVersionArn__"),
@@ -6716,10 +6782,16 @@ func TestCheckResponseSnapshot_UpdateFunctionConfiguration(t *testing.T) {
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 		},
 		ImageConfig: &types.ImageConfig{
@@ -7212,10 +7284,16 @@ func TestCheckResponseSnapshot_Error_CodeSigningConfigNotFoundException(t *testi
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 		},
 		CodeSigningConfigArn: ptr.String("__CodeSigningConfigArn__"),
@@ -7341,10 +7419,16 @@ func TestCheckResponseSnapshot_Error_CodeStorageExceededException(t *testing.T) 
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 		},
 		CodeSigningConfigArn: ptr.String("__CodeSigningConfigArn__"),
@@ -7470,10 +7554,16 @@ func TestCheckResponseSnapshot_Error_CodeVerificationFailedException(t *testing.
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 		},
 		CodeSigningConfigArn: ptr.String("__CodeSigningConfigArn__"),
@@ -7950,10 +8040,16 @@ func TestCheckResponseSnapshot_Error_FunctionVersionsPerCapacityProviderLimitExc
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 		},
 		CodeSigningConfigArn: ptr.String("__CodeSigningConfigArn__"),
@@ -8079,10 +8175,16 @@ func TestCheckResponseSnapshot_Error_InvalidCodeSignatureException(t *testing.T)
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 		},
 		CodeSigningConfigArn: ptr.String("__CodeSigningConfigArn__"),

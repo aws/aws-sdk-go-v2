@@ -206,6 +206,35 @@ func serdeDecodeJSON(b []byte) (any, bool) {
 	}
 	return v, true
 }
+func TestCheckRequestSnapshot_AssociateEmailIdentityCertificate(t *testing.T) {
+	input := &AssociateEmailIdentityCertificateInput{
+		EmailIdentity:  ptr.String("__EmailIdentity__"),
+		FromAddress:    ptr.String("__FromAddress__"),
+		CertificateArn: ptr.String("__CertificateArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateEmailIdentityCertificate(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateEmailIdentityCertificate"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_BatchGetMetricData(t *testing.T) {
 	input := &BatchGetMetricDataInput{
 		Queries: []types.BatchGetMetricDataQuery{
@@ -335,6 +364,11 @@ func TestCheckRequestSnapshot_CreateConfigurationSet(t *testing.T) {
 		},
 		ArchivingOptions: &types.ArchivingOptions{
 			ArchiveArn: ptr.String("__ArchiveArn__"),
+		},
+		MessageSecurityOptions: &types.MessageSecurityOptions{
+			SigningScheme: &types.SigningSchemeMemberDefaultScheme{
+				Value: types.DefaultSigningScheme{},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1462,6 +1496,34 @@ func TestCheckRequestSnapshot_DeleteTenantResourceAssociation(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DisassociateEmailIdentityCertificate(t *testing.T) {
+	input := &DisassociateEmailIdentityCertificateInput{
+		EmailIdentity: ptr.String("__EmailIdentity__"),
+		FromAddress:   ptr.String("__FromAddress__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateEmailIdentityCertificate(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateEmailIdentityCertificate"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetAccount(t *testing.T) {
 	input := &GetAccountInput{}
 	body := &bytes.Buffer{}
@@ -2374,6 +2436,35 @@ func TestCheckRequestSnapshot_ListEmailIdentities(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEmailIdentities"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListEmailIdentityCertificates(t *testing.T) {
+	input := &ListEmailIdentityCertificatesInput{
+		EmailIdentity: ptr.String("__EmailIdentity__"),
+		NextToken:     ptr.String("__NextToken__"),
+		PageSize:      ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListEmailIdentityCertificates(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEmailIdentityCertificates"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3922,6 +4013,38 @@ func TestCheckRequestSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateConfigurationSet(t *testing.T) {
+	input := &UpdateConfigurationSetInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		MessageSecurityOptions: &types.MessageSecurityOptions{
+			SigningScheme: &types.SigningSchemeMemberDefaultScheme{
+				Value: types.DefaultSigningScheme{},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateConfigurationSet(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateConfigurationSet"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateConfigurationSetEventDestination(t *testing.T) {
 	input := &UpdateConfigurationSetEventDestinationInput{
 		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
@@ -4216,6 +4339,35 @@ func TestCheckRequestSnapshot_UpdateReputationEntityPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateRequestSnapshot_AssociateEmailIdentityCertificate(t *testing.T) {
+	input := &AssociateEmailIdentityCertificateInput{
+		EmailIdentity:  ptr.String("__EmailIdentity__"),
+		FromAddress:    ptr.String("__FromAddress__"),
+		CertificateArn: ptr.String("__CertificateArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateEmailIdentityCertificate(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateEmailIdentityCertificate"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_BatchGetMetricData(t *testing.T) {
 	input := &BatchGetMetricDataInput{
 		Queries: []types.BatchGetMetricDataQuery{
@@ -4345,6 +4497,11 @@ func TestUpdateRequestSnapshot_CreateConfigurationSet(t *testing.T) {
 		},
 		ArchivingOptions: &types.ArchivingOptions{
 			ArchiveArn: ptr.String("__ArchiveArn__"),
+		},
+		MessageSecurityOptions: &types.MessageSecurityOptions{
+			SigningScheme: &types.SigningSchemeMemberDefaultScheme{
+				Value: types.DefaultSigningScheme{},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -5472,6 +5629,34 @@ func TestUpdateRequestSnapshot_DeleteTenantResourceAssociation(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DisassociateEmailIdentityCertificate(t *testing.T) {
+	input := &DisassociateEmailIdentityCertificateInput{
+		EmailIdentity: ptr.String("__EmailIdentity__"),
+		FromAddress:   ptr.String("__FromAddress__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateEmailIdentityCertificate(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateEmailIdentityCertificate"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetAccount(t *testing.T) {
 	input := &GetAccountInput{}
 	body := &bytes.Buffer{}
@@ -6384,6 +6569,35 @@ func TestUpdateRequestSnapshot_ListEmailIdentities(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEmailIdentities"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListEmailIdentityCertificates(t *testing.T) {
+	input := &ListEmailIdentityCertificatesInput{
+		EmailIdentity: ptr.String("__EmailIdentity__"),
+		NextToken:     ptr.String("__NextToken__"),
+		PageSize:      ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListEmailIdentityCertificates(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEmailIdentityCertificates"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7928,6 +8142,38 @@ func TestUpdateRequestSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UntagResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateConfigurationSet(t *testing.T) {
+	input := &UpdateConfigurationSetInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		MessageSecurityOptions: &types.MessageSecurityOptions{
+			SigningScheme: &types.SigningSchemeMemberDefaultScheme{
+				Value: types.DefaultSigningScheme{},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateConfigurationSet(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateConfigurationSet"); err != nil {
 		t.Fatal(err)
 	}
 }

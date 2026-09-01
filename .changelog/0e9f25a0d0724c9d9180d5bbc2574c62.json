@@ -1,0 +1,8 @@
+{
+    "id": "0e9f25a0-d072-4c9d-9180-d5bbc2574c62",
+    "type": "feature",
+    "description": "This release adds renewal support for AWS Marketplace private offers. Agreements report whether they renew and, if not, why. Renewal terms add price increases, renewal limits, renewal decision deadlines, and payment schedule templates. SearchAgreements adds filters.",
+    "modules": [
+        "service/marketplaceagreement"
+    ]
+}

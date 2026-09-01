@@ -71,6 +71,9 @@ type SubscribeToShardInput struct {
 	// This member is required.
 	StartingPosition *types.StartingPosition
 
+	// Checks if your request will succeed. DryRun is an optional parameter.
+	DryRun *bool
+
 	// Not Implemented. Reserved for future use.
 	StreamId *string
 

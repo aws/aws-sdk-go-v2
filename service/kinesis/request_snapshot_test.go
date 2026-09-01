@@ -777,6 +777,7 @@ func TestCheckRequestSnapshot_GetRecords(t *testing.T) {
 		Limit:         ptr.Int32(1),
 		StreamARN:     ptr.String("__StreamARN__"),
 		StreamId:      ptr.String("__StreamId__"),
+		DryRun:        ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -838,6 +839,7 @@ func TestCheckRequestSnapshot_GetShardIterator(t *testing.T) {
 		Timestamp:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		StreamARN:              ptr.String("__StreamARN__"),
 		StreamId:               ptr.String("__StreamId__"),
+		DryRun:                 ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1127,6 +1129,7 @@ func TestCheckRequestSnapshot_PutRecord(t *testing.T) {
 		SequenceNumberForOrdering: ptr.String("__SequenceNumberForOrdering__"),
 		StreamARN:                 ptr.String("__StreamARN__"),
 		StreamId:                  ptr.String("__StreamId__"),
+		DryRun:                    ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1168,6 +1171,7 @@ func TestCheckRequestSnapshot_PutRecords(t *testing.T) {
 		StreamName: ptr.String("__StreamName__"),
 		StreamARN:  ptr.String("__StreamARN__"),
 		StreamId:   ptr.String("__StreamId__"),
+		DryRun:     ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2203,6 +2207,7 @@ func TestUpdateRequestSnapshot_GetRecords(t *testing.T) {
 		Limit:         ptr.Int32(1),
 		StreamARN:     ptr.String("__StreamARN__"),
 		StreamId:      ptr.String("__StreamId__"),
+		DryRun:        ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2264,6 +2269,7 @@ func TestUpdateRequestSnapshot_GetShardIterator(t *testing.T) {
 		Timestamp:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		StreamARN:              ptr.String("__StreamARN__"),
 		StreamId:               ptr.String("__StreamId__"),
+		DryRun:                 ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2553,6 +2559,7 @@ func TestUpdateRequestSnapshot_PutRecord(t *testing.T) {
 		SequenceNumberForOrdering: ptr.String("__SequenceNumberForOrdering__"),
 		StreamARN:                 ptr.String("__StreamARN__"),
 		StreamId:                  ptr.String("__StreamId__"),
+		DryRun:                    ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2594,6 +2601,7 @@ func TestUpdateRequestSnapshot_PutRecords(t *testing.T) {
 		StreamName: ptr.String("__StreamName__"),
 		StreamARN:  ptr.String("__StreamARN__"),
 		StreamId:   ptr.String("__StreamId__"),
+		DryRun:     ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""

@@ -106,6 +106,10 @@ type DescribePipelineExecutionOutput struct {
 	// The token to be used for the next set of paginated results.
 	NextToken *string
 
+	// The mount overrides provided as input for the pipeline execution. Present when
+	// mount overrides were supplied at execution time.
+	RequestMountOverrides *types.MountOverrides
+
 	// The time the pipeline execution started, in Unix epoch time.
 	StartTime *time.Time
 

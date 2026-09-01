@@ -1,0 +1,8 @@
+{
+    "id": "66a06aec-215a-462b-9453-74998154b247",
+    "type": "feature",
+    "description": "France and Monaco Additional Info changes",
+    "modules": [
+        "service/taxsettings"
+    ]
+}

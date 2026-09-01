@@ -17,6 +17,10 @@ import (
 // You must specify either S3DestinationConfiguration or
 // S3TablesDestinationConfiguration , but not both.
 //
+// To use this operation, you must have permission to pass the specified service
+// execution IAM role to Amazon Kinesis Data Streams (the iam:PassRole permission
+// on that role).
+//
 // Creating a channel is an asynchronous operation. Upon receiving the request,
 // Amazon Kinesis Data Streams returns immediately with the channel in the CREATING
 // state. After provisioning is complete, Amazon Kinesis Data Streams sets the
@@ -25,8 +29,9 @@ import (
 // This operation is only supported for data streams with the on-demand capacity
 // mode.
 //
-// This API has a call limit of 5 transactions per second (TPS) for each Amazon
-// Web Services account. Exceeding 5 TPS results in a LimitExceededException .
+// This operation has a call limit of 5 transactions per second (TPS) for each
+// Amazon Web Services account. Exceeding 5 TPS results in a LimitExceededException
+// .
 func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, optFns ...func(*Options)) (*CreateChannelOutput, error) {
 	if params == nil {
 		params = &CreateChannelInput{}

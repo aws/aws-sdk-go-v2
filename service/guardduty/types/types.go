@@ -333,6 +333,89 @@ type AnomalyUnusual struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the full details of a custom detection rule association.
+type AssociationDetail struct {
+
+	// The Amazon Web Services account ID associated with this rule association.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The Amazon Resource Name (ARN) of the association.
+	//
+	// This member is required.
+	Arn *string
+
+	// The unique identifier for the association.
+	//
+	// This member is required.
+	AssociationId *string
+
+	// The timestamp when the association was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The rule execution mode. Valid values: LIVE | DRY_RUN .
+	//
+	// This member is required.
+	Mode AssociationMode
+
+	// The unique identifier for the custom detection rule.
+	//
+	// This member is required.
+	RuleId *string
+
+	// The timestamp when the association was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The timestamp when the association expires.
+	ExpiresAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a custom detection rule association.
+type AssociationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the association.
+	//
+	// This member is required.
+	Arn *string
+
+	// The unique identifier for the association.
+	//
+	// This member is required.
+	AssociationId *string
+
+	// The timestamp when the association was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The rule execution mode. Valid values: LIVE | DRY_RUN .
+	//
+	// This member is required.
+	Mode AssociationMode
+
+	// The unique identifier for the custom detection rule.
+	//
+	// This member is required.
+	RuleId *string
+
+	// The timestamp when the association was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The timestamp when the association expires.
+	ExpiresAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the Autonomous System (AS) associated with the
 // network endpoints involved in an attack sequence.
 type AutonomousSystem struct {
@@ -1121,6 +1204,113 @@ type Detection struct {
 
 	// The details about the attack sequence.
 	Sequence *Sequence
+
+	noSmithyDocumentSerde
+}
+
+// Contains filter criteria for listing custom detection rules or associations.
+type DetectionRuleFilter struct {
+
+	// The name of the field to filter by.
+	//
+	// This member is required.
+	Name FilterFieldName
+
+	// The values to match against the specified filter name.
+	//
+	// This member is required.
+	Values []string
+
+	// The condition to apply to the filter. For example, EQUALS or CONTAINS .
+	Condition DetectionRuleFilterCondition
+
+	noSmithyDocumentSerde
+}
+
+// Contains the organization-level configuration for a custom detection rule.
+type DetectionRuleOrgConfiguration struct {
+
+	// The timestamp when the organization configuration was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// A list of member account IDs excluded from the organization configuration.
+	// Mutually exclusive with IncludeAccountIds .
+	//
+	// This member is required.
+	ExcludeAccountIds []string
+
+	// A list of member account IDs included in the organization configuration.
+	// Mutually exclusive with ExcludeAccountIds .
+	//
+	// This member is required.
+	IncludeAccountIds []string
+
+	// The execution mode of the organization configuration. Valid values: LIVE |
+	// DRY_RUN .
+	//
+	// This member is required.
+	Mode AssociationMode
+
+	// The unique identifier for the custom detection rule.
+	//
+	// This member is required.
+	RuleId *string
+
+	// The configuration status. Valid values: ACTIVE | PROCESSING | FAILED .
+	//
+	// This member is required.
+	Status DetectionRuleConfigurationStatus
+
+	// The timestamp when the organization configuration was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The timestamp when the organization configuration expires.
+	ExpiresAt *time.Time
+
+	// The reason for the current configuration status.
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about an organization-level configuration for a
+// custom detection rule.
+type DetectionRuleOrgConfigurationSummary struct {
+
+	// The timestamp when the organization configuration was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The rule execution mode.
+	//
+	// This member is required.
+	Mode AssociationMode
+
+	// The unique identifier for the custom detection rule.
+	//
+	// This member is required.
+	RuleId *string
+
+	// The configuration status.
+	//
+	// This member is required.
+	Status DetectionRuleConfigurationStatus
+
+	// The timestamp when the organization configuration was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The timestamp when the organization configuration expires.
+	ExpiresAt *time.Time
+
+	// The reason for the current configuration status.
+	StatusReason *string
 
 	noSmithyDocumentSerde
 }
@@ -3983,6 +4173,153 @@ type ResourceV2 struct {
 
 	// Contains information about the tags associated with the resource.
 	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// Contains the detection logic for a custom detection rule.
+type RuleDefinition struct {
+
+	// The detection logic expression for the rule.
+	//
+	// This member is required.
+	Expression *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the full details of a custom detection rule, including its detection
+// logic.
+type RuleDetail struct {
+
+	// The Amazon Resource Name (ARN) of the rule.
+	//
+	// This member is required.
+	Arn *string
+
+	// The timestamp when the rule was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The data source that the rule analyzes.
+	//
+	// This member is required.
+	DataSource DetectionRuleDataSource
+
+	// The detection logic definition for the rule.
+	//
+	// This member is required.
+	Definition *RuleDefinition
+
+	// A description of what the rule detects.
+	//
+	// This member is required.
+	Description *string
+
+	// The display name of the rule.
+	//
+	// This member is required.
+	Name *string
+
+	// The unique identifier for the rule.
+	//
+	// This member is required.
+	RuleId *string
+
+	// The Amazon Web Services service associated with the rule.
+	//
+	// This member is required.
+	Service *string
+
+	// The severity level assigned to findings generated by this rule.
+	//
+	// This member is required.
+	Severity DetectionRuleSeverity
+
+	// The MITRE ATT&CK tactic associated with the rule.
+	//
+	// This member is required.
+	Tactic *string
+
+	// The MITRE ATT&CK technique associated with the rule.
+	//
+	// This member is required.
+	Technique *string
+
+	// The language used for the detection logic expression.
+	Language RuleLanguage
+
+	// The schema version used by the rule definition.
+	Schema RuleSchema
+
+	// The timestamp when the rule was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a custom detection rule.
+type RuleSummary struct {
+
+	// The Amazon Resource Name (ARN) of the rule.
+	//
+	// This member is required.
+	Arn *string
+
+	// The timestamp when the rule was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The data source that the rule analyzes.
+	//
+	// This member is required.
+	DataSource DetectionRuleDataSource
+
+	// A description of what the rule detects.
+	//
+	// This member is required.
+	Description *string
+
+	// The display name of the rule.
+	//
+	// This member is required.
+	Name *string
+
+	// The unique identifier for the rule.
+	//
+	// This member is required.
+	RuleId *string
+
+	// The Amazon Web Services service associated with the rule.
+	//
+	// This member is required.
+	Service *string
+
+	// The severity level assigned to findings generated by this rule.
+	//
+	// This member is required.
+	Severity DetectionRuleSeverity
+
+	// The MITRE ATT&CK tactic associated with the rule.
+	//
+	// This member is required.
+	Tactic *string
+
+	// The MITRE ATT&CK technique associated with the rule.
+	//
+	// This member is required.
+	Technique *string
+
+	// The language used for the detection logic expression.
+	Language RuleLanguage
+
+	// The schema version used by the rule definition.
+	Schema RuleSchema
+
+	// The timestamp when the rule was last updated.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }

@@ -1,0 +1,5 @@
+POST /custom-detection-rule/association
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","mode":"LIVE","ruleId":"__RuleId__","tags":{"key0":"__Value__"}}

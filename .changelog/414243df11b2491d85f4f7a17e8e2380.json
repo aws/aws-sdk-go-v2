@@ -1,0 +1,8 @@
+{
+    "id": "414243df-11b2-491d-85f4-f7a17e8e2380",
+    "type": "feature",
+    "description": "Adds support for AAC passthrough. Adds ManifestCues option to support HLS manifest Cue marker passthrough. Adds playback device compatibility mode for DASH H.265 outputs. Adds TTML caption styling options. Adds interlace mode support for XAVC HD Intra CBG profile.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

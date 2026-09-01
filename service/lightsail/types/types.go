@@ -8748,6 +8748,76 @@ func (v *Origin) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// An object that contains information about the Lightsail partner program
+// membership of an Amazon Lightsail account.
+type PartnerInfo struct {
+
+	// The timestamp when the account was enrolled in the Lightsail partner program.
+	//
+	// This member is required.
+	EnrolledAt *time.Time
+
+	// The status of the partner membership.
+	//
+	// The following statuses are possible:
+	//
+	//   - Active – The membership is active, and the benefits of the current tier are
+	//   available to the account.
+	//
+	//   - Suspended – The membership is suspended, and the benefits of the tier are
+	//   not available to the account.
+	//
+	// This member is required.
+	Status PartnerStatus
+
+	// The tier of the partner membership.
+	TierName TierName
+
+	noSmithyDocumentSerde
+}
+
+func (v *PartnerInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PartnerInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PartnerInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnrolledAt != nil {
+		s.WriteTime(schemas.PartnerInfo_enrolledAt, *v.EnrolledAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.PartnerInfo_status, string(v.Status))
+	}
+	if v.TierName != "" {
+		s.WriteString(schemas.PartnerInfo_tierName, string(v.TierName))
+	}
+}
+func (v *PartnerInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PartnerInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PartnerInfo_enrolledAt:
+			v.EnrolledAt = new(time.Time)
+			return d.ReadTime(schemas.PartnerInfo_enrolledAt, v.EnrolledAt)
+		case schemas.PartnerInfo_status:
+			var ev string
+			if err := d.ReadString(schemas.PartnerInfo_status, &ev); err != nil {
+				return err
+			}
+			v.Status = PartnerStatus(ev)
+			return nil
+		case schemas.PartnerInfo_tierName:
+			var ev string
+			if err := d.ReadString(schemas.PartnerInfo_tierName, &ev); err != nil {
+				return err
+			}
+			v.TierName = TierName(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The password data for the Windows Server-based instance, including the
 // ciphertext and the key pair name.
 type PasswordData struct {

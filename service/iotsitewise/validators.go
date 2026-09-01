@@ -3876,6 +3876,23 @@ func validateComputeNodeList(v []types.ComputeNode) error {
 	}
 }
 
+func validateComputeNodeMountsMap(v map[string][]types.Mount) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComputeNodeMountsMap"}
+	for key := range v {
+		if err := validateMountList(v[key]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateContainerTaskConfiguration(v *types.ContainerTaskConfiguration) error {
 	if v == nil {
 		return nil
@@ -3892,6 +3909,16 @@ func validateContainerTaskConfiguration(v *types.ContainerTaskConfiguration) err
 	}
 	if len(v.ProcessingUnit) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ProcessingUnit"))
+	}
+	if v.EphemeralStorageConfiguration != nil {
+		if err := validateEphemeralStorageConfiguration(v.EphemeralStorageConfiguration); err != nil {
+			invalidParams.AddNested("EphemeralStorageConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Mounts != nil {
+		if err := validateMountList(v.Mounts); err != nil {
+			invalidParams.AddNested("Mounts", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4157,6 +4184,24 @@ func validateEnrichmentTrimSettings(v *types.EnrichmentTrimSettings) error {
 		if err := validateTimeInNanos(v.EndTime); err != nil {
 			invalidParams.AddNested("EndTime", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEphemeralStorageConfiguration(v *types.EphemeralStorageConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EphemeralStorageConfiguration"}
+	if len(v.StorageClass) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageClass"))
+	}
+	if v.StorageSizeInGiB == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageSizeInGiB"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4648,6 +4693,89 @@ func validateMetricWindow(v *types.MetricWindow) error {
 	}
 }
 
+func validateMount(v *types.Mount) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Mount"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.RelativePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RelativePath"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateMountSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.StorageType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMountList(v []types.Mount) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MountList"}
+	for i := range v {
+		if err := validateMount(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMountOverrides(v *types.MountOverrides) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MountOverrides"}
+	if v.ComputeNodes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputeNodes"))
+	} else if v.ComputeNodes != nil {
+		if err := validateComputeNodeMountsMap(v.ComputeNodes); err != nil {
+			invalidParams.AddNested("ComputeNodes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMountSource(v types.MountSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MountSource"}
+	switch uv := v.(type) {
+	case *types.MountSourceMemberS3AccessPoint:
+		if err := validateS3AccessPointSource(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3AccessPoint]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMultiLayerStorage(v *types.MultiLayerStorage) error {
 	if v == nil {
 		return nil
@@ -4883,6 +5011,21 @@ func validateResource(v *types.Resource) error {
 		if err := validateProjectResource(v.Project); err != nil {
 			invalidParams.AddNested("Project", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3AccessPointSource(v *types.S3AccessPointSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3AccessPointSource"}
+	if v.AccessPointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessPointArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7324,6 +7467,11 @@ func validateOpStartPipelineExecutionInput(v *StartPipelineExecutionInput) error
 	}
 	if v.PipelineName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PipelineName"))
+	}
+	if v.ExecutionMountOverrides != nil {
+		if err := validateMountOverrides(v.ExecutionMountOverrides); err != nil {
+			invalidParams.AddNested("ExecutionMountOverrides", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

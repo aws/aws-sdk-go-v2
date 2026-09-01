@@ -3633,6 +3633,11 @@ func awsAwsjson11_serializeOpDocumentGetRecordsInput(v *GetRecordsInput, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.DryRun != nil {
+		ok := object.Key("DryRun")
+		ok.Boolean(*v.DryRun)
+	}
+
 	if v.Limit != nil {
 		ok := object.Key("Limit")
 		ok.Integer(*v.Limit)
@@ -3676,6 +3681,11 @@ func awsAwsjson11_serializeOpDocumentGetResourcePolicyInput(v *GetResourcePolicy
 func awsAwsjson11_serializeOpDocumentGetShardIteratorInput(v *GetShardIteratorInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DryRun != nil {
+		ok := object.Key("DryRun")
+		ok.Boolean(*v.DryRun)
+	}
 
 	if v.ShardId != nil {
 		ok := object.Key("ShardId")
@@ -3959,6 +3969,11 @@ func awsAwsjson11_serializeOpDocumentPutRecordInput(v *PutRecordInput, value smi
 		ok.Base64EncodeBytes(v.Data)
 	}
 
+	if v.DryRun != nil {
+		ok := object.Key("DryRun")
+		ok.Boolean(*v.DryRun)
+	}
+
 	if v.ExplicitHashKey != nil {
 		ok := object.Key("ExplicitHashKey")
 		ok.String(*v.ExplicitHashKey)
@@ -3995,6 +4010,11 @@ func awsAwsjson11_serializeOpDocumentPutRecordInput(v *PutRecordInput, value smi
 func awsAwsjson11_serializeOpDocumentPutRecordsInput(v *PutRecordsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DryRun != nil {
+		ok := object.Key("DryRun")
+		ok.Boolean(*v.DryRun)
+	}
 
 	if v.Records != nil {
 		ok := object.Key("Records")
@@ -4204,6 +4224,11 @@ func awsAwsjson11_serializeOpDocumentSubscribeToShardInput(v *SubscribeToShardIn
 	if v.ConsumerARN != nil {
 		ok := object.Key("ConsumerARN")
 		ok.String(*v.ConsumerARN)
+	}
+
+	if v.DryRun != nil {
+		ok := object.Key("DryRun")
+		ok.Boolean(*v.DryRun)
 	}
 
 	if v.ShardId != nil {

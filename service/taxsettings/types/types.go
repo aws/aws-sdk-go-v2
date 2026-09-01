@@ -196,6 +196,9 @@ type AdditionalInfoRequest struct {
 	//  Additional tax information to specify for a TRN in Malaysia.
 	MalaysiaAdditionalInfo *MalaysiaAdditionalInfo
 
+	// Additional tax information to specify for a TRN in Monaco.
+	MonacoAdditionalInfo *MonacoAdditionalInfo
+
 	// Additional tax information to specify for a TRN in the Philippines.
 	PhilippinesAdditionalInfo *PhilippinesAdditionalInfo
 
@@ -301,6 +304,11 @@ func (v *AdditionalInfoRequest) SerializeMembers(s smithy.ShapeSerializer) {
 		v.MalaysiaAdditionalInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.MonacoAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_monacoAdditionalInfo)
+		v.MonacoAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.PhilippinesAdditionalInfo != nil {
 		s.WriteStruct(schemas.AdditionalInfoRequest_philippinesAdditionalInfo)
 		v.PhilippinesAdditionalInfo.SerializeMembers(s)
@@ -394,6 +402,9 @@ func (v *AdditionalInfoRequest) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AdditionalInfoRequest_malaysiaAdditionalInfo:
 			v.MalaysiaAdditionalInfo = &MalaysiaAdditionalInfo{}
 			return v.MalaysiaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_monacoAdditionalInfo:
+			v.MonacoAdditionalInfo = &MonacoAdditionalInfo{}
+			return v.MonacoAdditionalInfo.Deserialize(d)
 		case schemas.AdditionalInfoRequest_philippinesAdditionalInfo:
 			v.PhilippinesAdditionalInfo = &PhilippinesAdditionalInfo{}
 			return v.PhilippinesAdditionalInfo.Deserialize(d)
@@ -481,6 +492,9 @@ type AdditionalInfoResponse struct {
 
 	//  Additional tax information associated with your TRN in Malaysia.
 	MalaysiaAdditionalInfo *MalaysiaAdditionalInfo
+
+	// Additional tax information associated with your TRN in Monaco.
+	MonacoAdditionalInfo *MonacoAdditionalInfo
 
 	// Additional tax information associated with your TRN in the Philippines.
 	PhilippinesAdditionalInfo *PhilippinesAdditionalInfo
@@ -597,6 +611,11 @@ func (v *AdditionalInfoResponse) SerializeMembers(s smithy.ShapeSerializer) {
 		v.MalaysiaAdditionalInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.MonacoAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_monacoAdditionalInfo)
+		v.MonacoAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.PhilippinesAdditionalInfo != nil {
 		s.WriteStruct(schemas.AdditionalInfoResponse_philippinesAdditionalInfo)
 		v.PhilippinesAdditionalInfo.SerializeMembers(s)
@@ -696,6 +715,9 @@ func (v *AdditionalInfoResponse) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AdditionalInfoResponse_malaysiaAdditionalInfo:
 			v.MalaysiaAdditionalInfo = &MalaysiaAdditionalInfo{}
 			return v.MalaysiaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_monacoAdditionalInfo:
+			v.MonacoAdditionalInfo = &MonacoAdditionalInfo{}
+			return v.MonacoAdditionalInfo.Deserialize(d)
 		case schemas.AdditionalInfoResponse_philippinesAdditionalInfo:
 			v.PhilippinesAdditionalInfo = &PhilippinesAdditionalInfo{}
 			return v.PhilippinesAdditionalInfo.Deserialize(d)
@@ -1164,7 +1186,11 @@ func (v *CanadaAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
 // Additional tax information associated with your TRN in Chile.
 type ChileAdditionalInfo struct {
 
-	//  The business activity of the taxpayer in Chile.
+	//  The business activity code of the taxpayer in Chile. This must be the activity
+	// code shown on your SII (Servicio de Impuestos Internos) tax profile. For the
+	// list of valid activity codes, see [SII activity codes].
+	//
+	// [SII activity codes]: https://www.sii.cl/ayudas/ayudas_por_servicios/1956-codigos-1959.html
 	BusinessActivity *string
 
 	//  The type of tax document. For Chile, this can be Invoice or Receipt .
@@ -1375,6 +1401,10 @@ type FranceAdditionalInfo struct {
 	// This member is required.
 	SirenNumber *string
 
+	// The routing code used for electronic invoicing (e-invoicing) for the company in
+	// France.
+	EInvoiceRoutingCode *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1385,6 +1415,9 @@ func (v *FranceAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FranceAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EInvoiceRoutingCode != nil {
+		s.WriteString(schemas.FranceAdditionalInfo_eInvoiceRoutingCode, *v.EInvoiceRoutingCode)
+	}
 	if v.SirenNumber != nil {
 		s.WriteString(schemas.FranceAdditionalInfo_sirenNumber, *v.SirenNumber)
 	}
@@ -1392,6 +1425,9 @@ func (v *FranceAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *FranceAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FranceAdditionalInfo, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.FranceAdditionalInfo_eInvoiceRoutingCode:
+			v.EInvoiceRoutingCode = new(string)
+			return d.ReadString(schemas.FranceAdditionalInfo_eInvoiceRoutingCode, v.EInvoiceRoutingCode)
 		case schemas.FranceAdditionalInfo_sirenNumber:
 			v.SirenNumber = new(string)
 			return d.ReadString(schemas.FranceAdditionalInfo_sirenNumber, v.SirenNumber)
@@ -1837,6 +1873,40 @@ func (v *MalaysiaAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.MalaysiaAdditionalInfo_taxInformationNumber:
 			v.TaxInformationNumber = new(string)
 			return d.ReadString(schemas.MalaysiaAdditionalInfo_taxInformationNumber, v.TaxInformationNumber)
+		}
+		return nil
+	})
+}
+
+// Additional tax information associated with your TRN in Monaco.
+type MonacoAdditionalInfo struct {
+
+	// The business number for the company in Monaco. Can be up to 12 alphanumeric
+	// characters.
+	//
+	// This member is required.
+	BusinessNumber *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MonacoAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MonacoAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MonacoAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BusinessNumber != nil {
+		s.WriteString(schemas.MonacoAdditionalInfo_businessNumber, *v.BusinessNumber)
+	}
+}
+func (v *MonacoAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MonacoAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MonacoAdditionalInfo_businessNumber:
+			v.BusinessNumber = new(string)
+			return d.ReadString(schemas.MonacoAdditionalInfo_businessNumber, v.BusinessNumber)
 		}
 		return nil
 	})

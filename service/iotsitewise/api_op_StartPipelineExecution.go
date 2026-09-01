@@ -58,6 +58,13 @@ type StartPipelineExecutionInput struct {
 	// hierarchy.
 	ExecutionEnvironmentVariableOverrides *types.ExecutionEnvironmentVariables
 
+	// Runtime mount overrides for the execution. Overrides are merged by mount name
+	// into each listed compute node's task-defined mounts: a matching name replaces
+	// the task-defined mount, a new name adds a mount, and task-defined mounts not
+	// referenced remain unchanged. Compute nodes not listed use their task-defined
+	// mounts as-is.
+	ExecutionMountOverrides *types.MountOverrides
+
 	// Scheduling priority for the execution. Lower values indicate higher priority.
 	// Defaults to 2 when not specified.
 	ExecutionPriority *int32

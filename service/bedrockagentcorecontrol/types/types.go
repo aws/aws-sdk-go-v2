@@ -1408,7 +1408,7 @@ type Content interface {
 }
 
 // The raw text content containing natural language descriptions of desired policy
-// behavior. This text is processed by AI to generate corresponding Cedar policy
+// behavior. This text is processed by AI to generate corresponding Dogwood policy
 // statements that match the described intent.
 type ContentMemberRawText struct {
 	Value string
@@ -3003,9 +3003,9 @@ type GatewayInterceptorConfiguration struct {
 // defined policies.
 type GatewayPolicyEngineConfiguration struct {
 
-	// The ARN of the policy engine. The policy engine contains Cedar policies that
-	// define fine-grained authorization rules specifying who can perform what actions
-	// on which resources as agents interact through the gateway.
+	// The ARN of the policy engine. The policy engine contains Cedar or Dogwood
+	// policies that define fine-grained authorization rules specifying who can perform
+	// what actions on which resources as agents interact through the gateway.
 	//
 	// This member is required.
 	Arn *string
@@ -6685,16 +6685,15 @@ type PermissionsConfiguration struct {
 }
 
 // Represents a complete policy resource within the AgentCore Policy system.
-// Policies are ARN-able resources that contain Cedar policy statements and
-// associated metadata for controlling agent behavior and access decisions. Each
-// policy belongs to a policy engine and defines fine-grained authorization rules
-// that are evaluated in real-time as agents interact with tools through Gateway.
-// Policies use the Cedar policy language to specify who (principals based on OAuth
+// Policies are ARN-able resources that contain Cedar or Dogwood policy statements
+// and associated metadata for controlling agent behavior and access decisions.
+// Each policy belongs to a policy engine and defines fine-grained authorization
+// rules that are evaluated in real-time as agents interact with tools through
+// Gateway. Policies use Cedar or Dogwood to specify who (principals based on OAuth
 // claims like username, role, or scope) can perform what actions (tool calls) on
 // which resources (Gateways), with optional conditions for attribute-based access
-// control. Multiple policies can apply to a single request, with Cedar's
-// forbid-wins semantics ensuring that security restrictions are never accidentally
-// overridden.
+// control. Multiple policies can apply to a single request, with forbid-wins
+// semantics ensuring that security restrictions are never accidentally overridden.
 type Policy struct {
 
 	// The timestamp when the policy was originally created. This is automatically set
@@ -6703,8 +6702,9 @@ type Policy struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The Cedar policy statement that defines the access control rules. This contains
-	// the actual policy logic used for agent behavior control and access decisions.
+	// The Cedar or Dogwood policy statement that defines the access control rules.
+	// This contains the actual policy logic used for agent behavior control and access
+	// decisions.
 	//
 	// This member is required.
 	Definition PolicyDefinition
@@ -6791,8 +6791,9 @@ type PolicyDefinitionMemberCedar struct {
 
 func (*PolicyDefinitionMemberCedar) isPolicyDefinition() {}
 
-// An AgentCore policy statement that defines the access control rules. The
-// statement can be a Cedar policy or a guardrails definition.
+// The Dogwood policy statement that defines the access control rules. This policy
+// definition can include Dogwood policies and supports temporal conditions and
+// information providers such as guardrails.
 type PolicyDefinitionMemberPolicy struct {
 	Value PolicyStatement
 
@@ -6804,7 +6805,7 @@ func (*PolicyDefinitionMemberPolicy) isPolicyDefinition() {}
 // The generated policy asset information within the policy definition structure.
 // This contains information identifying a generated policy asset from the
 // AI-powered policy generation process within the AgentCore Policy system. Each
-// asset contains a Cedar policy statement generated from natural language input,
+// asset contains a Dogwood policy statement generated from natural language input,
 // along with associated metadata and analysis findings to help users evaluate and
 // select the most appropriate policy option.
 type PolicyDefinitionMemberPolicyGeneration struct {
@@ -6926,7 +6927,7 @@ type PolicyEngineSummary struct {
 }
 
 // Represents a policy generation request within the AgentCore Policy system.
-// Tracks the AI-powered conversion of natural language descriptions into Cedar
+// Tracks the AI-powered conversion of natural language descriptions into Dogwood
 // policy statements, enabling users to author policies by describing authorization
 // requirements in plain English. The generation process analyzes the natural
 // language input along with the Gateway's tool context and Cedar schema to produce
@@ -6989,7 +6990,7 @@ type PolicyGeneration struct {
 }
 
 // Represents a generated policy asset from the AI-powered policy generation
-// process within the AgentCore Policy system. Each asset contains a Cedar policy
+// process within the AgentCore Policy system. Each asset contains a Dogwood policy
 // statement generated from natural language input, along with associated metadata
 // and analysis findings to help users evaluate and select the most appropriate
 // policy option.
@@ -7012,12 +7013,12 @@ type PolicyGenerationAsset struct {
 
 	// The portion of the original natural language input that this generated policy
 	// asset addresses. This helps users understand which part of their policy
-	// description was translated into this specific Cedar policy statement, enabling
+	// description was translated into this specific Dogwood policy statement, enabling
 	// better policy selection and refinement. When a single natural language input
 	// describes multiple authorization requirements, the generation process creates
 	// separate policy assets for each requirement, with each asset's rawTextFragment
 	// showing which requirement it addresses. Use this mapping to verify that all
-	// parts of your natural language input were correctly translated into Cedar
+	// parts of your natural language input were correctly translated into Dogwood
 	// policies.
 	//
 	// This member is required.
@@ -7033,7 +7034,7 @@ type PolicyGenerationAsset struct {
 
 // Represents the information identifying a generated policy asset from the
 // AI-powered policy generation process within the AgentCore Policy system. Each
-// asset contains a Cedar policy statement generated from natural language input,
+// asset contains a Dogwood policy statement generated from natural language input,
 // along with associated metadata and analysis findings to help users evaluate and
 // select the most appropriate policy option.
 type PolicyGenerationDetails struct {
@@ -7105,12 +7106,13 @@ type PolicyGenerationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// An AgentCore policy statement, which supports plain Cedar policies as well as
-// guardrails definitions.
+// An AgentCore Cedar or Dogwood policy statement, which supports plain Cedar
+// policies, temporal policies, and guardrails definitions.
 type PolicyStatement struct {
 
-	// The body of the AgentCore policy statement. Contains the policy logic, which
-	// can be a Cedar policy or a guardrails definition.
+	// The body of the AgentCore Cedar or Dogwood policy statement. Contains the
+	// policy logic, which can be a Cedar policy, a temporal policy, or a guardrails
+	// definition.
 	//
 	// This member is required.
 	Statement *string

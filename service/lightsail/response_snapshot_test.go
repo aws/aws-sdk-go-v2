@@ -9116,6 +9116,32 @@ func TestCheckResponseSnapshot_GetOperationsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetProfile(t *testing.T) {
+	want := &GetProfileOutput{
+		ProfileType: types.ProfileType("Lightsailor"),
+		Partner: &types.PartnerInfo{
+			EnrolledAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TierName:   types.TierName("Essential"),
+			Status:     types.PartnerStatus("Active"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetProfile.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetProfile(context.Background(), &GetProfileInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetProfile.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetRegions(t *testing.T) {
 	want := &GetRegionsOutput{
 		Regions: []types.Region{

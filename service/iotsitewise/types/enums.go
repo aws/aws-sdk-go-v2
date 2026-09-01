@@ -1140,6 +1140,23 @@ func (MonitorErrorCode) Values() []MonitorErrorCode {
 	}
 }
 
+type MountStorageType string
+
+// Enum values for MountStorageType
+const (
+	MountStorageTypeSharedStorage MountStorageType = "SHARED_STORAGE"
+)
+
+// Values returns all known values for MountStorageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MountStorageType) Values() []MountStorageType {
+	return []MountStorageType{
+		"SHARED_STORAGE",
+	}
+}
+
 type Permission string
 
 // Enum values for Permission
@@ -1584,6 +1601,29 @@ func (SearchType) Values() []SearchType {
 	return []SearchType{
 		"DEEP",
 		"QUICK",
+	}
+}
+
+type StorageClass string
+
+// Enum values for StorageClass
+const (
+	StorageClassStandard1   StorageClass = "STANDARD_1"
+	StorageClassStandard2   StorageClass = "STANDARD_2"
+	StorageClassThroughput1 StorageClass = "THROUGHPUT_1"
+	StorageClassThroughput2 StorageClass = "THROUGHPUT_2"
+)
+
+// Values returns all known values for StorageClass. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StorageClass) Values() []StorageClass {
+	return []StorageClass{
+		"STANDARD_1",
+		"STANDARD_2",
+		"THROUGHPUT_1",
+		"THROUGHPUT_2",
 	}
 }
 

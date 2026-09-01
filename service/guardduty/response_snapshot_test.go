@@ -178,6 +178,74 @@ func TestCheckResponseSnapshot_ArchiveFindings(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateCustomDetectionRuleAssociation(t *testing.T) {
+	want := &CreateCustomDetectionRuleAssociationOutput{
+		RuleAssociation: &types.AssociationDetail{
+			AssociationId: ptr.String("__AssociationId__"),
+			Arn:           ptr.String("__Arn__"),
+			RuleId:        ptr.String("__RuleId__"),
+			AccountId:     ptr.String("__AccountId__"),
+			Mode:          types.AssociationMode("LIVE"),
+			CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ExpiresAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateCustomDetectionRuleAssociation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateCustomDetectionRuleAssociation(context.Background(), &CreateCustomDetectionRuleAssociationInput{
+		RuleId:      ptr.String("__RuleId__"),
+		Mode:        types.AssociationMode("LIVE"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateCustomDetectionRuleAssociation.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateCustomDetectionRuleOrgConfiguration(t *testing.T) {
+	want := &CreateCustomDetectionRuleOrgConfigurationOutput{}
+	status, header, body, err := serdeRespReadSnapshot("CreateCustomDetectionRuleOrgConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateCustomDetectionRuleOrgConfiguration(context.Background(), &CreateCustomDetectionRuleOrgConfigurationInput{
+		RuleId: ptr.String("__RuleId__"),
+		Mode:   types.AssociationMode("LIVE"),
+		IncludeAccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ExcludeAccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateCustomDetectionRuleOrgConfiguration.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateDetector(t *testing.T) {
 	want := &CreateDetectorOutput{
 		DetectorId: ptr.String("__DetectorId__"),
@@ -656,6 +724,50 @@ func TestCheckResponseSnapshot_DeclineInvitations(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeclineInvitations.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteCustomDetectionRuleAssociation(t *testing.T) {
+	want := &DeleteCustomDetectionRuleAssociationOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteCustomDetectionRuleAssociation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteCustomDetectionRuleAssociation(context.Background(), &DeleteCustomDetectionRuleAssociationInput{
+		RuleId:        ptr.String("__RuleId__"),
+		AssociationId: ptr.String("__AssociationId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteCustomDetectionRuleAssociation.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteCustomDetectionRuleOrgConfiguration(t *testing.T) {
+	want := &DeleteCustomDetectionRuleOrgConfigurationOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteCustomDetectionRuleOrgConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteCustomDetectionRuleOrgConfiguration(context.Background(), &DeleteCustomDetectionRuleOrgConfigurationInput{
+		RuleId: ptr.String("__RuleId__"),
+		Mode:   types.AssociationMode("LIVE"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteCustomDetectionRuleOrgConfiguration.response", err)
 	}
 }
 
@@ -1361,6 +1473,122 @@ func TestCheckResponseSnapshot_GetCoverageStatistics(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetCoverageStatistics.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetCustomDetectionRule(t *testing.T) {
+	want := &GetCustomDetectionRuleOutput{
+		Rule: &types.RuleDetail{
+			RuleId:      ptr.String("__RuleId__"),
+			Arn:         ptr.String("__Arn__"),
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+			Severity:    types.DetectionRuleSeverity("CRITICAL"),
+			DataSource:  types.DetectionRuleDataSource("CloudTrailManagementEvent"),
+			Tactic:      ptr.String("__Tactic__"),
+			Technique:   ptr.String("__Technique__"),
+			Service:     ptr.String("__Service__"),
+			Definition: &types.RuleDefinition{
+				Expression: ptr.String("__Expression__"),
+			},
+			Language:  types.RuleLanguage("SQL"),
+			Schema:    types.RuleSchema("CloudTrail"),
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetCustomDetectionRule.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetCustomDetectionRule(context.Background(), &GetCustomDetectionRuleInput{
+		RuleId: ptr.String("__RuleId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetCustomDetectionRule.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetCustomDetectionRuleAssociation(t *testing.T) {
+	want := &GetCustomDetectionRuleAssociationOutput{
+		RuleAssociation: &types.AssociationDetail{
+			AssociationId: ptr.String("__AssociationId__"),
+			Arn:           ptr.String("__Arn__"),
+			RuleId:        ptr.String("__RuleId__"),
+			AccountId:     ptr.String("__AccountId__"),
+			Mode:          types.AssociationMode("LIVE"),
+			CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ExpiresAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetCustomDetectionRuleAssociation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetCustomDetectionRuleAssociation(context.Background(), &GetCustomDetectionRuleAssociationInput{
+		RuleId:        ptr.String("__RuleId__"),
+		AssociationId: ptr.String("__AssociationId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetCustomDetectionRuleAssociation.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetCustomDetectionRuleOrgConfiguration(t *testing.T) {
+	want := &GetCustomDetectionRuleOrgConfigurationOutput{
+		Configuration: &types.DetectionRuleOrgConfiguration{
+			RuleId:       ptr.String("__RuleId__"),
+			Mode:         types.AssociationMode("LIVE"),
+			Status:       types.DetectionRuleConfigurationStatus("ACTIVE"),
+			StatusReason: ptr.String("__StatusReason__"),
+			IncludeAccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludeAccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ExpiresAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetCustomDetectionRuleOrgConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetCustomDetectionRuleOrgConfiguration(context.Background(), &GetCustomDetectionRuleOrgConfigurationInput{
+		RuleId: ptr.String("__RuleId__"),
+		Mode:   types.AssociationMode("LIVE"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetCustomDetectionRuleOrgConfiguration.response", err)
 	}
 }
 
@@ -6715,6 +6943,171 @@ func TestCheckResponseSnapshot_ListCoverage(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListCustomDetectionRuleAssociations(t *testing.T) {
+	want := &ListCustomDetectionRuleAssociationsOutput{
+		RuleAssociations: []types.AssociationSummary{
+			{
+				AssociationId: ptr.String("__AssociationId__"),
+				Arn:           ptr.String("__Arn__"),
+				RuleId:        ptr.String("__RuleId__"),
+				Mode:          types.AssociationMode("LIVE"),
+				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExpiresAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				AssociationId: ptr.String("__AssociationId__"),
+				Arn:           ptr.String("__Arn__"),
+				RuleId:        ptr.String("__RuleId__"),
+				Mode:          types.AssociationMode("LIVE"),
+				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExpiresAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListCustomDetectionRuleAssociations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListCustomDetectionRuleAssociations(context.Background(), &ListCustomDetectionRuleAssociationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		RuleId:     ptr.String("__RuleId__"),
+		Mode:       types.AssociationMode("LIVE"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListCustomDetectionRuleAssociations.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListCustomDetectionRuleOrgConfigurations(t *testing.T) {
+	want := &ListCustomDetectionRuleOrgConfigurationsOutput{
+		Configurations: []types.DetectionRuleOrgConfigurationSummary{
+			{
+				RuleId:       ptr.String("__RuleId__"),
+				Mode:         types.AssociationMode("LIVE"),
+				Status:       types.DetectionRuleConfigurationStatus("ACTIVE"),
+				StatusReason: ptr.String("__StatusReason__"),
+				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExpiresAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				RuleId:       ptr.String("__RuleId__"),
+				Mode:         types.AssociationMode("LIVE"),
+				Status:       types.DetectionRuleConfigurationStatus("ACTIVE"),
+				StatusReason: ptr.String("__StatusReason__"),
+				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExpiresAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListCustomDetectionRuleOrgConfigurations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListCustomDetectionRuleOrgConfigurations(context.Background(), &ListCustomDetectionRuleOrgConfigurationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Status:     types.DetectionRuleConfigurationStatus("ACTIVE"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListCustomDetectionRuleOrgConfigurations.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListCustomDetectionRules(t *testing.T) {
+	want := &ListCustomDetectionRulesOutput{
+		Rules: []types.RuleSummary{
+			{
+				RuleId:      ptr.String("__RuleId__"),
+				Arn:         ptr.String("__Arn__"),
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				Severity:    types.DetectionRuleSeverity("CRITICAL"),
+				DataSource:  types.DetectionRuleDataSource("CloudTrailManagementEvent"),
+				Tactic:      ptr.String("__Tactic__"),
+				Technique:   ptr.String("__Technique__"),
+				Service:     ptr.String("__Service__"),
+				Language:    types.RuleLanguage("SQL"),
+				Schema:      types.RuleSchema("CloudTrail"),
+				CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				RuleId:      ptr.String("__RuleId__"),
+				Arn:         ptr.String("__Arn__"),
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				Severity:    types.DetectionRuleSeverity("CRITICAL"),
+				DataSource:  types.DetectionRuleDataSource("CloudTrailManagementEvent"),
+				Tactic:      ptr.String("__Tactic__"),
+				Technique:   ptr.String("__Technique__"),
+				Service:     ptr.String("__Service__"),
+				Language:    types.RuleLanguage("SQL"),
+				Schema:      types.RuleSchema("CloudTrail"),
+				CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListCustomDetectionRules.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListCustomDetectionRules(context.Background(), &ListCustomDetectionRulesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.DetectionRuleFilter{
+			{
+				Name: types.FilterFieldName("name"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Condition: types.DetectionRuleFilterCondition("EQUALS"),
+			},
+			{
+				Name: types.FilterFieldName("name"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Condition: types.DetectionRuleFilterCondition("EQUALS"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListCustomDetectionRules.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListDetectors(t *testing.T) {
 	want := &ListDetectorsOutput{
 		DetectorIds: []string{
@@ -7503,6 +7896,59 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateCustomDetectionRuleAssociation(t *testing.T) {
+	want := &UpdateCustomDetectionRuleAssociationOutput{}
+	status, header, body, err := serdeRespReadSnapshot("UpdateCustomDetectionRuleAssociation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateCustomDetectionRuleAssociation(context.Background(), &UpdateCustomDetectionRuleAssociationInput{
+		RuleId:        ptr.String("__RuleId__"),
+		AssociationId: ptr.String("__AssociationId__"),
+		Mode:          types.AssociationMode("LIVE"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateCustomDetectionRuleAssociation.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateCustomDetectionRuleOrgConfiguration(t *testing.T) {
+	want := &UpdateCustomDetectionRuleOrgConfigurationOutput{}
+	status, header, body, err := serdeRespReadSnapshot("UpdateCustomDetectionRuleOrgConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateCustomDetectionRuleOrgConfiguration(context.Background(), &UpdateCustomDetectionRuleOrgConfigurationInput{
+		RuleId: ptr.String("__RuleId__"),
+		Mode:   types.AssociationMode("LIVE"),
+		IncludeAccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ExcludeAccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateCustomDetectionRuleOrgConfiguration.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateDetector(t *testing.T) {
 	want := &UpdateDetectorOutput{}
 	status, header, body, err := serdeRespReadSnapshot("UpdateDetector.response")
@@ -8044,17 +8490,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIPSet(context.Background(), &CreateIPSetInput{
-		DetectorId:  ptr.String("__DetectorId__"),
-		Name:        ptr.String("__Name__"),
-		Format:      types.IpSetFormat("TXT"),
-		Location:    ptr.String("__Location__"),
-		Activate:    ptr.Bool(true),
+	_, opErr := svc.CreateCustomDetectionRuleAssociation(context.Background(), &CreateCustomDetectionRuleAssociationInput{
+		RuleId:      ptr.String("__RuleId__"),
+		Mode:        types.AssociationMode("LIVE"),
 		ClientToken: ptr.String("__ClientToken__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
-		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -8111,23 +8553,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMalwareProtectionPlan(context.Background(), &CreateMalwareProtectionPlanInput{
+	_, opErr := svc.CreateCustomDetectionRuleAssociation(context.Background(), &CreateCustomDetectionRuleAssociationInput{
+		RuleId:      ptr.String("__RuleId__"),
+		Mode:        types.AssociationMode("LIVE"),
 		ClientToken: ptr.String("__ClientToken__"),
-		Role:        ptr.String("__Role__"),
-		ProtectedResource: &types.CreateProtectedResource{
-			S3Bucket: &types.CreateS3BucketResource{
-				BucketName: ptr.String("__BucketName__"),
-				ObjectPrefixes: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-		},
-		Actions: &types.MalwareProtectionPlanActions{
-			Tagging: &types.MalwareProtectionPlanTaggingAction{
-				Status: types.MalwareProtectionPlanTaggingActionStatus("ENABLED"),
-			},
-		},
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -8187,8 +8616,13 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteMalwareProtectionPlan(context.Background(), &DeleteMalwareProtectionPlanInput{
-		MalwareProtectionPlanId: ptr.String("__MalwareProtectionPlanId__"),
+	_, opErr := svc.CreateCustomDetectionRuleAssociation(context.Background(), &CreateCustomDetectionRuleAssociationInput{
+		RuleId:      ptr.String("__RuleId__"),
+		Mode:        types.AssociationMode("LIVE"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

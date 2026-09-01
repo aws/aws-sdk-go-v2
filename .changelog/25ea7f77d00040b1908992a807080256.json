@@ -1,0 +1,8 @@
+{
+    "id": "25ea7f77-d000-40b1-9089-92a807080256",
+    "type": "feature",
+    "description": "Amazon GuardDuty now supports custom detection rules, including APIs to manage rule associations and organization-level configurations.",
+    "modules": [
+        "service/guardduty"
+    ]
+}

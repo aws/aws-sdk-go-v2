@@ -16,6 +16,97 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+type awsRestjson1_serializeOpAssociateEmailIdentityCertificate struct {
+}
+
+func (*awsRestjson1_serializeOpAssociateEmailIdentityCertificate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpAssociateEmailIdentityCertificate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AssociateEmailIdentityCertificateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/identity/certificates")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentAssociateEmailIdentityCertificateInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsAssociateEmailIdentityCertificateInput(v *AssociateEmailIdentityCertificateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentAssociateEmailIdentityCertificateInput(v *AssociateEmailIdentityCertificateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CertificateArn != nil {
+		ok := object.Key("CertificateArn")
+		ok.String(*v.CertificateArn)
+	}
+
+	if v.EmailIdentity != nil {
+		ok := object.Key("EmailIdentity")
+		ok.String(*v.EmailIdentity)
+	}
+
+	if v.FromAddress != nil {
+		ok := object.Key("FromAddress")
+		ok.String(*v.FromAddress)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpBatchGetMetricData struct {
 }
 
@@ -258,6 +349,13 @@ func awsRestjson1_serializeOpDocumentCreateConfigurationSetInput(v *CreateConfig
 	if v.DeliveryOptions != nil {
 		ok := object.Key("DeliveryOptions")
 		if err := awsRestjson1_serializeDocumentDeliveryOptions(v.DeliveryOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MessageSecurityOptions != nil {
+		ok := object.Key("MessageSecurityOptions")
+		if err := awsRestjson1_serializeDocumentMessageSecurityOptions(v.MessageSecurityOptions, ok); err != nil {
 			return err
 		}
 	}
@@ -2653,6 +2751,92 @@ func awsRestjson1_serializeOpDocumentDeleteTenantResourceAssociationInput(v *Del
 	if v.TenantName != nil {
 		ok := object.Key("TenantName")
 		ok.String(*v.TenantName)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDisassociateEmailIdentityCertificate struct {
+}
+
+func (*awsRestjson1_serializeOpDisassociateEmailIdentityCertificate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDisassociateEmailIdentityCertificate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DisassociateEmailIdentityCertificateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/identity/certificates/delete")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentDisassociateEmailIdentityCertificateInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDisassociateEmailIdentityCertificateInput(v *DisassociateEmailIdentityCertificateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentDisassociateEmailIdentityCertificateInput(v *DisassociateEmailIdentityCertificateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EmailIdentity != nil {
+		ok := object.Key("EmailIdentity")
+		ok.String(*v.EmailIdentity)
+	}
+
+	if v.FromAddress != nil {
+		ok := object.Key("FromAddress")
+		ok.String(*v.FromAddress)
 	}
 
 	return nil
@@ -5065,6 +5249,97 @@ func awsRestjson1_serializeOpHttpBindingsListEmailIdentitiesInput(v *ListEmailId
 
 	if v.PageSize != nil {
 		encoder.SetQuery("PageSize").Integer(*v.PageSize)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListEmailIdentityCertificates struct {
+}
+
+func (*awsRestjson1_serializeOpListEmailIdentityCertificates) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListEmailIdentityCertificates) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListEmailIdentityCertificatesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/identity/certificates/list")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListEmailIdentityCertificatesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListEmailIdentityCertificatesInput(v *ListEmailIdentityCertificatesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListEmailIdentityCertificatesInput(v *ListEmailIdentityCertificatesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EmailIdentity != nil {
+		ok := object.Key("EmailIdentity")
+		ok.String(*v.EmailIdentity)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.PageSize != nil {
+		ok := object.Key("PageSize")
+		ok.Integer(*v.PageSize)
 	}
 
 	return nil
@@ -8905,6 +9180,94 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateConfigurationSet struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateConfigurationSet) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateConfigurationSet) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateConfigurationSetInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/update-configuration-sets")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateConfigurationSetInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateConfigurationSetInput(v *UpdateConfigurationSetInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateConfigurationSetInput(v *UpdateConfigurationSetInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConfigurationSetName != nil {
+		ok := object.Key("ConfigurationSetName")
+		ok.String(*v.ConfigurationSetName)
+	}
+
+	if v.MessageSecurityOptions != nil {
+		ok := object.Key("MessageSecurityOptions")
+		if err := awsRestjson1_serializeDocumentMessageSecurityOptions(v.MessageSecurityOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateConfigurationSetEventDestination struct {
 }
 
@@ -10079,6 +10442,13 @@ func awsRestjson1_serializeDocumentDashboardOptions(v *types.DashboardOptions, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDefaultSigningScheme(v *types.DefaultSigningScheme, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDeliveryOptions(v *types.DeliveryOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10823,6 +11193,20 @@ func awsRestjson1_serializeDocumentMessageInsightsFilters(v *types.MessageInsigh
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMessageSecurityOptions(v *types.MessageSecurityOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SigningScheme != nil {
+		ok := object.Key("SigningScheme")
+		if err := awsRestjson1_serializeDocumentSigningScheme(v.SigningScheme, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMessageTag(v *types.MessageTag, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10999,6 +11383,42 @@ func awsRestjson1_serializeDocumentSendingOptions(v *types.SendingOptions, value
 	if v.SendingEnabled {
 		ok := object.Key("SendingEnabled")
 		ok.Boolean(v.SendingEnabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSigningScheme(v types.SigningScheme, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.SigningSchemeMemberDefaultScheme:
+		av := object.Key("DefaultScheme")
+		if err := awsRestjson1_serializeDocumentDefaultSigningScheme(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.SigningSchemeMemberSmimeScheme:
+		av := object.Key("SmimeScheme")
+		if err := awsRestjson1_serializeDocumentSmimeSigningScheme(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSmimeSigningScheme(v *types.SmimeSigningScheme, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.SignatureFormat) > 0 {
+		ok := object.Key("SignatureFormat")
+		ok.String(string(v.SignatureFormat))
 	}
 
 	return nil

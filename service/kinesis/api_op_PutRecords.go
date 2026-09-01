@@ -102,6 +102,9 @@ type PutRecordsInput struct {
 	// This member is required.
 	Records []types.PutRecordsRequestEntry
 
+	// Checks if your request will succeed. DryRun is an optional parameter.
+	DryRun *bool
+
 	// The ARN of the stream.
 	StreamARN *string
 

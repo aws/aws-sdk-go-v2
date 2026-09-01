@@ -75419,7 +75419,7 @@ func TestCheckResponseSnapshot_ModifyInstanceAttribute(t *testing.T) {
 		Ramdisk: &types.AttributeValue{
 			Value: ptr.String("__Value__"),
 		},
-		UserData: &types.BlobAttributeValue{
+		UserData: &types.SecureBlobAttributeValue{
 			Value: []byte("blob"),
 		},
 		InstanceInitiatedShutdownBehavior: &types.AttributeValue{

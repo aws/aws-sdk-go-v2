@@ -371,7 +371,11 @@ func TestCheckResponseSnapshot_BatchPutTaxRegistration(t *testing.T) {
 					BusinessActivity: ptr.String("__BusinessActivity__"),
 				},
 				FranceAdditionalInfo: &types.FranceAdditionalInfo{
-					SirenNumber: ptr.String("__SirenNumber__"),
+					SirenNumber:         ptr.String("__SirenNumber__"),
+					EInvoiceRoutingCode: ptr.String("__EInvoiceRoutingCode__"),
+				},
+				MonacoAdditionalInfo: &types.MonacoAdditionalInfo{
+					BusinessNumber: ptr.String("__BusinessNumber__"),
 				},
 			},
 			VerificationDetails: &types.VerificationDetails{
@@ -646,7 +650,11 @@ func TestCheckResponseSnapshot_GetTaxRegistration(t *testing.T) {
 					BusinessActivity: ptr.String("__BusinessActivity__"),
 				},
 				FranceAdditionalInfo: &types.FranceAdditionalInfo{
-					SirenNumber: ptr.String("__SirenNumber__"),
+					SirenNumber:         ptr.String("__SirenNumber__"),
+					EInvoiceRoutingCode: ptr.String("__EInvoiceRoutingCode__"),
+				},
+				MonacoAdditionalInfo: &types.MonacoAdditionalInfo{
+					BusinessNumber: ptr.String("__BusinessNumber__"),
 				},
 			},
 			LegalAddress: &types.Address{
@@ -978,7 +986,11 @@ func TestCheckResponseSnapshot_ListTaxRegistrations(t *testing.T) {
 							BusinessActivity: ptr.String("__BusinessActivity__"),
 						},
 						FranceAdditionalInfo: &types.FranceAdditionalInfo{
-							SirenNumber: ptr.String("__SirenNumber__"),
+							SirenNumber:         ptr.String("__SirenNumber__"),
+							EInvoiceRoutingCode: ptr.String("__EInvoiceRoutingCode__"),
+						},
+						MonacoAdditionalInfo: &types.MonacoAdditionalInfo{
+							BusinessNumber: ptr.String("__BusinessNumber__"),
 						},
 					},
 					Jurisdiction: &types.Jurisdiction{
@@ -1135,7 +1147,11 @@ func TestCheckResponseSnapshot_ListTaxRegistrations(t *testing.T) {
 							BusinessActivity: ptr.String("__BusinessActivity__"),
 						},
 						FranceAdditionalInfo: &types.FranceAdditionalInfo{
-							SirenNumber: ptr.String("__SirenNumber__"),
+							SirenNumber:         ptr.String("__SirenNumber__"),
+							EInvoiceRoutingCode: ptr.String("__EInvoiceRoutingCode__"),
+						},
+						MonacoAdditionalInfo: &types.MonacoAdditionalInfo{
+							BusinessNumber: ptr.String("__BusinessNumber__"),
 						},
 					},
 					Jurisdiction: &types.Jurisdiction{
@@ -1412,7 +1428,11 @@ func TestCheckResponseSnapshot_PutTaxRegistration(t *testing.T) {
 					BusinessActivity: ptr.String("__BusinessActivity__"),
 				},
 				FranceAdditionalInfo: &types.FranceAdditionalInfo{
-					SirenNumber: ptr.String("__SirenNumber__"),
+					SirenNumber:         ptr.String("__SirenNumber__"),
+					EInvoiceRoutingCode: ptr.String("__EInvoiceRoutingCode__"),
+				},
+				MonacoAdditionalInfo: &types.MonacoAdditionalInfo{
+					BusinessNumber: ptr.String("__BusinessNumber__"),
 				},
 			},
 			VerificationDetails: &types.VerificationDetails{

@@ -32,13 +32,13 @@ type ChannelDescription struct {
 
 	// The current status of the channel. Valid values:
 	//
-	//   - CREATING
+	//   - CREATING - The channel is being created.
 	//
-	//   - ACTIVE
+	//   - ACTIVE - The channel is ready to deliver records.
 	//
-	//   - UPDATING
+	//   - UPDATING - The channel configuration is being updated.
 	//
-	//   - DELETING
+	//   - DELETING - The channel is being deleted.
 	//
 	//   - FAILED - See ChannelStatusReason for the failure cause.
 	//
@@ -78,7 +78,8 @@ type ChannelDescription struct {
 	noSmithyDocumentSerde
 }
 
-// The server-side encryption configuration for a channel.
+// Specifies the Amazon Web Services KMS key that Amazon Kinesis Data Streams uses
+// to encrypt data delivered to the channel's destination.
 type ChannelEncryptionConfiguration struct {
 
 	// The encryption type. The only valid value is KMS .
@@ -204,13 +205,13 @@ type ChannelSummary struct {
 
 	// The current status of the channel. Valid values:
 	//
-	//   - CREATING
+	//   - CREATING - The channel is being created.
 	//
-	//   - ACTIVE
+	//   - ACTIVE - The channel is ready to deliver records.
 	//
-	//   - UPDATING
+	//   - UPDATING - The channel configuration is being updated.
 	//
-	//   - DELETING
+	//   - DELETING - The channel is being deleted.
 	//
 	//   - FAILED - See ChannelStatusReason for the failure cause.
 	//
@@ -709,11 +710,13 @@ type S3StorageConfiguration struct {
 
 	// The Amazon S3 storage class for delivered objects. Valid values:
 	//
-	//   - STANDARD (default)
+	//   - STANDARD - Default storage class for frequently accessed data. (default)
 	//
-	//   - INTELLIGENT_TIERING
+	//   - INTELLIGENT_TIERING - Automatically moves objects to the most cost-effective
+	//   access tier based on usage patterns.
 	//
-	//   - GLACIER_IR
+	//   - GLACIER_IR - Low-cost storage for rarely accessed data that requires
+	//   millisecond retrieval.
 	StorageClass S3StorageClass
 
 	noSmithyDocumentSerde

@@ -56676,18 +56676,6 @@ func awsEc2query_serializeDocumentBillingProductList(v []string, value query.Val
 	return nil
 }
 
-func awsEc2query_serializeDocumentBlobAttributeValue(v *types.BlobAttributeValue, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.Value != nil {
-		objectKey := object.Key("Value")
-		objectKey.Base64EncodeBytes(v.Value)
-	}
-
-	return nil
-}
-
 func awsEc2query_serializeDocumentBlockDeviceMapping(v *types.BlockDeviceMapping, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -65998,6 +65986,18 @@ func awsEc2query_serializeDocumentSecondarySubnetIdList(v []string, value query.
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentSecureBlobAttributeValue(v *types.SecureBlobAttributeValue, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Value != nil {
+		objectKey := object.Key("Value")
+		objectKey.Base64EncodeBytes(v.Value)
+	}
+
 	return nil
 }
 
@@ -89400,7 +89400,7 @@ func awsEc2query_serializeOpDocumentModifyInstanceAttributeInput(v *ModifyInstan
 
 	if v.UserData != nil {
 		objectKey := object.Key("UserData")
-		if err := awsEc2query_serializeDocumentBlobAttributeValue(v.UserData, objectKey); err != nil {
+		if err := awsEc2query_serializeDocumentSecureBlobAttributeValue(v.UserData, objectKey); err != nil {
 			return err
 		}
 	}

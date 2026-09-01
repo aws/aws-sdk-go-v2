@@ -539,7 +539,15 @@ func TestCheckResponseSnapshot_DescribeAgreement(t *testing.T) {
 			OfferId:    ptr.String("__OfferId__"),
 			OfferSetId: ptr.String("__OfferSetId__"),
 		},
-		Status: types.AgreementStatus("ACTIVE"),
+		Status:             types.AgreementStatus("ACTIVE"),
+		InitialAgreementId: ptr.String("__InitialAgreementId__"),
+		EndTimeBehavior: &types.EndTimeBehavior{
+			Type:       types.EndTimeBehaviorType("RENEW"),
+			ReasonCode: types.EndTimeBehaviorReasonCode("PROPOSER_RENEW_OPTED_OUT"),
+			RenewalSummary: &types.RenewalSummary{
+				OfferId: ptr.String("__OfferId__"),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeAgreement.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1128,6 +1136,7 @@ func TestCheckResponseSnapshot_SearchAgreements(t *testing.T) {
 				AcceptanceTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				StartTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				EndTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				AgreementType:  ptr.String("__AgreementType__"),
 				Acceptor: &types.Acceptor{
 					AccountId: ptr.String("__AccountId__"),
@@ -1158,12 +1167,16 @@ func TestCheckResponseSnapshot_SearchAgreements(t *testing.T) {
 						LicenseArn: ptr.String("__LicenseArn__"),
 					},
 				},
+				InitialAgreementId:        ptr.String("__InitialAgreementId__"),
+				EndTimeBehaviorType:       types.EndTimeBehaviorType("RENEW"),
+				EndTimeBehaviorReasonCode: types.EndTimeBehaviorReasonCode("PROPOSER_RENEW_OPTED_OUT"),
 			},
 			{
 				AgreementId:    ptr.String("__AgreementId__"),
 				AcceptanceTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				StartTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				EndTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				AgreementType:  ptr.String("__AgreementType__"),
 				Acceptor: &types.Acceptor{
 					AccountId: ptr.String("__AccountId__"),
@@ -1194,6 +1207,9 @@ func TestCheckResponseSnapshot_SearchAgreements(t *testing.T) {
 						LicenseArn: ptr.String("__LicenseArn__"),
 					},
 				},
+				InitialAgreementId:        ptr.String("__InitialAgreementId__"),
+				EndTimeBehaviorType:       types.EndTimeBehaviorType("RENEW"),
+				EndTimeBehaviorReasonCode: types.EndTimeBehaviorReasonCode("PROPOSER_RENEW_OPTED_OUT"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),

@@ -57,8 +57,24 @@ type DescribeAgreementOutput struct {
 	// agreements, which don’t have end dates.
 	EndTime *time.Time
 
+	// The behavior of the agreement when it reaches its end date. For example,
+	// whether the agreement renews, and if it doesn't, the reason why.
+	//
+	// This field is present for every active agreement that has an end date. It is
+	// not present for an agreement that has no end date, because such an agreement
+	// never reaches an end time. Pay-as-you-go agreements are the most common example.
+	// It is also not present for an agreement that is no longer active.
+	EndTimeBehavior *types.EndTimeBehavior
+
 	// The estimated cost of the agreement.
 	EstimatedCharges *types.EstimatedCharges
+
+	// The unique identifier of the very first agreement in a chain of related
+	// agreements, such as renewals or replacements. It stays the same across all
+	// agreements in that chain, which lets you trace an agreement back to the
+	// original. When an agreement isn't derived from another agreement, its
+	// InitialAgreementId is its own AgreementId .
+	InitialAgreementId *string
 
 	// A summary of the proposal received from the proposer.
 	ProposalSummary *types.ProposalSummary
@@ -75,8 +91,6 @@ type DescribeAgreementOutput struct {
 	// Statuses include:
 	//
 	//   - ACTIVE – The terms of the agreement are active.
-	//
-	//   - ARCHIVED – The agreement ended without a specified reason.
 	//
 	//   - CANCELLED – The acceptor ended the agreement before the defined end date.
 	//

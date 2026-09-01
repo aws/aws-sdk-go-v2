@@ -1,0 +1,5 @@
+PUT /custom-detection-rule/org-configuration/__RuleId__
+
+Content-Type: application/json
+
+{"excludeAccountIds":["__Member__","__Member__"],"includeAccountIds":["__Member__","__Member__"],"mode":"LIVE"}

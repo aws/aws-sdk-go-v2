@@ -101,6 +101,9 @@ type GetRecordsInput struct {
 	// This member is required.
 	ShardIterator *string
 
+	// Checks if your request will succeed. DryRun is an optional parameter.
+	DryRun *bool
+
 	// The maximum number of records to return. Specify a value of up to 10,000. If
 	// you specify a value that is greater than 10,000, GetRecordsthrows InvalidArgumentException
 	// . The default value is 10,000.

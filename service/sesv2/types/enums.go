@@ -529,6 +529,31 @@ func (HttpsPolicy) Values() []HttpsPolicy {
 	}
 }
 
+type IdentityCertificateStatus string
+
+// Enum values for IdentityCertificateStatus
+const (
+	IdentityCertificateStatusProvisioning   IdentityCertificateStatus = "PROVISIONING"
+	IdentityCertificateStatusInactive       IdentityCertificateStatus = "INACTIVE"
+	IdentityCertificateStatusDeprovisioning IdentityCertificateStatus = "DEPROVISIONING"
+	IdentityCertificateStatusActive         IdentityCertificateStatus = "ACTIVE"
+	IdentityCertificateStatusFailed         IdentityCertificateStatus = "FAILED"
+)
+
+// Values returns all known values for IdentityCertificateStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IdentityCertificateStatus) Values() []IdentityCertificateStatus {
+	return []IdentityCertificateStatus{
+		"PROVISIONING",
+		"INACTIVE",
+		"DEPROVISIONING",
+		"ACTIVE",
+		"FAILED",
+	}
+}
+
 type IdentityType string
 
 // Enum values for IdentityType
@@ -1002,6 +1027,23 @@ func (SendingStatus) Values() []SendingStatus {
 		"ENABLED",
 		"REINSTATED",
 		"DISABLED",
+	}
+}
+
+type SignatureFormat string
+
+// Enum values for SignatureFormat
+const (
+	SignatureFormatDetached SignatureFormat = "DETACHED"
+)
+
+// Values returns all known values for SignatureFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SignatureFormat) Values() []SignatureFormat {
+	return []SignatureFormat{
+		"DETACHED",
 	}
 }
 

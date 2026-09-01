@@ -107,6 +107,29 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 		},
 	})
 }
+func TestCheckResponseSnapshot_AssociateEmailIdentityCertificate(t *testing.T) {
+	want := &AssociateEmailIdentityCertificateOutput{}
+	status, header, body, err := serdeRespReadSnapshot("AssociateEmailIdentityCertificate.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AssociateEmailIdentityCertificate(context.Background(), &AssociateEmailIdentityCertificateInput{
+		EmailIdentity:  ptr.String("__EmailIdentity__"),
+		FromAddress:    ptr.String("__FromAddress__"),
+		CertificateArn: ptr.String("__CertificateArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AssociateEmailIdentityCertificate.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_BatchGetMetricData(t *testing.T) {
 	want := &BatchGetMetricDataOutput{
 		Results: []types.MetricDataResult{
@@ -270,6 +293,11 @@ func TestCheckResponseSnapshot_CreateConfigurationSet(t *testing.T) {
 		},
 		ArchivingOptions: &types.ArchivingOptions{
 			ArchiveArn: ptr.String("__ArchiveArn__"),
+		},
+		MessageSecurityOptions: &types.MessageSecurityOptions{
+			SigningScheme: &types.SigningSchemeMemberDefaultScheme{
+				Value: types.DefaultSigningScheme{},
+			},
 		},
 	})
 	if err != nil {
@@ -1271,6 +1299,28 @@ func TestCheckResponseSnapshot_DeleteTenantResourceAssociation(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DisassociateEmailIdentityCertificate(t *testing.T) {
+	want := &DisassociateEmailIdentityCertificateOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DisassociateEmailIdentityCertificate.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DisassociateEmailIdentityCertificate(context.Background(), &DisassociateEmailIdentityCertificateInput{
+		EmailIdentity: ptr.String("__EmailIdentity__"),
+		FromAddress:   ptr.String("__FromAddress__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DisassociateEmailIdentityCertificate.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetAccount(t *testing.T) {
 	want := &GetAccountOutput{
 		DedicatedIpAutoWarmupEnabled: true,
@@ -1434,6 +1484,11 @@ func TestCheckResponseSnapshot_GetConfigurationSet(t *testing.T) {
 		},
 		ArchivingOptions: &types.ArchivingOptions{
 			ArchiveArn: ptr.String("__ArchiveArn__"),
+		},
+		MessageSecurityOptions: &types.MessageSecurityOptions{
+			SigningScheme: &types.SigningSchemeMemberDefaultScheme{
+				Value: types.DefaultSigningScheme{},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetConfigurationSet.response")
@@ -3037,6 +3092,45 @@ func TestCheckResponseSnapshot_ListEmailIdentities(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListEmailIdentityCertificates(t *testing.T) {
+	want := &ListEmailIdentityCertificatesOutput{
+		Certificates: []types.IdentityCertificate{
+			{
+				FromAddress:           ptr.String("__FromAddress__"),
+				Status:                types.IdentityCertificateStatus("PROVISIONING"),
+				CertificateArn:        ptr.String("__CertificateArn__"),
+				CertificateExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				FromAddress:           ptr.String("__FromAddress__"),
+				Status:                types.IdentityCertificateStatus("PROVISIONING"),
+				CertificateArn:        ptr.String("__CertificateArn__"),
+				CertificateExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListEmailIdentityCertificates.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListEmailIdentityCertificates(context.Background(), &ListEmailIdentityCertificatesInput{
+		EmailIdentity: ptr.String("__EmailIdentity__"),
+		NextToken:     ptr.String("__NextToken__"),
+		PageSize:      ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListEmailIdentityCertificates.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListEmailTemplates(t *testing.T) {
 	want := &ListEmailTemplatesOutput{
 		TemplatesMetadata: []types.EmailTemplateMetadata{
@@ -4582,6 +4676,32 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateConfigurationSet(t *testing.T) {
+	want := &UpdateConfigurationSetOutput{}
+	status, header, body, err := serdeRespReadSnapshot("UpdateConfigurationSet.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateConfigurationSet(context.Background(), &UpdateConfigurationSetInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		MessageSecurityOptions: &types.MessageSecurityOptions{
+			SigningScheme: &types.SigningSchemeMemberDefaultScheme{
+				Value: types.DefaultSigningScheme{},
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateConfigurationSet.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateConfigurationSetEventDestination(t *testing.T) {
 	want := &UpdateConfigurationSetEventDestinationOutput{}
 	status, header, body, err := serdeRespReadSnapshot("UpdateConfigurationSetEventDestination.response")
@@ -4970,60 +5090,10 @@ func TestCheckResponseSnapshot_Error_AlreadyExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{
-		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
-		TrackingOptions: &types.TrackingOptions{
-			CustomRedirectDomain: ptr.String("__CustomRedirectDomain__"),
-			HttpsPolicy:          types.HttpsPolicy("REQUIRE"),
-		},
-		DeliveryOptions: &types.DeliveryOptions{
-			TlsPolicy:          types.TlsPolicy("REQUIRE"),
-			SendingPoolName:    ptr.String("__SendingPoolName__"),
-			MaxDeliverySeconds: ptr.Int64(1),
-		},
-		ReputationOptions: &types.ReputationOptions{
-			ReputationMetricsEnabled: true,
-			LastFreshStart:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		},
-		SendingOptions: &types.SendingOptions{
-			SendingEnabled: true,
-		},
-		Tags: []types.Tag{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-		},
-		SuppressionOptions: &types.SuppressionOptions{
-			SuppressedReasons: []types.SuppressionListReason{
-				types.SuppressionListReason("BOUNCE"),
-				types.SuppressionListReason("BOUNCE"),
-			},
-			SuppressionScope: types.SuppressionListScope("ACCOUNT"),
-			ValidationOptions: &types.SuppressionValidationOptions{
-				ConditionThreshold: &types.SuppressionConditionThreshold{
-					ConditionThresholdEnabled: types.FeatureStatus("ENABLED"),
-					OverallConfidenceThreshold: &types.SuppressionConfidenceThreshold{
-						ConfidenceVerdictThreshold: types.SuppressionConfidenceVerdictThreshold("MEDIUM"),
-					},
-				},
-			},
-		},
-		VdmOptions: &types.VdmOptions{
-			DashboardOptions: &types.DashboardOptions{
-				EngagementMetrics: types.FeatureStatus("ENABLED"),
-			},
-			GuardianOptions: &types.GuardianOptions{
-				OptimizedSharedDelivery: types.FeatureStatus("ENABLED"),
-			},
-		},
-		ArchivingOptions: &types.ArchivingOptions{
-			ArchiveArn: ptr.String("__ArchiveArn__"),
-		},
+	_, opErr := svc.AssociateEmailIdentityCertificate(context.Background(), &AssociateEmailIdentityCertificateInput{
+		EmailIdentity:  ptr.String("__EmailIdentity__"),
+		FromAddress:    ptr.String("__FromAddress__"),
+		CertificateArn: ptr.String("__CertificateArn__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -5049,29 +5119,10 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetMetricData(context.Background(), &BatchGetMetricDataInput{
-		Queries: []types.BatchGetMetricDataQuery{
-			{
-				Id:        ptr.String("__Id__"),
-				Namespace: types.MetricNamespace("VDM"),
-				Metric:    types.Metric("SEND"),
-				Dimensions: map[string]string{
-					"key0": "__Value__",
-				},
-				StartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			},
-			{
-				Id:        ptr.String("__Id__"),
-				Namespace: types.MetricNamespace("VDM"),
-				Metric:    types.Metric("SEND"),
-				Dimensions: map[string]string{
-					"key0": "__Value__",
-				},
-				StartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			},
-		},
+	_, opErr := svc.AssociateEmailIdentityCertificate(context.Background(), &AssociateEmailIdentityCertificateInput{
+		EmailIdentity:  ptr.String("__EmailIdentity__"),
+		FromAddress:    ptr.String("__FromAddress__"),
+		CertificateArn: ptr.String("__CertificateArn__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -5150,6 +5201,11 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		},
 		ArchivingOptions: &types.ArchivingOptions{
 			ArchiveArn: ptr.String("__ArchiveArn__"),
+		},
+		MessageSecurityOptions: &types.MessageSecurityOptions{
+			SigningScheme: &types.SigningSchemeMemberDefaultScheme{
+				Value: types.DefaultSigningScheme{},
+			},
 		},
 	})
 	if opErr == nil {
@@ -5347,6 +5403,11 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		},
 		ArchivingOptions: &types.ArchivingOptions{
 			ArchiveArn: ptr.String("__ArchiveArn__"),
+		},
+		MessageSecurityOptions: &types.MessageSecurityOptions{
+			SigningScheme: &types.SigningSchemeMemberDefaultScheme{
+				Value: types.DefaultSigningScheme{},
+			},
 		},
 	})
 	if opErr == nil {
@@ -5631,29 +5692,10 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetMetricData(context.Background(), &BatchGetMetricDataInput{
-		Queries: []types.BatchGetMetricDataQuery{
-			{
-				Id:        ptr.String("__Id__"),
-				Namespace: types.MetricNamespace("VDM"),
-				Metric:    types.Metric("SEND"),
-				Dimensions: map[string]string{
-					"key0": "__Value__",
-				},
-				StartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			},
-			{
-				Id:        ptr.String("__Id__"),
-				Namespace: types.MetricNamespace("VDM"),
-				Metric:    types.Metric("SEND"),
-				Dimensions: map[string]string{
-					"key0": "__Value__",
-				},
-				StartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			},
-		},
+	_, opErr := svc.AssociateEmailIdentityCertificate(context.Background(), &AssociateEmailIdentityCertificateInput{
+		EmailIdentity:  ptr.String("__EmailIdentity__"),
+		FromAddress:    ptr.String("__FromAddress__"),
+		CertificateArn: ptr.String("__CertificateArn__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -5808,29 +5850,10 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetMetricData(context.Background(), &BatchGetMetricDataInput{
-		Queries: []types.BatchGetMetricDataQuery{
-			{
-				Id:        ptr.String("__Id__"),
-				Namespace: types.MetricNamespace("VDM"),
-				Metric:    types.Metric("SEND"),
-				Dimensions: map[string]string{
-					"key0": "__Value__",
-				},
-				StartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			},
-			{
-				Id:        ptr.String("__Id__"),
-				Namespace: types.MetricNamespace("VDM"),
-				Metric:    types.Metric("SEND"),
-				Dimensions: map[string]string{
-					"key0": "__Value__",
-				},
-				StartDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				EndDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			},
-		},
+	_, opErr := svc.AssociateEmailIdentityCertificate(context.Background(), &AssociateEmailIdentityCertificateInput{
+		EmailIdentity:  ptr.String("__EmailIdentity__"),
+		FromAddress:    ptr.String("__FromAddress__"),
+		CertificateArn: ptr.String("__CertificateArn__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

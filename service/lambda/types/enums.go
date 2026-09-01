@@ -127,6 +127,27 @@ func (CodeSigningPolicy) Values() []CodeSigningPolicy {
 	}
 }
 
+type DirectS3Read string
+
+// Enum values for DirectS3Read
+const (
+	DirectS3ReadEnabled  DirectS3Read = "ENABLED"
+	DirectS3ReadDisabled DirectS3Read = "DISABLED"
+	DirectS3ReadAuto     DirectS3Read = "AUTO"
+)
+
+// Values returns all known values for DirectS3Read. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DirectS3Read) Values() []DirectS3Read {
+	return []DirectS3Read{
+		"ENABLED",
+		"DISABLED",
+		"AUTO",
+	}
+}
+
 type EndPointType string
 
 // Enum values for EndPointType

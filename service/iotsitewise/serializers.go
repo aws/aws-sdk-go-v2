@@ -11610,6 +11610,13 @@ func awsRestjson1_serializeOpDocumentStartPipelineExecutionInput(v *StartPipelin
 		}
 	}
 
+	if v.ExecutionMountOverrides != nil {
+		ok := object.Key("executionMountOverrides")
+		if err := awsRestjson1_serializeDocumentMountOverrides(v.ExecutionMountOverrides, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ExecutionPriority != nil {
 		ok := object.Key("executionPriority")
 		ok.Integer(*v.ExecutionPriority)
@@ -14666,6 +14673,22 @@ func awsRestjson1_serializeDocumentComputeNodeList(v []types.ComputeNode, value 
 	return nil
 }
 
+func awsRestjson1_serializeDocumentComputeNodeMountsMap(v map[string][]types.Mount, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentMountList(v[key], om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentComputeNodeNameList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -14696,6 +14719,20 @@ func awsRestjson1_serializeDocumentContainerTaskConfiguration(v *types.Container
 	if v.EnvironmentVariables != nil {
 		ok := object.Key("environmentVariables")
 		if err := awsRestjson1_serializeDocumentEnvironmentVariablesMap(v.EnvironmentVariables, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EphemeralStorageConfiguration != nil {
+		ok := object.Key("ephemeralStorageConfiguration")
+		if err := awsRestjson1_serializeDocumentEphemeralStorageConfiguration(v.EphemeralStorageConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Mounts != nil {
+		ok := object.Key("mounts")
+		if err := awsRestjson1_serializeDocumentMountList(v.Mounts, ok); err != nil {
 			return err
 		}
 	}
@@ -14994,6 +15031,23 @@ func awsRestjson1_serializeDocumentEnvironmentVariablesMap(v map[string]string, 
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEphemeralStorageConfiguration(v *types.EphemeralStorageConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.StorageClass) > 0 {
+		ok := object.Key("storageClass")
+		ok.String(string(v.StorageClass))
+	}
+
+	if v.StorageSizeInGiB != nil {
+		ok := object.Key("storageSizeInGiB")
+		ok.Integer(*v.StorageSizeInGiB)
+	}
+
 	return nil
 }
 
@@ -15607,6 +15661,80 @@ func awsRestjson1_serializeDocumentMetricWindow(v *types.MetricWindow, value smi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMount(v *types.Mount, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.RelativePath != nil {
+		ok := object.Key("relativePath")
+		ok.String(*v.RelativePath)
+	}
+
+	if v.Source != nil {
+		ok := object.Key("source")
+		if err := awsRestjson1_serializeDocumentMountSource(v.Source, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.StorageType) > 0 {
+		ok := object.Key("storageType")
+		ok.String(string(v.StorageType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMountList(v []types.Mount, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentMount(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMountOverrides(v *types.MountOverrides, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ComputeNodes != nil {
+		ok := object.Key("computeNodes")
+		if err := awsRestjson1_serializeDocumentComputeNodeMountsMap(v.ComputeNodes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMountSource(v types.MountSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.MountSourceMemberS3AccessPoint:
+		av := object.Key("s3AccessPoint")
+		if err := awsRestjson1_serializeDocumentS3AccessPointSource(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMp4(v *types.Mp4, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -15926,6 +16054,23 @@ func awsRestjson1_serializeDocumentRetentionPeriod(v *types.RetentionPeriod, val
 	if v.Unlimited != nil {
 		ok := object.Key("unlimited")
 		ok.Boolean(*v.Unlimited)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3AccessPointSource(v *types.S3AccessPointSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccessPointArn != nil {
+		ok := object.Key("accessPointArn")
+		ok.String(*v.AccessPointArn)
+	}
+
+	if v.Prefix != nil {
+		ok := object.Key("prefix")
+		ok.String(*v.Prefix)
 	}
 
 	return nil

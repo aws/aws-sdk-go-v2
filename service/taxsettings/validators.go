@@ -252,6 +252,11 @@ func validateAdditionalInfoRequest(v *types.AdditionalInfoRequest) error {
 			invalidParams.AddNested("FranceAdditionalInfo", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MonacoAdditionalInfo != nil {
+		if err := validateMonacoAdditionalInfo(v.MonacoAdditionalInfo); err != nil {
+			invalidParams.AddNested("MonacoAdditionalInfo", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -395,6 +400,21 @@ func validateKenyaAdditionalInfo(v *types.KenyaAdditionalInfo) error {
 	invalidParams := smithy.InvalidParamsError{Context: "KenyaAdditionalInfo"}
 	if len(v.PersonType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PersonType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMonacoAdditionalInfo(v *types.MonacoAdditionalInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MonacoAdditionalInfo"}
+	if v.BusinessNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BusinessNumber"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

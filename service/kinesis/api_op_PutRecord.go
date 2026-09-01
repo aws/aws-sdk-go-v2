@@ -95,6 +95,9 @@ type PutRecordInput struct {
 	// This member is required.
 	PartitionKey *string
 
+	// Checks if your request will succeed. DryRun is an optional parameter.
+	DryRun *bool
+
 	// The hash value used to explicitly determine the shard the data record is
 	// assigned to by overriding the partition key hash.
 	ExplicitHashKey *string

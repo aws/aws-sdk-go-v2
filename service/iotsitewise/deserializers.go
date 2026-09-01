@@ -13438,6 +13438,11 @@ func awsRestjson1_deserializeOpDocumentDescribePipelineExecutionOutput(v **Descr
 				return err
 			}
 
+		case "requestMountOverrides":
+			if err := awsRestjson1_deserializeDocumentMountOverrides(&sv.RequestMountOverrides, value); err != nil {
+				return err
+			}
+
 		case "startTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -34826,6 +34831,11 @@ func awsRestjson1_deserializeDocumentComputeNodeExecutionDetails(v **types.Compu
 				return err
 			}
 
+		case "executionMounts":
+			if err := awsRestjson1_deserializeDocumentMountList(&sv.ExecutionMounts, value); err != nil {
+				return err
+			}
+
 		case "startTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -35050,6 +35060,40 @@ func awsRestjson1_deserializeDocumentComputeNodeList(v *[]types.ComputeNode, val
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentComputeNodeMountsMap(v *map[string][]types.Mount, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string][]types.Mount
+	if *v == nil {
+		mv = map[string][]types.Mount{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal []types.Mount
+		mapVar := parsedVal
+		if err := awsRestjson1_deserializeDocumentMountList(&mapVar, value); err != nil {
+			return err
+		}
+		parsedVal = mapVar
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentComputeNodeNameList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -35218,6 +35262,16 @@ func awsRestjson1_deserializeDocumentContainerTaskConfiguration(v **types.Contai
 
 		case "environmentVariables":
 			if err := awsRestjson1_deserializeDocumentEnvironmentVariablesMap(&sv.EnvironmentVariables, value); err != nil {
+				return err
+			}
+
+		case "ephemeralStorageConfiguration":
+			if err := awsRestjson1_deserializeDocumentEphemeralStorageConfiguration(&sv.EphemeralStorageConfiguration, value); err != nil {
+				return err
+			}
+
+		case "mounts":
+			if err := awsRestjson1_deserializeDocumentMountList(&sv.Mounts, value); err != nil {
 				return err
 			}
 
@@ -36765,6 +36819,59 @@ func awsRestjson1_deserializeDocumentEnvironmentVariablesMap(v *map[string]strin
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEphemeralStorageConfiguration(v **types.EphemeralStorageConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EphemeralStorageConfiguration
+	if *v == nil {
+		sv = &types.EphemeralStorageConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "storageClass":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StorageClass to be of type string, got %T instead", value)
+				}
+				sv.StorageClass = types.StorageClass(jtv)
+			}
+
+		case "storageSizeInGiB":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected EphemeralStorageConfigurationStorageSizeInGiBInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StorageSizeInGiB = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -39648,6 +39755,179 @@ func awsRestjson1_deserializeDocumentMonitorErrorDetails(v **types.MonitorErrorD
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMount(v **types.Mount, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Mount
+	if *v == nil {
+		sv = &types.Mount{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "relativePath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MountRelativePath to be of type string, got %T instead", value)
+				}
+				sv.RelativePath = ptr.String(jtv)
+			}
+
+		case "source":
+			if err := awsRestjson1_deserializeDocumentMountSource(&sv.Source, value); err != nil {
+				return err
+			}
+
+		case "storageType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MountStorageType to be of type string, got %T instead", value)
+				}
+				sv.StorageType = types.MountStorageType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMountList(v *[]types.Mount, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Mount
+	if *v == nil {
+		cv = []types.Mount{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Mount
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentMount(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMountOverrides(v **types.MountOverrides, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MountOverrides
+	if *v == nil {
+		sv = &types.MountOverrides{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "computeNodes":
+			if err := awsRestjson1_deserializeDocumentComputeNodeMountsMap(&sv.ComputeNodes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMountSource(v *types.MountSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.MountSource
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "s3AccessPoint":
+			var mv types.S3AccessPointSource
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentS3AccessPointSource(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.MountSourceMemberS3AccessPoint{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMp4(v **types.Mp4, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -41703,6 +41983,55 @@ func awsRestjson1_deserializeDocumentRows(v *[]types.Row, value interface{}) err
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentS3AccessPointSource(v **types.S3AccessPointSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3AccessPointSource
+	if *v == nil {
+		sv = &types.S3AccessPointSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accessPointArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MountS3AccessPointArn to be of type string, got %T instead", value)
+				}
+				sv.AccessPointArn = ptr.String(jtv)
+			}
+
+		case "prefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MountS3KeyPrefix to be of type string, got %T instead", value)
+				}
+				sv.Prefix = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

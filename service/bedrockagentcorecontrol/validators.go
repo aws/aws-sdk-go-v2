@@ -11232,6 +11232,9 @@ func validateOpUpdateConfigurationBundleInput(v *UpdateConfigurationBundleInput)
 			invalidParams.AddNested("Components", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ParentVersionIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParentVersionIds"))
+	}
 	if v.CreatedBy != nil {
 		if err := validateVersionCreatedBySource(v.CreatedBy); err != nil {
 			invalidParams.AddNested("CreatedBy", err.(smithy.InvalidParamsError))

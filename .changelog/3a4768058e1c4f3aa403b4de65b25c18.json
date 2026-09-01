@@ -1,0 +1,8 @@
+{
+    "id": "3a476805-8e1c-4f3a-a403-b4de65b25c18",
+    "type": "feature",
+    "description": "GetOfferTerms now returns renewalTerm for offers with pre-authorized renewals, exposing maxRenewals, lockoutPeriod, adjustmentDeadline, priceIncrease (fixed percentage or percentage range), and termTemplates (renewal payment schedules). Enables buyers to view renewal pricing and terms.",
+    "modules": [
+        "service/marketplacediscovery"
+    ]
+}

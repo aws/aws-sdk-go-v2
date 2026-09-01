@@ -2,4 +2,4 @@ POST /workspaces/__WorkspaceName__/pipelines/__PipelineName__/executions
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","executionEnvironmentVariableOverrides":{"computeNodes":{"key0":{"key0":"__Value__"}},"global":{"key0":"__Value__"}},"executionPriority":1}
+{"clientToken":"__ClientToken__","executionEnvironmentVariableOverrides":{"computeNodes":{"key0":{"key0":"__Value__"}},"global":{"key0":"__Value__"}},"executionMountOverrides":{"computeNodes":{"key0":[{"name":"__Name__","relativePath":"__RelativePath__","source":{"s3AccessPoint":{"accessPointArn":"__AccessPointArn__","prefix":"__Prefix__"}},"storageType":"SHARED_STORAGE"},{"name":"__Name__","relativePath":"__RelativePath__","source":{"s3AccessPoint":{"accessPointArn":"__AccessPointArn__","prefix":"__Prefix__"}},"storageType":"SHARED_STORAGE"}]}},"executionPriority":1}

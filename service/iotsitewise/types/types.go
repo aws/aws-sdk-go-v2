@@ -2023,6 +2023,12 @@ type ComputeNodeExecutionDetails struct {
 	// The fully resolved environment variables used for this compute node execution.
 	ExecutionEnvironmentVariables map[string]string
 
+	// The fully resolved mounts used for this compute node execution, after merging
+	// task-defined mounts with any execution-level mount overrides. Each mount
+	// attaches an external data source to the container filesystem at a relative path
+	// under the service-owned mount root.
+	ExecutionMounts []Mount
+
 	// The time the compute node execution started, in Unix epoch time.
 	StartTime *time.Time
 
@@ -2124,6 +2130,15 @@ type ContainerTaskConfiguration struct {
 
 	// Environment variables passed to the container at runtime.
 	EnvironmentVariables map[string]string
+
+	// Ephemeral storage configuration for the container task.
+	EphemeralStorageConfiguration *EphemeralStorageConfiguration
+
+	// Mounts attached to the container filesystem. Each mount exposes an external
+	// data source as a local directory inside the container. The service assigns each
+	// mount a container path based on the mount name. The container reads files
+	// through that path as if the data were on the local filesystem.
+	Mounts []Mount
 
 	// The timeout in seconds for task execution. Default: 3600 (1 hour).
 	TimeoutSeconds *int64
@@ -2703,6 +2718,22 @@ type EnrichmentTrimSettings struct {
 	//
 	// This member is required.
 	StartTime *TimeInNanos
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for ephemeral storage attached to the container task.
+type EphemeralStorageConfiguration struct {
+
+	// Storage type that determines I/O performance family and level.
+	//
+	// This member is required.
+	StorageClass StorageClass
+
+	// Storage volume size in GiB.
+	//
+	// This member is required.
+	StorageSizeInGiB *int32
 
 	noSmithyDocumentSerde
 }
@@ -3670,6 +3701,64 @@ type MonitorErrorDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Attaches a data source to the container filesystem for a task at a
+// customer-supplied relative path under the service-owned mount root.
+type Mount struct {
+
+	// A unique name for the mount within the task.
+	//
+	// This member is required.
+	Name *string
+
+	// The relative path under the service-owned mount root where this mount is
+	// attached inside the container.
+	//
+	// This member is required.
+	RelativePath *string
+
+	// The data source for the mount.
+	//
+	// This member is required.
+	Source MountSource
+
+	// The type of storage used for the mount.
+	//
+	// This member is required.
+	StorageType MountStorageType
+
+	noSmithyDocumentSerde
+}
+
+// Runtime mount overrides applied to a single pipeline execution. Overrides are
+// transient — they do not modify the stored task configuration.
+type MountOverrides struct {
+
+	// The mount overrides for each compute node, keyed by compute node name.
+	//
+	// This member is required.
+	ComputeNodes map[string][]Mount
+
+	noSmithyDocumentSerde
+}
+
+// The data source configuration for a mount. Specify exactly one of the following.
+//
+// The following types satisfy this interface:
+//
+//	MountSourceMemberS3AccessPoint
+type MountSource interface {
+	isMountSource()
+}
+
+// Configuration for a mount that reads from an Amazon S3 access point.
+type MountSourceMemberS3AccessPoint struct {
+	Value S3AccessPointSource
+
+	noSmithyDocumentSerde
+}
+
+func (*MountSourceMemberS3AccessPoint) isMountSource() {}
+
 // The MP4 video format configuration for bulk import files.
 type Mp4 struct {
 	noSmithyDocumentSerde
@@ -4283,6 +4372,21 @@ type Row struct {
 	//
 	// This member is required.
 	Data []Datum
+
+	noSmithyDocumentSerde
+}
+
+// Configures a mount that reads from an Amazon S3 access point.
+type S3AccessPointSource struct {
+
+	// The Amazon Resource Name (ARN) of the S3 access point.
+	//
+	// This member is required.
+	AccessPointArn *string
+
+	// An optional key prefix to scope the mount to a subset of objects at the access
+	// point.
+	Prefix *string
 
 	noSmithyDocumentSerde
 }
@@ -4964,6 +5068,7 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isEnrichmentJobConfiguration() {}
+func (*UnknownUnionMember) isMountSource()                {}
 func (*UnknownUnionMember) isProcessingInput()            {}
 func (*UnknownUnionMember) isResponseStream()             {}
 func (*UnknownUnionMember) isTaskConfiguration()          {}

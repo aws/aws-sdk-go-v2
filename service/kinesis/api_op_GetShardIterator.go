@@ -96,6 +96,9 @@ type GetShardIteratorInput struct {
 	// This member is required.
 	ShardIteratorType types.ShardIteratorType
 
+	// Checks if your request will succeed. DryRun is an optional parameter.
+	DryRun *bool
+
 	// The sequence number of the data record in the shard from which to start
 	// reading. Used with shard iterator type AT_SEQUENCE_NUMBER and
 	// AFTER_SEQUENCE_NUMBER.

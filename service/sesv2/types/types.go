@@ -647,6 +647,12 @@ type DedicatedIpPool struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the default signing scheme, in which Amazon SES API v2 doesn't apply
+// S/MIME signing to messages sent with the configuration set.
+type DefaultSigningScheme struct {
+	noSmithyDocumentSerde
+}
+
 // An object that contains metadata related to a predictive inbox placement test.
 type DeliverabilityTestReport struct {
 
@@ -1673,6 +1679,27 @@ type GuardianOptions struct {
 	noSmithyDocumentSerde
 }
 
+// An object that contains information about an S/MIME certificate that's
+// associated with an email identity.
+type IdentityCertificate struct {
+
+	// The Amazon Resource Name (ARN) of the Certificate Manager (ACM) certificate
+	// that's associated with the email identity.
+	CertificateArn *string
+
+	// The timestamp after which the certificate is no longer valid.
+	CertificateExpiryTime *time.Time
+
+	// The email address that the certificate applies to.
+	FromAddress *string
+
+	// The status of the certificate association. A status of ACTIVE indicates that
+	// the certificate is ready to use for signing.
+	Status IdentityCertificateStatus
+
+	noSmithyDocumentSerde
+}
+
 // Information about an email identity.
 type IdentityInfo struct {
 
@@ -2018,6 +2045,8 @@ type MessageInsightsDataSource struct {
 	Include *MessageInsightsFilters
 
 	// The maximum number of results.
+	//
+	// If you don't specify MaxResults , the export returns a maximum of 1,000 results.
 	MaxResults *int32
 
 	noSmithyDocumentSerde
@@ -2061,6 +2090,19 @@ type MessageInsightsFilters struct {
 
 	// The subject line of the message.
 	Subject []string
+
+	noSmithyDocumentSerde
+}
+
+// An object that defines the message-level security options that apply to
+// messages that you send using the configuration set. Currently, these options
+// determine whether Amazon SES API v2 adds an S/MIME signature to your messages
+// and, if so, the format of that signature.
+type MessageSecurityOptions struct {
+
+	// The signing scheme that Amazon SES API v2 applies to messages sent with the
+	// configuration set.
+	SigningScheme SigningScheme
 
 	noSmithyDocumentSerde
 }
@@ -2511,6 +2553,48 @@ type SendQuota struct {
 	// The number of emails sent from your Amazon SES account in the current Amazon
 	// Web Services Region over the past 24 hours.
 	SentLast24Hours float64
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the signing scheme to apply to messages sent with a configuration
+// set. This is a union type, so you specify exactly one of its members.
+//
+// The following types satisfy this interface:
+//
+//	SigningSchemeMemberDefaultScheme
+//	SigningSchemeMemberSmimeScheme
+type SigningScheme interface {
+	isSigningScheme()
+}
+
+// Use the default signing behavior. When you select this option, Amazon SES API
+// v2 doesn't add an S/MIME signature to messages sent with the configuration set.
+type SigningSchemeMemberDefaultScheme struct {
+	Value DefaultSigningScheme
+
+	noSmithyDocumentSerde
+}
+
+func (*SigningSchemeMemberDefaultScheme) isSigningScheme() {}
+
+// Sign messages sent with the configuration set using S/MIME. For signing to
+// apply, the email identity used to send a message must have an active S/MIME
+// certificate association.
+type SigningSchemeMemberSmimeScheme struct {
+	Value SmimeSigningScheme
+
+	noSmithyDocumentSerde
+}
+
+func (*SigningSchemeMemberSmimeScheme) isSigningScheme() {}
+
+// Specifies that Amazon SES API v2 signs messages sent with the configuration set
+// using S/MIME.
+type SmimeSigningScheme struct {
+
+	// The format of the S/MIME signature that Amazon SES API v2 applies to messages.
+	SignatureFormat SignatureFormat
 
 	noSmithyDocumentSerde
 }
@@ -3195,3 +3279,14 @@ type VolumeStatistics struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isSigningScheme() {}

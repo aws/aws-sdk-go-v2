@@ -25,6 +25,24 @@ func ExampleEnrichmentJobConfiguration_outputUsage() {
 
 var _ *types.EventDetection
 
+func ExampleMountSource_outputUsage() {
+	var union types.MountSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MountSourceMemberS3AccessPoint:
+		_ = v.Value // Value is types.S3AccessPointSource
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.S3AccessPointSource
+
 func ExampleProcessingInput_outputUsage() {
 	var union types.ProcessingInput
 	// type switches can be used to check the union value
