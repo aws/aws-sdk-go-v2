@@ -812,6 +812,22 @@ func TestUnmarshalTime_S_SS(t *testing.T) {
 			input:  "1970-01-01T00:02:03.01Z",
 			expect: time.Unix(123, 10000000).UTC(),
 		},
+		"String RFC3339 no fractional": {
+			input:  "1970-01-01T00:02:03Z",
+			expect: time.Unix(123, 0).UTC(),
+		},
+		"String RFC3339 with offset": {
+			input:  "1970-01-01T05:32:03+05:30",
+			expect: time.Unix(123, 0).In(time.FixedZone("", 5*3600+30*60)),
+		},
+		"String DateTime literal Z": {
+			input:  "1970-01-01T00:02:03.01Z",
+			expect: time.Unix(123, 10000000).UTC(),
+		},
+		"String DateTime no timezone": {
+			input:  "1970-01-01T00:02:03.01",
+			expect: time.Unix(123, 10000000).UTC(),
+		},
 		"String UnixDate": {
 			input:  "Thu Jan  1 00:02:03 UTC 1970",
 			expect: time.Unix(123, 0).UTC(),
@@ -1006,6 +1022,57 @@ func TestCustomDecodeNAndDefaultDecodeS(t *testing.T) {
 	}
 	if diff := cmpDiff(expectedValue, actualValue); diff != "" {
 		t.Errorf("expect attribute value match\n%s", diff)
+	}
+}
+
+func TestUnmarshalTime_S_RoundTrip(t *testing.T) {
+	type A struct {
+		TimeField time.Time
+	}
+
+	times := []time.Time{
+		time.Date(2024, 1, 15, 12, 30, 45, 0, time.UTC),
+		time.Date(2024, 1, 15, 12, 30, 45, 123456789, time.UTC),
+		time.Date(2024, 1, 15, 12, 30, 45, 100000000, time.UTC),
+	}
+
+	for _, ts := range times {
+		t.Run(ts.String(), func(t *testing.T) {
+			input := A{TimeField: ts}
+
+			av, err := Marshal(input)
+			if err != nil {
+				t.Fatalf("expect no marshal error, got %v", err)
+			}
+
+			var output A
+			err = Unmarshal(av, &output)
+			if err != nil {
+				t.Fatalf("expect no unmarshal error, got %v", err)
+			}
+
+			if !input.TimeField.Equal(output.TimeField) {
+				t.Errorf("expect round-trip to preserve time, got %v != %v",
+					input.TimeField, output.TimeField)
+			}
+		})
+	}
+}
+
+func TestUnmarshalTime_S_FiveDigitYear(t *testing.T) {
+	type A struct {
+		TimeField time.Time
+	}
+
+	inputMap := &types.AttributeValueMemberM{
+		Value: map[string]types.AttributeValue{
+			"TimeField": &types.AttributeValueMemberS{Value: "58000-01-15T12:30:45.123456789Z"},
+		},
+	}
+	var output A
+	err := Unmarshal(inputMap, &output)
+	if err == nil {
+		t.Fatal("expect unmarshal error for 5-digit year, got nil")
 	}
 }
 
