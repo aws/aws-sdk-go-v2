@@ -1,8 +1,0 @@
-{
-    "id": "c56aa2af-f359-455b-a9ce-b8e28fc545c9",
-    "type": "feature",
-    "description": "Added support for managing SMIME signing certificates for email identities, including associating, listing, and disassociating certificates. Added the UpdateConfigurationSet operation to configure message security options such as signing scheme.",
-    "modules": [
-        "service/sesv2"
-    ]
-}

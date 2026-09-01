@@ -1,3 +1,7 @@
+# v1.68.1 (2026-09-01)
+
+* No change notes available for this release.
+
 # v1.68.0 (2026-08-31.2)
 
 * **Feature**: Stop registering the `SetCredentialSourceMiddleware` middleware in generated clients. Credential source user agent features are now set when the client's middleware stack is constructed.

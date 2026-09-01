@@ -1,3 +1,7 @@
+# v1.63.0 (2026-09-01)
+
+* **Feature**: This release adds support for the Amazon Lightsail GetProfile API, which returns the profile for the specified account.
+
 # v1.62.0 (2026-08-31.2)
 
 * **Feature**: Stop registering the `SetCredentialSourceMiddleware` middleware in generated clients. Credential source user agent features are now set when the client's middleware stack is constructed.

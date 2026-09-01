@@ -1,3 +1,31 @@
+# Release (2026-09-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.63.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1630-2026-09-01)
+  * **Feature**: Online evaluation configurations now support up to 25 evaluators. CloudWatch Logs data sources for online evaluation now support up to 10 log groups.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.327.0](service/ec2/CHANGELOG.md#v13270-2026-09-01)
+  * **Feature**: Update UserData and UploadPolicy shapes to use SecureBlob
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.89.0](service/guardduty/CHANGELOG.md#v1890-2026-09-01)
+  * **Feature**: Amazon GuardDuty now supports custom detection rules, including APIs to manage rule associations and organization-level configurations.
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.60.0](service/iotsitewise/CHANGELOG.md#v1600-2026-09-01)
+  * **Feature**: AWS IoT SiteWise Scenario Discovery now supports mounting Amazon S3 data directly into pipeline task containers via S3 Access Points, and configuring additional ephemeral storage per task. Mount configurations can be overridden at execution time. See the API guide for details.
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.52.0](service/kinesis/CHANGELOG.md#v1520-2026-09-01)
+  * **Feature**: Amazon Kinesis Data Streams now supports a dry run feature for data-plane APIs to validate the permissions and request parameters. If all checks complete successfully, the API returns a 'DryRunOperationException', confirming the request would have succeeded without the 'DryRun' parameter.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.106.0](service/lambda/CHANGELOG.md#v11060-2026-09-01)
+  * **Feature**: AWS Lambda now provides configurable control over S3 direct access, allowing you to explicitly enable or disable how functions stream file reads directly from S3 buckets. This gives you flexibility to tune data access behavior based on your workload requirements, independent of memory size.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.63.0](service/lightsail/CHANGELOG.md#v1630-2026-09-01)
+  * **Feature**: This release adds support for the Amazon Lightsail GetProfile API, which returns the profile for the specified account.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceagreement`: [v1.24.0](service/marketplaceagreement/CHANGELOG.md#v1240-2026-09-01)
+  * **Feature**: This release adds renewal support for AWS Marketplace private offers. Agreements report whether they renew and, if not, why. Renewal terms add price increases, renewal limits, renewal decision deadlines, and payment schedule templates. SearchAgreements adds filters.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacediscovery`: [v1.8.0](service/marketplacediscovery/CHANGELOG.md#v180-2026-09-01)
+  * **Feature**: GetOfferTerms now returns renewalTerm for offers with pre-authorized renewals, exposing maxRenewals, lockoutPeriod, adjustmentDeadline, priceIncrease (fixed percentage or percentage range), and termTemplates (renewal payment schedules). Enables buyers to view renewal pricing and terms.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.101.0](service/mediaconvert/CHANGELOG.md#v11010-2026-09-01)
+  * **Feature**: Adds support for AAC passthrough. Adds ManifestCues option to support HLS manifest Cue marker passthrough. Adds playback device compatibility mode for DASH H.265 outputs. Adds TTML caption styling options. Adds interlace mode support for XAVC HD Intra CBG profile.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.71.0](service/sesv2/CHANGELOG.md#v1710-2026-09-01)
+  * **Feature**: Added support for managing SMIME signing certificates for email identities, including associating, listing, and disassociating certificates. Added the UpdateConfigurationSet operation to configure message security options such as signing scheme.
+* `github.com/aws/aws-sdk-go-v2/service/taxsettings`: [v1.25.0](service/taxsettings/CHANGELOG.md#v1250-2026-09-01)
+  * **Feature**: France and Monaco Additional Info changes
+
 # Release (2026-08-31.2)
 
 ## General Highlights

@@ -1,3 +1,7 @@
+# v1.89.0 (2026-09-01)
+
+* **Feature**: Amazon GuardDuty now supports custom detection rules, including APIs to manage rule associations and organization-level configurations.
+
 # v1.88.0 (2026-08-31.2)
 
 * **Feature**: Stop registering the `SetCredentialSourceMiddleware` middleware in generated clients. Credential source user agent features are now set when the client's middleware stack is constructed.

@@ -1,8 +1,0 @@
-{
-    "id": "69aa0b18-89bf-4bba-8bb0-9613cb960269",
-    "type": "feature",
-    "description": "AWS IoT SiteWise Scenario Discovery now supports mounting Amazon S3 data directly into pipeline task containers via S3 Access Points, and configuring additional ephemeral storage per task. Mount configurations can be overridden at execution time. See the API guide for details.",
-    "modules": [
-        "service/iotsitewise"
-    ]
-}

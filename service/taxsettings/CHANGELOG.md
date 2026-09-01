@@ -1,3 +1,7 @@
+# v1.25.0 (2026-09-01)
+
+* **Feature**: France and Monaco Additional Info changes
+
 # v1.24.0 (2026-08-31.2)
 
 * **Feature**: Stop registering the `SetCredentialSourceMiddleware` middleware in generated clients. Credential source user agent features are now set when the client's middleware stack is constructed.

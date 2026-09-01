@@ -1,3 +1,7 @@
+# v1.327.0 (2026-09-01)
+
+* **Feature**: Update UserData and UploadPolicy shapes to use SecureBlob
+
 # v1.326.0 (2026-08-31.2)
 
 * **Feature**: Stop registering the `SetCredentialSourceMiddleware` middleware in generated clients. Credential source user agent features are now set when the client's middleware stack is constructed.

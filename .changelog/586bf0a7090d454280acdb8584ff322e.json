@@ -1,8 +1,0 @@
-{
-    "id": "586bf0a7-090d-4542-80ac-db8584ff322e",
-    "type": "feature",
-    "description": "This release adds support for the Amazon Lightsail GetProfile API, which returns the profile for the specified account.",
-    "modules": [
-        "service/lightsail"
-    ]
-}
