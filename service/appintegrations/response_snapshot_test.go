@@ -372,7 +372,8 @@ func TestCheckResponseSnapshot_DeleteApplication(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{
-		Arn: ptr.String("__Arn__"),
+		Arn:   ptr.String("__Arn__"),
+		Force: true,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1197,6 +1198,88 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "AccessDeniedException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
+	want := &types.ConflictException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ConflictException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{
+		Arn:         ptr.String("__Arn__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ApplicationSourceConfig: &types.ApplicationSourceConfig{
+			ExternalUrlConfig: &types.ExternalUrlConfig{
+				AccessUrl: ptr.String("__AccessUrl__"),
+				ApprovedOrigins: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Subscriptions: []types.Subscription{
+			{
+				Event:       ptr.String("__Event__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Event:       ptr.String("__Event__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		Publications: []types.Publication{
+			{
+				Event:       ptr.String("__Event__"),
+				Schema:      ptr.String("__Schema__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Event:       ptr.String("__Event__"),
+				Schema:      ptr.String("__Schema__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		Permissions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IsService:             ptr.Bool(true),
+		InitializationTimeout: ptr.Int32(1),
+		ApplicationConfig: &types.ApplicationConfig{
+			ContactHandling: &types.ContactHandling{
+				Scope: types.ContactHandlingScope("CROSS_CONTACTS"),
+			},
+		},
+		IframeConfig: &types.IframeConfig{
+			Allow: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Sandbox: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ApplicationType: types.ApplicationType("STANDARD"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ConflictException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ConflictException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ConflictException.error", err)
 	}
 }
 

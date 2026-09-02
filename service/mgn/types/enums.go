@@ -1378,6 +1378,25 @@ func (VolumeType) Values() []VolumeType {
 	}
 }
 
+type VpcProvisioningStrategy string
+
+// Enum values for VpcProvisioningStrategy
+const (
+	VpcProvisioningStrategyCreateNew   VpcProvisioningStrategy = "CREATE_NEW"
+	VpcProvisioningStrategyUseExisting VpcProvisioningStrategy = "USE_EXISTING"
+)
+
+// Values returns all known values for VpcProvisioningStrategy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VpcProvisioningStrategy) Values() []VpcProvisioningStrategy {
+	return []VpcProvisioningStrategy{
+		"CREATE_NEW",
+		"USE_EXISTING",
+	}
+}
+
 type WaveHealthStatus string
 
 // Enum values for WaveHealthStatus

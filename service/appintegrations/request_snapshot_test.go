@@ -441,7 +441,8 @@ func TestCheckRequestSnapshot_CreateEventIntegration(t *testing.T) {
 
 func TestCheckRequestSnapshot_DeleteApplication(t *testing.T) {
 	input := &DeleteApplicationInput{
-		Arn: ptr.String("__Arn__"),
+		Arn:   ptr.String("__Arn__"),
+		Force: true,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1275,7 +1276,8 @@ func TestUpdateRequestSnapshot_CreateEventIntegration(t *testing.T) {
 
 func TestUpdateRequestSnapshot_DeleteApplication(t *testing.T) {
 	input := &DeleteApplicationInput{
-		Arn: ptr.String("__Arn__"),
+		Arn:   ptr.String("__Arn__"),
+		Force: true,
 	}
 	body := &bytes.Buffer{}
 	method := ""

@@ -1,0 +1,8 @@
+{
+    "id": "86078ea3-5feb-4334-a2b4-c47c4a64ea9f",
+    "type": "feature",
+    "description": "AWS Elemental MediaLive now supports AB forensic video watermarking",
+    "modules": [
+        "service/medialive"
+    ]
+}

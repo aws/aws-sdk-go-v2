@@ -139,6 +139,19 @@ func serializeAssociateSourceServersRequestSourceServerIDs(s smithy.ShapeSeriali
 	s.CloseList()
 }
 
+func serializeCidrMappingsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CidrMapping) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeCodeGenerationOutputFormatTypes(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CodeGenerationOutputFormatType) {
 	if v == nil {
 		return
@@ -1199,6 +1212,20 @@ func deserializeAssociateSourceServersRequestSourceServerIDs(d smithy.ShapeDeser
 	return smithy.ReadList(d, s, func() error {
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCidrMappingsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CidrMapping) error {
+	*v = make([]types.CidrMapping, 0)
+	var vv types.CidrMapping
+	return smithy.ReadList(d, s, func() error {
+		vv = types.CidrMapping{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

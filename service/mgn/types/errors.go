@@ -8,7 +8,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Operating denied due to a file permission or access check error.
+// Operation denied due to a file permission or access check error.
 type AccessDeniedException struct {
 	Message *string
 
@@ -261,7 +261,7 @@ func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
-// The request could not be completed because its exceeded the service quota.
+// The request could not be completed because it exceeded the service quota.
 type ServiceQuotaExceededException struct {
 	Message *string
 

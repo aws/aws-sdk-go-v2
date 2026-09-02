@@ -736,9 +736,20 @@ func TestCheckResponseSnapshot_CreateNetworkMigrationDefinition(t *testing.T) {
 			OutboundCidr:   ptr.String("__OutboundCidr__"),
 			InspectionCidr: ptr.String("__InspectionCidr__"),
 		},
-		TargetDeployment: types.TargetDeployment("SINGLE_ACCOUNT"),
-		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		TargetDeployment:        types.TargetDeployment("SINGLE_ACCOUNT"),
+		VpcProvisioningStrategy: types.VpcProvisioningStrategy("CREATE_NEW"),
+		CidrMappings: []types.CidrMapping{
+			{
+				OriginalCidr: ptr.String("__OriginalCidr__"),
+				UpdatedCidr:  ptr.String("__UpdatedCidr__"),
+			},
+			{
+				OriginalCidr: ptr.String("__OriginalCidr__"),
+				UpdatedCidr:  ptr.String("__UpdatedCidr__"),
+			},
+		},
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -785,7 +796,18 @@ func TestCheckResponseSnapshot_CreateNetworkMigrationDefinition(t *testing.T) {
 			OutboundCidr:   ptr.String("__OutboundCidr__"),
 			InspectionCidr: ptr.String("__InspectionCidr__"),
 		},
-		TargetDeployment: types.TargetDeployment("SINGLE_ACCOUNT"),
+		TargetDeployment:        types.TargetDeployment("SINGLE_ACCOUNT"),
+		VpcProvisioningStrategy: types.VpcProvisioningStrategy("CREATE_NEW"),
+		CidrMappings: []types.CidrMapping{
+			{
+				OriginalCidr: ptr.String("__OriginalCidr__"),
+				UpdatedCidr:  ptr.String("__UpdatedCidr__"),
+			},
+			{
+				OriginalCidr: ptr.String("__OriginalCidr__"),
+				UpdatedCidr:  ptr.String("__UpdatedCidr__"),
+			},
+		},
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -2782,9 +2804,20 @@ func TestCheckResponseSnapshot_GetNetworkMigrationDefinition(t *testing.T) {
 			OutboundCidr:   ptr.String("__OutboundCidr__"),
 			InspectionCidr: ptr.String("__InspectionCidr__"),
 		},
-		TargetDeployment: types.TargetDeployment("SINGLE_ACCOUNT"),
-		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		TargetDeployment:        types.TargetDeployment("SINGLE_ACCOUNT"),
+		VpcProvisioningStrategy: types.VpcProvisioningStrategy("CREATE_NEW"),
+		CidrMappings: []types.CidrMapping{
+			{
+				OriginalCidr: ptr.String("__OriginalCidr__"),
+				UpdatedCidr:  ptr.String("__UpdatedCidr__"),
+			},
+			{
+				OriginalCidr: ptr.String("__OriginalCidr__"),
+				UpdatedCidr:  ptr.String("__UpdatedCidr__"),
+			},
+		},
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -7268,9 +7301,20 @@ func TestCheckResponseSnapshot_UpdateNetworkMigrationDefinition(t *testing.T) {
 			OutboundCidr:   ptr.String("__OutboundCidr__"),
 			InspectionCidr: ptr.String("__InspectionCidr__"),
 		},
-		TargetDeployment: types.TargetDeployment("SINGLE_ACCOUNT"),
-		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		TargetDeployment:        types.TargetDeployment("SINGLE_ACCOUNT"),
+		VpcProvisioningStrategy: types.VpcProvisioningStrategy("CREATE_NEW"),
+		CidrMappings: []types.CidrMapping{
+			{
+				OriginalCidr: ptr.String("__OriginalCidr__"),
+				UpdatedCidr:  ptr.String("__UpdatedCidr__"),
+			},
+			{
+				OriginalCidr: ptr.String("__OriginalCidr__"),
+				UpdatedCidr:  ptr.String("__UpdatedCidr__"),
+			},
+		},
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -7318,7 +7362,18 @@ func TestCheckResponseSnapshot_UpdateNetworkMigrationDefinition(t *testing.T) {
 			OutboundCidr:   ptr.String("__OutboundCidr__"),
 			InspectionCidr: ptr.String("__InspectionCidr__"),
 		},
-		TargetDeployment: types.TargetDeployment("SINGLE_ACCOUNT"),
+		TargetDeployment:        types.TargetDeployment("SINGLE_ACCOUNT"),
+		VpcProvisioningStrategy: types.VpcProvisioningStrategy("CREATE_NEW"),
+		CidrMappings: []types.CidrMapping{
+			{
+				OriginalCidr: ptr.String("__OriginalCidr__"),
+				UpdatedCidr:  ptr.String("__UpdatedCidr__"),
+			},
+			{
+				OriginalCidr: ptr.String("__OriginalCidr__"),
+				UpdatedCidr:  ptr.String("__UpdatedCidr__"),
+			},
+		},
 		ScopeTags: map[string]string{
 			"key0": "__Value__",
 		},

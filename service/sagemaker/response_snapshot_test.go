@@ -41804,6 +41804,7 @@ func TestCheckResponseSnapshot_UpdateFeatureGroup(t *testing.T) {
 				Unit:  types.TtlDurationUnit("Seconds"),
 				Value: ptr.Int32(1),
 			},
+			StorageType: types.StorageType("Standard"),
 		},
 		ThroughputConfig: &types.ThroughputConfigUpdate{
 			ThroughputMode:                types.ThroughputMode("OnDemand"),

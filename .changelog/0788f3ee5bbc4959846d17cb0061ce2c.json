@@ -1,0 +1,8 @@
+{
+    "id": "0788f3ee-5bbc-4959-846d-17cb0061ce2c",
+    "type": "feature",
+    "description": "This release adds a force parameter to DeleteApplication and a ConflictException to UpdateApplication, letting customers delete applications with existing associations in one call and get a clear error when an update conflicts with the application's current state.",
+    "modules": [
+        "service/appintegrations"
+    ]
+}

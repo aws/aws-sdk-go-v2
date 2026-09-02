@@ -11581,6 +11581,19 @@ func awsRestjson1_serializeDocument__listOfOutputGroup(v []types.OutputGroup, va
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfOutputLocationRef(v []types.OutputLocationRef, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentOutputLocationRef(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfPipelinePauseStateSettings(v []types.PipelinePauseStateSettings, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -11795,6 +11808,67 @@ func awsRestjson1_serializeDocumentAacSettings(v *types.AacSettings, value smith
 	if len(v.VbrQuality) > 0 {
 		ok := object.Key("vbrQuality")
 		ok.String(string(v.VbrQuality))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAbWatermarkingCustomProfile(v *types.AbWatermarkingCustomProfile, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EmbeddingFrequency != nil {
+		ok := object.Key("embeddingFrequency")
+		switch {
+		case math.IsNaN(*v.EmbeddingFrequency):
+			ok.String("NaN")
+
+		case math.IsInf(*v.EmbeddingFrequency, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.EmbeddingFrequency, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.EmbeddingFrequency)
+
+		}
+	}
+
+	if v.SceneCut != nil {
+		ok := object.Key("sceneCut")
+		switch {
+		case math.IsNaN(*v.SceneCut):
+			ok.String("NaN")
+
+		case math.IsInf(*v.SceneCut, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.SceneCut, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.SceneCut)
+
+		}
+	}
+
+	if v.TargetPsnr != nil {
+		ok := object.Key("targetPsnr")
+		switch {
+		case math.IsNaN(*v.TargetPsnr):
+			ok.String("NaN")
+
+		case math.IsInf(*v.TargetPsnr, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.TargetPsnr, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.TargetPsnr)
+
+		}
 	}
 
 	return nil
@@ -13407,6 +13481,59 @@ func awsRestjson1_serializeDocumentClusterNetworkSettingsUpdateRequest(v *types.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCmafIngestAbWatermarkerIrdetoSettings(v *types.CmafIngestAbWatermarkerIrdetoSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdditionalDestinationsAlternateDestinations != nil {
+		ok := object.Key("additionalDestinationsAlternateDestinations")
+		if err := awsRestjson1_serializeDocument__listOfOutputLocationRef(v.AdditionalDestinationsAlternateDestinations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AlternateDestination != nil {
+		ok := object.Key("alternateDestination")
+		if err := awsRestjson1_serializeDocumentOutputLocationRef(v.AlternateDestination, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomProfile != nil {
+		ok := object.Key("customProfile")
+		if err := awsRestjson1_serializeDocumentAbWatermarkingCustomProfile(v.CustomProfile, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.License != nil {
+		ok := object.Key("license")
+		ok.String(*v.License)
+	}
+
+	if v.OperatorId != nil {
+		ok := object.Key("operatorId")
+		ok.Integer(*v.OperatorId)
+	}
+
+	if v.PolyPeriod != nil {
+		ok := object.Key("polyPeriod")
+		ok.Integer(*v.PolyPeriod)
+	}
+
+	if len(v.Profile) > 0 {
+		ok := object.Key("profile")
+		ok.String(string(v.Profile))
+	}
+
+	if len(v.WatermarkIdLength) > 0 {
+		ok := object.Key("watermarkIdLength")
+		ok.String(string(v.WatermarkIdLength))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCmafIngestCaptionLanguageMapping(v *types.CmafIngestCaptionLanguageMapping, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -13519,6 +13646,13 @@ func awsRestjson1_serializeDocumentCmafIngestGroupSettings(v *types.CmafIngestGr
 		ok.String(string(v.TimedMetadataPassthrough))
 	}
 
+	if v.WatermarkingSettings != nil {
+		ok := object.Key("watermarkingSettings")
+		if err := awsRestjson1_serializeDocumentCmafIngestWatermarkingSettings(v.WatermarkingSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -13529,6 +13663,20 @@ func awsRestjson1_serializeDocumentCmafIngestOutputSettings(v *types.CmafIngestO
 	if v.NameModifier != nil {
 		ok := object.Key("nameModifier")
 		ok.String(*v.NameModifier)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCmafIngestWatermarkingSettings(v *types.CmafIngestWatermarkingSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CmafIngestAbWatermarkerIrdetoSettings != nil {
+		ok := object.Key("cmafIngestAbWatermarkerIrdetoSettings")
+		if err := awsRestjson1_serializeDocumentCmafIngestAbWatermarkerIrdetoSettings(v.CmafIngestAbWatermarkerIrdetoSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -17037,6 +17185,59 @@ func awsRestjson1_serializeDocumentMediaPackageOutputSettings(v *types.MediaPack
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMediaPackageV2AbWatermarkerIrdetoSettings(v *types.MediaPackageV2AbWatermarkerIrdetoSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdditionalDestinationsAlternateDestinations != nil {
+		ok := object.Key("additionalDestinationsAlternateDestinations")
+		if err := awsRestjson1_serializeDocument__listOfOutputLocationRef(v.AdditionalDestinationsAlternateDestinations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AlternateDestination != nil {
+		ok := object.Key("alternateDestination")
+		if err := awsRestjson1_serializeDocumentOutputLocationRef(v.AlternateDestination, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomProfile != nil {
+		ok := object.Key("customProfile")
+		if err := awsRestjson1_serializeDocumentAbWatermarkingCustomProfile(v.CustomProfile, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.License != nil {
+		ok := object.Key("license")
+		ok.String(*v.License)
+	}
+
+	if v.OperatorId != nil {
+		ok := object.Key("operatorId")
+		ok.Integer(*v.OperatorId)
+	}
+
+	if v.PolyPeriod != nil {
+		ok := object.Key("polyPeriod")
+		ok.Integer(*v.PolyPeriod)
+	}
+
+	if len(v.Profile) > 0 {
+		ok := object.Key("profile")
+		ok.String(string(v.Profile))
+	}
+
+	if len(v.WatermarkIdLength) > 0 {
+		ok := object.Key("watermarkIdLength")
+		ok.String(string(v.WatermarkIdLength))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMediaPackageV2DestinationSettings(v *types.MediaPackageV2DestinationSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -17125,6 +17326,27 @@ func awsRestjson1_serializeDocumentMediaPackageV2GroupSettings(v *types.MediaPac
 	if len(v.TimedMetadataPassthrough) > 0 {
 		ok := object.Key("timedMetadataPassthrough")
 		ok.String(string(v.TimedMetadataPassthrough))
+	}
+
+	if v.WatermarkingSettings != nil {
+		ok := object.Key("watermarkingSettings")
+		if err := awsRestjson1_serializeDocumentMediaPackageV2WatermarkingSettings(v.WatermarkingSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMediaPackageV2WatermarkingSettings(v *types.MediaPackageV2WatermarkingSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MediaPackageV2AbWatermarkerIrdetoSettings != nil {
+		ok := object.Key("mediaPackageV2AbWatermarkerIrdetoSettings")
+		if err := awsRestjson1_serializeDocumentMediaPackageV2AbWatermarkerIrdetoSettings(v.MediaPackageV2AbWatermarkerIrdetoSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

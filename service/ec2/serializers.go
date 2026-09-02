@@ -71803,6 +71803,11 @@ func awsEc2query_serializeOpDocumentCreateInterruptibleCapacityReservationAlloca
 		}
 	}
 
+	if len(v.ZeroSizePreference) > 0 {
+		objectKey := object.Key("ZeroSizePreference")
+		objectKey.String(string(v.ZeroSizePreference))
+	}
+
 	return nil
 }
 
@@ -94558,6 +94563,11 @@ func awsEc2query_serializeOpDocumentUpdateInterruptibleCapacityReservationAlloca
 	if v.TargetInstanceCount != nil {
 		objectKey := object.Key("TargetInstanceCount")
 		objectKey.Integer(*v.TargetInstanceCount)
+	}
+
+	if len(v.ZeroSizePreference) > 0 {
+		objectKey := object.Key("ZeroSizePreference")
+		objectKey.String(string(v.ZeroSizePreference))
 	}
 
 	return nil

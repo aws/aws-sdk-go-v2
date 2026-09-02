@@ -265,6 +265,51 @@ func (v *Checksum) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Maps a source CIDR range to the corresponding target CIDR range to use in the
+// target network.
+type CidrMapping struct {
+
+	// The original CIDR range in the source network.
+	//
+	// This member is required.
+	OriginalCidr *string
+
+	// The updated CIDR range to use in the target network.
+	//
+	// This member is required.
+	UpdatedCidr *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CidrMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CidrMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CidrMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OriginalCidr != nil {
+		s.WriteString(schemas.CidrMapping_originalCidr, *v.OriginalCidr)
+	}
+	if v.UpdatedCidr != nil {
+		s.WriteString(schemas.CidrMapping_updatedCidr, *v.UpdatedCidr)
+	}
+}
+func (v *CidrMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CidrMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CidrMapping_originalCidr:
+			v.OriginalCidr = new(string)
+			return d.ReadString(schemas.CidrMapping_originalCidr, v.OriginalCidr)
+		case schemas.CidrMapping_updatedCidr:
+			v.UpdatedCidr = new(string)
+			return d.ReadString(schemas.CidrMapping_updatedCidr, v.UpdatedCidr)
+		}
+		return nil
+	})
+}
+
 // Status details for a specific code generation output format.
 type CodeGenerationOutputFormatStatusDetails struct {
 
@@ -1938,13 +1983,13 @@ func (v *ImportTaskSummaryServers) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 
-// Import task summery waves.
+// Import task summary waves.
 type ImportTaskSummaryWaves struct {
 
-	// Import task summery waves created count.
+	// Import task summary waves created count.
 	CreatedCount int64
 
-	// Import task summery waves modified count.
+	// Import task summary waves modified count.
 	ModifiedCount int64
 
 	noSmithyDocumentSerde
@@ -2221,8 +2266,7 @@ func (v *JobLogEventData) Deserialize(d smithy.ShapeDeserializer) error {
 // Launch Status of the Job Post Launch Actions.
 type JobPostLaunchActionsLaunchStatus struct {
 
-	// AWS Systems Manager Document's execution ID of the of the Job Post Launch
-	// Actions.
+	// AWS Systems Manager Document's execution ID of the Job Post Launch Actions.
 	ExecutionID *string
 
 	// AWS Systems Manager Document's execution status.
@@ -2231,7 +2275,7 @@ type JobPostLaunchActionsLaunchStatus struct {
 	// AWS Systems Manager Document's failure reason.
 	FailureReason *string
 
-	// AWS Systems Manager's Document of the of the Job Post Launch Actions.
+	// AWS Systems Manager's Document of the Job Post Launch Actions.
 	SsmDocument *SsmDocument
 
 	// AWS Systems Manager Document type.
@@ -2740,7 +2784,7 @@ func (v *Licensing) Deserialize(d smithy.ShapeDeserializer) error {
 // Lifecycle.
 type LifeCycle struct {
 
-	// Lifecycle added to service data and time.
+	// Lifecycle added to service date and time.
 	AddedToServiceDateTime *string
 
 	// Lifecycle elapsed time and duration.
@@ -3045,7 +3089,7 @@ func (v *LifeCycleLastTest) Deserialize(d smithy.ShapeDeserializer) error {
 // Lifecycle last Test finalized.
 type LifeCycleLastTestFinalized struct {
 
-	// Lifecycle Test failed API call date and time.
+	// Lifecycle Test finalized API call date and time.
 	ApiCallDateTime *string
 
 	noSmithyDocumentSerde
@@ -4087,7 +4131,7 @@ type NetworkMigrationCodeGenerationArtifact struct {
 	// The sub-type of the artifact for further classification.
 	ArtifactSubType NetworkMigrationCodeGenerationArtifactSubType
 
-	// The type of the artifact, such as CLOUDFORMATION_TEMPLATE or TERRAFORM_MODULE.
+	// The type of the generated artifact.
 	ArtifactType NetworkMigrationCodeGenerationArtifactType
 
 	// The checksum of the artifact for integrity verification.
@@ -4817,7 +4861,9 @@ type NetworkMigrationMapperSegment struct {
 	// The unique identifier of the segment.
 	SegmentID *string
 
-	// The type of the segment, such as VPC, subnet, or security group.
+	// The category of the network migration segment. A segment groups the network
+	// constructs (such as VPCs, subnets, and security groups) that are migrated
+	// together. Valid values: WORKLOAD , APPLIANCE .
 	SegmentType NetworkMigrationMapperSegmentType
 
 	// The target AWS account where this segment will be deployed.
@@ -5396,7 +5442,7 @@ func (v *ParticipatingServer) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Post Launch Actions to executed on the Test or Cutover instance.
+// Post Launch Actions to be executed on the Test or Cutover instance.
 type PostLaunchActions struct {
 
 	// AWS Systems Manager Command's CloudWatch log group name.

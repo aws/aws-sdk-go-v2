@@ -4828,6 +4828,59 @@ func TestCheckResponseSnapshot_ListExascaleDbStorageVaults(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListFlexComponents(t *testing.T) {
+	want := &ListFlexComponentsOutput{
+		NextToken: ptr.String("__NextToken__"),
+		FlexComponents: []types.FlexComponentSummary{
+			{
+				AvailableCoreCount:         ptr.Int32(1),
+				AvailableDbStorageInGBs:    ptr.Int32(1),
+				AvailableLocalStorageInGBs: ptr.Int32(1),
+				AvailableMemoryInGBs:       ptr.Int32(1),
+				ComputeModel:               types.ComputeModel("ECPU"),
+				DescriptionSummary:         ptr.String("__DescriptionSummary__"),
+				HardwareType:               types.HardwareType("COMPUTE"),
+				MinimumCoreCount:           ptr.Int32(1),
+				Name:                       ptr.String("__Name__"),
+				RuntimeMinimumCoreCount:    ptr.Int32(1),
+				Shape:                      ptr.String("__Shape__"),
+			},
+			{
+				AvailableCoreCount:         ptr.Int32(1),
+				AvailableDbStorageInGBs:    ptr.Int32(1),
+				AvailableLocalStorageInGBs: ptr.Int32(1),
+				AvailableMemoryInGBs:       ptr.Int32(1),
+				ComputeModel:               types.ComputeModel("ECPU"),
+				DescriptionSummary:         ptr.String("__DescriptionSummary__"),
+				HardwareType:               types.HardwareType("COMPUTE"),
+				MinimumCoreCount:           ptr.Int32(1),
+				Name:                       ptr.String("__Name__"),
+				RuntimeMinimumCoreCount:    ptr.Int32(1),
+				Shape:                      ptr.String("__Shape__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListFlexComponents.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListFlexComponents(context.Background(), &ListFlexComponentsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Shape:      ptr.String("__Shape__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListFlexComponents.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListGiMinorVersions(t *testing.T) {
 	want := &ListGiMinorVersionsOutput{
 		NextToken: ptr.String("__NextToken__"),

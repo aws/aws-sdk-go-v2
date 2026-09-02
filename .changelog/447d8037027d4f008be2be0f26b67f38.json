@@ -1,0 +1,8 @@
+{
+    "id": "447d8037-027d-4f00-8be2-be0f26b67f38",
+    "type": "feature",
+    "description": "Enabled customers to clear optional S3 paths (plugins, requirements, and startup script) for their Amazon MWAA environments by accepting empty strings for the associated fields in UpdateEnvironment requests.",
+    "modules": [
+        "service/mwaa"
+    ]
+}

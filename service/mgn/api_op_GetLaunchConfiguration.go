@@ -96,7 +96,7 @@ type GetLaunchConfigurationOutput struct {
 	// Launch configuration name.
 	Name *string
 
-	// Post Launch Actions to executed on the Test or Cutover instance.
+	// Post Launch Actions to be executed on the Test or Cutover instance.
 	PostLaunchActions *types.PostLaunchActions
 
 	// Launch configuration Source Server ID.

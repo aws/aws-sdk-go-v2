@@ -10,7 +10,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Updates multiple ReplicationConfigurationTemplates by ID.
+// Updates a ReplicationConfigurationTemplate by ID.
 func (c *Client) UpdateReplicationConfigurationTemplate(ctx context.Context, params *UpdateReplicationConfigurationTemplateInput, optFns ...func(*Options)) (*UpdateReplicationConfigurationTemplateOutput, error) {
 	if params == nil {
 		params = &UpdateReplicationConfigurationTemplateInput{}

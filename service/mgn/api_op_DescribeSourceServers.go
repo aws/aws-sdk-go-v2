@@ -29,7 +29,7 @@ func (c *Client) DescribeSourceServers(ctx context.Context, params *DescribeSour
 
 type DescribeSourceServersInput struct {
 
-	// Request to filter Source Servers list by Accoun ID.
+	// Request to filter Source Servers list by Account ID.
 	AccountID *string
 
 	// Request to filter Source Servers list.
@@ -88,10 +88,10 @@ func (v *DescribeSourceServersInput) Deserialize(d smithy.ShapeDeserializer) err
 
 type DescribeSourceServersOutput struct {
 
-	// Request to filter Source Servers list by item.
+	// The list of returned Source Servers.
 	Items []types.SourceServer
 
-	// Request to filter Source Servers next token.
+	// The token of the next Source Server to retrieve.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

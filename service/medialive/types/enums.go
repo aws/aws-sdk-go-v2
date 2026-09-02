@@ -147,6 +147,52 @@ func (AacVbrQuality) Values() []AacVbrQuality {
 	}
 }
 
+type AbWatermarkerIdLength string
+
+// Enum values for AbWatermarkerIdLength
+const (
+	AbWatermarkerIdLengthId2048 AbWatermarkerIdLength = "ID_2048"
+	AbWatermarkerIdLengthId512  AbWatermarkerIdLength = "ID_512"
+)
+
+// Values returns all known values for AbWatermarkerIdLength. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AbWatermarkerIdLength) Values() []AbWatermarkerIdLength {
+	return []AbWatermarkerIdLength{
+		"ID_2048",
+		"ID_512",
+	}
+}
+
+type AbWatermarkingProfile string
+
+// Enum values for AbWatermarkingProfile
+const (
+	AbWatermarkingProfileCamcording AbWatermarkingProfile = "CAMCORDING"
+	AbWatermarkingProfileCustom     AbWatermarkingProfile = "CUSTOM"
+	AbWatermarkingProfileDefault    AbWatermarkingProfile = "DEFAULT"
+	AbWatermarkingProfileHq         AbWatermarkingProfile = "HQ"
+	AbWatermarkingProfileMezzanine  AbWatermarkingProfile = "MEZZANINE"
+	AbWatermarkingProfileRobust     AbWatermarkingProfile = "ROBUST"
+)
+
+// Values returns all known values for AbWatermarkingProfile. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AbWatermarkingProfile) Values() []AbWatermarkingProfile {
+	return []AbWatermarkingProfile{
+		"CAMCORDING",
+		"CUSTOM",
+		"DEFAULT",
+		"HQ",
+		"MEZZANINE",
+		"ROBUST",
+	}
+}
+
 type Ac3AttenuationControl string
 
 // Enum values for Ac3AttenuationControl

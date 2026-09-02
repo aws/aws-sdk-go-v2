@@ -9590,8 +9590,9 @@ type StorageType string
 
 // Enum values for StorageType
 const (
-	StorageTypeStandard StorageType = "Standard"
-	StorageTypeInMemory StorageType = "InMemory"
+	StorageTypeStandard   StorageType = "Standard"
+	StorageTypeStandardV2 StorageType = "Standard_V2"
+	StorageTypeInMemory   StorageType = "InMemory"
 )
 
 // Values returns all known values for StorageType. Note that this can be expanded
@@ -9601,6 +9602,7 @@ const (
 func (StorageType) Values() []StorageType {
 	return []StorageType{
 		"Standard",
+		"Standard_V2",
 		"InMemory",
 	}
 }

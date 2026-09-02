@@ -7,8 +7,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deletes the Application. Only Applications that don't have any Application
-// Associations can be deleted.
+// Deletes an application. If the application has associations, you must delete
+// them first. Alternatively, use the force option to delete the application and
+// remove its associations.
 func (c *Client) DeleteApplication(ctx context.Context, params *DeleteApplicationInput, optFns ...func(*Options)) (*DeleteApplicationOutput, error) {
 	if params == nil {
 		params = &DeleteApplicationInput{}
@@ -30,6 +31,15 @@ type DeleteApplicationInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	// Specifies whether to delete the application even if it still has application
+	// associations. If true , the operation removes the application and its
+	// associations. If false or absent, the delete fails when associations exist.
+	//
+	// Setting this parameter to true permanently removes all of the application's
+	// associations. Doing so might impact other resources that rely on and reference
+	// the application. This action can't be undone.
+	Force bool
 
 	noSmithyDocumentSerde
 }

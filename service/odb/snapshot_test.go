@@ -722,6 +722,18 @@ func TestCheckSnapshot_ListExascaleDbStorageVaults(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListFlexComponents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFlexComponents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListFlexComponents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListGiMinorVersions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListGiMinorVersions(context.Background(), nil, func(o *Options) {
@@ -1662,6 +1674,18 @@ func TestUpdateSnapshot_ListExascaleDbStorageVaults(t *testing.T) {
 	_, err := svc.ListExascaleDbStorageVaults(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListExascaleDbStorageVaults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListFlexComponents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFlexComponents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListFlexComponents")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -16326,8 +16326,10 @@ var OnlineStoreConfig_StorageType *smithy.Schema
 var OnlineStoreConfigUpdate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "OnlineStoreConfigUpdate",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var OnlineStoreConfigUpdate_TtlDuration *smithy.Schema
+
+var OnlineStoreConfigUpdate_StorageType *smithy.Schema
 
 var OnlineStoreSecurityConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -21312,8 +21314,10 @@ var StoppingCondition_MaxPendingTimeInSeconds *smithy.Schema
 var StorageType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "StorageType",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var StorageType_STANDARD *smithy.Schema
+
+var StorageType_STANDARD_V2 *smithy.Schema
 
 var StorageType_IN_MEMORY *smithy.Schema
 
@@ -41137,6 +41141,8 @@ func init() {
 
 	StorageType_STANDARD = StorageType.AddMember("STANDARD", smithyprelude.Unit)
 
+	StorageType_STANDARD_V2 = StorageType.AddMember("STANDARD_V2", smithyprelude.Unit)
+
 	StorageType_IN_MEMORY = StorageType.AddMember("IN_MEMORY", smithyprelude.Unit)
 
 	OnlineStoreConfig_SecurityConfig = OnlineStoreConfig.AddMember("SecurityConfig", OnlineStoreSecurityConfig)
@@ -44134,6 +44140,8 @@ func init() {
 	OidcConfigForResponse_AuthenticationRequestExtraParams = OidcConfigForResponse.AddMember("AuthenticationRequestExtraParams", _AuthenticationRequestExtraParams)
 
 	OnlineStoreConfigUpdate_TtlDuration = OnlineStoreConfigUpdate.AddMember("TtlDuration", TtlDuration)
+
+	OnlineStoreConfigUpdate_StorageType = OnlineStoreConfigUpdate.AddMember("StorageType", StorageType)
 
 	OptimizationConfig_ModelQuantizationConfig = OptimizationConfig.AddMember("ModelQuantizationConfig", ModelQuantizationConfig)
 

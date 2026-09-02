@@ -11,8 +11,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Returns a list of Jobs. Use the JobsID and fromDate and toData filters to limit
-// which jobs are returned. The response is sorted by creationDataTime - latest
+// Returns a list of Jobs. Use the jobIDs and fromDate and toDate filters to limit
+// which jobs are returned. The response is sorted by creationDateTime - latest
 // date first. Jobs are normally created by the StartTest, StartCutover, and
 // TerminateTargetInstances APIs. Jobs are also created by DiagnosticLaunch and
 // TerminateDiagnosticInstances, which are APIs available only to *Support* and

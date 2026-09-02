@@ -1,0 +1,8 @@
+{
+    "id": "9150a60c-cdf3-4977-9e38-37b592d263e1",
+    "type": "feature",
+    "description": "Amazon SageMaker Feature Store now supports the Standard V2 online store type, which enables feature-level writes to feature groups. You can select Standard V2 when creating a feature group, and update the storage type of an existing feature group via UpdateFeatureGroup.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

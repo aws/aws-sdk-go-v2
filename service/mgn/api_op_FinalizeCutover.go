@@ -18,7 +18,7 @@ import (
 // properties of the SourceServer will be changed immediately:
 // dataReplicationInfo.dataReplicationState will be changed to DISCONNECTED; The
 // SourceServer.lifeCycle.state will be changed to CUTOVER; The totalStorageBytes
-// property fo each of dataReplicationInfo.replicatedDisks will be set to zero;
+// property for each of dataReplicationInfo.replicatedDisks will be set to zero;
 // dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be
 // nullified.
 func (c *Client) FinalizeCutover(ctx context.Context, params *FinalizeCutoverInput, optFns ...func(*Options)) (*FinalizeCutoverOutput, error) {

@@ -765,7 +765,7 @@ type CloudWatchLogsRule struct {
 // The configuration for reading agent traces from CloudWatch Logs.
 type CloudWatchLogsSource struct {
 
-	// The list of CloudWatch log group names to read agent traces from. Maximum of 5
+	// The list of CloudWatch log group names to read agent traces from. Maximum of 10
 	// log groups.
 	//
 	// This member is required.

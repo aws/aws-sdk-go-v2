@@ -63,6 +63,7 @@
         "api_op_ListDbSystemShapes.go",
         "api_op_ListExadbVmClusters.go",
         "api_op_ListExascaleDbStorageVaults.go",
+        "api_op_ListFlexComponents.go",
         "api_op_ListGiMinorVersions.go",
         "api_op_ListGiVersions.go",
         "api_op_ListOdbNetworks.go",

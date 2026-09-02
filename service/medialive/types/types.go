@@ -52,6 +52,27 @@ type AacSettings struct {
 	noSmithyDocumentSerde
 }
 
+// The vendor-specified custom profile options
+type AbWatermarkingCustomProfile struct {
+
+	// The frequency with which watermarks will be embedded, in milliseconds.
+	//
+	// This member is required.
+	EmbeddingFrequency *float64
+
+	// The number of frames after scene-cut to embed the watermark.
+	//
+	// This member is required.
+	SceneCut *float64
+
+	// The target PSNR of the watermarked frame
+	//
+	// This member is required.
+	TargetPsnr *float64
+
+	noSmithyDocumentSerde
+}
+
 // Ac3 Settings
 type Ac3Settings struct {
 
@@ -1771,6 +1792,44 @@ type ClusterNetworkSettingsUpdateRequest struct {
 	noSmithyDocumentSerde
 }
 
+// A/B Watermarker settings for CMAF Ingest output groups.
+type CmafIngestAbWatermarkerIrdetoSettings struct {
+
+	// The "B" pipeline renditions for the main destination.
+	//
+	// This member is required.
+	AlternateDestination *OutputLocationRef
+
+	// The vendor-provided Operator ID.
+	//
+	// This member is required.
+	OperatorId *int32
+
+	// The vendor-provided profile choice.
+	//
+	// This member is required.
+	Profile AbWatermarkingProfile
+
+	// The "B" pipeline renditions for the additional destinations.
+	AdditionalDestinationsAlternateDestinations []OutputLocationRef
+
+	// The vendor-provided custom profile values.
+	CustomProfile *AbWatermarkingCustomProfile
+
+	// The name of the Secrets Manager secret containing the license file.
+	License *string
+
+	// The number of segments per watermarking bit. The total duration of the
+	// watermarking bit should be the LCM (least common multiple) of all segments sizes
+	// emitted by the downstream packager.
+	PolyPeriod *int32
+
+	// The number of bits that compose the watermarking identifier to be embedded.
+	WatermarkIdLength AbWatermarkerIdLength
+
+	noSmithyDocumentSerde
+}
+
 // Add an array item for each language. Follow the order of the caption
 // descriptions. For example, if the first caption description is for German, then
 // the first array item must be for German, and its caption channel must be set to
@@ -1885,6 +1944,9 @@ type CmafIngestGroupSettings struct {
 	// Set to enabled to pass through ID3 metadata from the input sources.
 	TimedMetadataPassthrough CmafTimedMetadataPassthrough
 
+	// Specifies the type of watermarking technology to use.
+	WatermarkingSettings *CmafIngestWatermarkingSettings
+
 	noSmithyDocumentSerde
 }
 
@@ -1894,6 +1956,15 @@ type CmafIngestOutputSettings struct {
 	// String concatenated to the end of the destination filename. Required for
 	// multiple outputs of the same type.
 	NameModifier *string
+
+	noSmithyDocumentSerde
+}
+
+// A/B Watermarker settings for CMAF Ingest output groups.
+type CmafIngestWatermarkingSettings struct {
+
+	// A/B Watermarker settings for CMAF Ingest output groups.
+	CmafIngestAbWatermarkerIrdetoSettings *CmafIngestAbWatermarkerIrdetoSettings
 
 	noSmithyDocumentSerde
 }
@@ -5575,6 +5646,44 @@ type MediaPackageOutputSettings struct {
 	noSmithyDocumentSerde
 }
 
+// A/B Watermarker settings for MediaPackage V2 output groups.
+type MediaPackageV2AbWatermarkerIrdetoSettings struct {
+
+	// The "B" pipeline renditions for the main destination.
+	//
+	// This member is required.
+	AlternateDestination *OutputLocationRef
+
+	// The vendor-provided Operator ID.
+	//
+	// This member is required.
+	OperatorId *int32
+
+	// The vendor-provided profile choice.
+	//
+	// This member is required.
+	Profile AbWatermarkingProfile
+
+	// The "B" pipeline renditions for the additional destinations.
+	AdditionalDestinationsAlternateDestinations []OutputLocationRef
+
+	// The vendor-provided custom profile values.
+	CustomProfile *AbWatermarkingCustomProfile
+
+	// The name of the Secrets Manager secret containing the license file.
+	License *string
+
+	// The number of segments per watermarking bit. The total duration of the
+	// watermarking bit should be the LCM (least common multiple) of all segments sizes
+	// emitted by the downstream packager.
+	PolyPeriod *int32
+
+	// The number of bits that compose the watermarking identifier to be embedded.
+	WatermarkIdLength AbWatermarkerIdLength
+
+	noSmithyDocumentSerde
+}
+
 // Media Package V2 Destination Settings
 type MediaPackageV2DestinationSettings struct {
 
@@ -5671,6 +5780,18 @@ type MediaPackageV2GroupSettings struct {
 
 	// Set to enabled to pass through ID3 metadata from the input sources.
 	TimedMetadataPassthrough CmafTimedMetadataPassthrough
+
+	// Specifies the type of watermarking technology to use.
+	WatermarkingSettings *MediaPackageV2WatermarkingSettings
+
+	noSmithyDocumentSerde
+}
+
+// A/B Watermarker settings for MediaPackage V2 output groups.
+type MediaPackageV2WatermarkingSettings struct {
+
+	// A/B Watermarker settings for MediaPackage V2 output groups.
+	MediaPackageV2AbWatermarkerIrdetoSettings *MediaPackageV2AbWatermarkerIrdetoSettings
 
 	noSmithyDocumentSerde
 }

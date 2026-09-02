@@ -2367,6 +2367,31 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 											},
 										},
 									},
+									WatermarkingSettings: &types.MediaPackageV2WatermarkingSettings{
+										MediaPackageV2AbWatermarkerIrdetoSettings: &types.MediaPackageV2AbWatermarkerIrdetoSettings{
+											AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+												{
+													DestinationRefId: ptr.String("__DestinationRefId__"),
+												},
+												{
+													DestinationRefId: ptr.String("__DestinationRefId__"),
+												},
+											},
+											AlternateDestination: &types.OutputLocationRef{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											CustomProfile: &types.AbWatermarkingCustomProfile{
+												EmbeddingFrequency: ptr.Float64(1.0),
+												SceneCut:           ptr.Float64(1.0),
+												TargetPsnr:         ptr.Float64(1.0),
+											},
+											License:           ptr.String("__License__"),
+											OperatorId:        ptr.Int32(1),
+											PolyPeriod:        ptr.Int32(1),
+											Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+											WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
+										},
+									},
 								},
 							},
 							MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -2449,6 +2474,31 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 										Destination: &types.OutputLocationRef{
 											DestinationRefId: ptr.String("__DestinationRefId__"),
 										},
+									},
+								},
+								WatermarkingSettings: &types.CmafIngestWatermarkingSettings{
+									CmafIngestAbWatermarkerIrdetoSettings: &types.CmafIngestAbWatermarkerIrdetoSettings{
+										AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+										},
+										AlternateDestination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										CustomProfile: &types.AbWatermarkingCustomProfile{
+											EmbeddingFrequency: ptr.Float64(1.0),
+											SceneCut:           ptr.Float64(1.0),
+											TargetPsnr:         ptr.Float64(1.0),
+										},
+										License:           ptr.String("__License__"),
+										OperatorId:        ptr.Int32(1),
+										PolyPeriod:        ptr.Int32(1),
+										Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 									},
 								},
 							},
@@ -3420,6 +3470,31 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 											},
 										},
 									},
+									WatermarkingSettings: &types.MediaPackageV2WatermarkingSettings{
+										MediaPackageV2AbWatermarkerIrdetoSettings: &types.MediaPackageV2AbWatermarkerIrdetoSettings{
+											AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+												{
+													DestinationRefId: ptr.String("__DestinationRefId__"),
+												},
+												{
+													DestinationRefId: ptr.String("__DestinationRefId__"),
+												},
+											},
+											AlternateDestination: &types.OutputLocationRef{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											CustomProfile: &types.AbWatermarkingCustomProfile{
+												EmbeddingFrequency: ptr.Float64(1.0),
+												SceneCut:           ptr.Float64(1.0),
+												TargetPsnr:         ptr.Float64(1.0),
+											},
+											License:           ptr.String("__License__"),
+											OperatorId:        ptr.Int32(1),
+											PolyPeriod:        ptr.Int32(1),
+											Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+											WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
+										},
+									},
 								},
 							},
 							MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -3502,6 +3577,31 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 										Destination: &types.OutputLocationRef{
 											DestinationRefId: ptr.String("__DestinationRefId__"),
 										},
+									},
+								},
+								WatermarkingSettings: &types.CmafIngestWatermarkingSettings{
+									CmafIngestAbWatermarkerIrdetoSettings: &types.CmafIngestAbWatermarkerIrdetoSettings{
+										AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+										},
+										AlternateDestination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										CustomProfile: &types.AbWatermarkingCustomProfile{
+											EmbeddingFrequency: ptr.Float64(1.0),
+											SceneCut:           ptr.Float64(1.0),
+											TargetPsnr:         ptr.Float64(1.0),
+										},
+										License:           ptr.String("__License__"),
+										OperatorId:        ptr.Int32(1),
+										PolyPeriod:        ptr.Int32(1),
+										Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 									},
 								},
 							},
@@ -5805,6 +5905,31 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 										},
 									},
 								},
+								WatermarkingSettings: &types.MediaPackageV2WatermarkingSettings{
+									MediaPackageV2AbWatermarkerIrdetoSettings: &types.MediaPackageV2AbWatermarkerIrdetoSettings{
+										AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+										},
+										AlternateDestination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										CustomProfile: &types.AbWatermarkingCustomProfile{
+											EmbeddingFrequency: ptr.Float64(1.0),
+											SceneCut:           ptr.Float64(1.0),
+											TargetPsnr:         ptr.Float64(1.0),
+										},
+										License:           ptr.String("__License__"),
+										OperatorId:        ptr.Int32(1),
+										PolyPeriod:        ptr.Int32(1),
+										Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
+									},
+								},
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -5887,6 +6012,31 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 									Destination: &types.OutputLocationRef{
 										DestinationRefId: ptr.String("__DestinationRefId__"),
 									},
+								},
+							},
+							WatermarkingSettings: &types.CmafIngestWatermarkingSettings{
+								CmafIngestAbWatermarkerIrdetoSettings: &types.CmafIngestAbWatermarkerIrdetoSettings{
+									AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+									},
+									AlternateDestination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									CustomProfile: &types.AbWatermarkingCustomProfile{
+										EmbeddingFrequency: ptr.Float64(1.0),
+										SceneCut:           ptr.Float64(1.0),
+										TargetPsnr:         ptr.Float64(1.0),
+									},
+									License:           ptr.String("__License__"),
+									OperatorId:        ptr.Int32(1),
+									PolyPeriod:        ptr.Int32(1),
+									Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+									WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 								},
 							},
 						},
@@ -6858,6 +7008,31 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 										},
 									},
 								},
+								WatermarkingSettings: &types.MediaPackageV2WatermarkingSettings{
+									MediaPackageV2AbWatermarkerIrdetoSettings: &types.MediaPackageV2AbWatermarkerIrdetoSettings{
+										AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+										},
+										AlternateDestination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										CustomProfile: &types.AbWatermarkingCustomProfile{
+											EmbeddingFrequency: ptr.Float64(1.0),
+											SceneCut:           ptr.Float64(1.0),
+											TargetPsnr:         ptr.Float64(1.0),
+										},
+										License:           ptr.String("__License__"),
+										OperatorId:        ptr.Int32(1),
+										PolyPeriod:        ptr.Int32(1),
+										Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
+									},
+								},
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -6940,6 +7115,31 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 									Destination: &types.OutputLocationRef{
 										DestinationRefId: ptr.String("__DestinationRefId__"),
 									},
+								},
+							},
+							WatermarkingSettings: &types.CmafIngestWatermarkingSettings{
+								CmafIngestAbWatermarkerIrdetoSettings: &types.CmafIngestAbWatermarkerIrdetoSettings{
+									AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+									},
+									AlternateDestination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									CustomProfile: &types.AbWatermarkingCustomProfile{
+										EmbeddingFrequency: ptr.Float64(1.0),
+										SceneCut:           ptr.Float64(1.0),
+										TargetPsnr:         ptr.Float64(1.0),
+									},
+									License:           ptr.String("__License__"),
+									OperatorId:        ptr.Int32(1),
+									PolyPeriod:        ptr.Int32(1),
+									Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+									WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 								},
 							},
 						},
@@ -10842,6 +11042,31 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 										},
 									},
 								},
+								WatermarkingSettings: &types.MediaPackageV2WatermarkingSettings{
+									MediaPackageV2AbWatermarkerIrdetoSettings: &types.MediaPackageV2AbWatermarkerIrdetoSettings{
+										AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+										},
+										AlternateDestination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										CustomProfile: &types.AbWatermarkingCustomProfile{
+											EmbeddingFrequency: ptr.Float64(1.0),
+											SceneCut:           ptr.Float64(1.0),
+											TargetPsnr:         ptr.Float64(1.0),
+										},
+										License:           ptr.String("__License__"),
+										OperatorId:        ptr.Int32(1),
+										PolyPeriod:        ptr.Int32(1),
+										Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
+									},
+								},
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -10924,6 +11149,31 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 									Destination: &types.OutputLocationRef{
 										DestinationRefId: ptr.String("__DestinationRefId__"),
 									},
+								},
+							},
+							WatermarkingSettings: &types.CmafIngestWatermarkingSettings{
+								CmafIngestAbWatermarkerIrdetoSettings: &types.CmafIngestAbWatermarkerIrdetoSettings{
+									AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+									},
+									AlternateDestination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									CustomProfile: &types.AbWatermarkingCustomProfile{
+										EmbeddingFrequency: ptr.Float64(1.0),
+										SceneCut:           ptr.Float64(1.0),
+										TargetPsnr:         ptr.Float64(1.0),
+									},
+									License:           ptr.String("__License__"),
+									OperatorId:        ptr.Int32(1),
+									PolyPeriod:        ptr.Int32(1),
+									Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+									WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 								},
 							},
 						},
@@ -11895,6 +12145,31 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 										},
 									},
 								},
+								WatermarkingSettings: &types.MediaPackageV2WatermarkingSettings{
+									MediaPackageV2AbWatermarkerIrdetoSettings: &types.MediaPackageV2AbWatermarkerIrdetoSettings{
+										AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+										},
+										AlternateDestination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										CustomProfile: &types.AbWatermarkingCustomProfile{
+											EmbeddingFrequency: ptr.Float64(1.0),
+											SceneCut:           ptr.Float64(1.0),
+											TargetPsnr:         ptr.Float64(1.0),
+										},
+										License:           ptr.String("__License__"),
+										OperatorId:        ptr.Int32(1),
+										PolyPeriod:        ptr.Int32(1),
+										Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
+									},
+								},
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -11977,6 +12252,31 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 									Destination: &types.OutputLocationRef{
 										DestinationRefId: ptr.String("__DestinationRefId__"),
 									},
+								},
+							},
+							WatermarkingSettings: &types.CmafIngestWatermarkingSettings{
+								CmafIngestAbWatermarkerIrdetoSettings: &types.CmafIngestAbWatermarkerIrdetoSettings{
+									AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+									},
+									AlternateDestination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									CustomProfile: &types.AbWatermarkingCustomProfile{
+										EmbeddingFrequency: ptr.Float64(1.0),
+										SceneCut:           ptr.Float64(1.0),
+										TargetPsnr:         ptr.Float64(1.0),
+									},
+									License:           ptr.String("__License__"),
+									OperatorId:        ptr.Int32(1),
+									PolyPeriod:        ptr.Int32(1),
+									Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+									WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 								},
 							},
 						},
@@ -14945,6 +15245,31 @@ func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
 										},
 									},
 								},
+								WatermarkingSettings: &types.MediaPackageV2WatermarkingSettings{
+									MediaPackageV2AbWatermarkerIrdetoSettings: &types.MediaPackageV2AbWatermarkerIrdetoSettings{
+										AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+										},
+										AlternateDestination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										CustomProfile: &types.AbWatermarkingCustomProfile{
+											EmbeddingFrequency: ptr.Float64(1.0),
+											SceneCut:           ptr.Float64(1.0),
+											TargetPsnr:         ptr.Float64(1.0),
+										},
+										License:           ptr.String("__License__"),
+										OperatorId:        ptr.Int32(1),
+										PolyPeriod:        ptr.Int32(1),
+										Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
+									},
+								},
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -15027,6 +15352,31 @@ func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
 									Destination: &types.OutputLocationRef{
 										DestinationRefId: ptr.String("__DestinationRefId__"),
 									},
+								},
+							},
+							WatermarkingSettings: &types.CmafIngestWatermarkingSettings{
+								CmafIngestAbWatermarkerIrdetoSettings: &types.CmafIngestAbWatermarkerIrdetoSettings{
+									AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+									},
+									AlternateDestination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									CustomProfile: &types.AbWatermarkingCustomProfile{
+										EmbeddingFrequency: ptr.Float64(1.0),
+										SceneCut:           ptr.Float64(1.0),
+										TargetPsnr:         ptr.Float64(1.0),
+									},
+									License:           ptr.String("__License__"),
+									OperatorId:        ptr.Int32(1),
+									PolyPeriod:        ptr.Int32(1),
+									Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+									WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 								},
 							},
 						},
@@ -15998,6 +16348,31 @@ func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
 										},
 									},
 								},
+								WatermarkingSettings: &types.MediaPackageV2WatermarkingSettings{
+									MediaPackageV2AbWatermarkerIrdetoSettings: &types.MediaPackageV2AbWatermarkerIrdetoSettings{
+										AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+										},
+										AlternateDestination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										CustomProfile: &types.AbWatermarkingCustomProfile{
+											EmbeddingFrequency: ptr.Float64(1.0),
+											SceneCut:           ptr.Float64(1.0),
+											TargetPsnr:         ptr.Float64(1.0),
+										},
+										License:           ptr.String("__License__"),
+										OperatorId:        ptr.Int32(1),
+										PolyPeriod:        ptr.Int32(1),
+										Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
+									},
+								},
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -16080,6 +16455,31 @@ func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
 									Destination: &types.OutputLocationRef{
 										DestinationRefId: ptr.String("__DestinationRefId__"),
 									},
+								},
+							},
+							WatermarkingSettings: &types.CmafIngestWatermarkingSettings{
+								CmafIngestAbWatermarkerIrdetoSettings: &types.CmafIngestAbWatermarkerIrdetoSettings{
+									AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+									},
+									AlternateDestination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									CustomProfile: &types.AbWatermarkingCustomProfile{
+										EmbeddingFrequency: ptr.Float64(1.0),
+										SceneCut:           ptr.Float64(1.0),
+										TargetPsnr:         ptr.Float64(1.0),
+									},
+									License:           ptr.String("__License__"),
+									OperatorId:        ptr.Int32(1),
+									PolyPeriod:        ptr.Int32(1),
+									Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+									WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 								},
 							},
 						},
@@ -22293,6 +22693,31 @@ func TestCheckResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 										},
 									},
 								},
+								WatermarkingSettings: &types.MediaPackageV2WatermarkingSettings{
+									MediaPackageV2AbWatermarkerIrdetoSettings: &types.MediaPackageV2AbWatermarkerIrdetoSettings{
+										AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+										},
+										AlternateDestination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										CustomProfile: &types.AbWatermarkingCustomProfile{
+											EmbeddingFrequency: ptr.Float64(1.0),
+											SceneCut:           ptr.Float64(1.0),
+											TargetPsnr:         ptr.Float64(1.0),
+										},
+										License:           ptr.String("__License__"),
+										OperatorId:        ptr.Int32(1),
+										PolyPeriod:        ptr.Int32(1),
+										Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
+									},
+								},
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -22375,6 +22800,31 @@ func TestCheckResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 									Destination: &types.OutputLocationRef{
 										DestinationRefId: ptr.String("__DestinationRefId__"),
 									},
+								},
+							},
+							WatermarkingSettings: &types.CmafIngestWatermarkingSettings{
+								CmafIngestAbWatermarkerIrdetoSettings: &types.CmafIngestAbWatermarkerIrdetoSettings{
+									AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+									},
+									AlternateDestination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									CustomProfile: &types.AbWatermarkingCustomProfile{
+										EmbeddingFrequency: ptr.Float64(1.0),
+										SceneCut:           ptr.Float64(1.0),
+										TargetPsnr:         ptr.Float64(1.0),
+									},
+									License:           ptr.String("__License__"),
+									OperatorId:        ptr.Int32(1),
+									PolyPeriod:        ptr.Int32(1),
+									Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+									WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 								},
 							},
 						},
@@ -23346,6 +23796,31 @@ func TestCheckResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 										},
 									},
 								},
+								WatermarkingSettings: &types.MediaPackageV2WatermarkingSettings{
+									MediaPackageV2AbWatermarkerIrdetoSettings: &types.MediaPackageV2AbWatermarkerIrdetoSettings{
+										AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+										},
+										AlternateDestination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										CustomProfile: &types.AbWatermarkingCustomProfile{
+											EmbeddingFrequency: ptr.Float64(1.0),
+											SceneCut:           ptr.Float64(1.0),
+											TargetPsnr:         ptr.Float64(1.0),
+										},
+										License:           ptr.String("__License__"),
+										OperatorId:        ptr.Int32(1),
+										PolyPeriod:        ptr.Int32(1),
+										Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
+									},
+								},
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -23428,6 +23903,31 @@ func TestCheckResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 									Destination: &types.OutputLocationRef{
 										DestinationRefId: ptr.String("__DestinationRefId__"),
 									},
+								},
+							},
+							WatermarkingSettings: &types.CmafIngestWatermarkingSettings{
+								CmafIngestAbWatermarkerIrdetoSettings: &types.CmafIngestAbWatermarkerIrdetoSettings{
+									AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+									},
+									AlternateDestination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									CustomProfile: &types.AbWatermarkingCustomProfile{
+										EmbeddingFrequency: ptr.Float64(1.0),
+										SceneCut:           ptr.Float64(1.0),
+										TargetPsnr:         ptr.Float64(1.0),
+									},
+									License:           ptr.String("__License__"),
+									OperatorId:        ptr.Int32(1),
+									PolyPeriod:        ptr.Int32(1),
+									Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+									WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 								},
 							},
 						},
@@ -25762,6 +26262,31 @@ func TestCheckResponseSnapshot_StartChannel(t *testing.T) {
 										},
 									},
 								},
+								WatermarkingSettings: &types.MediaPackageV2WatermarkingSettings{
+									MediaPackageV2AbWatermarkerIrdetoSettings: &types.MediaPackageV2AbWatermarkerIrdetoSettings{
+										AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+										},
+										AlternateDestination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										CustomProfile: &types.AbWatermarkingCustomProfile{
+											EmbeddingFrequency: ptr.Float64(1.0),
+											SceneCut:           ptr.Float64(1.0),
+											TargetPsnr:         ptr.Float64(1.0),
+										},
+										License:           ptr.String("__License__"),
+										OperatorId:        ptr.Int32(1),
+										PolyPeriod:        ptr.Int32(1),
+										Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
+									},
+								},
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -25844,6 +26369,31 @@ func TestCheckResponseSnapshot_StartChannel(t *testing.T) {
 									Destination: &types.OutputLocationRef{
 										DestinationRefId: ptr.String("__DestinationRefId__"),
 									},
+								},
+							},
+							WatermarkingSettings: &types.CmafIngestWatermarkingSettings{
+								CmafIngestAbWatermarkerIrdetoSettings: &types.CmafIngestAbWatermarkerIrdetoSettings{
+									AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+									},
+									AlternateDestination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									CustomProfile: &types.AbWatermarkingCustomProfile{
+										EmbeddingFrequency: ptr.Float64(1.0),
+										SceneCut:           ptr.Float64(1.0),
+										TargetPsnr:         ptr.Float64(1.0),
+									},
+									License:           ptr.String("__License__"),
+									OperatorId:        ptr.Int32(1),
+									PolyPeriod:        ptr.Int32(1),
+									Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+									WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 								},
 							},
 						},
@@ -26815,6 +27365,31 @@ func TestCheckResponseSnapshot_StartChannel(t *testing.T) {
 										},
 									},
 								},
+								WatermarkingSettings: &types.MediaPackageV2WatermarkingSettings{
+									MediaPackageV2AbWatermarkerIrdetoSettings: &types.MediaPackageV2AbWatermarkerIrdetoSettings{
+										AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+										},
+										AlternateDestination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										CustomProfile: &types.AbWatermarkingCustomProfile{
+											EmbeddingFrequency: ptr.Float64(1.0),
+											SceneCut:           ptr.Float64(1.0),
+											TargetPsnr:         ptr.Float64(1.0),
+										},
+										License:           ptr.String("__License__"),
+										OperatorId:        ptr.Int32(1),
+										PolyPeriod:        ptr.Int32(1),
+										Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
+									},
+								},
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -26897,6 +27472,31 @@ func TestCheckResponseSnapshot_StartChannel(t *testing.T) {
 									Destination: &types.OutputLocationRef{
 										DestinationRefId: ptr.String("__DestinationRefId__"),
 									},
+								},
+							},
+							WatermarkingSettings: &types.CmafIngestWatermarkingSettings{
+								CmafIngestAbWatermarkerIrdetoSettings: &types.CmafIngestAbWatermarkerIrdetoSettings{
+									AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+									},
+									AlternateDestination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									CustomProfile: &types.AbWatermarkingCustomProfile{
+										EmbeddingFrequency: ptr.Float64(1.0),
+										SceneCut:           ptr.Float64(1.0),
+										TargetPsnr:         ptr.Float64(1.0),
+									},
+									License:           ptr.String("__License__"),
+									OperatorId:        ptr.Int32(1),
+									PolyPeriod:        ptr.Int32(1),
+									Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+									WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 								},
 							},
 						},
@@ -29643,6 +30243,31 @@ func TestCheckResponseSnapshot_StopChannel(t *testing.T) {
 										},
 									},
 								},
+								WatermarkingSettings: &types.MediaPackageV2WatermarkingSettings{
+									MediaPackageV2AbWatermarkerIrdetoSettings: &types.MediaPackageV2AbWatermarkerIrdetoSettings{
+										AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+										},
+										AlternateDestination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										CustomProfile: &types.AbWatermarkingCustomProfile{
+											EmbeddingFrequency: ptr.Float64(1.0),
+											SceneCut:           ptr.Float64(1.0),
+											TargetPsnr:         ptr.Float64(1.0),
+										},
+										License:           ptr.String("__License__"),
+										OperatorId:        ptr.Int32(1),
+										PolyPeriod:        ptr.Int32(1),
+										Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
+									},
+								},
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -29725,6 +30350,31 @@ func TestCheckResponseSnapshot_StopChannel(t *testing.T) {
 									Destination: &types.OutputLocationRef{
 										DestinationRefId: ptr.String("__DestinationRefId__"),
 									},
+								},
+							},
+							WatermarkingSettings: &types.CmafIngestWatermarkingSettings{
+								CmafIngestAbWatermarkerIrdetoSettings: &types.CmafIngestAbWatermarkerIrdetoSettings{
+									AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+									},
+									AlternateDestination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									CustomProfile: &types.AbWatermarkingCustomProfile{
+										EmbeddingFrequency: ptr.Float64(1.0),
+										SceneCut:           ptr.Float64(1.0),
+										TargetPsnr:         ptr.Float64(1.0),
+									},
+									License:           ptr.String("__License__"),
+									OperatorId:        ptr.Int32(1),
+									PolyPeriod:        ptr.Int32(1),
+									Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+									WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 								},
 							},
 						},
@@ -30696,6 +31346,31 @@ func TestCheckResponseSnapshot_StopChannel(t *testing.T) {
 										},
 									},
 								},
+								WatermarkingSettings: &types.MediaPackageV2WatermarkingSettings{
+									MediaPackageV2AbWatermarkerIrdetoSettings: &types.MediaPackageV2AbWatermarkerIrdetoSettings{
+										AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+										},
+										AlternateDestination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										CustomProfile: &types.AbWatermarkingCustomProfile{
+											EmbeddingFrequency: ptr.Float64(1.0),
+											SceneCut:           ptr.Float64(1.0),
+											TargetPsnr:         ptr.Float64(1.0),
+										},
+										License:           ptr.String("__License__"),
+										OperatorId:        ptr.Int32(1),
+										PolyPeriod:        ptr.Int32(1),
+										Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
+									},
+								},
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -30778,6 +31453,31 @@ func TestCheckResponseSnapshot_StopChannel(t *testing.T) {
 									Destination: &types.OutputLocationRef{
 										DestinationRefId: ptr.String("__DestinationRefId__"),
 									},
+								},
+							},
+							WatermarkingSettings: &types.CmafIngestWatermarkingSettings{
+								CmafIngestAbWatermarkerIrdetoSettings: &types.CmafIngestAbWatermarkerIrdetoSettings{
+									AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+									},
+									AlternateDestination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									CustomProfile: &types.AbWatermarkingCustomProfile{
+										EmbeddingFrequency: ptr.Float64(1.0),
+										SceneCut:           ptr.Float64(1.0),
+										TargetPsnr:         ptr.Float64(1.0),
+									},
+									License:           ptr.String("__License__"),
+									OperatorId:        ptr.Int32(1),
+									PolyPeriod:        ptr.Int32(1),
+									Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+									WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 								},
 							},
 						},
@@ -33233,6 +33933,31 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 											},
 										},
 									},
+									WatermarkingSettings: &types.MediaPackageV2WatermarkingSettings{
+										MediaPackageV2AbWatermarkerIrdetoSettings: &types.MediaPackageV2AbWatermarkerIrdetoSettings{
+											AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+												{
+													DestinationRefId: ptr.String("__DestinationRefId__"),
+												},
+												{
+													DestinationRefId: ptr.String("__DestinationRefId__"),
+												},
+											},
+											AlternateDestination: &types.OutputLocationRef{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											CustomProfile: &types.AbWatermarkingCustomProfile{
+												EmbeddingFrequency: ptr.Float64(1.0),
+												SceneCut:           ptr.Float64(1.0),
+												TargetPsnr:         ptr.Float64(1.0),
+											},
+											License:           ptr.String("__License__"),
+											OperatorId:        ptr.Int32(1),
+											PolyPeriod:        ptr.Int32(1),
+											Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+											WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
+										},
+									},
 								},
 							},
 							MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -33315,6 +34040,31 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 										Destination: &types.OutputLocationRef{
 											DestinationRefId: ptr.String("__DestinationRefId__"),
 										},
+									},
+								},
+								WatermarkingSettings: &types.CmafIngestWatermarkingSettings{
+									CmafIngestAbWatermarkerIrdetoSettings: &types.CmafIngestAbWatermarkerIrdetoSettings{
+										AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+										},
+										AlternateDestination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										CustomProfile: &types.AbWatermarkingCustomProfile{
+											EmbeddingFrequency: ptr.Float64(1.0),
+											SceneCut:           ptr.Float64(1.0),
+											TargetPsnr:         ptr.Float64(1.0),
+										},
+										License:           ptr.String("__License__"),
+										OperatorId:        ptr.Int32(1),
+										PolyPeriod:        ptr.Int32(1),
+										Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 									},
 								},
 							},
@@ -34286,6 +35036,31 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 											},
 										},
 									},
+									WatermarkingSettings: &types.MediaPackageV2WatermarkingSettings{
+										MediaPackageV2AbWatermarkerIrdetoSettings: &types.MediaPackageV2AbWatermarkerIrdetoSettings{
+											AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+												{
+													DestinationRefId: ptr.String("__DestinationRefId__"),
+												},
+												{
+													DestinationRefId: ptr.String("__DestinationRefId__"),
+												},
+											},
+											AlternateDestination: &types.OutputLocationRef{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											CustomProfile: &types.AbWatermarkingCustomProfile{
+												EmbeddingFrequency: ptr.Float64(1.0),
+												SceneCut:           ptr.Float64(1.0),
+												TargetPsnr:         ptr.Float64(1.0),
+											},
+											License:           ptr.String("__License__"),
+											OperatorId:        ptr.Int32(1),
+											PolyPeriod:        ptr.Int32(1),
+											Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+											WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
+										},
+									},
 								},
 							},
 							MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -34368,6 +35143,31 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 										Destination: &types.OutputLocationRef{
 											DestinationRefId: ptr.String("__DestinationRefId__"),
 										},
+									},
+								},
+								WatermarkingSettings: &types.CmafIngestWatermarkingSettings{
+									CmafIngestAbWatermarkerIrdetoSettings: &types.CmafIngestAbWatermarkerIrdetoSettings{
+										AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+										},
+										AlternateDestination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										CustomProfile: &types.AbWatermarkingCustomProfile{
+											EmbeddingFrequency: ptr.Float64(1.0),
+											SceneCut:           ptr.Float64(1.0),
+											TargetPsnr:         ptr.Float64(1.0),
+										},
+										License:           ptr.String("__License__"),
+										OperatorId:        ptr.Int32(1),
+										PolyPeriod:        ptr.Int32(1),
+										Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 									},
 								},
 							},
@@ -36671,6 +37471,31 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 										},
 									},
 								},
+								WatermarkingSettings: &types.MediaPackageV2WatermarkingSettings{
+									MediaPackageV2AbWatermarkerIrdetoSettings: &types.MediaPackageV2AbWatermarkerIrdetoSettings{
+										AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+										},
+										AlternateDestination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										CustomProfile: &types.AbWatermarkingCustomProfile{
+											EmbeddingFrequency: ptr.Float64(1.0),
+											SceneCut:           ptr.Float64(1.0),
+											TargetPsnr:         ptr.Float64(1.0),
+										},
+										License:           ptr.String("__License__"),
+										OperatorId:        ptr.Int32(1),
+										PolyPeriod:        ptr.Int32(1),
+										Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
+									},
+								},
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -36753,6 +37578,31 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 									Destination: &types.OutputLocationRef{
 										DestinationRefId: ptr.String("__DestinationRefId__"),
 									},
+								},
+							},
+							WatermarkingSettings: &types.CmafIngestWatermarkingSettings{
+								CmafIngestAbWatermarkerIrdetoSettings: &types.CmafIngestAbWatermarkerIrdetoSettings{
+									AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+									},
+									AlternateDestination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									CustomProfile: &types.AbWatermarkingCustomProfile{
+										EmbeddingFrequency: ptr.Float64(1.0),
+										SceneCut:           ptr.Float64(1.0),
+										TargetPsnr:         ptr.Float64(1.0),
+									},
+									License:           ptr.String("__License__"),
+									OperatorId:        ptr.Int32(1),
+									PolyPeriod:        ptr.Int32(1),
+									Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+									WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 								},
 							},
 						},
@@ -37724,6 +38574,31 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 										},
 									},
 								},
+								WatermarkingSettings: &types.MediaPackageV2WatermarkingSettings{
+									MediaPackageV2AbWatermarkerIrdetoSettings: &types.MediaPackageV2AbWatermarkerIrdetoSettings{
+										AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+										},
+										AlternateDestination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										CustomProfile: &types.AbWatermarkingCustomProfile{
+											EmbeddingFrequency: ptr.Float64(1.0),
+											SceneCut:           ptr.Float64(1.0),
+											TargetPsnr:         ptr.Float64(1.0),
+										},
+										License:           ptr.String("__License__"),
+										OperatorId:        ptr.Int32(1),
+										PolyPeriod:        ptr.Int32(1),
+										Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
+									},
+								},
 							},
 						},
 						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -37806,6 +38681,31 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 									Destination: &types.OutputLocationRef{
 										DestinationRefId: ptr.String("__DestinationRefId__"),
 									},
+								},
+							},
+							WatermarkingSettings: &types.CmafIngestWatermarkingSettings{
+								CmafIngestAbWatermarkerIrdetoSettings: &types.CmafIngestAbWatermarkerIrdetoSettings{
+									AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+									},
+									AlternateDestination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									CustomProfile: &types.AbWatermarkingCustomProfile{
+										EmbeddingFrequency: ptr.Float64(1.0),
+										SceneCut:           ptr.Float64(1.0),
+										TargetPsnr:         ptr.Float64(1.0),
+									},
+									License:           ptr.String("__License__"),
+									OperatorId:        ptr.Int32(1),
+									PolyPeriod:        ptr.Int32(1),
+									Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+									WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 								},
 							},
 						},
@@ -40116,6 +41016,31 @@ func TestCheckResponseSnapshot_UpdateChannelClass(t *testing.T) {
 											},
 										},
 									},
+									WatermarkingSettings: &types.MediaPackageV2WatermarkingSettings{
+										MediaPackageV2AbWatermarkerIrdetoSettings: &types.MediaPackageV2AbWatermarkerIrdetoSettings{
+											AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+												{
+													DestinationRefId: ptr.String("__DestinationRefId__"),
+												},
+												{
+													DestinationRefId: ptr.String("__DestinationRefId__"),
+												},
+											},
+											AlternateDestination: &types.OutputLocationRef{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											CustomProfile: &types.AbWatermarkingCustomProfile{
+												EmbeddingFrequency: ptr.Float64(1.0),
+												SceneCut:           ptr.Float64(1.0),
+												TargetPsnr:         ptr.Float64(1.0),
+											},
+											License:           ptr.String("__License__"),
+											OperatorId:        ptr.Int32(1),
+											PolyPeriod:        ptr.Int32(1),
+											Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+											WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
+										},
+									},
 								},
 							},
 							MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -40198,6 +41123,31 @@ func TestCheckResponseSnapshot_UpdateChannelClass(t *testing.T) {
 										Destination: &types.OutputLocationRef{
 											DestinationRefId: ptr.String("__DestinationRefId__"),
 										},
+									},
+								},
+								WatermarkingSettings: &types.CmafIngestWatermarkingSettings{
+									CmafIngestAbWatermarkerIrdetoSettings: &types.CmafIngestAbWatermarkerIrdetoSettings{
+										AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+										},
+										AlternateDestination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										CustomProfile: &types.AbWatermarkingCustomProfile{
+											EmbeddingFrequency: ptr.Float64(1.0),
+											SceneCut:           ptr.Float64(1.0),
+											TargetPsnr:         ptr.Float64(1.0),
+										},
+										License:           ptr.String("__License__"),
+										OperatorId:        ptr.Int32(1),
+										PolyPeriod:        ptr.Int32(1),
+										Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 									},
 								},
 							},
@@ -41169,6 +42119,31 @@ func TestCheckResponseSnapshot_UpdateChannelClass(t *testing.T) {
 											},
 										},
 									},
+									WatermarkingSettings: &types.MediaPackageV2WatermarkingSettings{
+										MediaPackageV2AbWatermarkerIrdetoSettings: &types.MediaPackageV2AbWatermarkerIrdetoSettings{
+											AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+												{
+													DestinationRefId: ptr.String("__DestinationRefId__"),
+												},
+												{
+													DestinationRefId: ptr.String("__DestinationRefId__"),
+												},
+											},
+											AlternateDestination: &types.OutputLocationRef{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											CustomProfile: &types.AbWatermarkingCustomProfile{
+												EmbeddingFrequency: ptr.Float64(1.0),
+												SceneCut:           ptr.Float64(1.0),
+												TargetPsnr:         ptr.Float64(1.0),
+											},
+											License:           ptr.String("__License__"),
+											OperatorId:        ptr.Int32(1),
+											PolyPeriod:        ptr.Int32(1),
+											Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+											WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
+										},
+									},
 								},
 							},
 							MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
@@ -41251,6 +42226,31 @@ func TestCheckResponseSnapshot_UpdateChannelClass(t *testing.T) {
 										Destination: &types.OutputLocationRef{
 											DestinationRefId: ptr.String("__DestinationRefId__"),
 										},
+									},
+								},
+								WatermarkingSettings: &types.CmafIngestWatermarkingSettings{
+									CmafIngestAbWatermarkerIrdetoSettings: &types.CmafIngestAbWatermarkerIrdetoSettings{
+										AdditionalDestinationsAlternateDestinations: []types.OutputLocationRef{
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+											{
+												DestinationRefId: ptr.String("__DestinationRefId__"),
+											},
+										},
+										AlternateDestination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+										CustomProfile: &types.AbWatermarkingCustomProfile{
+											EmbeddingFrequency: ptr.Float64(1.0),
+											SceneCut:           ptr.Float64(1.0),
+											TargetPsnr:         ptr.Float64(1.0),
+										},
+										License:           ptr.String("__License__"),
+										OperatorId:        ptr.Int32(1),
+										PolyPeriod:        ptr.Int32(1),
+										Profile:           types.AbWatermarkingProfile("CAMCORDING"),
+										WatermarkIdLength: types.AbWatermarkerIdLength("ID_2048"),
 									},
 								},
 							},
