@@ -1,3 +1,23 @@
+# Release (2026-09-02)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.44.0](service/appintegrations/CHANGELOG.md#v1440-2026-09-02)
+  * **Feature**: This release adds a force parameter to DeleteApplication and a ConflictException to UpdateApplication, letting customers delete applications with existing associations in one call and get a clear error when an update conflicts with the application's current state.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.45.0](service/bedrockagentcore/CHANGELOG.md#v1450-2026-09-02)
+  * **Feature**: Batch evaluation now supports up to 10 CloudWatch log groups per CloudWatchLogsSource
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.328.0](service/ec2/CHANGELOG.md#v13280-2026-09-02)
+  * **Feature**: This release adds support to retain interruptible Capacity Reservations in an active state when all capacity is reclaimed.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.108.0](service/medialive/CHANGELOG.md#v11080-2026-09-02)
+  * **Feature**: AWS Elemental MediaLive now supports AB forensic video watermarking
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.53.0](service/mgn/CHANGELOG.md#v1530-2026-09-02)
+  * **Feature**: AWS Transform for migrations adds a second network migration option - apply your source security posture to existing VPCs. Upload a source network file with firewall rules, tag the in-scope VPCs, and AWS Transform matches source subnets to them by CIDR and generates the security groups.
+* `github.com/aws/aws-sdk-go-v2/service/odb`: [v1.20.0](service/odb/CHANGELOG.md#v1200-2026-09-02)
+  * **Feature**: Adds the ListFlexComponents API for listing the flex components available for a given DB system shape.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.273.0](service/sagemaker/CHANGELOG.md#v12730-2026-09-02)
+  * **Feature**: Amazon SageMaker Feature Store now supports the Standard V2 online store type, which enables feature-level writes to feature groups. You can select Standard V2 when creating a feature group, and update the storage type of an existing feature group via UpdateFeatureGroup.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime`: [v1.42.0](service/sagemakerfeaturestoreruntime/CHANGELOG.md#v1420-2026-09-02)
+  * **Feature**: Amazon SageMaker Feature Store now supports the UpdateRecord API, enabling partial updates to individual feature values in an existing Online Store record without rewriting the entire record. This reduces write payloads and latency for high-frequency feature-level writes .
+
 # Release (2026-09-01)
 
 ## Module Highlights

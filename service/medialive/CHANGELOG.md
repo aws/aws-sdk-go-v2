@@ -1,3 +1,7 @@
+# v1.108.0 (2026-09-02)
+
+* **Feature**: AWS Elemental MediaLive now supports AB forensic video watermarking
+
 # v1.107.0 (2026-08-31.2)
 
 * **Feature**: Stop registering the `SetCredentialSourceMiddleware` middleware in generated clients. Credential source user agent features are now set when the client's middleware stack is constructed.

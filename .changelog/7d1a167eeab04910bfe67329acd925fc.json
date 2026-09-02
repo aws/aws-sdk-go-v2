@@ -1,8 +1,0 @@
-{
-    "id": "7d1a167e-eab0-4910-bfe6-7329acd925fc",
-    "type": "feature",
-    "description": "Adds the ListFlexComponents API for listing the flex components available for a given DB system shape.",
-    "modules": [
-        "service/odb"
-    ]
-}

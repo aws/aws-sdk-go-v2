@@ -1,8 +1,0 @@
-{
-    "id": "4039753a-89f5-4792-bb63-bef47e49cd94",
-    "type": "feature",
-    "description": "AWS Transform for migrations adds a second network migration option - apply your source security posture to existing VPCs. Upload a source network file with firewall rules, tag the in-scope VPCs, and AWS Transform matches source subnets to them by CIDR and generates the security groups.",
-    "modules": [
-        "service/mgn"
-    ]
-}

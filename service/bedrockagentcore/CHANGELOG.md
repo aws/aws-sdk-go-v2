@@ -1,3 +1,7 @@
+# v1.45.0 (2026-09-02)
+
+* **Feature**: Batch evaluation now supports up to 10 CloudWatch log groups per CloudWatchLogsSource
+
 # v1.44.0 (2026-08-31.2)
 
 * **Feature**: Stop registering the `SetCredentialSourceMiddleware` middleware in generated clients. Credential source user agent features are now set when the client's middleware stack is constructed.

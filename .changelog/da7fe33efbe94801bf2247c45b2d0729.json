@@ -1,8 +1,0 @@
-{
-    "id": "da7fe33e-fbe9-4801-bf22-47c45b2d0729",
-    "type": "feature",
-    "description": "This release adds support to retain interruptible Capacity Reservations in an active state when all capacity is reclaimed.",
-    "modules": [
-        "service/ec2"
-    ]
-}
