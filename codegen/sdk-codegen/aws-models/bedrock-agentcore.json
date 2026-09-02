@@ -2708,10 +2708,10 @@
                 "logGroupNames": {
                     "target": "com.amazonaws.bedrockagentcore#EvaluationStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of CloudWatch log group names to read agent traces from. Maximum of 5 log groups.</p>",
+                        "smithy.api#documentation": "<p>The list of CloudWatch log group names to read agent traces from. Maximum of 10 log groups.</p>",
                         "smithy.api#length": {
                             "min": 1,
-                            "max": 5
+                            "max": 10
                         },
                         "smithy.api#required": {}
                     }
