@@ -256,6 +256,10 @@ func TestCheckResponseSnapshot_CreateConnector(t *testing.T) {
 				"__Member__",
 			},
 			MaxConcurrentConnections: ptr.Int32(1),
+			OrderedUserSecretVersionStages: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 		SecurityPolicyName: ptr.String("__SecurityPolicyName__"),
 		EgressConfig: &types.ConnectorEgressConfigMemberVpcLattice{
@@ -1258,6 +1262,10 @@ func TestCheckResponseSnapshot_DescribeConnector(t *testing.T) {
 					"__Member__",
 				},
 				MaxConcurrentConnections: ptr.Int32(1),
+				OrderedUserSecretVersionStages: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 			ServiceManagedEgressIpAddresses: []string{
 				"__Member__",
@@ -3232,6 +3240,10 @@ func TestCheckResponseSnapshot_UpdateConnector(t *testing.T) {
 				"__Member__",
 			},
 			MaxConcurrentConnections: ptr.Int32(1),
+			OrderedUserSecretVersionStages: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 		SecurityPolicyName: ptr.String("__SecurityPolicyName__"),
 		EgressConfig: &types.UpdateConnectorEgressConfigMemberVpcLattice{

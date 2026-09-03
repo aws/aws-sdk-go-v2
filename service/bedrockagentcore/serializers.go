@@ -5797,6 +5797,13 @@ func awsRestjson1_serializeOpDocumentStartBatchEvaluationInput(v *StartBatchEval
 		ok.String(*v.KmsKeyArn)
 	}
 
+	if v.OutputConfig != nil {
+		ok := object.Key("outputConfig")
+		if err := awsRestjson1_serializeDocumentOutputConfig(v.OutputConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
@@ -7359,9 +7366,16 @@ func awsRestjson1_serializeDocumentCloudWatchLogsSource(v *types.CloudWatchLogsS
 		}
 	}
 
+	if v.LogGroupNamePrefixes != nil {
+		ok := object.Key("logGroupNamePrefixes")
+		if err := awsRestjson1_serializeDocumentLogGroupNamePrefixList(v.LogGroupNamePrefixes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LogGroupNames != nil {
 		ok := object.Key("logGroupNames")
-		if err := awsRestjson1_serializeDocumentEvaluationStringList(v.LogGroupNames, ok); err != nil {
+		if err := awsRestjson1_serializeDocumentLogGroupNameList(v.LogGroupNames, ok); err != nil {
 			return err
 		}
 	}
@@ -7409,6 +7423,33 @@ func awsRestjson1_serializeDocumentCloudWatchLogsTraceConfig(v *types.CloudWatch
 	if v.StartTime != nil {
 		ok := object.Key("startTime")
 		ok.String(smithytime.FormatDateTime(*v.StartTime))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCloudWatchOutputConfig(v *types.CloudWatchOutputConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LogGroupName != nil {
+		ok := object.Key("logGroupName")
+		ok.String(*v.LogGroupName)
+	}
+
+	if v.LogStreamName != nil {
+		ok := object.Key("logStreamName")
+		ok.String(*v.LogStreamName)
+	}
+
+	if v.MetricsNamespace != nil {
+		ok := object.Key("metricsNamespace")
+		ok.String(*v.MetricsNamespace)
+	}
+
+	if len(v.ResultDestination) > 0 {
+		ok := object.Key("resultDestination")
+		ok.String(string(v.ResultDestination))
 	}
 
 	return nil
@@ -9429,6 +9470,28 @@ func awsRestjson1_serializeDocumentLogGroupArnList(v []string, value smithyjson.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentLogGroupNameList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLogGroupNamePrefixList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMemoryContent(v types.MemoryContent, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10089,6 +10152,24 @@ func awsRestjson1_serializeDocumentOnlineEvaluationTraceConfig(v *types.OnlineEv
 		ok.String(smithytime.FormatDateTime(*v.StartTime))
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOutputConfig(v types.OutputConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.OutputConfigMemberCloudWatchConfig:
+		av := object.Key("cloudWatchConfig")
+		if err := awsRestjson1_serializeDocumentCloudWatchOutputConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 

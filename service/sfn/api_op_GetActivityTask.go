@@ -15,8 +15,6 @@ import (
 // seconds. If no task is available within 60 seconds, the poll returns a taskToken
 // with a null string.
 //
-// This API action isn't logged in CloudTrail.
-//
 // Workers should set their client side socket timeout to at least 65 seconds (5
 // seconds higher than the maximum time the service may hold the poll request).
 //

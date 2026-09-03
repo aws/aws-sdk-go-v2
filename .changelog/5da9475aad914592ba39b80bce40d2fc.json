@@ -1,0 +1,8 @@
+{
+    "id": "5da9475a-ad91-4592-ba39-b80bce40d2fc",
+    "type": "feature",
+    "description": "AWS Transfer Family SFTP Connectors now support specifying an ordered list of AWS Secrets Manager version stages for secret retrieval. This enables seamless credential rotation workflows where external partners may take time to update their systems with new credentials.",
+    "modules": [
+        "service/transfer"
+    ]
+}

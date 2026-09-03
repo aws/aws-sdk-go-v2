@@ -351,6 +351,10 @@ func TestCheckRequestSnapshot_CreateConnector(t *testing.T) {
 				"__Member__",
 			},
 			MaxConcurrentConnections: ptr.Int32(1),
+			OrderedUserSecretVersionStages: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 		SecurityPolicyName: ptr.String("__SecurityPolicyName__"),
 		EgressConfig: &types.ConnectorEgressConfigMemberVpcLattice{
@@ -2633,6 +2637,10 @@ func TestCheckRequestSnapshot_UpdateConnector(t *testing.T) {
 				"__Member__",
 			},
 			MaxConcurrentConnections: ptr.Int32(1),
+			OrderedUserSecretVersionStages: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 		SecurityPolicyName: ptr.String("__SecurityPolicyName__"),
 		EgressConfig: &types.UpdateConnectorEgressConfigMemberVpcLattice{
@@ -3098,6 +3106,10 @@ func TestUpdateRequestSnapshot_CreateConnector(t *testing.T) {
 				"__Member__",
 			},
 			MaxConcurrentConnections: ptr.Int32(1),
+			OrderedUserSecretVersionStages: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 		SecurityPolicyName: ptr.String("__SecurityPolicyName__"),
 		EgressConfig: &types.ConnectorEgressConfigMemberVpcLattice{
@@ -5380,6 +5392,10 @@ func TestUpdateRequestSnapshot_UpdateConnector(t *testing.T) {
 				"__Member__",
 			},
 			MaxConcurrentConnections: ptr.Int32(1),
+			OrderedUserSecretVersionStages: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 		SecurityPolicyName: ptr.String("__SecurityPolicyName__"),
 		EgressConfig: &types.UpdateConnectorEgressConfigMemberVpcLattice{

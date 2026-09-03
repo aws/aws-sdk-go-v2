@@ -1,0 +1,8 @@
+{
+    "id": "e8f9f802-37a0-40f7-b122-4482550d630d",
+    "type": "documentation",
+    "description": "Updates Step Functions API documentation around CloudTrail, Execution name reuse and sort order of ListExecutions API",
+    "modules": [
+        "service/sfn"
+    ]
+}

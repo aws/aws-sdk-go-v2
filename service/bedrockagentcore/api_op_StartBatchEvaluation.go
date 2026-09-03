@@ -66,6 +66,9 @@ type StartBatchEvaluationInput struct {
 	// data is encrypted at rest with the specified key.
 	KmsKeyArn *string
 
+	// Output destination configuration.
+	OutputConfig types.OutputConfig
+
 	// A map of tag keys and values to associate with the batch evaluation.
 	Tags map[string]string
 

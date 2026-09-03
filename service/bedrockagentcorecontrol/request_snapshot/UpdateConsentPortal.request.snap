@@ -1,0 +1,5 @@
+POST /identities/UpdateConsentPortal
+
+Content-Type: application/json
+
+{"consentPortalIdentifier":"__ConsentPortalIdentifier__","description":"__Description__","executionRoleArn":"__ExecutionRoleArn__","idpConfig":{"audience":"__Audience__","credentialProviderArn":"__CredentialProviderArn__","scopes":["__Member__","__Member__"]}}

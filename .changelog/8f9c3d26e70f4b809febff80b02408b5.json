@@ -1,0 +1,8 @@
+{
+    "id": "8f9c3d26-e70f-4b80-9feb-ff80b02408b5",
+    "type": "feature",
+    "description": "Adding support for WhatsApp Flows with endpoints.",
+    "modules": [
+        "service/socialmessaging"
+    ]
+}

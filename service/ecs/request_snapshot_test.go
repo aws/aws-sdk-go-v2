@@ -517,6 +517,7 @@ func TestCheckRequestSnapshot_CreateDaemon(t *testing.T) {
 		EnableECSManagedTags: true,
 		EnableExecuteCommand: true,
 		ClientToken:          ptr.String("__ClientToken__"),
+		Critical:             ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5110,6 +5111,7 @@ func TestCheckRequestSnapshot_UpdateDaemon(t *testing.T) {
 		PropagateTags:        types.DaemonPropagateTags("DAEMON"),
 		EnableECSManagedTags: true,
 		EnableExecuteCommand: true,
+		Critical:             ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6045,6 +6047,7 @@ func TestUpdateRequestSnapshot_CreateDaemon(t *testing.T) {
 		EnableECSManagedTags: true,
 		EnableExecuteCommand: true,
 		ClientToken:          ptr.String("__ClientToken__"),
+		Critical:             ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -10638,6 +10641,7 @@ func TestUpdateRequestSnapshot_UpdateDaemon(t *testing.T) {
 		PropagateTags:        types.DaemonPropagateTags("DAEMON"),
 		EnableECSManagedTags: true,
 		EnableExecuteCommand: true,
+		Critical:             ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""

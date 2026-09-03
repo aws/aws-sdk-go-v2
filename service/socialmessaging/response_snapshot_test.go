@@ -274,6 +274,7 @@ func TestCheckResponseSnapshot_CreateWhatsAppFlow(t *testing.T) {
 		FlowJson:    []byte("blob"),
 		Publish:     ptr.Bool(true),
 		CloneFlowId: ptr.String("__CloneFlowId__"),
+		EndpointUri: ptr.String("__EndpointUri__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -617,6 +618,30 @@ func TestCheckResponseSnapshot_GetLinkedWhatsAppBusinessAccountPhoneNumber(t *te
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetLinkedWhatsAppBusinessAccountPhoneNumber.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetWhatsAppBusinessPublicKey(t *testing.T) {
+	want := &GetWhatsAppBusinessPublicKeyOutput{
+		BusinessPublicKey:                ptr.String("__BusinessPublicKey__"),
+		BusinessPublicKeySignatureStatus: ptr.String("__BusinessPublicKeySignatureStatus__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetWhatsAppBusinessPublicKey.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetWhatsAppBusinessPublicKey(context.Background(), &GetWhatsAppBusinessPublicKeyInput{
+		OriginationPhoneNumberId: ptr.String("__OriginationPhoneNumberId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetWhatsAppBusinessPublicKey.response", err)
 	}
 }
 
@@ -1232,6 +1257,29 @@ func TestCheckResponseSnapshot_PutWhatsAppBusinessAccountEventDestinations(t *te
 	}
 }
 
+func TestCheckResponseSnapshot_PutWhatsAppBusinessPublicKey(t *testing.T) {
+	want := &PutWhatsAppBusinessPublicKeyOutput{}
+	status, header, body, err := serdeRespReadSnapshot("PutWhatsAppBusinessPublicKey.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutWhatsAppBusinessPublicKey(context.Background(), &PutWhatsAppBusinessPublicKeyInput{
+		OriginationPhoneNumberId: ptr.String("__OriginationPhoneNumberId__"),
+		BusinessPublicKey:        ptr.String("__BusinessPublicKey__"),
+		KmsKeyArn:                ptr.String("__KmsKeyArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutWhatsAppBusinessPublicKey.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_SendWhatsAppConversionEvent(t *testing.T) {
 	want := &SendWhatsAppConversionEventOutput{
 		RequestId: ptr.String("__RequestId__"),
@@ -1360,6 +1408,8 @@ func TestCheckResponseSnapshot_UpdateWhatsAppFlow(t *testing.T) {
 			types.MetaFlowCategory("SIGN_UP"),
 			types.MetaFlowCategory("SIGN_UP"),
 		},
+		EndpointUri: ptr.String("__EndpointUri__"),
+		MetaAppId:   ptr.String("__MetaAppId__"),
 	})
 	if err != nil {
 		t.Fatal(err)

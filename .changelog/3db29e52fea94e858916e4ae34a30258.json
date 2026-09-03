@@ -1,0 +1,8 @@
+{
+    "id": "3db29e52-fea9-4e85-8916-e4ae34a30258",
+    "type": "documentation",
+    "description": "This release adds support for sending TCP resets for Gateway Load Balancer when a flow's idle timeout expires, or when a target becomes unhealthy or is deregistered. This adds updates the CLI documentation.",
+    "modules": [
+        "service/elasticloadbalancingv2"
+    ]
+}

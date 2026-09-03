@@ -838,6 +838,36 @@ func TestCheckResponseSnapshot_DisassociateEipFromVlan(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetAccountSettings(t *testing.T) {
+	want := &GetAccountSettingsOutput{
+		Settings: []types.AccountSetting{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetAccountSettings.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetAccountSettings(context.Background(), &GetAccountSettingsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetAccountSettings.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetDepotUrl(t *testing.T) {
 	want := &GetDepotUrlOutput{
 		DepotUrl: ptr.String("__DepotUrl__"),
@@ -1371,6 +1401,47 @@ func TestCheckResponseSnapshot_ListVmEntitlements(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_PutAccountSettings(t *testing.T) {
+	want := &PutAccountSettingsOutput{
+		Settings: []types.AccountSetting{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("PutAccountSettings.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutAccountSettings(context.Background(), &PutAccountSettingsInput{
+		Settings: []types.AccountSetting{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutAccountSettings.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
 	status, header, body, err := serdeRespReadSnapshot("TagResource.response")
@@ -1484,7 +1555,7 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetVersions(context.Background(), &GetVersionsInput{})
+	_, opErr := svc.GetAccountSettings(context.Background(), &GetAccountSettingsInput{})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -2153,7 +2153,7 @@ var _SourceNetworksList_member *smithy.Schema
 var SourceProperties = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.drs",
 	Name:      "SourceProperties",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var SourceProperties_lastUpdatedDateTime *smithy.Schema
 
 var SourceProperties_recommendedInstanceType *smithy.Schema
@@ -2171,6 +2171,8 @@ var SourceProperties_ramBytes *smithy.Schema
 var SourceProperties_os *smithy.Schema
 
 var SourceProperties_supportsNitroInstances *smithy.Schema
+
+var SourceProperties_architecture *smithy.Schema
 
 var SourceServer = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.drs",
@@ -2203,6 +2205,11 @@ var SourceServer_reversedDirectionSourceServerArn *smithy.Schema
 var SourceServer_sourceNetworkID *smithy.Schema
 
 var SourceServer_agentVersion *smithy.Schema
+
+var _SourceServerArchitecture = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.drs",
+	Name:      "SourceServerArchitecture",
+}, smithy.ShapeTypeString, 0)
 
 var _SourceServerARN = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.drs",
@@ -4389,6 +4396,8 @@ func init() {
 	SourceProperties_os = SourceProperties.AddMember("os", OS)
 
 	SourceProperties_supportsNitroInstances = SourceProperties.AddMember("supportsNitroInstances", smithyprelude.Boolean)
+
+	SourceProperties_architecture = SourceProperties.AddMember("architecture", _SourceServerArchitecture)
 
 	StagingArea_status = StagingArea.AddMember("status", _ExtensionStatus)
 

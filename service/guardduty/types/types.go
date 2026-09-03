@@ -188,6 +188,22 @@ type Action struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about an activity, such as an API call, that was observed
+// for a signal.
+type Activity struct {
+
+	// The type of the observed activity.
+	//
+	// This member is required.
+	Type ActivityType
+
+	// Contains information about the API call that was observed, when the activity
+	// type is API_CALL .
+	Api *ApiCall
+
+	noSmithyDocumentSerde
+}
+
 // Information about the actors involved in an attack sequence.
 type Actor struct {
 
@@ -329,6 +345,24 @@ type AnomalyUnusual struct {
 	// The behavior of the anomalous activity that caused GuardDuty to generate the
 	// finding.
 	Behavior map[string]map[string]AnomalyObject
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an API call that was observed as part of an activity.
+type ApiCall struct {
+
+	// The error code that was returned, if the API call failed.
+	Error *string
+
+	// The name of the API operation that was invoked.
+	Operation *string
+
+	// The service that the API operation was invoked against.
+	Service *string
+
+	// User agent in the request to the API operation
+	UserAgent *string
 
 	noSmithyDocumentSerde
 }
@@ -5151,6 +5185,10 @@ type Signal struct {
 	//
 	// This member is required.
 	UpdatedAt *time.Time
+
+	// Contains information about the activities, such as API calls, that were
+	// observed for this signal.
+	Activities []Activity
 
 	// Information about the IDs of the threat actors involved in the signal.
 	ActorIds []string

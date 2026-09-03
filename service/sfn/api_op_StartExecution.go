@@ -47,7 +47,7 @@ import (
 // if you call StartExecution with the same name and input as a running execution,
 // the call succeeds and return the same response as the original request. If the
 // execution is closed or if the input is different, it returns a 400
-// ExecutionAlreadyExists error. You can reuse names after 90 days.
+// ExecutionAlreadyExists error. You can reuse the name 90 days after it closes.
 //
 // StartExecution isn't idempotent for EXPRESS workflows.
 //
@@ -116,9 +116,11 @@ type StartExecutionInput struct {
 	// UTF-8 encoding.
 	Input *string
 
-	// Optional name of the execution. This name must be unique for your Amazon Web
-	// Services account, Region, and state machine for 90 days. For more information,
-	// see [Limits Related to State Machine Executions]in the Step Functions Developer Guide.
+	// Optional name of the execution. For STANDARD workflows, this name must be
+	// unique for your Amazon Web Services account, region, and state machine. If a
+	// previous execution with the same name exists, you can reuse the name 90 days
+	// after it closes. For EXPRESS workflows, execution names can be reused
+	// immediately. For more information, see [Limits Related to State Machine Executions]in the Step Functions Developer Guide.
 	//
 	// If you don't provide a name for the execution, Step Functions automatically
 	// generates a universally unique identifier (UUID) as the execution name.

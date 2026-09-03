@@ -332,6 +332,7 @@ func TestCheckRequestSnapshot_CreateWhatsAppFlow(t *testing.T) {
 		FlowJson:    []byte("blob"),
 		Publish:     ptr.Bool(true),
 		CloneFlowId: ptr.String("__CloneFlowId__"),
+		EndpointUri: ptr.String("__EndpointUri__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -682,6 +683,33 @@ func TestCheckRequestSnapshot_GetLinkedWhatsAppBusinessAccountPhoneNumber(t *tes
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetLinkedWhatsAppBusinessAccountPhoneNumber"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetWhatsAppBusinessPublicKey(t *testing.T) {
+	input := &GetWhatsAppBusinessPublicKeyInput{
+		OriginationPhoneNumberId: ptr.String("__OriginationPhoneNumberId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetWhatsAppBusinessPublicKey(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetWhatsAppBusinessPublicKey"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1089,6 +1117,35 @@ func TestCheckRequestSnapshot_PutWhatsAppBusinessAccountEventDestinations(t *tes
 	}
 }
 
+func TestCheckRequestSnapshot_PutWhatsAppBusinessPublicKey(t *testing.T) {
+	input := &PutWhatsAppBusinessPublicKeyInput{
+		OriginationPhoneNumberId: ptr.String("__OriginationPhoneNumberId__"),
+		BusinessPublicKey:        ptr.String("__BusinessPublicKey__"),
+		KmsKeyArn:                ptr.String("__KmsKeyArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutWhatsAppBusinessPublicKey(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutWhatsAppBusinessPublicKey"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_SendWhatsAppConversionEvent(t *testing.T) {
 	input := &SendWhatsAppConversionEventInput{
 		Id:        ptr.String("__Id__"),
@@ -1224,6 +1281,8 @@ func TestCheckRequestSnapshot_UpdateWhatsAppFlow(t *testing.T) {
 			types.MetaFlowCategory("SIGN_UP"),
 			types.MetaFlowCategory("SIGN_UP"),
 		},
+		EndpointUri: ptr.String("__EndpointUri__"),
+		MetaAppId:   ptr.String("__MetaAppId__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1437,6 +1496,7 @@ func TestUpdateRequestSnapshot_CreateWhatsAppFlow(t *testing.T) {
 		FlowJson:    []byte("blob"),
 		Publish:     ptr.Bool(true),
 		CloneFlowId: ptr.String("__CloneFlowId__"),
+		EndpointUri: ptr.String("__EndpointUri__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1787,6 +1847,33 @@ func TestUpdateRequestSnapshot_GetLinkedWhatsAppBusinessAccountPhoneNumber(t *te
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetLinkedWhatsAppBusinessAccountPhoneNumber"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetWhatsAppBusinessPublicKey(t *testing.T) {
+	input := &GetWhatsAppBusinessPublicKeyInput{
+		OriginationPhoneNumberId: ptr.String("__OriginationPhoneNumberId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetWhatsAppBusinessPublicKey(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetWhatsAppBusinessPublicKey"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2194,6 +2281,35 @@ func TestUpdateRequestSnapshot_PutWhatsAppBusinessAccountEventDestinations(t *te
 	}
 }
 
+func TestUpdateRequestSnapshot_PutWhatsAppBusinessPublicKey(t *testing.T) {
+	input := &PutWhatsAppBusinessPublicKeyInput{
+		OriginationPhoneNumberId: ptr.String("__OriginationPhoneNumberId__"),
+		BusinessPublicKey:        ptr.String("__BusinessPublicKey__"),
+		KmsKeyArn:                ptr.String("__KmsKeyArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutWhatsAppBusinessPublicKey(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutWhatsAppBusinessPublicKey"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_SendWhatsAppConversionEvent(t *testing.T) {
 	input := &SendWhatsAppConversionEventInput{
 		Id:        ptr.String("__Id__"),
@@ -2329,6 +2445,8 @@ func TestUpdateRequestSnapshot_UpdateWhatsAppFlow(t *testing.T) {
 			types.MetaFlowCategory("SIGN_UP"),
 			types.MetaFlowCategory("SIGN_UP"),
 		},
+		EndpointUri: ptr.String("__EndpointUri__"),
+		MetaAppId:   ptr.String("__MetaAppId__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

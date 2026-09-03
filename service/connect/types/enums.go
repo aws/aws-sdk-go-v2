@@ -3643,6 +3643,58 @@ func (Policy) Values() []Policy {
 	}
 }
 
+type PreEvaluationFilterOperator string
+
+// Enum values for PreEvaluationFilterOperator
+const (
+	PreEvaluationFilterOperatorEquals PreEvaluationFilterOperator = "EQUALS"
+)
+
+// Values returns all known values for PreEvaluationFilterOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PreEvaluationFilterOperator) Values() []PreEvaluationFilterOperator {
+	return []PreEvaluationFilterOperator{
+		"EQUALS",
+	}
+}
+
+type PreEvaluationFilterResourceType string
+
+// Enum values for PreEvaluationFilterResourceType
+const (
+	PreEvaluationFilterResourceTypeContact PreEvaluationFilterResourceType = "CONTACT"
+)
+
+// Values returns all known values for PreEvaluationFilterResourceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PreEvaluationFilterResourceType) Values() []PreEvaluationFilterResourceType {
+	return []PreEvaluationFilterResourceType{
+		"CONTACT",
+	}
+}
+
+type PreEvaluationFilterType string
+
+// Enum values for PreEvaluationFilterType
+const (
+	PreEvaluationFilterTypeTag PreEvaluationFilterType = "TAG"
+)
+
+// Values returns all known values for PreEvaluationFilterType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PreEvaluationFilterType) Values() []PreEvaluationFilterType {
+	return []PreEvaluationFilterType{
+		"TAG",
+	}
+}
+
 type PropertyValidationExceptionReason string
 
 // Enum values for PropertyValidationExceptionReason

@@ -67,6 +67,10 @@ type UpdateOnlineEvaluationConfigInput struct {
 	// The updated list of insight types to run against agent sessions.
 	Insights []types.Insight
 
+	//  The configuration that specifies where evaluation results should be written
+	// for monitoring and analysis.
+	OutputConfig *types.OutputConfig
+
 	//  The updated evaluation rule containing sampling configuration, filters, and
 	// session settings.
 	Rule *types.Rule

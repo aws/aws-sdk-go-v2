@@ -2042,6 +2042,17 @@ var _SecretId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SecretId",
 }, smithy.ShapeTypeString, 0)
 
+var _SecretVersionStage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transfer",
+	Name:      "SecretVersionStage",
+}, smithy.ShapeTypeString, 0)
+
+var _SecretVersionStageList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transfer",
+	Name:      "SecretVersionStageList",
+}, smithy.ShapeTypeList, 1)
+var _SecretVersionStageList_member *smithy.Schema
+
 var _SecurityGroupId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "SecurityGroupId",
@@ -2160,12 +2171,14 @@ var SftpAuthenticationMethods_PUBLIC_KEY_AND_PASSWORD *smithy.Schema
 var SftpConnectorConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "SftpConnectorConfig",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var SftpConnectorConfig_UserSecretId *smithy.Schema
 
 var SftpConnectorConfig_TrustedHostKeys *smithy.Schema
 
 var SftpConnectorConfig_MaxConcurrentConnections *smithy.Schema
+
+var SftpConnectorConfig_OrderedUserSecretVersionStages *smithy.Schema
 
 var SftpConnectorConnectionDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
@@ -4141,11 +4154,15 @@ func init() {
 
 	_SftpConnectorTrustedHostKeyList_member = _SftpConnectorTrustedHostKeyList.AddMember("member", _SftpConnectorTrustedHostKey)
 
+	_SecretVersionStageList_member = _SecretVersionStageList.AddMember("member", _SecretVersionStage)
+
 	SftpConnectorConfig_UserSecretId = SftpConnectorConfig.AddMember("UserSecretId", _SecretId)
 
 	SftpConnectorConfig_TrustedHostKeys = SftpConnectorConfig.AddMember("TrustedHostKeys", _SftpConnectorTrustedHostKeyList)
 
 	SftpConnectorConfig_MaxConcurrentConnections = SftpConnectorConfig.AddMember("MaxConcurrentConnections", _MaxConcurrentConnections)
+
+	SftpConnectorConfig_OrderedUserSecretVersionStages = SftpConnectorConfig.AddMember("OrderedUserSecretVersionStages", _SecretVersionStageList)
 
 	_ServiceManagedEgressIpAddresses_member = _ServiceManagedEgressIpAddresses.AddMember("member", _ServiceManagedEgressIpAddress)
 

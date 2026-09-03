@@ -1,0 +1,8 @@
+{
+    "id": "0e313375-5c0e-43ff-b4e6-f945914c5804",
+    "type": "feature",
+    "description": "Adds log group name prefix trace source selection, custom or source log group result destinations, and metrics namespace customization",
+    "modules": [
+        "service/bedrockagentcore"
+    ]
+}

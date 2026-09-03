@@ -14317,6 +14317,19 @@ func awsAwsjson11_deserializeDocumentDaemonCapacityProvider(v **types.DaemonCapa
 				sv.RunningCount = int32(i64)
 			}
 
+		case "withoutDaemonCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.WithoutDaemonCount = int32(i64)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -15072,6 +15085,19 @@ func awsAwsjson11_deserializeDocumentDaemonDeploymentCapacityProvider(v **types.
 				sv.RunningInstanceCount = ptr.Int32(int32(i64))
 			}
 
+		case "withoutDaemonInstanceCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.WithoutDaemonInstanceCount = ptr.Int32(int32(i64))
+			}
+
 		default:
 			_, _ = key, value
 
@@ -15292,6 +15318,19 @@ func awsAwsjson11_deserializeDocumentDaemonDeploymentRevisionDetail(v **types.Da
 					return err
 				}
 				sv.TotalRunningInstanceCount = ptr.Int32(int32(i64))
+			}
+
+		case "totalWithoutDaemonInstanceCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalWithoutDaemonInstanceCount = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -15811,6 +15850,15 @@ func awsAwsjson11_deserializeDocumentDaemonRevision(v **types.DaemonRevision, va
 				}
 			}
 
+		case "critical":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Critical = ptr.Bool(jtv)
+			}
+
 		case "daemonArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15921,6 +15969,19 @@ func awsAwsjson11_deserializeDocumentDaemonRevisionDetail(v **types.DaemonRevisi
 					return err
 				}
 				sv.TotalRunningCount = int32(i64)
+			}
+
+		case "totalWithoutDaemonCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalWithoutDaemonCount = int32(i64)
 			}
 
 		default:

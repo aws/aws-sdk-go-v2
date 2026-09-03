@@ -579,18 +579,36 @@ type PiiEntityType string
 
 // Enum values for PiiEntityType
 const (
-	PiiEntityTypeBankAccountNumber PiiEntityType = "BANK_ACCOUNT_NUMBER"
-	PiiEntityTypeBankRouting       PiiEntityType = "BANK_ROUTING"
-	PiiEntityTypeCreditDebitNumber PiiEntityType = "CREDIT_DEBIT_NUMBER"
-	PiiEntityTypeCreditDebitCvv    PiiEntityType = "CREDIT_DEBIT_CVV"
-	PiiEntityTypeCreditDebitExpiry PiiEntityType = "CREDIT_DEBIT_EXPIRY"
-	PiiEntityTypePin               PiiEntityType = "PIN"
-	PiiEntityTypeEmail             PiiEntityType = "EMAIL"
-	PiiEntityTypeAddress           PiiEntityType = "ADDRESS"
-	PiiEntityTypeName              PiiEntityType = "NAME"
-	PiiEntityTypePhone             PiiEntityType = "PHONE"
-	PiiEntityTypeSsn               PiiEntityType = "SSN"
-	PiiEntityTypeAll               PiiEntityType = "ALL"
+	PiiEntityTypeBankAccountNumber                   PiiEntityType = "BANK_ACCOUNT_NUMBER"
+	PiiEntityTypeBankRouting                         PiiEntityType = "BANK_ROUTING"
+	PiiEntityTypeCreditDebitNumber                   PiiEntityType = "CREDIT_DEBIT_NUMBER"
+	PiiEntityTypeCreditDebitCvv                      PiiEntityType = "CREDIT_DEBIT_CVV"
+	PiiEntityTypeCreditDebitExpiry                   PiiEntityType = "CREDIT_DEBIT_EXPIRY"
+	PiiEntityTypePin                                 PiiEntityType = "PIN"
+	PiiEntityTypeEmail                               PiiEntityType = "EMAIL"
+	PiiEntityTypeAddress                             PiiEntityType = "ADDRESS"
+	PiiEntityTypeName                                PiiEntityType = "NAME"
+	PiiEntityTypePhone                               PiiEntityType = "PHONE"
+	PiiEntityTypeSsn                                 PiiEntityType = "SSN"
+	PiiEntityTypeDateTime                            PiiEntityType = "DATE_TIME"
+	PiiEntityTypePassportNumber                      PiiEntityType = "PASSPORT_NUMBER"
+	PiiEntityTypeDriverId                            PiiEntityType = "DRIVER_ID"
+	PiiEntityTypeUrl                                 PiiEntityType = "URL"
+	PiiEntityTypeAge                                 PiiEntityType = "AGE"
+	PiiEntityTypeUsername                            PiiEntityType = "USERNAME"
+	PiiEntityTypePassword                            PiiEntityType = "PASSWORD"
+	PiiEntityTypeAwsAccessKey                        PiiEntityType = "AWS_ACCESS_KEY"
+	PiiEntityTypeAwsSecretKey                        PiiEntityType = "AWS_SECRET_KEY"
+	PiiEntityTypeIpAddress                           PiiEntityType = "IP_ADDRESS"
+	PiiEntityTypeMacAddress                          PiiEntityType = "MAC_ADDRESS"
+	PiiEntityTypeLicensePlate                        PiiEntityType = "LICENSE_PLATE"
+	PiiEntityTypeVehicleIdentificationNumber         PiiEntityType = "VEHICLE_IDENTIFICATION_NUMBER"
+	PiiEntityTypeUsIndividualTaxIdentificationNumber PiiEntityType = "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"
+	PiiEntityTypeCaHealthNumber                      PiiEntityType = "CA_HEALTH_NUMBER"
+	PiiEntityTypeCaSocialInsuranceNumber             PiiEntityType = "CA_SOCIAL_INSURANCE_NUMBER"
+	PiiEntityTypeInternationalBankAccountNumber      PiiEntityType = "INTERNATIONAL_BANK_ACCOUNT_NUMBER"
+	PiiEntityTypeSwiftCode                           PiiEntityType = "SWIFT_CODE"
+	PiiEntityTypeAll                                 PiiEntityType = "ALL"
 )
 
 // Values returns all known values for PiiEntityType. Note that this can be
@@ -610,6 +628,24 @@ func (PiiEntityType) Values() []PiiEntityType {
 		"NAME",
 		"PHONE",
 		"SSN",
+		"DATE_TIME",
+		"PASSPORT_NUMBER",
+		"DRIVER_ID",
+		"URL",
+		"AGE",
+		"USERNAME",
+		"PASSWORD",
+		"AWS_ACCESS_KEY",
+		"AWS_SECRET_KEY",
+		"IP_ADDRESS",
+		"MAC_ADDRESS",
+		"LICENSE_PLATE",
+		"VEHICLE_IDENTIFICATION_NUMBER",
+		"US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+		"CA_HEALTH_NUMBER",
+		"CA_SOCIAL_INSURANCE_NUMBER",
+		"INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+		"SWIFT_CODE",
 		"ALL",
 	}
 }

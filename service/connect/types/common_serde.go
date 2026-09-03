@@ -3215,6 +3215,19 @@ func serializePredefinedAttributeSummaryList(s smithy.ShapeSerializer, schema *s
 	s.CloseList()
 }
 
+func serializePreEvaluationFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []PreEvaluationFilter) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializePrimaryAttributeValueFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []PrimaryAttributeValueFilter) {
 	if v == nil {
 		return
@@ -7670,6 +7683,20 @@ func deserializePredefinedAttributeSummaryList(d smithy.ShapeDeserializer, s *sm
 	var vv PredefinedAttributeSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = PredefinedAttributeSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializePreEvaluationFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PreEvaluationFilter) error {
+	*v = make([]PreEvaluationFilter, 0)
+	var vv PreEvaluationFilter
+	return smithy.ReadList(d, s, func() error {
+		vv = PreEvaluationFilter{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

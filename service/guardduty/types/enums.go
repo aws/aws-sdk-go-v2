@@ -2,6 +2,24 @@
 
 package types
 
+type ActivityType string
+
+// Enum values for ActivityType
+const (
+	// The observed activity is an API call.
+	ActivityTypeApiCall ActivityType = "API_CALL"
+)
+
+// Values returns all known values for ActivityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ActivityType) Values() []ActivityType {
+	return []ActivityType{
+		"API_CALL",
+	}
+}
+
 type AdminStatus string
 
 // Enum values for AdminStatus

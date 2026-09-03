@@ -426,6 +426,7 @@ func TestCheckResponseSnapshot_CreateExtendedSourceServer(t *testing.T) {
 					FullString: ptr.String("__FullString__"),
 				},
 				SupportsNitroInstances: ptr.Bool(true),
+				Architecture:           types.SourceServerArchitecture("x86_64"),
 			},
 			StagingArea: &types.StagingArea{
 				Status:                 types.ExtensionStatus("EXTENDED"),
@@ -2097,6 +2098,7 @@ func TestCheckResponseSnapshot_DescribeSourceServers(t *testing.T) {
 						FullString: ptr.String("__FullString__"),
 					},
 					SupportsNitroInstances: ptr.Bool(true),
+					Architecture:           types.SourceServerArchitecture("x86_64"),
 				},
 				StagingArea: &types.StagingArea{
 					Status:                 types.ExtensionStatus("EXTENDED"),
@@ -2232,6 +2234,7 @@ func TestCheckResponseSnapshot_DescribeSourceServers(t *testing.T) {
 						FullString: ptr.String("__FullString__"),
 					},
 					SupportsNitroInstances: ptr.Bool(true),
+					Architecture:           types.SourceServerArchitecture("x86_64"),
 				},
 				StagingArea: &types.StagingArea{
 					Status:                 types.ExtensionStatus("EXTENDED"),
@@ -2423,6 +2426,7 @@ func TestCheckResponseSnapshot_DisconnectSourceServer(t *testing.T) {
 				FullString: ptr.String("__FullString__"),
 			},
 			SupportsNitroInstances: ptr.Bool(true),
+			Architecture:           types.SourceServerArchitecture("x86_64"),
 		},
 		StagingArea: &types.StagingArea{
 			Status:                 types.ExtensionStatus("EXTENDED"),
@@ -3457,6 +3461,7 @@ func TestCheckResponseSnapshot_RetryDataReplication(t *testing.T) {
 				FullString: ptr.String("__FullString__"),
 			},
 			SupportsNitroInstances: ptr.Bool(true),
+			Architecture:           types.SourceServerArchitecture("x86_64"),
 		},
 		StagingArea: &types.StagingArea{
 			Status:                 types.ExtensionStatus("EXTENDED"),
@@ -4082,6 +4087,7 @@ func TestCheckResponseSnapshot_StartReplication(t *testing.T) {
 					FullString: ptr.String("__FullString__"),
 				},
 				SupportsNitroInstances: ptr.Bool(true),
+				Architecture:           types.SourceServerArchitecture("x86_64"),
 			},
 			StagingArea: &types.StagingArea{
 				Status:                 types.ExtensionStatus("EXTENDED"),
@@ -4476,6 +4482,7 @@ func TestCheckResponseSnapshot_StopReplication(t *testing.T) {
 					FullString: ptr.String("__FullString__"),
 				},
 				SupportsNitroInstances: ptr.Bool(true),
+				Architecture:           types.SourceServerArchitecture("x86_64"),
 			},
 			StagingArea: &types.StagingArea{
 				Status:                 types.ExtensionStatus("EXTENDED"),

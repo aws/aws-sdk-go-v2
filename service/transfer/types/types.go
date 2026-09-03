@@ -5186,6 +5186,14 @@ type SftpConnectorConfig struct {
 	// parallel operations.
 	MaxConcurrentConnections *int32
 
+	// An ordered list of Amazon Web Services Secrets Manager version stages (staging
+	// labels, such as AWSCURRENT and AWSPREVIOUS ) for the secret identified by
+	// UserSecretId . When establishing a connection, the connector attempts to
+	// retrieve the SFTP user's credentials from each version stage in the order
+	// listed, and uses the first version it can successfully retrieve. This lets you
+	// rotate the user secret without interrupting connector operations.
+	OrderedUserSecretVersionStages []string
+
 	// The public portion of the host key, or keys, that are used to identify the
 	// external server to which you are connecting. You can use the ssh-keyscan
 	// command against the SFTP server to retrieve the necessary key.
@@ -5250,6 +5258,7 @@ func (v *SftpConnectorConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxConcurrentConnections != nil {
 		s.WriteInt32(schemas.SftpConnectorConfig_MaxConcurrentConnections, *v.MaxConcurrentConnections)
 	}
+	serializeSecretVersionStageList(s, schemas.SftpConnectorConfig_OrderedUserSecretVersionStages, v.OrderedUserSecretVersionStages)
 	serializeSftpConnectorTrustedHostKeyList(s, schemas.SftpConnectorConfig_TrustedHostKeys, v.TrustedHostKeys)
 	if v.UserSecretId != nil {
 		s.WriteString(schemas.SftpConnectorConfig_UserSecretId, *v.UserSecretId)
@@ -5261,6 +5270,8 @@ func (v *SftpConnectorConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.SftpConnectorConfig_MaxConcurrentConnections:
 			v.MaxConcurrentConnections = new(int32)
 			return d.ReadInt32(schemas.SftpConnectorConfig_MaxConcurrentConnections, v.MaxConcurrentConnections)
+		case schemas.SftpConnectorConfig_OrderedUserSecretVersionStages:
+			return deserializeSecretVersionStageList(d, schemas.SftpConnectorConfig_OrderedUserSecretVersionStages, &v.OrderedUserSecretVersionStages)
 		case schemas.SftpConnectorConfig_TrustedHostKeys:
 			return deserializeSftpConnectorTrustedHostKeyList(d, schemas.SftpConnectorConfig_TrustedHostKeys, &v.TrustedHostKeys)
 		case schemas.SftpConnectorConfig_UserSecretId:

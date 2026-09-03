@@ -271,6 +271,11 @@ func awsRestjson1_serializeOpDocumentCreateWhatsAppFlowInput(v *CreateWhatsAppFl
 		ok.String(*v.CloneFlowId)
 	}
 
+	if v.EndpointUri != nil {
+		ok := object.Key("endpointUri")
+		ok.String(*v.EndpointUri)
+	}
+
 	if v.FlowJson != nil {
 		ok := object.Key("flowJson")
 		ok.Base64EncodeBytes(v.FlowJson)
@@ -1053,6 +1058,72 @@ func awsRestjson1_serializeOpHttpBindingsGetLinkedWhatsAppBusinessAccountPhoneNu
 
 	if v.Id != nil {
 		encoder.SetQuery("id").String(*v.Id)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetWhatsAppBusinessPublicKey struct {
+}
+
+func (*awsRestjson1_serializeOpGetWhatsAppBusinessPublicKey) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetWhatsAppBusinessPublicKey) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetWhatsAppBusinessPublicKeyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/whatsapp/business-public-key")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetWhatsAppBusinessPublicKeyInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetWhatsAppBusinessPublicKeyInput(v *GetWhatsAppBusinessPublicKeyInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.OriginationPhoneNumberId != nil {
+		encoder.SetQuery("originationPhoneNumberId").String(*v.OriginationPhoneNumberId)
 	}
 
 	return nil
@@ -2117,6 +2188,97 @@ func awsRestjson1_serializeOpDocumentPutWhatsAppBusinessAccountEventDestinations
 	return nil
 }
 
+type awsRestjson1_serializeOpPutWhatsAppBusinessPublicKey struct {
+}
+
+func (*awsRestjson1_serializeOpPutWhatsAppBusinessPublicKey) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPutWhatsAppBusinessPublicKey) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutWhatsAppBusinessPublicKeyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/whatsapp/business-public-key")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPutWhatsAppBusinessPublicKeyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPutWhatsAppBusinessPublicKeyInput(v *PutWhatsAppBusinessPublicKeyInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPutWhatsAppBusinessPublicKeyInput(v *PutWhatsAppBusinessPublicKeyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BusinessPublicKey != nil {
+		ok := object.Key("businessPublicKey")
+		ok.String(*v.BusinessPublicKey)
+	}
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("kmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
+	if v.OriginationPhoneNumberId != nil {
+		ok := object.Key("originationPhoneNumberId")
+		ok.String(*v.OriginationPhoneNumberId)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpSendWhatsAppConversionEvent struct {
 }
 
@@ -2555,6 +2717,11 @@ func awsRestjson1_serializeOpDocumentUpdateWhatsAppFlowInput(v *UpdateWhatsAppFl
 		}
 	}
 
+	if v.EndpointUri != nil {
+		ok := object.Key("endpointUri")
+		ok.String(*v.EndpointUri)
+	}
+
 	if v.FlowId != nil {
 		ok := object.Key("flowId")
 		ok.String(*v.FlowId)
@@ -2568,6 +2735,11 @@ func awsRestjson1_serializeOpDocumentUpdateWhatsAppFlowInput(v *UpdateWhatsAppFl
 	if v.Id != nil {
 		ok := object.Key("id")
 		ok.String(*v.Id)
+	}
+
+	if v.MetaAppId != nil {
+		ok := object.Key("metaAppId")
+		ok.String(*v.MetaAppId)
 	}
 
 	return nil

@@ -3593,7 +3593,28 @@ func TestCheckRequestSnapshot_CreateRule(t *testing.T) {
 			},
 		},
 		PublishStatus: types.RulePublishStatus("DRAFT"),
-		ClientToken:   ptr.String("__ClientToken__"),
+		PreEvaluationFilters: &types.PreEvaluationFilters{
+			AndConditions: []types.PreEvaluationFilter{
+				{
+					ResourceType: types.PreEvaluationFilterResourceType("CONTACT"),
+					FilterType:   types.PreEvaluationFilterType("TAG"),
+					FilterKey:    ptr.String("__FilterKey__"),
+					FilterValue:  ptr.String("__FilterValue__"),
+					Operator:     types.PreEvaluationFilterOperator("EQUALS"),
+				},
+				{
+					ResourceType: types.PreEvaluationFilterResourceType("CONTACT"),
+					FilterType:   types.PreEvaluationFilterType("TAG"),
+					FilterKey:    ptr.String("__FilterKey__"),
+					FilterValue:  ptr.String("__FilterValue__"),
+					Operator:     types.PreEvaluationFilterOperator("EQUALS"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -17274,6 +17295,24 @@ func TestCheckRequestSnapshot_UpdateRule(t *testing.T) {
 			},
 		},
 		PublishStatus: types.RulePublishStatus("DRAFT"),
+		PreEvaluationFilters: &types.PreEvaluationFilters{
+			AndConditions: []types.PreEvaluationFilter{
+				{
+					ResourceType: types.PreEvaluationFilterResourceType("CONTACT"),
+					FilterType:   types.PreEvaluationFilterType("TAG"),
+					FilterKey:    ptr.String("__FilterKey__"),
+					FilterValue:  ptr.String("__FilterValue__"),
+					Operator:     types.PreEvaluationFilterOperator("EQUALS"),
+				},
+				{
+					ResourceType: types.PreEvaluationFilterResourceType("CONTACT"),
+					FilterType:   types.PreEvaluationFilterType("TAG"),
+					FilterKey:    ptr.String("__FilterKey__"),
+					FilterValue:  ptr.String("__FilterValue__"),
+					Operator:     types.PreEvaluationFilterOperator("EQUALS"),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -21667,7 +21706,28 @@ func TestUpdateRequestSnapshot_CreateRule(t *testing.T) {
 			},
 		},
 		PublishStatus: types.RulePublishStatus("DRAFT"),
-		ClientToken:   ptr.String("__ClientToken__"),
+		PreEvaluationFilters: &types.PreEvaluationFilters{
+			AndConditions: []types.PreEvaluationFilter{
+				{
+					ResourceType: types.PreEvaluationFilterResourceType("CONTACT"),
+					FilterType:   types.PreEvaluationFilterType("TAG"),
+					FilterKey:    ptr.String("__FilterKey__"),
+					FilterValue:  ptr.String("__FilterValue__"),
+					Operator:     types.PreEvaluationFilterOperator("EQUALS"),
+				},
+				{
+					ResourceType: types.PreEvaluationFilterResourceType("CONTACT"),
+					FilterType:   types.PreEvaluationFilterType("TAG"),
+					FilterKey:    ptr.String("__FilterKey__"),
+					FilterValue:  ptr.String("__FilterValue__"),
+					Operator:     types.PreEvaluationFilterOperator("EQUALS"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -35348,6 +35408,24 @@ func TestUpdateRequestSnapshot_UpdateRule(t *testing.T) {
 			},
 		},
 		PublishStatus: types.RulePublishStatus("DRAFT"),
+		PreEvaluationFilters: &types.PreEvaluationFilters{
+			AndConditions: []types.PreEvaluationFilter{
+				{
+					ResourceType: types.PreEvaluationFilterResourceType("CONTACT"),
+					FilterType:   types.PreEvaluationFilterType("TAG"),
+					FilterKey:    ptr.String("__FilterKey__"),
+					FilterValue:  ptr.String("__FilterValue__"),
+					Operator:     types.PreEvaluationFilterOperator("EQUALS"),
+				},
+				{
+					ResourceType: types.PreEvaluationFilterResourceType("CONTACT"),
+					FilterType:   types.PreEvaluationFilterType("TAG"),
+					FilterKey:    ptr.String("__FilterKey__"),
+					FilterValue:  ptr.String("__FilterValue__"),
+					Operator:     types.PreEvaluationFilterOperator("EQUALS"),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

@@ -67,6 +67,13 @@ type UpdateRuleInput struct {
 	// This member is required.
 	RuleId *string
 
+	// The pre-evaluation filters for the rule, that restrict the rule to be applied
+	// to only certain resources based on the resource's attributes, such as tags
+	// assigned to a contact. The pre-evaluation filters are applied even before rule
+	// conditions are evaluated and are used to enforce tag-based-access-control while
+	// applying rules.
+	PreEvaluationFilters *types.PreEvaluationFilters
+
 	noSmithyDocumentSerde
 }
 
@@ -86,6 +93,11 @@ func (v *UpdateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateRuleRequest_Name, *v.Name)
+	}
+	if v.PreEvaluationFilters != nil {
+		s.WriteStruct(schemas.UpdateRuleRequest_PreEvaluationFilters)
+		v.PreEvaluationFilters.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.PublishStatus != "" {
 		s.WriteString(schemas.UpdateRuleRequest_PublishStatus, string(v.PublishStatus))

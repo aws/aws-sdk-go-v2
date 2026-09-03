@@ -451,6 +451,50 @@ func (ConfigurationBundleStatus) Values() []ConfigurationBundleStatus {
 	}
 }
 
+type ConsentPortalSourceType string
+
+// Enum values for ConsentPortalSourceType
+const (
+	ConsentPortalSourceTypeAgentcoreGateway ConsentPortalSourceType = "agentcore-gateway"
+)
+
+// Values returns all known values for ConsentPortalSourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConsentPortalSourceType) Values() []ConsentPortalSourceType {
+	return []ConsentPortalSourceType{
+		"agentcore-gateway",
+	}
+}
+
+type ConsentPortalStatus string
+
+// Enum values for ConsentPortalStatus
+const (
+	ConsentPortalStatusCreating     ConsentPortalStatus = "CREATING"
+	ConsentPortalStatusActive       ConsentPortalStatus = "ACTIVE"
+	ConsentPortalStatusUpdating     ConsentPortalStatus = "UPDATING"
+	ConsentPortalStatusUpdateFailed ConsentPortalStatus = "UPDATE_FAILED"
+	ConsentPortalStatusDeleting     ConsentPortalStatus = "DELETING"
+	ConsentPortalStatusFailed       ConsentPortalStatus = "FAILED"
+)
+
+// Values returns all known values for ConsentPortalStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConsentPortalStatus) Values() []ConsentPortalStatus {
+	return []ConsentPortalStatus{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"UPDATE_FAILED",
+		"DELETING",
+		"FAILED",
+	}
+}
+
 type ContentLevel string
 
 // Enum values for ContentLevel
@@ -2104,6 +2148,25 @@ func (RestApiMethod) Values() []RestApiMethod {
 		"PATCH",
 		"PUT",
 		"POST",
+	}
+}
+
+type ResultDestination string
+
+// Enum values for ResultDestination
+const (
+	ResultDestinationDedicatedLogGroup ResultDestination = "DEDICATED_LOG_GROUP"
+	ResultDestinationSourceLogGroup    ResultDestination = "SOURCE_LOG_GROUP"
+)
+
+// Values returns all known values for ResultDestination. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResultDestination) Values() []ResultDestination {
+	return []ResultDestination{
+		"DEDICATED_LOG_GROUP",
+		"SOURCE_LOG_GROUP",
 	}
 }
 

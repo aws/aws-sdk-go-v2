@@ -889,16 +889,20 @@ func (*ClaimMatchValueTypeMemberMatchValueStringList) isClaimMatchValueType() {}
 // online evaluation.
 type CloudWatchLogsInputConfig struct {
 
-	//  The list of CloudWatch log group names to monitor for agent traces.
-	//
-	// This member is required.
-	LogGroupNames []string
-
 	//  The list of service names to filter traces within the specified log groups.
 	// Used to identify relevant agent sessions.
 	//
 	// This member is required.
 	ServiceNames []string
+
+	//  The list of CloudWatch log group name prefixes to monitor for agent traces.
+	// Specify this instead of logGroupNames to match log groups by prefix. Specify
+	// either logGroupNames or logGroupNamePrefixes , not both. One of the two is
+	// required.
+	LogGroupNamePrefixes []string
+
+	//  The list of CloudWatch log group names to monitor for agent traces.
+	LogGroupNames []string
 
 	noSmithyDocumentSerde
 }
@@ -909,10 +913,26 @@ type CloudWatchLogsInputConfig struct {
 type CloudWatchOutputConfig struct {
 
 	//  The name of the CloudWatch log group where evaluation results will be written.
-	// The log group will be created if it doesn't exist.
-	//
-	// This member is required.
+	// An existing log group is used as-is; otherwise the service creates it, which
+	// requires the evaluation execution role to grant logs:CreateLogGroup on the log
+	// group. Don't specify this value when resultDestination is SOURCE_LOG_GROUP . The
+	// name can't be under the service-reserved /aws/bedrock-agentcore/evaluations/
+	// namespace, apart from this configuration's own service-managed default group.
 	LogGroupName *string
+
+	//  The CloudWatch metrics namespace where evaluation result metrics are
+	// published. If you omit this value, the service publishes metrics to
+	// Bedrock-AgentCore/Evaluations . This value can't begin with AWS/ .
+	MetricsNamespace *string
+
+	//  The destination where evaluation results are written. Valid values:
+	//
+	//   - DEDICATED_LOG_GROUP (default) – Writes results to a dedicated result log
+	//   group.
+	//
+	//   - SOURCE_LOG_GROUP – Writes results back to the log group that the agent
+	//   traces were read from. If you use this value, don't specify logGroupName .
+	ResultDestination ResultDestination
 
 	noSmithyDocumentSerde
 }
@@ -1362,6 +1382,93 @@ type ConnectorTargetConfiguration struct {
 	// A list of tool names to enable from this connector. If absent, all tools
 	// provided by the connector are enabled.
 	Enabled []string
+
+	noSmithyDocumentSerde
+}
+
+// The identity provider configuration used to authenticate end users to the
+// consent portal.
+type ConsentPortalIdpConfig struct {
+
+	// The Amazon Resource Name (ARN) of the OAuth2 credential provider used to
+	// authenticate end users to the consent portal.
+	//
+	// This member is required.
+	CredentialProviderArn *string
+
+	// The OAuth2 scopes that the consent portal requests when authenticating end
+	// users.
+	//
+	// This member is required.
+	Scopes []string
+
+	// The audience value that the consent portal includes when requesting tokens from
+	// the identity provider.
+	Audience *string
+
+	noSmithyDocumentSerde
+}
+
+// A resource served by the consent portal.
+type ConsentPortalSource struct {
+
+	// The identifier of the source resource. For an agentcore-gateway source, this is
+	// the gateway ID or its Amazon Resource Name (ARN).
+	//
+	// This member is required.
+	Identifier *string
+
+	// The type of the source resource.
+	//
+	// This member is required.
+	Type ConsentPortalSourceType
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a consent portal.
+type ConsentPortalSummary struct {
+
+	// The Amazon Resource Name (ARN) of the consent portal.
+	//
+	// This member is required.
+	ConsentPortalArn *string
+
+	// The unique identifier of the consent portal.
+	//
+	// This member is required.
+	ConsentPortalId *string
+
+	// The timestamp for when the consent portal was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The name of the consent portal.
+	//
+	// This member is required.
+	Name *string
+
+	// The resources served by the consent portal.
+	//
+	// This member is required.
+	Sources []ConsentPortalSource
+
+	// The current status of the consent portal.
+	//
+	// This member is required.
+	Status ConsentPortalStatus
+
+	// The timestamp for when the consent portal was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The description of the consent portal.
+	Description *string
+
+	// The URL used to access the consent portal.
+	PortalUrl *string
 
 	noSmithyDocumentSerde
 }

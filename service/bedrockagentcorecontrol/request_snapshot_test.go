@@ -1082,6 +1082,56 @@ func TestCheckRequestSnapshot_CreateConfigurationBundle(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateConsentPortal(t *testing.T) {
+	input := &CreateConsentPortalInput{
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		IdpConfig: &types.ConsentPortalIdpConfig{
+			CredentialProviderArn: ptr.String("__CredentialProviderArn__"),
+			Scopes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Audience: ptr.String("__Audience__"),
+		},
+		Name: ptr.String("__Name__"),
+		Sources: []types.ConsentPortalSource{
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Type:       types.ConsentPortalSourceType("agentcore-gateway"),
+			},
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Type:       types.ConsentPortalSourceType("agentcore-gateway"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateConsentPortal(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateConsentPortal"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateDataset(t *testing.T) {
 	input := &CreateDatasetInput{
 		ClientToken: ptr.String("__ClientToken__"),
@@ -2304,6 +2354,10 @@ func TestCheckRequestSnapshot_CreateOnlineEvaluationConfig(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+				LogGroupNamePrefixes: []string{
+					"__Member__",
+					"__Member__",
+				},
 				ServiceNames: []string{
 					"__Member__",
 					"__Member__",
@@ -2330,6 +2384,13 @@ func TestCheckRequestSnapshot_CreateOnlineEvaluationConfig(t *testing.T) {
 			Frequencies: []types.ClusteringFrequency{
 				types.ClusteringFrequency("DAILY"),
 				types.ClusteringFrequency("DAILY"),
+			},
+		},
+		OutputConfig: &types.OutputConfig{
+			CloudWatchConfig: &types.CloudWatchOutputConfig{
+				LogGroupName:      ptr.String("__LogGroupName__"),
+				MetricsNamespace:  ptr.String("__MetricsNamespace__"),
+				ResultDestination: types.ResultDestination("DEDICATED_LOG_GROUP"),
 			},
 		},
 		EvaluationExecutionRoleArn: ptr.String("__EvaluationExecutionRoleArn__"),
@@ -3105,6 +3166,33 @@ func TestCheckRequestSnapshot_DeleteConfigurationBundle(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteConfigurationBundle"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteConsentPortal(t *testing.T) {
+	input := &DeleteConsentPortalInput{
+		ConsentPortalIdentifier: ptr.String("__ConsentPortalIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteConsentPortal(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteConsentPortal"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3938,6 +4026,33 @@ func TestCheckRequestSnapshot_GetConfigurationBundleVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetConfigurationBundleVersion"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetConsentPortal(t *testing.T) {
+	input := &GetConsentPortalInput{
+		ConsentPortalIdentifier: ptr.String("__ConsentPortalIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetConsentPortal(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetConsentPortal"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4947,6 +5062,34 @@ func TestCheckRequestSnapshot_ListConfigurationBundleVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListConfigurationBundleVersions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListConsentPortals(t *testing.T) {
+	input := &ListConsentPortalsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListConsentPortals(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListConsentPortals"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6270,6 +6413,43 @@ func TestCheckRequestSnapshot_UpdateConfigurationBundle(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateConfigurationBundle"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateConsentPortal(t *testing.T) {
+	input := &UpdateConsentPortalInput{
+		ConsentPortalIdentifier: ptr.String("__ConsentPortalIdentifier__"),
+		ExecutionRoleArn:        ptr.String("__ExecutionRoleArn__"),
+		IdpConfig: &types.ConsentPortalIdpConfig{
+			CredentialProviderArn: ptr.String("__CredentialProviderArn__"),
+			Scopes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Audience: ptr.String("__Audience__"),
+		},
+		Description: ptr.String("__Description__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateConsentPortal(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateConsentPortal"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7697,6 +7877,10 @@ func TestCheckRequestSnapshot_UpdateOnlineEvaluationConfig(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+				LogGroupNamePrefixes: []string{
+					"__Member__",
+					"__Member__",
+				},
 				ServiceNames: []string{
 					"__Member__",
 					"__Member__",
@@ -7723,6 +7907,13 @@ func TestCheckRequestSnapshot_UpdateOnlineEvaluationConfig(t *testing.T) {
 			Frequencies: []types.ClusteringFrequency{
 				types.ClusteringFrequency("DAILY"),
 				types.ClusteringFrequency("DAILY"),
+			},
+		},
+		OutputConfig: &types.OutputConfig{
+			CloudWatchConfig: &types.CloudWatchOutputConfig{
+				LogGroupName:      ptr.String("__LogGroupName__"),
+				MetricsNamespace:  ptr.String("__MetricsNamespace__"),
+				ResultDestination: types.ResultDestination("DEDICATED_LOG_GROUP"),
 			},
 		},
 		EvaluationExecutionRoleArn: ptr.String("__EvaluationExecutionRoleArn__"),
@@ -9198,6 +9389,56 @@ func TestUpdateRequestSnapshot_CreateConfigurationBundle(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateConsentPortal(t *testing.T) {
+	input := &CreateConsentPortalInput{
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		IdpConfig: &types.ConsentPortalIdpConfig{
+			CredentialProviderArn: ptr.String("__CredentialProviderArn__"),
+			Scopes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Audience: ptr.String("__Audience__"),
+		},
+		Name: ptr.String("__Name__"),
+		Sources: []types.ConsentPortalSource{
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Type:       types.ConsentPortalSourceType("agentcore-gateway"),
+			},
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Type:       types.ConsentPortalSourceType("agentcore-gateway"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateConsentPortal(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateConsentPortal"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateDataset(t *testing.T) {
 	input := &CreateDatasetInput{
 		ClientToken: ptr.String("__ClientToken__"),
@@ -10420,6 +10661,10 @@ func TestUpdateRequestSnapshot_CreateOnlineEvaluationConfig(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+				LogGroupNamePrefixes: []string{
+					"__Member__",
+					"__Member__",
+				},
 				ServiceNames: []string{
 					"__Member__",
 					"__Member__",
@@ -10446,6 +10691,13 @@ func TestUpdateRequestSnapshot_CreateOnlineEvaluationConfig(t *testing.T) {
 			Frequencies: []types.ClusteringFrequency{
 				types.ClusteringFrequency("DAILY"),
 				types.ClusteringFrequency("DAILY"),
+			},
+		},
+		OutputConfig: &types.OutputConfig{
+			CloudWatchConfig: &types.CloudWatchOutputConfig{
+				LogGroupName:      ptr.String("__LogGroupName__"),
+				MetricsNamespace:  ptr.String("__MetricsNamespace__"),
+				ResultDestination: types.ResultDestination("DEDICATED_LOG_GROUP"),
 			},
 		},
 		EvaluationExecutionRoleArn: ptr.String("__EvaluationExecutionRoleArn__"),
@@ -11221,6 +11473,33 @@ func TestUpdateRequestSnapshot_DeleteConfigurationBundle(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteConfigurationBundle"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteConsentPortal(t *testing.T) {
+	input := &DeleteConsentPortalInput{
+		ConsentPortalIdentifier: ptr.String("__ConsentPortalIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteConsentPortal(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteConsentPortal"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -12054,6 +12333,33 @@ func TestUpdateRequestSnapshot_GetConfigurationBundleVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetConfigurationBundleVersion"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetConsentPortal(t *testing.T) {
+	input := &GetConsentPortalInput{
+		ConsentPortalIdentifier: ptr.String("__ConsentPortalIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetConsentPortal(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetConsentPortal"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -13063,6 +13369,34 @@ func TestUpdateRequestSnapshot_ListConfigurationBundleVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListConfigurationBundleVersions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListConsentPortals(t *testing.T) {
+	input := &ListConsentPortalsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListConsentPortals(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListConsentPortals"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -14386,6 +14720,43 @@ func TestUpdateRequestSnapshot_UpdateConfigurationBundle(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateConfigurationBundle"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateConsentPortal(t *testing.T) {
+	input := &UpdateConsentPortalInput{
+		ConsentPortalIdentifier: ptr.String("__ConsentPortalIdentifier__"),
+		ExecutionRoleArn:        ptr.String("__ExecutionRoleArn__"),
+		IdpConfig: &types.ConsentPortalIdpConfig{
+			CredentialProviderArn: ptr.String("__CredentialProviderArn__"),
+			Scopes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Audience: ptr.String("__Audience__"),
+		},
+		Description: ptr.String("__Description__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateConsentPortal(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateConsentPortal"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -15813,6 +16184,10 @@ func TestUpdateRequestSnapshot_UpdateOnlineEvaluationConfig(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+				LogGroupNamePrefixes: []string{
+					"__Member__",
+					"__Member__",
+				},
 				ServiceNames: []string{
 					"__Member__",
 					"__Member__",
@@ -15839,6 +16214,13 @@ func TestUpdateRequestSnapshot_UpdateOnlineEvaluationConfig(t *testing.T) {
 			Frequencies: []types.ClusteringFrequency{
 				types.ClusteringFrequency("DAILY"),
 				types.ClusteringFrequency("DAILY"),
+			},
+		},
+		OutputConfig: &types.OutputConfig{
+			CloudWatchConfig: &types.CloudWatchOutputConfig{
+				LogGroupName:      ptr.String("__LogGroupName__"),
+				MetricsNamespace:  ptr.String("__MetricsNamespace__"),
+				ResultDestination: types.ResultDestination("DEDICATED_LOG_GROUP"),
 			},
 		},
 		EvaluationExecutionRoleArn: ptr.String("__EvaluationExecutionRoleArn__"),

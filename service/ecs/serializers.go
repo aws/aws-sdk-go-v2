@@ -9472,6 +9472,11 @@ func awsAwsjson11_serializeOpDocumentCreateDaemonInput(v *CreateDaemonInput, val
 		ok.String(*v.ClusterArn)
 	}
 
+	if v.Critical != nil {
+		ok := object.Key("critical")
+		ok.Boolean(*v.Critical)
+	}
+
 	if v.DaemonName != nil {
 		ok := object.Key("daemonName")
 		ok.String(*v.DaemonName)
@@ -11717,6 +11722,11 @@ func awsAwsjson11_serializeOpDocumentUpdateDaemonInput(v *UpdateDaemonInput, val
 		if err := awsAwsjson11_serializeDocumentStringList(v.CapacityProviderArns, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Critical != nil {
+		ok := object.Key("critical")
+		ok.Boolean(*v.Critical)
 	}
 
 	if v.DaemonArn != nil {

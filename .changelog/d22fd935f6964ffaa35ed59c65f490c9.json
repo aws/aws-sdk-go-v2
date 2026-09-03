@@ -1,0 +1,8 @@
+{
+    "id": "d22fd935-f696-4ffa-a35e-d59c65f490c9",
+    "type": "feature",
+    "description": "AgentCore Identity adds Consent Portal APIs to manage portals that let end users grant OAuth authorization for agents to access resources. AgentCore Evaluation adds trace source selection by log group prefix, custom or source log group result destinations, and metrics namespace customization.",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

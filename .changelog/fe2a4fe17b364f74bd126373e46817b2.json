@@ -1,0 +1,8 @@
+{
+    "id": "fe2a4fe1-7b36-4f74-bd12-6373e46817b2",
+    "type": "feature",
+    "description": "Adding support for Sequence Activities in GuardDuty Findings",
+    "modules": [
+        "service/guardduty"
+    ]
+}

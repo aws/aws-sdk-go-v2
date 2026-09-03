@@ -1,0 +1,8 @@
+{
+    "id": "879e0151-ca3f-4219-998b-1e69b90425a6",
+    "type": "feature",
+    "description": "AWS Elastic Disaster Recovery now includes source server architecture in SourceProperties to identify x86 and ARM64 systems.",
+    "modules": [
+        "service/drs"
+    ]
+}

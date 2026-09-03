@@ -3483,6 +3483,26 @@ func TestCheckResponseSnapshot_GetFindings(t *testing.T) {
 											Title: ptr.String("__Title__"),
 										},
 									},
+									Activities: []types.Activity{
+										{
+											Type: types.ActivityType("API_CALL"),
+											Api: &types.ApiCall{
+												Operation: ptr.String("__Operation__"),
+												Service:   ptr.String("__Service__"),
+												Error:     ptr.String("__Error__"),
+												UserAgent: ptr.String("__UserAgent__"),
+											},
+										},
+										{
+											Type: types.ActivityType("API_CALL"),
+											Api: &types.ApiCall{
+												Operation: ptr.String("__Operation__"),
+												Service:   ptr.String("__Service__"),
+												Error:     ptr.String("__Error__"),
+												UserAgent: ptr.String("__UserAgent__"),
+											},
+										},
+									},
 								},
 								{
 									Uid:         ptr.String("__Uid__"),
@@ -3523,6 +3543,26 @@ func TestCheckResponseSnapshot_GetFindings(t *testing.T) {
 												"__Member__",
 											},
 											Title: ptr.String("__Title__"),
+										},
+									},
+									Activities: []types.Activity{
+										{
+											Type: types.ActivityType("API_CALL"),
+											Api: &types.ApiCall{
+												Operation: ptr.String("__Operation__"),
+												Service:   ptr.String("__Service__"),
+												Error:     ptr.String("__Error__"),
+												UserAgent: ptr.String("__UserAgent__"),
+											},
+										},
+										{
+											Type: types.ActivityType("API_CALL"),
+											Api: &types.ApiCall{
+												Operation: ptr.String("__Operation__"),
+												Service:   ptr.String("__Service__"),
+												Error:     ptr.String("__Error__"),
+												UserAgent: ptr.String("__UserAgent__"),
+											},
 										},
 									},
 								},
@@ -5367,6 +5407,26 @@ func TestCheckResponseSnapshot_GetFindings(t *testing.T) {
 											Title: ptr.String("__Title__"),
 										},
 									},
+									Activities: []types.Activity{
+										{
+											Type: types.ActivityType("API_CALL"),
+											Api: &types.ApiCall{
+												Operation: ptr.String("__Operation__"),
+												Service:   ptr.String("__Service__"),
+												Error:     ptr.String("__Error__"),
+												UserAgent: ptr.String("__UserAgent__"),
+											},
+										},
+										{
+											Type: types.ActivityType("API_CALL"),
+											Api: &types.ApiCall{
+												Operation: ptr.String("__Operation__"),
+												Service:   ptr.String("__Service__"),
+												Error:     ptr.String("__Error__"),
+												UserAgent: ptr.String("__UserAgent__"),
+											},
+										},
+									},
 								},
 								{
 									Uid:         ptr.String("__Uid__"),
@@ -5407,6 +5467,26 @@ func TestCheckResponseSnapshot_GetFindings(t *testing.T) {
 												"__Member__",
 											},
 											Title: ptr.String("__Title__"),
+										},
+									},
+									Activities: []types.Activity{
+										{
+											Type: types.ActivityType("API_CALL"),
+											Api: &types.ApiCall{
+												Operation: ptr.String("__Operation__"),
+												Service:   ptr.String("__Service__"),
+												Error:     ptr.String("__Error__"),
+												UserAgent: ptr.String("__UserAgent__"),
+											},
+										},
+										{
+											Type: types.ActivityType("API_CALL"),
+											Api: &types.ApiCall{
+												Operation: ptr.String("__Operation__"),
+												Service:   ptr.String("__Service__"),
+												Error:     ptr.String("__Error__"),
+												UserAgent: ptr.String("__UserAgent__"),
+											},
 										},
 									},
 								},

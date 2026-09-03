@@ -182,6 +182,18 @@ func TestCheckSnapshot_CreateConfigurationBundle(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateConsentPortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConsentPortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateConsentPortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateDataset(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDataset(context.Background(), nil, func(o *Options) {
@@ -511,6 +523,18 @@ func TestCheckSnapshot_DeleteConfigurationBundle(t *testing.T) {
 	_, err := svc.DeleteConfigurationBundle(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteConfigurationBundle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteConsentPortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConsentPortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteConsentPortal")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -871,6 +895,18 @@ func TestCheckSnapshot_GetConfigurationBundleVersion(t *testing.T) {
 	_, err := svc.GetConfigurationBundleVersion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetConfigurationBundleVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetConsentPortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConsentPortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetConsentPortal")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1303,6 +1339,18 @@ func TestCheckSnapshot_ListConfigurationBundleVersions(t *testing.T) {
 	_, err := svc.ListConfigurationBundleVersions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListConfigurationBundleVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListConsentPortals(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConsentPortals(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListConsentPortals")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1790,6 +1838,18 @@ func TestCheckSnapshot_UpdateConfigurationBundle(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateConsentPortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConsentPortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateConsentPortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateDataset(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateDataset(context.Background(), nil, func(o *Options) {
@@ -2161,6 +2221,18 @@ func TestUpdateSnapshot_CreateConfigurationBundle(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateConsentPortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConsentPortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateConsentPortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateDataset(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDataset(context.Background(), nil, func(o *Options) {
@@ -2490,6 +2562,18 @@ func TestUpdateSnapshot_DeleteConfigurationBundle(t *testing.T) {
 	_, err := svc.DeleteConfigurationBundle(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteConfigurationBundle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteConsentPortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConsentPortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteConsentPortal")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2850,6 +2934,18 @@ func TestUpdateSnapshot_GetConfigurationBundleVersion(t *testing.T) {
 	_, err := svc.GetConfigurationBundleVersion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetConfigurationBundleVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetConsentPortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConsentPortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetConsentPortal")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3282,6 +3378,18 @@ func TestUpdateSnapshot_ListConfigurationBundleVersions(t *testing.T) {
 	_, err := svc.ListConfigurationBundleVersions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListConfigurationBundleVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListConsentPortals(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConsentPortals(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListConsentPortals")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3762,6 +3870,18 @@ func TestUpdateSnapshot_UpdateConfigurationBundle(t *testing.T) {
 	_, err := svc.UpdateConfigurationBundle(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateConfigurationBundle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateConsentPortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConsentPortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateConsentPortal")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

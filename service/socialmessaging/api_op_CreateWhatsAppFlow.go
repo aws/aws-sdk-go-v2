@@ -48,6 +48,13 @@ type CreateWhatsAppFlowInput struct {
 	// The ID of an existing Flow within the same WhatsApp Business Account to clone.
 	CloneFlowId *string
 
+	// Optional HTTPS endpoint for a dynamic Flow, registered with Meta as the Flow's
+	// endpoint_uri and called by Meta directly. When omitted, the Flow has no endpoint
+	// (static Flow). Meta only calls the endpoint when the Flow JSON also declares
+	// data_api_version. To verify that requests originate from Meta, attach your own
+	// Meta app via UpdateWhatsAppFlow.
+	EndpointUri *string
+
 	// The Flow JSON definition that describes the screens, components, and logic of
 	// the Flow. Maximum size is 10 MB.
 	FlowJson []byte

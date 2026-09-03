@@ -43,8 +43,7 @@ func (c *Client) CreateActivity(ctx context.Context, params *CreateActivityInput
 type CreateActivityInput struct {
 
 	// The name of the activity to create. This name must be unique for your Amazon
-	// Web Services account and region for 90 days. For more information, see [Limits Related to State Machine Executions]in the
-	// Step Functions Developer Guide.
+	// Web Services account and region.
 	//
 	// A name must not contain:
 	//
@@ -64,8 +63,6 @@ type CreateActivityInput struct {
 	//
 	// To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z,
 	// a-z, - and _.
-	//
-	// [Limits Related to State Machine Executions]: https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
 	//
 	// This member is required.
 	Name *string
