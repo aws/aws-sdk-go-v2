@@ -19,7 +19,6 @@ GetBucketPolicy
 		RecursionDetection
 	Finalize stack step
 		DisableAcceptEncodingGzip
-		spanRetryLoop
 		InterceptBeforeRetryLoop
 		Retry
 		InterceptAttempt

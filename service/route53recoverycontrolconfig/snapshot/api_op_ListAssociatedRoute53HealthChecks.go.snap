@@ -10,7 +10,6 @@ ListAssociatedRoute53HealthChecks
 		UserAgent
 		RecursionDetection
 	Finalize stack step
-		spanRetryLoop
 		InterceptBeforeRetryLoop
 		Retry
 		InterceptAttempt

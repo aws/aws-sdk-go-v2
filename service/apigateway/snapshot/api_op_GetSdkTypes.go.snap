@@ -10,7 +10,6 @@ GetSdkTypes
 		RecursionDetection
 		APIGATEWAY:AcceptHeader
 	Finalize stack step
-		spanRetryLoop
 		InterceptBeforeRetryLoop
 		Retry
 		InterceptAttempt
