@@ -10093,6 +10093,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Are EC2 nitro instance types supported when recovering the Source Server.</p>"
                     }
+                },
+                "architecture": {
+                    "target": "com.amazonaws.drs#SourceServerArchitecture",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The architecture of the Source Server.</p>",
+                        "smithy.api#tags": [
+                            "graviton"
+                        ]
+                    }
                 }
             },
             "traits": {
@@ -10203,6 +10212,24 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:(?:[0-9a-zA-Z_-]+:){3}([0-9]{12,}):source-server/(s-[0-9a-zA-Z]{17})$"
+            }
+        },
+        "com.amazonaws.drs#SourceServerArchitecture": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "X86_64",
+                        "value": "x86_64"
+                    },
+                    {
+                        "name": "ARM64",
+                        "value": "arm64"
+                    }
+                ],
+                "smithy.api#tags": [
+                    "graviton"
+                ]
             }
         },
         "com.amazonaws.drs#SourceServerID": {

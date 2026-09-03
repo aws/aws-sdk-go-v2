@@ -496,6 +496,58 @@
                 "smithy.api#documentation": "<p>Contains information about actions.</p>"
             }
         },
+        "com.amazonaws.guardduty#Activities": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#Activity"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of activities that were observed for a signal.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.guardduty#Activity": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.guardduty#ActivityType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of the observed activity.</p>",
+                        "smithy.api#jsonName": "type",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Api": {
+                    "target": "com.amazonaws.guardduty#ApiCall",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the API call that was observed, when the activity type is <code>API_CALL</code>.</p>",
+                        "smithy.api#jsonName": "api"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an activity, such as an API call, that was observed for a signal.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#ActivityType": {
+            "type": "enum",
+            "members": {
+                "API_CALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The observed activity is an API call.</p>",
+                        "smithy.api#enumValue": "API_CALL"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of an observed activity.</p>"
+            }
+        },
         "com.amazonaws.guardduty#Actor": {
             "type": "structure",
             "members": {
@@ -855,6 +907,58 @@
             },
             "value": {
                 "target": "com.amazonaws.guardduty#AnomalyObject"
+            }
+        },
+        "com.amazonaws.guardduty#ApiCall": {
+            "type": "structure",
+            "members": {
+                "Operation": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the API operation that was invoked.</p>",
+                        "smithy.api#jsonName": "operation",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 512
+                        }
+                    }
+                },
+                "Service": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service that the API operation was invoked against.</p>",
+                        "smithy.api#jsonName": "service",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 512
+                        }
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code that was returned, if the API call failed.</p>",
+                        "smithy.api#jsonName": "error",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 512
+                        }
+                    }
+                },
+                "UserAgent": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User agent in the request to the API operation</p>",
+                        "smithy.api#jsonName": "userAgent",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 1024
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an API call that was observed as part of an activity.</p>"
             }
         },
         "com.amazonaws.guardduty#ArchiveFindings": {
@@ -20978,6 +21082,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains information about the indicators associated with the signals.</p>",
                         "smithy.api#jsonName": "signalIndicators"
+                    }
+                },
+                "Activities": {
+                    "target": "com.amazonaws.guardduty#Activities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the activities, such as API calls, that were observed for this signal.</p>",
+                        "smithy.api#jsonName": "activities"
                     }
                 }
             },

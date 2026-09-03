@@ -8604,7 +8604,11 @@
                 "resources": {
                     "target": "com.amazonaws.eks#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the resources to be encrypted. The only supported value is\n                <code>secrets</code>.</p>"
+                        "smithy.api#deprecated": {
+                            "since": "2025-03-05",
+                            "message": "Deprecated. Amazon EKS encrypts all Kubernetes API data by default, so this value no longer determines which resources are encrypted."
+                        },
+                        "smithy.api#documentation": "<important>\n            <p>Amazon EKS encrypts all Kubernetes API data with envelope encryption by default for\n                clusters running Kubernetes version 1.28 or higher, so this field no longer affects which\n                resources are encrypted.</p>\n         </important>\n         <p>Specifies the resources to be encrypted. The only supported value is\n                <code>secrets</code>.</p>"
                     }
                 },
                 "provider": {

@@ -139,6 +139,24 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.socialmessaging#BusinessPublicKeyPem": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 8192
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#BusinessPublicKeySignatureStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
         "com.amazonaws.socialmessaging#ButtonType": {
             "type": "string",
             "traits": {
@@ -298,6 +316,12 @@
                     "target": "com.amazonaws.socialmessaging#MetaFlowId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of an existing Flow within the same WhatsApp Business Account to clone.</p>"
+                    }
+                },
+                "endpointUri": {
+                    "target": "com.amazonaws.socialmessaging#MetaFlowEndpointUri",
+                    "traits": {
+                        "smithy.api#documentation": "Optional HTTPS endpoint for a dynamic Flow, registered with Meta as the\nFlow's endpoint_uri and called by Meta directly. When omitted, the Flow\nhas no endpoint (static Flow). Meta only calls the endpoint when the\nFlow JSON also declares data_api_version. To verify that requests\noriginate from Meta, attach your own Meta app via UpdateWhatsAppFlow."
                     }
                 }
             },
@@ -1112,6 +1136,84 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.socialmessaging#GetWhatsAppBusinessPublicKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#GetWhatsAppBusinessPublicKeyInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#GetWhatsAppBusinessPublicKeyOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#AccessDeniedByMetaException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Retrieves the business public key for a phone number and its signature status.",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/whatsapp/business-public-key",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#GetWhatsAppBusinessPublicKeyInput": {
+            "type": "structure",
+            "members": {
+                "originationPhoneNumberId": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
+                    "traits": {
+                        "smithy.api#documentation": "The unique identifier of the phone number whose business public key to retrieve.",
+                        "smithy.api#httpQuery": "originationPhoneNumberId",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "OriginationPhoneNumberId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#GetWhatsAppBusinessPublicKeyOutput": {
+            "type": "structure",
+            "members": {
+                "businessPublicKey": {
+                    "target": "com.amazonaws.socialmessaging#BusinessPublicKeyPem",
+                    "traits": {
+                        "smithy.api#documentation": "The stored RSA business public key (PEM), if present."
+                    }
+                },
+                "businessPublicKeySignatureStatus": {
+                    "target": "com.amazonaws.socialmessaging#BusinessPublicKeySignatureStatus",
+                    "traits": {
+                        "smithy.api#documentation": "Meta's signing status: \"VALID\" | \"MISMATCH\"."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.socialmessaging#GetWhatsAppFlow": {
             "type": "operation",
             "input": {
@@ -1578,6 +1680,16 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[A-Z]{2}$"
+            }
+        },
+        "com.amazonaws.socialmessaging#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:aws[a-z-]*:kms:[a-z0-9-]+:[0-9]{12}:(key/.+|alias/.+)$"
             }
         },
         "com.amazonaws.socialmessaging#LibraryTemplateBodyInputs": {
@@ -2057,10 +2169,16 @@
                     "target": "com.amazonaws.socialmessaging#DeleteWhatsAppMessageMedia"
                 },
                 {
+                    "target": "com.amazonaws.socialmessaging#GetWhatsAppBusinessPublicKey"
+                },
+                {
                     "target": "com.amazonaws.socialmessaging#GetWhatsAppMessageMedia"
                 },
                 {
                     "target": "com.amazonaws.socialmessaging#PostWhatsAppMessageMedia"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#PutWhatsAppBusinessPublicKey"
                 },
                 {
                     "target": "com.amazonaws.socialmessaging#SendWhatsAppMessage"
@@ -3693,6 +3811,82 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.socialmessaging#PutWhatsAppBusinessPublicKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#PutWhatsAppBusinessPublicKeyInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#PutWhatsAppBusinessPublicKeyOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#AccessDeniedByMetaException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Sets the business public key used to encrypt the data exchanged with the endpoint of a data exchange Flow.",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v1/whatsapp/business-public-key",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#PutWhatsAppBusinessPublicKeyInput": {
+            "type": "structure",
+            "members": {
+                "originationPhoneNumberId": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
+                    "traits": {
+                        "smithy.api#documentation": "The unique identifier of the phone number to associate with the business public key.",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "OriginationPhoneNumberId"
+                    }
+                },
+                "businessPublicKey": {
+                    "target": "com.amazonaws.socialmessaging#BusinessPublicKeyPem",
+                    "traits": {
+                        "smithy.api#documentation": "PEM-encoded RSA public key. Mutually exclusive with kmsKeyArn."
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.socialmessaging#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "Customer-managed KMS asymmetric RSA key ARN. Mutually exclusive with businessPublicKey."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#PutWhatsAppBusinessPublicKeyOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.socialmessaging#RegistrationStatus": {
             "type": "enum",
             "members": {
@@ -5315,6 +5509,18 @@
                     "target": "com.amazonaws.socialmessaging#MetaFlowCategoryList",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated categories for the Flow.</p>"
+                    }
+                },
+                "endpointUri": {
+                    "target": "com.amazonaws.socialmessaging#MetaFlowEndpointUri",
+                    "traits": {
+                        "smithy.api#documentation": "Optional HTTPS endpoint for a dynamic Flow, registered with Meta as the\nFlow's endpoint_uri and called by Meta directly. When omitted, the\nFlow's endpoint is unchanged."
+                    }
+                },
+                "metaAppId": {
+                    "target": "com.amazonaws.socialmessaging#MetaFlowApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "Optional Meta app ID to attach to the Flow. Meta signs data-exchange\nrequests with the attached app's secret, so attaching your own app is\nwhat enables X-Hub-Signature-256 and flow_token_signature verification\nat your endpoint. Meta requires the app to be owned by the same business\nthat owns the WABA. Attaching your own app is one-way: the service's\napp cannot be re-attached afterwards. When omitted, the attached app is\nunchanged. (Set via update because Meta ignores application_id at\ncreation time.)"
                     }
                 }
             },
