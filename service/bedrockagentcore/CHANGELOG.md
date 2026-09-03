@@ -1,3 +1,7 @@
+# v1.46.0 (2026-09-03)
+
+* **Feature**: Adds log group name prefix trace source selection, custom or source log group result destinations, and metrics namespace customization
+
 # v1.45.0 (2026-09-02)
 
 * **Feature**: Batch evaluation now supports up to 10 CloudWatch log groups per CloudWatchLogsSource

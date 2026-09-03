@@ -1,3 +1,7 @@
+# v1.48.1 (2026-09-03)
+
+* **Documentation**: Updates Step Functions API documentation around CloudTrail, Execution name reuse and sort order of ListExecutions API
+
 # v1.48.0 (2026-08-31.2)
 
 * **Feature**: Stop registering the `SetCredentialSourceMiddleware` middleware in generated clients. Credential source user agent features are now set when the client's middleware stack is constructed.

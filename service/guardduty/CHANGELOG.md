@@ -1,3 +1,7 @@
+# v1.90.0 (2026-09-03)
+
+* **Feature**: Adding support for Sequence Activities in GuardDuty Findings
+
 # v1.89.0 (2026-09-01)
 
 * **Feature**: Amazon GuardDuty now supports custom detection rules, including APIs to manage rule associations and organization-level configurations.

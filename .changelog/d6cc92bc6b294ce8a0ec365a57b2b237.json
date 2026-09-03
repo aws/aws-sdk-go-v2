@@ -1,8 +1,0 @@
-{
-    "id": "d6cc92bc-6b29-4ce8-a0ec-365a57b2b237",
-    "type": "feature",
-    "description": "Amazon Transcribe now supports specifying up to 29 PII entity types in the ContentRedaction configuration of a StartTranscriptionJob request, allowing all supported entity types to be redacted in a single batch transcription job.",
-    "modules": [
-        "service/transcribe"
-    ]
-}

@@ -1,3 +1,33 @@
+# Release (2026-09-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.46.0](service/bedrockagentcore/CHANGELOG.md#v1460-2026-09-03)
+  * **Feature**: Adds log group name prefix trace source selection, custom or source log group result destinations, and metrics namespace customization
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.64.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1640-2026-09-03)
+  * **Feature**: AgentCore Identity adds Consent Portal APIs to manage portals that let end users grant OAuth authorization for agents to access resources. AgentCore Evaluation adds trace source selection by log group prefix, custom or source log group result destinations, and metrics namespace customization.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.195.0](service/connect/CHANGELOG.md#v11950-2026-09-03)
+  * **Feature**: This release enables TagOnCreate for Rule resource on CreateRule API. It also introduces a new field called PreEvaluationFilters to Rule resource, thereby impacting all Create, Update, Describe and Search APIs for Rules
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.48.0](service/drs/CHANGELOG.md#v1480-2026-09-03)
+  * **Feature**: AWS Elastic Disaster Recovery now includes source server architecture in SourceProperties to identify x86 and ARM64 systems.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.95.0](service/ecs/CHANGELOG.md#v1950-2026-09-03)
+  * **Feature**: Adds a critical parameter to the Amazon ECS managed daemon APIs that controls whether a daemon task failure drains the container instance. Non-critical daemon failures no longer drain the instance or block instance registration.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.97.0](service/eks/CHANGELOG.md#v1970-2026-09-03)
+  * **Feature**: Deprecate EncryptionConfig resources field. Amazon EKS encrypts all Kubernetes API data with envelope encryption by default for clusters running Kubernetes version 1.28 or higher, so this field no longer affects which resources are encrypted.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.61.1](service/elasticloadbalancingv2/CHANGELOG.md#v1611-2026-09-03)
+  * **Documentation**: This release adds support for sending TCP resets for Gateway Load Balancer when a flow's idle timeout expires, or when a target becomes unhealthy or is deregistered. This adds updates the CLI documentation.
+* `github.com/aws/aws-sdk-go-v2/service/evs`: [v1.18.0](service/evs/CHANGELOG.md#v1180-2026-09-03)
+  * **Feature**: Amazon EVS now allows users to set, update, and retrieve values for parameters that apply across all EVS Environments in their account at a regional level, such as the VCF License portability core count.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.90.0](service/guardduty/CHANGELOG.md#v1900-2026-09-03)
+  * **Feature**: Adding support for Sequence Activities in GuardDuty Findings
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.48.1](service/sfn/CHANGELOG.md#v1481-2026-09-03)
+  * **Documentation**: Updates Step Functions API documentation around CloudTrail, Execution name reuse and sort order of ListExecutions API
+* `github.com/aws/aws-sdk-go-v2/service/socialmessaging`: [v1.18.0](service/socialmessaging/CHANGELOG.md#v1180-2026-09-03)
+  * **Feature**: Adding support for WhatsApp Flows with endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.63.0](service/transcribe/CHANGELOG.md#v1630-2026-09-03)
+  * **Feature**: Amazon Transcribe now supports specifying up to 29 PII entity types in the ContentRedaction configuration of a StartTranscriptionJob request, allowing all supported entity types to be redacted in a single batch transcription job.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.80.0](service/transfer/CHANGELOG.md#v1800-2026-09-03)
+  * **Feature**: AWS Transfer Family SFTP Connectors now support specifying an ordered list of AWS Secrets Manager version stages for secret retrieval. This enables seamless credential rotation workflows where external partners may take time to update their systems with new credentials.
+
 # Release (2026-09-02)
 
 ## Module Highlights
