@@ -1,0 +1,30 @@
+ListConsentPortals
+	Initialize stack step
+	Serialize stack step
+		setOperationInput
+		ResolveEndpoint
+		OperationSerializer
+	Build stack step
+		ClientRequestID
+		UserAgent
+		RecursionDetection
+	Finalize stack step
+		spanRetryLoop
+		InterceptBeforeRetryLoop
+		Retry
+		InterceptAttempt
+		RetryMetricsHeader
+		ResolveAuthScheme
+		GetIdentity
+		ResolveEndpointV2
+		disableHTTPS
+		ComputePayloadHash
+		setLegacyContextSigningOptions
+		Signing
+	Deserialize stack step
+		AddRawResponseToMetadata
+		ResponseErrorWrapper
+		RequestIDRetriever
+		OperationDeserializer
+		RecordResponseTiming
+		RequestResponseLogger

@@ -1364,7 +1364,7 @@ var _Phrases_member *smithy.Schema
 var PiiEntityType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "PiiEntityType",
-}, smithy.ShapeTypeEnum, 12)
+}, smithy.ShapeTypeEnum, 30)
 var PiiEntityType_BANK_ACCOUNT_NUMBER *smithy.Schema
 
 var PiiEntityType_BANK_ROUTING *smithy.Schema
@@ -1386,6 +1386,42 @@ var PiiEntityType_NAME *smithy.Schema
 var PiiEntityType_PHONE *smithy.Schema
 
 var PiiEntityType_SSN *smithy.Schema
+
+var PiiEntityType_DATE_TIME *smithy.Schema
+
+var PiiEntityType_PASSPORT_NUMBER *smithy.Schema
+
+var PiiEntityType_DRIVER_ID *smithy.Schema
+
+var PiiEntityType_URL *smithy.Schema
+
+var PiiEntityType_AGE *smithy.Schema
+
+var PiiEntityType_USERNAME *smithy.Schema
+
+var PiiEntityType_PASSWORD *smithy.Schema
+
+var PiiEntityType_AWS_ACCESS_KEY *smithy.Schema
+
+var PiiEntityType_AWS_SECRET_KEY *smithy.Schema
+
+var PiiEntityType_IP_ADDRESS *smithy.Schema
+
+var PiiEntityType_MAC_ADDRESS *smithy.Schema
+
+var PiiEntityType_LICENSE_PLATE *smithy.Schema
+
+var PiiEntityType_VEHICLE_IDENTIFICATION_NUMBER *smithy.Schema
+
+var PiiEntityType_US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER *smithy.Schema
+
+var PiiEntityType_CA_HEALTH_NUMBER *smithy.Schema
+
+var PiiEntityType_CA_SOCIAL_INSURANCE_NUMBER *smithy.Schema
+
+var PiiEntityType_INTERNATIONAL_BANK_ACCOUNT_NUMBER *smithy.Schema
+
+var PiiEntityType_SWIFT_CODE *smithy.Schema
 
 var PiiEntityType_ALL *smithy.Schema
 
@@ -2972,6 +3008,42 @@ func init() {
 	PiiEntityType_PHONE = PiiEntityType.AddMember("PHONE", smithyprelude.Unit)
 
 	PiiEntityType_SSN = PiiEntityType.AddMember("SSN", smithyprelude.Unit)
+
+	PiiEntityType_DATE_TIME = PiiEntityType.AddMember("DATE_TIME", smithyprelude.Unit)
+
+	PiiEntityType_PASSPORT_NUMBER = PiiEntityType.AddMember("PASSPORT_NUMBER", smithyprelude.Unit)
+
+	PiiEntityType_DRIVER_ID = PiiEntityType.AddMember("DRIVER_ID", smithyprelude.Unit)
+
+	PiiEntityType_URL = PiiEntityType.AddMember("URL", smithyprelude.Unit)
+
+	PiiEntityType_AGE = PiiEntityType.AddMember("AGE", smithyprelude.Unit)
+
+	PiiEntityType_USERNAME = PiiEntityType.AddMember("USERNAME", smithyprelude.Unit)
+
+	PiiEntityType_PASSWORD = PiiEntityType.AddMember("PASSWORD", smithyprelude.Unit)
+
+	PiiEntityType_AWS_ACCESS_KEY = PiiEntityType.AddMember("AWS_ACCESS_KEY", smithyprelude.Unit)
+
+	PiiEntityType_AWS_SECRET_KEY = PiiEntityType.AddMember("AWS_SECRET_KEY", smithyprelude.Unit)
+
+	PiiEntityType_IP_ADDRESS = PiiEntityType.AddMember("IP_ADDRESS", smithyprelude.Unit)
+
+	PiiEntityType_MAC_ADDRESS = PiiEntityType.AddMember("MAC_ADDRESS", smithyprelude.Unit)
+
+	PiiEntityType_LICENSE_PLATE = PiiEntityType.AddMember("LICENSE_PLATE", smithyprelude.Unit)
+
+	PiiEntityType_VEHICLE_IDENTIFICATION_NUMBER = PiiEntityType.AddMember("VEHICLE_IDENTIFICATION_NUMBER", smithyprelude.Unit)
+
+	PiiEntityType_US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER = PiiEntityType.AddMember("US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", smithyprelude.Unit)
+
+	PiiEntityType_CA_HEALTH_NUMBER = PiiEntityType.AddMember("CA_HEALTH_NUMBER", smithyprelude.Unit)
+
+	PiiEntityType_CA_SOCIAL_INSURANCE_NUMBER = PiiEntityType.AddMember("CA_SOCIAL_INSURANCE_NUMBER", smithyprelude.Unit)
+
+	PiiEntityType_INTERNATIONAL_BANK_ACCOUNT_NUMBER = PiiEntityType.AddMember("INTERNATIONAL_BANK_ACCOUNT_NUMBER", smithyprelude.Unit)
+
+	PiiEntityType_SWIFT_CODE = PiiEntityType.AddMember("SWIFT_CODE", smithyprelude.Unit)
 
 	PiiEntityType_ALL = PiiEntityType.AddMember("ALL", smithyprelude.Unit)
 

@@ -615,6 +615,25 @@ func (GridImageType) Values() []GridImageType {
 	}
 }
 
+type HardwareType string
+
+// Enum values for HardwareType
+const (
+	HardwareTypeCompute HardwareType = "COMPUTE"
+	HardwareTypeCell    HardwareType = "CELL"
+)
+
+// Values returns all known values for HardwareType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HardwareType) Values() []HardwareType {
+	return []HardwareType{
+		"COMPUTE",
+		"CELL",
+	}
+}
+
 type IamRoleStatus string
 
 // Enum values for IamRoleStatus

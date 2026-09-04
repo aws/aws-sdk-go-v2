@@ -8629,6 +8629,35 @@ func TestUpdateResponseSnapshot_GetOperationsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetProfile(t *testing.T) {
+	want := &GetProfileOutput{
+		ProfileType: types.ProfileType("Lightsailor"),
+		Partner: &types.PartnerInfo{
+			EnrolledAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TierName:   types.TierName("Essential"),
+			Status:     types.PartnerStatus("Active"),
+		},
+	}
+	proto := awsjson.New11(schemas.Lightsail_20161128)
+	opSchema := smithy.NewOperationSchema(schemas.GetProfile, schemas.GetProfileResult, schemas.GetProfileResult)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetProfile.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetRegions(t *testing.T) {
 	want := &GetRegionsOutput{
 		Regions: []types.Region{

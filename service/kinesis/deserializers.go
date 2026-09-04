@@ -1965,6 +1965,9 @@ func awsAwsjson11_deserializeOpErrorGetRecords(response *smithyhttp.Response, me
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("DryRunOperationException", errorCode):
+		return awsAwsjson11_deserializeErrorDryRunOperationException(response, errorBody)
+
 	case strings.EqualFold("ExpiredIteratorException", errorCode):
 		return awsAwsjson11_deserializeErrorExpiredIteratorException(response, errorBody)
 
@@ -2237,6 +2240,9 @@ func awsAwsjson11_deserializeOpErrorGetShardIterator(response *smithyhttp.Respon
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("DryRunOperationException", errorCode):
+		return awsAwsjson11_deserializeErrorDryRunOperationException(response, errorBody)
 
 	case strings.EqualFold("InternalFailureException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalFailureException(response, errorBody)
@@ -3325,6 +3331,9 @@ func awsAwsjson11_deserializeOpErrorPutRecord(response *smithyhttp.Response, met
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("DryRunOperationException", errorCode):
+		return awsAwsjson11_deserializeErrorDryRunOperationException(response, errorBody)
+
 	case strings.EqualFold("InternalFailureException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalFailureException(response, errorBody)
 
@@ -3468,6 +3477,9 @@ func awsAwsjson11_deserializeOpErrorPutRecords(response *smithyhttp.Response, me
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("DryRunOperationException", errorCode):
+		return awsAwsjson11_deserializeErrorDryRunOperationException(response, errorBody)
 
 	case strings.EqualFold("InternalFailureException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalFailureException(response, errorBody)
@@ -4246,6 +4258,9 @@ func awsAwsjson11_deserializeOpErrorSubscribeToShard(response *smithyhttp.Respon
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("DryRunOperationException", errorCode):
+		return awsAwsjson11_deserializeErrorDryRunOperationException(response, errorBody)
 
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
@@ -6458,6 +6473,41 @@ func awsAwsjson11_deserializeErrorAccessDeniedException(response *smithyhttp.Res
 	return output
 }
 
+func awsAwsjson11_deserializeErrorDryRunOperationException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.DryRunOperationException{}
+	err := awsAwsjson11_deserializeDocumentDryRunOperationException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorExpiredIteratorException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -7855,6 +7905,46 @@ func awsAwsjson11_deserializeDocumentDeadLetterQueueS3Configuration(v **types.De
 					return fmt.Errorf("expected ExpectedBucketOwner to be of type string, got %T instead", value)
 				}
 				sv.ExpectedBucketOwner = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDryRunOperationException(v **types.DryRunOperationException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DryRunOperationException
+	if *v == nil {
+		sv = &types.DryRunOperationException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

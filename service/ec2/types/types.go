@@ -1393,12 +1393,6 @@ type BaselinePerformanceFactorsRequest struct {
 	noSmithyDocumentSerde
 }
 
-type BlobAttributeValue struct {
-	Value []byte
-
-	noSmithyDocumentSerde
-}
-
 // Describes a block device mapping, which defines the EBS volumes and instance
 // store volumes to attach to an instance at launch.
 type BlockDeviceMapping struct {
@@ -2359,6 +2353,13 @@ type CapacityReservation struct {
 	// The ID of the Amazon Web Services account to which billing of the unused
 	// capacity of the Capacity Reservation is assigned.
 	UnusedReservationBillingOwnerId *string
+
+	//  The zero-size preference configured for the interruptible Capacity
+	// Reservation. A value of retain keeps the interruptible Capacity Reservation
+	// active at zero capacity when you reduce its allocation to zero. A value of
+	// default cancels the interruptible Capacity Reservation when you reduce its
+	// allocation to zero.
+	ZeroSizePreference ZeroSizePreference
 
 	noSmithyDocumentSerde
 }
@@ -4621,13 +4622,13 @@ type DescribeFleetError struct {
 	// The error code that indicates why the instance could not be launched. For more
 	// information about error codes, see [Error codes].
 	//
-	// [Error codes]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html
+	// [Error codes]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html
 	ErrorCode *string
 
 	// The error message that describes why the instance could not be launched. For
 	// more information about error messages, see [Error codes].
 	//
-	// [Error codes]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html
+	// [Error codes]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html
 	ErrorMessage *string
 
 	// The launch templates and overrides that were used for launching the instances.
@@ -11298,8 +11299,7 @@ type InstanceStateChange struct {
 // attached EBS status, and application status.
 type InstanceStatus struct {
 
-	// Reports impaired functionality that stems from issues with applications running
-	// on the instance.
+	// Reports the application-level health status for the instance.
 	ApplicationStatus *ApplicationStatusSummary
 
 	// Reports impaired functionality that stems from an attached Amazon EBS volume
@@ -11733,6 +11733,14 @@ type InterruptibleCapacityAllocation struct {
 	//  After your modify request, the requested number of instances allocated to
 	// interruptible reservation.
 	TargetInstanceCount *int32
+
+	//  Specifies how Amazon EC2 handles the interruptible Capacity Reservation when
+	// you reduce its allocation to zero instances. A value of retain keeps the
+	// interruptible Capacity Reservation active at zero capacity so that you can
+	// allocate instances to it again later. A value of default cancels the
+	// interruptible Capacity Reservation and returns the capacity to your source
+	// Capacity Reservation.
+	ZeroSizePreference ZeroSizePreference
 
 	noSmithyDocumentSerde
 }
@@ -12263,6 +12271,10 @@ type IpamInternetRegistryAssociation struct {
 	// enable-complete | enable-failed | delete-in-progress | delete-complete |
 	// delete-failed .
 	State IpamInternetRegistryAssociationState
+
+	// A message describing the current state of the internet registry association,
+	// including additional details such as the reason for a failure.
+	StateMessage *string
 
 	// The tags assigned to the internet registry association.
 	Tags []Tag
@@ -21401,6 +21413,16 @@ type SecondarySubnetIpv4CidrBlockAssociation struct {
 
 	// The reason for the current state of the CIDR block association.
 	StateReason *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a value for a resource attribute that is a Base64-encoded binary data
+// object.
+type SecureBlobAttributeValue struct {
+
+	// The attribute value.
+	Value []byte
 
 	noSmithyDocumentSerde
 }

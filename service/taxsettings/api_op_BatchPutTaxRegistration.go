@@ -204,6 +204,14 @@ import (
 //   - You must specify the sirenNumber in the franceAdditionalInfo field of the
 //     additionalTaxInformation object.
 //
+//   - You can optionally specify the eInvoiceRoutingCode in the
+//     franceAdditionalInfo field of the additionalTaxInformation object.
+//
+// Monaco
+//
+//   - You must specify the businessNumber in the monacoAdditionalInfo field of the
+//     additionalTaxInformation object.
+//
 // Poland
 //
 //   - You can optionally specify the taxRegistrationNumberType in the

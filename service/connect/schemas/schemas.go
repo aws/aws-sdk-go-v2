@@ -12041,6 +12041,50 @@ var PredefinedAttributeValues = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeUnion, 1)
 var PredefinedAttributeValues_StringList *smithy.Schema
 
+var PreEvaluationFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "PreEvaluationFilter",
+}, smithy.ShapeTypeStructure, 5)
+var PreEvaluationFilter_ResourceType *smithy.Schema
+
+var PreEvaluationFilter_FilterType *smithy.Schema
+
+var PreEvaluationFilter_FilterKey *smithy.Schema
+
+var PreEvaluationFilter_FilterValue *smithy.Schema
+
+var PreEvaluationFilter_Operator *smithy.Schema
+
+var _PreEvaluationFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "PreEvaluationFilterList",
+}, smithy.ShapeTypeList, 1)
+var _PreEvaluationFilterList_member *smithy.Schema
+
+var PreEvaluationFilterOperator = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "PreEvaluationFilterOperator",
+}, smithy.ShapeTypeEnum, 1)
+var PreEvaluationFilterOperator_EQUALS *smithy.Schema
+
+var PreEvaluationFilterResourceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "PreEvaluationFilterResourceType",
+}, smithy.ShapeTypeEnum, 1)
+var PreEvaluationFilterResourceType_CONTACT *smithy.Schema
+
+var PreEvaluationFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "PreEvaluationFilters",
+}, smithy.ShapeTypeStructure, 1)
+var PreEvaluationFilters_AndConditions *smithy.Schema
+
+var PreEvaluationFilterType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "PreEvaluationFilterType",
+}, smithy.ShapeTypeEnum, 1)
+var PreEvaluationFilterType_TAG *smithy.Schema
+
 var _Prefix = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "Prefix",
@@ -13764,7 +13808,7 @@ var _RoutingProfileSummaryList_member *smithy.Schema
 var Rule = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "Rule",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var Rule_Name *smithy.Schema
 
 var Rule_RuleId *smithy.Schema
@@ -13780,6 +13824,8 @@ var Rule_Function *smithy.Schema
 var Rule_Actions *smithy.Schema
 
 var Rule_PublishStatus *smithy.Schema
+
+var Rule_PreEvaluationFilters *smithy.Schema
 
 var Rule_CreatedTime *smithy.Schema
 
@@ -13887,7 +13933,7 @@ var RulesConfiguration_Behavior *smithy.Schema
 var RuleSearchSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "RuleSearchSummary",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var RuleSearchSummary_Name *smithy.Schema
 
 var RuleSearchSummary_RuleId *smithy.Schema
@@ -13901,6 +13947,8 @@ var RuleSearchSummary_ActionSummaries *smithy.Schema
 var RuleSearchSummary_RuleCapabilityTiers *smithy.Schema
 
 var RuleSearchSummary_PublishStatus *smithy.Schema
+
+var RuleSearchSummary_PreEvaluationFilters *smithy.Schema
 
 var RuleSearchSummary_CreatedTime *smithy.Schema
 
@@ -18087,7 +18135,7 @@ var CreateRoutingProfileResponse_RoutingProfileId *smithy.Schema
 var CreateRuleRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "CreateRuleRequest",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 9)
 var CreateRuleRequest_InstanceId *smithy.Schema
 
 var CreateRuleRequest_Name *smithy.Schema
@@ -18100,7 +18148,11 @@ var CreateRuleRequest_Actions *smithy.Schema
 
 var CreateRuleRequest_PublishStatus *smithy.Schema
 
+var CreateRuleRequest_PreEvaluationFilters *smithy.Schema
+
 var CreateRuleRequest_ClientToken *smithy.Schema
+
+var CreateRuleRequest_Tags *smithy.Schema
 
 var CreateRuleResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -23898,7 +23950,7 @@ var UpdateRoutingProfileQueuesRequest_QueueConfigs *smithy.Schema
 var UpdateRuleRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "UpdateRuleRequest",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var UpdateRuleRequest_RuleId *smithy.Schema
 
 var UpdateRuleRequest_InstanceId *smithy.Schema
@@ -23910,6 +23962,8 @@ var UpdateRuleRequest_Function *smithy.Schema
 var UpdateRuleRequest_Actions *smithy.Schema
 
 var UpdateRuleRequest_PublishStatus *smithy.Schema
+
+var UpdateRuleRequest_PreEvaluationFilters *smithy.Schema
 
 var UpdateSecurityProfileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -29660,6 +29714,26 @@ func init() {
 
 	_PredefinedAttributeSummaryList_member = _PredefinedAttributeSummaryList.AddMember("member", PredefinedAttributeSummary)
 
+	PreEvaluationFilterResourceType_CONTACT = PreEvaluationFilterResourceType.AddMember("CONTACT", smithyprelude.Unit)
+
+	PreEvaluationFilterType_TAG = PreEvaluationFilterType.AddMember("TAG", smithyprelude.Unit)
+
+	PreEvaluationFilterOperator_EQUALS = PreEvaluationFilterOperator.AddMember("EQUALS", smithyprelude.Unit)
+
+	PreEvaluationFilter_ResourceType = PreEvaluationFilter.AddMember("ResourceType", PreEvaluationFilterResourceType)
+
+	PreEvaluationFilter_FilterType = PreEvaluationFilter.AddMember("FilterType", PreEvaluationFilterType)
+
+	PreEvaluationFilter_FilterKey = PreEvaluationFilter.AddMember("FilterKey", _String)
+
+	PreEvaluationFilter_FilterValue = PreEvaluationFilter.AddMember("FilterValue", _String)
+
+	PreEvaluationFilter_Operator = PreEvaluationFilter.AddMember("Operator", PreEvaluationFilterOperator)
+
+	_PreEvaluationFilterList_member = _PreEvaluationFilterList.AddMember("member", PreEvaluationFilter)
+
+	PreEvaluationFilters_AndConditions = PreEvaluationFilters.AddMember("AndConditions", _PreEvaluationFilterList)
+
 	_ValueList_member = _ValueList.AddMember("member", _String)
 
 	PrimaryAttributeValueFilter_AttributeName = PrimaryAttributeValueFilter.AddMember("AttributeName", _DataTableName)
@@ -30350,6 +30424,8 @@ func init() {
 
 	Rule_PublishStatus = Rule.AddMember("PublishStatus", RulePublishStatus)
 
+	Rule_PreEvaluationFilters = Rule.AddMember("PreEvaluationFilters", PreEvaluationFilters)
+
 	Rule_CreatedTime = Rule.AddMember("CreatedTime", _Timestamp)
 
 	Rule_LastUpdatedTime = Rule.AddMember("LastUpdatedTime", _Timestamp)
@@ -30381,6 +30457,8 @@ func init() {
 	RuleSearchSummary_RuleCapabilityTiers = RuleSearchSummary.AddMember("RuleCapabilityTiers", _RuleCapabilityTiers)
 
 	RuleSearchSummary_PublishStatus = RuleSearchSummary.AddMember("PublishStatus", RulePublishStatus)
+
+	RuleSearchSummary_PreEvaluationFilters = RuleSearchSummary.AddMember("PreEvaluationFilters", PreEvaluationFilters)
 
 	RuleSearchSummary_CreatedTime = RuleSearchSummary.AddMember("CreatedTime", _Timestamp)
 
@@ -32184,7 +32262,11 @@ func init() {
 
 	CreateRuleRequest_PublishStatus = CreateRuleRequest.AddMember("PublishStatus", RulePublishStatus)
 
+	CreateRuleRequest_PreEvaluationFilters = CreateRuleRequest.AddMember("PreEvaluationFilters", PreEvaluationFilters)
+
 	CreateRuleRequest_ClientToken = CreateRuleRequest.AddMember("ClientToken", _ClientToken)
+
+	CreateRuleRequest_Tags = CreateRuleRequest.AddMember("Tags", _TagMap)
 
 	CreateRuleResponse_RuleArn = CreateRuleResponse.AddMember("RuleArn", _ARN)
 
@@ -35635,6 +35717,8 @@ func init() {
 	UpdateRuleRequest_Actions = UpdateRuleRequest.AddMember("Actions", _RuleActions)
 
 	UpdateRuleRequest_PublishStatus = UpdateRuleRequest.AddMember("PublishStatus", RulePublishStatus)
+
+	UpdateRuleRequest_PreEvaluationFilters = UpdateRuleRequest.AddMember("PreEvaluationFilters", PreEvaluationFilters)
 
 	UpdateSecurityProfileRequest_Description = UpdateSecurityProfileRequest.AddMember("Description", _SecurityProfileDescription)
 

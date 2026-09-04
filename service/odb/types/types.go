@@ -3073,11 +3073,11 @@ type ExadbVmCluster struct {
 	// cluster.
 	ScanIpIds []string
 
-	// The port number for TCP connections to the single client access name (SCAN)
+	// The port number for TCP connections to the Single Client Access Name (SCAN)
 	// listener for the Exascale VM cluster.
 	ScanListenerPortTcp *int32
 
-	// The port number for TCP connections with SSL to the single client access name
+	// The port number for TCP connections with SSL to the Single Client Access Name
 	// (SCAN) listener for the Exascale VM cluster.
 	ScanListenerPortTcpSsl *int32
 
@@ -3241,11 +3241,11 @@ type ExadbVmClusterSummary struct {
 	// cluster.
 	ScanIpIds []string
 
-	// The port number for TCP connections to the single client access name (SCAN)
+	// The port number for TCP connections to the Single Client Access Name (SCAN)
 	// listener for the Exascale VM cluster.
 	ScanListenerPortTcp *int32
 
-	// The port number for TCP connections with SSL to the single client access name
+	// The port number for TCP connections with SSL to the Single Client Access Name
 	// (SCAN) listener for the Exascale VM cluster.
 	ScanListenerPortTcpSsl *int32
 
@@ -3456,6 +3456,56 @@ type ExascaleDbStorageVaultSummary struct {
 	// The list of unique identifiers of the VM clusters associated with this Exascale
 	// storage vault.
 	VmClusterIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a flex component that's available for an Exadata
+// infrastructure. A flex component defines the hardware resources, such as CPU
+// cores, memory, and storage, that can be allocated to a shape.
+type FlexComponentSummary struct {
+
+	// The maximum number of CPU cores that can be enabled for the flex component.
+	AvailableCoreCount *int32
+
+	// The maximum amount of database storage, in gigabytes (GB), that can be enabled
+	// for the flex component.
+	AvailableDbStorageInGBs *int32
+
+	// The maximum amount of local storage, in gigabytes (GB), that can be enabled for
+	// the flex component.
+	AvailableLocalStorageInGBs *int32
+
+	// The maximum amount of memory, in gigabytes (GB), that can be enabled for the
+	// flex component.
+	AvailableMemoryInGBs *int32
+
+	// The OCI model compute model used when you create or clone an instance: ECPU or
+	// OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are based on
+	// the number of cores elastically allocated from a pool of compute and storage
+	// servers. An OCPU is a legacy physical measure of compute resources. OCPUs are
+	// based on the physical core of a processor with hyper-threading enabled.
+	ComputeModel ComputeModel
+
+	// A summary description of the flex component.
+	DescriptionSummary *string
+
+	// The type of hardware for the flex component. Valid values are COMPUTE for
+	// compute servers and CELL for storage servers.
+	HardwareType HardwareType
+
+	// The minimum number of CPU cores that can be enabled for the flex component.
+	MinimumCoreCount *int32
+
+	// The name of the flex component.
+	Name *string
+
+	// The runtime minimum number of CPU cores that can be enabled for the flex
+	// component.
+	RuntimeMinimumCoreCount *int32
+
+	// The shape that uses the flex component.
+	Shape *string
 
 	noSmithyDocumentSerde
 }

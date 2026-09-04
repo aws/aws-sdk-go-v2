@@ -27896,6 +27896,40 @@ func awsRestjson1_deserializeDocument__listOfOutputGroup(v *[]types.OutputGroup,
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfOutputLocationRef(v *[]types.OutputLocationRef, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.OutputLocationRef
+	if *v == nil {
+		cv = []types.OutputLocationRef{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.OutputLocationRef
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentOutputLocationRef(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfPipelineDetail(v *[]types.PipelineDetail, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -28661,6 +28695,139 @@ func awsRestjson1_deserializeDocumentAacSettings(v **types.AacSettings, value in
 					return fmt.Errorf("expected AacVbrQuality to be of type string, got %T instead", value)
 				}
 				sv.VbrQuality = types.AacVbrQuality(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAbWatermarkingCustomProfile(v **types.AbWatermarkingCustomProfile, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AbWatermarkingCustomProfile
+	if *v == nil {
+		sv = &types.AbWatermarkingCustomProfile{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "embeddingFrequency":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EmbeddingFrequency = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.EmbeddingFrequency = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected __doubleMin250Max5000 to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "sceneCut":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.SceneCut = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.SceneCut = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected __doubleMinNegative1Max5 to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "targetPsnr":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.TargetPsnr = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.TargetPsnr = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected __doubleMin32Max46 to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		default:
@@ -33109,6 +33276,105 @@ func awsRestjson1_deserializeDocumentClusterNetworkSettings(v **types.ClusterNet
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCmafIngestAbWatermarkerIrdetoSettings(v **types.CmafIngestAbWatermarkerIrdetoSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CmafIngestAbWatermarkerIrdetoSettings
+	if *v == nil {
+		sv = &types.CmafIngestAbWatermarkerIrdetoSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "additionalDestinationsAlternateDestinations":
+			if err := awsRestjson1_deserializeDocument__listOfOutputLocationRef(&sv.AdditionalDestinationsAlternateDestinations, value); err != nil {
+				return err
+			}
+
+		case "alternateDestination":
+			if err := awsRestjson1_deserializeDocumentOutputLocationRef(&sv.AlternateDestination, value); err != nil {
+				return err
+			}
+
+		case "customProfile":
+			if err := awsRestjson1_deserializeDocumentAbWatermarkingCustomProfile(&sv.CustomProfile, value); err != nil {
+				return err
+			}
+
+		case "license":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.License = ptr.String(jtv)
+			}
+
+		case "operatorId":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max511 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.OperatorId = ptr.Int32(int32(i64))
+			}
+
+		case "polyPeriod":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max1000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PolyPeriod = ptr.Int32(int32(i64))
+			}
+
+		case "profile":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AbWatermarkingProfile to be of type string, got %T instead", value)
+				}
+				sv.Profile = types.AbWatermarkingProfile(jtv)
+			}
+
+		case "watermarkIdLength":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AbWatermarkerIdLength to be of type string, got %T instead", value)
+				}
+				sv.WatermarkIdLength = types.AbWatermarkerIdLength(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCmafIngestCaptionLanguageMapping(v **types.CmafIngestCaptionLanguageMapping, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -33337,6 +33603,11 @@ func awsRestjson1_deserializeDocumentCmafIngestGroupSettings(v **types.CmafInges
 				sv.TimedMetadataPassthrough = types.CmafTimedMetadataPassthrough(jtv)
 			}
 
+		case "watermarkingSettings":
+			if err := awsRestjson1_deserializeDocumentCmafIngestWatermarkingSettings(&sv.WatermarkingSettings, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -33375,6 +33646,42 @@ func awsRestjson1_deserializeDocumentCmafIngestOutputSettings(v **types.CmafInge
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.NameModifier = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCmafIngestWatermarkingSettings(v **types.CmafIngestWatermarkingSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CmafIngestWatermarkingSettings
+	if *v == nil {
+		sv = &types.CmafIngestWatermarkingSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "cmafIngestAbWatermarkerIrdetoSettings":
+			if err := awsRestjson1_deserializeDocumentCmafIngestAbWatermarkerIrdetoSettings(&sv.CmafIngestAbWatermarkerIrdetoSettings, value); err != nil {
+				return err
 			}
 
 		default:
@@ -42869,6 +43176,105 @@ func awsRestjson1_deserializeDocumentMediaPackageOutputSettings(v **types.MediaP
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMediaPackageV2AbWatermarkerIrdetoSettings(v **types.MediaPackageV2AbWatermarkerIrdetoSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MediaPackageV2AbWatermarkerIrdetoSettings
+	if *v == nil {
+		sv = &types.MediaPackageV2AbWatermarkerIrdetoSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "additionalDestinationsAlternateDestinations":
+			if err := awsRestjson1_deserializeDocument__listOfOutputLocationRef(&sv.AdditionalDestinationsAlternateDestinations, value); err != nil {
+				return err
+			}
+
+		case "alternateDestination":
+			if err := awsRestjson1_deserializeDocumentOutputLocationRef(&sv.AlternateDestination, value); err != nil {
+				return err
+			}
+
+		case "customProfile":
+			if err := awsRestjson1_deserializeDocumentAbWatermarkingCustomProfile(&sv.CustomProfile, value); err != nil {
+				return err
+			}
+
+		case "license":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.License = ptr.String(jtv)
+			}
+
+		case "operatorId":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max511 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.OperatorId = ptr.Int32(int32(i64))
+			}
+
+		case "polyPeriod":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max1000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PolyPeriod = ptr.Int32(int32(i64))
+			}
+
+		case "profile":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AbWatermarkingProfile to be of type string, got %T instead", value)
+				}
+				sv.Profile = types.AbWatermarkingProfile(jtv)
+			}
+
+		case "watermarkIdLength":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AbWatermarkerIdLength to be of type string, got %T instead", value)
+				}
+				sv.WatermarkIdLength = types.AbWatermarkerIdLength(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMediaPackageV2DestinationSettings(v **types.MediaPackageV2DestinationSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -43055,6 +43461,47 @@ func awsRestjson1_deserializeDocumentMediaPackageV2GroupSettings(v **types.Media
 					return fmt.Errorf("expected CmafTimedMetadataPassthrough to be of type string, got %T instead", value)
 				}
 				sv.TimedMetadataPassthrough = types.CmafTimedMetadataPassthrough(jtv)
+			}
+
+		case "watermarkingSettings":
+			if err := awsRestjson1_deserializeDocumentMediaPackageV2WatermarkingSettings(&sv.WatermarkingSettings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMediaPackageV2WatermarkingSettings(v **types.MediaPackageV2WatermarkingSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MediaPackageV2WatermarkingSettings
+	if *v == nil {
+		sv = &types.MediaPackageV2WatermarkingSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "mediaPackageV2AbWatermarkerIrdetoSettings":
+			if err := awsRestjson1_deserializeDocumentMediaPackageV2AbWatermarkerIrdetoSettings(&sv.MediaPackageV2AbWatermarkerIrdetoSettings, value); err != nil {
+				return err
 			}
 
 		default:

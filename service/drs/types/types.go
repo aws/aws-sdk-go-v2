@@ -4496,6 +4496,9 @@ func (v *SourceNetworkData) Deserialize(d smithy.ShapeDeserializer) error {
 // Properties of the Source Server machine.
 type SourceProperties struct {
 
+	// The architecture of the Source Server.
+	Architecture SourceServerArchitecture
+
 	// An array of CPUs.
 	Cpus []CPU
 
@@ -4534,6 +4537,9 @@ func (v *SourceProperties) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SourceProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Architecture != "" {
+		s.WriteString(schemas.SourceProperties_architecture, string(v.Architecture))
+	}
 	serializeCpus(s, schemas.SourceProperties_cpus, v.Cpus)
 	serializeDisks(s, schemas.SourceProperties_disks, v.Disks)
 	if v.IdentificationHints != nil {
@@ -4563,6 +4569,13 @@ func (v *SourceProperties) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *SourceProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SourceProperties, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.SourceProperties_architecture:
+			var ev string
+			if err := d.ReadString(schemas.SourceProperties_architecture, &ev); err != nil {
+				return err
+			}
+			v.Architecture = SourceServerArchitecture(ev)
+			return nil
 		case schemas.SourceProperties_cpus:
 			return deserializeCpus(d, schemas.SourceProperties_cpus, &v.Cpus)
 		case schemas.SourceProperties_disks:

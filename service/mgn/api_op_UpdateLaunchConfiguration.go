@@ -12,7 +12,7 @@ import (
 
 // Updates multiple LaunchConfigurations by Source Server ID.
 //
-// bootMode valid values are LEGACY_BIOS | UEFI
+// bootMode valid values are LEGACY_BIOS | UEFI | USE_SOURCE
 func (c *Client) UpdateLaunchConfiguration(ctx context.Context, params *UpdateLaunchConfigurationInput, optFns ...func(*Options)) (*UpdateLaunchConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateLaunchConfigurationInput{}
@@ -62,7 +62,7 @@ type UpdateLaunchConfigurationInput struct {
 	// Update Launch configuration name request.
 	Name *string
 
-	// Post Launch Actions to executed on the Test or Cutover instance.
+	// Post Launch Actions to be executed on the Test or Cutover instance.
 	PostLaunchActions *types.PostLaunchActions
 
 	// Update Launch configuration Target instance right sizing request.
@@ -204,7 +204,7 @@ type UpdateLaunchConfigurationOutput struct {
 	// Launch configuration name.
 	Name *string
 
-	// Post Launch Actions to executed on the Test or Cutover instance.
+	// Post Launch Actions to be executed on the Test or Cutover instance.
 	PostLaunchActions *types.PostLaunchActions
 
 	// Launch configuration Source Server ID.

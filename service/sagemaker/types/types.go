@@ -38537,8 +38537,15 @@ type OnlineStoreConfig struct {
 	//
 	//   - Standard : A managed low latency data store for feature groups.
 	//
+	//   - Standard_V2 : A managed low latency data store for feature groups that
+	//   supports partial updates to individual features using the [UpdateRecord]operation. Choose
+	//   this storage type at feature group creation time if your use case requires
+	//   updating specific feature values without rewriting the entire record.
+	//
 	//   - InMemory : A managed data store for feature groups that supports very low
 	//   latency retrieval.
+	//
+	// [UpdateRecord]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_UpdateRecord.html
 	StorageType StorageType
 
 	// Time to live duration, where the record is hard deleted after the expiration
@@ -38602,6 +38609,14 @@ func (v *OnlineStoreConfig) Deserialize(d smithy.ShapeDeserializer) error {
 // Updates the feature group online store configuration.
 type OnlineStoreConfigUpdate struct {
 
+	// The online store storage type to migrate the feature group to. Use this
+	// parameter to migrate an existing feature group from Standard to Standard_V2
+	// storage format, enabling support for the [UpdateRecord]operation. Migration is a one-way
+	// operation and cannot be reversed.
+	//
+	// [UpdateRecord]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_UpdateRecord.html
+	StorageType StorageType
+
 	// Time to live duration, where the record is hard deleted after the expiration
 	// time is reached; ExpiresAt = EventTime + TtlDuration . For information on
 	// HardDelete, see the [DeleteRecord]API in the Amazon SageMaker API Reference guide.
@@ -38619,6 +38634,9 @@ func (v *OnlineStoreConfigUpdate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OnlineStoreConfigUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StorageType != "" {
+		s.WriteString(schemas.OnlineStoreConfigUpdate_StorageType, string(v.StorageType))
+	}
 	if v.TtlDuration != nil {
 		s.WriteStruct(schemas.OnlineStoreConfigUpdate_TtlDuration)
 		v.TtlDuration.SerializeMembers(s)
@@ -38628,6 +38646,13 @@ func (v *OnlineStoreConfigUpdate) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *OnlineStoreConfigUpdate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OnlineStoreConfigUpdate, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.OnlineStoreConfigUpdate_StorageType:
+			var ev string
+			if err := d.ReadString(schemas.OnlineStoreConfigUpdate_StorageType, &ev); err != nil {
+				return err
+			}
+			v.StorageType = StorageType(ev)
+			return nil
 		case schemas.OnlineStoreConfigUpdate_TtlDuration:
 			v.TtlDuration = &TtlDuration{}
 			return v.TtlDuration.Deserialize(d)

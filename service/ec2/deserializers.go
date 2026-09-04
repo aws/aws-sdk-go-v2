@@ -89095,6 +89095,19 @@ func awsEc2query_deserializeDocumentCapacityReservation(v **types.CapacityReserv
 				sv.UnusedReservationBillingOwnerId = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("zeroSizePreference", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ZeroSizePreference = types.ZeroSizePreference(xtv)
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()
@@ -122445,6 +122458,19 @@ func awsEc2query_deserializeDocumentInterruptibleCapacityAllocation(v **types.In
 				sv.TargetInstanceCount = ptr.Int32(int32(i64))
 			}
 
+		case strings.EqualFold("zeroSizePreference", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ZeroSizePreference = types.ZeroSizePreference(xtv)
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()
@@ -124641,6 +124667,19 @@ func awsEc2query_deserializeDocumentIpamInternetRegistryAssociation(v **types.Ip
 			{
 				xtv := string(val)
 				sv.State = types.IpamInternetRegistryAssociationState(xtv)
+			}
+
+		case strings.EqualFold("stateMessage", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.StateMessage = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("tagSet", t.Name.Local):

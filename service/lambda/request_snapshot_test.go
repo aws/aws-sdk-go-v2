@@ -753,10 +753,16 @@ func TestCheckRequestSnapshot_CreateFunction(t *testing.T) {
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 		},
 		CodeSigningConfigArn: ptr.String("__CodeSigningConfigArn__"),
@@ -3269,10 +3275,16 @@ func TestCheckRequestSnapshot_UpdateFunctionConfiguration(t *testing.T) {
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 		},
 		ImageConfig: &types.ImageConfig{
@@ -3968,10 +3980,16 @@ func TestUpdateRequestSnapshot_CreateFunction(t *testing.T) {
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 		},
 		CodeSigningConfigArn: ptr.String("__CodeSigningConfigArn__"),
@@ -6484,10 +6502,16 @@ func TestUpdateRequestSnapshot_UpdateFunctionConfiguration(t *testing.T) {
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 			{
 				Arn:            ptr.String("__Arn__"),
 				LocalMountPath: ptr.String("__LocalMountPath__"),
+				S3FilesConfig: &types.S3FilesConfig{
+					DirectS3Read: types.DirectS3Read("ENABLED"),
+				},
 			},
 		},
 		ImageConfig: &types.ImageConfig{

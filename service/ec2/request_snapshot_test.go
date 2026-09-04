@@ -5220,6 +5220,7 @@ func TestCheckRequestSnapshot_CreateInterruptibleCapacityReservationAllocation(t
 				},
 			},
 		},
+		ZeroSizePreference: types.ZeroSizePreference("retain"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -30858,7 +30859,7 @@ func TestCheckRequestSnapshot_ModifyInstanceAttribute(t *testing.T) {
 		Ramdisk: &types.AttributeValue{
 			Value: ptr.String("__Value__"),
 		},
-		UserData: &types.BlobAttributeValue{
+		UserData: &types.SecureBlobAttributeValue{
 			Value: []byte("blob"),
 		},
 		InstanceInitiatedShutdownBehavior: &types.AttributeValue{
@@ -39025,6 +39026,7 @@ func TestCheckRequestSnapshot_UpdateInterruptibleCapacityReservationAllocation(t
 		CapacityReservationId: ptr.String("__CapacityReservationId__"),
 		TargetInstanceCount:   ptr.Int32(1),
 		DryRun:                ptr.Bool(true),
+		ZeroSizePreference:    types.ZeroSizePreference("retain"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -44415,6 +44417,7 @@ func TestUpdateRequestSnapshot_CreateInterruptibleCapacityReservationAllocation(
 				},
 			},
 		},
+		ZeroSizePreference: types.ZeroSizePreference("retain"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -70053,7 +70056,7 @@ func TestUpdateRequestSnapshot_ModifyInstanceAttribute(t *testing.T) {
 		Ramdisk: &types.AttributeValue{
 			Value: ptr.String("__Value__"),
 		},
-		UserData: &types.BlobAttributeValue{
+		UserData: &types.SecureBlobAttributeValue{
 			Value: []byte("blob"),
 		},
 		InstanceInitiatedShutdownBehavior: &types.AttributeValue{
@@ -78220,6 +78223,7 @@ func TestUpdateRequestSnapshot_UpdateInterruptibleCapacityReservationAllocation(
 		CapacityReservationId: ptr.String("__CapacityReservationId__"),
 		TargetInstanceCount:   ptr.Int32(1),
 		DryRun:                ptr.Bool(true),
+		ZeroSizePreference:    types.ZeroSizePreference("retain"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

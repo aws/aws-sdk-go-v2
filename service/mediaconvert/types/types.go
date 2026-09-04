@@ -62,6 +62,12 @@ type AacSettings struct {
 	// speech gates.
 	LoudnessMeasurementMode AacLoudnessMeasurementMode
 
+	// When set to WHEN_POSSIBLE, input AAC audio will be passed through if it is
+	// present on the input. This detection is dynamic over the life of the transcode.
+	// Inputs that alternate between AAC and non-AAC content will have a consistent AAC
+	// output as the system alternates between passthrough and encoding.
+	PassthroughControl AacPassthroughControl
+
 	// Specify the RAP (Random Access Point) interval for your xHE-AAC audio output. A
 	// RAP allows a decoder to decode audio data mid-stream, without the need to
 	// reference previous audio frames, and perform adaptive audio bitrate switching.
@@ -366,6 +372,23 @@ type AncillarySourceSettings struct {
 	noSmithyDocumentSerde
 }
 
+// An aspect ratio expressed as a fraction with numerator and denominator values,
+// reduced to lowest terms. Used for the sample (pixel) aspect ratio and the
+// display aspect ratio of a video track. For example, a 720x576 anamorphic track
+// has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9.
+type AspectRatio struct {
+
+	// The denominator, or bottom number, in the fractional aspect ratio. For example,
+	// for a display aspect ratio of 16 / 9, the denominator would be 9.
+	Denominator *int32
+
+	// The numerator, or top number, in the fractional aspect ratio. For example, for
+	// a display aspect ratio of 16 / 9, the numerator would be 16.
+	Numerator *int32
+
+	noSmithyDocumentSerde
+}
+
 // Specify the QuickTime audio channel layout tags for the audio channels in this
 // audio track. When you don't specify a value, MediaConvert labels your track as
 // Center (C) by default. To use Audio layout tagging, your output must be in a
@@ -411,9 +434,10 @@ type AudioCodecSettings struct {
 	// Required when you set Codec to the value AIFF.
 	AiffSettings *AiffSettings
 
-	// Choose the audio codec for this output. Note that the option Dolby Digital
-	// passthrough applies only to Dolby Digital and Dolby Digital Plus audio inputs.
-	// Make sure that you choose a codec that's supported with your output container:
+	// Choose the audio codec for this output. Note that the option passthrough
+	// applies only to Dolby Digital, Dolby Digital Plus, AAC LC, AAC HEV1, and AAC
+	// HEV2 audio inputs. Make sure that you choose a codec that's supported with your
+	// output container:
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers.html#reference-codecs-containers-output-audio
 	// For audio-only outputs, make sure that both your input audio codec and your
 	// output audio codec are supported for audio-only workflows. For more information,
@@ -614,6 +638,10 @@ type AudioProperties struct {
 
 	// The bit rate of the audio track, in bits per second.
 	BitRate *int64
+
+	// The audio channel layout of the track, such as "mono", "stereo", "5.1", or
+	// "7.1". Object-based or immersive audio is reported as "5.1.4" or "7.1.4".
+	ChannelLayout *string
 
 	// The number of audio channels in the audio track.
 	Channels *int32
@@ -2200,7 +2228,9 @@ type CmfcSettings struct {
 	// Ignore this setting unless you have SCTE-35 markers in your input video file.
 	// Choose Passthrough if you want SCTE-35 markers that appear in your input to also
 	// appear in this output. Choose None if you don't want those SCTE-35 markers in
-	// this output.
+	// this output. When your input is an HLS manifest, choose Manifest cues to pass
+	// through CUE markers in your HLS manifest as segment boundaries and SCTE-35
+	// markers in this output at each EXT-X-CUE-OUT splice point in the input manifest.
 	Scte35Source CmfcScte35Source
 
 	// Specify the ID or ARN of the AWS KMS key used to sign the C2PA manifest in your
@@ -2274,6 +2304,10 @@ type CodecMetadata struct {
 	// interlaced video; it is omitted for progressive video and when the field order
 	// is not indicated by the source.
 	FieldOrder *string
+
+	// Indicates that HDR10+ (SMPTE ST 2094-40) dynamic metadata was detected in the
+	// HEVC bitstream. Present only when detected.
+	Hdr10PlusPresence Hdr10PlusPresence
 
 	// The height in pixels as coded by the codec. This represents the actual encoded
 	// video height as specified in the video stream headers.
@@ -2454,9 +2488,9 @@ type Container struct {
 	Duration *float64
 
 	// The format of your media file. For example: MP4, QuickTime (MOV), Matroska
-	// (MKV), WebM, MXF, Wave, AVI, MPEG-TS, MPEG-PS, or MP3. Note that this will be
-	// blank if your media file has a format that the MediaConvert Probe operation does
-	// not recognize.
+	// (MKV), WebM, MXF, Wave, AVI, MPEG-TS, MPEG-PS, MP3, FLAC, ASF (Windows Media /
+	// WMA), OGG. Note that this will be blank if your media file has a format that the
+	// MediaConvert Probe operation does not recognize.
 	Format Format
 
 	// The start timecode of the media file, in HH:MM:SS:FF format (or HH:MM:SS;FF for
@@ -2553,11 +2587,11 @@ type DashAdditionalManifest struct {
 type DashIsoEncryptionSettings struct {
 
 	// This setting can improve the compatibility of your output with video players on
-	// obsolete devices. It applies only to DASH H.264 outputs with DRM encryption.
-	// Choose Unencrypted SEI only to correct problems with playback on older devices.
-	// Otherwise, keep the default setting CENC v1. If you choose Unencrypted SEI, for
-	// that output, the service will exclude the access unit delimiter and will leave
-	// the SEI NAL units unencrypted.
+	// obsolete devices. It applies only to DASH outputs with DRM encryption. Choose
+	// Unencrypted SEI only to correct problems with playback on older H.264 devices.
+	// Choose CENC v1 unencrypted headers to leave NAL unit headers and slice headers
+	// unencrypted for H.265 outputs, improving compatibility with strict HEVC
+	// decoders. Otherwise, keep the default setting CENC v1.
 	PlaybackDeviceCompatibility DashIsoPlaybackDeviceCompatibility
 
 	// If your output group type is HLS, DASH, or Microsoft Smooth, use these settings
@@ -6403,7 +6437,10 @@ type JobsQueryFilter struct {
 	// format. * audioCodec - Your output's audio codec. (AAC | MP2 | MP3 | WAV | AIFF
 	// | AC3| EAC3 | EAC3_ATMOS | VORBIS | OPUS | PASSTHROUGH | FLAC) * videoCodec -
 	// Your output's video codec. (AV1 | AVC_INTRA | FRAME_CAPTURE | H_264 | H_265 |
-	// MPEG2 | PASSTHROUGH | PRORES | UNCOMPRESSED | VC3 | VP8 | VP9 | XAVC)
+	// MPEG2 | PASSTHROUGH | PRORES | UNCOMPRESSED | VC3 | VP8 | VP9 | XAVC) *
+	// errorCode - The error code that your job failed with. For example, 1010. For
+	// more information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/mediaconvert_error_codes.html
 	Key JobsQueryFilterKey
 
 	// A list of values associated with a JobsQueryFilterKey.
@@ -6853,8 +6890,11 @@ type M2tsSettings struct {
 
 	// For SCTE-35 markers from your input-- Choose Passthrough if you want SCTE-35
 	// markers that appear in your input to also appear in this output. Choose None if
-	// you don't want SCTE-35 markers in this output. For SCTE-35 markers from an ESAM
-	// XML document-- Choose None. Also provide the ESAM XML as a string in the setting
+	// you don't want SCTE-35 markers in this output. When your input is an HLS
+	// manifest, choose Manifest cues to pass through CUE markers in your HLS manifest
+	// as segment boundaries and SCTE-35 markers in this output at each EXT-X-CUE-OUT
+	// splice point in the input manifest. For SCTE-35 markers from an ESAM XML
+	// document-- Choose None. Also provide the ESAM XML as a string in the setting
 	// Signal processing notification XML. Also enable ESAM SCTE-35 (include the
 	// property scte35Esam).
 	Scte35Source M2tsScte35Source
@@ -6997,7 +7037,10 @@ type M3u8Settings struct {
 	// XML document-- Choose None if you don't want manifest conditioning. Choose
 	// Passthrough and choose Ad markers if you do want manifest conditioning. In both
 	// cases, also provide the ESAM XML as a string in the setting Signal processing
-	// notification XML.
+	// notification XML. For SCTE-35 markers from your input HLS manifest-- Choose
+	// Manifest cues to pass through CUE markers in your HLS manifest as segment
+	// boundaries and SCTE-35 markers in this output at each EXT-X-CUE-OUT splice point
+	// in the input manifest.
 	Scte35Source M3u8Scte35Source
 
 	// Set ID3 metadata to Passthrough to include ID3 metadata in this output. This
@@ -7438,7 +7481,9 @@ type MpdSettings struct {
 	// Ignore this setting unless you have SCTE-35 markers in your input video file.
 	// Choose Passthrough if you want SCTE-35 markers that appear in your input to also
 	// appear in this output. Choose None if you don't want those SCTE-35 markers in
-	// this output.
+	// this output. When your input is an HLS manifest, choose Manifest cues to pass
+	// through CUE markers in your HLS manifest as segment boundaries and SCTE-35
+	// markers in this output at each EXT-X-CUE-OUT splice point in the input manifest.
 	Scte35Source MpdScte35Source
 
 	// Specify the ID or ARN of the AWS KMS key used to sign the C2PA manifest in your
@@ -9256,9 +9301,57 @@ type TrackSourceSettings struct {
 // https://docs.aws.amazon.com/mediaconvert/latest/ug/ttml-and-webvtt-output-captions.html.
 type TtmlDestinationSettings struct {
 
+	// Specify the color of the rectangle behind the captions. If Style passthrough is
+	// set to enabled, leave blank or set to Auto to pass through the background color
+	// from your input captions. If Style passthrough is set to disabled, leave blank
+	// or set to Auto to use the default black.
+	BackgroundColor TtmlBackgroundColor
+
+	// Specify the opacity of the background rectangle. Enter a value from 0 to 255,
+	// where 0 is transparent and 255 is opaque. If Style passthrough is set to
+	// enabled, leave blank to pass through the background style information in your
+	// input captions to your output captions. If Style passthrough is set to disabled
+	// and backgroundColor is set, leave blank to use a value of 255 (opaque).
+	BackgroundOpacity *int32
+
+	// Specify the color of the captions text. If Style passthrough is set to enabled,
+	// leave blank or set to Auto to pass through the font color from your input
+	// captions. If Style passthrough is set to disabled, leave blank or set to Auto to
+	// use the default white.
+	FontColor TtmlFontColor
+
+	// Specify the opacity of the captions. Enter a value from 0 to 255, where 0 is
+	// transparent and 255 is opaque. If Style passthrough is set to enabled, leave
+	// blank to pass through the font opacity information in your input captions to
+	// your output captions. If Style passthrough is set to disabled and fontColor is
+	// set, leave blank to use a value of 255 (opaque).
+	FontOpacity *int32
+
+	// Specify the Font size in pixels. Must be a positive integer. Set to 0, or leave
+	// blank, for automatic font size.
+	FontSize *int32
+
+	// Specify the font style of the caption text. If Style passthrough is set to
+	// enabled, leave blank to pass through the font style from your input captions. If
+	// Style passthrough is set to disabled, leave blank to use the default normal
+	// style.
+	FontStyle TtmlFontStyle
+
+	// Specify the font weight of the caption text. If Style passthrough is set to
+	// enabled, leave blank to pass through the font weight from your input captions.
+	// If Style passthrough is set to disabled, leave blank to use the default normal
+	// weight.
+	FontWeight TtmlFontWeight
+
 	// Pass through style and position information from a TTML-like input source
 	// (TTML, IMSC, SMPTE-TT) to the TTML output.
 	StylePassthrough TtmlStylePassthrough
+
+	// Specify the text decoration of the caption text. If Style passthrough is set to
+	// enabled, leave blank to pass through the text decoration from your input
+	// captions. If Style passthrough is set to disabled, leave blank to use the
+	// default of none.
+	TextDecoration TtmlTextDecoration
 
 	noSmithyDocumentSerde
 }
@@ -9964,6 +10057,12 @@ type VideoProperties struct {
 	// color reproduction during playback and transcoding.
 	ColorPrimaries ColorPrimaries
 
+	// An aspect ratio expressed as a fraction with numerator and denominator values,
+	// reduced to lowest terms. Used for the sample (pixel) aspect ratio and the
+	// display aspect ratio of a video track. For example, a 720x576 anamorphic track
+	// has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9.
+	DisplayAspectRatio *AspectRatio
+
 	// The frame rate of the video or audio track, expressed as a fraction with
 	// numerator and denominator values.
 	FrameRate *FrameRate
@@ -9987,6 +10086,12 @@ type VideoProperties struct {
 	// field is null when no rotation metadata is present or when the rotation is 0
 	// degrees. For MP4, non-standard transformation matrices also yield null.
 	Rotation *int32
+
+	// An aspect ratio expressed as a fraction with numerator and denominator values,
+	// reduced to lowest terms. Used for the sample (pixel) aspect ratio and the
+	// display aspect ratio of a video track. For example, a 720x576 anamorphic track
+	// has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9.
+	SampleAspectRatio *AspectRatio
 
 	// The color space transfer characteristics of the video track, defining the
 	// relationship between linear light values and the encoded signal values. This
@@ -10522,6 +10627,18 @@ type Xavc4kProfileSettings struct {
 
 // Required when you set Profile to the value XAVC_HD_INTRA_CBG.
 type XavcHdIntraCbgProfileSettings struct {
+
+	// Choose the scan line type for the output. Keep the default value, Progressive
+	// to create a progressive output, regardless of the scan type of your input. Use
+	// Top field first or Bottom field first to create an output that's interlaced with
+	// the same field polarity throughout. Use Follow, default top or Follow, default
+	// bottom to produce outputs with the same field polarity as the source. For jobs
+	// that have multiple inputs, the output field polarity might change over the
+	// course of the output. Follow behavior depends on the input scan type. If the
+	// source is interlaced, the output will be interlaced with the same polarity as
+	// the source. If the source is progressive, the output will be interlaced with top
+	// field bottom field first, depending on which of the Follow options you choose.
+	InterlaceMode XavcInterlaceMode
 
 	// Specify the XAVC Intra HD (CBG) Class to set the bitrate of your output.
 	// Outputs of the same class have similar image quality over the operating points

@@ -33,6 +33,35 @@ func (e *AccessForbidden) ErrorCode() string {
 }
 func (e *AccessForbidden) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The service rejected the update because the provided EventTime is older than
+// the record's current EventTime . To persist the update, retrieve the record's
+// latest EventTime and resubmit the request with an EventTime that is equal to or
+// newer than the current value.
+type ConflictException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // An internal failure occurred. Try your request again. If the problem persists,
 // contact Amazon Web Services customer support.
 type InternalFailure struct {

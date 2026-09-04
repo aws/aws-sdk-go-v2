@@ -7916,6 +7916,15 @@ func awsRestjson1_deserializeDocumentAacSettings(v **types.AacSettings, value in
 				sv.LoudnessMeasurementMode = types.AacLoudnessMeasurementMode(jtv)
 			}
 
+		case "passthroughControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AacPassthroughControl to be of type string, got %T instead", value)
+				}
+				sv.PassthroughControl = types.AacPassthroughControl(jtv)
+			}
+
 		case "rapInterval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8676,6 +8685,63 @@ func awsRestjson1_deserializeDocumentAncillarySourceSettings(v **types.Ancillary
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAspectRatio(v **types.AspectRatio, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AspectRatio
+	if *v == nil {
+		sv = &types.AspectRatio{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "denominator":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Denominator = ptr.Int32(int32(i64))
+			}
+
+		case "numerator":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Numerator = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAudioChannelTaggingSettings(v **types.AudioChannelTaggingSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9178,6 +9244,15 @@ func awsRestjson1_deserializeDocumentAudioProperties(v **types.AudioProperties, 
 					return err
 				}
 				sv.BitRate = ptr.Int64(i64)
+			}
+
+		case "channelLayout":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ChannelLayout = ptr.String(jtv)
 			}
 
 		case "channels":
@@ -11979,6 +12054,15 @@ func awsRestjson1_deserializeDocumentCodecMetadata(v **types.CodecMetadata, valu
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.FieldOrder = ptr.String(jtv)
+			}
+
+		case "hdr10PlusPresence":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Hdr10PlusPresence to be of type string, got %T instead", value)
+				}
+				sv.Hdr10PlusPresence = types.Hdr10PlusPresence(jtv)
 			}
 
 		case "height":
@@ -26463,6 +26547,81 @@ func awsRestjson1_deserializeDocumentTtmlDestinationSettings(v **types.TtmlDesti
 
 	for key, value := range shape {
 		switch key {
+		case "backgroundColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TtmlBackgroundColor to be of type string, got %T instead", value)
+				}
+				sv.BackgroundColor = types.TtmlBackgroundColor(jtv)
+			}
+
+		case "backgroundOpacity":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max255 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BackgroundOpacity = ptr.Int32(int32(i64))
+			}
+
+		case "fontColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TtmlFontColor to be of type string, got %T instead", value)
+				}
+				sv.FontColor = types.TtmlFontColor(jtv)
+			}
+
+		case "fontOpacity":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max255 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FontOpacity = ptr.Int32(int32(i64))
+			}
+
+		case "fontSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max96 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FontSize = ptr.Int32(int32(i64))
+			}
+
+		case "fontStyle":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TtmlFontStyle to be of type string, got %T instead", value)
+				}
+				sv.FontStyle = types.TtmlFontStyle(jtv)
+			}
+
+		case "fontWeight":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TtmlFontWeight to be of type string, got %T instead", value)
+				}
+				sv.FontWeight = types.TtmlFontWeight(jtv)
+			}
+
 		case "stylePassthrough":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -26470,6 +26629,15 @@ func awsRestjson1_deserializeDocumentTtmlDestinationSettings(v **types.TtmlDesti
 					return fmt.Errorf("expected TtmlStylePassthrough to be of type string, got %T instead", value)
 				}
 				sv.StylePassthrough = types.TtmlStylePassthrough(jtv)
+			}
+
+		case "textDecoration":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TtmlTextDecoration to be of type string, got %T instead", value)
+				}
+				sv.TextDecoration = types.TtmlTextDecoration(jtv)
 			}
 
 		default:
@@ -27656,6 +27824,11 @@ func awsRestjson1_deserializeDocumentVideoProperties(v **types.VideoProperties, 
 				sv.ColorPrimaries = types.ColorPrimaries(jtv)
 			}
 
+		case "displayAspectRatio":
+			if err := awsRestjson1_deserializeDocumentAspectRatio(&sv.DisplayAspectRatio, value); err != nil {
+				return err
+			}
+
 		case "frameRate":
 			if err := awsRestjson1_deserializeDocumentFrameRate(&sv.FrameRate, value); err != nil {
 				return err
@@ -27699,6 +27872,11 @@ func awsRestjson1_deserializeDocumentVideoProperties(v **types.VideoProperties, 
 					return err
 				}
 				sv.Rotation = ptr.Int32(int32(i64))
+			}
+
+		case "sampleAspectRatio":
+			if err := awsRestjson1_deserializeDocumentAspectRatio(&sv.SampleAspectRatio, value); err != nil {
+				return err
 			}
 
 		case "transferCharacteristics":
@@ -28816,6 +28994,15 @@ func awsRestjson1_deserializeDocumentXavcHdIntraCbgProfileSettings(v **types.Xav
 
 	for key, value := range shape {
 		switch key {
+		case "interlaceMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XavcInterlaceMode to be of type string, got %T instead", value)
+				}
+				sv.InterlaceMode = types.XavcInterlaceMode(jtv)
+			}
+
 		case "xavcClass":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -3624,6 +3624,11 @@ func awsRestjson1_serializeDocumentAacSettings(v *types.AacSettings, value smith
 		ok.String(string(v.LoudnessMeasurementMode))
 	}
 
+	if len(v.PassthroughControl) > 0 {
+		ok := object.Key("passthroughControl")
+		ok.String(string(v.PassthroughControl))
+	}
+
 	if v.RapInterval != nil {
 		ok := object.Key("rapInterval")
 		ok.Integer(*v.RapInterval)
@@ -11030,9 +11035,49 @@ func awsRestjson1_serializeDocumentTtmlDestinationSettings(v *types.TtmlDestinat
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.BackgroundColor) > 0 {
+		ok := object.Key("backgroundColor")
+		ok.String(string(v.BackgroundColor))
+	}
+
+	if v.BackgroundOpacity != nil {
+		ok := object.Key("backgroundOpacity")
+		ok.Integer(*v.BackgroundOpacity)
+	}
+
+	if len(v.FontColor) > 0 {
+		ok := object.Key("fontColor")
+		ok.String(string(v.FontColor))
+	}
+
+	if v.FontOpacity != nil {
+		ok := object.Key("fontOpacity")
+		ok.Integer(*v.FontOpacity)
+	}
+
+	if v.FontSize != nil {
+		ok := object.Key("fontSize")
+		ok.Integer(*v.FontSize)
+	}
+
+	if len(v.FontStyle) > 0 {
+		ok := object.Key("fontStyle")
+		ok.String(string(v.FontStyle))
+	}
+
+	if len(v.FontWeight) > 0 {
+		ok := object.Key("fontWeight")
+		ok.String(string(v.FontWeight))
+	}
+
 	if len(v.StylePassthrough) > 0 {
 		ok := object.Key("stylePassthrough")
 		ok.String(string(v.StylePassthrough))
+	}
+
+	if len(v.TextDecoration) > 0 {
+		ok := object.Key("textDecoration")
+		ok.String(string(v.TextDecoration))
 	}
 
 	return nil
@@ -12026,6 +12071,11 @@ func awsRestjson1_serializeDocumentXavc4kProfileSettings(v *types.Xavc4kProfileS
 func awsRestjson1_serializeDocumentXavcHdIntraCbgProfileSettings(v *types.XavcHdIntraCbgProfileSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.InterlaceMode) > 0 {
+		ok := object.Key("interlaceMode")
+		ok.String(string(v.InterlaceMode))
+	}
 
 	if len(v.XavcClass) > 0 {
 		ok := object.Key("xavcClass")

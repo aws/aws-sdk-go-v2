@@ -13850,3 +13850,22 @@ func (WeekDay) Values() []WeekDay {
 		"saturday",
 	}
 }
+
+type ZeroSizePreference string
+
+// Enum values for ZeroSizePreference
+const (
+	ZeroSizePreferenceRetain  ZeroSizePreference = "retain"
+	ZeroSizePreferenceDefault ZeroSizePreference = "default"
+)
+
+// Values returns all known values for ZeroSizePreference. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ZeroSizePreference) Values() []ZeroSizePreference {
+	return []ZeroSizePreference{
+		"retain",
+		"default",
+	}
+}

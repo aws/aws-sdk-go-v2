@@ -16,8 +16,9 @@ import (
 // first delete all channels attached to it. To find them, use ListChannelswith a stream
 // filter.
 //
-// This API has a call limit of 5 transactions per second (TPS) for each Amazon
-// Web Services account. Exceeding 5 TPS results in a LimitExceededException .
+// This operation has a call limit of 5 transactions per second (TPS) for each
+// Amazon Web Services account. Exceeding 5 TPS results in a LimitExceededException
+// .
 func (c *Client) DeleteChannel(ctx context.Context, params *DeleteChannelInput, optFns ...func(*Options)) (*DeleteChannelOutput, error) {
 	if params == nil {
 		params = &DeleteChannelInput{}

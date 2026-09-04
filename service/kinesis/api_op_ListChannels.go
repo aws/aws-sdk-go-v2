@@ -17,8 +17,9 @@ import (
 // Use this operation to find channels before deleting a stream, or to audit the
 // channels configured in an Amazon Web Services Region.
 //
-// This API has a call limit of 5 transactions per second (TPS) for each Amazon
-// Web Services account. Exceeding 5 TPS results in a LimitExceededException .
+// This operation has a call limit of 5 transactions per second (TPS) for each
+// Amazon Web Services account. Exceeding 5 TPS results in a LimitExceededException
+// .
 func (c *Client) ListChannels(ctx context.Context, params *ListChannelsInput, optFns ...func(*Options)) (*ListChannelsOutput, error) {
 	if params == nil {
 		params = &ListChannelsInput{}

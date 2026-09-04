@@ -495,6 +495,60 @@ func TestCheckRequestSnapshot_PutRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckRequestSnapshot_UpdateRecord(t *testing.T) {
+	input := &UpdateRecordInput{
+		FeatureGroupName:              ptr.String("__FeatureGroupName__"),
+		RecordIdentifierValueAsString: ptr.String("__RecordIdentifierValueAsString__"),
+		Features: []types.FeatureValue{
+			{
+				FeatureName:   ptr.String("__FeatureName__"),
+				ValueAsString: ptr.String("__ValueAsString__"),
+				ValueAsStringList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				FeatureName:   ptr.String("__FeatureName__"),
+				ValueAsString: ptr.String("__ValueAsString__"),
+				ValueAsStringList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		TargetStores: []types.TargetStore{
+			types.TargetStore("OnlineStore"),
+			types.TargetStore("OnlineStore"),
+		},
+		TtlDuration: &types.TtlDuration{
+			Unit:  types.TtlDurationUnit("Seconds"),
+			Value: ptr.Int32(1),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateRecord(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRecord"); err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateRequestSnapshot_BatchGetRecord(t *testing.T) {
 	input := &BatchGetRecordInput{
 		Identifiers: []types.BatchGetRecordIdentifier{
@@ -782,6 +836,60 @@ func TestUpdateRequestSnapshot_PutRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutRecord"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateRecord(t *testing.T) {
+	input := &UpdateRecordInput{
+		FeatureGroupName:              ptr.String("__FeatureGroupName__"),
+		RecordIdentifierValueAsString: ptr.String("__RecordIdentifierValueAsString__"),
+		Features: []types.FeatureValue{
+			{
+				FeatureName:   ptr.String("__FeatureName__"),
+				ValueAsString: ptr.String("__ValueAsString__"),
+				ValueAsStringList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				FeatureName:   ptr.String("__FeatureName__"),
+				ValueAsString: ptr.String("__ValueAsString__"),
+				ValueAsStringList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		TargetStores: []types.TargetStore{
+			types.TargetStore("OnlineStore"),
+			types.TargetStore("OnlineStore"),
+		},
+		TtlDuration: &types.TtlDuration{
+			Unit:  types.TtlDurationUnit("Seconds"),
+			Value: ptr.Int32(1),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateRecord(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRecord"); err != nil {
 		t.Fatal(err)
 	}
 }

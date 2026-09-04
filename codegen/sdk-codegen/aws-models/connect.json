@@ -14184,11 +14184,23 @@
                         "smithy.api#required": {}
                     }
                 },
+                "PreEvaluationFilters": {
+                    "target": "com.amazonaws.connect#PreEvaluationFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pre-evaluation filters for the rule, that restrict the rule to be applied to only certain resources based\n   on the resource's attributes, such as tags assigned to a contact. The pre-evaluation filters are applied even before\n   rule conditions are evaluated and are used to enforce tag-based-access-control while applying rules.</p>"
+                    }
+                },
                 "ClientToken": {
                     "target": "com.amazonaws.connect#ClientToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
                 }
             },
@@ -46505,6 +46517,102 @@
                 }
             }
         },
+        "com.amazonaws.connect#PreEvaluationFilter": {
+            "type": "structure",
+            "members": {
+                "ResourceType": {
+                    "target": "com.amazonaws.connect#PreEvaluationFilterResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource to filter on. Valid values: <code>CONTACT</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FilterType": {
+                    "target": "com.amazonaws.connect#PreEvaluationFilterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of filter to apply. Valid values: <code>TAG</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FilterKey": {
+                    "target": "com.amazonaws.connect#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the attribute to filter on. For tag filters, this is the tag key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FilterValue": {
+                    "target": "com.amazonaws.connect#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to match against. For tag filters, this is the tag value.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Operator": {
+                    "target": "com.amazonaws.connect#PreEvaluationFilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison operator for the filter condition. Valid values: <code>EQUALS</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single pre-evaluation filter condition. Specifies a resource type, filter type, key, value, and operator\n   to match against a resource attribute.</p>"
+            }
+        },
+        "com.amazonaws.connect#PreEvaluationFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#PreEvaluationFilter"
+            }
+        },
+        "com.amazonaws.connect#PreEvaluationFilterOperator": {
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#PreEvaluationFilterResourceType": {
+            "type": "enum",
+            "members": {
+                "CONTACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTACT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#PreEvaluationFilterType": {
+            "type": "enum",
+            "members": {
+                "TAG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TAG"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#PreEvaluationFilters": {
+            "type": "structure",
+            "members": {
+                "AndConditions": {
+                    "target": "com.amazonaws.connect#PreEvaluationFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions that the rule evaluates together using AND logic. All conditions must be met for\n   the event to be evaluated by the rule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The pre-evaluation filters for a rule, that restrict a rule to be applied to only certain resources based on\n   the resource's attributes, such as tags assigned to a contact. The pre-evaluation filters are applied even before\n   rule conditions are evaluated and are used to enforce tag-based-access-control while applying rules.</p>"
+            }
+        },
         "com.amazonaws.connect#PreSignedAttachmentUrl": {
             "type": "string",
             "traits": {
@@ -50943,6 +51051,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "PreEvaluationFilters": {
+                    "target": "com.amazonaws.connect#PreEvaluationFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pre-evaluation filters for the rule, that restrict the rule to be applied to only certain resources based\n   on the resource's attributes, such as tags assigned to a contact. The pre-evaluation filters are applied even before\n   rule conditions are evaluated and are used to enforce tag-based-access-control while applying rules.</p>"
+                    }
+                },
                 "CreatedTime": {
                     "target": "com.amazonaws.connect#Timestamp",
                     "traits": {
@@ -51204,6 +51318,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The publish status of the rule.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "PreEvaluationFilters": {
+                    "target": "com.amazonaws.connect#PreEvaluationFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pre-evaluation filters for the rule, that restrict the rule to be applied to only certain resources based\n   on the resource's attributes, such as tags assigned to a contact. The pre-evaluation filters are applied even before\n   rule conditions are evaluated and are used to enforce tag-based-access-control while applying rules.</p>"
                     }
                 },
                 "CreatedTime": {
@@ -65310,6 +65430,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The publish status of the rule.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "PreEvaluationFilters": {
+                    "target": "com.amazonaws.connect#PreEvaluationFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pre-evaluation filters for the rule, that restrict the rule to be applied to only certain resources based\n   on the resource's attributes, such as tags assigned to a contact. The pre-evaluation filters are applied even before\n   rule conditions are evaluated and are used to enforce tag-based-access-control while applying rules.</p>"
                     }
                 }
             },

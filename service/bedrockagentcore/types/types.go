@@ -765,12 +765,6 @@ type CloudWatchLogsRule struct {
 // The configuration for reading agent traces from CloudWatch Logs.
 type CloudWatchLogsSource struct {
 
-	// The list of CloudWatch log group names to read agent traces from. Maximum of 5
-	// log groups.
-	//
-	// This member is required.
-	LogGroupNames []string
-
 	// The list of agent service names to filter traces within the specified log
 	// groups.
 	//
@@ -779,6 +773,16 @@ type CloudWatchLogsSource struct {
 
 	// Optional filter configuration to narrow down which sessions to evaluate.
 	FilterConfig *CloudWatchFilterConfig
+
+	// The list of CloudWatch log group name prefixes to read agent traces from.
+	// Specify this instead of logGroupNames to match log groups by prefix. Maximum of
+	// 5 prefixes. Specify either logGroupNames or logGroupNamePrefixes , not both. One
+	// of the two is required.
+	LogGroupNamePrefixes []string
+
+	// The list of CloudWatch log group names to read agent traces from. Maximum of 10
+	// log groups.
+	LogGroupNames []string
 
 	noSmithyDocumentSerde
 }
@@ -817,14 +821,28 @@ type CloudWatchLogsTraceConfig struct {
 type CloudWatchOutputConfig struct {
 
 	// The name of the CloudWatch log group where evaluation results will be written.
-	//
-	// This member is required.
+	// This value doesn't apply when resultDestination is SOURCE_LOG_GROUP , because
+	// results are written back to the trace source log group. The name can't be under
+	// the service-reserved /aws/bedrock-agentcore/evaluations/ namespace, apart from
+	// the service-managed default group.
 	LogGroupName *string
 
 	// The name of the CloudWatch log stream where evaluation results will be written.
-	//
-	// This member is required.
 	LogStreamName *string
+
+	// The CloudWatch metrics namespace where evaluation result metrics are published.
+	// If you omit this value, the service publishes metrics to
+	// Bedrock-AgentCore/Evaluations . This value can't begin with AWS/ .
+	MetricsNamespace *string
+
+	// The destination where evaluation results are written. Valid values:
+	//
+	//   - DEDICATED_LOG_GROUP (default) – Writes results to a dedicated result log
+	//   group.
+	//
+	//   - SOURCE_LOG_GROUP – Writes results back to the log group that the agent
+	//   traces were read from. If you use this value, don't specify logGroupName .
+	ResultDestination ResultDestination
 
 	noSmithyDocumentSerde
 }

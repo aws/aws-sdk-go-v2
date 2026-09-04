@@ -3,16 +3,51 @@
 // Package transfer provides the API client, operations, and parameter types for
 // AWS Transfer Family.
 //
-// Transfer Family is a fully managed service that enables the transfer of files
-// over the File Transfer Protocol (FTP), File Transfer Protocol over SSL (FTPS),
-// or Secure Shell (SSH) File Transfer Protocol (SFTP) directly into and out of
-// Amazon Simple Storage Service (Amazon S3) or Amazon EFS. Additionally, you can
-// use Applicability Statement 2 (AS2) to transfer files into and out of Amazon S3.
-// Amazon Web Services helps you seamlessly migrate your file transfer workflows to
-// Transfer Family by integrating with existing authentication systems, and
-// providing DNS routing with Amazon Route 53 so nothing changes for your customers
-// and partners, or their applications. With your data in Amazon S3, you can use it
-// with Amazon Web Services services for processing, analytics, machine learning,
-// and archiving. Getting started with Transfer Family is easy since there is no
-// infrastructure to buy and set up.
+// Transfer Family offers fully managed support for the transfer of files over
+// SFTP, AS2, FTPS, FTP, and web browser-based transfers directly into and out of
+// Amazon Web Services storage services.
+//
+// File transfer protocols are used in data exchange workflows across different
+// industries such as financial services, healthcare, advertising, and retail,
+// among others. Transfer Family simplifies the migration of file transfer
+// workflows to Amazon Web Services.
+//
+// To use the Transfer Family service, you instantiate a server in the Amazon Web
+// Services Region of your choice. You can create the server, list available
+// servers, and update and delete servers. The server is the entity that requests
+// file operations from Transfer Family. Servers have a number of important
+// properties. The server is a named instance as identified by a system assigned
+// ServerId identifier. You can optionally assign a hostname, or even a custom
+// hostname to a server. The service bills for any instantiated servers (even ones
+// OFFLINE ), and for the amount of data transferred.
+//
+// Users must be known to the server that requests file operations. A user as
+// identified by their username is assigned to a server. Usernames are used to
+// authenticate requests. A server can have only one authentication method:
+// AWS_DIRECTORY_SERVICE , SERVICE_MANAGED , AWS_LAMBDA , or API_GATEWAY .
+//
+// Transfer Family also supports web applications that provide browser-based file
+// transfer capabilities. Web applications can be configured with VPC endpoints to
+// enable secure, private connectivity within your Virtual Private Cloud (VPC).
+// This allows you to control network access and route traffic through your VPC
+// infrastructure while maintaining the managed benefits of Transfer Family.
+//
+// This API interface reference for Transfer Family contains documentation for a
+// programming interface that you can use to manage Transfer Family. The reference
+// structure is as follows:
+//
+//   - For the alphabetical list of API actions, see .
+//
+//   - For the alphabetical list of data types, see .
+//
+//   - For a list of common query parameters, see CommonParameters.
+//
+//   - For descriptions of the error codes, see CommonErrors.
+//
+// Rather than actually running a command, you can use the --generate-cli-skeleton
+// parameter with any API call to generate and display a parameter template. You
+// can then use the generated template to customize and use as input on a later
+// command. For details, see [Generate and use a parameter skeleton file].
+//
+// [Generate and use a parameter skeleton file]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-skeleton.html#cli-usage-skeleton-generate
 package transfer

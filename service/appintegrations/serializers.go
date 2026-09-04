@@ -607,6 +607,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteApplicationInput(v *DeleteApplica
 		}
 	}
 
+	if v.Force {
+		encoder.SetQuery("force").Boolean(v.Force)
+	}
+
 	return nil
 }
 

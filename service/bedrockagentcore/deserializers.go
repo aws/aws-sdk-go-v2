@@ -17859,8 +17859,13 @@ func awsRestjson1_deserializeDocumentCloudWatchLogsSource(v **types.CloudWatchLo
 				return err
 			}
 
+		case "logGroupNamePrefixes":
+			if err := awsRestjson1_deserializeDocumentLogGroupNamePrefixList(&sv.LogGroupNamePrefixes, value); err != nil {
+				return err
+			}
+
 		case "logGroupNames":
-			if err := awsRestjson1_deserializeDocumentEvaluationStringList(&sv.LogGroupNames, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentLogGroupNameList(&sv.LogGroupNames, value); err != nil {
 				return err
 			}
 
@@ -17976,7 +17981,7 @@ func awsRestjson1_deserializeDocumentCloudWatchOutputConfig(v **types.CloudWatch
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected OptionalLogGroupName to be of type string, got %T instead", value)
 				}
 				sv.LogGroupName = ptr.String(jtv)
 			}
@@ -17985,9 +17990,27 @@ func awsRestjson1_deserializeDocumentCloudWatchOutputConfig(v **types.CloudWatch
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected LogStreamName to be of type string, got %T instead", value)
 				}
 				sv.LogStreamName = ptr.String(jtv)
+			}
+
+		case "metricsNamespace":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MetricsNamespace to be of type string, got %T instead", value)
+				}
+				sv.MetricsNamespace = ptr.String(jtv)
+			}
+
+		case "resultDestination":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResultDestination to be of type string, got %T instead", value)
+				}
+				sv.ResultDestination = types.ResultDestination(jtv)
 			}
 
 		default:
@@ -21548,6 +21571,78 @@ func awsRestjson1_deserializeDocumentLogGroupArnList(v *[]string, value interfac
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLogGroupNameList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected LogGroupName to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLogGroupNamePrefixList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected LogGroupNamePrefix to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}

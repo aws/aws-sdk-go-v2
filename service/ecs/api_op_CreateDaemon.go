@@ -67,6 +67,24 @@ type CreateDaemonInput struct {
 	// The Amazon Resource Name (ARN) of the cluster to create the daemon in.
 	ClusterArn *string
 
+	// If the critical parameter of a daemon is true , and the daemon task fails,
+	// stops, or becomes unhealthy, Amazon ECS drains the container instance and stops
+	// the other tasks running on it. If the critical parameter is false , the daemon
+	// task failure doesn't affect the other tasks on the instance. The default value
+	// is true .
+	//
+	// A non-critical daemon doesn't block instance registration. The container
+	// instance becomes active and continues to run your other tasks, whether the
+	// daemon task fails during scale-out or during a deployment.
+	//
+	// Amazon ECS emits an EventBridge event when a daemon task fails to start, for
+	// both critical and non-critical daemons.
+	//
+	// Daemon task launch failures during a deployment are still counted by the
+	// deployment circuit breaker. The circuit breaker can roll back an unstable target
+	// revision.
+	Critical *bool
+
 	// Optional deployment parameters that control how the daemon rolls out updates,
 	// including the drain percentage, alarm-based rollback, and bake time.
 	DeploymentConfiguration *types.DaemonDeploymentConfiguration

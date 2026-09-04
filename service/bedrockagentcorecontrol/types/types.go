@@ -889,16 +889,20 @@ func (*ClaimMatchValueTypeMemberMatchValueStringList) isClaimMatchValueType() {}
 // online evaluation.
 type CloudWatchLogsInputConfig struct {
 
-	//  The list of CloudWatch log group names to monitor for agent traces.
-	//
-	// This member is required.
-	LogGroupNames []string
-
 	//  The list of service names to filter traces within the specified log groups.
 	// Used to identify relevant agent sessions.
 	//
 	// This member is required.
 	ServiceNames []string
+
+	//  The list of CloudWatch log group name prefixes to monitor for agent traces.
+	// Specify this instead of logGroupNames to match log groups by prefix. Specify
+	// either logGroupNames or logGroupNamePrefixes , not both. One of the two is
+	// required.
+	LogGroupNamePrefixes []string
+
+	//  The list of CloudWatch log group names to monitor for agent traces.
+	LogGroupNames []string
 
 	noSmithyDocumentSerde
 }
@@ -909,10 +913,26 @@ type CloudWatchLogsInputConfig struct {
 type CloudWatchOutputConfig struct {
 
 	//  The name of the CloudWatch log group where evaluation results will be written.
-	// The log group will be created if it doesn't exist.
-	//
-	// This member is required.
+	// An existing log group is used as-is; otherwise the service creates it, which
+	// requires the evaluation execution role to grant logs:CreateLogGroup on the log
+	// group. Don't specify this value when resultDestination is SOURCE_LOG_GROUP . The
+	// name can't be under the service-reserved /aws/bedrock-agentcore/evaluations/
+	// namespace, apart from this configuration's own service-managed default group.
 	LogGroupName *string
+
+	//  The CloudWatch metrics namespace where evaluation result metrics are
+	// published. If you omit this value, the service publishes metrics to
+	// Bedrock-AgentCore/Evaluations . This value can't begin with AWS/ .
+	MetricsNamespace *string
+
+	//  The destination where evaluation results are written. Valid values:
+	//
+	//   - DEDICATED_LOG_GROUP (default) – Writes results to a dedicated result log
+	//   group.
+	//
+	//   - SOURCE_LOG_GROUP – Writes results back to the log group that the agent
+	//   traces were read from. If you use this value, don't specify logGroupName .
+	ResultDestination ResultDestination
 
 	noSmithyDocumentSerde
 }
@@ -1366,6 +1386,93 @@ type ConnectorTargetConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The identity provider configuration used to authenticate end users to the
+// consent portal.
+type ConsentPortalIdpConfig struct {
+
+	// The Amazon Resource Name (ARN) of the OAuth2 credential provider used to
+	// authenticate end users to the consent portal.
+	//
+	// This member is required.
+	CredentialProviderArn *string
+
+	// The OAuth2 scopes that the consent portal requests when authenticating end
+	// users.
+	//
+	// This member is required.
+	Scopes []string
+
+	// The audience value that the consent portal includes when requesting tokens from
+	// the identity provider.
+	Audience *string
+
+	noSmithyDocumentSerde
+}
+
+// A resource served by the consent portal.
+type ConsentPortalSource struct {
+
+	// The identifier of the source resource. For an agentcore-gateway source, this is
+	// the gateway ID or its Amazon Resource Name (ARN).
+	//
+	// This member is required.
+	Identifier *string
+
+	// The type of the source resource.
+	//
+	// This member is required.
+	Type ConsentPortalSourceType
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a consent portal.
+type ConsentPortalSummary struct {
+
+	// The Amazon Resource Name (ARN) of the consent portal.
+	//
+	// This member is required.
+	ConsentPortalArn *string
+
+	// The unique identifier of the consent portal.
+	//
+	// This member is required.
+	ConsentPortalId *string
+
+	// The timestamp for when the consent portal was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The name of the consent portal.
+	//
+	// This member is required.
+	Name *string
+
+	// The resources served by the consent portal.
+	//
+	// This member is required.
+	Sources []ConsentPortalSource
+
+	// The current status of the consent portal.
+	//
+	// This member is required.
+	Status ConsentPortalStatus
+
+	// The timestamp for when the consent portal was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The description of the consent portal.
+	Description *string
+
+	// The URL used to access the consent portal.
+	PortalUrl *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains consolidation configuration information for a memory strategy.
 //
 // The following types satisfy this interface:
@@ -1408,7 +1515,7 @@ type Content interface {
 }
 
 // The raw text content containing natural language descriptions of desired policy
-// behavior. This text is processed by AI to generate corresponding Cedar policy
+// behavior. This text is processed by AI to generate corresponding Dogwood policy
 // statements that match the described intent.
 type ContentMemberRawText struct {
 	Value string
@@ -3003,9 +3110,9 @@ type GatewayInterceptorConfiguration struct {
 // defined policies.
 type GatewayPolicyEngineConfiguration struct {
 
-	// The ARN of the policy engine. The policy engine contains Cedar policies that
-	// define fine-grained authorization rules specifying who can perform what actions
-	// on which resources as agents interact through the gateway.
+	// The ARN of the policy engine. The policy engine contains Cedar or Dogwood
+	// policies that define fine-grained authorization rules specifying who can perform
+	// what actions on which resources as agents interact through the gateway.
 	//
 	// This member is required.
 	Arn *string
@@ -6685,16 +6792,15 @@ type PermissionsConfiguration struct {
 }
 
 // Represents a complete policy resource within the AgentCore Policy system.
-// Policies are ARN-able resources that contain Cedar policy statements and
-// associated metadata for controlling agent behavior and access decisions. Each
-// policy belongs to a policy engine and defines fine-grained authorization rules
-// that are evaluated in real-time as agents interact with tools through Gateway.
-// Policies use the Cedar policy language to specify who (principals based on OAuth
+// Policies are ARN-able resources that contain Cedar or Dogwood policy statements
+// and associated metadata for controlling agent behavior and access decisions.
+// Each policy belongs to a policy engine and defines fine-grained authorization
+// rules that are evaluated in real-time as agents interact with tools through
+// Gateway. Policies use Cedar or Dogwood to specify who (principals based on OAuth
 // claims like username, role, or scope) can perform what actions (tool calls) on
 // which resources (Gateways), with optional conditions for attribute-based access
-// control. Multiple policies can apply to a single request, with Cedar's
-// forbid-wins semantics ensuring that security restrictions are never accidentally
-// overridden.
+// control. Multiple policies can apply to a single request, with forbid-wins
+// semantics ensuring that security restrictions are never accidentally overridden.
 type Policy struct {
 
 	// The timestamp when the policy was originally created. This is automatically set
@@ -6703,8 +6809,9 @@ type Policy struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The Cedar policy statement that defines the access control rules. This contains
-	// the actual policy logic used for agent behavior control and access decisions.
+	// The Cedar or Dogwood policy statement that defines the access control rules.
+	// This contains the actual policy logic used for agent behavior control and access
+	// decisions.
 	//
 	// This member is required.
 	Definition PolicyDefinition
@@ -6791,8 +6898,9 @@ type PolicyDefinitionMemberCedar struct {
 
 func (*PolicyDefinitionMemberCedar) isPolicyDefinition() {}
 
-// An AgentCore policy statement that defines the access control rules. The
-// statement can be a Cedar policy or a guardrails definition.
+// The Dogwood policy statement that defines the access control rules. This policy
+// definition can include Dogwood policies and supports temporal conditions and
+// information providers such as guardrails.
 type PolicyDefinitionMemberPolicy struct {
 	Value PolicyStatement
 
@@ -6804,7 +6912,7 @@ func (*PolicyDefinitionMemberPolicy) isPolicyDefinition() {}
 // The generated policy asset information within the policy definition structure.
 // This contains information identifying a generated policy asset from the
 // AI-powered policy generation process within the AgentCore Policy system. Each
-// asset contains a Cedar policy statement generated from natural language input,
+// asset contains a Dogwood policy statement generated from natural language input,
 // along with associated metadata and analysis findings to help users evaluate and
 // select the most appropriate policy option.
 type PolicyDefinitionMemberPolicyGeneration struct {
@@ -6926,7 +7034,7 @@ type PolicyEngineSummary struct {
 }
 
 // Represents a policy generation request within the AgentCore Policy system.
-// Tracks the AI-powered conversion of natural language descriptions into Cedar
+// Tracks the AI-powered conversion of natural language descriptions into Dogwood
 // policy statements, enabling users to author policies by describing authorization
 // requirements in plain English. The generation process analyzes the natural
 // language input along with the Gateway's tool context and Cedar schema to produce
@@ -6989,7 +7097,7 @@ type PolicyGeneration struct {
 }
 
 // Represents a generated policy asset from the AI-powered policy generation
-// process within the AgentCore Policy system. Each asset contains a Cedar policy
+// process within the AgentCore Policy system. Each asset contains a Dogwood policy
 // statement generated from natural language input, along with associated metadata
 // and analysis findings to help users evaluate and select the most appropriate
 // policy option.
@@ -7012,12 +7120,12 @@ type PolicyGenerationAsset struct {
 
 	// The portion of the original natural language input that this generated policy
 	// asset addresses. This helps users understand which part of their policy
-	// description was translated into this specific Cedar policy statement, enabling
+	// description was translated into this specific Dogwood policy statement, enabling
 	// better policy selection and refinement. When a single natural language input
 	// describes multiple authorization requirements, the generation process creates
 	// separate policy assets for each requirement, with each asset's rawTextFragment
 	// showing which requirement it addresses. Use this mapping to verify that all
-	// parts of your natural language input were correctly translated into Cedar
+	// parts of your natural language input were correctly translated into Dogwood
 	// policies.
 	//
 	// This member is required.
@@ -7033,7 +7141,7 @@ type PolicyGenerationAsset struct {
 
 // Represents the information identifying a generated policy asset from the
 // AI-powered policy generation process within the AgentCore Policy system. Each
-// asset contains a Cedar policy statement generated from natural language input,
+// asset contains a Dogwood policy statement generated from natural language input,
 // along with associated metadata and analysis findings to help users evaluate and
 // select the most appropriate policy option.
 type PolicyGenerationDetails struct {
@@ -7105,12 +7213,13 @@ type PolicyGenerationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// An AgentCore policy statement, which supports plain Cedar policies as well as
-// guardrails definitions.
+// An AgentCore Cedar or Dogwood policy statement, which supports plain Cedar
+// policies, temporal policies, and guardrails definitions.
 type PolicyStatement struct {
 
-	// The body of the AgentCore policy statement. Contains the policy logic, which
-	// can be a Cedar policy or a guardrails definition.
+	// The body of the AgentCore Cedar or Dogwood policy statement. Contains the
+	// policy logic, which can be a Cedar policy, a temporal policy, or a guardrails
+	// definition.
 	//
 	// This member is required.
 	Statement *string

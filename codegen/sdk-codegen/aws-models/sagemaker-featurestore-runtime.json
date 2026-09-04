@@ -63,6 +63,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemakerfeaturestoreruntime#PutRecord"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#UpdateRecord"
                 }
             ],
             "traits": {
@@ -1280,6 +1283,19 @@
         "com.amazonaws.sagemakerfeaturestoreruntime#Boolean": {
             "type": "boolean"
         },
+        "com.amazonaws.sagemakerfeaturestoreruntime#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service rejected the update because the provided <code>EventTime</code> is\n         older than the record's current <code>EventTime</code>. To persist the update, retrieve\n         the record's latest <code>EventTime</code> and resubmit the request with an\n            <code>EventTime</code> that is equal to or newer than the current value.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
         "com.amazonaws.sagemakerfeaturestoreruntime#DeleteRecord": {
             "type": "operation",
             "input": {
@@ -1939,6 +1955,133 @@
                 "smithy.api#length": {
                     "min": 0
                 }
+            }
+        },
+        "com.amazonaws.sagemakerfeaturestoreruntime#UpdateRecord": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemakerfeaturestoreruntime#UpdateRecordRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#AccessForbidden"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#InternalFailure"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#ResourceNotFound"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#ServiceUnavailable"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#ValidationError"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates one or more feature values for an existing record in the specified\n         feature group. Features that you do not include in the request remain unchanged.\n         You can update up to 100 features per call.</p>\n         <important>\n            <p>This operation is available only for feature groups that use the\n               <code>Standard_V2</code> or <code>InMemory</code> online store type.</p>\n         </important>\n         <p>The record must already exist. If the record does not exist or has been\n         soft-deleted, the operation returns a <code>ResourceNotFound</code> error. To create\n         a record, use <code>PutRecord</code>.</p>\n         <p>If you provide an <code>EventTime</code> that is older than the record's current\n            <code>EventTime</code>, the service rejects the update with a\n            <code>ConflictException</code>. If the <code>EventTime</code> is equal to or newer\n         than the current value, the service applies the update. If you omit\n            <code>EventTime</code>, the service keeps the record's existing\n            <code>EventTime</code> and applies the update.</p>\n         <p>If you specify a <code>TtlDuration</code>, you must also provide an\n            <code>EventTime</code> in the request. Otherwise, the operation returns a\n            <code>ValidationError</code>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Update specific features in a record",
+                        "input": {
+                            "FeatureGroupName": "my-feature-group",
+                            "RecordIdentifierValueAsString": "cust-001",
+                            "Features": [
+                                {
+                                    "FeatureName": "age",
+                                    "ValueAsString": "26"
+                                },
+                                {
+                                    "FeatureName": "membership_tier",
+                                    "ValueAsString": "gold"
+                                },
+                                {
+                                    "FeatureName": "event_time",
+                                    "ValueAsString": "2026-07-26T12:00:00Z"
+                                }
+                            ]
+                        },
+                        "output": {}
+                    },
+                    {
+                        "title": "Update features and set a time-to-live (TTL) duration",
+                        "input": {
+                            "FeatureGroupName": "my-feature-group",
+                            "RecordIdentifierValueAsString": "cust-001",
+                            "Features": [
+                                {
+                                    "FeatureName": "age",
+                                    "ValueAsString": "26"
+                                },
+                                {
+                                    "FeatureName": "event_time",
+                                    "ValueAsString": "2026-07-26T12:00:00Z"
+                                }
+                            ],
+                            "TtlDuration": {
+                                "Unit": "Weeks",
+                                "Value": 4
+                            }
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/FeatureGroup/{FeatureGroupName}/Record",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sagemakerfeaturestoreruntime#UpdateRecordRequest": {
+            "type": "structure",
+            "members": {
+                "FeatureGroupName": {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#FeatureGroupNameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the feature group that contains the record to update. You can\n         specify one of the following:</p>\n         <ul>\n            <li>\n               <p>The feature group name.</p>\n            </li>\n            <li>\n               <p>The feature group Amazon Resource Name (ARN).</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecordIdentifierValueAsString": {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#ValueAsString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The value that uniquely identifies the record in the feature group. This must\n         match the value defined by the feature group's record identifier feature.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Features": {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#Record",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The feature values to write to the record.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetStores": {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#TargetStores",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target stores for the record update. By default, Amazon SageMaker Feature\n         Store updates the record in all stores associated with the\n            <code>FeatureGroup</code>.</p>"
+                    }
+                },
+                "TtlDuration": {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#TtlDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time-to-live (TTL) duration for the record. Amazon SageMaker Feature Store\n         deletes the record when <code>EventTime</code> + <code>TtlDuration</code>\n         elapses. If you omit this parameter, the record's existing TTL setting remains\n         unchanged. For information about <code>HardDelete</code>, see the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html\">DeleteRecord</a> operation in the Amazon SageMaker API Reference.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sagemakerfeaturestoreruntime#ValidationError": {

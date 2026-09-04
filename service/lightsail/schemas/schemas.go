@@ -778,6 +778,13 @@ var GetOperationsForResource = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/ls/api/2016-11-28/GetOperationsForResource",
 	Code: 200})
 
+var GetProfile = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "GetProfile",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/ls/api/2016-11-28/GetProfile",
+	Code: 200})
+
 var GetRegions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "GetRegions",
@@ -3836,7 +3843,7 @@ var _MetricDatapointList_member *smithy.Schema
 var MetricName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "MetricName",
-}, smithy.ShapeTypeEnum, 25)
+}, smithy.ShapeTypeEnum, 27)
 var MetricName_CPUUtilization *smithy.Schema
 
 var MetricName_NetworkIn *smithy.Schema
@@ -3882,6 +3889,10 @@ var MetricName_FreeStorageSpace *smithy.Schema
 var MetricName_NetworkReceiveThroughput *smithy.Schema
 
 var MetricName_NetworkTransmitThroughput *smithy.Schema
+
+var MetricName_FreeableMemory *smithy.Schema
+
+var MetricName_SwapUsage *smithy.Schema
 
 var MetricName_BurstCapacityTime *smithy.Schema
 
@@ -4106,7 +4117,7 @@ var OperationStatus_Succeeded *smithy.Schema
 var OperationType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "OperationType",
-}, smithy.ShapeTypeEnum, 83)
+}, smithy.ShapeTypeEnum, 84)
 var OperationType_DeleteKnownHostKeys *smithy.Schema
 
 var OperationType_DeleteInstance *smithy.Schema
@@ -4273,6 +4284,8 @@ var OperationType_StopGUISession *smithy.Schema
 
 var OperationType_SetupInstanceHttps *smithy.Schema
 
+var OperationType_GetProfile *smithy.Schema
+
 var Origin = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "Origin",
@@ -4312,6 +4325,24 @@ var _PartnerIdList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PartnerIdList",
 }, smithy.ShapeTypeList, 1)
 var _PartnerIdList_member *smithy.Schema
+
+var PartnerInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "PartnerInfo",
+}, smithy.ShapeTypeStructure, 3)
+var PartnerInfo_enrolledAt *smithy.Schema
+
+var PartnerInfo_tierName *smithy.Schema
+
+var PartnerInfo_status *smithy.Schema
+
+var PartnerStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "PartnerStatus",
+}, smithy.ShapeTypeEnum, 2)
+var PartnerStatus_Active *smithy.Schema
+
+var PartnerStatus_Suspended *smithy.Schema
 
 var PasswordData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -4441,6 +4472,14 @@ var PrivateRegistryAccessRequest = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PrivateRegistryAccessRequest",
 }, smithy.ShapeTypeStructure, 1)
 var PrivateRegistryAccessRequest_ecrImagePullerRole *smithy.Schema
+
+var ProfileType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "ProfileType",
+}, smithy.ShapeTypeEnum, 2)
+var ProfileType_Lightsailor *smithy.Schema
+
+var ProfileType_LightsailPartner *smithy.Schema
 
 var QueryStringObject = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -4723,7 +4762,7 @@ var _RelationalDatabaseList_member *smithy.Schema
 var RelationalDatabaseMetricName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "RelationalDatabaseMetricName",
-}, smithy.ShapeTypeEnum, 6)
+}, smithy.ShapeTypeEnum, 8)
 var RelationalDatabaseMetricName_CPUUtilization *smithy.Schema
 
 var RelationalDatabaseMetricName_DatabaseConnections *smithy.Schema
@@ -4735,6 +4774,10 @@ var RelationalDatabaseMetricName_FreeStorageSpace *smithy.Schema
 var RelationalDatabaseMetricName_NetworkReceiveThroughput *smithy.Schema
 
 var RelationalDatabaseMetricName_NetworkTransmitThroughput *smithy.Schema
+
+var RelationalDatabaseMetricName_FreeableMemory *smithy.Schema
+
+var RelationalDatabaseMetricName_SwapUsage *smithy.Schema
 
 var RelationalDatabaseParameter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -5221,6 +5264,18 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "TagValue",
 }, smithy.ShapeTypeString, 0)
+
+var TierName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "TierName",
+}, smithy.ShapeTypeEnum, 4)
+var TierName_Essential *smithy.Schema
+
+var TierName_Growth *smithy.Schema
+
+var TierName_Accelerate *smithy.Schema
+
+var TierName_Premier *smithy.Schema
 
 var _TimeOfDay = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -7031,6 +7086,19 @@ var GetOperationsResult_operations *smithy.Schema
 
 var GetOperationsResult_nextPageToken *smithy.Schema
 
+var GetProfileRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "GetProfileRequest",
+}, smithy.ShapeTypeStructure, 0)
+
+var GetProfileResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "GetProfileResult",
+}, smithy.ShapeTypeStructure, 2)
+var GetProfileResult_profileType *smithy.Schema
+
+var GetProfileResult_partner *smithy.Schema
+
 var GetRegionsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "GetRegionsRequest",
@@ -8120,6 +8188,10 @@ func init() {
 	MetricName_NetworkReceiveThroughput = MetricName.AddMember("NetworkReceiveThroughput", smithyprelude.Unit)
 
 	MetricName_NetworkTransmitThroughput = MetricName.AddMember("NetworkTransmitThroughput", smithyprelude.Unit)
+
+	MetricName_FreeableMemory = MetricName.AddMember("FreeableMemory", smithyprelude.Unit)
+
+	MetricName_SwapUsage = MetricName.AddMember("SwapUsage", smithyprelude.Unit)
 
 	MetricName_BurstCapacityTime = MetricName.AddMember("BurstCapacityTime", smithyprelude.Unit)
 
@@ -10091,6 +10163,8 @@ func init() {
 
 	OperationType_SetupInstanceHttps = OperationType.AddMember("SetupInstanceHttps", smithyprelude.Unit)
 
+	OperationType_GetProfile = OperationType.AddMember("GetProfile", smithyprelude.Unit)
+
 	OperationStatus_NotStarted = OperationStatus.AddMember("NotStarted", smithyprelude.Unit)
 
 	OperationStatus_Started = OperationStatus.AddMember("Started", smithyprelude.Unit)
@@ -10135,6 +10209,24 @@ func init() {
 
 	_OperationList_member = _OperationList.AddMember("member", Operation)
 
+	TierName_Essential = TierName.AddMember("Essential", smithyprelude.Unit)
+
+	TierName_Growth = TierName.AddMember("Growth", smithyprelude.Unit)
+
+	TierName_Accelerate = TierName.AddMember("Accelerate", smithyprelude.Unit)
+
+	TierName_Premier = TierName.AddMember("Premier", smithyprelude.Unit)
+
+	PartnerStatus_Active = PartnerStatus.AddMember("Active", smithyprelude.Unit)
+
+	PartnerStatus_Suspended = PartnerStatus.AddMember("Suspended", smithyprelude.Unit)
+
+	PartnerInfo_enrolledAt = PartnerInfo.AddMember("enrolledAt", _IsoDate)
+
+	PartnerInfo_tierName = PartnerInfo.AddMember("tierName", TierName)
+
+	PartnerInfo_status = PartnerInfo.AddMember("status", PartnerStatus)
+
 	PendingMaintenanceAction_action = PendingMaintenanceAction.AddMember("action", _NonEmptyString)
 
 	PendingMaintenanceAction_description = PendingMaintenanceAction.AddMember("description", _NonEmptyString)
@@ -10164,6 +10256,10 @@ func init() {
 	_PortInfoList_member = _PortInfoList.AddMember("member", PortInfo)
 
 	PrivateRegistryAccessRequest_ecrImagePullerRole = PrivateRegistryAccessRequest.AddMember("ecrImagePullerRole", ContainerServiceECRImagePullerRoleRequest)
+
+	ProfileType_Lightsailor = ProfileType.AddMember("Lightsailor", smithyprelude.Unit)
+
+	ProfileType_LightsailPartner = ProfileType.AddMember("LightsailPartner", smithyprelude.Unit)
 
 	Region_continentCode = Region.AddMember("continentCode", _string)
 
@@ -10308,6 +10404,10 @@ func init() {
 	RelationalDatabaseMetricName_NetworkReceiveThroughput = RelationalDatabaseMetricName.AddMember("NetworkReceiveThroughput", smithyprelude.Unit)
 
 	RelationalDatabaseMetricName_NetworkTransmitThroughput = RelationalDatabaseMetricName.AddMember("NetworkTransmitThroughput", smithyprelude.Unit)
+
+	RelationalDatabaseMetricName_FreeableMemory = RelationalDatabaseMetricName.AddMember("FreeableMemory", smithyprelude.Unit)
+
+	RelationalDatabaseMetricName_SwapUsage = RelationalDatabaseMetricName.AddMember("SwapUsage", smithyprelude.Unit)
 
 	RelationalDatabaseParameter_allowedValues = RelationalDatabaseParameter.AddMember("allowedValues", _string)
 
@@ -11376,6 +11476,10 @@ func init() {
 	GetOperationsResult_operations = GetOperationsResult.AddMember("operations", _OperationList)
 
 	GetOperationsResult_nextPageToken = GetOperationsResult.AddMember("nextPageToken", _string)
+
+	GetProfileResult_profileType = GetProfileResult.AddMember("profileType", ProfileType)
+
+	GetProfileResult_partner = GetProfileResult.AddMember("partner", PartnerInfo)
 
 	GetRegionsRequest_includeAvailabilityZones = GetRegionsRequest.AddMember("includeAvailabilityZones", _boolean)
 

@@ -2548,6 +2548,10 @@ func TestCheckRequestSnapshot_CreateTask(t *testing.T) {
 				TaskExecutionRole: ptr.String("__TaskExecutionRole__"),
 				ProcessingType:    types.ProcessingType("GENERIC_COMPUTE_PROCESSING"),
 				ProcessingUnit:    types.ProcessingUnit("UNITS_2"),
+				EphemeralStorageConfiguration: &types.EphemeralStorageConfiguration{
+					StorageClass:     types.StorageClass("STANDARD_1"),
+					StorageSizeInGiB: ptr.Int32(1),
+				},
 				Command: []string{
 					"__Member__",
 					"__Member__",
@@ -2555,6 +2559,30 @@ func TestCheckRequestSnapshot_CreateTask(t *testing.T) {
 				TimeoutSeconds: ptr.Int64(1),
 				EnvironmentVariables: map[string]string{
 					"key0": "__Value__",
+				},
+				Mounts: []types.Mount{
+					{
+						Name:         ptr.String("__Name__"),
+						RelativePath: ptr.String("__RelativePath__"),
+						Source: &types.MountSourceMemberS3AccessPoint{
+							Value: types.S3AccessPointSource{
+								AccessPointArn: ptr.String("__AccessPointArn__"),
+								Prefix:         ptr.String("__Prefix__"),
+							},
+						},
+						StorageType: types.MountStorageType("SHARED_STORAGE"),
+					},
+					{
+						Name:         ptr.String("__Name__"),
+						RelativePath: ptr.String("__RelativePath__"),
+						Source: &types.MountSourceMemberS3AccessPoint{
+							Value: types.S3AccessPointSource{
+								AccessPointArn: ptr.String("__AccessPointArn__"),
+								Prefix:         ptr.String("__Prefix__"),
+							},
+						},
+						StorageType: types.MountStorageType("SHARED_STORAGE"),
+					},
 				},
 			},
 		},
@@ -5571,6 +5599,34 @@ func TestCheckRequestSnapshot_StartPipelineExecution(t *testing.T) {
 				},
 			},
 		},
+		ExecutionMountOverrides: &types.MountOverrides{
+			ComputeNodes: map[string][]types.Mount{
+				"key0": {
+					{
+						Name:         ptr.String("__Name__"),
+						RelativePath: ptr.String("__RelativePath__"),
+						Source: &types.MountSourceMemberS3AccessPoint{
+							Value: types.S3AccessPointSource{
+								AccessPointArn: ptr.String("__AccessPointArn__"),
+								Prefix:         ptr.String("__Prefix__"),
+							},
+						},
+						StorageType: types.MountStorageType("SHARED_STORAGE"),
+					},
+					{
+						Name:         ptr.String("__Name__"),
+						RelativePath: ptr.String("__RelativePath__"),
+						Source: &types.MountSourceMemberS3AccessPoint{
+							Value: types.S3AccessPointSource{
+								AccessPointArn: ptr.String("__AccessPointArn__"),
+								Prefix:         ptr.String("__Prefix__"),
+							},
+						},
+						StorageType: types.MountStorageType("SHARED_STORAGE"),
+					},
+				},
+			},
+		},
 		ExecutionPriority: ptr.Int32(1),
 		ClientToken:       ptr.String("__ClientToken__"),
 	}
@@ -7301,6 +7357,10 @@ func TestCheckRequestSnapshot_UpdateTask(t *testing.T) {
 				TaskExecutionRole: ptr.String("__TaskExecutionRole__"),
 				ProcessingType:    types.ProcessingType("GENERIC_COMPUTE_PROCESSING"),
 				ProcessingUnit:    types.ProcessingUnit("UNITS_2"),
+				EphemeralStorageConfiguration: &types.EphemeralStorageConfiguration{
+					StorageClass:     types.StorageClass("STANDARD_1"),
+					StorageSizeInGiB: ptr.Int32(1),
+				},
 				Command: []string{
 					"__Member__",
 					"__Member__",
@@ -7308,6 +7368,30 @@ func TestCheckRequestSnapshot_UpdateTask(t *testing.T) {
 				TimeoutSeconds: ptr.Int64(1),
 				EnvironmentVariables: map[string]string{
 					"key0": "__Value__",
+				},
+				Mounts: []types.Mount{
+					{
+						Name:         ptr.String("__Name__"),
+						RelativePath: ptr.String("__RelativePath__"),
+						Source: &types.MountSourceMemberS3AccessPoint{
+							Value: types.S3AccessPointSource{
+								AccessPointArn: ptr.String("__AccessPointArn__"),
+								Prefix:         ptr.String("__Prefix__"),
+							},
+						},
+						StorageType: types.MountStorageType("SHARED_STORAGE"),
+					},
+					{
+						Name:         ptr.String("__Name__"),
+						RelativePath: ptr.String("__RelativePath__"),
+						Source: &types.MountSourceMemberS3AccessPoint{
+							Value: types.S3AccessPointSource{
+								AccessPointArn: ptr.String("__AccessPointArn__"),
+								Prefix:         ptr.String("__Prefix__"),
+							},
+						},
+						StorageType: types.MountStorageType("SHARED_STORAGE"),
+					},
 				},
 			},
 		},
@@ -9709,6 +9793,10 @@ func TestUpdateRequestSnapshot_CreateTask(t *testing.T) {
 				TaskExecutionRole: ptr.String("__TaskExecutionRole__"),
 				ProcessingType:    types.ProcessingType("GENERIC_COMPUTE_PROCESSING"),
 				ProcessingUnit:    types.ProcessingUnit("UNITS_2"),
+				EphemeralStorageConfiguration: &types.EphemeralStorageConfiguration{
+					StorageClass:     types.StorageClass("STANDARD_1"),
+					StorageSizeInGiB: ptr.Int32(1),
+				},
 				Command: []string{
 					"__Member__",
 					"__Member__",
@@ -9716,6 +9804,30 @@ func TestUpdateRequestSnapshot_CreateTask(t *testing.T) {
 				TimeoutSeconds: ptr.Int64(1),
 				EnvironmentVariables: map[string]string{
 					"key0": "__Value__",
+				},
+				Mounts: []types.Mount{
+					{
+						Name:         ptr.String("__Name__"),
+						RelativePath: ptr.String("__RelativePath__"),
+						Source: &types.MountSourceMemberS3AccessPoint{
+							Value: types.S3AccessPointSource{
+								AccessPointArn: ptr.String("__AccessPointArn__"),
+								Prefix:         ptr.String("__Prefix__"),
+							},
+						},
+						StorageType: types.MountStorageType("SHARED_STORAGE"),
+					},
+					{
+						Name:         ptr.String("__Name__"),
+						RelativePath: ptr.String("__RelativePath__"),
+						Source: &types.MountSourceMemberS3AccessPoint{
+							Value: types.S3AccessPointSource{
+								AccessPointArn: ptr.String("__AccessPointArn__"),
+								Prefix:         ptr.String("__Prefix__"),
+							},
+						},
+						StorageType: types.MountStorageType("SHARED_STORAGE"),
+					},
 				},
 			},
 		},
@@ -12732,6 +12844,34 @@ func TestUpdateRequestSnapshot_StartPipelineExecution(t *testing.T) {
 				},
 			},
 		},
+		ExecutionMountOverrides: &types.MountOverrides{
+			ComputeNodes: map[string][]types.Mount{
+				"key0": {
+					{
+						Name:         ptr.String("__Name__"),
+						RelativePath: ptr.String("__RelativePath__"),
+						Source: &types.MountSourceMemberS3AccessPoint{
+							Value: types.S3AccessPointSource{
+								AccessPointArn: ptr.String("__AccessPointArn__"),
+								Prefix:         ptr.String("__Prefix__"),
+							},
+						},
+						StorageType: types.MountStorageType("SHARED_STORAGE"),
+					},
+					{
+						Name:         ptr.String("__Name__"),
+						RelativePath: ptr.String("__RelativePath__"),
+						Source: &types.MountSourceMemberS3AccessPoint{
+							Value: types.S3AccessPointSource{
+								AccessPointArn: ptr.String("__AccessPointArn__"),
+								Prefix:         ptr.String("__Prefix__"),
+							},
+						},
+						StorageType: types.MountStorageType("SHARED_STORAGE"),
+					},
+				},
+			},
+		},
 		ExecutionPriority: ptr.Int32(1),
 		ClientToken:       ptr.String("__ClientToken__"),
 	}
@@ -14462,6 +14602,10 @@ func TestUpdateRequestSnapshot_UpdateTask(t *testing.T) {
 				TaskExecutionRole: ptr.String("__TaskExecutionRole__"),
 				ProcessingType:    types.ProcessingType("GENERIC_COMPUTE_PROCESSING"),
 				ProcessingUnit:    types.ProcessingUnit("UNITS_2"),
+				EphemeralStorageConfiguration: &types.EphemeralStorageConfiguration{
+					StorageClass:     types.StorageClass("STANDARD_1"),
+					StorageSizeInGiB: ptr.Int32(1),
+				},
 				Command: []string{
 					"__Member__",
 					"__Member__",
@@ -14469,6 +14613,30 @@ func TestUpdateRequestSnapshot_UpdateTask(t *testing.T) {
 				TimeoutSeconds: ptr.Int64(1),
 				EnvironmentVariables: map[string]string{
 					"key0": "__Value__",
+				},
+				Mounts: []types.Mount{
+					{
+						Name:         ptr.String("__Name__"),
+						RelativePath: ptr.String("__RelativePath__"),
+						Source: &types.MountSourceMemberS3AccessPoint{
+							Value: types.S3AccessPointSource{
+								AccessPointArn: ptr.String("__AccessPointArn__"),
+								Prefix:         ptr.String("__Prefix__"),
+							},
+						},
+						StorageType: types.MountStorageType("SHARED_STORAGE"),
+					},
+					{
+						Name:         ptr.String("__Name__"),
+						RelativePath: ptr.String("__RelativePath__"),
+						Source: &types.MountSourceMemberS3AccessPoint{
+							Value: types.S3AccessPointSource{
+								AccessPointArn: ptr.String("__AccessPointArn__"),
+								Prefix:         ptr.String("__Prefix__"),
+							},
+						},
+						StorageType: types.MountStorageType("SHARED_STORAGE"),
+					},
 				},
 			},
 		},

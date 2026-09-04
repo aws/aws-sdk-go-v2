@@ -671,6 +671,7 @@ func TestCheckResponseSnapshot_CreateDaemon(t *testing.T) {
 		EnableECSManagedTags: true,
 		EnableExecuteCommand: true,
 		ClientToken:          ptr.String("__ClientToken__"),
+		Critical:             ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -7529,29 +7530,35 @@ func TestCheckResponseSnapshot_DescribeDaemon(t *testing.T) {
 					Arn: ptr.String("__Arn__"),
 					CapacityProviders: []types.DaemonCapacityProvider{
 						{
-							Arn:          ptr.String("__Arn__"),
-							RunningCount: 1,
+							Arn:                ptr.String("__Arn__"),
+							RunningCount:       1,
+							WithoutDaemonCount: 1,
 						},
 						{
-							Arn:          ptr.String("__Arn__"),
-							RunningCount: 1,
+							Arn:                ptr.String("__Arn__"),
+							RunningCount:       1,
+							WithoutDaemonCount: 1,
 						},
 					},
-					TotalRunningCount: 1,
+					TotalRunningCount:       1,
+					TotalWithoutDaemonCount: 1,
 				},
 				{
 					Arn: ptr.String("__Arn__"),
 					CapacityProviders: []types.DaemonCapacityProvider{
 						{
-							Arn:          ptr.String("__Arn__"),
-							RunningCount: 1,
+							Arn:                ptr.String("__Arn__"),
+							RunningCount:       1,
+							WithoutDaemonCount: 1,
 						},
 						{
-							Arn:          ptr.String("__Arn__"),
-							RunningCount: 1,
+							Arn:                ptr.String("__Arn__"),
+							RunningCount:       1,
+							WithoutDaemonCount: 1,
 						},
 					},
-					TotalRunningCount: 1,
+					TotalRunningCount:       1,
+					TotalWithoutDaemonCount: 1,
 				},
 			},
 			DeploymentArn: ptr.String("__DeploymentArn__"),
@@ -7602,53 +7609,62 @@ func TestCheckResponseSnapshot_DescribeDaemonDeployments(t *testing.T) {
 					Arn: ptr.String("__Arn__"),
 					CapacityProviders: []types.DaemonDeploymentCapacityProvider{
 						{
-							Arn:                   ptr.String("__Arn__"),
-							RunningInstanceCount:  ptr.Int32(1),
-							DrainingInstanceCount: ptr.Int32(1),
+							Arn:                        ptr.String("__Arn__"),
+							RunningInstanceCount:       ptr.Int32(1),
+							WithoutDaemonInstanceCount: ptr.Int32(1),
+							DrainingInstanceCount:      ptr.Int32(1),
 						},
 						{
-							Arn:                   ptr.String("__Arn__"),
-							RunningInstanceCount:  ptr.Int32(1),
-							DrainingInstanceCount: ptr.Int32(1),
+							Arn:                        ptr.String("__Arn__"),
+							RunningInstanceCount:       ptr.Int32(1),
+							WithoutDaemonInstanceCount: ptr.Int32(1),
+							DrainingInstanceCount:      ptr.Int32(1),
 						},
 					},
-					TotalRunningInstanceCount:  ptr.Int32(1),
-					TotalDrainingInstanceCount: ptr.Int32(1),
+					TotalRunningInstanceCount:       ptr.Int32(1),
+					TotalWithoutDaemonInstanceCount: ptr.Int32(1),
+					TotalDrainingInstanceCount:      ptr.Int32(1),
 				},
 				SourceDaemonRevisions: []types.DaemonDeploymentRevisionDetail{
 					{
 						Arn: ptr.String("__Arn__"),
 						CapacityProviders: []types.DaemonDeploymentCapacityProvider{
 							{
-								Arn:                   ptr.String("__Arn__"),
-								RunningInstanceCount:  ptr.Int32(1),
-								DrainingInstanceCount: ptr.Int32(1),
+								Arn:                        ptr.String("__Arn__"),
+								RunningInstanceCount:       ptr.Int32(1),
+								WithoutDaemonInstanceCount: ptr.Int32(1),
+								DrainingInstanceCount:      ptr.Int32(1),
 							},
 							{
-								Arn:                   ptr.String("__Arn__"),
-								RunningInstanceCount:  ptr.Int32(1),
-								DrainingInstanceCount: ptr.Int32(1),
+								Arn:                        ptr.String("__Arn__"),
+								RunningInstanceCount:       ptr.Int32(1),
+								WithoutDaemonInstanceCount: ptr.Int32(1),
+								DrainingInstanceCount:      ptr.Int32(1),
 							},
 						},
-						TotalRunningInstanceCount:  ptr.Int32(1),
-						TotalDrainingInstanceCount: ptr.Int32(1),
+						TotalRunningInstanceCount:       ptr.Int32(1),
+						TotalWithoutDaemonInstanceCount: ptr.Int32(1),
+						TotalDrainingInstanceCount:      ptr.Int32(1),
 					},
 					{
 						Arn: ptr.String("__Arn__"),
 						CapacityProviders: []types.DaemonDeploymentCapacityProvider{
 							{
-								Arn:                   ptr.String("__Arn__"),
-								RunningInstanceCount:  ptr.Int32(1),
-								DrainingInstanceCount: ptr.Int32(1),
+								Arn:                        ptr.String("__Arn__"),
+								RunningInstanceCount:       ptr.Int32(1),
+								WithoutDaemonInstanceCount: ptr.Int32(1),
+								DrainingInstanceCount:      ptr.Int32(1),
 							},
 							{
-								Arn:                   ptr.String("__Arn__"),
-								RunningInstanceCount:  ptr.Int32(1),
-								DrainingInstanceCount: ptr.Int32(1),
+								Arn:                        ptr.String("__Arn__"),
+								RunningInstanceCount:       ptr.Int32(1),
+								WithoutDaemonInstanceCount: ptr.Int32(1),
+								DrainingInstanceCount:      ptr.Int32(1),
 							},
 						},
-						TotalRunningInstanceCount:  ptr.Int32(1),
-						TotalDrainingInstanceCount: ptr.Int32(1),
+						TotalRunningInstanceCount:       ptr.Int32(1),
+						TotalWithoutDaemonInstanceCount: ptr.Int32(1),
+						TotalDrainingInstanceCount:      ptr.Int32(1),
 					},
 				},
 				CircuitBreaker: &types.DaemonCircuitBreaker{
@@ -7701,53 +7717,62 @@ func TestCheckResponseSnapshot_DescribeDaemonDeployments(t *testing.T) {
 					Arn: ptr.String("__Arn__"),
 					CapacityProviders: []types.DaemonDeploymentCapacityProvider{
 						{
-							Arn:                   ptr.String("__Arn__"),
-							RunningInstanceCount:  ptr.Int32(1),
-							DrainingInstanceCount: ptr.Int32(1),
+							Arn:                        ptr.String("__Arn__"),
+							RunningInstanceCount:       ptr.Int32(1),
+							WithoutDaemonInstanceCount: ptr.Int32(1),
+							DrainingInstanceCount:      ptr.Int32(1),
 						},
 						{
-							Arn:                   ptr.String("__Arn__"),
-							RunningInstanceCount:  ptr.Int32(1),
-							DrainingInstanceCount: ptr.Int32(1),
+							Arn:                        ptr.String("__Arn__"),
+							RunningInstanceCount:       ptr.Int32(1),
+							WithoutDaemonInstanceCount: ptr.Int32(1),
+							DrainingInstanceCount:      ptr.Int32(1),
 						},
 					},
-					TotalRunningInstanceCount:  ptr.Int32(1),
-					TotalDrainingInstanceCount: ptr.Int32(1),
+					TotalRunningInstanceCount:       ptr.Int32(1),
+					TotalWithoutDaemonInstanceCount: ptr.Int32(1),
+					TotalDrainingInstanceCount:      ptr.Int32(1),
 				},
 				SourceDaemonRevisions: []types.DaemonDeploymentRevisionDetail{
 					{
 						Arn: ptr.String("__Arn__"),
 						CapacityProviders: []types.DaemonDeploymentCapacityProvider{
 							{
-								Arn:                   ptr.String("__Arn__"),
-								RunningInstanceCount:  ptr.Int32(1),
-								DrainingInstanceCount: ptr.Int32(1),
+								Arn:                        ptr.String("__Arn__"),
+								RunningInstanceCount:       ptr.Int32(1),
+								WithoutDaemonInstanceCount: ptr.Int32(1),
+								DrainingInstanceCount:      ptr.Int32(1),
 							},
 							{
-								Arn:                   ptr.String("__Arn__"),
-								RunningInstanceCount:  ptr.Int32(1),
-								DrainingInstanceCount: ptr.Int32(1),
+								Arn:                        ptr.String("__Arn__"),
+								RunningInstanceCount:       ptr.Int32(1),
+								WithoutDaemonInstanceCount: ptr.Int32(1),
+								DrainingInstanceCount:      ptr.Int32(1),
 							},
 						},
-						TotalRunningInstanceCount:  ptr.Int32(1),
-						TotalDrainingInstanceCount: ptr.Int32(1),
+						TotalRunningInstanceCount:       ptr.Int32(1),
+						TotalWithoutDaemonInstanceCount: ptr.Int32(1),
+						TotalDrainingInstanceCount:      ptr.Int32(1),
 					},
 					{
 						Arn: ptr.String("__Arn__"),
 						CapacityProviders: []types.DaemonDeploymentCapacityProvider{
 							{
-								Arn:                   ptr.String("__Arn__"),
-								RunningInstanceCount:  ptr.Int32(1),
-								DrainingInstanceCount: ptr.Int32(1),
+								Arn:                        ptr.String("__Arn__"),
+								RunningInstanceCount:       ptr.Int32(1),
+								WithoutDaemonInstanceCount: ptr.Int32(1),
+								DrainingInstanceCount:      ptr.Int32(1),
 							},
 							{
-								Arn:                   ptr.String("__Arn__"),
-								RunningInstanceCount:  ptr.Int32(1),
-								DrainingInstanceCount: ptr.Int32(1),
+								Arn:                        ptr.String("__Arn__"),
+								RunningInstanceCount:       ptr.Int32(1),
+								WithoutDaemonInstanceCount: ptr.Int32(1),
+								DrainingInstanceCount:      ptr.Int32(1),
 							},
 						},
-						TotalRunningInstanceCount:  ptr.Int32(1),
-						TotalDrainingInstanceCount: ptr.Int32(1),
+						TotalRunningInstanceCount:       ptr.Int32(1),
+						TotalWithoutDaemonInstanceCount: ptr.Int32(1),
+						TotalDrainingInstanceCount:      ptr.Int32(1),
 					},
 				},
 				CircuitBreaker: &types.DaemonCircuitBreaker{
@@ -7839,6 +7864,7 @@ func TestCheckResponseSnapshot_DescribeDaemonRevisions(t *testing.T) {
 				PropagateTags:        types.DaemonPropagateTags("DAEMON"),
 				EnableECSManagedTags: ptr.Bool(true),
 				EnableExecuteCommand: ptr.Bool(true),
+				Critical:             ptr.Bool(true),
 			},
 			{
 				DaemonRevisionArn:       ptr.String("__DaemonRevisionArn__"),
@@ -7861,6 +7887,7 @@ func TestCheckResponseSnapshot_DescribeDaemonRevisions(t *testing.T) {
 				PropagateTags:        types.DaemonPropagateTags("DAEMON"),
 				EnableECSManagedTags: ptr.Bool(true),
 				EnableExecuteCommand: ptr.Bool(true),
+				Critical:             ptr.Bool(true),
 			},
 		},
 		Failures: []types.Failure{
@@ -20358,6 +20385,7 @@ func TestCheckResponseSnapshot_UpdateDaemon(t *testing.T) {
 		PropagateTags:        types.DaemonPropagateTags("DAEMON"),
 		EnableECSManagedTags: true,
 		EnableExecuteCommand: true,
+		Critical:             ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -23698,6 +23726,7 @@ func TestCheckResponseSnapshot_Error_PlatformUnknownException(t *testing.T) {
 		EnableECSManagedTags: true,
 		EnableExecuteCommand: true,
 		ClientToken:          ptr.String("__ClientToken__"),
+		Critical:             ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

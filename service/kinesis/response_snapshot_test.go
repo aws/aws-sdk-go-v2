@@ -970,6 +970,7 @@ func TestCheckResponseSnapshot_GetRecords(t *testing.T) {
 		Limit:         ptr.Int32(1),
 		StreamARN:     ptr.String("__StreamARN__"),
 		StreamId:      ptr.String("__StreamId__"),
+		DryRun:        ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1023,6 +1024,7 @@ func TestCheckResponseSnapshot_GetShardIterator(t *testing.T) {
 		Timestamp:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		StreamARN:              ptr.String("__StreamARN__"),
 		StreamId:               ptr.String("__StreamId__"),
+		DryRun:                 ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1400,6 +1402,7 @@ func TestCheckResponseSnapshot_PutRecord(t *testing.T) {
 		SequenceNumberForOrdering: ptr.String("__SequenceNumberForOrdering__"),
 		StreamARN:                 ptr.String("__StreamARN__"),
 		StreamId:                  ptr.String("__StreamId__"),
+		DryRun:                    ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1452,6 +1455,7 @@ func TestCheckResponseSnapshot_PutRecords(t *testing.T) {
 		StreamName: ptr.String("__StreamName__"),
 		StreamARN:  ptr.String("__StreamARN__"),
 		StreamId:   ptr.String("__StreamId__"),
+		DryRun:     ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1980,6 +1984,37 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_Error_DryRunOperationException(t *testing.T) {
+	want := &types.DryRunOperationException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DryRunOperationException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
+		ShardIterator: ptr.String("__ShardIterator__"),
+		Limit:         ptr.Int32(1),
+		StreamARN:     ptr.String("__StreamARN__"),
+		StreamId:      ptr.String("__StreamId__"),
+		DryRun:        ptr.Bool(true),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.DryRunOperationException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.DryRunOperationException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "DryRunOperationException.error", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_ExpiredIteratorException(t *testing.T) {
 	want := &types.ExpiredIteratorException{
 		Message: ptr.String("__Message__"),
@@ -1997,6 +2032,7 @@ func TestCheckResponseSnapshot_Error_ExpiredIteratorException(t *testing.T) {
 		Limit:         ptr.Int32(1),
 		StreamARN:     ptr.String("__StreamARN__"),
 		StreamId:      ptr.String("__StreamId__"),
+		DryRun:        ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2065,6 +2101,7 @@ func TestCheckResponseSnapshot_Error_InternalFailureException(t *testing.T) {
 		Limit:         ptr.Int32(1),
 		StreamARN:     ptr.String("__StreamARN__"),
 		StreamId:      ptr.String("__StreamId__"),
+		DryRun:        ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2873,6 +2910,7 @@ func TestCheckResponseSnapshot_Error_ProvisionedThroughputExceededException(t *t
 		Limit:         ptr.Int32(1),
 		StreamARN:     ptr.String("__StreamARN__"),
 		StreamId:      ptr.String("__StreamId__"),
+		DryRun:        ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

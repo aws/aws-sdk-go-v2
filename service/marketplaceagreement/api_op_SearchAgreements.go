@@ -12,121 +12,6 @@ import (
 // Searches across all agreements that a proposer or an acceptor has in AWS
 // Marketplace. The search returns a list of agreements with basic agreement
 // information.
-//
-// The following filter combinations are supported when the PartyType is Proposer :
-//
-//   - AgreementType
-//
-//   - AgreementType + EndTime
-//
-//   - AgreementType + ResourceType
-//
-//   - AgreementType + ResourceType + EndTime
-//
-//   - AgreementType + ResourceType + Status
-//
-//   - AgreementType + ResourceType + Status + EndTime
-//
-//   - AgreementType + ResourceIdentifier
-//
-//   - AgreementType + ResourceIdentifier + EndTime
-//
-//   - AgreementType + ResourceIdentifier + Status
-//
-//   - AgreementType + ResourceIdentifier + Status + EndTime
-//
-//   - AgreementType + AcceptorAccountId
-//
-//   - AgreementType + AcceptorAccountId + EndTime
-//
-//   - AgreementType + AcceptorAccountId + Status
-//
-//   - AgreementType + AcceptorAccountId + Status + EndTime
-//
-//   - AgreementType + AcceptorAccountId + OfferId
-//
-//   - AgreementType + AcceptorAccountId + OfferId + Status
-//
-//   - AgreementType + AcceptorAccountId + OfferId + EndTime
-//
-//   - AgreementType + AcceptorAccountId + OfferId + Status + EndTime
-//
-//   - AgreementType + AcceptorAccountId + ResourceIdentifier
-//
-//   - AgreementType + AcceptorAccountId + ResourceIdentifier + Status
-//
-//   - AgreementType + AcceptorAccountId + ResourceIdentifier + EndTime
-//
-//   - AgreementType + AcceptorAccountId + ResourceIdentifier + Status + EndTime
-//
-//   - AgreementType + AcceptorAccountId + ResourceType
-//
-//   - AgreementType + AcceptorAccountId + ResourceType + EndTime
-//
-//   - AgreementType + AcceptorAccountId + ResourceType + Status
-//
-//   - AgreementType + AcceptorAccountId + ResourceType + Status + EndTime
-//
-//   - AgreementType + Status
-//
-//   - AgreementType + Status + EndTime
-//
-//   - AgreementType + OfferId
-//
-//   - AgreementType + OfferId + EndTime
-//
-//   - AgreementType + OfferId + Status
-//
-//   - AgreementType + OfferId + Status + EndTime
-//
-//   - AgreementType + OfferSetId
-//
-//   - AgreementType + OfferSetId + EndTime
-//
-//   - AgreementType + OfferSetId + Status
-//
-//   - AgreementType + OfferSetId + Status + EndTime
-//
-// To filter by EndTime , you can use BeforeEndTime and/or AfterEndTime . Only
-// EndTime is supported for sorting.
-//
-// The following filter combinations are supported when the PartyType is Acceptor :
-//
-//   - AgreementType
-//
-//   - AgreementType + Status
-//
-//   - AgreementType + EndTime
-//
-//   - AgreementType + Status + EndTime
-//
-//   - AgreementType + ResourceIdentifier
-//
-//   - AgreementType + ResourceIdentifier + EndTime
-//
-//   - AgreementType + ResourceIdentifier + Status
-//
-//   - AgreementType + ResourceIdentifier + Status + EndTime
-//
-//   - AgreementType + ResourceType
-//
-//   - AgreementType + ResourceType + EndTime
-//
-//   - AgreementType + OfferId
-//
-//   - AgreementType + OfferId + EndTime
-//
-//   - AgreementType + OfferId + Status
-//
-//   - AgreementType + OfferId + Status + EndTime
-//
-//   - AgreementType + OfferSetId
-//
-//   - AgreementType + OfferSetId + EndTime
-//
-//   - AgreementType + OfferSetId + Status
-//
-//   - AgreementType + OfferSetId + Status + EndTime
 func (c *Client) SearchAgreements(ctx context.Context, params *SearchAgreementsInput, optFns ...func(*Options)) (*SearchAgreementsOutput, error) {
 	if params == nil {
 		params = &SearchAgreementsInput{}
@@ -166,7 +51,7 @@ type SearchAgreementsInput struct {
 	//   registered in the agreement token.
 	//
 	//   - Status – The current status of the agreement. Values include ACTIVE ,
-	//   ARCHIVED , CANCELLED , EXPIRED , RENEWED , REPLACED , and TERMINATED .
+	//   CANCELLED , EXPIRED , RENEWED , REPLACED , and TERMINATED .
 	//
 	//   - BeforeEndTime – A date used to filter agreements with a date before the
 	//   endTime of an agreement.
@@ -174,12 +59,81 @@ type SearchAgreementsInput struct {
 	//   - AfterEndTime – A date used to filter agreements with a date after the
 	//   endTime of an agreement.
 	//
+	//   - BeforeStartTime – A date used to filter agreements with a date before the
+	//   startTime of an agreement.
+	//
+	//   - AfterStartTime – A date used to filter agreements with a date after the
+	//   startTime of an agreement.
+	//
+	//   - BeforeLastUpdateTime – A date used to filter agreements with a date before
+	//   the lastUpdateTime of an agreement.
+	//
+	//   - AfterLastUpdateTime – A date used to filter agreements with a date after the
+	//   lastUpdateTime of an agreement.
+	//
 	//   - AgreementType – The type of agreement. Supported value includes
 	//   PurchaseAgreement .
 	//
 	//   - OfferSetId – A unique identifier for the offer set containing this offer.
 	//   All agreements created from offers in this set include this identifier as
 	//   context.
+	//
+	//   - EndTimeBehaviorType – What happens to the agreement when it reaches its end
+	//   date. Values include RENEW , REPLACE , and EXPIRE .
+	//
+	//   - EndTimeBehaviorReasonCode – The reason why the agreement doesn't renew at
+	//   its end date. Values include PROPOSER_RENEW_OPTED_OUT ,
+	//   ACCEPTOR_RENEW_OPTED_OUT , NO_RENEWAL_TERM , and RENEWAL_LIMIT_EXHAUSTED .
+	//
+	//   - InitialAgreementId – The unique identifier of the very first agreement in a
+	//   chain of related agreements. Use this filter to return every agreement in the
+	//   same chain.
+	//
+	//   - LicenseArn – The Amazon Resource Name (ARN) of the AWS License Manager
+	//   license associated with an entitlement granted by the agreement.
+	//
+	// A proposer can use any combination of the preceding filters along with
+	// AgreementType , which is required.
+	//
+	// The following filter combinations are supported when the PartyType is Acceptor :
+	//
+	//   - AgreementType
+	//
+	//   - AgreementType + Status
+	//
+	//   - AgreementType + EndTime
+	//
+	//   - AgreementType + Status + EndTime
+	//
+	//   - AgreementType + ResourceIdentifier
+	//
+	//   - AgreementType + ResourceIdentifier + EndTime
+	//
+	//   - AgreementType + ResourceIdentifier + Status
+	//
+	//   - AgreementType + ResourceIdentifier + Status + EndTime
+	//
+	//   - AgreementType + ResourceType
+	//
+	//   - AgreementType + ResourceType + EndTime
+	//
+	//   - AgreementType + OfferId
+	//
+	//   - AgreementType + OfferId + EndTime
+	//
+	//   - AgreementType + OfferId + Status
+	//
+	//   - AgreementType + OfferId + Status + EndTime
+	//
+	//   - AgreementType + OfferSetId
+	//
+	//   - AgreementType + OfferSetId + EndTime
+	//
+	//   - AgreementType + OfferSetId + Status
+	//
+	//   - AgreementType + OfferSetId + Status + EndTime
+	//
+	// To filter by EndTime , you can use BeforeEndTime , AfterEndTime , or both.
 	Filters []types.Filter
 
 	// The maximum number of agreements to return in the response.
@@ -188,8 +142,10 @@ type SearchAgreementsInput struct {
 	// A token to specify where to start pagination.
 	NextToken *string
 
-	// An object that contains the SortBy and SortOrder attributes. Only EndTime is
-	// supported for SearchAgreements . The default sort is EndTime descending.
+	// An object that contains the SortBy and SortOrder attributes. For
+	// SearchAgreements , SortBy supports EndTime for both party types, and StartTime
+	// and LastUpdateTime only when PartyType is Proposer . The default SortBy value
+	// is EndTime .
 	Sort *types.Sort
 
 	noSmithyDocumentSerde

@@ -276,6 +276,105 @@
                 "smithy.api#documentation": "Aac Vbr Quality"
             }
         },
+        "com.amazonaws.medialive#AbWatermarkerIdLength": {
+            "type": "enum",
+            "members": {
+                "ID_2048": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ID_2048"
+                    }
+                },
+                "ID_512": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ID_512"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Ab Watermarker Id Length"
+            }
+        },
+        "com.amazonaws.medialive#AbWatermarkingCustomProfile": {
+            "type": "structure",
+            "members": {
+                "EmbeddingFrequency": {
+                    "target": "com.amazonaws.medialive#__doubleMin250Max5000",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The frequency with which watermarks will be embedded, in milliseconds.",
+                        "smithy.api#jsonName": "embeddingFrequency",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SceneCut": {
+                    "target": "com.amazonaws.medialive#__doubleMinNegative1Max5",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The number of frames after scene-cut to embed the watermark.",
+                        "smithy.api#jsonName": "sceneCut",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetPsnr": {
+                    "target": "com.amazonaws.medialive#__doubleMin32Max46",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The target PSNR of the watermarked frame",
+                        "smithy.api#jsonName": "targetPsnr",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The vendor-specified custom profile options"
+            }
+        },
+        "com.amazonaws.medialive#AbWatermarkingProfile": {
+            "type": "enum",
+            "members": {
+                "CAMCORDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CAMCORDING"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                },
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEFAULT"
+                    }
+                },
+                "HQ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HQ"
+                    }
+                },
+                "MEZZANINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEZZANINE"
+                    }
+                },
+                "ROBUST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROBUST"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Ab Watermarking Profile"
+            }
+        },
         "com.amazonaws.medialive#Ac3AttenuationControl": {
             "type": "enum",
             "members": {
@@ -5099,6 +5198,76 @@
                 "smithy.api#documentation": "Cmaf Id3 Behavior"
             }
         },
+        "com.amazonaws.medialive#CmafIngestAbWatermarkerIrdetoSettings": {
+            "type": "structure",
+            "members": {
+                "AdditionalDestinationsAlternateDestinations": {
+                    "target": "com.amazonaws.medialive#__listOfOutputLocationRef",
+                    "traits": {
+                        "smithy.api#documentation": "The \"B\" pipeline renditions for the additional destinations.",
+                        "smithy.api#jsonName": "additionalDestinationsAlternateDestinations"
+                    }
+                },
+                "AlternateDestination": {
+                    "target": "com.amazonaws.medialive#OutputLocationRef",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The \"B\" pipeline renditions for the main destination.",
+                        "smithy.api#jsonName": "alternateDestination",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CustomProfile": {
+                    "target": "com.amazonaws.medialive#AbWatermarkingCustomProfile",
+                    "traits": {
+                        "smithy.api#documentation": "The vendor-provided custom profile values.",
+                        "smithy.api#jsonName": "customProfile"
+                    }
+                },
+                "License": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the Secrets Manager secret containing the license file.",
+                        "smithy.api#jsonName": "license"
+                    }
+                },
+                "OperatorId": {
+                    "target": "com.amazonaws.medialive#__integerMin1Max511",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The vendor-provided Operator ID.",
+                        "smithy.api#jsonName": "operatorId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolyPeriod": {
+                    "target": "com.amazonaws.medialive#__integerMin1Max1000",
+                    "traits": {
+                        "smithy.api#documentation": "The number of segments per watermarking bit. The total duration of the watermarking bit\nshould be the LCM (least common multiple) of all segments sizes emitted by the downstream packager.",
+                        "smithy.api#jsonName": "polyPeriod"
+                    }
+                },
+                "Profile": {
+                    "target": "com.amazonaws.medialive#AbWatermarkingProfile",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The vendor-provided profile choice.",
+                        "smithy.api#jsonName": "profile",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WatermarkIdLength": {
+                    "target": "com.amazonaws.medialive#AbWatermarkerIdLength",
+                    "traits": {
+                        "smithy.api#documentation": "The number of bits that compose the watermarking identifier to be embedded.",
+                        "smithy.api#jsonName": "watermarkIdLength"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A/B Watermarker settings for CMAF Ingest output groups."
+            }
+        },
         "com.amazonaws.medialive#CmafIngestCaptionLanguageMapping": {
             "type": "structure",
             "members": {
@@ -5248,6 +5417,13 @@
                         "smithy.api#documentation": "Optional an array of additional destinational HTTP destinations for the OutputGroup outputs",
                         "smithy.api#jsonName": "additionalDestinations"
                     }
+                },
+                "WatermarkingSettings": {
+                    "target": "com.amazonaws.medialive#CmafIngestWatermarkingSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies the type of watermarking technology to use.",
+                        "smithy.api#jsonName": "watermarkingSettings"
+                    }
                 }
             },
             "traits": {
@@ -5287,6 +5463,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "Cmaf Ingest Segment Length Units"
+            }
+        },
+        "com.amazonaws.medialive#CmafIngestWatermarkingSettings": {
+            "type": "structure",
+            "members": {
+                "CmafIngestAbWatermarkerIrdetoSettings": {
+                    "target": "com.amazonaws.medialive#CmafIngestAbWatermarkerIrdetoSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "cmafIngestAbWatermarkerIrdetoSettings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A/B Watermarker settings for CMAF Ingest output groups."
             }
         },
         "com.amazonaws.medialive#CmafKLVBehavior": {
@@ -10273,7 +10463,7 @@
                         "minDelay": 5
                     },
                     "ChannelStopped": {
-                        "documentation": "Wait until a channel has is stopped",
+                        "documentation": "Wait until a channel is not running",
                         "acceptors": [
                             {
                                 "state": "success",
@@ -10299,6 +10489,32 @@
                                 "state": "retry",
                                 "matcher": {
                                     "errorType": "InternalServerErrorException"
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "State",
+                                        "expected": "DELETING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "State",
+                                        "expected": "DELETED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "errorType": "NotFoundException"
                                 }
                             }
                         ],
@@ -27836,6 +28052,76 @@
                 "smithy.api#documentation": "Media Package Output Settings"
             }
         },
+        "com.amazonaws.medialive#MediaPackageV2AbWatermarkerIrdetoSettings": {
+            "type": "structure",
+            "members": {
+                "AdditionalDestinationsAlternateDestinations": {
+                    "target": "com.amazonaws.medialive#__listOfOutputLocationRef",
+                    "traits": {
+                        "smithy.api#documentation": "The \"B\" pipeline renditions for the additional destinations.",
+                        "smithy.api#jsonName": "additionalDestinationsAlternateDestinations"
+                    }
+                },
+                "AlternateDestination": {
+                    "target": "com.amazonaws.medialive#OutputLocationRef",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The \"B\" pipeline renditions for the main destination.",
+                        "smithy.api#jsonName": "alternateDestination",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CustomProfile": {
+                    "target": "com.amazonaws.medialive#AbWatermarkingCustomProfile",
+                    "traits": {
+                        "smithy.api#documentation": "The vendor-provided custom profile values.",
+                        "smithy.api#jsonName": "customProfile"
+                    }
+                },
+                "License": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the Secrets Manager secret containing the license file.",
+                        "smithy.api#jsonName": "license"
+                    }
+                },
+                "OperatorId": {
+                    "target": "com.amazonaws.medialive#__integerMin1Max511",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The vendor-provided Operator ID.",
+                        "smithy.api#jsonName": "operatorId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolyPeriod": {
+                    "target": "com.amazonaws.medialive#__integerMin1Max1000",
+                    "traits": {
+                        "smithy.api#documentation": "The number of segments per watermarking bit. The total duration of the watermarking bit\nshould be the LCM (least common multiple) of all segments sizes emitted by the downstream packager.",
+                        "smithy.api#jsonName": "polyPeriod"
+                    }
+                },
+                "Profile": {
+                    "target": "com.amazonaws.medialive#AbWatermarkingProfile",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The vendor-provided profile choice.",
+                        "smithy.api#jsonName": "profile",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WatermarkIdLength": {
+                    "target": "com.amazonaws.medialive#AbWatermarkerIdLength",
+                    "traits": {
+                        "smithy.api#documentation": "The number of bits that compose the watermarking identifier to be embedded.",
+                        "smithy.api#jsonName": "watermarkIdLength"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A/B Watermarker settings for MediaPackage V2 output groups."
+            }
+        },
         "com.amazonaws.medialive#MediaPackageV2DestinationSettings": {
             "type": "structure",
             "members": {
@@ -27951,10 +28237,31 @@
                         "smithy.api#documentation": "Optional an array of additional destinational HTTP destinations for the OutputGroup outputs",
                         "smithy.api#jsonName": "additionalDestinations"
                     }
+                },
+                "WatermarkingSettings": {
+                    "target": "com.amazonaws.medialive#MediaPackageV2WatermarkingSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies the type of watermarking technology to use.",
+                        "smithy.api#jsonName": "watermarkingSettings"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "Media Package V2 Group Settings"
+            }
+        },
+        "com.amazonaws.medialive#MediaPackageV2WatermarkingSettings": {
+            "type": "structure",
+            "members": {
+                "MediaPackageV2AbWatermarkerIrdetoSettings": {
+                    "target": "com.amazonaws.medialive#MediaPackageV2AbWatermarkerIrdetoSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "mediaPackageV2AbWatermarkerIrdetoSettings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A/B Watermarker settings for MediaPackage V2 output groups."
             }
         },
         "com.amazonaws.medialive#MediaResource": {
@@ -40396,6 +40703,24 @@
                 "smithy.api#documentation": "Placeholder documentation for __doubleMin1Max65535"
             }
         },
+        "com.amazonaws.medialive#__doubleMin250Max5000": {
+            "type": "double",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __doubleMin250Max5000"
+            }
+        },
+        "com.amazonaws.medialive#__doubleMin32Max46": {
+            "type": "double",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __doubleMin32Max46"
+            }
+        },
+        "com.amazonaws.medialive#__doubleMinNegative1Max5": {
+            "type": "double",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __doubleMinNegative1Max5"
+            }
+        },
         "com.amazonaws.medialive#__doubleMinNegative59Max0": {
             "type": "double",
             "traits": {
@@ -40630,6 +40955,12 @@
                 "smithy.api#documentation": "Placeholder documentation for __integerMin1Max10"
             }
         },
+        "com.amazonaws.medialive#__integerMin1Max1000": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max1000"
+            }
+        },
         "com.amazonaws.medialive#__integerMin1Max1000000": {
             "type": "integer",
             "traits": {
@@ -40688,6 +41019,12 @@
             "type": "integer",
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __integerMin1Max51"
+            }
+        },
+        "com.amazonaws.medialive#__integerMin1Max511": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max511"
             }
         },
         "com.amazonaws.medialive#__integerMin1Max6": {
@@ -41528,6 +41865,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __listOfOutputGroup"
+            }
+        },
+        "com.amazonaws.medialive#__listOfOutputLocationRef": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#OutputLocationRef"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfOutputLocationRef"
             }
         },
         "com.amazonaws.medialive#__listOfPipelineDetail": {

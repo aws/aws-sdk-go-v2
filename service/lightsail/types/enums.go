@@ -1318,6 +1318,8 @@ const (
 	MetricNameFreeStorageSpace               MetricName = "FreeStorageSpace"
 	MetricNameNetworkReceiveThroughput       MetricName = "NetworkReceiveThroughput"
 	MetricNameNetworkTransmitThroughput      MetricName = "NetworkTransmitThroughput"
+	MetricNameFreeableMemory                 MetricName = "FreeableMemory"
+	MetricNameSwapUsage                      MetricName = "SwapUsage"
 	MetricNameBurstCapacityTime              MetricName = "BurstCapacityTime"
 	MetricNameBurstCapacityPercentage        MetricName = "BurstCapacityPercentage"
 )
@@ -1351,6 +1353,8 @@ func (MetricName) Values() []MetricName {
 		"FreeStorageSpace",
 		"NetworkReceiveThroughput",
 		"NetworkTransmitThroughput",
+		"FreeableMemory",
+		"SwapUsage",
 		"BurstCapacityTime",
 		"BurstCapacityPercentage",
 	}
@@ -1610,6 +1614,7 @@ const (
 	OperationTypeStartGUISession                      OperationType = "StartGUISession"
 	OperationTypeStopGUISession                       OperationType = "StopGUISession"
 	OperationTypeSetupInstanceHttps                   OperationType = "SetupInstanceHttps"
+	OperationTypeGetProfile                           OperationType = "GetProfile"
 )
 
 // Values returns all known values for OperationType. Note that this can be
@@ -1701,6 +1706,7 @@ func (OperationType) Values() []OperationType {
 		"StartGUISession",
 		"StopGUISession",
 		"SetupInstanceHttps",
+		"GetProfile",
 	}
 }
 
@@ -1741,6 +1747,25 @@ func (OriginProtocolPolicyEnum) Values() []OriginProtocolPolicyEnum {
 	return []OriginProtocolPolicyEnum{
 		"http-only",
 		"https-only",
+	}
+}
+
+type PartnerStatus string
+
+// Enum values for PartnerStatus
+const (
+	PartnerStatusActive    PartnerStatus = "Active"
+	PartnerStatusSuspended PartnerStatus = "Suspended"
+)
+
+// Values returns all known values for PartnerStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PartnerStatus) Values() []PartnerStatus {
+	return []PartnerStatus{
+		"Active",
+		"Suspended",
 	}
 }
 
@@ -1827,6 +1852,25 @@ func (PricingUnit) Values() []PricingUnit {
 		"GB-Mo",
 		"Bundles",
 		"Queries",
+	}
+}
+
+type ProfileType string
+
+// Enum values for ProfileType
+const (
+	ProfileTypeLightsailor      ProfileType = "Lightsailor"
+	ProfileTypeLightsailPartner ProfileType = "LightsailPartner"
+)
+
+// Values returns all known values for ProfileType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProfileType) Values() []ProfileType {
+	return []ProfileType{
+		"Lightsailor",
+		"LightsailPartner",
 	}
 }
 
@@ -1957,6 +2001,8 @@ const (
 	RelationalDatabaseMetricNameFreeStorageSpace          RelationalDatabaseMetricName = "FreeStorageSpace"
 	RelationalDatabaseMetricNameNetworkReceiveThroughput  RelationalDatabaseMetricName = "NetworkReceiveThroughput"
 	RelationalDatabaseMetricNameNetworkTransmitThroughput RelationalDatabaseMetricName = "NetworkTransmitThroughput"
+	RelationalDatabaseMetricNameFreeableMemory            RelationalDatabaseMetricName = "FreeableMemory"
+	RelationalDatabaseMetricNameSwapUsage                 RelationalDatabaseMetricName = "SwapUsage"
 )
 
 // Values returns all known values for RelationalDatabaseMetricName. Note that
@@ -1972,6 +2018,8 @@ func (RelationalDatabaseMetricName) Values() []RelationalDatabaseMetricName {
 		"FreeStorageSpace",
 		"NetworkReceiveThroughput",
 		"NetworkTransmitThroughput",
+		"FreeableMemory",
+		"SwapUsage",
 	}
 }
 
@@ -2166,6 +2214,29 @@ func (StatusType) Values() []StatusType {
 	return []StatusType{
 		"Active",
 		"Inactive",
+	}
+}
+
+type TierName string
+
+// Enum values for TierName
+const (
+	TierNameEssential  TierName = "Essential"
+	TierNameGrowth     TierName = "Growth"
+	TierNameAccelerate TierName = "Accelerate"
+	TierNamePremier    TierName = "Premier"
+)
+
+// Values returns all known values for TierName. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TierName) Values() []TierName {
+	return []TierName{
+		"Essential",
+		"Growth",
+		"Accelerate",
+		"Premier",
 	}
 }
 

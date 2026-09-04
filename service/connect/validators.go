@@ -12012,6 +12012,67 @@ func validatePostAcceptTimeoutConfig(v *types.PostAcceptTimeoutConfig) error {
 	}
 }
 
+func validatePreEvaluationFilter(v *types.PreEvaluationFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PreEvaluationFilter"}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if len(v.FilterType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FilterType"))
+	}
+	if v.FilterKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FilterKey"))
+	}
+	if v.FilterValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FilterValue"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePreEvaluationFilterList(v []types.PreEvaluationFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PreEvaluationFilterList"}
+	for i := range v {
+		if err := validatePreEvaluationFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePreEvaluationFilters(v *types.PreEvaluationFilters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PreEvaluationFilters"}
+	if v.AndConditions != nil {
+		if err := validatePreEvaluationFilterList(v.AndConditions); err != nil {
+			invalidParams.AddNested("AndConditions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePreview(v *types.Preview) error {
 	if v == nil {
 		return nil
@@ -14737,6 +14798,11 @@ func validateOpCreateRuleInput(v *CreateRuleInput) error {
 	}
 	if len(v.PublishStatus) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PublishStatus"))
+	}
+	if v.PreEvaluationFilters != nil {
+		if err := validatePreEvaluationFilters(v.PreEvaluationFilters); err != nil {
+			invalidParams.AddNested("PreEvaluationFilters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -20814,6 +20880,11 @@ func validateOpUpdateRuleInput(v *UpdateRuleInput) error {
 	}
 	if len(v.PublishStatus) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PublishStatus"))
+	}
+	if v.PreEvaluationFilters != nil {
+		if err := validatePreEvaluationFilters(v.PreEvaluationFilters); err != nil {
+			invalidParams.AddNested("PreEvaluationFilters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

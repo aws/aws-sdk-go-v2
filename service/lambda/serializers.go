@@ -8880,6 +8880,13 @@ func awsRestjson1_serializeDocumentFileSystemConfig(v *types.FileSystemConfig, v
 		ok.String(*v.LocalMountPath)
 	}
 
+	if v.S3FilesConfig != nil {
+		ok := object.Key("S3FilesConfig")
+		if err := awsRestjson1_serializeDocumentS3FilesConfig(v.S3FilesConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -9442,6 +9449,18 @@ func awsRestjson1_serializeDocumentQueues(v []string, value smithyjson.Value) er
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3FilesConfig(v *types.S3FilesConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DirectS3Read) > 0 {
+		ok := object.Key("DirectS3Read")
+		ok.String(string(v.DirectS3Read))
+	}
+
 	return nil
 }
 

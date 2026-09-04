@@ -42,8 +42,22 @@ type UpdateWhatsAppFlowInput struct {
 	// The updated categories for the Flow.
 	Categories []types.MetaFlowCategory
 
+	// Optional HTTPS endpoint for a dynamic Flow, registered with Meta as the Flow's
+	// endpoint_uri and called by Meta directly. When omitted, the Flow's endpoint is
+	// unchanged.
+	EndpointUri *string
+
 	// The updated name for the Flow.
 	FlowName *string
+
+	// Optional Meta app ID to attach to the Flow. Meta signs data-exchange requests
+	// with the attached app's secret, so attaching your own app is what enables
+	// X-Hub-Signature-256 and flow_token_signature verification at your endpoint. Meta
+	// requires the app to be owned by the same business that owns the WABA. Attaching
+	// your own app is one-way: the service's app cannot be re-attached afterwards.
+	// When omitted, the attached app is unchanged. (Set via update because Meta
+	// ignores application_id at creation time.)
+	MetaAppId *string
 
 	noSmithyDocumentSerde
 }

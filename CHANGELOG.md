@@ -1,3 +1,81 @@
+# Release (2026-09-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.46.0](service/bedrockagentcore/CHANGELOG.md#v1460-2026-09-03)
+  * **Feature**: Adds log group name prefix trace source selection, custom or source log group result destinations, and metrics namespace customization
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.64.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1640-2026-09-03)
+  * **Feature**: AgentCore Identity adds Consent Portal APIs to manage portals that let end users grant OAuth authorization for agents to access resources. AgentCore Evaluation adds trace source selection by log group prefix, custom or source log group result destinations, and metrics namespace customization.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.195.0](service/connect/CHANGELOG.md#v11950-2026-09-03)
+  * **Feature**: This release enables TagOnCreate for Rule resource on CreateRule API. It also introduces a new field called PreEvaluationFilters to Rule resource, thereby impacting all Create, Update, Describe and Search APIs for Rules
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.48.0](service/drs/CHANGELOG.md#v1480-2026-09-03)
+  * **Feature**: AWS Elastic Disaster Recovery now includes source server architecture in SourceProperties to identify x86 and ARM64 systems.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.95.0](service/ecs/CHANGELOG.md#v1950-2026-09-03)
+  * **Feature**: Adds a critical parameter to the Amazon ECS managed daemon APIs that controls whether a daemon task failure drains the container instance. Non-critical daemon failures no longer drain the instance or block instance registration.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.97.0](service/eks/CHANGELOG.md#v1970-2026-09-03)
+  * **Feature**: Deprecate EncryptionConfig resources field. Amazon EKS encrypts all Kubernetes API data with envelope encryption by default for clusters running Kubernetes version 1.28 or higher, so this field no longer affects which resources are encrypted.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.61.1](service/elasticloadbalancingv2/CHANGELOG.md#v1611-2026-09-03)
+  * **Documentation**: This release adds support for sending TCP resets for Gateway Load Balancer when a flow's idle timeout expires, or when a target becomes unhealthy or is deregistered. This adds updates the CLI documentation.
+* `github.com/aws/aws-sdk-go-v2/service/evs`: [v1.18.0](service/evs/CHANGELOG.md#v1180-2026-09-03)
+  * **Feature**: Amazon EVS now allows users to set, update, and retrieve values for parameters that apply across all EVS Environments in their account at a regional level, such as the VCF License portability core count.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.90.0](service/guardduty/CHANGELOG.md#v1900-2026-09-03)
+  * **Feature**: Adding support for Sequence Activities in GuardDuty Findings
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.48.1](service/sfn/CHANGELOG.md#v1481-2026-09-03)
+  * **Documentation**: Updates Step Functions API documentation around CloudTrail, Execution name reuse and sort order of ListExecutions API
+* `github.com/aws/aws-sdk-go-v2/service/socialmessaging`: [v1.18.0](service/socialmessaging/CHANGELOG.md#v1180-2026-09-03)
+  * **Feature**: Adding support for WhatsApp Flows with endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.63.0](service/transcribe/CHANGELOG.md#v1630-2026-09-03)
+  * **Feature**: Amazon Transcribe now supports specifying up to 29 PII entity types in the ContentRedaction configuration of a StartTranscriptionJob request, allowing all supported entity types to be redacted in a single batch transcription job.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.80.0](service/transfer/CHANGELOG.md#v1800-2026-09-03)
+  * **Feature**: AWS Transfer Family SFTP Connectors now support specifying an ordered list of AWS Secrets Manager version stages for secret retrieval. This enables seamless credential rotation workflows where external partners may take time to update their systems with new credentials.
+
+# Release (2026-09-02)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.44.0](service/appintegrations/CHANGELOG.md#v1440-2026-09-02)
+  * **Feature**: This release adds a force parameter to DeleteApplication and a ConflictException to UpdateApplication, letting customers delete applications with existing associations in one call and get a clear error when an update conflicts with the application's current state.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.45.0](service/bedrockagentcore/CHANGELOG.md#v1450-2026-09-02)
+  * **Feature**: Batch evaluation now supports up to 10 CloudWatch log groups per CloudWatchLogsSource
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.328.0](service/ec2/CHANGELOG.md#v13280-2026-09-02)
+  * **Feature**: This release adds support to retain interruptible Capacity Reservations in an active state when all capacity is reclaimed.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.108.0](service/medialive/CHANGELOG.md#v11080-2026-09-02)
+  * **Feature**: AWS Elemental MediaLive now supports AB forensic video watermarking
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.53.0](service/mgn/CHANGELOG.md#v1530-2026-09-02)
+  * **Feature**: AWS Transform for migrations adds a second network migration option - apply your source security posture to existing VPCs. Upload a source network file with firewall rules, tag the in-scope VPCs, and AWS Transform matches source subnets to them by CIDR and generates the security groups.
+* `github.com/aws/aws-sdk-go-v2/service/odb`: [v1.20.0](service/odb/CHANGELOG.md#v1200-2026-09-02)
+  * **Feature**: Adds the ListFlexComponents API for listing the flex components available for a given DB system shape.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.273.0](service/sagemaker/CHANGELOG.md#v12730-2026-09-02)
+  * **Feature**: Amazon SageMaker Feature Store now supports the Standard V2 online store type, which enables feature-level writes to feature groups. You can select Standard V2 when creating a feature group, and update the storage type of an existing feature group via UpdateFeatureGroup.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime`: [v1.42.0](service/sagemakerfeaturestoreruntime/CHANGELOG.md#v1420-2026-09-02)
+  * **Feature**: Amazon SageMaker Feature Store now supports the UpdateRecord API, enabling partial updates to individual feature values in an existing Online Store record without rewriting the entire record. This reduces write payloads and latency for high-frequency feature-level writes .
+
+# Release (2026-09-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.63.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1630-2026-09-01)
+  * **Feature**: Online evaluation configurations now support up to 25 evaluators. CloudWatch Logs data sources for online evaluation now support up to 10 log groups.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.327.0](service/ec2/CHANGELOG.md#v13270-2026-09-01)
+  * **Feature**: Update UserData and UploadPolicy shapes to use SecureBlob
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.89.0](service/guardduty/CHANGELOG.md#v1890-2026-09-01)
+  * **Feature**: Amazon GuardDuty now supports custom detection rules, including APIs to manage rule associations and organization-level configurations.
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.60.0](service/iotsitewise/CHANGELOG.md#v1600-2026-09-01)
+  * **Feature**: AWS IoT SiteWise Scenario Discovery now supports mounting Amazon S3 data directly into pipeline task containers via S3 Access Points, and configuring additional ephemeral storage per task. Mount configurations can be overridden at execution time. See the API guide for details.
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.52.0](service/kinesis/CHANGELOG.md#v1520-2026-09-01)
+  * **Feature**: Amazon Kinesis Data Streams now supports a dry run feature for data-plane APIs to validate the permissions and request parameters. If all checks complete successfully, the API returns a 'DryRunOperationException', confirming the request would have succeeded without the 'DryRun' parameter.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.106.0](service/lambda/CHANGELOG.md#v11060-2026-09-01)
+  * **Feature**: AWS Lambda now provides configurable control over S3 direct access, allowing you to explicitly enable or disable how functions stream file reads directly from S3 buckets. This gives you flexibility to tune data access behavior based on your workload requirements, independent of memory size.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.63.0](service/lightsail/CHANGELOG.md#v1630-2026-09-01)
+  * **Feature**: This release adds support for the Amazon Lightsail GetProfile API, which returns the profile for the specified account.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceagreement`: [v1.24.0](service/marketplaceagreement/CHANGELOG.md#v1240-2026-09-01)
+  * **Feature**: This release adds renewal support for AWS Marketplace private offers. Agreements report whether they renew and, if not, why. Renewal terms add price increases, renewal limits, renewal decision deadlines, and payment schedule templates. SearchAgreements adds filters.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacediscovery`: [v1.8.0](service/marketplacediscovery/CHANGELOG.md#v180-2026-09-01)
+  * **Feature**: GetOfferTerms now returns renewalTerm for offers with pre-authorized renewals, exposing maxRenewals, lockoutPeriod, adjustmentDeadline, priceIncrease (fixed percentage or percentage range), and termTemplates (renewal payment schedules). Enables buyers to view renewal pricing and terms.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.101.0](service/mediaconvert/CHANGELOG.md#v11010-2026-09-01)
+  * **Feature**: Adds support for AAC passthrough. Adds ManifestCues option to support HLS manifest Cue marker passthrough. Adds playback device compatibility mode for DASH H.265 outputs. Adds TTML caption styling options. Adds interlace mode support for XAVC HD Intra CBG profile.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.71.0](service/sesv2/CHANGELOG.md#v1710-2026-09-01)
+  * **Feature**: Added support for managing SMIME signing certificates for email identities, including associating, listing, and disassociating certificates. Added the UpdateConfigurationSet operation to configure message security options such as signing scheme.
+* `github.com/aws/aws-sdk-go-v2/service/taxsettings`: [v1.25.0](service/taxsettings/CHANGELOG.md#v1250-2026-09-01)
+  * **Feature**: France and Monaco Additional Info changes
+
 # Release (2026-08-31.2)
 
 ## General Highlights

@@ -130,6 +130,26 @@ func (m *validateOpPutRecord) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRecord struct {
+}
+
+func (*validateOpUpdateRecord) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRecord) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRecordInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRecordInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpBatchGetRecordValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetRecord{}, middleware.After)
 }
@@ -152,6 +172,10 @@ func addOpListRecordsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutRecordValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutRecord{}, middleware.After)
+}
+
+func addOpUpdateRecordValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRecord{}, middleware.After)
 }
 
 func validateBatchGetRecordIdentifier(v *types.BatchGetRecordIdentifier) error {
@@ -393,6 +417,36 @@ func validateOpPutRecordInput(v *PutRecordInput) error {
 	} else if v.Record != nil {
 		if err := validateRecord(v.Record); err != nil {
 			invalidParams.AddNested("Record", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TtlDuration != nil {
+		if err := validateTtlDuration(v.TtlDuration); err != nil {
+			invalidParams.AddNested("TtlDuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRecordInput(v *UpdateRecordInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRecordInput"}
+	if v.FeatureGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FeatureGroupName"))
+	}
+	if v.RecordIdentifierValueAsString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordIdentifierValueAsString"))
+	}
+	if v.Features == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Features"))
+	} else if v.Features != nil {
+		if err := validateRecord(v.Features); err != nil {
+			invalidParams.AddNested("Features", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.TtlDuration != nil {

@@ -2,6 +2,24 @@
 
 package types
 
+type ActivityType string
+
+// Enum values for ActivityType
+const (
+	// The observed activity is an API call.
+	ActivityTypeApiCall ActivityType = "API_CALL"
+)
+
+// Values returns all known values for ActivityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ActivityType) Values() []ActivityType {
+	return []ActivityType{
+		"API_CALL",
+	}
+}
+
 type AdminStatus string
 
 // Enum values for AdminStatus
@@ -18,6 +36,25 @@ func (AdminStatus) Values() []AdminStatus {
 	return []AdminStatus{
 		"ENABLED",
 		"DISABLE_IN_PROGRESS",
+	}
+}
+
+type AssociationMode string
+
+// Enum values for AssociationMode
+const (
+	AssociationModeLive   AssociationMode = "LIVE"
+	AssociationModeDryRun AssociationMode = "DRY_RUN"
+)
+
+// Values returns all known values for AssociationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssociationMode) Values() []AssociationMode {
+	return []AssociationMode{
+		"LIVE",
+		"DRY_RUN",
 	}
 }
 
@@ -380,6 +417,88 @@ func (DestinationType) Values() []DestinationType {
 	}
 }
 
+type DetectionRuleConfigurationStatus string
+
+// Enum values for DetectionRuleConfigurationStatus
+const (
+	DetectionRuleConfigurationStatusActive     DetectionRuleConfigurationStatus = "ACTIVE"
+	DetectionRuleConfigurationStatusProcessing DetectionRuleConfigurationStatus = "PROCESSING"
+	DetectionRuleConfigurationStatusFailed     DetectionRuleConfigurationStatus = "FAILED"
+)
+
+// Values returns all known values for DetectionRuleConfigurationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DetectionRuleConfigurationStatus) Values() []DetectionRuleConfigurationStatus {
+	return []DetectionRuleConfigurationStatus{
+		"ACTIVE",
+		"PROCESSING",
+		"FAILED",
+	}
+}
+
+type DetectionRuleDataSource string
+
+// Enum values for DetectionRuleDataSource
+const (
+	DetectionRuleDataSourceCloudtrailManagementEvent DetectionRuleDataSource = "CloudTrailManagementEvent"
+)
+
+// Values returns all known values for DetectionRuleDataSource. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DetectionRuleDataSource) Values() []DetectionRuleDataSource {
+	return []DetectionRuleDataSource{
+		"CloudTrailManagementEvent",
+	}
+}
+
+type DetectionRuleFilterCondition string
+
+// Enum values for DetectionRuleFilterCondition
+const (
+	DetectionRuleFilterConditionEquals   DetectionRuleFilterCondition = "EQUALS"
+	DetectionRuleFilterConditionContains DetectionRuleFilterCondition = "CONTAINS"
+)
+
+// Values returns all known values for DetectionRuleFilterCondition. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DetectionRuleFilterCondition) Values() []DetectionRuleFilterCondition {
+	return []DetectionRuleFilterCondition{
+		"EQUALS",
+		"CONTAINS",
+	}
+}
+
+type DetectionRuleSeverity string
+
+// Enum values for DetectionRuleSeverity
+const (
+	DetectionRuleSeverityCritical DetectionRuleSeverity = "CRITICAL"
+	DetectionRuleSeverityHigh     DetectionRuleSeverity = "HIGH"
+	DetectionRuleSeverityMedium   DetectionRuleSeverity = "MEDIUM"
+	DetectionRuleSeverityLow      DetectionRuleSeverity = "LOW"
+)
+
+// Values returns all known values for DetectionRuleSeverity. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DetectionRuleSeverity) Values() []DetectionRuleSeverity {
+	return []DetectionRuleSeverity{
+		"CRITICAL",
+		"HIGH",
+		"MEDIUM",
+		"LOW",
+	}
+}
+
 type DetectionSource string
 
 // Enum values for DetectionSource
@@ -629,6 +748,35 @@ func (FilterAction) Values() []FilterAction {
 	return []FilterAction{
 		"NOOP",
 		"ARCHIVE",
+	}
+}
+
+type FilterFieldName string
+
+// Enum values for FilterFieldName
+const (
+	FilterFieldNameName        FilterFieldName = "name"
+	FilterFieldNameDescription FilterFieldName = "description"
+	FilterFieldNameDataSource  FilterFieldName = "dataSource"
+	FilterFieldNameSeverity    FilterFieldName = "severity"
+	FilterFieldNameTactic      FilterFieldName = "tactic"
+	FilterFieldNameTechnique   FilterFieldName = "technique"
+	FilterFieldNameService     FilterFieldName = "service"
+)
+
+// Values returns all known values for FilterFieldName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FilterFieldName) Values() []FilterFieldName {
+	return []FilterFieldName{
+		"name",
+		"description",
+		"dataSource",
+		"severity",
+		"tactic",
+		"technique",
+		"service",
 	}
 }
 
@@ -1486,6 +1634,40 @@ func (RiskLevel) Values() []RiskLevel {
 		"Medium",
 		"High",
 		"Critical",
+	}
+}
+
+type RuleLanguage string
+
+// Enum values for RuleLanguage
+const (
+	RuleLanguageSql RuleLanguage = "SQL"
+)
+
+// Values returns all known values for RuleLanguage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleLanguage) Values() []RuleLanguage {
+	return []RuleLanguage{
+		"SQL",
+	}
+}
+
+type RuleSchema string
+
+// Enum values for RuleSchema
+const (
+	RuleSchemaCloudTrail RuleSchema = "CloudTrail"
+)
+
+// Values returns all known values for RuleSchema. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleSchema) Values() []RuleSchema {
+	return []RuleSchema{
+		"CloudTrail",
 	}
 }
 

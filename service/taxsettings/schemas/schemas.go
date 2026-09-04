@@ -184,7 +184,7 @@ var _AccountName = smithy.NewSchema(smithy.ShapeID{
 var AdditionalInfoRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "AdditionalInfoRequest",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 24)
 var AdditionalInfoRequest_malaysiaAdditionalInfo *smithy.Schema
 
 var AdditionalInfoRequest_israelAdditionalInfo *smithy.Schema
@@ -231,10 +231,12 @@ var AdditionalInfoRequest_chileAdditionalInfo *smithy.Schema
 
 var AdditionalInfoRequest_franceAdditionalInfo *smithy.Schema
 
+var AdditionalInfoRequest_monacoAdditionalInfo *smithy.Schema
+
 var AdditionalInfoResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "AdditionalInfoResponse",
-}, smithy.ShapeTypeStructure, 25)
+}, smithy.ShapeTypeStructure, 26)
 var AdditionalInfoResponse_malaysiaAdditionalInfo *smithy.Schema
 
 var AdditionalInfoResponse_israelAdditionalInfo *smithy.Schema
@@ -284,6 +286,8 @@ var AdditionalInfoResponse_belgiumAdditionalInfo *smithy.Schema
 var AdditionalInfoResponse_chileAdditionalInfo *smithy.Schema
 
 var AdditionalInfoResponse_franceAdditionalInfo *smithy.Schema
+
+var AdditionalInfoResponse_monacoAdditionalInfo *smithy.Schema
 
 var Address = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
@@ -405,6 +409,11 @@ var BrazilAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
 var BrazilAdditionalInfo_ccmCode *smithy.Schema
 
 var BrazilAdditionalInfo_legalNatureCode *smithy.Schema
+
+var _BusinessNumber = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "BusinessNumber",
+}, smithy.ShapeTypeString, 0)
 
 var _BusinessRegistrationNumber = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
@@ -631,8 +640,10 @@ var _FileBlob = smithy.NewSchema(smithy.ShapeID{
 var FranceAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "FranceAdditionalInfo",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var FranceAdditionalInfo_sirenNumber *smithy.Schema
+
+var FranceAdditionalInfo_eInvoiceRoutingCode *smithy.Schema
 
 var _GenericString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
@@ -830,6 +841,12 @@ var _MaxResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "MaxResults",
 }, smithy.ShapeTypeInteger, 0)
+
+var MonacoAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "MonacoAdditionalInfo",
+}, smithy.ShapeTypeStructure, 1)
+var MonacoAdditionalInfo_businessNumber *smithy.Schema
 
 var _PaginationTokenString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
@@ -1855,6 +1872,10 @@ func init() {
 
 	FranceAdditionalInfo_sirenNumber = FranceAdditionalInfo.AddMember("sirenNumber", _SirenNumber)
 
+	FranceAdditionalInfo_eInvoiceRoutingCode = FranceAdditionalInfo.AddMember("eInvoiceRoutingCode", smithyprelude.String)
+
+	MonacoAdditionalInfo_businessNumber = MonacoAdditionalInfo.AddMember("businessNumber", _BusinessNumber)
+
 	AdditionalInfoResponse_malaysiaAdditionalInfo = AdditionalInfoResponse.AddMember("malaysiaAdditionalInfo", MalaysiaAdditionalInfo)
 
 	AdditionalInfoResponse_israelAdditionalInfo = AdditionalInfoResponse.AddMember("israelAdditionalInfo", IsraelAdditionalInfo)
@@ -1904,6 +1925,8 @@ func init() {
 	AdditionalInfoResponse_chileAdditionalInfo = AdditionalInfoResponse.AddMember("chileAdditionalInfo", ChileAdditionalInfo)
 
 	AdditionalInfoResponse_franceAdditionalInfo = AdditionalInfoResponse.AddMember("franceAdditionalInfo", FranceAdditionalInfo)
+
+	AdditionalInfoResponse_monacoAdditionalInfo = AdditionalInfoResponse.AddMember("monacoAdditionalInfo", MonacoAdditionalInfo)
 
 	Jurisdiction_stateOrRegion = Jurisdiction.AddMember("stateOrRegion", _State)
 
@@ -2024,6 +2047,8 @@ func init() {
 	AdditionalInfoRequest_chileAdditionalInfo = AdditionalInfoRequest.AddMember("chileAdditionalInfo", ChileAdditionalInfo)
 
 	AdditionalInfoRequest_franceAdditionalInfo = AdditionalInfoRequest.AddMember("franceAdditionalInfo", FranceAdditionalInfo)
+
+	AdditionalInfoRequest_monacoAdditionalInfo = AdditionalInfoRequest.AddMember("monacoAdditionalInfo", MonacoAdditionalInfo)
 
 	AttachmentUploadException_message = AttachmentUploadException.AddMember("message", _ErrorMessage)
 

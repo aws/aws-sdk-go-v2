@@ -118,6 +118,7 @@
         "api_op_GetOperation.go",
         "api_op_GetOperations.go",
         "api_op_GetOperationsForResource.go",
+        "api_op_GetProfile.go",
         "api_op_GetRegions.go",
         "api_op_GetRelationalDatabase.go",
         "api_op_GetRelationalDatabaseBlueprints.go",

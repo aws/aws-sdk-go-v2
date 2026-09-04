@@ -1089,6 +1089,25 @@ func (ResourceContentType) Values() []ResourceContentType {
 	}
 }
 
+type ResultDestination string
+
+// Enum values for ResultDestination
+const (
+	ResultDestinationDedicatedLogGroup ResultDestination = "DEDICATED_LOG_GROUP"
+	ResultDestinationSourceLogGroup    ResultDestination = "SOURCE_LOG_GROUP"
+)
+
+// Values returns all known values for ResultDestination. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResultDestination) Values() []ResultDestination {
+	return []ResultDestination{
+		"DEDICATED_LOG_GROUP",
+		"SOURCE_LOG_GROUP",
+	}
+}
+
 type Role string
 
 // Enum values for Role

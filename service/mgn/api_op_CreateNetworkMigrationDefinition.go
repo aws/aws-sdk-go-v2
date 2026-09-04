@@ -45,6 +45,11 @@ type CreateNetworkMigrationDefinitionInput struct {
 	// This member is required.
 	TargetS3Configuration *types.TargetS3Configuration
 
+	// A list of CIDR mappings that map original source CIDR ranges to updated target
+	// CIDR ranges. CIDR mappings can be provided only when vpcProvisioningStrategy is
+	// set to USE_EXISTING .
+	CidrMappings []types.CidrMapping
+
 	// A description of the network migration definition.
 	Description *string
 
@@ -61,6 +66,11 @@ type CreateNetworkMigrationDefinitionInput struct {
 	// The target deployment configuration for the migrated network.
 	TargetDeployment types.TargetDeployment
 
+	// Specifies whether to create new target VPCs or use existing ones. Set to
+	// CREATE_NEW to provision new target VPCs as part of the migration, or
+	// USE_EXISTING to migrate into existing VPCs in the target account.
+	VpcProvisioningStrategy types.VpcProvisioningStrategy
+
 	noSmithyDocumentSerde
 }
 
@@ -71,6 +81,7 @@ func (v *CreateNetworkMigrationDefinitionInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *CreateNetworkMigrationDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCidrMappingsList(s, schemas.CreateNetworkMigrationDefinitionRequest_cidrMappings, v.CidrMappings)
 	if v.Description != nil {
 		s.WriteString(schemas.CreateNetworkMigrationDefinitionRequest_description, *v.Description)
 	}
@@ -93,12 +104,20 @@ func (v *CreateNetworkMigrationDefinitionInput) SerializeMembers(s smithy.ShapeS
 		v.TargetS3Configuration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.VpcProvisioningStrategy != "" {
+		s.WriteString(schemas.CreateNetworkMigrationDefinitionRequest_vpcProvisioningStrategy, string(v.VpcProvisioningStrategy))
+	}
 }
 
 type CreateNetworkMigrationDefinitionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the network migration definition.
 	Arn *string
+
+	// A list of CIDR mappings that map original source CIDR ranges to updated target
+	// CIDR ranges. CIDR mappings apply only when vpcProvisioningStrategy is set to
+	// USE_EXISTING .
+	CidrMappings []types.CidrMapping
 
 	// The timestamp when the network migration definition was created.
 	CreatedAt *time.Time
@@ -133,6 +152,11 @@ type CreateNetworkMigrationDefinitionOutput struct {
 	// The timestamp when the network migration definition was last updated.
 	UpdatedAt *time.Time
 
+	// Indicates whether the migration creates new target VPCs or uses existing ones.
+	// CREATE_NEW provisions new target VPCs; USE_EXISTING migrates into existing VPCs
+	// in the target account.
+	VpcProvisioningStrategy types.VpcProvisioningStrategy
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -149,6 +173,7 @@ func (v *CreateNetworkMigrationDefinitionOutput) SerializeMembers(s smithy.Shape
 	if v.Arn != nil {
 		s.WriteString(schemas.NetworkMigrationDefinition_arn, *v.Arn)
 	}
+	serializeCidrMappingsList(s, schemas.NetworkMigrationDefinition_cidrMappings, v.CidrMappings)
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.NetworkMigrationDefinition_createdAt, *v.CreatedAt)
 	}
@@ -180,6 +205,9 @@ func (v *CreateNetworkMigrationDefinitionOutput) SerializeMembers(s smithy.Shape
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.NetworkMigrationDefinition_updatedAt, *v.UpdatedAt)
 	}
+	if v.VpcProvisioningStrategy != "" {
+		s.WriteString(schemas.NetworkMigrationDefinition_vpcProvisioningStrategy, string(v.VpcProvisioningStrategy))
+	}
 }
 func (v *CreateNetworkMigrationDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NetworkMigrationDefinition, func(s *smithy.Schema) error {
@@ -187,6 +215,8 @@ func (v *CreateNetworkMigrationDefinitionOutput) Deserialize(d smithy.ShapeDeser
 		case schemas.NetworkMigrationDefinition_arn:
 			v.Arn = new(string)
 			return d.ReadString(schemas.NetworkMigrationDefinition_arn, v.Arn)
+		case schemas.NetworkMigrationDefinition_cidrMappings:
+			return deserializeCidrMappingsList(d, schemas.NetworkMigrationDefinition_cidrMappings, &v.CidrMappings)
 		case schemas.NetworkMigrationDefinition_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.NetworkMigrationDefinition_createdAt, v.CreatedAt)
@@ -221,6 +251,13 @@ func (v *CreateNetworkMigrationDefinitionOutput) Deserialize(d smithy.ShapeDeser
 		case schemas.NetworkMigrationDefinition_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.NetworkMigrationDefinition_updatedAt, v.UpdatedAt)
+		case schemas.NetworkMigrationDefinition_vpcProvisioningStrategy:
+			var ev string
+			if err := d.ReadString(schemas.NetworkMigrationDefinition_vpcProvisioningStrategy, &ev); err != nil {
+				return err
+			}
+			v.VpcProvisioningStrategy = types.VpcProvisioningStrategy(ev)
+			return nil
 		}
 		return nil
 	})

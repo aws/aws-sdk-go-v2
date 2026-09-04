@@ -1926,9 +1926,6 @@ func validateCloudWatchLogsSource(v *types.CloudWatchLogsSource) error {
 	if v.ServiceNames == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceNames"))
 	}
-	if v.LogGroupNames == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LogGroupNames"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

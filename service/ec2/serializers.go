@@ -56676,18 +56676,6 @@ func awsEc2query_serializeDocumentBillingProductList(v []string, value query.Val
 	return nil
 }
 
-func awsEc2query_serializeDocumentBlobAttributeValue(v *types.BlobAttributeValue, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.Value != nil {
-		objectKey := object.Key("Value")
-		objectKey.Base64EncodeBytes(v.Value)
-	}
-
-	return nil
-}
-
 func awsEc2query_serializeDocumentBlockDeviceMapping(v *types.BlockDeviceMapping, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -66001,6 +65989,18 @@ func awsEc2query_serializeDocumentSecondarySubnetIdList(v []string, value query.
 	return nil
 }
 
+func awsEc2query_serializeDocumentSecureBlobAttributeValue(v *types.SecureBlobAttributeValue, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Value != nil {
+		objectKey := object.Key("Value")
+		objectKey.Base64EncodeBytes(v.Value)
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeDocumentSecurityGroupIdList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -71801,6 +71801,11 @@ func awsEc2query_serializeOpDocumentCreateInterruptibleCapacityReservationAlloca
 		if err := awsEc2query_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if len(v.ZeroSizePreference) > 0 {
+		objectKey := object.Key("ZeroSizePreference")
+		objectKey.String(string(v.ZeroSizePreference))
 	}
 
 	return nil
@@ -89400,7 +89405,7 @@ func awsEc2query_serializeOpDocumentModifyInstanceAttributeInput(v *ModifyInstan
 
 	if v.UserData != nil {
 		objectKey := object.Key("UserData")
-		if err := awsEc2query_serializeDocumentBlobAttributeValue(v.UserData, objectKey); err != nil {
+		if err := awsEc2query_serializeDocumentSecureBlobAttributeValue(v.UserData, objectKey); err != nil {
 			return err
 		}
 	}
@@ -94558,6 +94563,11 @@ func awsEc2query_serializeOpDocumentUpdateInterruptibleCapacityReservationAlloca
 	if v.TargetInstanceCount != nil {
 		objectKey := object.Key("TargetInstanceCount")
 		objectKey.Integer(*v.TargetInstanceCount)
+	}
+
+	if len(v.ZeroSizePreference) > 0 {
+		objectKey := object.Key("ZeroSizePreference")
+		objectKey.String(string(v.ZeroSizePreference))
 	}
 
 	return nil

@@ -2,4 +2,4 @@ POST /v1/whatsapp/flow/create
 
 Content-Type: application/json
 
-{"categories":["SIGN_UP","SIGN_UP"],"cloneFlowId":"__CloneFlowId__","flowJson":"YmxvYg==","flowName":"__FlowName__","id":"__Id__","publish":true}
+{"categories":["SIGN_UP","SIGN_UP"],"cloneFlowId":"__CloneFlowId__","endpointUri":"__EndpointUri__","flowJson":"YmxvYg==","flowName":"__FlowName__","id":"__Id__","publish":true}

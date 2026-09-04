@@ -1969,6 +1969,41 @@ func validateChangeServerLifeCycleStateSourceServerLifecycle(v *types.ChangeServ
 	}
 }
 
+func validateCidrMapping(v *types.CidrMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CidrMapping"}
+	if v.OriginalCidr == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OriginalCidr"))
+	}
+	if v.UpdatedCidr == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdatedCidr"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCidrMappingsList(v []types.CidrMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CidrMappingsList"}
+	for i := range v {
+		if err := validateCidrMapping(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConnectorSsmCommandConfig(v *types.ConnectorSsmCommandConfig) error {
 	if v == nil {
 		return nil
@@ -2525,6 +2560,11 @@ func validateOpCreateNetworkMigrationDefinitionInput(v *CreateNetworkMigrationDe
 	} else if v.TargetNetwork != nil {
 		if err := validateTargetNetwork(v.TargetNetwork); err != nil {
 			invalidParams.AddNested("TargetNetwork", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CidrMappings != nil {
+		if err := validateCidrMappingsList(v.CidrMappings); err != nil {
+			invalidParams.AddNested("CidrMappings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3704,6 +3744,11 @@ func validateOpUpdateNetworkMigrationDefinitionInput(v *UpdateNetworkMigrationDe
 	if v.SourceConfigurations != nil {
 		if err := validateSourceConfigurationList(v.SourceConfigurations); err != nil {
 			invalidParams.AddNested("SourceConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CidrMappings != nil {
+		if err := validateCidrMappingsList(v.CidrMappings); err != nil {
+			invalidParams.AddNested("CidrMappings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

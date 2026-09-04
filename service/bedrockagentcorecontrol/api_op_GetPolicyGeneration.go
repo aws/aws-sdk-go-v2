@@ -14,7 +14,7 @@ import (
 
 // Retrieves information about a policy generation request within the AgentCore
 // Policy system. Policy generation converts natural language descriptions into
-// Cedar policy statements using AI-powered translation, enabling non-technical
+// Dogwood policy statements using AI-powered translation, enabling non-technical
 // users to create policies.
 func (c *Client) GetPolicyGeneration(ctx context.Context, params *GetPolicyGenerationInput, optFns ...func(*Options)) (*GetPolicyGenerationOutput, error) {
 	if params == nil {

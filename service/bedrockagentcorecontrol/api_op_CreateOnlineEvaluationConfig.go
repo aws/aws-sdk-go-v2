@@ -90,6 +90,10 @@ type CreateOnlineEvaluationConfigInput struct {
 	// The list of insight types to run against agent sessions.
 	Insights []types.Insight
 
+	//  The configuration that specifies where evaluation results should be written
+	// for monitoring and analysis.
+	OutputConfig *types.OutputConfig
+
 	// A map of tag keys and values to assign to an AgentCore Online Evaluation
 	// Config. Tags enable you to categorize your resources in different ways, for
 	// example, by purpose, owner, or environment.

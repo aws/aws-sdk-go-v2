@@ -1129,6 +1129,25 @@ func (ReplicationStatus) Values() []ReplicationStatus {
 	}
 }
 
+type SourceServerArchitecture string
+
+// Enum values for SourceServerArchitecture
+const (
+	SourceServerArchitectureX8664 SourceServerArchitecture = "x86_64"
+	SourceServerArchitectureArm64 SourceServerArchitecture = "arm64"
+)
+
+// Values returns all known values for SourceServerArchitecture. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SourceServerArchitecture) Values() []SourceServerArchitecture {
+	return []SourceServerArchitecture{
+		"x86_64",
+		"arm64",
+	}
+}
+
 type TargetInstanceTypeRightSizingMethod string
 
 // Enum values for TargetInstanceTypeRightSizingMethod

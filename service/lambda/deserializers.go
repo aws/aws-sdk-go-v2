@@ -24814,6 +24814,11 @@ func awsRestjson1_deserializeDocumentFileSystemConfig(v **types.FileSystemConfig
 				sv.LocalMountPath = ptr.String(jtv)
 			}
 
+		case "S3FilesConfig":
+			if err := awsRestjson1_deserializeDocumentS3FilesConfig(&sv.S3FilesConfig, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -29014,6 +29019,46 @@ func awsRestjson1_deserializeDocumentRuntimeVersionError(v **types.RuntimeVersio
 					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentS3FilesConfig(v **types.S3FilesConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3FilesConfig
+	if *v == nil {
+		sv = &types.S3FilesConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DirectS3Read":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DirectS3Read to be of type string, got %T instead", value)
+				}
+				sv.DirectS3Read = types.DirectS3Read(jtv)
 			}
 
 		default:

@@ -11,7 +11,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Lists all ReplicationConfigurationTemplates, filtered by Source Server IDs.
+// Lists all ReplicationConfigurationTemplates, filtered by replication
+// configuration template IDs.
 func (c *Client) DescribeReplicationConfigurationTemplates(ctx context.Context, params *DescribeReplicationConfigurationTemplatesInput, optFns ...func(*Options)) (*DescribeReplicationConfigurationTemplatesOutput, error) {
 	if params == nil {
 		params = &DescribeReplicationConfigurationTemplatesInput{}

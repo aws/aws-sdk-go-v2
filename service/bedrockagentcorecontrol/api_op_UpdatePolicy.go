@@ -52,9 +52,9 @@ type UpdatePolicyInput struct {
 	// This member is required.
 	PolicyId *string
 
-	// The new Cedar policy statement that defines the access control rules. This
-	// replaces the existing policy definition with new logic while maintaining the
-	// policy's identity.
+	// The new Cedar or Dogwood policy statement that defines the access control
+	// rules. This replaces the existing policy definition with new logic while
+	// maintaining the policy's identity.
 	Definition types.PolicyDefinition
 
 	// The new human-readable description for the policy. This optional field allows
@@ -86,7 +86,7 @@ type UpdatePolicyOutput struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The updated Cedar policy statement.
+	// The updated Cedar or Dogwood policy statement.
 	//
 	// This member is required.
 	Definition types.PolicyDefinition

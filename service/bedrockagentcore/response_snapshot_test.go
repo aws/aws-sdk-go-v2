@@ -1237,6 +1237,10 @@ func TestCheckResponseSnapshot_GetBatchEvaluation(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+				LogGroupNamePrefixes: []string{
+					"__Member__",
+					"__Member__",
+				},
 				FilterConfig: &types.CloudWatchFilterConfig{
 					SessionIds: []string{
 						"__Member__",
@@ -1251,8 +1255,10 @@ func TestCheckResponseSnapshot_GetBatchEvaluation(t *testing.T) {
 		},
 		OutputConfig: &types.OutputConfigMemberCloudWatchConfig{
 			Value: types.CloudWatchOutputConfig{
-				LogGroupName:  ptr.String("__LogGroupName__"),
-				LogStreamName: ptr.String("__LogStreamName__"),
+				LogGroupName:      ptr.String("__LogGroupName__"),
+				LogStreamName:     ptr.String("__LogStreamName__"),
+				MetricsNamespace:  ptr.String("__MetricsNamespace__"),
+				ResultDestination: types.ResultDestination("DEDICATED_LOG_GROUP"),
 			},
 		},
 		EvaluationResults: &types.EvaluationJobResults{
@@ -4112,8 +4118,10 @@ func TestCheckResponseSnapshot_StartBatchEvaluation(t *testing.T) {
 		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		OutputConfig: &types.OutputConfigMemberCloudWatchConfig{
 			Value: types.CloudWatchOutputConfig{
-				LogGroupName:  ptr.String("__LogGroupName__"),
-				LogStreamName: ptr.String("__LogStreamName__"),
+				LogGroupName:      ptr.String("__LogGroupName__"),
+				LogStreamName:     ptr.String("__LogStreamName__"),
+				MetricsNamespace:  ptr.String("__MetricsNamespace__"),
+				ResultDestination: types.ResultDestination("DEDICATED_LOG_GROUP"),
 			},
 		},
 		Tags: map[string]string{
@@ -4155,6 +4163,10 @@ func TestCheckResponseSnapshot_StartBatchEvaluation(t *testing.T) {
 					"__Member__",
 				},
 				LogGroupNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				LogGroupNamePrefixes: []string{
 					"__Member__",
 					"__Member__",
 				},
@@ -4266,6 +4278,14 @@ func TestCheckResponseSnapshot_StartBatchEvaluation(t *testing.T) {
 		},
 		KmsKeyArn:   ptr.String("__KmsKeyArn__"),
 		Description: ptr.String("__Description__"),
+		OutputConfig: &types.OutputConfigMemberCloudWatchConfig{
+			Value: types.CloudWatchOutputConfig{
+				LogGroupName:      ptr.String("__LogGroupName__"),
+				LogStreamName:     ptr.String("__LogStreamName__"),
+				MetricsNamespace:  ptr.String("__MetricsNamespace__"),
+				ResultDestination: types.ResultDestination("DEDICATED_LOG_GROUP"),
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)

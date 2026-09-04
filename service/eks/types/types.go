@@ -1416,7 +1416,14 @@ type EncryptionConfig struct {
 	// Key Management Service (KMS) key. Either the ARN or the alias can be used.
 	Provider *Provider
 
+	// Amazon EKS encrypts all Kubernetes API data with envelope encryption by default
+	// for clusters running Kubernetes version 1.28 or higher, so this field no longer
+	// affects which resources are encrypted.
+	//
 	// Specifies the resources to be encrypted. The only supported value is secrets .
+	//
+	// Deprecated: Deprecated. Amazon EKS encrypts all Kubernetes API data by default,
+	// so this value no longer determines which resources are encrypted.
 	Resources []string
 
 	noSmithyDocumentSerde

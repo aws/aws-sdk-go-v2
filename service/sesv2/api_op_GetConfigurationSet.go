@@ -57,6 +57,10 @@ type GetConfigurationSetOutput struct {
 	// you send using the configuration set.
 	DeliveryOptions *types.DeliveryOptions
 
+	// The message security options that are applied to the configuration set, such as
+	// the signing scheme used for messages that you send with the configuration set.
+	MessageSecurityOptions *types.MessageSecurityOptions
+
 	// An object that defines whether or not Amazon SES collects reputation metrics
 	// for the emails that you send that use the configuration set.
 	ReputationOptions *types.ReputationOptions

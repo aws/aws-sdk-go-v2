@@ -85,10 +85,12 @@ type CreateExadbVmClusterInput struct {
 	// This member is required.
 	VmFileSystemStorageTotalSizeInGBs *int32
 
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. If you don't specify a client token, the Amazon Web Services SDK
-	// automatically generates one and uses it for the request to ensure idempotency.
-	// The client token is valid for up to 24 hours after it's first used.
+	// A unique, case-sensitive identifier that you provide to ensure that the
+	// operation completes no more than one time. If you submit the same request twice
+	// with the same client token, the service ignores the second request and returns
+	// the result of the first. If you don't specify a client token, the AWS SDK
+	// automatically generates one. The client token is valid for up to 24 hours after
+	// it's first used.
 	ClientToken *string
 
 	// A name for the Grid Infrastructure cluster. The name isn't case sensitive.
@@ -101,11 +103,11 @@ type CreateExadbVmClusterInput struct {
 	// The Oracle license model to apply to the Exascale VM cluster.
 	LicenseModel types.LicenseModel
 
-	// The port number for TCP connections to the single client access name (SCAN)
+	// The port number for TCP connections to the Single Client Access Name (SCAN)
 	// listener.
 	ScanListenerPortTcp *int32
 
-	// The port number for TCP connections with SSL to the single client access name
+	// The port number for TCP connections with SSL to the Single Client Access Name
 	// (SCAN) listener.
 	ScanListenerPortTcpSsl *int32
 

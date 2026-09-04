@@ -5323,6 +5323,114 @@
                         "smithy.api#enumValue": "SSN"
                     }
                 },
+                "DATE_TIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATE_TIME"
+                    }
+                },
+                "PASSPORT_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSPORT_NUMBER"
+                    }
+                },
+                "DRIVER_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVER_ID"
+                    }
+                },
+                "URL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "URL"
+                    }
+                },
+                "AGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGE"
+                    }
+                },
+                "USERNAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USERNAME"
+                    }
+                },
+                "PASSWORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSWORD"
+                    }
+                },
+                "AWS_ACCESS_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_ACCESS_KEY"
+                    }
+                },
+                "AWS_SECRET_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SECRET_KEY"
+                    }
+                },
+                "IP_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IP_ADDRESS"
+                    }
+                },
+                "MAC_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAC_ADDRESS"
+                    }
+                },
+                "LICENSE_PLATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LICENSE_PLATE"
+                    }
+                },
+                "VEHICLE_IDENTIFICATION_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VEHICLE_IDENTIFICATION_NUMBER"
+                    }
+                },
+                "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"
+                    }
+                },
+                "CA_HEALTH_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CA_HEALTH_NUMBER"
+                    }
+                },
+                "CA_SOCIAL_INSURANCE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CA_SOCIAL_INSURANCE_NUMBER"
+                    }
+                },
+                "INTERNATIONAL_BANK_ACCOUNT_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNATIONAL_BANK_ACCOUNT_NUMBER"
+                    }
+                },
+                "SWIFT_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SWIFT_CODE"
+                    }
+                },
                 "ALL": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -5339,7 +5447,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 11
+                    "max": 29
                 }
             }
         },

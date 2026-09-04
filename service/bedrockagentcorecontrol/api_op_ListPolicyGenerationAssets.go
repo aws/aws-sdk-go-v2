@@ -10,7 +10,7 @@ import (
 )
 
 // Retrieves a list of generated policy assets from a policy generation request
-// within the AgentCore Policy system. This operation returns the actual Cedar
+// within the AgentCore Policy system. This operation returns the actual Dogwood
 // policies and related artifacts produced by the AI-powered policy generation
 // process, allowing users to review and select from multiple generated policy
 // options.
@@ -72,7 +72,7 @@ type ListPolicyGenerationAssetsOutput struct {
 	// [ListPolicyGenerationAssets]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyGenerationAssets.html
 	NextToken *string
 
-	// An array of generated policy assets including Cedar policies and related
+	// An array of generated policy assets including Dogwood policies and related
 	// artifacts from the AI-powered policy generation process. Each asset represents a
 	// different policy option or variation generated from the original natural
 	// language input.

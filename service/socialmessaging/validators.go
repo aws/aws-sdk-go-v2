@@ -270,6 +270,26 @@ func (m *validateOpGetLinkedWhatsAppBusinessAccountPhoneNumber) HandleInitialize
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetWhatsAppBusinessPublicKey struct {
+}
+
+func (*validateOpGetWhatsAppBusinessPublicKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetWhatsAppBusinessPublicKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetWhatsAppBusinessPublicKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetWhatsAppBusinessPublicKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetWhatsAppFlow struct {
 }
 
@@ -510,6 +530,26 @@ func (m *validateOpPutWhatsAppBusinessAccountEventDestinations) HandleInitialize
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutWhatsAppBusinessPublicKey struct {
+}
+
+func (*validateOpPutWhatsAppBusinessPublicKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutWhatsAppBusinessPublicKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutWhatsAppBusinessPublicKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutWhatsAppBusinessPublicKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSendWhatsAppConversionEvent struct {
 }
 
@@ -702,6 +742,10 @@ func addOpGetLinkedWhatsAppBusinessAccountPhoneNumberValidationMiddleware(stack 
 	return stack.Initialize.Add(&validateOpGetLinkedWhatsAppBusinessAccountPhoneNumber{}, middleware.After)
 }
 
+func addOpGetWhatsAppBusinessPublicKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetWhatsAppBusinessPublicKey{}, middleware.After)
+}
+
 func addOpGetWhatsAppFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetWhatsAppFlow{}, middleware.After)
 }
@@ -748,6 +792,10 @@ func addOpPublishWhatsAppFlowValidationMiddleware(stack *middleware.Stack) error
 
 func addOpPutWhatsAppBusinessAccountEventDestinationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutWhatsAppBusinessAccountEventDestinations{}, middleware.After)
+}
+
+func addOpPutWhatsAppBusinessPublicKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutWhatsAppBusinessPublicKey{}, middleware.After)
 }
 
 func addOpSendWhatsAppConversionEventValidationMiddleware(stack *middleware.Stack) error {
@@ -1241,6 +1289,21 @@ func validateOpGetLinkedWhatsAppBusinessAccountPhoneNumberInput(v *GetLinkedWhat
 	}
 }
 
+func validateOpGetWhatsAppBusinessPublicKeyInput(v *GetWhatsAppBusinessPublicKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetWhatsAppBusinessPublicKeyInput"}
+	if v.OriginationPhoneNumberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OriginationPhoneNumberId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetWhatsAppFlowInput(v *GetWhatsAppFlowInput) error {
 	if v == nil {
 		return nil
@@ -1455,6 +1518,21 @@ func validateOpPutWhatsAppBusinessAccountEventDestinationsInput(v *PutWhatsAppBu
 		if err := validateWhatsAppBusinessAccountEventDestinations(v.EventDestinations); err != nil {
 			invalidParams.AddNested("EventDestinations", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutWhatsAppBusinessPublicKeyInput(v *PutWhatsAppBusinessPublicKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutWhatsAppBusinessPublicKeyInput"}
+	if v.OriginationPhoneNumberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OriginationPhoneNumberId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

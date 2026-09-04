@@ -182,7 +182,7 @@
                 "ChannelStatus": {
                     "target": "com.amazonaws.kinesis#ChannelStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the channel. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - See <code>ChannelStatusReason</code> for the failure cause.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The current status of the channel. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - The channel is being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> - The channel is ready to deliver records.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> - The channel configuration is being updated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - The channel is being deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - See <code>ChannelStatusReason</code> for the failure cause.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -279,7 +279,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The server-side encryption configuration for a channel.</p>"
+                "smithy.api#documentation": "<p>Specifies the Amazon Web Services KMS key that Amazon Kinesis Data Streams uses to encrypt data delivered to the channel's destination.</p>"
             }
         },
         "com.amazonaws.kinesis#ChannelEncryptionType": {
@@ -522,7 +522,7 @@
                 "ChannelStatus": {
                     "target": "com.amazonaws.kinesis#ChannelStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the channel. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - See <code>ChannelStatusReason</code> for the failure cause.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The current status of the channel. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - The channel is being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> - The channel is ready to deliver records.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> - The channel configuration is being updated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - The channel is being deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - See <code>ChannelStatusReason</code> for the failure cause.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -856,7 +856,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a channel that delivers records from a Kinesis data stream to a destination. A channel reads records from the specified stream and writes them to streaming tables on Apache Iceberg (Amazon S3 Tables) or to a general purpose Amazon S3 bucket.</p>\n         <p>You must specify either <code>S3DestinationConfiguration</code> or <code>S3TablesDestinationConfiguration</code>, but not both.</p>\n         <p>Creating a channel is an asynchronous operation. Upon receiving the request, Amazon Kinesis Data Streams returns immediately with the channel in the <code>CREATING</code> state. After provisioning is complete, Amazon Kinesis Data Streams sets the state to <code>ACTIVE</code>. You can use <a>DescribeChannel</a> to check the current state.</p>\n         <p>This operation is only supported for data streams with the on-demand capacity mode.</p>\n         <p>This API has a call limit of 5 transactions per second (TPS) for each Amazon Web Services account. Exceeding 5 TPS results in a <code>LimitExceededException</code>.</p>",
+                "smithy.api#documentation": "<p>Creates a channel that delivers records from a Kinesis data stream to a destination. A channel reads records from the specified stream and writes them to streaming tables on Apache Iceberg (Amazon S3 Tables) or to a general purpose Amazon S3 bucket.</p>\n         <p>You must specify either <code>S3DestinationConfiguration</code> or <code>S3TablesDestinationConfiguration</code>, but not both.</p>\n         <p>To use this operation, you must have permission to pass the specified service execution IAM role to Amazon Kinesis Data Streams (the <code>iam:PassRole</code> permission on that role).</p>\n         <p>Creating a channel is an asynchronous operation. Upon receiving the request, Amazon Kinesis Data Streams returns immediately with the channel in the <code>CREATING</code> state. After provisioning is complete, Amazon Kinesis Data Streams sets the state to <code>ACTIVE</code>. You can use <a>DescribeChannel</a> to check the current state.</p>\n         <p>This operation is only supported for data streams with the on-demand capacity mode.</p>\n         <p>This operation has a call limit of 5 transactions per second (TPS) for each Amazon Web Services account. Exceeding 5 TPS results in a <code>LimitExceededException</code>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To create an S3 channel",
@@ -1343,7 +1343,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified channel. Deleting a channel stops delivery from the source stream to the destination. Data already delivered to the destination is not deleted.</p>\n         <p>A stream cannot be deleted while it has active channels. To delete the stream, first delete all channels attached to it. To find them, use <a>ListChannels</a> with a stream filter.</p>\n         <p>This API has a call limit of 5 transactions per second (TPS) for each Amazon Web Services account. Exceeding 5 TPS results in a <code>LimitExceededException</code>.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified channel. Deleting a channel stops delivery from the source stream to the destination. Data already delivered to the destination is not deleted.</p>\n         <p>A stream cannot be deleted while it has active channels. To delete the stream, first delete all channels attached to it. To find them, use <a>ListChannels</a> with a stream filter.</p>\n         <p>This operation has a call limit of 5 transactions per second (TPS) for each Amazon Web Services account. Exceeding 5 TPS results in a <code>LimitExceededException</code>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To delete a channel",
@@ -1650,7 +1650,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified channel, including its configuration and current status.</p>\n         <p>Use this operation to verify that a channel reached the <code>ACTIVE</code> state after creation, or to diagnose a channel in the <code>FAILED</code> state by reading the <code>ChannelStatusReason</code>.</p>\n         <p>This API has a call limit of 5 transactions per second (TPS) for each Amazon Web Services account. Exceeding 5 TPS results in a <code>LimitExceededException</code>.</p>",
+                "smithy.api#documentation": "<p>Describes the specified channel, including its configuration and current status.</p>\n         <p>Use this operation to verify that a channel reached the <code>ACTIVE</code> state after creation, or to diagnose a channel in the <code>FAILED</code> state by reading the <code>ChannelStatusReason</code>.</p>\n         <p>This operation has a call limit of 5 transactions per second (TPS) for each Amazon Web Services account. Exceeding 5 TPS results in a <code>LimitExceededException</code>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To describe a channel",
@@ -2259,6 +2259,18 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.kinesis#DryRunOperationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.kinesis#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was rejected because the DryRun parameter was specified.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.kinesis#EnableEnhancedMonitoring": {
             "type": "operation",
             "input": {
@@ -2468,6 +2480,9 @@
                     "target": "com.amazonaws.kinesis#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.kinesis#DryRunOperationException"
+                },
+                {
                     "target": "com.amazonaws.kinesis#ExpiredIteratorException"
                 },
                 {
@@ -2542,6 +2557,12 @@
                         "smithy.rules#contextParam": {
                             "name": "StreamId"
                         }
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.kinesis#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks if your request will succeed. <code>DryRun</code> is an optional\n            parameter.</p>"
                     }
                 }
             },
@@ -2682,6 +2703,9 @@
                     "target": "com.amazonaws.kinesis#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.kinesis#DryRunOperationException"
+                },
+                {
                     "target": "com.amazonaws.kinesis#InternalFailureException"
                 },
                 {
@@ -2754,6 +2778,12 @@
                         "smithy.rules#contextParam": {
                             "name": "StreamId"
                         }
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.kinesis#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks if your request will succeed. <code>DryRun</code> is an optional\n            parameter.</p>"
                     }
                 }
             },
@@ -13372,7 +13402,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the channels in your account. You can filter the results by source stream. The results are paginated. Use the <code>NextToken</code> value returned in the response to retrieve additional results.</p>\n         <p>Use this operation to find channels before deleting a stream, or to audit the channels configured in an Amazon Web Services Region.</p>\n         <p>This API has a call limit of 5 transactions per second (TPS) for each Amazon Web Services account. Exceeding 5 TPS results in a <code>LimitExceededException</code>.</p>",
+                "smithy.api#documentation": "<p>Lists the channels in your account. You can filter the results by source stream. The results are paginated. Use the <code>NextToken</code> value returned in the response to retrieve additional results.</p>\n         <p>Use this operation to find channels before deleting a stream, or to audit the channels configured in an Amazon Web Services Region.</p>\n         <p>This operation has a call limit of 5 transactions per second (TPS) for each Amazon Web Services account. Exceeding 5 TPS results in a <code>LimitExceededException</code>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To list channels",
@@ -14444,6 +14474,9 @@
                     "target": "com.amazonaws.kinesis#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.kinesis#DryRunOperationException"
+                },
+                {
                     "target": "com.amazonaws.kinesis#InternalFailureException"
                 },
                 {
@@ -14535,6 +14568,12 @@
                             "name": "StreamId"
                         }
                     }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.kinesis#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks if your request will succeed. <code>DryRun</code> is an optional\n            parameter.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14582,6 +14621,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.kinesis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kinesis#DryRunOperationException"
                 },
                 {
                     "target": "com.amazonaws.kinesis#InternalFailureException"
@@ -14655,6 +14697,12 @@
                         "smithy.rules#contextParam": {
                             "name": "StreamId"
                         }
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.kinesis#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks if your request will succeed. <code>DryRun</code> is an optional\n            parameter.</p>"
                     }
                 }
             },
@@ -15316,7 +15364,7 @@
                 "StorageClass": {
                     "target": "com.amazonaws.kinesis#S3StorageClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 storage class for delivered objects. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STANDARD</code> (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTELLIGENT_TIERING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>GLACIER_IR</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The Amazon S3 storage class for delivered objects. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STANDARD</code> - Default storage class for frequently accessed data. (default)</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTELLIGENT_TIERING</code> - Automatically moves objects to the most cost-effective access tier based on usage patterns.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GLACIER_IR</code> - Low-cost storage for rarely accessed data that requires millisecond retrieval.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CompressionType": {
@@ -16385,6 +16433,9 @@
                     "target": "com.amazonaws.kinesis#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.kinesis#DryRunOperationException"
+                },
+                {
                     "target": "com.amazonaws.kinesis#InvalidArgumentException"
                 },
                 {
@@ -16520,6 +16571,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The starting position in the data stream from which to start streaming.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.kinesis#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks if your request will succeed. <code>DryRun</code> is an optional\n            parameter.</p>"
                     }
                 }
             },
@@ -16855,7 +16912,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the data freshness interval or the Amazon CloudWatch Logs configuration of an existing channel. You cannot change the destination, source stream, record format, schema, encryption configuration, or service execution role of an existing channel. To change any other setting, delete the channel and create a new one.</p>\n         <p>Updating a channel is an asynchronous operation. Upon receiving the request, Amazon Kinesis Data Streams sets the channel to the <code>UPDATING</code> state and returns immediately. After the change is applied, Amazon Kinesis Data Streams sets the channel back to the <code>ACTIVE</code> state.</p>\n         <p>This API has a call limit of 5 transactions per second (TPS) for each Amazon Web Services account. Exceeding 5 TPS results in a <code>LimitExceededException</code>.</p>",
+                "smithy.api#documentation": "<p>Updates the data freshness interval or the Amazon CloudWatch Logs configuration of an existing channel. You cannot change the destination, source stream, record format, schema, encryption configuration, or service execution role of an existing channel. To change any other setting, delete the channel and create a new one.</p>\n         <p>Updating a channel is an asynchronous operation. Upon receiving the request, Amazon Kinesis Data Streams sets the channel to the <code>UPDATING</code> state and returns immediately. After the change is applied, Amazon Kinesis Data Streams sets the channel back to the <code>ACTIVE</code> state.</p>\n         <p>This operation has a call limit of 5 transactions per second (TPS) for each Amazon Web Services account. Exceeding 5 TPS results in a <code>LimitExceededException</code>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To update a channel",

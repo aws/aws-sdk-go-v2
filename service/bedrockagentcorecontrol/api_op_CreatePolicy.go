@@ -12,8 +12,8 @@ import (
 
 // Creates a policy within the AgentCore Policy system. Policies provide
 // real-time, deterministic control over agentic interactions with AgentCore
-// Gateway. Using the Cedar policy language, you can define fine-grained policies
-// that specify which interactions with Gateway tools are permitted based on input
+// Gateway. Using Cedar or Dogwood, you can define fine-grained policies that
+// specify which interactions with Gateway tools are permitted based on input
 // parameters and OAuth claims, ensuring agents operate within defined boundaries
 // and business rules. The policy is validated during creation against the Cedar
 // schema generated from the Gateway's tools' input schemas, which defines the
@@ -46,10 +46,10 @@ func (c *Client) CreatePolicy(ctx context.Context, params *CreatePolicyInput, op
 
 type CreatePolicyInput struct {
 
-	// The Cedar policy statement that defines the access control rules. This contains
-	// the actual policy logic written in Cedar policy language, specifying effect
-	// (permit or forbid), principals, actions, resources, and conditions for agent
-	// behavior control.
+	// The Cedar or Dogwood policy statement that defines the access control rules.
+	// This contains the actual policy logic written in Cedar or Dogwood, specifying
+	// effect (permit or forbid), principals, actions, resources, and conditions for
+	// agent behavior control.
 	//
 	// This member is required.
 	Definition types.PolicyDefinition
@@ -108,8 +108,9 @@ type CreatePolicyOutput struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The Cedar policy statement that was created. This is the validated policy
-	// definition that will be used for agent behavior control and access decisions.
+	// The Cedar or Dogwood policy statement that was created. This is the validated
+	// policy definition that will be used for agent behavior control and access
+	// decisions.
 	//
 	// This member is required.
 	Definition types.PolicyDefinition

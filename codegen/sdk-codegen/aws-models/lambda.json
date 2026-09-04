@@ -6816,7 +6816,7 @@
                 },
                 "smithy.api#idempotent": {},
                 "smithy.api#tags": [
-                    "feature:rbp"
+                    "feature:public"
                 ]
             }
         },
@@ -6830,7 +6830,7 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.api#tags": [
-                            "feature:rbp"
+                            "feature:public"
                         ]
                     }
                 },
@@ -6840,7 +6840,7 @@
                         "smithy.api#documentation": "<p>The revision ID that the existing policy must match for the deletion to proceed. If the revision ID doesn't match, the operation fails with a <code>PreconditionFailedException</code> error. To retrieve the current revision ID, use the <a>GetResourcePolicy</a> operation.</p>",
                         "smithy.api#httpQuery": "RevisionId",
                         "smithy.api#tags": [
-                            "feature:rbp"
+                            "feature:public"
                         ]
                     }
                 }
@@ -6848,7 +6848,7 @@
             "traits": {
                 "smithy.api#input": {},
                 "smithy.api#tags": [
-                    "feature:rbp"
+                    "feature:public"
                 ]
             }
         },
@@ -6906,6 +6906,43 @@
                 ]
             }
         },
+        "com.amazonaws.lambda#DirectS3Read": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED",
+                        "smithy.api#tags": [
+                            "feature:s3files-rbp"
+                        ]
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED",
+                        "smithy.api#tags": [
+                            "feature:s3files-rbp"
+                        ]
+                    }
+                },
+                "AUTO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO",
+                        "smithy.api#tags": [
+                            "feature:s3files-rbp"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#tags": [
+                    "feature:s3files-rbp"
+                ]
+            }
+        },
         "com.amazonaws.lambda#DocumentDBEventSourceConfig": {
             "type": "structure",
             "members": {
@@ -6952,7 +6989,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the Key Management Service (KMS) customer managed key that is used to encrypt your durable execution's payload data, including input, output, and error payloads.</p>",
                         "smithy.api#tags": [
-                            "feature:dar-cmkms"
+                            "feature:public"
                         ]
                     }
                 },
@@ -9249,10 +9286,19 @@
                             "feature:public"
                         ]
                     }
+                },
+                "S3FilesConfig": {
+                    "target": "com.amazonaws.lambda#S3FilesConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for how your function accesses data on an Amazon S3 file system. Valid only when the file system access point ARN is an Amazon S3 Files access point. If you specify a different access point type (for example, Amazon Elastic File System), the operation returns an <code>InvalidParameterException</code>.</p>",
+                        "smithy.api#tags": [
+                            "feature:s3files-rbp"
+                        ]
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about the connection between a Lambda function and an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html\">Amazon EFS file system</a> or an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html\">Amazon S3 Files file system</a>.</p>",
+                "smithy.api#documentation": "<p>Details about the connection between a Lambda function and an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html\">Amazon EFS file system</a> or an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html\">Amazon S3 file system</a>.</p>",
                 "smithy.api#tags": [
                     "feature:public"
                 ]
@@ -10033,7 +10079,7 @@
                 "FileSystemConfigs": {
                     "target": "com.amazonaws.lambda#FileSystemConfigList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Connection settings for an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html\">Amazon EFS file system</a> or an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html\">Amazon S3 Files file system</a>.</p>",
+                        "smithy.api#documentation": "<p>Connection settings for an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html\">Amazon EFS file system</a> or an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html\">Amazon S3 file system</a>.</p>",
                         "smithy.api#tags": [
                             "feature:public"
                         ]
@@ -13532,7 +13578,7 @@
                 },
                 "smithy.api#readonly": {},
                 "smithy.api#tags": [
-                    "feature:rbp"
+                    "feature:public"
                 ]
             }
         },
@@ -13546,7 +13592,7 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.api#tags": [
-                            "feature:rbp"
+                            "feature:public"
                         ]
                     }
                 }
@@ -13554,7 +13600,7 @@
             "traits": {
                 "smithy.api#input": {},
                 "smithy.api#tags": [
-                    "feature:rbp"
+                    "feature:public"
                 ]
             }
         },
@@ -13566,7 +13612,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The resource-based policy attached to the Lambda resource you specified.</p>",
                         "smithy.api#tags": [
-                            "feature:rbp"
+                            "feature:public"
                         ]
                     }
                 },
@@ -13575,7 +13621,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The revision ID of the policy. Pass this value as the <code>RevisionId</code> in a <a>PutResourcePolicy</a> or <a>DeleteResourcePolicy</a> request. Doing so ensures the operation acts on the expected version of the policy.</p>",
                         "smithy.api#tags": [
-                            "feature:rbp"
+                            "feature:public"
                         ]
                     }
                 }
@@ -13583,7 +13629,7 @@
             "traits": {
                 "smithy.api#output": {},
                 "smithy.api#tags": [
-                    "feature:rbp"
+                    "feature:public"
                 ]
             }
         },
@@ -19074,7 +19120,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:|(((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:)?(\\d{12}:)?))(function:)?([a-zA-Z0-9-_\\.]+)(:(\\$LATEST(\\.PUBLISHED)?|[a-zA-Z0-9-_]+))?$",
+                "smithy.api#pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:)?((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_\\.]+)(:(\\$LATEST(\\.PUBLISHED)?|[a-zA-Z0-9-_]+))?$",
                 "smithy.api#tags": [
                     "feature:public"
                 ]
@@ -19914,7 +19960,7 @@
                 },
                 "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_]+(:(\\$LATEST(\\.PUBLISHED)?|[a-zA-Z0-9-_])+)?$",
                 "smithy.api#tags": [
-                    "feature:rbp"
+                    "feature:public"
                 ]
             }
         },
@@ -21493,7 +21539,7 @@
                 },
                 "smithy.api#idempotent": {},
                 "smithy.api#tags": [
-                    "feature:rbp"
+                    "feature:public"
                 ]
             }
         },
@@ -21507,7 +21553,7 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {},
                         "smithy.api#tags": [
-                            "feature:rbp"
+                            "feature:public"
                         ]
                     }
                 },
@@ -21517,7 +21563,7 @@
                         "smithy.api#documentation": "<p>The policy document you want to add to your Lambda resource. This is formatted as a JSON string.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html\">Working with resource-based policies in Lambda</a> in the <i>Lambda Developer Guide</i>.</p>",
                         "smithy.api#required": {},
                         "smithy.api#tags": [
-                            "feature:rbp"
+                            "feature:public"
                         ]
                     }
                 },
@@ -21526,7 +21572,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The revision ID that the existing policy must match for the replacement to proceed. If the revision ID doesn't match, the operation fails with a <code>PreconditionFailedException</code> error. To retrieve the current revision ID, use the <a>GetResourcePolicy</a> operation.</p>",
                         "smithy.api#tags": [
-                            "feature:rbp"
+                            "feature:public"
                         ]
                     }
                 }
@@ -21534,7 +21580,7 @@
             "traits": {
                 "smithy.api#input": {},
                 "smithy.api#tags": [
-                    "feature:rbp"
+                    "feature:public"
                 ]
             }
         },
@@ -21546,7 +21592,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The resource-based policy that Lambda adds to the resource.</p>",
                         "smithy.api#tags": [
-                            "feature:rbp"
+                            "feature:public"
                         ]
                     }
                 },
@@ -21555,7 +21601,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The revision ID of the policy that Lambda adds to your Lambda resource.</p>",
                         "smithy.api#tags": [
-                            "feature:rbp"
+                            "feature:public"
                         ]
                     }
                 }
@@ -21563,7 +21609,7 @@
             "traits": {
                 "smithy.api#output": {},
                 "smithy.api#tags": [
-                    "feature:rbp"
+                    "feature:public"
                 ]
             }
         },
@@ -22268,7 +22314,7 @@
                 },
                 "smithy.api#pattern": "^[\\s\\S]+$",
                 "smithy.api#tags": [
-                    "feature:rbp"
+                    "feature:public"
                 ]
             }
         },
@@ -22359,7 +22405,7 @@
                 },
                 "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
                 "smithy.api#tags": [
-                    "feature:rbp"
+                    "feature:public"
                 ]
             }
         },
@@ -22816,7 +22862,7 @@
                     "traits": {
                         "smithy.api#enumValue": "java8.al2023",
                         "smithy.api#tags": [
-                            "feature:java-al2023"
+                            "feature:public"
                         ]
                     }
                 },
@@ -22825,7 +22871,7 @@
                     "traits": {
                         "smithy.api#enumValue": "java11.al2023",
                         "smithy.api#tags": [
-                            "feature:java-al2023"
+                            "feature:public"
                         ]
                     }
                 },
@@ -22834,7 +22880,7 @@
                     "traits": {
                         "smithy.api#enumValue": "java17.al2023",
                         "smithy.api#tags": [
-                            "feature:java-al2023"
+                            "feature:public"
                         ]
                     }
                 }
@@ -22926,6 +22972,26 @@
                 "smithy.api#pattern": "^[0-9A-Za-z\\.\\-_]*(?<!\\.)$",
                 "smithy.api#tags": [
                     "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambda#S3FilesConfig": {
+            "type": "structure",
+            "members": {
+                "DirectS3Read": {
+                    "target": "com.amazonaws.lambda#DirectS3Read",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies if a function reads from the file system for the lowest latency, or through Amazon S3 Files feature \"direct Amazon S3 bucket reads\" for the highest throughput. Valid values:</p> <ul> <li> <p> <code>AUTO</code> (default) – Direct reads are active for functions you configure with 512 MB or more of memory.</p> </li> <li> <p> <code>ENABLED</code> – Enforces all reads are directly from the Amazon S3 bucket, regardless of available memory (less than 512 MB).</p> </li> <li> <p> <code>DISABLED</code> – Routes all reads through the file system, regardless of memory configuration.</p> </li> </ul> <p>To use direct reads, you must grant the execution role the <code>s3:GetObject</code> and <code>s3:GetObjectVersion</code> permissions. If a direct read fails, Lambda automatically falls back to reading through the file system.</p>",
+                        "smithy.api#tags": [
+                            "feature:s3files-rbp"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Setting controls how your function accesses data from an Amazon S3 file system.</p>",
+                "smithy.api#tags": [
+                    "feature:s3files-rbp"
                 ]
             }
         },

@@ -1,3 +1,11 @@
+# v1.328.0 (2026-09-02)
+
+* **Feature**: This release adds support to retain interruptible Capacity Reservations in an active state when all capacity is reclaimed.
+
+# v1.327.0 (2026-09-01)
+
+* **Feature**: Update UserData and UploadPolicy shapes to use SecureBlob
+
 # v1.326.0 (2026-08-31.2)
 
 * **Feature**: Stop registering the `SetCredentialSourceMiddleware` middleware in generated clients. Credential source user agent features are now set when the client's middleware stack is constructed.

@@ -23926,9 +23926,6 @@ func validateOpUpdateInterruptibleCapacityReservationAllocationInput(v *UpdateIn
 	if v.CapacityReservationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CapacityReservationId"))
 	}
-	if v.TargetInstanceCount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetInstanceCount"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

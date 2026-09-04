@@ -858,6 +858,20 @@ var _CidrBlock = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CidrBlock",
 }, smithy.ShapeTypeString, 0)
 
+var CidrMapping = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "CidrMapping",
+}, smithy.ShapeTypeStructure, 2)
+var CidrMapping_originalCidr *smithy.Schema
+
+var CidrMapping_updatedCidr *smithy.Schema
+
+var _CidrMappingsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "CidrMappingsList",
+}, smithy.ShapeTypeList, 1)
+var _CidrMappingsList_member *smithy.Schema
+
 var _ClientIdempotencyToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "ClientIdempotencyToken",
@@ -3499,6 +3513,11 @@ var _VpcIDsFilter = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _VpcIDsFilter_member *smithy.Schema
 
+var _VpcProvisioningStrategy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "VpcProvisioningStrategy",
+}, smithy.ShapeTypeString, 0)
+
 var Wave = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "Wave",
@@ -3691,7 +3710,7 @@ var CreateLaunchConfigurationTemplateRequest_parametersEncryptionKey *smithy.Sch
 var CreateNetworkMigrationDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "CreateNetworkMigrationDefinitionRequest",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 10)
 var CreateNetworkMigrationDefinitionRequest_name *smithy.Schema
 
 var CreateNetworkMigrationDefinitionRequest_description *smithy.Schema
@@ -3704,6 +3723,10 @@ var CreateNetworkMigrationDefinitionRequest_targetNetwork *smithy.Schema
 
 var CreateNetworkMigrationDefinitionRequest_targetDeployment *smithy.Schema
 
+var CreateNetworkMigrationDefinitionRequest_vpcProvisioningStrategy *smithy.Schema
+
+var CreateNetworkMigrationDefinitionRequest_cidrMappings *smithy.Schema
+
 var CreateNetworkMigrationDefinitionRequest_tags *smithy.Schema
 
 var CreateNetworkMigrationDefinitionRequest_scopeTags *smithy.Schema
@@ -3711,7 +3734,7 @@ var CreateNetworkMigrationDefinitionRequest_scopeTags *smithy.Schema
 var NetworkMigrationDefinition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "NetworkMigrationDefinition",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 14)
 var NetworkMigrationDefinition_arn *smithy.Schema
 
 var NetworkMigrationDefinition_networkMigrationDefinitionID *smithy.Schema
@@ -3727,6 +3750,10 @@ var NetworkMigrationDefinition_targetS3Configuration *smithy.Schema
 var NetworkMigrationDefinition_targetNetwork *smithy.Schema
 
 var NetworkMigrationDefinition_targetDeployment *smithy.Schema
+
+var NetworkMigrationDefinition_vpcProvisioningStrategy *smithy.Schema
+
+var NetworkMigrationDefinition_cidrMappings *smithy.Schema
 
 var NetworkMigrationDefinition_createdAt *smithy.Schema
 
@@ -5076,7 +5103,7 @@ var UpdateLaunchConfigurationTemplateRequest_parametersEncryptionKey *smithy.Sch
 var UpdateNetworkMigrationDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "UpdateNetworkMigrationDefinitionRequest",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 10)
 var UpdateNetworkMigrationDefinitionRequest_networkMigrationDefinitionID *smithy.Schema
 
 var UpdateNetworkMigrationDefinitionRequest_name *smithy.Schema
@@ -5090,6 +5117,10 @@ var UpdateNetworkMigrationDefinitionRequest_targetS3Configuration *smithy.Schema
 var UpdateNetworkMigrationDefinitionRequest_targetNetwork *smithy.Schema
 
 var UpdateNetworkMigrationDefinitionRequest_targetDeployment *smithy.Schema
+
+var UpdateNetworkMigrationDefinitionRequest_vpcProvisioningStrategy *smithy.Schema
+
+var UpdateNetworkMigrationDefinitionRequest_cidrMappings *smithy.Schema
 
 var UpdateNetworkMigrationDefinitionRequest_scopeTags *smithy.Schema
 
@@ -5281,6 +5312,12 @@ func init() {
 	Checksum_encryptionAlgorithm = Checksum.AddMember("encryptionAlgorithm", _EncryptionAlgorithm)
 
 	Checksum_hash = Checksum.AddMember("hash", _Hash)
+
+	CidrMapping_originalCidr = CidrMapping.AddMember("originalCidr", _Cidr)
+
+	CidrMapping_updatedCidr = CidrMapping.AddMember("updatedCidr", _Cidr)
+
+	_CidrMappingsList_member = _CidrMappingsList.AddMember("member", CidrMapping)
 
 	CodeGenerationOutputFormatStatusDetails_status = CodeGenerationOutputFormatStatusDetails.AddMember("status", _CodeGenerationOutputFormatStatus)
 
@@ -6592,6 +6629,10 @@ func init() {
 
 	CreateNetworkMigrationDefinitionRequest_targetDeployment = CreateNetworkMigrationDefinitionRequest.AddMember("targetDeployment", _TargetDeployment)
 
+	CreateNetworkMigrationDefinitionRequest_vpcProvisioningStrategy = CreateNetworkMigrationDefinitionRequest.AddMember("vpcProvisioningStrategy", _VpcProvisioningStrategy)
+
+	CreateNetworkMigrationDefinitionRequest_cidrMappings = CreateNetworkMigrationDefinitionRequest.AddMember("cidrMappings", _CidrMappingsList)
+
 	CreateNetworkMigrationDefinitionRequest_tags = CreateNetworkMigrationDefinitionRequest.AddMember("tags", _TagsMap)
 
 	CreateNetworkMigrationDefinitionRequest_scopeTags = CreateNetworkMigrationDefinitionRequest.AddMember("scopeTags", _ScopeTagsMap)
@@ -6611,6 +6652,10 @@ func init() {
 	NetworkMigrationDefinition_targetNetwork = NetworkMigrationDefinition.AddMember("targetNetwork", TargetNetwork)
 
 	NetworkMigrationDefinition_targetDeployment = NetworkMigrationDefinition.AddMember("targetDeployment", _TargetDeployment)
+
+	NetworkMigrationDefinition_vpcProvisioningStrategy = NetworkMigrationDefinition.AddMember("vpcProvisioningStrategy", _VpcProvisioningStrategy)
+
+	NetworkMigrationDefinition_cidrMappings = NetworkMigrationDefinition.AddMember("cidrMappings", _CidrMappingsList)
 
 	NetworkMigrationDefinition_createdAt = NetworkMigrationDefinition.AddMember("createdAt", smithyprelude.Timestamp)
 
@@ -7417,6 +7462,10 @@ func init() {
 	UpdateNetworkMigrationDefinitionRequest_targetNetwork = UpdateNetworkMigrationDefinitionRequest.AddMember("targetNetwork", TargetNetworkUpdate)
 
 	UpdateNetworkMigrationDefinitionRequest_targetDeployment = UpdateNetworkMigrationDefinitionRequest.AddMember("targetDeployment", _TargetDeployment)
+
+	UpdateNetworkMigrationDefinitionRequest_vpcProvisioningStrategy = UpdateNetworkMigrationDefinitionRequest.AddMember("vpcProvisioningStrategy", _VpcProvisioningStrategy)
+
+	UpdateNetworkMigrationDefinitionRequest_cidrMappings = UpdateNetworkMigrationDefinitionRequest.AddMember("cidrMappings", _CidrMappingsList)
 
 	UpdateNetworkMigrationDefinitionRequest_scopeTags = UpdateNetworkMigrationDefinitionRequest.AddMember("scopeTags", _ScopeTagsMap)
 

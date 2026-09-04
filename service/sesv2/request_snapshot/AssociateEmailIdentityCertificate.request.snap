@@ -1,0 +1,5 @@
+POST /v2/email/identity/certificates
+
+Content-Type: application/json
+
+{"CertificateArn":"__CertificateArn__","EmailIdentity":"__EmailIdentity__","FromAddress":"__FromAddress__"}

@@ -12807,6 +12807,68 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.lightsail#GetProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lightsail#GetProfileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lightsail#GetProfileResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lightsail#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#AccountSetupInProgressException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#UnauthenticatedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the profile of the Amazon Lightsail account that makes the\n      request. The response includes the profile type and, for accounts enrolled in the Lightsail\n      partner program, the partner membership details.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/ls/api/2016-11-28/GetProfile",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lightsail#GetProfileRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lightsail#GetProfileResult": {
+            "type": "structure",
+            "members": {
+                "profileType": {
+                    "target": "com.amazonaws.lightsail#ProfileType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the profile.</p>\n         <p>The following profile types are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Lightsailor</code> – The account is not enrolled in the Lightsail partner\n          program.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LightsailPartner</code> – The account is enrolled in the Lightsail partner\n          program.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "partner": {
+                    "target": "com.amazonaws.lightsail#PartnerInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the partner membership of the account, such as the tier of the\n      membership, its status, and when the account was enrolled.</p>\n         <p>This parameter is returned only for accounts that have a <code>profileType</code> of\n        <code>LightsailPartner</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.lightsail#GetRegions": {
             "type": "operation",
             "input": {
@@ -16094,6 +16156,9 @@
                     "target": "com.amazonaws.lightsail#GetOperationsForResource"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#GetProfile"
+                },
+                {
                     "target": "com.amazonaws.lightsail#GetRegions"
                 },
                 {
@@ -18306,6 +18371,18 @@
                         "smithy.api#enumValue": "NetworkTransmitThroughput"
                     }
                 },
+                "FreeableMemory": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FreeableMemory"
+                    }
+                },
+                "SwapUsage": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SwapUsage"
+                    }
+                },
                 "BurstCapacityTime": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -19417,6 +19494,12 @@
                     "traits": {
                         "smithy.api#enumValue": "SetupInstanceHttps"
                     }
+                },
+                "GetProfile": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GetProfile"
+                    }
                 }
             }
         },
@@ -19513,6 +19596,51 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 10
+                }
+            }
+        },
+        "com.amazonaws.lightsail#PartnerInfo": {
+            "type": "structure",
+            "members": {
+                "enrolledAt": {
+                    "target": "com.amazonaws.lightsail#IsoDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the account was enrolled in the Lightsail partner program.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tierName": {
+                    "target": "com.amazonaws.lightsail#TierName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier of the partner membership.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.lightsail#PartnerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the partner membership.</p>\n         <p>The following statuses are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Active</code> – The membership is active, and the benefits of the current tier\n          are available to the account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Suspended</code> – The membership is suspended, and the benefits of the tier are\n          not available to the account.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains information about the Lightsail partner program membership of an\n        Amazon Lightsail account.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#PartnerStatus": {
+            "type": "enum",
+            "members": {
+                "Active": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
+                    }
+                },
+                "Suspended": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Suspended"
+                    }
                 }
             }
         },
@@ -19859,6 +19987,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes a request to configure an Amazon Lightsail container service to\n      access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-container-service-ecr-private-repo-access\">Configuring access to an Amazon ECR private repository for an Amazon Lightsail container service</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#ProfileType": {
+            "type": "enum",
+            "members": {
+                "Lightsailor": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Lightsailor"
+                    }
+                },
+                "LightsailPartner": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LightsailPartner"
+                    }
+                }
             }
         },
         "com.amazonaws.lightsail#PutAlarm": {
@@ -21040,6 +21185,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "NetworkTransmitThroughput"
+                    }
+                },
+                "FreeableMemory": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FreeableMemory"
+                    }
+                },
+                "SwapUsage": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SwapUsage"
                     }
                 }
             }
@@ -23152,6 +23309,35 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lightsail#TierName": {
+            "type": "enum",
+            "members": {
+                "Essential": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Essential"
+                    }
+                },
+                "Growth": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Growth"
+                    }
+                },
+                "Accelerate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Accelerate"
+                    }
+                },
+                "Premier": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Premier"
+                    }
+                }
             }
         },
         "com.amazonaws.lightsail#TimeOfDay": {

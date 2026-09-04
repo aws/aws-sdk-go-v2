@@ -19,8 +19,6 @@ import (
 // Error codes are reserved for errors that prevent your execution from running,
 // such as permissions errors, limit errors, or issues with your state machine code
 // and configuration.
-//
-// This API action isn't logged in CloudTrail.
 func (c *Client) StartSyncExecution(ctx context.Context, params *StartSyncExecutionInput, optFns ...func(*Options)) (*StartSyncExecutionOutput, error) {
 	if params == nil {
 		params = &StartSyncExecutionInput{}

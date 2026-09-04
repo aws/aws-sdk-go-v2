@@ -509,6 +509,17 @@ type EksAddOnOperatingSystem struct {
 	noSmithyDocumentSerde
 }
 
+// A single fixed price increase percentage applied at each renewal cycle.
+type FixedPercentage struct {
+
+	// The percentage value applied at each renewal cycle.
+	//
+	// This member is required.
+	PercentageValue *string
+
+	noSmithyDocumentSerde
+}
+
 // Defines a fixed upfront pricing term with a pre-paid amount and granted
 // entitlements.
 type FixedUpfrontPricingTerm struct {
@@ -1199,6 +1210,33 @@ type OfferTermMemberVariablePaymentTerm struct {
 
 func (*OfferTermMemberVariablePaymentTerm) isOfferTerm() {}
 
+// A single installment entry in the renewal payment schedule.
+type PaymentScheduleEntry struct {
+
+	// The relative offset from the renewal agreement start date when this installment
+	// is due, in ISO 8601 duration format. The offset uses months only or days only
+	// (for example, P1M or P30D); mixed units are not supported, and every offset in a
+	// schedule uses the same unit.
+	//
+	// This member is required.
+	ChargeDateOffset *string
+
+	// The percentage of the increased TCV to charge in this installment. All entries
+	// in a schedule sum to 100.00.
+	//
+	// This member is required.
+	ChargePercentage *string
+
+	// The optional calendar day of month on which the charge occurs. When absent, the
+	// charge day is derived from chargeDateOffset , and this field does not apply when
+	// chargeDateOffset is expressed in days. For months with fewer days than the
+	// specified day, the charge occurs on the last day of the month. For example, if
+	// dayOfMonth is 31, the charge in April occurs on April 30.
+	DayOfMonth *int32
+
+	noSmithyDocumentSerde
+}
+
 // Defines a payment schedule term with installment payments at specified dates.
 type PaymentScheduleTerm struct {
 
@@ -1224,6 +1262,69 @@ type PaymentScheduleTerm struct {
 
 	noSmithyDocumentSerde
 }
+
+// A template for the payment schedule term on the renewal offer.
+type PaymentScheduleTermTemplate struct {
+
+	// An ordered list of installment entries for the renewal payment schedule.
+	//
+	// This member is required.
+	Schedule []PaymentScheduleEntry
+
+	noSmithyDocumentSerde
+}
+
+// A price increase percentage range with minimum, maximum, and default values.
+type PercentageRange struct {
+
+	// The percentage increase applied by default when no other value is finalized
+	// before the adjustment deadline. Falls between minimumValue and maximumValue .
+	//
+	// This member is required.
+	DefaultValue *string
+
+	// The maximum percentage by which the price can increase at each renewal cycle.
+	//
+	// This member is required.
+	MaximumValue *string
+
+	// The minimum percentage by which the price can increase at each renewal cycle.
+	//
+	// This member is required.
+	MinimumValue *string
+
+	noSmithyDocumentSerde
+}
+
+// The pricing adjustment that applies at each renewal cycle, expressed as either
+// a fixed percentage or a percentage range. Exactly one variant is present.
+//
+// The following types satisfy this interface:
+//
+//	PriceIncreaseMemberFixedPercentage
+//	PriceIncreaseMemberPercentageRange
+type PriceIncrease interface {
+	isPriceIncrease()
+}
+
+// A single fixed percentage applied uniformly at every renewal cycle.
+type PriceIncreaseMemberFixedPercentage struct {
+	Value FixedPercentage
+
+	noSmithyDocumentSerde
+}
+
+func (*PriceIncreaseMemberFixedPercentage) isPriceIncrease() {}
+
+// A percentage band with minimum, maximum, and default values that bound the
+// price increase at each renewal cycle.
+type PriceIncreaseMemberPercentageRange struct {
+	Value PercentageRange
+
+	noSmithyDocumentSerde
+}
+
+func (*PriceIncreaseMemberPercentageRange) isPriceIncrease() {}
 
 // A pricing model that determines how buyers are charged for a listing, such as
 // usage-based, contract, BYOL, or free.
@@ -1559,6 +1660,27 @@ type RenewalTerm struct {
 	// This member is required.
 	Type TermType
 
+	// The duration before the agreement end date by which the renewal price is
+	// finalized, represented in ISO 8601 format (for example, P30D). Only applicable
+	// with PercentageRange .
+	AdjustmentDeadline *string
+
+	// The duration before the agreement end date when the lockout window begins, in
+	// ISO 8601 format (for example, P30D). Absent means no lockout.
+	LockoutPeriod *string
+
+	// The maximum number of renewals allowed on this offer. Absent means unlimited
+	// renewals.
+	MaxRenewals *int32
+
+	// The price increase applied at each renewal cycle. Absent means identical
+	// pricing on renewal.
+	PriceIncrease PriceIncrease
+
+	// Structural templates defining how specific terms are reshaped on each renewal
+	// cycle. Absent for upfront-only offers.
+	TermTemplates []TermTemplate
+
 	noSmithyDocumentSerde
 }
 
@@ -1870,6 +1992,25 @@ type SupportTerm struct {
 	noSmithyDocumentSerde
 }
 
+// A structural template defining how a specific term type is reshaped on each
+// renewal cycle. Exactly one variant is present.
+//
+// The following types satisfy this interface:
+//
+//	TermTemplateMemberPaymentScheduleTermTemplate
+type TermTemplate interface {
+	isTermTemplate()
+}
+
+// The installment schedule used to structure payments on the renewal offer.
+type TermTemplateMemberPaymentScheduleTermTemplate struct {
+	Value PaymentScheduleTermTemplate
+
+	noSmithyDocumentSerde
+}
+
+func (*TermTemplateMemberPaymentScheduleTermTemplate) isTermTemplate() {}
+
 // Defines a usage-based pricing term (typically pay-as-you-go), where buyers are
 // charged based on product usage.
 type UsageBasedPricingTerm struct {
@@ -2005,4 +2146,6 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isFulfillmentOption() {}
 func (*UnknownUnionMember) isOfferTerm()         {}
+func (*UnknownUnionMember) isPriceIncrease()     {}
 func (*UnknownUnionMember) isPromotionalMedia()  {}
+func (*UnknownUnionMember) isTermTemplate()      {}

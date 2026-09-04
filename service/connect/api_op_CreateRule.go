@@ -73,6 +73,17 @@ type CreateRuleInput struct {
 	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
+	// The pre-evaluation filters for the rule, that restrict the rule to be applied
+	// to only certain resources based on the resource's attributes, such as tags
+	// assigned to a contact. The pre-evaluation filters are applied even before rule
+	// conditions are evaluated and are used to enforce tag-based-access-control while
+	// applying rules.
+	PreEvaluationFilters *types.PreEvaluationFilters
+
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 
@@ -96,9 +107,15 @@ func (v *CreateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateRuleRequest_Name, *v.Name)
 	}
+	if v.PreEvaluationFilters != nil {
+		s.WriteStruct(schemas.CreateRuleRequest_PreEvaluationFilters)
+		v.PreEvaluationFilters.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.PublishStatus != "" {
 		s.WriteString(schemas.CreateRuleRequest_PublishStatus, string(v.PublishStatus))
 	}
+	serializeTagMap(s, schemas.CreateRuleRequest_Tags, v.Tags)
 	if v.TriggerEventSource != nil {
 		s.WriteStruct(schemas.CreateRuleRequest_TriggerEventSource)
 		v.TriggerEventSource.SerializeMembers(s)

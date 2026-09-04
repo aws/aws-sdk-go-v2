@@ -1155,6 +1155,79 @@ func TestCheckResponseSnapshot_CreateConfigurationBundle(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateConsentPortal(t *testing.T) {
+	want := &CreateConsentPortalOutput{
+		Sources: []types.ConsentPortalSource{
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Type:       types.ConsentPortalSourceType("agentcore-gateway"),
+			},
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Type:       types.ConsentPortalSourceType("agentcore-gateway"),
+			},
+		},
+		ConsentPortalArn: ptr.String("__ConsentPortalArn__"),
+		ConsentPortalId:  ptr.String("__ConsentPortalId__"),
+		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Description:      ptr.String("__Description__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		IdpConfig: &types.ConsentPortalIdpConfig{
+			CredentialProviderArn: ptr.String("__CredentialProviderArn__"),
+			Scopes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Audience: ptr.String("__Audience__"),
+		},
+		Name:         ptr.String("__Name__"),
+		PortalUrl:    ptr.String("__PortalUrl__"),
+		Status:       types.ConsentPortalStatus("CREATING"),
+		StatusReason: ptr.String("__StatusReason__"),
+		UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateConsentPortal.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateConsentPortal(context.Background(), &CreateConsentPortalInput{
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		IdpConfig: &types.ConsentPortalIdpConfig{
+			CredentialProviderArn: ptr.String("__CredentialProviderArn__"),
+			Scopes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Audience: ptr.String("__Audience__"),
+		},
+		Name: ptr.String("__Name__"),
+		Sources: []types.ConsentPortalSource{
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Type:       types.ConsentPortalSourceType("agentcore-gateway"),
+			},
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Type:       types.ConsentPortalSourceType("agentcore-gateway"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateConsentPortal.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateDataset(t *testing.T) {
 	want := &CreateDatasetOutput{
 		DatasetArn: ptr.String("__DatasetArn__"),
@@ -3326,7 +3399,9 @@ func TestCheckResponseSnapshot_CreateOnlineEvaluationConfig(t *testing.T) {
 		CreatedAt:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		OutputConfig: &types.OutputConfig{
 			CloudWatchConfig: &types.CloudWatchOutputConfig{
-				LogGroupName: ptr.String("__LogGroupName__"),
+				LogGroupName:      ptr.String("__LogGroupName__"),
+				MetricsNamespace:  ptr.String("__MetricsNamespace__"),
+				ResultDestination: types.ResultDestination("DEDICATED_LOG_GROUP"),
 			},
 		},
 		Status:          types.OnlineEvaluationConfigStatus("ACTIVE"),
@@ -3375,6 +3450,10 @@ func TestCheckResponseSnapshot_CreateOnlineEvaluationConfig(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+				LogGroupNamePrefixes: []string{
+					"__Member__",
+					"__Member__",
+				},
 				ServiceNames: []string{
 					"__Member__",
 					"__Member__",
@@ -3401,6 +3480,13 @@ func TestCheckResponseSnapshot_CreateOnlineEvaluationConfig(t *testing.T) {
 			Frequencies: []types.ClusteringFrequency{
 				types.ClusteringFrequency("DAILY"),
 				types.ClusteringFrequency("DAILY"),
+			},
+		},
+		OutputConfig: &types.OutputConfig{
+			CloudWatchConfig: &types.CloudWatchOutputConfig{
+				LogGroupName:      ptr.String("__LogGroupName__"),
+				MetricsNamespace:  ptr.String("__MetricsNamespace__"),
+				ResultDestination: types.ResultDestination("DEDICATED_LOG_GROUP"),
 			},
 		},
 		EvaluationExecutionRoleArn: ptr.String("__EvaluationExecutionRoleArn__"),
@@ -4271,6 +4357,27 @@ func TestCheckResponseSnapshot_DeleteConfigurationBundle(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteConfigurationBundle.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteConsentPortal(t *testing.T) {
+	want := &DeleteConsentPortalOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteConsentPortal.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteConsentPortal(context.Background(), &DeleteConsentPortalInput{
+		ConsentPortalIdentifier: ptr.String("__ConsentPortalIdentifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteConsentPortal.response", err)
 	}
 }
 
@@ -5747,6 +5854,56 @@ func TestCheckResponseSnapshot_GetConfigurationBundleVersion(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetConsentPortal(t *testing.T) {
+	want := &GetConsentPortalOutput{
+		Sources: []types.ConsentPortalSource{
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Type:       types.ConsentPortalSourceType("agentcore-gateway"),
+			},
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Type:       types.ConsentPortalSourceType("agentcore-gateway"),
+			},
+		},
+		ConsentPortalArn: ptr.String("__ConsentPortalArn__"),
+		ConsentPortalId:  ptr.String("__ConsentPortalId__"),
+		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Description:      ptr.String("__Description__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		IdpConfig: &types.ConsentPortalIdpConfig{
+			CredentialProviderArn: ptr.String("__CredentialProviderArn__"),
+			Scopes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Audience: ptr.String("__Audience__"),
+		},
+		Name:         ptr.String("__Name__"),
+		PortalUrl:    ptr.String("__PortalUrl__"),
+		Status:       types.ConsentPortalStatus("CREATING"),
+		StatusReason: ptr.String("__StatusReason__"),
+		UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetConsentPortal.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetConsentPortal(context.Background(), &GetConsentPortalInput{
+		ConsentPortalIdentifier: ptr.String("__ConsentPortalIdentifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetConsentPortal.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetDataset(t *testing.T) {
 	want := &GetDatasetOutput{
 		DatasetArn:           ptr.String("__DatasetArn__"),
@@ -7099,6 +7256,10 @@ func TestCheckResponseSnapshot_GetOnlineEvaluationConfig(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+				LogGroupNamePrefixes: []string{
+					"__Member__",
+					"__Member__",
+				},
 				ServiceNames: []string{
 					"__Member__",
 					"__Member__",
@@ -7129,7 +7290,9 @@ func TestCheckResponseSnapshot_GetOnlineEvaluationConfig(t *testing.T) {
 		},
 		OutputConfig: &types.OutputConfig{
 			CloudWatchConfig: &types.CloudWatchOutputConfig{
-				LogGroupName: ptr.String("__LogGroupName__"),
+				LogGroupName:      ptr.String("__LogGroupName__"),
+				MetricsNamespace:  ptr.String("__MetricsNamespace__"),
+				ResultDestination: types.ResultDestination("DEDICATED_LOG_GROUP"),
 			},
 		},
 		EvaluationExecutionRoleArn: ptr.String("__EvaluationExecutionRoleArn__"),
@@ -8369,6 +8532,72 @@ func TestCheckResponseSnapshot_ListConfigurationBundles(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListConfigurationBundles.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListConsentPortals(t *testing.T) {
+	want := &ListConsentPortalsOutput{
+		ConsentPortals: []types.ConsentPortalSummary{
+			{
+				Sources: []types.ConsentPortalSource{
+					{
+						Identifier: ptr.String("__Identifier__"),
+						Type:       types.ConsentPortalSourceType("agentcore-gateway"),
+					},
+					{
+						Identifier: ptr.String("__Identifier__"),
+						Type:       types.ConsentPortalSourceType("agentcore-gateway"),
+					},
+				},
+				ConsentPortalArn: ptr.String("__ConsentPortalArn__"),
+				ConsentPortalId:  ptr.String("__ConsentPortalId__"),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Description:      ptr.String("__Description__"),
+				Name:             ptr.String("__Name__"),
+				PortalUrl:        ptr.String("__PortalUrl__"),
+				Status:           types.ConsentPortalStatus("CREATING"),
+				UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Sources: []types.ConsentPortalSource{
+					{
+						Identifier: ptr.String("__Identifier__"),
+						Type:       types.ConsentPortalSourceType("agentcore-gateway"),
+					},
+					{
+						Identifier: ptr.String("__Identifier__"),
+						Type:       types.ConsentPortalSourceType("agentcore-gateway"),
+					},
+				},
+				ConsentPortalArn: ptr.String("__ConsentPortalArn__"),
+				ConsentPortalId:  ptr.String("__ConsentPortalId__"),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Description:      ptr.String("__Description__"),
+				Name:             ptr.String("__Name__"),
+				PortalUrl:        ptr.String("__PortalUrl__"),
+				Status:           types.ConsentPortalStatus("CREATING"),
+				UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListConsentPortals.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListConsentPortals(context.Background(), &ListConsentPortalsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListConsentPortals.response", err)
 	}
 }
 
@@ -10715,6 +10944,66 @@ func TestCheckResponseSnapshot_UpdateConfigurationBundle(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateConfigurationBundle.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateConsentPortal(t *testing.T) {
+	want := &UpdateConsentPortalOutput{
+		Sources: []types.ConsentPortalSource{
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Type:       types.ConsentPortalSourceType("agentcore-gateway"),
+			},
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Type:       types.ConsentPortalSourceType("agentcore-gateway"),
+			},
+		},
+		ConsentPortalArn: ptr.String("__ConsentPortalArn__"),
+		ConsentPortalId:  ptr.String("__ConsentPortalId__"),
+		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Description:      ptr.String("__Description__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		IdpConfig: &types.ConsentPortalIdpConfig{
+			CredentialProviderArn: ptr.String("__CredentialProviderArn__"),
+			Scopes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Audience: ptr.String("__Audience__"),
+		},
+		Name:         ptr.String("__Name__"),
+		PortalUrl:    ptr.String("__PortalUrl__"),
+		Status:       types.ConsentPortalStatus("CREATING"),
+		StatusReason: ptr.String("__StatusReason__"),
+		UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateConsentPortal.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateConsentPortal(context.Background(), &UpdateConsentPortalInput{
+		ConsentPortalIdentifier: ptr.String("__ConsentPortalIdentifier__"),
+		ExecutionRoleArn:        ptr.String("__ExecutionRoleArn__"),
+		IdpConfig: &types.ConsentPortalIdpConfig{
+			CredentialProviderArn: ptr.String("__CredentialProviderArn__"),
+			Scopes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Audience: ptr.String("__Audience__"),
+		},
+		Description: ptr.String("__Description__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateConsentPortal.response", err)
 	}
 }
 
@@ -13137,6 +13426,10 @@ func TestCheckResponseSnapshot_UpdateOnlineEvaluationConfig(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+				LogGroupNamePrefixes: []string{
+					"__Member__",
+					"__Member__",
+				},
 				ServiceNames: []string{
 					"__Member__",
 					"__Member__",
@@ -13163,6 +13456,13 @@ func TestCheckResponseSnapshot_UpdateOnlineEvaluationConfig(t *testing.T) {
 			Frequencies: []types.ClusteringFrequency{
 				types.ClusteringFrequency("DAILY"),
 				types.ClusteringFrequency("DAILY"),
+			},
+		},
+		OutputConfig: &types.OutputConfig{
+			CloudWatchConfig: &types.CloudWatchOutputConfig{
+				LogGroupName:      ptr.String("__LogGroupName__"),
+				MetricsNamespace:  ptr.String("__MetricsNamespace__"),
+				ResultDestination: types.ResultDestination("DEDICATED_LOG_GROUP"),
 			},
 		},
 		EvaluationExecutionRoleArn: ptr.String("__EvaluationExecutionRoleArn__"),

@@ -1,3 +1,3 @@
-DELETE /applications/__Arn__
+DELETE /applications/__Arn__?force=true
 
 

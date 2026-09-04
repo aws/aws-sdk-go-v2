@@ -1910,6 +1910,12 @@ type DaemonCapacityProvider struct {
 	// The number of daemon tasks running on this capacity provider.
 	RunningCount int32
 
+	// The number of instances on this capacity provider that are running without the
+	// daemon task. This applies to daemons that aren't critical, where the instance
+	// remains available for your other tasks even if the daemon task can't start or
+	// stops. These instances aren't included in runningCount .
+	WithoutDaemonCount int32
+
 	noSmithyDocumentSerde
 }
 
@@ -2144,6 +2150,12 @@ type DaemonDeploymentCapacityProvider struct {
 	// The number of instances running daemon tasks on this capacity provider.
 	RunningInstanceCount *int32
 
+	// The number of instances on this capacity provider that are running without the
+	// daemon task. This applies to daemons that aren't critical, where the instance
+	// remains available for your other tasks even if the daemon task can't start or
+	// stops. These instances aren't included in runningInstanceCount .
+	WithoutDaemonInstanceCount *int32
+
 	noSmithyDocumentSerde
 }
 
@@ -2184,6 +2196,11 @@ type DaemonDeploymentRevisionDetail struct {
 
 	// The total number of instances running daemon tasks for this revision.
 	TotalRunningInstanceCount *int32
+
+	// The total number of instances running without the daemon task for this
+	// revision, across all capacity providers. These instances aren't included in
+	// totalRunningInstanceCount .
+	TotalWithoutDaemonInstanceCount *int32
 
 	noSmithyDocumentSerde
 }
@@ -2286,6 +2303,13 @@ type DaemonRevision struct {
 	// The Unix timestamp for the time when the daemon revision was created.
 	CreatedAt *time.Time
 
+	// If the critical parameter of this daemon revision is true , and the daemon task
+	// fails, stops, or becomes unhealthy, Amazon ECS drains the container instance and
+	// stops the other tasks running on it. If the parameter is false , the daemon task
+	// failure doesn't affect the other tasks on the instance, and doesn't block
+	// instance registration. The default value is true .
+	Critical *bool
+
 	// The Amazon Resource Name (ARN) of the daemon for this revision.
 	DaemonArn *string
 
@@ -2321,6 +2345,11 @@ type DaemonRevisionDetail struct {
 
 	// The total number of daemon tasks running for this revision.
 	TotalRunningCount int32
+
+	// The total number of instances running without the daemon task for this
+	// revision, across all capacity providers. These instances aren't included in
+	// totalRunningCount .
+	TotalWithoutDaemonCount int32
 
 	noSmithyDocumentSerde
 }

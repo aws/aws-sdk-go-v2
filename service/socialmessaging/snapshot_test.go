@@ -218,6 +218,18 @@ func TestCheckSnapshot_GetLinkedWhatsAppBusinessAccountPhoneNumber(t *testing.T)
 	}
 }
 
+func TestCheckSnapshot_GetWhatsAppBusinessPublicKey(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetWhatsAppBusinessPublicKey(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetWhatsAppBusinessPublicKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetWhatsAppFlow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetWhatsAppFlow(context.Background(), nil, func(o *Options) {
@@ -367,6 +379,18 @@ func TestCheckSnapshot_PutWhatsAppBusinessAccountEventDestinations(t *testing.T)
 	_, err := svc.PutWhatsAppBusinessAccountEventDestinations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutWhatsAppBusinessAccountEventDestinations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutWhatsAppBusinessPublicKey(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutWhatsAppBusinessPublicKey(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutWhatsAppBusinessPublicKey")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -613,6 +637,18 @@ func TestUpdateSnapshot_GetLinkedWhatsAppBusinessAccountPhoneNumber(t *testing.T
 	}
 }
 
+func TestUpdateSnapshot_GetWhatsAppBusinessPublicKey(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetWhatsAppBusinessPublicKey(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetWhatsAppBusinessPublicKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetWhatsAppFlow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetWhatsAppFlow(context.Background(), nil, func(o *Options) {
@@ -762,6 +798,18 @@ func TestUpdateSnapshot_PutWhatsAppBusinessAccountEventDestinations(t *testing.T
 	_, err := svc.PutWhatsAppBusinessAccountEventDestinations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutWhatsAppBusinessAccountEventDestinations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutWhatsAppBusinessPublicKey(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutWhatsAppBusinessPublicKey(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutWhatsAppBusinessPublicKey")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

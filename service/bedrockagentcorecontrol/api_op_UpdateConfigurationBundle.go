@@ -34,6 +34,14 @@ type UpdateConfigurationBundleInput struct {
 	// This member is required.
 	BundleId *string
 
+	// A list of parent version identifiers for lineage tracking. Regular commits have
+	// a single parent. Merge commits have two parents: the target branch parent and
+	// the source branch parent. If the branch already exists, the first parent must be
+	// the latest version on that branch.
+	//
+	// This member is required.
+	ParentVersionIds []string
+
 	// The branch name for this version. If not specified, inherits the parent's
 	// branch or defaults to mainline .
 	BranchName *string
@@ -66,12 +74,6 @@ type UpdateConfigurationBundleInput struct {
 	// components will be encrypted with this key. If the bundle already has a KMS key,
 	// this rotates to the new key.
 	KmsKeyArn *string
-
-	// A list of parent version identifiers for lineage tracking. Regular commits have
-	// a single parent. Merge commits have two parents: the target branch parent and
-	// the source branch parent. If the branch already exists, the first parent must be
-	// the latest version on that branch.
-	ParentVersionIds []string
 
 	noSmithyDocumentSerde
 }

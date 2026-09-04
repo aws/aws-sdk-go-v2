@@ -3835,6 +3835,46 @@ func awsRestjson1_deserializeDocumentEksAddOnOperatingSystemList(v *[]types.EksA
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFixedPercentage(v **types.FixedPercentage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FixedPercentage
+	if *v == nil {
+		sv = &types.FixedPercentage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "percentageValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BoundedString to be of type string, got %T instead", value)
+				}
+				sv.PercentageValue = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFixedUpfrontPricingTerm(v **types.FixedUpfrontPricingTerm, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5662,6 +5702,102 @@ func awsRestjson1_deserializeDocumentOfferTermsList(v *[]types.OfferTerm, value 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPaymentScheduleEntry(v **types.PaymentScheduleEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PaymentScheduleEntry
+	if *v == nil {
+		sv = &types.PaymentScheduleEntry{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "chargeDateOffset":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BoundedString to be of type string, got %T instead", value)
+				}
+				sv.ChargeDateOffset = ptr.String(jtv)
+			}
+
+		case "chargePercentage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BoundedString to be of type string, got %T instead", value)
+				}
+				sv.ChargePercentage = ptr.String(jtv)
+			}
+
+		case "dayOfMonth":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DayOfMonth = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPaymentScheduleEntryList(v *[]types.PaymentScheduleEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PaymentScheduleEntry
+	if *v == nil {
+		cv = []types.PaymentScheduleEntry{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PaymentScheduleEntry
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentPaymentScheduleEntry(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPaymentScheduleTerm(v **types.PaymentScheduleTerm, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5722,6 +5858,150 @@ func awsRestjson1_deserializeDocumentPaymentScheduleTerm(v **types.PaymentSchedu
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPaymentScheduleTermTemplate(v **types.PaymentScheduleTermTemplate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PaymentScheduleTermTemplate
+	if *v == nil {
+		sv = &types.PaymentScheduleTermTemplate{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "schedule":
+			if err := awsRestjson1_deserializeDocumentPaymentScheduleEntryList(&sv.Schedule, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPercentageRange(v **types.PercentageRange, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PercentageRange
+	if *v == nil {
+		sv = &types.PercentageRange{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "defaultValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BoundedString to be of type string, got %T instead", value)
+				}
+				sv.DefaultValue = ptr.String(jtv)
+			}
+
+		case "maximumValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BoundedString to be of type string, got %T instead", value)
+				}
+				sv.MaximumValue = ptr.String(jtv)
+			}
+
+		case "minimumValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BoundedString to be of type string, got %T instead", value)
+				}
+				sv.MinimumValue = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPriceIncrease(v *types.PriceIncrease, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.PriceIncrease
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "fixedPercentage":
+			var mv types.FixedPercentage
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentFixedPercentage(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.PriceIncreaseMemberFixedPercentage{Value: mv}
+			break loop
+
+		case "percentageRange":
+			var mv types.PercentageRange
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentPercentageRange(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.PriceIncreaseMemberPercentageRange{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -6743,6 +7023,15 @@ func awsRestjson1_deserializeDocumentRenewalTerm(v **types.RenewalTerm, value in
 
 	for key, value := range shape {
 		switch key {
+		case "adjustmentDeadline":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BoundedString to be of type string, got %T instead", value)
+				}
+				sv.AdjustmentDeadline = ptr.String(jtv)
+			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6750,6 +7039,38 @@ func awsRestjson1_deserializeDocumentRenewalTerm(v **types.RenewalTerm, value in
 					return fmt.Errorf("expected TermId to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "lockoutPeriod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BoundedString to be of type string, got %T instead", value)
+				}
+				sv.LockoutPeriod = ptr.String(jtv)
+			}
+
+		case "maxRenewals":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxRenewals = ptr.Int32(int32(i64))
+			}
+
+		case "priceIncrease":
+			if err := awsRestjson1_deserializeDocumentPriceIncrease(&sv.PriceIncrease, value); err != nil {
+				return err
+			}
+
+		case "termTemplates":
+			if err := awsRestjson1_deserializeDocumentTermTemplateList(&sv.TermTemplates, value); err != nil {
+				return err
 			}
 
 		case "type":
@@ -7759,6 +8080,78 @@ func awsRestjson1_deserializeDocumentSupportTerm(v **types.SupportTerm, value in
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTermTemplate(v *types.TermTemplate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.TermTemplate
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "paymentScheduleTermTemplate":
+			var mv types.PaymentScheduleTermTemplate
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentPaymentScheduleTermTemplate(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.TermTemplateMemberPaymentScheduleTermTemplate{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTermTemplateList(v *[]types.TermTemplate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TermTemplate
+	if *v == nil {
+		cv = []types.TermTemplate{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TermTemplate
+		if err := awsRestjson1_deserializeDocumentTermTemplate(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

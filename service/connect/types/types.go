@@ -22981,6 +22981,129 @@ func (v *PredefinedAttributeValuesMemberStringList) Deserialize(d smithy.ShapeDe
 	return deserializePredefinedAttributeStringValuesList(d, schemas.PredefinedAttributeValues_StringList, &v.Value)
 }
 
+// A single pre-evaluation filter condition. Specifies a resource type, filter
+// type, key, value, and operator to match against a resource attribute.
+type PreEvaluationFilter struct {
+
+	// The key of the attribute to filter on. For tag filters, this is the tag key.
+	//
+	// This member is required.
+	FilterKey *string
+
+	// The type of filter to apply. Valid values: TAG .
+	//
+	// This member is required.
+	FilterType PreEvaluationFilterType
+
+	// The value to match against. For tag filters, this is the tag value.
+	//
+	// This member is required.
+	FilterValue *string
+
+	// The comparison operator for the filter condition. Valid values: EQUALS .
+	//
+	// This member is required.
+	Operator PreEvaluationFilterOperator
+
+	// The type of resource to filter on. Valid values: CONTACT .
+	//
+	// This member is required.
+	ResourceType PreEvaluationFilterResourceType
+
+	noSmithyDocumentSerde
+}
+
+func (v *PreEvaluationFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PreEvaluationFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PreEvaluationFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterKey != nil {
+		s.WriteString(schemas.PreEvaluationFilter_FilterKey, *v.FilterKey)
+	}
+	if v.FilterType != "" {
+		s.WriteString(schemas.PreEvaluationFilter_FilterType, string(v.FilterType))
+	}
+	if v.FilterValue != nil {
+		s.WriteString(schemas.PreEvaluationFilter_FilterValue, *v.FilterValue)
+	}
+	if v.Operator != "" {
+		s.WriteString(schemas.PreEvaluationFilter_Operator, string(v.Operator))
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.PreEvaluationFilter_ResourceType, string(v.ResourceType))
+	}
+}
+func (v *PreEvaluationFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PreEvaluationFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PreEvaluationFilter_FilterKey:
+			v.FilterKey = new(string)
+			return d.ReadString(schemas.PreEvaluationFilter_FilterKey, v.FilterKey)
+		case schemas.PreEvaluationFilter_FilterType:
+			var ev string
+			if err := d.ReadString(schemas.PreEvaluationFilter_FilterType, &ev); err != nil {
+				return err
+			}
+			v.FilterType = PreEvaluationFilterType(ev)
+			return nil
+		case schemas.PreEvaluationFilter_FilterValue:
+			v.FilterValue = new(string)
+			return d.ReadString(schemas.PreEvaluationFilter_FilterValue, v.FilterValue)
+		case schemas.PreEvaluationFilter_Operator:
+			var ev string
+			if err := d.ReadString(schemas.PreEvaluationFilter_Operator, &ev); err != nil {
+				return err
+			}
+			v.Operator = PreEvaluationFilterOperator(ev)
+			return nil
+		case schemas.PreEvaluationFilter_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.PreEvaluationFilter_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = PreEvaluationFilterResourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The pre-evaluation filters for a rule, that restrict a rule to be applied to
+// only certain resources based on the resource's attributes, such as tags assigned
+// to a contact. The pre-evaluation filters are applied even before rule conditions
+// are evaluated and are used to enforce tag-based-access-control while applying
+// rules.
+type PreEvaluationFilters struct {
+
+	// A list of conditions that the rule evaluates together using AND logic. All
+	// conditions must be met for the event to be evaluated by the rule.
+	AndConditions []PreEvaluationFilter
+
+	noSmithyDocumentSerde
+}
+
+func (v *PreEvaluationFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PreEvaluationFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PreEvaluationFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePreEvaluationFilterList(s, schemas.PreEvaluationFilters_AndConditions, v.AndConditions)
+}
+func (v *PreEvaluationFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PreEvaluationFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PreEvaluationFilters_AndConditions:
+			return deserializePreEvaluationFilterList(d, schemas.PreEvaluationFilters_AndConditions, &v.AndConditions)
+		}
+		return nil
+	})
+}
+
 // Information about agent-first preview mode outbound strategy configuration.
 type Preview struct {
 
@@ -27551,6 +27674,13 @@ type Rule struct {
 	// This member is required.
 	TriggerEventSource *RuleTriggerEventSource
 
+	// The pre-evaluation filters for the rule, that restrict the rule to be applied
+	// to only certain resources based on the resource's attributes, such as tags
+	// assigned to a contact. The pre-evaluation filters are applied even before rule
+	// conditions are evaluated and are used to enforce tag-based-access-control while
+	// applying rules.
+	PreEvaluationFilters *PreEvaluationFilters
+
 	// The list of capability tiers associated with the rule. Used for categorizing
 	// rules by capability (for example, GenerativeAI ).
 	RuleCapabilityTiers []RuleCapabilityTier
@@ -27584,6 +27714,11 @@ func (v *Rule) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.Rule_Name, *v.Name)
+	}
+	if v.PreEvaluationFilters != nil {
+		s.WriteStruct(schemas.Rule_PreEvaluationFilters)
+		v.PreEvaluationFilters.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.PublishStatus != "" {
 		s.WriteString(schemas.Rule_PublishStatus, string(v.PublishStatus))
@@ -27622,6 +27757,9 @@ func (v *Rule) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Rule_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.Rule_Name, v.Name)
+		case schemas.Rule_PreEvaluationFilters:
+			v.PreEvaluationFilters = &PreEvaluationFilters{}
+			return v.PreEvaluationFilters.Deserialize(d)
 		case schemas.Rule_PublishStatus:
 			var ev string
 			if err := d.ReadString(schemas.Rule_PublishStatus, &ev); err != nil {
@@ -27988,6 +28126,13 @@ type RuleSearchSummary struct {
 	// This member is required.
 	TriggerEventSource *RuleTriggerEventSource
 
+	// The pre-evaluation filters for the rule, that restrict the rule to be applied
+	// to only certain resources based on the resource's attributes, such as tags
+	// assigned to a contact. The pre-evaluation filters are applied even before rule
+	// conditions are evaluated and are used to enforce tag-based-access-control while
+	// applying rules.
+	PreEvaluationFilters *PreEvaluationFilters
+
 	// The list of capability tiers associated with the rule. Used for categorizing
 	// rules by capability (for example, GenerativeAI ).
 	RuleCapabilityTiers []RuleCapabilityTier
@@ -28018,6 +28163,11 @@ func (v *RuleSearchSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.RuleSearchSummary_Name, *v.Name)
+	}
+	if v.PreEvaluationFilters != nil {
+		s.WriteStruct(schemas.RuleSearchSummary_PreEvaluationFilters)
+		v.PreEvaluationFilters.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.PublishStatus != "" {
 		s.WriteString(schemas.RuleSearchSummary_PublishStatus, string(v.PublishStatus))
@@ -28053,6 +28203,9 @@ func (v *RuleSearchSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RuleSearchSummary_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.RuleSearchSummary_Name, v.Name)
+		case schemas.RuleSearchSummary_PreEvaluationFilters:
+			v.PreEvaluationFilters = &PreEvaluationFilters{}
+			return v.PreEvaluationFilters.Deserialize(d)
 		case schemas.RuleSearchSummary_PublishStatus:
 			var ev string
 			if err := d.ReadString(schemas.RuleSearchSummary_PublishStatus, &ev); err != nil {

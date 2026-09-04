@@ -603,6 +603,54 @@ func TestCheckResponseSnapshot_PutRecord(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateRecord(t *testing.T) {
+	want := &UpdateRecordOutput{}
+	status, header, body, err := serdeRespReadSnapshot("UpdateRecord.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateRecord(context.Background(), &UpdateRecordInput{
+		FeatureGroupName:              ptr.String("__FeatureGroupName__"),
+		RecordIdentifierValueAsString: ptr.String("__RecordIdentifierValueAsString__"),
+		Features: []types.FeatureValue{
+			{
+				FeatureName:   ptr.String("__FeatureName__"),
+				ValueAsString: ptr.String("__ValueAsString__"),
+				ValueAsStringList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				FeatureName:   ptr.String("__FeatureName__"),
+				ValueAsString: ptr.String("__ValueAsString__"),
+				ValueAsStringList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		TargetStores: []types.TargetStore{
+			types.TargetStore("OnlineStore"),
+			types.TargetStore("OnlineStore"),
+		},
+		TtlDuration: &types.TtlDuration{
+			Unit:  types.TtlDurationUnit("Seconds"),
+			Value: ptr.Int32(1),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateRecord.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_AccessForbidden(t *testing.T) {
 	want := &types.AccessForbidden{
 		Message: ptr.String("__Message__"),
@@ -651,6 +699,60 @@ func TestCheckResponseSnapshot_Error_AccessForbidden(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "AccessForbidden.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
+	want := &types.ConflictException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ConflictException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.UpdateRecord(context.Background(), &UpdateRecordInput{
+		FeatureGroupName:              ptr.String("__FeatureGroupName__"),
+		RecordIdentifierValueAsString: ptr.String("__RecordIdentifierValueAsString__"),
+		Features: []types.FeatureValue{
+			{
+				FeatureName:   ptr.String("__FeatureName__"),
+				ValueAsString: ptr.String("__ValueAsString__"),
+				ValueAsStringList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				FeatureName:   ptr.String("__FeatureName__"),
+				ValueAsString: ptr.String("__ValueAsString__"),
+				ValueAsStringList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		TargetStores: []types.TargetStore{
+			types.TargetStore("OnlineStore"),
+			types.TargetStore("OnlineStore"),
+		},
+		TtlDuration: &types.TtlDuration{
+			Unit:  types.TtlDurationUnit("Seconds"),
+			Value: ptr.Int32(1),
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ConflictException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ConflictException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ConflictException.error", err)
 	}
 }
 

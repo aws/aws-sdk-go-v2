@@ -350,6 +350,26 @@ func (m *validateOpListVmEntitlements) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutAccountSettings struct {
+}
+
+func (*validateOpPutAccountSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAccountSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAccountSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAccountSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -478,6 +498,10 @@ func addOpListVmEntitlementsValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpListVmEntitlements{}, middleware.After)
 }
 
+func addOpPutAccountSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAccountSettings{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -488,6 +512,41 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateEnvironmentConnectorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateEnvironmentConnector{}, middleware.After)
+}
+
+func validateAccountSetting(v *types.AccountSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AccountSetting"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAccountSettingList(v []types.AccountSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AccountSettingList"}
+	for i := range v {
+		if err := validateAccountSetting(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateConnectivityInfo(v *types.ConnectivityInfo) error {
@@ -1055,6 +1114,25 @@ func validateOpListVmEntitlementsInput(v *ListVmEntitlementsInput) error {
 	}
 	if len(v.EntitlementType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("EntitlementType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAccountSettingsInput(v *PutAccountSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAccountSettingsInput"}
+	if v.Settings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Settings"))
+	} else if v.Settings != nil {
+		if err := validateAccountSettingList(v.Settings); err != nil {
+			invalidParams.AddNested("Settings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -2226,6 +2226,10 @@ func TestCheckRequestSnapshot_StartBatchEvaluation(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+				LogGroupNamePrefixes: []string{
+					"__Member__",
+					"__Member__",
+				},
 				FilterConfig: &types.CloudWatchFilterConfig{
 					SessionIds: []string{
 						"__Member__",
@@ -2334,6 +2338,14 @@ func TestCheckRequestSnapshot_StartBatchEvaluation(t *testing.T) {
 		},
 		KmsKeyArn:   ptr.String("__KmsKeyArn__"),
 		Description: ptr.String("__Description__"),
+		OutputConfig: &types.OutputConfigMemberCloudWatchConfig{
+			Value: types.CloudWatchOutputConfig{
+				LogGroupName:      ptr.String("__LogGroupName__"),
+				LogStreamName:     ptr.String("__LogStreamName__"),
+				MetricsNamespace:  ptr.String("__MetricsNamespace__"),
+				ResultDestination: types.ResultDestination("DEDICATED_LOG_GROUP"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4903,6 +4915,10 @@ func TestUpdateRequestSnapshot_StartBatchEvaluation(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+				LogGroupNamePrefixes: []string{
+					"__Member__",
+					"__Member__",
+				},
 				FilterConfig: &types.CloudWatchFilterConfig{
 					SessionIds: []string{
 						"__Member__",
@@ -5011,6 +5027,14 @@ func TestUpdateRequestSnapshot_StartBatchEvaluation(t *testing.T) {
 		},
 		KmsKeyArn:   ptr.String("__KmsKeyArn__"),
 		Description: ptr.String("__Description__"),
+		OutputConfig: &types.OutputConfigMemberCloudWatchConfig{
+			Value: types.CloudWatchOutputConfig{
+				LogGroupName:      ptr.String("__LogGroupName__"),
+				LogStreamName:     ptr.String("__LogStreamName__"),
+				MetricsNamespace:  ptr.String("__MetricsNamespace__"),
+				ResultDestination: types.ResultDestination("DEDICATED_LOG_GROUP"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

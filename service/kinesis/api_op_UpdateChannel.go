@@ -20,8 +20,9 @@ import (
 // immediately. After the change is applied, Amazon Kinesis Data Streams sets the
 // channel back to the ACTIVE state.
 //
-// This API has a call limit of 5 transactions per second (TPS) for each Amazon
-// Web Services account. Exceeding 5 TPS results in a LimitExceededException .
+// This operation has a call limit of 5 transactions per second (TPS) for each
+// Amazon Web Services account. Exceeding 5 TPS results in a LimitExceededException
+// .
 func (c *Client) UpdateChannel(ctx context.Context, params *UpdateChannelInput, optFns ...func(*Options)) (*UpdateChannelOutput, error) {
 	if params == nil {
 		params = &UpdateChannelInput{}

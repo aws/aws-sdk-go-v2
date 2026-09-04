@@ -4195,9 +4195,52 @@ func awsAwsjson10_deserializeDocumentAgreementViewSummary(v **types.AgreementVie
 				}
 			}
 
+		case "endTimeBehaviorReasonCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EndTimeBehaviorReasonCode to be of type string, got %T instead", value)
+				}
+				sv.EndTimeBehaviorReasonCode = types.EndTimeBehaviorReasonCode(jtv)
+			}
+
+		case "endTimeBehaviorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EndTimeBehaviorType to be of type string, got %T instead", value)
+				}
+				sv.EndTimeBehaviorType = types.EndTimeBehaviorType(jtv)
+			}
+
 		case "entitlements":
 			if err := awsAwsjson10_deserializeDocumentEntitlementList(&sv.Entitlements, value); err != nil {
 				return err
+			}
+
+		case "initialAgreementId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
+				}
+				sv.InitialAgreementId = ptr.String(jtv)
+			}
+
+		case "lastUpdateTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastUpdateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		case "proposalSummary":
@@ -5385,6 +5428,60 @@ func awsAwsjson10_deserializeDocumentDocumentList(v *[]types.DocumentItem, value
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentEndTimeBehavior(v **types.EndTimeBehavior, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EndTimeBehavior
+	if *v == nil {
+		sv = &types.EndTimeBehavior{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "reasonCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EndTimeBehaviorReasonCode to be of type string, got %T instead", value)
+				}
+				sv.ReasonCode = types.EndTimeBehaviorReasonCode(jtv)
+			}
+
+		case "renewalSummary":
+			if err := awsAwsjson10_deserializeDocumentRenewalSummary(&sv.RenewalSummary, value); err != nil {
+				return err
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EndTimeBehaviorType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.EndTimeBehaviorType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentEntitlement(v **types.Entitlement, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5672,6 +5769,46 @@ func awsAwsjson10_deserializeDocumentExpectedChargeList(v *[]types.ExpectedCharg
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentFixedPercentage(v **types.FixedPercentage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FixedPercentage
+	if *v == nil {
+		sv = &types.FixedPercentage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PriceIncreasePercentage to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -6451,6 +6588,102 @@ func awsAwsjson10_deserializeDocumentPaymentRequestSummaryList(v *[]types.Paymen
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentPaymentScheduleEntry(v **types.PaymentScheduleEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PaymentScheduleEntry
+	if *v == nil {
+		sv = &types.PaymentScheduleEntry{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "chargeDateOffset":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OffsetDuration to be of type string, got %T instead", value)
+				}
+				sv.ChargeDateOffset = ptr.String(jtv)
+			}
+
+		case "chargePercentage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ChargePercentage to be of type string, got %T instead", value)
+				}
+				sv.ChargePercentage = ptr.String(jtv)
+			}
+
+		case "dayOfMonth":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DayOfMonth = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentPaymentScheduleEntryList(v *[]types.PaymentScheduleEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PaymentScheduleEntry
+	if *v == nil {
+		cv = []types.PaymentScheduleEntry{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PaymentScheduleEntry
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentPaymentScheduleEntry(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentPaymentScheduleTerm(v **types.PaymentScheduleTerm, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6511,6 +6744,150 @@ func awsAwsjson10_deserializeDocumentPaymentScheduleTerm(v **types.PaymentSchedu
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentPaymentScheduleTermTemplate(v **types.PaymentScheduleTermTemplate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PaymentScheduleTermTemplate
+	if *v == nil {
+		sv = &types.PaymentScheduleTermTemplate{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "schedule":
+			if err := awsAwsjson10_deserializeDocumentPaymentScheduleEntryList(&sv.Schedule, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentPercentageRange(v **types.PercentageRange, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PercentageRange
+	if *v == nil {
+		sv = &types.PercentageRange{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "defaultValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PriceIncreasePercentage to be of type string, got %T instead", value)
+				}
+				sv.DefaultValue = ptr.String(jtv)
+			}
+
+		case "maxValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PriceIncreasePercentage to be of type string, got %T instead", value)
+				}
+				sv.MaxValue = ptr.String(jtv)
+			}
+
+		case "minValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PriceIncreasePercentage to be of type string, got %T instead", value)
+				}
+				sv.MinValue = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentPriceIncrease(v *types.PriceIncrease, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.PriceIncrease
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "fixedPercentage":
+			var mv types.FixedPercentage
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentFixedPercentage(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.PriceIncreaseMemberFixedPercentage{Value: mv}
+			break loop
+
+		case "percentageRange":
+			var mv types.PercentageRange
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentPercentageRange(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.PriceIncreaseMemberPercentageRange{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -6825,6 +7202,46 @@ func awsAwsjson10_deserializeDocumentRecurringPaymentTerm(v **types.RecurringPay
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentRenewalSummary(v **types.RenewalSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RenewalSummary
+	if *v == nil {
+		sv = &types.RenewalSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "offerId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OfferId to be of type string, got %T instead", value)
+				}
+				sv.OfferId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentRenewalTerm(v **types.RenewalTerm, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6847,6 +7264,15 @@ func awsAwsjson10_deserializeDocumentRenewalTerm(v **types.RenewalTerm, value in
 
 	for key, value := range shape {
 		switch key {
+		case "adjustmentDeadline":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DayDuration to be of type string, got %T instead", value)
+				}
+				sv.AdjustmentDeadline = ptr.String(jtv)
+			}
+
 		case "configuration":
 			if err := awsAwsjson10_deserializeDocumentRenewalTermConfiguration(&sv.Configuration, value); err != nil {
 				return err
@@ -6859,6 +7285,38 @@ func awsAwsjson10_deserializeDocumentRenewalTerm(v **types.RenewalTerm, value in
 					return fmt.Errorf("expected TermId to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "lockoutPeriod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DayDuration to be of type string, got %T instead", value)
+				}
+				sv.LockoutPeriod = ptr.String(jtv)
+			}
+
+		case "maxRenewals":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxRenewals = ptr.Int32(int32(i64))
+			}
+
+		case "priceIncrease":
+			if err := awsAwsjson10_deserializeDocumentPriceIncrease(&sv.PriceIncrease, value); err != nil {
+				return err
+			}
+
+		case "termTemplates":
+			if err := awsAwsjson10_deserializeDocumentTermTemplateList(&sv.TermTemplates, value); err != nil {
+				return err
 			}
 
 		case "type":
@@ -7440,6 +7898,78 @@ func awsAwsjson10_deserializeDocumentTaxBreakdownItem(v **types.TaxBreakdownItem
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentTermTemplate(v *types.TermTemplate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.TermTemplate
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "paymentScheduleTermTemplate":
+			var mv types.PaymentScheduleTermTemplate
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentPaymentScheduleTermTemplate(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.TermTemplateMemberPaymentScheduleTermTemplate{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentTermTemplateList(v *[]types.TermTemplate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TermTemplate
+	if *v == nil {
+		cv = []types.TermTemplate{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TermTemplate
+		if err := awsAwsjson10_deserializeDocumentTermTemplate(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -8693,9 +9223,23 @@ func awsAwsjson10_deserializeOpDocumentDescribeAgreementOutput(v **DescribeAgree
 				}
 			}
 
+		case "endTimeBehavior":
+			if err := awsAwsjson10_deserializeDocumentEndTimeBehavior(&sv.EndTimeBehavior, value); err != nil {
+				return err
+			}
+
 		case "estimatedCharges":
 			if err := awsAwsjson10_deserializeDocumentEstimatedCharges(&sv.EstimatedCharges, value); err != nil {
 				return err
+			}
+
+		case "initialAgreementId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
+				}
+				sv.InitialAgreementId = ptr.String(jtv)
 			}
 
 		case "proposalSummary":

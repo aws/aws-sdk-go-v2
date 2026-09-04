@@ -210,6 +210,26 @@ func (m *validateOpCreateConfigurationBundle) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateConsentPortal struct {
+}
+
+func (*validateOpCreateConsentPortal) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateConsentPortal) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateConsentPortalInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateConsentPortalInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDataset struct {
 }
 
@@ -765,6 +785,26 @@ func (m *validateOpDeleteConfigurationBundle) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteConfigurationBundleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteConsentPortal struct {
+}
+
+func (*validateOpDeleteConsentPortal) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConsentPortal) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConsentPortalInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConsentPortalInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1365,6 +1405,26 @@ func (m *validateOpGetConfigurationBundleVersion) HandleInitialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetConfigurationBundleVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetConsentPortal struct {
+}
+
+func (*validateOpGetConsentPortal) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConsentPortal) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConsentPortalInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConsentPortalInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2470,6 +2530,26 @@ func (m *validateOpUpdateConfigurationBundle) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateConsentPortal struct {
+}
+
+func (*validateOpUpdateConsentPortal) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateConsentPortal) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateConsentPortalInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateConsentPortalInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDatasetExamples struct {
 }
 
@@ -2930,6 +3010,10 @@ func addOpCreateConfigurationBundleValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpCreateConfigurationBundle{}, middleware.After)
 }
 
+func addOpCreateConsentPortalValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateConsentPortal{}, middleware.After)
+}
+
 func addOpCreateDatasetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDataset{}, middleware.After)
 }
@@ -3040,6 +3124,10 @@ func addOpDeleteCodeInterpreterValidationMiddleware(stack *middleware.Stack) err
 
 func addOpDeleteConfigurationBundleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteConfigurationBundle{}, middleware.After)
+}
+
+func addOpDeleteConsentPortalValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConsentPortal{}, middleware.After)
 }
 
 func addOpDeleteDatasetExamplesValidationMiddleware(stack *middleware.Stack) error {
@@ -3160,6 +3248,10 @@ func addOpGetConfigurationBundleValidationMiddleware(stack *middleware.Stack) er
 
 func addOpGetConfigurationBundleVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetConfigurationBundleVersion{}, middleware.After)
+}
+
+func addOpGetConsentPortalValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConsentPortal{}, middleware.After)
 }
 
 func addOpGetDatasetValidationMiddleware(stack *middleware.Stack) error {
@@ -3380,6 +3472,10 @@ func addOpUpdateCapacityProviderValidationMiddleware(stack *middleware.Stack) er
 
 func addOpUpdateConfigurationBundleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateConfigurationBundle{}, middleware.After)
+}
+
+func addOpUpdateConsentPortalValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateConsentPortal{}, middleware.After)
 }
 
 func addOpUpdateDatasetExamplesValidationMiddleware(stack *middleware.Stack) error {
@@ -3992,9 +4088,6 @@ func validateCloudWatchLogsInputConfig(v *types.CloudWatchLogsInputConfig) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchLogsInputConfig"}
-	if v.LogGroupNames == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LogGroupNames"))
-	}
 	if v.ServiceNames == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceNames"))
 	}
@@ -4362,6 +4455,59 @@ func validateConnectorTargetConfiguration(v *types.ConnectorTargetConfiguration)
 	if v.Configurations != nil {
 		if err := validateConnectorConfigurations(v.Configurations); err != nil {
 			invalidParams.AddNested("Configurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConsentPortalIdpConfig(v *types.ConsentPortalIdpConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConsentPortalIdpConfig"}
+	if v.CredentialProviderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CredentialProviderArn"))
+	}
+	if v.Scopes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Scopes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConsentPortalSource(v *types.ConsentPortalSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConsentPortalSource"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConsentPortalSources(v []types.ConsentPortalSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConsentPortalSources"}
+	for i := range v {
+		if err := validateConsentPortalSource(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -7285,6 +7431,21 @@ func validateOpenResponsesEvaluatorModelConfig(v *types.OpenResponsesEvaluatorMo
 	}
 }
 
+func validateOutputConfig(v *types.OutputConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutputConfig"}
+	if v.CloudWatchConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CloudWatchConfig"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePassthroughTargetConfiguration(v *types.PassthroughTargetConfiguration) error {
 	if v == nil {
 		return nil
@@ -9145,6 +9306,38 @@ func validateOpCreateConfigurationBundleInput(v *CreateConfigurationBundleInput)
 	}
 }
 
+func validateOpCreateConsentPortalInput(v *CreateConsentPortalInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConsentPortalInput"}
+	if v.ExecutionRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
+	}
+	if v.IdpConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdpConfig"))
+	} else if v.IdpConfig != nil {
+		if err := validateConsentPortalIdpConfig(v.IdpConfig); err != nil {
+			invalidParams.AddNested("IdpConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Sources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
+	} else if v.Sources != nil {
+		if err := validateConsentPortalSources(v.Sources); err != nil {
+			invalidParams.AddNested("Sources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDatasetInput(v *CreateDatasetInput) error {
 	if v == nil {
 		return nil
@@ -9504,6 +9697,11 @@ func validateOpCreateOnlineEvaluationConfigInput(v *CreateOnlineEvaluationConfig
 			invalidParams.AddNested("ClusteringConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.OutputConfig != nil {
+		if err := validateOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.EvaluationExecutionRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EvaluationExecutionRoleArn"))
 	}
@@ -9812,6 +10010,21 @@ func validateOpDeleteConfigurationBundleInput(v *DeleteConfigurationBundleInput)
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteConfigurationBundleInput"}
 	if v.BundleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteConsentPortalInput(v *DeleteConsentPortalInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConsentPortalInput"}
+	if v.ConsentPortalIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConsentPortalIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10292,6 +10505,21 @@ func validateOpGetConfigurationBundleVersionInput(v *GetConfigurationBundleVersi
 	}
 	if v.VersionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VersionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetConsentPortalInput(v *GetConsentPortalInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConsentPortalInput"}
+	if v.ConsentPortalIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConsentPortalIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -11232,9 +11460,32 @@ func validateOpUpdateConfigurationBundleInput(v *UpdateConfigurationBundleInput)
 			invalidParams.AddNested("Components", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ParentVersionIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParentVersionIds"))
+	}
 	if v.CreatedBy != nil {
 		if err := validateVersionCreatedBySource(v.CreatedBy); err != nil {
 			invalidParams.AddNested("CreatedBy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateConsentPortalInput(v *UpdateConsentPortalInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateConsentPortalInput"}
+	if v.ConsentPortalIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConsentPortalIdentifier"))
+	}
+	if v.IdpConfig != nil {
+		if err := validateConsentPortalIdpConfig(v.IdpConfig); err != nil {
+			invalidParams.AddNested("IdpConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -11583,6 +11834,11 @@ func validateOpUpdateOnlineEvaluationConfigInput(v *UpdateOnlineEvaluationConfig
 	if v.ClusteringConfig != nil {
 		if err := validateClusteringConfig(v.ClusteringConfig); err != nil {
 			invalidParams.AddNested("ClusteringConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputConfig != nil {
+		if err := validateOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

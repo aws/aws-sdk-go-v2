@@ -207,6 +207,7 @@ const (
 	PurchaseOptionBadgeTypePrivatePricing   PurchaseOptionBadgeType = "PRIVATE_PRICING"
 	PurchaseOptionBadgeTypeFutureDated      PurchaseOptionBadgeType = "FUTURE_DATED"
 	PurchaseOptionBadgeTypeReplacementOffer PurchaseOptionBadgeType = "REPLACEMENT_OFFER"
+	PurchaseOptionBadgeTypeAutoRenew        PurchaseOptionBadgeType = "AUTO_RENEW"
 )
 
 // Values returns all known values for PurchaseOptionBadgeType. Note that this can
@@ -218,6 +219,7 @@ func (PurchaseOptionBadgeType) Values() []PurchaseOptionBadgeType {
 		"PRIVATE_PRICING",
 		"FUTURE_DATED",
 		"REPLACEMENT_OFFER",
+		"AUTO_RENEW",
 	}
 }
 

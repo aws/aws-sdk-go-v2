@@ -182,6 +182,18 @@ func TestCheckSnapshot_DisassociateEipFromVlan(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAccountSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccountSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAccountSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDepotUrl(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDepotUrl(context.Background(), nil, func(o *Options) {
@@ -283,6 +295,18 @@ func TestCheckSnapshot_ListVmEntitlements(t *testing.T) {
 	_, err := svc.ListVmEntitlements(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListVmEntitlements")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutAccountSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAccountSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutAccountSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -445,6 +469,18 @@ func TestUpdateSnapshot_DisassociateEipFromVlan(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetAccountSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccountSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAccountSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetDepotUrl(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDepotUrl(context.Background(), nil, func(o *Options) {
@@ -546,6 +582,18 @@ func TestUpdateSnapshot_ListVmEntitlements(t *testing.T) {
 	_, err := svc.ListVmEntitlements(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListVmEntitlements")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutAccountSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAccountSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutAccountSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

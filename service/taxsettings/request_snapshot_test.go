@@ -383,7 +383,11 @@ func TestCheckRequestSnapshot_BatchPutTaxRegistration(t *testing.T) {
 					BusinessActivity: ptr.String("__BusinessActivity__"),
 				},
 				FranceAdditionalInfo: &types.FranceAdditionalInfo{
-					SirenNumber: ptr.String("__SirenNumber__"),
+					SirenNumber:         ptr.String("__SirenNumber__"),
+					EInvoiceRoutingCode: ptr.String("__EInvoiceRoutingCode__"),
+				},
+				MonacoAdditionalInfo: &types.MonacoAdditionalInfo{
+					BusinessNumber: ptr.String("__BusinessNumber__"),
 				},
 			},
 			VerificationDetails: &types.VerificationDetails{
@@ -908,7 +912,11 @@ func TestCheckRequestSnapshot_PutTaxRegistration(t *testing.T) {
 					BusinessActivity: ptr.String("__BusinessActivity__"),
 				},
 				FranceAdditionalInfo: &types.FranceAdditionalInfo{
-					SirenNumber: ptr.String("__SirenNumber__"),
+					SirenNumber:         ptr.String("__SirenNumber__"),
+					EInvoiceRoutingCode: ptr.String("__EInvoiceRoutingCode__"),
+				},
+				MonacoAdditionalInfo: &types.MonacoAdditionalInfo{
+					BusinessNumber: ptr.String("__BusinessNumber__"),
 				},
 			},
 			VerificationDetails: &types.VerificationDetails{
@@ -1139,7 +1147,11 @@ func TestUpdateRequestSnapshot_BatchPutTaxRegistration(t *testing.T) {
 					BusinessActivity: ptr.String("__BusinessActivity__"),
 				},
 				FranceAdditionalInfo: &types.FranceAdditionalInfo{
-					SirenNumber: ptr.String("__SirenNumber__"),
+					SirenNumber:         ptr.String("__SirenNumber__"),
+					EInvoiceRoutingCode: ptr.String("__EInvoiceRoutingCode__"),
+				},
+				MonacoAdditionalInfo: &types.MonacoAdditionalInfo{
+					BusinessNumber: ptr.String("__BusinessNumber__"),
 				},
 			},
 			VerificationDetails: &types.VerificationDetails{
@@ -1664,7 +1676,11 @@ func TestUpdateRequestSnapshot_PutTaxRegistration(t *testing.T) {
 					BusinessActivity: ptr.String("__BusinessActivity__"),
 				},
 				FranceAdditionalInfo: &types.FranceAdditionalInfo{
-					SirenNumber: ptr.String("__SirenNumber__"),
+					SirenNumber:         ptr.String("__SirenNumber__"),
+					EInvoiceRoutingCode: ptr.String("__EInvoiceRoutingCode__"),
+				},
+				MonacoAdditionalInfo: &types.MonacoAdditionalInfo{
+					BusinessNumber: ptr.String("__BusinessNumber__"),
 				},
 			},
 			VerificationDetails: &types.VerificationDetails{

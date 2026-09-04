@@ -7,6 +7,26 @@ import (
 	"time"
 )
 
+// A regional account-level EVS setting, represented as a name and value pair.
+type AccountSetting struct {
+
+	// The name of the EVS setting. Valid values are:
+	//
+	//   - vcfPortedCoreCount (type: numeric string) - The total number of VCF license
+	//   cores ported to Amazon EVS for the account in that Region. The maximum value is
+	//   1,000,000 cores. This setting value is shared with Broadcom for record-keeping.
+	//
+	// This member is required.
+	Name *string
+
+	// The value of the EVS setting.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // A check on the environment to identify environment health and validate VMware
 // VCF licensing compliance.
 type Check struct {

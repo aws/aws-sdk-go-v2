@@ -3802,11 +3802,13 @@ func TestCheckResponseSnapshot_CreateCapacityReservation(t *testing.T) {
 				Status:                             types.InterruptibleCapacityReservationAllocationStatus("pending"),
 				InterruptibleCapacityReservationId: ptr.String("__InterruptibleCapacityReservationId__"),
 				InterruptionType:                   types.InterruptionType("adhoc"),
+				ZeroSizePreference:                 types.ZeroSizePreference("retain"),
 			},
 			InterruptionInfo: &types.InterruptionInfo{
 				SourceCapacityReservationId: ptr.String("__SourceCapacityReservationId__"),
 				InterruptionType:            types.InterruptionType("adhoc"),
 			},
+			ZeroSizePreference: types.ZeroSizePreference("retain"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateCapacityReservation.response")
@@ -3952,11 +3954,13 @@ func TestCheckResponseSnapshot_CreateCapacityReservationBySplitting(t *testing.T
 				Status:                             types.InterruptibleCapacityReservationAllocationStatus("pending"),
 				InterruptibleCapacityReservationId: ptr.String("__InterruptibleCapacityReservationId__"),
 				InterruptionType:                   types.InterruptionType("adhoc"),
+				ZeroSizePreference:                 types.ZeroSizePreference("retain"),
 			},
 			InterruptionInfo: &types.InterruptionInfo{
 				SourceCapacityReservationId: ptr.String("__SourceCapacityReservationId__"),
 				InterruptionType:            types.InterruptionType("adhoc"),
 			},
+			ZeroSizePreference: types.ZeroSizePreference("retain"),
 		},
 		DestinationCapacityReservation: &types.CapacityReservation{
 			CapacityReservationId:  ptr.String("__CapacityReservationId__"),
@@ -4035,11 +4039,13 @@ func TestCheckResponseSnapshot_CreateCapacityReservationBySplitting(t *testing.T
 				Status:                             types.InterruptibleCapacityReservationAllocationStatus("pending"),
 				InterruptibleCapacityReservationId: ptr.String("__InterruptibleCapacityReservationId__"),
 				InterruptionType:                   types.InterruptionType("adhoc"),
+				ZeroSizePreference:                 types.ZeroSizePreference("retain"),
 			},
 			InterruptionInfo: &types.InterruptionInfo{
 				SourceCapacityReservationId: ptr.String("__SourceCapacityReservationId__"),
 				InterruptionType:            types.InterruptionType("adhoc"),
 			},
+			ZeroSizePreference: types.ZeroSizePreference("retain"),
 		},
 		InstanceCount: ptr.Int32(1),
 	}
@@ -7344,6 +7350,7 @@ func TestCheckResponseSnapshot_CreateInterruptibleCapacityReservationAllocation(
 				},
 			},
 		},
+		ZeroSizePreference: types.ZeroSizePreference("retain"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -7538,6 +7545,7 @@ func TestCheckResponseSnapshot_CreateIpamInternetRegistryAssociation(t *testing.
 			OrganizationHandle:                 ptr.String("__OrganizationHandle__"),
 			Description:                        ptr.String("__Description__"),
 			State:                              types.IpamInternetRegistryAssociationState("pending-enable"),
+			StateMessage:                       ptr.String("__StateMessage__"),
 			ChildRequestXml:                    ptr.String("__ChildRequestXml__"),
 			Tags: []types.Tag{
 				{
@@ -17993,6 +18001,7 @@ func TestCheckResponseSnapshot_DeleteIpamInternetRegistryAssociation(t *testing.
 			OrganizationHandle:                 ptr.String("__OrganizationHandle__"),
 			Description:                        ptr.String("__Description__"),
 			State:                              types.IpamInternetRegistryAssociationState("pending-enable"),
+			StateMessage:                       ptr.String("__StateMessage__"),
 			ChildRequestXml:                    ptr.String("__ChildRequestXml__"),
 			Tags: []types.Tag{
 				{
@@ -23418,11 +23427,13 @@ func TestCheckResponseSnapshot_DescribeCapacityReservations(t *testing.T) {
 					Status:                             types.InterruptibleCapacityReservationAllocationStatus("pending"),
 					InterruptibleCapacityReservationId: ptr.String("__InterruptibleCapacityReservationId__"),
 					InterruptionType:                   types.InterruptionType("adhoc"),
+					ZeroSizePreference:                 types.ZeroSizePreference("retain"),
 				},
 				InterruptionInfo: &types.InterruptionInfo{
 					SourceCapacityReservationId: ptr.String("__SourceCapacityReservationId__"),
 					InterruptionType:            types.InterruptionType("adhoc"),
 				},
+				ZeroSizePreference: types.ZeroSizePreference("retain"),
 			},
 			{
 				CapacityReservationId:  ptr.String("__CapacityReservationId__"),
@@ -23501,11 +23512,13 @@ func TestCheckResponseSnapshot_DescribeCapacityReservations(t *testing.T) {
 					Status:                             types.InterruptibleCapacityReservationAllocationStatus("pending"),
 					InterruptibleCapacityReservationId: ptr.String("__InterruptibleCapacityReservationId__"),
 					InterruptionType:                   types.InterruptionType("adhoc"),
+					ZeroSizePreference:                 types.ZeroSizePreference("retain"),
 				},
 				InterruptionInfo: &types.InterruptionInfo{
 					SourceCapacityReservationId: ptr.String("__SourceCapacityReservationId__"),
 					InterruptionType:            types.InterruptionType("adhoc"),
 				},
+				ZeroSizePreference: types.ZeroSizePreference("retain"),
 			},
 		},
 	}
@@ -33913,6 +33926,7 @@ func TestCheckResponseSnapshot_DescribeIpamInternetRegistryAssociations(t *testi
 				OrganizationHandle:                 ptr.String("__OrganizationHandle__"),
 				Description:                        ptr.String("__Description__"),
 				State:                              types.IpamInternetRegistryAssociationState("pending-enable"),
+				StateMessage:                       ptr.String("__StateMessage__"),
 				ChildRequestXml:                    ptr.String("__ChildRequestXml__"),
 				Tags: []types.Tag{
 					{
@@ -33935,6 +33949,7 @@ func TestCheckResponseSnapshot_DescribeIpamInternetRegistryAssociations(t *testi
 				OrganizationHandle:                 ptr.String("__OrganizationHandle__"),
 				Description:                        ptr.String("__Description__"),
 				State:                              types.IpamInternetRegistryAssociationState("pending-enable"),
+				StateMessage:                       ptr.String("__StateMessage__"),
 				ChildRequestXml:                    ptr.String("__ChildRequestXml__"),
 				Tags: []types.Tag{
 					{
@@ -63097,6 +63112,7 @@ func TestCheckResponseSnapshot_EnableIpamInternetRegistryAssociation(t *testing.
 			OrganizationHandle:                 ptr.String("__OrganizationHandle__"),
 			Description:                        ptr.String("__Description__"),
 			State:                              types.IpamInternetRegistryAssociationState("pending-enable"),
+			StateMessage:                       ptr.String("__StateMessage__"),
 			ChildRequestXml:                    ptr.String("__ChildRequestXml__"),
 			Tags: []types.Tag{
 				{
@@ -64302,6 +64318,7 @@ func TestCheckResponseSnapshot_GetCapacityReservationUsage(t *testing.T) {
 			Status:                             types.InterruptibleCapacityReservationAllocationStatus("pending"),
 			InterruptibleCapacityReservationId: ptr.String("__InterruptibleCapacityReservationId__"),
 			InterruptionType:                   types.InterruptionType("adhoc"),
+			ZeroSizePreference:                 types.ZeroSizePreference("retain"),
 		},
 		InterruptionInfo: &types.InterruptionInfo{
 			SourceCapacityReservationId: ptr.String("__SourceCapacityReservationId__"),
@@ -75419,7 +75436,7 @@ func TestCheckResponseSnapshot_ModifyInstanceAttribute(t *testing.T) {
 		Ramdisk: &types.AttributeValue{
 			Value: ptr.String("__Value__"),
 		},
-		UserData: &types.BlobAttributeValue{
+		UserData: &types.SecureBlobAttributeValue{
 			Value: []byte("blob"),
 		},
 		InstanceInitiatedShutdownBehavior: &types.AttributeValue{
@@ -80558,11 +80575,13 @@ func TestCheckResponseSnapshot_MoveCapacityReservationInstances(t *testing.T) {
 				Status:                             types.InterruptibleCapacityReservationAllocationStatus("pending"),
 				InterruptibleCapacityReservationId: ptr.String("__InterruptibleCapacityReservationId__"),
 				InterruptionType:                   types.InterruptionType("adhoc"),
+				ZeroSizePreference:                 types.ZeroSizePreference("retain"),
 			},
 			InterruptionInfo: &types.InterruptionInfo{
 				SourceCapacityReservationId: ptr.String("__SourceCapacityReservationId__"),
 				InterruptionType:            types.InterruptionType("adhoc"),
 			},
+			ZeroSizePreference: types.ZeroSizePreference("retain"),
 		},
 		DestinationCapacityReservation: &types.CapacityReservation{
 			CapacityReservationId:  ptr.String("__CapacityReservationId__"),
@@ -80641,11 +80660,13 @@ func TestCheckResponseSnapshot_MoveCapacityReservationInstances(t *testing.T) {
 				Status:                             types.InterruptibleCapacityReservationAllocationStatus("pending"),
 				InterruptibleCapacityReservationId: ptr.String("__InterruptibleCapacityReservationId__"),
 				InterruptionType:                   types.InterruptionType("adhoc"),
+				ZeroSizePreference:                 types.ZeroSizePreference("retain"),
 			},
 			InterruptionInfo: &types.InterruptionInfo{
 				SourceCapacityReservationId: ptr.String("__SourceCapacityReservationId__"),
 				InterruptionType:            types.InterruptionType("adhoc"),
 			},
+			ZeroSizePreference: types.ZeroSizePreference("retain"),
 		},
 		InstanceCount: ptr.Int32(1),
 	}
@@ -80943,11 +80964,13 @@ func TestCheckResponseSnapshot_PurchaseCapacityBlock(t *testing.T) {
 				Status:                             types.InterruptibleCapacityReservationAllocationStatus("pending"),
 				InterruptibleCapacityReservationId: ptr.String("__InterruptibleCapacityReservationId__"),
 				InterruptionType:                   types.InterruptionType("adhoc"),
+				ZeroSizePreference:                 types.ZeroSizePreference("retain"),
 			},
 			InterruptionInfo: &types.InterruptionInfo{
 				SourceCapacityReservationId: ptr.String("__SourceCapacityReservationId__"),
 				InterruptionType:            types.InterruptionType("adhoc"),
 			},
+			ZeroSizePreference: types.ZeroSizePreference("retain"),
 		},
 		CapacityBlocks: []types.CapacityBlock{
 			{
@@ -92753,6 +92776,7 @@ func TestCheckResponseSnapshot_UpdateInterruptibleCapacityReservationAllocation(
 		CapacityReservationId: ptr.String("__CapacityReservationId__"),
 		TargetInstanceCount:   ptr.Int32(1),
 		DryRun:                ptr.Bool(true),
+		ZeroSizePreference:    types.ZeroSizePreference("retain"),
 	})
 	if err != nil {
 		t.Fatal(err)

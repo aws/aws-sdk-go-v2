@@ -936,6 +936,33 @@ func channelStoppedStateRetryable(ctx context.Context, input *DescribeChannelInp
 		}
 	}
 
+	if err == nil {
+		v1 := output.State
+		expectedValue := "DELETING"
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
+			return false, nil
+		}
+	}
+
+	if err == nil {
+		v1 := output.State
+		expectedValue := "DELETED"
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
+			return false, nil
+		}
+	}
+
+	if err != nil {
+		var errorType *types.NotFoundException
+		if errors.As(err, &errorType) {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
+
 	if err != nil {
 		return false, err
 	}

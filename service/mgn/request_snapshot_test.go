@@ -564,7 +564,18 @@ func TestCheckRequestSnapshot_CreateNetworkMigrationDefinition(t *testing.T) {
 			OutboundCidr:   ptr.String("__OutboundCidr__"),
 			InspectionCidr: ptr.String("__InspectionCidr__"),
 		},
-		TargetDeployment: types.TargetDeployment("SINGLE_ACCOUNT"),
+		TargetDeployment:        types.TargetDeployment("SINGLE_ACCOUNT"),
+		VpcProvisioningStrategy: types.VpcProvisioningStrategy("CREATE_NEW"),
+		CidrMappings: []types.CidrMapping{
+			{
+				OriginalCidr: ptr.String("__OriginalCidr__"),
+				UpdatedCidr:  ptr.String("__UpdatedCidr__"),
+			},
+			{
+				OriginalCidr: ptr.String("__OriginalCidr__"),
+				UpdatedCidr:  ptr.String("__UpdatedCidr__"),
+			},
+		},
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -3378,7 +3389,18 @@ func TestCheckRequestSnapshot_UpdateNetworkMigrationDefinition(t *testing.T) {
 			OutboundCidr:   ptr.String("__OutboundCidr__"),
 			InspectionCidr: ptr.String("__InspectionCidr__"),
 		},
-		TargetDeployment: types.TargetDeployment("SINGLE_ACCOUNT"),
+		TargetDeployment:        types.TargetDeployment("SINGLE_ACCOUNT"),
+		VpcProvisioningStrategy: types.VpcProvisioningStrategy("CREATE_NEW"),
+		CidrMappings: []types.CidrMapping{
+			{
+				OriginalCidr: ptr.String("__OriginalCidr__"),
+				UpdatedCidr:  ptr.String("__UpdatedCidr__"),
+			},
+			{
+				OriginalCidr: ptr.String("__OriginalCidr__"),
+				UpdatedCidr:  ptr.String("__UpdatedCidr__"),
+			},
+		},
 		ScopeTags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -4017,7 +4039,18 @@ func TestUpdateRequestSnapshot_CreateNetworkMigrationDefinition(t *testing.T) {
 			OutboundCidr:   ptr.String("__OutboundCidr__"),
 			InspectionCidr: ptr.String("__InspectionCidr__"),
 		},
-		TargetDeployment: types.TargetDeployment("SINGLE_ACCOUNT"),
+		TargetDeployment:        types.TargetDeployment("SINGLE_ACCOUNT"),
+		VpcProvisioningStrategy: types.VpcProvisioningStrategy("CREATE_NEW"),
+		CidrMappings: []types.CidrMapping{
+			{
+				OriginalCidr: ptr.String("__OriginalCidr__"),
+				UpdatedCidr:  ptr.String("__UpdatedCidr__"),
+			},
+			{
+				OriginalCidr: ptr.String("__OriginalCidr__"),
+				UpdatedCidr:  ptr.String("__UpdatedCidr__"),
+			},
+		},
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -6831,7 +6864,18 @@ func TestUpdateRequestSnapshot_UpdateNetworkMigrationDefinition(t *testing.T) {
 			OutboundCidr:   ptr.String("__OutboundCidr__"),
 			InspectionCidr: ptr.String("__InspectionCidr__"),
 		},
-		TargetDeployment: types.TargetDeployment("SINGLE_ACCOUNT"),
+		TargetDeployment:        types.TargetDeployment("SINGLE_ACCOUNT"),
+		VpcProvisioningStrategy: types.VpcProvisioningStrategy("CREATE_NEW"),
+		CidrMappings: []types.CidrMapping{
+			{
+				OriginalCidr: ptr.String("__OriginalCidr__"),
+				UpdatedCidr:  ptr.String("__UpdatedCidr__"),
+			},
+			{
+				OriginalCidr: ptr.String("__OriginalCidr__"),
+				UpdatedCidr:  ptr.String("__UpdatedCidr__"),
+			},
+		},
 		ScopeTags: map[string]string{
 			"key0": "__Value__",
 		},

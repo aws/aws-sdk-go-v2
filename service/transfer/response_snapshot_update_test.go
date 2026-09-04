@@ -795,6 +795,10 @@ func TestUpdateResponseSnapshot_DescribeConnector(t *testing.T) {
 					"__Member__",
 				},
 				MaxConcurrentConnections: ptr.Int32(1),
+				OrderedUserSecretVersionStages: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 			ServiceManagedEgressIpAddresses: []string{
 				"__Member__",

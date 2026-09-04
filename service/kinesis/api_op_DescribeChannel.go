@@ -19,8 +19,9 @@ import (
 // creation, or to diagnose a channel in the FAILED state by reading the
 // ChannelStatusReason .
 //
-// This API has a call limit of 5 transactions per second (TPS) for each Amazon
-// Web Services account. Exceeding 5 TPS results in a LimitExceededException .
+// This operation has a call limit of 5 transactions per second (TPS) for each
+// Amazon Web Services account. Exceeding 5 TPS results in a LimitExceededException
+// .
 func (c *Client) DescribeChannel(ctx context.Context, params *DescribeChannelInput, optFns ...func(*Options)) (*DescribeChannelOutput, error) {
 	if params == nil {
 		params = &DescribeChannelInput{}

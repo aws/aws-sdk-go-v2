@@ -133,6 +133,18 @@ func TestCheckSnapshot_PutRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateRecord(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRecord(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRecord")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_BatchGetRecord(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetRecord(context.Background(), nil, func(o *Options) {
@@ -198,6 +210,18 @@ func TestUpdateSnapshot_PutRecord(t *testing.T) {
 	_, err := svc.PutRecord(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutRecord")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRecord(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRecord(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRecord")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

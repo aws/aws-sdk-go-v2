@@ -135,6 +135,28 @@ var _ *types.ConfigurableUpfrontPricingTerm
 var _ *types.UsageBasedPricingTerm
 var _ *types.PaymentScheduleTerm
 
+func ExamplePriceIncrease_outputUsage() {
+	var union types.PriceIncrease
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PriceIncreaseMemberFixedPercentage:
+		_ = v.Value // Value is types.FixedPercentage
+
+	case *types.PriceIncreaseMemberPercentageRange:
+		_ = v.Value // Value is types.PercentageRange
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.PercentageRange
+var _ *types.FixedPercentage
+
 func ExamplePromotionalMedia_outputUsage() {
 	var union types.PromotionalMedia
 	// type switches can be used to check the union value
@@ -156,3 +178,21 @@ func ExamplePromotionalMedia_outputUsage() {
 
 var _ *types.PromotionalEmbeddedImage
 var _ *types.PromotionalEmbeddedVideo
+
+func ExampleTermTemplate_outputUsage() {
+	var union types.TermTemplate
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TermTemplateMemberPaymentScheduleTermTemplate:
+		_ = v.Value // Value is types.PaymentScheduleTermTemplate
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.PaymentScheduleTermTemplate

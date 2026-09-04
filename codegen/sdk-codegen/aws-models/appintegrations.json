@@ -1273,6 +1273,19 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.appintegrations#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.appintegrations#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request conflicts with the current state of the resource. Verify the application's current state and retry the request.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
         "com.amazonaws.appintegrations#ContactHandling": {
             "type": "structure",
             "members": {
@@ -1990,7 +2003,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the Application. Only Applications that don't have any Application Associations\n      can be deleted.</p>",
+                "smithy.api#documentation": "<p>Deletes an application. If the application has associations, you must delete them first.\n      Alternatively, use the <code>force</code> option to delete the application and remove its\n      associations.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To delete an application",
@@ -2017,6 +2030,14 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Application.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "Force": {
+                    "target": "com.amazonaws.appintegrations#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether to delete the application even if it still has application associations.\n      If <code>true</code>, the operation removes the application and its associations. If\n      <code>false</code> or absent, the delete fails when associations exist.</p>\n         <important>\n            <p>Setting this parameter to <code>true</code> permanently removes all of the\n        application's associations. Doing so might impact other resources that rely on and\n        reference the application. This action can't be undone.</p>\n         </important>",
+                        "smithy.api#httpQuery": "force"
                     }
                 }
             },
@@ -4115,6 +4136,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.appintegrations#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.appintegrations#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.appintegrations#InternalServiceError"
