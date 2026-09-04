@@ -1,3 +1,19 @@
+# Release (2026-09-04)
+
+## General Highlights
+* **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.71.0](service/bedrock/CHANGELOG.md#v1710-2026-09-04)
+  * **Feature**: New AWS REVIEW mode as supported data retention mode for Bedrock models
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.329.0](service/ec2/CHANGELOG.md#v13290-2026-09-04)
+  * **Feature**: Adds support for ValidateSecurityGroupQuotasForInterface, an API that specifically authorized AWS services use to validate security group rule quotas before creating an elastic network interface.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.69.0](service/mediatailor/CHANGELOG.md#v1690-2026-09-04)
+  * **Feature**: Elemental MediaTailor now supports two new Monetization Functions lifecycle hooks, Post Ads Response and Pre Manifest Insertion, and a VAST Request function type that calls a VAST or VMAP ad server. This release also adds Yield Optimization with demand from Amazon Publisher Services.
+* `github.com/aws/aws-sdk-go-v2/service/servicequotas`: [v1.42.0](service/servicequotas/CHANGELOG.md#v1420-2026-09-04)
+  * **Feature**: Service Quotas adds the AdjustableAtLevel property to QuotaContext, indicating whether a quota is adjustable at the account or resource level.
+
 # Release (2026-09-03)
 
 ## Module Highlights

@@ -1,3 +1,8 @@
+# v1.64.0 (2026-09-04)
+
+* **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.63.0 (2026-09-01)
 
 * **Feature**: This release adds support for the Amazon Lightsail GetProfile API, which returns the profile for the specified account.

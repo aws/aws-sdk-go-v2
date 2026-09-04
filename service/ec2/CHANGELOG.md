@@ -1,3 +1,9 @@
+# v1.329.0 (2026-09-04)
+
+* **Feature**: Adds support for ValidateSecurityGroupQuotasForInterface, an API that specifically authorized AWS services use to validate security group rule quotas before creating an elastic network interface.
+* **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.328.0 (2026-09-02)
 
 * **Feature**: This release adds support to retain interruptible Capacity Reservations in an active state when all capacity is reclaimed.

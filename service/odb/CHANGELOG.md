@@ -1,3 +1,8 @@
+# v1.21.0 (2026-09-04)
+
+* **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2026-09-02)
 
 * **Feature**: Adds the ListFlexComponents API for listing the flex components available for a given DB system shape.

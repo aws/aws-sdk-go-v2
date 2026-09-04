@@ -1,8 +1,0 @@
-{
-    "id": "5c36f04c-1f55-494f-85d0-162d204875f0",
-    "type": "feature",
-    "description": "Elemental MediaTailor now supports two new Monetization Functions lifecycle hooks, Post Ads Response and Pre Manifest Insertion, and a VAST Request function type that calls a VAST or VMAP ad server. This release also adds Yield Optimization with demand from Amazon Publisher Services.",
-    "modules": [
-        "service/mediatailor"
-    ]
-}

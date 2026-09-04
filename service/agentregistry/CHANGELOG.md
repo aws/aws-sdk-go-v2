@@ -1,3 +1,8 @@
+# v1.5.0 (2026-09-04)
+
+* **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.4.0 (2026-08-31.2)
 
 * **Feature**: Release HTTP and AGUI descriptors to the dataplane model

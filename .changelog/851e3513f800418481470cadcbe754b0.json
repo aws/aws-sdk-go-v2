@@ -1,8 +1,0 @@
-{
-    "id": "851e3513-f800-4184-8147-0cadcbe754b0",
-    "type": "feature",
-    "description": "New AWS REVIEW mode as supported data retention mode for Bedrock models",
-    "modules": [
-        "service/bedrock"
-    ]
-}
