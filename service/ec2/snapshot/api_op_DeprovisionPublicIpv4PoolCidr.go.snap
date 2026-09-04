@@ -13,7 +13,6 @@ DeprovisionPublicIpv4PoolCidr
 		InterceptBeforeRetryLoop
 		Retry
 		InterceptAttempt
-		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
 		ResolveEndpointV2

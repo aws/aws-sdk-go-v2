@@ -13,7 +13,6 @@ DescribeLineageGroup
 		InterceptBeforeRetryLoop
 		Retry
 		InterceptAttempt
-		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
 		ResolveEndpointV2

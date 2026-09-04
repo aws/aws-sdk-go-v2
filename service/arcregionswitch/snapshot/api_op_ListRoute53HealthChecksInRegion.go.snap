@@ -13,7 +13,6 @@ ListRoute53HealthChecksInRegion
 		InterceptBeforeRetryLoop
 		Retry
 		InterceptAttempt
-		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
 		ResolveEndpointV2

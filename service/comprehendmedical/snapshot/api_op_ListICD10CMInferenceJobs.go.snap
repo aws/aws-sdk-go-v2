@@ -12,7 +12,6 @@ ListICD10CMInferenceJobs
 		InterceptBeforeRetryLoop
 		Retry
 		InterceptAttempt
-		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
 		ResolveEndpointV2
