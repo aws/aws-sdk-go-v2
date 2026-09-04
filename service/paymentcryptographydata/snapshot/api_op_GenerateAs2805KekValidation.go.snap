@@ -10,7 +10,6 @@ GenerateAs2805KekValidation
 		UserAgent
 		RecursionDetection
 	Finalize stack step
-		spanRetryLoop
 		InterceptBeforeRetryLoop
 		Retry
 		InterceptAttempt
