@@ -76,6 +76,9 @@ type GetFunctionOutput struct {
 	// [Tagging AWS Elemental MediaTailor Resources]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
 	Tags map[string]string
 
+	// The configuration for a VAST_REQUEST function.
+	VastRequestConfiguration *types.VastRequestConfiguration
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

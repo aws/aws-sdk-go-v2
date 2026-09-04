@@ -1557,6 +1557,54 @@ func validateTransition(v *types.Transition) error {
 	}
 }
 
+func validateVastRequestConfiguration(v *types.VastRequestConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VastRequestConfiguration"}
+	if len(v.Runtime) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Runtime"))
+	}
+	if len(v.MethodType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MethodType"))
+	}
+	if v.RequestTimeoutMilliseconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestTimeoutMilliseconds"))
+	}
+	if v.Url == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Url"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateYieldOptimizationConfiguration(v *types.YieldOptimizationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "YieldOptimizationConfiguration"}
+	if v.MinimumUnfilledDuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinimumUnfilledDuration"))
+	}
+	if v.PublisherId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PublisherId"))
+	}
+	if len(v.Region) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Region"))
+	}
+	if v.OpenRtbTemplate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OpenRtbTemplate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpConfigureLogsForChannelInput(v *ConfigureLogsForChannelInput) error {
 	if v == nil {
 		return nil
@@ -2196,6 +2244,11 @@ func validateOpPutFunctionInput(v *PutFunctionInput) error {
 			invalidParams.AddNested("SequentialExecutorConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.VastRequestConfiguration != nil {
+		if err := validateVastRequestConfiguration(v.VastRequestConfiguration); err != nil {
+			invalidParams.AddNested("VastRequestConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2214,6 +2267,11 @@ func validateOpPutPlaybackConfigurationInput(v *PutPlaybackConfigurationInput) e
 	if v.AdConditioningConfiguration != nil {
 		if err := validateAdConditioningConfiguration(v.AdConditioningConfiguration); err != nil {
 			invalidParams.AddNested("AdConditioningConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.YieldOptimizationConfiguration != nil {
+		if err := validateYieldOptimizationConfiguration(v.YieldOptimizationConfiguration); err != nil {
+			invalidParams.AddNested("YieldOptimizationConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -9662,6 +9662,18 @@ func TestCheckSnapshot_UpdateSecurityGroupRuleDescriptionsIngress(t *testing.T) 
 	}
 }
 
+func TestCheckSnapshot_ValidateSecurityGroupQuotasForInterface(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ValidateSecurityGroupQuotasForInterface(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ValidateSecurityGroupQuotasForInterface")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_WithdrawByoipCidr(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.WithdrawByoipCidr(context.Background(), nil, func(o *Options) {
@@ -19266,6 +19278,18 @@ func TestUpdateSnapshot_UpdateSecurityGroupRuleDescriptionsIngress(t *testing.T)
 	_, err := svc.UpdateSecurityGroupRuleDescriptionsIngress(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateSecurityGroupRuleDescriptionsIngress")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ValidateSecurityGroupQuotasForInterface(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ValidateSecurityGroupQuotasForInterface(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ValidateSecurityGroupQuotasForInterface")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

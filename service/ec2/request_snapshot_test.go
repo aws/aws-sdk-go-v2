@@ -39353,6 +39353,37 @@ func TestCheckRequestSnapshot_UpdateSecurityGroupRuleDescriptionsIngress(t *test
 	}
 }
 
+func TestCheckRequestSnapshot_ValidateSecurityGroupQuotasForInterface(t *testing.T) {
+	input := &ValidateSecurityGroupQuotasForInterfaceInput{
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ValidateSecurityGroupQuotasForInterface(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ValidateSecurityGroupQuotasForInterface"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_WithdrawByoipCidr(t *testing.T) {
 	input := &WithdrawByoipCidrInput{
 		Cidr:   ptr.String("__Cidr__"),
@@ -78546,6 +78577,37 @@ func TestUpdateRequestSnapshot_UpdateSecurityGroupRuleDescriptionsIngress(t *tes
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateSecurityGroupRuleDescriptionsIngress"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ValidateSecurityGroupQuotasForInterface(t *testing.T) {
+	input := &ValidateSecurityGroupQuotasForInterfaceInput{
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ValidateSecurityGroupQuotasForInterface(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ValidateSecurityGroupQuotasForInterface"); err != nil {
 		t.Fatal(err)
 	}
 }

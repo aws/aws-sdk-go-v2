@@ -93080,6 +93080,33 @@ func TestCheckResponseSnapshot_UpdateSecurityGroupRuleDescriptionsIngress(t *tes
 	}
 }
 
+func TestCheckResponseSnapshot_ValidateSecurityGroupQuotasForInterface(t *testing.T) {
+	want := &ValidateSecurityGroupQuotasForInterfaceOutput{
+		Valid: ptr.Bool(true),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ValidateSecurityGroupQuotasForInterface.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ValidateSecurityGroupQuotasForInterface(context.Background(), &ValidateSecurityGroupQuotasForInterfaceInput{
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ValidateSecurityGroupQuotasForInterface.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_WithdrawByoipCidr(t *testing.T) {
 	want := &WithdrawByoipCidrOutput{
 		ByoipCidr: &types.ByoipCidr{

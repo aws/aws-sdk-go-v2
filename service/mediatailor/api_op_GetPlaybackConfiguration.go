@@ -102,8 +102,9 @@ type GetPlaybackConfigurationOutput struct {
 
 	// A map of lifecycle hook event names to function identifiers. The function
 	// mapping specifies which function MediaTailor executes at each lifecycle hook
-	// during ad insertion. Valid keys are PRE_SESSION_INITIALIZATION and
-	// PRE_ADS_REQUEST . For more information, see [Functions lifecycle hooks] in the MediaTailor User Guide.
+	// during ad insertion. Valid keys are PRE_SESSION_INITIALIZATION , PRE_ADS_REQUEST
+	// , POST_ADS_RESPONSE , and PRE_MANIFEST_INSERTION . For more information, see [Functions lifecycle hooks]
+	// in the MediaTailor User Guide.
 	//
 	// [Functions lifecycle hooks]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html
 	FunctionMapping map[string]string
@@ -178,6 +179,10 @@ type GetPlaybackConfigurationOutput struct {
 	// The URL prefix for the parent manifest for the stream, minus the asset ID. The
 	// maximum length is 512 characters.
 	VideoContentSourceUrl *string
+
+	// Configuration for Yield Optimization, which fills unsold ad inventory in ad
+	// breaks with programmatic ads from Amazon Publisher Services (APS).
+	YieldOptimizationConfiguration *types.YieldOptimizationConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

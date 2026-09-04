@@ -479,6 +479,7 @@ type DataRetentionMode string
 const (
 	DataRetentionModeDefault           DataRetentionMode = "default"
 	DataRetentionModeNone              DataRetentionMode = "none"
+	DataRetentionModeAwsReview         DataRetentionMode = "aws_review"
 	DataRetentionModeProviderDataShare DataRetentionMode = "provider_data_share"
 	DataRetentionModeInherit           DataRetentionMode = "inherit"
 )
@@ -491,6 +492,7 @@ func (DataRetentionMode) Values() []DataRetentionMode {
 	return []DataRetentionMode{
 		"default",
 		"none",
+		"aws_review",
 		"provider_data_share",
 		"inherit",
 	}

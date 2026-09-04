@@ -151,6 +151,16 @@ var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
 
+var AdjustableAtLevelEnum = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.servicequotas",
+	Name:      "AdjustableAtLevelEnum",
+}, smithy.ShapeTypeEnum, 3)
+var AdjustableAtLevelEnum_ACCOUNT *smithy.Schema
+
+var AdjustableAtLevelEnum_PER_RESOURCE *smithy.Schema
+
+var AdjustableAtLevelEnum_ALL *smithy.Schema
+
 var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicequotas",
 	Name:      "AmazonResourceName",
@@ -437,12 +447,14 @@ var _QuotaContextId = smithy.NewSchema(smithy.ShapeID{
 var QuotaContextInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicequotas",
 	Name:      "QuotaContextInfo",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var QuotaContextInfo_ContextScope *smithy.Schema
 
 var QuotaContextInfo_ContextScopeType *smithy.Schema
 
 var QuotaContextInfo_ContextId *smithy.Schema
+
+var QuotaContextInfo_AdjustableAtLevel *smithy.Schema
 
 var QuotaContextScope = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.servicequotas",
@@ -1255,6 +1267,12 @@ var UpdateAutoManagementResponse = smithy.NewSchema(smithy.ShapeID{
 func init() {
 	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ExceptionMessage)
 
+	AdjustableAtLevelEnum_ACCOUNT = AdjustableAtLevelEnum.AddMember("ACCOUNT", smithyprelude.Unit)
+
+	AdjustableAtLevelEnum_PER_RESOURCE = AdjustableAtLevelEnum.AddMember("PER_RESOURCE", smithyprelude.Unit)
+
+	AdjustableAtLevelEnum_ALL = AdjustableAtLevelEnum.AddMember("ALL", smithyprelude.Unit)
+
 	AppliedLevelEnum_ACCOUNT = AppliedLevelEnum.AddMember("ACCOUNT", smithyprelude.Unit)
 
 	AppliedLevelEnum_RESOURCE = AppliedLevelEnum.AddMember("RESOURCE", smithyprelude.Unit)
@@ -1360,6 +1378,8 @@ func init() {
 	QuotaContextInfo_ContextScopeType = QuotaContextInfo.AddMember("ContextScopeType", _QuotaContextScopeType)
 
 	QuotaContextInfo_ContextId = QuotaContextInfo.AddMember("ContextId", _QuotaContextId)
+
+	QuotaContextInfo_AdjustableAtLevel = QuotaContextInfo.AddMember("AdjustableAtLevel", AdjustableAtLevelEnum)
 
 	QuotaExceededException_Message = QuotaExceededException.AddMember("Message", _ExceptionMessage)
 

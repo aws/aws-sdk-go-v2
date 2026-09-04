@@ -3324,6 +3324,13 @@ func awsRestjson1_serializeOpDocumentPutFunctionInput(v *PutFunctionInput, value
 		}
 	}
 
+	if v.VastRequestConfiguration != nil {
+		ok := object.Key("VastRequestConfiguration")
+		if err := awsRestjson1_serializeDocumentVastRequestConfiguration(v.VastRequestConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3524,6 +3531,13 @@ func awsRestjson1_serializeOpDocumentPutPlaybackConfigurationInput(v *PutPlaybac
 	if v.VideoContentSourceUrl != nil {
 		ok := object.Key("VideoContentSourceUrl")
 		ok.String(*v.VideoContentSourceUrl)
+	}
+
+	if v.YieldOptimizationConfiguration != nil {
+		ok := object.Key("YieldOptimizationConfiguration")
+		if err := awsRestjson1_serializeDocumentYieldOptimizationConfiguration(v.YieldOptimizationConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -5864,6 +5878,52 @@ func awsRestjson1_serializeDocumentUpdateProgramTransition(v *types.UpdateProgra
 	return nil
 }
 
+func awsRestjson1_serializeDocumentVastRequestConfiguration(v *types.VastRequestConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Body != nil {
+		ok := object.Key("Body")
+		ok.String(*v.Body)
+	}
+
+	if v.Headers != nil {
+		ok := object.Key("Headers")
+		if err := awsRestjson1_serializeDocument__mapOf__string(v.Headers, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.MethodType) > 0 {
+		ok := object.Key("MethodType")
+		ok.String(string(v.MethodType))
+	}
+
+	if v.Output != nil {
+		ok := object.Key("Output")
+		if err := awsRestjson1_serializeDocument__mapOf__string(v.Output, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RequestTimeoutMilliseconds != nil {
+		ok := object.Key("RequestTimeoutMilliseconds")
+		ok.Integer(*v.RequestTimeoutMilliseconds)
+	}
+
+	if len(v.Runtime) > 0 {
+		ok := object.Key("Runtime")
+		ok.String(string(v.Runtime))
+	}
+
+	if v.Url != nil {
+		ok := object.Key("Url")
+		ok.String(*v.Url)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentVastResponse(v *types.VastResponse, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5871,6 +5931,33 @@ func awsRestjson1_serializeDocumentVastResponse(v *types.VastResponse, value smi
 	if len(v.AdSequencingMode) > 0 {
 		ok := object.Key("AdSequencingMode")
 		ok.String(string(v.AdSequencingMode))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentYieldOptimizationConfiguration(v *types.YieldOptimizationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MinimumUnfilledDuration != nil {
+		ok := object.Key("MinimumUnfilledDuration")
+		ok.Integer(*v.MinimumUnfilledDuration)
+	}
+
+	if v.OpenRtbTemplate != nil {
+		ok := object.Key("OpenRtbTemplate")
+		ok.String(*v.OpenRtbTemplate)
+	}
+
+	if v.PublisherId != nil {
+		ok := object.Key("PublisherId")
+		ok.String(*v.PublisherId)
+	}
+
+	if len(v.Region) > 0 {
+		ok := object.Key("Region")
+		ok.String(string(v.Region))
 	}
 
 	return nil

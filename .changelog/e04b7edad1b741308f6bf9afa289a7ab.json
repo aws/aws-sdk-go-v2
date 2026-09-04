@@ -1,0 +1,8 @@
+{
+    "id": "e04b7eda-d1b7-4130-8f6b-f9afa289a7ab",
+    "type": "feature",
+    "description": "Adds support for ValidateSecurityGroupQuotasForInterface, an API that specifically authorized AWS services use to validate security group rule quotas before creating an elastic network interface.",
+    "modules": [
+        "service/ec2"
+    ]
+}

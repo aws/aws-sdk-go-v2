@@ -3035,6 +3035,19 @@ func TestCheckResponseSnapshot_GetFunction(t *testing.T) {
 			},
 			TimeoutMilliseconds: ptr.Int32(1),
 		},
+		VastRequestConfiguration: &types.VastRequestConfiguration{
+			Runtime: types.RuntimeType("JSONATA"),
+			Output: map[string]string{
+				"key0": "__Value__",
+			},
+			MethodType:                 types.MethodType("GET"),
+			RequestTimeoutMilliseconds: ptr.Int32(1),
+			Url:                        ptr.String("__Url__"),
+			Body:                       ptr.String("__Body__"),
+			Headers: map[string]string{
+				"key0": "__Value__",
+			},
+		},
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -3160,6 +3173,12 @@ func TestCheckResponseSnapshot_GetPlaybackConfiguration(t *testing.T) {
 			VastResponse: &types.VastResponse{
 				AdSequencingMode: types.AdSequencingMode("FOLLOW_AD_SEQUENCE"),
 			},
+		},
+		YieldOptimizationConfiguration: &types.YieldOptimizationConfiguration{
+			MinimumUnfilledDuration: ptr.Int32(1),
+			PublisherId:             ptr.String("__PublisherId__"),
+			Region:                  types.ApsRegion("AMERICAS"),
+			OpenRtbTemplate:         ptr.String("__OpenRtbTemplate__"),
 		},
 		FunctionMapping: map[string]string{
 			"key0": "__Value__",
@@ -3558,6 +3577,19 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 					},
 					TimeoutMilliseconds: ptr.Int32(1),
 				},
+				VastRequestConfiguration: &types.VastRequestConfiguration{
+					Runtime: types.RuntimeType("JSONATA"),
+					Output: map[string]string{
+						"key0": "__Value__",
+					},
+					MethodType:                 types.MethodType("GET"),
+					RequestTimeoutMilliseconds: ptr.Int32(1),
+					Url:                        ptr.String("__Url__"),
+					Body:                       ptr.String("__Body__"),
+					Headers: map[string]string{
+						"key0": "__Value__",
+					},
+				},
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -3624,6 +3656,19 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 						},
 					},
 					TimeoutMilliseconds: ptr.Int32(1),
+				},
+				VastRequestConfiguration: &types.VastRequestConfiguration{
+					Runtime: types.RuntimeType("JSONATA"),
+					Output: map[string]string{
+						"key0": "__Value__",
+					},
+					MethodType:                 types.MethodType("GET"),
+					RequestTimeoutMilliseconds: ptr.Int32(1),
+					Url:                        ptr.String("__Url__"),
+					Body:                       ptr.String("__Body__"),
+					Headers: map[string]string{
+						"key0": "__Value__",
+					},
 				},
 				Tags: map[string]string{
 					"key0": "__Value__",
@@ -3828,6 +3873,12 @@ func TestCheckResponseSnapshot_ListPlaybackConfigurations(t *testing.T) {
 						AdSequencingMode: types.AdSequencingMode("FOLLOW_AD_SEQUENCE"),
 					},
 				},
+				YieldOptimizationConfiguration: &types.YieldOptimizationConfiguration{
+					MinimumUnfilledDuration: ptr.Int32(1),
+					PublisherId:             ptr.String("__PublisherId__"),
+					Region:                  types.ApsRegion("AMERICAS"),
+					OpenRtbTemplate:         ptr.String("__OpenRtbTemplate__"),
+				},
 				FunctionMapping: map[string]string{
 					"key0": "__Value__",
 				},
@@ -3943,6 +3994,12 @@ func TestCheckResponseSnapshot_ListPlaybackConfigurations(t *testing.T) {
 					VastResponse: &types.VastResponse{
 						AdSequencingMode: types.AdSequencingMode("FOLLOW_AD_SEQUENCE"),
 					},
+				},
+				YieldOptimizationConfiguration: &types.YieldOptimizationConfiguration{
+					MinimumUnfilledDuration: ptr.Int32(1),
+					PublisherId:             ptr.String("__PublisherId__"),
+					Region:                  types.ApsRegion("AMERICAS"),
+					OpenRtbTemplate:         ptr.String("__OpenRtbTemplate__"),
 				},
 				FunctionMapping: map[string]string{
 					"key0": "__Value__",
@@ -4424,6 +4481,19 @@ func TestCheckResponseSnapshot_PutFunction(t *testing.T) {
 			},
 			TimeoutMilliseconds: ptr.Int32(1),
 		},
+		VastRequestConfiguration: &types.VastRequestConfiguration{
+			Runtime: types.RuntimeType("JSONATA"),
+			Output: map[string]string{
+				"key0": "__Value__",
+			},
+			MethodType:                 types.MethodType("GET"),
+			RequestTimeoutMilliseconds: ptr.Int32(1),
+			Url:                        ptr.String("__Url__"),
+			Body:                       ptr.String("__Body__"),
+			Headers: map[string]string{
+				"key0": "__Value__",
+			},
+		},
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -4498,6 +4568,19 @@ func TestCheckResponseSnapshot_PutFunction(t *testing.T) {
 				},
 			},
 			TimeoutMilliseconds: ptr.Int32(1),
+		},
+		VastRequestConfiguration: &types.VastRequestConfiguration{
+			Runtime: types.RuntimeType("JSONATA"),
+			Output: map[string]string{
+				"key0": "__Value__",
+			},
+			MethodType:                 types.MethodType("GET"),
+			RequestTimeoutMilliseconds: ptr.Int32(1),
+			Url:                        ptr.String("__Url__"),
+			Body:                       ptr.String("__Body__"),
+			Headers: map[string]string{
+				"key0": "__Value__",
+			},
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -4613,6 +4696,12 @@ func TestCheckResponseSnapshot_PutPlaybackConfiguration(t *testing.T) {
 				AdSequencingMode: types.AdSequencingMode("FOLLOW_AD_SEQUENCE"),
 			},
 		},
+		YieldOptimizationConfiguration: &types.YieldOptimizationConfiguration{
+			MinimumUnfilledDuration: ptr.Int32(1),
+			PublisherId:             ptr.String("__PublisherId__"),
+			Region:                  types.ApsRegion("AMERICAS"),
+			OpenRtbTemplate:         ptr.String("__OpenRtbTemplate__"),
+		},
 		FunctionMapping: map[string]string{
 			"key0": "__Value__",
 		},
@@ -4698,6 +4787,12 @@ func TestCheckResponseSnapshot_PutPlaybackConfiguration(t *testing.T) {
 			VastResponse: &types.VastResponse{
 				AdSequencingMode: types.AdSequencingMode("FOLLOW_AD_SEQUENCE"),
 			},
+		},
+		YieldOptimizationConfiguration: &types.YieldOptimizationConfiguration{
+			MinimumUnfilledDuration: ptr.Int32(1),
+			PublisherId:             ptr.String("__PublisherId__"),
+			Region:                  types.ApsRegion("AMERICAS"),
+			OpenRtbTemplate:         ptr.String("__OpenRtbTemplate__"),
 		},
 		FunctionMapping: map[string]string{
 			"key0": "__Value__",
