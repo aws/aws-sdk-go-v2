@@ -1,3 +1,8 @@
+# v1.91.0 (2026-09-04)
+
+* **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.90.0 (2026-09-03)
 
 * **Feature**: Adding support for Sequence Activities in GuardDuty Findings

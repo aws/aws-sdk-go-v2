@@ -41,9 +41,12 @@ type PutFunctionInput struct {
 	// at runtime. Valid values: CUSTOM_OUTPUT evaluates expressions and produces
 	// output bindings with no external calls. HTTP_REQUEST makes an HTTP call to an
 	// external service and evaluates output expressions that can reference the
-	// response. SEQUENTIAL_EXECUTOR runs a sequence of child functions in order,
-	// passing data between steps through temporary data. For more information, see [Function types and composition]in
-	// the MediaTailor User Guide.
+	// response. VAST_REQUEST calls a VAST endpoint, parses the response as VAST, and
+	// makes the parsed ads available to output expressions. SEQUENTIAL_EXECUTOR runs
+	// a sequence of child functions in order, passing data between steps through
+	// temporary data. CONCURRENT_EXECUTOR runs a set of child functions in parallel,
+	// up to a maximum concurrency, and combines their output when all functions
+	// complete. For more information, see [Function types and composition]in the MediaTailor User Guide.
 	//
 	// [Function types and composition]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-types.html
 	//
@@ -78,6 +81,11 @@ type PutFunctionInput struct {
 	//
 	// [Tagging AWS Elemental MediaTailor Resources]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
 	Tags map[string]string
+
+	// The configuration for a VAST_REQUEST function. Specifies the HTTP method, URL,
+	// headers, body, timeout, and output expressions. Required when FunctionType is
+	// VAST_REQUEST .
+	VastRequestConfiguration *types.VastRequestConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -119,6 +127,9 @@ type PutFunctionOutput struct {
 	//
 	// [Tagging AWS Elemental MediaTailor Resources]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
 	Tags map[string]string
+
+	// The configuration for a VAST_REQUEST function.
+	VastRequestConfiguration *types.VastRequestConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

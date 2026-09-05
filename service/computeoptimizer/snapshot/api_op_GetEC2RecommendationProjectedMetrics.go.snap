@@ -10,7 +10,6 @@ GetEC2RecommendationProjectedMetrics
 		UserAgent
 		RecursionDetection
 	Finalize stack step
-		spanRetryLoop
 		InterceptBeforeRetryLoop
 		Retry
 		InterceptAttempt

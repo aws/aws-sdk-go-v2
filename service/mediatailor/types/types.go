@@ -188,8 +188,12 @@ type AdsInteractionLog struct {
 	// playback sessions that are initialized with this configuration.
 	ExcludeEventTypes []AdsInteractionExcludeEventType
 
-	// Indicates that MediaTailor emits RAW_ADS_RESPONSE logs for playback sessions
-	// that are initialized with this configuration.
+	// Indicates that MediaTailor will emit the selected events in the logs for
+	// playback sessions that are initialized with this configuration. These events are
+	// not emitted by default and must be explicitly opted in. For descriptions of each
+	// event type, see [MediaTailor ADS logs description and event types]in Elemental MediaTailor User Guide.
+	//
+	// [MediaTailor ADS logs description and event types]: https://docs.aws.amazon.com/mediatailor/latest/ug/ads-log-format.html
 	PublishOptInEventTypes []AdsInteractionPublishOptInEventType
 
 	noSmithyDocumentSerde
@@ -716,6 +720,9 @@ type Function struct {
 	// [Tagging AWS Elemental MediaTailor Resources]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
 	Tags map[string]string
 
+	// The configuration for a VAST_REQUEST function.
+	VastRequestConfiguration *VastRequestConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -1118,8 +1125,9 @@ type PlaybackConfiguration struct {
 
 	// A map of lifecycle hook event names to function identifiers. The function
 	// mapping specifies which function MediaTailor executes at each lifecycle hook
-	// during ad insertion. Valid keys are PRE_SESSION_INITIALIZATION and
-	// PRE_ADS_REQUEST . For more information, see [Functions lifecycle hooks] in the MediaTailor User Guide.
+	// during ad insertion. Valid keys are PRE_SESSION_INITIALIZATION , PRE_ADS_REQUEST
+	// , POST_ADS_RESPONSE , and PRE_MANIFEST_INSERTION . For more information, see [Functions lifecycle hooks]
+	// in the MediaTailor User Guide.
 	//
 	// [Functions lifecycle hooks]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html
 	FunctionMapping map[string]string
@@ -1194,6 +1202,10 @@ type PlaybackConfiguration struct {
 	// The URL prefix for the parent manifest for the stream, minus the asset ID. The
 	// maximum length is 512 characters.
 	VideoContentSourceUrl *string
+
+	// Configuration for Yield Optimization, which fills unsold ad inventory in ad
+	// breaks with programmatic ads from Amazon Publisher Services (APS).
+	YieldOptimizationConfiguration *YieldOptimizationConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -1914,6 +1926,68 @@ type UpdateProgramTransition struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for a VAST_REQUEST function. Specifies the HTTP method, URL,
+// headers, body, timeout, and output expressions for a request to a VAST endpoint.
+// MediaTailor parses the response as VAST and resolves wrapper redirects, then
+// makes the parsed ads available to the function's output expressions. For more
+// information, see [Function types and composition]in the MediaTailor User Guide.
+//
+// [Function types and composition]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-types.html
+type VastRequestConfiguration struct {
+
+	// The HTTP method for the request to the VAST endpoint. Valid values: GET and POST
+	// . Use POST to send a bid request body, such as an OpenRTB payload.
+	//
+	// This member is required.
+	MethodType MethodType
+
+	// The maximum time, in milliseconds, that MediaTailor waits for a response from
+	// the VAST endpoint. The timeout covers the entire response, including any wrapper
+	// redirects that MediaTailor follows. If the call exceeds this timeout,
+	// MediaTailor proceeds with an empty ad list and continues output expression
+	// evaluation. Valid values: 100 to 2000 .
+	//
+	// This member is required.
+	RequestTimeoutMilliseconds *int32
+
+	// The expression language used to evaluate expressions in the function
+	// configuration. Set this to JSONata .
+	//
+	// This member is required.
+	Runtime RuntimeType
+
+	// An expression that evaluates to the VAST endpoint URL. Use {%...%} delimiters
+	// for dynamic expressions. A literal value must be an https:// URL. The maximum
+	// length is 25,000 characters.
+	//
+	// This member is required.
+	Url *string
+
+	// An expression that evaluates to the request body. Used with POST requests, for
+	// example to send an OpenRTB bid request. The maximum length is 100,000
+	// characters.
+	Body *string
+
+	// A map of HTTP header names to expression values. MediaTailor evaluates each
+	// header value expression at runtime and includes the result in the outbound
+	// request. Headers beginning with X-Amz- are reserved by the service, and method
+	// override headers are not allowed.
+	Headers map[string]string
+
+	// A map of output bindings. Each key is a namespaced output path (such as
+	// temp.wrappedAds ), and each value is an expression that MediaTailor evaluates at
+	// runtime. Output expressions in a VAST_REQUEST function can reference the
+	// response object, which exposes response.parsedAds — the ads parsed from the
+	// VAST response after schema validation and wrapper resolution — and
+	// response.statusCode . For more information about expression syntax, see [JSONata expression reference] in the
+	// MediaTailor User Guide.
+	//
+	// [JSONata expression reference]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-jsonata.html
+	Output map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // The settings that control how MediaTailor processes VAST responses from the ad
 // decision server.
 type VastResponse struct {
@@ -1966,6 +2040,48 @@ type VodSource struct {
 	//
 	// [Tagging AWS Elemental MediaTailor Resources]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for Yield Optimization, which fills unsold ad inventory in ad
+// breaks with programmatic ads from Amazon Publisher Services (APS).
+type YieldOptimizationConfiguration struct {
+
+	// The minimum unfilled duration, in seconds, that must remain in an ad break
+	// before MediaTailor requests additional ads from Amazon Publisher Services (APS).
+	// For example, if set to 6 seconds, yield optimization triggers only when at least
+	// 6 seconds of unfilled time remains after the primary ad server response.
+	//
+	// This member is required.
+	MinimumUnfilledDuration *int32
+
+	// The OpenRTB bid request template, in JSON, that MediaTailor sends to Amazon
+	// Publisher Services (APS). The template must include an imp array with one
+	// impression specifying bidfloor , an app object specifying bundle and storeurl ,
+	// and a device object specifying ua and ip . Use double curly braces (for example,
+	// {{player_params.user_agent}} ) to insert session variables and player parameters.
+	//
+	// This member is required.
+	OpenRtbTemplate *string
+
+	// Publisher ID for an existing Amazon Publisher Services configuration. This ID
+	// must be obtained by registering with APS prior to using the Yield Optimization
+	// feature. The Publisher ID identifies your account in the APS system and is
+	// required for all bid requests.
+	//
+	// This member is required.
+	PublisherId *string
+
+	// The Amazon Publisher Services (APS) region that MediaTailor sends bid requests
+	// to. Choose the region closest to your primary audience, because the selection
+	// affects both latency and the ad inventory available to you. This setting applies
+	// to the entire playback configuration, not to individual viewers. If you serve
+	// traffic across multiple regions, create a separate playback configuration for
+	// each APS region.
+	//
+	// This member is required.
+	Region ApsRegion
 
 	noSmithyDocumentSerde
 }

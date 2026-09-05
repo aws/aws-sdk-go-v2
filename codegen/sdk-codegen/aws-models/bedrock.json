@@ -8256,6 +8256,12 @@
                         "smithy.api#enumValue": "none"
                     }
                 },
+                "AWS_REVIEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "aws_review"
+                    }
+                },
                 "PROVIDER_DATA_SHARE": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -8270,7 +8276,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The data retention mode for the account. Valid values are:</p> <ul> <li> <p> <code>default</code> – The standard data handling for the model applies.</p> </li> <li> <p> <code>none</code> – Zero data retention.</p> </li> <li> <p> <code>provider_data_share</code> – Data may be shared with the model provider.</p> </li> <li> <p> <code>inherit</code> – No data retention mode is set at this scope.</p> </li> </ul>"
+                "smithy.api#documentation": "<p>The data retention mode for the account. Valid values are:</p> <ul> <li> <p> <code>default</code> – The standard data handling for the model applies.</p> </li> <li> <p> <code>none</code> – Zero data retention.</p> </li> <li> <p> <code>aws_review</code> – Amazon Web Services may review the request data. The data is not shared with the model provider. A model must support this mode to be invoked under it.</p> </li> <li> <p> <code>provider_data_share</code> – Data may be shared with the model provider.</p> </li> <li> <p> <code>inherit</code> – No data retention mode is set at this scope.</p> </li> </ul>"
             }
         },
         "com.amazonaws.bedrock#DataRetentionResource": {

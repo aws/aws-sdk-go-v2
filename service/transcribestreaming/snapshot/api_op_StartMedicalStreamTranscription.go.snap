@@ -12,7 +12,6 @@ StartMedicalStreamTranscription
 	Finalize stack step
 		ComputePayloadHash
 		SigV4ContentSHA256Header
-		spanRetryLoop
 		InterceptBeforeRetryLoop
 		Retry
 		InterceptAttempt

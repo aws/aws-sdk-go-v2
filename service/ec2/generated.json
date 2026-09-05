@@ -811,6 +811,7 @@
         "api_op_UpdateInterruptibleCapacityReservationAllocation.go",
         "api_op_UpdateSecurityGroupRuleDescriptionsEgress.go",
         "api_op_UpdateSecurityGroupRuleDescriptionsIngress.go",
+        "api_op_ValidateSecurityGroupQuotasForInterface.go",
         "api_op_WithdrawByoipCidr.go",
         "auth.go",
         "deserializers.go",

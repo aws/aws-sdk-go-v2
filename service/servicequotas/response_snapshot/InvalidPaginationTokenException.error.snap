@@ -1,5 +1,5 @@
 400
 Content-Type: application/x-amz-json-1.1
-X-Amz-Target: ServiceQuotasV20190624.ListAWSDefaultServiceQuotas
+X-Amz-Target: ServiceQuotasV20190624.GetQuotaUtilizationReport
 
 {"__type":"InvalidPaginationTokenException","Message":"__Message__"}

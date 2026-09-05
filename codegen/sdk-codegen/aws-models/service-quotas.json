@@ -55,6 +55,29 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.servicequotas#AdjustableAtLevelEnum": {
+            "type": "enum",
+            "members": {
+                "ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT"
+                    }
+                },
+                "PER_RESOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PER_RESOURCE"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                }
+            }
+        },
         "com.amazonaws.servicequotas#AmazonResourceName": {
             "type": "string",
             "traits": {
@@ -687,6 +710,9 @@
                 },
                 {
                     "target": "com.amazonaws.servicequotas#IllegalArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.servicequotas#InvalidPaginationTokenException"
                 },
                 {
                     "target": "com.amazonaws.servicequotas#NoSuchResourceException"
@@ -2033,6 +2059,12 @@
                     "target": "com.amazonaws.servicequotas#QuotaContextId",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the resource, or resources, to which the quota applies. The value for this field is either an Amazon Resource Name (ARN) or *. If the value is an ARN, the quota value applies to that resource. If the value is *, then the quota value applies to all resources listed in the <code>ContextScopeType</code> field. The quota value applies to all resources for which you haven’t previously applied a quota value, and any new resources you create in your Amazon Web Services account.</p>"
+                    }
+                },
+                "AdjustableAtLevel": {
+                    "target": "com.amazonaws.servicequotas#AdjustableAtLevelEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the level at which you can request an increase for this quota:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACCOUNT</code> – You can request an increase only at the account level.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PER_RESOURCE</code> – You can request an increase only for an individual resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALL</code> – You can request an increase at either the account level or for an individual resource.</p>\n            </li>\n         </ul>"
                     }
                 }
             },

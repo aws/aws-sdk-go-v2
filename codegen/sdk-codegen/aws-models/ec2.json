@@ -5083,6 +5083,9 @@
                     "target": "com.amazonaws.ec2#UpdateSecurityGroupRuleDescriptionsIngress"
                 },
                 {
+                    "target": "com.amazonaws.ec2#ValidateSecurityGroupQuotasForInterface"
+                },
+                {
                     "target": "com.amazonaws.ec2#WithdrawByoipCidr"
                 }
             ],
@@ -139831,6 +139834,57 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes the vCPU configurations for the instance type.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ValidateSecurityGroupQuotasForInterface": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#ValidateSecurityGroupQuotasForInterfaceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#ValidateSecurityGroupQuotasForInterfaceResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Validates whether the specified security groups can be associated with a single\n            network interface. The operation checks Amazon Virtual Private Cloud (Amazon VPC)\n            quotas for inbound or outbound rules per security group and security groups per\n            network interface. Only authorized AWS services can call this operation.</p>\n         <p>For more information about security group quotas, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-security-groups\">Amazon\n            VPC quotas</a> in the <i>Amazon VPC User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ValidateSecurityGroupQuotasForInterfaceRequest": {
+            "type": "structure",
+            "members": {
+                "SecurityGroupIds": {
+                    "target": "com.amazonaws.ec2#SecurityGroupIdList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The IDs of the security groups to validate for association with a single network\n            interface. You must specify at least one ID, and each ID must be unique. The number\n            of IDs cannot exceed the maximum number of security groups allowed per network\n            interface.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "SecurityGroupId"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#ValidateSecurityGroupQuotasForInterfaceResult": {
+            "type": "structure",
+            "members": {
+                "Valid": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Valid",
+                        "smithy.api#documentation": "<p>The operation returns <code>true</code> if the specified security groups can be\n            associated with a single network interface without exceeding the quotas. It returns\n            an error if associating the security groups would exceed a quota.</p>",
+                        "smithy.api#xmlName": "valid"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ec2#ValidationError": {

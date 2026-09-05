@@ -4233,6 +4233,11 @@ func awsRestjson1_deserializeOpDocumentGetFunctionOutput(v **GetFunctionOutput, 
 				return err
 			}
 
+		case "VastRequestConfiguration":
+			if err := awsRestjson1_deserializeDocumentVastRequestConfiguration(&sv.VastRequestConfiguration, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -4565,6 +4570,11 @@ func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPla
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.VideoContentSourceUrl = ptr.String(jtv)
+			}
+
+		case "YieldOptimizationConfiguration":
+			if err := awsRestjson1_deserializeDocumentYieldOptimizationConfiguration(&sv.YieldOptimizationConfiguration, value); err != nil {
+				return err
 			}
 
 		default:
@@ -6518,6 +6528,11 @@ func awsRestjson1_deserializeOpDocumentPutFunctionOutput(v **PutFunctionOutput, 
 				return err
 			}
 
+		case "VastRequestConfiguration":
+			if err := awsRestjson1_deserializeDocumentVastRequestConfiguration(&sv.VastRequestConfiguration, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -6850,6 +6865,11 @@ func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPla
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.VideoContentSourceUrl = ptr.String(jtv)
+			}
+
+		case "YieldOptimizationConfiguration":
+			if err := awsRestjson1_deserializeDocumentYieldOptimizationConfiguration(&sv.YieldOptimizationConfiguration, value); err != nil {
+				return err
 			}
 
 		default:
@@ -10935,6 +10955,11 @@ func awsRestjson1_deserializeDocumentFunction(v **types.Function, value interfac
 				return err
 			}
 
+		case "VastRequestConfiguration":
+			if err := awsRestjson1_deserializeDocumentVastRequestConfiguration(&sv.VastRequestConfiguration, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -12043,6 +12068,11 @@ func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackCon
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.VideoContentSourceUrl = ptr.String(jtv)
+			}
+
+		case "YieldOptimizationConfiguration":
+			if err := awsRestjson1_deserializeDocumentYieldOptimizationConfiguration(&sv.YieldOptimizationConfiguration, value); err != nil {
+				return err
 			}
 
 		default:
@@ -13683,6 +13713,96 @@ func awsRestjson1_deserializeDocumentTrafficShapingTpsConfiguration(v **types.Tr
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentVastRequestConfiguration(v **types.VastRequestConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VastRequestConfiguration
+	if *v == nil {
+		sv = &types.VastRequestConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Body":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Body = ptr.String(jtv)
+			}
+
+		case "Headers":
+			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Headers, value); err != nil {
+				return err
+			}
+
+		case "MethodType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MethodType to be of type string, got %T instead", value)
+				}
+				sv.MethodType = types.MethodType(jtv)
+			}
+
+		case "Output":
+			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Output, value); err != nil {
+				return err
+			}
+
+		case "RequestTimeoutMilliseconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RequestTimeoutMilliseconds = ptr.Int32(int32(i64))
+			}
+
+		case "Runtime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuntimeType to be of type string, got %T instead", value)
+				}
+				sv.Runtime = types.RuntimeType(jtv)
+			}
+
+		case "Url":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Url = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentVastResponse(v **types.VastResponse, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13812,6 +13932,77 @@ func awsRestjson1_deserializeDocumentVodSource(v **types.VodSource, value interf
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.VodSourceName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentYieldOptimizationConfiguration(v **types.YieldOptimizationConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.YieldOptimizationConfiguration
+	if *v == nil {
+		sv = &types.YieldOptimizationConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MinimumUnfilledDuration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MinimumUnfilledDurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinimumUnfilledDuration = ptr.Int32(int32(i64))
+			}
+
+		case "OpenRtbTemplate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OpenRtbTemplateString to be of type string, got %T instead", value)
+				}
+				sv.OpenRtbTemplate = ptr.String(jtv)
+			}
+
+		case "PublisherId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ApsPublisherId to be of type string, got %T instead", value)
+				}
+				sv.PublisherId = ptr.String(jtv)
+			}
+
+		case "Region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ApsRegion to be of type string, got %T instead", value)
+				}
+				sv.Region = types.ApsRegion(jtv)
 			}
 
 		default:

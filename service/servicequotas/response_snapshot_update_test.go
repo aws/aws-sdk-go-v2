@@ -259,9 +259,10 @@ func TestUpdateResponseSnapshot_GetAWSDefaultServiceQuota(t *testing.T) {
 			},
 			QuotaAppliedAtLevel: types.AppliedLevelEnum("ACCOUNT"),
 			QuotaContext: &types.QuotaContextInfo{
-				ContextScope:     types.QuotaContextScope("RESOURCE"),
-				ContextScopeType: ptr.String("__ContextScopeType__"),
-				ContextId:        ptr.String("__ContextId__"),
+				ContextScope:      types.QuotaContextScope("RESOURCE"),
+				ContextScopeType:  ptr.String("__ContextScopeType__"),
+				ContextId:         ptr.String("__ContextId__"),
+				AdjustableAtLevel: types.AdjustableAtLevelEnum("ACCOUNT"),
 			},
 			Description: ptr.String("__Description__"),
 		},
@@ -423,9 +424,10 @@ func TestUpdateResponseSnapshot_GetRequestedServiceQuotaChange(t *testing.T) {
 			Unit:                  ptr.String("__Unit__"),
 			QuotaRequestedAtLevel: types.AppliedLevelEnum("ACCOUNT"),
 			QuotaContext: &types.QuotaContextInfo{
-				ContextScope:     types.QuotaContextScope("RESOURCE"),
-				ContextScopeType: ptr.String("__ContextScopeType__"),
-				ContextId:        ptr.String("__ContextId__"),
+				ContextScope:      types.QuotaContextScope("RESOURCE"),
+				ContextScopeType:  ptr.String("__ContextScopeType__"),
+				ContextId:         ptr.String("__ContextId__"),
+				AdjustableAtLevel: types.AdjustableAtLevelEnum("ACCOUNT"),
 			},
 		},
 	}
@@ -479,9 +481,10 @@ func TestUpdateResponseSnapshot_GetServiceQuota(t *testing.T) {
 			},
 			QuotaAppliedAtLevel: types.AppliedLevelEnum("ACCOUNT"),
 			QuotaContext: &types.QuotaContextInfo{
-				ContextScope:     types.QuotaContextScope("RESOURCE"),
-				ContextScopeType: ptr.String("__ContextScopeType__"),
-				ContextId:        ptr.String("__ContextId__"),
+				ContextScope:      types.QuotaContextScope("RESOURCE"),
+				ContextScopeType:  ptr.String("__ContextScopeType__"),
+				ContextId:         ptr.String("__ContextId__"),
+				AdjustableAtLevel: types.AdjustableAtLevelEnum("ACCOUNT"),
 			},
 			Description: ptr.String("__Description__"),
 		},
@@ -571,9 +574,10 @@ func TestUpdateResponseSnapshot_ListAWSDefaultServiceQuotas(t *testing.T) {
 				},
 				QuotaAppliedAtLevel: types.AppliedLevelEnum("ACCOUNT"),
 				QuotaContext: &types.QuotaContextInfo{
-					ContextScope:     types.QuotaContextScope("RESOURCE"),
-					ContextScopeType: ptr.String("__ContextScopeType__"),
-					ContextId:        ptr.String("__ContextId__"),
+					ContextScope:      types.QuotaContextScope("RESOURCE"),
+					ContextScopeType:  ptr.String("__ContextScopeType__"),
+					ContextId:         ptr.String("__ContextId__"),
+					AdjustableAtLevel: types.AdjustableAtLevelEnum("ACCOUNT"),
 				},
 				Description: ptr.String("__Description__"),
 			},
@@ -605,9 +609,10 @@ func TestUpdateResponseSnapshot_ListAWSDefaultServiceQuotas(t *testing.T) {
 				},
 				QuotaAppliedAtLevel: types.AppliedLevelEnum("ACCOUNT"),
 				QuotaContext: &types.QuotaContextInfo{
-					ContextScope:     types.QuotaContextScope("RESOURCE"),
-					ContextScopeType: ptr.String("__ContextScopeType__"),
-					ContextId:        ptr.String("__ContextId__"),
+					ContextScope:      types.QuotaContextScope("RESOURCE"),
+					ContextScopeType:  ptr.String("__ContextScopeType__"),
+					ContextId:         ptr.String("__ContextId__"),
+					AdjustableAtLevel: types.AdjustableAtLevelEnum("ACCOUNT"),
 				},
 				Description: ptr.String("__Description__"),
 			},
@@ -655,9 +660,10 @@ func TestUpdateResponseSnapshot_ListRequestedServiceQuotaChangeHistory(t *testin
 				Unit:                  ptr.String("__Unit__"),
 				QuotaRequestedAtLevel: types.AppliedLevelEnum("ACCOUNT"),
 				QuotaContext: &types.QuotaContextInfo{
-					ContextScope:     types.QuotaContextScope("RESOURCE"),
-					ContextScopeType: ptr.String("__ContextScopeType__"),
-					ContextId:        ptr.String("__ContextId__"),
+					ContextScope:      types.QuotaContextScope("RESOURCE"),
+					ContextScopeType:  ptr.String("__ContextScopeType__"),
+					ContextId:         ptr.String("__ContextId__"),
+					AdjustableAtLevel: types.AdjustableAtLevelEnum("ACCOUNT"),
 				},
 			},
 			{
@@ -678,9 +684,10 @@ func TestUpdateResponseSnapshot_ListRequestedServiceQuotaChangeHistory(t *testin
 				Unit:                  ptr.String("__Unit__"),
 				QuotaRequestedAtLevel: types.AppliedLevelEnum("ACCOUNT"),
 				QuotaContext: &types.QuotaContextInfo{
-					ContextScope:     types.QuotaContextScope("RESOURCE"),
-					ContextScopeType: ptr.String("__ContextScopeType__"),
-					ContextId:        ptr.String("__ContextId__"),
+					ContextScope:      types.QuotaContextScope("RESOURCE"),
+					ContextScopeType:  ptr.String("__ContextScopeType__"),
+					ContextId:         ptr.String("__ContextId__"),
+					AdjustableAtLevel: types.AdjustableAtLevelEnum("ACCOUNT"),
 				},
 			},
 		},
@@ -727,9 +734,10 @@ func TestUpdateResponseSnapshot_ListRequestedServiceQuotaChangeHistoryByQuota(t 
 				Unit:                  ptr.String("__Unit__"),
 				QuotaRequestedAtLevel: types.AppliedLevelEnum("ACCOUNT"),
 				QuotaContext: &types.QuotaContextInfo{
-					ContextScope:     types.QuotaContextScope("RESOURCE"),
-					ContextScopeType: ptr.String("__ContextScopeType__"),
-					ContextId:        ptr.String("__ContextId__"),
+					ContextScope:      types.QuotaContextScope("RESOURCE"),
+					ContextScopeType:  ptr.String("__ContextScopeType__"),
+					ContextId:         ptr.String("__ContextId__"),
+					AdjustableAtLevel: types.AdjustableAtLevelEnum("ACCOUNT"),
 				},
 			},
 			{
@@ -750,9 +758,10 @@ func TestUpdateResponseSnapshot_ListRequestedServiceQuotaChangeHistoryByQuota(t 
 				Unit:                  ptr.String("__Unit__"),
 				QuotaRequestedAtLevel: types.AppliedLevelEnum("ACCOUNT"),
 				QuotaContext: &types.QuotaContextInfo{
-					ContextScope:     types.QuotaContextScope("RESOURCE"),
-					ContextScopeType: ptr.String("__ContextScopeType__"),
-					ContextId:        ptr.String("__ContextId__"),
+					ContextScope:      types.QuotaContextScope("RESOURCE"),
+					ContextScopeType:  ptr.String("__ContextScopeType__"),
+					ContextId:         ptr.String("__ContextId__"),
+					AdjustableAtLevel: types.AdjustableAtLevelEnum("ACCOUNT"),
 				},
 			},
 		},
@@ -855,9 +864,10 @@ func TestUpdateResponseSnapshot_ListServiceQuotas(t *testing.T) {
 				},
 				QuotaAppliedAtLevel: types.AppliedLevelEnum("ACCOUNT"),
 				QuotaContext: &types.QuotaContextInfo{
-					ContextScope:     types.QuotaContextScope("RESOURCE"),
-					ContextScopeType: ptr.String("__ContextScopeType__"),
-					ContextId:        ptr.String("__ContextId__"),
+					ContextScope:      types.QuotaContextScope("RESOURCE"),
+					ContextScopeType:  ptr.String("__ContextScopeType__"),
+					ContextId:         ptr.String("__ContextId__"),
+					AdjustableAtLevel: types.AdjustableAtLevelEnum("ACCOUNT"),
 				},
 				Description: ptr.String("__Description__"),
 			},
@@ -889,9 +899,10 @@ func TestUpdateResponseSnapshot_ListServiceQuotas(t *testing.T) {
 				},
 				QuotaAppliedAtLevel: types.AppliedLevelEnum("ACCOUNT"),
 				QuotaContext: &types.QuotaContextInfo{
-					ContextScope:     types.QuotaContextScope("RESOURCE"),
-					ContextScopeType: ptr.String("__ContextScopeType__"),
-					ContextId:        ptr.String("__ContextId__"),
+					ContextScope:      types.QuotaContextScope("RESOURCE"),
+					ContextScopeType:  ptr.String("__ContextScopeType__"),
+					ContextId:         ptr.String("__ContextId__"),
+					AdjustableAtLevel: types.AdjustableAtLevelEnum("ACCOUNT"),
 				},
 				Description: ptr.String("__Description__"),
 			},
@@ -1037,9 +1048,10 @@ func TestUpdateResponseSnapshot_RequestServiceQuotaIncrease(t *testing.T) {
 			Unit:                  ptr.String("__Unit__"),
 			QuotaRequestedAtLevel: types.AppliedLevelEnum("ACCOUNT"),
 			QuotaContext: &types.QuotaContextInfo{
-				ContextScope:     types.QuotaContextScope("RESOURCE"),
-				ContextScopeType: ptr.String("__ContextScopeType__"),
-				ContextId:        ptr.String("__ContextId__"),
+				ContextScope:      types.QuotaContextScope("RESOURCE"),
+				ContextScopeType:  ptr.String("__ContextScopeType__"),
+				ContextId:         ptr.String("__ContextId__"),
+				AdjustableAtLevel: types.AdjustableAtLevelEnum("ACCOUNT"),
 			},
 		},
 	}
@@ -1304,7 +1316,7 @@ func TestUpdateResponseSnapshot_Error_InvalidPaginationTokenException(t *testing
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New11(schemas.ServiceQuotasV20190624)
-	opSchema := smithy.NewOperationSchema(schemas.ListAWSDefaultServiceQuotas, schemas.InvalidPaginationTokenException, schemas.InvalidPaginationTokenException)
+	opSchema := smithy.NewOperationSchema(schemas.GetQuotaUtilizationReport, schemas.InvalidPaginationTokenException, schemas.InvalidPaginationTokenException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

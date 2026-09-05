@@ -13,7 +13,6 @@ DescribeJob
 		RecursionDetection
 	Finalize stack step
 		Glacier:TreeHash
-		spanRetryLoop
 		InterceptBeforeRetryLoop
 		Retry
 		InterceptAttempt
