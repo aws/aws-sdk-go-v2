@@ -284,6 +284,48 @@ func TestUploadOrderMultiDifferentPartSize(t *testing.T) {
 	}
 }
 
+func TestUploadOrderMultiSeekableBodyUsesSectionReaders(t *testing.T) {
+	c, ops, args := s3testing.NewUploadLoggingClient(nil)
+	mgr := New(c, func(options *Options) {
+		options.PartSizeBytes = 4
+		options.MultipartUploadThreshold = 6
+		options.Concurrency = 1
+	})
+
+	body := bytes.NewReader([]byte("0123456789abc"))
+	if _, err := body.Seek(2, io.SeekStart); err != nil {
+		t.Fatalf("failed to seek body: %v", err)
+	}
+
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   body,
+	})
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+
+	if diff := cmpDiff([]string{"CreateMultipartUpload", "UploadPart", "UploadPart", "UploadPart", "CompleteMultipartUpload"}, *ops); len(diff) > 0 {
+		t.Error(diff)
+	}
+
+	for i, expect := range []string{"2345", "6789", "abc"} {
+		part := (*args)[i+1].(*s3.UploadPartInput)
+		if _, ok := part.Body.(*io.SectionReader); !ok {
+			t.Errorf("expect part %d body to be %T, got %T", i+1, &io.SectionReader{}, part.Body)
+		}
+
+		actual, err := io.ReadAll(part.Body)
+		if err != nil {
+			t.Fatalf("failed to read part %d body: %v", i+1, err)
+		}
+		if string(actual) != expect {
+			t.Errorf("expect part %d body %q, got %q", i+1, expect, string(actual))
+		}
+	}
+}
+
 func TestUploadOrderMultiWithPartSizeEqualToThreshold(t *testing.T) {
 	c, ops, args := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c, func(options *Options) {
