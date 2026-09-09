@@ -1235,6 +1235,36 @@ func validateAvailMatchingCriteria(v *types.AvailMatchingCriteria) error {
 	}
 }
 
+func validateAwsServiceRequestConfiguration(v *types.AwsServiceRequestConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AwsServiceRequestConfiguration"}
+	if len(v.Runtime) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Runtime"))
+	}
+	if len(v.MethodType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MethodType"))
+	}
+	if v.RequestTimeoutMilliseconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestTimeoutMilliseconds"))
+	}
+	if v.Url == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Url"))
+	}
+	if v.TargetService == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetService"))
+	}
+	if v.TargetRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConcurrentExecutorConfiguration(v *types.ConcurrentExecutorConfiguration) error {
 	if v == nil {
 		return nil
@@ -2227,6 +2257,11 @@ func validateOpPutFunctionInput(v *PutFunctionInput) error {
 	if v.HttpRequestConfiguration != nil {
 		if err := validateHttpRequestConfiguration(v.HttpRequestConfiguration); err != nil {
 			invalidParams.AddNested("HttpRequestConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AwsServiceRequestConfiguration != nil {
+		if err := validateAwsServiceRequestConfiguration(v.AwsServiceRequestConfiguration); err != nil {
+			invalidParams.AddNested("AwsServiceRequestConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.CustomOutputConfiguration != nil {

@@ -2404,6 +2404,26 @@ func (EmbeddedConvert608To708) Values() []EmbeddedConvert608To708 {
 	}
 }
 
+type EmbeddedDestinationStyleControl string
+
+// Enum values for EmbeddedDestinationStyleControl
+const (
+	EmbeddedDestinationStyleControlManual      EmbeddedDestinationStyleControl = "MANUAL"
+	EmbeddedDestinationStyleControlPassthrough EmbeddedDestinationStyleControl = "PASSTHROUGH"
+)
+
+// Values returns all known values for EmbeddedDestinationStyleControl. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EmbeddedDestinationStyleControl) Values() []EmbeddedDestinationStyleControl {
+	return []EmbeddedDestinationStyleControl{
+		"MANUAL",
+		"PASSTHROUGH",
+	}
+}
+
 type EmbeddedScte20Detection string
 
 // Enum values for EmbeddedScte20Detection
@@ -2420,6 +2440,23 @@ func (EmbeddedScte20Detection) Values() []EmbeddedScte20Detection {
 	return []EmbeddedScte20Detection{
 		"AUTO",
 		"OFF",
+	}
+}
+
+type EnrichmentMethod string
+
+// Enum values for EnrichmentMethod
+const (
+	EnrichmentMethodScte35ElementalInferenceQueryParams EnrichmentMethod = "SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS"
+)
+
+// Values returns all known values for EnrichmentMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EnrichmentMethod) Values() []EnrichmentMethod {
+	return []EnrichmentMethod{
+		"SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS",
 	}
 }
 
@@ -6006,6 +6043,27 @@ func (OfferingType) Values() []OfferingType {
 	}
 }
 
+type OutputUsage string
+
+// Enum values for OutputUsage
+const (
+	OutputUsageMultiviewEqualSizeView OutputUsage = "MULTIVIEW_EQUAL_SIZE_VIEW"
+	OutputUsageMultiviewPrimaryView   OutputUsage = "MULTIVIEW_PRIMARY_VIEW"
+	OutputUsageMultiviewSecondaryView OutputUsage = "MULTIVIEW_SECONDARY_VIEW"
+)
+
+// Values returns all known values for OutputUsage. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OutputUsage) Values() []OutputUsage {
+	return []OutputUsage{
+		"MULTIVIEW_EQUAL_SIZE_VIEW",
+		"MULTIVIEW_PRIMARY_VIEW",
+		"MULTIVIEW_SECONDARY_VIEW",
+	}
+}
+
 type PipelineId string
 
 // Enum values for PipelineId
@@ -7210,6 +7268,7 @@ type TtmlDestinationStyleControl string
 const (
 	TtmlDestinationStyleControlPassthrough   TtmlDestinationStyleControl = "PASSTHROUGH"
 	TtmlDestinationStyleControlUseConfigured TtmlDestinationStyleControl = "USE_CONFIGURED"
+	TtmlDestinationStyleControlManual        TtmlDestinationStyleControl = "MANUAL"
 )
 
 // Values returns all known values for TtmlDestinationStyleControl. Note that this
@@ -7220,6 +7279,7 @@ func (TtmlDestinationStyleControl) Values() []TtmlDestinationStyleControl {
 	return []TtmlDestinationStyleControl{
 		"PASSTHROUGH",
 		"USE_CONFIGURED",
+		"MANUAL",
 	}
 }
 
@@ -7381,6 +7441,7 @@ type WebvttDestinationStyleControl string
 const (
 	WebvttDestinationStyleControlNoStyleData WebvttDestinationStyleControl = "NO_STYLE_DATA"
 	WebvttDestinationStyleControlPassthrough WebvttDestinationStyleControl = "PASSTHROUGH"
+	WebvttDestinationStyleControlManual      WebvttDestinationStyleControl = "MANUAL"
 )
 
 // Values returns all known values for WebvttDestinationStyleControl. Note that
@@ -7392,5 +7453,6 @@ func (WebvttDestinationStyleControl) Values() []WebvttDestinationStyleControl {
 	return []WebvttDestinationStyleControl{
 		"NO_STYLE_DATA",
 		"PASSTHROUGH",
+		"MANUAL",
 	}
 }

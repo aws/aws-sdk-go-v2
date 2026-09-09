@@ -26670,6 +26670,42 @@ func awsRestjson1_deserializeDocument__listOfDescribeNodeSummary(v *[]types.Desc
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfEnrichmentMethod(v *[]types.EnrichmentMethod, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.EnrichmentMethod
+	if *v == nil {
+		cv = []types.EnrichmentMethod{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.EnrichmentMethod
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected EnrichmentMethod to be of type string, got %T instead", value)
+			}
+			col = types.EnrichmentMethod(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfEventBridgeRuleTemplateGroupSummary(v *[]types.EventBridgeRuleTemplateGroupSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -27923,6 +27959,42 @@ func awsRestjson1_deserializeDocument__listOfOutputLocationRef(v *[]types.Output
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocument__listOfOutputUsage(v *[]types.OutputUsage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.OutputUsage
+	if *v == nil {
+		cv = []types.OutputUsage{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.OutputUsage
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected OutputUsage to be of type string, got %T instead", value)
+			}
+			col = types.OutputUsage(jtv)
+		}
 		cv = append(cv, col)
 
 	}
@@ -34164,6 +34236,11 @@ func awsRestjson1_deserializeDocumentDescribeInferenceSettings(v **types.Describ
 				return err
 			}
 
+		case "enrichmentMethods":
+			if err := awsRestjson1_deserializeDocument__listOfEnrichmentMethod(&sv.EnrichmentMethods, value); err != nil {
+				return err
+			}
+
 		case "feedArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -35613,6 +35690,50 @@ func awsRestjson1_deserializeDocumentEbuTtDDestinationSettings(v **types.EbuTtDD
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEmbeddedCaptionPositionSettings(v **types.EmbeddedCaptionPositionSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EmbeddedCaptionPositionSettings
+	if *v == nil {
+		sv = &types.EmbeddedCaptionPositionSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "yPositionLine":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max15 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.YPositionLine = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEmbeddedDestinationSettings(v **types.EmbeddedDestinationSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -35635,6 +35756,20 @@ func awsRestjson1_deserializeDocumentEmbeddedDestinationSettings(v **types.Embed
 
 	for key, value := range shape {
 		switch key {
+		case "position":
+			if err := awsRestjson1_deserializeDocumentEmbeddedCaptionPositionSettings(&sv.Position, value); err != nil {
+				return err
+			}
+
+		case "styleControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EmbeddedDestinationStyleControl to be of type string, got %T instead", value)
+				}
+				sv.StyleControl = types.EmbeddedDestinationStyleControl(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -43331,6 +43466,11 @@ func awsRestjson1_deserializeDocumentMediaPackageV2DestinationSettings(v **types
 					return fmt.Errorf("expected HlsDefault to be of type string, got %T instead", value)
 				}
 				sv.HlsDefault = types.HlsDefault(jtv)
+			}
+
+		case "outputUsage":
+			if err := awsRestjson1_deserializeDocument__listOfOutputUsage(&sv.OutputUsage, value); err != nil {
+				return err
 			}
 
 		default:
@@ -51369,6 +51509,50 @@ func awsRestjson1_deserializeDocumentTemporalFilterSettings(v **types.TemporalFi
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentTextCaptionPositionSettings(v **types.TextCaptionPositionSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TextCaptionPositionSettings
+	if *v == nil {
+		sv = &types.TextCaptionPositionSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "yPositionPercentage":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max100 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.YPositionPercentage = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentThumbnail(v **types.Thumbnail, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -51805,6 +51989,11 @@ func awsRestjson1_deserializeDocumentTtmlDestinationSettings(v **types.TtmlDesti
 
 	for key, value := range shape {
 		switch key {
+		case "position":
+			if err := awsRestjson1_deserializeDocumentTextCaptionPositionSettings(&sv.Position, value); err != nil {
+				return err
+			}
+
 		case "styleControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -52230,6 +52419,19 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 
 	for key, value := range shape {
 		switch key {
+		case "border":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max100 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Border = ptr.Int32(int32(i64))
+			}
+
 		case "codecSettings":
 			if err := awsRestjson1_deserializeDocumentVideoCodecSettings(&sv.CodecSettings, value); err != nil {
 				return err
@@ -52808,6 +53010,11 @@ func awsRestjson1_deserializeDocumentWebvttDestinationSettings(v **types.WebvttD
 
 	for key, value := range shape {
 		switch key {
+		case "position":
+			if err := awsRestjson1_deserializeDocumentTextCaptionPositionSettings(&sv.Position, value); err != nil {
+				return err
+			}
+
 		case "styleControl":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -2022,6 +2022,19 @@ func serializeEvaluationAutomationRuleCategoryList(s smithy.ShapeSerializer, sch
 	s.CloseList()
 }
 
+func serializeEvaluationFormAIVersionSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EvaluationFormAIVersionSummary) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeEvaluationFormItemEnablementConditionOperandList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EvaluationFormItemEnablementConditionOperand) {
 	if v == nil {
 		return
@@ -6353,6 +6366,20 @@ func deserializeEvaluationAutomationRuleCategoryList(d smithy.ShapeDeserializer,
 	var vv types.EvaluationAutomationRuleCategory
 	return smithy.ReadList(d, s, func() error {
 		vv = types.EvaluationAutomationRuleCategory{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeEvaluationFormAIVersionSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EvaluationFormAIVersionSummary) error {
+	*v = make([]types.EvaluationFormAIVersionSummary, 0)
+	var vv types.EvaluationFormAIVersionSummary
+	return smithy.ReadList(d, s, func() error {
+		vv = types.EvaluationFormAIVersionSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

@@ -4210,6 +4210,26 @@ func (m *validateOpListEntitySecurityProfiles) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListEvaluationFormAIVersions struct {
+}
+
+func (*validateOpListEvaluationFormAIVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEvaluationFormAIVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEvaluationFormAIVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEvaluationFormAIVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListEvaluationForms struct {
 }
 
@@ -8650,6 +8670,10 @@ func addOpListEntitySecurityProfilesValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpListEntitySecurityProfiles{}, middleware.After)
 }
 
+func addOpListEvaluationFormAIVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEvaluationFormAIVersions{}, middleware.After)
+}
+
 func addOpListEvaluationFormsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListEvaluationForms{}, middleware.After)
 }
@@ -10430,6 +10454,24 @@ func validateEvaluationFormItemsList(v []types.EvaluationFormItem) error {
 	}
 }
 
+func validateEvaluationFormMetricConfiguration(v *types.EvaluationFormMetricConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluationFormMetricConfiguration"}
+	if len(v.MetricType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricType"))
+	}
+	if v.MetricName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEvaluationFormMultiSelectQuestionAutomation(v *types.EvaluationFormMultiSelectQuestionAutomation) error {
 	if v == nil {
 		return nil
@@ -10659,6 +10701,11 @@ func validateEvaluationFormQuestion(v *types.EvaluationFormQuestion) error {
 	if v.ScoringConfiguration != nil {
 		if err := validateEvaluationFormQuestionScoringConfiguration(v.ScoringConfiguration); err != nil {
 			invalidParams.AddNested("ScoringConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MetricConfiguration != nil {
+		if err := validateEvaluationFormMetricConfiguration(v.MetricConfiguration); err != nil {
+			invalidParams.AddNested("MetricConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -17706,6 +17753,24 @@ func validateOpListEntitySecurityProfilesInput(v *ListEntitySecurityProfilesInpu
 	}
 	if v.EntityArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EntityArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListEvaluationFormAIVersionsInput(v *ListEvaluationFormAIVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEvaluationFormAIVersionsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if len(v.ContactInteractionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactInteractionType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

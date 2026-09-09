@@ -1,0 +1,8 @@
+{
+    "id": "05fba571-bd4a-40db-8d8e-32c3b5b5ddd4",
+    "type": "feature",
+    "description": "Dynamic Multiview enables viewers to watch multiple live video streams in a single combined output. Viewers can select from 6 preset tiled layouts. Create MediaPackage channels with Input Type MULTIVIEW and configure Available Layouts and Available Sources. See the API Documentation for details.",
+    "modules": [
+        "service/mediapackagev2"
+    ]
+}

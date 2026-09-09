@@ -54,6 +54,10 @@ type GetFunctionOutput struct {
 	// The Amazon Resource Name (ARN) of the function.
 	Arn *string
 
+	// The configuration for an AWS_SERVICE_REQUEST function. Specifies the target
+	// service, target Region, and request parameters.
+	AwsServiceRequestConfiguration *types.AwsServiceRequestConfiguration
+
 	// The configuration for a CONCURRENT_EXECUTOR function.
 	ConcurrentExecutorConfiguration *types.ConcurrentExecutorConfiguration
 

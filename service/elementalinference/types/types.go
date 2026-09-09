@@ -58,6 +58,25 @@ type Competitor struct {
 	noSmithyDocumentSerde
 }
 
+// The output configuration settings for the contextual metadata feature. Use this
+// structure when the feed output generates metadata that describes the media
+// content.
+type ContextualMetadataConfig struct {
+
+	// Specifies whether Elemental Inference generates a descriptive summary of the
+	// media content for this output.
+	//
+	// Valid values:
+	//
+	//   - ENABLED (default) – Elemental Inference generates a descriptive summary
+	//   along with IAB taxonomy and GARM suitability classifications.
+	//
+	//   - DISABLED – No descriptive summary is generated.
+	SummaryGeneration SummaryGenerationMode
+
+	noSmithyDocumentSerde
+}
+
 // Contains configuration information about one output in a feed. It is used in
 // the AssociateFeed and the CreateFeed actions.
 type CreateOutput struct {
@@ -272,6 +291,7 @@ type GetOutput struct {
 // The following types satisfy this interface:
 //
 //	OutputConfigMemberClipping
+//	OutputConfigMemberContextualMetadata
 //	OutputConfigMemberCropping
 //	OutputConfigMemberSubtitling
 type OutputConfig interface {
@@ -286,6 +306,15 @@ type OutputConfigMemberClipping struct {
 }
 
 func (*OutputConfigMemberClipping) isOutputConfig() {}
+
+// The output config type that applies to the contextual metadata feature.
+type OutputConfigMemberContextualMetadata struct {
+	Value ContextualMetadataConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*OutputConfigMemberContextualMetadata) isOutputConfig() {}
 
 // The output config type that applies to the cropping feature.
 type OutputConfigMemberCropping struct {

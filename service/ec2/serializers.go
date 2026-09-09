@@ -70542,9 +70542,19 @@ func awsEc2query_serializeOpDocumentCopyVolumesInput(v *CopyVolumesInput, value 
 		objectKey.Boolean(*v.DryRun)
 	}
 
+	if v.Encrypted != nil {
+		objectKey := object.Key("Encrypted")
+		objectKey.Boolean(*v.Encrypted)
+	}
+
 	if v.Iops != nil {
 		objectKey := object.Key("Iops")
 		objectKey.Integer(*v.Iops)
+	}
+
+	if v.KmsKeyId != nil {
+		objectKey := object.Key("KmsKeyId")
+		objectKey.String(*v.KmsKeyId)
 	}
 
 	if v.MultiAttachEnabled != nil {

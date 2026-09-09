@@ -1,0 +1,8 @@
+{
+    "id": "0dc6439f-a9dd-4ba8-91cb-f536f1974165",
+    "type": "feature",
+    "description": "This release adds support for sharing Amazon EBS volumes across AWS accounts using AWS Resource Access Manager (RAM). Consuming accounts can view shared volume metadata and create copies of shared volumes within the same Availability Zone, with optional re-encryption using their own KMS key.",
+    "modules": [
+        "service/ec2"
+    ]
+}

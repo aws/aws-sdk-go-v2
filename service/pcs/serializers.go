@@ -1297,6 +1297,13 @@ func awsAwsjson10_serializeDocumentComputeNodeGroupSlurmConfigurationRequest(v *
 	object := value.Object()
 	defer object.Close()
 
+	if v.GresCustomSettings != nil {
+		ok := object.Key("gresCustomSettings")
+		if err := awsAwsjson10_serializeDocumentGresCustomSettings(v.GresCustomSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ScaleDownIdleTimeInSeconds != nil {
 		ok := object.Key("scaleDownIdleTimeInSeconds")
 		ok.Integer(*v.ScaleDownIdleTimeInSeconds)
@@ -1326,6 +1333,33 @@ func awsAwsjson10_serializeDocumentCustomLaunchTemplate(v *types.CustomLaunchTem
 		ok.String(*v.Version)
 	}
 
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentGresCustomSettingMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentGresCustomSettings(v []map[string]string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsAwsjson10_serializeDocumentGresCustomSettingMap(v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -1756,6 +1790,13 @@ func awsAwsjson10_serializeDocumentUpdateClusterSlurmConfigurationRequest(v *typ
 func awsAwsjson10_serializeDocumentUpdateComputeNodeGroupSlurmConfigurationRequest(v *types.UpdateComputeNodeGroupSlurmConfigurationRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.GresCustomSettings != nil {
+		ok := object.Key("gresCustomSettings")
+		if err := awsAwsjson10_serializeDocumentGresCustomSettings(v.GresCustomSettings, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ScaleDownIdleTimeInSeconds != nil {
 		ok := object.Key("scaleDownIdleTimeInSeconds")

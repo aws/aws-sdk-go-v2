@@ -16,9 +16,6 @@ import (
 // version used for the contact evaluation corresponds to the currently activated
 // version. If no version is activated for the evaluation form, the contact
 // evaluation cannot be started.
-//
-// Evaluations created through the public API do not contain answer values
-// suggested from automation.
 func (c *Client) StartContactEvaluation(ctx context.Context, params *StartContactEvaluationInput, optFns ...func(*Options)) (*StartContactEvaluationOutput, error) {
 	if params == nil {
 		params = &StartContactEvaluationInput{}

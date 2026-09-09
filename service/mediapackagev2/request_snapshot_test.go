@@ -251,6 +251,16 @@ func TestCheckRequestSnapshot_CreateChannel(t *testing.T) {
 		OutputHeaderConfiguration: &types.OutputHeaderConfiguration{
 			PublishMQCS: ptr.Bool(true),
 		},
+		MultiviewConfiguration: &types.MultiviewConfiguration{
+			AvailableSources: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AvailableLayouts: []types.MultiviewLayoutType{
+				types.MultiviewLayoutType("LAYOUT_2EH"),
+				types.MultiviewLayoutType("LAYOUT_2EH"),
+			},
+		},
 		OutputLockingMode: types.OutputLockingMode("EPOCH_LOCKED"),
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -1418,6 +1428,16 @@ func TestCheckRequestSnapshot_UpdateChannel(t *testing.T) {
 		OutputHeaderConfiguration: &types.OutputHeaderConfiguration{
 			PublishMQCS: ptr.Bool(true),
 		},
+		MultiviewConfiguration: &types.MultiviewConfiguration{
+			AvailableSources: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AvailableLayouts: []types.MultiviewLayoutType{
+				types.MultiviewLayoutType("LAYOUT_2EH"),
+				types.MultiviewLayoutType("LAYOUT_2EH"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1892,6 +1912,16 @@ func TestUpdateRequestSnapshot_CreateChannel(t *testing.T) {
 		},
 		OutputHeaderConfiguration: &types.OutputHeaderConfiguration{
 			PublishMQCS: ptr.Bool(true),
+		},
+		MultiviewConfiguration: &types.MultiviewConfiguration{
+			AvailableSources: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AvailableLayouts: []types.MultiviewLayoutType{
+				types.MultiviewLayoutType("LAYOUT_2EH"),
+				types.MultiviewLayoutType("LAYOUT_2EH"),
+			},
 		},
 		OutputLockingMode: types.OutputLockingMode("EPOCH_LOCKED"),
 		Tags: map[string]string{
@@ -3059,6 +3089,16 @@ func TestUpdateRequestSnapshot_UpdateChannel(t *testing.T) {
 		},
 		OutputHeaderConfiguration: &types.OutputHeaderConfiguration{
 			PublishMQCS: ptr.Bool(true),
+		},
+		MultiviewConfiguration: &types.MultiviewConfiguration{
+			AvailableSources: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AvailableLayouts: []types.MultiviewLayoutType{
+				types.MultiviewLayoutType("LAYOUT_2EH"),
+				types.MultiviewLayoutType("LAYOUT_2EH"),
+			},
 		},
 	}
 	body := &bytes.Buffer{}

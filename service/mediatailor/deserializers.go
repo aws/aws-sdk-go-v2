@@ -4181,6 +4181,11 @@ func awsRestjson1_deserializeOpDocumentGetFunctionOutput(v **GetFunctionOutput, 
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "AwsServiceRequestConfiguration":
+			if err := awsRestjson1_deserializeDocumentAwsServiceRequestConfiguration(&sv.AwsServiceRequestConfiguration, value); err != nil {
+				return err
+			}
+
 		case "ConcurrentExecutorConfiguration":
 			if err := awsRestjson1_deserializeDocumentConcurrentExecutorConfiguration(&sv.ConcurrentExecutorConfiguration, value); err != nil {
 				return err
@@ -6474,6 +6479,11 @@ func awsRestjson1_deserializeOpDocumentPutFunctionOutput(v **PutFunctionOutput, 
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "AwsServiceRequestConfiguration":
+			if err := awsRestjson1_deserializeDocumentAwsServiceRequestConfiguration(&sv.AwsServiceRequestConfiguration, value); err != nil {
+				return err
 			}
 
 		case "ConcurrentExecutorConfiguration":
@@ -10199,6 +10209,114 @@ func awsRestjson1_deserializeDocumentAvailSuppression(v **types.AvailSuppression
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAwsServiceRequestConfiguration(v **types.AwsServiceRequestConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsServiceRequestConfiguration
+	if *v == nil {
+		sv = &types.AwsServiceRequestConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Body":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Body = ptr.String(jtv)
+			}
+
+		case "Headers":
+			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Headers, value); err != nil {
+				return err
+			}
+
+		case "MethodType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MethodType to be of type string, got %T instead", value)
+				}
+				sv.MethodType = types.MethodType(jtv)
+			}
+
+		case "Output":
+			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Output, value); err != nil {
+				return err
+			}
+
+		case "RequestTimeoutMilliseconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RequestTimeoutMilliseconds = ptr.Int32(int32(i64))
+			}
+
+		case "Runtime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuntimeType to be of type string, got %T instead", value)
+				}
+				sv.Runtime = types.RuntimeType(jtv)
+			}
+
+		case "TargetRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.TargetRegion = ptr.String(jtv)
+			}
+
+		case "TargetService":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsTargetService to be of type string, got %T instead", value)
+				}
+				sv.TargetService = ptr.String(jtv)
+			}
+
+		case "Url":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Url = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10901,6 +11019,11 @@ func awsRestjson1_deserializeDocumentFunction(v **types.Function, value interfac
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "AwsServiceRequestConfiguration":
+			if err := awsRestjson1_deserializeDocumentAwsServiceRequestConfiguration(&sv.AwsServiceRequestConfiguration, value); err != nil {
+				return err
 			}
 
 		case "ConcurrentExecutorConfiguration":

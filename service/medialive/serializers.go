@@ -11206,6 +11206,17 @@ func awsRestjson1_serializeDocument__listOfDashRoleCaption(v []types.DashRoleCap
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfEnrichmentMethod(v []types.EnrichmentMethod, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfEventBridgeRuleTemplateTarget(v []types.EventBridgeRuleTemplateTarget, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -11590,6 +11601,17 @@ func awsRestjson1_serializeDocument__listOfOutputLocationRef(v []types.OutputLoc
 		if err := awsRestjson1_serializeDocumentOutputLocationRef(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfOutputUsage(v []types.OutputUsage, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }
@@ -14211,9 +14233,33 @@ func awsRestjson1_serializeDocumentEbuTtDDestinationSettings(v *types.EbuTtDDest
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEmbeddedCaptionPositionSettings(v *types.EmbeddedCaptionPositionSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.YPositionLine != nil {
+		ok := object.Key("yPositionLine")
+		ok.Integer(*v.YPositionLine)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEmbeddedDestinationSettings(v *types.EmbeddedDestinationSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Position != nil {
+		ok := object.Key("position")
+		if err := awsRestjson1_serializeDocumentEmbeddedCaptionPositionSettings(v.Position, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.StyleControl) > 0 {
+		ok := object.Key("styleControl")
+		ok.String(string(v.StyleControl))
+	}
 
 	return nil
 }
@@ -15919,6 +15965,13 @@ func awsRestjson1_serializeDocumentInferenceSettings(v *types.InferenceSettings,
 		}
 	}
 
+	if v.EnrichmentMethods != nil {
+		ok := object.Key("enrichmentMethods")
+		if err := awsRestjson1_serializeDocument__listOfEnrichmentMethod(v.EnrichmentMethods, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FeedArn != nil {
 		ok := object.Key("feedArn")
 		ok.String(*v.FeedArn)
@@ -17260,6 +17313,13 @@ func awsRestjson1_serializeDocumentMediaPackageV2DestinationSettings(v *types.Me
 	if len(v.HlsDefault) > 0 {
 		ok := object.Key("hlsDefault")
 		ok.String(string(v.HlsDefault))
+	}
+
+	if v.OutputUsage != nil {
+		ok := object.Key("outputUsage")
+		if err := awsRestjson1_serializeDocument__listOfOutputUsage(v.OutputUsage, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -20091,6 +20151,18 @@ func awsRestjson1_serializeDocumentTemporalFilterSettings(v *types.TemporalFilte
 	return nil
 }
 
+func awsRestjson1_serializeDocumentTextCaptionPositionSettings(v *types.TextCaptionPositionSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.YPositionPercentage != nil {
+		ok := object.Key("yPositionPercentage")
+		ok.Integer(*v.YPositionPercentage)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentThumbnailConfiguration(v *types.ThumbnailConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -20157,6 +20229,13 @@ func awsRestjson1_serializeDocumentTimedMetadataScheduleActionSettings(v *types.
 func awsRestjson1_serializeDocumentTtmlDestinationSettings(v *types.TtmlDestinationSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Position != nil {
+		ok := object.Key("position")
+		if err := awsRestjson1_serializeDocumentTextCaptionPositionSettings(v.Position, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.StyleControl) > 0 {
 		ok := object.Key("styleControl")
@@ -20310,6 +20389,11 @@ func awsRestjson1_serializeDocumentVideoCodecSettings(v *types.VideoCodecSetting
 func awsRestjson1_serializeDocumentVideoDescription(v *types.VideoDescription, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Border != nil {
+		ok := object.Key("border")
+		ok.Integer(*v.Border)
+	}
 
 	if v.CodecSettings != nil {
 		ok := object.Key("codecSettings")
@@ -20561,6 +20645,13 @@ func awsRestjson1_serializeDocumentWavSettings(v *types.WavSettings, value smith
 func awsRestjson1_serializeDocumentWebvttDestinationSettings(v *types.WebvttDestinationSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Position != nil {
+		ok := object.Key("position")
+		if err := awsRestjson1_serializeDocumentTextCaptionPositionSettings(v.Position, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.StyleControl) > 0 {
 		ok := object.Key("styleControl")

@@ -2754,6 +2754,8 @@ func TestCheckRequestSnapshot_CopyVolumes(t *testing.T) {
 		MultiAttachEnabled: ptr.Bool(true),
 		Throughput:         ptr.Int32(1),
 		ClientToken:        ptr.String("__ClientToken__"),
+		Encrypted:          ptr.Bool(true),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -41982,6 +41984,8 @@ func TestUpdateRequestSnapshot_CopyVolumes(t *testing.T) {
 		MultiAttachEnabled: ptr.Bool(true),
 		Throughput:         ptr.Int32(1),
 		ClientToken:        ptr.String("__ClientToken__"),
+		Encrypted:          ptr.Bool(true),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

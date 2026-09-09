@@ -2582,6 +2582,18 @@ func TestCheckSnapshot_ListEntitySecurityProfiles(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListEvaluationFormAIVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEvaluationFormAIVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListEvaluationFormAIVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListEvaluationForms(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListEvaluationForms(context.Background(), nil, func(o *Options) {
@@ -7314,6 +7326,18 @@ func TestUpdateSnapshot_ListEntitySecurityProfiles(t *testing.T) {
 	_, err := svc.ListEntitySecurityProfiles(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListEntitySecurityProfiles")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListEvaluationFormAIVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEvaluationFormAIVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListEvaluationFormAIVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -2048,7 +2048,12 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 								DefaultFontSize:   ptr.Int32(1),
 								DefaultLineHeight: ptr.Int32(1),
 							},
-							EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+							EmbeddedDestinationSettings: &types.EmbeddedDestinationSettings{
+								Position: &types.EmbeddedCaptionPositionSettings{
+									YPositionLine: ptr.Int32(1),
+								},
+								StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							},
 							EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 							RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
 							Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
@@ -2057,9 +2062,15 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 							TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
 							TtmlDestinationSettings: &types.TtmlDestinationSettings{
 								StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+								Position: &types.TextCaptionPositionSettings{
+									YPositionPercentage: ptr.Int32(1),
+								},
 							},
 							WebvttDestinationSettings: &types.WebvttDestinationSettings{
 								StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+								Position: &types.TextCaptionPositionSettings{
+									YPositionPercentage: ptr.Int32(1),
+								},
 							},
 						},
 						LanguageCode:        ptr.String("__LanguageCode__"),
@@ -2132,7 +2143,12 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 								DefaultFontSize:   ptr.Int32(1),
 								DefaultLineHeight: ptr.Int32(1),
 							},
-							EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+							EmbeddedDestinationSettings: &types.EmbeddedDestinationSettings{
+								Position: &types.EmbeddedCaptionPositionSettings{
+									YPositionLine: ptr.Int32(1),
+								},
+								StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							},
 							EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 							RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
 							Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
@@ -2141,9 +2157,15 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 							TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
 							TtmlDestinationSettings: &types.TtmlDestinationSettings{
 								StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+								Position: &types.TextCaptionPositionSettings{
+									YPositionPercentage: ptr.Int32(1),
+								},
 							},
 							WebvttDestinationSettings: &types.WebvttDestinationSettings{
 								StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+								Position: &types.TextCaptionPositionSettings{
+									YPositionPercentage: ptr.Int32(1),
+								},
 							},
 						},
 						LanguageCode:        ptr.String("__LanguageCode__"),
@@ -2648,6 +2670,10 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 											AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 											HlsAutoSelect:      types.HlsAutoSelect("NO"),
 											HlsDefault:         types.HlsDefault("NO"),
+											OutputUsage: []types.OutputUsage{
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											},
 										},
 									},
 									MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -3043,6 +3069,10 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 											AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 											HlsAutoSelect:      types.HlsAutoSelect("NO"),
 											HlsDefault:         types.HlsDefault("NO"),
+											OutputUsage: []types.OutputUsage{
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											},
 										},
 									},
 									MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -3751,6 +3781,10 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 											AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 											HlsAutoSelect:      types.HlsAutoSelect("NO"),
 											HlsDefault:         types.HlsDefault("NO"),
+											OutputUsage: []types.OutputUsage{
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											},
 										},
 									},
 									MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -4146,6 +4180,10 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 											AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 											HlsAutoSelect:      types.HlsAutoSelect("NO"),
 											HlsDefault:         types.HlsDefault("NO"),
+											OutputUsage: []types.OutputUsage{
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											},
 										},
 									},
 									MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -4641,6 +4679,7 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 							X:      ptr.Int32(1),
 							Y:      ptr.Int32(1),
 						},
+						Border: ptr.Int32(1),
 					},
 					{
 						CodecSettings: &types.VideoCodecSettings{
@@ -4869,6 +4908,7 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 							X:      ptr.Int32(1),
 							Y:      ptr.Int32(1),
 						},
+						Border: ptr.Int32(1),
 					},
 				},
 				ThumbnailConfiguration: &types.ThumbnailConfiguration{
@@ -5586,7 +5626,12 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 							DefaultFontSize:   ptr.Int32(1),
 							DefaultLineHeight: ptr.Int32(1),
 						},
-						EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+						EmbeddedDestinationSettings: &types.EmbeddedDestinationSettings{
+							Position: &types.EmbeddedCaptionPositionSettings{
+								YPositionLine: ptr.Int32(1),
+							},
+							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
 						Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
@@ -5595,9 +5640,15 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 						TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
 						TtmlDestinationSettings: &types.TtmlDestinationSettings{
 							StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 						WebvttDestinationSettings: &types.WebvttDestinationSettings{
 							StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 					},
 					LanguageCode:        ptr.String("__LanguageCode__"),
@@ -5670,7 +5721,12 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 							DefaultFontSize:   ptr.Int32(1),
 							DefaultLineHeight: ptr.Int32(1),
 						},
-						EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+						EmbeddedDestinationSettings: &types.EmbeddedDestinationSettings{
+							Position: &types.EmbeddedCaptionPositionSettings{
+								YPositionLine: ptr.Int32(1),
+							},
+							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
 						Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
@@ -5679,9 +5735,15 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 						TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
 						TtmlDestinationSettings: &types.TtmlDestinationSettings{
 							StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 						WebvttDestinationSettings: &types.WebvttDestinationSettings{
 							StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 					},
 					LanguageCode:        ptr.String("__LanguageCode__"),
@@ -6186,6 +6248,10 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -6581,6 +6647,10 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -7289,6 +7359,10 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -7684,6 +7758,10 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -8179,6 +8257,7 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 						X:      ptr.Int32(1),
 						Y:      ptr.Int32(1),
 					},
+					Border: ptr.Int32(1),
 				},
 				{
 					CodecSettings: &types.VideoCodecSettings{
@@ -8407,6 +8486,7 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 						X:      ptr.Int32(1),
 						Y:      ptr.Int32(1),
 					},
+					Border: ptr.Int32(1),
 				},
 			},
 			ThumbnailConfiguration: &types.ThumbnailConfiguration{
@@ -10723,7 +10803,12 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 							DefaultFontSize:   ptr.Int32(1),
 							DefaultLineHeight: ptr.Int32(1),
 						},
-						EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+						EmbeddedDestinationSettings: &types.EmbeddedDestinationSettings{
+							Position: &types.EmbeddedCaptionPositionSettings{
+								YPositionLine: ptr.Int32(1),
+							},
+							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
 						Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
@@ -10732,9 +10817,15 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 						TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
 						TtmlDestinationSettings: &types.TtmlDestinationSettings{
 							StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 						WebvttDestinationSettings: &types.WebvttDestinationSettings{
 							StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 					},
 					LanguageCode:        ptr.String("__LanguageCode__"),
@@ -10807,7 +10898,12 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 							DefaultFontSize:   ptr.Int32(1),
 							DefaultLineHeight: ptr.Int32(1),
 						},
-						EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+						EmbeddedDestinationSettings: &types.EmbeddedDestinationSettings{
+							Position: &types.EmbeddedCaptionPositionSettings{
+								YPositionLine: ptr.Int32(1),
+							},
+							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
 						Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
@@ -10816,9 +10912,15 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 						TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
 						TtmlDestinationSettings: &types.TtmlDestinationSettings{
 							StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 						WebvttDestinationSettings: &types.WebvttDestinationSettings{
 							StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 					},
 					LanguageCode:        ptr.String("__LanguageCode__"),
@@ -11323,6 +11425,10 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -11718,6 +11824,10 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -12426,6 +12536,10 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -12821,6 +12935,10 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -13316,6 +13434,7 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 						X:      ptr.Int32(1),
 						Y:      ptr.Int32(1),
 					},
+					Border: ptr.Int32(1),
 				},
 				{
 					CodecSettings: &types.VideoCodecSettings{
@@ -13544,6 +13663,7 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 						X:      ptr.Int32(1),
 						Y:      ptr.Int32(1),
 					},
+					Border: ptr.Int32(1),
 				},
 			},
 			ThumbnailConfiguration: &types.ThumbnailConfiguration{
@@ -14926,7 +15046,12 @@ func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
 							DefaultFontSize:   ptr.Int32(1),
 							DefaultLineHeight: ptr.Int32(1),
 						},
-						EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+						EmbeddedDestinationSettings: &types.EmbeddedDestinationSettings{
+							Position: &types.EmbeddedCaptionPositionSettings{
+								YPositionLine: ptr.Int32(1),
+							},
+							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
 						Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
@@ -14935,9 +15060,15 @@ func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
 						TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
 						TtmlDestinationSettings: &types.TtmlDestinationSettings{
 							StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 						WebvttDestinationSettings: &types.WebvttDestinationSettings{
 							StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 					},
 					LanguageCode:        ptr.String("__LanguageCode__"),
@@ -15010,7 +15141,12 @@ func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
 							DefaultFontSize:   ptr.Int32(1),
 							DefaultLineHeight: ptr.Int32(1),
 						},
-						EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+						EmbeddedDestinationSettings: &types.EmbeddedDestinationSettings{
+							Position: &types.EmbeddedCaptionPositionSettings{
+								YPositionLine: ptr.Int32(1),
+							},
+							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
 						Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
@@ -15019,9 +15155,15 @@ func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
 						TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
 						TtmlDestinationSettings: &types.TtmlDestinationSettings{
 							StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 						WebvttDestinationSettings: &types.WebvttDestinationSettings{
 							StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 					},
 					LanguageCode:        ptr.String("__LanguageCode__"),
@@ -15526,6 +15668,10 @@ func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -15921,6 +16067,10 @@ func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -16629,6 +16779,10 @@ func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -17024,6 +17178,10 @@ func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -17519,6 +17677,7 @@ func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
 						X:      ptr.Int32(1),
 						Y:      ptr.Int32(1),
 					},
+					Border: ptr.Int32(1),
 				},
 				{
 					CodecSettings: &types.VideoCodecSettings{
@@ -17747,6 +17906,7 @@ func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
 						X:      ptr.Int32(1),
 						Y:      ptr.Int32(1),
 					},
+					Border: ptr.Int32(1),
 				},
 			},
 			ThumbnailConfiguration: &types.ThumbnailConfiguration{
@@ -22374,7 +22534,12 @@ func TestCheckResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 							DefaultFontSize:   ptr.Int32(1),
 							DefaultLineHeight: ptr.Int32(1),
 						},
-						EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+						EmbeddedDestinationSettings: &types.EmbeddedDestinationSettings{
+							Position: &types.EmbeddedCaptionPositionSettings{
+								YPositionLine: ptr.Int32(1),
+							},
+							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
 						Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
@@ -22383,9 +22548,15 @@ func TestCheckResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 						TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
 						TtmlDestinationSettings: &types.TtmlDestinationSettings{
 							StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 						WebvttDestinationSettings: &types.WebvttDestinationSettings{
 							StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 					},
 					LanguageCode:        ptr.String("__LanguageCode__"),
@@ -22458,7 +22629,12 @@ func TestCheckResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 							DefaultFontSize:   ptr.Int32(1),
 							DefaultLineHeight: ptr.Int32(1),
 						},
-						EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+						EmbeddedDestinationSettings: &types.EmbeddedDestinationSettings{
+							Position: &types.EmbeddedCaptionPositionSettings{
+								YPositionLine: ptr.Int32(1),
+							},
+							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
 						Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
@@ -22467,9 +22643,15 @@ func TestCheckResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 						TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
 						TtmlDestinationSettings: &types.TtmlDestinationSettings{
 							StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 						WebvttDestinationSettings: &types.WebvttDestinationSettings{
 							StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 					},
 					LanguageCode:        ptr.String("__LanguageCode__"),
@@ -22974,6 +23156,10 @@ func TestCheckResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -23369,6 +23555,10 @@ func TestCheckResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -24077,6 +24267,10 @@ func TestCheckResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -24472,6 +24666,10 @@ func TestCheckResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -24967,6 +25165,7 @@ func TestCheckResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 						X:      ptr.Int32(1),
 						Y:      ptr.Int32(1),
 					},
+					Border: ptr.Int32(1),
 				},
 				{
 					CodecSettings: &types.VideoCodecSettings{
@@ -25195,6 +25394,7 @@ func TestCheckResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 						X:      ptr.Int32(1),
 						Y:      ptr.Int32(1),
 					},
+					Border: ptr.Int32(1),
 				},
 			},
 			ThumbnailConfiguration: &types.ThumbnailConfiguration{
@@ -25943,7 +26143,12 @@ func TestCheckResponseSnapshot_StartChannel(t *testing.T) {
 							DefaultFontSize:   ptr.Int32(1),
 							DefaultLineHeight: ptr.Int32(1),
 						},
-						EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+						EmbeddedDestinationSettings: &types.EmbeddedDestinationSettings{
+							Position: &types.EmbeddedCaptionPositionSettings{
+								YPositionLine: ptr.Int32(1),
+							},
+							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
 						Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
@@ -25952,9 +26157,15 @@ func TestCheckResponseSnapshot_StartChannel(t *testing.T) {
 						TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
 						TtmlDestinationSettings: &types.TtmlDestinationSettings{
 							StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 						WebvttDestinationSettings: &types.WebvttDestinationSettings{
 							StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 					},
 					LanguageCode:        ptr.String("__LanguageCode__"),
@@ -26027,7 +26238,12 @@ func TestCheckResponseSnapshot_StartChannel(t *testing.T) {
 							DefaultFontSize:   ptr.Int32(1),
 							DefaultLineHeight: ptr.Int32(1),
 						},
-						EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+						EmbeddedDestinationSettings: &types.EmbeddedDestinationSettings{
+							Position: &types.EmbeddedCaptionPositionSettings{
+								YPositionLine: ptr.Int32(1),
+							},
+							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
 						Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
@@ -26036,9 +26252,15 @@ func TestCheckResponseSnapshot_StartChannel(t *testing.T) {
 						TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
 						TtmlDestinationSettings: &types.TtmlDestinationSettings{
 							StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 						WebvttDestinationSettings: &types.WebvttDestinationSettings{
 							StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 					},
 					LanguageCode:        ptr.String("__LanguageCode__"),
@@ -26543,6 +26765,10 @@ func TestCheckResponseSnapshot_StartChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -26938,6 +27164,10 @@ func TestCheckResponseSnapshot_StartChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -27646,6 +27876,10 @@ func TestCheckResponseSnapshot_StartChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -28041,6 +28275,10 @@ func TestCheckResponseSnapshot_StartChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -28536,6 +28774,7 @@ func TestCheckResponseSnapshot_StartChannel(t *testing.T) {
 						X:      ptr.Int32(1),
 						Y:      ptr.Int32(1),
 					},
+					Border: ptr.Int32(1),
 				},
 				{
 					CodecSettings: &types.VideoCodecSettings{
@@ -28764,6 +29003,7 @@ func TestCheckResponseSnapshot_StartChannel(t *testing.T) {
 						X:      ptr.Int32(1),
 						Y:      ptr.Int32(1),
 					},
+					Border: ptr.Int32(1),
 				},
 			},
 			ThumbnailConfiguration: &types.ThumbnailConfiguration{
@@ -29924,7 +30164,12 @@ func TestCheckResponseSnapshot_StopChannel(t *testing.T) {
 							DefaultFontSize:   ptr.Int32(1),
 							DefaultLineHeight: ptr.Int32(1),
 						},
-						EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+						EmbeddedDestinationSettings: &types.EmbeddedDestinationSettings{
+							Position: &types.EmbeddedCaptionPositionSettings{
+								YPositionLine: ptr.Int32(1),
+							},
+							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
 						Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
@@ -29933,9 +30178,15 @@ func TestCheckResponseSnapshot_StopChannel(t *testing.T) {
 						TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
 						TtmlDestinationSettings: &types.TtmlDestinationSettings{
 							StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 						WebvttDestinationSettings: &types.WebvttDestinationSettings{
 							StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 					},
 					LanguageCode:        ptr.String("__LanguageCode__"),
@@ -30008,7 +30259,12 @@ func TestCheckResponseSnapshot_StopChannel(t *testing.T) {
 							DefaultFontSize:   ptr.Int32(1),
 							DefaultLineHeight: ptr.Int32(1),
 						},
-						EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+						EmbeddedDestinationSettings: &types.EmbeddedDestinationSettings{
+							Position: &types.EmbeddedCaptionPositionSettings{
+								YPositionLine: ptr.Int32(1),
+							},
+							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
 						Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
@@ -30017,9 +30273,15 @@ func TestCheckResponseSnapshot_StopChannel(t *testing.T) {
 						TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
 						TtmlDestinationSettings: &types.TtmlDestinationSettings{
 							StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 						WebvttDestinationSettings: &types.WebvttDestinationSettings{
 							StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 					},
 					LanguageCode:        ptr.String("__LanguageCode__"),
@@ -30524,6 +30786,10 @@ func TestCheckResponseSnapshot_StopChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -30919,6 +31185,10 @@ func TestCheckResponseSnapshot_StopChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -31627,6 +31897,10 @@ func TestCheckResponseSnapshot_StopChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -32022,6 +32296,10 @@ func TestCheckResponseSnapshot_StopChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -32517,6 +32795,7 @@ func TestCheckResponseSnapshot_StopChannel(t *testing.T) {
 						X:      ptr.Int32(1),
 						Y:      ptr.Int32(1),
 					},
+					Border: ptr.Int32(1),
 				},
 				{
 					CodecSettings: &types.VideoCodecSettings{
@@ -32745,6 +33024,7 @@ func TestCheckResponseSnapshot_StopChannel(t *testing.T) {
 						X:      ptr.Int32(1),
 						Y:      ptr.Int32(1),
 					},
+					Border: ptr.Int32(1),
 				},
 			},
 			ThumbnailConfiguration: &types.ThumbnailConfiguration{
@@ -33614,7 +33894,12 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 								DefaultFontSize:   ptr.Int32(1),
 								DefaultLineHeight: ptr.Int32(1),
 							},
-							EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+							EmbeddedDestinationSettings: &types.EmbeddedDestinationSettings{
+								Position: &types.EmbeddedCaptionPositionSettings{
+									YPositionLine: ptr.Int32(1),
+								},
+								StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							},
 							EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 							RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
 							Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
@@ -33623,9 +33908,15 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 							TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
 							TtmlDestinationSettings: &types.TtmlDestinationSettings{
 								StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+								Position: &types.TextCaptionPositionSettings{
+									YPositionPercentage: ptr.Int32(1),
+								},
 							},
 							WebvttDestinationSettings: &types.WebvttDestinationSettings{
 								StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+								Position: &types.TextCaptionPositionSettings{
+									YPositionPercentage: ptr.Int32(1),
+								},
 							},
 						},
 						LanguageCode:        ptr.String("__LanguageCode__"),
@@ -33698,7 +33989,12 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 								DefaultFontSize:   ptr.Int32(1),
 								DefaultLineHeight: ptr.Int32(1),
 							},
-							EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+							EmbeddedDestinationSettings: &types.EmbeddedDestinationSettings{
+								Position: &types.EmbeddedCaptionPositionSettings{
+									YPositionLine: ptr.Int32(1),
+								},
+								StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							},
 							EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 							RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
 							Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
@@ -33707,9 +34003,15 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 							TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
 							TtmlDestinationSettings: &types.TtmlDestinationSettings{
 								StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+								Position: &types.TextCaptionPositionSettings{
+									YPositionPercentage: ptr.Int32(1),
+								},
 							},
 							WebvttDestinationSettings: &types.WebvttDestinationSettings{
 								StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+								Position: &types.TextCaptionPositionSettings{
+									YPositionPercentage: ptr.Int32(1),
+								},
 							},
 						},
 						LanguageCode:        ptr.String("__LanguageCode__"),
@@ -34214,6 +34516,10 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 											AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 											HlsAutoSelect:      types.HlsAutoSelect("NO"),
 											HlsDefault:         types.HlsDefault("NO"),
+											OutputUsage: []types.OutputUsage{
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											},
 										},
 									},
 									MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -34609,6 +34915,10 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 											AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 											HlsAutoSelect:      types.HlsAutoSelect("NO"),
 											HlsDefault:         types.HlsDefault("NO"),
+											OutputUsage: []types.OutputUsage{
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											},
 										},
 									},
 									MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -35317,6 +35627,10 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 											AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 											HlsAutoSelect:      types.HlsAutoSelect("NO"),
 											HlsDefault:         types.HlsDefault("NO"),
+											OutputUsage: []types.OutputUsage{
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											},
 										},
 									},
 									MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -35712,6 +36026,10 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 											AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 											HlsAutoSelect:      types.HlsAutoSelect("NO"),
 											HlsDefault:         types.HlsDefault("NO"),
+											OutputUsage: []types.OutputUsage{
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											},
 										},
 									},
 									MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -36207,6 +36525,7 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 							X:      ptr.Int32(1),
 							Y:      ptr.Int32(1),
 						},
+						Border: ptr.Int32(1),
 					},
 					{
 						CodecSettings: &types.VideoCodecSettings{
@@ -36435,6 +36754,7 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 							X:      ptr.Int32(1),
 							Y:      ptr.Int32(1),
 						},
+						Border: ptr.Int32(1),
 					},
 				},
 				ThumbnailConfiguration: &types.ThumbnailConfiguration{
@@ -37152,7 +37472,12 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 							DefaultFontSize:   ptr.Int32(1),
 							DefaultLineHeight: ptr.Int32(1),
 						},
-						EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+						EmbeddedDestinationSettings: &types.EmbeddedDestinationSettings{
+							Position: &types.EmbeddedCaptionPositionSettings{
+								YPositionLine: ptr.Int32(1),
+							},
+							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
 						Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
@@ -37161,9 +37486,15 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 						TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
 						TtmlDestinationSettings: &types.TtmlDestinationSettings{
 							StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 						WebvttDestinationSettings: &types.WebvttDestinationSettings{
 							StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 					},
 					LanguageCode:        ptr.String("__LanguageCode__"),
@@ -37236,7 +37567,12 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 							DefaultFontSize:   ptr.Int32(1),
 							DefaultLineHeight: ptr.Int32(1),
 						},
-						EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+						EmbeddedDestinationSettings: &types.EmbeddedDestinationSettings{
+							Position: &types.EmbeddedCaptionPositionSettings{
+								YPositionLine: ptr.Int32(1),
+							},
+							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
 						Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
@@ -37245,9 +37581,15 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 						TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
 						TtmlDestinationSettings: &types.TtmlDestinationSettings{
 							StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 						WebvttDestinationSettings: &types.WebvttDestinationSettings{
 							StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+							Position: &types.TextCaptionPositionSettings{
+								YPositionPercentage: ptr.Int32(1),
+							},
 						},
 					},
 					LanguageCode:        ptr.String("__LanguageCode__"),
@@ -37752,6 +38094,10 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -38147,6 +38493,10 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -38855,6 +39205,10 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -39250,6 +39604,10 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 										HlsAutoSelect:      types.HlsAutoSelect("NO"),
 										HlsDefault:         types.HlsDefault("NO"),
+										OutputUsage: []types.OutputUsage{
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+										},
 									},
 								},
 								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -39745,6 +40103,7 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 						X:      ptr.Int32(1),
 						Y:      ptr.Int32(1),
 					},
+					Border: ptr.Int32(1),
 				},
 				{
 					CodecSettings: &types.VideoCodecSettings{
@@ -39973,6 +40332,7 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 						X:      ptr.Int32(1),
 						Y:      ptr.Int32(1),
 					},
+					Border: ptr.Int32(1),
 				},
 			},
 			ThumbnailConfiguration: &types.ThumbnailConfiguration{
@@ -40697,7 +41057,12 @@ func TestCheckResponseSnapshot_UpdateChannelClass(t *testing.T) {
 								DefaultFontSize:   ptr.Int32(1),
 								DefaultLineHeight: ptr.Int32(1),
 							},
-							EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+							EmbeddedDestinationSettings: &types.EmbeddedDestinationSettings{
+								Position: &types.EmbeddedCaptionPositionSettings{
+									YPositionLine: ptr.Int32(1),
+								},
+								StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							},
 							EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 							RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
 							Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
@@ -40706,9 +41071,15 @@ func TestCheckResponseSnapshot_UpdateChannelClass(t *testing.T) {
 							TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
 							TtmlDestinationSettings: &types.TtmlDestinationSettings{
 								StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+								Position: &types.TextCaptionPositionSettings{
+									YPositionPercentage: ptr.Int32(1),
+								},
 							},
 							WebvttDestinationSettings: &types.WebvttDestinationSettings{
 								StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+								Position: &types.TextCaptionPositionSettings{
+									YPositionPercentage: ptr.Int32(1),
+								},
 							},
 						},
 						LanguageCode:        ptr.String("__LanguageCode__"),
@@ -40781,7 +41152,12 @@ func TestCheckResponseSnapshot_UpdateChannelClass(t *testing.T) {
 								DefaultFontSize:   ptr.Int32(1),
 								DefaultLineHeight: ptr.Int32(1),
 							},
-							EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+							EmbeddedDestinationSettings: &types.EmbeddedDestinationSettings{
+								Position: &types.EmbeddedCaptionPositionSettings{
+									YPositionLine: ptr.Int32(1),
+								},
+								StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							},
 							EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 							RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
 							Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
@@ -40790,9 +41166,15 @@ func TestCheckResponseSnapshot_UpdateChannelClass(t *testing.T) {
 							TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
 							TtmlDestinationSettings: &types.TtmlDestinationSettings{
 								StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+								Position: &types.TextCaptionPositionSettings{
+									YPositionPercentage: ptr.Int32(1),
+								},
 							},
 							WebvttDestinationSettings: &types.WebvttDestinationSettings{
 								StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+								Position: &types.TextCaptionPositionSettings{
+									YPositionPercentage: ptr.Int32(1),
+								},
 							},
 						},
 						LanguageCode:        ptr.String("__LanguageCode__"),
@@ -41297,6 +41679,10 @@ func TestCheckResponseSnapshot_UpdateChannelClass(t *testing.T) {
 											AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 											HlsAutoSelect:      types.HlsAutoSelect("NO"),
 											HlsDefault:         types.HlsDefault("NO"),
+											OutputUsage: []types.OutputUsage{
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											},
 										},
 									},
 									MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -41692,6 +42078,10 @@ func TestCheckResponseSnapshot_UpdateChannelClass(t *testing.T) {
 											AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 											HlsAutoSelect:      types.HlsAutoSelect("NO"),
 											HlsDefault:         types.HlsDefault("NO"),
+											OutputUsage: []types.OutputUsage{
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											},
 										},
 									},
 									MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -42400,6 +42790,10 @@ func TestCheckResponseSnapshot_UpdateChannelClass(t *testing.T) {
 											AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 											HlsAutoSelect:      types.HlsAutoSelect("NO"),
 											HlsDefault:         types.HlsDefault("NO"),
+											OutputUsage: []types.OutputUsage{
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											},
 										},
 									},
 									MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -42795,6 +43189,10 @@ func TestCheckResponseSnapshot_UpdateChannelClass(t *testing.T) {
 											AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
 											HlsAutoSelect:      types.HlsAutoSelect("NO"),
 											HlsDefault:         types.HlsDefault("NO"),
+											OutputUsage: []types.OutputUsage{
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+												types.OutputUsage("MULTIVIEW_EQUAL_SIZE_VIEW"),
+											},
 										},
 									},
 									MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
@@ -43290,6 +43688,7 @@ func TestCheckResponseSnapshot_UpdateChannelClass(t *testing.T) {
 							X:      ptr.Int32(1),
 							Y:      ptr.Int32(1),
 						},
+						Border: ptr.Int32(1),
 					},
 					{
 						CodecSettings: &types.VideoCodecSettings{
@@ -43518,6 +43917,7 @@ func TestCheckResponseSnapshot_UpdateChannelClass(t *testing.T) {
 							X:      ptr.Int32(1),
 							Y:      ptr.Int32(1),
 						},
+						Border: ptr.Int32(1),
 					},
 				},
 				ThumbnailConfiguration: &types.ThumbnailConfiguration{

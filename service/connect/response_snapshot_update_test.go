@@ -4153,6 +4153,10 @@ func TestUpdateResponseSnapshot_DescribeContactEvaluation(t *testing.T) {
 											},
 										},
 									},
+									MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+										MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+										MetricName: ptr.String("__MetricName__"),
+									},
 								},
 							},
 							&types.EvaluationFormItemMemberQuestion{
@@ -4268,6 +4272,10 @@ func TestUpdateResponseSnapshot_DescribeContactEvaluation(t *testing.T) {
 												MaxScorePercentage:  1.0,
 											},
 										},
+									},
+									MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+										MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+										MetricName: ptr.String("__MetricName__"),
 									},
 								},
 							},
@@ -4408,6 +4416,10 @@ func TestUpdateResponseSnapshot_DescribeContactEvaluation(t *testing.T) {
 											},
 										},
 									},
+									MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+										MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+										MetricName: ptr.String("__MetricName__"),
+									},
 								},
 							},
 							&types.EvaluationFormItemMemberQuestion{
@@ -4524,6 +4536,10 @@ func TestUpdateResponseSnapshot_DescribeContactEvaluation(t *testing.T) {
 											},
 										},
 									},
+									MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+										MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+										MetricName: ptr.String("__MetricName__"),
+									},
 								},
 							},
 						},
@@ -4586,6 +4602,7 @@ func TestUpdateResponseSnapshot_DescribeContactEvaluation(t *testing.T) {
 				},
 				EligibilityDays: 1,
 			},
+			AIVersion: ptr.String("__AIVersion__"),
 		},
 	}
 	proto := restjson1.New(schemas.AmazonConnectService)
@@ -5002,6 +5019,10 @@ func TestUpdateResponseSnapshot_DescribeEvaluationForm(t *testing.T) {
 											},
 										},
 									},
+									MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+										MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+										MetricName: ptr.String("__MetricName__"),
+									},
 								},
 							},
 							&types.EvaluationFormItemMemberQuestion{
@@ -5117,6 +5138,10 @@ func TestUpdateResponseSnapshot_DescribeEvaluationForm(t *testing.T) {
 												MaxScorePercentage:  1.0,
 											},
 										},
+									},
+									MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+										MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+										MetricName: ptr.String("__MetricName__"),
 									},
 								},
 							},
@@ -5257,6 +5282,10 @@ func TestUpdateResponseSnapshot_DescribeEvaluationForm(t *testing.T) {
 											},
 										},
 									},
+									MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+										MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+										MetricName: ptr.String("__MetricName__"),
+									},
 								},
 							},
 							&types.EvaluationFormItemMemberQuestion{
@@ -5373,6 +5402,10 @@ func TestUpdateResponseSnapshot_DescribeEvaluationForm(t *testing.T) {
 											},
 										},
 									},
+									MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+										MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+										MetricName: ptr.String("__MetricName__"),
+									},
 								},
 							},
 						},
@@ -5444,6 +5477,7 @@ func TestUpdateResponseSnapshot_DescribeEvaluationForm(t *testing.T) {
 			},
 			LatestValidationStatus: types.EvaluationFormValidationStatus("IN_PROGRESS"),
 			LastValidationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			AIVersion:              ptr.String("__AIVersion__"),
 		},
 	}
 	proto := restjson1.New(schemas.AmazonConnectService)
@@ -10037,6 +10071,48 @@ func TestUpdateResponseSnapshot_ListEntitySecurityProfiles(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListEvaluationFormAIVersions(t *testing.T) {
+	want := &ListEvaluationFormAIVersionsOutput{
+		AIVersionSummaries: []types.EvaluationFormAIVersionSummary{
+			{
+				AIVersionName: ptr.String("__AIVersionName__"),
+				AIVersionLifecycle: &types.EvaluationFormAIVersionLifecycle{
+					Status:          types.EvaluationFormAIVersionStatus("LATEST"),
+					StartOfLifeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndOfLifeTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			{
+				AIVersionName: ptr.String("__AIVersionName__"),
+				AIVersionLifecycle: &types.EvaluationFormAIVersionLifecycle{
+					Status:          types.EvaluationFormAIVersionStatus("LATEST"),
+					StartOfLifeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndOfLifeTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.AmazonConnectService)
+	opSchema := smithy.NewOperationSchema(schemas.ListEvaluationFormAIVersions, schemas.ListEvaluationFormAIVersionsResponse, schemas.ListEvaluationFormAIVersionsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListEvaluationFormAIVersions.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListEvaluationFormVersions(t *testing.T) {
 	want := &ListEvaluationFormVersionsOutput{
 		EvaluationFormVersionSummaryList: []types.EvaluationFormVersionSummary{
@@ -13224,6 +13300,7 @@ func TestUpdateResponseSnapshot_SearchEvaluationForms(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
+				AIVersion: ptr.String("__AIVersion__"),
 			},
 			{
 				EvaluationFormId:       ptr.String("__EvaluationFormId__"),
@@ -13245,6 +13322,7 @@ func TestUpdateResponseSnapshot_SearchEvaluationForms(t *testing.T) {
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
+				AIVersion: ptr.String("__AIVersion__"),
 			},
 		},
 		NextToken:             ptr.String("__NextToken__"),
