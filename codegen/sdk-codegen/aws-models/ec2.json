@@ -18636,6 +18636,18 @@
                         "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the \n      request. For more information, see <a href=\"https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html\">\n        Ensure Idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
+                },
+                "Encrypted": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to encrypt the volume copy. If the source volume is encrypted, the \n      service always encrypts the copy regardless of this value. Set to <code>true</code> to \n      encrypt a copy of an unencrypted source volume during the copy operation. If you set \n      <code>Encrypted</code> to <code>true</code> but do not specify <code>KmsKeyId</code>, the \n      service uses the default KMS key for EBS encryption in your account.</p>"
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.ec2#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the KMS key to use for encryption of the volume copy. Specify a \n      symmetric encryption KMS key. You can specify a KMS key using the key ID, key ARN, alias \n      name, or alias ARN. If you set <code>Encrypted</code> to <code>true</code> but do not \n      specify this parameter, the service uses the default KMS key for EBS encryption in your \n      account. For cross-account volume copies, this must be a KMS key in the calling \n      account.</p>"
+                    }
                 }
             },
             "traits": {
@@ -141779,6 +141791,22 @@
                         "aws.protocols#ec2QueryName": "VolumeInitializationRate",
                         "smithy.api#documentation": "<p>The Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate) specified for the volume during creation, \n      in MiB/s. If no volume initialization rate was specified, the value is <code>null</code>.</p>",
                         "smithy.api#xmlName": "volumeInitializationRate"
+                    }
+                },
+                "VolumeArn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "VolumeArn",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the volume.</p>",
+                        "smithy.api#xmlName": "volumeArn"
+                    }
+                },
+                "OwnerId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "OwnerId",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the volume.</p>",
+                        "smithy.api#xmlName": "ownerId"
                     }
                 },
                 "VolumeId": {
