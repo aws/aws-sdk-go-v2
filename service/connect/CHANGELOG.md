@@ -1,3 +1,9 @@
+# v1.198.0 (2026-09-09)
+
+* **Feature**: Add metric configuration field to evaluation forms and ListEvaluationFormAIVersions API for retrieving AI-generated evaluation form versions
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.197.0 (2026-09-08)
 
 * **Feature**: Releasing workload types feature. A proper launch announcement or details will follow up.

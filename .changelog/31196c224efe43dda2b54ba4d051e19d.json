@@ -1,8 +1,0 @@
-{
-    "id": "31196c22-4efe-43dd-a2b5-4ba4d051e19d",
-    "type": "feature",
-    "description": "Added the AWS Service Request function type for MediaTailor Functions, enabling authenticated requests to AWS Elemental Inference for contextual ad targeting during ad insertion.",
-    "modules": [
-        "service/mediatailor"
-    ]
-}

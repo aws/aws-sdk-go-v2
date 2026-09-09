@@ -1,8 +1,0 @@
-{
-    "id": "8747e85f-40b8-4164-b40b-6048015a3934",
-    "type": "feature",
-    "description": "MediaLive now supports Manual Style Control for vertical caption positioning in TTML, WebVTT, and Embedded captions, Contextual Metadata Enrichment via Elemental Inference, and an Output Usage field on MediaPackage v2 for Dynamic Multiview validation.",
-    "modules": [
-        "service/medialive"
-    ]
-}

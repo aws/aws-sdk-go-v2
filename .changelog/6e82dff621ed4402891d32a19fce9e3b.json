@@ -1,8 +1,0 @@
-{
-    "id": "6e82dff6-21ed-4402-891d-32a19fce9e3b",
-    "type": "feature",
-    "description": "Updates documentation for lambda function timeout.",
-    "modules": [
-        "service/lambda"
-    ]
-}

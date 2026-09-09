@@ -1,3 +1,31 @@
+# Release (2026-09-09)
+
+## General Highlights
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager`: [v0.4.5](feature/s3/transfermanager/CHANGELOG.md#v045-2026-09-09)
+  * **Bug Fix**: Fix potential deadlock in GetObject calls.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.198.0](service/connect/CHANGELOG.md#v11980-2026-09-09)
+  * **Feature**: Add metric configuration field to evaluation forms and ListEvaluationFormAIVersions API for retrieving AI-generated evaluation form versions
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.331.0](service/ec2/CHANGELOG.md#v13310-2026-09-09)
+  * **Feature**: This release adds support for sharing Amazon EBS volumes across AWS accounts using AWS Resource Access Manager (RAM). Consuming accounts can view shared volume metadata and create copies of shared volumes within the same Availability Zone, with optional re-encryption using their own KMS key.
+* `github.com/aws/aws-sdk-go-v2/service/elementalinference`: [v1.12.0](service/elementalinference/CHANGELOG.md#v1120-2026-09-09)
+  * **Feature**: This release adds contextual metadata, a feed output type that generates a descriptive summary of your media content along with IAB taxonomy and GARM suitability classifications. It also adds feed resource policies for granting cross-account access to a feed.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.108.0](service/lambda/CHANGELOG.md#v11080-2026-09-09)
+  * **Feature**: Updates documentation for lambda function timeout.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.110.0](service/medialive/CHANGELOG.md#v11100-2026-09-09)
+  * **Feature**: MediaLive now supports Manual Style Control for vertical caption positioning in TTML, WebVTT, and Embedded captions, Contextual Metadata Enrichment via Elemental Inference, and an Output Usage field on MediaPackage v2 for Dynamic Multiview validation.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.49.0](service/mediapackagev2/CHANGELOG.md#v1490-2026-09-09)
+  * **Feature**: Dynamic Multiview enables viewers to watch multiple live video streams in a single combined output. Viewers can select from 6 preset tiled layouts. Create MediaPackage channels with Input Type MULTIVIEW and configure Available Layouts and Available Sources. See the API Documentation for details.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.70.0](service/mediatailor/CHANGELOG.md#v1700-2026-09-09)
+  * **Feature**: Added the AWS Service Request function type for MediaTailor Functions, enabling authenticated requests to AWS Elemental Inference for contextual ad targeting during ad insertion.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.29.0](service/pcs/CHANGELOG.md#v1290-2026-09-09)
+  * **Feature**: This release adds support for custom Gres.conf configuration and Slurm version 26.05 in AWS PCS. Customers can now specify generic resource (GRES) settings to control how GPUs and other resources are configured and shared on their compute node groups.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.113.0](service/s3/CHANGELOG.md#v11130-2026-09-09)
+  * **Bug Fix**: Expand S3 operations that check for an error inside an HTTP 200 response (wave 3/4)
+
 # Release (2026-09-08)
 
 ## General Highlights

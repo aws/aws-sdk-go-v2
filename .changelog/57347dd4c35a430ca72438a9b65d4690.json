@@ -1,8 +1,0 @@
-{
-    "id": "57347dd4-c35a-430c-a724-38a9b65d4690",
-    "type": "feature",
-    "description": "Add metric configuration field to evaluation forms and ListEvaluationFormAIVersions API for retrieving AI-generated evaluation form versions",
-    "modules": [
-        "service/connect"
-    ]
-}
