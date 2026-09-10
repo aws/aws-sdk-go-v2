@@ -220,6 +220,28 @@ var _ *types.SystemPolicyAssociatedMetadata
 var _ *types.SystemCreatedMetadata
 var _ *types.SystemUserJourneyCreatedMetadata
 
+func ExampleTestRunSourceEventDetail_outputUsage() {
+	var union types.TestRunSourceEventDetail
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TestRunSourceEventDetailMemberAlarmStateChange:
+		_ = v.Value // Value is types.AlarmStateChangeDetail
+
+	case *types.TestRunSourceEventDetailMemberError:
+		_ = v.Value // Value is types.TestRunSourceEventError
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AlarmStateChangeDetail
+var _ *types.TestRunSourceEventError
+
 func ExampleTestRunSourceSummary_outputUsage() {
 	var union types.TestRunSourceSummary
 	// type switches can be used to check the union value

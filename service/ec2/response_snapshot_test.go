@@ -6778,6 +6778,7 @@ func TestCheckResponseSnapshot_CreateImage(t *testing.T) {
 			},
 		},
 		SnapshotLocation: types.SnapshotLocationEnum("regional"),
+		BootModeOverride: types.BootModeOverrideValues("uefi"),
 		DryRun:           ptr.Bool(true),
 		InstanceId:       ptr.String("__InstanceId__"),
 		Name:             ptr.String("__Name__"),

@@ -2150,6 +2150,29 @@ func TestCheckResponseSnapshot_ListInputSources(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
+					LabelSelector: &types.EksLabelSelector{
+						MatchLabels: map[string]string{
+							"key0": "__Value__",
+						},
+						MatchExpressions: []types.EksLabelSelectorRequirement{
+							{
+								Key:      ptr.String("__Key__"),
+								Operator: types.EksLabelSelectorOperator("IN"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Key:      ptr.String("__Key__"),
+								Operator: types.EksLabelSelectorOperator("IN"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
 				},
 				DesignFileS3Url: ptr.String("__DesignFileS3Url__"),
 				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -2180,6 +2203,29 @@ func TestCheckResponseSnapshot_ListInputSources(t *testing.T) {
 					Namespaces: []string{
 						"__Member__",
 						"__Member__",
+					},
+					LabelSelector: &types.EksLabelSelector{
+						MatchLabels: map[string]string{
+							"key0": "__Value__",
+						},
+						MatchExpressions: []types.EksLabelSelectorRequirement{
+							{
+								Key:      ptr.String("__Key__"),
+								Operator: types.EksLabelSelectorOperator("IN"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Key:      ptr.String("__Key__"),
+								Operator: types.EksLabelSelectorOperator("IN"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
 					},
 				},
 				DesignFileS3Url: ptr.String("__DesignFileS3Url__"),
@@ -2896,6 +2942,60 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListTestRunDependencies(t *testing.T) {
+	want := &ListTestRunDependenciesOutput{
+		Dependencies: []types.TestRunDependencySummary{
+			{
+				DependencyId:   ptr.String("__DependencyId__"),
+				DependencyName: ptr.String("__DependencyName__"),
+				DnsName:        ptr.String("__DnsName__"),
+				Criticality:    types.DependencyCriticality("HARD"),
+				Source:         types.TestRunDependencySource("DISCOVERED"),
+				Location:       ptr.String("__Location__"),
+				SourceRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Provider: ptr.String("__Provider__"),
+			},
+			{
+				DependencyId:   ptr.String("__DependencyId__"),
+				DependencyName: ptr.String("__DependencyName__"),
+				DnsName:        ptr.String("__DnsName__"),
+				Criticality:    types.DependencyCriticality("HARD"),
+				Source:         types.TestRunDependencySource("DISCOVERED"),
+				Location:       ptr.String("__Location__"),
+				SourceRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Provider: ptr.String("__Provider__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListTestRunDependencies.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListTestRunDependencies(context.Background(), &ListTestRunDependenciesInput{
+		TestRunId:  ptr.String("__TestRunId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListTestRunDependencies.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListTestRunEvents(t *testing.T) {
 	want := &ListTestRunEventsOutput{
 		Events: []types.TestRunEvent{
@@ -2941,6 +3041,59 @@ func TestCheckResponseSnapshot_ListTestRunEvents(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListTestRunEvents.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListTestRunSourceEvents(t *testing.T) {
+	want := &ListTestRunSourceEventsOutput{
+		TestRunSourceEvents: []types.TestRunSourceEvent{
+			{
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SourceArn: ptr.String("__SourceArn__"),
+				EventType: types.TestRunSourceEventType("ALARM"),
+				Detail: &types.TestRunSourceEventDetailMemberAlarmStateChange{
+					Value: types.AlarmStateChangeDetail{
+						State:         types.AlarmState("OK"),
+						PreviousState: types.AlarmState("OK"),
+						Reason:        ptr.String("__Reason__"),
+					},
+				},
+			},
+			{
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SourceArn: ptr.String("__SourceArn__"),
+				EventType: types.TestRunSourceEventType("ALARM"),
+				Detail: &types.TestRunSourceEventDetailMemberAlarmStateChange{
+					Value: types.AlarmStateChangeDetail{
+						State:         types.AlarmState("OK"),
+						PreviousState: types.AlarmState("OK"),
+						Reason:        ptr.String("__Reason__"),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListTestRunSourceEvents.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListTestRunSourceEvents(context.Background(), &ListTestRunSourceEventsInput{
+		TestRunId:  ptr.String("__TestRunId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		SourceArn:  ptr.String("__SourceArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListTestRunSourceEvents.response", err)
 	}
 }
 

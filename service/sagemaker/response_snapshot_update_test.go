@@ -224,6 +224,33 @@ func TestUpdateResponseSnapshot_AssociateTrialComponent(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_AttachClusterNodeNetworkInterface(t *testing.T) {
+	want := &AttachClusterNodeNetworkInterfaceOutput{
+		ClusterArn:         ptr.String("__ClusterArn__"),
+		NodeId:             ptr.String("__NodeId__"),
+		NetworkInterfaceId: ptr.String("__NetworkInterfaceId__"),
+		AttachmentId:       ptr.String("__AttachmentId__"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.AttachClusterNodeNetworkInterface, schemas.AttachClusterNodeNetworkInterfaceResponse, schemas.AttachClusterNodeNetworkInterfaceResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("AttachClusterNodeNetworkInterface.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_AttachClusterNodeVolume(t *testing.T) {
 	want := &AttachClusterNodeVolumeOutput{
 		ClusterArn: ptr.String("__ClusterArn__"),

@@ -7621,6 +7621,13 @@ func awsRestjson1_serializeDocumentBedrockEmbeddingModelConfiguration(v *types.B
 		ok.String(string(v.EmbeddingDataType))
 	}
 
+	if v.ModelConfiguration != nil {
+		ok := object.Key("modelConfiguration")
+		if err := awsRestjson1_serializeDocumentDocument(v.ModelConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Video != nil {
 		ok := object.Key("video")
 		if err := awsRestjson1_serializeDocumentVideoConfigurations(v.Video, ok); err != nil {
@@ -9421,6 +9428,13 @@ func awsRestjson1_serializeDocumentManagedKnowledgeBaseConfiguration(v *types.Ma
 	if v.ServerSideEncryptionConfiguration != nil {
 		ok := object.Key("serverSideEncryptionConfiguration")
 		if err := awsRestjson1_serializeDocumentServerSideEncryptionConfiguration(v.ServerSideEncryptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SupplementalDataStorageConfiguration != nil {
+		ok := object.Key("supplementalDataStorageConfiguration")
+		if err := awsRestjson1_serializeDocumentSupplementalDataStorageConfiguration(v.SupplementalDataStorageConfiguration, ok); err != nil {
 			return err
 		}
 	}

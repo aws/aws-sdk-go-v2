@@ -912,6 +912,11 @@ type BedrockEmbeddingModelConfiguration struct {
 
 	// Configuration settings for processing audio content in multimodal knowledge
 	// bases.
+	//
+	// This field is deprecated. Use modelConfiguration instead.
+	//
+	// Deprecated: Use Managed Knowledge Base's modelConfiguration field.
+	// https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html
 	Audio []AudioConfiguration
 
 	// The dimensions details for the vector configuration used on the Bedrock
@@ -927,8 +932,21 @@ type BedrockEmbeddingModelConfiguration struct {
 	// [Supported embeddings models]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-supported.html
 	EmbeddingDataType EmbeddingDataType
 
+	// Model-specific configuration for the embedding model, provided as a JSON
+	// object. Use this field to specify settings that apply to the embedding model
+	// that you selected, such as how audio and video files are divided into segments.
+	//
+	// The fields that this object accepts depend on the embedding model. For the
+	// settings that each model accepts, see the documentation for that model.
+	ModelConfiguration document.Interface
+
 	// Configuration settings for processing video content in multimodal knowledge
 	// bases.
+	//
+	// This field is deprecated. Use modelConfiguration instead.
+	//
+	// Deprecated: Use Managed Knowledge Base's modelConfiguration field.
+	// https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html
 	Video []VideoConfiguration
 
 	noSmithyDocumentSerde
@@ -3247,7 +3265,9 @@ type KnowledgeBaseConfiguration struct {
 	// Settings for an Amazon Kendra knowledge base.
 	KendraKnowledgeBaseConfiguration *KendraKnowledgeBaseConfiguration
 
-	// Configurations for a managed knowledge base.
+	// Contains configuration details for a knowledge base that uses a vector store
+	// fully managed by Amazon Bedrock. Specify this object when the knowledge base
+	// type is MANAGED.
 	ManagedKnowledgeBaseConfiguration *ManagedKnowledgeBaseConfiguration
 
 	// Specifies configurations for a knowledge base connected to an SQL database.
@@ -3608,18 +3628,22 @@ type ManagedKnowledgeBaseConfiguration struct {
 	// The ARN for the embeddings model.
 	EmbeddingModelArn *string
 
-	// The configuration details for the embeddings model.
+	// The configuration details for the embeddings model. Not required when choosing
+	// the MANAGED embeddingModelType.
 	EmbeddingModelConfiguration *EmbeddingModelConfiguration
 
 	// Choose CUSTOM to provide your own Bedrock embedding model ARN. Choose MANAGED
-	// to use a service-managed embedding model. For more information, see [Embedding model options].
-	//
-	// [Embedding model options]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-managed-create.html#kb-managed-embedding-models
+	// to use a service-managed embedding model.
 	EmbeddingModelType EmbeddingModelType
 
 	// Contains the configuration for server-side encryption for your managed
 	// knowledge base.
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration
+
+	// Use this object to specify the Amazon S3 location that the knowledge base uses
+	// to process and ingest multimodal content. This field is required when you use a
+	// native multimodal embedding model.
+	SupplementalDataStorageConfiguration *SupplementalDataStorageConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -4237,8 +4261,19 @@ type ParameterDetail struct {
 // [Parsing options for your data source]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-advanced-parsing.html
 type ParsingConfiguration struct {
 
-	// The parsing strategy for the data source. Only SMART_PARSING can be selected
-	// for managed knowledge bases. For more information, see [Customize ingestion for managed knowledge bases].
+	// The parsing strategy for the data source.
+	//
+	// For managed knowledge bases, the strategy that you can select depends on the
+	// embedding model that your knowledge base uses:
+	//
+	//   - If your knowledge base uses a native multimodal embedding model, specify
+	//   MULTI_MODAL_EMBEDDINGS . With this strategy, files are sent directly to the
+	//   embedding model instead of being parsed into text. This is the only strategy
+	//   that is supported for these knowledge bases.
+	//
+	//   - Otherwise, specify SMART_PARSING .
+	//
+	// For more information, see [Customize ingestion for managed knowledge bases].
 	//
 	// [Customize ingestion for managed knowledge bases]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-managed-customize-ingestion.html
 	//
@@ -5853,7 +5888,7 @@ type ToolSpecification struct {
 	// The description of the tool.
 	Description *string
 
-	// Whether to enforce strict JSON schema adherence for the tool input
+	// Whether the tool schema is strictly enforced.
 	Strict *bool
 
 	noSmithyDocumentSerde

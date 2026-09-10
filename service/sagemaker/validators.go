@@ -70,6 +70,26 @@ func (m *validateOpAssociateTrialComponent) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAttachClusterNodeNetworkInterface struct {
+}
+
+func (*validateOpAttachClusterNodeNetworkInterface) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAttachClusterNodeNetworkInterface) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AttachClusterNodeNetworkInterfaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAttachClusterNodeNetworkInterfaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAttachClusterNodeVolume struct {
 }
 
@@ -6640,6 +6660,10 @@ func addOpAddTagsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpAssociateTrialComponentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateTrialComponent{}, middleware.After)
+}
+
+func addOpAttachClusterNodeNetworkInterfaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAttachClusterNodeNetworkInterface{}, middleware.After)
 }
 
 func addOpAttachClusterNodeVolumeValidationMiddleware(stack *middleware.Stack) error {
@@ -16415,6 +16439,27 @@ func validateOpAssociateTrialComponentInput(v *AssociateTrialComponentInput) err
 	}
 	if v.TrialName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrialName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAttachClusterNodeNetworkInterfaceInput(v *AttachClusterNodeNetworkInterfaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttachClusterNodeNetworkInterfaceInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.NodeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeId"))
+	}
+	if v.NetworkInterfaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkInterfaceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

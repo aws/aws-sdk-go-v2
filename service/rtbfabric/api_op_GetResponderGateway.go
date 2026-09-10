@@ -79,6 +79,16 @@ type GetResponderGatewayOutput struct {
 	// The count of active links for the responder gateway.
 	ActiveLinksCount *int32
 
+	// The client routing policy of the gateway. This policy controls which
+	// Availability Zones RTB Fabric uses to reach the gateway for the requester
+	// gateways that send traffic to it. RTB Fabric omits this member if the gateway
+	// has never had a client routing policy. An omitted value means that the gateway
+	// uses AVAILABILITY_ZONE_AFFINITY . For more information, see [Configuring Availability Zone affinity] in the Amazon Web
+	// Services RTB Fabric User Guide.
+	//
+	// [Configuring Availability Zone affinity]: https://docs.aws.amazon.com/rtb-fabric/latest/userguide/working-with-responder-gateways.html#configuring-availability-zone-affinity
+	ClientRoutingPolicy types.ClientRoutingPolicy
+
 	// The timestamp of when the responder gateway was created.
 	CreatedAt *time.Time
 

@@ -61,6 +61,27 @@ func (ActorType) Values() []ActorType {
 	}
 }
 
+type AlarmState string
+
+// Enum values for AlarmState
+const (
+	AlarmStateOk               AlarmState = "OK"
+	AlarmStateAlarm            AlarmState = "ALARM"
+	AlarmStateInsufficientData AlarmState = "INSUFFICIENT_DATA"
+)
+
+// Values returns all known values for AlarmState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AlarmState) Values() []AlarmState {
+	return []AlarmState{
+		"OK",
+		"ALARM",
+		"INSUFFICIENT_DATA",
+	}
+}
+
 type AssertionSource string
 
 // Enum values for AssertionSource
@@ -255,6 +276,29 @@ func (DependencyDiscoveryStatus) Values() []DependencyDiscoveryStatus {
 		"ENABLED",
 		"INITIALIZING",
 		"DISABLED",
+	}
+}
+
+type EksLabelSelectorOperator string
+
+// Enum values for EksLabelSelectorOperator
+const (
+	EksLabelSelectorOperatorIn           EksLabelSelectorOperator = "IN"
+	EksLabelSelectorOperatorNotIn        EksLabelSelectorOperator = "NOT_IN"
+	EksLabelSelectorOperatorExists       EksLabelSelectorOperator = "EXISTS"
+	EksLabelSelectorOperatorDoesNotExist EksLabelSelectorOperator = "DOES_NOT_EXIST"
+)
+
+// Values returns all known values for EksLabelSelectorOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EksLabelSelectorOperator) Values() []EksLabelSelectorOperator {
+	return []EksLabelSelectorOperator{
+		"IN",
+		"NOT_IN",
+		"EXISTS",
+		"DOES_NOT_EXIST",
 	}
 }
 
@@ -760,6 +804,61 @@ func (SystemEventType) Values() []SystemEventType {
 		"SYSTEM_SERVICE_DISASSOCIATED",
 		"SYSTEM_POLICY_ASSOCIATED",
 		"SYSTEM_POLICY_DISASSOCIATED",
+	}
+}
+
+type TestRunDependencySource string
+
+// Enum values for TestRunDependencySource
+const (
+	TestRunDependencySourceDiscovered TestRunDependencySource = "DISCOVERED"
+	TestRunDependencySourceManual     TestRunDependencySource = "MANUAL"
+)
+
+// Values returns all known values for TestRunDependencySource. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestRunDependencySource) Values() []TestRunDependencySource {
+	return []TestRunDependencySource{
+		"DISCOVERED",
+		"MANUAL",
+	}
+}
+
+type TestRunSourceEventErrorCode string
+
+// Enum values for TestRunSourceEventErrorCode
+const (
+	TestRunSourceEventErrorCodeAccessDenied  TestRunSourceEventErrorCode = "ACCESS_DENIED"
+	TestRunSourceEventErrorCodeInternalError TestRunSourceEventErrorCode = "INTERNAL_ERROR"
+)
+
+// Values returns all known values for TestRunSourceEventErrorCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestRunSourceEventErrorCode) Values() []TestRunSourceEventErrorCode {
+	return []TestRunSourceEventErrorCode{
+		"ACCESS_DENIED",
+		"INTERNAL_ERROR",
+	}
+}
+
+type TestRunSourceEventType string
+
+// Enum values for TestRunSourceEventType
+const (
+	TestRunSourceEventTypeAlarm TestRunSourceEventType = "ALARM"
+)
+
+// Values returns all known values for TestRunSourceEventType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestRunSourceEventType) Values() []TestRunSourceEventType {
+	return []TestRunSourceEventType{
+		"ALARM",
 	}
 }
 

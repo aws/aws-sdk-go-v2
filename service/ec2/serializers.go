@@ -71632,6 +71632,11 @@ func awsEc2query_serializeOpDocumentCreateImageInput(v *CreateImageInput, value 
 		}
 	}
 
+	if len(v.BootModeOverride) > 0 {
+		objectKey := object.Key("BootModeOverride")
+		objectKey.String(string(v.BootModeOverride))
+	}
+
 	if v.Description != nil {
 		objectKey := object.Key("Description")
 		objectKey.String(*v.Description)

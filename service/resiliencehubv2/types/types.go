@@ -28,6 +28,24 @@ type Achievability struct {
 	noSmithyDocumentSerde
 }
 
+// Details about a CloudWatch alarm state change observed during a test run.
+type AlarmStateChangeDetail struct {
+
+	// The state the alarm transitioned to.
+	//
+	// This member is required.
+	State AlarmState
+
+	// The state the alarm transitioned from. Absent on the initial event, which
+	// records the alarm's state when collection began.
+	PreviousState AlarmState
+
+	// A human-readable explanation of the state change, as reported by CloudWatch.
+	Reason *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents a resilience assertion for a service.
 type Assertion struct {
 
@@ -342,6 +360,45 @@ type EffectivePolicyValues struct {
 	noSmithyDocumentSerde
 }
 
+// A label selector that filters the Kubernetes objects discovered from an Amazon
+// EKS input source. An object must satisfy both matchLabels and matchExpressions
+// to match the selector. A selector with neither matches every object. The
+// selector must render to 2,048 characters or fewer in Kubernetes label selector
+// syntax.
+type EksLabelSelector struct {
+
+	// The label requirements that an object must satisfy. All requirements in the
+	// list must match for the object to be selected.
+	MatchExpressions []EksLabelSelectorRequirement
+
+	// The label key-value pairs that an object must have. All pairs must match for
+	// the object to be selected.
+	MatchLabels map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A single label requirement in a label selector, expressed as a key, an
+// operator, and an optional list of values.
+type EksLabelSelectorRequirement struct {
+
+	// The label key that the requirement applies to.
+	//
+	// This member is required.
+	Key *string
+
+	// The operator that relates the label key to the values.
+	//
+	// This member is required.
+	Operator EksLabelSelectorOperator
+
+	// The label values to compare against. Specify values when the operator is IN or
+	// NOT_IN. Leave this empty when the operator is EXISTS or DOES_NOT_EXIST.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
 // Defines an Amazon EKS cluster and its namespaces as an input source for
 // resource discovery.
 type EksSource struct {
@@ -355,6 +412,10 @@ type EksSource struct {
 	//
 	// This member is required.
 	Namespaces []string
+
+	// Filters discovery to the Kubernetes objects whose labels match the selector.
+	// When omitted, all supported objects in the specified namespaces are discovered.
+	LabelSelector *EksLabelSelector
 
 	noSmithyDocumentSerde
 }
@@ -2288,7 +2349,8 @@ type TestRun struct {
 	// This member is required.
 	TestTemplateArn *string
 
-	// Indicates whether this test run targets a single account or multiple accounts.
+	// Indicates whether the test run targets resources in a single AWS account or
+	// across multiple accounts.
 	AccountTargeting AccountTargeting
 
 	// The timestamp when the test run ended.
@@ -2342,6 +2404,48 @@ type TestRun struct {
 
 	// The stop conditions snapshotted from the test when the run was started.
 	StopConditions []StopCondition
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a dependency that a test run blocked, as
+// captured when the run started.
+type TestRunDependencySummary struct {
+
+	// The criticality classification of the dependency when the run started. A
+	// dependency that was not discovered has the UNKNOWN criticality.
+	//
+	// This member is required.
+	Criticality DependencyCriticality
+
+	// The name of the dependency.
+	//
+	// This member is required.
+	DependencyName *string
+
+	// The DNS name of the dependency that the test run blocked.
+	//
+	// This member is required.
+	DnsName *string
+
+	// The origin of the dependency. A discovered dependency was found by dependency
+	// discovery; a manual dependency was entered when the run started.
+	//
+	// This member is required.
+	Source TestRunDependencySource
+
+	// The unique identifier of the dependency. Absent when the dependency was entered
+	// manually and was not part of dependency discovery.
+	DependencyId *string
+
+	// The location of the dependency.
+	Location *string
+
+	// The provider of the dependency.
+	Provider *string
+
+	// The source Regions from which the dependency was detected.
+	SourceRegions []string
 
 	noSmithyDocumentSerde
 }
@@ -2440,6 +2544,78 @@ type TestRunReportConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// A state-change event observed for a test run monitoring source.
+type TestRunSourceEvent struct {
+
+	// The event payload.
+	//
+	// This member is required.
+	Detail TestRunSourceEventDetail
+
+	// The type of the event. ALARM indicates an event from a CloudWatch alarm source;
+	// the detail member carries either the alarm state change or a collection error.
+	//
+	// This member is required.
+	EventType TestRunSourceEventType
+
+	// The ARN of the monitoring source the event belongs to.
+	//
+	// This member is required.
+	SourceArn *string
+
+	// The timestamp when the event occurred.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The payload of a test run source event. Exactly one member is set.
+//
+// The following types satisfy this interface:
+//
+//	TestRunSourceEventDetailMemberAlarmStateChange
+//	TestRunSourceEventDetailMemberError
+type TestRunSourceEventDetail interface {
+	isTestRunSourceEventDetail()
+}
+
+// A CloudWatch alarm state change.
+type TestRunSourceEventDetailMemberAlarmStateChange struct {
+	Value AlarmStateChangeDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*TestRunSourceEventDetailMemberAlarmStateChange) isTestRunSourceEventDetail() {}
+
+// An error that prevented event collection from the source.
+type TestRunSourceEventDetailMemberError struct {
+	Value TestRunSourceEventError
+
+	noSmithyDocumentSerde
+}
+
+func (*TestRunSourceEventDetailMemberError) isTestRunSourceEventDetail() {}
+
+// Describes an error that prevented event collection from a test run monitoring
+// source.
+type TestRunSourceEventError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	ErrorCode TestRunSourceEventErrorCode
+
+	// A human-readable description of the error.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // A monitoring-source snapshot captured for a test run. Exactly one member is set.
 //
 // The following types satisfy this interface:
@@ -2525,7 +2701,8 @@ type TestRunSummary struct {
 	// This member is required.
 	TestTemplateArn *string
 
-	// Indicates whether this test run targets a single account or multiple accounts.
+	// Indicates whether the test run targets resources in a single AWS account or
+	// across multiple accounts.
 	AccountTargeting AccountTargeting
 
 	// The timestamp when the test run ended.
@@ -2806,6 +2983,7 @@ func (*UnknownUnionMember) isReportOutputConfiguration() {}
 func (*UnknownUnionMember) isResourceConfiguration()     {}
 func (*UnknownUnionMember) isServiceEventMetadata()      {}
 func (*UnknownUnionMember) isSystemEventMetadata()       {}
+func (*UnknownUnionMember) isTestRunSourceEventDetail()  {}
 func (*UnknownUnionMember) isTestRunSourceSummary()      {}
 func (*UnknownUnionMember) isTestSourceInput()           {}
 func (*UnknownUnionMember) isTestSourceSummary()         {}
