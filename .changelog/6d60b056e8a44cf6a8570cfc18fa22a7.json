@@ -1,8 +1,0 @@
-{
-    "id": "6d60b056-e8a4-4cf6-a857-0cfc18fa22a7",
-    "type": "feature",
-    "description": "AWS RTB Fabric now lets you control how traffic is routed to your responder gateway across Availability Zones. Set the new clientRoutingPolicy parameter  to keep traffic within the same Availability Zone or distribute traffic across all Availability Zones.",
-    "modules": [
-        "service/rtbfabric"
-    ]
-}

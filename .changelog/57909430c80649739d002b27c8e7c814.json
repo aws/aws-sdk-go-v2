@@ -1,8 +1,0 @@
-{
-    "id": "57909430-c806-4973-9d00-2b27c8e7c814",
-    "type": "feature",
-    "description": "This release adds the ListTestRunSourceEvents and ListTestRunDependencies APIs, which return the alarm state changes during a test run and the dependencies the run blocked.",
-    "modules": [
-        "service/resiliencehubv2"
-    ]
-}

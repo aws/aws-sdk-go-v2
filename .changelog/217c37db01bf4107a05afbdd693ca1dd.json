@@ -1,8 +1,0 @@
-{
-    "id": "217c37db-01bf-4107-a05a-fbdd693ca1dd",
-    "type": "feature",
-    "description": "Added fields to identify Outpost generation and rack scaling configuration on Outpost and CatalogItem resources.",
-    "modules": [
-        "service/outposts"
-    ]
-}

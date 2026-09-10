@@ -1,8 +1,0 @@
-{
-    "id": "72a2b93a-f190-400f-8d38-3a8d386854c0",
-    "type": "feature",
-    "description": "The CreateImage API now supports a BootModeOverride parameter to explicitly set UEFI boot mode on a new AMI, overriding the source instance's inherited boot mode.",
-    "modules": [
-        "service/ec2"
-    ]
-}

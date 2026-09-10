@@ -1,3 +1,7 @@
+# v1.74.0 (2026-09-10)
+
+* **Feature**: Added fields to identify Outpost generation and rack scaling configuration on Outpost and CatalogItem resources.
+
 # v1.73.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

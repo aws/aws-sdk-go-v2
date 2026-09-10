@@ -1,3 +1,19 @@
+# Release (2026-09-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.65.0](service/bedrockagent/CHANGELOG.md#v1650-2026-09-10)
+  * **Feature**: TwelveLabs Marengo 3.0 is now an embedding model option in Amazon Bedrock Managed Knowledge Base. Create multimodal embeddings for video, audio, and image content that capture visual scenes, speech, and video cues, not just transcribed text.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.332.0](service/ec2/CHANGELOG.md#v13320-2026-09-10)
+  * **Feature**: The CreateImage API now supports a BootModeOverride parameter to explicitly set UEFI boot mode on a new AMI, overriding the source instance's inherited boot mode.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.74.0](service/outposts/CHANGELOG.md#v1740-2026-09-10)
+  * **Feature**: Added fields to identify Outpost generation and rack scaling configuration on Outpost and CatalogItem resources.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehubv2`: [v1.10.0](service/resiliencehubv2/CHANGELOG.md#v1100-2026-09-10)
+  * **Feature**: This release adds the ListTestRunSourceEvents and ListTestRunDependencies APIs, which return the alarm state changes during a test run and the dependencies the run blocked.
+* `github.com/aws/aws-sdk-go-v2/service/rtbfabric`: [v1.16.0](service/rtbfabric/CHANGELOG.md#v1160-2026-09-10)
+  * **Feature**: AWS RTB Fabric now lets you control how traffic is routed to your responder gateway across Availability Zones. Set the new clientRoutingPolicy parameter  to keep traffic within the same Availability Zone or distribute traffic across all Availability Zones.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.277.0](service/sagemaker/CHANGELOG.md#v12770-2026-09-10)
+  * **Feature**: This release adds the ability for customers to attach customer owned Elastic Network Interfaces (ENIs) to HyperPod cluster nodes.
+
 # Release (2026-09-09)
 
 ## General Highlights

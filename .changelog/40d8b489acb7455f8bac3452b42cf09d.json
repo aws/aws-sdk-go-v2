@@ -1,8 +1,0 @@
-{
-    "id": "40d8b489-acb7-455f-8bac-3452b42cf09d",
-    "type": "feature",
-    "description": "This release adds the ability for customers to attach customer owned Elastic Network Interfaces (ENIs) to HyperPod cluster nodes.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}
