@@ -1616,7 +1616,7 @@
                     ],
                     "maxAge": 86400
                 },
-                "smithy.api#documentation": "<p>Describes the API operations for creating and managing Amazon Bedrock agents.</p>",
+                "smithy.api#documentation": "<note> <p>Amazon Bedrock Agents (now Amazon Bedrock Agents Classic) is no longer open to new customers. For capabilities similar to Bedrock Agents Classic, explore Amazon Bedrock AgentCore. Existing customers can continue to use the service as normal. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-classic-maintenance-mode.html\">Amazon Bedrock Agents Classic availability change</a>.</p> </note> <p>Describes the API operations for creating and managing Amazon Bedrock agents.</p>",
                 "smithy.api#title": "Agents for Amazon Bedrock",
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
@@ -2691,7 +2691,7 @@
                 "audioExtractionStatus": {
                     "target": "com.amazonaws.bedrockagent#EnabledOrDisabledState",
                     "traits": {
-                        "smithy.api#documentation": "Whether audio extraction is enabled or disabled.",
+                        "smithy.api#documentation": "<p>Whether audio extraction is enabled or disabled.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2800,13 +2800,27 @@
                 "audio": {
                     "target": "com.amazonaws.bedrockagent#AudioConfigurations",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration settings for processing audio content in multimodal knowledge bases.</p>"
+                        "smithy.api#deprecated": {
+                            "message": "Use Managed Knowledge Base's modelConfiguration field. https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html",
+                            "since": "2026-09-01"
+                        },
+                        "smithy.api#documentation": "<p>Configuration settings for processing audio content in multimodal knowledge bases.</p> <important> <p>This field is deprecated. Use <code>modelConfiguration</code> instead.</p> </important>"
                     }
                 },
                 "video": {
                     "target": "com.amazonaws.bedrockagent#VideoConfigurations",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration settings for processing video content in multimodal knowledge bases.</p>"
+                        "smithy.api#deprecated": {
+                            "message": "Use Managed Knowledge Base's modelConfiguration field. https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html",
+                            "since": "2026-09-01"
+                        },
+                        "smithy.api#documentation": "<p>Configuration settings for processing video content in multimodal knowledge bases.</p> <important> <p>This field is deprecated. Use <code>modelConfiguration</code> instead.</p> </important>"
+                    }
+                },
+                "modelConfiguration": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Model-specific configuration for the embedding model, provided as a JSON object. Use this field to specify settings that apply to the embedding model that you selected, such as how audio and video files are divided into segments.</p> <p>The fields that this object accepts depend on the embedding model. For the settings that each model accepts, see the documentation for that model.</p>"
                     }
                 }
             },
@@ -3382,7 +3396,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.</p> <ul> <li> <p>Specify the following fields for security purposes.</p> <ul> <li> <p> <code>agentResourceRoleArn</code> – The Amazon Resource Name (ARN) of the role with permissions to invoke API operations on an agent.</p> </li> <li> <p>(Optional) <code>customerEncryptionKeyArn</code> – The Amazon Resource Name (ARN) of a KMS key to encrypt the creation of the agent.</p> </li> <li> <p>(Optional) <code>idleSessionTTLinSeconds</code> – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent <code>InvokeAgent</code> request begins a new session.</p> </li> </ul> </li> <li> <p>To enable your agent to retain conversational context across multiple sessions, include a <code>memoryConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-configure-memory.html\">Configure memory</a>.</p> </li> <li> <p>To override the default prompt behavior for agent orchestration and to use advanced prompts, include a <code>promptOverrideConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html\">Advanced prompts</a>.</p> </li> <li> <p>If your agent fails to be created, the response returns a list of <code>failureReasons</code> alongside a list of <code>recommendedActions</code> for you to troubleshoot.</p> </li> <li> <p>The agent instructions will not be honored if your agent has only one knowledge base, uses default prompts, has no action group, and user input is disabled.</p> </li> </ul>",
+                "smithy.api#documentation": "<note> <p>Amazon Bedrock Agents (now Amazon Bedrock Agents Classic) is no longer open to new customers. For capabilities similar to Bedrock Agents Classic, explore Amazon Bedrock AgentCore. Existing customers can continue to use the service as normal. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-classic-maintenance-mode.html\">Amazon Bedrock Agents Classic availability change</a>.</p> </note> <p>Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.</p> <ul> <li> <p>Specify the following fields for security purposes.</p> <ul> <li> <p> <code>agentResourceRoleArn</code> – The Amazon Resource Name (ARN) of the role with permissions to invoke API operations on an agent.</p> </li> <li> <p>(Optional) <code>customerEncryptionKeyArn</code> – The Amazon Resource Name (ARN) of a KMS key to encrypt the creation of the agent.</p> </li> <li> <p>(Optional) <code>idleSessionTTLinSeconds</code> – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent <code>InvokeAgent</code> request begins a new session.</p> </li> </ul> </li> <li> <p>To enable your agent to retain conversational context across multiple sessions, include a <code>memoryConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-configure-memory.html\">Configure memory</a>.</p> </li> <li> <p>To override the default prompt behavior for agent orchestration and to use advanced prompts, include a <code>promptOverrideConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html\">Advanced prompts</a>.</p> </li> <li> <p>If your agent fails to be created, the response returns a list of <code>failureReasons</code> alongside a list of <code>recommendedActions</code> for you to troubleshoot.</p> </li> <li> <p>The agent instructions will not be honored if your agent has only one knowledge base, uses default prompts, has no action group, and user input is disabled.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "PUT",
@@ -10469,7 +10483,7 @@
                 "imageExtractionStatus": {
                     "target": "com.amazonaws.bedrockagent#EnabledOrDisabledState",
                     "traits": {
-                        "smithy.api#documentation": "Whether image extraction is enabled or disabled.",
+                        "smithy.api#documentation": "<p>Whether image extraction is enabled or disabled.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -11396,7 +11410,10 @@
                     }
                 },
                 "managedKnowledgeBaseConfiguration": {
-                    "target": "com.amazonaws.bedrockagent#ManagedKnowledgeBaseConfiguration"
+                    "target": "com.amazonaws.bedrockagent#ManagedKnowledgeBaseConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration details for a knowledge base that uses a vector store fully managed by Amazon Bedrock. Specify this object when the knowledge base type is MANAGED.</p>"
+                    }
                 },
                 "kendraKnowledgeBaseConfiguration": {
                     "target": "com.amazonaws.bedrockagent#KendraKnowledgeBaseConfiguration",
@@ -13486,7 +13503,10 @@
             "type": "structure",
             "members": {
                 "embeddingModelType": {
-                    "target": "com.amazonaws.bedrockagent#EmbeddingModelType"
+                    "target": "com.amazonaws.bedrockagent#EmbeddingModelType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Choose CUSTOM to provide your own Bedrock embedding model ARN. Choose MANAGED to use a service-managed embedding model.</p>"
+                    }
                 },
                 "embeddingModelArn": {
                     "target": "com.amazonaws.bedrockagent#BedrockEmbeddingModelArn",
@@ -13495,10 +13515,22 @@
                     }
                 },
                 "embeddingModelConfiguration": {
-                    "target": "com.amazonaws.bedrockagent#EmbeddingModelConfiguration"
+                    "target": "com.amazonaws.bedrockagent#EmbeddingModelConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration details for the embeddings model. Not required when choosing the MANAGED embeddingModelType.</p>"
+                    }
                 },
                 "serverSideEncryptionConfiguration": {
-                    "target": "com.amazonaws.bedrockagent#ServerSideEncryptionConfiguration"
+                    "target": "com.amazonaws.bedrockagent#ServerSideEncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the configuration for server-side encryption for your managed knowledge base.</p>"
+                    }
+                },
+                "supplementalDataStorageConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#SupplementalDataStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this object to specify the Amazon S3 location that the knowledge base uses to process and ingest multimodal content. This field is required when you use a native multimodal embedding model.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14562,7 +14594,7 @@
                 "parsingStrategy": {
                     "target": "com.amazonaws.bedrockagent#ParsingStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parsing strategy for the data source. Only <code>SMART_PARSING</code> can be selected for managed knowledge bases. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-managed-customize-ingestion.html\">Customize ingestion for managed knowledge bases</a>.</p>",
+                        "smithy.api#documentation": "<p>The parsing strategy for the data source.</p> <p>For managed knowledge bases, the strategy that you can select depends on the embedding model that your knowledge base uses:</p> <ul> <li> <p>If your knowledge base uses a native multimodal embedding model, specify <code>MULTI_MODAL_EMBEDDINGS</code>. With this strategy, files are sent directly to the embedding model instead of being parsed into text. This is the only strategy that is supported for these knowledge bases.</p> </li> <li> <p>Otherwise, specify <code>SMART_PARSING</code>.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-managed-customize-ingestion.html\">Customize ingestion for managed knowledge bases</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14637,6 +14669,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SMART_PARSING"
+                    }
+                },
+                "MULTI_MODAL_EMBEDDINGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTI_MODAL_EMBEDDINGS"
                     }
                 }
             }
@@ -17947,7 +17985,7 @@
                 "strict": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "Whether to enforce strict JSON schema adherence for the tool input"
+                        "smithy.api#documentation": "<p>Whether the tool schema is strictly enforced.</p>"
                     }
                 }
             },
@@ -20035,7 +20073,7 @@
                 "videoExtractionStatus": {
                     "target": "com.amazonaws.bedrockagent#EnabledOrDisabledState",
                     "traits": {
-                        "smithy.api#documentation": "Whether video extraction is enabled or disabled.",
+                        "smithy.api#documentation": "<p>Whether video extraction is enabled or disabled.</p>",
                         "smithy.api#required": {}
                     }
                 }

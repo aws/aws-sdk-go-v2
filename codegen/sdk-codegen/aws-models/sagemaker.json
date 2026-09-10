@@ -4822,6 +4822,98 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9._-]+$"
             }
         },
+        "com.amazonaws.sagemaker#AttachClusterNodeNetworkInterface": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#AttachClusterNodeNetworkInterfaceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#AttachClusterNodeNetworkInterfaceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Attaches an elastic network interface (ENI) to a node in a HyperPod cluster. </p> <p> To use this operation, you must have the <code>sagemaker:AttachClusterNodeNetworkInterface</code> permission. </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#AttachClusterNodeNetworkInterfaceRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterName": {
+                    "target": "com.amazonaws.sagemaker#ClusterNameOrArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The name or Amazon Resource Name (ARN) of the SageMaker HyperPod cluster that contains the target node. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NodeId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The unique identifier of the cluster node to which you want to attach the network interface. The node must belong to your specified HyperPod cluster and cannot be part of a Restricted Instance Group (RIG). </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NetworkInterfaceId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNetworkInterfaceId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The unique identifier of the elastic network interface (ENI) to attach. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#AttachClusterNodeNetworkInterfaceResponse": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.sagemaker#ClusterArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of your SageMaker HyperPod cluster where the network interface attachment operation was performed. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NodeId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The unique identifier of the cluster node where your network interface was attached. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NetworkInterfaceId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNetworkInterfaceId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The unique identifier of the elastic network interface (ENI) that was attached. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AttachmentId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNetworkInterfaceAttachmentId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The unique identifier of the network interface attachment. Use this value to reference or detach the network interface later. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#AttachClusterNodeVolume": {
             "type": "operation",
             "input": {
@@ -12805,6 +12897,16 @@
                 "smithy.api#documentation": "<p>The network interface configuration for a Amazon SageMaker HyperPod cluster instance group.</p>"
             }
         },
+        "com.amazonaws.sagemaker#ClusterNetworkInterfaceAttachmentId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 28
+                },
+                "smithy.api#pattern": "^eni-attach-[0-9a-f]{8}(?:[0-9a-f]{9})?$"
+            }
+        },
         "com.amazonaws.sagemaker#ClusterNetworkInterfaceDetails": {
             "type": "structure",
             "members": {
@@ -12817,6 +12919,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The network interface configuration details for a Amazon SageMaker HyperPod cluster instance group.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterNetworkInterfaceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 21
+                },
+                "smithy.api#pattern": "^eni-[0-9a-f]{8}(?:[0-9a-f]{9})?$"
             }
         },
         "com.amazonaws.sagemaker#ClusterNodeDetails": {
@@ -74982,6 +75094,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#AssociateTrialComponent"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#AttachClusterNodeNetworkInterface"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#AttachClusterNodeVolume"
