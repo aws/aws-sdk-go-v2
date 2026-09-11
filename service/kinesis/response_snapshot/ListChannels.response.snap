@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Kinesis_20131202.ListChannels
+
+{"ChannelSummaries":[{"ChannelARN":"__ChannelARN__","ChannelCreationTimestamp":946684800,"ChannelDestinationType":"S3","ChannelId":"__ChannelId__","ChannelName":"__ChannelName__","ChannelStatus":"CREATING","ChannelStatusReason":"__ChannelStatusReason__","Streams":[{"StreamARN":"__StreamARN__","StreamCreationTimestamp":946684800},{"StreamARN":"__StreamARN__","StreamCreationTimestamp":946684800}]},{"ChannelARN":"__ChannelARN__","ChannelCreationTimestamp":946684800,"ChannelDestinationType":"S3","ChannelId":"__ChannelId__","ChannelName":"__ChannelName__","ChannelStatus":"CREATING","ChannelStatusReason":"__ChannelStatusReason__","Streams":[{"StreamARN":"__StreamARN__","StreamCreationTimestamp":946684800},{"StreamARN":"__StreamARN__","StreamCreationTimestamp":946684800}]}],"NextToken":"__NextToken__"}

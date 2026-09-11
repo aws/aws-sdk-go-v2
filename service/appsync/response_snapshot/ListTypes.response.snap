@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","types":[{"arn":"__Arn__","definition":"__Definition__","description":"__Description__","format":"SDL","name":"__Name__"},{"arn":"__Arn__","definition":"__Definition__","description":"__Description__","format":"SDL","name":"__Name__"}]}

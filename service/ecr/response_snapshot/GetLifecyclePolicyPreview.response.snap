@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerRegistry_V20150921.GetLifecyclePolicyPreview
+
+{"lifecyclePolicyText":"__LifecyclePolicyText__","nextToken":"__NextToken__","previewResults":[{"action":{"targetStorageClass":"ARCHIVE","type":"EXPIRE"},"appliedRulePriority":1,"imageDigest":"__ImageDigest__","imagePushedAt":946684800,"imageTags":["__Member__","__Member__"],"storageClass":"ARCHIVE"},{"action":{"targetStorageClass":"ARCHIVE","type":"EXPIRE"},"appliedRulePriority":1,"imageDigest":"__ImageDigest__","imagePushedAt":946684800,"imageTags":["__Member__","__Member__"],"storageClass":"ARCHIVE"}],"registryId":"__RegistryId__","repositoryName":"__RepositoryName__","status":"IN_PROGRESS","summary":{"expiringImageTotalCount":1,"transitioningImageTotalCounts":[{"imageTotalCount":1,"targetStorageClass":"ARCHIVE"},{"imageTotalCount":1,"targetStorageClass":"ARCHIVE"}]}}

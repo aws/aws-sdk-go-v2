@@ -1,0 +1,4 @@
+422
+Content-Type: application/json
+
+{"__type":"UnprocessableEntityException","message":"__Message__","validationErrors":[{"elementPath":"__ElementPath__","errorMessage":"__ErrorMessage__"},{"elementPath":"__ElementPath__","errorMessage":"__ErrorMessage__"}]}

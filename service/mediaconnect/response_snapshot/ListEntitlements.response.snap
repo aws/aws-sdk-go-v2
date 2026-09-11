@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"entitlements":[{"dataTransferSubscriberFeePercent":1,"entitlementArn":"__EntitlementArn__","entitlementName":"__EntitlementName__"},{"dataTransferSubscriberFeePercent":1,"entitlementArn":"__EntitlementArn__","entitlementName":"__EntitlementName__"}],"nextToken":"__NextToken__"}

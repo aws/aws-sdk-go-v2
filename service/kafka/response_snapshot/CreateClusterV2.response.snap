@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"clusterArn":"__ClusterArn__","clusterName":"__ClusterName__","clusterType":"PROVISIONED","state":"ACTIVE"}

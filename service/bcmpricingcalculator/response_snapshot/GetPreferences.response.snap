@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBCMPricingCalculator.GetPreferences
+
+{"managementAccountRateTypeSelections":["BEFORE_DISCOUNTS","BEFORE_DISCOUNTS"],"memberAccountRateTypeSelections":["BEFORE_DISCOUNTS","BEFORE_DISCOUNTS"],"standaloneAccountRateTypeSelections":["BEFORE_DISCOUNTS","BEFORE_DISCOUNTS"]}

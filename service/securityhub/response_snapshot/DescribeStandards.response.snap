@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","Standards":[{"Description":"__Description__","EnabledByDefault":true,"Name":"__Name__","Provider":"AWS","StandardsArn":"__StandardsArn__","StandardsManagedBy":{"Company":"__Company__","Product":"__Product__"}},{"Description":"__Description__","EnabledByDefault":true,"Name":"__Name__","Provider":"AWS","StandardsArn":"__StandardsArn__","StandardsManagedBy":{"Company":"__Company__","Product":"__Product__"}}]}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","UpgradeHistories":[{"StartTimestamp":946684800,"StepsList":[{"Issues":["__Member__","__Member__"],"ProgressPercent":1,"UpgradeStep":"PRE_UPGRADE_CHECK","UpgradeStepStatus":"IN_PROGRESS"},{"Issues":["__Member__","__Member__"],"ProgressPercent":1,"UpgradeStep":"PRE_UPGRADE_CHECK","UpgradeStepStatus":"IN_PROGRESS"}],"UpgradeName":"__UpgradeName__","UpgradeStatus":"IN_PROGRESS"},{"StartTimestamp":946684800,"StepsList":[{"Issues":["__Member__","__Member__"],"ProgressPercent":1,"UpgradeStep":"PRE_UPGRADE_CHECK","UpgradeStepStatus":"IN_PROGRESS"},{"Issues":["__Member__","__Member__"],"ProgressPercent":1,"UpgradeStep":"PRE_UPGRADE_CHECK","UpgradeStepStatus":"IN_PROGRESS"}],"UpgradeName":"__UpgradeName__","UpgradeStatus":"IN_PROGRESS"}]}

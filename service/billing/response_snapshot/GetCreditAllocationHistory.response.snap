@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBilling.GetCreditAllocationHistory
+
+{"creditAllocationHistoryList":[{"accountId":"__AccountId__","appliedServiceName":"__AppliedServiceName__","billingMonth":"__BillingMonth__","creditAmount":{"currencyAmount":"__CurrencyAmount__","currencyCode":"__CurrencyCode__"},"creditId":"__CreditId__","description":"__Description__","isEstimatedBill":true},{"accountId":"__AccountId__","appliedServiceName":"__AppliedServiceName__","billingMonth":"__BillingMonth__","creditAmount":{"currencyAmount":"__CurrencyAmount__","currencyCode":"__CurrencyCode__"},"creditId":"__CreditId__","description":"__Description__","isEstimatedBill":true}],"failedMonths":["__Member__","__Member__"],"nextToken":"__NextToken__","partialResults":true}

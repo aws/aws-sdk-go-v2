@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerRegistry_V20150921.UpdateImageStorageClass
+
+{"__type":"ImageStorageClassUpdateNotSupportedException","message":"__Message__"}

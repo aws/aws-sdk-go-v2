@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"dependencies":[{"criticality":"HARD","dependencyId":"__DependencyId__","dependencyName":"__DependencyName__","dnsName":"__DnsName__","location":"__Location__","provider":"__Provider__","source":"DISCOVERED","sourceRegions":["__Member__","__Member__"]},{"criticality":"HARD","dependencyId":"__DependencyId__","dependencyName":"__DependencyName__","dnsName":"__DnsName__","location":"__Location__","provider":"__Provider__","source":"DISCOVERED","sourceRegions":["__Member__","__Member__"]}],"nextToken":"__NextToken__"}

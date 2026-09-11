@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: DynamoDB_20120810.UpdateContinuousBackups
+
+{"ContinuousBackupsDescription":{"ContinuousBackupsStatus":"ENABLED","PointInTimeRecoveryDescription":{"EarliestRestorableDateTime":946684800,"LatestRestorableDateTime":946684800,"PointInTimeRecoveryStatus":"ENABLED","RecoveryPeriodInDays":1}}}

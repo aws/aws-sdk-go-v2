@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"failed":[{"arn":"__Arn__","code":"__Code__","id":"__Id__","message":"__Message__"},{"arn":"__Arn__","code":"__Code__","id":"__Id__","message":"__Message__"}],"successful":[{"arn":"__Arn__","id":"__Id__","state":"__State__"},{"arn":"__Arn__","id":"__Id__","state":"__State__"}]}

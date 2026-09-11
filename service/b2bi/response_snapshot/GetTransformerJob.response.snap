@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: B2BI.GetTransformerJob
+
+{"message":"__Message__","outputFiles":[{"bucketName":"__BucketName__","key":"__Key__"},{"bucketName":"__BucketName__","key":"__Key__"}],"status":"running"}

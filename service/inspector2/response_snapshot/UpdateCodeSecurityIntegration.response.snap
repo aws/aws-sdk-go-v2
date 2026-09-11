@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"integrationArn":"__IntegrationArn__","status":"PENDING"}

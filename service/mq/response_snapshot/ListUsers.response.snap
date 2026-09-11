@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"brokerId":"__BrokerId__","maxResults":1,"nextToken":"__NextToken__","users":[{"pendingChange":"CREATE","username":"__Username__"},{"pendingChange":"CREATE","username":"__Username__"}]}

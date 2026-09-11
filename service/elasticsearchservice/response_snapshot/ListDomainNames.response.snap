@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DomainNames":[{"DomainName":"__DomainName__","EngineType":"OpenSearch"},{"DomainName":"__DomainName__","EngineType":"OpenSearch"}]}

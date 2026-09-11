@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TrentService.Verify
+
+{"KeyId":"__KeyId__","SignatureValid":true,"SigningAlgorithm":"RSASSA_PSS_SHA_256"}
