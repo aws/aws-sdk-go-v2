@@ -105,9 +105,6 @@ func (t *loginToken) Update(out *signin.CreateOAuth2TokenOutput) error {
 	if out == nil || out.TokenOutput == nil || out.TokenOutput.AccessToken == nil {
 		return fmt.Errorf("missing token payload in CreateOAuth2Token response")
 	}
-	if t.AccessToken == nil {
-		t.AccessToken = &loginTokenAccessToken{}
-	}
 	if out.TokenOutput.AccessToken.AccessKeyId != nil {
 		t.AccessToken.AccessKeyID = *out.TokenOutput.AccessToken.AccessKeyId
 	}

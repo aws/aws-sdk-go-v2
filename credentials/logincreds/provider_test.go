@@ -358,7 +358,7 @@ func TestRetrieve_Failure_NilTokenOutput(t *testing.T) {
 	if err == nil {
 		t.Fatal("expect err, got none")
 	}
-	if !strings.Contains(err.Error(), "update token") {
+	if !strings.Contains(err.Error(), "missing token payload in CreateOAuth2Token response") {
 		t.Errorf("unexpected error: %v", err)
 	}
 }
@@ -395,10 +395,32 @@ func TestRetrieve_OK_NilRefreshToken(t *testing.T) {
 	if e, a := "NEW_AKID", creds.AccessKeyID; e != a {
 		t.Errorf("akid: %q != %q", e, a)
 	}
+	if e, a := "NEW_SECRET", creds.SecretAccessKey; e != a {
+		t.Errorf("secret: %q != %q", e, a)
+	}
+	if e, a := "NEW_SESSION", creds.SessionToken; e != a {
+		t.Errorf("session: %q != %q", e, a)
+	}
+	// we mocked time.Now() to return 60 and creds expire in 900 seconds
+	if e, a := time.Unix(960, 0).UTC(), creds.Expires; e != a {
+		t.Errorf("expires: %v != %v", e, a)
+	}
 
 	var savedToken *loginToken
 	if err := json.Unmarshal(written.p, &savedToken); err != nil {
 		t.Fatal(err)
+	}
+	if e, a := "NEW_AKID", savedToken.AccessToken.AccessKeyID; e != a {
+		t.Errorf("akid: %q != %q", e, a)
+	}
+	if e, a := "NEW_SECRET", savedToken.AccessToken.SecretAccessKey; e != a {
+		t.Errorf("secret: %q != %q", e, a)
+	}
+	if e, a := "NEW_SESSION", savedToken.AccessToken.SessionToken; e != a {
+		t.Errorf("session: %q != %q", e, a)
+	}
+	if e, a := time.Unix(960, 0).UTC(), savedToken.AccessToken.ExpiresAt; e != a {
+		t.Errorf("expires: %v != %v", e, a)
 	}
 	if e, a := "RefreshToken", savedToken.RefreshToken; e != a {
 		t.Errorf("refresh token should be preserved: %q != %q", e, a)
