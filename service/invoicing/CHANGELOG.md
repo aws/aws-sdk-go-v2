@@ -1,3 +1,7 @@
+# v1.19.0 (2026-09-11)
+
+* **Feature**: Add ListProcurementPortals and ListProcurementPortalSuppliers APIs to retrieve AWS-supported 3rd party procurement portals and their suppliers for e-invoice delivery and purchase order retrieval.
+
 # v1.18.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

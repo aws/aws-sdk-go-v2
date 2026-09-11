@@ -1,3 +1,7 @@
+# v1.66.0 (2026-09-11)
+
+* **Feature**: Amazon Lightsail now lets you serve website content from a private Lightsail bucket through a Lightsail distribution. This release adds enablePrivateOriginAccess to the CreateDistribution and UpdateDistribution actions, plus new defaultRootObject and customErrorResponses options.
+
 # v1.65.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

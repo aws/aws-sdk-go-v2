@@ -1,8 +1,0 @@
-{
-    "id": "9dcbfde4-25b0-4a1e-ae16-e71aab178ad4",
-    "type": "feature",
-    "description": "Added new bulk job APIs (CancelJobs, TerminateJobs, TerminateServiceJobs) and new fields on ListJobs and ListServiceJobs responses. This allows customers to cancel or terminate multiple jobs in a single request. ListJobs and ListServiceJobs responses now include isCancelled and isTerminated fields.",
-    "modules": [
-        "service/batch"
-    ]
-}

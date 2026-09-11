@@ -1,8 +1,0 @@
-{
-    "id": "176d1059-8295-485b-8870-281b2ed72ed6",
-    "type": "feature",
-    "description": "Add ListProcurementPortals and ListProcurementPortalSuppliers APIs to retrieve AWS-supported 3rd party procurement portals and their suppliers for e-invoice delivery and purchase order retrieval.",
-    "modules": [
-        "service/invoicing"
-    ]
-}

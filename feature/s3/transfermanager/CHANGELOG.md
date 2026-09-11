@@ -1,3 +1,7 @@
+# v0.4.6 (2026-09-11)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v0.4.5 (2026-09-09)
 
 * **Bug Fix**: Fix potential deadlock in GetObject calls.

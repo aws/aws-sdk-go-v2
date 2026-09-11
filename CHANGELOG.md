@@ -1,3 +1,22 @@
+# Release (2026-09-11)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.76.0](service/batch/CHANGELOG.md#v1760-2026-09-11)
+  * **Feature**: Added new bulk job APIs (CancelJobs, TerminateJobs, TerminateServiceJobs) and new fields on ListJobs and ListServiceJobs responses. This allows customers to cancel or terminate multiple jobs in a single request. ListJobs and ListServiceJobs responses now include isCancelled and isTerminated fields.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.98.0](service/ecs/CHANGELOG.md#v1980-2026-09-11)
+  * **Feature**: This feature adds support for setting the cpu architecture type that should be used to launch tasks for an Express Gateway Service.
+* `github.com/aws/aws-sdk-go-v2/service/invoicing`: [v1.19.0](service/invoicing/CHANGELOG.md#v1190-2026-09-11)
+  * **Feature**: Add ListProcurementPortals and ListProcurementPortalSuppliers APIs to retrieve AWS-supported 3rd party procurement portals and their suppliers for e-invoice delivery and purchase order retrieval.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.66.0](service/lightsail/CHANGELOG.md#v1660-2026-09-11)
+  * **Feature**: Amazon Lightsail now lets you serve website content from a private Lightsail bucket through a Lightsail distribution. This release adds enablePrivateOriginAccess to the CreateDistribution and UpdateDistribution actions, plus new defaultRootObject and customErrorResponses options.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.104.0](service/mediaconvert/CHANGELOG.md#v11040-2026-09-11)
+  * **Feature**: Adds Dolby Vision metadata to Probe results, including profile, level, and presence of the RPU, base layer, and enhancement layer. Adds video sample and display aspect ratios. Adds the UnprocessableEntityException (HTTP 422) error to Probe for recognized but malformed or corrupt inputs.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.113.1](service/s3/CHANGELOG.md#v11131-2026-09-11)
+  * **Documentation**: Updated S3 Object Lock Default Retention documentation.
+
 # Release (2026-09-10)
 
 ## Module Highlights

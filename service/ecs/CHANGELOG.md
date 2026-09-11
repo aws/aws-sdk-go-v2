@@ -1,3 +1,7 @@
+# v1.98.0 (2026-09-11)
+
+* **Feature**: This feature adds support for setting the cpu architecture type that should be used to launch tasks for an Express Gateway Service.
+
 # v1.97.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
