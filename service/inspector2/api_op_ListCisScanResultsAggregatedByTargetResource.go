@@ -5,7 +5,9 @@ package inspector2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,35 @@ type ListCisScanResultsAggregatedByTargetResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCisScanResultsAggregatedByTargetResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCisScanResultsAggregatedByTargetResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCisScanResultsAggregatedByTargetResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterCriteria != nil {
+		s.WriteStruct(schemas.ListCisScanResultsAggregatedByTargetResourceRequest_filterCriteria)
+		v.FilterCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCisScanResultsAggregatedByTargetResourceRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCisScanResultsAggregatedByTargetResourceRequest_nextToken, *v.NextToken)
+	}
+	if v.ScanArn != nil {
+		s.WriteString(schemas.ListCisScanResultsAggregatedByTargetResourceRequest_scanArn, *v.ScanArn)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListCisScanResultsAggregatedByTargetResourceRequest_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListCisScanResultsAggregatedByTargetResourceRequest_sortOrder, string(v.SortOrder))
+	}
+}
+
 type ListCisScanResultsAggregatedByTargetResourceOutput struct {
 
 	// The pagination token from a previous request that's used to retrieve the next
@@ -67,13 +98,35 @@ type ListCisScanResultsAggregatedByTargetResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCisScanResultsAggregatedByTargetResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCisScanResultsAggregatedByTargetResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCisScanResultsAggregatedByTargetResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCisScanResultsAggregatedByTargetResourceResponse_nextToken, *v.NextToken)
+	}
+	serializeCisTargetResourceAggregationList(s, schemas.ListCisScanResultsAggregatedByTargetResourceResponse_targetResourceAggregations, v.TargetResourceAggregations)
+}
+func (v *ListCisScanResultsAggregatedByTargetResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCisScanResultsAggregatedByTargetResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCisScanResultsAggregatedByTargetResourceResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCisScanResultsAggregatedByTargetResourceResponse_nextToken, v.NextToken)
+		case schemas.ListCisScanResultsAggregatedByTargetResourceResponse_targetResourceAggregations:
+			return deserializeCisTargetResourceAggregationList(d, schemas.ListCisScanResultsAggregatedByTargetResourceResponse_targetResourceAggregations, &v.TargetResourceAggregations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCisScanResultsAggregatedByTargetResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCisScanResultsAggregatedByTargetResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCisScanResultsAggregatedByTargetResource, schemas.ListCisScanResultsAggregatedByTargetResourceRequest, schemas.ListCisScanResultsAggregatedByTargetResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCisScanResultsAggregatedByTargetResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCisScanResultsAggregatedByTargetResource, schemas.ListCisScanResultsAggregatedByTargetResourceRequest, schemas.ListCisScanResultsAggregatedByTargetResourceResponse), output: &ListCisScanResultsAggregatedByTargetResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

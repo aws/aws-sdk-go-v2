@@ -5,7 +5,9 @@ package resiliencehubv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -62,6 +64,37 @@ type ListFailureModeAssessmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFailureModeAssessmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFailureModeAssessmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFailureModeAssessmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssessmentStatusList(s, schemas.ListFailureModeAssessmentsRequest_assessmentStatuses, v.AssessmentStatuses)
+	if v.EndedBefore != nil {
+		s.WriteTime(schemas.ListFailureModeAssessmentsRequest_endedBefore, *v.EndedBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFailureModeAssessmentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFailureModeAssessmentsRequest_nextToken, *v.NextToken)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.ListFailureModeAssessmentsRequest_serviceArn, *v.ServiceArn)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListFailureModeAssessmentsRequest_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListFailureModeAssessmentsRequest_sortOrder, string(v.SortOrder))
+	}
+	if v.StartedAfter != nil {
+		s.WriteTime(schemas.ListFailureModeAssessmentsRequest_startedAfter, *v.StartedAfter)
+	}
+}
+
 type ListFailureModeAssessmentsOutput struct {
 
 	// The list of assessment summaries.
@@ -78,13 +111,35 @@ type ListFailureModeAssessmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFailureModeAssessmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFailureModeAssessmentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFailureModeAssessmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssessmentSummaryList(s, schemas.ListFailureModeAssessmentsResponse_assessmentSummaries, v.AssessmentSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFailureModeAssessmentsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListFailureModeAssessmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFailureModeAssessmentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFailureModeAssessmentsResponse_assessmentSummaries:
+			return deserializeAssessmentSummaryList(d, schemas.ListFailureModeAssessmentsResponse_assessmentSummaries, &v.AssessmentSummaries)
+		case schemas.ListFailureModeAssessmentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFailureModeAssessmentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFailureModeAssessmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFailureModeAssessments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFailureModeAssessments, schemas.ListFailureModeAssessmentsRequest, schemas.ListFailureModeAssessmentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFailureModeAssessments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFailureModeAssessments, schemas.ListFailureModeAssessmentsRequest, schemas.ListFailureModeAssessmentsResponse), output: &ListFailureModeAssessmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

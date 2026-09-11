@@ -4,7 +4,9 @@ package mediatailor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,31 @@ type ConfigureLogsForChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfigureLogsForChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigureLogsForChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigureLogsForChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelName != nil {
+		s.WriteString(schemas.ConfigureLogsForChannelRequest_ChannelName, *v.ChannelName)
+	}
+	serializeLogTypes(s, schemas.ConfigureLogsForChannelRequest_LogTypes, v.LogTypes)
+}
+func (v *ConfigureLogsForChannelInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigureLogsForChannelRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigureLogsForChannelRequest_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.ConfigureLogsForChannelRequest_ChannelName, v.ChannelName)
+		case schemas.ConfigureLogsForChannelRequest_LogTypes:
+			return deserializeLogTypes(d, schemas.ConfigureLogsForChannelRequest_LogTypes, &v.LogTypes)
+		}
+		return nil
+	})
+}
+
 type ConfigureLogsForChannelOutput struct {
 
 	// The name of the channel.
@@ -53,13 +80,35 @@ type ConfigureLogsForChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfigureLogsForChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigureLogsForChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigureLogsForChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelName != nil {
+		s.WriteString(schemas.ConfigureLogsForChannelResponse_ChannelName, *v.ChannelName)
+	}
+	serializeLogTypes(s, schemas.ConfigureLogsForChannelResponse_LogTypes, v.LogTypes)
+}
+func (v *ConfigureLogsForChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigureLogsForChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigureLogsForChannelResponse_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.ConfigureLogsForChannelResponse_ChannelName, v.ChannelName)
+		case schemas.ConfigureLogsForChannelResponse_LogTypes:
+			return deserializeLogTypes(d, schemas.ConfigureLogsForChannelResponse_LogTypes, &v.LogTypes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConfigureLogsForChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpConfigureLogsForChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfigureLogsForChannel, schemas.ConfigureLogsForChannelRequest, schemas.ConfigureLogsForChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpConfigureLogsForChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfigureLogsForChannel, schemas.ConfigureLogsForChannelRequest, schemas.ConfigureLogsForChannelResponse), output: &ConfigureLogsForChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

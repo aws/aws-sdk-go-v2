@@ -4,7 +4,9 @@ package billing
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/billing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,19 @@ type UpdateBillingPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBillingPreferencesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBillingPreferencesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBillingPreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBillingPreferencesPerKey(s, schemas.UpdateBillingPreferencesRequest_billingPreferencesPerKey, v.BillingPreferencesPerKey)
+	if v.Feature != "" {
+		s.WriteString(schemas.UpdateBillingPreferencesRequest_feature, string(v.Feature))
+	}
+}
+
 type UpdateBillingPreferencesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,13 +75,26 @@ type UpdateBillingPreferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBillingPreferencesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBillingPreferencesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBillingPreferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateBillingPreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBillingPreferencesResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBillingPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateBillingPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBillingPreferences, schemas.UpdateBillingPreferencesRequest, schemas.UpdateBillingPreferencesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateBillingPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBillingPreferences, schemas.UpdateBillingPreferencesRequest, schemas.UpdateBillingPreferencesResponse), output: &UpdateBillingPreferencesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

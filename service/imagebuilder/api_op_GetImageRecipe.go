@@ -4,7 +4,9 @@ package imagebuilder
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetImageRecipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetImageRecipeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetImageRecipeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetImageRecipeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageRecipeArn != nil {
+		s.WriteString(schemas.GetImageRecipeRequest_imageRecipeArn, *v.ImageRecipeArn)
+	}
+}
+
 type GetImageRecipeOutput struct {
 
 	// The image recipe object.
@@ -51,13 +65,48 @@ type GetImageRecipeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetImageRecipeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetImageRecipeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetImageRecipeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageRecipe != nil {
+		s.WriteStruct(schemas.GetImageRecipeResponse_imageRecipe)
+		v.ImageRecipe.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LatestVersionReferences != nil {
+		s.WriteStruct(schemas.GetImageRecipeResponse_latestVersionReferences)
+		v.LatestVersionReferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.GetImageRecipeResponse_requestId, *v.RequestId)
+	}
+}
+func (v *GetImageRecipeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetImageRecipeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetImageRecipeResponse_imageRecipe:
+			v.ImageRecipe = &types.ImageRecipe{}
+			return v.ImageRecipe.Deserialize(d)
+		case schemas.GetImageRecipeResponse_latestVersionReferences:
+			v.LatestVersionReferences = &types.LatestVersionReferences{}
+			return v.LatestVersionReferences.Deserialize(d)
+		case schemas.GetImageRecipeResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.GetImageRecipeResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetImageRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetImageRecipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImageRecipe, schemas.GetImageRecipeRequest, schemas.GetImageRecipeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetImageRecipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImageRecipe, schemas.GetImageRecipeRequest, schemas.GetImageRecipeResponse), output: &GetImageRecipeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

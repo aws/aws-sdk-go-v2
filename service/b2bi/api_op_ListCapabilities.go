@@ -5,7 +5,9 @@ package b2bi
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ListCapabilitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCapabilitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCapabilitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCapabilitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCapabilitiesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCapabilitiesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListCapabilitiesOutput struct {
 
 	// Returns one or more capabilities associated with this partnership.
@@ -58,13 +75,35 @@ type ListCapabilitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCapabilitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCapabilitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCapabilitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCapabilityList(s, schemas.ListCapabilitiesResponse_capabilities, v.Capabilities)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCapabilitiesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCapabilitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCapabilitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCapabilitiesResponse_capabilities:
+			return deserializeCapabilityList(d, schemas.ListCapabilitiesResponse_capabilities, &v.Capabilities)
+		case schemas.ListCapabilitiesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCapabilitiesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCapabilitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListCapabilities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCapabilities, schemas.ListCapabilitiesRequest, schemas.ListCapabilitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListCapabilities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCapabilities, schemas.ListCapabilitiesRequest, schemas.ListCapabilitiesResponse), output: &ListCapabilitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

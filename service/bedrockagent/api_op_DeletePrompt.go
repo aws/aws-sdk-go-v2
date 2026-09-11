@@ -4,6 +4,8 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DeletePromptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePromptInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePromptRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePromptInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PromptIdentifier != nil {
+		s.WriteString(schemas.DeletePromptRequest_promptIdentifier, *v.PromptIdentifier)
+	}
+	if v.PromptVersion != nil {
+		s.WriteString(schemas.DeletePromptRequest_promptVersion, *v.PromptVersion)
+	}
+}
+
 type DeletePromptOutput struct {
 
 	// The unique identifier of the prompt that was deleted.
@@ -57,13 +74,38 @@ type DeletePromptOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePromptOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePromptResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePromptOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeletePromptResponse_id, *v.Id)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.DeletePromptResponse_version, *v.Version)
+	}
+}
+func (v *DeletePromptOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePromptResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePromptResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeletePromptResponse_id, v.Id)
+		case schemas.DeletePromptResponse_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.DeletePromptResponse_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePromptMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePrompt{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePrompt, schemas.DeletePromptRequest, schemas.DeletePromptResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePrompt{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePrompt, schemas.DeletePromptRequest, schemas.DeletePromptResponse), output: &DeletePromptOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

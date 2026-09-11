@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteSdiSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSdiSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSdiSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSdiSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SdiSourceId != nil {
+		s.WriteString(schemas.DeleteSdiSourceRequest_SdiSourceId, *v.SdiSourceId)
+	}
+}
+
 // Placeholder documentation for DeleteSdiSourceResponse
 type DeleteSdiSourceOutput struct {
 
@@ -48,13 +62,34 @@ type DeleteSdiSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSdiSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSdiSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSdiSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SdiSource != nil {
+		s.WriteStruct(schemas.DeleteSdiSourceResponse_SdiSource)
+		v.SdiSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteSdiSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSdiSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSdiSourceResponse_SdiSource:
+			v.SdiSource = &types.SdiSource{}
+			return v.SdiSource.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSdiSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSdiSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSdiSource, schemas.DeleteSdiSourceRequest, schemas.DeleteSdiSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSdiSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSdiSource, schemas.DeleteSdiSourceRequest, schemas.DeleteSdiSourceResponse), output: &DeleteSdiSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

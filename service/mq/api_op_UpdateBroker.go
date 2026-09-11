@@ -4,7 +4,9 @@ package mq
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mq/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mq/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -89,6 +91,58 @@ type UpdateBrokerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBrokerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBrokerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBrokerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationStrategy != "" {
+		s.WriteString(schemas.UpdateBrokerRequest_AuthenticationStrategy, string(v.AuthenticationStrategy))
+	}
+	if v.AutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.UpdateBrokerRequest_AutoMinorVersionUpgrade, *v.AutoMinorVersionUpgrade)
+	}
+	if v.BrokerId != nil {
+		s.WriteString(schemas.UpdateBrokerRequest_BrokerId, *v.BrokerId)
+	}
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.UpdateBrokerRequest_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataReplicationMode != "" {
+		s.WriteString(schemas.UpdateBrokerRequest_DataReplicationMode, string(v.DataReplicationMode))
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.UpdateBrokerRequest_EngineVersion, *v.EngineVersion)
+	}
+	if v.HostInstanceType != nil {
+		s.WriteString(schemas.UpdateBrokerRequest_HostInstanceType, *v.HostInstanceType)
+	}
+	if v.LdapServerMetadata != nil {
+		s.WriteStruct(schemas.UpdateBrokerRequest_LdapServerMetadata)
+		v.LdapServerMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Logs != nil {
+		s.WriteStruct(schemas.UpdateBrokerRequest_Logs)
+		v.Logs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaintenanceWindowStartTime != nil {
+		s.WriteStruct(schemas.UpdateBrokerRequest_MaintenanceWindowStartTime)
+		v.MaintenanceWindowStartTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOf__string(s, schemas.UpdateBrokerRequest_ResourceShareArns, v.ResourceShareArns)
+	serialize__listOf__string(s, schemas.UpdateBrokerRequest_SecurityGroups, v.SecurityGroups)
+	if v.StorageSize != nil {
+		s.WriteInt32(schemas.UpdateBrokerRequest_StorageSize, *v.StorageSize)
+	}
+}
+
 type UpdateBrokerOutput struct {
 
 	// Optional. The authentication strategy used to secure the broker. The default is
@@ -160,13 +214,140 @@ type UpdateBrokerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBrokerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBrokerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBrokerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationStrategy != "" {
+		s.WriteString(schemas.UpdateBrokerResponse_AuthenticationStrategy, string(v.AuthenticationStrategy))
+	}
+	if v.AutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.UpdateBrokerResponse_AutoMinorVersionUpgrade, *v.AutoMinorVersionUpgrade)
+	}
+	if v.BrokerId != nil {
+		s.WriteString(schemas.UpdateBrokerResponse_BrokerId, *v.BrokerId)
+	}
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.UpdateBrokerResponse_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataReplicationMetadata != nil {
+		s.WriteStruct(schemas.UpdateBrokerResponse_DataReplicationMetadata)
+		v.DataReplicationMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataReplicationMode != "" {
+		s.WriteString(schemas.UpdateBrokerResponse_DataReplicationMode, string(v.DataReplicationMode))
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.UpdateBrokerResponse_EngineVersion, *v.EngineVersion)
+	}
+	if v.HostInstanceType != nil {
+		s.WriteString(schemas.UpdateBrokerResponse_HostInstanceType, *v.HostInstanceType)
+	}
+	if v.LdapServerMetadata != nil {
+		s.WriteStruct(schemas.UpdateBrokerResponse_LdapServerMetadata)
+		v.LdapServerMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Logs != nil {
+		s.WriteStruct(schemas.UpdateBrokerResponse_Logs)
+		v.Logs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaintenanceWindowStartTime != nil {
+		s.WriteStruct(schemas.UpdateBrokerResponse_MaintenanceWindowStartTime)
+		v.MaintenanceWindowStartTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PendingDataReplicationMetadata != nil {
+		s.WriteStruct(schemas.UpdateBrokerResponse_PendingDataReplicationMetadata)
+		v.PendingDataReplicationMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PendingDataReplicationMode != "" {
+		s.WriteString(schemas.UpdateBrokerResponse_PendingDataReplicationMode, string(v.PendingDataReplicationMode))
+	}
+	serialize__listOf__string(s, schemas.UpdateBrokerResponse_ResourceShareArns, v.ResourceShareArns)
+	serialize__listOf__string(s, schemas.UpdateBrokerResponse_SecurityGroups, v.SecurityGroups)
+	if v.StorageSize != nil {
+		s.WriteInt32(schemas.UpdateBrokerResponse_StorageSize, *v.StorageSize)
+	}
+}
+func (v *UpdateBrokerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBrokerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBrokerResponse_AuthenticationStrategy:
+			var ev string
+			if err := d.ReadString(schemas.UpdateBrokerResponse_AuthenticationStrategy, &ev); err != nil {
+				return err
+			}
+			v.AuthenticationStrategy = types.AuthenticationStrategy(ev)
+			return nil
+		case schemas.UpdateBrokerResponse_AutoMinorVersionUpgrade:
+			v.AutoMinorVersionUpgrade = new(bool)
+			return d.ReadBool(schemas.UpdateBrokerResponse_AutoMinorVersionUpgrade, v.AutoMinorVersionUpgrade)
+		case schemas.UpdateBrokerResponse_BrokerId:
+			v.BrokerId = new(string)
+			return d.ReadString(schemas.UpdateBrokerResponse_BrokerId, v.BrokerId)
+		case schemas.UpdateBrokerResponse_Configuration:
+			v.Configuration = &types.ConfigurationId{}
+			return v.Configuration.Deserialize(d)
+		case schemas.UpdateBrokerResponse_DataReplicationMetadata:
+			v.DataReplicationMetadata = &types.DataReplicationMetadataOutput{}
+			return v.DataReplicationMetadata.Deserialize(d)
+		case schemas.UpdateBrokerResponse_DataReplicationMode:
+			var ev string
+			if err := d.ReadString(schemas.UpdateBrokerResponse_DataReplicationMode, &ev); err != nil {
+				return err
+			}
+			v.DataReplicationMode = types.DataReplicationMode(ev)
+			return nil
+		case schemas.UpdateBrokerResponse_EngineVersion:
+			v.EngineVersion = new(string)
+			return d.ReadString(schemas.UpdateBrokerResponse_EngineVersion, v.EngineVersion)
+		case schemas.UpdateBrokerResponse_HostInstanceType:
+			v.HostInstanceType = new(string)
+			return d.ReadString(schemas.UpdateBrokerResponse_HostInstanceType, v.HostInstanceType)
+		case schemas.UpdateBrokerResponse_LdapServerMetadata:
+			v.LdapServerMetadata = &types.LdapServerMetadataOutput{}
+			return v.LdapServerMetadata.Deserialize(d)
+		case schemas.UpdateBrokerResponse_Logs:
+			v.Logs = &types.Logs{}
+			return v.Logs.Deserialize(d)
+		case schemas.UpdateBrokerResponse_MaintenanceWindowStartTime:
+			v.MaintenanceWindowStartTime = &types.WeeklyStartTime{}
+			return v.MaintenanceWindowStartTime.Deserialize(d)
+		case schemas.UpdateBrokerResponse_PendingDataReplicationMetadata:
+			v.PendingDataReplicationMetadata = &types.DataReplicationMetadataOutput{}
+			return v.PendingDataReplicationMetadata.Deserialize(d)
+		case schemas.UpdateBrokerResponse_PendingDataReplicationMode:
+			var ev string
+			if err := d.ReadString(schemas.UpdateBrokerResponse_PendingDataReplicationMode, &ev); err != nil {
+				return err
+			}
+			v.PendingDataReplicationMode = types.DataReplicationMode(ev)
+			return nil
+		case schemas.UpdateBrokerResponse_ResourceShareArns:
+			return deserialize__listOf__string(d, schemas.UpdateBrokerResponse_ResourceShareArns, &v.ResourceShareArns)
+		case schemas.UpdateBrokerResponse_SecurityGroups:
+			return deserialize__listOf__string(d, schemas.UpdateBrokerResponse_SecurityGroups, &v.SecurityGroups)
+		case schemas.UpdateBrokerResponse_StorageSize:
+			v.StorageSize = new(int32)
+			return d.ReadInt32(schemas.UpdateBrokerResponse_StorageSize, v.StorageSize)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBrokerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBroker{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBroker, schemas.UpdateBrokerRequest, schemas.UpdateBrokerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBroker{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBroker, schemas.UpdateBrokerRequest, schemas.UpdateBrokerResponse), output: &UpdateBrokerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

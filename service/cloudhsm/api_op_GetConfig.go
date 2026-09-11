@@ -4,7 +4,9 @@ package cloudhsm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,22 @@ type GetConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientArn != nil {
+		s.WriteString(schemas.GetConfigRequest_ClientArn, *v.ClientArn)
+	}
+	if v.ClientVersion != "" {
+		s.WriteString(schemas.GetConfigRequest_ClientVersion, string(v.ClientVersion))
+	}
+	serializeHapgList(s, schemas.GetConfigRequest_HapgList, v.HapgList)
+}
+
 type GetConfigOutput struct {
 
 	// The certificate file containing the server.pem files of the HSMs.
@@ -77,13 +95,44 @@ type GetConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigCred != nil {
+		s.WriteString(schemas.GetConfigResponse_ConfigCred, *v.ConfigCred)
+	}
+	if v.ConfigFile != nil {
+		s.WriteString(schemas.GetConfigResponse_ConfigFile, *v.ConfigFile)
+	}
+	if v.ConfigType != nil {
+		s.WriteString(schemas.GetConfigResponse_ConfigType, *v.ConfigType)
+	}
+}
+func (v *GetConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfigResponse_ConfigCred:
+			v.ConfigCred = new(string)
+			return d.ReadString(schemas.GetConfigResponse_ConfigCred, v.ConfigCred)
+		case schemas.GetConfigResponse_ConfigFile:
+			v.ConfigFile = new(string)
+			return d.ReadString(schemas.GetConfigResponse_ConfigFile, v.ConfigFile)
+		case schemas.GetConfigResponse_ConfigType:
+			v.ConfigType = new(string)
+			return d.ReadString(schemas.GetConfigResponse_ConfigType, v.ConfigType)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfig, schemas.GetConfigRequest, schemas.GetConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfig, schemas.GetConfigRequest, schemas.GetConfigResponse), output: &GetConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,26 @@ type UpdateClusterConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.UpdateClusterConfigurationRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.ConfigurationInfo != nil {
+		s.WriteStruct(schemas.UpdateClusterConfigurationRequest_ConfigurationInfo)
+		v.ConfigurationInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CurrentVersion != nil {
+		s.WriteString(schemas.UpdateClusterConfigurationRequest_CurrentVersion, *v.CurrentVersion)
+	}
+}
+
 type UpdateClusterConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.
@@ -60,13 +82,38 @@ type UpdateClusterConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.UpdateClusterConfigurationResponse_ClusterArn, *v.ClusterArn)
+	}
+	if v.ClusterOperationArn != nil {
+		s.WriteString(schemas.UpdateClusterConfigurationResponse_ClusterOperationArn, *v.ClusterOperationArn)
+	}
+}
+func (v *UpdateClusterConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateClusterConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateClusterConfigurationResponse_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.UpdateClusterConfigurationResponse_ClusterArn, v.ClusterArn)
+		case schemas.UpdateClusterConfigurationResponse_ClusterOperationArn:
+			v.ClusterOperationArn = new(string)
+			return d.ReadString(schemas.UpdateClusterConfigurationResponse_ClusterOperationArn, v.ClusterOperationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateClusterConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateClusterConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateClusterConfiguration, schemas.UpdateClusterConfigurationRequest, schemas.UpdateClusterConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateClusterConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateClusterConfiguration, schemas.UpdateClusterConfigurationRequest, schemas.UpdateClusterConfigurationResponse), output: &UpdateClusterConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteActionTargetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteActionTargetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteActionTargetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteActionTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionTargetArn != nil {
+		s.WriteString(schemas.DeleteActionTargetRequest_ActionTargetArn, *v.ActionTargetArn)
+	}
+}
+
 type DeleteActionTargetOutput struct {
 
 	// The ARN of the custom action target that was deleted.
@@ -49,13 +63,32 @@ type DeleteActionTargetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteActionTargetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteActionTargetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteActionTargetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionTargetArn != nil {
+		s.WriteString(schemas.DeleteActionTargetResponse_ActionTargetArn, *v.ActionTargetArn)
+	}
+}
+func (v *DeleteActionTargetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteActionTargetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteActionTargetResponse_ActionTargetArn:
+			v.ActionTargetArn = new(string)
+			return d.ReadString(schemas.DeleteActionTargetResponse_ActionTargetArn, v.ActionTargetArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteActionTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteActionTarget{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteActionTarget, schemas.DeleteActionTargetRequest, schemas.DeleteActionTargetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteActionTarget{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteActionTarget, schemas.DeleteActionTargetRequest, schemas.DeleteActionTargetResponse), output: &DeleteActionTargetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package firehose
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/firehose/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/firehose/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -199,6 +201,97 @@ type CreateDeliveryStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeliveryStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeliveryStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeliveryStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmazonOpenSearchServerlessDestinationConfiguration != nil {
+		s.WriteStruct(schemas.CreateDeliveryStreamInput_AmazonOpenSearchServerlessDestinationConfiguration)
+		v.AmazonOpenSearchServerlessDestinationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AmazonopensearchserviceDestinationConfiguration != nil {
+		s.WriteStruct(schemas.CreateDeliveryStreamInput_AmazonopensearchserviceDestinationConfiguration)
+		v.AmazonopensearchserviceDestinationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DatabaseSourceConfiguration != nil {
+		s.WriteStruct(schemas.CreateDeliveryStreamInput_DatabaseSourceConfiguration)
+		v.DatabaseSourceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeliveryStreamEncryptionConfigurationInput != nil {
+		s.WriteStruct(schemas.CreateDeliveryStreamInput_DeliveryStreamEncryptionConfigurationInput)
+		v.DeliveryStreamEncryptionConfigurationInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeliveryStreamName != nil {
+		s.WriteString(schemas.CreateDeliveryStreamInput_DeliveryStreamName, *v.DeliveryStreamName)
+	}
+	if v.DeliveryStreamType != "" {
+		s.WriteString(schemas.CreateDeliveryStreamInput_DeliveryStreamType, string(v.DeliveryStreamType))
+	}
+	if v.DirectPutSourceConfiguration != nil {
+		s.WriteStruct(schemas.CreateDeliveryStreamInput_DirectPutSourceConfiguration)
+		v.DirectPutSourceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ElasticsearchDestinationConfiguration != nil {
+		s.WriteStruct(schemas.CreateDeliveryStreamInput_ElasticsearchDestinationConfiguration)
+		v.ElasticsearchDestinationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExtendedS3DestinationConfiguration != nil {
+		s.WriteStruct(schemas.CreateDeliveryStreamInput_ExtendedS3DestinationConfiguration)
+		v.ExtendedS3DestinationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HttpEndpointDestinationConfiguration != nil {
+		s.WriteStruct(schemas.CreateDeliveryStreamInput_HttpEndpointDestinationConfiguration)
+		v.HttpEndpointDestinationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IcebergDestinationConfiguration != nil {
+		s.WriteStruct(schemas.CreateDeliveryStreamInput_IcebergDestinationConfiguration)
+		v.IcebergDestinationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisStreamSourceConfiguration != nil {
+		s.WriteStruct(schemas.CreateDeliveryStreamInput_KinesisStreamSourceConfiguration)
+		v.KinesisStreamSourceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MSKSourceConfiguration != nil {
+		s.WriteStruct(schemas.CreateDeliveryStreamInput_MSKSourceConfiguration)
+		v.MSKSourceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RedshiftDestinationConfiguration != nil {
+		s.WriteStruct(schemas.CreateDeliveryStreamInput_RedshiftDestinationConfiguration)
+		v.RedshiftDestinationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3DestinationConfiguration != nil {
+		s.WriteStruct(schemas.CreateDeliveryStreamInput_S3DestinationConfiguration)
+		v.S3DestinationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnowflakeDestinationConfiguration != nil {
+		s.WriteStruct(schemas.CreateDeliveryStreamInput_SnowflakeDestinationConfiguration)
+		v.SnowflakeDestinationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SplunkDestinationConfiguration != nil {
+		s.WriteStruct(schemas.CreateDeliveryStreamInput_SplunkDestinationConfiguration)
+		v.SplunkDestinationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagDeliveryStreamInputTagList(s, schemas.CreateDeliveryStreamInput_Tags, v.Tags)
+}
+
 type CreateDeliveryStreamOutput struct {
 
 	// The ARN of the Firehose stream.
@@ -210,13 +303,32 @@ type CreateDeliveryStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeliveryStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeliveryStreamOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeliveryStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryStreamARN != nil {
+		s.WriteString(schemas.CreateDeliveryStreamOutput_DeliveryStreamARN, *v.DeliveryStreamARN)
+	}
+}
+func (v *CreateDeliveryStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDeliveryStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDeliveryStreamOutput_DeliveryStreamARN:
+			v.DeliveryStreamARN = new(string)
+			return d.ReadString(schemas.CreateDeliveryStreamOutput_DeliveryStreamARN, v.DeliveryStreamARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDeliveryStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDeliveryStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeliveryStream, schemas.CreateDeliveryStreamInput, schemas.CreateDeliveryStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDeliveryStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeliveryStream, schemas.CreateDeliveryStreamInput, schemas.CreateDeliveryStreamOutput), output: &CreateDeliveryStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

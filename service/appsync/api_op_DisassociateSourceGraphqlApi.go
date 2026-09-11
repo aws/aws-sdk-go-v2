@@ -4,7 +4,9 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type DisassociateSourceGraphqlApiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateSourceGraphqlApiInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateSourceGraphqlApiRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateSourceGraphqlApiInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.DisassociateSourceGraphqlApiRequest_associationId, *v.AssociationId)
+	}
+	if v.MergedApiIdentifier != nil {
+		s.WriteString(schemas.DisassociateSourceGraphqlApiRequest_mergedApiIdentifier, *v.MergedApiIdentifier)
+	}
+}
+
 type DisassociateSourceGraphqlApiOutput struct {
 
 	// The state of the source API association.
@@ -55,13 +72,36 @@ type DisassociateSourceGraphqlApiOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateSourceGraphqlApiOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateSourceGraphqlApiResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateSourceGraphqlApiOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceApiAssociationStatus != "" {
+		s.WriteString(schemas.DisassociateSourceGraphqlApiResponse_sourceApiAssociationStatus, string(v.SourceApiAssociationStatus))
+	}
+}
+func (v *DisassociateSourceGraphqlApiOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateSourceGraphqlApiResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateSourceGraphqlApiResponse_sourceApiAssociationStatus:
+			var ev string
+			if err := d.ReadString(schemas.DisassociateSourceGraphqlApiResponse_sourceApiAssociationStatus, &ev); err != nil {
+				return err
+			}
+			v.SourceApiAssociationStatus = types.SourceApiAssociationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateSourceGraphqlApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateSourceGraphqlApi{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateSourceGraphqlApi, schemas.DisassociateSourceGraphqlApiRequest, schemas.DisassociateSourceGraphqlApiResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateSourceGraphqlApi{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateSourceGraphqlApi, schemas.DisassociateSourceGraphqlApiRequest, schemas.DisassociateSourceGraphqlApiResponse), output: &DisassociateSourceGraphqlApiOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

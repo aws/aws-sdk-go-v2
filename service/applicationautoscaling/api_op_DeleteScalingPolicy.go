@@ -4,7 +4,9 @@ package applicationautoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -211,6 +213,27 @@ type DeleteScalingPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteScalingPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteScalingPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteScalingPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyName != nil {
+		s.WriteString(schemas.DeleteScalingPolicyRequest_PolicyName, *v.PolicyName)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DeleteScalingPolicyRequest_ResourceId, *v.ResourceId)
+	}
+	if v.ScalableDimension != "" {
+		s.WriteString(schemas.DeleteScalingPolicyRequest_ScalableDimension, string(v.ScalableDimension))
+	}
+	if v.ServiceNamespace != "" {
+		s.WriteString(schemas.DeleteScalingPolicyRequest_ServiceNamespace, string(v.ServiceNamespace))
+	}
+}
+
 type DeleteScalingPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -218,13 +241,26 @@ type DeleteScalingPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteScalingPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteScalingPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteScalingPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteScalingPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteScalingPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteScalingPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteScalingPolicy, schemas.DeleteScalingPolicyRequest, schemas.DeleteScalingPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteScalingPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteScalingPolicy, schemas.DeleteScalingPolicyRequest, schemas.DeleteScalingPolicyResponse), output: &DeleteScalingPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

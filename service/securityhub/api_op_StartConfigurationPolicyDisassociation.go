@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,19 @@ type StartConfigurationPolicyDisassociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartConfigurationPolicyDisassociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConfigurationPolicyDisassociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartConfigurationPolicyDisassociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationPolicyIdentifier != nil {
+		s.WriteString(schemas.StartConfigurationPolicyDisassociationRequest_ConfigurationPolicyIdentifier, *v.ConfigurationPolicyIdentifier)
+	}
+	serializeTarget(s, schemas.StartConfigurationPolicyDisassociationRequest_Target, v.Target)
+}
+
 type StartConfigurationPolicyDisassociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +69,26 @@ type StartConfigurationPolicyDisassociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartConfigurationPolicyDisassociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConfigurationPolicyDisassociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartConfigurationPolicyDisassociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartConfigurationPolicyDisassociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartConfigurationPolicyDisassociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartConfigurationPolicyDisassociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartConfigurationPolicyDisassociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartConfigurationPolicyDisassociation, schemas.StartConfigurationPolicyDisassociationRequest, schemas.StartConfigurationPolicyDisassociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartConfigurationPolicyDisassociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartConfigurationPolicyDisassociation, schemas.StartConfigurationPolicyDisassociationRequest, schemas.StartConfigurationPolicyDisassociationResponse), output: &StartConfigurationPolicyDisassociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

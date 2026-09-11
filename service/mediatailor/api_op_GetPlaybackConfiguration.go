@@ -4,7 +4,9 @@ package mediatailor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,28 @@ type GetPlaybackConfigurationInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetPlaybackConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlaybackConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlaybackConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetPlaybackConfigurationRequest_Name, *v.Name)
+	}
+}
+func (v *GetPlaybackConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPlaybackConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPlaybackConfigurationRequest_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetPlaybackConfigurationRequest_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 type GetPlaybackConfigurationOutput struct {
@@ -190,13 +214,215 @@ type GetPlaybackConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPlaybackConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlaybackConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlaybackConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdConditioningConfiguration != nil {
+		s.WriteStruct(schemas.GetPlaybackConfigurationResponse_AdConditioningConfiguration)
+		v.AdConditioningConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AdDecisionServerConfiguration != nil {
+		s.WriteStruct(schemas.GetPlaybackConfigurationResponse_AdDecisionServerConfiguration)
+		v.AdDecisionServerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AdDecisionServerUrl != nil {
+		s.WriteString(schemas.GetPlaybackConfigurationResponse_AdDecisionServerUrl, *v.AdDecisionServerUrl)
+	}
+	if v.AdsPersonalizationConcurrency != nil {
+		s.WriteStruct(schemas.GetPlaybackConfigurationResponse_AdsPersonalizationConcurrency)
+		v.AdsPersonalizationConcurrency.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AdsPersonalizationTimeouts != nil {
+		s.WriteStruct(schemas.GetPlaybackConfigurationResponse_AdsPersonalizationTimeouts)
+		v.AdsPersonalizationTimeouts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AvailSuppression != nil {
+		s.WriteStruct(schemas.GetPlaybackConfigurationResponse_AvailSuppression)
+		v.AvailSuppression.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Bumper != nil {
+		s.WriteStruct(schemas.GetPlaybackConfigurationResponse_Bumper)
+		v.Bumper.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CdnConfiguration != nil {
+		s.WriteStruct(schemas.GetPlaybackConfigurationResponse_CdnConfiguration)
+		v.CdnConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeConfigurationAliasesResponse(s, schemas.GetPlaybackConfigurationResponse_ConfigurationAliases, v.ConfigurationAliases)
+	if v.DashConfiguration != nil {
+		s.WriteStruct(schemas.GetPlaybackConfigurationResponse_DashConfiguration)
+		v.DashConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DualStackPlaybackEndpointPrefix != nil {
+		s.WriteString(schemas.GetPlaybackConfigurationResponse_DualStackPlaybackEndpointPrefix, *v.DualStackPlaybackEndpointPrefix)
+	}
+	if v.DualStackSessionInitializationEndpointPrefix != nil {
+		s.WriteString(schemas.GetPlaybackConfigurationResponse_DualStackSessionInitializationEndpointPrefix, *v.DualStackSessionInitializationEndpointPrefix)
+	}
+	serializeFunctionMapping(s, schemas.GetPlaybackConfigurationResponse_FunctionMapping, v.FunctionMapping)
+	if v.HlsConfiguration != nil {
+		s.WriteStruct(schemas.GetPlaybackConfigurationResponse_HlsConfiguration)
+		v.HlsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InsertionMode != "" {
+		s.WriteString(schemas.GetPlaybackConfigurationResponse_InsertionMode, string(v.InsertionMode))
+	}
+	if v.LivePreRollConfiguration != nil {
+		s.WriteStruct(schemas.GetPlaybackConfigurationResponse_LivePreRollConfiguration)
+		v.LivePreRollConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogConfiguration != nil {
+		s.WriteStruct(schemas.GetPlaybackConfigurationResponse_LogConfiguration)
+		v.LogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ManifestProcessingRules != nil {
+		s.WriteStruct(schemas.GetPlaybackConfigurationResponse_ManifestProcessingRules)
+		v.ManifestProcessingRules.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetPlaybackConfigurationResponse_Name, *v.Name)
+	}
+	if v.PersonalizationThresholdSeconds != nil {
+		s.WriteInt32(schemas.GetPlaybackConfigurationResponse_PersonalizationThresholdSeconds, *v.PersonalizationThresholdSeconds)
+	}
+	if v.PlaybackConfigurationArn != nil {
+		s.WriteString(schemas.GetPlaybackConfigurationResponse_PlaybackConfigurationArn, *v.PlaybackConfigurationArn)
+	}
+	if v.PlaybackEndpointPrefix != nil {
+		s.WriteString(schemas.GetPlaybackConfigurationResponse_PlaybackEndpointPrefix, *v.PlaybackEndpointPrefix)
+	}
+	if v.SessionInitializationEndpointPrefix != nil {
+		s.WriteString(schemas.GetPlaybackConfigurationResponse_SessionInitializationEndpointPrefix, *v.SessionInitializationEndpointPrefix)
+	}
+	if v.SlateAdUrl != nil {
+		s.WriteString(schemas.GetPlaybackConfigurationResponse_SlateAdUrl, *v.SlateAdUrl)
+	}
+	serialize__mapOf__string(s, schemas.GetPlaybackConfigurationResponse_Tags, v.Tags)
+	if v.TranscodeProfileName != nil {
+		s.WriteString(schemas.GetPlaybackConfigurationResponse_TranscodeProfileName, *v.TranscodeProfileName)
+	}
+	if v.VideoContentSourceUrl != nil {
+		s.WriteString(schemas.GetPlaybackConfigurationResponse_VideoContentSourceUrl, *v.VideoContentSourceUrl)
+	}
+	if v.YieldOptimizationConfiguration != nil {
+		s.WriteStruct(schemas.GetPlaybackConfigurationResponse_YieldOptimizationConfiguration)
+		v.YieldOptimizationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetPlaybackConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPlaybackConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPlaybackConfigurationResponse_AdConditioningConfiguration:
+			v.AdConditioningConfiguration = &types.AdConditioningConfiguration{}
+			return v.AdConditioningConfiguration.Deserialize(d)
+		case schemas.GetPlaybackConfigurationResponse_AdDecisionServerConfiguration:
+			v.AdDecisionServerConfiguration = &types.AdDecisionServerConfiguration{}
+			return v.AdDecisionServerConfiguration.Deserialize(d)
+		case schemas.GetPlaybackConfigurationResponse_AdDecisionServerUrl:
+			v.AdDecisionServerUrl = new(string)
+			return d.ReadString(schemas.GetPlaybackConfigurationResponse_AdDecisionServerUrl, v.AdDecisionServerUrl)
+		case schemas.GetPlaybackConfigurationResponse_AdsPersonalizationConcurrency:
+			v.AdsPersonalizationConcurrency = &types.AdsPersonalizationConcurrency{}
+			return v.AdsPersonalizationConcurrency.Deserialize(d)
+		case schemas.GetPlaybackConfigurationResponse_AdsPersonalizationTimeouts:
+			v.AdsPersonalizationTimeouts = &types.AdsPersonalizationTimeouts{}
+			return v.AdsPersonalizationTimeouts.Deserialize(d)
+		case schemas.GetPlaybackConfigurationResponse_AvailSuppression:
+			v.AvailSuppression = &types.AvailSuppression{}
+			return v.AvailSuppression.Deserialize(d)
+		case schemas.GetPlaybackConfigurationResponse_Bumper:
+			v.Bumper = &types.Bumper{}
+			return v.Bumper.Deserialize(d)
+		case schemas.GetPlaybackConfigurationResponse_CdnConfiguration:
+			v.CdnConfiguration = &types.CdnConfiguration{}
+			return v.CdnConfiguration.Deserialize(d)
+		case schemas.GetPlaybackConfigurationResponse_ConfigurationAliases:
+			return deserializeConfigurationAliasesResponse(d, schemas.GetPlaybackConfigurationResponse_ConfigurationAliases, &v.ConfigurationAliases)
+		case schemas.GetPlaybackConfigurationResponse_DashConfiguration:
+			v.DashConfiguration = &types.DashConfiguration{}
+			return v.DashConfiguration.Deserialize(d)
+		case schemas.GetPlaybackConfigurationResponse_DualStackPlaybackEndpointPrefix:
+			v.DualStackPlaybackEndpointPrefix = new(string)
+			return d.ReadString(schemas.GetPlaybackConfigurationResponse_DualStackPlaybackEndpointPrefix, v.DualStackPlaybackEndpointPrefix)
+		case schemas.GetPlaybackConfigurationResponse_DualStackSessionInitializationEndpointPrefix:
+			v.DualStackSessionInitializationEndpointPrefix = new(string)
+			return d.ReadString(schemas.GetPlaybackConfigurationResponse_DualStackSessionInitializationEndpointPrefix, v.DualStackSessionInitializationEndpointPrefix)
+		case schemas.GetPlaybackConfigurationResponse_FunctionMapping:
+			return deserializeFunctionMapping(d, schemas.GetPlaybackConfigurationResponse_FunctionMapping, &v.FunctionMapping)
+		case schemas.GetPlaybackConfigurationResponse_HlsConfiguration:
+			v.HlsConfiguration = &types.HlsConfiguration{}
+			return v.HlsConfiguration.Deserialize(d)
+		case schemas.GetPlaybackConfigurationResponse_InsertionMode:
+			var ev string
+			if err := d.ReadString(schemas.GetPlaybackConfigurationResponse_InsertionMode, &ev); err != nil {
+				return err
+			}
+			v.InsertionMode = types.InsertionMode(ev)
+			return nil
+		case schemas.GetPlaybackConfigurationResponse_LivePreRollConfiguration:
+			v.LivePreRollConfiguration = &types.LivePreRollConfiguration{}
+			return v.LivePreRollConfiguration.Deserialize(d)
+		case schemas.GetPlaybackConfigurationResponse_LogConfiguration:
+			v.LogConfiguration = &types.LogConfiguration{}
+			return v.LogConfiguration.Deserialize(d)
+		case schemas.GetPlaybackConfigurationResponse_ManifestProcessingRules:
+			v.ManifestProcessingRules = &types.ManifestProcessingRules{}
+			return v.ManifestProcessingRules.Deserialize(d)
+		case schemas.GetPlaybackConfigurationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetPlaybackConfigurationResponse_Name, v.Name)
+		case schemas.GetPlaybackConfigurationResponse_PersonalizationThresholdSeconds:
+			v.PersonalizationThresholdSeconds = new(int32)
+			return d.ReadInt32(schemas.GetPlaybackConfigurationResponse_PersonalizationThresholdSeconds, v.PersonalizationThresholdSeconds)
+		case schemas.GetPlaybackConfigurationResponse_PlaybackConfigurationArn:
+			v.PlaybackConfigurationArn = new(string)
+			return d.ReadString(schemas.GetPlaybackConfigurationResponse_PlaybackConfigurationArn, v.PlaybackConfigurationArn)
+		case schemas.GetPlaybackConfigurationResponse_PlaybackEndpointPrefix:
+			v.PlaybackEndpointPrefix = new(string)
+			return d.ReadString(schemas.GetPlaybackConfigurationResponse_PlaybackEndpointPrefix, v.PlaybackEndpointPrefix)
+		case schemas.GetPlaybackConfigurationResponse_SessionInitializationEndpointPrefix:
+			v.SessionInitializationEndpointPrefix = new(string)
+			return d.ReadString(schemas.GetPlaybackConfigurationResponse_SessionInitializationEndpointPrefix, v.SessionInitializationEndpointPrefix)
+		case schemas.GetPlaybackConfigurationResponse_SlateAdUrl:
+			v.SlateAdUrl = new(string)
+			return d.ReadString(schemas.GetPlaybackConfigurationResponse_SlateAdUrl, v.SlateAdUrl)
+		case schemas.GetPlaybackConfigurationResponse_Tags:
+			return deserialize__mapOf__string(d, schemas.GetPlaybackConfigurationResponse_Tags, &v.Tags)
+		case schemas.GetPlaybackConfigurationResponse_TranscodeProfileName:
+			v.TranscodeProfileName = new(string)
+			return d.ReadString(schemas.GetPlaybackConfigurationResponse_TranscodeProfileName, v.TranscodeProfileName)
+		case schemas.GetPlaybackConfigurationResponse_VideoContentSourceUrl:
+			v.VideoContentSourceUrl = new(string)
+			return d.ReadString(schemas.GetPlaybackConfigurationResponse_VideoContentSourceUrl, v.VideoContentSourceUrl)
+		case schemas.GetPlaybackConfigurationResponse_YieldOptimizationConfiguration:
+			v.YieldOptimizationConfiguration = &types.YieldOptimizationConfiguration{}
+			return v.YieldOptimizationConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPlaybackConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPlaybackConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlaybackConfiguration, schemas.GetPlaybackConfigurationRequest, schemas.GetPlaybackConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPlaybackConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlaybackConfiguration, schemas.GetPlaybackConfigurationRequest, schemas.GetPlaybackConfigurationResponse), output: &GetPlaybackConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

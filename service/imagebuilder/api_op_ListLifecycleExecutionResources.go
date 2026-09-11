@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,27 @@ type ListLifecycleExecutionResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLifecycleExecutionResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLifecycleExecutionResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLifecycleExecutionResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LifecycleExecutionId != nil {
+		s.WriteString(schemas.ListLifecycleExecutionResourcesRequest_lifecycleExecutionId, *v.LifecycleExecutionId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLifecycleExecutionResourcesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLifecycleExecutionResourcesRequest_nextToken, *v.NextToken)
+	}
+	if v.ParentResourceId != nil {
+		s.WriteString(schemas.ListLifecycleExecutionResourcesRequest_parentResourceId, *v.ParentResourceId)
+	}
+}
+
 type ListLifecycleExecutionResourcesOutput struct {
 
 	// Runtime details for the specified runtime instance of the lifecycle policy.
@@ -74,13 +97,49 @@ type ListLifecycleExecutionResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLifecycleExecutionResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLifecycleExecutionResourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLifecycleExecutionResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LifecycleExecutionId != nil {
+		s.WriteString(schemas.ListLifecycleExecutionResourcesResponse_lifecycleExecutionId, *v.LifecycleExecutionId)
+	}
+	if v.LifecycleExecutionState != nil {
+		s.WriteStruct(schemas.ListLifecycleExecutionResourcesResponse_lifecycleExecutionState)
+		v.LifecycleExecutionState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLifecycleExecutionResourcesResponse_nextToken, *v.NextToken)
+	}
+	serializeLifecycleExecutionResourceList(s, schemas.ListLifecycleExecutionResourcesResponse_resources, v.Resources)
+}
+func (v *ListLifecycleExecutionResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLifecycleExecutionResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLifecycleExecutionResourcesResponse_lifecycleExecutionId:
+			v.LifecycleExecutionId = new(string)
+			return d.ReadString(schemas.ListLifecycleExecutionResourcesResponse_lifecycleExecutionId, v.LifecycleExecutionId)
+		case schemas.ListLifecycleExecutionResourcesResponse_lifecycleExecutionState:
+			v.LifecycleExecutionState = &types.LifecycleExecutionState{}
+			return v.LifecycleExecutionState.Deserialize(d)
+		case schemas.ListLifecycleExecutionResourcesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLifecycleExecutionResourcesResponse_nextToken, v.NextToken)
+		case schemas.ListLifecycleExecutionResourcesResponse_resources:
+			return deserializeLifecycleExecutionResourceList(d, schemas.ListLifecycleExecutionResourcesResponse_resources, &v.Resources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLifecycleExecutionResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLifecycleExecutionResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLifecycleExecutionResources, schemas.ListLifecycleExecutionResourcesRequest, schemas.ListLifecycleExecutionResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLifecycleExecutionResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLifecycleExecutionResources, schemas.ListLifecycleExecutionResourcesRequest, schemas.ListLifecycleExecutionResourcesResponse), output: &ListLifecycleExecutionResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

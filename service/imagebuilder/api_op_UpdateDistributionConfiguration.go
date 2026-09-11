@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,25 @@ type UpdateDistributionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDistributionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDistributionConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDistributionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateDistributionConfigurationRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDistributionConfigurationRequest_description, *v.Description)
+	}
+	if v.DistributionConfigurationArn != nil {
+		s.WriteString(schemas.UpdateDistributionConfigurationRequest_distributionConfigurationArn, *v.DistributionConfigurationArn)
+	}
+	serializeDistributionList(s, schemas.UpdateDistributionConfigurationRequest_distributions, v.Distributions)
+}
+
 type UpdateDistributionConfigurationOutput struct {
 
 	// The client token that uniquely identifies the request.
@@ -73,13 +94,44 @@ type UpdateDistributionConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDistributionConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDistributionConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDistributionConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateDistributionConfigurationResponse_clientToken, *v.ClientToken)
+	}
+	if v.DistributionConfigurationArn != nil {
+		s.WriteString(schemas.UpdateDistributionConfigurationResponse_distributionConfigurationArn, *v.DistributionConfigurationArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateDistributionConfigurationResponse_requestId, *v.RequestId)
+	}
+}
+func (v *UpdateDistributionConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDistributionConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDistributionConfigurationResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateDistributionConfigurationResponse_clientToken, v.ClientToken)
+		case schemas.UpdateDistributionConfigurationResponse_distributionConfigurationArn:
+			v.DistributionConfigurationArn = new(string)
+			return d.ReadString(schemas.UpdateDistributionConfigurationResponse_distributionConfigurationArn, v.DistributionConfigurationArn)
+		case schemas.UpdateDistributionConfigurationResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateDistributionConfigurationResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDistributionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDistributionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDistributionConfiguration, schemas.UpdateDistributionConfigurationRequest, schemas.UpdateDistributionConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDistributionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDistributionConfiguration, schemas.UpdateDistributionConfigurationRequest, schemas.UpdateDistributionConfigurationResponse), output: &UpdateDistributionConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

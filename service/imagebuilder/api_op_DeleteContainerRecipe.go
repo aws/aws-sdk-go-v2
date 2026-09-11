@@ -4,6 +4,8 @@ package imagebuilder
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteContainerRecipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContainerRecipeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContainerRecipeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContainerRecipeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerRecipeArn != nil {
+		s.WriteString(schemas.DeleteContainerRecipeRequest_containerRecipeArn, *v.ContainerRecipeArn)
+	}
+}
+
 type DeleteContainerRecipeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the container recipe that was deleted.
@@ -47,13 +61,38 @@ type DeleteContainerRecipeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContainerRecipeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContainerRecipeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContainerRecipeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerRecipeArn != nil {
+		s.WriteString(schemas.DeleteContainerRecipeResponse_containerRecipeArn, *v.ContainerRecipeArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteContainerRecipeResponse_requestId, *v.RequestId)
+	}
+}
+func (v *DeleteContainerRecipeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteContainerRecipeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteContainerRecipeResponse_containerRecipeArn:
+			v.ContainerRecipeArn = new(string)
+			return d.ReadString(schemas.DeleteContainerRecipeResponse_containerRecipeArn, v.ContainerRecipeArn)
+		case schemas.DeleteContainerRecipeResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteContainerRecipeResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteContainerRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteContainerRecipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContainerRecipe, schemas.DeleteContainerRecipeRequest, schemas.DeleteContainerRecipeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteContainerRecipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContainerRecipe, schemas.DeleteContainerRecipeRequest, schemas.DeleteContainerRecipeResponse), output: &DeleteContainerRecipeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package mediaconvert
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type ListQueuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueuesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueuesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueuesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListBy != "" {
+		s.WriteString(schemas.ListQueuesRequest_ListBy, string(v.ListBy))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListQueuesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueuesRequest_NextToken, *v.NextToken)
+	}
+	if v.Order != "" {
+		s.WriteString(schemas.ListQueuesRequest_Order, string(v.Order))
+	}
+}
+
 type ListQueuesOutput struct {
 
 	// Use this string to request the next batch of queues.
@@ -71,13 +94,47 @@ type ListQueuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueuesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueuesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueuesResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfQueue(s, schemas.ListQueuesResponse_Queues, v.Queues)
+	if v.TotalConcurrentJobs != nil {
+		s.WriteInt32(schemas.ListQueuesResponse_TotalConcurrentJobs, *v.TotalConcurrentJobs)
+	}
+	if v.UnallocatedConcurrentJobs != nil {
+		s.WriteInt32(schemas.ListQueuesResponse_UnallocatedConcurrentJobs, *v.UnallocatedConcurrentJobs)
+	}
+}
+func (v *ListQueuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListQueuesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListQueuesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListQueuesResponse_NextToken, v.NextToken)
+		case schemas.ListQueuesResponse_Queues:
+			return deserialize__listOfQueue(d, schemas.ListQueuesResponse_Queues, &v.Queues)
+		case schemas.ListQueuesResponse_TotalConcurrentJobs:
+			v.TotalConcurrentJobs = new(int32)
+			return d.ReadInt32(schemas.ListQueuesResponse_TotalConcurrentJobs, v.TotalConcurrentJobs)
+		case schemas.ListQueuesResponse_UnallocatedConcurrentJobs:
+			v.UnallocatedConcurrentJobs = new(int32)
+			return d.ReadInt32(schemas.ListQueuesResponse_UnallocatedConcurrentJobs, v.UnallocatedConcurrentJobs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListQueues{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueues, schemas.ListQueuesRequest, schemas.ListQueuesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListQueues{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueues, schemas.ListQueuesRequest, schemas.ListQueuesResponse), output: &ListQueuesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

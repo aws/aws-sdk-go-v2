@@ -4,6 +4,8 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,28 @@ type AssociateMemberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateMemberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateMemberRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateMemberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.AssociateMemberRequest_accountId, *v.AccountId)
+	}
+}
+func (v *AssociateMemberInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateMemberRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateMemberRequest_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.AssociateMemberRequest_accountId, v.AccountId)
+		}
+		return nil
+	})
+}
+
 type AssociateMemberOutput struct {
 
 	// The Amazon Web Services account ID of the successfully associated member
@@ -53,13 +77,32 @@ type AssociateMemberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateMemberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateMemberResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateMemberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.AssociateMemberResponse_accountId, *v.AccountId)
+	}
+}
+func (v *AssociateMemberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateMemberResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateMemberResponse_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.AssociateMemberResponse_accountId, v.AccountId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateMember{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateMember, schemas.AssociateMemberRequest, schemas.AssociateMemberResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateMember{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateMember, schemas.AssociateMemberRequest, schemas.AssociateMemberResponse), output: &AssociateMemberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

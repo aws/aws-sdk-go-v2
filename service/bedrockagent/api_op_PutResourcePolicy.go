@@ -4,6 +4,8 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type PutResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutResourcePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutResourcePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutResourcePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpectedRevisionId != nil {
+		s.WriteString(schemas.PutResourcePolicyRequest_expectedRevisionId, *v.ExpectedRevisionId)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.PutResourcePolicyRequest_policy, *v.Policy)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.PutResourcePolicyRequest_resourceArn, *v.ResourceArn)
+	}
+}
+
 type PutResourcePolicyOutput struct {
 
 	// The ARN of the knowledge base that the resource policy was attached to.
@@ -69,13 +89,38 @@ type PutResourcePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutResourcePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutResourcePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutResourcePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.PutResourcePolicyResponse_resourceArn, *v.ResourceArn)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.PutResourcePolicyResponse_revisionId, *v.RevisionId)
+	}
+}
+func (v *PutResourcePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutResourcePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutResourcePolicyResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.PutResourcePolicyResponse_resourceArn, v.ResourceArn)
+		case schemas.PutResourcePolicyResponse_revisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.PutResourcePolicyResponse_revisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutResourcePolicy, schemas.PutResourcePolicyRequest, schemas.PutResourcePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutResourcePolicy, schemas.PutResourcePolicyRequest, schemas.PutResourcePolicyResponse), output: &PutResourcePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

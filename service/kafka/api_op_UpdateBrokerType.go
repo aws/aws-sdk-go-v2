@@ -4,6 +4,8 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type UpdateBrokerTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBrokerTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBrokerTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBrokerTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.UpdateBrokerTypeRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.CurrentVersion != nil {
+		s.WriteString(schemas.UpdateBrokerTypeRequest_CurrentVersion, *v.CurrentVersion)
+	}
+	if v.TargetInstanceType != nil {
+		s.WriteString(schemas.UpdateBrokerTypeRequest_TargetInstanceType, *v.TargetInstanceType)
+	}
+}
+
 type UpdateBrokerTypeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.
@@ -59,13 +79,38 @@ type UpdateBrokerTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBrokerTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBrokerTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBrokerTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.UpdateBrokerTypeResponse_ClusterArn, *v.ClusterArn)
+	}
+	if v.ClusterOperationArn != nil {
+		s.WriteString(schemas.UpdateBrokerTypeResponse_ClusterOperationArn, *v.ClusterOperationArn)
+	}
+}
+func (v *UpdateBrokerTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBrokerTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBrokerTypeResponse_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.UpdateBrokerTypeResponse_ClusterArn, v.ClusterArn)
+		case schemas.UpdateBrokerTypeResponse_ClusterOperationArn:
+			v.ClusterOperationArn = new(string)
+			return d.ReadString(schemas.UpdateBrokerTypeResponse_ClusterOperationArn, v.ClusterOperationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBrokerTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBrokerType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBrokerType, schemas.UpdateBrokerTypeRequest, schemas.UpdateBrokerTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBrokerType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBrokerType, schemas.UpdateBrokerTypeRequest, schemas.UpdateBrokerTypeResponse), output: &UpdateBrokerTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

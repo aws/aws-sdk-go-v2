@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,25 @@ type ListImageBuildVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImageBuildVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImageBuildVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImageBuildVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.ListImageBuildVersionsRequest_filters, v.Filters)
+	if v.ImageVersionArn != nil {
+		s.WriteString(schemas.ListImageBuildVersionsRequest_imageVersionArn, *v.ImageVersionArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListImageBuildVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImageBuildVersionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListImageBuildVersionsOutput struct {
 
 	// The list of image build versions.
@@ -73,13 +94,41 @@ type ListImageBuildVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImageBuildVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImageBuildVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImageBuildVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImageSummaryList(s, schemas.ListImageBuildVersionsResponse_imageSummaryList, v.ImageSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImageBuildVersionsResponse_nextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListImageBuildVersionsResponse_requestId, *v.RequestId)
+	}
+}
+func (v *ListImageBuildVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListImageBuildVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListImageBuildVersionsResponse_imageSummaryList:
+			return deserializeImageSummaryList(d, schemas.ListImageBuildVersionsResponse_imageSummaryList, &v.ImageSummaryList)
+		case schemas.ListImageBuildVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListImageBuildVersionsResponse_nextToken, v.NextToken)
+		case schemas.ListImageBuildVersionsResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListImageBuildVersionsResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListImageBuildVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListImageBuildVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImageBuildVersions, schemas.ListImageBuildVersionsRequest, schemas.ListImageBuildVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListImageBuildVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImageBuildVersions, schemas.ListImageBuildVersionsRequest, schemas.ListImageBuildVersionsResponse), output: &ListImageBuildVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

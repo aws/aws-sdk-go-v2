@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListComponentBuildVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComponentBuildVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComponentBuildVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComponentBuildVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentVersionArn != nil {
+		s.WriteString(schemas.ListComponentBuildVersionsRequest_componentVersionArn, *v.ComponentVersionArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListComponentBuildVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComponentBuildVersionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListComponentBuildVersionsOutput struct {
 
 	// The list of component summaries for the specified semantic version.
@@ -61,13 +81,41 @@ type ListComponentBuildVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComponentBuildVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComponentBuildVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComponentBuildVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComponentSummaryList(s, schemas.ListComponentBuildVersionsResponse_componentSummaryList, v.ComponentSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComponentBuildVersionsResponse_nextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListComponentBuildVersionsResponse_requestId, *v.RequestId)
+	}
+}
+func (v *ListComponentBuildVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListComponentBuildVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListComponentBuildVersionsResponse_componentSummaryList:
+			return deserializeComponentSummaryList(d, schemas.ListComponentBuildVersionsResponse_componentSummaryList, &v.ComponentSummaryList)
+		case schemas.ListComponentBuildVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListComponentBuildVersionsResponse_nextToken, v.NextToken)
+		case schemas.ListComponentBuildVersionsResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListComponentBuildVersionsResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListComponentBuildVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListComponentBuildVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComponentBuildVersions, schemas.ListComponentBuildVersionsRequest, schemas.ListComponentBuildVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListComponentBuildVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComponentBuildVersions, schemas.ListComponentBuildVersionsRequest, schemas.ListComponentBuildVersionsResponse), output: &ListComponentBuildVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

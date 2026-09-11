@@ -5,7 +5,9 @@ package auditmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListNotificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNotificationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNotificationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNotificationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListNotificationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNotificationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListNotificationsOutput struct {
 
 	//  The pagination token that's used to fetch the next set of results.
@@ -50,13 +67,35 @@ type ListNotificationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNotificationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNotificationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNotificationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNotificationsResponse_nextToken, *v.NextToken)
+	}
+	serializeNotifications(s, schemas.ListNotificationsResponse_notifications, v.Notifications)
+}
+func (v *ListNotificationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNotificationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNotificationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNotificationsResponse_nextToken, v.NextToken)
+		case schemas.ListNotificationsResponse_notifications:
+			return deserializeNotifications(d, schemas.ListNotificationsResponse_notifications, &v.Notifications)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNotificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNotifications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNotifications, schemas.ListNotificationsRequest, schemas.ListNotificationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNotifications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNotifications, schemas.ListNotificationsRequest, schemas.ListNotificationsResponse), output: &ListNotificationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

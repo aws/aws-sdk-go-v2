@@ -5,8 +5,10 @@ package dynamodb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,18 @@ type UpdateGlobalTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGlobalTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGlobalTableInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGlobalTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalTableName != nil {
+		s.WriteString(schemas.UpdateGlobalTableInput_GlobalTableName, *v.GlobalTableName)
+	}
+	serializeReplicaUpdateList(s, schemas.UpdateGlobalTableInput_ReplicaUpdates, v.ReplicaUpdates)
+}
 func (in *UpdateGlobalTableInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ResourceArn = in.GlobalTableName
@@ -93,13 +107,34 @@ type UpdateGlobalTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGlobalTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGlobalTableOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGlobalTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalTableDescription != nil {
+		s.WriteStruct(schemas.UpdateGlobalTableOutput_GlobalTableDescription)
+		v.GlobalTableDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateGlobalTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGlobalTableOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGlobalTableOutput_GlobalTableDescription:
+			v.GlobalTableDescription = &types.GlobalTableDescription{}
+			return v.GlobalTableDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGlobalTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateGlobalTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGlobalTable, schemas.UpdateGlobalTableInput, schemas.UpdateGlobalTableOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateGlobalTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGlobalTable, schemas.UpdateGlobalTableInput, schemas.UpdateGlobalTableOutput), output: &UpdateGlobalTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package resiliencehubv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,22 @@ type CreateInputSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInputSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInputSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInputSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateInputSourceRequest_clientToken, *v.ClientToken)
+	}
+	serializeResourceConfiguration(s, schemas.CreateInputSourceRequest_resourceConfiguration, v.ResourceConfiguration)
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.CreateInputSourceRequest_serviceArn, *v.ServiceArn)
+	}
+}
+
 type CreateInputSourceOutput struct {
 
 	// The unique identifier assigned to the created input source.
@@ -61,13 +79,38 @@ type CreateInputSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInputSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInputSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInputSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputSourceId != nil {
+		s.WriteString(schemas.CreateInputSourceResponse_inputSourceId, *v.InputSourceId)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.CreateInputSourceResponse_serviceArn, *v.ServiceArn)
+	}
+}
+func (v *CreateInputSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateInputSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateInputSourceResponse_inputSourceId:
+			v.InputSourceId = new(string)
+			return d.ReadString(schemas.CreateInputSourceResponse_inputSourceId, v.InputSourceId)
+		case schemas.CreateInputSourceResponse_serviceArn:
+			v.ServiceArn = new(string)
+			return d.ReadString(schemas.CreateInputSourceResponse_serviceArn, v.ServiceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateInputSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateInputSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInputSource, schemas.CreateInputSourceRequest, schemas.CreateInputSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateInputSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInputSource, schemas.CreateInputSourceRequest, schemas.CreateInputSourceResponse), output: &CreateInputSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

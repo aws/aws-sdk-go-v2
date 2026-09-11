@@ -4,7 +4,9 @@ package resiliencehub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,40 @@ type DescribeAppVersionResourcesResolutionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppVersionResourcesResolutionStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppVersionResourcesResolutionStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppVersionResourcesResolutionStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.DescribeAppVersionResourcesResolutionStatusRequest_appArn, *v.AppArn)
+	}
+	if v.AppVersion != nil {
+		s.WriteString(schemas.DescribeAppVersionResourcesResolutionStatusRequest_appVersion, *v.AppVersion)
+	}
+	if v.ResolutionId != nil {
+		s.WriteString(schemas.DescribeAppVersionResourcesResolutionStatusRequest_resolutionId, *v.ResolutionId)
+	}
+}
+func (v *DescribeAppVersionResourcesResolutionStatusInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAppVersionResourcesResolutionStatusRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAppVersionResourcesResolutionStatusRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.DescribeAppVersionResourcesResolutionStatusRequest_appArn, v.AppArn)
+		case schemas.DescribeAppVersionResourcesResolutionStatusRequest_appVersion:
+			v.AppVersion = new(string)
+			return d.ReadString(schemas.DescribeAppVersionResourcesResolutionStatusRequest_appVersion, v.AppVersion)
+		case schemas.DescribeAppVersionResourcesResolutionStatusRequest_resolutionId:
+			v.ResolutionId = new(string)
+			return d.ReadString(schemas.DescribeAppVersionResourcesResolutionStatusRequest_resolutionId, v.ResolutionId)
+		}
+		return nil
+	})
+}
+
 type DescribeAppVersionResourcesResolutionStatusOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
@@ -85,13 +121,60 @@ type DescribeAppVersionResourcesResolutionStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppVersionResourcesResolutionStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppVersionResourcesResolutionStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppVersionResourcesResolutionStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.DescribeAppVersionResourcesResolutionStatusResponse_appArn, *v.AppArn)
+	}
+	if v.AppVersion != nil {
+		s.WriteString(schemas.DescribeAppVersionResourcesResolutionStatusResponse_appVersion, *v.AppVersion)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.DescribeAppVersionResourcesResolutionStatusResponse_errorMessage, *v.ErrorMessage)
+	}
+	if v.ResolutionId != nil {
+		s.WriteString(schemas.DescribeAppVersionResourcesResolutionStatusResponse_resolutionId, *v.ResolutionId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeAppVersionResourcesResolutionStatusResponse_status, string(v.Status))
+	}
+}
+func (v *DescribeAppVersionResourcesResolutionStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAppVersionResourcesResolutionStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAppVersionResourcesResolutionStatusResponse_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.DescribeAppVersionResourcesResolutionStatusResponse_appArn, v.AppArn)
+		case schemas.DescribeAppVersionResourcesResolutionStatusResponse_appVersion:
+			v.AppVersion = new(string)
+			return d.ReadString(schemas.DescribeAppVersionResourcesResolutionStatusResponse_appVersion, v.AppVersion)
+		case schemas.DescribeAppVersionResourcesResolutionStatusResponse_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.DescribeAppVersionResourcesResolutionStatusResponse_errorMessage, v.ErrorMessage)
+		case schemas.DescribeAppVersionResourcesResolutionStatusResponse_resolutionId:
+			v.ResolutionId = new(string)
+			return d.ReadString(schemas.DescribeAppVersionResourcesResolutionStatusResponse_resolutionId, v.ResolutionId)
+		case schemas.DescribeAppVersionResourcesResolutionStatusResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAppVersionResourcesResolutionStatusResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ResourceResolutionStatusType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAppVersionResourcesResolutionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAppVersionResourcesResolutionStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppVersionResourcesResolutionStatus, schemas.DescribeAppVersionResourcesResolutionStatusRequest, schemas.DescribeAppVersionResourcesResolutionStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAppVersionResourcesResolutionStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppVersionResourcesResolutionStatus, schemas.DescribeAppVersionResourcesResolutionStatusRequest, schemas.DescribeAppVersionResourcesResolutionStatusResponse), output: &DescribeAppVersionResourcesResolutionStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

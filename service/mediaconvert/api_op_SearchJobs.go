@@ -5,7 +5,9 @@ package mediaconvert
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,33 @@ type SearchJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputFile != nil {
+		s.WriteString(schemas.SearchJobsRequest_InputFile, *v.InputFile)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.Order != "" {
+		s.WriteString(schemas.SearchJobsRequest_Order, string(v.Order))
+	}
+	if v.Queue != nil {
+		s.WriteString(schemas.SearchJobsRequest_Queue, *v.Queue)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SearchJobsRequest_Status, string(v.Status))
+	}
+}
+
 type SearchJobsOutput struct {
 
 	// List of jobs.
@@ -70,13 +99,35 @@ type SearchJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfJob(s, schemas.SearchJobsResponse_Jobs, v.Jobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *SearchJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchJobsResponse_Jobs:
+			return deserialize__listOfJob(d, schemas.SearchJobsResponse_Jobs, &v.Jobs)
+		case schemas.SearchJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchJobs, schemas.SearchJobsRequest, schemas.SearchJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchJobs, schemas.SearchJobsRequest, schemas.SearchJobsResponse), output: &SearchJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

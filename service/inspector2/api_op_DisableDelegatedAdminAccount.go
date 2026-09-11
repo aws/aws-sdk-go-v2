@@ -4,6 +4,8 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,28 @@ type DisableDelegatedAdminAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableDelegatedAdminAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableDelegatedAdminAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableDelegatedAdminAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DelegatedAdminAccountId != nil {
+		s.WriteString(schemas.DisableDelegatedAdminAccountRequest_delegatedAdminAccountId, *v.DelegatedAdminAccountId)
+	}
+}
+func (v *DisableDelegatedAdminAccountInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableDelegatedAdminAccountRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisableDelegatedAdminAccountRequest_delegatedAdminAccountId:
+			v.DelegatedAdminAccountId = new(string)
+			return d.ReadString(schemas.DisableDelegatedAdminAccountRequest_delegatedAdminAccountId, v.DelegatedAdminAccountId)
+		}
+		return nil
+	})
+}
+
 type DisableDelegatedAdminAccountOutput struct {
 
 	// The Amazon Web Services account ID of the successfully disabled delegated
@@ -48,13 +72,32 @@ type DisableDelegatedAdminAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableDelegatedAdminAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableDelegatedAdminAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableDelegatedAdminAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DelegatedAdminAccountId != nil {
+		s.WriteString(schemas.DisableDelegatedAdminAccountResponse_delegatedAdminAccountId, *v.DelegatedAdminAccountId)
+	}
+}
+func (v *DisableDelegatedAdminAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableDelegatedAdminAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisableDelegatedAdminAccountResponse_delegatedAdminAccountId:
+			v.DelegatedAdminAccountId = new(string)
+			return d.ReadString(schemas.DisableDelegatedAdminAccountResponse_delegatedAdminAccountId, v.DelegatedAdminAccountId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableDelegatedAdminAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisableDelegatedAdminAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableDelegatedAdminAccount, schemas.DisableDelegatedAdminAccountRequest, schemas.DisableDelegatedAdminAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisableDelegatedAdminAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableDelegatedAdminAccount, schemas.DisableDelegatedAdminAccountRequest, schemas.DisableDelegatedAdminAccountResponse), output: &DisableDelegatedAdminAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

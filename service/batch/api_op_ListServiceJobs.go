@@ -5,7 +5,9 @@ package batch
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -93,6 +95,28 @@ type ListServiceJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListJobsFilterList(s, schemas.ListServiceJobsRequest_filters, v.Filters)
+	if v.JobQueue != nil {
+		s.WriteString(schemas.ListServiceJobsRequest_jobQueue, *v.JobQueue)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.ListServiceJobsRequest_jobStatus, string(v.JobStatus))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListServiceJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceJobsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListServiceJobsOutput struct {
 
 	// A list of service job summaries.
@@ -112,13 +136,35 @@ type ListServiceJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeServiceJobSummaryList(s, schemas.ListServiceJobsResponse_jobSummaryList, v.JobSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListServiceJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceJobsResponse_jobSummaryList:
+			return deserializeServiceJobSummaryList(d, schemas.ListServiceJobsResponse_jobSummaryList, &v.JobSummaryList)
+		case schemas.ListServiceJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServiceJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListServiceJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceJobs, schemas.ListServiceJobsRequest, schemas.ListServiceJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListServiceJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceJobs, schemas.ListServiceJobsRequest, schemas.ListServiceJobsResponse), output: &ListServiceJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

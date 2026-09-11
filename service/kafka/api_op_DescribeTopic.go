@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DescribeTopicInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTopicInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTopicRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTopicInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.DescribeTopicRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.TopicName != nil {
+		s.WriteString(schemas.DescribeTopicRequest_TopicName, *v.TopicName)
+	}
+}
+
 type DescribeTopicOutput struct {
 
 	// Topic configurations encoded as a Base64 string.
@@ -65,13 +82,66 @@ type DescribeTopicOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTopicOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTopicResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTopicOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configs != nil {
+		s.WriteString(schemas.DescribeTopicResponse_Configs, *v.Configs)
+	}
+	if v.PartitionCount != nil {
+		s.WriteInt32(schemas.DescribeTopicResponse_PartitionCount, *v.PartitionCount)
+	}
+	if v.ReplicationFactor != nil {
+		s.WriteInt32(schemas.DescribeTopicResponse_ReplicationFactor, *v.ReplicationFactor)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeTopicResponse_Status, string(v.Status))
+	}
+	if v.TopicArn != nil {
+		s.WriteString(schemas.DescribeTopicResponse_TopicArn, *v.TopicArn)
+	}
+	if v.TopicName != nil {
+		s.WriteString(schemas.DescribeTopicResponse_TopicName, *v.TopicName)
+	}
+}
+func (v *DescribeTopicOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTopicResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTopicResponse_Configs:
+			v.Configs = new(string)
+			return d.ReadString(schemas.DescribeTopicResponse_Configs, v.Configs)
+		case schemas.DescribeTopicResponse_PartitionCount:
+			v.PartitionCount = new(int32)
+			return d.ReadInt32(schemas.DescribeTopicResponse_PartitionCount, v.PartitionCount)
+		case schemas.DescribeTopicResponse_ReplicationFactor:
+			v.ReplicationFactor = new(int32)
+			return d.ReadInt32(schemas.DescribeTopicResponse_ReplicationFactor, v.ReplicationFactor)
+		case schemas.DescribeTopicResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTopicResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TopicState(ev)
+			return nil
+		case schemas.DescribeTopicResponse_TopicArn:
+			v.TopicArn = new(string)
+			return d.ReadString(schemas.DescribeTopicResponse_TopicArn, v.TopicArn)
+		case schemas.DescribeTopicResponse_TopicName:
+			v.TopicName = new(string)
+			return d.ReadString(schemas.DescribeTopicResponse_TopicName, v.TopicName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeTopic{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTopic, schemas.DescribeTopicRequest, schemas.DescribeTopicResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeTopic{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTopic, schemas.DescribeTopicRequest, schemas.DescribeTopicResponse), output: &DescribeTopicOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

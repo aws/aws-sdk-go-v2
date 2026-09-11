@@ -5,7 +5,9 @@ package medialive
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListMultiplexProgramsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMultiplexProgramsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMultiplexProgramsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMultiplexProgramsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMultiplexProgramsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MultiplexId != nil {
+		s.WriteString(schemas.ListMultiplexProgramsRequest_MultiplexId, *v.MultiplexId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMultiplexProgramsRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Placeholder documentation for ListMultiplexProgramsResponse
 type ListMultiplexProgramsOutput struct {
 
@@ -57,13 +77,35 @@ type ListMultiplexProgramsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMultiplexProgramsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMultiplexProgramsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMultiplexProgramsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfMultiplexProgramSummary(s, schemas.ListMultiplexProgramsResponse_MultiplexPrograms, v.MultiplexPrograms)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMultiplexProgramsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListMultiplexProgramsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMultiplexProgramsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMultiplexProgramsResponse_MultiplexPrograms:
+			return deserialize__listOfMultiplexProgramSummary(d, schemas.ListMultiplexProgramsResponse_MultiplexPrograms, &v.MultiplexPrograms)
+		case schemas.ListMultiplexProgramsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMultiplexProgramsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMultiplexProgramsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMultiplexPrograms{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMultiplexPrograms, schemas.ListMultiplexProgramsRequest, schemas.ListMultiplexProgramsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMultiplexPrograms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMultiplexPrograms, schemas.ListMultiplexProgramsRequest, schemas.ListMultiplexProgramsResponse), output: &ListMultiplexProgramsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

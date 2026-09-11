@@ -4,7 +4,9 @@ package accessanalyzer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,40 @@ type GetGeneratedPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGeneratedPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGeneratedPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGeneratedPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeResourcePlaceholders != nil {
+		s.WriteBool(schemas.GetGeneratedPolicyRequest_includeResourcePlaceholders, *v.IncludeResourcePlaceholders)
+	}
+	if v.IncludeServiceLevelTemplate != nil {
+		s.WriteBool(schemas.GetGeneratedPolicyRequest_includeServiceLevelTemplate, *v.IncludeServiceLevelTemplate)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetGeneratedPolicyRequest_jobId, *v.JobId)
+	}
+}
+func (v *GetGeneratedPolicyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGeneratedPolicyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGeneratedPolicyRequest_includeResourcePlaceholders:
+			v.IncludeResourcePlaceholders = new(bool)
+			return d.ReadBool(schemas.GetGeneratedPolicyRequest_includeResourcePlaceholders, v.IncludeResourcePlaceholders)
+		case schemas.GetGeneratedPolicyRequest_includeServiceLevelTemplate:
+			v.IncludeServiceLevelTemplate = new(bool)
+			return d.ReadBool(schemas.GetGeneratedPolicyRequest_includeServiceLevelTemplate, v.IncludeServiceLevelTemplate)
+		case schemas.GetGeneratedPolicyRequest_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GetGeneratedPolicyRequest_jobId, v.JobId)
+		}
+		return nil
+	})
+}
+
 type GetGeneratedPolicyOutput struct {
 
 	// A GeneratedPolicyResult object that contains the generated policies and
@@ -71,13 +107,42 @@ type GetGeneratedPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGeneratedPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGeneratedPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGeneratedPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GeneratedPolicyResult != nil {
+		s.WriteStruct(schemas.GetGeneratedPolicyResponse_generatedPolicyResult)
+		v.GeneratedPolicyResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobDetails != nil {
+		s.WriteStruct(schemas.GetGeneratedPolicyResponse_jobDetails)
+		v.JobDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetGeneratedPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGeneratedPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGeneratedPolicyResponse_generatedPolicyResult:
+			v.GeneratedPolicyResult = &types.GeneratedPolicyResult{}
+			return v.GeneratedPolicyResult.Deserialize(d)
+		case schemas.GetGeneratedPolicyResponse_jobDetails:
+			v.JobDetails = &types.JobDetails{}
+			return v.JobDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGeneratedPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGeneratedPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGeneratedPolicy, schemas.GetGeneratedPolicyRequest, schemas.GetGeneratedPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGeneratedPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGeneratedPolicy, schemas.GetGeneratedPolicyRequest, schemas.GetGeneratedPolicyResponse), output: &GetGeneratedPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

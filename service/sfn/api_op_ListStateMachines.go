@@ -5,7 +5,9 @@ package sfn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,21 @@ type ListStateMachinesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStateMachinesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStateMachinesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStateMachinesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListStateMachinesInput_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStateMachinesInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListStateMachinesOutput struct {
 
 	// This member is required.
@@ -72,13 +89,35 @@ type ListStateMachinesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStateMachinesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStateMachinesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStateMachinesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStateMachinesOutput_nextToken, *v.NextToken)
+	}
+	serializeStateMachineList(s, schemas.ListStateMachinesOutput_stateMachines, v.StateMachines)
+}
+func (v *ListStateMachinesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStateMachinesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStateMachinesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStateMachinesOutput_nextToken, v.NextToken)
+		case schemas.ListStateMachinesOutput_stateMachines:
+			return deserializeStateMachineList(d, schemas.ListStateMachinesOutput_stateMachines, &v.StateMachines)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStateMachinesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListStateMachines{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStateMachines, schemas.ListStateMachinesInput, schemas.ListStateMachinesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListStateMachines{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStateMachines, schemas.ListStateMachinesInput, schemas.ListStateMachinesOutput), output: &ListStateMachinesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

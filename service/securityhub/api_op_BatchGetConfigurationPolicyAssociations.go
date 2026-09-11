@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,16 @@ type BatchGetConfigurationPolicyAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetConfigurationPolicyAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetConfigurationPolicyAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetConfigurationPolicyAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationPolicyAssociationsList(s, schemas.BatchGetConfigurationPolicyAssociationsRequest_ConfigurationPolicyAssociationIdentifiers, v.ConfigurationPolicyAssociationIdentifiers)
+}
+
 type BatchGetConfigurationPolicyAssociationsOutput struct {
 
 	//  Describes associations for the target accounts, OUs, or the root.
@@ -56,13 +68,32 @@ type BatchGetConfigurationPolicyAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetConfigurationPolicyAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetConfigurationPolicyAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetConfigurationPolicyAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationPolicyAssociationList(s, schemas.BatchGetConfigurationPolicyAssociationsResponse_ConfigurationPolicyAssociations, v.ConfigurationPolicyAssociations)
+	serializeUnprocessedConfigurationPolicyAssociationList(s, schemas.BatchGetConfigurationPolicyAssociationsResponse_UnprocessedConfigurationPolicyAssociations, v.UnprocessedConfigurationPolicyAssociations)
+}
+func (v *BatchGetConfigurationPolicyAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetConfigurationPolicyAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetConfigurationPolicyAssociationsResponse_ConfigurationPolicyAssociations:
+			return deserializeConfigurationPolicyAssociationList(d, schemas.BatchGetConfigurationPolicyAssociationsResponse_ConfigurationPolicyAssociations, &v.ConfigurationPolicyAssociations)
+		case schemas.BatchGetConfigurationPolicyAssociationsResponse_UnprocessedConfigurationPolicyAssociations:
+			return deserializeUnprocessedConfigurationPolicyAssociationList(d, schemas.BatchGetConfigurationPolicyAssociationsResponse_UnprocessedConfigurationPolicyAssociations, &v.UnprocessedConfigurationPolicyAssociations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetConfigurationPolicyAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetConfigurationPolicyAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetConfigurationPolicyAssociations, schemas.BatchGetConfigurationPolicyAssociationsRequest, schemas.BatchGetConfigurationPolicyAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetConfigurationPolicyAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetConfigurationPolicyAssociations, schemas.BatchGetConfigurationPolicyAssociationsRequest, schemas.BatchGetConfigurationPolicyAssociationsResponse), output: &BatchGetConfigurationPolicyAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

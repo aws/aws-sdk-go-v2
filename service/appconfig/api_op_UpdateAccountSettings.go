@@ -4,7 +4,9 @@ package appconfig
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,25 @@ type UpdateAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccountSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccountSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccountSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletionProtection != nil {
+		s.WriteStruct(schemas.UpdateAccountSettingsRequest_DeletionProtection)
+		v.DeletionProtection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VendedMetrics != nil {
+		s.WriteStruct(schemas.UpdateAccountSettingsRequest_VendedMetrics)
+		v.VendedMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateAccountSettingsOutput struct {
 
 	// A parameter to configure deletion protection. Deletion protection prevents a
@@ -61,13 +82,42 @@ type UpdateAccountSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccountSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccountSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletionProtection != nil {
+		s.WriteStruct(schemas.AccountSettings_DeletionProtection)
+		v.DeletionProtection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VendedMetrics != nil {
+		s.WriteStruct(schemas.AccountSettings_VendedMetrics)
+		v.VendedMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAccountSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountSettings_DeletionProtection:
+			v.DeletionProtection = &types.DeletionProtectionSettings{}
+			return v.DeletionProtection.Deserialize(d)
+		case schemas.AccountSettings_VendedMetrics:
+			v.VendedMetrics = &types.VendedMetricsSettings{}
+			return v.VendedMetrics.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountSettings, schemas.UpdateAccountSettingsRequest, schemas.AccountSettings)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountSettings, schemas.UpdateAccountSettingsRequest, schemas.AccountSettings), output: &UpdateAccountSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,29 @@ type AssociateSourceGraphqlApiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSourceGraphqlApiInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSourceGraphqlApiRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSourceGraphqlApiInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.AssociateSourceGraphqlApiRequest_description, *v.Description)
+	}
+	if v.MergedApiIdentifier != nil {
+		s.WriteString(schemas.AssociateSourceGraphqlApiRequest_mergedApiIdentifier, *v.MergedApiIdentifier)
+	}
+	if v.SourceApiAssociationConfig != nil {
+		s.WriteStruct(schemas.AssociateSourceGraphqlApiRequest_sourceApiAssociationConfig)
+		v.SourceApiAssociationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceApiIdentifier != nil {
+		s.WriteString(schemas.AssociateSourceGraphqlApiRequest_sourceApiIdentifier, *v.SourceApiIdentifier)
+	}
+}
+
 type AssociateSourceGraphqlApiOutput struct {
 
 	// The SourceApiAssociation object data.
@@ -65,13 +90,34 @@ type AssociateSourceGraphqlApiOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSourceGraphqlApiOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSourceGraphqlApiResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSourceGraphqlApiOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceApiAssociation != nil {
+		s.WriteStruct(schemas.AssociateSourceGraphqlApiResponse_sourceApiAssociation)
+		v.SourceApiAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateSourceGraphqlApiOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateSourceGraphqlApiResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateSourceGraphqlApiResponse_sourceApiAssociation:
+			v.SourceApiAssociation = &types.SourceApiAssociation{}
+			return v.SourceApiAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateSourceGraphqlApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateSourceGraphqlApi{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSourceGraphqlApi, schemas.AssociateSourceGraphqlApiRequest, schemas.AssociateSourceGraphqlApiResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateSourceGraphqlApi{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSourceGraphqlApi, schemas.AssociateSourceGraphqlApiRequest, schemas.AssociateSourceGraphqlApiResponse), output: &AssociateSourceGraphqlApiOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

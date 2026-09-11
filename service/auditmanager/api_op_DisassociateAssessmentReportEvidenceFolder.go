@@ -4,6 +4,8 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DisassociateAssessmentReportEvidenceFolderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateAssessmentReportEvidenceFolderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateAssessmentReportEvidenceFolderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateAssessmentReportEvidenceFolderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.DisassociateAssessmentReportEvidenceFolderRequest_assessmentId, *v.AssessmentId)
+	}
+	if v.EvidenceFolderId != nil {
+		s.WriteString(schemas.DisassociateAssessmentReportEvidenceFolderRequest_evidenceFolderId, *v.EvidenceFolderId)
+	}
+}
+
 type DisassociateAssessmentReportEvidenceFolderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type DisassociateAssessmentReportEvidenceFolderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateAssessmentReportEvidenceFolderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateAssessmentReportEvidenceFolderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateAssessmentReportEvidenceFolderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateAssessmentReportEvidenceFolderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateAssessmentReportEvidenceFolderResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateAssessmentReportEvidenceFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateAssessmentReportEvidenceFolder{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAssessmentReportEvidenceFolder, schemas.DisassociateAssessmentReportEvidenceFolderRequest, schemas.DisassociateAssessmentReportEvidenceFolderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateAssessmentReportEvidenceFolder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAssessmentReportEvidenceFolder, schemas.DisassociateAssessmentReportEvidenceFolderRequest, schemas.DisassociateAssessmentReportEvidenceFolderResponse), output: &DisassociateAssessmentReportEvidenceFolderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

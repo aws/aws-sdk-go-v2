@@ -4,6 +4,8 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteCloudWatchAlarmTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCloudWatchAlarmTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCloudWatchAlarmTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCloudWatchAlarmTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.DeleteCloudWatchAlarmTemplateRequest_Identifier, *v.Identifier)
+	}
+}
+
 type DeleteCloudWatchAlarmTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type DeleteCloudWatchAlarmTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCloudWatchAlarmTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCloudWatchAlarmTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCloudWatchAlarmTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCloudWatchAlarmTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCloudWatchAlarmTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCloudWatchAlarmTemplate, schemas.DeleteCloudWatchAlarmTemplateRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCloudWatchAlarmTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCloudWatchAlarmTemplate, schemas.DeleteCloudWatchAlarmTemplateRequest, nil), output: &DeleteCloudWatchAlarmTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

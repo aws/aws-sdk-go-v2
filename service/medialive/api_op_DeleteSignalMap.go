@@ -4,6 +4,8 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteSignalMapInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSignalMapInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSignalMapRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSignalMapInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.DeleteSignalMapRequest_Identifier, *v.Identifier)
+	}
+}
+
 type DeleteSignalMapOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteSignalMapOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSignalMapOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSignalMapOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSignalMapOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSignalMapMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSignalMap{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSignalMap, schemas.DeleteSignalMapRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSignalMap{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSignalMap, schemas.DeleteSignalMapRequest, nil), output: &DeleteSignalMapOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

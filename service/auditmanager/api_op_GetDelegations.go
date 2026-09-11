@@ -5,7 +5,9 @@ package auditmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type GetDelegationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDelegationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDelegationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDelegationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetDelegationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDelegationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetDelegationsOutput struct {
 
 	//  The list of delegations that the GetDelegations API returned.
@@ -50,13 +67,35 @@ type GetDelegationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDelegationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDelegationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDelegationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDelegationMetadataList(s, schemas.GetDelegationsResponse_delegations, v.Delegations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDelegationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetDelegationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDelegationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDelegationsResponse_delegations:
+			return deserializeDelegationMetadataList(d, schemas.GetDelegationsResponse_delegations, &v.Delegations)
+		case schemas.GetDelegationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetDelegationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDelegationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDelegations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDelegations, schemas.GetDelegationsRequest, schemas.GetDelegationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDelegations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDelegations, schemas.GetDelegationsRequest, schemas.GetDelegationsResponse), output: &GetDelegationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,19 @@ type PutAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.PutAttributesRequest_attributes, v.Attributes)
+	if v.Cluster != nil {
+		s.WriteString(schemas.PutAttributesRequest_cluster, *v.Cluster)
+	}
+}
+
 type PutAttributesOutput struct {
 
 	// The attributes applied to your resource.
@@ -58,13 +73,29 @@ type PutAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.PutAttributesResponse_attributes, v.Attributes)
+}
+func (v *PutAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAttributesResponse_attributes:
+			return deserializeAttributes(d, schemas.PutAttributesResponse_attributes, &v.Attributes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAttributes, schemas.PutAttributesRequest, schemas.PutAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAttributes, schemas.PutAttributesRequest, schemas.PutAttributesResponse), output: &PutAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

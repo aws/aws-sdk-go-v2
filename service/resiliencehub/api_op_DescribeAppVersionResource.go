@@ -4,7 +4,9 @@ package resiliencehub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,66 @@ type DescribeAppVersionResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppVersionResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppVersionResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppVersionResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.DescribeAppVersionResourceRequest_appArn, *v.AppArn)
+	}
+	if v.AppVersion != nil {
+		s.WriteString(schemas.DescribeAppVersionResourceRequest_appVersion, *v.AppVersion)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeAppVersionResourceRequest_awsAccountId, *v.AwsAccountId)
+	}
+	if v.AwsRegion != nil {
+		s.WriteString(schemas.DescribeAppVersionResourceRequest_awsRegion, *v.AwsRegion)
+	}
+	if v.LogicalResourceId != nil {
+		s.WriteStruct(schemas.DescribeAppVersionResourceRequest_logicalResourceId)
+		v.LogicalResourceId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PhysicalResourceId != nil {
+		s.WriteString(schemas.DescribeAppVersionResourceRequest_physicalResourceId, *v.PhysicalResourceId)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.DescribeAppVersionResourceRequest_resourceName, *v.ResourceName)
+	}
+}
+func (v *DescribeAppVersionResourceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAppVersionResourceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAppVersionResourceRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.DescribeAppVersionResourceRequest_appArn, v.AppArn)
+		case schemas.DescribeAppVersionResourceRequest_appVersion:
+			v.AppVersion = new(string)
+			return d.ReadString(schemas.DescribeAppVersionResourceRequest_appVersion, v.AppVersion)
+		case schemas.DescribeAppVersionResourceRequest_awsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.DescribeAppVersionResourceRequest_awsAccountId, v.AwsAccountId)
+		case schemas.DescribeAppVersionResourceRequest_awsRegion:
+			v.AwsRegion = new(string)
+			return d.ReadString(schemas.DescribeAppVersionResourceRequest_awsRegion, v.AwsRegion)
+		case schemas.DescribeAppVersionResourceRequest_logicalResourceId:
+			v.LogicalResourceId = &types.LogicalResourceId{}
+			return v.LogicalResourceId.Deserialize(d)
+		case schemas.DescribeAppVersionResourceRequest_physicalResourceId:
+			v.PhysicalResourceId = new(string)
+			return d.ReadString(schemas.DescribeAppVersionResourceRequest_physicalResourceId, v.PhysicalResourceId)
+		case schemas.DescribeAppVersionResourceRequest_resourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.DescribeAppVersionResourceRequest_resourceName, v.ResourceName)
+		}
+		return nil
+	})
+}
+
 type DescribeAppVersionResourceOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
@@ -96,13 +158,46 @@ type DescribeAppVersionResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppVersionResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppVersionResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppVersionResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.DescribeAppVersionResourceResponse_appArn, *v.AppArn)
+	}
+	if v.AppVersion != nil {
+		s.WriteString(schemas.DescribeAppVersionResourceResponse_appVersion, *v.AppVersion)
+	}
+	if v.PhysicalResource != nil {
+		s.WriteStruct(schemas.DescribeAppVersionResourceResponse_physicalResource)
+		v.PhysicalResource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAppVersionResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAppVersionResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAppVersionResourceResponse_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.DescribeAppVersionResourceResponse_appArn, v.AppArn)
+		case schemas.DescribeAppVersionResourceResponse_appVersion:
+			v.AppVersion = new(string)
+			return d.ReadString(schemas.DescribeAppVersionResourceResponse_appVersion, v.AppVersion)
+		case schemas.DescribeAppVersionResourceResponse_physicalResource:
+			v.PhysicalResource = &types.PhysicalResource{}
+			return v.PhysicalResource.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAppVersionResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAppVersionResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppVersionResource, schemas.DescribeAppVersionResourceRequest, schemas.DescribeAppVersionResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAppVersionResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppVersionResource, schemas.DescribeAppVersionResourceRequest, schemas.DescribeAppVersionResourceResponse), output: &DescribeAppVersionResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

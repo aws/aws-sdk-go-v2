@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type GetAutomatedReasoningPolicyNextScenarioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutomatedReasoningPolicyNextScenarioInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutomatedReasoningPolicyNextScenarioRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutomatedReasoningPolicyNextScenarioInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BuildWorkflowId != nil {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyNextScenarioRequest_buildWorkflowId, *v.BuildWorkflowId)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyNextScenarioRequest_policyArn, *v.PolicyArn)
+	}
+}
+
 type GetAutomatedReasoningPolicyNextScenarioOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Automated Reasoning policy.
@@ -59,13 +76,40 @@ type GetAutomatedReasoningPolicyNextScenarioOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutomatedReasoningPolicyNextScenarioOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutomatedReasoningPolicyNextScenarioResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutomatedReasoningPolicyNextScenarioOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyNextScenarioResponse_policyArn, *v.PolicyArn)
+	}
+	if v.Scenario != nil {
+		s.WriteStruct(schemas.GetAutomatedReasoningPolicyNextScenarioResponse_scenario)
+		v.Scenario.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAutomatedReasoningPolicyNextScenarioOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAutomatedReasoningPolicyNextScenarioResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAutomatedReasoningPolicyNextScenarioResponse_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.GetAutomatedReasoningPolicyNextScenarioResponse_policyArn, v.PolicyArn)
+		case schemas.GetAutomatedReasoningPolicyNextScenarioResponse_scenario:
+			v.Scenario = &types.AutomatedReasoningPolicyScenario{}
+			return v.Scenario.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAutomatedReasoningPolicyNextScenarioMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAutomatedReasoningPolicyNextScenario{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutomatedReasoningPolicyNextScenario, schemas.GetAutomatedReasoningPolicyNextScenarioRequest, schemas.GetAutomatedReasoningPolicyNextScenarioResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAutomatedReasoningPolicyNextScenario{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutomatedReasoningPolicyNextScenario, schemas.GetAutomatedReasoningPolicyNextScenarioRequest, schemas.GetAutomatedReasoningPolicyNextScenarioResponse), output: &GetAutomatedReasoningPolicyNextScenarioOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

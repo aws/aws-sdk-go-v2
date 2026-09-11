@@ -4,7 +4,9 @@ package imagebuilder
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetWorkflowStepExecutionInput struct {
 	StepExecutionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetWorkflowStepExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkflowStepExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkflowStepExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StepExecutionId != nil {
+		s.WriteString(schemas.GetWorkflowStepExecutionRequest_stepExecutionId, *v.StepExecutionId)
+	}
 }
 
 type GetWorkflowStepExecutionOutput struct {
@@ -112,13 +126,136 @@ type GetWorkflowStepExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkflowStepExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkflowStepExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkflowStepExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteString(schemas.GetWorkflowStepExecutionResponse_action, *v.Action)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetWorkflowStepExecutionResponse_description, *v.Description)
+	}
+	if v.EndTime != nil {
+		s.WriteString(schemas.GetWorkflowStepExecutionResponse_endTime, *v.EndTime)
+	}
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.GetWorkflowStepExecutionResponse_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+	if v.Inputs != nil {
+		s.WriteString(schemas.GetWorkflowStepExecutionResponse_inputs, *v.Inputs)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.GetWorkflowStepExecutionResponse_message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetWorkflowStepExecutionResponse_name, *v.Name)
+	}
+	if v.OnFailure != nil {
+		s.WriteString(schemas.GetWorkflowStepExecutionResponse_onFailure, *v.OnFailure)
+	}
+	if v.Outputs != nil {
+		s.WriteString(schemas.GetWorkflowStepExecutionResponse_outputs, *v.Outputs)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.GetWorkflowStepExecutionResponse_requestId, *v.RequestId)
+	}
+	if v.RollbackStatus != "" {
+		s.WriteString(schemas.GetWorkflowStepExecutionResponse_rollbackStatus, string(v.RollbackStatus))
+	}
+	if v.StartTime != nil {
+		s.WriteString(schemas.GetWorkflowStepExecutionResponse_startTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetWorkflowStepExecutionResponse_status, string(v.Status))
+	}
+	if v.StepExecutionId != nil {
+		s.WriteString(schemas.GetWorkflowStepExecutionResponse_stepExecutionId, *v.StepExecutionId)
+	}
+	if v.TimeoutSeconds != nil {
+		s.WriteInt32(schemas.GetWorkflowStepExecutionResponse_timeoutSeconds, *v.TimeoutSeconds)
+	}
+	if v.WorkflowBuildVersionArn != nil {
+		s.WriteString(schemas.GetWorkflowStepExecutionResponse_workflowBuildVersionArn, *v.WorkflowBuildVersionArn)
+	}
+	if v.WorkflowExecutionId != nil {
+		s.WriteString(schemas.GetWorkflowStepExecutionResponse_workflowExecutionId, *v.WorkflowExecutionId)
+	}
+}
+func (v *GetWorkflowStepExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkflowStepExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWorkflowStepExecutionResponse_action:
+			v.Action = new(string)
+			return d.ReadString(schemas.GetWorkflowStepExecutionResponse_action, v.Action)
+		case schemas.GetWorkflowStepExecutionResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetWorkflowStepExecutionResponse_description, v.Description)
+		case schemas.GetWorkflowStepExecutionResponse_endTime:
+			v.EndTime = new(string)
+			return d.ReadString(schemas.GetWorkflowStepExecutionResponse_endTime, v.EndTime)
+		case schemas.GetWorkflowStepExecutionResponse_imageBuildVersionArn:
+			v.ImageBuildVersionArn = new(string)
+			return d.ReadString(schemas.GetWorkflowStepExecutionResponse_imageBuildVersionArn, v.ImageBuildVersionArn)
+		case schemas.GetWorkflowStepExecutionResponse_inputs:
+			v.Inputs = new(string)
+			return d.ReadString(schemas.GetWorkflowStepExecutionResponse_inputs, v.Inputs)
+		case schemas.GetWorkflowStepExecutionResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GetWorkflowStepExecutionResponse_message, v.Message)
+		case schemas.GetWorkflowStepExecutionResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetWorkflowStepExecutionResponse_name, v.Name)
+		case schemas.GetWorkflowStepExecutionResponse_onFailure:
+			v.OnFailure = new(string)
+			return d.ReadString(schemas.GetWorkflowStepExecutionResponse_onFailure, v.OnFailure)
+		case schemas.GetWorkflowStepExecutionResponse_outputs:
+			v.Outputs = new(string)
+			return d.ReadString(schemas.GetWorkflowStepExecutionResponse_outputs, v.Outputs)
+		case schemas.GetWorkflowStepExecutionResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.GetWorkflowStepExecutionResponse_requestId, v.RequestId)
+		case schemas.GetWorkflowStepExecutionResponse_rollbackStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetWorkflowStepExecutionResponse_rollbackStatus, &ev); err != nil {
+				return err
+			}
+			v.RollbackStatus = types.WorkflowStepExecutionRollbackStatus(ev)
+			return nil
+		case schemas.GetWorkflowStepExecutionResponse_startTime:
+			v.StartTime = new(string)
+			return d.ReadString(schemas.GetWorkflowStepExecutionResponse_startTime, v.StartTime)
+		case schemas.GetWorkflowStepExecutionResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetWorkflowStepExecutionResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.WorkflowStepExecutionStatus(ev)
+			return nil
+		case schemas.GetWorkflowStepExecutionResponse_stepExecutionId:
+			v.StepExecutionId = new(string)
+			return d.ReadString(schemas.GetWorkflowStepExecutionResponse_stepExecutionId, v.StepExecutionId)
+		case schemas.GetWorkflowStepExecutionResponse_timeoutSeconds:
+			v.TimeoutSeconds = new(int32)
+			return d.ReadInt32(schemas.GetWorkflowStepExecutionResponse_timeoutSeconds, v.TimeoutSeconds)
+		case schemas.GetWorkflowStepExecutionResponse_workflowBuildVersionArn:
+			v.WorkflowBuildVersionArn = new(string)
+			return d.ReadString(schemas.GetWorkflowStepExecutionResponse_workflowBuildVersionArn, v.WorkflowBuildVersionArn)
+		case schemas.GetWorkflowStepExecutionResponse_workflowExecutionId:
+			v.WorkflowExecutionId = new(string)
+			return d.ReadString(schemas.GetWorkflowStepExecutionResponse_workflowExecutionId, v.WorkflowExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWorkflowStepExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWorkflowStepExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflowStepExecution, schemas.GetWorkflowStepExecutionRequest, schemas.GetWorkflowStepExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWorkflowStepExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflowStepExecution, schemas.GetWorkflowStepExecutionRequest, schemas.GetWorkflowStepExecutionResponse), output: &GetWorkflowStepExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package batch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,19 @@ type TerminateServiceJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateServiceJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateServiceJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateServiceJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.TerminateServiceJobsRequest_jobs, v.Jobs)
+	if v.Reason != nil {
+		s.WriteString(schemas.TerminateServiceJobsRequest_reason, *v.Reason)
+	}
+}
+
 // The result of a TerminateServiceJobs request, including the service jobs whose
 // termination request was accepted and the errors for service jobs that couldn't
 // be terminated.
@@ -72,13 +87,32 @@ type TerminateServiceJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateServiceJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateServiceJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateServiceJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTerminateServiceJobsErrorDetailList(s, schemas.TerminateServiceJobsResponse_errors, v.Errors)
+	serializeStringList(s, schemas.TerminateServiceJobsResponse_successful, v.Successful)
+}
+func (v *TerminateServiceJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TerminateServiceJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TerminateServiceJobsResponse_errors:
+			return deserializeTerminateServiceJobsErrorDetailList(d, schemas.TerminateServiceJobsResponse_errors, &v.Errors)
+		case schemas.TerminateServiceJobsResponse_successful:
+			return deserializeStringList(d, schemas.TerminateServiceJobsResponse_successful, &v.Successful)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTerminateServiceJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTerminateServiceJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateServiceJobs, schemas.TerminateServiceJobsRequest, schemas.TerminateServiceJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTerminateServiceJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateServiceJobs, schemas.TerminateServiceJobsRequest, schemas.TerminateServiceJobsResponse), output: &TerminateServiceJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

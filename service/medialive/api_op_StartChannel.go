@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type StartChannelInput struct {
 	ChannelId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelId != nil {
+		s.WriteString(schemas.StartChannelRequest_ChannelId, *v.ChannelId)
+	}
 }
 
 // Placeholder documentation for StartChannelResponse
@@ -116,13 +130,176 @@ type StartChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnywhereSettings != nil {
+		s.WriteStruct(schemas.StartChannelResponse_AnywhereSettings)
+		v.AnywhereSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.StartChannelResponse_Arn, *v.Arn)
+	}
+	if v.CdiInputSpecification != nil {
+		s.WriteStruct(schemas.StartChannelResponse_CdiInputSpecification)
+		v.CdiInputSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChannelClass != "" {
+		s.WriteString(schemas.StartChannelResponse_ChannelClass, string(v.ChannelClass))
+	}
+	if v.ChannelEngineVersion != nil {
+		s.WriteStruct(schemas.StartChannelResponse_ChannelEngineVersion)
+		v.ChannelEngineVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOf__string(s, schemas.StartChannelResponse_ChannelSecurityGroups, v.ChannelSecurityGroups)
+	serialize__listOfOutputDestination(s, schemas.StartChannelResponse_Destinations, v.Destinations)
+	serialize__listOfChannelEgressEndpoint(s, schemas.StartChannelResponse_EgressEndpoints, v.EgressEndpoints)
+	if v.EncoderSettings != nil {
+		s.WriteStruct(schemas.StartChannelResponse_EncoderSettings)
+		v.EncoderSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.StartChannelResponse_Id, *v.Id)
+	}
+	if v.InferenceSettings != nil {
+		s.WriteStruct(schemas.StartChannelResponse_InferenceSettings)
+		v.InferenceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfInputAttachment(s, schemas.StartChannelResponse_InputAttachments, v.InputAttachments)
+	if v.InputSpecification != nil {
+		s.WriteStruct(schemas.StartChannelResponse_InputSpecification)
+		v.InputSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LinkedChannelSettings != nil {
+		s.WriteStruct(schemas.StartChannelResponse_LinkedChannelSettings)
+		v.LinkedChannelSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogLevel != "" {
+		s.WriteString(schemas.StartChannelResponse_LogLevel, string(v.LogLevel))
+	}
+	if v.Maintenance != nil {
+		s.WriteStruct(schemas.StartChannelResponse_Maintenance)
+		v.Maintenance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartChannelResponse_Name, *v.Name)
+	}
+	serialize__listOfPipelineDetail(s, schemas.StartChannelResponse_PipelineDetails, v.PipelineDetails)
+	if v.PipelinesRunningCount != nil {
+		s.WriteInt32(schemas.StartChannelResponse_PipelinesRunningCount, *v.PipelinesRunningCount)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StartChannelResponse_RoleArn, *v.RoleArn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.StartChannelResponse_State, string(v.State))
+	}
+	serializeTags(s, schemas.StartChannelResponse_Tags, v.Tags)
+	if v.Vpc != nil {
+		s.WriteStruct(schemas.StartChannelResponse_Vpc)
+		v.Vpc.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartChannelResponse_AnywhereSettings:
+			v.AnywhereSettings = &types.DescribeAnywhereSettings{}
+			return v.AnywhereSettings.Deserialize(d)
+		case schemas.StartChannelResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StartChannelResponse_Arn, v.Arn)
+		case schemas.StartChannelResponse_CdiInputSpecification:
+			v.CdiInputSpecification = &types.CdiInputSpecification{}
+			return v.CdiInputSpecification.Deserialize(d)
+		case schemas.StartChannelResponse_ChannelClass:
+			var ev string
+			if err := d.ReadString(schemas.StartChannelResponse_ChannelClass, &ev); err != nil {
+				return err
+			}
+			v.ChannelClass = types.ChannelClass(ev)
+			return nil
+		case schemas.StartChannelResponse_ChannelEngineVersion:
+			v.ChannelEngineVersion = &types.ChannelEngineVersionResponse{}
+			return v.ChannelEngineVersion.Deserialize(d)
+		case schemas.StartChannelResponse_ChannelSecurityGroups:
+			return deserialize__listOf__string(d, schemas.StartChannelResponse_ChannelSecurityGroups, &v.ChannelSecurityGroups)
+		case schemas.StartChannelResponse_Destinations:
+			return deserialize__listOfOutputDestination(d, schemas.StartChannelResponse_Destinations, &v.Destinations)
+		case schemas.StartChannelResponse_EgressEndpoints:
+			return deserialize__listOfChannelEgressEndpoint(d, schemas.StartChannelResponse_EgressEndpoints, &v.EgressEndpoints)
+		case schemas.StartChannelResponse_EncoderSettings:
+			v.EncoderSettings = &types.EncoderSettings{}
+			return v.EncoderSettings.Deserialize(d)
+		case schemas.StartChannelResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartChannelResponse_Id, v.Id)
+		case schemas.StartChannelResponse_InferenceSettings:
+			v.InferenceSettings = &types.DescribeInferenceSettings{}
+			return v.InferenceSettings.Deserialize(d)
+		case schemas.StartChannelResponse_InputAttachments:
+			return deserialize__listOfInputAttachment(d, schemas.StartChannelResponse_InputAttachments, &v.InputAttachments)
+		case schemas.StartChannelResponse_InputSpecification:
+			v.InputSpecification = &types.InputSpecification{}
+			return v.InputSpecification.Deserialize(d)
+		case schemas.StartChannelResponse_LinkedChannelSettings:
+			v.LinkedChannelSettings = &types.DescribeLinkedChannelSettings{}
+			return v.LinkedChannelSettings.Deserialize(d)
+		case schemas.StartChannelResponse_LogLevel:
+			var ev string
+			if err := d.ReadString(schemas.StartChannelResponse_LogLevel, &ev); err != nil {
+				return err
+			}
+			v.LogLevel = types.LogLevel(ev)
+			return nil
+		case schemas.StartChannelResponse_Maintenance:
+			v.Maintenance = &types.MaintenanceStatus{}
+			return v.Maintenance.Deserialize(d)
+		case schemas.StartChannelResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StartChannelResponse_Name, v.Name)
+		case schemas.StartChannelResponse_PipelineDetails:
+			return deserialize__listOfPipelineDetail(d, schemas.StartChannelResponse_PipelineDetails, &v.PipelineDetails)
+		case schemas.StartChannelResponse_PipelinesRunningCount:
+			v.PipelinesRunningCount = new(int32)
+			return d.ReadInt32(schemas.StartChannelResponse_PipelinesRunningCount, v.PipelinesRunningCount)
+		case schemas.StartChannelResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.StartChannelResponse_RoleArn, v.RoleArn)
+		case schemas.StartChannelResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.StartChannelResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ChannelState(ev)
+			return nil
+		case schemas.StartChannelResponse_Tags:
+			return deserializeTags(d, schemas.StartChannelResponse_Tags, &v.Tags)
+		case schemas.StartChannelResponse_Vpc:
+			v.Vpc = &types.VpcOutputSettingsDescription{}
+			return v.Vpc.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartChannel, schemas.StartChannelRequest, schemas.StartChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartChannel, schemas.StartChannelRequest, schemas.StartChannelResponse), output: &StartChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

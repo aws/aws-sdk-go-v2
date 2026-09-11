@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,6 +31,22 @@ type GetDelegatedAdminAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDelegatedAdminAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDelegatedAdminAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDelegatedAdminAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetDelegatedAdminAccountInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDelegatedAdminAccountRequest, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type GetDelegatedAdminAccountOutput struct {
 
 	// The Amazon Web Services account ID of the Amazon Inspector delegated
@@ -41,13 +59,34 @@ type GetDelegatedAdminAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDelegatedAdminAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDelegatedAdminAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDelegatedAdminAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DelegatedAdmin != nil {
+		s.WriteStruct(schemas.GetDelegatedAdminAccountResponse_delegatedAdmin)
+		v.DelegatedAdmin.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetDelegatedAdminAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDelegatedAdminAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDelegatedAdminAccountResponse_delegatedAdmin:
+			v.DelegatedAdmin = &types.DelegatedAdmin{}
+			return v.DelegatedAdmin.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDelegatedAdminAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDelegatedAdminAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDelegatedAdminAccount, schemas.GetDelegatedAdminAccountRequest, schemas.GetDelegatedAdminAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDelegatedAdminAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDelegatedAdminAccount, schemas.GetDelegatedAdminAccountRequest, schemas.GetDelegatedAdminAccountResponse), output: &GetDelegatedAdminAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

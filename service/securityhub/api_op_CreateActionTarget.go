@@ -4,6 +4,8 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type CreateActionTargetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateActionTargetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateActionTargetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateActionTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateActionTargetRequest_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateActionTargetRequest_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateActionTargetRequest_Name, *v.Name)
+	}
+}
+
 type CreateActionTargetOutput struct {
 
 	// The Amazon Resource Name (ARN) for the custom action target.
@@ -60,13 +80,32 @@ type CreateActionTargetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateActionTargetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateActionTargetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateActionTargetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionTargetArn != nil {
+		s.WriteString(schemas.CreateActionTargetResponse_ActionTargetArn, *v.ActionTargetArn)
+	}
+}
+func (v *CreateActionTargetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateActionTargetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateActionTargetResponse_ActionTargetArn:
+			v.ActionTargetArn = new(string)
+			return d.ReadString(schemas.CreateActionTargetResponse_ActionTargetArn, v.ActionTargetArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateActionTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateActionTarget{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateActionTarget, schemas.CreateActionTargetRequest, schemas.CreateActionTargetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateActionTarget{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateActionTarget, schemas.CreateActionTargetRequest, schemas.CreateActionTargetResponse), output: &CreateActionTargetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

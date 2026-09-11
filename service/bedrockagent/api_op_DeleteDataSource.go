@@ -4,7 +4,9 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.DeleteDataSourceRequest_dataSourceId, *v.DataSourceId)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.DeleteDataSourceRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+}
+
 type DeleteDataSourceOutput struct {
 
 	// The unique identifier of the data source that was deleted.
@@ -64,13 +81,48 @@ type DeleteDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.DeleteDataSourceResponse_dataSourceId, *v.DataSourceId)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.DeleteDataSourceResponse_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteDataSourceResponse_status, string(v.Status))
+	}
+}
+func (v *DeleteDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDataSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDataSourceResponse_dataSourceId:
+			v.DataSourceId = new(string)
+			return d.ReadString(schemas.DeleteDataSourceResponse_dataSourceId, v.DataSourceId)
+		case schemas.DeleteDataSourceResponse_knowledgeBaseId:
+			v.KnowledgeBaseId = new(string)
+			return d.ReadString(schemas.DeleteDataSourceResponse_knowledgeBaseId, v.KnowledgeBaseId)
+		case schemas.DeleteDataSourceResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteDataSourceResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DataSourceStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataSource, schemas.DeleteDataSourceRequest, schemas.DeleteDataSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataSource, schemas.DeleteDataSourceRequest, schemas.DeleteDataSourceResponse), output: &DeleteDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

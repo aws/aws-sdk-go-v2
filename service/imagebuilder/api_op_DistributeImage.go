@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,33 @@ type DistributeImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DistributeImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DistributeImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DistributeImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DistributeImageRequest_clientToken, *v.ClientToken)
+	}
+	if v.DistributionConfigurationArn != nil {
+		s.WriteString(schemas.DistributeImageRequest_distributionConfigurationArn, *v.DistributionConfigurationArn)
+	}
+	if v.ExecutionRole != nil {
+		s.WriteString(schemas.DistributeImageRequest_executionRole, *v.ExecutionRole)
+	}
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.DistributeImageRequest_loggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceImage != nil {
+		s.WriteString(schemas.DistributeImageRequest_sourceImage, *v.SourceImage)
+	}
+	serializeTagMap(s, schemas.DistributeImageRequest_tags, v.Tags)
+}
+
 type DistributeImageOutput struct {
 
 	// The client token that uniquely identifies the request.
@@ -83,13 +112,38 @@ type DistributeImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DistributeImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DistributeImageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DistributeImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DistributeImageResponse_clientToken, *v.ClientToken)
+	}
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.DistributeImageResponse_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+}
+func (v *DistributeImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DistributeImageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DistributeImageResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DistributeImageResponse_clientToken, v.ClientToken)
+		case schemas.DistributeImageResponse_imageBuildVersionArn:
+			v.ImageBuildVersionArn = new(string)
+			return d.ReadString(schemas.DistributeImageResponse_imageBuildVersionArn, v.ImageBuildVersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDistributeImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDistributeImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DistributeImage, schemas.DistributeImageRequest, schemas.DistributeImageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDistributeImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DistributeImage, schemas.DistributeImageRequest, schemas.DistributeImageResponse), output: &DistributeImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

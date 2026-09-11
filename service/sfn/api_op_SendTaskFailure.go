@@ -4,6 +4,8 @@ package sfn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,24 @@ type SendTaskFailureInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendTaskFailureInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendTaskFailureInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendTaskFailureInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != nil {
+		s.WriteString(schemas.SendTaskFailureInput_cause, *v.Cause)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.SendTaskFailureInput_error, *v.Error)
+	}
+	if v.TaskToken != nil {
+		s.WriteString(schemas.SendTaskFailureInput_taskToken, *v.TaskToken)
+	}
+}
+
 type SendTaskFailureOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,13 +82,26 @@ type SendTaskFailureOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendTaskFailureOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendTaskFailureOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendTaskFailureOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SendTaskFailureOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendTaskFailureOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendTaskFailureMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSendTaskFailure{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendTaskFailure, schemas.SendTaskFailureInput, schemas.SendTaskFailureOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSendTaskFailure{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendTaskFailure, schemas.SendTaskFailureInput, schemas.SendTaskFailureOutput), output: &SendTaskFailureOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

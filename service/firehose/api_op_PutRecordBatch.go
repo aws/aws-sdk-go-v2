@@ -4,7 +4,9 @@ package firehose
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/firehose/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/firehose/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -114,6 +116,19 @@ type PutRecordBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRecordBatchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRecordBatchInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRecordBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryStreamName != nil {
+		s.WriteString(schemas.PutRecordBatchInput_DeliveryStreamName, *v.DeliveryStreamName)
+	}
+	serializePutRecordBatchRequestEntryList(s, schemas.PutRecordBatchInput_Records, v.Records)
+}
+
 type PutRecordBatchOutput struct {
 
 	// The number of records that might have failed processing. This number might be
@@ -139,13 +154,41 @@ type PutRecordBatchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRecordBatchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRecordBatchOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRecordBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Encrypted != nil {
+		s.WriteBool(schemas.PutRecordBatchOutput_Encrypted, *v.Encrypted)
+	}
+	if v.FailedPutCount != nil {
+		s.WriteInt32(schemas.PutRecordBatchOutput_FailedPutCount, *v.FailedPutCount)
+	}
+	serializePutRecordBatchResponseEntryList(s, schemas.PutRecordBatchOutput_RequestResponses, v.RequestResponses)
+}
+func (v *PutRecordBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutRecordBatchOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutRecordBatchOutput_Encrypted:
+			v.Encrypted = new(bool)
+			return d.ReadBool(schemas.PutRecordBatchOutput_Encrypted, v.Encrypted)
+		case schemas.PutRecordBatchOutput_FailedPutCount:
+			v.FailedPutCount = new(int32)
+			return d.ReadInt32(schemas.PutRecordBatchOutput_FailedPutCount, v.FailedPutCount)
+		case schemas.PutRecordBatchOutput_RequestResponses:
+			return deserializePutRecordBatchResponseEntryList(d, schemas.PutRecordBatchOutput_RequestResponses, &v.RequestResponses)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutRecordBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutRecordBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRecordBatch, schemas.PutRecordBatchInput, schemas.PutRecordBatchOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutRecordBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRecordBatch, schemas.PutRecordBatchInput, schemas.PutRecordBatchOutput), output: &PutRecordBatchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

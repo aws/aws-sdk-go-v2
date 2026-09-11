@@ -4,7 +4,9 @@ package secretsmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,22 @@ type ReplicateSecretToRegionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReplicateSecretToRegionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicateSecretToRegionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicateSecretToRegionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAddReplicaRegionListType(s, schemas.ReplicateSecretToRegionsRequest_AddReplicaRegions, v.AddReplicaRegions)
+	if v.ForceOverwriteReplicaSecret != false {
+		s.WriteBool(schemas.ReplicateSecretToRegionsRequest_ForceOverwriteReplicaSecret, v.ForceOverwriteReplicaSecret)
+	}
+	if v.SecretId != nil {
+		s.WriteString(schemas.ReplicateSecretToRegionsRequest_SecretId, *v.SecretId)
+	}
+}
+
 type ReplicateSecretToRegionsOutput struct {
 
 	// The ARN of the primary secret.
@@ -72,13 +90,35 @@ type ReplicateSecretToRegionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReplicateSecretToRegionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicateSecretToRegionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicateSecretToRegionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.ReplicateSecretToRegionsResponse_ARN, *v.ARN)
+	}
+	serializeReplicationStatusListType(s, schemas.ReplicateSecretToRegionsResponse_ReplicationStatus, v.ReplicationStatus)
+}
+func (v *ReplicateSecretToRegionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicateSecretToRegionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicateSecretToRegionsResponse_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.ReplicateSecretToRegionsResponse_ARN, v.ARN)
+		case schemas.ReplicateSecretToRegionsResponse_ReplicationStatus:
+			return deserializeReplicationStatusListType(d, schemas.ReplicateSecretToRegionsResponse_ReplicationStatus, &v.ReplicationStatus)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationReplicateSecretToRegionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpReplicateSecretToRegions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReplicateSecretToRegions, schemas.ReplicateSecretToRegionsRequest, schemas.ReplicateSecretToRegionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpReplicateSecretToRegions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReplicateSecretToRegions, schemas.ReplicateSecretToRegionsRequest, schemas.ReplicateSecretToRegionsResponse), output: &ReplicateSecretToRegionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

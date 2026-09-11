@@ -5,6 +5,8 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type CreateGuardrailVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGuardrailVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGuardrailVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGuardrailVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateGuardrailVersionRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateGuardrailVersionRequest_description, *v.Description)
+	}
+	if v.GuardrailIdentifier != nil {
+		s.WriteString(schemas.CreateGuardrailVersionRequest_guardrailIdentifier, *v.GuardrailIdentifier)
+	}
+}
+
 type CreateGuardrailVersionOutput struct {
 
 	// The unique identifier of the guardrail.
@@ -65,13 +85,38 @@ type CreateGuardrailVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGuardrailVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGuardrailVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGuardrailVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GuardrailId != nil {
+		s.WriteString(schemas.CreateGuardrailVersionResponse_guardrailId, *v.GuardrailId)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.CreateGuardrailVersionResponse_version, *v.Version)
+	}
+}
+func (v *CreateGuardrailVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGuardrailVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGuardrailVersionResponse_guardrailId:
+			v.GuardrailId = new(string)
+			return d.ReadString(schemas.CreateGuardrailVersionResponse_guardrailId, v.GuardrailId)
+		case schemas.CreateGuardrailVersionResponse_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.CreateGuardrailVersionResponse_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGuardrailVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateGuardrailVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGuardrailVersion, schemas.CreateGuardrailVersionRequest, schemas.CreateGuardrailVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateGuardrailVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGuardrailVersion, schemas.CreateGuardrailVersionRequest, schemas.CreateGuardrailVersionResponse), output: &CreateGuardrailVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,28 @@ type UpdateFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFindingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFindingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.UpdateFindingsRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Note != nil {
+		s.WriteStruct(schemas.UpdateFindingsRequest_Note)
+		v.Note.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RecordState != "" {
+		s.WriteString(schemas.UpdateFindingsRequest_RecordState, string(v.RecordState))
+	}
+}
+
 type UpdateFindingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +81,26 @@ type UpdateFindingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFindingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFindingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFindingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFindings, schemas.UpdateFindingsRequest, schemas.UpdateFindingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFindings, schemas.UpdateFindingsRequest, schemas.UpdateFindingsResponse), output: &UpdateFindingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.GetDataSourceRequest_dataSourceId, *v.DataSourceId)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.GetDataSourceRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+}
+
 type GetDataSourceOutput struct {
 
 	// Contains details about the data source.
@@ -52,13 +69,34 @@ type GetDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.GetDataSourceResponse_dataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataSourceResponse_dataSource:
+			v.DataSource = &types.DataSource{}
+			return v.DataSource.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataSource, schemas.GetDataSourceRequest, schemas.GetDataSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataSource, schemas.GetDataSourceRequest, schemas.GetDataSourceResponse), output: &GetDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package secretsmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,18 @@ type CancelRotateSecretInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelRotateSecretInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelRotateSecretRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelRotateSecretInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecretId != nil {
+		s.WriteString(schemas.CancelRotateSecretRequest_SecretId, *v.SecretId)
+	}
+}
+
 type CancelRotateSecretOutput struct {
 
 	// The ARN of the secret.
@@ -82,13 +96,44 @@ type CancelRotateSecretOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelRotateSecretOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelRotateSecretResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelRotateSecretOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.CancelRotateSecretResponse_ARN, *v.ARN)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CancelRotateSecretResponse_Name, *v.Name)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.CancelRotateSecretResponse_VersionId, *v.VersionId)
+	}
+}
+func (v *CancelRotateSecretOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelRotateSecretResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelRotateSecretResponse_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.CancelRotateSecretResponse_ARN, v.ARN)
+		case schemas.CancelRotateSecretResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CancelRotateSecretResponse_Name, v.Name)
+		case schemas.CancelRotateSecretResponse_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.CancelRotateSecretResponse_VersionId, v.VersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelRotateSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelRotateSecret{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelRotateSecret, schemas.CancelRotateSecretRequest, schemas.CancelRotateSecretResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCancelRotateSecret{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelRotateSecret, schemas.CancelRotateSecretRequest, schemas.CancelRotateSecretResponse), output: &CancelRotateSecretOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

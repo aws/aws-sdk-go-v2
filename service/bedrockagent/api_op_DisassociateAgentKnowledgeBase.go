@@ -4,6 +4,8 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type DisassociateAgentKnowledgeBaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateAgentKnowledgeBaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateAgentKnowledgeBaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateAgentKnowledgeBaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.DisassociateAgentKnowledgeBaseRequest_agentId, *v.AgentId)
+	}
+	if v.AgentVersion != nil {
+		s.WriteString(schemas.DisassociateAgentKnowledgeBaseRequest_agentVersion, *v.AgentVersion)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.DisassociateAgentKnowledgeBaseRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+}
+
 type DisassociateAgentKnowledgeBaseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +71,26 @@ type DisassociateAgentKnowledgeBaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateAgentKnowledgeBaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateAgentKnowledgeBaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateAgentKnowledgeBaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateAgentKnowledgeBaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateAgentKnowledgeBaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateAgentKnowledgeBaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateAgentKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAgentKnowledgeBase, schemas.DisassociateAgentKnowledgeBaseRequest, schemas.DisassociateAgentKnowledgeBaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateAgentKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAgentKnowledgeBase, schemas.DisassociateAgentKnowledgeBaseRequest, schemas.DisassociateAgentKnowledgeBaseResponse), output: &DisassociateAgentKnowledgeBaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

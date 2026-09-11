@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type AddBridgeOutputsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddBridgeOutputsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddBridgeOutputsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddBridgeOutputsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BridgeArn != nil {
+		s.WriteString(schemas.AddBridgeOutputsRequest_BridgeArn, *v.BridgeArn)
+	}
+	serialize__listOfAddBridgeOutputRequest(s, schemas.AddBridgeOutputsRequest_Outputs, v.Outputs)
+}
+
 type AddBridgeOutputsOutput struct {
 
 	//  The ARN of the bridge that you added outputs to.
@@ -53,13 +68,35 @@ type AddBridgeOutputsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddBridgeOutputsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddBridgeOutputsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddBridgeOutputsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BridgeArn != nil {
+		s.WriteString(schemas.AddBridgeOutputsResponse_BridgeArn, *v.BridgeArn)
+	}
+	serialize__listOfBridgeOutput(s, schemas.AddBridgeOutputsResponse_Outputs, v.Outputs)
+}
+func (v *AddBridgeOutputsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddBridgeOutputsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddBridgeOutputsResponse_BridgeArn:
+			v.BridgeArn = new(string)
+			return d.ReadString(schemas.AddBridgeOutputsResponse_BridgeArn, v.BridgeArn)
+		case schemas.AddBridgeOutputsResponse_Outputs:
+			return deserialize__listOfBridgeOutput(d, schemas.AddBridgeOutputsResponse_Outputs, &v.Outputs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddBridgeOutputsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddBridgeOutputs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddBridgeOutputs, schemas.AddBridgeOutputsRequest, schemas.AddBridgeOutputsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddBridgeOutputs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddBridgeOutputs, schemas.AddBridgeOutputsRequest, schemas.AddBridgeOutputsResponse), output: &AddBridgeOutputsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

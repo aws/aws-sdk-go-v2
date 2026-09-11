@@ -4,7 +4,9 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -60,6 +62,33 @@ type UpdateFlowAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFlowAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlowAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlowAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasIdentifier != nil {
+		s.WriteString(schemas.UpdateFlowAliasRequest_aliasIdentifier, *v.AliasIdentifier)
+	}
+	if v.ConcurrencyConfiguration != nil {
+		s.WriteStruct(schemas.UpdateFlowAliasRequest_concurrencyConfiguration)
+		v.ConcurrencyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFlowAliasRequest_description, *v.Description)
+	}
+	if v.FlowIdentifier != nil {
+		s.WriteString(schemas.UpdateFlowAliasRequest_flowIdentifier, *v.FlowIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateFlowAliasRequest_name, *v.Name)
+	}
+	serializeFlowAliasRoutingConfiguration(s, schemas.UpdateFlowAliasRequest_routingConfiguration, v.RoutingConfiguration)
+}
+
 type UpdateFlowAliasOutput struct {
 
 	// The Amazon Resource Name (ARN) of the flow.
@@ -109,13 +138,79 @@ type UpdateFlowAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFlowAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlowAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlowAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateFlowAliasResponse_arn, *v.Arn)
+	}
+	if v.ConcurrencyConfiguration != nil {
+		s.WriteStruct(schemas.UpdateFlowAliasResponse_concurrencyConfiguration)
+		v.ConcurrencyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateFlowAliasResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFlowAliasResponse_description, *v.Description)
+	}
+	if v.FlowId != nil {
+		s.WriteString(schemas.UpdateFlowAliasResponse_flowId, *v.FlowId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateFlowAliasResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateFlowAliasResponse_name, *v.Name)
+	}
+	serializeFlowAliasRoutingConfiguration(s, schemas.UpdateFlowAliasResponse_routingConfiguration, v.RoutingConfiguration)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdateFlowAliasResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *UpdateFlowAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFlowAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFlowAliasResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateFlowAliasResponse_arn, v.Arn)
+		case schemas.UpdateFlowAliasResponse_concurrencyConfiguration:
+			v.ConcurrencyConfiguration = &types.FlowAliasConcurrencyConfiguration{}
+			return v.ConcurrencyConfiguration.Deserialize(d)
+		case schemas.UpdateFlowAliasResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateFlowAliasResponse_createdAt, v.CreatedAt)
+		case schemas.UpdateFlowAliasResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateFlowAliasResponse_description, v.Description)
+		case schemas.UpdateFlowAliasResponse_flowId:
+			v.FlowId = new(string)
+			return d.ReadString(schemas.UpdateFlowAliasResponse_flowId, v.FlowId)
+		case schemas.UpdateFlowAliasResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateFlowAliasResponse_id, v.Id)
+		case schemas.UpdateFlowAliasResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateFlowAliasResponse_name, v.Name)
+		case schemas.UpdateFlowAliasResponse_routingConfiguration:
+			return deserializeFlowAliasRoutingConfiguration(d, schemas.UpdateFlowAliasResponse_routingConfiguration, &v.RoutingConfiguration)
+		case schemas.UpdateFlowAliasResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateFlowAliasResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFlowAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFlowAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlowAlias, schemas.UpdateFlowAliasRequest, schemas.UpdateFlowAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFlowAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlowAlias, schemas.UpdateFlowAliasRequest, schemas.UpdateFlowAliasResponse), output: &UpdateFlowAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

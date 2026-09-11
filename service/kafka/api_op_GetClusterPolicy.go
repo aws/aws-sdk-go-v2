@@ -4,6 +4,8 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetClusterPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetClusterPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetClusterPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetClusterPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.GetClusterPolicyRequest_ClusterArn, *v.ClusterArn)
+	}
+}
+
 type GetClusterPolicyOutput struct {
 
 	// The version of cluster policy.
@@ -48,13 +62,38 @@ type GetClusterPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetClusterPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetClusterPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetClusterPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentVersion != nil {
+		s.WriteString(schemas.GetClusterPolicyResponse_CurrentVersion, *v.CurrentVersion)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.GetClusterPolicyResponse_Policy, *v.Policy)
+	}
+}
+func (v *GetClusterPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetClusterPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetClusterPolicyResponse_CurrentVersion:
+			v.CurrentVersion = new(string)
+			return d.ReadString(schemas.GetClusterPolicyResponse_CurrentVersion, v.CurrentVersion)
+		case schemas.GetClusterPolicyResponse_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.GetClusterPolicyResponse_Policy, v.Policy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetClusterPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetClusterPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetClusterPolicy, schemas.GetClusterPolicyRequest, schemas.GetClusterPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetClusterPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetClusterPolicy, schemas.GetClusterPolicyRequest, schemas.GetClusterPolicyResponse), output: &GetClusterPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

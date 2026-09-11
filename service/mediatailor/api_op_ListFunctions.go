@@ -5,7 +5,9 @@ package mediatailor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,21 @@ type ListFunctionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFunctionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFunctionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFunctionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFunctionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFunctionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListFunctionsOutput struct {
 
 	// A list of functions associated with your account in the current Region.
@@ -75,13 +92,35 @@ type ListFunctionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFunctionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFunctionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFunctionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfFunctionsResponse(s, schemas.ListFunctionsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFunctionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFunctionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFunctionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFunctionsResponse_Items:
+			return deserialize__listOfFunctionsResponse(d, schemas.ListFunctionsResponse_Items, &v.Items)
+		case schemas.ListFunctionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFunctionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFunctionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFunctions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFunctions, schemas.ListFunctionsRequest, schemas.ListFunctionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFunctions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFunctions, schemas.ListFunctionsRequest, schemas.ListFunctionsResponse), output: &ListFunctionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

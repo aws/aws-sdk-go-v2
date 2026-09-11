@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,29 @@ type CreateClusterV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.CreateClusterV2Request_ClusterName, *v.ClusterName)
+	}
+	if v.Provisioned != nil {
+		s.WriteStruct(schemas.CreateClusterV2Request_Provisioned)
+		v.Provisioned.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Serverless != nil {
+		s.WriteStruct(schemas.CreateClusterV2Request_Serverless)
+		v.Serverless.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__mapOf__string(s, schemas.CreateClusterV2Request_Tags, v.Tags)
+}
+
 type CreateClusterV2Output struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.
@@ -64,13 +89,58 @@ type CreateClusterV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.CreateClusterV2Response_ClusterArn, *v.ClusterArn)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.CreateClusterV2Response_ClusterName, *v.ClusterName)
+	}
+	if v.ClusterType != "" {
+		s.WriteString(schemas.CreateClusterV2Response_ClusterType, string(v.ClusterType))
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CreateClusterV2Response_State, string(v.State))
+	}
+}
+func (v *CreateClusterV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateClusterV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateClusterV2Response_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.CreateClusterV2Response_ClusterArn, v.ClusterArn)
+		case schemas.CreateClusterV2Response_ClusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.CreateClusterV2Response_ClusterName, v.ClusterName)
+		case schemas.CreateClusterV2Response_ClusterType:
+			var ev string
+			if err := d.ReadString(schemas.CreateClusterV2Response_ClusterType, &ev); err != nil {
+				return err
+			}
+			v.ClusterType = types.ClusterType(ev)
+			return nil
+		case schemas.CreateClusterV2Response_State:
+			var ev string
+			if err := d.ReadString(schemas.CreateClusterV2Response_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ClusterState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateClusterV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateClusterV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateClusterV2, schemas.CreateClusterV2Request, schemas.CreateClusterV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateClusterV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateClusterV2, schemas.CreateClusterV2Request, schemas.CreateClusterV2Response), output: &CreateClusterV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

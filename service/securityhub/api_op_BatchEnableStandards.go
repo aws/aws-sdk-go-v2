@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,16 @@ type BatchEnableStandardsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchEnableStandardsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchEnableStandardsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchEnableStandardsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStandardsSubscriptionRequests(s, schemas.BatchEnableStandardsRequest_StandardsSubscriptionRequests, v.StandardsSubscriptionRequests)
+}
+
 type BatchEnableStandardsOutput struct {
 
 	// The details of the standards subscriptions that were enabled.
@@ -50,13 +62,29 @@ type BatchEnableStandardsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchEnableStandardsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchEnableStandardsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchEnableStandardsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStandardsSubscriptions(s, schemas.BatchEnableStandardsResponse_StandardsSubscriptions, v.StandardsSubscriptions)
+}
+func (v *BatchEnableStandardsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchEnableStandardsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchEnableStandardsResponse_StandardsSubscriptions:
+			return deserializeStandardsSubscriptions(d, schemas.BatchEnableStandardsResponse_StandardsSubscriptions, &v.StandardsSubscriptions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchEnableStandardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchEnableStandards{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchEnableStandards, schemas.BatchEnableStandardsRequest, schemas.BatchEnableStandardsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchEnableStandards{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchEnableStandards, schemas.BatchEnableStandardsRequest, schemas.BatchEnableStandardsResponse), output: &BatchEnableStandardsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

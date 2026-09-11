@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,26 @@ type CreateInferenceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInferenceProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInferenceProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInferenceProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateInferenceProfileRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateInferenceProfileRequest_description, *v.Description)
+	}
+	if v.InferenceProfileName != nil {
+		s.WriteString(schemas.CreateInferenceProfileRequest_inferenceProfileName, *v.InferenceProfileName)
+	}
+	serializeInferenceProfileModelSource(s, schemas.CreateInferenceProfileRequest_modelSource, v.ModelSource)
+	serializeTagList(s, schemas.CreateInferenceProfileRequest_tags, v.Tags)
+}
+
 type CreateInferenceProfileOutput struct {
 
 	// The ARN of the inference profile that you created.
@@ -83,13 +105,42 @@ type CreateInferenceProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInferenceProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInferenceProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInferenceProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InferenceProfileArn != nil {
+		s.WriteString(schemas.CreateInferenceProfileResponse_inferenceProfileArn, *v.InferenceProfileArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateInferenceProfileResponse_status, string(v.Status))
+	}
+}
+func (v *CreateInferenceProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateInferenceProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateInferenceProfileResponse_inferenceProfileArn:
+			v.InferenceProfileArn = new(string)
+			return d.ReadString(schemas.CreateInferenceProfileResponse_inferenceProfileArn, v.InferenceProfileArn)
+		case schemas.CreateInferenceProfileResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateInferenceProfileResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.InferenceProfileStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateInferenceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateInferenceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInferenceProfile, schemas.CreateInferenceProfileRequest, schemas.CreateInferenceProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateInferenceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInferenceProfile, schemas.CreateInferenceProfileRequest, schemas.CreateInferenceProfileResponse), output: &CreateInferenceProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

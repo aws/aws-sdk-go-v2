@@ -4,6 +4,8 @@ package elasticsearchservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type PurchaseReservedElasticsearchInstanceOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PurchaseReservedElasticsearchInstanceOfferingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurchaseReservedElasticsearchInstanceOfferingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurchaseReservedElasticsearchInstanceOfferingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceCount != nil {
+		s.WriteInt32(schemas.PurchaseReservedElasticsearchInstanceOfferingRequest_InstanceCount, *v.InstanceCount)
+	}
+	if v.ReservationName != nil {
+		s.WriteString(schemas.PurchaseReservedElasticsearchInstanceOfferingRequest_ReservationName, *v.ReservationName)
+	}
+	if v.ReservedElasticsearchInstanceOfferingId != nil {
+		s.WriteString(schemas.PurchaseReservedElasticsearchInstanceOfferingRequest_ReservedElasticsearchInstanceOfferingId, *v.ReservedElasticsearchInstanceOfferingId)
+	}
+}
+
 // Represents the output of a PurchaseReservedElasticsearchInstanceOffering
 // operation.
 type PurchaseReservedElasticsearchInstanceOfferingOutput struct {
@@ -58,13 +78,38 @@ type PurchaseReservedElasticsearchInstanceOfferingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PurchaseReservedElasticsearchInstanceOfferingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurchaseReservedElasticsearchInstanceOfferingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurchaseReservedElasticsearchInstanceOfferingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReservationName != nil {
+		s.WriteString(schemas.PurchaseReservedElasticsearchInstanceOfferingResponse_ReservationName, *v.ReservationName)
+	}
+	if v.ReservedElasticsearchInstanceId != nil {
+		s.WriteString(schemas.PurchaseReservedElasticsearchInstanceOfferingResponse_ReservedElasticsearchInstanceId, *v.ReservedElasticsearchInstanceId)
+	}
+}
+func (v *PurchaseReservedElasticsearchInstanceOfferingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PurchaseReservedElasticsearchInstanceOfferingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PurchaseReservedElasticsearchInstanceOfferingResponse_ReservationName:
+			v.ReservationName = new(string)
+			return d.ReadString(schemas.PurchaseReservedElasticsearchInstanceOfferingResponse_ReservationName, v.ReservationName)
+		case schemas.PurchaseReservedElasticsearchInstanceOfferingResponse_ReservedElasticsearchInstanceId:
+			v.ReservedElasticsearchInstanceId = new(string)
+			return d.ReadString(schemas.PurchaseReservedElasticsearchInstanceOfferingResponse_ReservedElasticsearchInstanceId, v.ReservedElasticsearchInstanceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPurchaseReservedElasticsearchInstanceOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPurchaseReservedElasticsearchInstanceOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PurchaseReservedElasticsearchInstanceOffering, schemas.PurchaseReservedElasticsearchInstanceOfferingRequest, schemas.PurchaseReservedElasticsearchInstanceOfferingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPurchaseReservedElasticsearchInstanceOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PurchaseReservedElasticsearchInstanceOffering, schemas.PurchaseReservedElasticsearchInstanceOfferingRequest, schemas.PurchaseReservedElasticsearchInstanceOfferingResponse), output: &PurchaseReservedElasticsearchInstanceOfferingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

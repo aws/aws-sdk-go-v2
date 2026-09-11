@@ -5,7 +5,9 @@ package costexplorer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,37 @@ type GetAnomaliesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAnomaliesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnomaliesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnomaliesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateInterval != nil {
+		s.WriteStruct(schemas.GetAnomaliesRequest_DateInterval)
+		v.DateInterval.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Feedback != "" {
+		s.WriteString(schemas.GetAnomaliesRequest_Feedback, string(v.Feedback))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetAnomaliesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MonitorArn != nil {
+		s.WriteString(schemas.GetAnomaliesRequest_MonitorArn, *v.MonitorArn)
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetAnomaliesRequest_NextPageToken, *v.NextPageToken)
+	}
+	if v.TotalImpact != nil {
+		s.WriteStruct(schemas.GetAnomaliesRequest_TotalImpact)
+		v.TotalImpact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetAnomaliesOutput struct {
 
 	// A list of cost anomalies.
@@ -76,13 +109,35 @@ type GetAnomaliesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAnomaliesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnomaliesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnomaliesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnomalies(s, schemas.GetAnomaliesResponse_Anomalies, v.Anomalies)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetAnomaliesResponse_NextPageToken, *v.NextPageToken)
+	}
+}
+func (v *GetAnomaliesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAnomaliesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAnomaliesResponse_Anomalies:
+			return deserializeAnomalies(d, schemas.GetAnomaliesResponse_Anomalies, &v.Anomalies)
+		case schemas.GetAnomaliesResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetAnomaliesResponse_NextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAnomaliesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAnomalies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnomalies, schemas.GetAnomaliesRequest, schemas.GetAnomaliesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAnomalies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnomalies, schemas.GetAnomaliesRequest, schemas.GetAnomaliesResponse), output: &GetAnomaliesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

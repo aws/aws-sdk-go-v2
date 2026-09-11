@@ -4,6 +4,8 @@ package resiliencehubv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteServiceFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceFunctionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceFunctionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.DeleteServiceFunctionRequest_serviceArn, *v.ServiceArn)
+	}
+	if v.ServiceFunctionId != nil {
+		s.WriteString(schemas.DeleteServiceFunctionRequest_serviceFunctionId, *v.ServiceFunctionId)
+	}
+}
+
 type DeleteServiceFunctionOutput struct {
 
 	// The identifier of the deleted service function.
@@ -49,13 +66,32 @@ type DeleteServiceFunctionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceFunctionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceFunctionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceFunctionId != nil {
+		s.WriteString(schemas.DeleteServiceFunctionResponse_serviceFunctionId, *v.ServiceFunctionId)
+	}
+}
+func (v *DeleteServiceFunctionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteServiceFunctionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteServiceFunctionResponse_serviceFunctionId:
+			v.ServiceFunctionId = new(string)
+			return d.ReadString(schemas.DeleteServiceFunctionResponse_serviceFunctionId, v.ServiceFunctionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteServiceFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteServiceFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceFunction, schemas.DeleteServiceFunctionRequest, schemas.DeleteServiceFunctionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteServiceFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceFunction, schemas.DeleteServiceFunctionRequest, schemas.DeleteServiceFunctionResponse), output: &DeleteServiceFunctionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,31 @@ type UpdateAgentAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAgentAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAgentAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAgentAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentAliasId != nil {
+		s.WriteString(schemas.UpdateAgentAliasRequest_agentAliasId, *v.AgentAliasId)
+	}
+	if v.AgentAliasName != nil {
+		s.WriteString(schemas.UpdateAgentAliasRequest_agentAliasName, *v.AgentAliasName)
+	}
+	if v.AgentId != nil {
+		s.WriteString(schemas.UpdateAgentAliasRequest_agentId, *v.AgentId)
+	}
+	if v.AliasInvocationState != "" {
+		s.WriteString(schemas.UpdateAgentAliasRequest_aliasInvocationState, string(v.AliasInvocationState))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAgentAliasRequest_description, *v.Description)
+	}
+	serializeAgentAliasRoutingConfiguration(s, schemas.UpdateAgentAliasRequest_routingConfiguration, v.RoutingConfiguration)
+}
+
 type UpdateAgentAliasOutput struct {
 
 	// Contains details about the alias that was updated.
@@ -69,13 +96,34 @@ type UpdateAgentAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAgentAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAgentAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAgentAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentAlias != nil {
+		s.WriteStruct(schemas.UpdateAgentAliasResponse_agentAlias)
+		v.AgentAlias.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAgentAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAgentAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAgentAliasResponse_agentAlias:
+			v.AgentAlias = &types.AgentAlias{}
+			return v.AgentAlias.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAgentAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAgentAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgentAlias, schemas.UpdateAgentAliasRequest, schemas.UpdateAgentAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAgentAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgentAlias, schemas.UpdateAgentAliasRequest, schemas.UpdateAgentAliasResponse), output: &UpdateAgentAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

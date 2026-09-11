@@ -4,7 +4,9 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetSchemaCreationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSchemaCreationStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSchemaCreationStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSchemaCreationStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.GetSchemaCreationStatusRequest_apiId, *v.ApiId)
+	}
+}
+
 type GetSchemaCreationStatusOutput struct {
 
 	// Detailed information about the status of the schema creation operation.
@@ -49,13 +63,42 @@ type GetSchemaCreationStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSchemaCreationStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSchemaCreationStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSchemaCreationStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Details != nil {
+		s.WriteString(schemas.GetSchemaCreationStatusResponse_details, *v.Details)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetSchemaCreationStatusResponse_status, string(v.Status))
+	}
+}
+func (v *GetSchemaCreationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSchemaCreationStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSchemaCreationStatusResponse_details:
+			v.Details = new(string)
+			return d.ReadString(schemas.GetSchemaCreationStatusResponse_details, v.Details)
+		case schemas.GetSchemaCreationStatusResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetSchemaCreationStatusResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SchemaStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSchemaCreationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSchemaCreationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSchemaCreationStatus, schemas.GetSchemaCreationStatusRequest, schemas.GetSchemaCreationStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSchemaCreationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSchemaCreationStatus, schemas.GetSchemaCreationStatusRequest, schemas.GetSchemaCreationStatusResponse), output: &GetSchemaCreationStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

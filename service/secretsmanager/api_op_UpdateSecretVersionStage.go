@@ -4,6 +4,8 @@ package secretsmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -88,6 +90,27 @@ type UpdateSecretVersionStageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSecretVersionStageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSecretVersionStageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSecretVersionStageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MoveToVersionId != nil {
+		s.WriteString(schemas.UpdateSecretVersionStageRequest_MoveToVersionId, *v.MoveToVersionId)
+	}
+	if v.RemoveFromVersionId != nil {
+		s.WriteString(schemas.UpdateSecretVersionStageRequest_RemoveFromVersionId, *v.RemoveFromVersionId)
+	}
+	if v.SecretId != nil {
+		s.WriteString(schemas.UpdateSecretVersionStageRequest_SecretId, *v.SecretId)
+	}
+	if v.VersionStage != nil {
+		s.WriteString(schemas.UpdateSecretVersionStageRequest_VersionStage, *v.VersionStage)
+	}
+}
+
 type UpdateSecretVersionStageOutput struct {
 
 	// The ARN of the secret that was updated.
@@ -102,13 +125,38 @@ type UpdateSecretVersionStageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSecretVersionStageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSecretVersionStageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSecretVersionStageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.UpdateSecretVersionStageResponse_ARN, *v.ARN)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateSecretVersionStageResponse_Name, *v.Name)
+	}
+}
+func (v *UpdateSecretVersionStageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSecretVersionStageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSecretVersionStageResponse_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.UpdateSecretVersionStageResponse_ARN, v.ARN)
+		case schemas.UpdateSecretVersionStageResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateSecretVersionStageResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSecretVersionStageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSecretVersionStage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSecretVersionStage, schemas.UpdateSecretVersionStageRequest, schemas.UpdateSecretVersionStageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateSecretVersionStage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSecretVersionStage, schemas.UpdateSecretVersionStageRequest, schemas.UpdateSecretVersionStageResponse), output: &UpdateSecretVersionStageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package resiliencehub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,28 @@ type DescribeResiliencyPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeResiliencyPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeResiliencyPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeResiliencyPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.DescribeResiliencyPolicyRequest_policyArn, *v.PolicyArn)
+	}
+}
+func (v *DescribeResiliencyPolicyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeResiliencyPolicyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeResiliencyPolicyRequest_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.DescribeResiliencyPolicyRequest_policyArn, v.PolicyArn)
+		}
+		return nil
+	})
+}
+
 type DescribeResiliencyPolicyOutput struct {
 
 	// Information about the specific resiliency policy, returned as an object. This
@@ -57,13 +81,34 @@ type DescribeResiliencyPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeResiliencyPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeResiliencyPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeResiliencyPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteStruct(schemas.DescribeResiliencyPolicyResponse_policy)
+		v.Policy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeResiliencyPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeResiliencyPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeResiliencyPolicyResponse_policy:
+			v.Policy = &types.ResiliencyPolicy{}
+			return v.Policy.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeResiliencyPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeResiliencyPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeResiliencyPolicy, schemas.DescribeResiliencyPolicyRequest, schemas.DescribeResiliencyPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeResiliencyPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeResiliencyPolicy, schemas.DescribeResiliencyPolicyRequest, schemas.DescribeResiliencyPolicyResponse), output: &DescribeResiliencyPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

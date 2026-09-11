@@ -4,7 +4,9 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type GetIntrospectionSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIntrospectionSchemaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIntrospectionSchemaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIntrospectionSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.GetIntrospectionSchemaRequest_apiId, *v.ApiId)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.GetIntrospectionSchemaRequest_format, string(v.Format))
+	}
+	if v.IncludeDirectives != nil {
+		s.WriteBool(schemas.GetIntrospectionSchemaRequest_includeDirectives, *v.IncludeDirectives)
+	}
+}
+
 type GetIntrospectionSchemaOutput struct {
 
 	// The schema, in GraphQL Schema Definition Language (SDL) format.
@@ -58,13 +78,31 @@ type GetIntrospectionSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIntrospectionSchemaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIntrospectionSchemaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIntrospectionSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Schema != nil {
+		s.WriteBlob(schemas.GetIntrospectionSchemaResponse_schema, v.Schema)
+	}
+}
+func (v *GetIntrospectionSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIntrospectionSchemaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIntrospectionSchemaResponse_schema:
+			return d.ReadBlob(schemas.GetIntrospectionSchemaResponse_schema, &v.Schema)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIntrospectionSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIntrospectionSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntrospectionSchema, schemas.GetIntrospectionSchemaRequest, schemas.GetIntrospectionSchemaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIntrospectionSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntrospectionSchema, schemas.GetIntrospectionSchemaRequest, schemas.GetIntrospectionSchemaResponse), output: &GetIntrospectionSchemaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

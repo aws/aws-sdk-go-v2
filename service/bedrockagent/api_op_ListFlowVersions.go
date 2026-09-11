@@ -5,7 +5,9 @@ package bedrockagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type ListFlowVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFlowVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFlowVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFlowVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowIdentifier != nil {
+		s.WriteString(schemas.ListFlowVersionsRequest_flowIdentifier, *v.FlowIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFlowVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFlowVersionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListFlowVersionsOutput struct {
 
 	// A list, each member of which contains information about a flow.
@@ -67,13 +87,35 @@ type ListFlowVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFlowVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFlowVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFlowVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFlowVersionSummaries(s, schemas.ListFlowVersionsResponse_flowVersionSummaries, v.FlowVersionSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFlowVersionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListFlowVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFlowVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFlowVersionsResponse_flowVersionSummaries:
+			return deserializeFlowVersionSummaries(d, schemas.ListFlowVersionsResponse_flowVersionSummaries, &v.FlowVersionSummaries)
+		case schemas.ListFlowVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFlowVersionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFlowVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFlowVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFlowVersions, schemas.ListFlowVersionsRequest, schemas.ListFlowVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFlowVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFlowVersions, schemas.ListFlowVersionsRequest, schemas.ListFlowVersionsResponse), output: &ListFlowVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

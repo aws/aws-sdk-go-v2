@@ -4,7 +4,9 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,21 @@ type RegisterAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DelegatedAdminAccount != nil {
+		s.WriteString(schemas.RegisterAccountRequest_delegatedAdminAccount, *v.DelegatedAdminAccount)
+	}
+	if v.KmsKey != nil {
+		s.WriteString(schemas.RegisterAccountRequest_kmsKey, *v.KmsKey)
+	}
+}
+
 type RegisterAccountOutput struct {
 
 	//  The status of the account registration request.
@@ -46,13 +63,36 @@ type RegisterAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.RegisterAccountResponse_status, string(v.Status))
+	}
+}
+func (v *RegisterAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterAccountResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.RegisterAccountResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AccountStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterAccount, schemas.RegisterAccountRequest, schemas.RegisterAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterAccount, schemas.RegisterAccountRequest, schemas.RegisterAccountResponse), output: &RegisterAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

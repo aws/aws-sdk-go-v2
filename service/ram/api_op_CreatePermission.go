@@ -4,7 +4,9 @@ package ram
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -94,6 +96,28 @@ type CreatePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePermissionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePermissionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreatePermissionRequest_clientToken, *v.ClientToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreatePermissionRequest_name, *v.Name)
+	}
+	if v.PolicyTemplate != nil {
+		s.WriteString(schemas.CreatePermissionRequest_policyTemplate, *v.PolicyTemplate)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.CreatePermissionRequest_resourceType, *v.ResourceType)
+	}
+	serializeTagList(s, schemas.CreatePermissionRequest_tags, v.Tags)
+}
+
 type CreatePermissionOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat
@@ -111,13 +135,40 @@ type CreatePermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePermissionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePermissionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreatePermissionResponse_clientToken, *v.ClientToken)
+	}
+	if v.Permission != nil {
+		s.WriteStruct(schemas.CreatePermissionResponse_permission)
+		v.Permission.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreatePermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePermissionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePermissionResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreatePermissionResponse_clientToken, v.ClientToken)
+		case schemas.CreatePermissionResponse_permission:
+			v.Permission = &types.ResourceSharePermissionSummary{}
+			return v.Permission.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePermission, schemas.CreatePermissionRequest, schemas.CreatePermissionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePermission, schemas.CreatePermissionRequest, schemas.CreatePermissionResponse), output: &CreatePermissionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package ram
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,27 @@ type ListPendingInvitationResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPendingInvitationResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPendingInvitationResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPendingInvitationResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPendingInvitationResourcesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPendingInvitationResourcesRequest_nextToken, *v.NextToken)
+	}
+	if v.ResourceRegionScope != "" {
+		s.WriteString(schemas.ListPendingInvitationResourcesRequest_resourceRegionScope, string(v.ResourceRegionScope))
+	}
+	if v.ResourceShareInvitationArn != nil {
+		s.WriteString(schemas.ListPendingInvitationResourcesRequest_resourceShareInvitationArn, *v.ResourceShareInvitationArn)
+	}
+}
+
 type ListPendingInvitationResourcesOutput struct {
 
 	// If present, this value indicates that more output is available than is included
@@ -94,13 +117,35 @@ type ListPendingInvitationResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPendingInvitationResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPendingInvitationResourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPendingInvitationResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPendingInvitationResourcesResponse_nextToken, *v.NextToken)
+	}
+	serializeResourceList(s, schemas.ListPendingInvitationResourcesResponse_resources, v.Resources)
+}
+func (v *ListPendingInvitationResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPendingInvitationResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPendingInvitationResourcesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPendingInvitationResourcesResponse_nextToken, v.NextToken)
+		case schemas.ListPendingInvitationResourcesResponse_resources:
+			return deserializeResourceList(d, schemas.ListPendingInvitationResourcesResponse_resources, &v.Resources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPendingInvitationResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPendingInvitationResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPendingInvitationResources, schemas.ListPendingInvitationResourcesRequest, schemas.ListPendingInvitationResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPendingInvitationResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPendingInvitationResources, schemas.ListPendingInvitationResourcesRequest, schemas.ListPendingInvitationResourcesResponse), output: &ListPendingInvitationResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

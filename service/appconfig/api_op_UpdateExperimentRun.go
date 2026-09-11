@@ -4,7 +4,9 @@ package appconfig
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -61,6 +63,36 @@ type UpdateExperimentRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExperimentRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExperimentRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExperimentRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationIdentifier != nil {
+		s.WriteString(schemas.UpdateExperimentRunRequest_ApplicationIdentifier, *v.ApplicationIdentifier)
+	}
+	if v.DeploymentParameters != nil {
+		s.WriteStruct(schemas.UpdateExperimentRunRequest_DeploymentParameters)
+		v.DeploymentParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateExperimentRunRequest_Description, *v.Description)
+	}
+	if v.ExperimentDefinitionIdentifier != nil {
+		s.WriteString(schemas.UpdateExperimentRunRequest_ExperimentDefinitionIdentifier, *v.ExperimentDefinitionIdentifier)
+	}
+	if v.ExposurePercentage != nil {
+		s.WriteFloat32(schemas.UpdateExperimentRunRequest_ExposurePercentage, *v.ExposurePercentage)
+	}
+	if v.Run != nil {
+		s.WriteInt32(schemas.UpdateExperimentRunRequest_Run, *v.Run)
+	}
+	serializeTreatmentOverrides(s, schemas.UpdateExperimentRunRequest_TreatmentOverrides, v.TreatmentOverrides)
+}
+
 // Describes an experiment run, including its status, exposure settings, and
 // treatment overrides.
 type UpdateExperimentRunOutput struct {
@@ -108,13 +140,102 @@ type UpdateExperimentRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExperimentRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentRun)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExperimentRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ExperimentRun_ApplicationId, *v.ApplicationId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ExperimentRun_Description, *v.Description)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.ExperimentRun_EndedAt, *v.EndedAt)
+	}
+	if v.ExperimentDefinitionId != nil {
+		s.WriteString(schemas.ExperimentRun_ExperimentDefinitionId, *v.ExperimentDefinitionId)
+	}
+	if v.ExperimentDefinitionSnapshot != nil {
+		s.WriteStruct(schemas.ExperimentRun_ExperimentDefinitionSnapshot)
+		v.ExperimentDefinitionSnapshot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExposurePercentage != nil {
+		s.WriteFloat32(schemas.ExperimentRun_ExposurePercentage, *v.ExposurePercentage)
+	}
+	if v.Result != nil {
+		s.WriteStruct(schemas.ExperimentRun_Result)
+		v.Result.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Run != 0 {
+		s.WriteInt32(schemas.ExperimentRun_Run, v.Run)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.ExperimentRun_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ExperimentRun_Status, string(v.Status))
+	}
+	serializeTreatmentOverrides(s, schemas.ExperimentRun_TreatmentOverrides, v.TreatmentOverrides)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.ExperimentRun_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *UpdateExperimentRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentRun, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentRun_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.ExperimentRun_ApplicationId, v.ApplicationId)
+		case schemas.ExperimentRun_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ExperimentRun_Description, v.Description)
+		case schemas.ExperimentRun_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.ExperimentRun_EndedAt, v.EndedAt)
+		case schemas.ExperimentRun_ExperimentDefinitionId:
+			v.ExperimentDefinitionId = new(string)
+			return d.ReadString(schemas.ExperimentRun_ExperimentDefinitionId, v.ExperimentDefinitionId)
+		case schemas.ExperimentRun_ExperimentDefinitionSnapshot:
+			v.ExperimentDefinitionSnapshot = &types.ExperimentDefinitionSnapshot{}
+			return v.ExperimentDefinitionSnapshot.Deserialize(d)
+		case schemas.ExperimentRun_ExposurePercentage:
+			v.ExposurePercentage = new(float32)
+			return d.ReadFloat32(schemas.ExperimentRun_ExposurePercentage, v.ExposurePercentage)
+		case schemas.ExperimentRun_Result:
+			v.Result = &types.ExperimentRunResult{}
+			return v.Result.Deserialize(d)
+		case schemas.ExperimentRun_Run:
+			return d.ReadInt32(schemas.ExperimentRun_Run, &v.Run)
+		case schemas.ExperimentRun_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.ExperimentRun_StartedAt, v.StartedAt)
+		case schemas.ExperimentRun_Status:
+			var ev string
+			if err := d.ReadString(schemas.ExperimentRun_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ExperimentRunStatus(ev)
+			return nil
+		case schemas.ExperimentRun_TreatmentOverrides:
+			return deserializeTreatmentOverrides(d, schemas.ExperimentRun_TreatmentOverrides, &v.TreatmentOverrides)
+		case schemas.ExperimentRun_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ExperimentRun_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateExperimentRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateExperimentRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExperimentRun, schemas.UpdateExperimentRunRequest, schemas.ExperimentRun)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateExperimentRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExperimentRun, schemas.UpdateExperimentRunRequest, schemas.ExperimentRun), output: &UpdateExperimentRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

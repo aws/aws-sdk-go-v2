@@ -5,7 +5,9 @@ package appsync
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,30 @@ type ListTypesByAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTypesByAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTypesByAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTypesByAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.ListTypesByAssociationRequest_associationId, *v.AssociationId)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.ListTypesByAssociationRequest_format, string(v.Format))
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListTypesByAssociationRequest_maxResults, v.MaxResults)
+	}
+	if v.MergedApiIdentifier != nil {
+		s.WriteString(schemas.ListTypesByAssociationRequest_mergedApiIdentifier, *v.MergedApiIdentifier)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTypesByAssociationRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListTypesByAssociationOutput struct {
 
 	// An identifier that was returned from the previous call to this operation, which
@@ -71,13 +97,35 @@ type ListTypesByAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTypesByAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTypesByAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTypesByAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTypesByAssociationResponse_nextToken, *v.NextToken)
+	}
+	serializeTypeList(s, schemas.ListTypesByAssociationResponse_types, v.Types)
+}
+func (v *ListTypesByAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTypesByAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTypesByAssociationResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTypesByAssociationResponse_nextToken, v.NextToken)
+		case schemas.ListTypesByAssociationResponse_types:
+			return deserializeTypeList(d, schemas.ListTypesByAssociationResponse_types, &v.Types)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTypesByAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTypesByAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTypesByAssociation, schemas.ListTypesByAssociationRequest, schemas.ListTypesByAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTypesByAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTypesByAssociation, schemas.ListTypesByAssociationRequest, schemas.ListTypesByAssociationResponse), output: &ListTypesByAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

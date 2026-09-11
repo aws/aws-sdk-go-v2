@@ -5,7 +5,9 @@ package mediaconnect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,21 @@ type ListEntitlementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntitlementsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntitlementsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntitlementsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEntitlementsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntitlementsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListEntitlementsOutput struct {
 
 	// A list of entitlements that have been granted to you from other Amazon Web
@@ -72,13 +89,35 @@ type ListEntitlementsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntitlementsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntitlementsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntitlementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfListedEntitlement(s, schemas.ListEntitlementsResponse_Entitlements, v.Entitlements)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntitlementsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEntitlementsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEntitlementsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEntitlementsResponse_Entitlements:
+			return deserialize__listOfListedEntitlement(d, schemas.ListEntitlementsResponse_Entitlements, &v.Entitlements)
+		case schemas.ListEntitlementsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEntitlementsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEntitlementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEntitlements{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntitlements, schemas.ListEntitlementsRequest, schemas.ListEntitlementsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEntitlements{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntitlements, schemas.ListEntitlementsRequest, schemas.ListEntitlementsResponse), output: &ListEntitlementsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

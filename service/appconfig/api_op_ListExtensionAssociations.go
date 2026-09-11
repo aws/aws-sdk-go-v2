@@ -5,7 +5,9 @@ package appconfig
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,30 @@ type ListExtensionAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExtensionAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExtensionAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExtensionAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExtensionIdentifier != nil {
+		s.WriteString(schemas.ListExtensionAssociationsRequest_ExtensionIdentifier, *v.ExtensionIdentifier)
+	}
+	if v.ExtensionVersionNumber != nil {
+		s.WriteInt32(schemas.ListExtensionAssociationsRequest_ExtensionVersionNumber, *v.ExtensionVersionNumber)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListExtensionAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExtensionAssociationsRequest_NextToken, *v.NextToken)
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.ListExtensionAssociationsRequest_ResourceIdentifier, *v.ResourceIdentifier)
+	}
+}
+
 type ListExtensionAssociationsOutput struct {
 
 	// The list of extension associations. Each item represents an extension
@@ -66,13 +92,35 @@ type ListExtensionAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExtensionAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtensionAssociations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExtensionAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExtensionAssociationSummaries(s, schemas.ExtensionAssociations_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ExtensionAssociations_NextToken, *v.NextToken)
+	}
+}
+func (v *ListExtensionAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtensionAssociations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtensionAssociations_Items:
+			return deserializeExtensionAssociationSummaries(d, schemas.ExtensionAssociations_Items, &v.Items)
+		case schemas.ExtensionAssociations_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ExtensionAssociations_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListExtensionAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListExtensionAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExtensionAssociations, schemas.ListExtensionAssociationsRequest, schemas.ExtensionAssociations)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListExtensionAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExtensionAssociations, schemas.ListExtensionAssociationsRequest, schemas.ExtensionAssociations), output: &ListExtensionAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

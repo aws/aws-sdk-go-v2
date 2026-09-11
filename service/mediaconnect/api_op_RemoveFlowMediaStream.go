@@ -4,6 +4,8 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type RemoveFlowMediaStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveFlowMediaStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveFlowMediaStreamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveFlowMediaStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.RemoveFlowMediaStreamRequest_FlowArn, *v.FlowArn)
+	}
+	if v.MediaStreamName != nil {
+		s.WriteString(schemas.RemoveFlowMediaStreamRequest_MediaStreamName, *v.MediaStreamName)
+	}
+}
+
 type RemoveFlowMediaStreamOutput struct {
 
 	//  The ARN of the flow that was updated.
@@ -54,13 +71,38 @@ type RemoveFlowMediaStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveFlowMediaStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveFlowMediaStreamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveFlowMediaStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.RemoveFlowMediaStreamResponse_FlowArn, *v.FlowArn)
+	}
+	if v.MediaStreamName != nil {
+		s.WriteString(schemas.RemoveFlowMediaStreamResponse_MediaStreamName, *v.MediaStreamName)
+	}
+}
+func (v *RemoveFlowMediaStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveFlowMediaStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveFlowMediaStreamResponse_FlowArn:
+			v.FlowArn = new(string)
+			return d.ReadString(schemas.RemoveFlowMediaStreamResponse_FlowArn, v.FlowArn)
+		case schemas.RemoveFlowMediaStreamResponse_MediaStreamName:
+			v.MediaStreamName = new(string)
+			return d.ReadString(schemas.RemoveFlowMediaStreamResponse_MediaStreamName, v.MediaStreamName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveFlowMediaStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveFlowMediaStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveFlowMediaStream, schemas.RemoveFlowMediaStreamRequest, schemas.RemoveFlowMediaStreamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveFlowMediaStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveFlowMediaStream, schemas.RemoveFlowMediaStreamRequest, schemas.RemoveFlowMediaStreamResponse), output: &RemoveFlowMediaStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

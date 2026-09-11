@@ -5,7 +5,9 @@ package medialive
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNodesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNodesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNodesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.ListNodesRequest_ClusterId, *v.ClusterId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListNodesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNodesRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Placeholder documentation for ListNodesResponse
 type ListNodesOutput struct {
 
@@ -57,13 +77,35 @@ type ListNodesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNodesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNodesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNodesResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfDescribeNodeSummary(s, schemas.ListNodesResponse_Nodes, v.Nodes)
+}
+func (v *ListNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNodesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNodesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNodesResponse_NextToken, v.NextToken)
+		case schemas.ListNodesResponse_Nodes:
+			return deserialize__listOfDescribeNodeSummary(d, schemas.ListNodesResponse_Nodes, &v.Nodes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNodes, schemas.ListNodesRequest, schemas.ListNodesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNodes, schemas.ListNodesRequest, schemas.ListNodesResponse), output: &ListNodesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

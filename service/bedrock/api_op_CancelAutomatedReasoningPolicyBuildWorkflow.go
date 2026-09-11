@@ -4,6 +4,8 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type CancelAutomatedReasoningPolicyBuildWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelAutomatedReasoningPolicyBuildWorkflowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelAutomatedReasoningPolicyBuildWorkflowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelAutomatedReasoningPolicyBuildWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BuildWorkflowId != nil {
+		s.WriteString(schemas.CancelAutomatedReasoningPolicyBuildWorkflowRequest_buildWorkflowId, *v.BuildWorkflowId)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.CancelAutomatedReasoningPolicyBuildWorkflowRequest_policyArn, *v.PolicyArn)
+	}
+}
+
 type CancelAutomatedReasoningPolicyBuildWorkflowOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +67,26 @@ type CancelAutomatedReasoningPolicyBuildWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelAutomatedReasoningPolicyBuildWorkflowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelAutomatedReasoningPolicyBuildWorkflowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelAutomatedReasoningPolicyBuildWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelAutomatedReasoningPolicyBuildWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelAutomatedReasoningPolicyBuildWorkflowResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelAutomatedReasoningPolicyBuildWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelAutomatedReasoningPolicyBuildWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelAutomatedReasoningPolicyBuildWorkflow, schemas.CancelAutomatedReasoningPolicyBuildWorkflowRequest, schemas.CancelAutomatedReasoningPolicyBuildWorkflowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelAutomatedReasoningPolicyBuildWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelAutomatedReasoningPolicyBuildWorkflow, schemas.CancelAutomatedReasoningPolicyBuildWorkflowRequest, schemas.CancelAutomatedReasoningPolicyBuildWorkflowResponse), output: &CancelAutomatedReasoningPolicyBuildWorkflowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteVpcConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVpcConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVpcConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVpcConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteVpcConnectionRequest_Arn, *v.Arn)
+	}
+}
+
 type DeleteVpcConnectionOutput struct {
 
 	// The state of the VPC connection.
@@ -48,13 +62,42 @@ type DeleteVpcConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVpcConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVpcConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVpcConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.DeleteVpcConnectionResponse_State, string(v.State))
+	}
+	if v.VpcConnectionArn != nil {
+		s.WriteString(schemas.DeleteVpcConnectionResponse_VpcConnectionArn, *v.VpcConnectionArn)
+	}
+}
+func (v *DeleteVpcConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVpcConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVpcConnectionResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DeleteVpcConnectionResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.VpcConnectionState(ev)
+			return nil
+		case schemas.DeleteVpcConnectionResponse_VpcConnectionArn:
+			v.VpcConnectionArn = new(string)
+			return d.ReadString(schemas.DeleteVpcConnectionResponse_VpcConnectionArn, v.VpcConnectionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVpcConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVpcConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVpcConnection, schemas.DeleteVpcConnectionRequest, schemas.DeleteVpcConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteVpcConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVpcConnection, schemas.DeleteVpcConnectionRequest, schemas.DeleteVpcConnectionResponse), output: &DeleteVpcConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

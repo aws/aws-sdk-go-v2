@@ -5,7 +5,9 @@ package securityhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,23 @@ type GetEnabledStandardsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEnabledStandardsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnabledStandardsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnabledStandardsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetEnabledStandardsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetEnabledStandardsRequest_NextToken, *v.NextToken)
+	}
+	serializeStandardsProviders(s, schemas.GetEnabledStandardsRequest_Providers, v.Providers)
+	serializeStandardsSubscriptionArns(s, schemas.GetEnabledStandardsRequest_StandardsSubscriptionArns, v.StandardsSubscriptionArns)
+}
+
 type GetEnabledStandardsOutput struct {
 
 	// The pagination token to use to request the next page of results.
@@ -62,13 +81,35 @@ type GetEnabledStandardsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEnabledStandardsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnabledStandardsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnabledStandardsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetEnabledStandardsResponse_NextToken, *v.NextToken)
+	}
+	serializeStandardsSubscriptions(s, schemas.GetEnabledStandardsResponse_StandardsSubscriptions, v.StandardsSubscriptions)
+}
+func (v *GetEnabledStandardsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEnabledStandardsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEnabledStandardsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetEnabledStandardsResponse_NextToken, v.NextToken)
+		case schemas.GetEnabledStandardsResponse_StandardsSubscriptions:
+			return deserializeStandardsSubscriptions(d, schemas.GetEnabledStandardsResponse_StandardsSubscriptions, &v.StandardsSubscriptions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEnabledStandardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEnabledStandards{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnabledStandards, schemas.GetEnabledStandardsRequest, schemas.GetEnabledStandardsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEnabledStandards{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnabledStandards, schemas.GetEnabledStandardsRequest, schemas.GetEnabledStandardsResponse), output: &GetEnabledStandardsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

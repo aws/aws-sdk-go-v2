@@ -5,7 +5,9 @@ package sfn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -117,6 +119,33 @@ type ListExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExecutionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MapRunArn != nil {
+		s.WriteString(schemas.ListExecutionsInput_mapRunArn, *v.MapRunArn)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListExecutionsInput_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExecutionsInput_nextToken, *v.NextToken)
+	}
+	if v.RedriveFilter != "" {
+		s.WriteString(schemas.ListExecutionsInput_redriveFilter, string(v.RedriveFilter))
+	}
+	if v.StateMachineArn != nil {
+		s.WriteString(schemas.ListExecutionsInput_stateMachineArn, *v.StateMachineArn)
+	}
+	if v.StatusFilter != "" {
+		s.WriteString(schemas.ListExecutionsInput_statusFilter, string(v.StatusFilter))
+	}
+}
+
 type ListExecutionsOutput struct {
 
 	// The list of matching executions.
@@ -137,13 +166,35 @@ type ListExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExecutionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExecutionList(s, schemas.ListExecutionsOutput_executions, v.Executions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExecutionsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListExecutionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListExecutionsOutput_executions:
+			return deserializeExecutionList(d, schemas.ListExecutionsOutput_executions, &v.Executions)
+		case schemas.ListExecutionsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListExecutionsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExecutions, schemas.ListExecutionsInput, schemas.ListExecutionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExecutions, schemas.ListExecutionsInput, schemas.ListExecutionsOutput), output: &ListExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

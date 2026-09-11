@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -116,6 +118,47 @@ type CreateComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateComponentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeDescription != nil {
+		s.WriteString(schemas.CreateComponentRequest_changeDescription, *v.ChangeDescription)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateComponentRequest_clientToken, *v.ClientToken)
+	}
+	if v.Data != nil {
+		s.WriteString(schemas.CreateComponentRequest_data, *v.Data)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateComponentRequest_description, *v.Description)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateComponentRequest_dryRun, v.DryRun)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateComponentRequest_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateComponentRequest_name, *v.Name)
+	}
+	if v.Platform != "" {
+		s.WriteString(schemas.CreateComponentRequest_platform, string(v.Platform))
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.CreateComponentRequest_semanticVersion, *v.SemanticVersion)
+	}
+	serializeOsVersionList(s, schemas.CreateComponentRequest_supportedOsVersions, v.SupportedOsVersions)
+	serializeTagMap(s, schemas.CreateComponentRequest_tags, v.Tags)
+	if v.Uri != nil {
+		s.WriteString(schemas.CreateComponentRequest_uri, *v.Uri)
+	}
+}
+
 type CreateComponentOutput struct {
 
 	// The client token that uniquely identifies the request.
@@ -136,13 +179,52 @@ type CreateComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateComponentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateComponentResponse_clientToken, *v.ClientToken)
+	}
+	if v.ComponentBuildVersionArn != nil {
+		s.WriteString(schemas.CreateComponentResponse_componentBuildVersionArn, *v.ComponentBuildVersionArn)
+	}
+	if v.LatestVersionReferences != nil {
+		s.WriteStruct(schemas.CreateComponentResponse_latestVersionReferences)
+		v.LatestVersionReferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateComponentResponse_requestId, *v.RequestId)
+	}
+}
+func (v *CreateComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateComponentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateComponentResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateComponentResponse_clientToken, v.ClientToken)
+		case schemas.CreateComponentResponse_componentBuildVersionArn:
+			v.ComponentBuildVersionArn = new(string)
+			return d.ReadString(schemas.CreateComponentResponse_componentBuildVersionArn, v.ComponentBuildVersionArn)
+		case schemas.CreateComponentResponse_latestVersionReferences:
+			v.LatestVersionReferences = &types.LatestVersionReferences{}
+			return v.LatestVersionReferences.Deserialize(d)
+		case schemas.CreateComponentResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateComponentResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComponent, schemas.CreateComponentRequest, schemas.CreateComponentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComponent, schemas.CreateComponentRequest, schemas.CreateComponentResponse), output: &CreateComponentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,38 @@ type UpdateRouterInputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRouterInputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRouterInputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRouterInputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateRouterInputRequest_Arn, *v.Arn)
+	}
+	serializeRouterInputConfiguration(s, schemas.UpdateRouterInputRequest_Configuration, v.Configuration)
+	serializeRouterContentQualityAnalysisConfiguration(s, schemas.UpdateRouterInputRequest_ContentQualityAnalysisConfiguration, v.ContentQualityAnalysisConfiguration)
+	serializeMaintenanceConfiguration(s, schemas.UpdateRouterInputRequest_MaintenanceConfiguration, v.MaintenanceConfiguration)
+	if v.MaximumBitrate != nil {
+		s.WriteInt64(schemas.UpdateRouterInputRequest_MaximumBitrate, *v.MaximumBitrate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateRouterInputRequest_Name, *v.Name)
+	}
+	if v.RoutingScope != "" {
+		s.WriteString(schemas.UpdateRouterInputRequest_RoutingScope, string(v.RoutingScope))
+	}
+	if v.Tier != "" {
+		s.WriteString(schemas.UpdateRouterInputRequest_Tier, string(v.Tier))
+	}
+	if v.TransitEncryption != nil {
+		s.WriteStruct(schemas.UpdateRouterInputRequest_TransitEncryption)
+		v.TransitEncryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateRouterInputOutput struct {
 
 	// The updated router input.
@@ -76,13 +110,34 @@ type UpdateRouterInputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRouterInputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRouterInputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRouterInputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RouterInput != nil {
+		s.WriteStruct(schemas.UpdateRouterInputResponse_RouterInput)
+		v.RouterInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateRouterInputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRouterInputResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRouterInputResponse_RouterInput:
+			v.RouterInput = &types.RouterInput{}
+			return v.RouterInput.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRouterInputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRouterInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRouterInput, schemas.UpdateRouterInputRequest, schemas.UpdateRouterInputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRouterInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRouterInput, schemas.UpdateRouterInputRequest, schemas.UpdateRouterInputResponse), output: &UpdateRouterInputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

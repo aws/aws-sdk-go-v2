@@ -4,7 +4,9 @@ package fis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,27 @@ type UpdateTargetAccountConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTargetAccountConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTargetAccountConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTargetAccountConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.UpdateTargetAccountConfigurationRequest_accountId, *v.AccountId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateTargetAccountConfigurationRequest_description, *v.Description)
+	}
+	if v.ExperimentTemplateId != nil {
+		s.WriteString(schemas.UpdateTargetAccountConfigurationRequest_experimentTemplateId, *v.ExperimentTemplateId)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateTargetAccountConfigurationRequest_roleArn, *v.RoleArn)
+	}
+}
+
 type UpdateTargetAccountConfigurationOutput struct {
 
 	// Information about the target account configuration.
@@ -56,13 +79,34 @@ type UpdateTargetAccountConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTargetAccountConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTargetAccountConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTargetAccountConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetAccountConfiguration != nil {
+		s.WriteStruct(schemas.UpdateTargetAccountConfigurationResponse_targetAccountConfiguration)
+		v.TargetAccountConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateTargetAccountConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTargetAccountConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTargetAccountConfigurationResponse_targetAccountConfiguration:
+			v.TargetAccountConfiguration = &types.TargetAccountConfiguration{}
+			return v.TargetAccountConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTargetAccountConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTargetAccountConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTargetAccountConfiguration, schemas.UpdateTargetAccountConfigurationRequest, schemas.UpdateTargetAccountConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTargetAccountConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTargetAccountConfiguration, schemas.UpdateTargetAccountConfigurationRequest, schemas.UpdateTargetAccountConfigurationResponse), output: &UpdateTargetAccountConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,25 @@ type BatchGetAccountStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetAccountStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetAccountStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetAccountStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdSet(s, schemas.BatchGetAccountStatusRequest_accountIds, v.AccountIds)
+}
+func (v *BatchGetAccountStatusInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetAccountStatusRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetAccountStatusRequest_accountIds:
+			return deserializeAccountIdSet(d, schemas.BatchGetAccountStatusRequest_accountIds, &v.AccountIds)
+		}
+		return nil
+	})
+}
+
 type BatchGetAccountStatusOutput struct {
 
 	// An array of objects that provide details on the status of Amazon Inspector for
@@ -52,13 +73,32 @@ type BatchGetAccountStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetAccountStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetAccountStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetAccountStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountStateList(s, schemas.BatchGetAccountStatusResponse_accounts, v.Accounts)
+	serializeFailedAccountList(s, schemas.BatchGetAccountStatusResponse_failedAccounts, v.FailedAccounts)
+}
+func (v *BatchGetAccountStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetAccountStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetAccountStatusResponse_accounts:
+			return deserializeAccountStateList(d, schemas.BatchGetAccountStatusResponse_accounts, &v.Accounts)
+		case schemas.BatchGetAccountStatusResponse_failedAccounts:
+			return deserializeFailedAccountList(d, schemas.BatchGetAccountStatusResponse_failedAccounts, &v.FailedAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetAccountStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetAccountStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetAccountStatus, schemas.BatchGetAccountStatusRequest, schemas.BatchGetAccountStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetAccountStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetAccountStatus, schemas.BatchGetAccountStatusRequest, schemas.BatchGetAccountStatusResponse), output: &BatchGetAccountStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

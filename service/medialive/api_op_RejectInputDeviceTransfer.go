@@ -4,6 +4,8 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type RejectInputDeviceTransferInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectInputDeviceTransferInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectInputDeviceTransferRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectInputDeviceTransferInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputDeviceId != nil {
+		s.WriteString(schemas.RejectInputDeviceTransferRequest_InputDeviceId, *v.InputDeviceId)
+	}
+}
+
 // Placeholder documentation for RejectInputDeviceTransferResponse
 type RejectInputDeviceTransferOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -42,13 +56,26 @@ type RejectInputDeviceTransferOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectInputDeviceTransferOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectInputDeviceTransferResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectInputDeviceTransferOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RejectInputDeviceTransferOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RejectInputDeviceTransferResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRejectInputDeviceTransferMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRejectInputDeviceTransfer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectInputDeviceTransfer, schemas.RejectInputDeviceTransferRequest, schemas.RejectInputDeviceTransferResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRejectInputDeviceTransfer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectInputDeviceTransfer, schemas.RejectInputDeviceTransferRequest, schemas.RejectInputDeviceTransferResponse), output: &RejectInputDeviceTransferOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

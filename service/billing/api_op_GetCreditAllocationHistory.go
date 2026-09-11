@@ -5,7 +5,9 @@ package billing
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/billing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -63,6 +65,33 @@ type GetCreditAllocationHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCreditAllocationHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCreditAllocationHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCreditAllocationHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetCreditAllocationHistoryRequest_accountId, *v.AccountId)
+	}
+	if v.CreditId != nil {
+		s.WriteInt64(schemas.GetCreditAllocationHistoryRequest_creditId, *v.CreditId)
+	}
+	if v.EndDate != nil {
+		s.WriteTime(schemas.GetCreditAllocationHistoryRequest_endDate, *v.EndDate)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetCreditAllocationHistoryRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCreditAllocationHistoryRequest_nextToken, *v.NextToken)
+	}
+	if v.StartDate != nil {
+		s.WriteTime(schemas.GetCreditAllocationHistoryRequest_startDate, *v.StartDate)
+	}
+}
+
 type GetCreditAllocationHistoryOutput struct {
 
 	// true when data could not be retrieved for one or more billing months. The
@@ -88,13 +117,44 @@ type GetCreditAllocationHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCreditAllocationHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCreditAllocationHistoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCreditAllocationHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCreditAllocationHistoryList(s, schemas.GetCreditAllocationHistoryResponse_creditAllocationHistoryList, v.CreditAllocationHistoryList)
+	serializeFailedMonthsList(s, schemas.GetCreditAllocationHistoryResponse_failedMonths, v.FailedMonths)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCreditAllocationHistoryResponse_nextToken, *v.NextToken)
+	}
+	if v.PartialResults != nil {
+		s.WriteBool(schemas.GetCreditAllocationHistoryResponse_partialResults, *v.PartialResults)
+	}
+}
+func (v *GetCreditAllocationHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCreditAllocationHistoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCreditAllocationHistoryResponse_creditAllocationHistoryList:
+			return deserializeCreditAllocationHistoryList(d, schemas.GetCreditAllocationHistoryResponse_creditAllocationHistoryList, &v.CreditAllocationHistoryList)
+		case schemas.GetCreditAllocationHistoryResponse_failedMonths:
+			return deserializeFailedMonthsList(d, schemas.GetCreditAllocationHistoryResponse_failedMonths, &v.FailedMonths)
+		case schemas.GetCreditAllocationHistoryResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetCreditAllocationHistoryResponse_nextToken, v.NextToken)
+		case schemas.GetCreditAllocationHistoryResponse_partialResults:
+			v.PartialResults = new(bool)
+			return d.ReadBool(schemas.GetCreditAllocationHistoryResponse_partialResults, v.PartialResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCreditAllocationHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetCreditAllocationHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCreditAllocationHistory, schemas.GetCreditAllocationHistoryRequest, schemas.GetCreditAllocationHistoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetCreditAllocationHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCreditAllocationHistory, schemas.GetCreditAllocationHistoryRequest, schemas.GetCreditAllocationHistoryResponse), output: &GetCreditAllocationHistoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

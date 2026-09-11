@@ -5,7 +5,9 @@ package securityhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DescribeProductsV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProductsV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProductsV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProductsV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeProductsV2Request_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeProductsV2Request_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeProductsV2Output struct {
 
 	// Gets information about the product integration.
@@ -55,13 +72,35 @@ type DescribeProductsV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProductsV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProductsV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProductsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeProductsV2Response_NextToken, *v.NextToken)
+	}
+	serializeProductsV2List(s, schemas.DescribeProductsV2Response_ProductsV2, v.ProductsV2)
+}
+func (v *DescribeProductsV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeProductsV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeProductsV2Response_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeProductsV2Response_NextToken, v.NextToken)
+		case schemas.DescribeProductsV2Response_ProductsV2:
+			return deserializeProductsV2List(d, schemas.DescribeProductsV2Response_ProductsV2, &v.ProductsV2)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeProductsV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeProductsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProductsV2, schemas.DescribeProductsV2Request, schemas.DescribeProductsV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeProductsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProductsV2, schemas.DescribeProductsV2Request, schemas.DescribeProductsV2Response), output: &DescribeProductsV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

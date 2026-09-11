@@ -5,7 +5,9 @@ package elasticsearchservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,22 @@ type DescribeInboundCrossClusterSearchConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInboundCrossClusterSearchConnectionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInboundCrossClusterSearchConnectionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInboundCrossClusterSearchConnectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribeInboundCrossClusterSearchConnectionsRequest_Filters, v.Filters)
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.DescribeInboundCrossClusterSearchConnectionsRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeInboundCrossClusterSearchConnectionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 // The result of a DescribeInboundCrossClusterSearchConnections request. Contains the list of connections matching the filter
 // criteria.
 type DescribeInboundCrossClusterSearchConnectionsOutput struct {
@@ -66,13 +84,35 @@ type DescribeInboundCrossClusterSearchConnectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInboundCrossClusterSearchConnectionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInboundCrossClusterSearchConnectionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInboundCrossClusterSearchConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInboundCrossClusterSearchConnections(s, schemas.DescribeInboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections, v.CrossClusterSearchConnections)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeInboundCrossClusterSearchConnectionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeInboundCrossClusterSearchConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInboundCrossClusterSearchConnectionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections:
+			return deserializeInboundCrossClusterSearchConnections(d, schemas.DescribeInboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections, &v.CrossClusterSearchConnections)
+		case schemas.DescribeInboundCrossClusterSearchConnectionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeInboundCrossClusterSearchConnectionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeInboundCrossClusterSearchConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeInboundCrossClusterSearchConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInboundCrossClusterSearchConnections, schemas.DescribeInboundCrossClusterSearchConnectionsRequest, schemas.DescribeInboundCrossClusterSearchConnectionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeInboundCrossClusterSearchConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInboundCrossClusterSearchConnections, schemas.DescribeInboundCrossClusterSearchConnectionsRequest, schemas.DescribeInboundCrossClusterSearchConnectionsResponse), output: &DescribeInboundCrossClusterSearchConnectionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

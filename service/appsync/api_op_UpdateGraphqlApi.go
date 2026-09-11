@@ -4,7 +4,9 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -103,6 +105,68 @@ type UpdateGraphqlApiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGraphqlApiInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGraphqlApiRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGraphqlApiInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalAuthenticationProviders(s, schemas.UpdateGraphqlApiRequest_additionalAuthenticationProviders, v.AdditionalAuthenticationProviders)
+	if v.ApiId != nil {
+		s.WriteString(schemas.UpdateGraphqlApiRequest_apiId, *v.ApiId)
+	}
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.UpdateGraphqlApiRequest_authenticationType, string(v.AuthenticationType))
+	}
+	if v.EnhancedMetricsConfig != nil {
+		s.WriteStruct(schemas.UpdateGraphqlApiRequest_enhancedMetricsConfig)
+		v.EnhancedMetricsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IntrospectionConfig != "" {
+		s.WriteString(schemas.UpdateGraphqlApiRequest_introspectionConfig, string(v.IntrospectionConfig))
+	}
+	if v.LambdaAuthorizerConfig != nil {
+		s.WriteStruct(schemas.UpdateGraphqlApiRequest_lambdaAuthorizerConfig)
+		v.LambdaAuthorizerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogConfig != nil {
+		s.WriteStruct(schemas.UpdateGraphqlApiRequest_logConfig)
+		v.LogConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MergedApiExecutionRoleArn != nil {
+		s.WriteString(schemas.UpdateGraphqlApiRequest_mergedApiExecutionRoleArn, *v.MergedApiExecutionRoleArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateGraphqlApiRequest_name, *v.Name)
+	}
+	if v.OpenIDConnectConfig != nil {
+		s.WriteStruct(schemas.UpdateGraphqlApiRequest_openIDConnectConfig)
+		v.OpenIDConnectConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OwnerContact != nil {
+		s.WriteString(schemas.UpdateGraphqlApiRequest_ownerContact, *v.OwnerContact)
+	}
+	if v.QueryDepthLimit != 0 {
+		s.WriteInt32(schemas.UpdateGraphqlApiRequest_queryDepthLimit, v.QueryDepthLimit)
+	}
+	if v.ResolverCountLimit != 0 {
+		s.WriteInt32(schemas.UpdateGraphqlApiRequest_resolverCountLimit, v.ResolverCountLimit)
+	}
+	if v.UserPoolConfig != nil {
+		s.WriteStruct(schemas.UpdateGraphqlApiRequest_userPoolConfig)
+		v.UserPoolConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.XrayEnabled != false {
+		s.WriteBool(schemas.UpdateGraphqlApiRequest_xrayEnabled, v.XrayEnabled)
+	}
+}
+
 type UpdateGraphqlApiOutput struct {
 
 	// The updated GraphqlApi object.
@@ -114,13 +178,34 @@ type UpdateGraphqlApiOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGraphqlApiOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGraphqlApiResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGraphqlApiOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphqlApi != nil {
+		s.WriteStruct(schemas.UpdateGraphqlApiResponse_graphqlApi)
+		v.GraphqlApi.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateGraphqlApiOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGraphqlApiResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGraphqlApiResponse_graphqlApi:
+			v.GraphqlApi = &types.GraphqlApi{}
+			return v.GraphqlApi.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGraphqlApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGraphqlApi{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGraphqlApi, schemas.UpdateGraphqlApiRequest, schemas.UpdateGraphqlApiResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateGraphqlApi{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGraphqlApi, schemas.UpdateGraphqlApiRequest, schemas.UpdateGraphqlApiResponse), output: &UpdateGraphqlApiOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

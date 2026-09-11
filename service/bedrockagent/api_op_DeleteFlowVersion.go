@@ -4,6 +4,8 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type DeleteFlowVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFlowVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFlowVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFlowVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowIdentifier != nil {
+		s.WriteString(schemas.DeleteFlowVersionRequest_flowIdentifier, *v.FlowIdentifier)
+	}
+	if v.FlowVersion != nil {
+		s.WriteString(schemas.DeleteFlowVersionRequest_flowVersion, *v.FlowVersion)
+	}
+	if v.SkipResourceInUseCheck != false {
+		s.WriteBool(schemas.DeleteFlowVersionRequest_skipResourceInUseCheck, v.SkipResourceInUseCheck)
+	}
+}
+
 type DeleteFlowVersionOutput struct {
 
 	// The unique identifier of the flow.
@@ -61,13 +81,38 @@ type DeleteFlowVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFlowVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFlowVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFlowVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteFlowVersionResponse_id, *v.Id)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.DeleteFlowVersionResponse_version, *v.Version)
+	}
+}
+func (v *DeleteFlowVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFlowVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFlowVersionResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteFlowVersionResponse_id, v.Id)
+		case schemas.DeleteFlowVersionResponse_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.DeleteFlowVersionResponse_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFlowVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteFlowVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFlowVersion, schemas.DeleteFlowVersionRequest, schemas.DeleteFlowVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteFlowVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFlowVersion, schemas.DeleteFlowVersionRequest, schemas.DeleteFlowVersionResponse), output: &DeleteFlowVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

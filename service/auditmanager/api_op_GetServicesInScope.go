@@ -4,7 +4,9 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,15 @@ type GetServicesInScopeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServicesInScopeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServicesInScopeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServicesInScopeInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetServicesInScopeOutput struct {
 
 	//  The metadata that's associated with the Amazon Web Services service.
@@ -50,13 +61,29 @@ type GetServicesInScopeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServicesInScopeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServicesInScopeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServicesInScopeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeServiceMetadataList(s, schemas.GetServicesInScopeResponse_serviceMetadata, v.ServiceMetadata)
+}
+func (v *GetServicesInScopeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServicesInScopeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServicesInScopeResponse_serviceMetadata:
+			return deserializeServiceMetadataList(d, schemas.GetServicesInScopeResponse_serviceMetadata, &v.ServiceMetadata)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServicesInScopeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetServicesInScope{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServicesInScope, schemas.GetServicesInScopeRequest, schemas.GetServicesInScopeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetServicesInScope{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServicesInScope, schemas.GetServicesInScopeRequest, schemas.GetServicesInScopeResponse), output: &GetServicesInScopeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

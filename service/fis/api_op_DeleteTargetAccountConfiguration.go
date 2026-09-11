@@ -4,7 +4,9 @@ package fis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteTargetAccountConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTargetAccountConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTargetAccountConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTargetAccountConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DeleteTargetAccountConfigurationRequest_accountId, *v.AccountId)
+	}
+	if v.ExperimentTemplateId != nil {
+		s.WriteString(schemas.DeleteTargetAccountConfigurationRequest_experimentTemplateId, *v.ExperimentTemplateId)
+	}
+}
+
 type DeleteTargetAccountConfigurationOutput struct {
 
 	// Information about the target account configuration.
@@ -50,13 +67,34 @@ type DeleteTargetAccountConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTargetAccountConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTargetAccountConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTargetAccountConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetAccountConfiguration != nil {
+		s.WriteStruct(schemas.DeleteTargetAccountConfigurationResponse_targetAccountConfiguration)
+		v.TargetAccountConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteTargetAccountConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTargetAccountConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteTargetAccountConfigurationResponse_targetAccountConfiguration:
+			v.TargetAccountConfiguration = &types.TargetAccountConfiguration{}
+			return v.TargetAccountConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTargetAccountConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTargetAccountConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTargetAccountConfiguration, schemas.DeleteTargetAccountConfigurationRequest, schemas.DeleteTargetAccountConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTargetAccountConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTargetAccountConfiguration, schemas.DeleteTargetAccountConfigurationRequest, schemas.DeleteTargetAccountConfigurationResponse), output: &DeleteTargetAccountConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

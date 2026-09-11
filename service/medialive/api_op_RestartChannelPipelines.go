@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,19 @@ type RestartChannelPipelinesInput struct {
 	PipelineIds []types.ChannelPipelineIdToRestart
 
 	noSmithyDocumentSerde
+}
+
+func (v *RestartChannelPipelinesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestartChannelPipelinesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestartChannelPipelinesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelId != nil {
+		s.WriteString(schemas.RestartChannelPipelinesRequest_ChannelId, *v.ChannelId)
+	}
+	serialize__listOfChannelPipelineIdToRestart(s, schemas.RestartChannelPipelinesRequest_PipelineIds, v.PipelineIds)
 }
 
 // Placeholder documentation for RestartChannelPipelinesResponse
@@ -123,13 +138,182 @@ type RestartChannelPipelinesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestartChannelPipelinesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestartChannelPipelinesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestartChannelPipelinesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnywhereSettings != nil {
+		s.WriteStruct(schemas.RestartChannelPipelinesResponse_AnywhereSettings)
+		v.AnywhereSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.RestartChannelPipelinesResponse_Arn, *v.Arn)
+	}
+	if v.CdiInputSpecification != nil {
+		s.WriteStruct(schemas.RestartChannelPipelinesResponse_CdiInputSpecification)
+		v.CdiInputSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChannelClass != "" {
+		s.WriteString(schemas.RestartChannelPipelinesResponse_ChannelClass, string(v.ChannelClass))
+	}
+	if v.ChannelEngineVersion != nil {
+		s.WriteStruct(schemas.RestartChannelPipelinesResponse_ChannelEngineVersion)
+		v.ChannelEngineVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOf__string(s, schemas.RestartChannelPipelinesResponse_ChannelSecurityGroups, v.ChannelSecurityGroups)
+	serialize__listOfOutputDestination(s, schemas.RestartChannelPipelinesResponse_Destinations, v.Destinations)
+	serialize__listOfChannelEgressEndpoint(s, schemas.RestartChannelPipelinesResponse_EgressEndpoints, v.EgressEndpoints)
+	if v.EncoderSettings != nil {
+		s.WriteStruct(schemas.RestartChannelPipelinesResponse_EncoderSettings)
+		v.EncoderSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RestartChannelPipelinesResponse_Id, *v.Id)
+	}
+	if v.InferenceSettings != nil {
+		s.WriteStruct(schemas.RestartChannelPipelinesResponse_InferenceSettings)
+		v.InferenceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfInputAttachment(s, schemas.RestartChannelPipelinesResponse_InputAttachments, v.InputAttachments)
+	if v.InputSpecification != nil {
+		s.WriteStruct(schemas.RestartChannelPipelinesResponse_InputSpecification)
+		v.InputSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LinkedChannelSettings != nil {
+		s.WriteStruct(schemas.RestartChannelPipelinesResponse_LinkedChannelSettings)
+		v.LinkedChannelSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogLevel != "" {
+		s.WriteString(schemas.RestartChannelPipelinesResponse_LogLevel, string(v.LogLevel))
+	}
+	if v.Maintenance != nil {
+		s.WriteStruct(schemas.RestartChannelPipelinesResponse_Maintenance)
+		v.Maintenance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaintenanceStatus != nil {
+		s.WriteString(schemas.RestartChannelPipelinesResponse_MaintenanceStatus, *v.MaintenanceStatus)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RestartChannelPipelinesResponse_Name, *v.Name)
+	}
+	serialize__listOfPipelineDetail(s, schemas.RestartChannelPipelinesResponse_PipelineDetails, v.PipelineDetails)
+	if v.PipelinesRunningCount != nil {
+		s.WriteInt32(schemas.RestartChannelPipelinesResponse_PipelinesRunningCount, *v.PipelinesRunningCount)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.RestartChannelPipelinesResponse_RoleArn, *v.RoleArn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.RestartChannelPipelinesResponse_State, string(v.State))
+	}
+	serializeTags(s, schemas.RestartChannelPipelinesResponse_Tags, v.Tags)
+	if v.Vpc != nil {
+		s.WriteStruct(schemas.RestartChannelPipelinesResponse_Vpc)
+		v.Vpc.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RestartChannelPipelinesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestartChannelPipelinesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestartChannelPipelinesResponse_AnywhereSettings:
+			v.AnywhereSettings = &types.DescribeAnywhereSettings{}
+			return v.AnywhereSettings.Deserialize(d)
+		case schemas.RestartChannelPipelinesResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RestartChannelPipelinesResponse_Arn, v.Arn)
+		case schemas.RestartChannelPipelinesResponse_CdiInputSpecification:
+			v.CdiInputSpecification = &types.CdiInputSpecification{}
+			return v.CdiInputSpecification.Deserialize(d)
+		case schemas.RestartChannelPipelinesResponse_ChannelClass:
+			var ev string
+			if err := d.ReadString(schemas.RestartChannelPipelinesResponse_ChannelClass, &ev); err != nil {
+				return err
+			}
+			v.ChannelClass = types.ChannelClass(ev)
+			return nil
+		case schemas.RestartChannelPipelinesResponse_ChannelEngineVersion:
+			v.ChannelEngineVersion = &types.ChannelEngineVersionResponse{}
+			return v.ChannelEngineVersion.Deserialize(d)
+		case schemas.RestartChannelPipelinesResponse_ChannelSecurityGroups:
+			return deserialize__listOf__string(d, schemas.RestartChannelPipelinesResponse_ChannelSecurityGroups, &v.ChannelSecurityGroups)
+		case schemas.RestartChannelPipelinesResponse_Destinations:
+			return deserialize__listOfOutputDestination(d, schemas.RestartChannelPipelinesResponse_Destinations, &v.Destinations)
+		case schemas.RestartChannelPipelinesResponse_EgressEndpoints:
+			return deserialize__listOfChannelEgressEndpoint(d, schemas.RestartChannelPipelinesResponse_EgressEndpoints, &v.EgressEndpoints)
+		case schemas.RestartChannelPipelinesResponse_EncoderSettings:
+			v.EncoderSettings = &types.EncoderSettings{}
+			return v.EncoderSettings.Deserialize(d)
+		case schemas.RestartChannelPipelinesResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RestartChannelPipelinesResponse_Id, v.Id)
+		case schemas.RestartChannelPipelinesResponse_InferenceSettings:
+			v.InferenceSettings = &types.DescribeInferenceSettings{}
+			return v.InferenceSettings.Deserialize(d)
+		case schemas.RestartChannelPipelinesResponse_InputAttachments:
+			return deserialize__listOfInputAttachment(d, schemas.RestartChannelPipelinesResponse_InputAttachments, &v.InputAttachments)
+		case schemas.RestartChannelPipelinesResponse_InputSpecification:
+			v.InputSpecification = &types.InputSpecification{}
+			return v.InputSpecification.Deserialize(d)
+		case schemas.RestartChannelPipelinesResponse_LinkedChannelSettings:
+			v.LinkedChannelSettings = &types.DescribeLinkedChannelSettings{}
+			return v.LinkedChannelSettings.Deserialize(d)
+		case schemas.RestartChannelPipelinesResponse_LogLevel:
+			var ev string
+			if err := d.ReadString(schemas.RestartChannelPipelinesResponse_LogLevel, &ev); err != nil {
+				return err
+			}
+			v.LogLevel = types.LogLevel(ev)
+			return nil
+		case schemas.RestartChannelPipelinesResponse_Maintenance:
+			v.Maintenance = &types.MaintenanceStatus{}
+			return v.Maintenance.Deserialize(d)
+		case schemas.RestartChannelPipelinesResponse_MaintenanceStatus:
+			v.MaintenanceStatus = new(string)
+			return d.ReadString(schemas.RestartChannelPipelinesResponse_MaintenanceStatus, v.MaintenanceStatus)
+		case schemas.RestartChannelPipelinesResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RestartChannelPipelinesResponse_Name, v.Name)
+		case schemas.RestartChannelPipelinesResponse_PipelineDetails:
+			return deserialize__listOfPipelineDetail(d, schemas.RestartChannelPipelinesResponse_PipelineDetails, &v.PipelineDetails)
+		case schemas.RestartChannelPipelinesResponse_PipelinesRunningCount:
+			v.PipelinesRunningCount = new(int32)
+			return d.ReadInt32(schemas.RestartChannelPipelinesResponse_PipelinesRunningCount, v.PipelinesRunningCount)
+		case schemas.RestartChannelPipelinesResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.RestartChannelPipelinesResponse_RoleArn, v.RoleArn)
+		case schemas.RestartChannelPipelinesResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.RestartChannelPipelinesResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ChannelState(ev)
+			return nil
+		case schemas.RestartChannelPipelinesResponse_Tags:
+			return deserializeTags(d, schemas.RestartChannelPipelinesResponse_Tags, &v.Tags)
+		case schemas.RestartChannelPipelinesResponse_Vpc:
+			v.Vpc = &types.VpcOutputSettingsDescription{}
+			return v.Vpc.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestartChannelPipelinesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRestartChannelPipelines{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestartChannelPipelines, schemas.RestartChannelPipelinesRequest, schemas.RestartChannelPipelinesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRestartChannelPipelines{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestartChannelPipelines, schemas.RestartChannelPipelinesRequest, schemas.RestartChannelPipelinesResponse), output: &RestartChannelPipelinesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

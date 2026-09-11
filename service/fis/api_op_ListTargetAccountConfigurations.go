@@ -5,7 +5,9 @@ package fis
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListTargetAccountConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTargetAccountConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTargetAccountConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTargetAccountConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExperimentTemplateId != nil {
+		s.WriteString(schemas.ListTargetAccountConfigurationsRequest_experimentTemplateId, *v.ExperimentTemplateId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTargetAccountConfigurationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTargetAccountConfigurationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListTargetAccountConfigurationsOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when
@@ -57,13 +77,35 @@ type ListTargetAccountConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTargetAccountConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTargetAccountConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTargetAccountConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTargetAccountConfigurationsResponse_nextToken, *v.NextToken)
+	}
+	serializeTargetAccountConfigurationList(s, schemas.ListTargetAccountConfigurationsResponse_targetAccountConfigurations, v.TargetAccountConfigurations)
+}
+func (v *ListTargetAccountConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTargetAccountConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTargetAccountConfigurationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTargetAccountConfigurationsResponse_nextToken, v.NextToken)
+		case schemas.ListTargetAccountConfigurationsResponse_targetAccountConfigurations:
+			return deserializeTargetAccountConfigurationList(d, schemas.ListTargetAccountConfigurationsResponse_targetAccountConfigurations, &v.TargetAccountConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTargetAccountConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTargetAccountConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTargetAccountConfigurations, schemas.ListTargetAccountConfigurationsRequest, schemas.ListTargetAccountConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTargetAccountConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTargetAccountConfigurations, schemas.ListTargetAccountConfigurationsRequest, schemas.ListTargetAccountConfigurationsResponse), output: &ListTargetAccountConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

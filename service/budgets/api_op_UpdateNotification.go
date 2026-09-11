@@ -4,7 +4,9 @@ package budgets
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/budgets/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,31 @@ type UpdateNotificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNotificationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNotificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNotificationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.UpdateNotificationRequest_AccountId, *v.AccountId)
+	}
+	if v.BudgetName != nil {
+		s.WriteString(schemas.UpdateNotificationRequest_BudgetName, *v.BudgetName)
+	}
+	if v.NewNotification != nil {
+		s.WriteStruct(schemas.UpdateNotificationRequest_NewNotification)
+		v.NewNotification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OldNotification != nil {
+		s.WriteStruct(schemas.UpdateNotificationRequest_OldNotification)
+		v.OldNotification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Response of UpdateNotification
 type UpdateNotificationOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -59,13 +86,26 @@ type UpdateNotificationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNotificationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNotificationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNotificationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateNotificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateNotificationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateNotification{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNotification, schemas.UpdateNotificationRequest, schemas.UpdateNotificationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateNotification{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNotification, schemas.UpdateNotificationRequest, schemas.UpdateNotificationResponse), output: &UpdateNotificationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

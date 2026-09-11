@@ -4,6 +4,8 @@ package appconfig
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type ListTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsForResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ListTagsForResourceRequest_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type ListTagsForResourceOutput struct {
 
 	// Metadata to assign to AppConfig resources. Tags help organize and categorize
@@ -46,13 +60,29 @@ type ListTagsForResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceTags)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTagMap(s, schemas.ResourceTags_Tags, v.Tags)
+}
+func (v *ListTagsForResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceTags, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceTags_Tags:
+			return deserializeTagMap(d, schemas.ResourceTags_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTagsForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ListTagsForResourceRequest, schemas.ResourceTags)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTagsForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ListTagsForResourceRequest, schemas.ResourceTags), output: &ListTagsForResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

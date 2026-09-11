@@ -5,7 +5,9 @@ package sfn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,21 @@ type ListActivitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListActivitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListActivitiesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListActivitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListActivitiesInput_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListActivitiesInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListActivitiesOutput struct {
 
 	// The list of activities.
@@ -74,13 +91,35 @@ type ListActivitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListActivitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListActivitiesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListActivitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActivityList(s, schemas.ListActivitiesOutput_activities, v.Activities)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListActivitiesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListActivitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListActivitiesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListActivitiesOutput_activities:
+			return deserializeActivityList(d, schemas.ListActivitiesOutput_activities, &v.Activities)
+		case schemas.ListActivitiesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListActivitiesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListActivitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListActivities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListActivities, schemas.ListActivitiesInput, schemas.ListActivitiesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListActivities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListActivities, schemas.ListActivitiesInput, schemas.ListActivitiesOutput), output: &ListActivitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

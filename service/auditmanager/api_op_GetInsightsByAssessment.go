@@ -4,7 +4,9 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetInsightsByAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInsightsByAssessmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInsightsByAssessmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInsightsByAssessmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.GetInsightsByAssessmentRequest_assessmentId, *v.AssessmentId)
+	}
+}
+
 type GetInsightsByAssessmentOutput struct {
 
 	//  The assessment analytics data that the GetInsightsByAssessment API returned.
@@ -45,13 +59,34 @@ type GetInsightsByAssessmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInsightsByAssessmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInsightsByAssessmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInsightsByAssessmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Insights != nil {
+		s.WriteStruct(schemas.GetInsightsByAssessmentResponse_insights)
+		v.Insights.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetInsightsByAssessmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInsightsByAssessmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInsightsByAssessmentResponse_insights:
+			v.Insights = &types.InsightsByAssessment{}
+			return v.Insights.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInsightsByAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInsightsByAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInsightsByAssessment, schemas.GetInsightsByAssessmentRequest, schemas.GetInsightsByAssessmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetInsightsByAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInsightsByAssessment, schemas.GetInsightsByAssessmentRequest, schemas.GetInsightsByAssessmentResponse), output: &GetInsightsByAssessmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

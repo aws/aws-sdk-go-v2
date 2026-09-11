@@ -4,7 +4,9 @@ package billing
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/billing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetBillingViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBillingViewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBillingViewRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBillingViewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetBillingViewRequest_arn, *v.Arn)
+	}
+}
+
 type GetBillingViewOutput struct {
 
 	// The billing view element associated with the specified ARN.
@@ -48,13 +62,34 @@ type GetBillingViewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBillingViewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBillingViewResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBillingViewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingView != nil {
+		s.WriteStruct(schemas.GetBillingViewResponse_billingView)
+		v.BillingView.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetBillingViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBillingViewResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBillingViewResponse_billingView:
+			v.BillingView = &types.BillingViewElement{}
+			return v.BillingView.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBillingViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetBillingView{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBillingView, schemas.GetBillingViewRequest, schemas.GetBillingViewResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetBillingView{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBillingView, schemas.GetBillingViewRequest, schemas.GetBillingViewResponse), output: &GetBillingViewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

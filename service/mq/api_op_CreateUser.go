@@ -4,6 +4,8 @@ package mq
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mq/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,31 @@ type CreateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrokerId != nil {
+		s.WriteString(schemas.CreateUserRequest_BrokerId, *v.BrokerId)
+	}
+	if v.ConsoleAccess != nil {
+		s.WriteBool(schemas.CreateUserRequest_ConsoleAccess, *v.ConsoleAccess)
+	}
+	serialize__listOf__string(s, schemas.CreateUserRequest_Groups, v.Groups)
+	if v.Password != nil {
+		s.WriteString(schemas.CreateUserRequest_Password, *v.Password)
+	}
+	if v.ReplicationUser != nil {
+		s.WriteBool(schemas.CreateUserRequest_ReplicationUser, *v.ReplicationUser)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.CreateUserRequest_Username, *v.Username)
+	}
+}
+
 type CreateUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -71,13 +98,26 @@ type CreateUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUser, schemas.CreateUserRequest, schemas.CreateUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUser, schemas.CreateUserRequest, schemas.CreateUserResponse), output: &CreateUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

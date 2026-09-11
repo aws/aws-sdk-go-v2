@@ -5,6 +5,8 @@ package securityhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,23 @@ type CreateAggregatorV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAggregatorV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAggregatorV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAggregatorV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAggregatorV2Request_ClientToken, *v.ClientToken)
+	}
+	serializeStringList(s, schemas.CreateAggregatorV2Request_LinkedRegions, v.LinkedRegions)
+	if v.RegionLinkingMode != nil {
+		s.WriteString(schemas.CreateAggregatorV2Request_RegionLinkingMode, *v.RegionLinkingMode)
+	}
+	serializeTagMap(s, schemas.CreateAggregatorV2Request_Tags, v.Tags)
+}
+
 type CreateAggregatorV2Output struct {
 
 	// The Amazon Web Services Region where data is aggregated.
@@ -63,13 +82,47 @@ type CreateAggregatorV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAggregatorV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAggregatorV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAggregatorV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationRegion != nil {
+		s.WriteString(schemas.CreateAggregatorV2Response_AggregationRegion, *v.AggregationRegion)
+	}
+	if v.AggregatorV2Arn != nil {
+		s.WriteString(schemas.CreateAggregatorV2Response_AggregatorV2Arn, *v.AggregatorV2Arn)
+	}
+	serializeStringList(s, schemas.CreateAggregatorV2Response_LinkedRegions, v.LinkedRegions)
+	if v.RegionLinkingMode != nil {
+		s.WriteString(schemas.CreateAggregatorV2Response_RegionLinkingMode, *v.RegionLinkingMode)
+	}
+}
+func (v *CreateAggregatorV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAggregatorV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAggregatorV2Response_AggregationRegion:
+			v.AggregationRegion = new(string)
+			return d.ReadString(schemas.CreateAggregatorV2Response_AggregationRegion, v.AggregationRegion)
+		case schemas.CreateAggregatorV2Response_AggregatorV2Arn:
+			v.AggregatorV2Arn = new(string)
+			return d.ReadString(schemas.CreateAggregatorV2Response_AggregatorV2Arn, v.AggregatorV2Arn)
+		case schemas.CreateAggregatorV2Response_LinkedRegions:
+			return deserializeStringList(d, schemas.CreateAggregatorV2Response_LinkedRegions, &v.LinkedRegions)
+		case schemas.CreateAggregatorV2Response_RegionLinkingMode:
+			v.RegionLinkingMode = new(string)
+			return d.ReadString(schemas.CreateAggregatorV2Response_RegionLinkingMode, v.RegionLinkingMode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAggregatorV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAggregatorV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAggregatorV2, schemas.CreateAggregatorV2Request, schemas.CreateAggregatorV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAggregatorV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAggregatorV2, schemas.CreateAggregatorV2Request, schemas.CreateAggregatorV2Response), output: &CreateAggregatorV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

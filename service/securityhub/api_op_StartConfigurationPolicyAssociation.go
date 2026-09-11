@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -47,6 +49,19 @@ type StartConfigurationPolicyAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartConfigurationPolicyAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConfigurationPolicyAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartConfigurationPolicyAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationPolicyIdentifier != nil {
+		s.WriteString(schemas.StartConfigurationPolicyAssociationRequest_ConfigurationPolicyIdentifier, *v.ConfigurationPolicyIdentifier)
+	}
+	serializeTarget(s, schemas.StartConfigurationPolicyAssociationRequest_Target, v.Target)
+}
+
 type StartConfigurationPolicyAssociationOutput struct {
 
 	//  The current status of the association between the specified target and the
@@ -82,13 +97,80 @@ type StartConfigurationPolicyAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartConfigurationPolicyAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConfigurationPolicyAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartConfigurationPolicyAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationStatus != "" {
+		s.WriteString(schemas.StartConfigurationPolicyAssociationResponse_AssociationStatus, string(v.AssociationStatus))
+	}
+	if v.AssociationStatusMessage != nil {
+		s.WriteString(schemas.StartConfigurationPolicyAssociationResponse_AssociationStatusMessage, *v.AssociationStatusMessage)
+	}
+	if v.AssociationType != "" {
+		s.WriteString(schemas.StartConfigurationPolicyAssociationResponse_AssociationType, string(v.AssociationType))
+	}
+	if v.ConfigurationPolicyId != nil {
+		s.WriteString(schemas.StartConfigurationPolicyAssociationResponse_ConfigurationPolicyId, *v.ConfigurationPolicyId)
+	}
+	if v.TargetId != nil {
+		s.WriteString(schemas.StartConfigurationPolicyAssociationResponse_TargetId, *v.TargetId)
+	}
+	if v.TargetType != "" {
+		s.WriteString(schemas.StartConfigurationPolicyAssociationResponse_TargetType, string(v.TargetType))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.StartConfigurationPolicyAssociationResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *StartConfigurationPolicyAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartConfigurationPolicyAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartConfigurationPolicyAssociationResponse_AssociationStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartConfigurationPolicyAssociationResponse_AssociationStatus, &ev); err != nil {
+				return err
+			}
+			v.AssociationStatus = types.ConfigurationPolicyAssociationStatus(ev)
+			return nil
+		case schemas.StartConfigurationPolicyAssociationResponse_AssociationStatusMessage:
+			v.AssociationStatusMessage = new(string)
+			return d.ReadString(schemas.StartConfigurationPolicyAssociationResponse_AssociationStatusMessage, v.AssociationStatusMessage)
+		case schemas.StartConfigurationPolicyAssociationResponse_AssociationType:
+			var ev string
+			if err := d.ReadString(schemas.StartConfigurationPolicyAssociationResponse_AssociationType, &ev); err != nil {
+				return err
+			}
+			v.AssociationType = types.AssociationType(ev)
+			return nil
+		case schemas.StartConfigurationPolicyAssociationResponse_ConfigurationPolicyId:
+			v.ConfigurationPolicyId = new(string)
+			return d.ReadString(schemas.StartConfigurationPolicyAssociationResponse_ConfigurationPolicyId, v.ConfigurationPolicyId)
+		case schemas.StartConfigurationPolicyAssociationResponse_TargetId:
+			v.TargetId = new(string)
+			return d.ReadString(schemas.StartConfigurationPolicyAssociationResponse_TargetId, v.TargetId)
+		case schemas.StartConfigurationPolicyAssociationResponse_TargetType:
+			var ev string
+			if err := d.ReadString(schemas.StartConfigurationPolicyAssociationResponse_TargetType, &ev); err != nil {
+				return err
+			}
+			v.TargetType = types.TargetType(ev)
+			return nil
+		case schemas.StartConfigurationPolicyAssociationResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.StartConfigurationPolicyAssociationResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartConfigurationPolicyAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartConfigurationPolicyAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartConfigurationPolicyAssociation, schemas.StartConfigurationPolicyAssociationRequest, schemas.StartConfigurationPolicyAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartConfigurationPolicyAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartConfigurationPolicyAssociation, schemas.StartConfigurationPolicyAssociationRequest, schemas.StartConfigurationPolicyAssociationResponse), output: &StartConfigurationPolicyAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -472,7 +472,9 @@ func (r *retrieveAndGenerateStreamResponseOutputReader) Closed() <-chan struct{}
 }
 
 type deserializeOpEventStreamAgenticRetrieveStream struct {
-	options *Options
+	asyncResult    chan deserializeResult
+	options        *Options
+	existingResult *AgenticRetrieveStreamOutput
 }
 
 func (*deserializeOpEventStreamAgenticRetrieveStream) ID() string {
@@ -488,22 +490,35 @@ func (m *deserializeOpEventStreamAgenticRetrieveStream) HandleDeserialize(
 	var md middleware.Metadata
 	var err error
 
-	output := &AgenticRetrieveStreamOutput{}
-	output.initialReply = make(chan AgenticRetrieveStreamInitialReply, 1)
+	output := m.existingResult
+	isFirstAttempt := output == nil
+	asyncResult := m.asyncResult
 
-	asyncResult := make(chan deserializeResult, 1)
-	asyncReader := newAsyncEventStreamReader(asyncResult)
-	eventReader := newAgenticRetrieveStreamResponseOutputReader(
-		smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.AgenticRetrieveStreamResponseOutput, TypeRegistry, asyncReader.pipeReader),
-	)
+	if isFirstAttempt {
+		output = &AgenticRetrieveStreamOutput{}
+		output.initialReply = make(chan AgenticRetrieveStreamInitialReply, 1)
 
-	output.eventStream = NewAgenticRetrieveStreamEventStream(func(stream *AgenticRetrieveStreamEventStream) {
+		asyncResult = make(chan deserializeResult, 1)
+		asyncReader := newAsyncEventStreamReader(asyncResult)
+		eventReader := newAgenticRetrieveStreamResponseOutputReader(
+			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.AgenticRetrieveStreamResponseOutput, TypeRegistry, asyncReader.pipeReader),
+		)
 
-		stream.Reader = eventReader
-	})
+		output.eventStream = NewAgenticRetrieveStreamEventStream(func(stream *AgenticRetrieveStreamEventStream) {
 
-	go output.eventStream.waitStreamClose()
+			stream.Reader = eventReader
+		})
 
+		go output.eventStream.waitStreamClose()
+
+		m.existingResult = output
+		m.asyncResult = asyncResult
+	}
+
+	// Drain and re-send on every attempt (not just the first), mirroring
+	// the legacy hand-written middleware: the caller only ever consumes
+	// one value, but always sending keeps this symmetric with m.existingResult
+	// rather than depending on isFirstAttempt to decide who notifies.
 	prc, _ := ctx.Value(partialResultChan{}).(chan PartialResult)
 	if prc != nil {
 		select {

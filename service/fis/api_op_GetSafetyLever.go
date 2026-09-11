@@ -4,7 +4,9 @@ package fis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetSafetyLeverInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSafetyLeverInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSafetyLeverRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSafetyLeverInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetSafetyLeverRequest_id, *v.Id)
+	}
+}
+
 type GetSafetyLeverOutput struct {
 
 	//  Information about the safety lever.
@@ -45,13 +59,34 @@ type GetSafetyLeverOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSafetyLeverOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSafetyLeverResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSafetyLeverOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SafetyLever != nil {
+		s.WriteStruct(schemas.GetSafetyLeverResponse_safetyLever)
+		v.SafetyLever.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSafetyLeverOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSafetyLeverResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSafetyLeverResponse_safetyLever:
+			v.SafetyLever = &types.SafetyLever{}
+			return v.SafetyLever.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSafetyLeverMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSafetyLever{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSafetyLever, schemas.GetSafetyLeverRequest, schemas.GetSafetyLeverResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSafetyLever{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSafetyLever, schemas.GetSafetyLeverRequest, schemas.GetSafetyLeverResponse), output: &GetSafetyLeverOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

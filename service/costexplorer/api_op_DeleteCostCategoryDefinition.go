@@ -4,6 +4,8 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteCostCategoryDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCostCategoryDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCostCategoryDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCostCategoryDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CostCategoryArn != nil {
+		s.WriteString(schemas.DeleteCostCategoryDefinitionRequest_CostCategoryArn, *v.CostCategoryArn)
+	}
+}
+
 type DeleteCostCategoryDefinitionOutput struct {
 
 	// The unique identifier for your cost category.
@@ -49,13 +63,38 @@ type DeleteCostCategoryDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCostCategoryDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCostCategoryDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCostCategoryDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CostCategoryArn != nil {
+		s.WriteString(schemas.DeleteCostCategoryDefinitionResponse_CostCategoryArn, *v.CostCategoryArn)
+	}
+	if v.EffectiveEnd != nil {
+		s.WriteString(schemas.DeleteCostCategoryDefinitionResponse_EffectiveEnd, *v.EffectiveEnd)
+	}
+}
+func (v *DeleteCostCategoryDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCostCategoryDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteCostCategoryDefinitionResponse_CostCategoryArn:
+			v.CostCategoryArn = new(string)
+			return d.ReadString(schemas.DeleteCostCategoryDefinitionResponse_CostCategoryArn, v.CostCategoryArn)
+		case schemas.DeleteCostCategoryDefinitionResponse_EffectiveEnd:
+			v.EffectiveEnd = new(string)
+			return d.ReadString(schemas.DeleteCostCategoryDefinitionResponse_EffectiveEnd, v.EffectiveEnd)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCostCategoryDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCostCategoryDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCostCategoryDefinition, schemas.DeleteCostCategoryDefinitionRequest, schemas.DeleteCostCategoryDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteCostCategoryDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCostCategoryDefinition, schemas.DeleteCostCategoryDefinitionRequest, schemas.DeleteCostCategoryDefinitionResponse), output: &DeleteCostCategoryDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

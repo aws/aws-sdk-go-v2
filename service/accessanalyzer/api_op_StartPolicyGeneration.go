@@ -5,7 +5,9 @@ package accessanalyzer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,44 @@ type StartPolicyGenerationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPolicyGenerationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPolicyGenerationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPolicyGenerationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartPolicyGenerationRequest_clientToken, *v.ClientToken)
+	}
+	if v.CloudTrailDetails != nil {
+		s.WriteStruct(schemas.StartPolicyGenerationRequest_cloudTrailDetails)
+		v.CloudTrailDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PolicyGenerationDetails != nil {
+		s.WriteStruct(schemas.StartPolicyGenerationRequest_policyGenerationDetails)
+		v.PolicyGenerationDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartPolicyGenerationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartPolicyGenerationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartPolicyGenerationRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.StartPolicyGenerationRequest_clientToken, v.ClientToken)
+		case schemas.StartPolicyGenerationRequest_cloudTrailDetails:
+			v.CloudTrailDetails = &types.CloudTrailDetails{}
+			return v.CloudTrailDetails.Deserialize(d)
+		case schemas.StartPolicyGenerationRequest_policyGenerationDetails:
+			v.PolicyGenerationDetails = &types.PolicyGenerationDetails{}
+			return v.PolicyGenerationDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type StartPolicyGenerationOutput struct {
 
 	// The JobId that is returned by the StartPolicyGeneration operation. The JobId
@@ -65,13 +105,32 @@ type StartPolicyGenerationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPolicyGenerationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPolicyGenerationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPolicyGenerationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartPolicyGenerationResponse_jobId, *v.JobId)
+	}
+}
+func (v *StartPolicyGenerationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartPolicyGenerationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartPolicyGenerationResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartPolicyGenerationResponse_jobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartPolicyGenerationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartPolicyGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPolicyGeneration, schemas.StartPolicyGenerationRequest, schemas.StartPolicyGenerationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartPolicyGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPolicyGeneration, schemas.StartPolicyGenerationRequest, schemas.StartPolicyGenerationResponse), output: &StartPolicyGenerationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package appconfig
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type DeleteHostedConfigurationVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteHostedConfigurationVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteHostedConfigurationVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteHostedConfigurationVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.DeleteHostedConfigurationVersionRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.ConfigurationProfileId != nil {
+		s.WriteString(schemas.DeleteHostedConfigurationVersionRequest_ConfigurationProfileId, *v.ConfigurationProfileId)
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt32(schemas.DeleteHostedConfigurationVersionRequest_VersionNumber, *v.VersionNumber)
+	}
+}
+
 type DeleteHostedConfigurationVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +71,26 @@ type DeleteHostedConfigurationVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteHostedConfigurationVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteHostedConfigurationVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteHostedConfigurationVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteHostedConfigurationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteHostedConfigurationVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHostedConfigurationVersion, schemas.DeleteHostedConfigurationVersionRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteHostedConfigurationVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHostedConfigurationVersion, schemas.DeleteHostedConfigurationVersionRequest, nil), output: &DeleteHostedConfigurationVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

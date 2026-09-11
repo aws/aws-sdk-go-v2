@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -92,6 +94,31 @@ type CreateProvisionedModelThroughputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProvisionedModelThroughputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProvisionedModelThroughputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProvisionedModelThroughputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateProvisionedModelThroughputRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.CommitmentDuration != "" {
+		s.WriteString(schemas.CreateProvisionedModelThroughputRequest_commitmentDuration, string(v.CommitmentDuration))
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.CreateProvisionedModelThroughputRequest_modelId, *v.ModelId)
+	}
+	if v.ModelUnits != nil {
+		s.WriteInt32(schemas.CreateProvisionedModelThroughputRequest_modelUnits, *v.ModelUnits)
+	}
+	if v.ProvisionedModelName != nil {
+		s.WriteString(schemas.CreateProvisionedModelThroughputRequest_provisionedModelName, *v.ProvisionedModelName)
+	}
+	serializeTagList(s, schemas.CreateProvisionedModelThroughputRequest_tags, v.Tags)
+}
+
 type CreateProvisionedModelThroughputOutput struct {
 
 	// The Amazon Resource Name (ARN) for this Provisioned Throughput.
@@ -105,13 +132,32 @@ type CreateProvisionedModelThroughputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProvisionedModelThroughputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProvisionedModelThroughputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProvisionedModelThroughputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProvisionedModelArn != nil {
+		s.WriteString(schemas.CreateProvisionedModelThroughputResponse_provisionedModelArn, *v.ProvisionedModelArn)
+	}
+}
+func (v *CreateProvisionedModelThroughputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProvisionedModelThroughputResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProvisionedModelThroughputResponse_provisionedModelArn:
+			v.ProvisionedModelArn = new(string)
+			return d.ReadString(schemas.CreateProvisionedModelThroughputResponse_provisionedModelArn, v.ProvisionedModelArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProvisionedModelThroughputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProvisionedModelThroughput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProvisionedModelThroughput, schemas.CreateProvisionedModelThroughputRequest, schemas.CreateProvisionedModelThroughputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProvisionedModelThroughput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProvisionedModelThroughput, schemas.CreateProvisionedModelThroughputRequest, schemas.CreateProvisionedModelThroughputResponse), output: &CreateProvisionedModelThroughputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,21 @@ type AcceptAdministratorInvitationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptAdministratorInvitationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptAdministratorInvitationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptAdministratorInvitationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdministratorId != nil {
+		s.WriteString(schemas.AcceptAdministratorInvitationRequest_AdministratorId, *v.AdministratorId)
+	}
+	if v.InvitationId != nil {
+		s.WriteString(schemas.AcceptAdministratorInvitationRequest_InvitationId, *v.InvitationId)
+	}
+}
+
 type AcceptAdministratorInvitationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,13 +77,26 @@ type AcceptAdministratorInvitationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptAdministratorInvitationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptAdministratorInvitationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptAdministratorInvitationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AcceptAdministratorInvitationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceptAdministratorInvitationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcceptAdministratorInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAcceptAdministratorInvitation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptAdministratorInvitation, schemas.AcceptAdministratorInvitationRequest, schemas.AcceptAdministratorInvitationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAcceptAdministratorInvitation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptAdministratorInvitation, schemas.AcceptAdministratorInvitationRequest, schemas.AcceptAdministratorInvitationResponse), output: &AcceptAdministratorInvitationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

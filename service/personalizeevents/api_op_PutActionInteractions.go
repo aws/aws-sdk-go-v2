@@ -4,7 +4,9 @@ package personalizeevents
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalizeevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalizeevents/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,19 @@ type PutActionInteractionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutActionInteractionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutActionInteractionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutActionInteractionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionInteractionsList(s, schemas.PutActionInteractionsRequest_actionInteractions, v.ActionInteractions)
+	if v.TrackingId != nil {
+		s.WriteString(schemas.PutActionInteractionsRequest_trackingId, *v.TrackingId)
+	}
+}
+
 type PutActionInteractionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,13 +73,26 @@ type PutActionInteractionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutActionInteractionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutActionInteractionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutActionInteractionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutActionInteractionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutActionInteractions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutActionInteractions, schemas.PutActionInteractionsRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutActionInteractions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutActionInteractions, schemas.PutActionInteractionsRequest, nil), output: &PutActionInteractionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

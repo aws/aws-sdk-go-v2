@@ -4,7 +4,9 @@ package fis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,23 @@ type UpdateSafetyLeverStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSafetyLeverStateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSafetyLeverStateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSafetyLeverStateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateSafetyLeverStateRequest_id, *v.Id)
+	}
+	if v.State != nil {
+		s.WriteStruct(schemas.UpdateSafetyLeverStateRequest_state)
+		v.State.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateSafetyLeverStateOutput struct {
 
 	//  Information about the safety lever.
@@ -50,13 +69,34 @@ type UpdateSafetyLeverStateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSafetyLeverStateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSafetyLeverStateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSafetyLeverStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SafetyLever != nil {
+		s.WriteStruct(schemas.UpdateSafetyLeverStateResponse_safetyLever)
+		v.SafetyLever.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateSafetyLeverStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSafetyLeverStateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSafetyLeverStateResponse_safetyLever:
+			v.SafetyLever = &types.SafetyLever{}
+			return v.SafetyLever.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSafetyLeverStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSafetyLeverState{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSafetyLeverState, schemas.UpdateSafetyLeverStateRequest, schemas.UpdateSafetyLeverStateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSafetyLeverState{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSafetyLeverState, schemas.UpdateSafetyLeverStateRequest, schemas.UpdateSafetyLeverStateResponse), output: &UpdateSafetyLeverStateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package billing
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/billing/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type RedeemCreditsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RedeemCreditsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedeemCreditsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedeemCreditsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PromoCode != nil {
+		s.WriteString(schemas.RedeemCreditsRequest_promoCode, *v.PromoCode)
+	}
+}
+
 type RedeemCreditsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +58,26 @@ type RedeemCreditsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RedeemCreditsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedeemCreditsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedeemCreditsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RedeemCreditsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedeemCreditsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRedeemCreditsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRedeemCredits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RedeemCredits, schemas.RedeemCreditsRequest, schemas.RedeemCreditsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRedeemCredits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RedeemCredits, schemas.RedeemCreditsRequest, schemas.RedeemCreditsResponse), output: &RedeemCreditsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

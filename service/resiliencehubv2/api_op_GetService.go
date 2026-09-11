@@ -5,7 +5,9 @@ package resiliencehubv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -38,6 +40,18 @@ type GetServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.GetServiceRequest_serviceArn, *v.ServiceArn)
+	}
+}
+
 type GetServiceOutput struct {
 
 	// The requested service.
@@ -51,13 +65,34 @@ type GetServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Service != nil {
+		s.WriteStruct(schemas.GetServiceResponse_service)
+		v.Service.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceResponse_service:
+			v.Service = &types.Service{}
+			return v.Service.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetService, schemas.GetServiceRequest, schemas.GetServiceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetService, schemas.GetServiceRequest, schemas.GetServiceResponse), output: &GetServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

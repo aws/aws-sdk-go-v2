@@ -5,7 +5,9 @@ package costexplorer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ListCostAllocationTagBackfillHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCostAllocationTagBackfillHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCostAllocationTagBackfillHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCostAllocationTagBackfillHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCostAllocationTagBackfillHistoryRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCostAllocationTagBackfillHistoryRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListCostAllocationTagBackfillHistoryOutput struct {
 
 	//  The list of historical cost allocation tag backfill requests.
@@ -54,13 +71,35 @@ type ListCostAllocationTagBackfillHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCostAllocationTagBackfillHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCostAllocationTagBackfillHistoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCostAllocationTagBackfillHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCostAllocationTagBackfillRequestList(s, schemas.ListCostAllocationTagBackfillHistoryResponse_BackfillRequests, v.BackfillRequests)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCostAllocationTagBackfillHistoryResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCostAllocationTagBackfillHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCostAllocationTagBackfillHistoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCostAllocationTagBackfillHistoryResponse_BackfillRequests:
+			return deserializeCostAllocationTagBackfillRequestList(d, schemas.ListCostAllocationTagBackfillHistoryResponse_BackfillRequests, &v.BackfillRequests)
+		case schemas.ListCostAllocationTagBackfillHistoryResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCostAllocationTagBackfillHistoryResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCostAllocationTagBackfillHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCostAllocationTagBackfillHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCostAllocationTagBackfillHistory, schemas.ListCostAllocationTagBackfillHistoryRequest, schemas.ListCostAllocationTagBackfillHistoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCostAllocationTagBackfillHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCostAllocationTagBackfillHistory, schemas.ListCostAllocationTagBackfillHistoryRequest, schemas.ListCostAllocationTagBackfillHistoryResponse), output: &ListCostAllocationTagBackfillHistoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

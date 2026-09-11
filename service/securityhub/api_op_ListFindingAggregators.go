@@ -5,7 +5,9 @@ package securityhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ListFindingAggregatorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFindingAggregatorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFindingAggregatorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFindingAggregatorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFindingAggregatorsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFindingAggregatorsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListFindingAggregatorsOutput struct {
 
 	// The list of finding aggregators. This operation currently only returns a single
@@ -58,13 +75,35 @@ type ListFindingAggregatorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFindingAggregatorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFindingAggregatorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFindingAggregatorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFindingAggregatorList(s, schemas.ListFindingAggregatorsResponse_FindingAggregators, v.FindingAggregators)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFindingAggregatorsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFindingAggregatorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFindingAggregatorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFindingAggregatorsResponse_FindingAggregators:
+			return deserializeFindingAggregatorList(d, schemas.ListFindingAggregatorsResponse_FindingAggregators, &v.FindingAggregators)
+		case schemas.ListFindingAggregatorsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFindingAggregatorsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFindingAggregatorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFindingAggregators{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFindingAggregators, schemas.ListFindingAggregatorsRequest, schemas.ListFindingAggregatorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFindingAggregators{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFindingAggregators, schemas.ListFindingAggregatorsRequest, schemas.ListFindingAggregatorsResponse), output: &ListFindingAggregatorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

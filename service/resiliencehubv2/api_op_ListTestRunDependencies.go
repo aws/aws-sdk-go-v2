@@ -5,7 +5,9 @@ package resiliencehubv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type ListTestRunDependenciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestRunDependenciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestRunDependenciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestRunDependenciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTestRunDependenciesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestRunDependenciesRequest_nextToken, *v.NextToken)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.ListTestRunDependenciesRequest_serviceArn, *v.ServiceArn)
+	}
+	if v.TestRunId != nil {
+		s.WriteString(schemas.ListTestRunDependenciesRequest_testRunId, *v.TestRunId)
+	}
+}
+
 type ListTestRunDependenciesOutput struct {
 
 	// The list of dependencies the test run blocked.
@@ -64,13 +87,35 @@ type ListTestRunDependenciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestRunDependenciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestRunDependenciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestRunDependenciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTestRunDependencySummaryList(s, schemas.ListTestRunDependenciesResponse_dependencies, v.Dependencies)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestRunDependenciesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListTestRunDependenciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTestRunDependenciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTestRunDependenciesResponse_dependencies:
+			return deserializeTestRunDependencySummaryList(d, schemas.ListTestRunDependenciesResponse_dependencies, &v.Dependencies)
+		case schemas.ListTestRunDependenciesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTestRunDependenciesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTestRunDependenciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTestRunDependencies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestRunDependencies, schemas.ListTestRunDependenciesRequest, schemas.ListTestRunDependenciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTestRunDependencies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestRunDependencies, schemas.ListTestRunDependenciesRequest, schemas.ListTestRunDependenciesResponse), output: &ListTestRunDependenciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

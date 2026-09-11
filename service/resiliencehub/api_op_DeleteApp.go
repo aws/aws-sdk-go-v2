@@ -5,6 +5,8 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,40 @@ type DeleteAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.DeleteAppRequest_appArn, *v.AppArn)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteAppRequest_clientToken, *v.ClientToken)
+	}
+	if v.ForceDelete != nil {
+		s.WriteBool(schemas.DeleteAppRequest_forceDelete, *v.ForceDelete)
+	}
+}
+func (v *DeleteAppInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAppRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAppRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.DeleteAppRequest_appArn, v.AppArn)
+		case schemas.DeleteAppRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DeleteAppRequest_clientToken, v.ClientToken)
+		case schemas.DeleteAppRequest_forceDelete:
+			v.ForceDelete = new(bool)
+			return d.ReadBool(schemas.DeleteAppRequest_forceDelete, v.ForceDelete)
+		}
+		return nil
+	})
+}
+
 type DeleteAppOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
@@ -66,13 +102,32 @@ type DeleteAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAppResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.DeleteAppResponse_appArn, *v.AppArn)
+	}
+}
+func (v *DeleteAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAppResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAppResponse_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.DeleteAppResponse_appArn, v.AppArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApp, schemas.DeleteAppRequest, schemas.DeleteAppResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApp, schemas.DeleteAppRequest, schemas.DeleteAppResponse), output: &DeleteAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

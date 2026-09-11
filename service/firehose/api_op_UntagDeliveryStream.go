@@ -4,6 +4,8 @@ package firehose
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/firehose/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,19 @@ type UntagDeliveryStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UntagDeliveryStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UntagDeliveryStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UntagDeliveryStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryStreamName != nil {
+		s.WriteString(schemas.UntagDeliveryStreamInput_DeliveryStreamName, *v.DeliveryStreamName)
+	}
+	serializeTagKeyList(s, schemas.UntagDeliveryStreamInput_TagKeys, v.TagKeys)
+}
+
 type UntagDeliveryStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +65,26 @@ type UntagDeliveryStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UntagDeliveryStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UntagDeliveryStreamOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UntagDeliveryStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UntagDeliveryStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UntagDeliveryStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUntagDeliveryStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUntagDeliveryStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UntagDeliveryStream, schemas.UntagDeliveryStreamInput, schemas.UntagDeliveryStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUntagDeliveryStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UntagDeliveryStream, schemas.UntagDeliveryStreamInput, schemas.UntagDeliveryStreamOutput), output: &UntagDeliveryStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

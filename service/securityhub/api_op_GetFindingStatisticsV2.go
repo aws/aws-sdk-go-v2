@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,27 @@ type GetFindingStatisticsV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingStatisticsV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingStatisticsV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingStatisticsV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroupByRules(s, schemas.GetFindingStatisticsV2Request_GroupByRules, v.GroupByRules)
+	if v.MaxStatisticResults != nil {
+		s.WriteInt32(schemas.GetFindingStatisticsV2Request_MaxStatisticResults, *v.MaxStatisticResults)
+	}
+	if v.Scopes != nil {
+		s.WriteStruct(schemas.GetFindingStatisticsV2Request_Scopes)
+		v.Scopes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.GetFindingStatisticsV2Request_SortOrder, string(v.SortOrder))
+	}
+}
+
 type GetFindingStatisticsV2Output struct {
 
 	// Aggregated statistics about security findings based on specified grouping
@@ -75,13 +98,29 @@ type GetFindingStatisticsV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingStatisticsV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingStatisticsV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingStatisticsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroupByResults(s, schemas.GetFindingStatisticsV2Response_GroupByResults, v.GroupByResults)
+}
+func (v *GetFindingStatisticsV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFindingStatisticsV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFindingStatisticsV2Response_GroupByResults:
+			return deserializeGroupByResults(d, schemas.GetFindingStatisticsV2Response_GroupByResults, &v.GroupByResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFindingStatisticsV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFindingStatisticsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingStatisticsV2, schemas.GetFindingStatisticsV2Request, schemas.GetFindingStatisticsV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFindingStatisticsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingStatisticsV2, schemas.GetFindingStatisticsV2Request, schemas.GetFindingStatisticsV2Response), output: &GetFindingStatisticsV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

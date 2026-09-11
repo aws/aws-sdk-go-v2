@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,22 @@ type ListDistributionConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDistributionConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDistributionConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDistributionConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.ListDistributionConfigurationsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDistributionConfigurationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDistributionConfigurationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListDistributionConfigurationsOutput struct {
 
 	// The list of distributions.
@@ -59,13 +77,41 @@ type ListDistributionConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDistributionConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDistributionConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDistributionConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDistributionConfigurationSummaryList(s, schemas.ListDistributionConfigurationsResponse_distributionConfigurationSummaryList, v.DistributionConfigurationSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDistributionConfigurationsResponse_nextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListDistributionConfigurationsResponse_requestId, *v.RequestId)
+	}
+}
+func (v *ListDistributionConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDistributionConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDistributionConfigurationsResponse_distributionConfigurationSummaryList:
+			return deserializeDistributionConfigurationSummaryList(d, schemas.ListDistributionConfigurationsResponse_distributionConfigurationSummaryList, &v.DistributionConfigurationSummaryList)
+		case schemas.ListDistributionConfigurationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDistributionConfigurationsResponse_nextToken, v.NextToken)
+		case schemas.ListDistributionConfigurationsResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListDistributionConfigurationsResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDistributionConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDistributionConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDistributionConfigurations, schemas.ListDistributionConfigurationsRequest, schemas.ListDistributionConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDistributionConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDistributionConfigurations, schemas.ListDistributionConfigurationsRequest, schemas.ListDistributionConfigurationsResponse), output: &ListDistributionConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

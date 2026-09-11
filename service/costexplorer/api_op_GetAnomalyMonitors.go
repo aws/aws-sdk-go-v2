@@ -5,7 +5,9 @@ package costexplorer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,22 @@ type GetAnomalyMonitorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAnomalyMonitorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnomalyMonitorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnomalyMonitorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetAnomalyMonitorsRequest_MaxResults, *v.MaxResults)
+	}
+	serializeValues(s, schemas.GetAnomalyMonitorsRequest_MonitorArnList, v.MonitorArnList)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetAnomalyMonitorsRequest_NextPageToken, *v.NextPageToken)
+	}
+}
+
 type GetAnomalyMonitorsOutput struct {
 
 	// A list of cost anomaly monitors that includes the detailed metadata for each
@@ -61,13 +79,35 @@ type GetAnomalyMonitorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAnomalyMonitorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnomalyMonitorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnomalyMonitorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnomalyMonitors(s, schemas.GetAnomalyMonitorsResponse_AnomalyMonitors, v.AnomalyMonitors)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetAnomalyMonitorsResponse_NextPageToken, *v.NextPageToken)
+	}
+}
+func (v *GetAnomalyMonitorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAnomalyMonitorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAnomalyMonitorsResponse_AnomalyMonitors:
+			return deserializeAnomalyMonitors(d, schemas.GetAnomalyMonitorsResponse_AnomalyMonitors, &v.AnomalyMonitors)
+		case schemas.GetAnomalyMonitorsResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetAnomalyMonitorsResponse_NextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAnomalyMonitorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAnomalyMonitors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnomalyMonitors, schemas.GetAnomalyMonitorsRequest, schemas.GetAnomalyMonitorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAnomalyMonitors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnomalyMonitors, schemas.GetAnomalyMonitorsRequest, schemas.GetAnomalyMonitorsResponse), output: &GetAnomalyMonitorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

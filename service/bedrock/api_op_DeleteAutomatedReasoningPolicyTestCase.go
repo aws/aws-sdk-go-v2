@@ -4,6 +4,8 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -47,6 +49,24 @@ type DeleteAutomatedReasoningPolicyTestCaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAutomatedReasoningPolicyTestCaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAutomatedReasoningPolicyTestCaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAutomatedReasoningPolicyTestCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.DeleteAutomatedReasoningPolicyTestCaseRequest_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.DeleteAutomatedReasoningPolicyTestCaseRequest_policyArn, *v.PolicyArn)
+	}
+	if v.TestCaseId != nil {
+		s.WriteString(schemas.DeleteAutomatedReasoningPolicyTestCaseRequest_testCaseId, *v.TestCaseId)
+	}
+}
+
 type DeleteAutomatedReasoningPolicyTestCaseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +74,26 @@ type DeleteAutomatedReasoningPolicyTestCaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAutomatedReasoningPolicyTestCaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAutomatedReasoningPolicyTestCaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAutomatedReasoningPolicyTestCaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAutomatedReasoningPolicyTestCaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAutomatedReasoningPolicyTestCaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAutomatedReasoningPolicyTestCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAutomatedReasoningPolicyTestCase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAutomatedReasoningPolicyTestCase, schemas.DeleteAutomatedReasoningPolicyTestCaseRequest, schemas.DeleteAutomatedReasoningPolicyTestCaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAutomatedReasoningPolicyTestCase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAutomatedReasoningPolicyTestCase, schemas.DeleteAutomatedReasoningPolicyTestCaseRequest, schemas.DeleteAutomatedReasoningPolicyTestCaseResponse), output: &DeleteAutomatedReasoningPolicyTestCaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

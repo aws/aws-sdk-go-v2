@@ -5,7 +5,9 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,52 @@ type ListAppVersionResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppVersionResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppVersionResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppVersionResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.ListAppVersionResourcesRequest_appArn, *v.AppArn)
+	}
+	if v.AppVersion != nil {
+		s.WriteString(schemas.ListAppVersionResourcesRequest_appVersion, *v.AppVersion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAppVersionResourcesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppVersionResourcesRequest_nextToken, *v.NextToken)
+	}
+	if v.ResolutionId != nil {
+		s.WriteString(schemas.ListAppVersionResourcesRequest_resolutionId, *v.ResolutionId)
+	}
+}
+func (v *ListAppVersionResourcesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppVersionResourcesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppVersionResourcesRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.ListAppVersionResourcesRequest_appArn, v.AppArn)
+		case schemas.ListAppVersionResourcesRequest_appVersion:
+			v.AppVersion = new(string)
+			return d.ReadString(schemas.ListAppVersionResourcesRequest_appVersion, v.AppVersion)
+		case schemas.ListAppVersionResourcesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListAppVersionResourcesRequest_maxResults, v.MaxResults)
+		case schemas.ListAppVersionResourcesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppVersionResourcesRequest_nextToken, v.NextToken)
+		case schemas.ListAppVersionResourcesRequest_resolutionId:
+			v.ResolutionId = new(string)
+			return d.ReadString(schemas.ListAppVersionResourcesRequest_resolutionId, v.ResolutionId)
+		}
+		return nil
+	})
+}
+
 type ListAppVersionResourcesOutput struct {
 
 	// The physical resources in the application version.
@@ -77,13 +125,41 @@ type ListAppVersionResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppVersionResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppVersionResourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppVersionResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppVersionResourcesResponse_nextToken, *v.NextToken)
+	}
+	serializePhysicalResourceList(s, schemas.ListAppVersionResourcesResponse_physicalResources, v.PhysicalResources)
+	if v.ResolutionId != nil {
+		s.WriteString(schemas.ListAppVersionResourcesResponse_resolutionId, *v.ResolutionId)
+	}
+}
+func (v *ListAppVersionResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppVersionResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppVersionResourcesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppVersionResourcesResponse_nextToken, v.NextToken)
+		case schemas.ListAppVersionResourcesResponse_physicalResources:
+			return deserializePhysicalResourceList(d, schemas.ListAppVersionResourcesResponse_physicalResources, &v.PhysicalResources)
+		case schemas.ListAppVersionResourcesResponse_resolutionId:
+			v.ResolutionId = new(string)
+			return d.ReadString(schemas.ListAppVersionResourcesResponse_resolutionId, v.ResolutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAppVersionResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAppVersionResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppVersionResources, schemas.ListAppVersionResourcesRequest, schemas.ListAppVersionResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAppVersionResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppVersionResources, schemas.ListAppVersionResourcesRequest, schemas.ListAppVersionResourcesResponse), output: &ListAppVersionResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

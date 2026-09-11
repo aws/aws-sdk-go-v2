@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,30 @@ type UpdateCisScanConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCisScanConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCisScanConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCisScanConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScanConfigurationArn != nil {
+		s.WriteString(schemas.UpdateCisScanConfigurationRequest_scanConfigurationArn, *v.ScanConfigurationArn)
+	}
+	if v.ScanName != nil {
+		s.WriteString(schemas.UpdateCisScanConfigurationRequest_scanName, *v.ScanName)
+	}
+	serializeSchedule(s, schemas.UpdateCisScanConfigurationRequest_schedule, v.Schedule)
+	if v.SecurityLevel != "" {
+		s.WriteString(schemas.UpdateCisScanConfigurationRequest_securityLevel, string(v.SecurityLevel))
+	}
+	if v.Targets != nil {
+		s.WriteStruct(schemas.UpdateCisScanConfigurationRequest_targets)
+		v.Targets.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateCisScanConfigurationOutput struct {
 
 	// The CIS scan configuration ARN.
@@ -60,13 +86,32 @@ type UpdateCisScanConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCisScanConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCisScanConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCisScanConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScanConfigurationArn != nil {
+		s.WriteString(schemas.UpdateCisScanConfigurationResponse_scanConfigurationArn, *v.ScanConfigurationArn)
+	}
+}
+func (v *UpdateCisScanConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCisScanConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCisScanConfigurationResponse_scanConfigurationArn:
+			v.ScanConfigurationArn = new(string)
+			return d.ReadString(schemas.UpdateCisScanConfigurationResponse_scanConfigurationArn, v.ScanConfigurationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCisScanConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCisScanConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCisScanConfiguration, schemas.UpdateCisScanConfigurationRequest, schemas.UpdateCisScanConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCisScanConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCisScanConfiguration, schemas.UpdateCisScanConfigurationRequest, schemas.UpdateCisScanConfigurationResponse), output: &UpdateCisScanConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

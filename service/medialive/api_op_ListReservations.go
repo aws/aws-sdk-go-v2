@@ -5,7 +5,9 @@ package medialive
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,45 @@ type ListReservationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReservationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReservationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReservationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelClass != nil {
+		s.WriteString(schemas.ListReservationsRequest_ChannelClass, *v.ChannelClass)
+	}
+	if v.Codec != nil {
+		s.WriteString(schemas.ListReservationsRequest_Codec, *v.Codec)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReservationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MaximumBitrate != nil {
+		s.WriteString(schemas.ListReservationsRequest_MaximumBitrate, *v.MaximumBitrate)
+	}
+	if v.MaximumFramerate != nil {
+		s.WriteString(schemas.ListReservationsRequest_MaximumFramerate, *v.MaximumFramerate)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReservationsRequest_NextToken, *v.NextToken)
+	}
+	if v.Resolution != nil {
+		s.WriteString(schemas.ListReservationsRequest_Resolution, *v.Resolution)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ListReservationsRequest_ResourceType, *v.ResourceType)
+	}
+	if v.SpecialFeature != nil {
+		s.WriteString(schemas.ListReservationsRequest_SpecialFeature, *v.SpecialFeature)
+	}
+	if v.VideoQuality != nil {
+		s.WriteString(schemas.ListReservationsRequest_VideoQuality, *v.VideoQuality)
+	}
+}
+
 // Placeholder documentation for ListReservationsResponse
 type ListReservationsOutput struct {
 
@@ -76,13 +117,35 @@ type ListReservationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReservationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReservationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReservationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReservationsResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfReservation(s, schemas.ListReservationsResponse_Reservations, v.Reservations)
+}
+func (v *ListReservationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReservationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReservationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReservationsResponse_NextToken, v.NextToken)
+		case schemas.ListReservationsResponse_Reservations:
+			return deserialize__listOfReservation(d, schemas.ListReservationsResponse_Reservations, &v.Reservations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReservationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListReservations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReservations, schemas.ListReservationsRequest, schemas.ListReservationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListReservations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReservations, schemas.ListReservationsRequest, schemas.ListReservationsResponse), output: &ListReservationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sfn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -134,6 +136,49 @@ type CreateStateMachineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStateMachineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStateMachineInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStateMachineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Definition != nil {
+		s.WriteString(schemas.CreateStateMachineInput_definition, *v.Definition)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateStateMachineInput_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.CreateStateMachineInput_loggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateStateMachineInput_name, *v.Name)
+	}
+	if v.Publish != false {
+		s.WriteBool(schemas.CreateStateMachineInput_publish, v.Publish)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateStateMachineInput_roleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.CreateStateMachineInput_tags, v.Tags)
+	if v.TracingConfiguration != nil {
+		s.WriteStruct(schemas.CreateStateMachineInput_tracingConfiguration)
+		v.TracingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateStateMachineInput_type, string(v.Type))
+	}
+	if v.VersionDescription != nil {
+		s.WriteString(schemas.CreateStateMachineInput_versionDescription, *v.VersionDescription)
+	}
+}
+
 type CreateStateMachineOutput struct {
 
 	// The date the state machine is created.
@@ -157,13 +202,44 @@ type CreateStateMachineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStateMachineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStateMachineOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStateMachineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.CreateStateMachineOutput_creationDate, *v.CreationDate)
+	}
+	if v.StateMachineArn != nil {
+		s.WriteString(schemas.CreateStateMachineOutput_stateMachineArn, *v.StateMachineArn)
+	}
+	if v.StateMachineVersionArn != nil {
+		s.WriteString(schemas.CreateStateMachineOutput_stateMachineVersionArn, *v.StateMachineVersionArn)
+	}
+}
+func (v *CreateStateMachineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStateMachineOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStateMachineOutput_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.CreateStateMachineOutput_creationDate, v.CreationDate)
+		case schemas.CreateStateMachineOutput_stateMachineArn:
+			v.StateMachineArn = new(string)
+			return d.ReadString(schemas.CreateStateMachineOutput_stateMachineArn, v.StateMachineArn)
+		case schemas.CreateStateMachineOutput_stateMachineVersionArn:
+			v.StateMachineVersionArn = new(string)
+			return d.ReadString(schemas.CreateStateMachineOutput_stateMachineVersionArn, v.StateMachineVersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStateMachineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateStateMachine{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStateMachine, schemas.CreateStateMachineInput, schemas.CreateStateMachineOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateStateMachine{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStateMachine, schemas.CreateStateMachineInput, schemas.CreateStateMachineOutput), output: &CreateStateMachineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

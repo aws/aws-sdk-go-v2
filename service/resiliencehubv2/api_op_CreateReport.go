@@ -5,7 +5,9 @@ package resiliencehubv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type CreateReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateReportRequest_clientToken, *v.ClientToken)
+	}
+	if v.ReportType != "" {
+		s.WriteString(schemas.CreateReportRequest_reportType, string(v.ReportType))
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.CreateReportRequest_serviceArn, *v.ServiceArn)
+	}
+}
+
 type CreateReportOutput struct {
 
 	// The result of the report generation request.
@@ -57,13 +77,34 @@ type CreateReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportGenerationResult != nil {
+		s.WriteStruct(schemas.CreateReportResponse_reportGenerationResult)
+		v.ReportGenerationResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateReportResponse_reportGenerationResult:
+			v.ReportGenerationResult = &types.ReportGenerationResult{}
+			return v.ReportGenerationResult.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReport, schemas.CreateReportRequest, schemas.CreateReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReport, schemas.CreateReportRequest, schemas.CreateReportResponse), output: &CreateReportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

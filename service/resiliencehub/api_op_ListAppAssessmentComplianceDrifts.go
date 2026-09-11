@@ -5,7 +5,9 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListAppAssessmentComplianceDriftsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppAssessmentComplianceDriftsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppAssessmentComplianceDriftsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppAssessmentComplianceDriftsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentArn != nil {
+		s.WriteString(schemas.ListAppAssessmentComplianceDriftsRequest_assessmentArn, *v.AssessmentArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAppAssessmentComplianceDriftsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppAssessmentComplianceDriftsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAppAssessmentComplianceDriftsOutput struct {
 
 	// Indicates compliance drifts (recovery time objective (RTO) and recovery point
@@ -62,13 +82,35 @@ type ListAppAssessmentComplianceDriftsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppAssessmentComplianceDriftsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppAssessmentComplianceDriftsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppAssessmentComplianceDriftsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComplianceDriftList(s, schemas.ListAppAssessmentComplianceDriftsResponse_complianceDrifts, v.ComplianceDrifts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppAssessmentComplianceDriftsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAppAssessmentComplianceDriftsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppAssessmentComplianceDriftsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppAssessmentComplianceDriftsResponse_complianceDrifts:
+			return deserializeComplianceDriftList(d, schemas.ListAppAssessmentComplianceDriftsResponse_complianceDrifts, &v.ComplianceDrifts)
+		case schemas.ListAppAssessmentComplianceDriftsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppAssessmentComplianceDriftsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAppAssessmentComplianceDriftsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAppAssessmentComplianceDrifts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppAssessmentComplianceDrifts, schemas.ListAppAssessmentComplianceDriftsRequest, schemas.ListAppAssessmentComplianceDriftsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAppAssessmentComplianceDrifts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppAssessmentComplianceDrifts, schemas.ListAppAssessmentComplianceDriftsRequest, schemas.ListAppAssessmentComplianceDriftsResponse), output: &ListAppAssessmentComplianceDriftsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,27 @@ type GetResourcesStatisticsV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcesStatisticsV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcesStatisticsV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcesStatisticsV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceGroupByRules(s, schemas.GetResourcesStatisticsV2Request_GroupByRules, v.GroupByRules)
+	if v.MaxStatisticResults != nil {
+		s.WriteInt32(schemas.GetResourcesStatisticsV2Request_MaxStatisticResults, *v.MaxStatisticResults)
+	}
+	if v.Scopes != nil {
+		s.WriteStruct(schemas.GetResourcesStatisticsV2Request_Scopes)
+		v.Scopes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.GetResourcesStatisticsV2Request_SortOrder, string(v.SortOrder))
+	}
+}
+
 type GetResourcesStatisticsV2Output struct {
 
 	// The aggregated statistics about resources based on the specified grouping rule.
@@ -76,13 +99,29 @@ type GetResourcesStatisticsV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcesStatisticsV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcesStatisticsV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcesStatisticsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroupByResults(s, schemas.GetResourcesStatisticsV2Response_GroupByResults, v.GroupByResults)
+}
+func (v *GetResourcesStatisticsV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourcesStatisticsV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourcesStatisticsV2Response_GroupByResults:
+			return deserializeGroupByResults(d, schemas.GetResourcesStatisticsV2Response_GroupByResults, &v.GroupByResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourcesStatisticsV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourcesStatisticsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcesStatisticsV2, schemas.GetResourcesStatisticsV2Request, schemas.GetResourcesStatisticsV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourcesStatisticsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcesStatisticsV2, schemas.GetResourcesStatisticsV2Request, schemas.GetResourcesStatisticsV2Response), output: &GetResourcesStatisticsV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

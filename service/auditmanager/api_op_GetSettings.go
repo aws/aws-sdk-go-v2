@@ -4,7 +4,9 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attribute != "" {
+		s.WriteString(schemas.GetSettingsRequest_attribute, string(v.Attribute))
+	}
+}
+
 type GetSettingsOutput struct {
 
 	//  The settings object that holds all supported Audit Manager settings.
@@ -45,13 +59,34 @@ type GetSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Settings != nil {
+		s.WriteStruct(schemas.GetSettingsResponse_settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSettingsResponse_settings:
+			v.Settings = &types.Settings{}
+			return v.Settings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSettings, schemas.GetSettingsRequest, schemas.GetSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSettings, schemas.GetSettingsRequest, schemas.GetSettingsResponse), output: &GetSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

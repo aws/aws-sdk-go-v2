@@ -5,7 +5,9 @@ package resiliencehubv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,27 @@ type ListInputSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInputSourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInputSourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInputSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInputSourcesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInputSourcesRequest_nextToken, *v.NextToken)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.ListInputSourcesRequest_serviceArn, *v.ServiceArn)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListInputSourcesRequest_type, string(v.Type))
+	}
+}
+
 type ListInputSourcesOutput struct {
 
 	// The list of input source summaries.
@@ -60,13 +83,35 @@ type ListInputSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInputSourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInputSourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInputSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInputSourceSummaryList(s, schemas.ListInputSourcesResponse_inputSourceSummaries, v.InputSourceSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInputSourcesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListInputSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInputSourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInputSourcesResponse_inputSourceSummaries:
+			return deserializeInputSourceSummaryList(d, schemas.ListInputSourcesResponse_inputSourceSummaries, &v.InputSourceSummaries)
+		case schemas.ListInputSourcesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInputSourcesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInputSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInputSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInputSources, schemas.ListInputSourcesRequest, schemas.ListInputSourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListInputSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInputSources, schemas.ListInputSourcesRequest, schemas.ListInputSourcesResponse), output: &ListInputSourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

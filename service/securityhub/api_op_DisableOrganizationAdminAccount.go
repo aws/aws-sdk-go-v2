@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DisableOrganizationAdminAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableOrganizationAdminAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableOrganizationAdminAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableOrganizationAdminAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdminAccountId != nil {
+		s.WriteString(schemas.DisableOrganizationAdminAccountRequest_AdminAccountId, *v.AdminAccountId)
+	}
+	if v.Feature != "" {
+		s.WriteString(schemas.DisableOrganizationAdminAccountRequest_Feature, string(v.Feature))
+	}
+}
+
 type DisableOrganizationAdminAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type DisableOrganizationAdminAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableOrganizationAdminAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableOrganizationAdminAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableOrganizationAdminAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisableOrganizationAdminAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableOrganizationAdminAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableOrganizationAdminAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisableOrganizationAdminAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableOrganizationAdminAccount, schemas.DisableOrganizationAdminAccountRequest, schemas.DisableOrganizationAdminAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisableOrganizationAdminAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableOrganizationAdminAccount, schemas.DisableOrganizationAdminAccountRequest, schemas.DisableOrganizationAdminAccountResponse), output: &DisableOrganizationAdminAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

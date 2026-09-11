@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,22 @@ type ListImageScanFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImageScanFindingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImageScanFindingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImageScanFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImageScanFindingsFilterList(s, schemas.ListImageScanFindingsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListImageScanFindingsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImageScanFindingsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListImageScanFindingsOutput struct {
 
 	// The image scan findings for your account that meet your request filter criteria.
@@ -70,13 +88,41 @@ type ListImageScanFindingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImageScanFindingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImageScanFindingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImageScanFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImageScanFindingsList(s, schemas.ListImageScanFindingsResponse_findings, v.Findings)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImageScanFindingsResponse_nextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListImageScanFindingsResponse_requestId, *v.RequestId)
+	}
+}
+func (v *ListImageScanFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListImageScanFindingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListImageScanFindingsResponse_findings:
+			return deserializeImageScanFindingsList(d, schemas.ListImageScanFindingsResponse_findings, &v.Findings)
+		case schemas.ListImageScanFindingsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListImageScanFindingsResponse_nextToken, v.NextToken)
+		case schemas.ListImageScanFindingsResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListImageScanFindingsResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListImageScanFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListImageScanFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImageScanFindings, schemas.ListImageScanFindingsRequest, schemas.ListImageScanFindingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListImageScanFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImageScanFindings, schemas.ListImageScanFindingsRequest, schemas.ListImageScanFindingsResponse), output: &ListImageScanFindingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

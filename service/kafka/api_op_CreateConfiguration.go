@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -49,6 +51,25 @@ type CreateConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateConfigurationRequest_Description, *v.Description)
+	}
+	serialize__listOf__string(s, schemas.CreateConfigurationRequest_KafkaVersions, v.KafkaVersions)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateConfigurationRequest_Name, *v.Name)
+	}
+	if v.ServerProperties != nil {
+		s.WriteBlob(schemas.CreateConfigurationRequest_ServerProperties, v.ServerProperties)
+	}
+}
+
 type CreateConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the configuration.
@@ -73,13 +94,62 @@ type CreateConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateConfigurationResponse_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CreateConfigurationResponse_CreationTime, *v.CreationTime)
+	}
+	if v.LatestRevision != nil {
+		s.WriteStruct(schemas.CreateConfigurationResponse_LatestRevision)
+		v.LatestRevision.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateConfigurationResponse_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CreateConfigurationResponse_State, string(v.State))
+	}
+}
+func (v *CreateConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConfigurationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateConfigurationResponse_Arn, v.Arn)
+		case schemas.CreateConfigurationResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateConfigurationResponse_CreationTime, v.CreationTime)
+		case schemas.CreateConfigurationResponse_LatestRevision:
+			v.LatestRevision = &types.ConfigurationRevision{}
+			return v.LatestRevision.Deserialize(d)
+		case schemas.CreateConfigurationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateConfigurationResponse_Name, v.Name)
+		case schemas.CreateConfigurationResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.CreateConfigurationResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ConfigurationState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfiguration, schemas.CreateConfigurationRequest, schemas.CreateConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfiguration, schemas.CreateConfigurationRequest, schemas.CreateConfigurationResponse), output: &CreateConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

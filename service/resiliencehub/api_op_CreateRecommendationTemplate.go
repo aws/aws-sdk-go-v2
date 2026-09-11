@@ -5,7 +5,9 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,65 @@ type CreateRecommendationTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRecommendationTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRecommendationTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRecommendationTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentArn != nil {
+		s.WriteString(schemas.CreateRecommendationTemplateRequest_assessmentArn, *v.AssessmentArn)
+	}
+	if v.BucketName != nil {
+		s.WriteString(schemas.CreateRecommendationTemplateRequest_bucketName, *v.BucketName)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRecommendationTemplateRequest_clientToken, *v.ClientToken)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.CreateRecommendationTemplateRequest_format, string(v.Format))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRecommendationTemplateRequest_name, *v.Name)
+	}
+	serializeRecommendationIdList(s, schemas.CreateRecommendationTemplateRequest_recommendationIds, v.RecommendationIds)
+	serializeRenderRecommendationTypeList(s, schemas.CreateRecommendationTemplateRequest_recommendationTypes, v.RecommendationTypes)
+	serializeTagMap(s, schemas.CreateRecommendationTemplateRequest_tags, v.Tags)
+}
+func (v *CreateRecommendationTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRecommendationTemplateRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRecommendationTemplateRequest_assessmentArn:
+			v.AssessmentArn = new(string)
+			return d.ReadString(schemas.CreateRecommendationTemplateRequest_assessmentArn, v.AssessmentArn)
+		case schemas.CreateRecommendationTemplateRequest_bucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.CreateRecommendationTemplateRequest_bucketName, v.BucketName)
+		case schemas.CreateRecommendationTemplateRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateRecommendationTemplateRequest_clientToken, v.ClientToken)
+		case schemas.CreateRecommendationTemplateRequest_format:
+			var ev string
+			if err := d.ReadString(schemas.CreateRecommendationTemplateRequest_format, &ev); err != nil {
+				return err
+			}
+			v.Format = types.TemplateFormat(ev)
+			return nil
+		case schemas.CreateRecommendationTemplateRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateRecommendationTemplateRequest_name, v.Name)
+		case schemas.CreateRecommendationTemplateRequest_recommendationIds:
+			return deserializeRecommendationIdList(d, schemas.CreateRecommendationTemplateRequest_recommendationIds, &v.RecommendationIds)
+		case schemas.CreateRecommendationTemplateRequest_recommendationTypes:
+			return deserializeRenderRecommendationTypeList(d, schemas.CreateRecommendationTemplateRequest_recommendationTypes, &v.RecommendationTypes)
+		case schemas.CreateRecommendationTemplateRequest_tags:
+			return deserializeTagMap(d, schemas.CreateRecommendationTemplateRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateRecommendationTemplateOutput struct {
 
 	// The newly created recommendation template, returned as an object. This object
@@ -88,13 +149,34 @@ type CreateRecommendationTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRecommendationTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRecommendationTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRecommendationTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecommendationTemplate != nil {
+		s.WriteStruct(schemas.CreateRecommendationTemplateResponse_recommendationTemplate)
+		v.RecommendationTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateRecommendationTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRecommendationTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRecommendationTemplateResponse_recommendationTemplate:
+			v.RecommendationTemplate = &types.RecommendationTemplate{}
+			return v.RecommendationTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRecommendationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRecommendationTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRecommendationTemplate, schemas.CreateRecommendationTemplateRequest, schemas.CreateRecommendationTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRecommendationTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRecommendationTemplate, schemas.CreateRecommendationTemplateRequest, schemas.CreateRecommendationTemplateResponse), output: &CreateRecommendationTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

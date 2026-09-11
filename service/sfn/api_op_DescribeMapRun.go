@@ -4,7 +4,9 @@ package sfn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,18 @@ type DescribeMapRunInput struct {
 	MapRunArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeMapRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMapRunInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMapRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MapRunArn != nil {
+		s.WriteString(schemas.DescribeMapRunInput_mapRunArn, *v.MapRunArn)
+	}
 }
 
 type DescribeMapRunOutput struct {
@@ -112,13 +126,97 @@ type DescribeMapRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMapRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMapRunOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMapRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionArn != nil {
+		s.WriteString(schemas.DescribeMapRunOutput_executionArn, *v.ExecutionArn)
+	}
+	if v.ExecutionCounts != nil {
+		s.WriteStruct(schemas.DescribeMapRunOutput_executionCounts)
+		v.ExecutionCounts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ItemCounts != nil {
+		s.WriteStruct(schemas.DescribeMapRunOutput_itemCounts)
+		v.ItemCounts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MapRunArn != nil {
+		s.WriteString(schemas.DescribeMapRunOutput_mapRunArn, *v.MapRunArn)
+	}
+	s.WriteInt32(schemas.DescribeMapRunOutput_maxConcurrency, v.MaxConcurrency)
+	if v.RedriveCount != nil {
+		s.WriteInt32(schemas.DescribeMapRunOutput_redriveCount, *v.RedriveCount)
+	}
+	if v.RedriveDate != nil {
+		s.WriteTime(schemas.DescribeMapRunOutput_redriveDate, *v.RedriveDate)
+	}
+	if v.StartDate != nil {
+		s.WriteTime(schemas.DescribeMapRunOutput_startDate, *v.StartDate)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeMapRunOutput_status, string(v.Status))
+	}
+	if v.StopDate != nil {
+		s.WriteTime(schemas.DescribeMapRunOutput_stopDate, *v.StopDate)
+	}
+	s.WriteInt64(schemas.DescribeMapRunOutput_toleratedFailureCount, v.ToleratedFailureCount)
+	s.WriteFloat32(schemas.DescribeMapRunOutput_toleratedFailurePercentage, v.ToleratedFailurePercentage)
+}
+func (v *DescribeMapRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMapRunOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMapRunOutput_executionArn:
+			v.ExecutionArn = new(string)
+			return d.ReadString(schemas.DescribeMapRunOutput_executionArn, v.ExecutionArn)
+		case schemas.DescribeMapRunOutput_executionCounts:
+			v.ExecutionCounts = &types.MapRunExecutionCounts{}
+			return v.ExecutionCounts.Deserialize(d)
+		case schemas.DescribeMapRunOutput_itemCounts:
+			v.ItemCounts = &types.MapRunItemCounts{}
+			return v.ItemCounts.Deserialize(d)
+		case schemas.DescribeMapRunOutput_mapRunArn:
+			v.MapRunArn = new(string)
+			return d.ReadString(schemas.DescribeMapRunOutput_mapRunArn, v.MapRunArn)
+		case schemas.DescribeMapRunOutput_maxConcurrency:
+			return d.ReadInt32(schemas.DescribeMapRunOutput_maxConcurrency, &v.MaxConcurrency)
+		case schemas.DescribeMapRunOutput_redriveCount:
+			v.RedriveCount = new(int32)
+			return d.ReadInt32(schemas.DescribeMapRunOutput_redriveCount, v.RedriveCount)
+		case schemas.DescribeMapRunOutput_redriveDate:
+			v.RedriveDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeMapRunOutput_redriveDate, v.RedriveDate)
+		case schemas.DescribeMapRunOutput_startDate:
+			v.StartDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeMapRunOutput_startDate, v.StartDate)
+		case schemas.DescribeMapRunOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeMapRunOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.MapRunStatus(ev)
+			return nil
+		case schemas.DescribeMapRunOutput_stopDate:
+			v.StopDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeMapRunOutput_stopDate, v.StopDate)
+		case schemas.DescribeMapRunOutput_toleratedFailureCount:
+			return d.ReadInt64(schemas.DescribeMapRunOutput_toleratedFailureCount, &v.ToleratedFailureCount)
+		case schemas.DescribeMapRunOutput_toleratedFailurePercentage:
+			return d.ReadFloat32(schemas.DescribeMapRunOutput_toleratedFailurePercentage, &v.ToleratedFailurePercentage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMapRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeMapRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMapRun, schemas.DescribeMapRunInput, schemas.DescribeMapRunOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeMapRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMapRun, schemas.DescribeMapRunInput, schemas.DescribeMapRunOutput), output: &DescribeMapRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

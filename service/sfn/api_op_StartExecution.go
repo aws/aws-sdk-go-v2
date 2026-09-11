@@ -4,6 +4,8 @@ package sfn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -161,6 +163,27 @@ type StartExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartExecutionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Input != nil {
+		s.WriteString(schemas.StartExecutionInput_input, *v.Input)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartExecutionInput_name, *v.Name)
+	}
+	if v.StateMachineArn != nil {
+		s.WriteString(schemas.StartExecutionInput_stateMachineArn, *v.StateMachineArn)
+	}
+	if v.TraceHeader != nil {
+		s.WriteString(schemas.StartExecutionInput_traceHeader, *v.TraceHeader)
+	}
+}
+
 type StartExecutionOutput struct {
 
 	// The Amazon Resource Name (ARN) that identifies the execution.
@@ -179,13 +202,38 @@ type StartExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartExecutionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionArn != nil {
+		s.WriteString(schemas.StartExecutionOutput_executionArn, *v.ExecutionArn)
+	}
+	if v.StartDate != nil {
+		s.WriteTime(schemas.StartExecutionOutput_startDate, *v.StartDate)
+	}
+}
+func (v *StartExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartExecutionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartExecutionOutput_executionArn:
+			v.ExecutionArn = new(string)
+			return d.ReadString(schemas.StartExecutionOutput_executionArn, v.ExecutionArn)
+		case schemas.StartExecutionOutput_startDate:
+			v.StartDate = new(time.Time)
+			return d.ReadTime(schemas.StartExecutionOutput_startDate, v.StartDate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartExecution, schemas.StartExecutionInput, schemas.StartExecutionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartExecution, schemas.StartExecutionInput, schemas.StartExecutionOutput), output: &StartExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

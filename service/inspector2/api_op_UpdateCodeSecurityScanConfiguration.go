@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,23 @@ type UpdateCodeSecurityScanConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCodeSecurityScanConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCodeSecurityScanConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCodeSecurityScanConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.UpdateCodeSecurityScanConfigurationRequest_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScanConfigurationArn != nil {
+		s.WriteString(schemas.UpdateCodeSecurityScanConfigurationRequest_scanConfigurationArn, *v.ScanConfigurationArn)
+	}
+}
+
 type UpdateCodeSecurityScanConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated scan configuration.
@@ -50,13 +69,32 @@ type UpdateCodeSecurityScanConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCodeSecurityScanConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCodeSecurityScanConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCodeSecurityScanConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScanConfigurationArn != nil {
+		s.WriteString(schemas.UpdateCodeSecurityScanConfigurationResponse_scanConfigurationArn, *v.ScanConfigurationArn)
+	}
+}
+func (v *UpdateCodeSecurityScanConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCodeSecurityScanConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCodeSecurityScanConfigurationResponse_scanConfigurationArn:
+			v.ScanConfigurationArn = new(string)
+			return d.ReadString(schemas.UpdateCodeSecurityScanConfigurationResponse_scanConfigurationArn, v.ScanConfigurationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCodeSecurityScanConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCodeSecurityScanConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCodeSecurityScanConfiguration, schemas.UpdateCodeSecurityScanConfigurationRequest, schemas.UpdateCodeSecurityScanConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCodeSecurityScanConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCodeSecurityScanConfiguration, schemas.UpdateCodeSecurityScanConfigurationRequest, schemas.UpdateCodeSecurityScanConfigurationResponse), output: &UpdateCodeSecurityScanConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

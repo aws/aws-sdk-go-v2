@@ -4,6 +4,8 @@ package mediatailor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,34 @@ type DeletePrefetchScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePrefetchScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePrefetchScheduleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePrefetchScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeletePrefetchScheduleRequest_Name, *v.Name)
+	}
+	if v.PlaybackConfigurationName != nil {
+		s.WriteString(schemas.DeletePrefetchScheduleRequest_PlaybackConfigurationName, *v.PlaybackConfigurationName)
+	}
+}
+func (v *DeletePrefetchScheduleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePrefetchScheduleRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePrefetchScheduleRequest_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeletePrefetchScheduleRequest_Name, v.Name)
+		case schemas.DeletePrefetchScheduleRequest_PlaybackConfigurationName:
+			v.PlaybackConfigurationName = new(string)
+			return d.ReadString(schemas.DeletePrefetchScheduleRequest_PlaybackConfigurationName, v.PlaybackConfigurationName)
+		}
+		return nil
+	})
+}
+
 type DeletePrefetchScheduleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +81,26 @@ type DeletePrefetchScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePrefetchScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePrefetchScheduleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePrefetchScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeletePrefetchScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePrefetchScheduleResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePrefetchScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePrefetchSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePrefetchSchedule, schemas.DeletePrefetchScheduleRequest, schemas.DeletePrefetchScheduleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePrefetchSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePrefetchSchedule, schemas.DeletePrefetchScheduleRequest, schemas.DeletePrefetchScheduleResponse), output: &DeletePrefetchScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package appsync
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type ListResolversByFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResolversByFunctionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResolversByFunctionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResolversByFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.ListResolversByFunctionRequest_apiId, *v.ApiId)
+	}
+	if v.FunctionId != nil {
+		s.WriteString(schemas.ListResolversByFunctionRequest_functionId, *v.FunctionId)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListResolversByFunctionRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResolversByFunctionRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListResolversByFunctionOutput struct {
 
 	// An identifier that you can use to return the next set of items in the list.
@@ -61,13 +84,35 @@ type ListResolversByFunctionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResolversByFunctionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResolversByFunctionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResolversByFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResolversByFunctionResponse_nextToken, *v.NextToken)
+	}
+	serializeResolvers(s, schemas.ListResolversByFunctionResponse_resolvers, v.Resolvers)
+}
+func (v *ListResolversByFunctionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResolversByFunctionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResolversByFunctionResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResolversByFunctionResponse_nextToken, v.NextToken)
+		case schemas.ListResolversByFunctionResponse_resolvers:
+			return deserializeResolvers(d, schemas.ListResolversByFunctionResponse_resolvers, &v.Resolvers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResolversByFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListResolversByFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResolversByFunction, schemas.ListResolversByFunctionRequest, schemas.ListResolversByFunctionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListResolversByFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResolversByFunction, schemas.ListResolversByFunctionRequest, schemas.ListResolversByFunctionResponse), output: &ListResolversByFunctionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

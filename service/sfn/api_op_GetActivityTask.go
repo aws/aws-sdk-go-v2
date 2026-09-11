@@ -4,6 +4,8 @@ package sfn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,21 @@ type GetActivityTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetActivityTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetActivityTaskInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetActivityTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityArn != nil {
+		s.WriteString(schemas.GetActivityTaskInput_activityArn, *v.ActivityArn)
+	}
+	if v.WorkerName != nil {
+		s.WriteString(schemas.GetActivityTaskInput_workerName, *v.WorkerName)
+	}
+}
+
 type GetActivityTaskOutput struct {
 
 	// The string that contains the JSON input data for the task. Length constraints
@@ -69,13 +86,38 @@ type GetActivityTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetActivityTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetActivityTaskOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetActivityTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Input != nil {
+		s.WriteString(schemas.GetActivityTaskOutput_input, *v.Input)
+	}
+	if v.TaskToken != nil {
+		s.WriteString(schemas.GetActivityTaskOutput_taskToken, *v.TaskToken)
+	}
+}
+func (v *GetActivityTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetActivityTaskOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetActivityTaskOutput_input:
+			v.Input = new(string)
+			return d.ReadString(schemas.GetActivityTaskOutput_input, v.Input)
+		case schemas.GetActivityTaskOutput_taskToken:
+			v.TaskToken = new(string)
+			return d.ReadString(schemas.GetActivityTaskOutput_taskToken, v.TaskToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetActivityTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetActivityTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetActivityTask, schemas.GetActivityTaskInput, schemas.GetActivityTaskOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetActivityTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetActivityTask, schemas.GetActivityTaskInput, schemas.GetActivityTaskOutput), output: &GetActivityTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

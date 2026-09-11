@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,23 @@ type DescribeTaskSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTaskSetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTaskSetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTaskSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteString(schemas.DescribeTaskSetsRequest_cluster, *v.Cluster)
+	}
+	serializeTaskSetFieldList(s, schemas.DescribeTaskSetsRequest_include, v.Include)
+	if v.Service != nil {
+		s.WriteString(schemas.DescribeTaskSetsRequest_service, *v.Service)
+	}
+	serializeStringList(s, schemas.DescribeTaskSetsRequest_taskSets, v.TaskSets)
+}
+
 type DescribeTaskSetsOutput struct {
 
 	// Any failures associated with the call.
@@ -67,13 +86,32 @@ type DescribeTaskSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTaskSetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTaskSetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTaskSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailures(s, schemas.DescribeTaskSetsResponse_failures, v.Failures)
+	serializeTaskSets(s, schemas.DescribeTaskSetsResponse_taskSets, v.TaskSets)
+}
+func (v *DescribeTaskSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTaskSetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTaskSetsResponse_failures:
+			return deserializeFailures(d, schemas.DescribeTaskSetsResponse_failures, &v.Failures)
+		case schemas.DescribeTaskSetsResponse_taskSets:
+			return deserializeTaskSets(d, schemas.DescribeTaskSetsResponse_taskSets, &v.TaskSets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTaskSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTaskSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTaskSets, schemas.DescribeTaskSetsRequest, schemas.DescribeTaskSetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTaskSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTaskSets, schemas.DescribeTaskSetsRequest, schemas.DescribeTaskSetsResponse), output: &DescribeTaskSetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

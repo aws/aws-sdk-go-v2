@@ -4,7 +4,9 @@ package ram
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,24 @@ type DeletePermissionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePermissionVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePermissionVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePermissionVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeletePermissionVersionRequest_clientToken, *v.ClientToken)
+	}
+	if v.PermissionArn != nil {
+		s.WriteString(schemas.DeletePermissionVersionRequest_permissionArn, *v.PermissionArn)
+	}
+	if v.PermissionVersion != nil {
+		s.WriteInt32(schemas.DeletePermissionVersionRequest_permissionVersion, *v.PermissionVersion)
+	}
+}
+
 type DeletePermissionVersionOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat
@@ -92,13 +112,48 @@ type DeletePermissionVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePermissionVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePermissionVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePermissionVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeletePermissionVersionResponse_clientToken, *v.ClientToken)
+	}
+	if v.PermissionStatus != "" {
+		s.WriteString(schemas.DeletePermissionVersionResponse_permissionStatus, string(v.PermissionStatus))
+	}
+	if v.ReturnValue != nil {
+		s.WriteBool(schemas.DeletePermissionVersionResponse_returnValue, *v.ReturnValue)
+	}
+}
+func (v *DeletePermissionVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePermissionVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePermissionVersionResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DeletePermissionVersionResponse_clientToken, v.ClientToken)
+		case schemas.DeletePermissionVersionResponse_permissionStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeletePermissionVersionResponse_permissionStatus, &ev); err != nil {
+				return err
+			}
+			v.PermissionStatus = types.PermissionStatus(ev)
+			return nil
+		case schemas.DeletePermissionVersionResponse_returnValue:
+			v.ReturnValue = new(bool)
+			return d.ReadBool(schemas.DeletePermissionVersionResponse_returnValue, v.ReturnValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePermissionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePermissionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePermissionVersion, schemas.DeletePermissionVersionRequest, schemas.DeletePermissionVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePermissionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePermissionVersion, schemas.DeletePermissionVersionRequest, schemas.DeletePermissionVersionResponse), output: &DeletePermissionVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

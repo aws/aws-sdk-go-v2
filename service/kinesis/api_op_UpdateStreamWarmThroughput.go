@@ -4,7 +4,9 @@ package kinesis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -84,6 +86,26 @@ type UpdateStreamWarmThroughputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStreamWarmThroughputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStreamWarmThroughputInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStreamWarmThroughputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamARN != nil {
+		s.WriteString(schemas.UpdateStreamWarmThroughputInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.UpdateStreamWarmThroughputInput_StreamId, *v.StreamId)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.UpdateStreamWarmThroughputInput_StreamName, *v.StreamName)
+	}
+	if v.WarmThroughputMiBps != nil {
+		s.WriteInt32(schemas.UpdateStreamWarmThroughputInput_WarmThroughputMiBps, *v.WarmThroughputMiBps)
+	}
+}
 func (in *UpdateStreamWarmThroughputInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
@@ -108,13 +130,46 @@ type UpdateStreamWarmThroughputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStreamWarmThroughputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStreamWarmThroughputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStreamWarmThroughputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamARN != nil {
+		s.WriteString(schemas.UpdateStreamWarmThroughputOutput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.UpdateStreamWarmThroughputOutput_StreamName, *v.StreamName)
+	}
+	if v.WarmThroughput != nil {
+		s.WriteStruct(schemas.UpdateStreamWarmThroughputOutput_WarmThroughput)
+		v.WarmThroughput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateStreamWarmThroughputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateStreamWarmThroughputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateStreamWarmThroughputOutput_StreamARN:
+			v.StreamARN = new(string)
+			return d.ReadString(schemas.UpdateStreamWarmThroughputOutput_StreamARN, v.StreamARN)
+		case schemas.UpdateStreamWarmThroughputOutput_StreamName:
+			v.StreamName = new(string)
+			return d.ReadString(schemas.UpdateStreamWarmThroughputOutput_StreamName, v.StreamName)
+		case schemas.UpdateStreamWarmThroughputOutput_WarmThroughput:
+			v.WarmThroughput = &types.WarmThroughputObject{}
+			return v.WarmThroughput.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateStreamWarmThroughputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateStreamWarmThroughput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStreamWarmThroughput, schemas.UpdateStreamWarmThroughputInput, schemas.UpdateStreamWarmThroughputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateStreamWarmThroughput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStreamWarmThroughput, schemas.UpdateStreamWarmThroughputInput, schemas.UpdateStreamWarmThroughputOutput), output: &UpdateStreamWarmThroughputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

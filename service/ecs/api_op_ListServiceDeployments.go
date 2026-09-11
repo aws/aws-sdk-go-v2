@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,33 @@ type ListServiceDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceDeploymentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceDeploymentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteString(schemas.ListServiceDeploymentsRequest_cluster, *v.Cluster)
+	}
+	if v.CreatedAt != nil {
+		s.WriteStruct(schemas.ListServiceDeploymentsRequest_createdAt)
+		v.CreatedAt.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListServiceDeploymentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceDeploymentsRequest_nextToken, *v.NextToken)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.ListServiceDeploymentsRequest_service, *v.Service)
+	}
+	serializeServiceDeploymentStatusList(s, schemas.ListServiceDeploymentsRequest_status, v.Status)
+}
+
 type ListServiceDeploymentsOutput struct {
 
 	// The nextToken value to include in a future ListServiceDeployments request. When
@@ -108,13 +137,35 @@ type ListServiceDeploymentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceDeploymentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceDeploymentsResponse_nextToken, *v.NextToken)
+	}
+	serializeServiceDeploymentsBrief(s, schemas.ListServiceDeploymentsResponse_serviceDeployments, v.ServiceDeployments)
+}
+func (v *ListServiceDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceDeploymentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceDeploymentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceDeploymentsResponse_nextToken, v.NextToken)
+		case schemas.ListServiceDeploymentsResponse_serviceDeployments:
+			return deserializeServiceDeploymentsBrief(d, schemas.ListServiceDeploymentsResponse_serviceDeployments, &v.ServiceDeployments)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServiceDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListServiceDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceDeployments, schemas.ListServiceDeploymentsRequest, schemas.ListServiceDeploymentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListServiceDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceDeployments, schemas.ListServiceDeploymentsRequest, schemas.ListServiceDeploymentsResponse), output: &ListServiceDeploymentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

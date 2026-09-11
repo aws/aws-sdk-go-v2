@@ -5,6 +5,8 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type CancelImageCreationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelImageCreationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelImageCreationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelImageCreationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CancelImageCreationRequest_clientToken, *v.ClientToken)
+	}
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.CancelImageCreationRequest_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+}
+
 type CancelImageCreationOutput struct {
 
 	// The client token that uniquely identifies the request.
@@ -64,13 +81,44 @@ type CancelImageCreationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelImageCreationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelImageCreationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelImageCreationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CancelImageCreationResponse_clientToken, *v.ClientToken)
+	}
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.CancelImageCreationResponse_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CancelImageCreationResponse_requestId, *v.RequestId)
+	}
+}
+func (v *CancelImageCreationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelImageCreationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelImageCreationResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CancelImageCreationResponse_clientToken, v.ClientToken)
+		case schemas.CancelImageCreationResponse_imageBuildVersionArn:
+			v.ImageBuildVersionArn = new(string)
+			return d.ReadString(schemas.CancelImageCreationResponse_imageBuildVersionArn, v.ImageBuildVersionArn)
+		case schemas.CancelImageCreationResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CancelImageCreationResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelImageCreationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelImageCreation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelImageCreation, schemas.CancelImageCreationRequest, schemas.CancelImageCreationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelImageCreation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelImageCreation, schemas.CancelImageCreationRequest, schemas.CancelImageCreationResponse), output: &CancelImageCreationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

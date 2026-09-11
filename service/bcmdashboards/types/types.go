@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/bcmdashboards/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -42,6 +44,54 @@ type CostAndUsageQuery struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CostAndUsageQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CostAndUsageQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CostAndUsageQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.CostAndUsageQuery_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Granularity != "" {
+		s.WriteString(schemas.CostAndUsageQuery_granularity, string(v.Granularity))
+	}
+	serializeGroupDefinitions(s, schemas.CostAndUsageQuery_groupBy, v.GroupBy)
+	serializeMetricNames(s, schemas.CostAndUsageQuery_metrics, v.Metrics)
+	if v.TimeRange != nil {
+		s.WriteStruct(schemas.CostAndUsageQuery_timeRange)
+		v.TimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CostAndUsageQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CostAndUsageQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CostAndUsageQuery_filter:
+			v.Filter = &Expression{}
+			return v.Filter.Deserialize(d)
+		case schemas.CostAndUsageQuery_granularity:
+			var ev string
+			if err := d.ReadString(schemas.CostAndUsageQuery_granularity, &ev); err != nil {
+				return err
+			}
+			v.Granularity = Granularity(ev)
+			return nil
+		case schemas.CostAndUsageQuery_groupBy:
+			return deserializeGroupDefinitions(d, schemas.CostAndUsageQuery_groupBy, &v.GroupBy)
+		case schemas.CostAndUsageQuery_metrics:
+			return deserializeMetricNames(d, schemas.CostAndUsageQuery_metrics, &v.Metrics)
+		case schemas.CostAndUsageQuery_timeRange:
+			v.TimeRange = &DateTimeRange{}
+			return v.TimeRange.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies the values and match options for cost category-based filtering in
 // cost and usage queries.
 type CostCategoryValues struct {
@@ -57,6 +107,34 @@ type CostCategoryValues struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CostCategoryValues) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CostCategoryValues)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CostCategoryValues) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.CostCategoryValues_key, *v.Key)
+	}
+	serializeMatchOptions(s, schemas.CostCategoryValues_matchOptions, v.MatchOptions)
+	serializeStringList(s, schemas.CostCategoryValues_values, v.Values)
+}
+func (v *CostCategoryValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CostCategoryValues, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CostCategoryValues_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.CostCategoryValues_key, v.Key)
+		case schemas.CostCategoryValues_matchOptions:
+			return deserializeMatchOptions(d, schemas.CostCategoryValues_matchOptions, &v.MatchOptions)
+		case schemas.CostCategoryValues_values:
+			return deserializeStringList(d, schemas.CostCategoryValues_values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Contains basic information about a dashboard, including its ARN, name, type,
@@ -94,6 +172,62 @@ type DashboardReference struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DashboardReference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DashboardReference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DashboardReference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DashboardReference_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DashboardReference_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DashboardReference_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DashboardReference_name, *v.Name)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DashboardReference_type, string(v.Type))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DashboardReference_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *DashboardReference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DashboardReference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DashboardReference_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DashboardReference_arn, v.Arn)
+		case schemas.DashboardReference_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DashboardReference_createdAt, v.CreatedAt)
+		case schemas.DashboardReference_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DashboardReference_description, v.Description)
+		case schemas.DashboardReference_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DashboardReference_name, v.Name)
+		case schemas.DashboardReference_type:
+			var ev string
+			if err := d.ReadString(schemas.DashboardReference_type, &ev); err != nil {
+				return err
+			}
+			v.Type = DashboardType(ev)
+			return nil
+		case schemas.DashboardReference_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DashboardReference_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Defines a time period with explicit start and end times for data queries.
 type DateTimeRange struct {
 
@@ -108,6 +242,38 @@ type DateTimeRange struct {
 	StartTime *DateTimeValue
 
 	noSmithyDocumentSerde
+}
+
+func (v *DateTimeRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DateTimeRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DateTimeRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteStruct(schemas.DateTimeRange_endTime)
+		v.EndTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteStruct(schemas.DateTimeRange_startTime)
+		v.StartTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DateTimeRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DateTimeRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DateTimeRange_endTime:
+			v.EndTime = &DateTimeValue{}
+			return v.EndTime.Deserialize(d)
+		case schemas.DateTimeRange_startTime:
+			v.StartTime = &DateTimeValue{}
+			return v.StartTime.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Represents a point in time that can be specified as either an absolute date
@@ -127,6 +293,38 @@ type DateTimeValue struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DateTimeValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DateTimeValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DateTimeValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.DateTimeValue_type, string(v.Type))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.DateTimeValue_value, *v.Value)
+	}
+}
+func (v *DateTimeValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DateTimeValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DateTimeValue_type:
+			var ev string
+			if err := d.ReadString(schemas.DateTimeValue_type, &ev); err != nil {
+				return err
+			}
+			v.Type = DateTimeType(ev)
+			return nil
+		case schemas.DateTimeValue_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.DateTimeValue_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Specifies the values and match options for dimension-based filtering in cost
@@ -151,6 +349,38 @@ type DimensionValues struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DimensionValues) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DimensionValues)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DimensionValues) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != "" {
+		s.WriteString(schemas.DimensionValues_key, string(v.Key))
+	}
+	serializeMatchOptions(s, schemas.DimensionValues_matchOptions, v.MatchOptions)
+	serializeStringList(s, schemas.DimensionValues_values, v.Values)
+}
+func (v *DimensionValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DimensionValues, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DimensionValues_key:
+			var ev string
+			if err := d.ReadString(schemas.DimensionValues_key, &ev); err != nil {
+				return err
+			}
+			v.Key = Dimension(ev)
+			return nil
+		case schemas.DimensionValues_matchOptions:
+			return deserializeMatchOptions(d, schemas.DimensionValues_matchOptions, &v.MatchOptions)
+		case schemas.DimensionValues_values:
+			return deserializeStringList(d, schemas.DimensionValues_values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Defines how the widget's data should be visualized, including chart type, color
 // schemes, axis configurations, and other display preferences.
 //
@@ -171,6 +401,12 @@ type DisplayConfigMemberGraph struct {
 }
 
 func (*DisplayConfigMemberGraph) isDisplayConfig() {}
+func (v *DisplayConfigMemberGraph) Serialize(s smithy.ShapeSerializer) {
+	serializeGraphDisplayConfigMap(s, schemas.DisplayConfig_graph, v.Value)
+}
+func (v *DisplayConfigMemberGraph) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeGraphDisplayConfigMap(d, schemas.DisplayConfig_graph, &v.Value)
+}
 
 // The configuration for tabular display of the widget data.
 type DisplayConfigMemberTable struct {
@@ -180,6 +416,14 @@ type DisplayConfigMemberTable struct {
 }
 
 func (*DisplayConfigMemberTable) isDisplayConfig() {}
+func (v *DisplayConfigMemberTable) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisplayConfig_table)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *DisplayConfigMemberTable) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines complex filtering conditions using logical operators ( AND , OR , NOT )
 // and various filter types.
@@ -206,6 +450,60 @@ type Expression struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Expression) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Expression)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Expression) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExpressions(s, schemas.Expression_and, v.And)
+	if v.CostCategories != nil {
+		s.WriteStruct(schemas.Expression_costCategories)
+		v.CostCategories.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Dimensions != nil {
+		s.WriteStruct(schemas.Expression_dimensions)
+		v.Dimensions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Not != nil {
+		s.WriteStruct(schemas.Expression_not)
+		v.Not.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeExpressions(s, schemas.Expression_or, v.Or)
+	if v.Tags != nil {
+		s.WriteStruct(schemas.Expression_tags)
+		v.Tags.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Expression) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Expression, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Expression_and:
+			return deserializeExpressions(d, schemas.Expression_and, &v.And)
+		case schemas.Expression_costCategories:
+			v.CostCategories = &CostCategoryValues{}
+			return v.CostCategories.Deserialize(d)
+		case schemas.Expression_dimensions:
+			v.Dimensions = &DimensionValues{}
+			return v.Dimensions.Deserialize(d)
+		case schemas.Expression_not:
+			v.Not = &Expression{}
+			return v.Not.Deserialize(d)
+		case schemas.Expression_or:
+			return deserializeExpressions(d, schemas.Expression_or, &v.Or)
+		case schemas.Expression_tags:
+			v.Tags = &TagValues{}
+			return v.Tags.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Defines the visual representation settings for widget data, including the
 // visualization type, styling options, and display preferences for different
 // metric types.
@@ -217,6 +515,32 @@ type GraphDisplayConfig struct {
 	VisualType VisualType
 
 	noSmithyDocumentSerde
+}
+
+func (v *GraphDisplayConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GraphDisplayConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GraphDisplayConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VisualType != "" {
+		s.WriteString(schemas.GraphDisplayConfig_visualType, string(v.VisualType))
+	}
+}
+func (v *GraphDisplayConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GraphDisplayConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GraphDisplayConfig_visualType:
+			var ev string
+			if err := d.ReadString(schemas.GraphDisplayConfig_visualType, &ev); err != nil {
+				return err
+			}
+			v.VisualType = VisualType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Specifies how to group cost and usage data.
@@ -231,6 +555,38 @@ type GroupDefinition struct {
 	Type GroupDefinitionType
 
 	noSmithyDocumentSerde
+}
+
+func (v *GroupDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroupDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroupDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.GroupDefinition_key, *v.Key)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GroupDefinition_type, string(v.Type))
+	}
+}
+func (v *GroupDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroupDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroupDefinition_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.GroupDefinition_key, v.Key)
+		case schemas.GroupDefinition_type:
+			var ev string
+			if err := d.ReadString(schemas.GroupDefinition_type, &ev); err != nil {
+				return err
+			}
+			v.Type = GroupDefinitionType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains the health status information for a scheduled report, including the
@@ -256,6 +612,41 @@ type HealthStatus struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HealthStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HealthStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HealthStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastRefreshedAt != nil {
+		s.WriteTime(schemas.HealthStatus_lastRefreshedAt, *v.LastRefreshedAt)
+	}
+	if v.StatusCode != "" {
+		s.WriteString(schemas.HealthStatus_statusCode, string(v.StatusCode))
+	}
+	serializeStatusReasonList(s, schemas.HealthStatus_statusReasons, v.StatusReasons)
+}
+func (v *HealthStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HealthStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HealthStatus_lastRefreshedAt:
+			v.LastRefreshedAt = new(time.Time)
+			return d.ReadTime(schemas.HealthStatus_lastRefreshedAt, v.LastRefreshedAt)
+		case schemas.HealthStatus_statusCode:
+			var ev string
+			if err := d.ReadString(schemas.HealthStatus_statusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = HealthStatusCode(ev)
+			return nil
+		case schemas.HealthStatus_statusReasons:
+			return deserializeStatusReasonList(d, schemas.HealthStatus_statusReasons, &v.StatusReasons)
+		}
+		return nil
+	})
+}
+
 // Defines the data retrieval parameters for a widget.
 //
 // The following types satisfy this interface:
@@ -278,6 +669,14 @@ type QueryParametersMemberCostAndUsage struct {
 }
 
 func (*QueryParametersMemberCostAndUsage) isQueryParameters() {}
+func (v *QueryParametersMemberCostAndUsage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryParameters_costAndUsage)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *QueryParametersMemberCostAndUsage) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The parameters for querying Reserved Instance coverage data, showing how much
 // of your eligible instance usage is covered by Reserved Instances.
@@ -288,6 +687,14 @@ type QueryParametersMemberReservationCoverage struct {
 }
 
 func (*QueryParametersMemberReservationCoverage) isQueryParameters() {}
+func (v *QueryParametersMemberReservationCoverage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryParameters_reservationCoverage)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *QueryParametersMemberReservationCoverage) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The parameters for querying Reserved Instance utilization data, showing how
 // effectively your Reserved Instances are being used.
@@ -298,6 +705,14 @@ type QueryParametersMemberReservationUtilization struct {
 }
 
 func (*QueryParametersMemberReservationUtilization) isQueryParameters() {}
+func (v *QueryParametersMemberReservationUtilization) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryParameters_reservationUtilization)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *QueryParametersMemberReservationUtilization) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The parameters for querying Savings Plans coverage data, showing how much of
 // your eligible compute usage is covered by Savings Plans.
@@ -308,6 +723,14 @@ type QueryParametersMemberSavingsPlansCoverage struct {
 }
 
 func (*QueryParametersMemberSavingsPlansCoverage) isQueryParameters() {}
+func (v *QueryParametersMemberSavingsPlansCoverage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryParameters_savingsPlansCoverage)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *QueryParametersMemberSavingsPlansCoverage) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The parameters for querying Savings Plans utilization data, showing how
 // effectively your Savings Plans are being used.
@@ -318,6 +741,14 @@ type QueryParametersMemberSavingsPlansUtilization struct {
 }
 
 func (*QueryParametersMemberSavingsPlansUtilization) isQueryParameters() {}
+func (v *QueryParametersMemberSavingsPlansUtilization) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryParameters_savingsPlansUtilization)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *QueryParametersMemberSavingsPlansUtilization) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines the parameters for querying Reserved Instance coverage data, including
 // grouping options, metrics, and sorting preferences.
@@ -347,6 +778,54 @@ type ReservationCoverageQuery struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReservationCoverageQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReservationCoverageQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReservationCoverageQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ReservationCoverageQuery_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Granularity != "" {
+		s.WriteString(schemas.ReservationCoverageQuery_granularity, string(v.Granularity))
+	}
+	serializeGroupDefinitions(s, schemas.ReservationCoverageQuery_groupBy, v.GroupBy)
+	serializeMetricNames(s, schemas.ReservationCoverageQuery_metrics, v.Metrics)
+	if v.TimeRange != nil {
+		s.WriteStruct(schemas.ReservationCoverageQuery_timeRange)
+		v.TimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ReservationCoverageQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReservationCoverageQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReservationCoverageQuery_filter:
+			v.Filter = &Expression{}
+			return v.Filter.Deserialize(d)
+		case schemas.ReservationCoverageQuery_granularity:
+			var ev string
+			if err := d.ReadString(schemas.ReservationCoverageQuery_granularity, &ev); err != nil {
+				return err
+			}
+			v.Granularity = Granularity(ev)
+			return nil
+		case schemas.ReservationCoverageQuery_groupBy:
+			return deserializeGroupDefinitions(d, schemas.ReservationCoverageQuery_groupBy, &v.GroupBy)
+		case schemas.ReservationCoverageQuery_metrics:
+			return deserializeMetricNames(d, schemas.ReservationCoverageQuery_metrics, &v.Metrics)
+		case schemas.ReservationCoverageQuery_timeRange:
+			v.TimeRange = &DateTimeRange{}
+			return v.TimeRange.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Defines the parameters for querying Reserved Instance utilization data,
 // including grouping options and time granularity.
 type ReservationUtilizationQuery struct {
@@ -370,6 +849,51 @@ type ReservationUtilizationQuery struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReservationUtilizationQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReservationUtilizationQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReservationUtilizationQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ReservationUtilizationQuery_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Granularity != "" {
+		s.WriteString(schemas.ReservationUtilizationQuery_granularity, string(v.Granularity))
+	}
+	serializeGroupDefinitions(s, schemas.ReservationUtilizationQuery_groupBy, v.GroupBy)
+	if v.TimeRange != nil {
+		s.WriteStruct(schemas.ReservationUtilizationQuery_timeRange)
+		v.TimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ReservationUtilizationQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReservationUtilizationQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReservationUtilizationQuery_filter:
+			v.Filter = &Expression{}
+			return v.Filter.Deserialize(d)
+		case schemas.ReservationUtilizationQuery_granularity:
+			var ev string
+			if err := d.ReadString(schemas.ReservationUtilizationQuery_granularity, &ev); err != nil {
+				return err
+			}
+			v.Granularity = Granularity(ev)
+			return nil
+		case schemas.ReservationUtilizationQuery_groupBy:
+			return deserializeGroupDefinitions(d, schemas.ReservationUtilizationQuery_groupBy, &v.GroupBy)
+		case schemas.ReservationUtilizationQuery_timeRange:
+			v.TimeRange = &DateTimeRange{}
+			return v.TimeRange.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A key-value pair that can be attached to a dashboard for organization and
 // management purposes.
 type ResourceTag struct {
@@ -385,6 +909,34 @@ type ResourceTag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceTag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceTag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceTag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.ResourceTag_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ResourceTag_value, *v.Value)
+	}
+}
+func (v *ResourceTag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceTag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceTag_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ResourceTag_key, v.Key)
+		case schemas.ResourceTag_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ResourceTag_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Defines the parameters for querying Savings Plans coverage data, including
@@ -415,6 +967,54 @@ type SavingsPlansCoverageQuery struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SavingsPlansCoverageQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SavingsPlansCoverageQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SavingsPlansCoverageQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.SavingsPlansCoverageQuery_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Granularity != "" {
+		s.WriteString(schemas.SavingsPlansCoverageQuery_granularity, string(v.Granularity))
+	}
+	serializeGroupDefinitions(s, schemas.SavingsPlansCoverageQuery_groupBy, v.GroupBy)
+	serializeMetricNames(s, schemas.SavingsPlansCoverageQuery_metrics, v.Metrics)
+	if v.TimeRange != nil {
+		s.WriteStruct(schemas.SavingsPlansCoverageQuery_timeRange)
+		v.TimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SavingsPlansCoverageQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SavingsPlansCoverageQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SavingsPlansCoverageQuery_filter:
+			v.Filter = &Expression{}
+			return v.Filter.Deserialize(d)
+		case schemas.SavingsPlansCoverageQuery_granularity:
+			var ev string
+			if err := d.ReadString(schemas.SavingsPlansCoverageQuery_granularity, &ev); err != nil {
+				return err
+			}
+			v.Granularity = Granularity(ev)
+			return nil
+		case schemas.SavingsPlansCoverageQuery_groupBy:
+			return deserializeGroupDefinitions(d, schemas.SavingsPlansCoverageQuery_groupBy, &v.GroupBy)
+		case schemas.SavingsPlansCoverageQuery_metrics:
+			return deserializeMetricNames(d, schemas.SavingsPlansCoverageQuery_metrics, &v.Metrics)
+		case schemas.SavingsPlansCoverageQuery_timeRange:
+			v.TimeRange = &DateTimeRange{}
+			return v.TimeRange.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Defines the parameters for querying Savings Plans utilization data, including
 // time granularity and sorting preferences.
 type SavingsPlansUtilizationQuery struct {
@@ -432,6 +1032,48 @@ type SavingsPlansUtilizationQuery struct {
 	Granularity Granularity
 
 	noSmithyDocumentSerde
+}
+
+func (v *SavingsPlansUtilizationQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SavingsPlansUtilizationQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SavingsPlansUtilizationQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.SavingsPlansUtilizationQuery_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Granularity != "" {
+		s.WriteString(schemas.SavingsPlansUtilizationQuery_granularity, string(v.Granularity))
+	}
+	if v.TimeRange != nil {
+		s.WriteStruct(schemas.SavingsPlansUtilizationQuery_timeRange)
+		v.TimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SavingsPlansUtilizationQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SavingsPlansUtilizationQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SavingsPlansUtilizationQuery_filter:
+			v.Filter = &Expression{}
+			return v.Filter.Deserialize(d)
+		case schemas.SavingsPlansUtilizationQuery_granularity:
+			var ev string
+			if err := d.ReadString(schemas.SavingsPlansUtilizationQuery_granularity, &ev); err != nil {
+				return err
+			}
+			v.Granularity = Granularity(ev)
+			return nil
+		case schemas.SavingsPlansUtilizationQuery_timeRange:
+			v.TimeRange = &DateTimeRange{}
+			return v.TimeRange.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Defines the schedule for a scheduled report, including the cron expression,
@@ -455,6 +1097,52 @@ type ScheduleConfig struct {
 	State ScheduleState
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScheduleConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduleConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScheduleExpression != nil {
+		s.WriteString(schemas.ScheduleConfig_scheduleExpression, *v.ScheduleExpression)
+	}
+	if v.ScheduleExpressionTimeZone != nil {
+		s.WriteString(schemas.ScheduleConfig_scheduleExpressionTimeZone, *v.ScheduleExpressionTimeZone)
+	}
+	if v.SchedulePeriod != nil {
+		s.WriteStruct(schemas.ScheduleConfig_schedulePeriod)
+		v.SchedulePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ScheduleConfig_state, string(v.State))
+	}
+}
+func (v *ScheduleConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduleConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduleConfig_scheduleExpression:
+			v.ScheduleExpression = new(string)
+			return d.ReadString(schemas.ScheduleConfig_scheduleExpression, v.ScheduleExpression)
+		case schemas.ScheduleConfig_scheduleExpressionTimeZone:
+			v.ScheduleExpressionTimeZone = new(string)
+			return d.ReadString(schemas.ScheduleConfig_scheduleExpressionTimeZone, v.ScheduleExpressionTimeZone)
+		case schemas.ScheduleConfig_schedulePeriod:
+			v.SchedulePeriod = &SchedulePeriod{}
+			return v.SchedulePeriod.Deserialize(d)
+		case schemas.ScheduleConfig_state:
+			var ev string
+			if err := d.ReadString(schemas.ScheduleConfig_state, &ev); err != nil {
+				return err
+			}
+			v.State = ScheduleState(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains the full configuration and metadata of a scheduled report.
@@ -510,6 +1198,97 @@ type ScheduledReport struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScheduledReport) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduledReport)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduledReport) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ScheduledReport_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ScheduledReport_createdAt, *v.CreatedAt)
+	}
+	if v.DashboardArn != nil {
+		s.WriteString(schemas.ScheduledReport_dashboardArn, *v.DashboardArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ScheduledReport_description, *v.Description)
+	}
+	if v.HealthStatus != nil {
+		s.WriteStruct(schemas.ScheduledReport_healthStatus)
+		v.HealthStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastExecutionAt != nil {
+		s.WriteTime(schemas.ScheduledReport_lastExecutionAt, *v.LastExecutionAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ScheduledReport_name, *v.Name)
+	}
+	if v.ScheduleConfig != nil {
+		s.WriteStruct(schemas.ScheduledReport_scheduleConfig)
+		v.ScheduleConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScheduledReportExecutionRoleArn != nil {
+		s.WriteString(schemas.ScheduledReport_scheduledReportExecutionRoleArn, *v.ScheduledReportExecutionRoleArn)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.ScheduledReport_updatedAt, *v.UpdatedAt)
+	}
+	if v.WidgetDateRangeOverride != nil {
+		s.WriteStruct(schemas.ScheduledReport_widgetDateRangeOverride)
+		v.WidgetDateRangeOverride.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeWidgetIdList(s, schemas.ScheduledReport_widgetIds, v.WidgetIds)
+}
+func (v *ScheduledReport) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduledReport, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduledReport_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ScheduledReport_arn, v.Arn)
+		case schemas.ScheduledReport_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ScheduledReport_createdAt, v.CreatedAt)
+		case schemas.ScheduledReport_dashboardArn:
+			v.DashboardArn = new(string)
+			return d.ReadString(schemas.ScheduledReport_dashboardArn, v.DashboardArn)
+		case schemas.ScheduledReport_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ScheduledReport_description, v.Description)
+		case schemas.ScheduledReport_healthStatus:
+			v.HealthStatus = &HealthStatus{}
+			return v.HealthStatus.Deserialize(d)
+		case schemas.ScheduledReport_lastExecutionAt:
+			v.LastExecutionAt = new(time.Time)
+			return d.ReadTime(schemas.ScheduledReport_lastExecutionAt, v.LastExecutionAt)
+		case schemas.ScheduledReport_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ScheduledReport_name, v.Name)
+		case schemas.ScheduledReport_scheduleConfig:
+			v.ScheduleConfig = &ScheduleConfig{}
+			return v.ScheduleConfig.Deserialize(d)
+		case schemas.ScheduledReport_scheduledReportExecutionRoleArn:
+			v.ScheduledReportExecutionRoleArn = new(string)
+			return d.ReadString(schemas.ScheduledReport_scheduledReportExecutionRoleArn, v.ScheduledReportExecutionRoleArn)
+		case schemas.ScheduledReport_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ScheduledReport_updatedAt, v.UpdatedAt)
+		case schemas.ScheduledReport_widgetDateRangeOverride:
+			v.WidgetDateRangeOverride = &DateTimeRange{}
+			return v.WidgetDateRangeOverride.Deserialize(d)
+		case schemas.ScheduledReport_widgetIds:
+			return deserializeWidgetIdList(d, schemas.ScheduledReport_widgetIds, &v.WidgetIds)
+		}
+		return nil
+	})
+}
+
 // Defines the configuration for creating a new scheduled report, including the
 // dashboard, schedule, execution role, and optional widget settings.
 type ScheduledReportInput struct {
@@ -548,6 +1327,65 @@ type ScheduledReportInput struct {
 	WidgetIds []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScheduledReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduledReportInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduledReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardArn != nil {
+		s.WriteString(schemas.ScheduledReportInput_dashboardArn, *v.DashboardArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ScheduledReportInput_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ScheduledReportInput_name, *v.Name)
+	}
+	if v.ScheduleConfig != nil {
+		s.WriteStruct(schemas.ScheduledReportInput_scheduleConfig)
+		v.ScheduleConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScheduledReportExecutionRoleArn != nil {
+		s.WriteString(schemas.ScheduledReportInput_scheduledReportExecutionRoleArn, *v.ScheduledReportExecutionRoleArn)
+	}
+	if v.WidgetDateRangeOverride != nil {
+		s.WriteStruct(schemas.ScheduledReportInput_widgetDateRangeOverride)
+		v.WidgetDateRangeOverride.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeWidgetIdList(s, schemas.ScheduledReportInput_widgetIds, v.WidgetIds)
+}
+func (v *ScheduledReportInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduledReportInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduledReportInput_dashboardArn:
+			v.DashboardArn = new(string)
+			return d.ReadString(schemas.ScheduledReportInput_dashboardArn, v.DashboardArn)
+		case schemas.ScheduledReportInput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ScheduledReportInput_description, v.Description)
+		case schemas.ScheduledReportInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ScheduledReportInput_name, v.Name)
+		case schemas.ScheduledReportInput_scheduleConfig:
+			v.ScheduleConfig = &ScheduleConfig{}
+			return v.ScheduleConfig.Deserialize(d)
+		case schemas.ScheduledReportInput_scheduledReportExecutionRoleArn:
+			v.ScheduledReportExecutionRoleArn = new(string)
+			return d.ReadString(schemas.ScheduledReportInput_scheduledReportExecutionRoleArn, v.ScheduledReportExecutionRoleArn)
+		case schemas.ScheduledReportInput_widgetDateRangeOverride:
+			v.WidgetDateRangeOverride = &DateTimeRange{}
+			return v.WidgetDateRangeOverride.Deserialize(d)
+		case schemas.ScheduledReportInput_widgetIds:
+			return deserializeWidgetIdList(d, schemas.ScheduledReportInput_widgetIds, &v.WidgetIds)
+		}
+		return nil
+	})
 }
 
 // Contains summary information for a scheduled report.
@@ -592,6 +1430,73 @@ type ScheduledReportSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScheduledReportSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduledReportSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduledReportSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ScheduledReportSummary_arn, *v.Arn)
+	}
+	if v.DashboardArn != nil {
+		s.WriteString(schemas.ScheduledReportSummary_dashboardArn, *v.DashboardArn)
+	}
+	if v.HealthStatus != nil {
+		s.WriteStruct(schemas.ScheduledReportSummary_healthStatus)
+		v.HealthStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ScheduledReportSummary_name, *v.Name)
+	}
+	if v.ScheduleExpression != nil {
+		s.WriteString(schemas.ScheduledReportSummary_scheduleExpression, *v.ScheduleExpression)
+	}
+	if v.ScheduleExpressionTimeZone != nil {
+		s.WriteString(schemas.ScheduledReportSummary_scheduleExpressionTimeZone, *v.ScheduleExpressionTimeZone)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ScheduledReportSummary_state, string(v.State))
+	}
+	serializeWidgetIdList(s, schemas.ScheduledReportSummary_widgetIds, v.WidgetIds)
+}
+func (v *ScheduledReportSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduledReportSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduledReportSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ScheduledReportSummary_arn, v.Arn)
+		case schemas.ScheduledReportSummary_dashboardArn:
+			v.DashboardArn = new(string)
+			return d.ReadString(schemas.ScheduledReportSummary_dashboardArn, v.DashboardArn)
+		case schemas.ScheduledReportSummary_healthStatus:
+			v.HealthStatus = &HealthStatus{}
+			return v.HealthStatus.Deserialize(d)
+		case schemas.ScheduledReportSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ScheduledReportSummary_name, v.Name)
+		case schemas.ScheduledReportSummary_scheduleExpression:
+			v.ScheduleExpression = new(string)
+			return d.ReadString(schemas.ScheduledReportSummary_scheduleExpression, v.ScheduleExpression)
+		case schemas.ScheduledReportSummary_scheduleExpressionTimeZone:
+			v.ScheduleExpressionTimeZone = new(string)
+			return d.ReadString(schemas.ScheduledReportSummary_scheduleExpressionTimeZone, v.ScheduleExpressionTimeZone)
+		case schemas.ScheduledReportSummary_state:
+			var ev string
+			if err := d.ReadString(schemas.ScheduledReportSummary_state, &ev); err != nil {
+				return err
+			}
+			v.State = ScheduleState(ev)
+			return nil
+		case schemas.ScheduledReportSummary_widgetIds:
+			return deserializeWidgetIdList(d, schemas.ScheduledReportSummary_widgetIds, &v.WidgetIds)
+		}
+		return nil
+	})
+}
+
 // Defines the active time period for execution of the scheduled report.
 type SchedulePeriod struct {
 
@@ -609,9 +1514,53 @@ type SchedulePeriod struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SchedulePeriod) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SchedulePeriod)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SchedulePeriod) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.SchedulePeriod_endTime, *v.EndTime)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.SchedulePeriod_startTime, *v.StartTime)
+	}
+}
+func (v *SchedulePeriod) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SchedulePeriod, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SchedulePeriod_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.SchedulePeriod_endTime, v.EndTime)
+		case schemas.SchedulePeriod_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.SchedulePeriod_startTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 // Configuration structure for customizing the tabular display of widget data.
 type TableDisplayConfigStruct struct {
 	noSmithyDocumentSerde
+}
+
+func (v *TableDisplayConfigStruct) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableDisplayConfigStruct)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TableDisplayConfigStruct) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *TableDisplayConfigStruct) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableDisplayConfigStruct, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Specifies tag-based filtering options for cost and usage queries.
@@ -628,6 +1577,34 @@ type TagValues struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TagValues) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagValues)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagValues) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.TagValues_key, *v.Key)
+	}
+	serializeMatchOptions(s, schemas.TagValues_matchOptions, v.MatchOptions)
+	serializeStringList(s, schemas.TagValues_values, v.Values)
+}
+func (v *TagValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagValues, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagValues_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.TagValues_key, v.Key)
+		case schemas.TagValues_matchOptions:
+			return deserializeMatchOptions(d, schemas.TagValues_matchOptions, &v.MatchOptions)
+		case schemas.TagValues_values:
+			return deserializeStringList(d, schemas.TagValues_values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // A configurable visualization component within a dashboard that displays
@@ -667,6 +1644,60 @@ type Widget struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Widget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Widget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Widget) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWidgetConfigList(s, schemas.Widget_configs, v.Configs)
+	if v.Description != nil {
+		s.WriteString(schemas.Widget_description, *v.Description)
+	}
+	if v.Height != nil {
+		s.WriteInt32(schemas.Widget_height, *v.Height)
+	}
+	if v.HorizontalOffset != 0 {
+		s.WriteInt32(schemas.Widget_horizontalOffset, v.HorizontalOffset)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Widget_id, *v.Id)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.Widget_title, *v.Title)
+	}
+	if v.Width != nil {
+		s.WriteInt32(schemas.Widget_width, *v.Width)
+	}
+}
+func (v *Widget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Widget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Widget_configs:
+			return deserializeWidgetConfigList(d, schemas.Widget_configs, &v.Configs)
+		case schemas.Widget_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Widget_description, v.Description)
+		case schemas.Widget_height:
+			v.Height = new(int32)
+			return d.ReadInt32(schemas.Widget_height, v.Height)
+		case schemas.Widget_horizontalOffset:
+			return d.ReadInt32(schemas.Widget_horizontalOffset, &v.HorizontalOffset)
+		case schemas.Widget_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Widget_id, v.Id)
+		case schemas.Widget_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.Widget_title, v.Title)
+		case schemas.Widget_width:
+			v.Width = new(int32)
+			return d.ReadInt32(schemas.Widget_width, v.Width)
+		}
+		return nil
+	})
+}
+
 // Defines the complete configuration for a widget, including data retrieval
 // settings and visualization preferences.
 type WidgetConfig struct {
@@ -684,6 +1715,28 @@ type WidgetConfig struct {
 	QueryParameters QueryParameters
 
 	noSmithyDocumentSerde
+}
+
+func (v *WidgetConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WidgetConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WidgetConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDisplayConfig(s, schemas.WidgetConfig_displayConfig, v.DisplayConfig)
+	serializeQueryParameters(s, schemas.WidgetConfig_queryParameters, v.QueryParameters)
+}
+func (v *WidgetConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WidgetConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WidgetConfig_displayConfig:
+			return deserializeDisplayConfig(d, schemas.WidgetConfig_displayConfig, &v.DisplayConfig)
+		case schemas.WidgetConfig_queryParameters:
+			return deserializeQueryParameters(d, schemas.WidgetConfig_queryParameters, &v.QueryParameters)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

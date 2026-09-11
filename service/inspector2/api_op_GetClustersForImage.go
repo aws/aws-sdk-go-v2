@@ -5,7 +5,9 @@ package inspector2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,26 @@ type GetClustersForImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetClustersForImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetClustersForImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetClustersForImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetClustersForImageRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetClustersForImageRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetClustersForImageRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetClustersForImageOutput struct {
 
 	// A unit of work inside of a cluster, which can include metadata about the
@@ -60,13 +82,35 @@ type GetClustersForImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetClustersForImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetClustersForImageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetClustersForImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClusterInformationList(s, schemas.GetClustersForImageResponse_cluster, v.Cluster)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetClustersForImageResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetClustersForImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetClustersForImageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetClustersForImageResponse_cluster:
+			return deserializeClusterInformationList(d, schemas.GetClustersForImageResponse_cluster, &v.Cluster)
+		case schemas.GetClustersForImageResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetClustersForImageResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetClustersForImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetClustersForImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetClustersForImage, schemas.GetClustersForImageRequest, schemas.GetClustersForImageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetClustersForImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetClustersForImage, schemas.GetClustersForImageRequest, schemas.GetClustersForImageResponse), output: &GetClustersForImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

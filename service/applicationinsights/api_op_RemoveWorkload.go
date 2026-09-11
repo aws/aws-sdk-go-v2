@@ -4,6 +4,8 @@ package applicationinsights
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type RemoveWorkloadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveWorkloadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveWorkloadRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveWorkloadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentName != nil {
+		s.WriteString(schemas.RemoveWorkloadRequest_ComponentName, *v.ComponentName)
+	}
+	if v.ResourceGroupName != nil {
+		s.WriteString(schemas.RemoveWorkloadRequest_ResourceGroupName, *v.ResourceGroupName)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.RemoveWorkloadRequest_WorkloadId, *v.WorkloadId)
+	}
+}
+
 type RemoveWorkloadOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +70,26 @@ type RemoveWorkloadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveWorkloadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveWorkloadResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveWorkloadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveWorkloadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveWorkloadResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveWorkloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpRemoveWorkload{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveWorkload, schemas.RemoveWorkloadRequest, schemas.RemoveWorkloadResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpRemoveWorkload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveWorkload, schemas.RemoveWorkloadRequest, schemas.RemoveWorkloadResponse), output: &RemoveWorkloadOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

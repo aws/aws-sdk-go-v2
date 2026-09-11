@@ -4,6 +4,8 @@ package appconfig
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteDeploymentStrategyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDeploymentStrategyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDeploymentStrategyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDeploymentStrategyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentStrategyId != nil {
+		s.WriteString(schemas.DeleteDeploymentStrategyRequest_DeploymentStrategyId, *v.DeploymentStrategyId)
+	}
+}
+
 type DeleteDeploymentStrategyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteDeploymentStrategyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDeploymentStrategyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDeploymentStrategyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteDeploymentStrategyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDeploymentStrategyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDeploymentStrategy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDeploymentStrategy, schemas.DeleteDeploymentStrategyRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDeploymentStrategy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDeploymentStrategy, schemas.DeleteDeploymentStrategyRequest, nil), output: &DeleteDeploymentStrategyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

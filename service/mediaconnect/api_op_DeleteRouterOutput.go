@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteRouterOutputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRouterOutputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRouterOutputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRouterOutputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteRouterOutputRequest_Arn, *v.Arn)
+	}
+}
+
 type DeleteRouterOutputOutput struct {
 
 	// The ARN of the deleted router output.
@@ -58,13 +72,48 @@ type DeleteRouterOutputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRouterOutputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRouterOutputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRouterOutputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteRouterOutputResponse_Arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteRouterOutputResponse_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DeleteRouterOutputResponse_State, string(v.State))
+	}
+}
+func (v *DeleteRouterOutputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRouterOutputResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRouterOutputResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteRouterOutputResponse_Arn, v.Arn)
+		case schemas.DeleteRouterOutputResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteRouterOutputResponse_Name, v.Name)
+		case schemas.DeleteRouterOutputResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DeleteRouterOutputResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.RouterOutputState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRouterOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRouterOutput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRouterOutput, schemas.DeleteRouterOutputRequest, schemas.DeleteRouterOutputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRouterOutput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRouterOutput, schemas.DeleteRouterOutputRequest, schemas.DeleteRouterOutputResponse), output: &DeleteRouterOutputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

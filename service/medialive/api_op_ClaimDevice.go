@@ -4,6 +4,8 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type ClaimDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClaimDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClaimDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClaimDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ClaimDeviceRequest_Id, *v.Id)
+	}
+}
+
 // Placeholder documentation for ClaimDeviceResponse
 type ClaimDeviceOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -42,13 +56,26 @@ type ClaimDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClaimDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClaimDeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClaimDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ClaimDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClaimDeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationClaimDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpClaimDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ClaimDevice, schemas.ClaimDeviceRequest, schemas.ClaimDeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpClaimDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ClaimDevice, schemas.ClaimDeviceRequest, schemas.ClaimDeviceResponse), output: &ClaimDeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

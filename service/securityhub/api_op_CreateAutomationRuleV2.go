@@ -5,7 +5,9 @@ package securityhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,33 @@ type CreateAutomationRuleV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutomationRuleV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutomationRuleV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutomationRuleV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomationRulesActionListV2(s, schemas.CreateAutomationRuleV2Request_Actions, v.Actions)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAutomationRuleV2Request_ClientToken, *v.ClientToken)
+	}
+	serializeCriteria(s, schemas.CreateAutomationRuleV2Request_Criteria, v.Criteria)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAutomationRuleV2Request_Description, *v.Description)
+	}
+	if v.RuleName != nil {
+		s.WriteString(schemas.CreateAutomationRuleV2Request_RuleName, *v.RuleName)
+	}
+	if v.RuleOrder != nil {
+		s.WriteFloat32(schemas.CreateAutomationRuleV2Request_RuleOrder, *v.RuleOrder)
+	}
+	if v.RuleStatus != "" {
+		s.WriteString(schemas.CreateAutomationRuleV2Request_RuleStatus, string(v.RuleStatus))
+	}
+	serializeTagMap(s, schemas.CreateAutomationRuleV2Request_Tags, v.Tags)
+}
+
 type CreateAutomationRuleV2Output struct {
 
 	// The ARN of the V2 automation rule.
@@ -78,13 +107,38 @@ type CreateAutomationRuleV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutomationRuleV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutomationRuleV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutomationRuleV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleArn != nil {
+		s.WriteString(schemas.CreateAutomationRuleV2Response_RuleArn, *v.RuleArn)
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.CreateAutomationRuleV2Response_RuleId, *v.RuleId)
+	}
+}
+func (v *CreateAutomationRuleV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAutomationRuleV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAutomationRuleV2Response_RuleArn:
+			v.RuleArn = new(string)
+			return d.ReadString(schemas.CreateAutomationRuleV2Response_RuleArn, v.RuleArn)
+		case schemas.CreateAutomationRuleV2Response_RuleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.CreateAutomationRuleV2Response_RuleId, v.RuleId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAutomationRuleV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAutomationRuleV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutomationRuleV2, schemas.CreateAutomationRuleV2Request, schemas.CreateAutomationRuleV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAutomationRuleV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutomationRuleV2, schemas.CreateAutomationRuleV2Request, schemas.CreateAutomationRuleV2Response), output: &CreateAutomationRuleV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

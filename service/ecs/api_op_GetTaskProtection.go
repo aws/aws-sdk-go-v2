@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,19 @@ type GetTaskProtectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTaskProtectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTaskProtectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTaskProtectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteString(schemas.GetTaskProtectionRequest_cluster, *v.Cluster)
+	}
+	serializeStringList(s, schemas.GetTaskProtectionRequest_tasks, v.Tasks)
+}
+
 type GetTaskProtectionOutput struct {
 
 	// Any failures associated with the call.
@@ -60,13 +75,32 @@ type GetTaskProtectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTaskProtectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTaskProtectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTaskProtectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailures(s, schemas.GetTaskProtectionResponse_failures, v.Failures)
+	serializeProtectedTasks(s, schemas.GetTaskProtectionResponse_protectedTasks, v.ProtectedTasks)
+}
+func (v *GetTaskProtectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTaskProtectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTaskProtectionResponse_failures:
+			return deserializeFailures(d, schemas.GetTaskProtectionResponse_failures, &v.Failures)
+		case schemas.GetTaskProtectionResponse_protectedTasks:
+			return deserializeProtectedTasks(d, schemas.GetTaskProtectionResponse_protectedTasks, &v.ProtectedTasks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTaskProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTaskProtection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTaskProtection, schemas.GetTaskProtectionRequest, schemas.GetTaskProtectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTaskProtection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTaskProtection, schemas.GetTaskProtectionRequest, schemas.GetTaskProtectionResponse), output: &GetTaskProtectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

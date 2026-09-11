@@ -4,6 +4,8 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,18 @@ type StartInputDeviceMaintenanceWindowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartInputDeviceMaintenanceWindowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartInputDeviceMaintenanceWindowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartInputDeviceMaintenanceWindowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputDeviceId != nil {
+		s.WriteString(schemas.StartInputDeviceMaintenanceWindowRequest_InputDeviceId, *v.InputDeviceId)
+	}
+}
+
 // Placeholder documentation for StartInputDeviceMaintenanceWindowResponse
 type StartInputDeviceMaintenanceWindowOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -50,13 +64,26 @@ type StartInputDeviceMaintenanceWindowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartInputDeviceMaintenanceWindowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartInputDeviceMaintenanceWindowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartInputDeviceMaintenanceWindowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartInputDeviceMaintenanceWindowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartInputDeviceMaintenanceWindowResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartInputDeviceMaintenanceWindowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartInputDeviceMaintenanceWindow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartInputDeviceMaintenanceWindow, schemas.StartInputDeviceMaintenanceWindowRequest, schemas.StartInputDeviceMaintenanceWindowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartInputDeviceMaintenanceWindow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartInputDeviceMaintenanceWindow, schemas.StartInputDeviceMaintenanceWindowRequest, schemas.StartInputDeviceMaintenanceWindowResponse), output: &StartInputDeviceMaintenanceWindowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

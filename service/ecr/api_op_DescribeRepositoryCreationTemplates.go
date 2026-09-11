@@ -5,7 +5,9 @@ package ecr
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,22 @@ type DescribeRepositoryCreationTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRepositoryCreationTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRepositoryCreationTemplatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRepositoryCreationTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeRepositoryCreationTemplatesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRepositoryCreationTemplatesRequest_nextToken, *v.NextToken)
+	}
+	serializePrefixList(s, schemas.DescribeRepositoryCreationTemplatesRequest_prefixes, v.Prefixes)
+}
+
 type DescribeRepositoryCreationTemplatesOutput struct {
 
 	// The nextToken value to include in a future DescribeRepositoryCreationTemplates
@@ -78,13 +96,41 @@ type DescribeRepositoryCreationTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRepositoryCreationTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRepositoryCreationTemplatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRepositoryCreationTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRepositoryCreationTemplatesResponse_nextToken, *v.NextToken)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.DescribeRepositoryCreationTemplatesResponse_registryId, *v.RegistryId)
+	}
+	serializeRepositoryCreationTemplateList(s, schemas.DescribeRepositoryCreationTemplatesResponse_repositoryCreationTemplates, v.RepositoryCreationTemplates)
+}
+func (v *DescribeRepositoryCreationTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRepositoryCreationTemplatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRepositoryCreationTemplatesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeRepositoryCreationTemplatesResponse_nextToken, v.NextToken)
+		case schemas.DescribeRepositoryCreationTemplatesResponse_registryId:
+			v.RegistryId = new(string)
+			return d.ReadString(schemas.DescribeRepositoryCreationTemplatesResponse_registryId, v.RegistryId)
+		case schemas.DescribeRepositoryCreationTemplatesResponse_repositoryCreationTemplates:
+			return deserializeRepositoryCreationTemplateList(d, schemas.DescribeRepositoryCreationTemplatesResponse_repositoryCreationTemplates, &v.RepositoryCreationTemplates)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRepositoryCreationTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRepositoryCreationTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRepositoryCreationTemplates, schemas.DescribeRepositoryCreationTemplatesRequest, schemas.DescribeRepositoryCreationTemplatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeRepositoryCreationTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRepositoryCreationTemplates, schemas.DescribeRepositoryCreationTemplatesRequest, schemas.DescribeRepositoryCreationTemplatesResponse), output: &DescribeRepositoryCreationTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

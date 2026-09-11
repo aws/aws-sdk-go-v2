@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -53,6 +55,25 @@ type CreateAutomatedReasoningPolicyVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutomatedReasoningPolicyVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutomatedReasoningPolicyVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutomatedReasoningPolicyVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyVersionRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.LastUpdatedDefinitionHash != nil {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyVersionRequest_lastUpdatedDefinitionHash, *v.LastUpdatedDefinitionHash)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyVersionRequest_policyArn, *v.PolicyArn)
+	}
+	serializeTagList(s, schemas.CreateAutomatedReasoningPolicyVersionRequest_tags, v.Tags)
+}
+
 type CreateAutomatedReasoningPolicyVersionOutput struct {
 
 	// The timestamp when the policy version was created.
@@ -89,13 +110,62 @@ type CreateAutomatedReasoningPolicyVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutomatedReasoningPolicyVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutomatedReasoningPolicyVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutomatedReasoningPolicyVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateAutomatedReasoningPolicyVersionResponse_createdAt, *v.CreatedAt)
+	}
+	if v.DefinitionHash != nil {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyVersionResponse_definitionHash, *v.DefinitionHash)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyVersionResponse_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyVersionResponse_name, *v.Name)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyVersionResponse_policyArn, *v.PolicyArn)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyVersionResponse_version, *v.Version)
+	}
+}
+func (v *CreateAutomatedReasoningPolicyVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAutomatedReasoningPolicyVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAutomatedReasoningPolicyVersionResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateAutomatedReasoningPolicyVersionResponse_createdAt, v.CreatedAt)
+		case schemas.CreateAutomatedReasoningPolicyVersionResponse_definitionHash:
+			v.DefinitionHash = new(string)
+			return d.ReadString(schemas.CreateAutomatedReasoningPolicyVersionResponse_definitionHash, v.DefinitionHash)
+		case schemas.CreateAutomatedReasoningPolicyVersionResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateAutomatedReasoningPolicyVersionResponse_description, v.Description)
+		case schemas.CreateAutomatedReasoningPolicyVersionResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateAutomatedReasoningPolicyVersionResponse_name, v.Name)
+		case schemas.CreateAutomatedReasoningPolicyVersionResponse_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.CreateAutomatedReasoningPolicyVersionResponse_policyArn, v.PolicyArn)
+		case schemas.CreateAutomatedReasoningPolicyVersionResponse_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.CreateAutomatedReasoningPolicyVersionResponse_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAutomatedReasoningPolicyVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAutomatedReasoningPolicyVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutomatedReasoningPolicyVersion, schemas.CreateAutomatedReasoningPolicyVersionRequest, schemas.CreateAutomatedReasoningPolicyVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAutomatedReasoningPolicyVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutomatedReasoningPolicyVersion, schemas.CreateAutomatedReasoningPolicyVersionRequest, schemas.CreateAutomatedReasoningPolicyVersionResponse), output: &CreateAutomatedReasoningPolicyVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

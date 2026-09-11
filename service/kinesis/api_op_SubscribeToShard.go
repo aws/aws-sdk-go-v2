@@ -4,7 +4,9 @@ package kinesis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	smithysync "github.com/aws/smithy-go/sync"
@@ -80,6 +82,31 @@ type SubscribeToShardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubscribeToShardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubscribeToShardInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubscribeToShardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsumerARN != nil {
+		s.WriteString(schemas.SubscribeToShardInput_ConsumerARN, *v.ConsumerARN)
+	}
+	if v.DryRun != nil {
+		s.WriteBool(schemas.SubscribeToShardInput_DryRun, *v.DryRun)
+	}
+	if v.ShardId != nil {
+		s.WriteString(schemas.SubscribeToShardInput_ShardId, *v.ShardId)
+	}
+	if v.StartingPosition != nil {
+		s.WriteStruct(schemas.SubscribeToShardInput_StartingPosition)
+		v.StartingPosition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.SubscribeToShardInput_StreamId, *v.StreamId)
+	}
+}
 func (in *SubscribeToShardInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ConsumerARN = in.ConsumerARN
@@ -96,24 +123,38 @@ type SubscribeToShardOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubscribeToShardOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubscribeToShardOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubscribeToShardOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SubscribeToShardOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubscribeToShardOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 // GetStream returns the type to interact with the event stream.
 func (o *SubscribeToShardOutput) GetStream() *SubscribeToShardEventStream {
 	return o.eventStream
 }
 
 func (c *Client) addOperationSubscribeToShardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSubscribeToShard{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubscribeToShard, schemas.SubscribeToShardInput, schemas.SubscribeToShardOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSubscribeToShard{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubscribeToShard, schemas.SubscribeToShardInput, schemas.SubscribeToShardOutput), output: &SubscribeToShardOutput{}}, middleware.After); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamSubscribeToShard{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
 	}
 
-	if err = addEventStreamSubscribeToShardMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}

@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,22 @@ type GetCisScanReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCisScanReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCisScanReportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCisScanReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportFormat != "" {
+		s.WriteString(schemas.GetCisScanReportRequest_reportFormat, string(v.ReportFormat))
+	}
+	if v.ScanArn != nil {
+		s.WriteString(schemas.GetCisScanReportRequest_scanArn, *v.ScanArn)
+	}
+	serializeReportTargetAccounts(s, schemas.GetCisScanReportRequest_targetAccounts, v.TargetAccounts)
+}
+
 type GetCisScanReportOutput struct {
 
 	// The status.
@@ -55,13 +73,42 @@ type GetCisScanReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCisScanReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCisScanReportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCisScanReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.GetCisScanReportResponse_status, string(v.Status))
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.GetCisScanReportResponse_url, *v.Url)
+	}
+}
+func (v *GetCisScanReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCisScanReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCisScanReportResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetCisScanReportResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CisReportStatus(ev)
+			return nil
+		case schemas.GetCisScanReportResponse_url:
+			v.Url = new(string)
+			return d.ReadString(schemas.GetCisScanReportResponse_url, v.Url)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCisScanReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCisScanReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCisScanReport, schemas.GetCisScanReportRequest, schemas.GetCisScanReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCisScanReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCisScanReport, schemas.GetCisScanReportRequest, schemas.GetCisScanReportResponse), output: &GetCisScanReportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

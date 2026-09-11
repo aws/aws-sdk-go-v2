@@ -4,6 +4,8 @@ package mq
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mq/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,19 @@ type CreateTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.CreateTagsRequest_ResourceArn, *v.ResourceArn)
+	}
+	serialize__mapOf__string(s, schemas.CreateTagsRequest_Tags, v.Tags)
+}
+
 type CreateTagsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +59,26 @@ type CreateTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTags, schemas.CreateTagsRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTags, schemas.CreateTagsRequest, nil), output: &CreateTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

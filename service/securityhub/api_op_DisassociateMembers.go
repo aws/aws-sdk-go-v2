@@ -4,6 +4,8 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,16 @@ type DisassociateMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateMembersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateMembersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateMembersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdList(s, schemas.DisassociateMembersRequest_AccountIds, v.AccountIds)
+}
+
 type DisassociateMembersOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +57,26 @@ type DisassociateMembersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateMembersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateMembersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateMembersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateMembersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateMembersResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateMembers, schemas.DisassociateMembersRequest, schemas.DisassociateMembersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateMembers, schemas.DisassociateMembersRequest, schemas.DisassociateMembersResponse), output: &DisassociateMembersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

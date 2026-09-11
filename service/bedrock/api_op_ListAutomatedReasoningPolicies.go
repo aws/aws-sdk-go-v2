@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListAutomatedReasoningPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomatedReasoningPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutomatedReasoningPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutomatedReasoningPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAutomatedReasoningPoliciesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutomatedReasoningPoliciesRequest_nextToken, *v.NextToken)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.ListAutomatedReasoningPoliciesRequest_policyArn, *v.PolicyArn)
+	}
+}
+
 type ListAutomatedReasoningPoliciesOutput struct {
 
 	// A list of Automated Reasoning policy summaries.
@@ -60,13 +80,35 @@ type ListAutomatedReasoningPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomatedReasoningPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutomatedReasoningPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutomatedReasoningPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningPolicySummaries(s, schemas.ListAutomatedReasoningPoliciesResponse_automatedReasoningPolicySummaries, v.AutomatedReasoningPolicySummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutomatedReasoningPoliciesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAutomatedReasoningPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAutomatedReasoningPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAutomatedReasoningPoliciesResponse_automatedReasoningPolicySummaries:
+			return deserializeAutomatedReasoningPolicySummaries(d, schemas.ListAutomatedReasoningPoliciesResponse_automatedReasoningPolicySummaries, &v.AutomatedReasoningPolicySummaries)
+		case schemas.ListAutomatedReasoningPoliciesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAutomatedReasoningPoliciesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAutomatedReasoningPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAutomatedReasoningPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomatedReasoningPolicies, schemas.ListAutomatedReasoningPoliciesRequest, schemas.ListAutomatedReasoningPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAutomatedReasoningPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomatedReasoningPolicies, schemas.ListAutomatedReasoningPoliciesRequest, schemas.ListAutomatedReasoningPoliciesResponse), output: &ListAutomatedReasoningPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

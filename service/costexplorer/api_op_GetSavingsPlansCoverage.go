@@ -5,7 +5,9 @@ package costexplorer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -116,6 +118,41 @@ type GetSavingsPlansCoverageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSavingsPlansCoverageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSavingsPlansCoverageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSavingsPlansCoverageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetSavingsPlansCoverageRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Granularity != "" {
+		s.WriteString(schemas.GetSavingsPlansCoverageRequest_Granularity, string(v.Granularity))
+	}
+	serializeGroupDefinitions(s, schemas.GetSavingsPlansCoverageRequest_GroupBy, v.GroupBy)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetSavingsPlansCoverageRequest_MaxResults, *v.MaxResults)
+	}
+	serializeMetricNames(s, schemas.GetSavingsPlansCoverageRequest_Metrics, v.Metrics)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSavingsPlansCoverageRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != nil {
+		s.WriteStruct(schemas.GetSavingsPlansCoverageRequest_SortBy)
+		v.SortBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.GetSavingsPlansCoverageRequest_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetSavingsPlansCoverageOutput struct {
 
 	// The amount of spend that your Savings Plans covered.
@@ -134,13 +171,35 @@ type GetSavingsPlansCoverageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSavingsPlansCoverageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSavingsPlansCoverageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSavingsPlansCoverageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSavingsPlansCoverageResponse_NextToken, *v.NextToken)
+	}
+	serializeSavingsPlansCoverages(s, schemas.GetSavingsPlansCoverageResponse_SavingsPlansCoverages, v.SavingsPlansCoverages)
+}
+func (v *GetSavingsPlansCoverageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSavingsPlansCoverageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSavingsPlansCoverageResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetSavingsPlansCoverageResponse_NextToken, v.NextToken)
+		case schemas.GetSavingsPlansCoverageResponse_SavingsPlansCoverages:
+			return deserializeSavingsPlansCoverages(d, schemas.GetSavingsPlansCoverageResponse_SavingsPlansCoverages, &v.SavingsPlansCoverages)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSavingsPlansCoverageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSavingsPlansCoverage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSavingsPlansCoverage, schemas.GetSavingsPlansCoverageRequest, schemas.GetSavingsPlansCoverageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSavingsPlansCoverage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSavingsPlansCoverage, schemas.GetSavingsPlansCoverageRequest, schemas.GetSavingsPlansCoverageResponse), output: &GetSavingsPlansCoverageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

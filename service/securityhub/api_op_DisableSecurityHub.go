@@ -4,6 +4,8 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,15 @@ type DisableSecurityHubInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableSecurityHubInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableSecurityHubRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableSecurityHubInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DisableSecurityHubOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +58,26 @@ type DisableSecurityHubOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableSecurityHubOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableSecurityHubResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableSecurityHubOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisableSecurityHubOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableSecurityHubResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableSecurityHubMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisableSecurityHub{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableSecurityHub, schemas.DisableSecurityHubRequest, schemas.DisableSecurityHubResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisableSecurityHub{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableSecurityHub, schemas.DisableSecurityHubRequest, schemas.DisableSecurityHubResponse), output: &DisableSecurityHubOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

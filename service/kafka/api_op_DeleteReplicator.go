@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type DeleteReplicatorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReplicatorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReplicatorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReplicatorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentVersion != nil {
+		s.WriteString(schemas.DeleteReplicatorRequest_CurrentVersion, *v.CurrentVersion)
+	}
+	if v.ReplicatorArn != nil {
+		s.WriteString(schemas.DeleteReplicatorRequest_ReplicatorArn, *v.ReplicatorArn)
+	}
+}
+
 type DeleteReplicatorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the replicator.
@@ -51,13 +68,42 @@ type DeleteReplicatorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReplicatorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReplicatorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReplicatorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicatorArn != nil {
+		s.WriteString(schemas.DeleteReplicatorResponse_ReplicatorArn, *v.ReplicatorArn)
+	}
+	if v.ReplicatorState != "" {
+		s.WriteString(schemas.DeleteReplicatorResponse_ReplicatorState, string(v.ReplicatorState))
+	}
+}
+func (v *DeleteReplicatorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteReplicatorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteReplicatorResponse_ReplicatorArn:
+			v.ReplicatorArn = new(string)
+			return d.ReadString(schemas.DeleteReplicatorResponse_ReplicatorArn, v.ReplicatorArn)
+		case schemas.DeleteReplicatorResponse_ReplicatorState:
+			var ev string
+			if err := d.ReadString(schemas.DeleteReplicatorResponse_ReplicatorState, &ev); err != nil {
+				return err
+			}
+			v.ReplicatorState = types.ReplicatorState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteReplicatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteReplicator{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReplicator, schemas.DeleteReplicatorRequest, schemas.DeleteReplicatorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteReplicator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReplicator, schemas.DeleteReplicatorRequest, schemas.DeleteReplicatorResponse), output: &DeleteReplicatorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetChannelNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChannelNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetChannelNamespaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetChannelNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.GetChannelNamespaceRequest_apiId, *v.ApiId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetChannelNamespaceRequest_name, *v.Name)
+	}
+}
+
 type GetChannelNamespaceOutput struct {
 
 	// The ChannelNamespace object.
@@ -50,13 +67,34 @@ type GetChannelNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChannelNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetChannelNamespaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetChannelNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelNamespace != nil {
+		s.WriteStruct(schemas.GetChannelNamespaceResponse_channelNamespace)
+		v.ChannelNamespace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetChannelNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetChannelNamespaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetChannelNamespaceResponse_channelNamespace:
+			v.ChannelNamespace = &types.ChannelNamespace{}
+			return v.ChannelNamespace.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetChannelNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetChannelNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannelNamespace, schemas.GetChannelNamespaceRequest, schemas.GetChannelNamespaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetChannelNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannelNamespace, schemas.GetChannelNamespaceRequest, schemas.GetChannelNamespaceResponse), output: &GetChannelNamespaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

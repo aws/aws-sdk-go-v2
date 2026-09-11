@@ -4,7 +4,9 @@ package bedrockruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetAsyncInvokeInput struct {
 	InvocationArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetAsyncInvokeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAsyncInvokeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAsyncInvokeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvocationArn != nil {
+		s.WriteString(schemas.GetAsyncInvokeRequest_invocationArn, *v.InvocationArn)
+	}
 }
 
 type GetAsyncInvokeOutput struct {
@@ -80,13 +94,81 @@ type GetAsyncInvokeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAsyncInvokeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAsyncInvokeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAsyncInvokeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.GetAsyncInvokeResponse_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetAsyncInvokeResponse_endTime, *v.EndTime)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.GetAsyncInvokeResponse_failureMessage, *v.FailureMessage)
+	}
+	if v.InvocationArn != nil {
+		s.WriteString(schemas.GetAsyncInvokeResponse_invocationArn, *v.InvocationArn)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.GetAsyncInvokeResponse_lastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.ModelArn != nil {
+		s.WriteString(schemas.GetAsyncInvokeResponse_modelArn, *v.ModelArn)
+	}
+	serializeAsyncInvokeOutputDataConfig(s, schemas.GetAsyncInvokeResponse_outputDataConfig, v.OutputDataConfig)
+	if v.Status != "" {
+		s.WriteString(schemas.GetAsyncInvokeResponse_status, string(v.Status))
+	}
+	if v.SubmitTime != nil {
+		s.WriteTime(schemas.GetAsyncInvokeResponse_submitTime, *v.SubmitTime)
+	}
+}
+func (v *GetAsyncInvokeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAsyncInvokeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAsyncInvokeResponse_clientRequestToken:
+			v.ClientRequestToken = new(string)
+			return d.ReadString(schemas.GetAsyncInvokeResponse_clientRequestToken, v.ClientRequestToken)
+		case schemas.GetAsyncInvokeResponse_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.GetAsyncInvokeResponse_endTime, v.EndTime)
+		case schemas.GetAsyncInvokeResponse_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.GetAsyncInvokeResponse_failureMessage, v.FailureMessage)
+		case schemas.GetAsyncInvokeResponse_invocationArn:
+			v.InvocationArn = new(string)
+			return d.ReadString(schemas.GetAsyncInvokeResponse_invocationArn, v.InvocationArn)
+		case schemas.GetAsyncInvokeResponse_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.GetAsyncInvokeResponse_lastModifiedTime, v.LastModifiedTime)
+		case schemas.GetAsyncInvokeResponse_modelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.GetAsyncInvokeResponse_modelArn, v.ModelArn)
+		case schemas.GetAsyncInvokeResponse_outputDataConfig:
+			return deserializeAsyncInvokeOutputDataConfig(d, schemas.GetAsyncInvokeResponse_outputDataConfig, &v.OutputDataConfig)
+		case schemas.GetAsyncInvokeResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetAsyncInvokeResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AsyncInvokeStatus(ev)
+			return nil
+		case schemas.GetAsyncInvokeResponse_submitTime:
+			v.SubmitTime = new(time.Time)
+			return d.ReadTime(schemas.GetAsyncInvokeResponse_submitTime, v.SubmitTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAsyncInvokeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAsyncInvoke{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAsyncInvoke, schemas.GetAsyncInvokeRequest, schemas.GetAsyncInvokeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAsyncInvoke{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAsyncInvoke, schemas.GetAsyncInvokeRequest, schemas.GetAsyncInvokeResponse), output: &GetAsyncInvokeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

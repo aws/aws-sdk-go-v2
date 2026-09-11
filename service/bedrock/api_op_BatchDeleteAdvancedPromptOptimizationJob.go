@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,16 @@ type BatchDeleteAdvancedPromptOptimizationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteAdvancedPromptOptimizationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteAdvancedPromptOptimizationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteAdvancedPromptOptimizationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdvancedPromptOptimizationJobIdentifiers(s, schemas.BatchDeleteAdvancedPromptOptimizationJobRequest_jobIdentifiers, v.JobIdentifiers)
+}
+
 // Batch Delete Advanced Prompt Optimization Jobs Response
 type BatchDeleteAdvancedPromptOptimizationJobOutput struct {
 
@@ -54,13 +66,32 @@ type BatchDeleteAdvancedPromptOptimizationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteAdvancedPromptOptimizationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteAdvancedPromptOptimizationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteAdvancedPromptOptimizationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDeleteAdvancedPromptOptimizationJobItems(s, schemas.BatchDeleteAdvancedPromptOptimizationJobResponse_advancedPromptOptimizationJobs, v.AdvancedPromptOptimizationJobs)
+	serializeBatchDeleteAdvancedPromptOptimizationJobErrors(s, schemas.BatchDeleteAdvancedPromptOptimizationJobResponse_errors, v.Errors)
+}
+func (v *BatchDeleteAdvancedPromptOptimizationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteAdvancedPromptOptimizationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteAdvancedPromptOptimizationJobResponse_advancedPromptOptimizationJobs:
+			return deserializeBatchDeleteAdvancedPromptOptimizationJobItems(d, schemas.BatchDeleteAdvancedPromptOptimizationJobResponse_advancedPromptOptimizationJobs, &v.AdvancedPromptOptimizationJobs)
+		case schemas.BatchDeleteAdvancedPromptOptimizationJobResponse_errors:
+			return deserializeBatchDeleteAdvancedPromptOptimizationJobErrors(d, schemas.BatchDeleteAdvancedPromptOptimizationJobResponse_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteAdvancedPromptOptimizationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteAdvancedPromptOptimizationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteAdvancedPromptOptimizationJob, schemas.BatchDeleteAdvancedPromptOptimizationJobRequest, schemas.BatchDeleteAdvancedPromptOptimizationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteAdvancedPromptOptimizationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteAdvancedPromptOptimizationJob, schemas.BatchDeleteAdvancedPromptOptimizationJobRequest, schemas.BatchDeleteAdvancedPromptOptimizationJobResponse), output: &BatchDeleteAdvancedPromptOptimizationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

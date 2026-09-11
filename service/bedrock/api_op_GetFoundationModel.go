@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetFoundationModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFoundationModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFoundationModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFoundationModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelIdentifier != nil {
+		s.WriteString(schemas.GetFoundationModelRequest_modelIdentifier, *v.ModelIdentifier)
+	}
+}
+
 type GetFoundationModelOutput struct {
 
 	// Information about the foundation model.
@@ -45,13 +59,34 @@ type GetFoundationModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFoundationModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFoundationModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFoundationModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelDetails != nil {
+		s.WriteStruct(schemas.GetFoundationModelResponse_modelDetails)
+		v.ModelDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetFoundationModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFoundationModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFoundationModelResponse_modelDetails:
+			v.ModelDetails = &types.FoundationModelDetails{}
+			return v.ModelDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFoundationModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFoundationModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFoundationModel, schemas.GetFoundationModelRequest, schemas.GetFoundationModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFoundationModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFoundationModel, schemas.GetFoundationModelRequest, schemas.GetFoundationModelResponse), output: &GetFoundationModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

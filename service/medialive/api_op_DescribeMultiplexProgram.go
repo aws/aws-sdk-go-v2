@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DescribeMultiplexProgramInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMultiplexProgramInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMultiplexProgramRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMultiplexProgramInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MultiplexId != nil {
+		s.WriteString(schemas.DescribeMultiplexProgramRequest_MultiplexId, *v.MultiplexId)
+	}
+	if v.ProgramName != nil {
+		s.WriteString(schemas.DescribeMultiplexProgramRequest_ProgramName, *v.ProgramName)
+	}
+}
+
 // Placeholder documentation for DescribeMultiplexProgramResponse
 type DescribeMultiplexProgramOutput struct {
 
@@ -67,13 +84,57 @@ type DescribeMultiplexProgramOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMultiplexProgramOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMultiplexProgramResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMultiplexProgramOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelId != nil {
+		s.WriteString(schemas.DescribeMultiplexProgramResponse_ChannelId, *v.ChannelId)
+	}
+	if v.MultiplexProgramSettings != nil {
+		s.WriteStruct(schemas.DescribeMultiplexProgramResponse_MultiplexProgramSettings)
+		v.MultiplexProgramSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PacketIdentifiersMap != nil {
+		s.WriteStruct(schemas.DescribeMultiplexProgramResponse_PacketIdentifiersMap)
+		v.PacketIdentifiersMap.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfMultiplexProgramPipelineDetail(s, schemas.DescribeMultiplexProgramResponse_PipelineDetails, v.PipelineDetails)
+	if v.ProgramName != nil {
+		s.WriteString(schemas.DescribeMultiplexProgramResponse_ProgramName, *v.ProgramName)
+	}
+}
+func (v *DescribeMultiplexProgramOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMultiplexProgramResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMultiplexProgramResponse_ChannelId:
+			v.ChannelId = new(string)
+			return d.ReadString(schemas.DescribeMultiplexProgramResponse_ChannelId, v.ChannelId)
+		case schemas.DescribeMultiplexProgramResponse_MultiplexProgramSettings:
+			v.MultiplexProgramSettings = &types.MultiplexProgramSettings{}
+			return v.MultiplexProgramSettings.Deserialize(d)
+		case schemas.DescribeMultiplexProgramResponse_PacketIdentifiersMap:
+			v.PacketIdentifiersMap = &types.MultiplexProgramPacketIdentifiersMap{}
+			return v.PacketIdentifiersMap.Deserialize(d)
+		case schemas.DescribeMultiplexProgramResponse_PipelineDetails:
+			return deserialize__listOfMultiplexProgramPipelineDetail(d, schemas.DescribeMultiplexProgramResponse_PipelineDetails, &v.PipelineDetails)
+		case schemas.DescribeMultiplexProgramResponse_ProgramName:
+			v.ProgramName = new(string)
+			return d.ReadString(schemas.DescribeMultiplexProgramResponse_ProgramName, v.ProgramName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMultiplexProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeMultiplexProgram{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMultiplexProgram, schemas.DescribeMultiplexProgramRequest, schemas.DescribeMultiplexProgramResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeMultiplexProgram{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMultiplexProgram, schemas.DescribeMultiplexProgramRequest, schemas.DescribeMultiplexProgramResponse), output: &DescribeMultiplexProgramOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

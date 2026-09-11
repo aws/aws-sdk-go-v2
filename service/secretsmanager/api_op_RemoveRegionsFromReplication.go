@@ -4,7 +4,9 @@ package secretsmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,19 @@ type RemoveRegionsFromReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveRegionsFromReplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveRegionsFromReplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveRegionsFromReplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRemoveReplicaRegionListType(s, schemas.RemoveRegionsFromReplicationRequest_RemoveReplicaRegions, v.RemoveReplicaRegions)
+	if v.SecretId != nil {
+		s.WriteString(schemas.RemoveRegionsFromReplicationRequest_SecretId, *v.SecretId)
+	}
+}
+
 type RemoveRegionsFromReplicationOutput struct {
 
 	// The ARN of the primary secret.
@@ -65,13 +80,35 @@ type RemoveRegionsFromReplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveRegionsFromReplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveRegionsFromReplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveRegionsFromReplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.RemoveRegionsFromReplicationResponse_ARN, *v.ARN)
+	}
+	serializeReplicationStatusListType(s, schemas.RemoveRegionsFromReplicationResponse_ReplicationStatus, v.ReplicationStatus)
+}
+func (v *RemoveRegionsFromReplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveRegionsFromReplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveRegionsFromReplicationResponse_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.RemoveRegionsFromReplicationResponse_ARN, v.ARN)
+		case schemas.RemoveRegionsFromReplicationResponse_ReplicationStatus:
+			return deserializeReplicationStatusListType(d, schemas.RemoveRegionsFromReplicationResponse_ReplicationStatus, &v.ReplicationStatus)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveRegionsFromReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveRegionsFromReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveRegionsFromReplication, schemas.RemoveRegionsFromReplicationRequest, schemas.RemoveRegionsFromReplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRemoveRegionsFromReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveRegionsFromReplication, schemas.RemoveRegionsFromReplicationRequest, schemas.RemoveRegionsFromReplicationResponse), output: &RemoveRegionsFromReplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

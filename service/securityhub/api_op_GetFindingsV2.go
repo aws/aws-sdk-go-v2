@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/document"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,32 @@ type GetFindingsV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingsV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingsV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingsV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.GetFindingsV2Request_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetFindingsV2Request_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetFindingsV2Request_NextToken, *v.NextToken)
+	}
+	if v.Scopes != nil {
+		s.WriteStruct(schemas.GetFindingsV2Request_Scopes)
+		v.Scopes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSortCriteria(s, schemas.GetFindingsV2Request_SortCriteria, v.SortCriteria)
+}
+
 type GetFindingsV2Output struct {
 
 	// An array of security findings returned by the operation.
@@ -88,13 +116,35 @@ type GetFindingsV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingsV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingsV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOcsfFindingsList(s, schemas.GetFindingsV2Response_Findings, v.Findings)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetFindingsV2Response_NextToken, *v.NextToken)
+	}
+}
+func (v *GetFindingsV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFindingsV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFindingsV2Response_Findings:
+			return deserializeOcsfFindingsList(d, schemas.GetFindingsV2Response_Findings, &v.Findings)
+		case schemas.GetFindingsV2Response_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetFindingsV2Response_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFindingsV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFindingsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingsV2, schemas.GetFindingsV2Request, schemas.GetFindingsV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFindingsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingsV2, schemas.GetFindingsV2Request, schemas.GetFindingsV2Response), output: &GetFindingsV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

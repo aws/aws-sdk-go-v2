@@ -4,7 +4,9 @@ package ecr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteRepositoryCreationTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRepositoryCreationTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRepositoryCreationTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRepositoryCreationTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Prefix != nil {
+		s.WriteString(schemas.DeleteRepositoryCreationTemplateRequest_prefix, *v.Prefix)
+	}
+}
+
 type DeleteRepositoryCreationTemplateOutput struct {
 
 	// The registry ID associated with the request.
@@ -49,13 +63,40 @@ type DeleteRepositoryCreationTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRepositoryCreationTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRepositoryCreationTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRepositoryCreationTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryId != nil {
+		s.WriteString(schemas.DeleteRepositoryCreationTemplateResponse_registryId, *v.RegistryId)
+	}
+	if v.RepositoryCreationTemplate != nil {
+		s.WriteStruct(schemas.DeleteRepositoryCreationTemplateResponse_repositoryCreationTemplate)
+		v.RepositoryCreationTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteRepositoryCreationTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRepositoryCreationTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRepositoryCreationTemplateResponse_registryId:
+			v.RegistryId = new(string)
+			return d.ReadString(schemas.DeleteRepositoryCreationTemplateResponse_registryId, v.RegistryId)
+		case schemas.DeleteRepositoryCreationTemplateResponse_repositoryCreationTemplate:
+			v.RepositoryCreationTemplate = &types.RepositoryCreationTemplate{}
+			return v.RepositoryCreationTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRepositoryCreationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRepositoryCreationTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRepositoryCreationTemplate, schemas.DeleteRepositoryCreationTemplateRequest, schemas.DeleteRepositoryCreationTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteRepositoryCreationTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRepositoryCreationTemplate, schemas.DeleteRepositoryCreationTemplateRequest, schemas.DeleteRepositoryCreationTemplateResponse), output: &DeleteRepositoryCreationTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

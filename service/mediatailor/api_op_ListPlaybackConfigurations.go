@@ -5,7 +5,9 @@ package mediatailor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,34 @@ type ListPlaybackConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlaybackConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlaybackConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlaybackConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPlaybackConfigurationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlaybackConfigurationsRequest_NextToken, *v.NextToken)
+	}
+}
+func (v *ListPlaybackConfigurationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPlaybackConfigurationsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPlaybackConfigurationsRequest_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListPlaybackConfigurationsRequest_MaxResults, v.MaxResults)
+		case schemas.ListPlaybackConfigurationsRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPlaybackConfigurationsRequest_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListPlaybackConfigurationsOutput struct {
 
 	// Array of playback configurations. This might be all the available
@@ -72,13 +102,35 @@ type ListPlaybackConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlaybackConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlaybackConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlaybackConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfPlaybackConfiguration(s, schemas.ListPlaybackConfigurationsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlaybackConfigurationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListPlaybackConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPlaybackConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPlaybackConfigurationsResponse_Items:
+			return deserialize__listOfPlaybackConfiguration(d, schemas.ListPlaybackConfigurationsResponse_Items, &v.Items)
+		case schemas.ListPlaybackConfigurationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPlaybackConfigurationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPlaybackConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPlaybackConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlaybackConfigurations, schemas.ListPlaybackConfigurationsRequest, schemas.ListPlaybackConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPlaybackConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlaybackConfigurations, schemas.ListPlaybackConfigurationsRequest, schemas.ListPlaybackConfigurationsResponse), output: &ListPlaybackConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

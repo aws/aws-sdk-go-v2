@@ -4,7 +4,9 @@ package accessanalyzer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,18 @@ type GetFindingsStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingsStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingsStatisticsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingsStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzerArn != nil {
+		s.WriteString(schemas.GetFindingsStatisticsRequest_analyzerArn, *v.AnalyzerArn)
+	}
+}
+
 type GetFindingsStatisticsOutput struct {
 
 	// A group of external access or unused access findings statistics.
@@ -54,13 +68,35 @@ type GetFindingsStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingsStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingsStatisticsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingsStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFindingsStatisticsList(s, schemas.GetFindingsStatisticsResponse_findingsStatistics, v.FindingsStatistics)
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetFindingsStatisticsResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+}
+func (v *GetFindingsStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFindingsStatisticsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFindingsStatisticsResponse_findingsStatistics:
+			return deserializeFindingsStatisticsList(d, schemas.GetFindingsStatisticsResponse_findingsStatistics, &v.FindingsStatistics)
+		case schemas.GetFindingsStatisticsResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetFindingsStatisticsResponse_lastUpdatedAt, v.LastUpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFindingsStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFindingsStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingsStatistics, schemas.GetFindingsStatisticsRequest, schemas.GetFindingsStatisticsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFindingsStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingsStatistics, schemas.GetFindingsStatisticsRequest, schemas.GetFindingsStatisticsResponse), output: &GetFindingsStatisticsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

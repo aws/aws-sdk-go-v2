@@ -5,7 +5,9 @@ package bedrockagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type ListAgentActionGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentActionGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentActionGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentActionGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.ListAgentActionGroupsRequest_agentId, *v.AgentId)
+	}
+	if v.AgentVersion != nil {
+		s.WriteString(schemas.ListAgentActionGroupsRequest_agentVersion, *v.AgentVersion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAgentActionGroupsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentActionGroupsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAgentActionGroupsOutput struct {
 
 	// A list of objects, each of which contains information about an action group.
@@ -69,13 +92,35 @@ type ListAgentActionGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentActionGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentActionGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentActionGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionGroupSummaries(s, schemas.ListAgentActionGroupsResponse_actionGroupSummaries, v.ActionGroupSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentActionGroupsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAgentActionGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAgentActionGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAgentActionGroupsResponse_actionGroupSummaries:
+			return deserializeActionGroupSummaries(d, schemas.ListAgentActionGroupsResponse_actionGroupSummaries, &v.ActionGroupSummaries)
+		case schemas.ListAgentActionGroupsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAgentActionGroupsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAgentActionGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAgentActionGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentActionGroups, schemas.ListAgentActionGroupsRequest, schemas.ListAgentActionGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAgentActionGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentActionGroups, schemas.ListAgentActionGroupsRequest, schemas.ListAgentActionGroupsResponse), output: &ListAgentActionGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

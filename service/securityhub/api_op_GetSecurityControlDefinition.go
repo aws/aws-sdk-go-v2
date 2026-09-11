@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type GetSecurityControlDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSecurityControlDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSecurityControlDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSecurityControlDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecurityControlId != nil {
+		s.WriteString(schemas.GetSecurityControlDefinitionRequest_SecurityControlId, *v.SecurityControlId)
+	}
+}
+
 type GetSecurityControlDefinitionOutput struct {
 
 	//  Provides metadata for a security control, including its unique
@@ -53,13 +67,34 @@ type GetSecurityControlDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSecurityControlDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSecurityControlDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSecurityControlDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecurityControlDefinition != nil {
+		s.WriteStruct(schemas.GetSecurityControlDefinitionResponse_SecurityControlDefinition)
+		v.SecurityControlDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSecurityControlDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSecurityControlDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSecurityControlDefinitionResponse_SecurityControlDefinition:
+			v.SecurityControlDefinition = &types.SecurityControlDefinition{}
+			return v.SecurityControlDefinition.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSecurityControlDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSecurityControlDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSecurityControlDefinition, schemas.GetSecurityControlDefinitionRequest, schemas.GetSecurityControlDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSecurityControlDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSecurityControlDefinition, schemas.GetSecurityControlDefinitionRequest, schemas.GetSecurityControlDefinitionResponse), output: &GetSecurityControlDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

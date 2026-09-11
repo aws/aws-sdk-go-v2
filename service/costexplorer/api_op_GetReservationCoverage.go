@@ -4,7 +4,9 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -191,6 +193,41 @@ type GetReservationCoverageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReservationCoverageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReservationCoverageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReservationCoverageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetReservationCoverageRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Granularity != "" {
+		s.WriteString(schemas.GetReservationCoverageRequest_Granularity, string(v.Granularity))
+	}
+	serializeGroupDefinitions(s, schemas.GetReservationCoverageRequest_GroupBy, v.GroupBy)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetReservationCoverageRequest_MaxResults, *v.MaxResults)
+	}
+	serializeMetricNames(s, schemas.GetReservationCoverageRequest_Metrics, v.Metrics)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetReservationCoverageRequest_NextPageToken, *v.NextPageToken)
+	}
+	if v.SortBy != nil {
+		s.WriteStruct(schemas.GetReservationCoverageRequest_SortBy)
+		v.SortBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.GetReservationCoverageRequest_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetReservationCoverageOutput struct {
 
 	// The amount of time that your reservations covered.
@@ -212,13 +249,43 @@ type GetReservationCoverageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReservationCoverageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReservationCoverageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReservationCoverageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCoveragesByTime(s, schemas.GetReservationCoverageResponse_CoveragesByTime, v.CoveragesByTime)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetReservationCoverageResponse_NextPageToken, *v.NextPageToken)
+	}
+	if v.Total != nil {
+		s.WriteStruct(schemas.GetReservationCoverageResponse_Total)
+		v.Total.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetReservationCoverageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetReservationCoverageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetReservationCoverageResponse_CoveragesByTime:
+			return deserializeCoveragesByTime(d, schemas.GetReservationCoverageResponse_CoveragesByTime, &v.CoveragesByTime)
+		case schemas.GetReservationCoverageResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetReservationCoverageResponse_NextPageToken, v.NextPageToken)
+		case schemas.GetReservationCoverageResponse_Total:
+			v.Total = &types.Coverage{}
+			return v.Total.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetReservationCoverageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetReservationCoverage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReservationCoverage, schemas.GetReservationCoverageRequest, schemas.GetReservationCoverageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetReservationCoverage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReservationCoverage, schemas.GetReservationCoverageRequest, schemas.GetReservationCoverageResponse), output: &GetReservationCoverageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

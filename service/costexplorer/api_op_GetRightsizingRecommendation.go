@@ -5,7 +5,9 @@ package costexplorer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -135,6 +137,34 @@ type GetRightsizingRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRightsizingRecommendationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRightsizingRecommendationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRightsizingRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.GetRightsizingRecommendationRequest_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetRightsizingRecommendationRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetRightsizingRecommendationRequest_NextPageToken, *v.NextPageToken)
+	}
+	if v.PageSize != 0 {
+		s.WriteInt32(schemas.GetRightsizingRecommendationRequest_PageSize, v.PageSize)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.GetRightsizingRecommendationRequest_Service, *v.Service)
+	}
+}
+
 type GetRightsizingRecommendationOutput struct {
 
 	// You can use Configuration to customize recommendations across two attributes.
@@ -162,13 +192,59 @@ type GetRightsizingRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRightsizingRecommendationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRightsizingRecommendationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRightsizingRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.GetRightsizingRecommendationResponse_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.GetRightsizingRecommendationResponse_Metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetRightsizingRecommendationResponse_NextPageToken, *v.NextPageToken)
+	}
+	serializeRightsizingRecommendationList(s, schemas.GetRightsizingRecommendationResponse_RightsizingRecommendations, v.RightsizingRecommendations)
+	if v.Summary != nil {
+		s.WriteStruct(schemas.GetRightsizingRecommendationResponse_Summary)
+		v.Summary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetRightsizingRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRightsizingRecommendationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRightsizingRecommendationResponse_Configuration:
+			v.Configuration = &types.RightsizingRecommendationConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.GetRightsizingRecommendationResponse_Metadata:
+			v.Metadata = &types.RightsizingRecommendationMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.GetRightsizingRecommendationResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetRightsizingRecommendationResponse_NextPageToken, v.NextPageToken)
+		case schemas.GetRightsizingRecommendationResponse_RightsizingRecommendations:
+			return deserializeRightsizingRecommendationList(d, schemas.GetRightsizingRecommendationResponse_RightsizingRecommendations, &v.RightsizingRecommendations)
+		case schemas.GetRightsizingRecommendationResponse_Summary:
+			v.Summary = &types.RightsizingRecommendationSummary{}
+			return v.Summary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRightsizingRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRightsizingRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRightsizingRecommendation, schemas.GetRightsizingRecommendationRequest, schemas.GetRightsizingRecommendationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRightsizingRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRightsizingRecommendation, schemas.GetRightsizingRecommendationRequest, schemas.GetRightsizingRecommendationResponse), output: &GetRightsizingRecommendationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

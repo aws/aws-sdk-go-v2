@@ -4,6 +4,8 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteDomainNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDomainNameInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDomainNameRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDomainNameInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DeleteDomainNameRequest_domainName, *v.DomainName)
+	}
+}
+
 type DeleteDomainNameOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteDomainNameOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDomainNameOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDomainNameResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDomainNameOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteDomainNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDomainNameResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDomainNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDomainName{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDomainName, schemas.DeleteDomainNameRequest, schemas.DeleteDomainNameResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDomainName{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDomainName, schemas.DeleteDomainNameRequest, schemas.DeleteDomainNameResponse), output: &DeleteDomainNameOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

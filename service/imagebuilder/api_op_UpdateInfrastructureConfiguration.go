@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -108,6 +110,57 @@ type UpdateInfrastructureConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInfrastructureConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInfrastructureConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInfrastructureConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateInfrastructureConfigurationRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateInfrastructureConfigurationRequest_description, *v.Description)
+	}
+	if v.InfrastructureConfigurationArn != nil {
+		s.WriteString(schemas.UpdateInfrastructureConfigurationRequest_infrastructureConfigurationArn, *v.InfrastructureConfigurationArn)
+	}
+	if v.InstanceMetadataOptions != nil {
+		s.WriteStruct(schemas.UpdateInfrastructureConfigurationRequest_instanceMetadataOptions)
+		v.InstanceMetadataOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceProfileName != nil {
+		s.WriteString(schemas.UpdateInfrastructureConfigurationRequest_instanceProfileName, *v.InstanceProfileName)
+	}
+	serializeInstanceTypeList(s, schemas.UpdateInfrastructureConfigurationRequest_instanceTypes, v.InstanceTypes)
+	if v.KeyPair != nil {
+		s.WriteString(schemas.UpdateInfrastructureConfigurationRequest_keyPair, *v.KeyPair)
+	}
+	if v.Logging != nil {
+		s.WriteStruct(schemas.UpdateInfrastructureConfigurationRequest_logging)
+		v.Logging.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Placement != nil {
+		s.WriteStruct(schemas.UpdateInfrastructureConfigurationRequest_placement)
+		v.Placement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourceTagMap(s, schemas.UpdateInfrastructureConfigurationRequest_resourceTags, v.ResourceTags)
+	serializeSecurityGroupIds(s, schemas.UpdateInfrastructureConfigurationRequest_securityGroupIds, v.SecurityGroupIds)
+	if v.SnsTopicArn != nil {
+		s.WriteString(schemas.UpdateInfrastructureConfigurationRequest_snsTopicArn, *v.SnsTopicArn)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.UpdateInfrastructureConfigurationRequest_subnetId, *v.SubnetId)
+	}
+	if v.TerminateInstanceOnFailure != nil {
+		s.WriteBool(schemas.UpdateInfrastructureConfigurationRequest_terminateInstanceOnFailure, *v.TerminateInstanceOnFailure)
+	}
+}
+
 type UpdateInfrastructureConfigurationOutput struct {
 
 	// The client token that uniquely identifies the request.
@@ -126,13 +179,44 @@ type UpdateInfrastructureConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInfrastructureConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInfrastructureConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInfrastructureConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateInfrastructureConfigurationResponse_clientToken, *v.ClientToken)
+	}
+	if v.InfrastructureConfigurationArn != nil {
+		s.WriteString(schemas.UpdateInfrastructureConfigurationResponse_infrastructureConfigurationArn, *v.InfrastructureConfigurationArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateInfrastructureConfigurationResponse_requestId, *v.RequestId)
+	}
+}
+func (v *UpdateInfrastructureConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateInfrastructureConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateInfrastructureConfigurationResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateInfrastructureConfigurationResponse_clientToken, v.ClientToken)
+		case schemas.UpdateInfrastructureConfigurationResponse_infrastructureConfigurationArn:
+			v.InfrastructureConfigurationArn = new(string)
+			return d.ReadString(schemas.UpdateInfrastructureConfigurationResponse_infrastructureConfigurationArn, v.InfrastructureConfigurationArn)
+		case schemas.UpdateInfrastructureConfigurationResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateInfrastructureConfigurationResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateInfrastructureConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateInfrastructureConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInfrastructureConfiguration, schemas.UpdateInfrastructureConfigurationRequest, schemas.UpdateInfrastructureConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateInfrastructureConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInfrastructureConfiguration, schemas.UpdateInfrastructureConfigurationRequest, schemas.UpdateInfrastructureConfigurationResponse), output: &UpdateInfrastructureConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

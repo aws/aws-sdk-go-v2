@@ -4,7 +4,9 @@ package billing
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/billing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -58,6 +60,27 @@ type GetCreditsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCreditsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCreditsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCreditsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetCreditsRequest_accountId, *v.AccountId)
+	}
+	if v.EndDate != nil {
+		s.WriteTime(schemas.GetCreditsRequest_endDate, *v.EndDate)
+	}
+	if v.PayerAccountFlag != nil {
+		s.WriteBool(schemas.GetCreditsRequest_payerAccountFlag, *v.PayerAccountFlag)
+	}
+	if v.StartDate != nil {
+		s.WriteTime(schemas.GetCreditsRequest_startDate, *v.StartDate)
+	}
+}
+
 type GetCreditsOutput struct {
 
 	// The list of credits matching the request. Returns an empty list when no credits
@@ -70,13 +93,29 @@ type GetCreditsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCreditsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCreditsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCreditsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCreditDataList(s, schemas.GetCreditsResponse_credits, v.Credits)
+}
+func (v *GetCreditsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCreditsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCreditsResponse_credits:
+			return deserializeCreditDataList(d, schemas.GetCreditsResponse_credits, &v.Credits)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCreditsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetCredits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCredits, schemas.GetCreditsRequest, schemas.GetCreditsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetCredits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCredits, schemas.GetCreditsRequest, schemas.GetCreditsResponse), output: &GetCreditsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

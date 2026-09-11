@@ -4,6 +4,8 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,21 @@ type UpdateEventBridgeRuleTemplateGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEventBridgeRuleTemplateGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEventBridgeRuleTemplateGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEventBridgeRuleTemplateGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateEventBridgeRuleTemplateGroupRequest_Description, *v.Description)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateEventBridgeRuleTemplateGroupRequest_Identifier, *v.Identifier)
+	}
+}
+
 // Placeholder documentation for UpdateEventBridgeRuleTemplateGroupResponse
 type UpdateEventBridgeRuleTemplateGroupOutput struct {
 
@@ -71,13 +88,65 @@ type UpdateEventBridgeRuleTemplateGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEventBridgeRuleTemplateGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEventBridgeRuleTemplateGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEventBridgeRuleTemplateGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateEventBridgeRuleTemplateGroupResponse_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateEventBridgeRuleTemplateGroupResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateEventBridgeRuleTemplateGroupResponse_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateEventBridgeRuleTemplateGroupResponse_Id, *v.Id)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.UpdateEventBridgeRuleTemplateGroupResponse_ModifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateEventBridgeRuleTemplateGroupResponse_Name, *v.Name)
+	}
+	serializeTagMap(s, schemas.UpdateEventBridgeRuleTemplateGroupResponse_Tags, v.Tags)
+}
+func (v *UpdateEventBridgeRuleTemplateGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEventBridgeRuleTemplateGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEventBridgeRuleTemplateGroupResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateEventBridgeRuleTemplateGroupResponse_Arn, v.Arn)
+		case schemas.UpdateEventBridgeRuleTemplateGroupResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateEventBridgeRuleTemplateGroupResponse_CreatedAt, v.CreatedAt)
+		case schemas.UpdateEventBridgeRuleTemplateGroupResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateEventBridgeRuleTemplateGroupResponse_Description, v.Description)
+		case schemas.UpdateEventBridgeRuleTemplateGroupResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateEventBridgeRuleTemplateGroupResponse_Id, v.Id)
+		case schemas.UpdateEventBridgeRuleTemplateGroupResponse_ModifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateEventBridgeRuleTemplateGroupResponse_ModifiedAt, v.ModifiedAt)
+		case schemas.UpdateEventBridgeRuleTemplateGroupResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateEventBridgeRuleTemplateGroupResponse_Name, v.Name)
+		case schemas.UpdateEventBridgeRuleTemplateGroupResponse_Tags:
+			return deserializeTagMap(d, schemas.UpdateEventBridgeRuleTemplateGroupResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEventBridgeRuleTemplateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEventBridgeRuleTemplateGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEventBridgeRuleTemplateGroup, schemas.UpdateEventBridgeRuleTemplateGroupRequest, schemas.UpdateEventBridgeRuleTemplateGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEventBridgeRuleTemplateGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEventBridgeRuleTemplateGroup, schemas.UpdateEventBridgeRuleTemplateGroupRequest, schemas.UpdateEventBridgeRuleTemplateGroupResponse), output: &UpdateEventBridgeRuleTemplateGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

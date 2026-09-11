@@ -4,7 +4,9 @@ package bcmpricingcalculator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetBillScenarioInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetBillScenarioInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBillScenarioRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBillScenarioInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetBillScenarioRequest_identifier, *v.Identifier)
+	}
 }
 
 type GetBillScenarioOutput struct {
@@ -73,13 +87,90 @@ type GetBillScenarioOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBillScenarioOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBillScenarioResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBillScenarioOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillInterval != nil {
+		s.WriteStruct(schemas.GetBillScenarioResponse_billInterval)
+		v.BillInterval.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CostCategoryGroupSharingPreferenceArn != nil {
+		s.WriteString(schemas.GetBillScenarioResponse_costCategoryGroupSharingPreferenceArn, *v.CostCategoryGroupSharingPreferenceArn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetBillScenarioResponse_createdAt, *v.CreatedAt)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.GetBillScenarioResponse_expiresAt, *v.ExpiresAt)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.GetBillScenarioResponse_failureMessage, *v.FailureMessage)
+	}
+	if v.GroupSharingPreference != "" {
+		s.WriteString(schemas.GetBillScenarioResponse_groupSharingPreference, string(v.GroupSharingPreference))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetBillScenarioResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetBillScenarioResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetBillScenarioResponse_status, string(v.Status))
+	}
+}
+func (v *GetBillScenarioOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBillScenarioResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBillScenarioResponse_billInterval:
+			v.BillInterval = &types.BillInterval{}
+			return v.BillInterval.Deserialize(d)
+		case schemas.GetBillScenarioResponse_costCategoryGroupSharingPreferenceArn:
+			v.CostCategoryGroupSharingPreferenceArn = new(string)
+			return d.ReadString(schemas.GetBillScenarioResponse_costCategoryGroupSharingPreferenceArn, v.CostCategoryGroupSharingPreferenceArn)
+		case schemas.GetBillScenarioResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetBillScenarioResponse_createdAt, v.CreatedAt)
+		case schemas.GetBillScenarioResponse_expiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.GetBillScenarioResponse_expiresAt, v.ExpiresAt)
+		case schemas.GetBillScenarioResponse_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.GetBillScenarioResponse_failureMessage, v.FailureMessage)
+		case schemas.GetBillScenarioResponse_groupSharingPreference:
+			var ev string
+			if err := d.ReadString(schemas.GetBillScenarioResponse_groupSharingPreference, &ev); err != nil {
+				return err
+			}
+			v.GroupSharingPreference = types.GroupSharingPreferenceEnum(ev)
+			return nil
+		case schemas.GetBillScenarioResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetBillScenarioResponse_id, v.Id)
+		case schemas.GetBillScenarioResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetBillScenarioResponse_name, v.Name)
+		case schemas.GetBillScenarioResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetBillScenarioResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BillScenarioStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBillScenarioMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetBillScenario{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBillScenario, schemas.GetBillScenarioRequest, schemas.GetBillScenarioResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetBillScenario{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBillScenario, schemas.GetBillScenarioRequest, schemas.GetBillScenarioResponse), output: &GetBillScenarioOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

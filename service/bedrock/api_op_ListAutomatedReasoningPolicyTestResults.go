@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,27 @@ type ListAutomatedReasoningPolicyTestResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomatedReasoningPolicyTestResultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutomatedReasoningPolicyTestResultsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutomatedReasoningPolicyTestResultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BuildWorkflowId != nil {
+		s.WriteString(schemas.ListAutomatedReasoningPolicyTestResultsRequest_buildWorkflowId, *v.BuildWorkflowId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAutomatedReasoningPolicyTestResultsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutomatedReasoningPolicyTestResultsRequest_nextToken, *v.NextToken)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.ListAutomatedReasoningPolicyTestResultsRequest_policyArn, *v.PolicyArn)
+	}
+}
+
 type ListAutomatedReasoningPolicyTestResultsOutput struct {
 
 	// A list of test results, each containing information about how the policy
@@ -68,13 +91,35 @@ type ListAutomatedReasoningPolicyTestResultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomatedReasoningPolicyTestResultsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutomatedReasoningPolicyTestResultsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutomatedReasoningPolicyTestResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutomatedReasoningPolicyTestResultsResponse_nextToken, *v.NextToken)
+	}
+	serializeAutomatedReasoningPolicyTestList(s, schemas.ListAutomatedReasoningPolicyTestResultsResponse_testResults, v.TestResults)
+}
+func (v *ListAutomatedReasoningPolicyTestResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAutomatedReasoningPolicyTestResultsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAutomatedReasoningPolicyTestResultsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAutomatedReasoningPolicyTestResultsResponse_nextToken, v.NextToken)
+		case schemas.ListAutomatedReasoningPolicyTestResultsResponse_testResults:
+			return deserializeAutomatedReasoningPolicyTestList(d, schemas.ListAutomatedReasoningPolicyTestResultsResponse_testResults, &v.TestResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAutomatedReasoningPolicyTestResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAutomatedReasoningPolicyTestResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomatedReasoningPolicyTestResults, schemas.ListAutomatedReasoningPolicyTestResultsRequest, schemas.ListAutomatedReasoningPolicyTestResultsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAutomatedReasoningPolicyTestResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomatedReasoningPolicyTestResults, schemas.ListAutomatedReasoningPolicyTestResultsRequest, schemas.ListAutomatedReasoningPolicyTestResultsResponse), output: &ListAutomatedReasoningPolicyTestResultsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

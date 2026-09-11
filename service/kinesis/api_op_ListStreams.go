@@ -5,7 +5,9 @@ package kinesis
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -57,6 +59,23 @@ type ListStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStreamsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStreamsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStreamsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExclusiveStartStreamName != nil {
+		s.WriteString(schemas.ListStreamsInput_ExclusiveStartStreamName, *v.ExclusiveStartStreamName)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListStreamsInput_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStreamsInput_NextToken, *v.NextToken)
+	}
+}
 func (in *ListStreamsInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.OperationType = ptr.String("control")
@@ -88,13 +107,44 @@ type ListStreamsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStreamsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStreamsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStreamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HasMoreStreams != nil {
+		s.WriteBool(schemas.ListStreamsOutput_HasMoreStreams, *v.HasMoreStreams)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStreamsOutput_NextToken, *v.NextToken)
+	}
+	serializeStreamNameList(s, schemas.ListStreamsOutput_StreamNames, v.StreamNames)
+	serializeStreamSummaryList(s, schemas.ListStreamsOutput_StreamSummaries, v.StreamSummaries)
+}
+func (v *ListStreamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStreamsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStreamsOutput_HasMoreStreams:
+			v.HasMoreStreams = new(bool)
+			return d.ReadBool(schemas.ListStreamsOutput_HasMoreStreams, v.HasMoreStreams)
+		case schemas.ListStreamsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStreamsOutput_NextToken, v.NextToken)
+		case schemas.ListStreamsOutput_StreamNames:
+			return deserializeStreamNameList(d, schemas.ListStreamsOutput_StreamNames, &v.StreamNames)
+		case schemas.ListStreamsOutput_StreamSummaries:
+			return deserializeStreamSummaryList(d, schemas.ListStreamsOutput_StreamSummaries, &v.StreamSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListStreams{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreams, schemas.ListStreamsInput, schemas.ListStreamsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListStreams{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreams, schemas.ListStreamsInput, schemas.ListStreamsOutput), output: &ListStreamsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
