@@ -4059,6 +4059,9 @@ func awsRestjson1_deserializeOpErrorProbe(response *smithyhttp.Response, metadat
 	case strings.EqualFold("TooManyRequestsException", errorCode):
 		return awsRestjson1_deserializeErrorTooManyRequestsException(response, errorBody)
 
+	case strings.EqualFold("UnprocessableEntityException", errorCode):
+		return awsRestjson1_deserializeErrorUnprocessableEntityException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -5610,6 +5613,42 @@ func awsRestjson1_deserializeErrorTooManyRequestsException(response *smithyhttp.
 	}
 
 	err := awsRestjson1_deserializeDocumentTooManyRequestsException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
+func awsRestjson1_deserializeErrorUnprocessableEntityException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.UnprocessableEntityException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentUnprocessableEntityException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -12047,6 +12086,16 @@ func awsRestjson1_deserializeDocumentCodecMetadata(v **types.CodecMetadata, valu
 				return err
 			}
 
+		case "displayAspectRatio":
+			if err := awsRestjson1_deserializeDocumentAspectRatio(&sv.DisplayAspectRatio, value); err != nil {
+				return err
+			}
+
+		case "dolbyVision":
+			if err := awsRestjson1_deserializeDocumentDolbyVisionMetadata(&sv.DolbyVision, value); err != nil {
+				return err
+			}
+
 		case "fieldOrder":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12116,6 +12165,11 @@ func awsRestjson1_deserializeDocumentCodecMetadata(v **types.CodecMetadata, valu
 					return err
 				}
 				sv.Rotation = ptr.Int32(int32(i64))
+			}
+
+		case "sampleAspectRatio":
+			if err := awsRestjson1_deserializeDocumentAspectRatio(&sv.SampleAspectRatio, value); err != nil {
+				return err
 			}
 
 		case "scanType":
@@ -13515,6 +13569,90 @@ func awsRestjson1_deserializeDocumentDolbyVisionLevel6Metadata(v **types.DolbyVi
 					return err
 				}
 				sv.MaxFall = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDolbyVisionMetadata(v **types.DolbyVisionMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DolbyVisionMetadata
+	if *v == nil {
+		sv = &types.DolbyVisionMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "baseLayer":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DolbyVisionPresence to be of type string, got %T instead", value)
+				}
+				sv.BaseLayer = types.DolbyVisionPresence(jtv)
+			}
+
+		case "enhancementLayer":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DolbyVisionPresence to be of type string, got %T instead", value)
+				}
+				sv.EnhancementLayer = types.DolbyVisionPresence(jtv)
+			}
+
+		case "level":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Level = ptr.Int32(int32(i64))
+			}
+
+		case "profile":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Profile = ptr.Int32(int32(i64))
+			}
+
+		case "rpu":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DolbyVisionPresence to be of type string, got %T instead", value)
+				}
+				sv.Rpu = types.DolbyVisionPresence(jtv)
 			}
 
 		default:
@@ -26758,6 +26896,46 @@ func awsRestjson1_deserializeDocumentUncompressedSettings(v **types.Uncompressed
 					return fmt.Errorf("expected UncompressedTelecine to be of type string, got %T instead", value)
 				}
 				sv.Telecine = types.UncompressedTelecine(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUnprocessableEntityException(v **types.UnprocessableEntityException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UnprocessableEntityException
+	if *v == nil {
+		sv = &types.UnprocessableEntityException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

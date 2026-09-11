@@ -3660,6 +3660,23 @@ type ExpressGatewayServiceConfiguration struct {
 	// The CPU allocation for tasks in this service revision.
 	Cpu *string
 
+	// The CPU architecture that the tasks in this service revision run on. This is
+	// the architecture from the task definition that the service revision uses, so it
+	// reflects the default or the previously configured architecture when the request
+	// that created the revision didn't specify one.
+	//
+	// Valid values:
+	//
+	//   - X86_64 - The x86 64-bit architecture.
+	//
+	//   - ARM64 - The 64-bit ARM architecture.
+	//
+	// This value isn't returned when the task definition for the service revision
+	// doesn't specify a runtime platform. Because the architecture comes from each
+	// service revision's own task definition, revisions of the same service can report
+	// different architectures.
+	CpuArchitecture ExpressCpuArchitecture
+
 	// The Unix timestamp for when this service revision was created.
 	CreatedAt *time.Time
 

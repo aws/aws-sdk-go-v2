@@ -1,0 +1,8 @@
+{
+    "id": "15515e52-e33f-4eb6-91b9-a00e5e197fa6",
+    "type": "feature",
+    "description": "This feature adds support for setting the cpu architecture type that should be used to launch tasks for an Express Gateway Service.",
+    "modules": [
+        "service/ecs"
+    ]
+}

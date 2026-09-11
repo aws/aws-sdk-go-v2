@@ -43,6 +43,27 @@ type UpdateExpressGatewayServiceInput struct {
 	// The number of CPU units used by the task.
 	Cpu *string
 
+	// The CPU architecture that the tasks in the Express service run on. Amazon ECS
+	// applies this value to the task definition revision that it registers for the
+	// service. If you don't specify a value, the service keeps the architecture that
+	// it currently runs on.
+	//
+	// Valid values:
+	//
+	//   - X86_64 - The x86 64-bit architecture.
+	//
+	//   - ARM64 - The 64-bit ARM architecture.
+	//
+	// Changing the architecture starts a new deployment that replaces the running
+	// tasks. Make sure that the container image that the service uses supports the
+	// architecture that you choose. The operating system family for an Express service
+	// is always LINUX .
+	//
+	// You can't specify cpuArchitecture when you also specify taskDefinitionArn ,
+	// because this value applies only to a task definition that Amazon ECS registers
+	// on your behalf.
+	CpuArchitecture types.ExpressCpuArchitecture
+
 	// The Amazon Resource Name (ARN) of the task execution role for the Express
 	// service.
 	ExecutionRoleArn *string
@@ -73,7 +94,7 @@ type UpdateExpressGatewayServiceInput struct {
 	// also have FARGATE compatibility.
 	//
 	// If you provide a task definition ARN, you cannot also specify primaryContainer ,
-	// executionRoleArn , taskRoleArn , cpu , or memory .
+	// executionRoleArn , taskRoleArn , cpu , memory , or cpuArchitecture .
 	TaskDefinitionArn *string
 
 	// The Amazon Resource Name (ARN) of the IAM role for containers in this task.

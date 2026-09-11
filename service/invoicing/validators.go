@@ -190,6 +190,26 @@ func (m *validateOpListInvoiceSummaries) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListProcurementPortalSuppliers struct {
+}
+
+func (*validateOpListProcurementPortalSuppliers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListProcurementPortalSuppliers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListProcurementPortalSuppliersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListProcurementPortalSuppliersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -384,6 +404,10 @@ func addOpGetProcurementPortalPreferenceValidationMiddleware(stack *middleware.S
 
 func addOpListInvoiceSummariesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListInvoiceSummaries{}, middleware.After)
+}
+
+func addOpListProcurementPortalSuppliersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListProcurementPortalSuppliers{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -763,6 +787,21 @@ func validateOpListInvoiceSummariesInput(v *ListInvoiceSummariesInput) error {
 		if err := validateInvoiceSummariesFilter(v.Filter); err != nil {
 			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListProcurementPortalSuppliersInput(v *ListProcurementPortalSuppliersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListProcurementPortalSuppliersInput"}
+	if v.PortalIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

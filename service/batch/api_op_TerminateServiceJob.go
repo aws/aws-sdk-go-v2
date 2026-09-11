@@ -30,7 +30,7 @@ type TerminateServiceJobInput struct {
 	// This member is required.
 	JobId *string
 
-	// A message to attach to the service job that explains the reason for canceling
+	// A message to attach to the service job that explains the reason for terminating
 	// it. This message is returned by DescribeServiceJob operations on the service
 	// job.
 	//

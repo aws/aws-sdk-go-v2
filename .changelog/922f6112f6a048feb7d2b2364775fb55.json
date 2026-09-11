@@ -1,0 +1,8 @@
+{
+    "id": "922f6112-f6a0-48fe-b7d2-b2364775fb55",
+    "type": "feature",
+    "description": "Amazon Lightsail now lets you serve website content from a private Lightsail bucket through a Lightsail distribution. This release adds enablePrivateOriginAccess to the CreateDistribution and UpdateDistribution actions, plus new defaultRootObject and customErrorResponses options.",
+    "modules": [
+        "service/lightsail"
+    ]
+}

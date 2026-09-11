@@ -165,6 +165,15 @@ type Entity struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the default feature configuration settings for a procurement portal.
+type FeatureConfigurations struct {
+
+	// The invoice configuration settings for the procurement portal.
+	InvoiceConfiguration *InvoiceConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // The details of fees.
 type FeesBreakdown struct {
 
@@ -221,6 +230,19 @@ type Filters struct {
 	// invoice unit names. If multiple names are provided, the result is an OR
 	// condition (match any) of the specified invoice unit names.
 	Names []string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the supported document types and attachment types for invoice
+// delivery to a procurement portal.
+type InvoiceConfiguration struct {
+
+	// The attachment types supported by the procurement portal for e-invoice delivery.
+	AttachmentTypes []EinvoiceDeliveryAttachmentType
+
+	// The e-invoice document types supported by the procurement portal.
+	DocumentTypes []EinvoiceDeliveryDocumentType
 
 	noSmithyDocumentSerde
 }
@@ -450,6 +472,29 @@ type InvoiceUnitRule struct {
 	noSmithyDocumentSerde
 }
 
+// Contains metadata for a procurement portal, including the portal identifier,
+// name, and default feature configurations.
+type ProcurementPortal struct {
+
+	// The unique identifier of the procurement portal.
+	//
+	// This member is required.
+	PortalIdentifier *string
+
+	// The name of the procurement portal.
+	//
+	// This member is required.
+	PortalName ProcurementPortalName
+
+	// The default feature configurations for the procurement portal.
+	DefaultFeatureConfigurations *FeatureConfigurations
+
+	// The display name of the procurement portal.
+	PortalDisplayName *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents the full configuration of a procurement portal preference, including
 // settings for e-invoice delivery and purchase order retrieval.
 type ProcurementPortalPreference struct {
@@ -655,6 +700,29 @@ type ProcurementPortalPreferenceSummary struct {
 	// Specifies criteria for selecting which invoices should be processed using a
 	// particular procurement portal preference.
 	Selector *ProcurementPortalPreferenceSelector
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata for a supplier configured within a procurement portal.
+type ProcurementPortalSupplier struct {
+
+	// The unique identifier of the supplier within the procurement portal.
+	//
+	// This member is required.
+	SupplierIdentifier *string
+
+	// The two-letter ISO 3166-1 alpha-2 country code associated with the supplier.
+	CountryCode *string
+
+	// The environment identifier for the supplier in the procurement portal. PROD for
+	// production env, or TEST for sandbox/test env.
+	Environment ProcurementPortalEnv
+
+	// The Amazon Web Services seller of record associated with the supplier—the
+	// Amazon Web Services legal entity that issues invoices for the account (for
+	// example, AWS_INC or AWS_EUROPE ).
+	SellerOfRecord *string
 
 	noSmithyDocumentSerde
 }

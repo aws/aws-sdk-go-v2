@@ -18795,6 +18795,15 @@ func awsAwsjson11_deserializeDocumentExpressGatewayServiceConfiguration(v **type
 				sv.Cpu = ptr.String(jtv)
 			}
 
+		case "cpuArchitecture":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExpressCpuArchitecture to be of type string, got %T instead", value)
+				}
+				sv.CpuArchitecture = types.ExpressCpuArchitecture(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {

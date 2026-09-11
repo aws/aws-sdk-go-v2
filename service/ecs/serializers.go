@@ -9533,6 +9533,11 @@ func awsAwsjson11_serializeOpDocumentCreateExpressGatewayServiceInput(v *CreateE
 		ok.String(*v.Cpu)
 	}
 
+	if len(v.CpuArchitecture) > 0 {
+		ok := object.Key("cpuArchitecture")
+		ok.String(string(v.CpuArchitecture))
+	}
+
 	if v.ExecutionRoleArn != nil {
 		ok := object.Key("executionRoleArn")
 		ok.String(*v.ExecutionRoleArn)
@@ -11771,6 +11776,11 @@ func awsAwsjson11_serializeOpDocumentUpdateExpressGatewayServiceInput(v *UpdateE
 	if v.Cpu != nil {
 		ok := object.Key("cpu")
 		ok.String(*v.Cpu)
+	}
+
+	if len(v.CpuArchitecture) > 0 {
+		ok := object.Key("cpuArchitecture")
+		ok.String(string(v.CpuArchitecture))
 	}
 
 	if v.ExecutionRoleArn != nil {

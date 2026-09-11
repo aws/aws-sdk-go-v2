@@ -1,0 +1,8 @@
+{
+    "id": "71f9e828-fdd2-46ae-a361-9760a416429b",
+    "type": "documentation",
+    "description": "Updated S3 Object Lock Default Retention documentation.",
+    "modules": [
+        "service/s3"
+    ]
+}

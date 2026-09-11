@@ -1,0 +1,8 @@
+{
+    "id": "f09a1635-0315-4489-8ba4-66db34cd6bf6",
+    "type": "feature",
+    "description": "Adds Dolby Vision metadata to Probe results, including profile, level, and presence of the RPU, base layer, and enhancement layer. Adds video sample and display aspect ratios. Adds the UnprocessableEntityException (HTTP 422) error to Probe for recognized but malformed or corrupt inputs.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}
