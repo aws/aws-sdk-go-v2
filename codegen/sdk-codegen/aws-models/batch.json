@@ -37,6 +37,9 @@
                     "target": "com.amazonaws.batch#CancelJob"
                 },
                 {
+                    "target": "com.amazonaws.batch#CancelJobs"
+                },
+                {
                     "target": "com.amazonaws.batch#CreateComputeEnvironment"
                 },
                 {
@@ -142,7 +145,13 @@
                     "target": "com.amazonaws.batch#TerminateJob"
                 },
                 {
+                    "target": "com.amazonaws.batch#TerminateJobs"
+                },
+                {
                     "target": "com.amazonaws.batch#TerminateServiceJob"
+                },
+                {
+                    "target": "com.amazonaws.batch#TerminateServiceJobs"
                 },
                 {
                     "target": "com.amazonaws.batch#UntagResource"
@@ -1888,7 +1897,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels a job in an Batch job queue. Jobs that are in a <code>SUBMITTED</code>, <code>PENDING</code>, or <code>RUNNABLE</code> state are cancelled and the job status is updated to <code>FAILED</code>.</p>\n         <note>\n            <p>A <code>PENDING</code> job is canceled after all dependency jobs are completed.\n        Therefore, it may take longer than expected to cancel a job in <code>PENDING</code>\n        status.</p>\n            <p>When you try to cancel an array parent job in <code>PENDING</code>, Batch attempts to\n        cancel all child jobs. The array parent job is canceled when all child jobs are\n        completed.</p>\n         </note>\n         <p>Jobs that progressed to the <code>STARTING</code> or\n        <code>RUNNING</code> state aren't canceled. However, the API operation still succeeds, even\n      if no job is canceled. These jobs must be terminated with the <a>TerminateJob</a>\n      operation.</p>",
+                "smithy.api#documentation": "<p>Cancels a job in an Batch job queue. Jobs that are in a <code>SUBMITTED</code>, <code>PENDING</code>, or <code>RUNNABLE</code> state are cancelled and the job status is updated to <code>FAILED</code>.</p>\n         <note>\n            <p>A <code>PENDING</code> job is cancelled after all dependency jobs are completed.\n        Therefore, it might take longer than expected to cancel a job in <code>PENDING</code>\n        status.</p>\n            <p>When you try to cancel an array parent job in <code>PENDING</code>, Batch attempts to\n        cancel all child jobs. The array parent job is cancelled when all child jobs are\n        completed.</p>\n         </note>\n         <p>Jobs that progressed to the <code>STARTING</code> or\n        <code>RUNNING</code> state aren't cancelled. However, the API operation still succeeds, even\n      if no job is cancelled. These jobs must be terminated with the <a>TerminateJob</a> or\n        <a>TerminateJobs</a> operation.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To cancel a job",
@@ -1922,7 +1931,7 @@
                     "target": "com.amazonaws.batch#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>A message to attach to the job that explains the reason for canceling it. This message is\n      returned by future <a>DescribeJobs</a> operations on the job. It is also\n      recorded in the Batch activity logs.</p>\n         <p>This parameter has as limit of 1024 characters.</p>",
+                        "smithy.api#documentation": "<p>A message to attach to the job that explains the reason for cancelling it. This message is\n      returned by future <a>DescribeJobs</a> operations on the job. It is also\n      recorded in the Batch activity logs.</p>\n         <p>This parameter has a limit of 1024 characters.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1936,6 +1945,144 @@
             "type": "structure",
             "members": {},
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.batch#CancelJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.batch#CancelJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.batch#CancelJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.batch#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.batch#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels up to 50 jobs in an Batch job queue. This is a bulk version of <a>CancelJob</a>. Jobs that are in a\n        <code>SUBMITTED</code>, <code>PENDING</code>, or <code>RUNNABLE</code> state are cancelled\n      and the job status is updated to <code>FAILED</code>.</p>\n         <note>\n            <p>A <code>PENDING</code> job is cancelled after all dependency jobs are completed.\n        Therefore, it might take longer than expected to cancel a job in <code>PENDING</code>\n        status.</p>\n            <p>When you try to cancel an array parent job in <code>PENDING</code>, Batch attempts to\n        cancel all child jobs. The array parent job is cancelled when all child jobs are\n        completed.</p>\n         </note>\n         <p>Jobs that progressed to the <code>STARTING</code> or <code>RUNNING</code> state aren't\n      cancelled. These jobs must be terminated with the <a>TerminateJob</a> or\n        <a>TerminateJobs</a> operation.</p>\n         <p>Batch reports the result for each job individually in the response. Jobs that\n      were processed successfully are reported in the <code>successful</code> list. Jobs that\n      encountered errors are reported in the <code>errors</code> list. The response returns an\n      HTTP status code of <code>200</code> even when some jobs encountered errors, so check the\n      <code>errors</code> list. Jobs that can't be found are treated as successfully\n      processed.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To cancel multiple jobs",
+                        "documentation": "This example cancels the jobs with the specified job IDs.",
+                        "input": {
+                            "jobs": [
+                                "1d828f65-7a4d-42e8-996d-3b900ed59dc4",
+                                "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e"
+                            ],
+                            "reason": "Cancelling jobs."
+                        },
+                        "output": {
+                            "successful": [
+                                "1d828f65-7a4d-42e8-996d-3b900ed59dc4"
+                            ],
+                            "errors": [
+                                {
+                                    "job": "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e",
+                                    "code": "ServerException",
+                                    "message": "Failed to read job state. Please retry this job."
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/canceljobs",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.batch#CancelJobsErrorDetail": {
+            "type": "structure",
+            "members": {
+                "job": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Batch job ID of the job that couldn't be cancelled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "code": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>An error code that identifies the reason the job couldn't be cancelled. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ValidationException</code> – A job identifier in the request is malformed or isn't valid.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ClientException</code> – The request failed because of a client error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ThrottlingException</code> – The request was throttled. Retry the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ServerException</code> – An internal error occurred. Retry the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AccessDenied</code> – The caller isn't authorized to perform the action on the specified job.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A message that describes the reason the job couldn't be cancelled.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains the details of a job that couldn't be cancelled by a\n        <code>CancelJobs</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.batch#CancelJobsErrorDetailList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.batch#CancelJobsErrorDetail"
+            }
+        },
+        "com.amazonaws.batch#CancelJobsRequest": {
+            "type": "structure",
+            "members": {
+                "jobs": {
+                    "target": "com.amazonaws.batch#StringList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>An array of up to 50 Batch job IDs of the jobs to cancel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A message to attach to the job that explains the reason for cancelling it. This message is\n      returned by future <a>DescribeJobs</a> operations on the job. It is also\n      recorded in the Batch activity logs.</p>\n         <p>This parameter has a limit of 1024 characters.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the jobs to cancel and the reason for the cancellation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.batch#CancelJobsResponse": {
+            "type": "structure",
+            "members": {
+                "successful": {
+                    "target": "com.amazonaws.batch#StringList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of the job IDs whose cancellation request was accepted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.batch#CancelJobsErrorDetailList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of <code>CancelJobsErrorDetail</code> items, one for each job that couldn't be\n      cancelled. Each item includes the job ID along with a code and message that describe why the\n      job wasn't cancelled.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of a <code>CancelJobs</code> request, including the jobs whose cancellation\n      request was accepted and the errors for jobs that couldn't be cancelled.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -7605,7 +7752,7 @@
                 "isCancelled": {
                     "target": "com.amazonaws.batch#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the job is canceled.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the job is cancelled.</p>"
                     }
                 },
                 "isTerminated": {
@@ -7987,6 +8134,18 @@
                     "target": "com.amazonaws.batch#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the job definition.</p>"
+                    }
+                },
+                "isCancelled": {
+                    "target": "com.amazonaws.batch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether a cancellation request has been accepted for the job. This field is only present when the value is <code>true</code>.</p>"
+                    }
+                },
+                "isTerminated": {
+                    "target": "com.amazonaws.batch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether a termination request has been accepted for the job. This field is only present when the value is <code>true</code>.</p>"
                     }
                 }
             },
@@ -11125,6 +11284,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Unix timestamp (in milliseconds) for when the service job stopped running.</p>"
                     }
+                },
+                "isTerminated": {
+                    "target": "com.amazonaws.batch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether a termination request has been accepted for the service job. This field is only present when the value is <code>true</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12082,7 +12247,7 @@
                     "target": "com.amazonaws.batch#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>A message to attach to the job that explains the reason for canceling it. This message is\n      returned by future <a>DescribeJobs</a> operations on the job. It is also\n      recorded in the Batch activity logs.</p>\n         <p>This parameter has as limit of 1024 characters.</p>",
+                        "smithy.api#documentation": "<p>A message to attach to the job that explains the reason for terminating it. This message is\n      returned by future <a>DescribeJobs</a> operations on the job. It is also\n      recorded in the Batch activity logs.</p>\n         <p>This parameter has a limit of 1024 characters.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -12096,6 +12261,144 @@
             "type": "structure",
             "members": {},
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.batch#TerminateJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.batch#TerminateJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.batch#TerminateJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.batch#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.batch#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Terminates up to 50 jobs in a job queue. This is a bulk version of <a>TerminateJob</a>. Jobs that are in the <code>STARTING</code> or\n        <code>RUNNING</code> state are terminated, which causes them to transition to\n        <code>FAILED</code>. Jobs that have not progressed to the <code>STARTING</code> state are\n      cancelled.</p>\n         <p>Batch reports the result for each job individually in the response. Jobs that\n      were processed successfully are reported in the <code>successful</code> list. Jobs that\n      encountered errors are reported in the <code>errors</code> list. The response returns an\n      HTTP status code of <code>200</code> even when some jobs encountered errors, so check the\n      <code>errors</code> list. Jobs that can't be found are treated as successfully\n      processed.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To terminate multiple jobs",
+                        "documentation": "This example terminates the jobs with the specified job IDs.",
+                        "input": {
+                            "jobs": [
+                                "61e743ed-35e4-48da-b2de-5c8333821c84",
+                                "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e"
+                            ],
+                            "reason": "Terminating jobs."
+                        },
+                        "output": {
+                            "successful": [
+                                "61e743ed-35e4-48da-b2de-5c8333821c84"
+                            ],
+                            "errors": [
+                                {
+                                    "job": "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e",
+                                    "code": "ServerException",
+                                    "message": "Failed to read job state. Please retry this job."
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/terminatejobs",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.batch#TerminateJobsErrorDetail": {
+            "type": "structure",
+            "members": {
+                "job": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Batch job ID of the job that couldn't be terminated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "code": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>An error code that identifies the reason the job couldn't be terminated. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ValidationException</code> – A job identifier in the request is malformed or isn't valid.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ClientException</code> – The request failed because of a client error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ThrottlingException</code> – The request was throttled. Retry the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ServerException</code> – An internal error occurred. Retry the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AccessDenied</code> – The caller isn't authorized to perform the action on the specified job.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A message that describes the reason the job couldn't be terminated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains the details of a job that couldn't be terminated by a\n        <code>TerminateJobs</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.batch#TerminateJobsErrorDetailList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.batch#TerminateJobsErrorDetail"
+            }
+        },
+        "com.amazonaws.batch#TerminateJobsRequest": {
+            "type": "structure",
+            "members": {
+                "jobs": {
+                    "target": "com.amazonaws.batch#StringList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>An array of up to 50 Batch job IDs of the jobs to terminate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A message to attach to the job that explains the reason for terminating it. This message is\n      returned by future <a>DescribeJobs</a> operations on the job. It is also\n      recorded in the Batch activity logs.</p>\n         <p>This parameter has a limit of 1024 characters.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the jobs to terminate and the reason for the termination.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.batch#TerminateJobsResponse": {
+            "type": "structure",
+            "members": {
+                "successful": {
+                    "target": "com.amazonaws.batch#StringList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of the job IDs whose termination request was accepted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.batch#TerminateJobsErrorDetailList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of <code>TerminateJobsErrorDetail</code> items, one for each job that couldn't be\n      terminated. Each item includes the job ID along with a code and message that describe why the\n      job wasn't terminated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of a <code>TerminateJobs</code> request, including the jobs whose termination\n      request was accepted and the errors for jobs that couldn't be terminated.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -12139,7 +12442,7 @@
                     "target": "com.amazonaws.batch#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>A message to attach to the service job that explains the reason for canceling it. This message is returned by <code>DescribeServiceJob</code> operations on the service job.</p>",
+                        "smithy.api#documentation": "<p>A message to attach to the service job that explains the reason for terminating it. This message is returned by <code>DescribeServiceJob</code> operations on the service job.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -12152,6 +12455,144 @@
             "type": "structure",
             "members": {},
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.batch#TerminateServiceJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.batch#TerminateServiceJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.batch#TerminateServiceJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.batch#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.batch#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Terminates up to 50 service jobs in a job queue. This is a bulk version of <a>TerminateServiceJob</a>.</p>\n         <p>Batch reports the result for each service job individually in the response. Service jobs that were processed successfully are reported in the <code>successful</code> list. Service jobs that encountered errors are reported in the <code>errors</code> list. The response returns an HTTP status code of <code>200</code> even when some service jobs encountered errors, so check the <code>errors</code> list. Service jobs that can't be found are treated as successfully processed.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To terminate multiple service jobs",
+                        "documentation": "This example terminates the specified service jobs with a reason.",
+                        "input": {
+                            "jobs": [
+                                "a4d6c728-8ee8-4c65-8e2a-9a5e8f4b7c3d",
+                                "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e"
+                            ],
+                            "reason": "Job terminated by user request"
+                        },
+                        "output": {
+                            "successful": [
+                                "a4d6c728-8ee8-4c65-8e2a-9a5e8f4b7c3d"
+                            ],
+                            "errors": [
+                                {
+                                    "job": "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e",
+                                    "code": "ServerException",
+                                    "message": "Failed to read job state. Please retry this job."
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/terminateservicejobs",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.batch#TerminateServiceJobsErrorDetail": {
+            "type": "structure",
+            "members": {
+                "job": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The service job ID of the service job that couldn't be terminated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "code": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>An error code that identifies the reason the service job couldn't be terminated. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ValidationException</code> – A service job identifier in the request is malformed or isn't valid.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ClientException</code> – The request failed because of a client error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ThrottlingException</code> – The request was throttled. Retry the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ServerException</code> – An internal error occurred. Retry the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AccessDenied</code> – The caller isn't authorized to perform the action on the specified service job.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A message that describes the reason the service job couldn't be terminated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains the details of a service job that couldn't be terminated by a <code>TerminateServiceJobs</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.batch#TerminateServiceJobsErrorDetailList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.batch#TerminateServiceJobsErrorDetail"
+            }
+        },
+        "com.amazonaws.batch#TerminateServiceJobsRequest": {
+            "type": "structure",
+            "members": {
+                "jobs": {
+                    "target": "com.amazonaws.batch#StringList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>An array of up to 50 service job IDs of the service jobs to terminate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A message to attach to the service job that explains the reason for terminating it. This message is returned by <code>DescribeServiceJob</code> operations on the service job.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the service jobs to terminate and the reason for the termination.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.batch#TerminateServiceJobsResponse": {
+            "type": "structure",
+            "members": {
+                "successful": {
+                    "target": "com.amazonaws.batch#StringList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of the service job IDs whose termination request was accepted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.batch#TerminateServiceJobsErrorDetailList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of <code>TerminateServiceJobsErrorDetail</code> items, one for each service job that couldn't be terminated. Each item includes the service job ID along with a code and message that describe why the service job wasn't terminated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of a <code>TerminateServiceJobs</code> request, including the service jobs whose termination request was accepted and the errors for service jobs that couldn't be terminated.</p>",
                 "smithy.api#output": {}
             }
         },
