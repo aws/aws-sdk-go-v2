@@ -339,3 +339,97 @@ func TestRetrieve_Failure_Refresh(t *testing.T) {
 		t.Errorf("unexpected error: %v", err)
 	}
 }
+
+// Failure - Refresh response has no token payload (e.g. unmodeled error
+// returned with HTTP 200). Each missing required field surfaces an error instead of panicking
+func TestRetrieve_Failure_NilTokenOutput(t *testing.T) {
+	token, _ := mockToken()
+	restoreOpen := mockOpenFile(token, nil)
+	restoreNowTime := mockNowTime(time.Unix(60, 0).UTC())
+	defer restoreOpen()
+	defer restoreNowTime()
+
+	cases := map[string]struct {
+		out         *signin.CreateOAuth2TokenOutput
+		expectError string
+	}{
+		"miss CreateOAuth2TokenOutput": {
+			expectError: "missing CreateOAuth2Token response",
+		},
+		"miss TokenOutput": {
+			out:         &signin.CreateOAuth2TokenOutput{},
+			expectError: "missing TokenOutput in CreateOAuth2Token response",
+		},
+		"miss AccessToken": {
+			out: &signin.CreateOAuth2TokenOutput{
+				TokenOutput: &types.CreateOAuth2TokenResponseBody{
+					ExpiresIn:    aws.Int32(900), // actual service returns 15-min creds
+					RefreshToken: aws.String("NewRefreshToken"),
+					TokenType:    aws.String("NewTokenType"),
+					IdToken:      aws.String("NewIdToken"),
+				},
+			},
+			expectError: "missing AccessToken in CreateOAuth2Token response",
+		},
+		"miss AccessToken.AccessKeyID": { // should represent other token fields like secretAKID
+			out: &signin.CreateOAuth2TokenOutput{
+				TokenOutput: &types.CreateOAuth2TokenResponseBody{
+					AccessToken: &types.AccessToken{
+						SecretAccessKey: aws.String("NEW_SECRET"),
+						SessionToken:    aws.String("NEW_SESSION"),
+					},
+					ExpiresIn:    aws.Int32(900), // actual service returns 15-min creds
+					RefreshToken: aws.String("NewRefreshToken"),
+					TokenType:    aws.String("NewTokenType"),
+					IdToken:      aws.String("NewIdToken"),
+				},
+			},
+			expectError: "missing AccessToken.AccessKeyId in CreateOAuth2Token response",
+		},
+		"miss ExpiresIn": {
+			out: &signin.CreateOAuth2TokenOutput{
+				TokenOutput: &types.CreateOAuth2TokenResponseBody{
+					AccessToken: &types.AccessToken{
+						AccessKeyId:     aws.String("NEW_AKID"),
+						SecretAccessKey: aws.String("NEW_SECRET"),
+						SessionToken:    aws.String("NEW_SESSION"),
+					},
+					RefreshToken: aws.String("NewRefreshToken"),
+					TokenType:    aws.String("NewTokenType"),
+					IdToken:      aws.String("NewIdToken"),
+				},
+			},
+			expectError: "missing ExpiresIn in CreateOAuth2Token response",
+		},
+		"miss RefreshToken": {
+			out: &signin.CreateOAuth2TokenOutput{
+				TokenOutput: &types.CreateOAuth2TokenResponseBody{
+					AccessToken: &types.AccessToken{
+						AccessKeyId:     aws.String("NEW_AKID"),
+						SecretAccessKey: aws.String("NEW_SECRET"),
+						SessionToken:    aws.String("NEW_SESSION"),
+					},
+					ExpiresIn: aws.Int32(900), // actual service returns 15-min creds
+					TokenType: aws.String("NewTokenType"),
+					IdToken:   aws.String("NewIdToken"),
+				},
+			},
+			expectError: "missing RefreshToken in CreateOAuth2Token response",
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			svc := mockTokenAPIClient(c.out, nil)
+
+			p := New(svc, "mocktokenpath")
+			_, err := p.Retrieve(context.Background())
+			if err == nil {
+				t.Fatal("expect err, got none")
+			}
+			if e, a := c.expectError, err.Error(); !strings.Contains(a, e) {
+				t.Errorf("expect %v to be within %v", e, a)
+			}
+		})
+	}
+}
