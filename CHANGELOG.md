@@ -1,3 +1,66 @@
+# Release (2026-09-11)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.76.0](service/batch/CHANGELOG.md#v1760-2026-09-11)
+  * **Feature**: Added new bulk job APIs (CancelJobs, TerminateJobs, TerminateServiceJobs) and new fields on ListJobs and ListServiceJobs responses. This allows customers to cancel or terminate multiple jobs in a single request. ListJobs and ListServiceJobs responses now include isCancelled and isTerminated fields.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.98.0](service/ecs/CHANGELOG.md#v1980-2026-09-11)
+  * **Feature**: This feature adds support for setting the cpu architecture type that should be used to launch tasks for an Express Gateway Service.
+* `github.com/aws/aws-sdk-go-v2/service/invoicing`: [v1.19.0](service/invoicing/CHANGELOG.md#v1190-2026-09-11)
+  * **Feature**: Add ListProcurementPortals and ListProcurementPortalSuppliers APIs to retrieve AWS-supported 3rd party procurement portals and their suppliers for e-invoice delivery and purchase order retrieval.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.66.0](service/lightsail/CHANGELOG.md#v1660-2026-09-11)
+  * **Feature**: Amazon Lightsail now lets you serve website content from a private Lightsail bucket through a Lightsail distribution. This release adds enablePrivateOriginAccess to the CreateDistribution and UpdateDistribution actions, plus new defaultRootObject and customErrorResponses options.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.104.0](service/mediaconvert/CHANGELOG.md#v11040-2026-09-11)
+  * **Feature**: Adds Dolby Vision metadata to Probe results, including profile, level, and presence of the RPU, base layer, and enhancement layer. Adds video sample and display aspect ratios. Adds the UnprocessableEntityException (HTTP 422) error to Probe for recognized but malformed or corrupt inputs.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.113.1](service/s3/CHANGELOG.md#v11131-2026-09-11)
+  * **Documentation**: Updated S3 Object Lock Default Retention documentation.
+
+# Release (2026-09-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.65.0](service/bedrockagent/CHANGELOG.md#v1650-2026-09-10)
+  * **Feature**: TwelveLabs Marengo 3.0 is now an embedding model option in Amazon Bedrock Managed Knowledge Base. Create multimodal embeddings for video, audio, and image content that capture visual scenes, speech, and video cues, not just transcribed text.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.332.0](service/ec2/CHANGELOG.md#v13320-2026-09-10)
+  * **Feature**: The CreateImage API now supports a BootModeOverride parameter to explicitly set UEFI boot mode on a new AMI, overriding the source instance's inherited boot mode.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.74.0](service/outposts/CHANGELOG.md#v1740-2026-09-10)
+  * **Feature**: Added fields to identify Outpost generation and rack scaling configuration on Outpost and CatalogItem resources.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehubv2`: [v1.10.0](service/resiliencehubv2/CHANGELOG.md#v1100-2026-09-10)
+  * **Feature**: This release adds the ListTestRunSourceEvents and ListTestRunDependencies APIs, which return the alarm state changes during a test run and the dependencies the run blocked.
+* `github.com/aws/aws-sdk-go-v2/service/rtbfabric`: [v1.16.0](service/rtbfabric/CHANGELOG.md#v1160-2026-09-10)
+  * **Feature**: AWS RTB Fabric now lets you control how traffic is routed to your responder gateway across Availability Zones. Set the new clientRoutingPolicy parameter  to keep traffic within the same Availability Zone or distribute traffic across all Availability Zones.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.277.0](service/sagemaker/CHANGELOG.md#v12770-2026-09-10)
+  * **Feature**: This release adds the ability for customers to attach customer owned Elastic Network Interfaces (ENIs) to HyperPod cluster nodes.
+
+# Release (2026-09-09)
+
+## General Highlights
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager`: [v0.4.5](feature/s3/transfermanager/CHANGELOG.md#v045-2026-09-09)
+  * **Bug Fix**: Fix potential deadlock in GetObject calls.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.198.0](service/connect/CHANGELOG.md#v11980-2026-09-09)
+  * **Feature**: Add metric configuration field to evaluation forms and ListEvaluationFormAIVersions API for retrieving AI-generated evaluation form versions
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.331.0](service/ec2/CHANGELOG.md#v13310-2026-09-09)
+  * **Feature**: This release adds support for sharing Amazon EBS volumes across AWS accounts using AWS Resource Access Manager (RAM). Consuming accounts can view shared volume metadata and create copies of shared volumes within the same Availability Zone, with optional re-encryption using their own KMS key.
+* `github.com/aws/aws-sdk-go-v2/service/elementalinference`: [v1.12.0](service/elementalinference/CHANGELOG.md#v1120-2026-09-09)
+  * **Feature**: This release adds contextual metadata, a feed output type that generates a descriptive summary of your media content along with IAB taxonomy and GARM suitability classifications. It also adds feed resource policies for granting cross-account access to a feed.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.108.0](service/lambda/CHANGELOG.md#v11080-2026-09-09)
+  * **Feature**: Updates documentation for lambda function timeout.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.110.0](service/medialive/CHANGELOG.md#v11100-2026-09-09)
+  * **Feature**: MediaLive now supports Manual Style Control for vertical caption positioning in TTML, WebVTT, and Embedded captions, Contextual Metadata Enrichment via Elemental Inference, and an Output Usage field on MediaPackage v2 for Dynamic Multiview validation.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.49.0](service/mediapackagev2/CHANGELOG.md#v1490-2026-09-09)
+  * **Feature**: Dynamic Multiview enables viewers to watch multiple live video streams in a single combined output. Viewers can select from 6 preset tiled layouts. Create MediaPackage channels with Input Type MULTIVIEW and configure Available Layouts and Available Sources. See the API Documentation for details.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.70.0](service/mediatailor/CHANGELOG.md#v1700-2026-09-09)
+  * **Feature**: Added the AWS Service Request function type for MediaTailor Functions, enabling authenticated requests to AWS Elemental Inference for contextual ad targeting during ad insertion.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.29.0](service/pcs/CHANGELOG.md#v1290-2026-09-09)
+  * **Feature**: This release adds support for custom Gres.conf configuration and Slurm version 26.05 in AWS PCS. Customers can now specify generic resource (GRES) settings to control how GPUs and other resources are configured and shared on their compute node groups.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.113.0](service/s3/CHANGELOG.md#v11130-2026-09-09)
+  * **Bug Fix**: Expand S3 operations that check for an error inside an HTTP 200 response (wave 3/4)
+
 # Release (2026-09-08)
 
 ## General Highlights

@@ -1,3 +1,9 @@
+# v1.108.0 (2026-09-09)
+
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Feature**: Updates documentation for lambda function timeout.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.107.0 (2026-09-04)
 
 * **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.

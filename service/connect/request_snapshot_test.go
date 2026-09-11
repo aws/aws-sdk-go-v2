@@ -2070,6 +2070,10 @@ func TestCheckRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 										},
 									},
 								},
+								MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+									MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+									MetricName: ptr.String("__MetricName__"),
+								},
 							},
 						},
 						&types.EvaluationFormItemMemberQuestion{
@@ -2185,6 +2189,10 @@ func TestCheckRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 											MaxScorePercentage:  1.0,
 										},
 									},
+								},
+								MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+									MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+									MetricName: ptr.String("__MetricName__"),
 								},
 							},
 						},
@@ -2325,6 +2333,10 @@ func TestCheckRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 										},
 									},
 								},
+								MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+									MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+									MetricName: ptr.String("__MetricName__"),
+								},
 							},
 						},
 						&types.EvaluationFormItemMemberQuestion{
@@ -2441,6 +2453,10 @@ func TestCheckRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 										},
 									},
 								},
+								MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+									MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+									MetricName: ptr.String("__MetricName__"),
+								},
 							},
 						},
 					},
@@ -2508,6 +2524,7 @@ func TestCheckRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 		LanguageConfiguration: &types.EvaluationFormLanguageConfiguration{
 			FormLanguage: types.EvaluationFormLanguageCode("de-DE"),
 		},
+		AIVersion: ptr.String("__AIVersion__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8712,6 +8729,36 @@ func TestCheckRequestSnapshot_ListEntitySecurityProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEntitySecurityProfiles"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListEvaluationFormAIVersions(t *testing.T) {
+	input := &ListEvaluationFormAIVersionsInput{
+		InstanceId:             ptr.String("__InstanceId__"),
+		ContactInteractionType: types.ContactInteractionType("AGENT"),
+		MaxResults:             ptr.Int32(1),
+		NextToken:              ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListEvaluationFormAIVersions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEvaluationFormAIVersions"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -15510,6 +15557,10 @@ func TestCheckRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 										},
 									},
 								},
+								MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+									MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+									MetricName: ptr.String("__MetricName__"),
+								},
 							},
 						},
 						&types.EvaluationFormItemMemberQuestion{
@@ -15625,6 +15676,10 @@ func TestCheckRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 											MaxScorePercentage:  1.0,
 										},
 									},
+								},
+								MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+									MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+									MetricName: ptr.String("__MetricName__"),
 								},
 							},
 						},
@@ -15765,6 +15820,10 @@ func TestCheckRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 										},
 									},
 								},
+								MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+									MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+									MetricName: ptr.String("__MetricName__"),
+								},
 							},
 						},
 						&types.EvaluationFormItemMemberQuestion{
@@ -15881,6 +15940,10 @@ func TestCheckRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 										},
 									},
 								},
+								MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+									MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+									MetricName: ptr.String("__MetricName__"),
+								},
 							},
 						},
 					},
@@ -15945,6 +16008,7 @@ func TestCheckRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 		LanguageConfiguration: &types.EvaluationFormLanguageConfiguration{
 			FormLanguage: types.EvaluationFormLanguageCode("de-DE"),
 		},
+		AIVersion: ptr.String("__AIVersion__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -20247,6 +20311,10 @@ func TestUpdateRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 										},
 									},
 								},
+								MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+									MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+									MetricName: ptr.String("__MetricName__"),
+								},
 							},
 						},
 						&types.EvaluationFormItemMemberQuestion{
@@ -20362,6 +20430,10 @@ func TestUpdateRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 											MaxScorePercentage:  1.0,
 										},
 									},
+								},
+								MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+									MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+									MetricName: ptr.String("__MetricName__"),
 								},
 							},
 						},
@@ -20502,6 +20574,10 @@ func TestUpdateRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 										},
 									},
 								},
+								MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+									MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+									MetricName: ptr.String("__MetricName__"),
+								},
 							},
 						},
 						&types.EvaluationFormItemMemberQuestion{
@@ -20618,6 +20694,10 @@ func TestUpdateRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 										},
 									},
 								},
+								MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+									MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+									MetricName: ptr.String("__MetricName__"),
+								},
 							},
 						},
 					},
@@ -20685,6 +20765,7 @@ func TestUpdateRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 		LanguageConfiguration: &types.EvaluationFormLanguageConfiguration{
 			FormLanguage: types.EvaluationFormLanguageCode("de-DE"),
 		},
+		AIVersion: ptr.String("__AIVersion__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -26889,6 +26970,36 @@ func TestUpdateRequestSnapshot_ListEntitySecurityProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEntitySecurityProfiles"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListEvaluationFormAIVersions(t *testing.T) {
+	input := &ListEvaluationFormAIVersionsInput{
+		InstanceId:             ptr.String("__InstanceId__"),
+		ContactInteractionType: types.ContactInteractionType("AGENT"),
+		MaxResults:             ptr.Int32(1),
+		NextToken:              ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListEvaluationFormAIVersions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEvaluationFormAIVersions"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -33687,6 +33798,10 @@ func TestUpdateRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 										},
 									},
 								},
+								MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+									MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+									MetricName: ptr.String("__MetricName__"),
+								},
 							},
 						},
 						&types.EvaluationFormItemMemberQuestion{
@@ -33802,6 +33917,10 @@ func TestUpdateRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 											MaxScorePercentage:  1.0,
 										},
 									},
+								},
+								MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+									MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+									MetricName: ptr.String("__MetricName__"),
 								},
 							},
 						},
@@ -33942,6 +34061,10 @@ func TestUpdateRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 										},
 									},
 								},
+								MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+									MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+									MetricName: ptr.String("__MetricName__"),
+								},
 							},
 						},
 						&types.EvaluationFormItemMemberQuestion{
@@ -34058,6 +34181,10 @@ func TestUpdateRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 										},
 									},
 								},
+								MetricConfiguration: &types.EvaluationFormMetricConfiguration{
+									MetricType: types.EvaluationFormMetricType("BUSINESS_OUTCOME"),
+									MetricName: ptr.String("__MetricName__"),
+								},
 							},
 						},
 					},
@@ -34122,6 +34249,7 @@ func TestUpdateRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 		LanguageConfiguration: &types.EvaluationFormLanguageConfiguration{
 			FormLanguage: types.EvaluationFormLanguageCode("de-DE"),
 		},
+		AIVersion: ptr.String("__AIVersion__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

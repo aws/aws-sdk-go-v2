@@ -221,6 +221,20 @@
                 "smithy.api#retryable": {}
             }
         },
+        "com.amazonaws.elementalinference#ContextualMetadataConfig": {
+            "type": "structure",
+            "members": {
+                "summaryGeneration": {
+                    "target": "com.amazonaws.elementalinference#SummaryGenerationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Elemental Inference generates a descriptive summary of the media content for this output. </p> <p>Valid values:</p> <ul> <li> <p>ENABLED (default) – Elemental Inference generates a descriptive summary along with IAB taxonomy and GARM suitability classifications. </p> </li> <li> <p>DISABLED – No descriptive summary is generated.</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The output configuration settings for the contextual metadata feature. Use this structure when the feed output generates metadata that describes the media content. </p>"
+            }
+        },
         "com.amazonaws.elementalinference#CreateDictionary": {
             "type": "operation",
             "input": {
@@ -746,6 +760,65 @@
                     "code": 202
                 },
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.elementalinference#DeleteFeedPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#DeleteFeedPolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete the resource-based policy of a feed",
+                    "resources": {
+                        "required": {
+                            "feed": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Deletes the resource-based policy attached to the specified feed. After you delete the policy, the operation revokes the cross-account access that the policy granted. </p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v1/feed/{id}/policy",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.elementalinference#DeleteFeedPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.elementalinference#FeedId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the feed whose policy you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.elementalinference#DeleteFeedRequest": {
@@ -2105,7 +2178,16 @@
                     "target": "com.amazonaws.elementalinference#AssociateFeed"
                 },
                 {
+                    "target": "com.amazonaws.elementalinference#DeleteFeedPolicy"
+                },
+                {
                     "target": "com.amazonaws.elementalinference#DisassociateFeed"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#GetFeedPolicy"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#PutFeedPolicy"
                 }
             ],
             "traits": {
@@ -2541,6 +2623,80 @@
                         ]
                     }
                 }
+            }
+        },
+        "com.amazonaws.elementalinference#GetFeedPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#GetFeedPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elementalinference#GetFeedPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get the resource-based policy of a feed",
+                    "resources": {
+                        "required": {
+                            "feed": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Retrieves the resource-based policy attached to the specified feed.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/feed/{id}/policy",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.elementalinference#GetFeedPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.elementalinference#FeedId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the feed whose policy you want to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#GetFeedPolicyResponse": {
+            "type": "structure",
+            "members": {
+                "policy": {
+                    "target": "com.amazonaws.elementalinference#PolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource-based policy document attached to the feed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elementalinference#GetFeedRequest": {
@@ -3104,6 +3260,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The output config type that applies to the smart subtitling feature.</p>"
                     }
+                },
+                "contextualMetadata": {
+                    "target": "com.amazonaws.elementalinference#ContextualMetadataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output config type that applies to the contextual metadata feature.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3124,6 +3286,15 @@
                     "traits": {
                         "smithy.api#enumValue": "DISABLED"
                     }
+                }
+            }
+        },
+        "com.amazonaws.elementalinference#PolicyDocument": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
                 }
             }
         },
@@ -3148,6 +3319,82 @@
                         "smithy.api#enumValue": "DROP"
                     }
                 }
+            }
+        },
+        "com.amazonaws.elementalinference#PutFeedPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#PutFeedPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elementalinference#PutFeedPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to put a resource-based policy on a feed",
+                    "resources": {
+                        "required": {
+                            "feed": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Attaches or replaces a resource-based policy on the specified feed. A resource-based policy grants cross-account access to the feed. </p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v1/feed/{id}/policy",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.elementalinference#PutFeedPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.elementalinference#FeedId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the feed to attach the policy to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.elementalinference#PolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource-based policy document to attach to the feed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#PutFeedPolicyResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elementalinference#ResourceArn": {
@@ -3421,6 +3668,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A type of OutputConfig, used when the output in a feed is for the smart subtitling feature. smart subtitling uses automatic speech recognition (ASR) to generate live TTML subtitles from the audio in your source media. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#SummaryGenerationMode": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.elementalinference#TagKey": {

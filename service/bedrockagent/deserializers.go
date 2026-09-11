@@ -16602,6 +16602,11 @@ func awsRestjson1_deserializeDocumentBedrockEmbeddingModelConfiguration(v **type
 				sv.EmbeddingDataType = types.EmbeddingDataType(jtv)
 			}
 
+		case "modelConfiguration":
+			if err := awsRestjson1_deserializeDocumentDocument(&sv.ModelConfiguration, value); err != nil {
+				return err
+			}
+
 		case "video":
 			if err := awsRestjson1_deserializeDocumentVideoConfigurations(&sv.Video, value); err != nil {
 				return err
@@ -22531,6 +22536,11 @@ func awsRestjson1_deserializeDocumentManagedKnowledgeBaseConfiguration(v **types
 
 		case "serverSideEncryptionConfiguration":
 			if err := awsRestjson1_deserializeDocumentServerSideEncryptionConfiguration(&sv.ServerSideEncryptionConfiguration, value); err != nil {
+				return err
+			}
+
+		case "supplementalDataStorageConfiguration":
+			if err := awsRestjson1_deserializeDocumentSupplementalDataStorageConfiguration(&sv.SupplementalDataStorageConfiguration, value); err != nil {
 				return err
 			}
 

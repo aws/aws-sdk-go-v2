@@ -338,6 +338,7 @@ type FunctionType string
 // Enum values for FunctionType
 const (
 	FunctionTypeHttpRequest        FunctionType = "HTTP_REQUEST"
+	FunctionTypeAwsServiceRequest  FunctionType = "AWS_SERVICE_REQUEST"
 	FunctionTypeCustomOutput       FunctionType = "CUSTOM_OUTPUT"
 	FunctionTypeConcurrentExecutor FunctionType = "CONCURRENT_EXECUTOR"
 	FunctionTypeSequentialExecutor FunctionType = "SEQUENTIAL_EXECUTOR"
@@ -351,6 +352,7 @@ const (
 func (FunctionType) Values() []FunctionType {
 	return []FunctionType{
 		"HTTP_REQUEST",
+		"AWS_SERVICE_REQUEST",
 		"CUSTOM_OUTPUT",
 		"CONCURRENT_EXECUTOR",
 		"SEQUENTIAL_EXECUTOR",

@@ -1,3 +1,8 @@
+# v1.72.0 (2026-09-09)
+
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.71.0 (2026-09-04)
 
 * **Feature**: New AWS REVIEW mode as supported data retention mode for Bedrock models

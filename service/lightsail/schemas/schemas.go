@@ -2561,6 +2561,24 @@ var _DistributionBundleList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _DistributionBundleList_member *smithy.Schema
 
+var DistributionCustomErrorResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "DistributionCustomErrorResponse",
+}, smithy.ShapeTypeStructure, 4)
+var DistributionCustomErrorResponse_errorCode *smithy.Schema
+
+var DistributionCustomErrorResponse_responseCode *smithy.Schema
+
+var DistributionCustomErrorResponse_responsePagePath *smithy.Schema
+
+var DistributionCustomErrorResponse_errorCachingMinTTL *smithy.Schema
+
+var _DistributionCustomErrorResponseList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "DistributionCustomErrorResponseList",
+}, smithy.ShapeTypeList, 1)
+var _DistributionCustomErrorResponseList_member *smithy.Schema
+
 var _DistributionList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "DistributionList",
@@ -3398,7 +3416,7 @@ var _KeyPairList_member *smithy.Schema
 var LightsailDistribution = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "LightsailDistribution",
-}, smithy.ShapeTypeStructure, 21)
+}, smithy.ShapeTypeStructure, 23)
 var LightsailDistribution_name *smithy.Schema
 
 var LightsailDistribution_arn *smithy.Schema
@@ -3440,6 +3458,10 @@ var LightsailDistribution_ipAddressType *smithy.Schema
 var LightsailDistribution_tags *smithy.Schema
 
 var LightsailDistribution_viewerMinimumTlsProtocolVersion *smithy.Schema
+
+var LightsailDistribution_defaultRootObject *smithy.Schema
+
+var LightsailDistribution_customErrorResponses *smithy.Schema
 
 var LoadBalancer = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -4289,7 +4311,7 @@ var OperationType_GetProfile *smithy.Schema
 var Origin = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "Origin",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var Origin_name *smithy.Schema
 
 var Origin_resourceType *smithy.Schema
@@ -4301,6 +4323,8 @@ var Origin_protocolPolicy *smithy.Schema
 var Origin_responseTimeout *smithy.Schema
 
 var Origin_ipAddressType *smithy.Schema
+
+var Origin_isPrivateOriginAccessEnabled *smithy.Schema
 
 var OriginIpAddressTypeEnum = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -5655,7 +5679,7 @@ var CreateDiskSnapshotResult_operations *smithy.Schema
 var CreateDistributionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "CreateDistributionRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 13)
 var CreateDistributionRequest_distributionName *smithy.Schema
 
 var CreateDistributionRequest_origin *smithy.Schema
@@ -5675,6 +5699,12 @@ var CreateDistributionRequest_tags *smithy.Schema
 var CreateDistributionRequest_certificateName *smithy.Schema
 
 var CreateDistributionRequest_viewerMinimumTlsProtocolVersion *smithy.Schema
+
+var CreateDistributionRequest_enablePrivateOriginAccess *smithy.Schema
+
+var CreateDistributionRequest_defaultRootObject *smithy.Schema
+
+var CreateDistributionRequest_customErrorResponses *smithy.Schema
 
 var CreateDistributionResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -7791,7 +7821,7 @@ var UpdateDistributionBundleResult_operation *smithy.Schema
 var UpdateDistributionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "UpdateDistributionRequest",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 12)
 var UpdateDistributionRequest_distributionName *smithy.Schema
 
 var UpdateDistributionRequest_origin *smithy.Schema
@@ -7809,6 +7839,12 @@ var UpdateDistributionRequest_viewerMinimumTlsProtocolVersion *smithy.Schema
 var UpdateDistributionRequest_certificateName *smithy.Schema
 
 var UpdateDistributionRequest_useDefaultCertificate *smithy.Schema
+
+var UpdateDistributionRequest_enablePrivateOriginAccess *smithy.Schema
+
+var UpdateDistributionRequest_defaultRootObject *smithy.Schema
+
+var UpdateDistributionRequest_customErrorResponses *smithy.Schema
 
 var UpdateDistributionResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -9163,6 +9199,16 @@ func init() {
 
 	_DistributionBundleList_member = _DistributionBundleList.AddMember("member", DistributionBundle)
 
+	DistributionCustomErrorResponse_errorCode = DistributionCustomErrorResponse.AddMember("errorCode", _integer)
+
+	DistributionCustomErrorResponse_responseCode = DistributionCustomErrorResponse.AddMember("responseCode", _string)
+
+	DistributionCustomErrorResponse_responsePagePath = DistributionCustomErrorResponse.AddMember("responsePagePath", _string)
+
+	DistributionCustomErrorResponse_errorCachingMinTTL = DistributionCustomErrorResponse.AddMember("errorCachingMinTTL", _long)
+
+	_DistributionCustomErrorResponseList_member = _DistributionCustomErrorResponseList.AddMember("member", DistributionCustomErrorResponse)
+
 	OriginProtocolPolicyEnum_HTTPOnly = OriginProtocolPolicyEnum.AddMember("HTTPOnly", smithyprelude.Unit)
 
 	OriginProtocolPolicyEnum_HTTPSOnly = OriginProtocolPolicyEnum.AddMember("HTTPSOnly", smithyprelude.Unit)
@@ -9184,6 +9230,8 @@ func init() {
 	Origin_responseTimeout = Origin.AddMember("responseTimeout", _integer)
 
 	Origin_ipAddressType = Origin.AddMember("ipAddressType", OriginIpAddressTypeEnum)
+
+	Origin_isPrivateOriginAccessEnabled = Origin.AddMember("isPrivateOriginAccessEnabled", _boolean)
 
 	IpAddressType_DUALSTACK = IpAddressType.AddMember("DUALSTACK", smithyprelude.Unit)
 
@@ -9232,6 +9280,10 @@ func init() {
 	LightsailDistribution_tags = LightsailDistribution.AddMember("tags", _TagList)
 
 	LightsailDistribution_viewerMinimumTlsProtocolVersion = LightsailDistribution.AddMember("viewerMinimumTlsProtocolVersion", _string)
+
+	LightsailDistribution_defaultRootObject = LightsailDistribution.AddMember("defaultRootObject", _string)
+
+	LightsailDistribution_customErrorResponses = LightsailDistribution.AddMember("customErrorResponses", _DistributionCustomErrorResponseList)
 
 	_DistributionList_member = _DistributionList.AddMember("member", LightsailDistribution)
 
@@ -10797,6 +10849,12 @@ func init() {
 
 	CreateDistributionRequest_viewerMinimumTlsProtocolVersion = CreateDistributionRequest.AddMember("viewerMinimumTlsProtocolVersion", ViewerMinimumTlsProtocolVersionEnum)
 
+	CreateDistributionRequest_enablePrivateOriginAccess = CreateDistributionRequest.AddMember("enablePrivateOriginAccess", _boolean)
+
+	CreateDistributionRequest_defaultRootObject = CreateDistributionRequest.AddMember("defaultRootObject", _string)
+
+	CreateDistributionRequest_customErrorResponses = CreateDistributionRequest.AddMember("customErrorResponses", _DistributionCustomErrorResponseList)
+
 	CreateDistributionResult_distribution = CreateDistributionResult.AddMember("distribution", LightsailDistribution)
 
 	CreateDistributionResult_operation = CreateDistributionResult.AddMember("operation", Operation)
@@ -11824,6 +11882,12 @@ func init() {
 	UpdateDistributionRequest_certificateName = UpdateDistributionRequest.AddMember("certificateName", _ResourceName)
 
 	UpdateDistributionRequest_useDefaultCertificate = UpdateDistributionRequest.AddMember("useDefaultCertificate", _boolean)
+
+	UpdateDistributionRequest_enablePrivateOriginAccess = UpdateDistributionRequest.AddMember("enablePrivateOriginAccess", _boolean)
+
+	UpdateDistributionRequest_defaultRootObject = UpdateDistributionRequest.AddMember("defaultRootObject", _string)
+
+	UpdateDistributionRequest_customErrorResponses = UpdateDistributionRequest.AddMember("customErrorResponses", _DistributionCustomErrorResponseList)
 
 	UpdateDistributionResult_operation = UpdateDistributionResult.AddMember("operation", Operation)
 

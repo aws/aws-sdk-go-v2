@@ -1478,6 +1478,13 @@ var ListEntitySecurityProfiles = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/entity-security-profiles-summary/{InstanceId}",
 	Code: 200})
 
+var ListEvaluationFormAIVersions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ListEvaluationFormAIVersions",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/instances/{InstanceId}/evaluation-form-ai-versions",
+	Code: 200})
+
 var ListEvaluationForms = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ListEvaluationForms",
@@ -6815,7 +6822,7 @@ var EvaluationContactParticipant_ContactParticipantId *smithy.Schema
 var EvaluationForm = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationForm",
-}, smithy.ShapeTypeStructure, 20)
+}, smithy.ShapeTypeStructure, 21)
 var EvaluationForm_EvaluationFormId *smithy.Schema
 
 var EvaluationForm_EvaluationFormVersion *smithy.Schema
@@ -6856,6 +6863,49 @@ var EvaluationForm_LatestValidationStatus *smithy.Schema
 
 var EvaluationForm_LastValidationTime *smithy.Schema
 
+var EvaluationForm_AIVersion *smithy.Schema
+
+var _EvaluationFormAIVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EvaluationFormAIVersion",
+}, smithy.ShapeTypeString, 0)
+
+var EvaluationFormAIVersionLifecycle = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EvaluationFormAIVersionLifecycle",
+}, smithy.ShapeTypeStructure, 3)
+var EvaluationFormAIVersionLifecycle_Status *smithy.Schema
+
+var EvaluationFormAIVersionLifecycle_StartOfLifeTime *smithy.Schema
+
+var EvaluationFormAIVersionLifecycle_EndOfLifeTime *smithy.Schema
+
+var EvaluationFormAIVersionStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EvaluationFormAIVersionStatus",
+}, smithy.ShapeTypeEnum, 4)
+var EvaluationFormAIVersionStatus_LATEST *smithy.Schema
+
+var EvaluationFormAIVersionStatus_PREVIEW *smithy.Schema
+
+var EvaluationFormAIVersionStatus_ACTIVE *smithy.Schema
+
+var EvaluationFormAIVersionStatus_DEPRECATED *smithy.Schema
+
+var EvaluationFormAIVersionSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EvaluationFormAIVersionSummary",
+}, smithy.ShapeTypeStructure, 2)
+var EvaluationFormAIVersionSummary_AIVersionName *smithy.Schema
+
+var EvaluationFormAIVersionSummary_AIVersionLifecycle *smithy.Schema
+
+var _EvaluationFormAIVersionSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EvaluationFormAIVersionSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _EvaluationFormAIVersionSummaryList_member *smithy.Schema
+
 var EvaluationFormAutoEvaluationConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationFormAutoEvaluationConfiguration",
@@ -6865,7 +6915,7 @@ var EvaluationFormAutoEvaluationConfiguration_Enabled *smithy.Schema
 var EvaluationFormContent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationFormContent",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var EvaluationFormContent_EvaluationFormVersion *smithy.Schema
 
 var EvaluationFormContent_EvaluationFormId *smithy.Schema
@@ -6887,6 +6937,8 @@ var EvaluationFormContent_TargetConfiguration *smithy.Schema
 var EvaluationFormContent_LanguageConfiguration *smithy.Schema
 
 var EvaluationFormContent_ReviewConfiguration *smithy.Schema
+
+var EvaluationFormContent_AIVersion *smithy.Schema
 
 var _EvaluationFormDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -7051,6 +7103,25 @@ var EvaluationFormLanguageConfiguration = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var EvaluationFormLanguageConfiguration_FormLanguage *smithy.Schema
 
+var EvaluationFormMetricConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EvaluationFormMetricConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var EvaluationFormMetricConfiguration_MetricType *smithy.Schema
+
+var EvaluationFormMetricConfiguration_MetricName *smithy.Schema
+
+var _EvaluationFormMetricName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EvaluationFormMetricName",
+}, smithy.ShapeTypeString, 0)
+
+var EvaluationFormMetricType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EvaluationFormMetricType",
+}, smithy.ShapeTypeEnum, 1)
+var EvaluationFormMetricType_BUSINESS_OUTCOME *smithy.Schema
+
 var EvaluationFormMultiSelectQuestionAutomation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationFormMultiSelectQuestionAutomation",
@@ -7163,7 +7234,7 @@ var EvaluationFormNumericQuestionProperties_Automation *smithy.Schema
 var EvaluationFormQuestion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationFormQuestion",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var EvaluationFormQuestion_Title *smithy.Schema
 
 var EvaluationFormQuestion_Instructions *smithy.Schema
@@ -7181,6 +7252,8 @@ var EvaluationFormQuestion_Enablement *smithy.Schema
 var EvaluationFormQuestion_Weight *smithy.Schema
 
 var EvaluationFormQuestion_ScoringConfiguration *smithy.Schema
+
+var EvaluationFormQuestion_MetricConfiguration *smithy.Schema
 
 var _EvaluationFormQuestionAnswerScore = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -7322,7 +7395,7 @@ var EvaluationFormSearchFilter_AttributeFilter *smithy.Schema
 var EvaluationFormSearchSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationFormSearchSummary",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 18)
 var EvaluationFormSearchSummary_EvaluationFormId *smithy.Schema
 
 var EvaluationFormSearchSummary_EvaluationFormArn *smithy.Schema
@@ -7356,6 +7429,8 @@ var EvaluationFormSearchSummary_EvaluationFormLanguage *smithy.Schema
 var EvaluationFormSearchSummary_ContactInteractionType *smithy.Schema
 
 var EvaluationFormSearchSummary_Tags *smithy.Schema
+
+var EvaluationFormSearchSummary_AIVersion *smithy.Schema
 
 var _EvaluationFormSearchSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -17773,7 +17848,7 @@ var CreateEmailAddressResponse_EmailAddressArn *smithy.Schema
 var CreateEvaluationFormRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "CreateEvaluationFormRequest",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var CreateEvaluationFormRequest_InstanceId *smithy.Schema
 
 var CreateEvaluationFormRequest_Title *smithy.Schema
@@ -17797,6 +17872,8 @@ var CreateEvaluationFormRequest_ReviewConfiguration *smithy.Schema
 var CreateEvaluationFormRequest_TargetConfiguration *smithy.Schema
 
 var CreateEvaluationFormRequest_LanguageConfiguration *smithy.Schema
+
+var CreateEvaluationFormRequest_AIVersion *smithy.Schema
 
 var CreateEvaluationFormResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -20661,6 +20738,26 @@ var ListEntitySecurityProfilesResponse = smithy.NewSchema(smithy.ShapeID{
 var ListEntitySecurityProfilesResponse_SecurityProfiles *smithy.Schema
 
 var ListEntitySecurityProfilesResponse_NextToken *smithy.Schema
+
+var ListEvaluationFormAIVersionsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ListEvaluationFormAIVersionsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListEvaluationFormAIVersionsRequest_InstanceId *smithy.Schema
+
+var ListEvaluationFormAIVersionsRequest_ContactInteractionType *smithy.Schema
+
+var ListEvaluationFormAIVersionsRequest_MaxResults *smithy.Schema
+
+var ListEvaluationFormAIVersionsRequest_NextToken *smithy.Schema
+
+var ListEvaluationFormAIVersionsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ListEvaluationFormAIVersionsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListEvaluationFormAIVersionsResponse_AIVersionSummaries *smithy.Schema
+
+var ListEvaluationFormAIVersionsResponse_NextToken *smithy.Schema
 
 var ListEvaluationFormsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -23578,7 +23675,7 @@ var UpdateEmailAddressMetadataResponse_EmailAddressArn *smithy.Schema
 var UpdateEvaluationFormRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "UpdateEvaluationFormRequest",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var UpdateEvaluationFormRequest_InstanceId *smithy.Schema
 
 var UpdateEvaluationFormRequest_EvaluationFormId *smithy.Schema
@@ -23606,6 +23703,8 @@ var UpdateEvaluationFormRequest_ClientToken *smithy.Schema
 var UpdateEvaluationFormRequest_TargetConfiguration *smithy.Schema
 
 var UpdateEvaluationFormRequest_LanguageConfiguration *smithy.Schema
+
+var UpdateEvaluationFormRequest_AIVersion *smithy.Schema
 
 var UpdateEvaluationFormResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -27986,6 +28085,12 @@ func init() {
 
 	EvaluationFormQuestionScoringConfiguration_ScoreThresholds = EvaluationFormQuestionScoringConfiguration.AddMember("ScoreThresholds", _EvaluationFormScoreThresholdList)
 
+	EvaluationFormMetricType_BUSINESS_OUTCOME = EvaluationFormMetricType.AddMember("BUSINESS_OUTCOME", smithyprelude.Unit)
+
+	EvaluationFormMetricConfiguration_MetricType = EvaluationFormMetricConfiguration.AddMember("MetricType", EvaluationFormMetricType)
+
+	EvaluationFormMetricConfiguration_MetricName = EvaluationFormMetricConfiguration.AddMember("MetricName", _EvaluationFormMetricName)
+
 	EvaluationFormQuestion_Title = EvaluationFormQuestion.AddMember("Title", _EvaluationFormQuestionTitle)
 
 	EvaluationFormQuestion_Instructions = EvaluationFormQuestion.AddMember("Instructions", _EvaluationFormQuestionInstructions)
@@ -28003,6 +28108,8 @@ func init() {
 	EvaluationFormQuestion_Weight = EvaluationFormQuestion.AddMember("Weight", _EvaluationFormItemWeight)
 
 	EvaluationFormQuestion_ScoringConfiguration = EvaluationFormQuestion.AddMember("ScoringConfiguration", EvaluationFormQuestionScoringConfiguration)
+
+	EvaluationFormQuestion_MetricConfiguration = EvaluationFormQuestion.AddMember("MetricConfiguration", EvaluationFormMetricConfiguration)
 
 	EvaluationFormItem_Section = EvaluationFormItem.AddMember("Section", EvaluationFormSection)
 
@@ -28112,6 +28219,28 @@ func init() {
 
 	EvaluationForm_LastValidationTime = EvaluationForm.AddMember("LastValidationTime", _Timestamp)
 
+	EvaluationForm_AIVersion = EvaluationForm.AddMember("AIVersion", _EvaluationFormAIVersion)
+
+	EvaluationFormAIVersionStatus_LATEST = EvaluationFormAIVersionStatus.AddMember("LATEST", smithyprelude.Unit)
+
+	EvaluationFormAIVersionStatus_PREVIEW = EvaluationFormAIVersionStatus.AddMember("PREVIEW", smithyprelude.Unit)
+
+	EvaluationFormAIVersionStatus_ACTIVE = EvaluationFormAIVersionStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	EvaluationFormAIVersionStatus_DEPRECATED = EvaluationFormAIVersionStatus.AddMember("DEPRECATED", smithyprelude.Unit)
+
+	EvaluationFormAIVersionLifecycle_Status = EvaluationFormAIVersionLifecycle.AddMember("Status", EvaluationFormAIVersionStatus)
+
+	EvaluationFormAIVersionLifecycle_StartOfLifeTime = EvaluationFormAIVersionLifecycle.AddMember("StartOfLifeTime", _Timestamp)
+
+	EvaluationFormAIVersionLifecycle_EndOfLifeTime = EvaluationFormAIVersionLifecycle.AddMember("EndOfLifeTime", _Timestamp)
+
+	EvaluationFormAIVersionSummary_AIVersionName = EvaluationFormAIVersionSummary.AddMember("AIVersionName", _EvaluationFormAIVersion)
+
+	EvaluationFormAIVersionSummary_AIVersionLifecycle = EvaluationFormAIVersionSummary.AddMember("AIVersionLifecycle", EvaluationFormAIVersionLifecycle)
+
+	_EvaluationFormAIVersionSummaryList_member = _EvaluationFormAIVersionSummaryList.AddMember("member", EvaluationFormAIVersionSummary)
+
 	EvaluationFormContent_EvaluationFormVersion = EvaluationFormContent.AddMember("EvaluationFormVersion", _VersionNumber)
 
 	EvaluationFormContent_EvaluationFormId = EvaluationFormContent.AddMember("EvaluationFormId", _ResourceId)
@@ -28133,6 +28262,8 @@ func init() {
 	EvaluationFormContent_LanguageConfiguration = EvaluationFormContent.AddMember("LanguageConfiguration", EvaluationFormLanguageConfiguration)
 
 	EvaluationFormContent_ReviewConfiguration = EvaluationFormContent.AddMember("ReviewConfiguration", EvaluationReviewConfiguration)
+
+	EvaluationFormContent_AIVersion = EvaluationFormContent.AddMember("AIVersion", _EvaluationFormAIVersion)
 
 	EvaluationFormSearchCriteria_OrConditions = EvaluationFormSearchCriteria.AddMember("OrConditions", _EvaluationFormSearchConditionList)
 
@@ -28183,6 +28314,8 @@ func init() {
 	EvaluationFormSearchSummary_ContactInteractionType = EvaluationFormSearchSummary.AddMember("ContactInteractionType", ContactInteractionType)
 
 	EvaluationFormSearchSummary_Tags = EvaluationFormSearchSummary.AddMember("Tags", _TagMap)
+
+	EvaluationFormSearchSummary_AIVersion = EvaluationFormSearchSummary.AddMember("AIVersion", _EvaluationFormAIVersion)
 
 	_EvaluationFormSearchSummaryList_member = _EvaluationFormSearchSummaryList.AddMember("member", EvaluationFormSearchSummary)
 
@@ -32054,6 +32187,8 @@ func init() {
 
 	CreateEvaluationFormRequest_LanguageConfiguration = CreateEvaluationFormRequest.AddMember("LanguageConfiguration", EvaluationFormLanguageConfiguration)
 
+	CreateEvaluationFormRequest_AIVersion = CreateEvaluationFormRequest.AddMember("AIVersion", _EvaluationFormAIVersion)
+
 	CreateEvaluationFormResponse_EvaluationFormId = CreateEvaluationFormResponse.AddMember("EvaluationFormId", _ResourceId)
 
 	CreateEvaluationFormResponse_EvaluationFormArn = CreateEvaluationFormResponse.AddMember("EvaluationFormArn", _ARN)
@@ -33689,6 +33824,18 @@ func init() {
 	ListEntitySecurityProfilesResponse_SecurityProfiles = ListEntitySecurityProfilesResponse.AddMember("SecurityProfiles", _SecurityProfiles100)
 
 	ListEntitySecurityProfilesResponse_NextToken = ListEntitySecurityProfilesResponse.AddMember("NextToken", _NextToken2500)
+
+	ListEvaluationFormAIVersionsRequest_InstanceId = ListEvaluationFormAIVersionsRequest.AddMember("InstanceId", _InstanceId, &smithytraits.HTTPLabel{})
+
+	ListEvaluationFormAIVersionsRequest_ContactInteractionType = ListEvaluationFormAIVersionsRequest.AddMember("ContactInteractionType", ContactInteractionType, &smithytraits.HTTPQuery{Name: "contactInteractionType"})
+
+	ListEvaluationFormAIVersionsRequest_MaxResults = ListEvaluationFormAIVersionsRequest.AddMember("MaxResults", _MaxResult100, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListEvaluationFormAIVersionsRequest_NextToken = ListEvaluationFormAIVersionsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListEvaluationFormAIVersionsResponse_AIVersionSummaries = ListEvaluationFormAIVersionsResponse.AddMember("AIVersionSummaries", _EvaluationFormAIVersionSummaryList)
+
+	ListEvaluationFormAIVersionsResponse_NextToken = ListEvaluationFormAIVersionsResponse.AddMember("NextToken", _NextToken)
 
 	ListEvaluationFormsRequest_InstanceId = ListEvaluationFormsRequest.AddMember("InstanceId", _InstanceId, &smithytraits.HTTPLabel{})
 
@@ -35533,6 +35680,8 @@ func init() {
 	UpdateEvaluationFormRequest_TargetConfiguration = UpdateEvaluationFormRequest.AddMember("TargetConfiguration", EvaluationFormTargetConfiguration)
 
 	UpdateEvaluationFormRequest_LanguageConfiguration = UpdateEvaluationFormRequest.AddMember("LanguageConfiguration", EvaluationFormLanguageConfiguration)
+
+	UpdateEvaluationFormRequest_AIVersion = UpdateEvaluationFormRequest.AddMember("AIVersion", _EvaluationFormAIVersion)
 
 	UpdateEvaluationFormResponse_EvaluationFormId = UpdateEvaluationFormResponse.AddMember("EvaluationFormId", _ResourceId)
 

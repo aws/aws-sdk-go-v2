@@ -30,6 +30,26 @@ func (m *validateOpCancelJob) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelJobs struct {
+}
+
+func (*validateOpCancelJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateComputeEnvironment struct {
 }
 
@@ -570,6 +590,26 @@ func (m *validateOpTerminateJob) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpTerminateJobs struct {
+}
+
+func (*validateOpTerminateJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTerminateJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TerminateJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTerminateJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTerminateServiceJob struct {
 }
 
@@ -585,6 +625,26 @@ func (m *validateOpTerminateServiceJob) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpTerminateServiceJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpTerminateServiceJobs struct {
+}
+
+func (*validateOpTerminateServiceJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTerminateServiceJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TerminateServiceJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTerminateServiceJobsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -754,6 +814,10 @@ func addOpCancelJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelJob{}, middleware.After)
 }
 
+func addOpCancelJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelJobs{}, middleware.After)
+}
+
 func addOpCreateComputeEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateComputeEnvironment{}, middleware.After)
 }
@@ -862,8 +926,16 @@ func addOpTerminateJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTerminateJob{}, middleware.After)
 }
 
+func addOpTerminateJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTerminateJobs{}, middleware.After)
+}
+
 func addOpTerminateServiceJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTerminateServiceJob{}, middleware.After)
+}
+
+func addOpTerminateServiceJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTerminateServiceJobs{}, middleware.After)
 }
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -2464,6 +2536,24 @@ func validateOpCancelJobInput(v *CancelJobInput) error {
 	}
 }
 
+func validateOpCancelJobsInput(v *CancelJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelJobsInput"}
+	if v.Jobs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Jobs"))
+	}
+	if v.Reason == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Reason"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateComputeEnvironmentInput(v *CreateComputeEnvironmentInput) error {
 	if v == nil {
 		return nil
@@ -3019,6 +3109,24 @@ func validateOpTerminateJobInput(v *TerminateJobInput) error {
 	}
 }
 
+func validateOpTerminateJobsInput(v *TerminateJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TerminateJobsInput"}
+	if v.Jobs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Jobs"))
+	}
+	if v.Reason == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Reason"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTerminateServiceJobInput(v *TerminateServiceJobInput) error {
 	if v == nil {
 		return nil
@@ -3026,6 +3134,24 @@ func validateOpTerminateServiceJobInput(v *TerminateServiceJobInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TerminateServiceJobInput"}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if v.Reason == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Reason"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTerminateServiceJobsInput(v *TerminateServiceJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TerminateServiceJobsInput"}
+	if v.Jobs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Jobs"))
 	}
 	if v.Reason == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Reason"))

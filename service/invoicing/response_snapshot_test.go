@@ -1142,6 +1142,105 @@ func TestCheckResponseSnapshot_ListProcurementPortalPreferences(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListProcurementPortalSuppliers(t *testing.T) {
+	want := &ListProcurementPortalSuppliersOutput{
+		ProcurementPortalSuppliers: []types.ProcurementPortalSupplier{
+			{
+				SupplierIdentifier: ptr.String("__SupplierIdentifier__"),
+				SellerOfRecord:     ptr.String("__SellerOfRecord__"),
+				CountryCode:        ptr.String("__CountryCode__"),
+				Environment:        types.ProcurementPortalEnv("PROD"),
+			},
+			{
+				SupplierIdentifier: ptr.String("__SupplierIdentifier__"),
+				SellerOfRecord:     ptr.String("__SellerOfRecord__"),
+				CountryCode:        ptr.String("__CountryCode__"),
+				Environment:        types.ProcurementPortalEnv("PROD"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListProcurementPortalSuppliers.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListProcurementPortalSuppliers(context.Background(), &ListProcurementPortalSuppliersInput{
+		PortalIdentifier: ptr.String("__PortalIdentifier__"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListProcurementPortalSuppliers.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListProcurementPortals(t *testing.T) {
+	want := &ListProcurementPortalsOutput{
+		ProcurementPortals: []types.ProcurementPortal{
+			{
+				PortalIdentifier:  ptr.String("__PortalIdentifier__"),
+				PortalName:        types.ProcurementPortalName("SAP_BUSINESS_NETWORK"),
+				PortalDisplayName: ptr.String("__PortalDisplayName__"),
+				DefaultFeatureConfigurations: &types.FeatureConfigurations{
+					InvoiceConfiguration: &types.InvoiceConfiguration{
+						DocumentTypes: []types.EinvoiceDeliveryDocumentType{
+							types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+							types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+						},
+						AttachmentTypes: []types.EinvoiceDeliveryAttachmentType{
+							types.EinvoiceDeliveryAttachmentType("INVOICE_PDF"),
+							types.EinvoiceDeliveryAttachmentType("INVOICE_PDF"),
+						},
+					},
+				},
+			},
+			{
+				PortalIdentifier:  ptr.String("__PortalIdentifier__"),
+				PortalName:        types.ProcurementPortalName("SAP_BUSINESS_NETWORK"),
+				PortalDisplayName: ptr.String("__PortalDisplayName__"),
+				DefaultFeatureConfigurations: &types.FeatureConfigurations{
+					InvoiceConfiguration: &types.InvoiceConfiguration{
+						DocumentTypes: []types.EinvoiceDeliveryDocumentType{
+							types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+							types.EinvoiceDeliveryDocumentType("AWS_CLOUD_INVOICE"),
+						},
+						AttachmentTypes: []types.EinvoiceDeliveryAttachmentType{
+							types.EinvoiceDeliveryAttachmentType("INVOICE_PDF"),
+							types.EinvoiceDeliveryAttachmentType("INVOICE_PDF"),
+						},
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListProcurementPortals.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListProcurementPortals(context.Background(), &ListProcurementPortalsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListProcurementPortals.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 	want := &ListTagsForResourceOutput{
 		ResourceTags: []types.ResourceTag{

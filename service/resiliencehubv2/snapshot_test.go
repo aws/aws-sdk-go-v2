@@ -614,6 +614,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListTestRunDependencies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTestRunDependencies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTestRunDependencies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTestRunEvents(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTestRunEvents(context.Background(), nil, func(o *Options) {
@@ -631,6 +643,18 @@ func TestCheckSnapshot_ListTestRuns(t *testing.T) {
 	_, err := svc.ListTestRuns(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTestRuns")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListTestRunSourceEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTestRunSourceEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTestRunSourceEvents")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1429,6 +1453,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListTestRunDependencies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTestRunDependencies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTestRunDependencies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTestRunEvents(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTestRunEvents(context.Background(), nil, func(o *Options) {
@@ -1446,6 +1482,18 @@ func TestUpdateSnapshot_ListTestRuns(t *testing.T) {
 	_, err := svc.ListTestRuns(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTestRuns")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListTestRunSourceEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTestRunSourceEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTestRunSourceEvents")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

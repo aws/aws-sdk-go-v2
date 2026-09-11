@@ -3279,6 +3279,13 @@ func awsRestjson1_serializeOpDocumentPutFunctionInput(v *PutFunctionInput, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.AwsServiceRequestConfiguration != nil {
+		ok := object.Key("AwsServiceRequestConfiguration")
+		if err := awsRestjson1_serializeDocumentAwsServiceRequestConfiguration(v.AwsServiceRequestConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ConcurrentExecutorConfiguration != nil {
 		ok := object.Key("ConcurrentExecutorConfiguration")
 		if err := awsRestjson1_serializeDocumentConcurrentExecutorConfiguration(v.ConcurrentExecutorConfiguration, ok); err != nil {
@@ -4878,6 +4885,62 @@ func awsRestjson1_serializeDocumentAvailSuppression(v *types.AvailSuppression, v
 	if v.Value != nil {
 		ok := object.Key("Value")
 		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsServiceRequestConfiguration(v *types.AwsServiceRequestConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Body != nil {
+		ok := object.Key("Body")
+		ok.String(*v.Body)
+	}
+
+	if v.Headers != nil {
+		ok := object.Key("Headers")
+		if err := awsRestjson1_serializeDocument__mapOf__string(v.Headers, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.MethodType) > 0 {
+		ok := object.Key("MethodType")
+		ok.String(string(v.MethodType))
+	}
+
+	if v.Output != nil {
+		ok := object.Key("Output")
+		if err := awsRestjson1_serializeDocument__mapOf__string(v.Output, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RequestTimeoutMilliseconds != nil {
+		ok := object.Key("RequestTimeoutMilliseconds")
+		ok.Integer(*v.RequestTimeoutMilliseconds)
+	}
+
+	if len(v.Runtime) > 0 {
+		ok := object.Key("Runtime")
+		ok.String(string(v.Runtime))
+	}
+
+	if v.TargetRegion != nil {
+		ok := object.Key("TargetRegion")
+		ok.String(*v.TargetRegion)
+	}
+
+	if v.TargetService != nil {
+		ok := object.Key("TargetService")
+		ok.String(*v.TargetService)
+	}
+
+	if v.Url != nil {
+		ok := object.Key("Url")
+		ok.String(*v.Url)
 	}
 
 	return nil

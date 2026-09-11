@@ -200,6 +200,34 @@ func TestCheckResponseSnapshot_AssociateTrialComponent(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_AttachClusterNodeNetworkInterface(t *testing.T) {
+	want := &AttachClusterNodeNetworkInterfaceOutput{
+		ClusterArn:         ptr.String("__ClusterArn__"),
+		NodeId:             ptr.String("__NodeId__"),
+		NetworkInterfaceId: ptr.String("__NetworkInterfaceId__"),
+		AttachmentId:       ptr.String("__AttachmentId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("AttachClusterNodeNetworkInterface.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AttachClusterNodeNetworkInterface(context.Background(), &AttachClusterNodeNetworkInterfaceInput{
+		ClusterName:        ptr.String("__ClusterName__"),
+		NodeId:             ptr.String("__NodeId__"),
+		NetworkInterfaceId: ptr.String("__NetworkInterfaceId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AttachClusterNodeNetworkInterface.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_AttachClusterNodeVolume(t *testing.T) {
 	want := &AttachClusterNodeVolumeOutput{
 		ClusterArn: ptr.String("__ClusterArn__"),

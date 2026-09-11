@@ -701,6 +701,7 @@ func TestCheckResponseSnapshot_CreateExpressGatewayService(t *testing.T) {
 					TaskDefinitionArn:  ptr.String("__TaskDefinitionArn__"),
 					Cpu:                ptr.String("__Cpu__"),
 					Memory:             ptr.String("__Memory__"),
+					CpuArchitecture:    types.ExpressCpuArchitecture("X86_64"),
 					NetworkConfiguration: &types.ExpressGatewayServiceNetworkConfiguration{
 						SecurityGroups: []string{
 							"__Member__",
@@ -772,6 +773,7 @@ func TestCheckResponseSnapshot_CreateExpressGatewayService(t *testing.T) {
 					TaskDefinitionArn:  ptr.String("__TaskDefinitionArn__"),
 					Cpu:                ptr.String("__Cpu__"),
 					Memory:             ptr.String("__Memory__"),
+					CpuArchitecture:    types.ExpressCpuArchitecture("X86_64"),
 					NetworkConfiguration: &types.ExpressGatewayServiceNetworkConfiguration{
 						SecurityGroups: []string{
 							"__Member__",
@@ -911,8 +913,9 @@ func TestCheckResponseSnapshot_CreateExpressGatewayService(t *testing.T) {
 				"__Member__",
 			},
 		},
-		Cpu:    ptr.String("__Cpu__"),
-		Memory: ptr.String("__Memory__"),
+		Cpu:             ptr.String("__Cpu__"),
+		Memory:          ptr.String("__Memory__"),
+		CpuArchitecture: types.ExpressCpuArchitecture("X86_64"),
 		ScalingTarget: &types.ExpressGatewayScalingTarget{
 			MinTaskCount:           ptr.Int32(1),
 			MaxTaskCount:           ptr.Int32(1),
@@ -2984,6 +2987,7 @@ func TestCheckResponseSnapshot_DeleteExpressGatewayService(t *testing.T) {
 					TaskDefinitionArn:  ptr.String("__TaskDefinitionArn__"),
 					Cpu:                ptr.String("__Cpu__"),
 					Memory:             ptr.String("__Memory__"),
+					CpuArchitecture:    types.ExpressCpuArchitecture("X86_64"),
 					NetworkConfiguration: &types.ExpressGatewayServiceNetworkConfiguration{
 						SecurityGroups: []string{
 							"__Member__",
@@ -3055,6 +3059,7 @@ func TestCheckResponseSnapshot_DeleteExpressGatewayService(t *testing.T) {
 					TaskDefinitionArn:  ptr.String("__TaskDefinitionArn__"),
 					Cpu:                ptr.String("__Cpu__"),
 					Memory:             ptr.String("__Memory__"),
+					CpuArchitecture:    types.ExpressCpuArchitecture("X86_64"),
 					NetworkConfiguration: &types.ExpressGatewayServiceNetworkConfiguration{
 						SecurityGroups: []string{
 							"__Member__",
@@ -8378,6 +8383,7 @@ func TestCheckResponseSnapshot_DescribeExpressGatewayService(t *testing.T) {
 					TaskDefinitionArn:  ptr.String("__TaskDefinitionArn__"),
 					Cpu:                ptr.String("__Cpu__"),
 					Memory:             ptr.String("__Memory__"),
+					CpuArchitecture:    types.ExpressCpuArchitecture("X86_64"),
 					NetworkConfiguration: &types.ExpressGatewayServiceNetworkConfiguration{
 						SecurityGroups: []string{
 							"__Member__",
@@ -8449,6 +8455,7 @@ func TestCheckResponseSnapshot_DescribeExpressGatewayService(t *testing.T) {
 					TaskDefinitionArn:  ptr.String("__TaskDefinitionArn__"),
 					Cpu:                ptr.String("__Cpu__"),
 					Memory:             ptr.String("__Memory__"),
+					CpuArchitecture:    types.ExpressCpuArchitecture("X86_64"),
 					NetworkConfiguration: &types.ExpressGatewayServiceNetworkConfiguration{
 						SecurityGroups: []string{
 							"__Member__",
@@ -20412,6 +20419,7 @@ func TestCheckResponseSnapshot_UpdateExpressGatewayService(t *testing.T) {
 				TaskDefinitionArn:  ptr.String("__TaskDefinitionArn__"),
 				Cpu:                ptr.String("__Cpu__"),
 				Memory:             ptr.String("__Memory__"),
+				CpuArchitecture:    types.ExpressCpuArchitecture("X86_64"),
 				NetworkConfiguration: &types.ExpressGatewayServiceNetworkConfiguration{
 					SecurityGroups: []string{
 						"__Member__",
@@ -20538,8 +20546,9 @@ func TestCheckResponseSnapshot_UpdateExpressGatewayService(t *testing.T) {
 				"__Member__",
 			},
 		},
-		Cpu:    ptr.String("__Cpu__"),
-		Memory: ptr.String("__Memory__"),
+		Cpu:             ptr.String("__Cpu__"),
+		Memory:          ptr.String("__Memory__"),
+		CpuArchitecture: types.ExpressCpuArchitecture("X86_64"),
 		ScalingTarget: &types.ExpressGatewayScalingTarget{
 			MinTaskCount:           ptr.Int32(1),
 			MaxTaskCount:           ptr.Int32(1),
@@ -23649,8 +23658,9 @@ func TestCheckResponseSnapshot_Error_PlatformTaskDefinitionIncompatibilityExcept
 				"__Member__",
 			},
 		},
-		Cpu:    ptr.String("__Cpu__"),
-		Memory: ptr.String("__Memory__"),
+		Cpu:             ptr.String("__Cpu__"),
+		Memory:          ptr.String("__Memory__"),
+		CpuArchitecture: types.ExpressCpuArchitecture("X86_64"),
 		ScalingTarget: &types.ExpressGatewayScalingTarget{
 			MinTaskCount:           ptr.Int32(1),
 			MaxTaskCount:           ptr.Int32(1),

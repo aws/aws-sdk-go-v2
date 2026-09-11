@@ -98,6 +98,18 @@ func TestCheckSnapshot_AssociateTrialComponent(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AttachClusterNodeNetworkInterface(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AttachClusterNodeNetworkInterface(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AttachClusterNodeNetworkInterface")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AttachClusterNodeVolume(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AttachClusterNodeVolume(context.Background(), nil, func(o *Options) {
@@ -4926,6 +4938,18 @@ func TestUpdateSnapshot_AssociateTrialComponent(t *testing.T) {
 	_, err := svc.AssociateTrialComponent(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateTrialComponent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AttachClusterNodeNetworkInterface(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AttachClusterNodeNetworkInterface(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AttachClusterNodeNetworkInterface")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

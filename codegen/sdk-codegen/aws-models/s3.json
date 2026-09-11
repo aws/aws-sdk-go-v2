@@ -29402,14 +29402,14 @@
                 "ObjectLockEventHoldDurationDays": {
                     "target": "com.amazonaws.s3#ObjectLockEventHoldDurationDays",
                     "traits": {
-                        "smithy.api#documentation": "<p>The event hold duration in days to apply to the object copy.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The event hold duration in days to apply to the object copy. You cannot specify a duration\n      in both days and years.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
                         "smithy.api#httpHeader": "x-amz-object-lock-event-hold-duration-days"
                     }
                 },
                 "ObjectLockEventHoldDurationYears": {
                     "target": "com.amazonaws.s3#ObjectLockEventHoldDurationYears",
                     "traits": {
-                        "smithy.api#documentation": "<p>The event hold duration in years to apply to the object copy.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The event hold duration in years to apply to the object copy. You cannot specify a\n      duration in both days and years.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
                         "smithy.api#httpHeader": "x-amz-object-lock-event-hold-duration-years"
                     }
                 },
@@ -30337,14 +30337,14 @@
                 "ObjectLockEventHoldDurationDays": {
                     "target": "com.amazonaws.s3#ObjectLockEventHoldDurationDays",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the event hold duration in days to apply to the uploaded object.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>Specifies the event hold duration in days to apply to the uploaded object. You cannot\n      specify a duration in both days and years.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
                         "smithy.api#httpHeader": "x-amz-object-lock-event-hold-duration-days"
                     }
                 },
                 "ObjectLockEventHoldDurationYears": {
                     "target": "com.amazonaws.s3#ObjectLockEventHoldDurationYears",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the event hold duration in years to apply to the uploaded object.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>Specifies the event hold duration in years to apply to the uploaded object. You cannot\n      specify a duration in both days and years.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
                         "smithy.api#httpHeader": "x-amz-object-lock-event-hold-duration-years"
                     }
                 },
@@ -41157,7 +41157,7 @@
                 "DefaultRetention": {
                     "target": "com.amazonaws.s3#DefaultRetention",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default Object Lock retention mode and period that you want to apply to new objects placed in\n      the specified bucket. Bucket settings require both a mode and a period. The period can be either\n        <code>Days</code> or <code>Years</code> but you must select one. You cannot specify <code>Days</code>\n      and <code>Years</code> at the same time.</p>"
+                        "smithy.api#documentation": "<p>The default Object Lock retention settings for new objects in this bucket. You can\n      specify:</p>\n         <ul>\n            <li>\n               <p>A default retention period, by using <code>Days</code> or <code>Years</code>.</p>\n            </li>\n            <li>\n               <p>A default event hold duration, by using <code>DefaultEventHold</code>. This setting also\n          uses days or years.</p>\n            </li>\n         </ul>\n         <p>You can set one or both. You cannot use days and years in the same setting.</p>"
                     }
                 }
             },
@@ -44905,14 +44905,14 @@
                 "ObjectLockEventHoldDurationDays": {
                     "target": "com.amazonaws.s3#ObjectLockEventHoldDurationDays",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the event hold duration in days to apply to this object.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>Specifies the event hold duration in days to apply to this object. You cannot specify a\n      duration in both days and years.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
                         "smithy.api#httpHeader": "x-amz-object-lock-event-hold-duration-days"
                     }
                 },
                 "ObjectLockEventHoldDurationYears": {
                     "target": "com.amazonaws.s3#ObjectLockEventHoldDurationYears",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the event hold duration in years to apply to this object.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>Specifies the event hold duration in years to apply to this object. You cannot specify a\n      duration in both days and years.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
                         "smithy.api#httpHeader": "x-amz-object-lock-event-hold-duration-years"
                     }
                 },

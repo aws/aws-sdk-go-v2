@@ -1729,6 +1729,36 @@ func TestCheckRequestSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListTestRunDependencies(t *testing.T) {
+	input := &ListTestRunDependenciesInput{
+		TestRunId:  ptr.String("__TestRunId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTestRunDependencies(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTestRunDependencies"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListTestRunEvents(t *testing.T) {
 	input := &ListTestRunEventsInput{
 		TestRunId:  ptr.String("__TestRunId__"),
@@ -1787,6 +1817,37 @@ func TestCheckRequestSnapshot_ListTestRuns(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTestRuns"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListTestRunSourceEvents(t *testing.T) {
+	input := &ListTestRunSourceEventsInput{
+		TestRunId:  ptr.String("__TestRunId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		SourceArn:  ptr.String("__SourceArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTestRunSourceEvents(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTestRunSourceEvents"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3998,6 +4059,36 @@ func TestUpdateRequestSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListTestRunDependencies(t *testing.T) {
+	input := &ListTestRunDependenciesInput{
+		TestRunId:  ptr.String("__TestRunId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTestRunDependencies(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTestRunDependencies"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListTestRunEvents(t *testing.T) {
 	input := &ListTestRunEventsInput{
 		TestRunId:  ptr.String("__TestRunId__"),
@@ -4056,6 +4147,37 @@ func TestUpdateRequestSnapshot_ListTestRuns(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTestRuns"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListTestRunSourceEvents(t *testing.T) {
+	input := &ListTestRunSourceEventsInput{
+		TestRunId:  ptr.String("__TestRunId__"),
+		ServiceArn: ptr.String("__ServiceArn__"),
+		SourceArn:  ptr.String("__SourceArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTestRunSourceEvents(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTestRunSourceEvents"); err != nil {
 		t.Fatal(err)
 	}
 }

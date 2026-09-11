@@ -37,21 +37,37 @@ type PutFunctionInput struct {
 	// This member is required.
 	FunctionId *string
 
-	// The type of the function. The function type determines what the function can do
-	// at runtime. Valid values: CUSTOM_OUTPUT evaluates expressions and produces
-	// output bindings with no external calls. HTTP_REQUEST makes an HTTP call to an
-	// external service and evaluates output expressions that can reference the
-	// response. VAST_REQUEST calls a VAST endpoint, parses the response as VAST, and
-	// makes the parsed ads available to output expressions. SEQUENTIAL_EXECUTOR runs
-	// a sequence of child functions in order, passing data between steps through
-	// temporary data. CONCURRENT_EXECUTOR runs a set of child functions in parallel,
-	// up to a maximum concurrency, and combines their output when all functions
-	// complete. For more information, see [Function types and composition]in the MediaTailor User Guide.
+	// The type of the function, which determines what the function can do at runtime.
+	// Valid values:
+	//
+	//   - CUSTOM_OUTPUT – Evaluates expressions and produces output bindings with no
+	//   external calls.
+	//
+	//   - HTTP_REQUEST – Makes an HTTP call to an external service and evaluates
+	//   output expressions that can reference the response.
+	//
+	//   - AWS_SERVICE_REQUEST – Makes an authenticated request to a supported AWS
+	//   service API and evaluates output expressions that can reference the response.
+	//
+	//   - VAST_REQUEST – Calls a VAST endpoint, parses the response as VAST, and makes
+	//   the parsed ads available to output expressions.
+	//
+	//   - SEQUENTIAL_EXECUTOR – Runs a sequence of child functions in order, passing
+	//   data between steps through temporary data.
+	//
+	//   - CONCURRENT_EXECUTOR – Runs a set of child functions in parallel, up to a
+	//   maximum concurrency, and combines their output when all functions complete.
+	//
+	// For more information, see [Function types and composition] in the MediaTailor User Guide.
 	//
 	// [Function types and composition]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-types.html
 	//
 	// This member is required.
 	FunctionType types.FunctionType
+
+	// The configuration for an AWS_SERVICE_REQUEST function. You must specify this
+	// parameter when FunctionType is AWS_SERVICE_REQUEST .
+	AwsServiceRequestConfiguration *types.AwsServiceRequestConfiguration
 
 	// The configuration for a CONCURRENT_EXECUTOR function. Specifies the list of
 	// child functions to run in parallel, the maximum concurrency, an optional output
@@ -105,6 +121,10 @@ type PutFunctionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the function.
 	Arn *string
+
+	// The configuration for an AWS_SERVICE_REQUEST function. Specifies the target
+	// service, target Region, and request parameters.
+	AwsServiceRequestConfiguration *types.AwsServiceRequestConfiguration
 
 	// The configuration for a CONCURRENT_EXECUTOR function.
 	ConcurrentExecutorConfiguration *types.ConcurrentExecutorConfiguration

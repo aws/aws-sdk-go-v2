@@ -1,3 +1,12 @@
+# v1.277.0 (2026-09-10)
+
+* **Feature**: This release adds the ability for customers to attach customer owned Elastic Network Interfaces (ENIs) to HyperPod cluster nodes.
+
+# v1.276.0 (2026-09-09)
+
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.275.0 (2026-09-08)
 
 * **Feature**: Add support for InstancePreferences list for multiple instance type input support on SageMaker Training and Processing

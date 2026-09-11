@@ -2990,6 +2990,21 @@ func TestCheckResponseSnapshot_GetFunction(t *testing.T) {
 				"key0": "__Value__",
 			},
 		},
+		AwsServiceRequestConfiguration: &types.AwsServiceRequestConfiguration{
+			Runtime: types.RuntimeType("JSONATA"),
+			Output: map[string]string{
+				"key0": "__Value__",
+			},
+			MethodType:                 types.MethodType("GET"),
+			RequestTimeoutMilliseconds: ptr.Int32(1),
+			Url:                        ptr.String("__Url__"),
+			Body:                       ptr.String("__Body__"),
+			Headers: map[string]string{
+				"key0": "__Value__",
+			},
+			TargetService: ptr.String("__TargetService__"),
+			TargetRegion:  ptr.String("__TargetRegion__"),
+		},
 		CustomOutputConfiguration: &types.CustomOutputConfiguration{
 			Runtime: types.RuntimeType("JSONATA"),
 			Output: map[string]string{
@@ -3532,6 +3547,21 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 						"key0": "__Value__",
 					},
 				},
+				AwsServiceRequestConfiguration: &types.AwsServiceRequestConfiguration{
+					Runtime: types.RuntimeType("JSONATA"),
+					Output: map[string]string{
+						"key0": "__Value__",
+					},
+					MethodType:                 types.MethodType("GET"),
+					RequestTimeoutMilliseconds: ptr.Int32(1),
+					Url:                        ptr.String("__Url__"),
+					Body:                       ptr.String("__Body__"),
+					Headers: map[string]string{
+						"key0": "__Value__",
+					},
+					TargetService: ptr.String("__TargetService__"),
+					TargetRegion:  ptr.String("__TargetRegion__"),
+				},
 				CustomOutputConfiguration: &types.CustomOutputConfiguration{
 					Runtime: types.RuntimeType("JSONATA"),
 					Output: map[string]string{
@@ -3611,6 +3641,21 @@ func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
 					Headers: map[string]string{
 						"key0": "__Value__",
 					},
+				},
+				AwsServiceRequestConfiguration: &types.AwsServiceRequestConfiguration{
+					Runtime: types.RuntimeType("JSONATA"),
+					Output: map[string]string{
+						"key0": "__Value__",
+					},
+					MethodType:                 types.MethodType("GET"),
+					RequestTimeoutMilliseconds: ptr.Int32(1),
+					Url:                        ptr.String("__Url__"),
+					Body:                       ptr.String("__Body__"),
+					Headers: map[string]string{
+						"key0": "__Value__",
+					},
+					TargetService: ptr.String("__TargetService__"),
+					TargetRegion:  ptr.String("__TargetRegion__"),
 				},
 				CustomOutputConfiguration: &types.CustomOutputConfiguration{
 					Runtime: types.RuntimeType("JSONATA"),
@@ -4436,6 +4481,21 @@ func TestCheckResponseSnapshot_PutFunction(t *testing.T) {
 				"key0": "__Value__",
 			},
 		},
+		AwsServiceRequestConfiguration: &types.AwsServiceRequestConfiguration{
+			Runtime: types.RuntimeType("JSONATA"),
+			Output: map[string]string{
+				"key0": "__Value__",
+			},
+			MethodType:                 types.MethodType("GET"),
+			RequestTimeoutMilliseconds: ptr.Int32(1),
+			Url:                        ptr.String("__Url__"),
+			Body:                       ptr.String("__Body__"),
+			Headers: map[string]string{
+				"key0": "__Value__",
+			},
+			TargetService: ptr.String("__TargetService__"),
+			TargetRegion:  ptr.String("__TargetRegion__"),
+		},
 		CustomOutputConfiguration: &types.CustomOutputConfiguration{
 			Runtime: types.RuntimeType("JSONATA"),
 			Output: map[string]string{
@@ -4523,6 +4583,21 @@ func TestCheckResponseSnapshot_PutFunction(t *testing.T) {
 			Headers: map[string]string{
 				"key0": "__Value__",
 			},
+		},
+		AwsServiceRequestConfiguration: &types.AwsServiceRequestConfiguration{
+			Runtime: types.RuntimeType("JSONATA"),
+			Output: map[string]string{
+				"key0": "__Value__",
+			},
+			MethodType:                 types.MethodType("GET"),
+			RequestTimeoutMilliseconds: ptr.Int32(1),
+			Url:                        ptr.String("__Url__"),
+			Body:                       ptr.String("__Body__"),
+			Headers: map[string]string{
+				"key0": "__Value__",
+			},
+			TargetService: ptr.String("__TargetService__"),
+			TargetRegion:  ptr.String("__TargetRegion__"),
 		},
 		CustomOutputConfiguration: &types.CustomOutputConfiguration{
 			Runtime: types.RuntimeType("JSONATA"),

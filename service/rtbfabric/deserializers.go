@@ -1719,6 +1719,15 @@ func awsRestjson1_deserializeOpDocumentCreateResponderGatewayOutput(v **CreateRe
 
 	for key, value := range shape {
 		switch key {
+		case "clientRoutingPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientRoutingPolicy to be of type string, got %T instead", value)
+				}
+				sv.ClientRoutingPolicy = types.ClientRoutingPolicy(jtv)
+			}
+
 		case "externalInboundEndpoint":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4799,6 +4808,15 @@ func awsRestjson1_deserializeOpDocumentGetResponderGatewayOutput(v **GetResponde
 				sv.ActiveLinksCount = ptr.Int32(int32(i64))
 			}
 
+		case "clientRoutingPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientRoutingPolicy to be of type string, got %T instead", value)
+				}
+				sv.ClientRoutingPolicy = types.ClientRoutingPolicy(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7403,6 +7421,15 @@ func awsRestjson1_deserializeOpDocumentUpdateResponderGatewayOutput(v **UpdateRe
 
 	for key, value := range shape {
 		switch key {
+		case "clientRoutingPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientRoutingPolicy to be of type string, got %T instead", value)
+				}
+				sv.ClientRoutingPolicy = types.ClientRoutingPolicy(jtv)
+			}
+
 		case "gatewayId":
 			if value != nil {
 				jtv, ok := value.(string)

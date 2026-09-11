@@ -218,6 +218,7 @@
         "api_op_ListDataTables.go",
         "api_op_ListDefaultVocabularies.go",
         "api_op_ListEntitySecurityProfiles.go",
+        "api_op_ListEvaluationFormAIVersions.go",
         "api_op_ListEvaluationFormVersions.go",
         "api_op_ListEvaluationForms.go",
         "api_op_ListExtractionDefinitions.go",

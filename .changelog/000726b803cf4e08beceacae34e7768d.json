@@ -1,8 +1,0 @@
-{
-    "id": "000726b8-03cf-4e08-bece-acae34e7768d",
-    "type": "bugfix",
-    "description": "Fix potential deadlock in GetObject calls.",
-    "modules": [
-        "feature/s3/transfermanager"
-    ]
-}

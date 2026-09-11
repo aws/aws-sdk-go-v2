@@ -23,6 +23,11 @@ var AssociateTrialComponent = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AssociateTrialComponent",
 }, smithy.ShapeTypeOperation, 0)
 
+var AttachClusterNodeNetworkInterface = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "AttachClusterNodeNetworkInterface",
+}, smithy.ShapeTypeOperation, 0)
+
 var AttachClusterNodeVolume = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "AttachClusterNodeVolume",
@@ -6843,11 +6848,21 @@ var ClusterNetworkInterface = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ClusterNetworkInterface_InterfaceType *smithy.Schema
 
+var _ClusterNetworkInterfaceAttachmentId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterNetworkInterfaceAttachmentId",
+}, smithy.ShapeTypeString, 0)
+
 var ClusterNetworkInterfaceDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ClusterNetworkInterfaceDetails",
 }, smithy.ShapeTypeStructure, 1)
 var ClusterNetworkInterfaceDetails_InterfaceType *smithy.Schema
+
+var _ClusterNetworkInterfaceId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterNetworkInterfaceId",
+}, smithy.ShapeTypeString, 0)
 
 var ClusterNodeDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -24646,6 +24661,28 @@ var AssociateTrialComponentResponse = smithy.NewSchema(smithy.ShapeID{
 var AssociateTrialComponentResponse_TrialComponentArn *smithy.Schema
 
 var AssociateTrialComponentResponse_TrialArn *smithy.Schema
+
+var AttachClusterNodeNetworkInterfaceRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "AttachClusterNodeNetworkInterfaceRequest",
+}, smithy.ShapeTypeStructure, 3)
+var AttachClusterNodeNetworkInterfaceRequest_ClusterName *smithy.Schema
+
+var AttachClusterNodeNetworkInterfaceRequest_NodeId *smithy.Schema
+
+var AttachClusterNodeNetworkInterfaceRequest_NetworkInterfaceId *smithy.Schema
+
+var AttachClusterNodeNetworkInterfaceResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "AttachClusterNodeNetworkInterfaceResponse",
+}, smithy.ShapeTypeStructure, 4)
+var AttachClusterNodeNetworkInterfaceResponse_ClusterArn *smithy.Schema
+
+var AttachClusterNodeNetworkInterfaceResponse_NodeId *smithy.Schema
+
+var AttachClusterNodeNetworkInterfaceResponse_NetworkInterfaceId *smithy.Schema
+
+var AttachClusterNodeNetworkInterfaceResponse_AttachmentId *smithy.Schema
 
 var AttachClusterNodeVolumeRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -46768,6 +46805,20 @@ func init() {
 	AssociateTrialComponentResponse_TrialComponentArn = AssociateTrialComponentResponse.AddMember("TrialComponentArn", _TrialComponentArn)
 
 	AssociateTrialComponentResponse_TrialArn = AssociateTrialComponentResponse.AddMember("TrialArn", _TrialArn)
+
+	AttachClusterNodeNetworkInterfaceRequest_ClusterName = AttachClusterNodeNetworkInterfaceRequest.AddMember("ClusterName", _ClusterNameOrArn)
+
+	AttachClusterNodeNetworkInterfaceRequest_NodeId = AttachClusterNodeNetworkInterfaceRequest.AddMember("NodeId", _ClusterNodeId)
+
+	AttachClusterNodeNetworkInterfaceRequest_NetworkInterfaceId = AttachClusterNodeNetworkInterfaceRequest.AddMember("NetworkInterfaceId", _ClusterNetworkInterfaceId)
+
+	AttachClusterNodeNetworkInterfaceResponse_ClusterArn = AttachClusterNodeNetworkInterfaceResponse.AddMember("ClusterArn", _ClusterArn)
+
+	AttachClusterNodeNetworkInterfaceResponse_NodeId = AttachClusterNodeNetworkInterfaceResponse.AddMember("NodeId", _ClusterNodeId)
+
+	AttachClusterNodeNetworkInterfaceResponse_NetworkInterfaceId = AttachClusterNodeNetworkInterfaceResponse.AddMember("NetworkInterfaceId", _ClusterNetworkInterfaceId)
+
+	AttachClusterNodeNetworkInterfaceResponse_AttachmentId = AttachClusterNodeNetworkInterfaceResponse.AddMember("AttachmentId", _ClusterNetworkInterfaceAttachmentId)
 
 	AttachClusterNodeVolumeRequest_ClusterArn = AttachClusterNodeVolumeRequest.AddMember("ClusterArn", _ClusterArn)
 

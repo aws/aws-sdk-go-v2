@@ -203,6 +203,27 @@ func (ListInvoiceSummariesResourceType) Values() []ListInvoiceSummariesResourceT
 	}
 }
 
+type ProcurementPortalEnv string
+
+// Enum values for ProcurementPortalEnv
+const (
+	// The production environment.
+	ProcurementPortalEnvProd ProcurementPortalEnv = "PROD"
+	// The sandbox or test environment.
+	ProcurementPortalEnvTest ProcurementPortalEnv = "TEST"
+)
+
+// Values returns all known values for ProcurementPortalEnv. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProcurementPortalEnv) Values() []ProcurementPortalEnv {
+	return []ProcurementPortalEnv{
+		"PROD",
+		"TEST",
+	}
+}
+
 type ProcurementPortalName string
 
 // Enum values for ProcurementPortalName

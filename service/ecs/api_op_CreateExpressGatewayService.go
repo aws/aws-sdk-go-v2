@@ -61,6 +61,25 @@ type CreateExpressGatewayServiceInput struct {
 	// Express service is 256 (.25 vCPU).
 	Cpu *string
 
+	// The CPU architecture that the tasks in the Express service run on. Amazon ECS
+	// applies this value to the task definition revision that it registers for the
+	// service. If you don't specify a value, the default is X86_64 .
+	//
+	// Valid values:
+	//
+	//   - X86_64 - The x86 64-bit architecture.
+	//
+	//   - ARM64 - The 64-bit ARM architecture.
+	//
+	// Make sure that the container image that you specify supports the architecture
+	// that you choose. The operating system family for an Express service is always
+	// LINUX .
+	//
+	// You can't specify cpuArchitecture when you also specify taskDefinitionArn ,
+	// because this value applies only to a task definition that Amazon ECS registers
+	// on your behalf.
+	CpuArchitecture types.ExpressCpuArchitecture
+
 	// The Amazon Resource Name (ARN) of the task execution role that grants the
 	// Amazon ECS container agent permission to make Amazon Web Services API calls on
 	// your behalf. This role is required for Amazon ECS to pull container images from
@@ -141,7 +160,7 @@ type CreateExpressGatewayServiceInput struct {
 	// also have FARGATE compatibility.
 	//
 	// If you provide a task definition ARN, you cannot also specify primaryContainer ,
-	// executionRoleArn , taskRoleArn , cpu , or memory .
+	// executionRoleArn , taskRoleArn , cpu , memory , or cpuArchitecture .
 	TaskDefinitionArn *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that containers in this task can

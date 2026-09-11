@@ -1190,6 +1190,24 @@ func validateHarvesterScheduleConfiguration(v *types.HarvesterScheduleConfigurat
 	}
 }
 
+func validateMultiviewConfiguration(v *types.MultiviewConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MultiviewConfiguration"}
+	if v.AvailableSources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AvailableSources"))
+	}
+	if v.AvailableLayouts == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AvailableLayouts"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3DestinationConfig(v *types.S3DestinationConfig) error {
 	if v == nil {
 		return nil
@@ -1320,6 +1338,11 @@ func validateOpCreateChannelInput(v *CreateChannelInput) error {
 	}
 	if v.ChannelName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if v.MultiviewConfiguration != nil {
+		if err := validateMultiviewConfiguration(v.MultiviewConfiguration); err != nil {
+			invalidParams.AddNested("MultiviewConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1842,6 +1865,11 @@ func validateOpUpdateChannelInput(v *UpdateChannelInput) error {
 	}
 	if v.ChannelName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if v.MultiviewConfiguration != nil {
+		if err := validateMultiviewConfiguration(v.MultiviewConfiguration); err != nil {
+			invalidParams.AddNested("MultiviewConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

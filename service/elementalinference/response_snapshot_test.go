@@ -421,6 +421,27 @@ func TestCheckResponseSnapshot_DeleteFeed(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteFeedPolicy(t *testing.T) {
+	want := &DeleteFeedPolicyOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteFeedPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteFeedPolicy(context.Background(), &DeleteFeedPolicyInput{
+		Id: ptr.String("__Id__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteFeedPolicy.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DisassociateFeed(t *testing.T) {
 	want := &DisassociateFeedOutput{
 		Arn: ptr.String("__Arn__"),
@@ -595,6 +616,29 @@ func TestCheckResponseSnapshot_GetFeed(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetFeedPolicy(t *testing.T) {
+	want := &GetFeedPolicyOutput{
+		Policy: ptr.String("__Policy__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetFeedPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetFeedPolicy(context.Background(), &GetFeedPolicyInput{
+		Id: ptr.String("__Id__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetFeedPolicy.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetFixture(t *testing.T) {
 	want := &GetFixtureOutput{
 		FixtureId:      ptr.String("__FixtureId__"),
@@ -738,6 +782,28 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListTagsForResource.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_PutFeedPolicy(t *testing.T) {
+	want := &PutFeedPolicyOutput{}
+	status, header, body, err := serdeRespReadSnapshot("PutFeedPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutFeedPolicy(context.Background(), &PutFeedPolicyInput{
+		Id:     ptr.String("__Id__"),
+		Policy: ptr.String("__Policy__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutFeedPolicy.response", err)
 	}
 }
 

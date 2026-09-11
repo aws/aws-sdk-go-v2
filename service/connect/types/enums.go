@@ -1220,6 +1220,30 @@ func (EntityType) Values() []EntityType {
 	}
 }
 
+type EvaluationFormAIVersionStatus string
+
+// Enum values for EvaluationFormAIVersionStatus
+const (
+	EvaluationFormAIVersionStatusLatest     EvaluationFormAIVersionStatus = "LATEST"
+	EvaluationFormAIVersionStatusPreview    EvaluationFormAIVersionStatus = "PREVIEW"
+	EvaluationFormAIVersionStatusActive     EvaluationFormAIVersionStatus = "ACTIVE"
+	EvaluationFormAIVersionStatusDeprecated EvaluationFormAIVersionStatus = "DEPRECATED"
+)
+
+// Values returns all known values for EvaluationFormAIVersionStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationFormAIVersionStatus) Values() []EvaluationFormAIVersionStatus {
+	return []EvaluationFormAIVersionStatus{
+		"LATEST",
+		"PREVIEW",
+		"ACTIVE",
+		"DEPRECATED",
+	}
+}
+
 type EvaluationFormItemEnablementAction string
 
 // Enum values for EvaluationFormItemEnablementAction
@@ -1352,6 +1376,23 @@ func (EvaluationFormLanguageCode) Values() []EvaluationFormLanguageCode {
 		"ko-KR",
 		"zh-CN",
 		"ms-MY",
+	}
+}
+
+type EvaluationFormMetricType string
+
+// Enum values for EvaluationFormMetricType
+const (
+	EvaluationFormMetricTypeBusinessOutcome EvaluationFormMetricType = "BUSINESS_OUTCOME"
+)
+
+// Values returns all known values for EvaluationFormMetricType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationFormMetricType) Values() []EvaluationFormMetricType {
+	return []EvaluationFormMetricType{
+		"BUSINESS_OUTCOME",
 	}
 }
 

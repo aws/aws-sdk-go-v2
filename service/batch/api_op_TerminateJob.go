@@ -33,11 +33,11 @@ type TerminateJobInput struct {
 	// This member is required.
 	JobId *string
 
-	// A message to attach to the job that explains the reason for canceling it. This
-	// message is returned by future DescribeJobsoperations on the job. It is also recorded in the
-	// Batch activity logs.
+	// A message to attach to the job that explains the reason for terminating it.
+	// This message is returned by future DescribeJobsoperations on the job. It is also recorded
+	// in the Batch activity logs.
 	//
-	// This parameter has as limit of 1024 characters.
+	// This parameter has a limit of 1024 characters.
 	//
 	// This member is required.
 	Reason *string

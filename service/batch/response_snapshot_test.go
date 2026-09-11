@@ -128,6 +128,48 @@ func TestCheckResponseSnapshot_CancelJob(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CancelJobs(t *testing.T) {
+	want := &CancelJobsOutput{
+		Successful: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Errors: []types.CancelJobsErrorDetail{
+			{
+				Job:     ptr.String("__Job__"),
+				Code:    ptr.String("__Code__"),
+				Message: ptr.String("__Message__"),
+			},
+			{
+				Job:     ptr.String("__Job__"),
+				Code:    ptr.String("__Code__"),
+				Message: ptr.String("__Message__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CancelJobs.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CancelJobs(context.Background(), &CancelJobsInput{
+		Jobs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Reason: ptr.String("__Reason__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CancelJobs.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateComputeEnvironment(t *testing.T) {
 	want := &CreateComputeEnvironmentOutput{
 		ComputeEnvironmentName: ptr.String("__ComputeEnvironmentName__"),
@@ -17183,6 +17225,8 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 					NodeIndex:  ptr.Int32(1),
 				},
 				JobDefinition: ptr.String("__JobDefinition__"),
+				IsCancelled:   ptr.Bool(true),
+				IsTerminated:  ptr.Bool(true),
 			},
 			{
 				JobArn:  ptr.String("__JobArn__"),
@@ -17223,6 +17267,8 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 					NodeIndex:  ptr.Int32(1),
 				},
 				JobDefinition: ptr.String("__JobDefinition__"),
+				IsCancelled:   ptr.Bool(true),
+				IsTerminated:  ptr.Bool(true),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -17497,6 +17543,7 @@ func TestCheckResponseSnapshot_ListServiceJobs(t *testing.T) {
 				StatusReason:    ptr.String("__StatusReason__"),
 				StartedAt:       ptr.Int64(1),
 				StoppedAt:       ptr.Int64(1),
+				IsTerminated:    ptr.Bool(true),
 			},
 			{
 				LatestAttempt: &types.LatestServiceJobAttempt{
@@ -17527,6 +17574,7 @@ func TestCheckResponseSnapshot_ListServiceJobs(t *testing.T) {
 				StatusReason:    ptr.String("__StatusReason__"),
 				StartedAt:       ptr.Int64(1),
 				StoppedAt:       ptr.Int64(1),
+				IsTerminated:    ptr.Bool(true),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -22351,6 +22399,48 @@ func TestCheckResponseSnapshot_TerminateJob(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_TerminateJobs(t *testing.T) {
+	want := &TerminateJobsOutput{
+		Successful: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Errors: []types.TerminateJobsErrorDetail{
+			{
+				Job:     ptr.String("__Job__"),
+				Code:    ptr.String("__Code__"),
+				Message: ptr.String("__Message__"),
+			},
+			{
+				Job:     ptr.String("__Job__"),
+				Code:    ptr.String("__Code__"),
+				Message: ptr.String("__Message__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("TerminateJobs.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.TerminateJobs(context.Background(), &TerminateJobsInput{
+		Jobs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Reason: ptr.String("__Reason__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "TerminateJobs.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_TerminateServiceJob(t *testing.T) {
 	want := &TerminateServiceJobOutput{}
 	status, header, body, err := serdeRespReadSnapshot("TerminateServiceJob.response")
@@ -22370,6 +22460,48 @@ func TestCheckResponseSnapshot_TerminateServiceJob(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "TerminateServiceJob.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_TerminateServiceJobs(t *testing.T) {
+	want := &TerminateServiceJobsOutput{
+		Successful: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Errors: []types.TerminateServiceJobsErrorDetail{
+			{
+				Job:     ptr.String("__Job__"),
+				Code:    ptr.String("__Code__"),
+				Message: ptr.String("__Message__"),
+			},
+			{
+				Job:     ptr.String("__Job__"),
+				Code:    ptr.String("__Code__"),
+				Message: ptr.String("__Message__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("TerminateServiceJobs.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.TerminateServiceJobs(context.Background(), &TerminateServiceJobsInput{
+		Jobs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Reason: ptr.String("__Reason__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "TerminateServiceJobs.response", err)
 	}
 }
 

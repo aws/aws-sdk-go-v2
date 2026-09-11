@@ -2114,6 +2114,11 @@ type DescribeInferenceSettings struct {
 	// inputs on the associated Elemental Inference feed.
 	AudioFeedInputs []AudioFeedInput
 
+	// The set of Contextual Metadata Enrichment methods enabled for this channel.
+	// Each method represents a specific way the channel uses the inference feed to
+	// augment its output with contextual metadata.
+	EnrichmentMethods []EnrichmentMethod
+
 	// The ARN of the feed resource that is associated with this channel. The feed is
 	// a resource in the Elemental Inference service.
 	FeedArn *string
@@ -2589,8 +2594,33 @@ type EbuTtDDestinationSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Embedded Caption Position Settings
+type EmbeddedCaptionPositionSettings struct {
+
+	// Specifies the vertical position of the caption as a row counted from the top of
+	// the output. Row 1 is the topmost row. Acceptable values are 1 through 15.
+	YPositionLine *int32
+
+	noSmithyDocumentSerde
+}
+
 // Embedded Destination Settings
 type EmbeddedDestinationSettings struct {
+
+	// Specifies the position of the output captions. Applies only when styleControl
+	// is set to manual.
+	Position *EmbeddedCaptionPositionSettings
+
+	// Controls the source of position and style information for the output captions.
+	//
+	//   - "passthrough": Carry the caption position and style from the source
+	//   captions. When the source captions are embedded, SCTE-20, or ancillary, the
+	//   position and style are preserved exactly. When the source captions are another
+	//   format, the position and any supported style are carried over.
+	//   - "manual": Applies the specified styling and positioning. All other styling
+	//   and positioning is given default values.
+	StyleControl EmbeddedDestinationStyleControl
+
 	noSmithyDocumentSerde
 }
 
@@ -4175,6 +4205,13 @@ type InferenceSettings struct {
 	// inputs on the associated Elemental Inference feed.
 	AudioFeedInputs []AudioFeedInput
 
+	// The set of Contextual Metadata Enrichment methods enabled for this channel.
+	// Each method represents a specific way the channel will use the inference feed to
+	// augment its output with contextual metadata. An empty array (or omitting the
+	// field) disables enrichment. Order is not significant; duplicate values are not
+	// permitted.
+	EnrichmentMethods []EnrichmentMethod
+
 	// The ARN of the feed resource that is associated with this channel. The feed is
 	// a resource in the Elemental Inference service.
 	FeedArn *string
@@ -5721,6 +5758,17 @@ type MediaPackageV2DestinationSettings struct {
 	// NO, but you can't set all renditions to NO. You can set zero, some, or all to
 	// OMIT.
 	HlsDefault HlsDefault
+
+	// List of usage tags declaring how this MediaPackage V2 output is used. Currently
+	// these are all multiview-related (multiviewPrimaryView, multiviewSecondaryView,
+	// multiviewEqualSizeView) and enable multiview validations and augmentations to
+	// help ensure proper multiview configuration and compatibility with MediaPackage.
+	// Leave empty (the default) if this output has no multiview role. If any
+	// video-carrying MediaPackage V2 output in an output group specifies a multiview
+	// value, every video-carrying MediaPackage V2 output in the group must also
+	// specify a multiview value; place standalone video outputs in a separate output
+	// group.
+	OutputUsage []OutputUsage
 
 	noSmithyDocumentSerde
 }
@@ -8550,6 +8598,17 @@ type TemporalFilterSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Text Caption Position Settings
+type TextCaptionPositionSettings struct {
+
+	// Specifies the vertical position of the top edge of the caption relative to the
+	// top of the output as a percentage. A value of 0 places the caption at the top of
+	// the output and 100 at the bottom.
+	YPositionPercentage *int32
+
+	noSmithyDocumentSerde
+}
+
 // Details of a single thumbnail
 type Thumbnail struct {
 
@@ -8668,8 +8727,15 @@ type TransferringInputDeviceSummary struct {
 // Ttml Destination Settings
 type TtmlDestinationSettings struct {
 
-	// This field is not currently supported and will not affect the output styling.
-	// Leave the default value.
+	// Specifies the position of the output captions. Applies only when styleControl
+	// is set to manual.
+	Position *TextCaptionPositionSettings
+
+	// Controls the source of style and position information for the output captions.
+	// PASSTHROUGH - Preserve the style and position from the source captions.
+	// USE_CONFIGURED - Don't pass through the style. The output captions will use the
+	// default styling. MANUAL - Applies the specified styling and positioning. All
+	// other styling and positioning is given default values.
 	StyleControl TtmlDestinationStyleControl
 
 	noSmithyDocumentSerde
@@ -8794,6 +8860,14 @@ type VideoDescription struct {
 	//
 	// This member is required.
 	Name *string
+
+	// Specifies the number of pixels of black border that will be inserted around the
+	// edge of the encoded picture. Must be an even integer from 0 (no border, the
+	// default) up to 100. The width and height of the VideoDescription must each be
+	// greater than twice this value. Cannot be used together with {@link
+	// outputPositionRectangle} -- both govern the position of the encoded content
+	// within the output frame.
+	Border *int32
 
 	// Video codec settings.
 	CodecSettings *VideoCodecSettings
@@ -9021,10 +9095,16 @@ type WavSettings struct {
 // Webvtt Destination Settings
 type WebvttDestinationSettings struct {
 
+	// Specifies the position of the output captions. Applies only when styleControl
+	// is set to manual.
+	Position *TextCaptionPositionSettings
+
 	// Controls whether the color and position of the source captions is passed
 	// through to the WebVTT output captions. PASSTHROUGH - Valid only if the source
-	// captions are EMBEDDED or TELETEXT. NO_STYLE_DATA - Don't pass through the style.
-	// The output captions will not contain any font styling information.
+	// captions are EMBEDDED, TELETEXT, or SMART SUBTITLES. NO_STYLE_DATA - Don't pass
+	// through the style. The output captions will not contain any font styling
+	// information. MANUAL - Applies the specified styling and positioning. All other
+	// styling and positioning is given default values.
 	StyleControl WebvttDestinationStyleControl
 
 	noSmithyDocumentSerde

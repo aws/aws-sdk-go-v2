@@ -375,7 +375,14 @@ type AncillarySourceSettings struct {
 // An aspect ratio expressed as a fraction with numerator and denominator values,
 // reduced to lowest terms. Used for the sample (pixel) aspect ratio and the
 // display aspect ratio of a video track. For example, a 720x576 anamorphic track
-// has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9.
+// has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A
+// video track can declare an aspect ratio in two independent places, and
+// MediaConvert reports each one where it was found rather than choosing between
+// them. The ratio declared by the container appears on the video track itself, and
+// the ratio declared by the video essence appears under codecMetadata. When a file
+// declares an aspect ratio in only one of the two places, the other is null; when
+// it declares both and they disagree, you can compare them and decide which to
+// use.
 type AspectRatio struct {
 
 	// The denominator, or bottom number, in the fractional aspect ratio. For example,
@@ -2298,6 +2305,26 @@ type CodecMetadata struct {
 	// characteristics of the content.
 	ContentLightLevel *ContentLightLevel
 
+	// An aspect ratio expressed as a fraction with numerator and denominator values,
+	// reduced to lowest terms. Used for the sample (pixel) aspect ratio and the
+	// display aspect ratio of a video track. For example, a 720x576 anamorphic track
+	// has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A
+	// video track can declare an aspect ratio in two independent places, and
+	// MediaConvert reports each one where it was found rather than choosing between
+	// them. The ratio declared by the container appears on the video track itself, and
+	// the ratio declared by the video essence appears under codecMetadata. When a file
+	// declares an aspect ratio in only one of the two places, the other is null; when
+	// it declares both and they disagree, you can compare them and decide which to
+	// use.
+	DisplayAspectRatio *AspectRatio
+
+	// Dolby Vision characteristics of the video track: the profile and level, and
+	// whether the RPU (dynamic metadata), base layer, and enhancement layer are
+	// present. Use this to distinguish Dolby Vision content from standard HEVC and to
+	// choose your encoding or passthrough settings. Omitted when the content is not
+	// Dolby Vision.
+	DolbyVision *DolbyVisionMetadata
+
 	// The field order of interlaced video, which indicates whether the top or bottom
 	// field is displayed first. Use this to select the correct deinterlacing behavior.
 	// One of "TopFieldFirst" or "BottomFieldFirst". This field is present only for
@@ -2334,6 +2361,19 @@ type CodecMetadata struct {
 	// H.264 and H.265). This field is null when the video essence does not contain a
 	// Display Orientation SEI message or when the rotation is 0 degrees.
 	Rotation *int32
+
+	// An aspect ratio expressed as a fraction with numerator and denominator values,
+	// reduced to lowest terms. Used for the sample (pixel) aspect ratio and the
+	// display aspect ratio of a video track. For example, a 720x576 anamorphic track
+	// has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A
+	// video track can declare an aspect ratio in two independent places, and
+	// MediaConvert reports each one where it was found rather than choosing between
+	// them. The ratio declared by the container appears on the video track itself, and
+	// the ratio declared by the video essence appears under codecMetadata. When a file
+	// declares an aspect ratio in only one of the two places, the other is null; when
+	// it declares both and they disagree, you can compare them and decide which to
+	// use.
+	SampleAspectRatio *AspectRatio
 
 	// The scanning method specified in the video essence, indicating whether the
 	// video uses progressive or interlaced scanning.
@@ -2489,8 +2529,8 @@ type Container struct {
 
 	// The format of your media file. For example: MP4, QuickTime (MOV), Matroska
 	// (MKV), WebM, MXF, Wave, AVI, MPEG-TS, MPEG-PS, MP3, FLAC, ASF (Windows Media /
-	// WMA), OGG. Note that this will be blank if your media file has a format that the
-	// MediaConvert Probe operation does not recognize.
+	// WMA), or OGG. Note that this will be blank if your media file has a format that
+	// the MediaConvert Probe operation does not recognize.
 	Format Format
 
 	// The start timecode of the media file, in HH:MM:SS:FF format (or HH:MM:SS;FF for
@@ -2971,6 +3011,32 @@ type DolbyVisionLevel6Metadata struct {
 	// Maximum Frame-Average Light Level. Static HDR metadata that corresponds to the
 	// highest frame-average brightness in the entire stream. Measured in nits.
 	MaxFall *int32
+
+	noSmithyDocumentSerde
+}
+
+// Dolby Vision characteristics of the video track: the profile and level, and
+// whether the RPU (dynamic metadata), base layer, and enhancement layer are
+// present. Use this to distinguish Dolby Vision content from standard HEVC and to
+// choose your encoding or passthrough settings. Omitted when the content is not
+// Dolby Vision.
+type DolbyVisionMetadata struct {
+
+	// Whether a Dolby Vision component is present in the track.
+	BaseLayer DolbyVisionPresence
+
+	// Whether a Dolby Vision component is present in the track.
+	EnhancementLayer DolbyVisionPresence
+
+	// The Dolby Vision level, which indicates the maximum resolution and frame rate.
+	Level *int32
+
+	// The Dolby Vision profile, for example 5, 7, or 8. The profile determines the
+	// layer structure and playback compatibility of the content.
+	Profile *int32
+
+	// Whether a Dolby Vision component is present in the track.
+	Rpu DolbyVisionPresence
 
 	noSmithyDocumentSerde
 }
@@ -10060,7 +10126,14 @@ type VideoProperties struct {
 	// An aspect ratio expressed as a fraction with numerator and denominator values,
 	// reduced to lowest terms. Used for the sample (pixel) aspect ratio and the
 	// display aspect ratio of a video track. For example, a 720x576 anamorphic track
-	// has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9.
+	// has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A
+	// video track can declare an aspect ratio in two independent places, and
+	// MediaConvert reports each one where it was found rather than choosing between
+	// them. The ratio declared by the container appears on the video track itself, and
+	// the ratio declared by the video essence appears under codecMetadata. When a file
+	// declares an aspect ratio in only one of the two places, the other is null; when
+	// it declares both and they disagree, you can compare them and decide which to
+	// use.
 	DisplayAspectRatio *AspectRatio
 
 	// The frame rate of the video or audio track, expressed as a fraction with
@@ -10090,7 +10163,14 @@ type VideoProperties struct {
 	// An aspect ratio expressed as a fraction with numerator and denominator values,
 	// reduced to lowest terms. Used for the sample (pixel) aspect ratio and the
 	// display aspect ratio of a video track. For example, a 720x576 anamorphic track
-	// has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9.
+	// has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A
+	// video track can declare an aspect ratio in two independent places, and
+	// MediaConvert reports each one where it was found rather than choosing between
+	// them. The ratio declared by the container appears on the video track itself, and
+	// the ratio declared by the video essence appears under codecMetadata. When a file
+	// declares an aspect ratio in only one of the two places, the other is null; when
+	// it declares both and they disagree, you can compare them and decide which to
+	// use.
 	SampleAspectRatio *AspectRatio
 
 	// The color space transfer characteristics of the video track, defining the

@@ -155,6 +155,41 @@ type AttemptTaskContainerDetails struct {
 	noSmithyDocumentSerde
 }
 
+// An object that contains the details of a job that couldn't be cancelled by a
+// CancelJobs operation.
+type CancelJobsErrorDetail struct {
+
+	// An error code that identifies the reason the job couldn't be cancelled. Valid
+	// values are:
+	//
+	//   - ValidationException – A job identifier in the request is malformed or isn't
+	//   valid.
+	//
+	//   - ClientException – The request failed because of a client error.
+	//
+	//   - ThrottlingException – The request was throttled. Retry the request.
+	//
+	//   - ServerException – An internal error occurred. Retry the request.
+	//
+	//   - AccessDenied – The caller isn't authorized to perform the action on the
+	//   specified job.
+	//
+	// This member is required.
+	Code *string
+
+	// The Batch job ID of the job that couldn't be cancelled.
+	//
+	// This member is required.
+	Job *string
+
+	// A message that describes the reason the job couldn't be cancelled.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // Defines the type and maximum quantity of resources that can be allocated to
 // service jobs in a service environment.
 type CapacityLimit struct {
@@ -3597,7 +3632,7 @@ type JobDetail struct {
 	// An object with various properties that are specific to Amazon EKS based jobs.
 	EksProperties *EksPropertiesDetail
 
-	// Indicates whether the job is canceled.
+	// Indicates whether the job is cancelled.
 	IsCancelled *bool
 
 	// Indicates whether the job is terminated.
@@ -3828,6 +3863,14 @@ type JobSummary struct {
 	//
 	// [SubmitJob]: https://docs.aws.amazon.com/batch/latest/APIReference/API_SubmitJob.html
 	CreatedAt *int64
+
+	// Indicates whether a cancellation request has been accepted for the job. This
+	// field is only present when the value is true .
+	IsCancelled *bool
+
+	// Indicates whether a termination request has been accepted for the job. This
+	// field is only present when the value is true .
+	IsTerminated *bool
 
 	// The Amazon Resource Name (ARN) of the job.
 	JobArn *string
@@ -5297,6 +5340,10 @@ type ServiceJobSummary struct {
 	// The Unix timestamp (in milliseconds) for when the service job was created.
 	CreatedAt *int64
 
+	// Indicates whether a termination request has been accepted for the service job.
+	// This field is only present when the value is true .
+	IsTerminated *bool
+
 	// The Amazon Resource Name (ARN) of the service job.
 	JobArn *string
 
@@ -5910,6 +5957,76 @@ type TaskPropertiesOverride struct {
 
 	// The overrides for the container definition of a job.
 	Containers []TaskContainerOverrides
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains the details of a job that couldn't be terminated by a
+// TerminateJobs operation.
+type TerminateJobsErrorDetail struct {
+
+	// An error code that identifies the reason the job couldn't be terminated. Valid
+	// values are:
+	//
+	//   - ValidationException – A job identifier in the request is malformed or isn't
+	//   valid.
+	//
+	//   - ClientException – The request failed because of a client error.
+	//
+	//   - ThrottlingException – The request was throttled. Retry the request.
+	//
+	//   - ServerException – An internal error occurred. Retry the request.
+	//
+	//   - AccessDenied – The caller isn't authorized to perform the action on the
+	//   specified job.
+	//
+	// This member is required.
+	Code *string
+
+	// The Batch job ID of the job that couldn't be terminated.
+	//
+	// This member is required.
+	Job *string
+
+	// A message that describes the reason the job couldn't be terminated.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains the details of a service job that couldn't be
+// terminated by a TerminateServiceJobs operation.
+type TerminateServiceJobsErrorDetail struct {
+
+	// An error code that identifies the reason the service job couldn't be
+	// terminated. Valid values are:
+	//
+	//   - ValidationException – A service job identifier in the request is malformed
+	//   or isn't valid.
+	//
+	//   - ClientException – The request failed because of a client error.
+	//
+	//   - ThrottlingException – The request was throttled. Retry the request.
+	//
+	//   - ServerException – An internal error occurred. Retry the request.
+	//
+	//   - AccessDenied – The caller isn't authorized to perform the action on the
+	//   specified service job.
+	//
+	// This member is required.
+	Code *string
+
+	// The service job ID of the service job that couldn't be terminated.
+	//
+	// This member is required.
+	Job *string
+
+	// A message that describes the reason the service job couldn't be terminated.
+	//
+	// This member is required.
+	Message *string
 
 	noSmithyDocumentSerde
 }

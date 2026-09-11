@@ -337,6 +337,14 @@ func TestCheckResponseSnapshot_CreateComputeNodeGroup(t *testing.T) {
 						ParameterValue: ptr.String("__ParameterValue__"),
 					},
 				},
+				GresCustomSettings: []map[string]string{
+					{
+						"key0": "__Value__",
+					},
+					{
+						"key0": "__Value__",
+					},
+				},
 			},
 			NodeLifecycleActions: &types.NodeLifecycleActions{
 				Stages: &types.NodeLifecycleStages{
@@ -462,6 +470,14 @@ func TestCheckResponseSnapshot_CreateComputeNodeGroup(t *testing.T) {
 				{
 					ParameterName:  ptr.String("__ParameterName__"),
 					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			GresCustomSettings: []map[string]string{
+				{
+					"key0": "__Value__",
+				},
+				{
+					"key0": "__Value__",
 				},
 			},
 		},
@@ -865,6 +881,14 @@ func TestCheckResponseSnapshot_GetComputeNodeGroup(t *testing.T) {
 					{
 						ParameterName:  ptr.String("__ParameterName__"),
 						ParameterValue: ptr.String("__ParameterValue__"),
+					},
+				},
+				GresCustomSettings: []map[string]string{
+					{
+						"key0": "__Value__",
+					},
+					{
+						"key0": "__Value__",
 					},
 				},
 			},
@@ -1556,6 +1580,14 @@ func TestCheckResponseSnapshot_UpdateComputeNodeGroup(t *testing.T) {
 						ParameterValue: ptr.String("__ParameterValue__"),
 					},
 				},
+				GresCustomSettings: []map[string]string{
+					{
+						"key0": "__Value__",
+					},
+					{
+						"key0": "__Value__",
+					},
+				},
 			},
 			NodeLifecycleActions: &types.NodeLifecycleActions{
 				Stages: &types.NodeLifecycleStages{
@@ -1673,6 +1705,14 @@ func TestCheckResponseSnapshot_UpdateComputeNodeGroup(t *testing.T) {
 				{
 					ParameterName:  ptr.String("__ParameterName__"),
 					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			GresCustomSettings: []map[string]string{
+				{
+					"key0": "__Value__",
+				},
+				{
+					"key0": "__Value__",
 				},
 			},
 		},
@@ -2150,6 +2190,14 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 				{
 					ParameterName:  ptr.String("__ParameterName__"),
 					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			GresCustomSettings: []map[string]string{
+				{
+					"key0": "__Value__",
+				},
+				{
+					"key0": "__Value__",
 				},
 			},
 		},

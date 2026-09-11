@@ -19,6 +19,8 @@
         "api_op_ListInvoiceSummaries.go",
         "api_op_ListInvoiceUnits.go",
         "api_op_ListProcurementPortalPreferences.go",
+        "api_op_ListProcurementPortalSuppliers.go",
+        "api_op_ListProcurementPortals.go",
         "api_op_ListTagsForResource.go",
         "api_op_PutProcurementPortalPreference.go",
         "api_op_SendProcurementPortalValidation.go",

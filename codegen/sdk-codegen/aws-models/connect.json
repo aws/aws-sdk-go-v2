@@ -1971,6 +1971,9 @@
                     "target": "com.amazonaws.connect#ListEntitySecurityProfiles"
                 },
                 {
+                    "target": "com.amazonaws.connect#ListEvaluationFormAIVersions"
+                },
+                {
                     "target": "com.amazonaws.connect#ListEvaluationForms"
                 },
                 {
@@ -12429,6 +12432,12 @@
                     "target": "com.amazonaws.connect#EvaluationFormLanguageConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for language settings of the evaluation form.</p>"
+                    }
+                },
+                "AIVersion": {
+                    "target": "com.amazonaws.connect#EvaluationFormAIVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AI version to use for the evaluation form. This specifies which AI model version is used for automated evaluations.</p>"
                     }
                 }
             },
@@ -25619,10 +25628,110 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp when the most recent validation was started for this evaluation form.</p>"
                     }
+                },
+                "AIVersion": {
+                    "target": "com.amazonaws.connect#EvaluationFormAIVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AI version to use for the evaluation form. This specifies which AI model version is used for automated evaluations.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the evaluation form.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormAIVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormAIVersionLifecycle": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.connect#EvaluationFormAIVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the AI version. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Latest</code> - The most recent AI version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Preview</code> - An AI version available for preview.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Active</code> - An AI version that is currently available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Deprecated</code> - An AI version that is no longer recommended for use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Removed</code> - An AI version that is no longer available.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartOfLifeTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when this AI version became available.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndOfLifeTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when this AI version reaches or reached end of life.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the status and availability dates for an AI version, indicating when the version became active and when it reaches end of life.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormAIVersionStatus": {
+            "type": "enum",
+            "members": {
+                "LATEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LATEST"
+                    }
+                },
+                "PREVIEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PREVIEW"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DEPRECATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPRECATED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormAIVersionSummary": {
+            "type": "structure",
+            "members": {
+                "AIVersionName": {
+                    "target": "com.amazonaws.connect#EvaluationFormAIVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the AI version.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AIVersionLifecycle": {
+                    "target": "com.amazonaws.connect#EvaluationFormAIVersionLifecycle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle information for this AI version, including its status and availability dates.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the name and lifecycle information for an AI version that you can use when creating or updating an evaluation form.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormAIVersionSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#EvaluationFormAIVersionSummary"
             }
         },
         "com.amazonaws.connect#EvaluationFormAutoEvaluationConfiguration": {
@@ -25714,6 +25823,12 @@
                     "target": "com.amazonaws.connect#EvaluationReviewConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for evaluation review settings of this evaluation form content.</p>"
+                    }
+                },
+                "AIVersion": {
+                    "target": "com.amazonaws.connect#EvaluationFormAIVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AI version to use for the evaluation form. This specifies which AI model version is used for automated evaluations.</p>"
                     }
                 }
             },
@@ -26081,6 +26196,49 @@
                 "smithy.api#documentation": "<p>Language configuration for an evaluation form.</p>"
             }
         },
+        "com.amazonaws.connect#EvaluationFormMetricConfiguration": {
+            "type": "structure",
+            "members": {
+                "MetricType": {
+                    "target": "com.amazonaws.connect#EvaluationFormMetricType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of metric. Currently, only <code>BUSINESS_OUTCOME</code> is supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MetricName": {
+                    "target": "com.amazonaws.connect#EvaluationFormMetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the metric. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SALE_SUCCESS</code> – Sale success.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CSAT</code> – Customer satisfaction.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CHURN_PROPENSITY</code> – Churn propensity.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SELF_SERVICE_SUCCESS</code> – Self-service success.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PARTIAL_SELF_SERVICE_SUCCESS</code> – Partial self-service success.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the metric configuration for an evaluation form question. Use this to associate a\n   business outcome metric with a question.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormMetricName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[^\\p{C}]*$"
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormMetricType": {
+            "type": "enum",
+            "members": {
+                "BUSINESS_OUTCOME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUSINESS_OUTCOME"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#EvaluationFormMultiSelectQuestionAutomation": {
             "type": "structure",
             "members": {
@@ -26400,6 +26558,12 @@
                     "target": "com.amazonaws.connect#EvaluationFormQuestionScoringConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The scoring configuration of the question.</p>"
+                    }
+                },
+                "MetricConfiguration": {
+                    "target": "com.amazonaws.connect#EvaluationFormMetricConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric configuration for the question. Use this to associate a business outcome metric with the\n   question.</p>"
                     }
                 }
             },
@@ -26818,6 +26982,12 @@
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                    }
+                },
+                "AIVersion": {
+                    "target": "com.amazonaws.connect#EvaluationFormAIVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AI version to use for the evaluation form. This specifies which AI model version is used for automated evaluations.</p>"
                     }
                 }
             },
@@ -36329,6 +36499,96 @@
                     "target": "com.amazonaws.connect#NextToken2500",
                     "traits": {
                         "smithy.api#documentation": "<p> The token for the next set of results. Use the value returned in the previous response in the next request to\n   retrieve the next set of results. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#ListEvaluationFormAIVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListEvaluationFormAIVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListEvaluationFormAIVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the available AI versions for evaluation forms in the specified Connect Customer instance.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/instances/{InstanceId}/evaluation-form-ai-versions",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#ListEvaluationFormAIVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactInteractionType": {
+                    "target": "com.amazonaws.connect#ContactInteractionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contact interaction type for the evaluation form.</p>",
+                        "smithy.api#httpQuery": "contactInteractionType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#ListEvaluationFormAIVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "AIVersionSummaries": {
+                    "target": "com.amazonaws.connect#EvaluationFormAIVersionSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of AI version summaries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
                     }
                 }
             },
@@ -56885,7 +57145,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an empty evaluation in the specified Connect Customer instance, using the given evaluation form for the\n   particular contact. The evaluation form version used for the contact evaluation corresponds to the currently\n   activated version. If no version is activated for the evaluation form, the contact evaluation cannot be started. </p>\n         <note>\n            <p>Evaluations created through the public API do not contain answer values suggested from automation.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Starts an empty evaluation in the specified Connect Customer instance, using the given evaluation form for the\n   particular contact. The evaluation form version used for the contact evaluation corresponds to the currently\n   activated version. If no version is activated for the evaluation form, the contact evaluation cannot be started. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact-evaluations/{InstanceId}",
@@ -63261,6 +63521,12 @@
                     "target": "com.amazonaws.connect#EvaluationFormLanguageConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for language settings of the evaluation form.</p>"
+                    }
+                },
+                "AIVersion": {
+                    "target": "com.amazonaws.connect#EvaluationFormAIVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AI version to use for the evaluation form. This specifies which AI model version is used for automated evaluations.</p>"
                     }
                 }
             },
