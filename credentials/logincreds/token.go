@@ -108,39 +108,18 @@ func (t *loginToken) Update(out *signin.CreateOAuth2TokenOutput) error {
 	if out.TokenOutput == nil {
 		return fmt.Errorf("missing TokenOutput in CreateOAuth2Token response")
 	}
-
 	if out.TokenOutput.AccessToken == nil {
 		return fmt.Errorf("missing AccessToken in CreateOAuth2Token response")
 	}
-
-	if out.TokenOutput.AccessToken.AccessKeyId == nil {
-		return fmt.Errorf("missing AccessToken.AccessKeyId in CreateOAuth2Token response")
-	}
-	t.AccessToken.AccessKeyID = *out.TokenOutput.AccessToken.AccessKeyId
-
-	if out.TokenOutput.AccessToken.SecretAccessKey == nil {
-		return fmt.Errorf("missing AccessToken.SecretAccessKey in CreateOAuth2Token response")
-
-	}
-	t.AccessToken.SecretAccessKey = *out.TokenOutput.AccessToken.SecretAccessKey
-
-	if out.TokenOutput.AccessToken.SessionToken == nil {
-		return fmt.Errorf("missing AccessToken.SessionToken in CreateOAuth2Token response")
-
-	}
-	t.AccessToken.SessionToken = *out.TokenOutput.AccessToken.SessionToken
-
 	if out.TokenOutput.ExpiresIn == nil {
 		return fmt.Errorf("missing ExpiresIn in CreateOAuth2Token response")
-
 	}
+
+	t.AccessToken.AccessKeyID = aws.ToString(out.TokenOutput.AccessToken.AccessKeyId)
+	t.AccessToken.SecretAccessKey = aws.ToString(out.TokenOutput.AccessToken.SecretAccessKey)
+	t.AccessToken.SessionToken = aws.ToString(out.TokenOutput.AccessToken.SessionToken)
 	t.AccessToken.ExpiresAt = sdk.NowTime().Add(time.Duration(*out.TokenOutput.ExpiresIn) * time.Second)
+	t.RefreshToken = aws.ToString(out.TokenOutput.RefreshToken)
 
-	if out.TokenOutput.RefreshToken == nil {
-		return fmt.Errorf("missing RefreshToken in CreateOAuth2Token response")
-
-	}
-	t.RefreshToken = *out.TokenOutput.RefreshToken
-
-	return nil
+	return t.Validate()
 }

@@ -384,7 +384,7 @@ func TestRetrieve_Failure_NilTokenOutput(t *testing.T) {
 					IdToken:      aws.String("NewIdToken"),
 				},
 			},
-			expectError: "missing AccessToken.AccessKeyId in CreateOAuth2Token response",
+			expectError: "missing accessToken.accessKeyId",
 		},
 		"miss ExpiresIn": {
 			out: &signin.CreateOAuth2TokenOutput{
@@ -414,7 +414,7 @@ func TestRetrieve_Failure_NilTokenOutput(t *testing.T) {
 					IdToken:   aws.String("NewIdToken"),
 				},
 			},
-			expectError: "missing RefreshToken in CreateOAuth2Token response",
+			expectError: "missing refreshToken",
 		},
 	}
 
