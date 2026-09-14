@@ -8,7 +8,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Gets an image.
+// Retrieves an image.
 func (c *Client) GetImage(ctx context.Context, params *GetImageInput, optFns ...func(*Options)) (*GetImageOutput, error) {
 	if params == nil {
 		params = &GetImageInput{}

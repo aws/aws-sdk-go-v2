@@ -27,8 +27,10 @@ func (c *Client) ImportComponent(ctx context.Context, params *ImportComponentInp
 
 type ImportComponentInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -56,10 +58,10 @@ type ImportComponentInput struct {
 	// The semantic version has four nodes: ../. You can assign values for the first
 	// three, and can filter on all of them.
 	//
-	// Filtering: With semantic versioning, you have the flexibility to use wildcards
-	// (x) to specify the most recent versions or nodes when selecting the base image
-	// or components for your recipe. When you use a wildcard in any node, all nodes to
-	// the right of the first wildcard must also be wildcards.
+	// Filtering: You can use wildcards (x) to specify the most recent versions or
+	// nodes when selecting the base image or components for your recipe. When you use
+	// a wildcard in any node, all nodes to the right of the first wildcard must also
+	// be wildcards.
 	//
 	// This member is required.
 	SemanticVersion *string
@@ -92,10 +94,10 @@ type ImportComponentInput struct {
 	// The tags of the component.
 	Tags map[string]string
 
-	// The uri of the component. Must be an Amazon S3 URL and the requester must have
-	// permission to access the Amazon S3 bucket. If you use Amazon S3, you can specify
-	// component content up to your service quota. Either data or uri can be used to
-	// specify the data within the component.
+	// The uri of the component. Must be an Amazon S3 URL and you must have permission
+	// to access the Amazon S3 bucket. If you use Amazon S3, you can specify component
+	// content up to your service quota. Either data or uri can be used to specify the
+	// data within the component.
 	Uri *string
 
 	noSmithyDocumentSerde

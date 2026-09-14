@@ -7,7 +7,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Gets a component policy.
+// Retrieves a component policy.
 func (c *Client) GetComponentPolicy(ctx context.Context, params *GetComponentPolicyInput, optFns ...func(*Options)) (*GetComponentPolicyOutput, error) {
 	if params == nil {
 		params = &GetComponentPolicyInput{}

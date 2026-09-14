@@ -1558,6 +1558,7 @@ func TestCheckResponseSnapshot_BatchGetDeployments(t *testing.T) {
 				},
 				AdditionalDeploymentStatusInfo: ptr.String("__AdditionalDeploymentStatusInfo__"),
 				FileExistsBehavior:             types.FileExistsBehavior("DISALLOW"),
+				DeploymentMode:                 types.DeploymentMode("STANDARD"),
 				DeploymentStatusMessages: []string{
 					"__Member__",
 					"__Member__",
@@ -1795,6 +1796,7 @@ func TestCheckResponseSnapshot_BatchGetDeployments(t *testing.T) {
 				},
 				AdditionalDeploymentStatusInfo: ptr.String("__AdditionalDeploymentStatusInfo__"),
 				FileExistsBehavior:             types.FileExistsBehavior("DISALLOW"),
+				DeploymentMode:                 types.DeploymentMode("STANDARD"),
 				DeploymentStatusMessages: []string{
 					"__Member__",
 					"__Member__",
@@ -2840,6 +2842,7 @@ func TestCheckResponseSnapshot_GetDeployment(t *testing.T) {
 			},
 			AdditionalDeploymentStatusInfo: ptr.String("__AdditionalDeploymentStatusInfo__"),
 			FileExistsBehavior:             types.FileExistsBehavior("DISALLOW"),
+			DeploymentMode:                 types.DeploymentMode("STANDARD"),
 			DeploymentStatusMessages: []string{
 				"__Member__",
 				"__Member__",

@@ -9,8 +9,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Creates a new image pipeline. Image pipelines enable you to automate the
-// creation and distribution of images.
+// Creates a new image pipeline. Use image pipelines to automate the creation and
+// distribution of images.
 func (c *Client) CreateImagePipeline(ctx context.Context, params *CreateImagePipelineInput, optFns ...func(*Options)) (*CreateImagePipelineOutput, error) {
 	if params == nil {
 		params = &CreateImagePipelineInput{}
@@ -28,16 +28,18 @@ func (c *Client) CreateImagePipeline(ctx context.Context, params *CreateImagePip
 
 type CreateImagePipelineInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
 	// This member is required.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the infrastructure configuration that will be
-	// used to build images created by this image pipeline.
+	// The Amazon Resource Name (ARN) of the infrastructure configuration that builds
+	// images created by this image pipeline.
 	//
 	// This member is required.
 	InfrastructureConfigurationArn *string
@@ -54,21 +56,26 @@ type CreateImagePipelineInput struct {
 	// The description of the image pipeline.
 	Description *string
 
-	// The Amazon Resource Name (ARN) of the distribution configuration that will be
-	// used to configure and distribute images created by this image pipeline.
+	// The Amazon Resource Name (ARN) of the distribution configuration that
+	// configures and distributes images created by this image pipeline.
 	DistributionConfigurationArn *string
 
-	// Collects additional information about the image being created, including the
-	// operating system (OS) version and package list. This information is used to
-	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
+	// Validates the required permissions and request parameters without making the
+	// request. If validation succeeds, the operation returns a
+	// DryRunOperationException error response.
+	DryRun bool
+
+	// Specifies whether to collect additional information about the image being
+	// created, including the operating system (OS) version and package list. Defaults
+	// to true .
 	EnhancedImageMetadataEnabled *bool
 
 	// The name or Amazon Resource Name (ARN) for the IAM role you create that grants
 	// Image Builder access to perform workflow actions.
 	ExecutionRole *string
 
-	// The Amazon Resource Name (ARN) of the image recipe that will be used to
-	// configure images created by this image pipeline.
+	// The Amazon Resource Name (ARN) of the image recipe that configures images
+	// created by this image pipeline.
 	ImageRecipeArn *string
 
 	// Contains settings for vulnerability scans.

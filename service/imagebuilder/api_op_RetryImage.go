@@ -8,7 +8,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// RetryImage retries an image distribution without rebuilding the image.
+// Retries an image distribution or test without rebuilding the image.
 func (c *Client) RetryImage(ctx context.Context, params *RetryImageInput, optFns ...func(*Options)) (*RetryImageOutput, error) {
 	if params == nil {
 		params = &RetryImageInput{}
@@ -26,8 +26,10 @@ func (c *Client) RetryImage(ctx context.Context, params *RetryImageInput, optFns
 
 type RetryImageInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//

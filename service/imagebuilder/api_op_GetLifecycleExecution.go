@@ -8,8 +8,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Get the runtime information that was logged for a specific runtime instance of
-// the lifecycle policy.
+// Retrieves the runtime information for a specific runtime instance of the
+// lifecycle policy.
 func (c *Client) GetLifecycleExecution(ctx context.Context, params *GetLifecycleExecutionInput, optFns ...func(*Options)) (*GetLifecycleExecutionOutput, error) {
 	if params == nil {
 		params = &GetLifecycleExecutionInput{}
@@ -27,8 +27,7 @@ func (c *Client) GetLifecycleExecution(ctx context.Context, params *GetLifecycle
 
 type GetLifecycleExecutionInput struct {
 
-	// Use the unique identifier for a runtime instance of the lifecycle policy to get
-	// runtime details.
+	// The unique identifier for a runtime instance of the lifecycle policy.
 	//
 	// This member is required.
 	LifecycleExecutionId *string

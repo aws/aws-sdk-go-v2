@@ -38,10 +38,10 @@ type ListContainerRecipesInput struct {
 	//   - platform
 	Filters []types.Filter
 
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	MaxResults *int32
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 
@@ -115,7 +115,7 @@ func (c *Client) addOperationListContainerRecipesMiddlewares(stack *middleware.S
 // ListContainerRecipesPaginatorOptions is the paginator options for
 // ListContainerRecipes
 type ListContainerRecipesPaginatorOptions struct {
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

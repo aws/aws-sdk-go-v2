@@ -1,0 +1,8 @@
+{
+    "id": "06e03982-c49e-4ede-8313-2b24979a8870",
+    "type": "feature",
+    "description": "AWS CodeDeploy now returns the deployment mode on GetDeployment and BatchGetDeployments. The new deploymentMode field on DeploymentInfo indicates whether a deployment used the standard deployment process or restarted the application using a previously installed revision (RESTART mode).",
+    "modules": [
+        "service/codedeploy"
+    ]
+}

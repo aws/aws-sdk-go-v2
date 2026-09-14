@@ -8,7 +8,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Get a workflow resource object.
+// Retrieves a workflow resource object.
 func (c *Client) GetWorkflow(ctx context.Context, params *GetWorkflowInput, optFns ...func(*Options)) (*GetWorkflowOutput, error) {
 	if params == nil {
 		params = &GetWorkflowInput{}

@@ -676,9 +676,10 @@ func (v *CreateFreeTierConfig) Deserialize(d smithy.ShapeDeserializer) error {
 // The set of tiering configurations for the pricing rule.
 type CreateTieringInput struct {
 
+	//  The set of custom tiers for the pricing rule.
+	CustomTiers []CustomTier
+
 	//  The possible Amazon Web Services Free Tier configurations.
-	//
-	// This member is required.
 	FreeTier *CreateFreeTierConfig
 
 	noSmithyDocumentSerde
@@ -691,6 +692,7 @@ func (v *CreateTieringInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateTieringInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomTiersList(s, schemas.CreateTieringInput_CustomTiers, v.CustomTiers)
 	if v.FreeTier != nil {
 		s.WriteStruct(schemas.CreateTieringInput_FreeTier)
 		v.FreeTier.SerializeMembers(s)
@@ -700,6 +702,8 @@ func (v *CreateTieringInput) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *CreateTieringInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateTieringInput, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.CreateTieringInput_CustomTiers:
+			return deserializeCustomTiersList(d, schemas.CreateTieringInput_CustomTiers, &v.CustomTiers)
 		case schemas.CreateTieringInput_FreeTier:
 			v.FreeTier = &CreateFreeTierConfig{}
 			return v.FreeTier.Deserialize(d)
@@ -1225,6 +1229,63 @@ func (v *CustomLineItemVersionListElement) Deserialize(d smithy.ShapeDeserialize
 			return d.ReadString(schemas.CustomLineItemVersionListElement_StartBillingPeriod, v.StartBillingPeriod)
 		case schemas.CustomLineItemVersionListElement_StartTime:
 			return d.ReadInt64(schemas.CustomLineItemVersionListElement_StartTime, &v.StartTime)
+		}
+		return nil
+	})
+}
+
+//	A custom tier for the pricing rule. Each custom tier applies a rate to the
+//
+// usage that falls within the tier's range.
+type CustomTier struct {
+
+	//  The inclusive start of the usage range that this tier applies to.
+	//
+	// This member is required.
+	BeginRangeInclusive *float64
+
+	//  The rate that's applied to the usage that falls within this tier.
+	//
+	// This member is required.
+	RateValue *float64
+
+	//  The exclusive end of the usage range that this tier applies to. If you don't
+	// specify a value, this tier applies to all usage that is greater than or equal to
+	// BeginRangeInclusive .
+	EndRangeExclusive *float64
+
+	noSmithyDocumentSerde
+}
+
+func (v *CustomTier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomTier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomTier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginRangeInclusive != nil {
+		s.WriteFloat64(schemas.CustomTier_BeginRangeInclusive, *v.BeginRangeInclusive)
+	}
+	if v.EndRangeExclusive != nil {
+		s.WriteFloat64(schemas.CustomTier_EndRangeExclusive, *v.EndRangeExclusive)
+	}
+	if v.RateValue != nil {
+		s.WriteFloat64(schemas.CustomTier_RateValue, *v.RateValue)
+	}
+}
+func (v *CustomTier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomTier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomTier_BeginRangeInclusive:
+			v.BeginRangeInclusive = new(float64)
+			return d.ReadFloat64(schemas.CustomTier_BeginRangeInclusive, v.BeginRangeInclusive)
+		case schemas.CustomTier_EndRangeExclusive:
+			v.EndRangeExclusive = new(float64)
+			return d.ReadFloat64(schemas.CustomTier_EndRangeExclusive, v.EndRangeExclusive)
+		case schemas.CustomTier_RateValue:
+			v.RateValue = new(float64)
+			return d.ReadFloat64(schemas.CustomTier_RateValue, v.RateValue)
 		}
 		return nil
 	})
@@ -2332,9 +2393,10 @@ func (v *StringSearch) Deserialize(d smithy.ShapeDeserializer) error {
 // The set of tiering configurations for the pricing rule.
 type Tiering struct {
 
+	//  The set of custom tiers for the pricing rule.
+	CustomTiers []CustomTier
+
 	//  The possible Amazon Web Services Free Tier configurations.
-	//
-	// This member is required.
 	FreeTier *FreeTierConfig
 
 	noSmithyDocumentSerde
@@ -2347,6 +2409,7 @@ func (v *Tiering) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Tiering) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomTiersList(s, schemas.Tiering_CustomTiers, v.CustomTiers)
 	if v.FreeTier != nil {
 		s.WriteStruct(schemas.Tiering_FreeTier)
 		v.FreeTier.SerializeMembers(s)
@@ -2356,6 +2419,8 @@ func (v *Tiering) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *Tiering) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Tiering, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.Tiering_CustomTiers:
+			return deserializeCustomTiersList(d, schemas.Tiering_CustomTiers, &v.CustomTiers)
 		case schemas.Tiering_FreeTier:
 			v.FreeTier = &FreeTierConfig{}
 			return v.FreeTier.Deserialize(d)
@@ -2568,9 +2633,10 @@ func (v *UpdateFreeTierConfig) Deserialize(d smithy.ShapeDeserializer) error {
 // The set of tiering configurations for the pricing rule.
 type UpdateTieringInput struct {
 
+	//  The set of custom tiers for the pricing rule.
+	CustomTiers []CustomTier
+
 	//  The possible Amazon Web Services Free Tier configurations.
-	//
-	// This member is required.
 	FreeTier *UpdateFreeTierConfig
 
 	noSmithyDocumentSerde
@@ -2583,6 +2649,7 @@ func (v *UpdateTieringInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateTieringInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomTiersList(s, schemas.UpdateTieringInput_CustomTiers, v.CustomTiers)
 	if v.FreeTier != nil {
 		s.WriteStruct(schemas.UpdateTieringInput_FreeTier)
 		v.FreeTier.SerializeMembers(s)
@@ -2592,6 +2659,8 @@ func (v *UpdateTieringInput) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *UpdateTieringInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateTieringInput, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.UpdateTieringInput_CustomTiers:
+			return deserializeCustomTiersList(d, schemas.UpdateTieringInput_CustomTiers, &v.CustomTiers)
 		case schemas.UpdateTieringInput_FreeTier:
 			v.FreeTier = &UpdateFreeTierConfig{}
 			return v.FreeTier.Deserialize(d)

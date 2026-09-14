@@ -8,8 +8,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Get the runtime information that was logged for a specific runtime instance of
-// the workflow step.
+// Retrieves runtime information for a specific runtime instance of the workflow
+// step.
 func (c *Client) GetWorkflowStepExecution(ctx context.Context, params *GetWorkflowStepExecutionInput, optFns ...func(*Options)) (*GetWorkflowStepExecutionOutput, error) {
 	if params == nil {
 		params = &GetWorkflowStepExecutionInput{}
@@ -41,6 +41,10 @@ type GetWorkflowStepExecutionOutput struct {
 	// The name of the action that the specified step performs.
 	Action *string
 
+	// The current attempt number for the specified runtime instance of the workflow
+	// step. The first run is attempt one. The number increases by one for each retry.
+	AttemptNumber *int32
+
 	// Describes the specified workflow step.
 	Description *string
 
@@ -54,6 +58,11 @@ type GetWorkflowStepExecutionOutput struct {
 	// Input parameters that Image Builder provided for the specified runtime instance
 	// of the workflow step.
 	Inputs *string
+
+	// The maximum number of attempts allowed for the specified runtime instance of
+	// the workflow step, based on the retry configuration in the workflow document. If
+	// the step doesn't configure retries, the maximum is one attempt.
+	MaxAttempts *int32
 
 	// The output message from the specified runtime instance of the workflow step, if
 	// applicable.

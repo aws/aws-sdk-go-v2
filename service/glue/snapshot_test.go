@@ -2570,6 +2570,18 @@ func TestCheckSnapshot_ListIntegrationResourceProperties(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListIntegrationTableProperties(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIntegrationTableProperties(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListIntegrationTableProperties")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListIterableForms(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListIterableForms(context.Background(), nil, func(o *Options) {
@@ -6150,6 +6162,18 @@ func TestUpdateSnapshot_ListIntegrationResourceProperties(t *testing.T) {
 	_, err := svc.ListIntegrationResourceProperties(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListIntegrationResourceProperties")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListIntegrationTableProperties(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIntegrationTableProperties(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListIntegrationTableProperties")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -9,7 +9,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// List the Packages that are associated with an Image Build Version, as
+// Lists the packages that are associated with an image build version, as
 // determined by Amazon Web Services Systems Manager Inventory at build time.
 func (c *Client) ListImagePackages(ctx context.Context, params *ListImagePackagesInput, optFns ...func(*Options)) (*ListImagePackagesOutput, error) {
 	if params == nil {
@@ -33,10 +33,10 @@ type ListImagePackagesInput struct {
 	// This member is required.
 	ImageBuildVersionArn *string
 
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	MaxResults *int32
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 
@@ -107,7 +107,7 @@ func (c *Client) addOperationListImagePackagesMiddlewares(stack *middleware.Stac
 
 // ListImagePackagesPaginatorOptions is the paginator options for ListImagePackages
 type ListImagePackagesPaginatorOptions struct {
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

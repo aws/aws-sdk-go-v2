@@ -8,7 +8,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Get details for the specified image lifecycle policy.
+// Retrieves details for the specified image lifecycle policy.
 func (c *Client) GetLifecyclePolicy(ctx context.Context, params *GetLifecyclePolicyInput, optFns ...func(*Options)) (*GetLifecyclePolicyOutput, error) {
 	if params == nil {
 		params = &GetLifecyclePolicyInput{}

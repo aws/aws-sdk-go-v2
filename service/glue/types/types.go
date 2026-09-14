@@ -6609,6 +6609,44 @@ type IntegrationResourcePropertyFilter struct {
 	noSmithyDocumentSerde
 }
 
+// The properties of a single integration table, including the resource ARN, the
+// table name, and the source or target table configuration.
+type IntegrationTableProperties struct {
+
+	// The connection ARN of the source, or the database ARN of the target.
+	//
+	// This member is required.
+	ResourceArn *string
+
+	// The name of the source table to be replicated.
+	//
+	// This member is required.
+	TableName *string
+
+	// A structure for the source table configuration.
+	SourceTableConfig *SourceTableConfig
+
+	// A structure for the target table configuration.
+	TargetTableConfig *TargetTableConfig
+
+	noSmithyDocumentSerde
+}
+
+// A key-value filter used to narrow the list of integration table properties
+// returned by ListIntegrationTableProperties. Specify a filter key and one or more
+// values to match.
+type IntegrationTablePropertiesFilter struct {
+
+	// The name of the filter. Supported filter keys are SourceArn , TargetArn ,
+	// SourceTableName , and TargetTableName .
+	Name *string
+
+	// A list of filter values.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
 // An error that occurred when retrieving an iterable form item.
 type ItemError struct {
 
@@ -12280,6 +12318,9 @@ type TargetRedshiftCatalog struct {
 
 // Properties used by the target leg to partition the data on the target.
 type TargetTableConfig struct {
+
+	// The ARN of the integration that owns this target table configuration.
+	IntegrationArn *string
 
 	// Determines the file layout on the target.
 	PartitionSpec []IntegrationPartition

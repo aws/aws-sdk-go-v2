@@ -28,8 +28,10 @@ func (c *Client) CreateDistributionConfiguration(ctx context.Context, params *Cr
 
 type CreateDistributionConfigurationInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -48,6 +50,11 @@ type CreateDistributionConfigurationInput struct {
 
 	// The description of the distribution configuration.
 	Description *string
+
+	// Validates the required permissions and request parameters without making the
+	// request. If validation succeeds, the operation returns a
+	// DryRunOperationException error response.
+	DryRun bool
 
 	// The tags of the distribution configuration.
 	Tags map[string]string

@@ -8,8 +8,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Get the runtime information that was logged for a specific runtime instance of
-// the workflow.
+// Retrieves runtime information for a specific runtime instance of the workflow.
 func (c *Client) GetWorkflowExecution(ctx context.Context, params *GetWorkflowExecutionInput, optFns ...func(*Options)) (*GetWorkflowExecutionOutput, error) {
 	if params == nil {
 		params = &GetWorkflowExecutionInput{}

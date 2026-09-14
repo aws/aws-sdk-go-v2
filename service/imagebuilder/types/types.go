@@ -217,6 +217,31 @@ type ComponentConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about the component that caused the image creation process to
+// fail. The details identify the first step that failed when the component ran.
+type ComponentFailureContext struct {
+
+	// The action that the failed step runs, for example ExecuteBash .
+	Action *string
+
+	// The Amazon Resource Name (ARN) of the component build version that failed.
+	ComponentArn *string
+
+	// The error message from the step that failed. Image Builder truncates messages
+	// that are longer than 1024 characters. The component log in Amazon CloudWatch
+	// Logs contains the full output.
+	ErrorMessage *string
+
+	// The name of the phase in the component document where the failure occurred,
+	// such as build , validate , or test .
+	PhaseName *string
+
+	// The name of the step in the component document that failed.
+	StepName *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains a key/value pair that sets the named component parameter.
 type ComponentParameter struct {
 
@@ -363,8 +388,8 @@ type ComponentVersion struct {
 	// Describes the current status of the component version.
 	Status ComponentStatus
 
-	// he operating system (OS) version supported by the component. If the OS
-	// information is available, a prefix match is performed against the base image OS
+	// The operating system (OS) version supported by the component. If OS information
+	// is available, Image Builder performs a prefix match against the base image OS
 	// version during image recipe creation.
 	SupportedOsVersions []string
 
@@ -377,18 +402,18 @@ type ComponentVersion struct {
 	// The semantic version has four nodes: ../. You can assign values for the first
 	// three, and can filter on all of them.
 	//
-	// Assignment: For the first three nodes you can assign any positive integer
-	// value, including zero, with an upper limit of 2^30-1, or 1073741823 for each
-	// node. Image Builder automatically assigns the build number to the fourth node.
+	// Assignment: For the first three nodes, you can assign any positive integer
+	// value, including zero. The upper limit is 2^30-1, or 1073741823, for each node.
+	// Image Builder automatically assigns the build number to the fourth node.
 	//
 	// Patterns: You can use any numeric pattern that adheres to the assignment
 	// requirements for the nodes that you can assign. For example, you might choose a
 	// software version pattern, such as 1.0.0, or a date, such as 2021.01.01.
 	//
-	// Filtering: With semantic versioning, you have the flexibility to use wildcards
-	// (x) to specify the most recent versions or nodes when selecting the base image
-	// or components for your recipe. When you use a wildcard in any node, all nodes to
-	// the right of the first wildcard must also be wildcards.
+	// Filtering: You can use wildcards (x) to specify the most recent versions or
+	// nodes when selecting the base image or components for your recipe. When you use
+	// a wildcard in any node, all nodes to the right of the first wildcard must also
+	// be wildcards.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -503,18 +528,18 @@ type ContainerRecipe struct {
 	// The semantic version has four nodes: ../. You can assign values for the first
 	// three, and can filter on all of them.
 	//
-	// Assignment: For the first three nodes you can assign any positive integer
-	// value, including zero, with an upper limit of 2^30-1, or 1073741823 for each
-	// node. Image Builder automatically assigns the build number to the fourth node.
+	// Assignment: For the first three nodes, you can assign any positive integer
+	// value, including zero. The upper limit is 2^30-1, or 1073741823, for each node.
+	// Image Builder automatically assigns the build number to the fourth node.
 	//
 	// Patterns: You can use any numeric pattern that adheres to the assignment
 	// requirements for the nodes that you can assign. For example, you might choose a
 	// software version pattern, such as 1.0.0, or a date, such as 2021.01.01.
 	//
-	// Filtering: With semantic versioning, you have the flexibility to use wildcards
-	// (x) to specify the most recent versions or nodes when selecting the base image
-	// or components for your recipe. When you use a wildcard in any node, all nodes to
-	// the right of the first wildcard must also be wildcards.
+	// Filtering: You can use wildcards (x) to specify the most recent versions or
+	// nodes when selecting the base image or components for your recipe. When you use
+	// a wildcard in any node, all nodes to the right of the first wildcard must also
+	// be wildcards.
 	Version *string
 
 	// The working directory for use during build and test workflows.
@@ -722,16 +747,30 @@ type DistributionConfigurationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about a failure that occurred while Image Builder distributed
+// the image or applied configuration to the distributed image.
+type DistributionFailureContext struct {
+
+	// The error message for the distribution failure.
+	ErrorMessage *string
+
+	// The details about the failure for each Region where the image didn't finish
+	// distribution or configuration.
+	RegionFailures []RegionFailure
+
+	noSmithyDocumentSerde
+}
+
 // Amazon EBS-specific block device mapping specifications.
 type EbsInstanceBlockDeviceSpecification struct {
 
-	// Use to configure delete on termination of the associated device.
+	// Specifies whether to delete the associated device on termination.
 	DeleteOnTermination *bool
 
-	// Use to configure device encryption.
+	// Specifies whether to encrypt the device.
 	Encrypted *bool
 
-	// Use to configure device IOPS.
+	// The IOPS value for the device. Required only when volumeType is io1 or io2.
 	Iops *int32
 
 	// The Amazon Resource Name (ARN) that uniquely identifies the KMS key to use when
@@ -747,10 +786,10 @@ type EbsInstanceBlockDeviceSpecification struct {
 	//  For GP3 volumes only – The throughput in MiB/s that the volume supports.
 	Throughput *int32
 
-	// Use to override the device's volume size.
+	// Overrides the volume size for the device.
 	VolumeSize *int32
 
-	// Use to override the device's volume type.
+	// Overrides the volume type for the device.
 	VolumeType EbsVolumeType
 
 	noSmithyDocumentSerde
@@ -967,18 +1006,18 @@ type Image struct {
 	// The semantic version has four nodes: ../. You can assign values for the first
 	// three, and can filter on all of them.
 	//
-	// Assignment: For the first three nodes you can assign any positive integer
-	// value, including zero, with an upper limit of 2^30-1, or 1073741823 for each
-	// node. Image Builder automatically assigns the build number to the fourth node.
+	// Assignment: For the first three nodes, you can assign any positive integer
+	// value, including zero. The upper limit is 2^30-1, or 1073741823, for each node.
+	// Image Builder automatically assigns the build number to the fourth node.
 	//
 	// Patterns: You can use any numeric pattern that adheres to the assignment
 	// requirements for the nodes that you can assign. For example, you might choose a
 	// software version pattern, such as 1.0.0, or a date, such as 2021.01.01.
 	//
-	// Filtering: With semantic versioning, you have the flexibility to use wildcards
-	// (x) to specify the most recent versions or nodes when selecting the base image
-	// or components for your recipe. When you use a wildcard in any node, all nodes to
-	// the right of the first wildcard must also be wildcards.
+	// Filtering: You can use wildcards (x) to specify the most recent versions or
+	// nodes when selecting the base image or components for your recipe. When you use
+	// a wildcard in any node, all nodes to the right of the first wildcard must also
+	// be wildcards.
 	Version *string
 
 	// Contains the build and test workflows that are associated with the image.
@@ -996,6 +1035,42 @@ type ImageAggregation struct {
 	// Counts by severity level for medium severity and higher level findings, plus a
 	// total for all of the findings for the specified image.
 	SeverityCounts *SeverityCounts
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about the failure when the image creation process fails.
+// Properties appear in the failure context when the related information is
+// available for the failure.
+type ImageFailureContext struct {
+
+	// The details about the component that failed, if the failure occurred while a
+	// component was running.
+	ComponentFailure *ComponentFailureContext
+
+	// The details about the distribution failure, if the failure occurred while Image
+	// Builder distributed or configured the image.
+	DistributionFailure *DistributionFailureContext
+
+	// The name of the workflow step that failed, as it appears in the workflow
+	// document.
+	FailedStep *string
+
+	// The status that the image had when the failure occurred. This indicates the
+	// stage of the image creation process where the image failed, for example BUILDING
+	// or DISTRIBUTING .
+	ImageStatus ImageStatus
+
+	// The unique identifier of the workflow step execution that failed.
+	StepExecutionId *string
+
+	// The Amazon Resource Name (ARN) of the workflow build version that was running
+	// when the image failed.
+	WorkflowArn *string
+
+	// The unique identifier of the workflow execution that was running when the image
+	// failed.
+	WorkflowExecutionId *string
 
 	noSmithyDocumentSerde
 }
@@ -1076,9 +1151,9 @@ type ImagePipeline struct {
 	// with this image pipeline.
 	DistributionConfigurationArn *string
 
-	// Collects additional information about the image being created, including the
-	// operating system (OS) version and package list. This information is used to
-	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
+	// Specifies whether to collect additional information about the image being
+	// created, including the operating system (OS) version and package list. Defaults
+	// to true .
 	EnhancedImageMetadataEnabled *bool
 
 	// The name or Amazon Resource Name (ARN) for the IAM role you create that grants
@@ -1359,6 +1434,10 @@ type ImageScanState struct {
 // Image status and the reason for that status.
 type ImageState struct {
 
+	// The details about the failure, for images that failed to complete. Image
+	// Builder only sets this property when the image status is FAILED .
+	FailureContext *ImageFailureContext
+
 	// The reason for the status of the image.
 	Reason *string
 
@@ -1441,8 +1520,8 @@ type ImageSummary struct {
 // it.
 type ImageTestsConfiguration struct {
 
-	// Determines if tests should run after building the image. Image Builder defaults
-	// to enable tests to run following the image build, before image distribution.
+	// Specifies whether tests run after building the image. When enabled, tests run
+	// after the image build and before image distribution. Defaults to true .
 	ImageTestsEnabled *bool
 
 	// The maximum time in minutes that tests are permitted to run.
@@ -1514,18 +1593,18 @@ type ImageVersion struct {
 	// The semantic version has four nodes: ../. You can assign values for the first
 	// three, and can filter on all of them.
 	//
-	// Assignment: For the first three nodes you can assign any positive integer
-	// value, including zero, with an upper limit of 2^30-1, or 1073741823 for each
-	// node. Image Builder automatically assigns the build number to the fourth node.
+	// Assignment: For the first three nodes, you can assign any positive integer
+	// value, including zero. The upper limit is 2^30-1, or 1073741823, for each node.
+	// Image Builder automatically assigns the build number to the fourth node.
 	//
 	// Patterns: You can use any numeric pattern that adheres to the assignment
 	// requirements for the nodes that you can assign. For example, you might choose a
 	// software version pattern, such as 1.0.0, or a date, such as 2021.01.01.
 	//
-	// Filtering: With semantic versioning, you have the flexibility to use wildcards
-	// (x) to specify the most recent versions or nodes when selecting the base image
-	// or components for your recipe. When you use a wildcard in any node, all nodes to
-	// the right of the first wildcard must also be wildcards.
+	// Filtering: You can use wildcards (x) to specify the most recent versions or
+	// nodes when selecting the base image or components for your recipe. When you use
+	// a wildcard in any node, all nodes to the right of the first wildcard must also
+	// be wildcards.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -1565,7 +1644,7 @@ type InfrastructureConfiguration struct {
 	Name *string
 
 	// The instance placement settings that define where the instances that are
-	// launched from your image will run.
+	// launched from your image run.
 	Placement *Placement
 
 	// The tags attached to the resource created by Image Builder.
@@ -1574,8 +1653,8 @@ type InfrastructureConfiguration struct {
 	// The security group IDs of the infrastructure configuration.
 	SecurityGroupIds []string
 
-	// The Amazon Resource Name (ARN) for the SNS topic to which we send image build
-	// event notifications.
+	// The Amazon Resource Name (ARN) of the SNS topic to which Image Builder sends
+	// image build event notifications.
 	//
 	// EC2 Image Builder is unable to send notifications to SNS topics that are
 	// encrypted using keys from other accounts. The key that is used to encrypt the
@@ -1620,7 +1699,7 @@ type InfrastructureConfigurationSummary struct {
 	Name *string
 
 	// The instance placement settings that define where the instances that are
-	// launched from your image will run.
+	// launched from your image run.
 	Placement *Placement
 
 	// The tags attached to the image created by Image Builder.
@@ -1649,13 +1728,13 @@ type InstanceBlockDeviceMapping struct {
 	// The device to which these mappings apply.
 	DeviceName *string
 
-	// Use to manage Amazon EBS-specific configuration for this mapping.
+	// The Amazon EBS-specific configuration for this mapping.
 	Ebs *EbsInstanceBlockDeviceSpecification
 
-	// Use to remove a mapping from the base image.
+	// Specifies a mapping to remove from the base image.
 	NoDevice *string
 
-	// Use to manage instance ephemeral devices.
+	// The virtual device name for instance ephemeral devices.
 	VirtualName *string
 
 	noSmithyDocumentSerde
@@ -2304,6 +2383,33 @@ type ProductCodeListItem struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about a distribution or image configuration failure for a
+// single Region.
+type RegionFailure struct {
+
+	// The error message for the failure in the Region.
+	ErrorMessage *string
+
+	// The image configuration step where the failure occurred. Image Builder sets
+	// this property when the failure happened during post-distribution configuration,
+	// such as launch template updates or virtual machine (VM) export. This property
+	// doesn't appear for failures that occurred while Image Builder copied the image
+	// to the Region.
+	ImageConfigurationStep ImageConfigurationStep
+
+	// The Region where the failure occurred.
+	Region *string
+
+	// The failure status for the Region. Indicates whether the process failed, was
+	// canceled, or timed out.
+	Status RegionFailureStatus
+
+	// The account ID of the account that the image was distributed to in the Region.
+	TargetAccountId *string
+
+	noSmithyDocumentSerde
+}
+
 // Controls Secure Boot and UEFI data settings for the resulting image during ISO
 // imports. For more information, see [UEFI Secure Boot for Amazon EC2 instances]in the Amazon EC2 User Guide .
 //
@@ -2512,8 +2618,8 @@ type SsmParameterConfiguration struct {
 	// target account for the Region.
 	AmiAccountId *string
 
-	// The data type specifies what type of value the Parameter contains. We recommend
-	// that you use data type aws:ec2:image .
+	// The type of value the parameter contains. We recommend the aws:ec2:image data
+	// type.
 	DataType SsmParameterDataType
 
 	noSmithyDocumentSerde
@@ -2833,6 +2939,10 @@ type WorkflowStepMetadata struct {
 	// The step action name.
 	Action *string
 
+	// The current attempt number for the workflow step. The first run is attempt one.
+	// The number increases by one for each retry.
+	AttemptNumber *int32
+
 	// Description of the workflow step.
 	Description *string
 
@@ -2841,6 +2951,11 @@ type WorkflowStepMetadata struct {
 
 	// Input parameters that Image Builder provides for the workflow step.
 	Inputs *string
+
+	// The maximum number of attempts allowed for the workflow step, based on the
+	// retry configuration in the workflow document. If the step doesn't configure
+	// retries, the maximum is one attempt.
+	MaxAttempts *int32
 
 	// Detailed output message that the workflow step provides at runtime.
 	Message *string

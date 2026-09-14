@@ -8,7 +8,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Gets an infrastructure configuration.
+// Retrieves an infrastructure configuration.
 func (c *Client) GetInfrastructureConfiguration(ctx context.Context, params *GetInfrastructureConfigurationInput, optFns ...func(*Options)) (*GetInfrastructureConfigurationOutput, error) {
 	if params == nil {
 		params = &GetInfrastructureConfigurationInput{}

@@ -9,8 +9,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Updates a new infrastructure configuration. An infrastructure configuration
-// defines the environment in which your image will be built and tested.
+// Updates an infrastructure configuration. An infrastructure configuration
+// defines the environment in which Image Builder builds and tests your image.
 func (c *Client) UpdateInfrastructureConfiguration(ctx context.Context, params *UpdateInfrastructureConfigurationInput, optFns ...func(*Options)) (*UpdateInfrastructureConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateInfrastructureConfigurationInput{}
@@ -28,8 +28,10 @@ func (c *Client) UpdateInfrastructureConfiguration(ctx context.Context, params *
 
 type UpdateInfrastructureConfigurationInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -65,7 +67,7 @@ type UpdateInfrastructureConfigurationInput struct {
 	InstanceMetadataOptions *types.InstanceMetadataOptions
 
 	// The instance types of the infrastructure configuration. You can specify one or
-	// more instance types to use for this build. The service will pick one of these
+	// more instance types to use for this build. Image Builder picks one of these
 	// instance types based on availability.
 	InstanceTypes []string
 
@@ -77,7 +79,7 @@ type UpdateInfrastructureConfigurationInput struct {
 	Logging *types.Logging
 
 	// The instance placement settings that define where the instances that are
-	// launched from your image will run.
+	// launched from your image run.
 	Placement *types.Placement
 
 	// The tags attached to the resource created by Image Builder.
@@ -87,8 +89,8 @@ type UpdateInfrastructureConfigurationInput struct {
 	// Amazon EC2 AMI.
 	SecurityGroupIds []string
 
-	// The Amazon Resource Name (ARN) for the SNS topic to which we send image build
-	// event notifications.
+	// The Amazon Resource Name (ARN) of the SNS topic to which Image Builder sends
+	// image build event notifications.
 	//
 	// EC2 Image Builder is unable to send notifications to SNS topics that are
 	// encrypted using keys from other accounts. The key that is used to encrypt the
@@ -98,9 +100,9 @@ type UpdateInfrastructureConfigurationInput struct {
 	// The subnet ID to place the instance used to customize your Amazon EC2 AMI in.
 	SubnetId *string
 
-	// The terminate instance on failure setting of the infrastructure configuration.
-	// Set to false if you want Image Builder to retain the instance used to configure
-	// your AMI if the build or test phase of your workflow fails.
+	// Specifies whether to terminate the instance on failure. Set to false if you
+	// want Image Builder to retain the instance used to configure your AMI if the
+	// build or test phase of your workflow fails. Defaults to true .
 	TerminateInstanceOnFailure *bool
 
 	noSmithyDocumentSerde

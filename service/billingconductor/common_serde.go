@@ -232,6 +232,19 @@ func serializeCustomLineItemVersionList(s smithy.ShapeSerializer, schema *smithy
 	s.CloseList()
 }
 
+func serializeCustomTiersList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CustomTier) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeDisassociateResourcesResponseList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DisassociateResourceResponseElement) {
 	if v == nil {
 		return
@@ -679,6 +692,20 @@ func deserializeCustomLineItemVersionList(d smithy.ShapeDeserializer, s *smithy.
 	var vv types.CustomLineItemVersionListElement
 	return smithy.ReadList(d, s, func() error {
 		vv = types.CustomLineItemVersionListElement{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCustomTiersList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CustomTier) error {
+	*v = make([]types.CustomTier, 0)
+	var vv types.CustomTier
+	return smithy.ReadList(d, s, func() error {
+		vv = types.CustomTier{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

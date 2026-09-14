@@ -956,6 +956,19 @@ type DeploymentInfo struct {
 	//  The unique ID of a deployment.
 	DeploymentId *string
 
+	// The deployment's type. Valid values are:
+	//
+	//   - STANDARD : The deployment installed the specified revision.
+	//
+	//   - RESTART : The deployment restarted the application on the target instances
+	//   using the revision from the deployment group's last successful deployment,
+	//   without downloading a new revision.
+	//
+	// This field is absent for deployments created before deploymentMode existed, and
+	// for STANDARD deployments. An absent value must not be interpreted as STANDARD ;
+	// it simply means no value was recorded either way.
+	DeploymentMode DeploymentMode
+
 	// A summary of the deployment status of the instances in the deployment.
 	DeploymentOverview *DeploymentOverview
 
@@ -1106,6 +1119,9 @@ func (v *DeploymentInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeploymentId != nil {
 		s.WriteString(schemas.DeploymentInfo_deploymentId, *v.DeploymentId)
 	}
+	if v.DeploymentMode != "" {
+		s.WriteString(schemas.DeploymentInfo_deploymentMode, string(v.DeploymentMode))
+	}
 	if v.DeploymentOverview != nil {
 		s.WriteStruct(schemas.DeploymentInfo_deploymentOverview)
 		v.DeploymentOverview.SerializeMembers(s)
@@ -1226,6 +1242,13 @@ func (v *DeploymentInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DeploymentInfo_deploymentId:
 			v.DeploymentId = new(string)
 			return d.ReadString(schemas.DeploymentInfo_deploymentId, v.DeploymentId)
+		case schemas.DeploymentInfo_deploymentMode:
+			var ev string
+			if err := d.ReadString(schemas.DeploymentInfo_deploymentMode, &ev); err != nil {
+				return err
+			}
+			v.DeploymentMode = DeploymentMode(ev)
+			return nil
 		case schemas.DeploymentInfo_deploymentOverview:
 			v.DeploymentOverview = &DeploymentOverview{}
 			return v.DeploymentOverview.Deserialize(d)

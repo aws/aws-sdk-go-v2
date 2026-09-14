@@ -9,7 +9,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Create a new workflow or a new version of an existing workflow.
+// Creates a new workflow or a new version of an existing workflow.
 func (c *Client) CreateWorkflow(ctx context.Context, params *CreateWorkflowInput, optFns ...func(*Options)) (*CreateWorkflowOutput, error) {
 	if params == nil {
 		params = &CreateWorkflowInput{}
@@ -27,8 +27,10 @@ func (c *Client) CreateWorkflow(ctx context.Context, params *CreateWorkflowInput
 
 type CreateWorkflowInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -46,9 +48,9 @@ type CreateWorkflowInput struct {
 	// The semantic version has four nodes: ../. You can assign values for the first
 	// three, and can filter on all of them.
 	//
-	// Assignment: For the first three nodes you can assign any positive integer
-	// value, including zero, with an upper limit of 2^30-1, or 1073741823 for each
-	// node. Image Builder automatically assigns the build number to the fourth node.
+	// Assignment: For the first three nodes, you can assign any positive integer
+	// value, including zero. The upper limit is 2^30-1, or 1073741823, for each node.
+	// Image Builder automatically assigns the build number to the fourth node.
 	//
 	// Patterns: You can use any numeric pattern that adheres to the assignment
 	// requirements for the nodes that you can assign. For example, you might choose a
@@ -75,9 +77,9 @@ type CreateWorkflowInput struct {
 	// Describes the workflow.
 	Description *string
 
-	// Validates the required permissions for the operation and the request
-	// parameters, without actually making the request, and provides an error response.
-	// Upon a successful request, the error response is DryRunOperationException .
+	// Validates the required permissions and request parameters without making the
+	// request. If validation succeeds, the operation returns a
+	// DryRunOperationException error response.
 	DryRun bool
 
 	// The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to
@@ -91,9 +93,9 @@ type CreateWorkflowInput struct {
 	Tags map[string]string
 
 	// The uri of a YAML component document file. This must be an S3 URL (
-	// s3://bucket/key ), and the requester must have permission to access the S3
-	// bucket it points to. If you use Amazon S3, you can specify component content up
-	// to your service quota.
+	// s3://bucket/key ), and you must have permission to access the S3 bucket it
+	// points to. If you use Amazon S3, you can specify component content up to your
+	// service quota.
 	//
 	// Alternatively, you can specify the YAML document inline, using the component
 	// data property. You cannot specify both properties.

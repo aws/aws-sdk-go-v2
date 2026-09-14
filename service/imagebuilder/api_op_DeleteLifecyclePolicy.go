@@ -7,7 +7,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Delete the specified lifecycle policy resource.
+// Deletes the specified lifecycle policy resource.
 func (c *Client) DeleteLifecyclePolicy(ctx context.Context, params *DeleteLifecyclePolicyInput, optFns ...func(*Options)) (*DeleteLifecyclePolicyOutput, error) {
 	if params == nil {
 		params = &DeleteLifecyclePolicyInput{}

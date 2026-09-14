@@ -8,7 +8,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Gets a distribution configuration.
+// Retrieves a distribution configuration.
 func (c *Client) GetDistributionConfiguration(ctx context.Context, params *GetDistributionConfigurationInput, optFns ...func(*Options)) (*GetDistributionConfigurationOutput, error) {
 	if params == nil {
 		params = &GetDistributionConfigurationInput{}

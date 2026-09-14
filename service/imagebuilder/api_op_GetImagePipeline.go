@@ -8,7 +8,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Gets an image pipeline.
+// Retrieves an image pipeline.
 func (c *Client) GetImagePipeline(ctx context.Context, params *GetImagePipelineInput, optFns ...func(*Options)) (*GetImagePipelineOutput, error) {
 	if params == nil {
 		params = &GetImagePipelineInput{}

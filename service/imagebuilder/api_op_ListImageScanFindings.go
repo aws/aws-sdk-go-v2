@@ -41,10 +41,10 @@ type ListImageScanFindingsInput struct {
 	// If you don't request a filter, then all findings in your account are listed.
 	Filters []types.ImageScanFindingsFilter
 
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	MaxResults *int32
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 
@@ -113,7 +113,7 @@ func (c *Client) addOperationListImageScanFindingsMiddlewares(stack *middleware.
 // ListImageScanFindingsPaginatorOptions is the paginator options for
 // ListImageScanFindings
 type ListImageScanFindingsPaginatorOptions struct {
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

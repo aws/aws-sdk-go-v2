@@ -10,8 +10,8 @@ import (
 	"time"
 )
 
-// Begin asynchronous resource state update for lifecycle changes to the specified
-// image resources.
+// Begins an asynchronous resource state update for lifecycle changes to the
+// specified image resources.
 func (c *Client) StartResourceStateUpdate(ctx context.Context, params *StartResourceStateUpdateInput, optFns ...func(*Options)) (*StartResourceStateUpdateOutput, error) {
 	if params == nil {
 		params = &StartResourceStateUpdateInput{}
@@ -29,8 +29,10 @@ func (c *Client) StartResourceStateUpdate(ctx context.Context, params *StartReso
 
 type StartResourceStateUpdateInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//

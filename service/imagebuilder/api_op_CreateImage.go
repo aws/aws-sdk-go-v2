@@ -9,10 +9,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Creates a new image. This request will create a new image along with all of the
-// configured output resources defined in the distribution configuration. You must
-// specify exactly one recipe for your image, using either a ContainerRecipeArn or
-// an ImageRecipeArn.
+// Creates a new image along with all configured output resources defined in the
+// distribution configuration. You must specify exactly one recipe for your image,
+// using either a ContainerRecipeArn or an ImageRecipeArn.
 func (c *Client) CreateImage(ctx context.Context, params *CreateImageInput, optFns ...func(*Options)) (*CreateImageOutput, error) {
 	if params == nil {
 		params = &CreateImageInput{}
@@ -30,8 +29,10 @@ func (c *Client) CreateImage(ctx context.Context, params *CreateImageInput, optF
 
 type CreateImageInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -52,9 +53,9 @@ type CreateImageInput struct {
 	// and configures the outputs of your pipeline.
 	DistributionConfigurationArn *string
 
-	// Collects additional information about the image being created, including the
-	// operating system (OS) version and package list. This information is used to
-	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
+	// Specifies whether to collect additional information about the image being
+	// created, including the operating system (OS) version and package list. Defaults
+	// to true .
 	EnhancedImageMetadataEnabled *bool
 
 	// The name or Amazon Resource Name (ARN) for the IAM role you create that grants
@@ -71,7 +72,7 @@ type CreateImageInput struct {
 	// The image tests configuration of the image.
 	ImageTestsConfiguration *types.ImageTestsConfiguration
 
-	// Define logging configuration for the image build process.
+	// The logging configuration for the image build process.
 	LoggingConfiguration *types.ImageLoggingConfiguration
 
 	// The tags of the image.

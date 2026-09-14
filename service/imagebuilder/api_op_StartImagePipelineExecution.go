@@ -26,8 +26,10 @@ func (c *Client) StartImagePipelineExecution(ctx context.Context, params *StartI
 
 type StartImagePipelineExecutionInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -40,8 +42,8 @@ type StartImagePipelineExecutionInput struct {
 	// This member is required.
 	ImagePipelineArn *string
 
-	// Specify tags for Image Builder to apply to the image resource that's created
-	// When it starts pipeline execution.
+	// The tags for Image Builder to apply to the image resource that's created when
+	// pipeline execution starts.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

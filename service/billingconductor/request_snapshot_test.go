@@ -515,6 +515,18 @@ func TestCheckRequestSnapshot_CreatePricingRule(t *testing.T) {
 			FreeTier: &types.CreateFreeTierConfig{
 				Activated: ptr.Bool(true),
 			},
+			CustomTiers: []types.CustomTier{
+				{
+					BeginRangeInclusive: ptr.Float64(1.0),
+					EndRangeExclusive:   ptr.Float64(1.0),
+					RateValue:           ptr.Float64(1.0),
+				},
+				{
+					BeginRangeInclusive: ptr.Float64(1.0),
+					EndRangeExclusive:   ptr.Float64(1.0),
+					RateValue:           ptr.Float64(1.0),
+				},
+			},
 		},
 		UsageType: ptr.String("__UsageType__"),
 		Operation: ptr.String("__Operation__"),
@@ -1364,6 +1376,18 @@ func TestCheckRequestSnapshot_UpdatePricingRule(t *testing.T) {
 			FreeTier: &types.UpdateFreeTierConfig{
 				Activated: ptr.Bool(true),
 			},
+			CustomTiers: []types.CustomTier{
+				{
+					BeginRangeInclusive: ptr.Float64(1.0),
+					EndRangeExclusive:   ptr.Float64(1.0),
+					RateValue:           ptr.Float64(1.0),
+				},
+				{
+					BeginRangeInclusive: ptr.Float64(1.0),
+					EndRangeExclusive:   ptr.Float64(1.0),
+					RateValue:           ptr.Float64(1.0),
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1697,6 +1721,18 @@ func TestUpdateRequestSnapshot_CreatePricingRule(t *testing.T) {
 		Tiering: &types.CreateTieringInput{
 			FreeTier: &types.CreateFreeTierConfig{
 				Activated: ptr.Bool(true),
+			},
+			CustomTiers: []types.CustomTier{
+				{
+					BeginRangeInclusive: ptr.Float64(1.0),
+					EndRangeExclusive:   ptr.Float64(1.0),
+					RateValue:           ptr.Float64(1.0),
+				},
+				{
+					BeginRangeInclusive: ptr.Float64(1.0),
+					EndRangeExclusive:   ptr.Float64(1.0),
+					RateValue:           ptr.Float64(1.0),
+				},
 			},
 		},
 		UsageType: ptr.String("__UsageType__"),
@@ -2546,6 +2582,18 @@ func TestUpdateRequestSnapshot_UpdatePricingRule(t *testing.T) {
 		Tiering: &types.UpdateTieringInput{
 			FreeTier: &types.UpdateFreeTierConfig{
 				Activated: ptr.Bool(true),
+			},
+			CustomTiers: []types.CustomTier{
+				{
+					BeginRangeInclusive: ptr.Float64(1.0),
+					EndRangeExclusive:   ptr.Float64(1.0),
+					RateValue:           ptr.Float64(1.0),
+				},
+				{
+					BeginRangeInclusive: ptr.Float64(1.0),
+					EndRangeExclusive:   ptr.Float64(1.0),
+					RateValue:           ptr.Float64(1.0),
+				},
 			},
 		},
 	}

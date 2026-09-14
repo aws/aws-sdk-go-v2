@@ -8,8 +8,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// CancelImageCreation cancels the creation of Image. This operation can only be
-// used on images in a non-terminal state.
+// Cancels the creation of an image. This operation can only be used on images in
+// a non-terminal state.
 func (c *Client) CancelImageCreation(ctx context.Context, params *CancelImageCreationInput, optFns ...func(*Options)) (*CancelImageCreationOutput, error) {
 	if params == nil {
 		params = &CancelImageCreationInput{}
@@ -27,8 +27,10 @@ func (c *Client) CancelImageCreation(ctx context.Context, params *CancelImageCre
 
 type CancelImageCreationInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//

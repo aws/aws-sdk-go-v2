@@ -7,7 +7,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Gets an image recipe policy.
+// Retrieves an image recipe policy.
 func (c *Client) GetImageRecipePolicy(ctx context.Context, params *GetImageRecipePolicyInput, optFns ...func(*Options)) (*GetImageRecipePolicyOutput, error) {
 	if params == nil {
 		params = &GetImageRecipePolicyInput{}

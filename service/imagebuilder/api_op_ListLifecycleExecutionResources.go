@@ -9,7 +9,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// List resources that the runtime instance of the image lifecycle identified for
+// Lists resources that the runtime instance of the image lifecycle identified for
 // lifecycle actions.
 func (c *Client) ListLifecycleExecutionResources(ctx context.Context, params *ListLifecycleExecutionResourcesInput, optFns ...func(*Options)) (*ListLifecycleExecutionResourcesOutput, error) {
 	if params == nil {
@@ -28,16 +28,15 @@ func (c *Client) ListLifecycleExecutionResources(ctx context.Context, params *Li
 
 type ListLifecycleExecutionResourcesInput struct {
 
-	// Use the unique identifier for a runtime instance of the lifecycle policy to get
-	// runtime details.
+	// The unique identifier for a runtime instance of the lifecycle policy.
 	//
 	// This member is required.
 	LifecycleExecutionId *string
 
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	MaxResults *int32
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 
@@ -121,7 +120,7 @@ func (c *Client) addOperationListLifecycleExecutionResourcesMiddlewares(stack *m
 // ListLifecycleExecutionResourcesPaginatorOptions is the paginator options for
 // ListLifecycleExecutionResources
 type ListLifecycleExecutionResourcesPaginatorOptions struct {
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

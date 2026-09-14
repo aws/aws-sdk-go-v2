@@ -9,7 +9,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Import a Windows operating system image from a verified Microsoft ISO disk
+// Imports a Windows operating system image from a verified Microsoft ISO disk
 // file. The following disk images are supported:
 //
 //   - Windows 11 Enterprise
@@ -30,8 +30,10 @@ func (c *Client) ImportDiskImage(ctx context.Context, params *ImportDiskImageInp
 
 type ImportDiskImageInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -80,7 +82,7 @@ type ImportDiskImageInput struct {
 	// Microsoft ISO file.
 	ExecutionRole *string
 
-	// Define logging configuration for the image build process.
+	// The logging configuration for the image build process.
 	LoggingConfiguration *types.ImageLoggingConfiguration
 
 	// Configures Secure Boot and UEFI settings for the imported image.

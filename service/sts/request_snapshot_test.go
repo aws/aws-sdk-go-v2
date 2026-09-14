@@ -224,6 +224,7 @@ func TestCheckRequestSnapshot_AssumeRole(t *testing.T) {
 				ContextAssertion: ptr.String("__ContextAssertion__"),
 			},
 		},
+		MinimumSessionTokenSize: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -261,8 +262,9 @@ func TestCheckRequestSnapshot_AssumeRoleWithSAML(t *testing.T) {
 				Arn: ptr.String("__Arn__"),
 			},
 		},
-		Policy:          ptr.String("__Policy__"),
-		DurationSeconds: ptr.Int32(1),
+		Policy:                  ptr.String("__Policy__"),
+		DurationSeconds:         ptr.Int32(1),
+		MinimumSessionTokenSize: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -301,8 +303,9 @@ func TestCheckRequestSnapshot_AssumeRoleWithWebIdentity(t *testing.T) {
 				Arn: ptr.String("__Arn__"),
 			},
 		},
-		Policy:          ptr.String("__Policy__"),
-		DurationSeconds: ptr.Int32(1),
+		Policy:                  ptr.String("__Policy__"),
+		DurationSeconds:         ptr.Int32(1),
+		MinimumSessionTokenSize: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -333,7 +336,8 @@ func TestCheckRequestSnapshot_AssumeRoot(t *testing.T) {
 		TaskPolicyArn: &types.PolicyDescriptorType{
 			Arn: ptr.String("__Arn__"),
 		},
-		DurationSeconds: ptr.Int32(1),
+		DurationSeconds:         ptr.Int32(1),
+		MinimumSessionTokenSize: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -487,6 +491,7 @@ func TestCheckRequestSnapshot_GetFederationToken(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		MinimumSessionTokenSize: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -513,9 +518,10 @@ func TestCheckRequestSnapshot_GetFederationToken(t *testing.T) {
 
 func TestCheckRequestSnapshot_GetSessionToken(t *testing.T) {
 	input := &GetSessionTokenInput{
-		DurationSeconds: ptr.Int32(1),
-		SerialNumber:    ptr.String("__SerialNumber__"),
-		TokenCode:       ptr.String("__TokenCode__"),
+		DurationSeconds:         ptr.Int32(1),
+		SerialNumber:            ptr.String("__SerialNumber__"),
+		TokenCode:               ptr.String("__TokenCode__"),
+		MinimumSessionTokenSize: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -623,6 +629,7 @@ func TestUpdateRequestSnapshot_AssumeRole(t *testing.T) {
 				ContextAssertion: ptr.String("__ContextAssertion__"),
 			},
 		},
+		MinimumSessionTokenSize: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -660,8 +667,9 @@ func TestUpdateRequestSnapshot_AssumeRoleWithSAML(t *testing.T) {
 				Arn: ptr.String("__Arn__"),
 			},
 		},
-		Policy:          ptr.String("__Policy__"),
-		DurationSeconds: ptr.Int32(1),
+		Policy:                  ptr.String("__Policy__"),
+		DurationSeconds:         ptr.Int32(1),
+		MinimumSessionTokenSize: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -700,8 +708,9 @@ func TestUpdateRequestSnapshot_AssumeRoleWithWebIdentity(t *testing.T) {
 				Arn: ptr.String("__Arn__"),
 			},
 		},
-		Policy:          ptr.String("__Policy__"),
-		DurationSeconds: ptr.Int32(1),
+		Policy:                  ptr.String("__Policy__"),
+		DurationSeconds:         ptr.Int32(1),
+		MinimumSessionTokenSize: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -732,7 +741,8 @@ func TestUpdateRequestSnapshot_AssumeRoot(t *testing.T) {
 		TaskPolicyArn: &types.PolicyDescriptorType{
 			Arn: ptr.String("__Arn__"),
 		},
-		DurationSeconds: ptr.Int32(1),
+		DurationSeconds:         ptr.Int32(1),
+		MinimumSessionTokenSize: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -886,6 +896,7 @@ func TestUpdateRequestSnapshot_GetFederationToken(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		MinimumSessionTokenSize: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -912,9 +923,10 @@ func TestUpdateRequestSnapshot_GetFederationToken(t *testing.T) {
 
 func TestUpdateRequestSnapshot_GetSessionToken(t *testing.T) {
 	input := &GetSessionTokenInput{
-		DurationSeconds: ptr.Int32(1),
-		SerialNumber:    ptr.String("__SerialNumber__"),
-		TokenCode:       ptr.String("__TokenCode__"),
+		DurationSeconds:         ptr.Int32(1),
+		SerialNumber:            ptr.String("__SerialNumber__"),
+		TokenCode:               ptr.String("__TokenCode__"),
+		MinimumSessionTokenSize: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""

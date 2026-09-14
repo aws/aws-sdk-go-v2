@@ -9,8 +9,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Get a list of workflow steps that are waiting for action for workflows in your
-// Amazon Web Services account.
+// Retrieves a list of workflow steps that are waiting for action for workflows in
+// your Amazon Web Services account.
 func (c *Client) ListWaitingWorkflowSteps(ctx context.Context, params *ListWaitingWorkflowStepsInput, optFns ...func(*Options)) (*ListWaitingWorkflowStepsOutput, error) {
 	if params == nil {
 		params = &ListWaitingWorkflowStepsInput{}
@@ -28,10 +28,10 @@ func (c *Client) ListWaitingWorkflowSteps(ctx context.Context, params *ListWaiti
 
 type ListWaitingWorkflowStepsInput struct {
 
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	MaxResults *int32
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 
@@ -98,7 +98,7 @@ func (c *Client) addOperationListWaitingWorkflowStepsMiddlewares(stack *middlewa
 // ListWaitingWorkflowStepsPaginatorOptions is the paginator options for
 // ListWaitingWorkflowSteps
 type ListWaitingWorkflowStepsPaginatorOptions struct {
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

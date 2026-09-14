@@ -217,6 +217,7 @@
         "api_op_ListGlossaries.go",
         "api_op_ListGlossaryTerms.go",
         "api_op_ListIntegrationResourceProperties.go",
+        "api_op_ListIntegrationTableProperties.go",
         "api_op_ListIterableForms.go",
         "api_op_ListJobs.go",
         "api_op_ListMLTransforms.go",

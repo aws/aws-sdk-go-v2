@@ -16,10 +16,10 @@ import (
 // The semantic version has four nodes: ../. You can assign values for the first
 // three, and can filter on all of them.
 //
-// Filtering: With semantic versioning, you have the flexibility to use wildcards
-// (x) to specify the most recent versions or nodes when selecting the base image
-// or components for your recipe. When you use a wildcard in any node, all nodes to
-// the right of the first wildcard must also be wildcards.
+// Filtering: You can use wildcards (x) to specify the most recent versions or
+// nodes when selecting the base image or components for your recipe. When you use
+// a wildcard in any node, all nodes to the right of the first wildcard must also
+// be wildcards.
 func (c *Client) ListComponents(ctx context.Context, params *ListComponentsInput, optFns ...func(*Options)) (*ListComponentsOutput, error) {
 	if params == nil {
 		params = &ListComponentsInput{}
@@ -55,10 +55,10 @@ type ListComponentsInput struct {
 	//   - version
 	Filters []types.Filter
 
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	MaxResults *int32
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 
@@ -135,7 +135,7 @@ func (c *Client) addOperationListComponentsMiddlewares(stack *middleware.Stack, 
 
 // ListComponentsPaginatorOptions is the paginator options for ListComponents
 type ListComponentsPaginatorOptions struct {
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

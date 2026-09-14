@@ -2393,6 +2393,7 @@ func TestCheckRequestSnapshot_CreateIntegrationTableProperties(t *testing.T) {
 				},
 			},
 			TargetTableName: ptr.String("__TargetTableName__"),
+			IntegrationArn:  ptr.String("__IntegrationArn__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -11061,6 +11062,50 @@ func TestCheckRequestSnapshot_ListIntegrationResourceProperties(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListIntegrationTableProperties(t *testing.T) {
+	input := &ListIntegrationTablePropertiesInput{
+		Marker: ptr.String("__Marker__"),
+		Filters: []types.IntegrationTablePropertiesFilter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListIntegrationTableProperties(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListIntegrationTableProperties"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListIterableForms(t *testing.T) {
 	input := &ListIterableFormsInput{
 		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
@@ -15023,6 +15068,7 @@ func TestCheckRequestSnapshot_UpdateIntegrationTableProperties(t *testing.T) {
 				},
 			},
 			TargetTableName: ptr.String("__TargetTableName__"),
+			IntegrationArn:  ptr.String("__IntegrationArn__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -20924,6 +20970,7 @@ func TestUpdateRequestSnapshot_CreateIntegrationTableProperties(t *testing.T) {
 				},
 			},
 			TargetTableName: ptr.String("__TargetTableName__"),
+			IntegrationArn:  ptr.String("__IntegrationArn__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -29592,6 +29639,50 @@ func TestUpdateRequestSnapshot_ListIntegrationResourceProperties(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListIntegrationTableProperties(t *testing.T) {
+	input := &ListIntegrationTablePropertiesInput{
+		Marker: ptr.String("__Marker__"),
+		Filters: []types.IntegrationTablePropertiesFilter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListIntegrationTableProperties(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListIntegrationTableProperties"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListIterableForms(t *testing.T) {
 	input := &ListIterableFormsInput{
 		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
@@ -33554,6 +33645,7 @@ func TestUpdateRequestSnapshot_UpdateIntegrationTableProperties(t *testing.T) {
 				},
 			},
 			TargetTableName: ptr.String("__TargetTableName__"),
+			IntegrationArn:  ptr.String("__IntegrationArn__"),
 		},
 	}
 	body := &bytes.Buffer{}

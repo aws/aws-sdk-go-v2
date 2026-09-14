@@ -9,7 +9,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Get a list of lifecycle policies in your Amazon Web Services account.
+// Retrieves a list of lifecycle policies in your Amazon Web Services account.
 func (c *Client) ListLifecyclePolicies(ctx context.Context, params *ListLifecyclePoliciesInput, optFns ...func(*Options)) (*ListLifecyclePoliciesOutput, error) {
 	if params == nil {
 		params = &ListLifecyclePoliciesInput{}
@@ -30,10 +30,10 @@ type ListLifecyclePoliciesInput struct {
 	// Streamline results based on one of the following values: Name , Status .
 	Filters []types.Filter
 
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	MaxResults *int32
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 
@@ -100,7 +100,7 @@ func (c *Client) addOperationListLifecyclePoliciesMiddlewares(stack *middleware.
 // ListLifecyclePoliciesPaginatorOptions is the paginator options for
 // ListLifecyclePolicies
 type ListLifecyclePoliciesPaginatorOptions struct {
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

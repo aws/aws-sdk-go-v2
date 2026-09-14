@@ -46,7 +46,7 @@ type ListImageScanFindingAggregationsInput struct {
 	// by specific criteria, such as tags, attributes, or IDs.
 	Filter *types.Filter
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 

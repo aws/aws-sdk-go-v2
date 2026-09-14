@@ -9,7 +9,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Create a lifecycle policy resource.
+// Creates a lifecycle policy resource.
 func (c *Client) CreateLifecyclePolicy(ctx context.Context, params *CreateLifecyclePolicyInput, optFns ...func(*Options)) (*CreateLifecyclePolicyOutput, error) {
 	if params == nil {
 		params = &CreateLifecyclePolicyInput{}
@@ -27,8 +27,10 @@ func (c *Client) CreateLifecyclePolicy(ctx context.Context, params *CreateLifecy
 
 type CreateLifecyclePolicyInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -63,6 +65,11 @@ type CreateLifecyclePolicyInput struct {
 
 	// Optional description for the lifecycle policy.
 	Description *string
+
+	// Validates the required permissions and request parameters without making the
+	// request. If validation succeeds, the operation returns a
+	// DryRunOperationException error response.
+	DryRun bool
 
 	// Indicates whether the lifecycle policy resource is enabled.
 	Status types.LifecyclePolicyStatus
