@@ -4767,7 +4767,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>A list of service-level account usages.</p>",
                 "smithy.api#length": {
-                    "max": 50
+                    "max": 200
                 }
             }
         },

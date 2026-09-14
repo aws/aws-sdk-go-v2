@@ -2511,8 +2511,13 @@
                 "FreeTier": {
                     "target": "com.amazonaws.billingconductor#CreateFreeTierConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> The possible Amazon Web Services Free Tier configurations. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p> The possible Amazon Web Services Free Tier configurations. </p>"
+                    }
+                },
+                "CustomTiers": {
+                    "target": "com.amazonaws.billingconductor#CustomTiersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The set of custom tiers for the pricing rule. </p>"
                     }
                 }
             },
@@ -3028,6 +3033,70 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A representation of a custom line item version.</p>"
+            }
+        },
+        "com.amazonaws.billingconductor#CustomTier": {
+            "type": "structure",
+            "members": {
+                "BeginRangeInclusive": {
+                    "target": "com.amazonaws.billingconductor#CustomTierBeginRangeInclusive",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The inclusive start of the usage range that this tier applies to. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndRangeExclusive": {
+                    "target": "com.amazonaws.billingconductor#CustomTierEndRangeExclusive",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The exclusive end of the usage range that this tier applies to. If you don't specify a value, this tier applies to all usage that is greater than or equal to <code>BeginRangeInclusive</code>. </p>"
+                    }
+                },
+                "RateValue": {
+                    "target": "com.amazonaws.billingconductor#CustomTierRateValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The rate that's applied to the usage that falls within this tier. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> A custom tier for the pricing rule. Each custom tier applies a rate to the usage that falls within the tier's range. </p>"
+            }
+        },
+        "com.amazonaws.billingconductor#CustomTierBeginRangeInclusive": {
+            "type": "double",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.billingconductor#CustomTierEndRangeExclusive": {
+            "type": "double",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.billingconductor#CustomTierRateValue": {
+            "type": "double",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.billingconductor#CustomTiersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billingconductor#CustomTier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.billingconductor#DeleteBillingGroup": {
@@ -5864,8 +5933,13 @@
                 "FreeTier": {
                     "target": "com.amazonaws.billingconductor#FreeTierConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> The possible Amazon Web Services Free Tier configurations. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p> The possible Amazon Web Services Free Tier configurations. </p>"
+                    }
+                },
+                "CustomTiers": {
+                    "target": "com.amazonaws.billingconductor#CustomTiersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The set of custom tiers for the pricing rule. </p>"
                     }
                 }
             },
@@ -6599,8 +6673,13 @@
                 "FreeTier": {
                     "target": "com.amazonaws.billingconductor#UpdateFreeTierConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> The possible Amazon Web Services Free Tier configurations. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p> The possible Amazon Web Services Free Tier configurations. </p>"
+                    }
+                },
+                "CustomTiers": {
+                    "target": "com.amazonaws.billingconductor#CustomTiersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The set of custom tiers for the pricing rule. </p>"
                     }
                 }
             },
