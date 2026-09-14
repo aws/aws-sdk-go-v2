@@ -1,8 +1,0 @@
-{
-    "id": "59c827ef-97c8-4697-8800-3eb6c3f6ee8f",
-    "type": "feature",
-    "description": "This release adds a dryRun option to Image Builder create APIs (except CreateImage), structured failure context on failed images including component and distribution failure details, and step retry attempt tracking.",
-    "modules": [
-        "service/imagebuilder"
-    ]
-}

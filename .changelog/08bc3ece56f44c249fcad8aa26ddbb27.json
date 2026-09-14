@@ -1,8 +1,0 @@
-{
-    "id": "08bc3ece-56f4-4c24-9fca-d8aa26ddbb27",
-    "type": "feature",
-    "description": "Amazon Glue releasing the new API ListIntegrationTableProperties and adding IntegrationArn to TargetTableConfig",
-    "modules": [
-        "service/glue"
-    ]
-}

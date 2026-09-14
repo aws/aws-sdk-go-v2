@@ -1,8 +1,0 @@
-{
-    "id": "c2467a17-f8e9-4ea3-98bd-01f5af801def",
-    "type": "feature",
-    "description": "Increases the maximum session token size to 4,096 bytes and removes the packed policy size limit. Adds SessionTokenSize and SessionTokenUtilization fields and a new MinimumSessionTokenSize parameter. PackedPolicySize is deprecated.",
-    "modules": [
-        "service/sts"
-    ]
-}

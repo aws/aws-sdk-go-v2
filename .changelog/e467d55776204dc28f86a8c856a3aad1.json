@@ -1,8 +1,0 @@
-{
-    "id": "e467d557-7620-4dc2-8f86-a8c856a3aad1",
-    "type": "feature",
-    "description": "Increased the maximum number of services returned in the supportEligibleSpendByService field of ListEnterpriseSupportLinkedAccountCharges",
-    "modules": [
-        "service/billing"
-    ]
-}

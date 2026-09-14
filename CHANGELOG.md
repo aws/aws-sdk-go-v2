@@ -1,3 +1,20 @@
+# Release (2026-09-14)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/billingconductor`: [v1.39.0](service/billingconductor/CHANGELOG.md#v1390-2026-09-14)
+  * **Feature**: This release adds support for custom volume tiering. You can now define custom tiers on a pricing rule's tiering configuration, where each tier specifies a usage range and the rate applied to usage in that range.
+* `github.com/aws/aws-sdk-go-v2/service/codedeploy`: [v1.45.0](service/codedeploy/CHANGELOG.md#v1450-2026-09-14)
+  * **Feature**: AWS CodeDeploy now returns the deployment mode on GetDeployment and BatchGetDeployments. The new deploymentMode field on DeploymentInfo indicates whether a deployment used the standard deployment process or restarted the application using a previously installed revision (RESTART mode).
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.159.0](service/glue/CHANGELOG.md#v11590-2026-09-14)
+  * **Feature**: Amazon Glue releasing the new API ListIntegrationTableProperties and adding IntegrationArn to TargetTableConfig
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.64.0](service/imagebuilder/CHANGELOG.md#v1640-2026-09-14)
+  * **Feature**: This release adds a dryRun option to Image Builder create APIs (except CreateImage), structured failure context on failed images including component and distribution failure details, and step retry attempt tracking.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.51.0](service/sts/CHANGELOG.md#v1510-2026-09-14)
+  * **Feature**: Increases the maximum session token size to 4,096 bytes and removes the packed policy size limit. Adds SessionTokenSize and SessionTokenUtilization fields and a new MinimumSessionTokenSize parameter. PackedPolicySize is deprecated.
+
 # Release (2026-09-11)
 
 ## General Highlights
