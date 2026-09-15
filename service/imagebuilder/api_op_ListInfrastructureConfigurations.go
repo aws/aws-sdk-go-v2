@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,22 @@ type ListInfrastructureConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInfrastructureConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInfrastructureConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInfrastructureConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.ListInfrastructureConfigurationsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInfrastructureConfigurationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInfrastructureConfigurationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListInfrastructureConfigurationsOutput struct {
 
 	// The list of infrastructure configurations.
@@ -59,13 +77,41 @@ type ListInfrastructureConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInfrastructureConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInfrastructureConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInfrastructureConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInfrastructureConfigurationSummaryList(s, schemas.ListInfrastructureConfigurationsResponse_infrastructureConfigurationSummaryList, v.InfrastructureConfigurationSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInfrastructureConfigurationsResponse_nextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListInfrastructureConfigurationsResponse_requestId, *v.RequestId)
+	}
+}
+func (v *ListInfrastructureConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInfrastructureConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInfrastructureConfigurationsResponse_infrastructureConfigurationSummaryList:
+			return deserializeInfrastructureConfigurationSummaryList(d, schemas.ListInfrastructureConfigurationsResponse_infrastructureConfigurationSummaryList, &v.InfrastructureConfigurationSummaryList)
+		case schemas.ListInfrastructureConfigurationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInfrastructureConfigurationsResponse_nextToken, v.NextToken)
+		case schemas.ListInfrastructureConfigurationsResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListInfrastructureConfigurationsResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInfrastructureConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInfrastructureConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInfrastructureConfigurations, schemas.ListInfrastructureConfigurationsRequest, schemas.ListInfrastructureConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListInfrastructureConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInfrastructureConfigurations, schemas.ListInfrastructureConfigurationsRequest, schemas.ListInfrastructureConfigurationsResponse), output: &ListInfrastructureConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

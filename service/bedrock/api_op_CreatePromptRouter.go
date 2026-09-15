@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,36 @@ type CreatePromptRouterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePromptRouterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePromptRouterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePromptRouterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreatePromptRouterRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreatePromptRouterRequest_description, *v.Description)
+	}
+	if v.FallbackModel != nil {
+		s.WriteStruct(schemas.CreatePromptRouterRequest_fallbackModel)
+		v.FallbackModel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePromptRouterTargetModels(s, schemas.CreatePromptRouterRequest_models, v.Models)
+	if v.PromptRouterName != nil {
+		s.WriteString(schemas.CreatePromptRouterRequest_promptRouterName, *v.PromptRouterName)
+	}
+	if v.RoutingCriteria != nil {
+		s.WriteStruct(schemas.CreatePromptRouterRequest_routingCriteria)
+		v.RoutingCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreatePromptRouterRequest_tags, v.Tags)
+}
+
 type CreatePromptRouterOutput struct {
 
 	// The Amazon Resource Name (ARN) that uniquely identifies the prompt router.
@@ -77,13 +109,32 @@ type CreatePromptRouterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePromptRouterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePromptRouterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePromptRouterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PromptRouterArn != nil {
+		s.WriteString(schemas.CreatePromptRouterResponse_promptRouterArn, *v.PromptRouterArn)
+	}
+}
+func (v *CreatePromptRouterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePromptRouterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePromptRouterResponse_promptRouterArn:
+			v.PromptRouterArn = new(string)
+			return d.ReadString(schemas.CreatePromptRouterResponse_promptRouterArn, v.PromptRouterArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePromptRouterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePromptRouter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePromptRouter, schemas.CreatePromptRouterRequest, schemas.CreatePromptRouterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePromptRouter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePromptRouter, schemas.CreatePromptRouterRequest, schemas.CreatePromptRouterResponse), output: &CreatePromptRouterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

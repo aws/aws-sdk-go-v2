@@ -4,6 +4,8 @@ package ecr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type GetDownloadUrlForLayerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDownloadUrlForLayerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDownloadUrlForLayerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDownloadUrlForLayerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LayerDigest != nil {
+		s.WriteString(schemas.GetDownloadUrlForLayerRequest_layerDigest, *v.LayerDigest)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.GetDownloadUrlForLayerRequest_registryId, *v.RegistryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.GetDownloadUrlForLayerRequest_repositoryName, *v.RepositoryName)
+	}
+}
+
 type GetDownloadUrlForLayerOutput struct {
 
 	// The pre-signed Amazon S3 download URL for the requested layer.
@@ -65,13 +85,38 @@ type GetDownloadUrlForLayerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDownloadUrlForLayerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDownloadUrlForLayerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDownloadUrlForLayerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DownloadUrl != nil {
+		s.WriteString(schemas.GetDownloadUrlForLayerResponse_downloadUrl, *v.DownloadUrl)
+	}
+	if v.LayerDigest != nil {
+		s.WriteString(schemas.GetDownloadUrlForLayerResponse_layerDigest, *v.LayerDigest)
+	}
+}
+func (v *GetDownloadUrlForLayerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDownloadUrlForLayerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDownloadUrlForLayerResponse_downloadUrl:
+			v.DownloadUrl = new(string)
+			return d.ReadString(schemas.GetDownloadUrlForLayerResponse_downloadUrl, v.DownloadUrl)
+		case schemas.GetDownloadUrlForLayerResponse_layerDigest:
+			v.LayerDigest = new(string)
+			return d.ReadString(schemas.GetDownloadUrlForLayerResponse_layerDigest, v.LayerDigest)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDownloadUrlForLayerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDownloadUrlForLayer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDownloadUrlForLayer, schemas.GetDownloadUrlForLayerRequest, schemas.GetDownloadUrlForLayerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDownloadUrlForLayer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDownloadUrlForLayer, schemas.GetDownloadUrlForLayerRequest, schemas.GetDownloadUrlForLayerResponse), output: &GetDownloadUrlForLayerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package resiliencehub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,19 @@ type AcceptResourceGroupingRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptResourceGroupingRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptResourceGroupingRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptResourceGroupingRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.AcceptResourceGroupingRecommendationsRequest_appArn, *v.AppArn)
+	}
+	serializeAcceptGroupingRecommendationEntries(s, schemas.AcceptResourceGroupingRecommendationsRequest_entries, v.Entries)
+}
+
 type AcceptResourceGroupingRecommendationsOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
@@ -70,13 +85,35 @@ type AcceptResourceGroupingRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptResourceGroupingRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptResourceGroupingRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptResourceGroupingRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.AcceptResourceGroupingRecommendationsResponse_appArn, *v.AppArn)
+	}
+	serializeFailedGroupingRecommendationEntries(s, schemas.AcceptResourceGroupingRecommendationsResponse_failedEntries, v.FailedEntries)
+}
+func (v *AcceptResourceGroupingRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceptResourceGroupingRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceptResourceGroupingRecommendationsResponse_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.AcceptResourceGroupingRecommendationsResponse_appArn, v.AppArn)
+		case schemas.AcceptResourceGroupingRecommendationsResponse_failedEntries:
+			return deserializeFailedGroupingRecommendationEntries(d, schemas.AcceptResourceGroupingRecommendationsResponse_failedEntries, &v.FailedEntries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcceptResourceGroupingRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAcceptResourceGroupingRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptResourceGroupingRecommendations, schemas.AcceptResourceGroupingRecommendationsRequest, schemas.AcceptResourceGroupingRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAcceptResourceGroupingRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptResourceGroupingRecommendations, schemas.AcceptResourceGroupingRecommendationsRequest, schemas.AcceptResourceGroupingRecommendationsResponse), output: &AcceptResourceGroupingRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

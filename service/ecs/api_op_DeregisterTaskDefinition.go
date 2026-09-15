@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,18 @@ type DeregisterTaskDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterTaskDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterTaskDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterTaskDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskDefinition != nil {
+		s.WriteString(schemas.DeregisterTaskDefinitionRequest_taskDefinition, *v.TaskDefinition)
+	}
+}
+
 type DeregisterTaskDefinitionOutput struct {
 
 	// The full description of the deregistered task.
@@ -67,13 +81,34 @@ type DeregisterTaskDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterTaskDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterTaskDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterTaskDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskDefinition != nil {
+		s.WriteStruct(schemas.DeregisterTaskDefinitionResponse_taskDefinition)
+		v.TaskDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeregisterTaskDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterTaskDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeregisterTaskDefinitionResponse_taskDefinition:
+			v.TaskDefinition = &types.TaskDefinition{}
+			return v.TaskDefinition.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterTaskDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterTaskDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterTaskDefinition, schemas.DeregisterTaskDefinitionRequest, schemas.DeregisterTaskDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeregisterTaskDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterTaskDefinition, schemas.DeregisterTaskDefinitionRequest, schemas.DeregisterTaskDefinitionResponse), output: &DeregisterTaskDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

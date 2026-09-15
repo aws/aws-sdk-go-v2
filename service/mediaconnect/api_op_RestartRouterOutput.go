@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type RestartRouterOutputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestartRouterOutputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestartRouterOutputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestartRouterOutputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RestartRouterOutputRequest_Arn, *v.Arn)
+	}
+}
+
 type RestartRouterOutputOutput struct {
 
 	// The ARN of the router output that was restarted.
@@ -58,13 +72,48 @@ type RestartRouterOutputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestartRouterOutputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestartRouterOutputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestartRouterOutputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RestartRouterOutputResponse_Arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RestartRouterOutputResponse_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.RestartRouterOutputResponse_State, string(v.State))
+	}
+}
+func (v *RestartRouterOutputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestartRouterOutputResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestartRouterOutputResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RestartRouterOutputResponse_Arn, v.Arn)
+		case schemas.RestartRouterOutputResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RestartRouterOutputResponse_Name, v.Name)
+		case schemas.RestartRouterOutputResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.RestartRouterOutputResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.RouterOutputState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestartRouterOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRestartRouterOutput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestartRouterOutput, schemas.RestartRouterOutputRequest, schemas.RestartRouterOutputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRestartRouterOutput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestartRouterOutput, schemas.RestartRouterOutputRequest, schemas.RestartRouterOutputResponse), output: &RestartRouterOutputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

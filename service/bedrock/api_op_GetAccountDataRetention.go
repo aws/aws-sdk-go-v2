@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -29,6 +31,15 @@ type GetAccountDataRetentionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountDataRetentionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountDataRetentionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountDataRetentionInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetAccountDataRetentionOutput struct {
 
 	// The data retention mode configured for the account.
@@ -45,13 +56,42 @@ type GetAccountDataRetentionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountDataRetentionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountDataRetentionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountDataRetentionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mode != "" {
+		s.WriteString(schemas.GetAccountDataRetentionResponse_mode, string(v.Mode))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetAccountDataRetentionResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetAccountDataRetentionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccountDataRetentionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccountDataRetentionResponse_mode:
+			var ev string
+			if err := d.ReadString(schemas.GetAccountDataRetentionResponse_mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = types.DataRetentionMode(ev)
+			return nil
+		case schemas.GetAccountDataRetentionResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAccountDataRetentionResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccountDataRetentionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAccountDataRetention{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountDataRetention, schemas.GetAccountDataRetentionRequest, schemas.GetAccountDataRetentionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAccountDataRetention{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountDataRetention, schemas.GetAccountDataRetentionRequest, schemas.GetAccountDataRetentionResponse), output: &GetAccountDataRetentionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

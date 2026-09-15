@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,25 @@ type ListImageRecipesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImageRecipesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImageRecipesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImageRecipesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.ListImageRecipesRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListImageRecipesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImageRecipesRequest_nextToken, *v.NextToken)
+	}
+	if v.Owner != "" {
+		s.WriteString(schemas.ListImageRecipesRequest_owner, string(v.Owner))
+	}
+}
+
 type ListImageRecipesOutput struct {
 
 	// A list of ImageRecipeSummary objects that contain identifying characteristics
@@ -73,13 +94,41 @@ type ListImageRecipesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImageRecipesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImageRecipesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImageRecipesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImageRecipeSummaryList(s, schemas.ListImageRecipesResponse_imageRecipeSummaryList, v.ImageRecipeSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImageRecipesResponse_nextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListImageRecipesResponse_requestId, *v.RequestId)
+	}
+}
+func (v *ListImageRecipesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListImageRecipesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListImageRecipesResponse_imageRecipeSummaryList:
+			return deserializeImageRecipeSummaryList(d, schemas.ListImageRecipesResponse_imageRecipeSummaryList, &v.ImageRecipeSummaryList)
+		case schemas.ListImageRecipesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListImageRecipesResponse_nextToken, v.NextToken)
+		case schemas.ListImageRecipesResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListImageRecipesResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListImageRecipesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListImageRecipes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImageRecipes, schemas.ListImageRecipesRequest, schemas.ListImageRecipesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListImageRecipes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImageRecipes, schemas.ListImageRecipesRequest, schemas.ListImageRecipesResponse), output: &ListImageRecipesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

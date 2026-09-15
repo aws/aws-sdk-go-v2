@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeFlowSourceThumbnailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFlowSourceThumbnailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFlowSourceThumbnailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFlowSourceThumbnailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.DescribeFlowSourceThumbnailRequest_FlowArn, *v.FlowArn)
+	}
+}
+
 type DescribeFlowSourceThumbnailOutput struct {
 
 	// The details of the thumbnail, including thumbnail base64 string, timecode and
@@ -46,13 +60,34 @@ type DescribeFlowSourceThumbnailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFlowSourceThumbnailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFlowSourceThumbnailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFlowSourceThumbnailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThumbnailDetails != nil {
+		s.WriteStruct(schemas.DescribeFlowSourceThumbnailResponse_ThumbnailDetails)
+		v.ThumbnailDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeFlowSourceThumbnailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFlowSourceThumbnailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFlowSourceThumbnailResponse_ThumbnailDetails:
+			v.ThumbnailDetails = &types.ThumbnailDetails{}
+			return v.ThumbnailDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFlowSourceThumbnailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeFlowSourceThumbnail{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFlowSourceThumbnail, schemas.DescribeFlowSourceThumbnailRequest, schemas.DescribeFlowSourceThumbnailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeFlowSourceThumbnail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFlowSourceThumbnail, schemas.DescribeFlowSourceThumbnailRequest, schemas.DescribeFlowSourceThumbnailResponse), output: &DescribeFlowSourceThumbnailOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

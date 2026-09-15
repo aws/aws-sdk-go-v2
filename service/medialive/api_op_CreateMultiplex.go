@@ -5,7 +5,9 @@ package medialive
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,28 @@ type CreateMultiplexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMultiplexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMultiplexRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMultiplexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOf__string(s, schemas.CreateMultiplexRequest_AvailabilityZones, v.AvailabilityZones)
+	if v.MultiplexSettings != nil {
+		s.WriteStruct(schemas.CreateMultiplexRequest_MultiplexSettings)
+		v.MultiplexSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateMultiplexRequest_Name, *v.Name)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateMultiplexRequest_RequestId, *v.RequestId)
+	}
+	serializeTags(s, schemas.CreateMultiplexRequest_Tags, v.Tags)
+}
+
 // Placeholder documentation for CreateMultiplexResponse
 type CreateMultiplexOutput struct {
 
@@ -66,13 +90,34 @@ type CreateMultiplexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMultiplexOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMultiplexResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMultiplexOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Multiplex != nil {
+		s.WriteStruct(schemas.CreateMultiplexResponse_Multiplex)
+		v.Multiplex.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateMultiplexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMultiplexResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMultiplexResponse_Multiplex:
+			v.Multiplex = &types.Multiplex{}
+			return v.Multiplex.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMultiplexMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMultiplex{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMultiplex, schemas.CreateMultiplexRequest, schemas.CreateMultiplexResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMultiplex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMultiplex, schemas.CreateMultiplexRequest, schemas.CreateMultiplexResponse), output: &CreateMultiplexOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package kinesis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -118,6 +120,29 @@ type GetRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecordsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DryRun != nil {
+		s.WriteBool(schemas.GetRecordsInput_DryRun, *v.DryRun)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.GetRecordsInput_Limit, *v.Limit)
+	}
+	if v.ShardIterator != nil {
+		s.WriteString(schemas.GetRecordsInput_ShardIterator, *v.ShardIterator)
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.GetRecordsInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.GetRecordsInput_StreamId, *v.StreamId)
+	}
+}
 func (in *GetRecordsInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
@@ -154,13 +179,44 @@ type GetRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecordsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecordsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChildShardList(s, schemas.GetRecordsOutput_ChildShards, v.ChildShards)
+	if v.MillisBehindLatest != nil {
+		s.WriteInt64(schemas.GetRecordsOutput_MillisBehindLatest, *v.MillisBehindLatest)
+	}
+	if v.NextShardIterator != nil {
+		s.WriteString(schemas.GetRecordsOutput_NextShardIterator, *v.NextShardIterator)
+	}
+	serializeRecordList(s, schemas.GetRecordsOutput_Records, v.Records)
+}
+func (v *GetRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRecordsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRecordsOutput_ChildShards:
+			return deserializeChildShardList(d, schemas.GetRecordsOutput_ChildShards, &v.ChildShards)
+		case schemas.GetRecordsOutput_MillisBehindLatest:
+			v.MillisBehindLatest = new(int64)
+			return d.ReadInt64(schemas.GetRecordsOutput_MillisBehindLatest, v.MillisBehindLatest)
+		case schemas.GetRecordsOutput_NextShardIterator:
+			v.NextShardIterator = new(string)
+			return d.ReadString(schemas.GetRecordsOutput_NextShardIterator, v.NextShardIterator)
+		case schemas.GetRecordsOutput_Records:
+			return deserializeRecordList(d, schemas.GetRecordsOutput_Records, &v.Records)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecords, schemas.GetRecordsInput, schemas.GetRecordsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecords, schemas.GetRecordsInput, schemas.GetRecordsOutput), output: &GetRecordsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

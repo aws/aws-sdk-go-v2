@@ -4,7 +4,9 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,20 @@ type StartDataSourceIntrospectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDataSourceIntrospectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDataSourceIntrospectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDataSourceIntrospectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RdsDataApiConfig != nil {
+		s.WriteStruct(schemas.StartDataSourceIntrospectionRequest_rdsDataApiConfig)
+		v.RdsDataApiConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartDataSourceIntrospectionOutput struct {
 
 	// The introspection ID. Each introspection contains a unique ID that can be used
@@ -57,13 +73,48 @@ type StartDataSourceIntrospectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDataSourceIntrospectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDataSourceIntrospectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDataSourceIntrospectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntrospectionId != nil {
+		s.WriteString(schemas.StartDataSourceIntrospectionResponse_introspectionId, *v.IntrospectionId)
+	}
+	if v.IntrospectionStatus != "" {
+		s.WriteString(schemas.StartDataSourceIntrospectionResponse_introspectionStatus, string(v.IntrospectionStatus))
+	}
+	if v.IntrospectionStatusDetail != nil {
+		s.WriteString(schemas.StartDataSourceIntrospectionResponse_introspectionStatusDetail, *v.IntrospectionStatusDetail)
+	}
+}
+func (v *StartDataSourceIntrospectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDataSourceIntrospectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDataSourceIntrospectionResponse_introspectionId:
+			v.IntrospectionId = new(string)
+			return d.ReadString(schemas.StartDataSourceIntrospectionResponse_introspectionId, v.IntrospectionId)
+		case schemas.StartDataSourceIntrospectionResponse_introspectionStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartDataSourceIntrospectionResponse_introspectionStatus, &ev); err != nil {
+				return err
+			}
+			v.IntrospectionStatus = types.DataSourceIntrospectionStatus(ev)
+			return nil
+		case schemas.StartDataSourceIntrospectionResponse_introspectionStatusDetail:
+			v.IntrospectionStatusDetail = new(string)
+			return d.ReadString(schemas.StartDataSourceIntrospectionResponse_introspectionStatusDetail, v.IntrospectionStatusDetail)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDataSourceIntrospectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartDataSourceIntrospection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDataSourceIntrospection, schemas.StartDataSourceIntrospectionRequest, schemas.StartDataSourceIntrospectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartDataSourceIntrospection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDataSourceIntrospection, schemas.StartDataSourceIntrospectionRequest, schemas.StartDataSourceIntrospectionResponse), output: &StartDataSourceIntrospectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

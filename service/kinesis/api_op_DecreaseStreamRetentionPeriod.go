@@ -4,6 +4,8 @@ package kinesis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -55,6 +57,26 @@ type DecreaseStreamRetentionPeriodInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DecreaseStreamRetentionPeriodInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DecreaseStreamRetentionPeriodInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DecreaseStreamRetentionPeriodInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RetentionPeriodHours != nil {
+		s.WriteInt32(schemas.DecreaseStreamRetentionPeriodInput_RetentionPeriodHours, *v.RetentionPeriodHours)
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.DecreaseStreamRetentionPeriodInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.DecreaseStreamRetentionPeriodInput_StreamId, *v.StreamId)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.DecreaseStreamRetentionPeriodInput_StreamName, *v.StreamName)
+	}
+}
 func (in *DecreaseStreamRetentionPeriodInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
@@ -69,13 +91,26 @@ type DecreaseStreamRetentionPeriodOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DecreaseStreamRetentionPeriodOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DecreaseStreamRetentionPeriodOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DecreaseStreamRetentionPeriodOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDecreaseStreamRetentionPeriodMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDecreaseStreamRetentionPeriod{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DecreaseStreamRetentionPeriod, schemas.DecreaseStreamRetentionPeriodInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDecreaseStreamRetentionPeriod{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DecreaseStreamRetentionPeriod, schemas.DecreaseStreamRetentionPeriodInput, nil), output: &DecreaseStreamRetentionPeriodOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

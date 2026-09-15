@@ -4,6 +4,8 @@ package mediaconvert
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DisassociateCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DisassociateCertificateRequest_Arn, *v.Arn)
+	}
+}
+
 type DisassociateCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type DisassociateCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateCertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateCertificate, schemas.DisassociateCertificateRequest, schemas.DisassociateCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateCertificate, schemas.DisassociateCertificateRequest, schemas.DisassociateCertificateResponse), output: &DisassociateCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

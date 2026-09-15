@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AdminAccounts":[{"AccountId":"__AccountId__","Status":"ENABLED"},{"AccountId":"__AccountId__","Status":"ENABLED"}],"Feature":"SecurityHub","NextToken":"__NextToken__"}

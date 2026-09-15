@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -422,6 +424,80 @@ type UpdateServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZoneRebalancing != "" {
+		s.WriteString(schemas.UpdateServiceRequest_availabilityZoneRebalancing, string(v.AvailabilityZoneRebalancing))
+	}
+	serializeCapacityProviderStrategy(s, schemas.UpdateServiceRequest_capacityProviderStrategy, v.CapacityProviderStrategy)
+	if v.Cluster != nil {
+		s.WriteString(schemas.UpdateServiceRequest_cluster, *v.Cluster)
+	}
+	if v.DeploymentConfiguration != nil {
+		s.WriteStruct(schemas.UpdateServiceRequest_deploymentConfiguration)
+		v.DeploymentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeploymentController != nil {
+		s.WriteStruct(schemas.UpdateServiceRequest_deploymentController)
+		v.DeploymentController.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DesiredCount != nil {
+		s.WriteInt32(schemas.UpdateServiceRequest_desiredCount, *v.DesiredCount)
+	}
+	if v.EnableECSManagedTags != nil {
+		s.WriteBool(schemas.UpdateServiceRequest_enableECSManagedTags, *v.EnableECSManagedTags)
+	}
+	if v.EnableExecuteCommand != nil {
+		s.WriteBool(schemas.UpdateServiceRequest_enableExecuteCommand, *v.EnableExecuteCommand)
+	}
+	if v.ForceNewDeployment != false {
+		s.WriteBool(schemas.UpdateServiceRequest_forceNewDeployment, v.ForceNewDeployment)
+	}
+	if v.HealthCheckGracePeriodSeconds != nil {
+		s.WriteInt32(schemas.UpdateServiceRequest_healthCheckGracePeriodSeconds, *v.HealthCheckGracePeriodSeconds)
+	}
+	serializeLoadBalancers(s, schemas.UpdateServiceRequest_loadBalancers, v.LoadBalancers)
+	if v.Monitoring != nil {
+		s.WriteStruct(schemas.UpdateServiceRequest_monitoring)
+		v.Monitoring.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkConfiguration != nil {
+		s.WriteStruct(schemas.UpdateServiceRequest_networkConfiguration)
+		v.NetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePlacementConstraints(s, schemas.UpdateServiceRequest_placementConstraints, v.PlacementConstraints)
+	serializePlacementStrategies(s, schemas.UpdateServiceRequest_placementStrategy, v.PlacementStrategy)
+	if v.PlatformVersion != nil {
+		s.WriteString(schemas.UpdateServiceRequest_platformVersion, *v.PlatformVersion)
+	}
+	if v.PropagateTags != "" {
+		s.WriteString(schemas.UpdateServiceRequest_propagateTags, string(v.PropagateTags))
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.UpdateServiceRequest_service, *v.Service)
+	}
+	if v.ServiceConnectConfiguration != nil {
+		s.WriteStruct(schemas.UpdateServiceRequest_serviceConnectConfiguration)
+		v.ServiceConnectConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeServiceRegistries(s, schemas.UpdateServiceRequest_serviceRegistries, v.ServiceRegistries)
+	if v.TaskDefinition != nil {
+		s.WriteString(schemas.UpdateServiceRequest_taskDefinition, *v.TaskDefinition)
+	}
+	serializeServiceVolumeConfigurations(s, schemas.UpdateServiceRequest_volumeConfigurations, v.VolumeConfigurations)
+	serializeVpcLatticeConfigurations(s, schemas.UpdateServiceRequest_vpcLatticeConfigurations, v.VpcLatticeConfigurations)
+}
+
 type UpdateServiceOutput struct {
 
 	// The full description of your service following the update call.
@@ -440,13 +516,34 @@ type UpdateServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Service != nil {
+		s.WriteStruct(schemas.UpdateServiceResponse_service)
+		v.Service.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceResponse_service:
+			v.Service = &types.Service{}
+			return v.Service.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateService, schemas.UpdateServiceRequest, schemas.UpdateServiceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateService, schemas.UpdateServiceRequest, schemas.UpdateServiceResponse), output: &UpdateServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,29 @@ type CreateDistributionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDistributionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDistributionConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDistributionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDistributionConfigurationRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDistributionConfigurationRequest_description, *v.Description)
+	}
+	serializeDistributionList(s, schemas.CreateDistributionConfigurationRequest_distributions, v.Distributions)
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateDistributionConfigurationRequest_dryRun, v.DryRun)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDistributionConfigurationRequest_name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateDistributionConfigurationRequest_tags, v.Tags)
+}
+
 type CreateDistributionConfigurationOutput struct {
 
 	// The client token that uniquely identifies the request.
@@ -80,13 +105,44 @@ type CreateDistributionConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDistributionConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDistributionConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDistributionConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDistributionConfigurationResponse_clientToken, *v.ClientToken)
+	}
+	if v.DistributionConfigurationArn != nil {
+		s.WriteString(schemas.CreateDistributionConfigurationResponse_distributionConfigurationArn, *v.DistributionConfigurationArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateDistributionConfigurationResponse_requestId, *v.RequestId)
+	}
+}
+func (v *CreateDistributionConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDistributionConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDistributionConfigurationResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateDistributionConfigurationResponse_clientToken, v.ClientToken)
+		case schemas.CreateDistributionConfigurationResponse_distributionConfigurationArn:
+			v.DistributionConfigurationArn = new(string)
+			return d.ReadString(schemas.CreateDistributionConfigurationResponse_distributionConfigurationArn, v.DistributionConfigurationArn)
+		case schemas.CreateDistributionConfigurationResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateDistributionConfigurationResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDistributionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDistributionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDistributionConfiguration, schemas.CreateDistributionConfigurationRequest, schemas.CreateDistributionConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDistributionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDistributionConfiguration, schemas.CreateDistributionConfigurationRequest, schemas.CreateDistributionConfigurationResponse), output: &CreateDistributionConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

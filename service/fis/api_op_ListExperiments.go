@@ -5,7 +5,9 @@ package fis
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type ListExperimentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExperimentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExperimentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExperimentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExperimentTemplateId != nil {
+		s.WriteString(schemas.ListExperimentsRequest_experimentTemplateId, *v.ExperimentTemplateId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListExperimentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExperimentsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListExperimentsOutput struct {
 
 	// The experiments.
@@ -55,13 +75,35 @@ type ListExperimentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExperimentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExperimentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExperimentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExperimentSummaryList(s, schemas.ListExperimentsResponse_experiments, v.Experiments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExperimentsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListExperimentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListExperimentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListExperimentsResponse_experiments:
+			return deserializeExperimentSummaryList(d, schemas.ListExperimentsResponse_experiments, &v.Experiments)
+		case schemas.ListExperimentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListExperimentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListExperimentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListExperiments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExperiments, schemas.ListExperimentsRequest, schemas.ListExperimentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListExperiments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExperiments, schemas.ListExperimentsRequest, schemas.ListExperimentsResponse), output: &ListExperimentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

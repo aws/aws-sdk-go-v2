@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -38,6 +40,18 @@ type DescribeInputInput struct {
 	InputId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeInputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputId != nil {
+		s.WriteString(schemas.DescribeInputRequest_InputId, *v.InputId)
+	}
 }
 
 // Placeholder documentation for DescribeInputResponse
@@ -127,13 +141,159 @@ type DescribeInputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeInputResponse_Arn, *v.Arn)
+	}
+	serialize__listOf__string(s, schemas.DescribeInputResponse_AttachedChannels, v.AttachedChannels)
+	serialize__listOfInputDestination(s, schemas.DescribeInputResponse_Destinations, v.Destinations)
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeInputResponse_Id, *v.Id)
+	}
+	if v.InputClass != "" {
+		s.WriteString(schemas.DescribeInputResponse_InputClass, string(v.InputClass))
+	}
+	serialize__listOfInputDeviceSettings(s, schemas.DescribeInputResponse_InputDevices, v.InputDevices)
+	if v.InputNetworkLocation != "" {
+		s.WriteString(schemas.DescribeInputResponse_InputNetworkLocation, string(v.InputNetworkLocation))
+	}
+	serialize__listOf__string(s, schemas.DescribeInputResponse_InputPartnerIds, v.InputPartnerIds)
+	if v.InputSourceType != "" {
+		s.WriteString(schemas.DescribeInputResponse_InputSourceType, string(v.InputSourceType))
+	}
+	serialize__listOfMediaConnectFlow(s, schemas.DescribeInputResponse_MediaConnectFlows, v.MediaConnectFlows)
+	if v.MulticastSettings != nil {
+		s.WriteStruct(schemas.DescribeInputResponse_MulticastSettings)
+		v.MulticastSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeInputResponse_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeInputResponse_RoleArn, *v.RoleArn)
+	}
+	if v.RouterSettings != nil {
+		s.WriteStruct(schemas.DescribeInputResponse_RouterSettings)
+		v.RouterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeInputSdiSources(s, schemas.DescribeInputResponse_SdiSources, v.SdiSources)
+	serialize__listOf__string(s, schemas.DescribeInputResponse_SecurityGroups, v.SecurityGroups)
+	if v.Smpte2110ReceiverGroupSettings != nil {
+		s.WriteStruct(schemas.DescribeInputResponse_Smpte2110ReceiverGroupSettings)
+		v.Smpte2110ReceiverGroupSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfInputSource(s, schemas.DescribeInputResponse_Sources, v.Sources)
+	if v.SrtSettings != nil {
+		s.WriteStruct(schemas.DescribeInputResponse_SrtSettings)
+		v.SrtSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DescribeInputResponse_State, string(v.State))
+	}
+	serializeTags(s, schemas.DescribeInputResponse_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.DescribeInputResponse_Type, string(v.Type))
+	}
+}
+func (v *DescribeInputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInputResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInputResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeInputResponse_Arn, v.Arn)
+		case schemas.DescribeInputResponse_AttachedChannels:
+			return deserialize__listOf__string(d, schemas.DescribeInputResponse_AttachedChannels, &v.AttachedChannels)
+		case schemas.DescribeInputResponse_Destinations:
+			return deserialize__listOfInputDestination(d, schemas.DescribeInputResponse_Destinations, &v.Destinations)
+		case schemas.DescribeInputResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DescribeInputResponse_Id, v.Id)
+		case schemas.DescribeInputResponse_InputClass:
+			var ev string
+			if err := d.ReadString(schemas.DescribeInputResponse_InputClass, &ev); err != nil {
+				return err
+			}
+			v.InputClass = types.InputClass(ev)
+			return nil
+		case schemas.DescribeInputResponse_InputDevices:
+			return deserialize__listOfInputDeviceSettings(d, schemas.DescribeInputResponse_InputDevices, &v.InputDevices)
+		case schemas.DescribeInputResponse_InputNetworkLocation:
+			var ev string
+			if err := d.ReadString(schemas.DescribeInputResponse_InputNetworkLocation, &ev); err != nil {
+				return err
+			}
+			v.InputNetworkLocation = types.InputNetworkLocation(ev)
+			return nil
+		case schemas.DescribeInputResponse_InputPartnerIds:
+			return deserialize__listOf__string(d, schemas.DescribeInputResponse_InputPartnerIds, &v.InputPartnerIds)
+		case schemas.DescribeInputResponse_InputSourceType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeInputResponse_InputSourceType, &ev); err != nil {
+				return err
+			}
+			v.InputSourceType = types.InputSourceType(ev)
+			return nil
+		case schemas.DescribeInputResponse_MediaConnectFlows:
+			return deserialize__listOfMediaConnectFlow(d, schemas.DescribeInputResponse_MediaConnectFlows, &v.MediaConnectFlows)
+		case schemas.DescribeInputResponse_MulticastSettings:
+			v.MulticastSettings = &types.MulticastSettings{}
+			return v.MulticastSettings.Deserialize(d)
+		case schemas.DescribeInputResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeInputResponse_Name, v.Name)
+		case schemas.DescribeInputResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeInputResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeInputResponse_RouterSettings:
+			v.RouterSettings = &types.RouterInputSettings{}
+			return v.RouterSettings.Deserialize(d)
+		case schemas.DescribeInputResponse_SdiSources:
+			return deserializeInputSdiSources(d, schemas.DescribeInputResponse_SdiSources, &v.SdiSources)
+		case schemas.DescribeInputResponse_SecurityGroups:
+			return deserialize__listOf__string(d, schemas.DescribeInputResponse_SecurityGroups, &v.SecurityGroups)
+		case schemas.DescribeInputResponse_Smpte2110ReceiverGroupSettings:
+			v.Smpte2110ReceiverGroupSettings = &types.Smpte2110ReceiverGroupSettings{}
+			return v.Smpte2110ReceiverGroupSettings.Deserialize(d)
+		case schemas.DescribeInputResponse_Sources:
+			return deserialize__listOfInputSource(d, schemas.DescribeInputResponse_Sources, &v.Sources)
+		case schemas.DescribeInputResponse_SrtSettings:
+			v.SrtSettings = &types.SrtSettings{}
+			return v.SrtSettings.Deserialize(d)
+		case schemas.DescribeInputResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DescribeInputResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.InputState(ev)
+			return nil
+		case schemas.DescribeInputResponse_Tags:
+			return deserializeTags(d, schemas.DescribeInputResponse_Tags, &v.Tags)
+		case schemas.DescribeInputResponse_Type:
+			var ev string
+			if err := d.ReadString(schemas.DescribeInputResponse_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.InputType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeInputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInput, schemas.DescribeInputRequest, schemas.DescribeInputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInput, schemas.DescribeInputRequest, schemas.DescribeInputResponse), output: &DescribeInputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

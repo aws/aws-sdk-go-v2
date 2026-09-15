@@ -4,7 +4,9 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,21 @@ type CreateAnomalySubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAnomalySubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAnomalySubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAnomalySubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalySubscription != nil {
+		s.WriteStruct(schemas.CreateAnomalySubscriptionRequest_AnomalySubscription)
+		v.AnomalySubscription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourceTagList(s, schemas.CreateAnomalySubscriptionRequest_ResourceTags, v.ResourceTags)
+}
+
 type CreateAnomalySubscriptionOutput struct {
 
 	// The unique identifier of your newly created cost anomaly subscription.
@@ -78,13 +95,32 @@ type CreateAnomalySubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAnomalySubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAnomalySubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAnomalySubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubscriptionArn != nil {
+		s.WriteString(schemas.CreateAnomalySubscriptionResponse_SubscriptionArn, *v.SubscriptionArn)
+	}
+}
+func (v *CreateAnomalySubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAnomalySubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAnomalySubscriptionResponse_SubscriptionArn:
+			v.SubscriptionArn = new(string)
+			return d.ReadString(schemas.CreateAnomalySubscriptionResponse_SubscriptionArn, v.SubscriptionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAnomalySubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAnomalySubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAnomalySubscription, schemas.CreateAnomalySubscriptionRequest, schemas.CreateAnomalySubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAnomalySubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAnomalySubscription, schemas.CreateAnomalySubscriptionRequest, schemas.CreateAnomalySubscriptionResponse), output: &CreateAnomalySubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

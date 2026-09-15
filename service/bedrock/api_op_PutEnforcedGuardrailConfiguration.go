@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,23 @@ type PutEnforcedGuardrailConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEnforcedGuardrailConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEnforcedGuardrailConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEnforcedGuardrailConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigId != nil {
+		s.WriteString(schemas.PutEnforcedGuardrailConfigurationRequest_configId, *v.ConfigId)
+	}
+	if v.GuardrailInferenceConfig != nil {
+		s.WriteStruct(schemas.PutEnforcedGuardrailConfigurationRequest_guardrailInferenceConfig)
+		v.GuardrailInferenceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutEnforcedGuardrailConfigurationOutput struct {
 
 	// Unique ID for the account enforced configuration.
@@ -55,13 +74,44 @@ type PutEnforcedGuardrailConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEnforcedGuardrailConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEnforcedGuardrailConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEnforcedGuardrailConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigId != nil {
+		s.WriteString(schemas.PutEnforcedGuardrailConfigurationResponse_configId, *v.ConfigId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.PutEnforcedGuardrailConfigurationResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.PutEnforcedGuardrailConfigurationResponse_updatedBy, *v.UpdatedBy)
+	}
+}
+func (v *PutEnforcedGuardrailConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutEnforcedGuardrailConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutEnforcedGuardrailConfigurationResponse_configId:
+			v.ConfigId = new(string)
+			return d.ReadString(schemas.PutEnforcedGuardrailConfigurationResponse_configId, v.ConfigId)
+		case schemas.PutEnforcedGuardrailConfigurationResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.PutEnforcedGuardrailConfigurationResponse_updatedAt, v.UpdatedAt)
+		case schemas.PutEnforcedGuardrailConfigurationResponse_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.PutEnforcedGuardrailConfigurationResponse_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutEnforcedGuardrailConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutEnforcedGuardrailConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEnforcedGuardrailConfiguration, schemas.PutEnforcedGuardrailConfigurationRequest, schemas.PutEnforcedGuardrailConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutEnforcedGuardrailConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEnforcedGuardrailConfiguration, schemas.PutEnforcedGuardrailConfigurationRequest, schemas.PutEnforcedGuardrailConfigurationResponse), output: &PutEnforcedGuardrailConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

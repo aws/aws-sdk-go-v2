@@ -5,7 +5,9 @@ package securityhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,29 @@ type CreateConnectorV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectorV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectorV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectorV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateConnectorV2Request_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateConnectorV2Request_Description, *v.Description)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.CreateConnectorV2Request_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateConnectorV2Request_Name, *v.Name)
+	}
+	serializeProviderConfiguration(s, schemas.CreateConnectorV2Request_Provider, v.Provider)
+	serializeTagMap(s, schemas.CreateConnectorV2Request_Tags, v.Tags)
+}
+
 type CreateConnectorV2Output struct {
 
 	// The Amazon Resource Name (ARN) of the connectorV2.
@@ -80,13 +105,64 @@ type CreateConnectorV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectorV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectorV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectorV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthUrl != nil {
+		s.WriteString(schemas.CreateConnectorV2Response_AuthUrl, *v.AuthUrl)
+	}
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.CreateConnectorV2Response_ConnectorArn, *v.ConnectorArn)
+	}
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.CreateConnectorV2Response_ConnectorId, *v.ConnectorId)
+	}
+	if v.ConnectorStatus != "" {
+		s.WriteString(schemas.CreateConnectorV2Response_ConnectorStatus, string(v.ConnectorStatus))
+	}
+	if v.EnablementStatus != "" {
+		s.WriteString(schemas.CreateConnectorV2Response_EnablementStatus, string(v.EnablementStatus))
+	}
+}
+func (v *CreateConnectorV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectorV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectorV2Response_AuthUrl:
+			v.AuthUrl = new(string)
+			return d.ReadString(schemas.CreateConnectorV2Response_AuthUrl, v.AuthUrl)
+		case schemas.CreateConnectorV2Response_ConnectorArn:
+			v.ConnectorArn = new(string)
+			return d.ReadString(schemas.CreateConnectorV2Response_ConnectorArn, v.ConnectorArn)
+		case schemas.CreateConnectorV2Response_ConnectorId:
+			v.ConnectorId = new(string)
+			return d.ReadString(schemas.CreateConnectorV2Response_ConnectorId, v.ConnectorId)
+		case schemas.CreateConnectorV2Response_ConnectorStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateConnectorV2Response_ConnectorStatus, &ev); err != nil {
+				return err
+			}
+			v.ConnectorStatus = types.ConnectorStatus(ev)
+			return nil
+		case schemas.CreateConnectorV2Response_EnablementStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateConnectorV2Response_EnablementStatus, &ev); err != nil {
+				return err
+			}
+			v.EnablementStatus = types.EnablementStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConnectorV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConnectorV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnectorV2, schemas.CreateConnectorV2Request, schemas.CreateConnectorV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConnectorV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnectorV2, schemas.CreateConnectorV2Request, schemas.CreateConnectorV2Response), output: &CreateConnectorV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package mediatailor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,40 @@ type ListAlertsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAlertsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAlertsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAlertsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAlertsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAlertsRequest_NextToken, *v.NextToken)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ListAlertsRequest_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *ListAlertsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAlertsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAlertsRequest_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListAlertsRequest_MaxResults, v.MaxResults)
+		case schemas.ListAlertsRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAlertsRequest_NextToken, v.NextToken)
+		case schemas.ListAlertsRequest_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.ListAlertsRequest_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
+
 type ListAlertsOutput struct {
 
 	// A list of alerts that are associated with this resource.
@@ -72,13 +108,35 @@ type ListAlertsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAlertsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAlertsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAlertsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfAlert(s, schemas.ListAlertsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAlertsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAlertsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAlertsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAlertsResponse_Items:
+			return deserialize__listOfAlert(d, schemas.ListAlertsResponse_Items, &v.Items)
+		case schemas.ListAlertsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAlertsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAlertsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAlerts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAlerts, schemas.ListAlertsRequest, schemas.ListAlertsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAlerts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAlerts, schemas.ListAlertsRequest, schemas.ListAlertsResponse), output: &ListAlertsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

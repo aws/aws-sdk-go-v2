@@ -4,7 +4,9 @@ package batch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -171,6 +173,49 @@ type CreateComputeEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateComputeEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateComputeEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateComputeEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeEnvironmentName != nil {
+		s.WriteString(schemas.CreateComputeEnvironmentRequest_computeEnvironmentName, *v.ComputeEnvironmentName)
+	}
+	if v.ComputeResources != nil {
+		s.WriteStruct(schemas.CreateComputeEnvironmentRequest_computeResources)
+		v.ComputeResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Context != nil {
+		s.WriteString(schemas.CreateComputeEnvironmentRequest_context, *v.Context)
+	}
+	if v.EcsSettings != nil {
+		s.WriteStruct(schemas.CreateComputeEnvironmentRequest_ecsSettings)
+		v.EcsSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EksConfiguration != nil {
+		s.WriteStruct(schemas.CreateComputeEnvironmentRequest_eksConfiguration)
+		v.EksConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.CreateComputeEnvironmentRequest_serviceRole, *v.ServiceRole)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CreateComputeEnvironmentRequest_state, string(v.State))
+	}
+	serializeTagrisTagsMap(s, schemas.CreateComputeEnvironmentRequest_tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateComputeEnvironmentRequest_type, string(v.Type))
+	}
+	if v.UnmanagedvCpus != nil {
+		s.WriteInt32(schemas.CreateComputeEnvironmentRequest_unmanagedvCpus, *v.UnmanagedvCpus)
+	}
+}
+
 type CreateComputeEnvironmentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the compute environment.
@@ -187,13 +232,38 @@ type CreateComputeEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateComputeEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateComputeEnvironmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateComputeEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeEnvironmentArn != nil {
+		s.WriteString(schemas.CreateComputeEnvironmentResponse_computeEnvironmentArn, *v.ComputeEnvironmentArn)
+	}
+	if v.ComputeEnvironmentName != nil {
+		s.WriteString(schemas.CreateComputeEnvironmentResponse_computeEnvironmentName, *v.ComputeEnvironmentName)
+	}
+}
+func (v *CreateComputeEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateComputeEnvironmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateComputeEnvironmentResponse_computeEnvironmentArn:
+			v.ComputeEnvironmentArn = new(string)
+			return d.ReadString(schemas.CreateComputeEnvironmentResponse_computeEnvironmentArn, v.ComputeEnvironmentArn)
+		case schemas.CreateComputeEnvironmentResponse_computeEnvironmentName:
+			v.ComputeEnvironmentName = new(string)
+			return d.ReadString(schemas.CreateComputeEnvironmentResponse_computeEnvironmentName, v.ComputeEnvironmentName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateComputeEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateComputeEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComputeEnvironment, schemas.CreateComputeEnvironmentRequest, schemas.CreateComputeEnvironmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateComputeEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComputeEnvironment, schemas.CreateComputeEnvironmentRequest, schemas.CreateComputeEnvironmentResponse), output: &CreateComputeEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

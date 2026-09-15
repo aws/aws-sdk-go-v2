@@ -5,7 +5,9 @@ package resiliencehubv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,24 @@ type ListSystemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSystemsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSystemsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSystemsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSystemsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSystemsRequest_nextToken, *v.NextToken)
+	}
+	if v.OuId != nil {
+		s.WriteString(schemas.ListSystemsRequest_ouId, *v.OuId)
+	}
+}
+
 type ListSystemsOutput struct {
 
 	// The list of system summaries.
@@ -55,13 +75,35 @@ type ListSystemsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSystemsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSystemsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSystemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSystemsResponse_nextToken, *v.NextToken)
+	}
+	serializeSystemSummaryList(s, schemas.ListSystemsResponse_systemSummaries, v.SystemSummaries)
+}
+func (v *ListSystemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSystemsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSystemsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSystemsResponse_nextToken, v.NextToken)
+		case schemas.ListSystemsResponse_systemSummaries:
+			return deserializeSystemSummaryList(d, schemas.ListSystemsResponse_systemSummaries, &v.SystemSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSystemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSystems{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSystems, schemas.ListSystemsRequest, schemas.ListSystemsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSystems{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSystems, schemas.ListSystemsRequest, schemas.ListSystemsResponse), output: &ListSystemsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

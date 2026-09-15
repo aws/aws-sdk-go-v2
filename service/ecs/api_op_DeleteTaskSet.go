@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,27 @@ type DeleteTaskSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTaskSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTaskSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTaskSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteString(schemas.DeleteTaskSetRequest_cluster, *v.Cluster)
+	}
+	if v.Force != nil {
+		s.WriteBool(schemas.DeleteTaskSetRequest_force, *v.Force)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.DeleteTaskSetRequest_service, *v.Service)
+	}
+	if v.TaskSet != nil {
+		s.WriteString(schemas.DeleteTaskSetRequest_taskSet, *v.TaskSet)
+	}
+}
+
 type DeleteTaskSetOutput struct {
 
 	// Details about the task set.
@@ -64,13 +87,34 @@ type DeleteTaskSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTaskSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTaskSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTaskSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskSet != nil {
+		s.WriteStruct(schemas.DeleteTaskSetResponse_taskSet)
+		v.TaskSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteTaskSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTaskSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteTaskSetResponse_taskSet:
+			v.TaskSet = &types.TaskSet{}
+			return v.TaskSet.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTaskSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteTaskSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTaskSet, schemas.DeleteTaskSetRequest, schemas.DeleteTaskSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteTaskSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTaskSet, schemas.DeleteTaskSetRequest, schemas.DeleteTaskSetResponse), output: &DeleteTaskSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

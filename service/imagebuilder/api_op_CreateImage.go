@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -84,6 +86,53 @@ type CreateImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateImageRequest_clientToken, *v.ClientToken)
+	}
+	if v.ContainerRecipeArn != nil {
+		s.WriteString(schemas.CreateImageRequest_containerRecipeArn, *v.ContainerRecipeArn)
+	}
+	if v.DistributionConfigurationArn != nil {
+		s.WriteString(schemas.CreateImageRequest_distributionConfigurationArn, *v.DistributionConfigurationArn)
+	}
+	if v.EnhancedImageMetadataEnabled != nil {
+		s.WriteBool(schemas.CreateImageRequest_enhancedImageMetadataEnabled, *v.EnhancedImageMetadataEnabled)
+	}
+	if v.ExecutionRole != nil {
+		s.WriteString(schemas.CreateImageRequest_executionRole, *v.ExecutionRole)
+	}
+	if v.ImageRecipeArn != nil {
+		s.WriteString(schemas.CreateImageRequest_imageRecipeArn, *v.ImageRecipeArn)
+	}
+	if v.ImageScanningConfiguration != nil {
+		s.WriteStruct(schemas.CreateImageRequest_imageScanningConfiguration)
+		v.ImageScanningConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImageTestsConfiguration != nil {
+		s.WriteStruct(schemas.CreateImageRequest_imageTestsConfiguration)
+		v.ImageTestsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InfrastructureConfigurationArn != nil {
+		s.WriteString(schemas.CreateImageRequest_infrastructureConfigurationArn, *v.InfrastructureConfigurationArn)
+	}
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.CreateImageRequest_loggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateImageRequest_tags, v.Tags)
+	serializeWorkflowConfigurationList(s, schemas.CreateImageRequest_workflows, v.Workflows)
+}
+
 type CreateImageOutput struct {
 
 	// The client token that uniquely identifies the request.
@@ -104,13 +153,52 @@ type CreateImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateImageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateImageResponse_clientToken, *v.ClientToken)
+	}
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.CreateImageResponse_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+	if v.LatestVersionReferences != nil {
+		s.WriteStruct(schemas.CreateImageResponse_latestVersionReferences)
+		v.LatestVersionReferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateImageResponse_requestId, *v.RequestId)
+	}
+}
+func (v *CreateImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateImageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateImageResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateImageResponse_clientToken, v.ClientToken)
+		case schemas.CreateImageResponse_imageBuildVersionArn:
+			v.ImageBuildVersionArn = new(string)
+			return d.ReadString(schemas.CreateImageResponse_imageBuildVersionArn, v.ImageBuildVersionArn)
+		case schemas.CreateImageResponse_latestVersionReferences:
+			v.LatestVersionReferences = &types.LatestVersionReferences{}
+			return v.LatestVersionReferences.Deserialize(d)
+		case schemas.CreateImageResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateImageResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateImage, schemas.CreateImageRequest, schemas.CreateImageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateImage, schemas.CreateImageRequest, schemas.CreateImageResponse), output: &CreateImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

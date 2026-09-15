@@ -4,7 +4,9 @@ package mediaconvert
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetPresetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPresetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPresetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPresetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetPresetRequest_Name, *v.Name)
+	}
+}
+
 type GetPresetOutput struct {
 
 	// A preset is a collection of preconfigured media conversion settings that you
@@ -46,13 +60,34 @@ type GetPresetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPresetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPresetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPresetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Preset != nil {
+		s.WriteStruct(schemas.GetPresetResponse_Preset)
+		v.Preset.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetPresetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPresetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPresetResponse_Preset:
+			v.Preset = &types.Preset{}
+			return v.Preset.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPresetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPreset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPreset, schemas.GetPresetRequest, schemas.GetPresetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPreset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPreset, schemas.GetPresetRequest, schemas.GetPresetResponse), output: &GetPresetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

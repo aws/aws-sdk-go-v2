@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,37 @@ type SubmitContainerStateChangeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubmitContainerStateChangeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubmitContainerStateChangeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubmitContainerStateChangeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteString(schemas.SubmitContainerStateChangeRequest_cluster, *v.Cluster)
+	}
+	if v.ContainerName != nil {
+		s.WriteString(schemas.SubmitContainerStateChangeRequest_containerName, *v.ContainerName)
+	}
+	if v.ExitCode != nil {
+		s.WriteInt32(schemas.SubmitContainerStateChangeRequest_exitCode, *v.ExitCode)
+	}
+	serializeNetworkBindings(s, schemas.SubmitContainerStateChangeRequest_networkBindings, v.NetworkBindings)
+	if v.Reason != nil {
+		s.WriteString(schemas.SubmitContainerStateChangeRequest_reason, *v.Reason)
+	}
+	if v.RuntimeId != nil {
+		s.WriteString(schemas.SubmitContainerStateChangeRequest_runtimeId, *v.RuntimeId)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.SubmitContainerStateChangeRequest_status, *v.Status)
+	}
+	if v.Task != nil {
+		s.WriteString(schemas.SubmitContainerStateChangeRequest_task, *v.Task)
+	}
+}
+
 type SubmitContainerStateChangeOutput struct {
 
 	// Acknowledgement of the state change.
@@ -68,13 +101,32 @@ type SubmitContainerStateChangeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubmitContainerStateChangeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubmitContainerStateChangeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubmitContainerStateChangeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Acknowledgment != nil {
+		s.WriteString(schemas.SubmitContainerStateChangeResponse_acknowledgment, *v.Acknowledgment)
+	}
+}
+func (v *SubmitContainerStateChangeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubmitContainerStateChangeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubmitContainerStateChangeResponse_acknowledgment:
+			v.Acknowledgment = new(string)
+			return d.ReadString(schemas.SubmitContainerStateChangeResponse_acknowledgment, v.Acknowledgment)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSubmitContainerStateChangeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSubmitContainerStateChange{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitContainerStateChange, schemas.SubmitContainerStateChangeRequest, schemas.SubmitContainerStateChangeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSubmitContainerStateChange{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitContainerStateChange, schemas.SubmitContainerStateChangeRequest, schemas.SubmitContainerStateChangeResponse), output: &SubmitContainerStateChangeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

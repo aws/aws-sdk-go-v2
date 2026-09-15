@@ -4,7 +4,9 @@ package mediaconvert
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetJobsQueryResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJobsQueryResultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJobsQueryResultsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJobsQueryResultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetJobsQueryResultsRequest_Id, *v.Id)
+	}
+}
+
 type GetJobsQueryResultsOutput struct {
 
 	// List of jobs.
@@ -52,13 +66,45 @@ type GetJobsQueryResultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJobsQueryResultsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJobsQueryResultsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJobsQueryResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfJob(s, schemas.GetJobsQueryResultsResponse_Jobs, v.Jobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetJobsQueryResultsResponse_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetJobsQueryResultsResponse_Status, string(v.Status))
+	}
+}
+func (v *GetJobsQueryResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetJobsQueryResultsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetJobsQueryResultsResponse_Jobs:
+			return deserialize__listOfJob(d, schemas.GetJobsQueryResultsResponse_Jobs, &v.Jobs)
+		case schemas.GetJobsQueryResultsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetJobsQueryResultsResponse_NextToken, v.NextToken)
+		case schemas.GetJobsQueryResultsResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetJobsQueryResultsResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.JobsQueryStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetJobsQueryResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetJobsQueryResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJobsQueryResults, schemas.GetJobsQueryResultsRequest, schemas.GetJobsQueryResultsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetJobsQueryResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJobsQueryResults, schemas.GetJobsQueryResultsRequest, schemas.GetJobsQueryResultsResponse), output: &GetJobsQueryResultsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

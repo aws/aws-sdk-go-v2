@@ -5,7 +5,9 @@ package medialive
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,28 @@ type CreateSdiSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSdiSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSdiSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSdiSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mode != "" {
+		s.WriteString(schemas.CreateSdiSourceRequest_Mode, string(v.Mode))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSdiSourceRequest_Name, *v.Name)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateSdiSourceRequest_RequestId, *v.RequestId)
+	}
+	serializeTags(s, schemas.CreateSdiSourceRequest_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateSdiSourceRequest_Type, string(v.Type))
+	}
+}
+
 // Placeholder documentation for CreateSdiSourceResponse
 type CreateSdiSourceOutput struct {
 
@@ -67,13 +91,34 @@ type CreateSdiSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSdiSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSdiSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSdiSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SdiSource != nil {
+		s.WriteStruct(schemas.CreateSdiSourceResponse_SdiSource)
+		v.SdiSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSdiSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSdiSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSdiSourceResponse_SdiSource:
+			v.SdiSource = &types.SdiSource{}
+			return v.SdiSource.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSdiSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSdiSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSdiSource, schemas.CreateSdiSourceRequest, schemas.CreateSdiSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSdiSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSdiSource, schemas.CreateSdiSourceRequest, schemas.CreateSdiSourceResponse), output: &CreateSdiSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

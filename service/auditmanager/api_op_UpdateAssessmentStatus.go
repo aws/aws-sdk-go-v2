@@ -4,7 +4,9 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type UpdateAssessmentStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssessmentStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssessmentStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssessmentStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.UpdateAssessmentStatusRequest_assessmentId, *v.AssessmentId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateAssessmentStatusRequest_status, string(v.Status))
+	}
+}
+
 type UpdateAssessmentStatusOutput struct {
 
 	//  The name of the updated assessment that the UpdateAssessmentStatus API
@@ -51,13 +68,34 @@ type UpdateAssessmentStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssessmentStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssessmentStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssessmentStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Assessment != nil {
+		s.WriteStruct(schemas.UpdateAssessmentStatusResponse_assessment)
+		v.Assessment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAssessmentStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAssessmentStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAssessmentStatusResponse_assessment:
+			v.Assessment = &types.Assessment{}
+			return v.Assessment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAssessmentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAssessmentStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssessmentStatus, schemas.UpdateAssessmentStatusRequest, schemas.UpdateAssessmentStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAssessmentStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssessmentStatus, schemas.UpdateAssessmentStatusRequest, schemas.UpdateAssessmentStatusResponse), output: &UpdateAssessmentStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

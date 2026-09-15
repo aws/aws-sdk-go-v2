@@ -4,7 +4,9 @@ package ecr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,20 @@ type PutReplicationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutReplicationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutReplicationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutReplicationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationConfiguration != nil {
+		s.WriteStruct(schemas.PutReplicationConfigurationRequest_replicationConfiguration)
+		v.ReplicationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutReplicationConfigurationOutput struct {
 
 	// The contents of the replication configuration for the registry.
@@ -57,13 +73,34 @@ type PutReplicationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutReplicationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutReplicationConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutReplicationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationConfiguration != nil {
+		s.WriteStruct(schemas.PutReplicationConfigurationResponse_replicationConfiguration)
+		v.ReplicationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutReplicationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutReplicationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutReplicationConfigurationResponse_replicationConfiguration:
+			v.ReplicationConfiguration = &types.ReplicationConfiguration{}
+			return v.ReplicationConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutReplicationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutReplicationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutReplicationConfiguration, schemas.PutReplicationConfigurationRequest, schemas.PutReplicationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutReplicationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutReplicationConfiguration, schemas.PutReplicationConfigurationRequest, schemas.PutReplicationConfigurationResponse), output: &PutReplicationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

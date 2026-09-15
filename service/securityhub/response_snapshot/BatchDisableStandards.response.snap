@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"StandardsSubscriptions":[{"Provider":"AWS","StandardsArn":"__StandardsArn__","StandardsControlsUpdatable":"READY_FOR_UPDATES","StandardsInput":{"key0":"__Value__"},"StandardsStatus":"PENDING","StandardsStatusReason":{"StatusReasonCode":"NO_AVAILABLE_CONFIGURATION_RECORDER"},"StandardsSubscriptionArn":"__StandardsSubscriptionArn__"},{"Provider":"AWS","StandardsArn":"__StandardsArn__","StandardsControlsUpdatable":"READY_FOR_UPDATES","StandardsInput":{"key0":"__Value__"},"StandardsStatus":"PENDING","StandardsStatusReason":{"StatusReasonCode":"NO_AVAILABLE_CONFIGURATION_RECORDER"},"StandardsSubscriptionArn":"__StandardsSubscriptionArn__"}]}

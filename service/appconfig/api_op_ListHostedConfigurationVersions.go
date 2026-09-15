@@ -5,7 +5,9 @@ package appconfig
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,30 @@ type ListHostedConfigurationVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHostedConfigurationVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHostedConfigurationVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHostedConfigurationVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ListHostedConfigurationVersionsRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.ConfigurationProfileId != nil {
+		s.WriteString(schemas.ListHostedConfigurationVersionsRequest_ConfigurationProfileId, *v.ConfigurationProfileId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListHostedConfigurationVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHostedConfigurationVersionsRequest_NextToken, *v.NextToken)
+	}
+	if v.VersionLabel != nil {
+		s.WriteString(schemas.ListHostedConfigurationVersionsRequest_VersionLabel, *v.VersionLabel)
+	}
+}
+
 type ListHostedConfigurationVersionsOutput struct {
 
 	// The elements from this collection.
@@ -71,13 +97,35 @@ type ListHostedConfigurationVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHostedConfigurationVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HostedConfigurationVersions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHostedConfigurationVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHostedConfigurationVersionSummaryList(s, schemas.HostedConfigurationVersions_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.HostedConfigurationVersions_NextToken, *v.NextToken)
+	}
+}
+func (v *ListHostedConfigurationVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HostedConfigurationVersions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HostedConfigurationVersions_Items:
+			return deserializeHostedConfigurationVersionSummaryList(d, schemas.HostedConfigurationVersions_Items, &v.Items)
+		case schemas.HostedConfigurationVersions_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.HostedConfigurationVersions_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHostedConfigurationVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListHostedConfigurationVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHostedConfigurationVersions, schemas.ListHostedConfigurationVersionsRequest, schemas.HostedConfigurationVersions)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListHostedConfigurationVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHostedConfigurationVersions, schemas.ListHostedConfigurationVersionsRequest, schemas.HostedConfigurationVersions), output: &ListHostedConfigurationVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

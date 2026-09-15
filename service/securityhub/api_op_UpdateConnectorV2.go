@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,22 @@ type UpdateConnectorV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectorV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectorV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectorV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.UpdateConnectorV2Request_ConnectorId, *v.ConnectorId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateConnectorV2Request_Description, *v.Description)
+	}
+	serializeProviderUpdateConfiguration(s, schemas.UpdateConnectorV2Request_Provider, v.Provider)
+}
+
 type UpdateConnectorV2Output struct {
 
 	// The status of the connector after the update.
@@ -54,13 +72,46 @@ type UpdateConnectorV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectorV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectorV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectorV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorStatus != "" {
+		s.WriteString(schemas.UpdateConnectorV2Response_ConnectorStatus, string(v.ConnectorStatus))
+	}
+	if v.EnablementStatus != "" {
+		s.WriteString(schemas.UpdateConnectorV2Response_EnablementStatus, string(v.EnablementStatus))
+	}
+}
+func (v *UpdateConnectorV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConnectorV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConnectorV2Response_ConnectorStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateConnectorV2Response_ConnectorStatus, &ev); err != nil {
+				return err
+			}
+			v.ConnectorStatus = types.ConnectorStatus(ev)
+			return nil
+		case schemas.UpdateConnectorV2Response_EnablementStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateConnectorV2Response_EnablementStatus, &ev); err != nil {
+				return err
+			}
+			v.EnablementStatus = types.EnablementStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConnectorV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConnectorV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectorV2, schemas.UpdateConnectorV2Request, schemas.UpdateConnectorV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateConnectorV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectorV2, schemas.UpdateConnectorV2Request, schemas.UpdateConnectorV2Response), output: &UpdateConnectorV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

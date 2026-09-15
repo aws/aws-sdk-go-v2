@@ -5,7 +5,9 @@ package costexplorer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -147,6 +149,43 @@ type GetCostAndUsageComparisonsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCostAndUsageComparisonsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCostAndUsageComparisonsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCostAndUsageComparisonsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaselineTimePeriod != nil {
+		s.WriteStruct(schemas.GetCostAndUsageComparisonsRequest_BaselineTimePeriod)
+		v.BaselineTimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BillingViewArn != nil {
+		s.WriteString(schemas.GetCostAndUsageComparisonsRequest_BillingViewArn, *v.BillingViewArn)
+	}
+	if v.ComparisonTimePeriod != nil {
+		s.WriteStruct(schemas.GetCostAndUsageComparisonsRequest_ComparisonTimePeriod)
+		v.ComparisonTimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetCostAndUsageComparisonsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeGroupDefinitions(s, schemas.GetCostAndUsageComparisonsRequest_GroupBy, v.GroupBy)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetCostAndUsageComparisonsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MetricForComparison != nil {
+		s.WriteString(schemas.GetCostAndUsageComparisonsRequest_MetricForComparison, *v.MetricForComparison)
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetCostAndUsageComparisonsRequest_NextPageToken, *v.NextPageToken)
+	}
+}
+
 type GetCostAndUsageComparisonsOutput struct {
 
 	// An array of comparison results showing cost and usage metrics between
@@ -168,13 +207,38 @@ type GetCostAndUsageComparisonsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCostAndUsageComparisonsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCostAndUsageComparisonsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCostAndUsageComparisonsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCostAndUsageComparisons(s, schemas.GetCostAndUsageComparisonsResponse_CostAndUsageComparisons, v.CostAndUsageComparisons)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetCostAndUsageComparisonsResponse_NextPageToken, *v.NextPageToken)
+	}
+	serializeComparisonMetrics(s, schemas.GetCostAndUsageComparisonsResponse_TotalCostAndUsage, v.TotalCostAndUsage)
+}
+func (v *GetCostAndUsageComparisonsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCostAndUsageComparisonsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCostAndUsageComparisonsResponse_CostAndUsageComparisons:
+			return deserializeCostAndUsageComparisons(d, schemas.GetCostAndUsageComparisonsResponse_CostAndUsageComparisons, &v.CostAndUsageComparisons)
+		case schemas.GetCostAndUsageComparisonsResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetCostAndUsageComparisonsResponse_NextPageToken, v.NextPageToken)
+		case schemas.GetCostAndUsageComparisonsResponse_TotalCostAndUsage:
+			return deserializeComparisonMetrics(d, schemas.GetCostAndUsageComparisonsResponse_TotalCostAndUsage, &v.TotalCostAndUsage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCostAndUsageComparisonsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCostAndUsageComparisons{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCostAndUsageComparisons, schemas.GetCostAndUsageComparisonsRequest, schemas.GetCostAndUsageComparisonsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCostAndUsageComparisons{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCostAndUsageComparisons, schemas.GetCostAndUsageComparisonsRequest, schemas.GetCostAndUsageComparisonsResponse), output: &GetCostAndUsageComparisonsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package elasticsearchservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DeleteElasticsearchDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteElasticsearchDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteElasticsearchDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteElasticsearchDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DeleteElasticsearchDomainRequest_DomainName, *v.DomainName)
+	}
+}
+
 // The result of a DeleteElasticsearchDomain request. Contains the status of the
 // pending deletion, or no status if the domain and all of its resources have been
 // deleted.
@@ -51,13 +65,34 @@ type DeleteElasticsearchDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteElasticsearchDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteElasticsearchDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteElasticsearchDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainStatus != nil {
+		s.WriteStruct(schemas.DeleteElasticsearchDomainResponse_DomainStatus)
+		v.DomainStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteElasticsearchDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteElasticsearchDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteElasticsearchDomainResponse_DomainStatus:
+			v.DomainStatus = &types.ElasticsearchDomainStatus{}
+			return v.DomainStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteElasticsearchDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteElasticsearchDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteElasticsearchDomain, schemas.DeleteElasticsearchDomainRequest, schemas.DeleteElasticsearchDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteElasticsearchDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteElasticsearchDomain, schemas.DeleteElasticsearchDomainRequest, schemas.DeleteElasticsearchDomainResponse), output: &DeleteElasticsearchDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

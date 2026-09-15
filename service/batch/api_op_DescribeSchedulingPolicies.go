@@ -4,7 +4,9 @@ package batch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,16 @@ type DescribeSchedulingPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSchedulingPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSchedulingPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSchedulingPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.DescribeSchedulingPoliciesRequest_arns, v.Arns)
+}
+
 type DescribeSchedulingPoliciesOutput struct {
 
 	// The list of scheduling policies.
@@ -46,13 +58,29 @@ type DescribeSchedulingPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSchedulingPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSchedulingPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSchedulingPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSchedulingPolicyDetailList(s, schemas.DescribeSchedulingPoliciesResponse_schedulingPolicies, v.SchedulingPolicies)
+}
+func (v *DescribeSchedulingPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSchedulingPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSchedulingPoliciesResponse_schedulingPolicies:
+			return deserializeSchedulingPolicyDetailList(d, schemas.DescribeSchedulingPoliciesResponse_schedulingPolicies, &v.SchedulingPolicies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSchedulingPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSchedulingPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSchedulingPolicies, schemas.DescribeSchedulingPoliciesRequest, schemas.DescribeSchedulingPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeSchedulingPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSchedulingPolicies, schemas.DescribeSchedulingPoliciesRequest, schemas.DescribeSchedulingPoliciesResponse), output: &DescribeSchedulingPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

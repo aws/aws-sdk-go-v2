@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/codeconnections/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -44,6 +46,66 @@ type Connection struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Connection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Connection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Connection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionArn != nil {
+		s.WriteString(schemas.Connection_ConnectionArn, *v.ConnectionArn)
+	}
+	if v.ConnectionName != nil {
+		s.WriteString(schemas.Connection_ConnectionName, *v.ConnectionName)
+	}
+	if v.ConnectionStatus != "" {
+		s.WriteString(schemas.Connection_ConnectionStatus, string(v.ConnectionStatus))
+	}
+	if v.HostArn != nil {
+		s.WriteString(schemas.Connection_HostArn, *v.HostArn)
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.Connection_OwnerAccountId, *v.OwnerAccountId)
+	}
+	if v.ProviderType != "" {
+		s.WriteString(schemas.Connection_ProviderType, string(v.ProviderType))
+	}
+}
+func (v *Connection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Connection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Connection_ConnectionArn:
+			v.ConnectionArn = new(string)
+			return d.ReadString(schemas.Connection_ConnectionArn, v.ConnectionArn)
+		case schemas.Connection_ConnectionName:
+			v.ConnectionName = new(string)
+			return d.ReadString(schemas.Connection_ConnectionName, v.ConnectionName)
+		case schemas.Connection_ConnectionStatus:
+			var ev string
+			if err := d.ReadString(schemas.Connection_ConnectionStatus, &ev); err != nil {
+				return err
+			}
+			v.ConnectionStatus = ConnectionStatus(ev)
+			return nil
+		case schemas.Connection_HostArn:
+			v.HostArn = new(string)
+			return d.ReadString(schemas.Connection_HostArn, v.HostArn)
+		case schemas.Connection_OwnerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.Connection_OwnerAccountId, v.OwnerAccountId)
+		case schemas.Connection_ProviderType:
+			var ev string
+			if err := d.ReadString(schemas.Connection_ProviderType, &ev); err != nil {
+				return err
+			}
+			v.ProviderType = ProviderType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A resource that represents the infrastructure where a third-party provider is
 // installed. The host is used when you create connections to an installed
 // third-party provider type, such as GitHub Enterprise Server. You create one host
@@ -78,6 +140,70 @@ type Host struct {
 	VpcConfiguration *VpcConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *Host) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Host)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Host) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HostArn != nil {
+		s.WriteString(schemas.Host_HostArn, *v.HostArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Host_Name, *v.Name)
+	}
+	if v.ProviderEndpoint != nil {
+		s.WriteString(schemas.Host_ProviderEndpoint, *v.ProviderEndpoint)
+	}
+	if v.ProviderType != "" {
+		s.WriteString(schemas.Host_ProviderType, string(v.ProviderType))
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.Host_Status, *v.Status)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.Host_StatusMessage, *v.StatusMessage)
+	}
+	if v.VpcConfiguration != nil {
+		s.WriteStruct(schemas.Host_VpcConfiguration)
+		v.VpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Host) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Host, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Host_HostArn:
+			v.HostArn = new(string)
+			return d.ReadString(schemas.Host_HostArn, v.HostArn)
+		case schemas.Host_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Host_Name, v.Name)
+		case schemas.Host_ProviderEndpoint:
+			v.ProviderEndpoint = new(string)
+			return d.ReadString(schemas.Host_ProviderEndpoint, v.ProviderEndpoint)
+		case schemas.Host_ProviderType:
+			var ev string
+			if err := d.ReadString(schemas.Host_ProviderType, &ev); err != nil {
+				return err
+			}
+			v.ProviderType = ProviderType(ev)
+			return nil
+		case schemas.Host_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.Host_Status, v.Status)
+		case schemas.Host_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.Host_StatusMessage, v.StatusMessage)
+		case schemas.Host_VpcConfiguration:
+			v.VpcConfiguration = &VpcConfiguration{}
+			return v.VpcConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Information about the repository link resource, such as the repository link
@@ -124,6 +250,68 @@ type RepositoryLinkInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RepositoryLinkInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RepositoryLinkInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RepositoryLinkInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionArn != nil {
+		s.WriteString(schemas.RepositoryLinkInfo_ConnectionArn, *v.ConnectionArn)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.RepositoryLinkInfo_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.RepositoryLinkInfo_OwnerId, *v.OwnerId)
+	}
+	if v.ProviderType != "" {
+		s.WriteString(schemas.RepositoryLinkInfo_ProviderType, string(v.ProviderType))
+	}
+	if v.RepositoryLinkArn != nil {
+		s.WriteString(schemas.RepositoryLinkInfo_RepositoryLinkArn, *v.RepositoryLinkArn)
+	}
+	if v.RepositoryLinkId != nil {
+		s.WriteString(schemas.RepositoryLinkInfo_RepositoryLinkId, *v.RepositoryLinkId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.RepositoryLinkInfo_RepositoryName, *v.RepositoryName)
+	}
+}
+func (v *RepositoryLinkInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RepositoryLinkInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RepositoryLinkInfo_ConnectionArn:
+			v.ConnectionArn = new(string)
+			return d.ReadString(schemas.RepositoryLinkInfo_ConnectionArn, v.ConnectionArn)
+		case schemas.RepositoryLinkInfo_EncryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.RepositoryLinkInfo_EncryptionKeyArn, v.EncryptionKeyArn)
+		case schemas.RepositoryLinkInfo_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.RepositoryLinkInfo_OwnerId, v.OwnerId)
+		case schemas.RepositoryLinkInfo_ProviderType:
+			var ev string
+			if err := d.ReadString(schemas.RepositoryLinkInfo_ProviderType, &ev); err != nil {
+				return err
+			}
+			v.ProviderType = ProviderType(ev)
+			return nil
+		case schemas.RepositoryLinkInfo_RepositoryLinkArn:
+			v.RepositoryLinkArn = new(string)
+			return d.ReadString(schemas.RepositoryLinkInfo_RepositoryLinkArn, v.RepositoryLinkArn)
+		case schemas.RepositoryLinkInfo_RepositoryLinkId:
+			v.RepositoryLinkId = new(string)
+			return d.ReadString(schemas.RepositoryLinkInfo_RepositoryLinkId, v.RepositoryLinkId)
+		case schemas.RepositoryLinkInfo_RepositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.RepositoryLinkInfo_RepositoryName, v.RepositoryName)
+		}
+		return nil
+	})
+}
+
 // Information about a repository sync attempt for a repository with a sync
 // configuration.
 type RepositorySyncAttempt struct {
@@ -157,6 +345,41 @@ type RepositorySyncAttempt struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RepositorySyncAttempt) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RepositorySyncAttempt)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RepositorySyncAttempt) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRepositorySyncEventList(s, schemas.RepositorySyncAttempt_Events, v.Events)
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.RepositorySyncAttempt_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RepositorySyncAttempt_Status, string(v.Status))
+	}
+}
+func (v *RepositorySyncAttempt) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RepositorySyncAttempt, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RepositorySyncAttempt_Events:
+			return deserializeRepositorySyncEventList(d, schemas.RepositorySyncAttempt_Events, &v.Events)
+		case schemas.RepositorySyncAttempt_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.RepositorySyncAttempt_StartedAt, v.StartedAt)
+		case schemas.RepositorySyncAttempt_Status:
+			var ev string
+			if err := d.ReadString(schemas.RepositorySyncAttempt_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = RepositorySyncStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The definition for a repository with a sync configuration.
 type RepositorySyncDefinition struct {
 
@@ -185,6 +408,46 @@ type RepositorySyncDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RepositorySyncDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RepositorySyncDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RepositorySyncDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Branch != nil {
+		s.WriteString(schemas.RepositorySyncDefinition_Branch, *v.Branch)
+	}
+	if v.Directory != nil {
+		s.WriteString(schemas.RepositorySyncDefinition_Directory, *v.Directory)
+	}
+	if v.Parent != nil {
+		s.WriteString(schemas.RepositorySyncDefinition_Parent, *v.Parent)
+	}
+	if v.Target != nil {
+		s.WriteString(schemas.RepositorySyncDefinition_Target, *v.Target)
+	}
+}
+func (v *RepositorySyncDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RepositorySyncDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RepositorySyncDefinition_Branch:
+			v.Branch = new(string)
+			return d.ReadString(schemas.RepositorySyncDefinition_Branch, v.Branch)
+		case schemas.RepositorySyncDefinition_Directory:
+			v.Directory = new(string)
+			return d.ReadString(schemas.RepositorySyncDefinition_Directory, v.Directory)
+		case schemas.RepositorySyncDefinition_Parent:
+			v.Parent = new(string)
+			return d.ReadString(schemas.RepositorySyncDefinition_Parent, v.Parent)
+		case schemas.RepositorySyncDefinition_Target:
+			v.Target = new(string)
+			return d.ReadString(schemas.RepositorySyncDefinition_Target, v.Target)
+		}
+		return nil
+	})
+}
+
 // Information about a repository sync event.
 type RepositorySyncEvent struct {
 
@@ -207,6 +470,46 @@ type RepositorySyncEvent struct {
 	ExternalId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RepositorySyncEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RepositorySyncEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RepositorySyncEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Event != nil {
+		s.WriteString(schemas.RepositorySyncEvent_Event, *v.Event)
+	}
+	if v.ExternalId != nil {
+		s.WriteString(schemas.RepositorySyncEvent_ExternalId, *v.ExternalId)
+	}
+	if v.Time != nil {
+		s.WriteTime(schemas.RepositorySyncEvent_Time, *v.Time)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.RepositorySyncEvent_Type, *v.Type)
+	}
+}
+func (v *RepositorySyncEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RepositorySyncEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RepositorySyncEvent_Event:
+			v.Event = new(string)
+			return d.ReadString(schemas.RepositorySyncEvent_Event, v.Event)
+		case schemas.RepositorySyncEvent_ExternalId:
+			v.ExternalId = new(string)
+			return d.ReadString(schemas.RepositorySyncEvent_ExternalId, v.ExternalId)
+		case schemas.RepositorySyncEvent_Time:
+			v.Time = new(time.Time)
+			return d.ReadTime(schemas.RepositorySyncEvent_Time, v.Time)
+		case schemas.RepositorySyncEvent_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.RepositorySyncEvent_Type, v.Type)
+		}
+		return nil
+	})
 }
 
 // Information about a resource sync attempt.
@@ -257,6 +560,63 @@ type ResourceSyncAttempt struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceSyncAttempt) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceSyncAttempt)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceSyncAttempt) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceSyncEventList(s, schemas.ResourceSyncAttempt_Events, v.Events)
+	if v.InitialRevision != nil {
+		s.WriteStruct(schemas.ResourceSyncAttempt_InitialRevision)
+		v.InitialRevision.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.ResourceSyncAttempt_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ResourceSyncAttempt_Status, string(v.Status))
+	}
+	if v.Target != nil {
+		s.WriteString(schemas.ResourceSyncAttempt_Target, *v.Target)
+	}
+	if v.TargetRevision != nil {
+		s.WriteStruct(schemas.ResourceSyncAttempt_TargetRevision)
+		v.TargetRevision.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ResourceSyncAttempt) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceSyncAttempt, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceSyncAttempt_Events:
+			return deserializeResourceSyncEventList(d, schemas.ResourceSyncAttempt_Events, &v.Events)
+		case schemas.ResourceSyncAttempt_InitialRevision:
+			v.InitialRevision = &Revision{}
+			return v.InitialRevision.Deserialize(d)
+		case schemas.ResourceSyncAttempt_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.ResourceSyncAttempt_StartedAt, v.StartedAt)
+		case schemas.ResourceSyncAttempt_Status:
+			var ev string
+			if err := d.ReadString(schemas.ResourceSyncAttempt_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ResourceSyncStatus(ev)
+			return nil
+		case schemas.ResourceSyncAttempt_Target:
+			v.Target = new(string)
+			return d.ReadString(schemas.ResourceSyncAttempt_Target, v.Target)
+		case schemas.ResourceSyncAttempt_TargetRevision:
+			v.TargetRevision = &Revision{}
+			return v.TargetRevision.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Information about a resource sync event for the resource associated with a sync
 // configuration.
 type ResourceSyncEvent struct {
@@ -280,6 +640,46 @@ type ResourceSyncEvent struct {
 	ExternalId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceSyncEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceSyncEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceSyncEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Event != nil {
+		s.WriteString(schemas.ResourceSyncEvent_Event, *v.Event)
+	}
+	if v.ExternalId != nil {
+		s.WriteString(schemas.ResourceSyncEvent_ExternalId, *v.ExternalId)
+	}
+	if v.Time != nil {
+		s.WriteTime(schemas.ResourceSyncEvent_Time, *v.Time)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ResourceSyncEvent_Type, *v.Type)
+	}
+}
+func (v *ResourceSyncEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceSyncEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceSyncEvent_Event:
+			v.Event = new(string)
+			return d.ReadString(schemas.ResourceSyncEvent_Event, v.Event)
+		case schemas.ResourceSyncEvent_ExternalId:
+			v.ExternalId = new(string)
+			return d.ReadString(schemas.ResourceSyncEvent_ExternalId, v.ExternalId)
+		case schemas.ResourceSyncEvent_Time:
+			v.Time = new(time.Time)
+			return d.ReadTime(schemas.ResourceSyncEvent_Time, v.Time)
+		case schemas.ResourceSyncEvent_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ResourceSyncEvent_Type, v.Type)
+		}
+		return nil
+	})
 }
 
 // Information about the revision for a specific sync event, such as the branch,
@@ -318,6 +718,62 @@ type Revision struct {
 	Sha *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Revision) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Revision)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Revision) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Branch != nil {
+		s.WriteString(schemas.Revision_Branch, *v.Branch)
+	}
+	if v.Directory != nil {
+		s.WriteString(schemas.Revision_Directory, *v.Directory)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.Revision_OwnerId, *v.OwnerId)
+	}
+	if v.ProviderType != "" {
+		s.WriteString(schemas.Revision_ProviderType, string(v.ProviderType))
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.Revision_RepositoryName, *v.RepositoryName)
+	}
+	if v.Sha != nil {
+		s.WriteString(schemas.Revision_Sha, *v.Sha)
+	}
+}
+func (v *Revision) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Revision, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Revision_Branch:
+			v.Branch = new(string)
+			return d.ReadString(schemas.Revision_Branch, v.Branch)
+		case schemas.Revision_Directory:
+			v.Directory = new(string)
+			return d.ReadString(schemas.Revision_Directory, v.Directory)
+		case schemas.Revision_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.Revision_OwnerId, v.OwnerId)
+		case schemas.Revision_ProviderType:
+			var ev string
+			if err := d.ReadString(schemas.Revision_ProviderType, &ev); err != nil {
+				return err
+			}
+			v.ProviderType = ProviderType(ev)
+			return nil
+		case schemas.Revision_RepositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.Revision_RepositoryName, v.RepositoryName)
+		case schemas.Revision_Sha:
+			v.Sha = new(string)
+			return d.ReadString(schemas.Revision_Sha, v.Sha)
+		}
+		return nil
+	})
 }
 
 // Information about a blocker for a sync event.
@@ -360,6 +816,75 @@ type SyncBlocker struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SyncBlocker) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SyncBlocker)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SyncBlocker) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSyncBlockerContextList(s, schemas.SyncBlocker_Contexts, v.Contexts)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.SyncBlocker_CreatedAt, *v.CreatedAt)
+	}
+	if v.CreatedReason != nil {
+		s.WriteString(schemas.SyncBlocker_CreatedReason, *v.CreatedReason)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.SyncBlocker_Id, *v.Id)
+	}
+	if v.ResolvedAt != nil {
+		s.WriteTime(schemas.SyncBlocker_ResolvedAt, *v.ResolvedAt)
+	}
+	if v.ResolvedReason != nil {
+		s.WriteString(schemas.SyncBlocker_ResolvedReason, *v.ResolvedReason)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SyncBlocker_Status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SyncBlocker_Type, string(v.Type))
+	}
+}
+func (v *SyncBlocker) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SyncBlocker, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SyncBlocker_Contexts:
+			return deserializeSyncBlockerContextList(d, schemas.SyncBlocker_Contexts, &v.Contexts)
+		case schemas.SyncBlocker_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.SyncBlocker_CreatedAt, v.CreatedAt)
+		case schemas.SyncBlocker_CreatedReason:
+			v.CreatedReason = new(string)
+			return d.ReadString(schemas.SyncBlocker_CreatedReason, v.CreatedReason)
+		case schemas.SyncBlocker_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SyncBlocker_Id, v.Id)
+		case schemas.SyncBlocker_ResolvedAt:
+			v.ResolvedAt = new(time.Time)
+			return d.ReadTime(schemas.SyncBlocker_ResolvedAt, v.ResolvedAt)
+		case schemas.SyncBlocker_ResolvedReason:
+			v.ResolvedReason = new(string)
+			return d.ReadString(schemas.SyncBlocker_ResolvedReason, v.ResolvedReason)
+		case schemas.SyncBlocker_Status:
+			var ev string
+			if err := d.ReadString(schemas.SyncBlocker_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = BlockerStatus(ev)
+			return nil
+		case schemas.SyncBlocker_Type:
+			var ev string
+			if err := d.ReadString(schemas.SyncBlocker_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = BlockerType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The context for a specific sync blocker.
 type SyncBlockerContext struct {
 
@@ -374,6 +899,34 @@ type SyncBlockerContext struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SyncBlockerContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SyncBlockerContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SyncBlockerContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.SyncBlockerContext_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.SyncBlockerContext_Value, *v.Value)
+	}
+}
+func (v *SyncBlockerContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SyncBlockerContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SyncBlockerContext_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.SyncBlockerContext_Key, v.Key)
+		case schemas.SyncBlockerContext_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.SyncBlockerContext_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // A summary for sync blockers.
@@ -391,6 +944,37 @@ type SyncBlockerSummary struct {
 	ParentResourceName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SyncBlockerSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SyncBlockerSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SyncBlockerSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLatestSyncBlockerList(s, schemas.SyncBlockerSummary_LatestBlockers, v.LatestBlockers)
+	if v.ParentResourceName != nil {
+		s.WriteString(schemas.SyncBlockerSummary_ParentResourceName, *v.ParentResourceName)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.SyncBlockerSummary_ResourceName, *v.ResourceName)
+	}
+}
+func (v *SyncBlockerSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SyncBlockerSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SyncBlockerSummary_LatestBlockers:
+			return deserializeLatestSyncBlockerList(d, schemas.SyncBlockerSummary_LatestBlockers, &v.LatestBlockers)
+		case schemas.SyncBlockerSummary_ParentResourceName:
+			v.ParentResourceName = new(string)
+			return d.ReadString(schemas.SyncBlockerSummary_ParentResourceName, v.ParentResourceName)
+		case schemas.SyncBlockerSummary_ResourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.SyncBlockerSummary_ResourceName, v.ResourceName)
+		}
+		return nil
+	})
 }
 
 // Information, such as repository, branch, provider, and resource names for a
@@ -460,6 +1044,114 @@ type SyncConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SyncConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SyncConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SyncConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Branch != nil {
+		s.WriteString(schemas.SyncConfiguration_Branch, *v.Branch)
+	}
+	if v.ConfigFile != nil {
+		s.WriteString(schemas.SyncConfiguration_ConfigFile, *v.ConfigFile)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.SyncConfiguration_OwnerId, *v.OwnerId)
+	}
+	if v.ProviderType != "" {
+		s.WriteString(schemas.SyncConfiguration_ProviderType, string(v.ProviderType))
+	}
+	if v.PublishDeploymentStatus != "" {
+		s.WriteString(schemas.SyncConfiguration_PublishDeploymentStatus, string(v.PublishDeploymentStatus))
+	}
+	if v.PullRequestComment != "" {
+		s.WriteString(schemas.SyncConfiguration_PullRequestComment, string(v.PullRequestComment))
+	}
+	if v.RepositoryLinkId != nil {
+		s.WriteString(schemas.SyncConfiguration_RepositoryLinkId, *v.RepositoryLinkId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.SyncConfiguration_RepositoryName, *v.RepositoryName)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.SyncConfiguration_ResourceName, *v.ResourceName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.SyncConfiguration_RoleArn, *v.RoleArn)
+	}
+	if v.SyncType != "" {
+		s.WriteString(schemas.SyncConfiguration_SyncType, string(v.SyncType))
+	}
+	if v.TriggerResourceUpdateOn != "" {
+		s.WriteString(schemas.SyncConfiguration_TriggerResourceUpdateOn, string(v.TriggerResourceUpdateOn))
+	}
+}
+func (v *SyncConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SyncConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SyncConfiguration_Branch:
+			v.Branch = new(string)
+			return d.ReadString(schemas.SyncConfiguration_Branch, v.Branch)
+		case schemas.SyncConfiguration_ConfigFile:
+			v.ConfigFile = new(string)
+			return d.ReadString(schemas.SyncConfiguration_ConfigFile, v.ConfigFile)
+		case schemas.SyncConfiguration_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.SyncConfiguration_OwnerId, v.OwnerId)
+		case schemas.SyncConfiguration_ProviderType:
+			var ev string
+			if err := d.ReadString(schemas.SyncConfiguration_ProviderType, &ev); err != nil {
+				return err
+			}
+			v.ProviderType = ProviderType(ev)
+			return nil
+		case schemas.SyncConfiguration_PublishDeploymentStatus:
+			var ev string
+			if err := d.ReadString(schemas.SyncConfiguration_PublishDeploymentStatus, &ev); err != nil {
+				return err
+			}
+			v.PublishDeploymentStatus = PublishDeploymentStatus(ev)
+			return nil
+		case schemas.SyncConfiguration_PullRequestComment:
+			var ev string
+			if err := d.ReadString(schemas.SyncConfiguration_PullRequestComment, &ev); err != nil {
+				return err
+			}
+			v.PullRequestComment = PullRequestComment(ev)
+			return nil
+		case schemas.SyncConfiguration_RepositoryLinkId:
+			v.RepositoryLinkId = new(string)
+			return d.ReadString(schemas.SyncConfiguration_RepositoryLinkId, v.RepositoryLinkId)
+		case schemas.SyncConfiguration_RepositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.SyncConfiguration_RepositoryName, v.RepositoryName)
+		case schemas.SyncConfiguration_ResourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.SyncConfiguration_ResourceName, v.ResourceName)
+		case schemas.SyncConfiguration_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.SyncConfiguration_RoleArn, v.RoleArn)
+		case schemas.SyncConfiguration_SyncType:
+			var ev string
+			if err := d.ReadString(schemas.SyncConfiguration_SyncType, &ev); err != nil {
+				return err
+			}
+			v.SyncType = SyncConfigurationType(ev)
+			return nil
+		case schemas.SyncConfiguration_TriggerResourceUpdateOn:
+			var ev string
+			if err := d.ReadString(schemas.SyncConfiguration_TriggerResourceUpdateOn, &ev); err != nil {
+				return err
+			}
+			v.TriggerResourceUpdateOn = TriggerResourceUpdateOn(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A tag is a key-value pair that is used to manage the resource.
 //
 // This tag is available for use by Amazon Web Services services that support tags.
@@ -476,6 +1168,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // The VPC configuration provisioned for the host.
@@ -504,6 +1224,40 @@ type VpcConfiguration struct {
 	TlsCertificate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VpcConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSecurityGroupIds(s, schemas.VpcConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	serializeSubnetIds(s, schemas.VpcConfiguration_SubnetIds, v.SubnetIds)
+	if v.TlsCertificate != nil {
+		s.WriteString(schemas.VpcConfiguration_TlsCertificate, *v.TlsCertificate)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.VpcConfiguration_VpcId, *v.VpcId)
+	}
+}
+func (v *VpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcConfiguration_SecurityGroupIds:
+			return deserializeSecurityGroupIds(d, schemas.VpcConfiguration_SecurityGroupIds, &v.SecurityGroupIds)
+		case schemas.VpcConfiguration_SubnetIds:
+			return deserializeSubnetIds(d, schemas.VpcConfiguration_SubnetIds, &v.SubnetIds)
+		case schemas.VpcConfiguration_TlsCertificate:
+			v.TlsCertificate = new(string)
+			return d.ReadString(schemas.VpcConfiguration_TlsCertificate, v.TlsCertificate)
+		case schemas.VpcConfiguration_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.VpcConfiguration_VpcId, v.VpcId)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

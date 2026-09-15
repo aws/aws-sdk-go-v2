@@ -5,7 +5,9 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,40 @@ type ListAlarmRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAlarmRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAlarmRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAlarmRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentArn != nil {
+		s.WriteString(schemas.ListAlarmRecommendationsRequest_assessmentArn, *v.AssessmentArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAlarmRecommendationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAlarmRecommendationsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAlarmRecommendationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAlarmRecommendationsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAlarmRecommendationsRequest_assessmentArn:
+			v.AssessmentArn = new(string)
+			return d.ReadString(schemas.ListAlarmRecommendationsRequest_assessmentArn, v.AssessmentArn)
+		case schemas.ListAlarmRecommendationsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListAlarmRecommendationsRequest_maxResults, v.MaxResults)
+		case schemas.ListAlarmRecommendationsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAlarmRecommendationsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListAlarmRecommendationsOutput struct {
 
 	// The alarm recommendations for an Resilience Hub application, returned as an
@@ -66,13 +102,35 @@ type ListAlarmRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAlarmRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAlarmRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAlarmRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAlarmRecommendationList(s, schemas.ListAlarmRecommendationsResponse_alarmRecommendations, v.AlarmRecommendations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAlarmRecommendationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAlarmRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAlarmRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAlarmRecommendationsResponse_alarmRecommendations:
+			return deserializeAlarmRecommendationList(d, schemas.ListAlarmRecommendationsResponse_alarmRecommendations, &v.AlarmRecommendations)
+		case schemas.ListAlarmRecommendationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAlarmRecommendationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAlarmRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAlarmRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAlarmRecommendations, schemas.ListAlarmRecommendationsRequest, schemas.ListAlarmRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAlarmRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAlarmRecommendations, schemas.ListAlarmRecommendationsRequest, schemas.ListAlarmRecommendationsResponse), output: &ListAlarmRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

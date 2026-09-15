@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,27 @@ type UpdateTopicInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTopicInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTopicRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTopicInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.UpdateTopicRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.Configs != nil {
+		s.WriteString(schemas.UpdateTopicRequest_Configs, *v.Configs)
+	}
+	if v.PartitionCount != nil {
+		s.WriteInt32(schemas.UpdateTopicRequest_PartitionCount, *v.PartitionCount)
+	}
+	if v.TopicName != nil {
+		s.WriteString(schemas.UpdateTopicRequest_TopicName, *v.TopicName)
+	}
+}
+
 type UpdateTopicOutput struct {
 
 	// The status of the topic update.
@@ -62,13 +85,48 @@ type UpdateTopicOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTopicOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTopicResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTopicOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateTopicResponse_Status, string(v.Status))
+	}
+	if v.TopicArn != nil {
+		s.WriteString(schemas.UpdateTopicResponse_TopicArn, *v.TopicArn)
+	}
+	if v.TopicName != nil {
+		s.WriteString(schemas.UpdateTopicResponse_TopicName, *v.TopicName)
+	}
+}
+func (v *UpdateTopicOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTopicResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTopicResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateTopicResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TopicState(ev)
+			return nil
+		case schemas.UpdateTopicResponse_TopicArn:
+			v.TopicArn = new(string)
+			return d.ReadString(schemas.UpdateTopicResponse_TopicArn, v.TopicArn)
+		case schemas.UpdateTopicResponse_TopicName:
+			v.TopicName = new(string)
+			return d.ReadString(schemas.UpdateTopicResponse_TopicName, v.TopicName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTopic{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTopic, schemas.UpdateTopicRequest, schemas.UpdateTopicResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTopic{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTopic, schemas.UpdateTopicRequest, schemas.UpdateTopicResponse), output: &UpdateTopicOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

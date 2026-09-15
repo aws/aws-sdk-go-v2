@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -34,6 +35,32 @@ func (e *CloudHsmInternalException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CloudHsmInternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *CloudHsmInternalException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudHsmInternalException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudHsmInternalException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CloudHsmInternalException_message, *v.Message)
+	}
+	if v.Retryable != false {
+		s.WriteBool(schemas.CloudHsmInternalException_retryable, v.Retryable)
+	}
+}
+func (v *CloudHsmInternalException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudHsmInternalException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudHsmInternalException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CloudHsmInternalException_message, v.Message)
+		case schemas.CloudHsmInternalException_retryable:
+			return d.ReadBool(schemas.CloudHsmInternalException_retryable, &v.Retryable)
+		}
+		return nil
+	})
+}
 
 // Indicates that an exception occurred in the AWS CloudHSM service.
 type CloudHsmServiceException struct {
@@ -62,6 +89,32 @@ func (e *CloudHsmServiceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CloudHsmServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *CloudHsmServiceException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudHsmServiceException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudHsmServiceException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CloudHsmServiceException_message, *v.Message)
+	}
+	if v.Retryable != false {
+		s.WriteBool(schemas.CloudHsmServiceException_retryable, v.Retryable)
+	}
+}
+func (v *CloudHsmServiceException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudHsmServiceException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudHsmServiceException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CloudHsmServiceException_message, v.Message)
+		case schemas.CloudHsmServiceException_retryable:
+			return d.ReadBool(schemas.CloudHsmServiceException_retryable, &v.Retryable)
+		}
+		return nil
+	})
+}
 
 // Indicates that one or more of the request parameters are not valid.
 type InvalidRequestException struct {
@@ -90,3 +143,29 @@ func (e *InvalidRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidRequestException_message, *v.Message)
+	}
+	if v.Retryable != false {
+		s.WriteBool(schemas.InvalidRequestException_retryable, v.Retryable)
+	}
+}
+func (v *InvalidRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidRequestException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidRequestException_message, v.Message)
+		case schemas.InvalidRequestException_retryable:
+			return d.ReadBool(schemas.InvalidRequestException_retryable, &v.Retryable)
+		}
+		return nil
+	})
+}

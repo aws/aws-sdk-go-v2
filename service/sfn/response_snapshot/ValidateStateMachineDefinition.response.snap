@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSStepFunctions.ValidateStateMachineDefinition
+
+{"diagnostics":[{"code":"__Code__","location":"__Location__","message":"__Message__","severity":"ERROR"},{"code":"__Code__","location":"__Location__","message":"__Message__","severity":"ERROR"}],"result":"OK","truncated":true}

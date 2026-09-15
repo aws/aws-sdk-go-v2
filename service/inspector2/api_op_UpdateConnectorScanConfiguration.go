@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,23 @@ type UpdateConnectorScanConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectorScanConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectorScanConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectorScanConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsConfigConnectorArn != nil {
+		s.WriteString(schemas.UpdateConnectorScanConfigurationRequest_awsConfigConnectorArn, *v.AwsConfigConnectorArn)
+	}
+	if v.ScanConfiguration != nil {
+		s.WriteStruct(schemas.UpdateConnectorScanConfigurationRequest_scanConfiguration)
+		v.ScanConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateConnectorScanConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +66,26 @@ type UpdateConnectorScanConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectorScanConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectorScanConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectorScanConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateConnectorScanConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConnectorScanConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConnectorScanConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConnectorScanConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectorScanConfiguration, schemas.UpdateConnectorScanConfigurationRequest, schemas.UpdateConnectorScanConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateConnectorScanConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectorScanConfiguration, schemas.UpdateConnectorScanConfigurationRequest, schemas.UpdateConnectorScanConfigurationResponse), output: &UpdateConnectorScanConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

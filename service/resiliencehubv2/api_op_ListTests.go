@@ -5,7 +5,9 @@ package resiliencehubv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListTestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTestsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestsRequest_nextToken, *v.NextToken)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.ListTestsRequest_serviceArn, *v.ServiceArn)
+	}
+}
+
 type ListTestsOutput struct {
 
 	// The list of test summaries.
@@ -57,13 +77,35 @@ type ListTestsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestsResponse_nextToken, *v.NextToken)
+	}
+	serializeTestSummaryList(s, schemas.ListTestsResponse_tests, v.Tests)
+}
+func (v *ListTestsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTestsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTestsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTestsResponse_nextToken, v.NextToken)
+		case schemas.ListTestsResponse_tests:
+			return deserializeTestSummaryList(d, schemas.ListTestsResponse_tests, &v.Tests)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTests{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTests, schemas.ListTestsRequest, schemas.ListTestsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTests{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTests, schemas.ListTestsRequest, schemas.ListTestsResponse), output: &ListTestsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

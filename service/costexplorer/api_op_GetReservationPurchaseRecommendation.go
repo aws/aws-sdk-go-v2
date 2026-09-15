@@ -5,7 +5,9 @@ package costexplorer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -162,6 +164,49 @@ type GetReservationPurchaseRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReservationPurchaseRecommendationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReservationPurchaseRecommendationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReservationPurchaseRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetReservationPurchaseRecommendationRequest_AccountId, *v.AccountId)
+	}
+	if v.AccountScope != "" {
+		s.WriteString(schemas.GetReservationPurchaseRecommendationRequest_AccountScope, string(v.AccountScope))
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetReservationPurchaseRecommendationRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LookbackPeriodInDays != "" {
+		s.WriteString(schemas.GetReservationPurchaseRecommendationRequest_LookbackPeriodInDays, string(v.LookbackPeriodInDays))
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetReservationPurchaseRecommendationRequest_NextPageToken, *v.NextPageToken)
+	}
+	if v.PageSize != 0 {
+		s.WriteInt32(schemas.GetReservationPurchaseRecommendationRequest_PageSize, v.PageSize)
+	}
+	if v.PaymentOption != "" {
+		s.WriteString(schemas.GetReservationPurchaseRecommendationRequest_PaymentOption, string(v.PaymentOption))
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.GetReservationPurchaseRecommendationRequest_Service, *v.Service)
+	}
+	if v.ServiceSpecification != nil {
+		s.WriteStruct(schemas.GetReservationPurchaseRecommendationRequest_ServiceSpecification)
+		v.ServiceSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TermInYears != "" {
+		s.WriteString(schemas.GetReservationPurchaseRecommendationRequest_TermInYears, string(v.TermInYears))
+	}
+}
+
 type GetReservationPurchaseRecommendationOutput struct {
 
 	// Information about this specific recommendation call, such as the time stamp for
@@ -180,13 +225,43 @@ type GetReservationPurchaseRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReservationPurchaseRecommendationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReservationPurchaseRecommendationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReservationPurchaseRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.GetReservationPurchaseRecommendationResponse_Metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetReservationPurchaseRecommendationResponse_NextPageToken, *v.NextPageToken)
+	}
+	serializeReservationPurchaseRecommendations(s, schemas.GetReservationPurchaseRecommendationResponse_Recommendations, v.Recommendations)
+}
+func (v *GetReservationPurchaseRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetReservationPurchaseRecommendationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetReservationPurchaseRecommendationResponse_Metadata:
+			v.Metadata = &types.ReservationPurchaseRecommendationMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.GetReservationPurchaseRecommendationResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetReservationPurchaseRecommendationResponse_NextPageToken, v.NextPageToken)
+		case schemas.GetReservationPurchaseRecommendationResponse_Recommendations:
+			return deserializeReservationPurchaseRecommendations(d, schemas.GetReservationPurchaseRecommendationResponse_Recommendations, &v.Recommendations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetReservationPurchaseRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetReservationPurchaseRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReservationPurchaseRecommendation, schemas.GetReservationPurchaseRecommendationRequest, schemas.GetReservationPurchaseRecommendationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetReservationPurchaseRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReservationPurchaseRecommendation, schemas.GetReservationPurchaseRecommendationRequest, schemas.GetReservationPurchaseRecommendationResponse), output: &GetReservationPurchaseRecommendationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

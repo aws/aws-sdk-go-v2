@@ -4,7 +4,9 @@ package applicationautoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -272,6 +274,44 @@ type PutScheduledActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutScheduledActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutScheduledActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutScheduledActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.PutScheduledActionRequest_EndTime, *v.EndTime)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.PutScheduledActionRequest_ResourceId, *v.ResourceId)
+	}
+	if v.ScalableDimension != "" {
+		s.WriteString(schemas.PutScheduledActionRequest_ScalableDimension, string(v.ScalableDimension))
+	}
+	if v.ScalableTargetAction != nil {
+		s.WriteStruct(schemas.PutScheduledActionRequest_ScalableTargetAction)
+		v.ScalableTargetAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Schedule != nil {
+		s.WriteString(schemas.PutScheduledActionRequest_Schedule, *v.Schedule)
+	}
+	if v.ScheduledActionName != nil {
+		s.WriteString(schemas.PutScheduledActionRequest_ScheduledActionName, *v.ScheduledActionName)
+	}
+	if v.ServiceNamespace != "" {
+		s.WriteString(schemas.PutScheduledActionRequest_ServiceNamespace, string(v.ServiceNamespace))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.PutScheduledActionRequest_StartTime, *v.StartTime)
+	}
+	if v.Timezone != nil {
+		s.WriteString(schemas.PutScheduledActionRequest_Timezone, *v.Timezone)
+	}
+}
+
 type PutScheduledActionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -279,13 +319,26 @@ type PutScheduledActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutScheduledActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutScheduledActionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutScheduledActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutScheduledActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutScheduledActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutScheduledActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutScheduledAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutScheduledAction, schemas.PutScheduledActionRequest, schemas.PutScheduledActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutScheduledAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutScheduledAction, schemas.PutScheduledActionRequest, schemas.PutScheduledActionResponse), output: &PutScheduledActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

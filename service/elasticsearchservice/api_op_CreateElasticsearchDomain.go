@@ -4,7 +4,9 @@ package elasticsearchservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -122,6 +124,93 @@ type CreateElasticsearchDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateElasticsearchDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateElasticsearchDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateElasticsearchDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPolicies != nil {
+		s.WriteString(schemas.CreateElasticsearchDomainRequest_AccessPolicies, *v.AccessPolicies)
+	}
+	serializeAdvancedOptions(s, schemas.CreateElasticsearchDomainRequest_AdvancedOptions, v.AdvancedOptions)
+	if v.AdvancedSecurityOptions != nil {
+		s.WriteStruct(schemas.CreateElasticsearchDomainRequest_AdvancedSecurityOptions)
+		v.AdvancedSecurityOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutoTuneOptions != nil {
+		s.WriteStruct(schemas.CreateElasticsearchDomainRequest_AutoTuneOptions)
+		v.AutoTuneOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutomatedSnapshotPauseOptions != nil {
+		s.WriteStruct(schemas.CreateElasticsearchDomainRequest_AutomatedSnapshotPauseOptions)
+		v.AutomatedSnapshotPauseOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CognitoOptions != nil {
+		s.WriteStruct(schemas.CreateElasticsearchDomainRequest_CognitoOptions)
+		v.CognitoOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeploymentStrategyOptions != nil {
+		s.WriteStruct(schemas.CreateElasticsearchDomainRequest_DeploymentStrategyOptions)
+		v.DeploymentStrategyOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainEndpointOptions != nil {
+		s.WriteStruct(schemas.CreateElasticsearchDomainRequest_DomainEndpointOptions)
+		v.DomainEndpointOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.CreateElasticsearchDomainRequest_DomainName, *v.DomainName)
+	}
+	if v.EBSOptions != nil {
+		s.WriteStruct(schemas.CreateElasticsearchDomainRequest_EBSOptions)
+		v.EBSOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ElasticsearchClusterConfig != nil {
+		s.WriteStruct(schemas.CreateElasticsearchDomainRequest_ElasticsearchClusterConfig)
+		v.ElasticsearchClusterConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ElasticsearchVersion != nil {
+		s.WriteString(schemas.CreateElasticsearchDomainRequest_ElasticsearchVersion, *v.ElasticsearchVersion)
+	}
+	if v.EncryptionAtRestOptions != nil {
+		s.WriteStruct(schemas.CreateElasticsearchDomainRequest_EncryptionAtRestOptions)
+		v.EncryptionAtRestOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EngineMode != "" {
+		s.WriteString(schemas.CreateElasticsearchDomainRequest_EngineMode, string(v.EngineMode))
+	}
+	serializeLogPublishingOptions(s, schemas.CreateElasticsearchDomainRequest_LogPublishingOptions, v.LogPublishingOptions)
+	if v.NodeToNodeEncryptionOptions != nil {
+		s.WriteStruct(schemas.CreateElasticsearchDomainRequest_NodeToNodeEncryptionOptions)
+		v.NodeToNodeEncryptionOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnapshotOptions != nil {
+		s.WriteStruct(schemas.CreateElasticsearchDomainRequest_SnapshotOptions)
+		v.SnapshotOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateElasticsearchDomainRequest_TagList, v.TagList)
+	if v.UseCase != "" {
+		s.WriteString(schemas.CreateElasticsearchDomainRequest_UseCase, string(v.UseCase))
+	}
+	if v.VPCOptions != nil {
+		s.WriteStruct(schemas.CreateElasticsearchDomainRequest_VPCOptions)
+		v.VPCOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The result of a CreateElasticsearchDomain operation. Contains the status of the
 // newly created Elasticsearch domain.
 type CreateElasticsearchDomainOutput struct {
@@ -135,13 +224,34 @@ type CreateElasticsearchDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateElasticsearchDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateElasticsearchDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateElasticsearchDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainStatus != nil {
+		s.WriteStruct(schemas.CreateElasticsearchDomainResponse_DomainStatus)
+		v.DomainStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateElasticsearchDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateElasticsearchDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateElasticsearchDomainResponse_DomainStatus:
+			v.DomainStatus = &types.ElasticsearchDomainStatus{}
+			return v.DomainStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateElasticsearchDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateElasticsearchDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateElasticsearchDomain, schemas.CreateElasticsearchDomainRequest, schemas.CreateElasticsearchDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateElasticsearchDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateElasticsearchDomain, schemas.CreateElasticsearchDomainRequest, schemas.CreateElasticsearchDomainResponse), output: &CreateElasticsearchDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

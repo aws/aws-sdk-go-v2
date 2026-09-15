@@ -4,6 +4,8 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,28 @@ type CancelFindingsReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelFindingsReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelFindingsReportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelFindingsReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportId != nil {
+		s.WriteString(schemas.CancelFindingsReportRequest_reportId, *v.ReportId)
+	}
+}
+func (v *CancelFindingsReportInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelFindingsReportRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelFindingsReportRequest_reportId:
+			v.ReportId = new(string)
+			return d.ReadString(schemas.CancelFindingsReportRequest_reportId, v.ReportId)
+		}
+		return nil
+	})
+}
+
 type CancelFindingsReportOutput struct {
 
 	// The ID of the canceled report.
@@ -46,13 +70,32 @@ type CancelFindingsReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelFindingsReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelFindingsReportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelFindingsReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportId != nil {
+		s.WriteString(schemas.CancelFindingsReportResponse_reportId, *v.ReportId)
+	}
+}
+func (v *CancelFindingsReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelFindingsReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelFindingsReportResponse_reportId:
+			v.ReportId = new(string)
+			return d.ReadString(schemas.CancelFindingsReportResponse_reportId, v.ReportId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelFindingsReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelFindingsReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelFindingsReport, schemas.CancelFindingsReportRequest, schemas.CancelFindingsReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelFindingsReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelFindingsReport, schemas.CancelFindingsReportRequest, schemas.CancelFindingsReportResponse), output: &CancelFindingsReportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

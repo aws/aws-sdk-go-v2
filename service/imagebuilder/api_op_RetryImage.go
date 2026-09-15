@@ -5,6 +5,8 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type RetryImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetryImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetryImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetryImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.RetryImageRequest_clientToken, *v.ClientToken)
+	}
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.RetryImageRequest_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+}
+
 type RetryImageOutput struct {
 
 	// The client token that uniquely identifies the request.
@@ -58,13 +75,38 @@ type RetryImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetryImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetryImageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetryImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.RetryImageResponse_clientToken, *v.ClientToken)
+	}
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.RetryImageResponse_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+}
+func (v *RetryImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetryImageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetryImageResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.RetryImageResponse_clientToken, v.ClientToken)
+		case schemas.RetryImageResponse_imageBuildVersionArn:
+			v.ImageBuildVersionArn = new(string)
+			return d.ReadString(schemas.RetryImageResponse_imageBuildVersionArn, v.ImageBuildVersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRetryImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRetryImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetryImage, schemas.RetryImageRequest, schemas.RetryImageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRetryImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetryImage, schemas.RetryImageRequest, schemas.RetryImageResponse), output: &RetryImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

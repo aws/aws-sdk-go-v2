@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type DescribeConfigurationInput struct {
 	Arn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeConfigurationRequest_Arn, *v.Arn)
+	}
 }
 
 type DescribeConfigurationOutput struct {
@@ -66,13 +80,71 @@ type DescribeConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeConfigurationResponse_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeConfigurationResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeConfigurationResponse_Description, *v.Description)
+	}
+	serialize__listOf__string(s, schemas.DescribeConfigurationResponse_KafkaVersions, v.KafkaVersions)
+	if v.LatestRevision != nil {
+		s.WriteStruct(schemas.DescribeConfigurationResponse_LatestRevision)
+		v.LatestRevision.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeConfigurationResponse_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DescribeConfigurationResponse_State, string(v.State))
+	}
+}
+func (v *DescribeConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConfigurationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeConfigurationResponse_Arn, v.Arn)
+		case schemas.DescribeConfigurationResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeConfigurationResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeConfigurationResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeConfigurationResponse_Description, v.Description)
+		case schemas.DescribeConfigurationResponse_KafkaVersions:
+			return deserialize__listOf__string(d, schemas.DescribeConfigurationResponse_KafkaVersions, &v.KafkaVersions)
+		case schemas.DescribeConfigurationResponse_LatestRevision:
+			v.LatestRevision = &types.ConfigurationRevision{}
+			return v.LatestRevision.Deserialize(d)
+		case schemas.DescribeConfigurationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeConfigurationResponse_Name, v.Name)
+		case schemas.DescribeConfigurationResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DescribeConfigurationResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ConfigurationState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfiguration, schemas.DescribeConfigurationRequest, schemas.DescribeConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfiguration, schemas.DescribeConfigurationRequest, schemas.DescribeConfigurationResponse), output: &DescribeConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

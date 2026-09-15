@@ -4,6 +4,8 @@ package imagebuilder
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteComponentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentBuildVersionArn != nil {
+		s.WriteString(schemas.DeleteComponentRequest_componentBuildVersionArn, *v.ComponentBuildVersionArn)
+	}
+}
+
 type DeleteComponentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the component build version that this request
@@ -48,13 +62,38 @@ type DeleteComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteComponentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentBuildVersionArn != nil {
+		s.WriteString(schemas.DeleteComponentResponse_componentBuildVersionArn, *v.ComponentBuildVersionArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteComponentResponse_requestId, *v.RequestId)
+	}
+}
+func (v *DeleteComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteComponentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteComponentResponse_componentBuildVersionArn:
+			v.ComponentBuildVersionArn = new(string)
+			return d.ReadString(schemas.DeleteComponentResponse_componentBuildVersionArn, v.ComponentBuildVersionArn)
+		case schemas.DeleteComponentResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteComponentResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteComponent, schemas.DeleteComponentRequest, schemas.DeleteComponentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteComponent, schemas.DeleteComponentRequest, schemas.DeleteComponentResponse), output: &DeleteComponentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

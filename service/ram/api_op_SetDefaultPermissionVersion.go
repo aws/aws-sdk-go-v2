@@ -4,6 +4,8 @@ package ram
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,24 @@ type SetDefaultPermissionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetDefaultPermissionVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetDefaultPermissionVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetDefaultPermissionVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.SetDefaultPermissionVersionRequest_clientToken, *v.ClientToken)
+	}
+	if v.PermissionArn != nil {
+		s.WriteString(schemas.SetDefaultPermissionVersionRequest_permissionArn, *v.PermissionArn)
+	}
+	if v.PermissionVersion != nil {
+		s.WriteInt32(schemas.SetDefaultPermissionVersionRequest_permissionVersion, *v.PermissionVersion)
+	}
+}
+
 type SetDefaultPermissionVersionOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat
@@ -78,13 +98,38 @@ type SetDefaultPermissionVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetDefaultPermissionVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetDefaultPermissionVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetDefaultPermissionVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.SetDefaultPermissionVersionResponse_clientToken, *v.ClientToken)
+	}
+	if v.ReturnValue != nil {
+		s.WriteBool(schemas.SetDefaultPermissionVersionResponse_returnValue, *v.ReturnValue)
+	}
+}
+func (v *SetDefaultPermissionVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetDefaultPermissionVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetDefaultPermissionVersionResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.SetDefaultPermissionVersionResponse_clientToken, v.ClientToken)
+		case schemas.SetDefaultPermissionVersionResponse_returnValue:
+			v.ReturnValue = new(bool)
+			return d.ReadBool(schemas.SetDefaultPermissionVersionResponse_returnValue, v.ReturnValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetDefaultPermissionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSetDefaultPermissionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetDefaultPermissionVersion, schemas.SetDefaultPermissionVersionRequest, schemas.SetDefaultPermissionVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSetDefaultPermissionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetDefaultPermissionVersion, schemas.SetDefaultPermissionVersionRequest, schemas.SetDefaultPermissionVersionResponse), output: &SetDefaultPermissionVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

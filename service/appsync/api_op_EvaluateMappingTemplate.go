@@ -4,7 +4,9 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,21 @@ type EvaluateMappingTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EvaluateMappingTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluateMappingTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluateMappingTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Context != nil {
+		s.WriteString(schemas.EvaluateMappingTemplateRequest_context, *v.Context)
+	}
+	if v.Template != nil {
+		s.WriteString(schemas.EvaluateMappingTemplateRequest_template, *v.Template)
+	}
+}
+
 type EvaluateMappingTemplateOutput struct {
 
 	// The ErrorDetail object.
@@ -76,13 +93,55 @@ type EvaluateMappingTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EvaluateMappingTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluateMappingTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluateMappingTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Error != nil {
+		s.WriteStruct(schemas.EvaluateMappingTemplateResponse_error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EvaluationResult != nil {
+		s.WriteString(schemas.EvaluateMappingTemplateResponse_evaluationResult, *v.EvaluationResult)
+	}
+	serializeLogs(s, schemas.EvaluateMappingTemplateResponse_logs, v.Logs)
+	if v.OutErrors != nil {
+		s.WriteString(schemas.EvaluateMappingTemplateResponse_outErrors, *v.OutErrors)
+	}
+	if v.Stash != nil {
+		s.WriteString(schemas.EvaluateMappingTemplateResponse_stash, *v.Stash)
+	}
+}
+func (v *EvaluateMappingTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluateMappingTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluateMappingTemplateResponse_error:
+			v.Error = &types.ErrorDetail{}
+			return v.Error.Deserialize(d)
+		case schemas.EvaluateMappingTemplateResponse_evaluationResult:
+			v.EvaluationResult = new(string)
+			return d.ReadString(schemas.EvaluateMappingTemplateResponse_evaluationResult, v.EvaluationResult)
+		case schemas.EvaluateMappingTemplateResponse_logs:
+			return deserializeLogs(d, schemas.EvaluateMappingTemplateResponse_logs, &v.Logs)
+		case schemas.EvaluateMappingTemplateResponse_outErrors:
+			v.OutErrors = new(string)
+			return d.ReadString(schemas.EvaluateMappingTemplateResponse_outErrors, v.OutErrors)
+		case schemas.EvaluateMappingTemplateResponse_stash:
+			v.Stash = new(string)
+			return d.ReadString(schemas.EvaluateMappingTemplateResponse_stash, v.Stash)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEvaluateMappingTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpEvaluateMappingTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EvaluateMappingTemplate, schemas.EvaluateMappingTemplateRequest, schemas.EvaluateMappingTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEvaluateMappingTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EvaluateMappingTemplate, schemas.EvaluateMappingTemplateRequest, schemas.EvaluateMappingTemplateResponse), output: &EvaluateMappingTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

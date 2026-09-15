@@ -5,7 +5,9 @@ package auditmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,21 @@ type ListControlDomainInsightsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListControlDomainInsightsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListControlDomainInsightsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListControlDomainInsightsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListControlDomainInsightsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListControlDomainInsightsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListControlDomainInsightsOutput struct {
 
 	// The control domain analytics data that the ListControlDomainInsights API
@@ -63,13 +80,35 @@ type ListControlDomainInsightsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListControlDomainInsightsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListControlDomainInsightsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListControlDomainInsightsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeControlDomainInsightsList(s, schemas.ListControlDomainInsightsResponse_controlDomainInsights, v.ControlDomainInsights)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListControlDomainInsightsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListControlDomainInsightsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListControlDomainInsightsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListControlDomainInsightsResponse_controlDomainInsights:
+			return deserializeControlDomainInsightsList(d, schemas.ListControlDomainInsightsResponse_controlDomainInsights, &v.ControlDomainInsights)
+		case schemas.ListControlDomainInsightsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListControlDomainInsightsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListControlDomainInsightsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListControlDomainInsights{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListControlDomainInsights, schemas.ListControlDomainInsightsRequest, schemas.ListControlDomainInsightsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListControlDomainInsights{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListControlDomainInsights, schemas.ListControlDomainInsightsRequest, schemas.ListControlDomainInsightsResponse), output: &ListControlDomainInsightsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

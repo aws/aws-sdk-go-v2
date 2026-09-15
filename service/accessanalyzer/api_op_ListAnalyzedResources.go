@@ -5,7 +5,9 @@ package accessanalyzer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,50 @@ type ListAnalyzedResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnalyzedResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnalyzedResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnalyzedResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzerArn != nil {
+		s.WriteString(schemas.ListAnalyzedResourcesRequest_analyzerArn, *v.AnalyzerArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAnalyzedResourcesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnalyzedResourcesRequest_nextToken, *v.NextToken)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.ListAnalyzedResourcesRequest_resourceType, string(v.ResourceType))
+	}
+}
+func (v *ListAnalyzedResourcesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAnalyzedResourcesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAnalyzedResourcesRequest_analyzerArn:
+			v.AnalyzerArn = new(string)
+			return d.ReadString(schemas.ListAnalyzedResourcesRequest_analyzerArn, v.AnalyzerArn)
+		case schemas.ListAnalyzedResourcesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListAnalyzedResourcesRequest_maxResults, v.MaxResults)
+		case schemas.ListAnalyzedResourcesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAnalyzedResourcesRequest_nextToken, v.NextToken)
+		case schemas.ListAnalyzedResourcesRequest_resourceType:
+			var ev string
+			if err := d.ReadString(schemas.ListAnalyzedResourcesRequest_resourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = types.ResourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The response to the request.
 type ListAnalyzedResourcesOutput struct {
 
@@ -65,13 +111,35 @@ type ListAnalyzedResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnalyzedResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnalyzedResourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnalyzedResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalyzedResourcesList(s, schemas.ListAnalyzedResourcesResponse_analyzedResources, v.AnalyzedResources)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnalyzedResourcesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAnalyzedResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAnalyzedResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAnalyzedResourcesResponse_analyzedResources:
+			return deserializeAnalyzedResourcesList(d, schemas.ListAnalyzedResourcesResponse_analyzedResources, &v.AnalyzedResources)
+		case schemas.ListAnalyzedResourcesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAnalyzedResourcesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAnalyzedResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAnalyzedResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnalyzedResources, schemas.ListAnalyzedResourcesRequest, schemas.ListAnalyzedResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAnalyzedResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnalyzedResources, schemas.ListAnalyzedResourcesRequest, schemas.ListAnalyzedResourcesResponse), output: &ListAnalyzedResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

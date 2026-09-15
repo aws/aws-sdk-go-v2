@@ -4,6 +4,8 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteEventBridgeRuleTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEventBridgeRuleTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEventBridgeRuleTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEventBridgeRuleTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.DeleteEventBridgeRuleTemplateRequest_Identifier, *v.Identifier)
+	}
+}
+
 type DeleteEventBridgeRuleTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type DeleteEventBridgeRuleTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEventBridgeRuleTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEventBridgeRuleTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteEventBridgeRuleTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEventBridgeRuleTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteEventBridgeRuleTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEventBridgeRuleTemplate, schemas.DeleteEventBridgeRuleTemplateRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteEventBridgeRuleTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEventBridgeRuleTemplate, schemas.DeleteEventBridgeRuleTemplateRequest, nil), output: &DeleteEventBridgeRuleTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

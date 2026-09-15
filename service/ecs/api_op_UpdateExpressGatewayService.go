@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -103,6 +105,54 @@ type UpdateExpressGatewayServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExpressGatewayServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExpressGatewayServiceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExpressGatewayServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cpu != nil {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_cpu, *v.Cpu)
+	}
+	if v.CpuArchitecture != "" {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_cpuArchitecture, string(v.CpuArchitecture))
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.HealthCheckPath != nil {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_healthCheckPath, *v.HealthCheckPath)
+	}
+	if v.Memory != nil {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_memory, *v.Memory)
+	}
+	if v.NetworkConfiguration != nil {
+		s.WriteStruct(schemas.UpdateExpressGatewayServiceRequest_networkConfiguration)
+		v.NetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PrimaryContainer != nil {
+		s.WriteStruct(schemas.UpdateExpressGatewayServiceRequest_primaryContainer)
+		v.PrimaryContainer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScalingTarget != nil {
+		s.WriteStruct(schemas.UpdateExpressGatewayServiceRequest_scalingTarget)
+		v.ScalingTarget.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_serviceArn, *v.ServiceArn)
+	}
+	if v.TaskDefinitionArn != nil {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_taskDefinitionArn, *v.TaskDefinitionArn)
+	}
+	if v.TaskRoleArn != nil {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_taskRoleArn, *v.TaskRoleArn)
+	}
+}
+
 type UpdateExpressGatewayServiceOutput struct {
 
 	// The full description of your express gateway service following the update call.
@@ -114,13 +164,34 @@ type UpdateExpressGatewayServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExpressGatewayServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExpressGatewayServiceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExpressGatewayServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Service != nil {
+		s.WriteStruct(schemas.UpdateExpressGatewayServiceResponse_service)
+		v.Service.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateExpressGatewayServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateExpressGatewayServiceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateExpressGatewayServiceResponse_service:
+			v.Service = &types.UpdatedExpressGatewayService{}
+			return v.Service.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateExpressGatewayServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateExpressGatewayService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExpressGatewayService, schemas.UpdateExpressGatewayServiceRequest, schemas.UpdateExpressGatewayServiceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateExpressGatewayService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExpressGatewayService, schemas.UpdateExpressGatewayServiceRequest, schemas.UpdateExpressGatewayServiceResponse), output: &UpdateExpressGatewayServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

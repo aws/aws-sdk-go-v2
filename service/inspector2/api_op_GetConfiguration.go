@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,28 @@ type GetConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetConfigurationRequest_accountId, *v.AccountId)
+	}
+}
+func (v *GetConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfigurationRequest_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.GetConfigurationRequest_accountId, v.AccountId)
+		}
+		return nil
+	})
+}
+
 type GetConfigurationOutput struct {
 
 	// Specifies how the Amazon EC2 automated scan mode is currently configured for
@@ -55,13 +79,42 @@ type GetConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ec2Configuration != nil {
+		s.WriteStruct(schemas.GetConfigurationResponse_ec2Configuration)
+		v.Ec2Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EcrConfiguration != nil {
+		s.WriteStruct(schemas.GetConfigurationResponse_ecrConfiguration)
+		v.EcrConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfigurationResponse_ec2Configuration:
+			v.Ec2Configuration = &types.Ec2ConfigurationState{}
+			return v.Ec2Configuration.Deserialize(d)
+		case schemas.GetConfigurationResponse_ecrConfiguration:
+			v.EcrConfiguration = &types.EcrConfigurationState{}
+			return v.EcrConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguration, schemas.GetConfigurationRequest, schemas.GetConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguration, schemas.GetConfigurationRequest, schemas.GetConfigurationResponse), output: &GetConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

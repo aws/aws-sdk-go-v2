@@ -4,7 +4,9 @@ package ecr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,26 @@ type DescribeImageSigningStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImageSigningStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImageSigningStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImageSigningStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageId != nil {
+		s.WriteStruct(schemas.DescribeImageSigningStatusRequest_imageId)
+		v.ImageId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.DescribeImageSigningStatusRequest_registryId, *v.RegistryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.DescribeImageSigningStatusRequest_repositoryName, *v.RepositoryName)
+	}
+}
+
 type DescribeImageSigningStatusOutput struct {
 
 	// An object with identifying information for the image.
@@ -71,13 +93,49 @@ type DescribeImageSigningStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImageSigningStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImageSigningStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImageSigningStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageId != nil {
+		s.WriteStruct(schemas.DescribeImageSigningStatusResponse_imageId)
+		v.ImageId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.DescribeImageSigningStatusResponse_registryId, *v.RegistryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.DescribeImageSigningStatusResponse_repositoryName, *v.RepositoryName)
+	}
+	serializeImageSigningStatusList(s, schemas.DescribeImageSigningStatusResponse_signingStatuses, v.SigningStatuses)
+}
+func (v *DescribeImageSigningStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeImageSigningStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeImageSigningStatusResponse_imageId:
+			v.ImageId = &types.ImageIdentifier{}
+			return v.ImageId.Deserialize(d)
+		case schemas.DescribeImageSigningStatusResponse_registryId:
+			v.RegistryId = new(string)
+			return d.ReadString(schemas.DescribeImageSigningStatusResponse_registryId, v.RegistryId)
+		case schemas.DescribeImageSigningStatusResponse_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.DescribeImageSigningStatusResponse_repositoryName, v.RepositoryName)
+		case schemas.DescribeImageSigningStatusResponse_signingStatuses:
+			return deserializeImageSigningStatusList(d, schemas.DescribeImageSigningStatusResponse_signingStatuses, &v.SigningStatuses)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeImageSigningStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeImageSigningStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImageSigningStatus, schemas.DescribeImageSigningStatusRequest, schemas.DescribeImageSigningStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeImageSigningStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImageSigningStatus, schemas.DescribeImageSigningStatusRequest, schemas.DescribeImageSigningStatusResponse), output: &DescribeImageSigningStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

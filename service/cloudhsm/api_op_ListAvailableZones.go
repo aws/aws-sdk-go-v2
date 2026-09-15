@@ -4,6 +4,8 @@ package cloudhsm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,15 @@ type ListAvailableZonesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailableZonesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAvailableZonesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailableZonesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type ListAvailableZonesOutput struct {
 
 	// The list of Availability Zones that have available AWS CloudHSM capacity.
@@ -53,13 +64,29 @@ type ListAvailableZonesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailableZonesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAvailableZonesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailableZonesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAZList(s, schemas.ListAvailableZonesResponse_AZList, v.AZList)
+}
+func (v *ListAvailableZonesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAvailableZonesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAvailableZonesResponse_AZList:
+			return deserializeAZList(d, schemas.ListAvailableZonesResponse_AZList, &v.AZList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAvailableZonesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAvailableZones{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailableZones, schemas.ListAvailableZonesRequest, schemas.ListAvailableZonesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAvailableZones{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailableZones, schemas.ListAvailableZonesRequest, schemas.ListAvailableZonesResponse), output: &ListAvailableZonesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

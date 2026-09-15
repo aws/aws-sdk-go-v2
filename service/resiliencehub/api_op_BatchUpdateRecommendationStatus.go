@@ -4,7 +4,9 @@ package resiliencehub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,19 @@ type BatchUpdateRecommendationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateRecommendationStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateRecommendationStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateRecommendationStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.BatchUpdateRecommendationStatusRequest_appArn, *v.AppArn)
+	}
+	serializeUpdateRecommendationStatusRequestEntries(s, schemas.BatchUpdateRecommendationStatusRequest_requestEntries, v.RequestEntries)
+}
+
 type BatchUpdateRecommendationStatusOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
@@ -74,13 +89,38 @@ type BatchUpdateRecommendationStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateRecommendationStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateRecommendationStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateRecommendationStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.BatchUpdateRecommendationStatusResponse_appArn, *v.AppArn)
+	}
+	serializeBatchUpdateRecommendationStatusFailedEntries(s, schemas.BatchUpdateRecommendationStatusResponse_failedEntries, v.FailedEntries)
+	serializeBatchUpdateRecommendationStatusSuccessfulEntries(s, schemas.BatchUpdateRecommendationStatusResponse_successfulEntries, v.SuccessfulEntries)
+}
+func (v *BatchUpdateRecommendationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateRecommendationStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateRecommendationStatusResponse_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.BatchUpdateRecommendationStatusResponse_appArn, v.AppArn)
+		case schemas.BatchUpdateRecommendationStatusResponse_failedEntries:
+			return deserializeBatchUpdateRecommendationStatusFailedEntries(d, schemas.BatchUpdateRecommendationStatusResponse_failedEntries, &v.FailedEntries)
+		case schemas.BatchUpdateRecommendationStatusResponse_successfulEntries:
+			return deserializeBatchUpdateRecommendationStatusSuccessfulEntries(d, schemas.BatchUpdateRecommendationStatusResponse_successfulEntries, &v.SuccessfulEntries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdateRecommendationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateRecommendationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateRecommendationStatus, schemas.BatchUpdateRecommendationStatusRequest, schemas.BatchUpdateRecommendationStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateRecommendationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateRecommendationStatus, schemas.BatchUpdateRecommendationStatusRequest, schemas.BatchUpdateRecommendationStatusResponse), output: &BatchUpdateRecommendationStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

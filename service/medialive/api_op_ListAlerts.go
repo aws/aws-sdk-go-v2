@@ -5,7 +5,9 @@ package medialive
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type ListAlertsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAlertsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAlertsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAlertsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelId != nil {
+		s.WriteString(schemas.ListAlertsRequest_ChannelId, *v.ChannelId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAlertsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAlertsRequest_NextToken, *v.NextToken)
+	}
+	if v.StateFilter != nil {
+		s.WriteString(schemas.ListAlertsRequest_StateFilter, *v.StateFilter)
+	}
+}
+
 // Placeholder documentation for ListAlertsResponse
 type ListAlertsOutput struct {
 
@@ -62,13 +85,35 @@ type ListAlertsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAlertsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAlertsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAlertsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfChannelAlert(s, schemas.ListAlertsResponse_Alerts, v.Alerts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAlertsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAlertsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAlertsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAlertsResponse_Alerts:
+			return deserialize__listOfChannelAlert(d, schemas.ListAlertsResponse_Alerts, &v.Alerts)
+		case schemas.ListAlertsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAlertsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAlertsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAlerts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAlerts, schemas.ListAlertsRequest, schemas.ListAlertsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAlerts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAlerts, schemas.ListAlertsRequest, schemas.ListAlertsResponse), output: &ListAlertsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package kinesis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -59,6 +61,32 @@ type UpdateChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChannelInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelARN != nil {
+		s.WriteString(schemas.UpdateChannelInput_ChannelARN, *v.ChannelARN)
+	}
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.UpdateChannelInput_LoggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3DestinationConfiguration != nil {
+		s.WriteStruct(schemas.UpdateChannelInput_S3DestinationConfiguration)
+		v.S3DestinationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3TablesDestinationConfiguration != nil {
+		s.WriteStruct(schemas.UpdateChannelInput_S3TablesDestinationConfiguration)
+		v.S3TablesDestinationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
 func (in *UpdateChannelInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ChannelARN = in.ChannelARN
@@ -78,13 +106,34 @@ type UpdateChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChannelOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelDescription != nil {
+		s.WriteStruct(schemas.UpdateChannelOutput_ChannelDescription)
+		v.ChannelDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateChannelOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateChannelOutput_ChannelDescription:
+			v.ChannelDescription = &types.ChannelDescription{}
+			return v.ChannelDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannel, schemas.UpdateChannelInput, schemas.UpdateChannelOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannel, schemas.UpdateChannelInput, schemas.UpdateChannelOutput), output: &UpdateChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package kafka
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListClientVpcConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClientVpcConnectionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClientVpcConnectionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClientVpcConnectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.ListClientVpcConnectionsRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListClientVpcConnectionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClientVpcConnectionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListClientVpcConnectionsOutput struct {
 
 	// List of client VPC connections.
@@ -60,13 +80,35 @@ type ListClientVpcConnectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClientVpcConnectionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClientVpcConnectionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClientVpcConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfClientVpcConnection(s, schemas.ListClientVpcConnectionsResponse_ClientVpcConnections, v.ClientVpcConnections)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClientVpcConnectionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListClientVpcConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListClientVpcConnectionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListClientVpcConnectionsResponse_ClientVpcConnections:
+			return deserialize__listOfClientVpcConnection(d, schemas.ListClientVpcConnectionsResponse_ClientVpcConnections, &v.ClientVpcConnections)
+		case schemas.ListClientVpcConnectionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListClientVpcConnectionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListClientVpcConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListClientVpcConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClientVpcConnections, schemas.ListClientVpcConnectionsRequest, schemas.ListClientVpcConnectionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListClientVpcConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClientVpcConnections, schemas.ListClientVpcConnectionsRequest, schemas.ListClientVpcConnectionsResponse), output: &ListClientVpcConnectionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package accessanalyzer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,40 @@ type StartResourceScanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartResourceScanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartResourceScanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartResourceScanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzerArn != nil {
+		s.WriteString(schemas.StartResourceScanRequest_analyzerArn, *v.AnalyzerArn)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.StartResourceScanRequest_resourceArn, *v.ResourceArn)
+	}
+	if v.ResourceOwnerAccount != nil {
+		s.WriteString(schemas.StartResourceScanRequest_resourceOwnerAccount, *v.ResourceOwnerAccount)
+	}
+}
+func (v *StartResourceScanInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartResourceScanRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartResourceScanRequest_analyzerArn:
+			v.AnalyzerArn = new(string)
+			return d.ReadString(schemas.StartResourceScanRequest_analyzerArn, v.AnalyzerArn)
+		case schemas.StartResourceScanRequest_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.StartResourceScanRequest_resourceArn, v.ResourceArn)
+		case schemas.StartResourceScanRequest_resourceOwnerAccount:
+			v.ResourceOwnerAccount = new(string)
+			return d.ReadString(schemas.StartResourceScanRequest_resourceOwnerAccount, v.ResourceOwnerAccount)
+		}
+		return nil
+	})
+}
+
 type StartResourceScanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +91,26 @@ type StartResourceScanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartResourceScanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartResourceScanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartResourceScanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartResourceScanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartResourceScan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartResourceScan, schemas.StartResourceScanRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartResourceScan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartResourceScan, schemas.StartResourceScanRequest, nil), output: &StartResourceScanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

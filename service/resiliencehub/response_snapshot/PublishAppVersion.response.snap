@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"appArn":"__AppArn__","appVersion":"__AppVersion__","identifier":1,"versionName":"__VersionName__"}

@@ -4,7 +4,9 @@ package batch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -112,6 +114,45 @@ type UpdateComputeEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateComputeEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateComputeEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateComputeEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeEnvironment != nil {
+		s.WriteString(schemas.UpdateComputeEnvironmentRequest_computeEnvironment, *v.ComputeEnvironment)
+	}
+	if v.ComputeResources != nil {
+		s.WriteStruct(schemas.UpdateComputeEnvironmentRequest_computeResources)
+		v.ComputeResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Context != nil {
+		s.WriteString(schemas.UpdateComputeEnvironmentRequest_context, *v.Context)
+	}
+	if v.EcsSettings != nil {
+		s.WriteStruct(schemas.UpdateComputeEnvironmentRequest_ecsSettings)
+		v.EcsSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.UpdateComputeEnvironmentRequest_serviceRole, *v.ServiceRole)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.UpdateComputeEnvironmentRequest_state, string(v.State))
+	}
+	if v.UnmanagedvCpus != nil {
+		s.WriteInt32(schemas.UpdateComputeEnvironmentRequest_unmanagedvCpus, *v.UnmanagedvCpus)
+	}
+	if v.UpdatePolicy != nil {
+		s.WriteStruct(schemas.UpdateComputeEnvironmentRequest_updatePolicy)
+		v.UpdatePolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateComputeEnvironmentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the compute environment.
@@ -128,13 +169,38 @@ type UpdateComputeEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateComputeEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateComputeEnvironmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateComputeEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeEnvironmentArn != nil {
+		s.WriteString(schemas.UpdateComputeEnvironmentResponse_computeEnvironmentArn, *v.ComputeEnvironmentArn)
+	}
+	if v.ComputeEnvironmentName != nil {
+		s.WriteString(schemas.UpdateComputeEnvironmentResponse_computeEnvironmentName, *v.ComputeEnvironmentName)
+	}
+}
+func (v *UpdateComputeEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateComputeEnvironmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateComputeEnvironmentResponse_computeEnvironmentArn:
+			v.ComputeEnvironmentArn = new(string)
+			return d.ReadString(schemas.UpdateComputeEnvironmentResponse_computeEnvironmentArn, v.ComputeEnvironmentArn)
+		case schemas.UpdateComputeEnvironmentResponse_computeEnvironmentName:
+			v.ComputeEnvironmentName = new(string)
+			return d.ReadString(schemas.UpdateComputeEnvironmentResponse_computeEnvironmentName, v.ComputeEnvironmentName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateComputeEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateComputeEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateComputeEnvironment, schemas.UpdateComputeEnvironmentRequest, schemas.UpdateComputeEnvironmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateComputeEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateComputeEnvironment, schemas.UpdateComputeEnvironmentRequest, schemas.UpdateComputeEnvironmentResponse), output: &UpdateComputeEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"insights":{"activeAssessmentsCount":1,"assessmentControlsCountByNoncompliantEvidence":1,"compliantEvidenceCount":1,"inconclusiveEvidenceCount":1,"lastUpdated":946684800,"noncompliantEvidenceCount":1,"totalAssessmentControlsCount":1}}

@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DescribeClusterV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.DescribeClusterV2Request_ClusterArn, *v.ClusterArn)
+	}
+}
+
 type DescribeClusterV2Output struct {
 
 	// The cluster information.
@@ -46,13 +60,34 @@ type DescribeClusterV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterInfo != nil {
+		s.WriteStruct(schemas.DescribeClusterV2Response_ClusterInfo)
+		v.ClusterInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeClusterV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeClusterV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeClusterV2Response_ClusterInfo:
+			v.ClusterInfo = &types.Cluster{}
+			return v.ClusterInfo.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeClusterV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeClusterV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterV2, schemas.DescribeClusterV2Request, schemas.DescribeClusterV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeClusterV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterV2, schemas.DescribeClusterV2Request, schemas.DescribeClusterV2Response), output: &DescribeClusterV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

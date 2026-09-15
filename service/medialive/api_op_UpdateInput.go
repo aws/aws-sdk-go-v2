@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,50 @@ type UpdateInputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfInputDestinationRequest(s, schemas.UpdateInputRequest_Destinations, v.Destinations)
+	serialize__listOfInputDeviceRequest(s, schemas.UpdateInputRequest_InputDevices, v.InputDevices)
+	if v.InputId != nil {
+		s.WriteString(schemas.UpdateInputRequest_InputId, *v.InputId)
+	}
+	serialize__listOf__string(s, schemas.UpdateInputRequest_InputSecurityGroups, v.InputSecurityGroups)
+	serialize__listOfMediaConnectFlowRequest(s, schemas.UpdateInputRequest_MediaConnectFlows, v.MediaConnectFlows)
+	if v.MulticastSettings != nil {
+		s.WriteStruct(schemas.UpdateInputRequest_MulticastSettings)
+		v.MulticastSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateInputRequest_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateInputRequest_RoleArn, *v.RoleArn)
+	}
+	serializeInputSdiSources(s, schemas.UpdateInputRequest_SdiSources, v.SdiSources)
+	if v.Smpte2110ReceiverGroupSettings != nil {
+		s.WriteStruct(schemas.UpdateInputRequest_Smpte2110ReceiverGroupSettings)
+		v.Smpte2110ReceiverGroupSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfInputSourceRequest(s, schemas.UpdateInputRequest_Sources, v.Sources)
+	if v.SpecialRouterSettings != nil {
+		s.WriteStruct(schemas.UpdateInputRequest_SpecialRouterSettings)
+		v.SpecialRouterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SrtSettings != nil {
+		s.WriteStruct(schemas.UpdateInputRequest_SrtSettings)
+		v.SrtSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Placeholder documentation for UpdateInputResponse
 type UpdateInputOutput struct {
 
@@ -94,13 +140,34 @@ type UpdateInputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Input != nil {
+		s.WriteStruct(schemas.UpdateInputResponse_Input)
+		v.Input.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateInputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateInputResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateInputResponse_Input:
+			v.Input = &types.Input{}
+			return v.Input.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateInputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInput, schemas.UpdateInputRequest, schemas.UpdateInputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInput, schemas.UpdateInputRequest, schemas.UpdateInputResponse), output: &UpdateInputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

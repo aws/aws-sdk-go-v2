@@ -4,7 +4,9 @@ package resiliencehub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,63 @@ type UpdateResiliencyPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResiliencyPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResiliencyPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResiliencyPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataLocationConstraint != "" {
+		s.WriteString(schemas.UpdateResiliencyPolicyRequest_dataLocationConstraint, string(v.DataLocationConstraint))
+	}
+	serializeDisruptionPolicy(s, schemas.UpdateResiliencyPolicyRequest_policy, v.Policy)
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.UpdateResiliencyPolicyRequest_policyArn, *v.PolicyArn)
+	}
+	if v.PolicyDescription != nil {
+		s.WriteString(schemas.UpdateResiliencyPolicyRequest_policyDescription, *v.PolicyDescription)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.UpdateResiliencyPolicyRequest_policyName, *v.PolicyName)
+	}
+	if v.Tier != "" {
+		s.WriteString(schemas.UpdateResiliencyPolicyRequest_tier, string(v.Tier))
+	}
+}
+func (v *UpdateResiliencyPolicyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResiliencyPolicyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateResiliencyPolicyRequest_dataLocationConstraint:
+			var ev string
+			if err := d.ReadString(schemas.UpdateResiliencyPolicyRequest_dataLocationConstraint, &ev); err != nil {
+				return err
+			}
+			v.DataLocationConstraint = types.DataLocationConstraint(ev)
+			return nil
+		case schemas.UpdateResiliencyPolicyRequest_policy:
+			return deserializeDisruptionPolicy(d, schemas.UpdateResiliencyPolicyRequest_policy, &v.Policy)
+		case schemas.UpdateResiliencyPolicyRequest_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.UpdateResiliencyPolicyRequest_policyArn, v.PolicyArn)
+		case schemas.UpdateResiliencyPolicyRequest_policyDescription:
+			v.PolicyDescription = new(string)
+			return d.ReadString(schemas.UpdateResiliencyPolicyRequest_policyDescription, v.PolicyDescription)
+		case schemas.UpdateResiliencyPolicyRequest_policyName:
+			v.PolicyName = new(string)
+			return d.ReadString(schemas.UpdateResiliencyPolicyRequest_policyName, v.PolicyName)
+		case schemas.UpdateResiliencyPolicyRequest_tier:
+			var ev string
+			if err := d.ReadString(schemas.UpdateResiliencyPolicyRequest_tier, &ev); err != nil {
+				return err
+			}
+			v.Tier = types.ResiliencyPolicyTier(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type UpdateResiliencyPolicyOutput struct {
 
 	// The resiliency policy that was updated, including the recovery time objective
@@ -78,13 +137,34 @@ type UpdateResiliencyPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResiliencyPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResiliencyPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResiliencyPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteStruct(schemas.UpdateResiliencyPolicyResponse_policy)
+		v.Policy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateResiliencyPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResiliencyPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateResiliencyPolicyResponse_policy:
+			v.Policy = &types.ResiliencyPolicy{}
+			return v.Policy.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateResiliencyPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateResiliencyPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResiliencyPolicy, schemas.UpdateResiliencyPolicyRequest, schemas.UpdateResiliencyPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateResiliencyPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResiliencyPolicy, schemas.UpdateResiliencyPolicyRequest, schemas.UpdateResiliencyPolicyResponse), output: &UpdateResiliencyPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

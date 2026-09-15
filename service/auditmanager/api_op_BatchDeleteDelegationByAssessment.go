@@ -4,7 +4,9 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type BatchDeleteDelegationByAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteDelegationByAssessmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteDelegationByAssessmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteDelegationByAssessmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.BatchDeleteDelegationByAssessmentRequest_assessmentId, *v.AssessmentId)
+	}
+	serializeDelegationIds(s, schemas.BatchDeleteDelegationByAssessmentRequest_delegationIds, v.DelegationIds)
+}
+
 type BatchDeleteDelegationByAssessmentOutput struct {
 
 	//  A list of errors that the BatchDeleteDelegationByAssessment API returned.
@@ -50,13 +65,29 @@ type BatchDeleteDelegationByAssessmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteDelegationByAssessmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteDelegationByAssessmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteDelegationByAssessmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDeleteDelegationByAssessmentErrors(s, schemas.BatchDeleteDelegationByAssessmentResponse_errors, v.Errors)
+}
+func (v *BatchDeleteDelegationByAssessmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteDelegationByAssessmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteDelegationByAssessmentResponse_errors:
+			return deserializeBatchDeleteDelegationByAssessmentErrors(d, schemas.BatchDeleteDelegationByAssessmentResponse_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteDelegationByAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteDelegationByAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteDelegationByAssessment, schemas.BatchDeleteDelegationByAssessmentRequest, schemas.BatchDeleteDelegationByAssessmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteDelegationByAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteDelegationByAssessment, schemas.BatchDeleteDelegationByAssessmentRequest, schemas.BatchDeleteDelegationByAssessmentResponse), output: &BatchDeleteDelegationByAssessmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,46 @@ type ListAppInputSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppInputSourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppInputSourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppInputSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.ListAppInputSourcesRequest_appArn, *v.AppArn)
+	}
+	if v.AppVersion != nil {
+		s.WriteString(schemas.ListAppInputSourcesRequest_appVersion, *v.AppVersion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAppInputSourcesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppInputSourcesRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAppInputSourcesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppInputSourcesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppInputSourcesRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.ListAppInputSourcesRequest_appArn, v.AppArn)
+		case schemas.ListAppInputSourcesRequest_appVersion:
+			v.AppVersion = new(string)
+			return d.ReadString(schemas.ListAppInputSourcesRequest_appVersion, v.AppVersion)
+		case schemas.ListAppInputSourcesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListAppInputSourcesRequest_maxResults, v.MaxResults)
+		case schemas.ListAppInputSourcesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppInputSourcesRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListAppInputSourcesOutput struct {
 
 	// The list of Resilience Hub application input sources.
@@ -70,13 +112,35 @@ type ListAppInputSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppInputSourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppInputSourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppInputSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAppInputSourceList(s, schemas.ListAppInputSourcesResponse_appInputSources, v.AppInputSources)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppInputSourcesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAppInputSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppInputSourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppInputSourcesResponse_appInputSources:
+			return deserializeAppInputSourceList(d, schemas.ListAppInputSourcesResponse_appInputSources, &v.AppInputSources)
+		case schemas.ListAppInputSourcesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppInputSourcesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAppInputSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAppInputSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppInputSources, schemas.ListAppInputSourcesRequest, schemas.ListAppInputSourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAppInputSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppInputSources, schemas.ListAppInputSourcesRequest, schemas.ListAppInputSourcesResponse), output: &ListAppInputSourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

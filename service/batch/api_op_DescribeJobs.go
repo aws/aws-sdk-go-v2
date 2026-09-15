@@ -4,7 +4,9 @@ package batch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,16 @@ type DescribeJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.DescribeJobsRequest_jobs, v.Jobs)
+}
+
 type DescribeJobsOutput struct {
 
 	// The list of jobs.
@@ -46,13 +58,29 @@ type DescribeJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobDetailList(s, schemas.DescribeJobsResponse_jobs, v.Jobs)
+}
+func (v *DescribeJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeJobsResponse_jobs:
+			return deserializeJobDetailList(d, schemas.DescribeJobsResponse_jobs, &v.Jobs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeJobs, schemas.DescribeJobsRequest, schemas.DescribeJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeJobs, schemas.DescribeJobsRequest, schemas.DescribeJobsResponse), output: &DescribeJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package resiliencehub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type DescribeResourceGroupingRecommendationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeResourceGroupingRecommendationTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeResourceGroupingRecommendationTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeResourceGroupingRecommendationTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.DescribeResourceGroupingRecommendationTaskRequest_appArn, *v.AppArn)
+	}
+	if v.GroupingId != nil {
+		s.WriteString(schemas.DescribeResourceGroupingRecommendationTaskRequest_groupingId, *v.GroupingId)
+	}
+}
+
 type DescribeResourceGroupingRecommendationTaskOutput struct {
 
 	// Identifier of the grouping recommendation task.
@@ -64,13 +81,48 @@ type DescribeResourceGroupingRecommendationTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeResourceGroupingRecommendationTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeResourceGroupingRecommendationTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeResourceGroupingRecommendationTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.DescribeResourceGroupingRecommendationTaskResponse_errorMessage, *v.ErrorMessage)
+	}
+	if v.GroupingId != nil {
+		s.WriteString(schemas.DescribeResourceGroupingRecommendationTaskResponse_groupingId, *v.GroupingId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeResourceGroupingRecommendationTaskResponse_status, string(v.Status))
+	}
+}
+func (v *DescribeResourceGroupingRecommendationTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeResourceGroupingRecommendationTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeResourceGroupingRecommendationTaskResponse_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.DescribeResourceGroupingRecommendationTaskResponse_errorMessage, v.ErrorMessage)
+		case schemas.DescribeResourceGroupingRecommendationTaskResponse_groupingId:
+			v.GroupingId = new(string)
+			return d.ReadString(schemas.DescribeResourceGroupingRecommendationTaskResponse_groupingId, v.GroupingId)
+		case schemas.DescribeResourceGroupingRecommendationTaskResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeResourceGroupingRecommendationTaskResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ResourcesGroupingRecGenStatusType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeResourceGroupingRecommendationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeResourceGroupingRecommendationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeResourceGroupingRecommendationTask, schemas.DescribeResourceGroupingRecommendationTaskRequest, schemas.DescribeResourceGroupingRecommendationTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeResourceGroupingRecommendationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeResourceGroupingRecommendationTask, schemas.DescribeResourceGroupingRecommendationTaskRequest, schemas.DescribeResourceGroupingRecommendationTaskResponse), output: &DescribeResourceGroupingRecommendationTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

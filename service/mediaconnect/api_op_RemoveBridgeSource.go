@@ -4,6 +4,8 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type RemoveBridgeSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveBridgeSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveBridgeSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveBridgeSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BridgeArn != nil {
+		s.WriteString(schemas.RemoveBridgeSourceRequest_BridgeArn, *v.BridgeArn)
+	}
+	if v.SourceName != nil {
+		s.WriteString(schemas.RemoveBridgeSourceRequest_SourceName, *v.SourceName)
+	}
+}
+
 type RemoveBridgeSourceOutput struct {
 
 	//  The ARN of the bridge from which the source was removed.
@@ -52,13 +69,38 @@ type RemoveBridgeSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveBridgeSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveBridgeSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveBridgeSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BridgeArn != nil {
+		s.WriteString(schemas.RemoveBridgeSourceResponse_BridgeArn, *v.BridgeArn)
+	}
+	if v.SourceName != nil {
+		s.WriteString(schemas.RemoveBridgeSourceResponse_SourceName, *v.SourceName)
+	}
+}
+func (v *RemoveBridgeSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveBridgeSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveBridgeSourceResponse_BridgeArn:
+			v.BridgeArn = new(string)
+			return d.ReadString(schemas.RemoveBridgeSourceResponse_BridgeArn, v.BridgeArn)
+		case schemas.RemoveBridgeSourceResponse_SourceName:
+			v.SourceName = new(string)
+			return d.ReadString(schemas.RemoveBridgeSourceResponse_SourceName, v.SourceName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveBridgeSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveBridgeSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveBridgeSource, schemas.RemoveBridgeSourceRequest, schemas.RemoveBridgeSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveBridgeSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveBridgeSource, schemas.RemoveBridgeSourceRequest, schemas.RemoveBridgeSourceResponse), output: &RemoveBridgeSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

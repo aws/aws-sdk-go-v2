@@ -5,7 +5,9 @@ package secretsmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,27 @@ type ListSecretVersionIdsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecretVersionIdsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecretVersionIdsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecretVersionIdsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeDeprecated != nil {
+		s.WriteBool(schemas.ListSecretVersionIdsRequest_IncludeDeprecated, *v.IncludeDeprecated)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSecretVersionIdsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecretVersionIdsRequest_NextToken, *v.NextToken)
+	}
+	if v.SecretId != nil {
+		s.WriteString(schemas.ListSecretVersionIdsRequest_SecretId, *v.SecretId)
+	}
+}
+
 type ListSecretVersionIdsOutput struct {
 
 	// The ARN of the secret.
@@ -96,13 +119,47 @@ type ListSecretVersionIdsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecretVersionIdsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecretVersionIdsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecretVersionIdsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.ListSecretVersionIdsResponse_ARN, *v.ARN)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListSecretVersionIdsResponse_Name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecretVersionIdsResponse_NextToken, *v.NextToken)
+	}
+	serializeSecretVersionsListType(s, schemas.ListSecretVersionIdsResponse_Versions, v.Versions)
+}
+func (v *ListSecretVersionIdsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSecretVersionIdsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSecretVersionIdsResponse_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.ListSecretVersionIdsResponse_ARN, v.ARN)
+		case schemas.ListSecretVersionIdsResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ListSecretVersionIdsResponse_Name, v.Name)
+		case schemas.ListSecretVersionIdsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSecretVersionIdsResponse_NextToken, v.NextToken)
+		case schemas.ListSecretVersionIdsResponse_Versions:
+			return deserializeSecretVersionsListType(d, schemas.ListSecretVersionIdsResponse_Versions, &v.Versions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSecretVersionIdsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSecretVersionIds{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecretVersionIds, schemas.ListSecretVersionIdsRequest, schemas.ListSecretVersionIdsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSecretVersionIds{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecretVersionIds, schemas.ListSecretVersionIdsRequest, schemas.ListSecretVersionIdsResponse), output: &ListSecretVersionIdsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

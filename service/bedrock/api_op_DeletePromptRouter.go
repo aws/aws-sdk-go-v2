@@ -4,6 +4,8 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeletePromptRouterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePromptRouterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePromptRouterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePromptRouterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PromptRouterArn != nil {
+		s.WriteString(schemas.DeletePromptRouterRequest_promptRouterArn, *v.PromptRouterArn)
+	}
+}
+
 type DeletePromptRouterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeletePromptRouterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePromptRouterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePromptRouterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePromptRouterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeletePromptRouterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePromptRouterResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePromptRouterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePromptRouter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePromptRouter, schemas.DeletePromptRouterRequest, schemas.DeletePromptRouterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePromptRouter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePromptRouter, schemas.DeletePromptRouterRequest, schemas.DeletePromptRouterResponse), output: &DeletePromptRouterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package accessanalyzer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,40 @@ type ListPolicyGenerationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPolicyGenerationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPolicyGenerationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPolicyGenerationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPolicyGenerationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPolicyGenerationsRequest_nextToken, *v.NextToken)
+	}
+	if v.PrincipalArn != nil {
+		s.WriteString(schemas.ListPolicyGenerationsRequest_principalArn, *v.PrincipalArn)
+	}
+}
+func (v *ListPolicyGenerationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPolicyGenerationsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPolicyGenerationsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListPolicyGenerationsRequest_maxResults, v.MaxResults)
+		case schemas.ListPolicyGenerationsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPolicyGenerationsRequest_nextToken, v.NextToken)
+		case schemas.ListPolicyGenerationsRequest_principalArn:
+			v.PrincipalArn = new(string)
+			return d.ReadString(schemas.ListPolicyGenerationsRequest_principalArn, v.PrincipalArn)
+		}
+		return nil
+	})
+}
+
 type ListPolicyGenerationsOutput struct {
 
 	// A PolicyGeneration object that contains details about the generated policy.
@@ -57,13 +93,35 @@ type ListPolicyGenerationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPolicyGenerationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPolicyGenerationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPolicyGenerationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPolicyGenerationsResponse_nextToken, *v.NextToken)
+	}
+	serializePolicyGenerationList(s, schemas.ListPolicyGenerationsResponse_policyGenerations, v.PolicyGenerations)
+}
+func (v *ListPolicyGenerationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPolicyGenerationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPolicyGenerationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPolicyGenerationsResponse_nextToken, v.NextToken)
+		case schemas.ListPolicyGenerationsResponse_policyGenerations:
+			return deserializePolicyGenerationList(d, schemas.ListPolicyGenerationsResponse_policyGenerations, &v.PolicyGenerations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPolicyGenerationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPolicyGenerations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyGenerations, schemas.ListPolicyGenerationsRequest, schemas.ListPolicyGenerationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPolicyGenerations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPolicyGenerations, schemas.ListPolicyGenerationsRequest, schemas.ListPolicyGenerationsResponse), output: &ListPolicyGenerationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type StartSchemaCreationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSchemaCreationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSchemaCreationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSchemaCreationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.StartSchemaCreationRequest_apiId, *v.ApiId)
+	}
+	if v.Definition != nil {
+		s.WriteBlob(schemas.StartSchemaCreationRequest_definition, v.Definition)
+	}
+}
+
 type StartSchemaCreationOutput struct {
 
 	// The current state of the schema (PROCESSING, FAILED, SUCCESS, or
@@ -53,13 +70,36 @@ type StartSchemaCreationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSchemaCreationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSchemaCreationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSchemaCreationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.StartSchemaCreationResponse_status, string(v.Status))
+	}
+}
+func (v *StartSchemaCreationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSchemaCreationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSchemaCreationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.StartSchemaCreationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SchemaStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSchemaCreationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartSchemaCreation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSchemaCreation, schemas.StartSchemaCreationRequest, schemas.StartSchemaCreationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartSchemaCreation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSchemaCreation, schemas.StartSchemaCreationRequest, schemas.StartSchemaCreationResponse), output: &StartSchemaCreationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

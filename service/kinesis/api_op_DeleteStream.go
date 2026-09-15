@@ -4,6 +4,8 @@ package kinesis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -67,6 +69,26 @@ type DeleteStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnforceConsumerDeletion != nil {
+		s.WriteBool(schemas.DeleteStreamInput_EnforceConsumerDeletion, *v.EnforceConsumerDeletion)
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.DeleteStreamInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.DeleteStreamInput_StreamId, *v.StreamId)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.DeleteStreamInput_StreamName, *v.StreamName)
+	}
+}
 func (in *DeleteStreamInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
@@ -81,13 +103,26 @@ type DeleteStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStream, schemas.DeleteStreamInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStream, schemas.DeleteStreamInput, nil), output: &DeleteStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

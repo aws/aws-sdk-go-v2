@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type StartRouterInputInput struct {
 	Arn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartRouterInputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRouterInputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRouterInputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StartRouterInputRequest_Arn, *v.Arn)
+	}
 }
 
 type StartRouterInputOutput struct {
@@ -67,13 +81,61 @@ type StartRouterInputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRouterInputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRouterInputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRouterInputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StartRouterInputResponse_Arn, *v.Arn)
+	}
+	serializeMaintenanceSchedule(s, schemas.StartRouterInputResponse_MaintenanceSchedule, v.MaintenanceSchedule)
+	if v.MaintenanceScheduleType != "" {
+		s.WriteString(schemas.StartRouterInputResponse_MaintenanceScheduleType, string(v.MaintenanceScheduleType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartRouterInputResponse_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.StartRouterInputResponse_State, string(v.State))
+	}
+}
+func (v *StartRouterInputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartRouterInputResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartRouterInputResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StartRouterInputResponse_Arn, v.Arn)
+		case schemas.StartRouterInputResponse_MaintenanceSchedule:
+			return deserializeMaintenanceSchedule(d, schemas.StartRouterInputResponse_MaintenanceSchedule, &v.MaintenanceSchedule)
+		case schemas.StartRouterInputResponse_MaintenanceScheduleType:
+			var ev string
+			if err := d.ReadString(schemas.StartRouterInputResponse_MaintenanceScheduleType, &ev); err != nil {
+				return err
+			}
+			v.MaintenanceScheduleType = types.MaintenanceScheduleType(ev)
+			return nil
+		case schemas.StartRouterInputResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StartRouterInputResponse_Name, v.Name)
+		case schemas.StartRouterInputResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.StartRouterInputResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.RouterInputState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartRouterInputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartRouterInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRouterInput, schemas.StartRouterInputRequest, schemas.StartRouterInputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartRouterInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRouterInput, schemas.StartRouterInputRequest, schemas.StartRouterInputResponse), output: &StartRouterInputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

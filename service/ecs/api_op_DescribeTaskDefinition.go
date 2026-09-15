@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,19 @@ type DescribeTaskDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTaskDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTaskDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTaskDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTaskDefinitionFieldList(s, schemas.DescribeTaskDefinitionRequest_include, v.Include)
+	if v.TaskDefinition != nil {
+		s.WriteString(schemas.DescribeTaskDefinitionRequest_taskDefinition, *v.TaskDefinition)
+	}
+}
+
 type DescribeTaskDefinitionOutput struct {
 
 	// The metadata that's applied to the task definition to help you categorize and
@@ -85,13 +100,37 @@ type DescribeTaskDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTaskDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTaskDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTaskDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTags(s, schemas.DescribeTaskDefinitionResponse_tags, v.Tags)
+	if v.TaskDefinition != nil {
+		s.WriteStruct(schemas.DescribeTaskDefinitionResponse_taskDefinition)
+		v.TaskDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeTaskDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTaskDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTaskDefinitionResponse_tags:
+			return deserializeTags(d, schemas.DescribeTaskDefinitionResponse_tags, &v.Tags)
+		case schemas.DescribeTaskDefinitionResponse_taskDefinition:
+			v.TaskDefinition = &types.TaskDefinition{}
+			return v.TaskDefinition.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTaskDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTaskDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTaskDefinition, schemas.DescribeTaskDefinitionRequest, schemas.DescribeTaskDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTaskDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTaskDefinition, schemas.DescribeTaskDefinitionRequest, schemas.DescribeTaskDefinitionResponse), output: &DescribeTaskDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

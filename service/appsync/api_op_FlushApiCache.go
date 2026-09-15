@@ -4,6 +4,8 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type FlushApiCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FlushApiCacheInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlushApiCacheRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlushApiCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.FlushApiCacheRequest_apiId, *v.ApiId)
+	}
+}
+
 // Represents the output of a FlushApiCache operation.
 type FlushApiCacheOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -42,13 +56,26 @@ type FlushApiCacheOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FlushApiCacheOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlushApiCacheResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlushApiCacheOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *FlushApiCacheOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FlushApiCacheResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationFlushApiCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpFlushApiCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.FlushApiCache, schemas.FlushApiCacheRequest, schemas.FlushApiCacheResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpFlushApiCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.FlushApiCache, schemas.FlushApiCacheRequest, schemas.FlushApiCacheResponse), output: &FlushApiCacheOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

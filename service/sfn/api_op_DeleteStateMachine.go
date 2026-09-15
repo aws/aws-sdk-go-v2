@@ -4,6 +4,8 @@ package sfn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,18 @@ type DeleteStateMachineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStateMachineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStateMachineInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStateMachineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StateMachineArn != nil {
+		s.WriteString(schemas.DeleteStateMachineInput_stateMachineArn, *v.StateMachineArn)
+	}
+}
+
 type DeleteStateMachineOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -71,13 +85,26 @@ type DeleteStateMachineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStateMachineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStateMachineOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStateMachineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteStateMachineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteStateMachineOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteStateMachineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteStateMachine{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStateMachine, schemas.DeleteStateMachineInput, schemas.DeleteStateMachineOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteStateMachine{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStateMachine, schemas.DeleteStateMachineInput, schemas.DeleteStateMachineOutput), output: &DeleteStateMachineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -17,6 +19,34 @@ type ActivityFailedEventDetails struct {
 	Error *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ActivityFailedEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityFailedEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivityFailedEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != nil {
+		s.WriteString(schemas.ActivityFailedEventDetails_cause, *v.Cause)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.ActivityFailedEventDetails_error, *v.Error)
+	}
+}
+func (v *ActivityFailedEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityFailedEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityFailedEventDetails_cause:
+			v.Cause = new(string)
+			return d.ReadString(schemas.ActivityFailedEventDetails_cause, v.Cause)
+		case schemas.ActivityFailedEventDetails_error:
+			v.Error = new(string)
+			return d.ReadString(schemas.ActivityFailedEventDetails_error, v.Error)
+		}
+		return nil
+	})
 }
 
 // Contains details about an activity.
@@ -59,6 +89,40 @@ type ActivityListItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivityListItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityListItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivityListItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityArn != nil {
+		s.WriteString(schemas.ActivityListItem_activityArn, *v.ActivityArn)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.ActivityListItem_creationDate, *v.CreationDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ActivityListItem_name, *v.Name)
+	}
+}
+func (v *ActivityListItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityListItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityListItem_activityArn:
+			v.ActivityArn = new(string)
+			return d.ReadString(schemas.ActivityListItem_activityArn, v.ActivityArn)
+		case schemas.ActivityListItem_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.ActivityListItem_creationDate, v.CreationDate)
+		case schemas.ActivityListItem_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ActivityListItem_name, v.Name)
+		}
+		return nil
+	})
+}
+
 // Contains details about an activity scheduled during an execution.
 type ActivityScheduledEventDetails struct {
 
@@ -83,6 +147,54 @@ type ActivityScheduledEventDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivityScheduledEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityScheduledEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivityScheduledEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HeartbeatInSeconds != nil {
+		s.WriteInt64(schemas.ActivityScheduledEventDetails_heartbeatInSeconds, *v.HeartbeatInSeconds)
+	}
+	if v.Input != nil {
+		s.WriteString(schemas.ActivityScheduledEventDetails_input, *v.Input)
+	}
+	if v.InputDetails != nil {
+		s.WriteStruct(schemas.ActivityScheduledEventDetails_inputDetails)
+		v.InputDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resource != nil {
+		s.WriteString(schemas.ActivityScheduledEventDetails_resource, *v.Resource)
+	}
+	if v.TimeoutInSeconds != nil {
+		s.WriteInt64(schemas.ActivityScheduledEventDetails_timeoutInSeconds, *v.TimeoutInSeconds)
+	}
+}
+func (v *ActivityScheduledEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityScheduledEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityScheduledEventDetails_heartbeatInSeconds:
+			v.HeartbeatInSeconds = new(int64)
+			return d.ReadInt64(schemas.ActivityScheduledEventDetails_heartbeatInSeconds, v.HeartbeatInSeconds)
+		case schemas.ActivityScheduledEventDetails_input:
+			v.Input = new(string)
+			return d.ReadString(schemas.ActivityScheduledEventDetails_input, v.Input)
+		case schemas.ActivityScheduledEventDetails_inputDetails:
+			v.InputDetails = &HistoryEventExecutionDataDetails{}
+			return v.InputDetails.Deserialize(d)
+		case schemas.ActivityScheduledEventDetails_resource:
+			v.Resource = new(string)
+			return d.ReadString(schemas.ActivityScheduledEventDetails_resource, v.Resource)
+		case schemas.ActivityScheduledEventDetails_timeoutInSeconds:
+			v.TimeoutInSeconds = new(int64)
+			return d.ReadInt64(schemas.ActivityScheduledEventDetails_timeoutInSeconds, v.TimeoutInSeconds)
+		}
+		return nil
+	})
+}
+
 // Contains details about an activity schedule failure that occurred during an
 // execution.
 type ActivityScheduleFailedEventDetails struct {
@@ -96,6 +208,34 @@ type ActivityScheduleFailedEventDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivityScheduleFailedEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityScheduleFailedEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivityScheduleFailedEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != nil {
+		s.WriteString(schemas.ActivityScheduleFailedEventDetails_cause, *v.Cause)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.ActivityScheduleFailedEventDetails_error, *v.Error)
+	}
+}
+func (v *ActivityScheduleFailedEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityScheduleFailedEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityScheduleFailedEventDetails_cause:
+			v.Cause = new(string)
+			return d.ReadString(schemas.ActivityScheduleFailedEventDetails_cause, v.Cause)
+		case schemas.ActivityScheduleFailedEventDetails_error:
+			v.Error = new(string)
+			return d.ReadString(schemas.ActivityScheduleFailedEventDetails_error, v.Error)
+		}
+		return nil
+	})
+}
+
 // Contains details about the start of an activity during an execution.
 type ActivityStartedEventDetails struct {
 
@@ -104,6 +244,28 @@ type ActivityStartedEventDetails struct {
 	WorkerName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ActivityStartedEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityStartedEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivityStartedEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkerName != nil {
+		s.WriteString(schemas.ActivityStartedEventDetails_workerName, *v.WorkerName)
+	}
+}
+func (v *ActivityStartedEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityStartedEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityStartedEventDetails_workerName:
+			v.WorkerName = new(string)
+			return d.ReadString(schemas.ActivityStartedEventDetails_workerName, v.WorkerName)
+		}
+		return nil
+	})
 }
 
 // Contains details about an activity that successfully terminated during an
@@ -120,6 +282,36 @@ type ActivitySucceededEventDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivitySucceededEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivitySucceededEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivitySucceededEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Output != nil {
+		s.WriteString(schemas.ActivitySucceededEventDetails_output, *v.Output)
+	}
+	if v.OutputDetails != nil {
+		s.WriteStruct(schemas.ActivitySucceededEventDetails_outputDetails)
+		v.OutputDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ActivitySucceededEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivitySucceededEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivitySucceededEventDetails_output:
+			v.Output = new(string)
+			return d.ReadString(schemas.ActivitySucceededEventDetails_output, v.Output)
+		case schemas.ActivitySucceededEventDetails_outputDetails:
+			v.OutputDetails = &HistoryEventExecutionDataDetails{}
+			return v.OutputDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains details about an activity timeout that occurred during an execution.
 type ActivityTimedOutEventDetails struct {
 
@@ -132,6 +324,34 @@ type ActivityTimedOutEventDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivityTimedOutEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityTimedOutEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivityTimedOutEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != nil {
+		s.WriteString(schemas.ActivityTimedOutEventDetails_cause, *v.Cause)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.ActivityTimedOutEventDetails_error, *v.Error)
+	}
+}
+func (v *ActivityTimedOutEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityTimedOutEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityTimedOutEventDetails_cause:
+			v.Cause = new(string)
+			return d.ReadString(schemas.ActivityTimedOutEventDetails_cause, v.Cause)
+		case schemas.ActivityTimedOutEventDetails_error:
+			v.Error = new(string)
+			return d.ReadString(schemas.ActivityTimedOutEventDetails_error, v.Error)
+		}
+		return nil
+	})
+}
+
 // Provides details about assigned variables in an execution history event.
 type AssignedVariablesDetails struct {
 
@@ -141,6 +361,27 @@ type AssignedVariablesDetails struct {
 	Truncated bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssignedVariablesDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssignedVariablesDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssignedVariablesDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Truncated != false {
+		s.WriteBool(schemas.AssignedVariablesDetails_truncated, v.Truncated)
+	}
+}
+func (v *AssignedVariablesDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssignedVariablesDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssignedVariablesDetails_truncated:
+			return d.ReadBool(schemas.AssignedVariablesDetails_truncated, &v.Truncated)
+		}
+		return nil
+	})
 }
 
 // An object that describes workflow billing details.
@@ -155,6 +396,32 @@ type BillingDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BillingDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillingDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillingDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BilledDurationInMilliseconds != 0 {
+		s.WriteInt64(schemas.BillingDetails_billedDurationInMilliseconds, v.BilledDurationInMilliseconds)
+	}
+	if v.BilledMemoryUsedInMB != 0 {
+		s.WriteInt64(schemas.BillingDetails_billedMemoryUsedInMB, v.BilledMemoryUsedInMB)
+	}
+}
+func (v *BillingDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingDetails_billedDurationInMilliseconds:
+			return d.ReadInt64(schemas.BillingDetails_billedDurationInMilliseconds, &v.BilledDurationInMilliseconds)
+		case schemas.BillingDetails_billedMemoryUsedInMB:
+			return d.ReadInt64(schemas.BillingDetails_billedMemoryUsedInMB, &v.BilledMemoryUsedInMB)
+		}
+		return nil
+	})
+}
+
 // Provides details about execution input or output.
 type CloudWatchEventsExecutionDataDetails struct {
 
@@ -165,6 +432,27 @@ type CloudWatchEventsExecutionDataDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CloudWatchEventsExecutionDataDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudWatchEventsExecutionDataDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudWatchEventsExecutionDataDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Included != false {
+		s.WriteBool(schemas.CloudWatchEventsExecutionDataDetails_included, v.Included)
+	}
+}
+func (v *CloudWatchEventsExecutionDataDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudWatchEventsExecutionDataDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudWatchEventsExecutionDataDetails_included:
+			return d.ReadBool(schemas.CloudWatchEventsExecutionDataDetails_included, &v.Included)
+		}
+		return nil
+	})
+}
+
 type CloudWatchLogsLogGroup struct {
 
 	// The ARN of the the CloudWatch log group to which you want your logs emitted to.
@@ -172,6 +460,28 @@ type CloudWatchLogsLogGroup struct {
 	LogGroupArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CloudWatchLogsLogGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudWatchLogsLogGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudWatchLogsLogGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogGroupArn != nil {
+		s.WriteString(schemas.CloudWatchLogsLogGroup_logGroupArn, *v.LogGroupArn)
+	}
+}
+func (v *CloudWatchLogsLogGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudWatchLogsLogGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudWatchLogsLogGroup_logGroupArn:
+			v.LogGroupArn = new(string)
+			return d.ReadString(schemas.CloudWatchLogsLogGroup_logGroupArn, v.LogGroupArn)
+		}
+		return nil
+	})
 }
 
 // Settings to configure server-side encryption.
@@ -211,6 +521,44 @@ type EncryptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsDataKeyReusePeriodSeconds != nil {
+		s.WriteInt32(schemas.EncryptionConfiguration_kmsDataKeyReusePeriodSeconds, *v.KmsDataKeyReusePeriodSeconds)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.EncryptionConfiguration_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.EncryptionConfiguration_type, string(v.Type))
+	}
+}
+func (v *EncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EncryptionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EncryptionConfiguration_kmsDataKeyReusePeriodSeconds:
+			v.KmsDataKeyReusePeriodSeconds = new(int32)
+			return d.ReadInt32(schemas.EncryptionConfiguration_kmsDataKeyReusePeriodSeconds, v.KmsDataKeyReusePeriodSeconds)
+		case schemas.EncryptionConfiguration_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.EncryptionConfiguration_kmsKeyId, v.KmsKeyId)
+		case schemas.EncryptionConfiguration_type:
+			var ev string
+			if err := d.ReadString(schemas.EncryptionConfiguration_type, &ev); err != nil {
+				return err
+			}
+			v.Type = EncryptionType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains details about an evaluation failure that occurred while processing a
 // state, for example, when a JSONata expression throws an error. This event will
 // only be present in state machines that have QueryLanguage set to JSONata, or
@@ -234,6 +582,46 @@ type EvaluationFailedEventDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EvaluationFailedEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationFailedEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluationFailedEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != nil {
+		s.WriteString(schemas.EvaluationFailedEventDetails_cause, *v.Cause)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.EvaluationFailedEventDetails_error, *v.Error)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.EvaluationFailedEventDetails_location, *v.Location)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.EvaluationFailedEventDetails_state, *v.State)
+	}
+}
+func (v *EvaluationFailedEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluationFailedEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluationFailedEventDetails_cause:
+			v.Cause = new(string)
+			return d.ReadString(schemas.EvaluationFailedEventDetails_cause, v.Cause)
+		case schemas.EvaluationFailedEventDetails_error:
+			v.Error = new(string)
+			return d.ReadString(schemas.EvaluationFailedEventDetails_error, v.Error)
+		case schemas.EvaluationFailedEventDetails_location:
+			v.Location = new(string)
+			return d.ReadString(schemas.EvaluationFailedEventDetails_location, v.Location)
+		case schemas.EvaluationFailedEventDetails_state:
+			v.State = new(string)
+			return d.ReadString(schemas.EvaluationFailedEventDetails_state, v.State)
+		}
+		return nil
+	})
+}
+
 // Contains details about an abort of an execution.
 type ExecutionAbortedEventDetails struct {
 
@@ -246,6 +634,34 @@ type ExecutionAbortedEventDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecutionAbortedEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionAbortedEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecutionAbortedEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != nil {
+		s.WriteString(schemas.ExecutionAbortedEventDetails_cause, *v.Cause)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.ExecutionAbortedEventDetails_error, *v.Error)
+	}
+}
+func (v *ExecutionAbortedEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecutionAbortedEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecutionAbortedEventDetails_cause:
+			v.Cause = new(string)
+			return d.ReadString(schemas.ExecutionAbortedEventDetails_cause, v.Cause)
+		case schemas.ExecutionAbortedEventDetails_error:
+			v.Error = new(string)
+			return d.ReadString(schemas.ExecutionAbortedEventDetails_error, v.Error)
+		}
+		return nil
+	})
+}
+
 // Contains details about an execution failure event.
 type ExecutionFailedEventDetails struct {
 
@@ -256,6 +672,34 @@ type ExecutionFailedEventDetails struct {
 	Error *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExecutionFailedEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionFailedEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecutionFailedEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != nil {
+		s.WriteString(schemas.ExecutionFailedEventDetails_cause, *v.Cause)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.ExecutionFailedEventDetails_error, *v.Error)
+	}
+}
+func (v *ExecutionFailedEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecutionFailedEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecutionFailedEventDetails_cause:
+			v.Cause = new(string)
+			return d.ReadString(schemas.ExecutionFailedEventDetails_cause, v.Cause)
+		case schemas.ExecutionFailedEventDetails_error:
+			v.Error = new(string)
+			return d.ReadString(schemas.ExecutionFailedEventDetails_error, v.Error)
+		}
+		return nil
+	})
 }
 
 // Contains details about an execution.
@@ -348,6 +792,98 @@ type ExecutionListItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecutionListItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionListItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecutionListItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionArn != nil {
+		s.WriteString(schemas.ExecutionListItem_executionArn, *v.ExecutionArn)
+	}
+	if v.ItemCount != nil {
+		s.WriteInt32(schemas.ExecutionListItem_itemCount, *v.ItemCount)
+	}
+	if v.MapRunArn != nil {
+		s.WriteString(schemas.ExecutionListItem_mapRunArn, *v.MapRunArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ExecutionListItem_name, *v.Name)
+	}
+	if v.RedriveCount != nil {
+		s.WriteInt32(schemas.ExecutionListItem_redriveCount, *v.RedriveCount)
+	}
+	if v.RedriveDate != nil {
+		s.WriteTime(schemas.ExecutionListItem_redriveDate, *v.RedriveDate)
+	}
+	if v.StartDate != nil {
+		s.WriteTime(schemas.ExecutionListItem_startDate, *v.StartDate)
+	}
+	if v.StateMachineAliasArn != nil {
+		s.WriteString(schemas.ExecutionListItem_stateMachineAliasArn, *v.StateMachineAliasArn)
+	}
+	if v.StateMachineArn != nil {
+		s.WriteString(schemas.ExecutionListItem_stateMachineArn, *v.StateMachineArn)
+	}
+	if v.StateMachineVersionArn != nil {
+		s.WriteString(schemas.ExecutionListItem_stateMachineVersionArn, *v.StateMachineVersionArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ExecutionListItem_status, string(v.Status))
+	}
+	if v.StopDate != nil {
+		s.WriteTime(schemas.ExecutionListItem_stopDate, *v.StopDate)
+	}
+}
+func (v *ExecutionListItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecutionListItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecutionListItem_executionArn:
+			v.ExecutionArn = new(string)
+			return d.ReadString(schemas.ExecutionListItem_executionArn, v.ExecutionArn)
+		case schemas.ExecutionListItem_itemCount:
+			v.ItemCount = new(int32)
+			return d.ReadInt32(schemas.ExecutionListItem_itemCount, v.ItemCount)
+		case schemas.ExecutionListItem_mapRunArn:
+			v.MapRunArn = new(string)
+			return d.ReadString(schemas.ExecutionListItem_mapRunArn, v.MapRunArn)
+		case schemas.ExecutionListItem_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ExecutionListItem_name, v.Name)
+		case schemas.ExecutionListItem_redriveCount:
+			v.RedriveCount = new(int32)
+			return d.ReadInt32(schemas.ExecutionListItem_redriveCount, v.RedriveCount)
+		case schemas.ExecutionListItem_redriveDate:
+			v.RedriveDate = new(time.Time)
+			return d.ReadTime(schemas.ExecutionListItem_redriveDate, v.RedriveDate)
+		case schemas.ExecutionListItem_startDate:
+			v.StartDate = new(time.Time)
+			return d.ReadTime(schemas.ExecutionListItem_startDate, v.StartDate)
+		case schemas.ExecutionListItem_stateMachineAliasArn:
+			v.StateMachineAliasArn = new(string)
+			return d.ReadString(schemas.ExecutionListItem_stateMachineAliasArn, v.StateMachineAliasArn)
+		case schemas.ExecutionListItem_stateMachineArn:
+			v.StateMachineArn = new(string)
+			return d.ReadString(schemas.ExecutionListItem_stateMachineArn, v.StateMachineArn)
+		case schemas.ExecutionListItem_stateMachineVersionArn:
+			v.StateMachineVersionArn = new(string)
+			return d.ReadString(schemas.ExecutionListItem_stateMachineVersionArn, v.StateMachineVersionArn)
+		case schemas.ExecutionListItem_status:
+			var ev string
+			if err := d.ReadString(schemas.ExecutionListItem_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ExecutionStatus(ev)
+			return nil
+		case schemas.ExecutionListItem_stopDate:
+			v.StopDate = new(time.Time)
+			return d.ReadTime(schemas.ExecutionListItem_stopDate, v.StopDate)
+		}
+		return nil
+	})
+}
+
 // Contains details about a redriven execution.
 type ExecutionRedrivenEventDetails struct {
 
@@ -357,6 +893,28 @@ type ExecutionRedrivenEventDetails struct {
 	RedriveCount *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExecutionRedrivenEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionRedrivenEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecutionRedrivenEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RedriveCount != nil {
+		s.WriteInt32(schemas.ExecutionRedrivenEventDetails_redriveCount, *v.RedriveCount)
+	}
+}
+func (v *ExecutionRedrivenEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecutionRedrivenEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecutionRedrivenEventDetails_redriveCount:
+			v.RedriveCount = new(int32)
+			return d.ReadInt32(schemas.ExecutionRedrivenEventDetails_redriveCount, v.RedriveCount)
+		}
+		return nil
+	})
 }
 
 // Contains details about the start of the execution.
@@ -383,6 +941,54 @@ type ExecutionStartedEventDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecutionStartedEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionStartedEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecutionStartedEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Input != nil {
+		s.WriteString(schemas.ExecutionStartedEventDetails_input, *v.Input)
+	}
+	if v.InputDetails != nil {
+		s.WriteStruct(schemas.ExecutionStartedEventDetails_inputDetails)
+		v.InputDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.ExecutionStartedEventDetails_roleArn, *v.RoleArn)
+	}
+	if v.StateMachineAliasArn != nil {
+		s.WriteString(schemas.ExecutionStartedEventDetails_stateMachineAliasArn, *v.StateMachineAliasArn)
+	}
+	if v.StateMachineVersionArn != nil {
+		s.WriteString(schemas.ExecutionStartedEventDetails_stateMachineVersionArn, *v.StateMachineVersionArn)
+	}
+}
+func (v *ExecutionStartedEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecutionStartedEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecutionStartedEventDetails_input:
+			v.Input = new(string)
+			return d.ReadString(schemas.ExecutionStartedEventDetails_input, v.Input)
+		case schemas.ExecutionStartedEventDetails_inputDetails:
+			v.InputDetails = &HistoryEventExecutionDataDetails{}
+			return v.InputDetails.Deserialize(d)
+		case schemas.ExecutionStartedEventDetails_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.ExecutionStartedEventDetails_roleArn, v.RoleArn)
+		case schemas.ExecutionStartedEventDetails_stateMachineAliasArn:
+			v.StateMachineAliasArn = new(string)
+			return d.ReadString(schemas.ExecutionStartedEventDetails_stateMachineAliasArn, v.StateMachineAliasArn)
+		case schemas.ExecutionStartedEventDetails_stateMachineVersionArn:
+			v.StateMachineVersionArn = new(string)
+			return d.ReadString(schemas.ExecutionStartedEventDetails_stateMachineVersionArn, v.StateMachineVersionArn)
+		}
+		return nil
+	})
+}
+
 // Contains details about the successful termination of the execution.
 type ExecutionSucceededEventDetails struct {
 
@@ -396,6 +1002,36 @@ type ExecutionSucceededEventDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecutionSucceededEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionSucceededEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecutionSucceededEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Output != nil {
+		s.WriteString(schemas.ExecutionSucceededEventDetails_output, *v.Output)
+	}
+	if v.OutputDetails != nil {
+		s.WriteStruct(schemas.ExecutionSucceededEventDetails_outputDetails)
+		v.OutputDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExecutionSucceededEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecutionSucceededEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecutionSucceededEventDetails_output:
+			v.Output = new(string)
+			return d.ReadString(schemas.ExecutionSucceededEventDetails_output, v.Output)
+		case schemas.ExecutionSucceededEventDetails_outputDetails:
+			v.OutputDetails = &HistoryEventExecutionDataDetails{}
+			return v.OutputDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains details about the execution timeout that occurred during the execution.
 type ExecutionTimedOutEventDetails struct {
 
@@ -406,6 +1042,34 @@ type ExecutionTimedOutEventDetails struct {
 	Error *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExecutionTimedOutEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionTimedOutEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecutionTimedOutEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != nil {
+		s.WriteString(schemas.ExecutionTimedOutEventDetails_cause, *v.Cause)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.ExecutionTimedOutEventDetails_error, *v.Error)
+	}
+}
+func (v *ExecutionTimedOutEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecutionTimedOutEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecutionTimedOutEventDetails_cause:
+			v.Cause = new(string)
+			return d.ReadString(schemas.ExecutionTimedOutEventDetails_cause, v.Cause)
+		case schemas.ExecutionTimedOutEventDetails_error:
+			v.Error = new(string)
+			return d.ReadString(schemas.ExecutionTimedOutEventDetails_error, v.Error)
+		}
+		return nil
+	})
 }
 
 // Contains details about the events of an execution.
@@ -553,6 +1217,342 @@ type HistoryEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HistoryEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HistoryEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HistoryEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityFailedEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_activityFailedEventDetails)
+		v.ActivityFailedEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ActivityScheduleFailedEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_activityScheduleFailedEventDetails)
+		v.ActivityScheduleFailedEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ActivityScheduledEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_activityScheduledEventDetails)
+		v.ActivityScheduledEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ActivityStartedEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_activityStartedEventDetails)
+		v.ActivityStartedEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ActivitySucceededEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_activitySucceededEventDetails)
+		v.ActivitySucceededEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ActivityTimedOutEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_activityTimedOutEventDetails)
+		v.ActivityTimedOutEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EvaluationFailedEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_evaluationFailedEventDetails)
+		v.EvaluationFailedEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionAbortedEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_executionAbortedEventDetails)
+		v.ExecutionAbortedEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionFailedEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_executionFailedEventDetails)
+		v.ExecutionFailedEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionRedrivenEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_executionRedrivenEventDetails)
+		v.ExecutionRedrivenEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionStartedEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_executionStartedEventDetails)
+		v.ExecutionStartedEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionSucceededEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_executionSucceededEventDetails)
+		v.ExecutionSucceededEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionTimedOutEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_executionTimedOutEventDetails)
+		v.ExecutionTimedOutEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.WriteInt64(schemas.HistoryEvent_id, v.Id)
+	if v.LambdaFunctionFailedEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_lambdaFunctionFailedEventDetails)
+		v.LambdaFunctionFailedEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaFunctionScheduleFailedEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_lambdaFunctionScheduleFailedEventDetails)
+		v.LambdaFunctionScheduleFailedEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaFunctionScheduledEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_lambdaFunctionScheduledEventDetails)
+		v.LambdaFunctionScheduledEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaFunctionStartFailedEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_lambdaFunctionStartFailedEventDetails)
+		v.LambdaFunctionStartFailedEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaFunctionSucceededEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_lambdaFunctionSucceededEventDetails)
+		v.LambdaFunctionSucceededEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaFunctionTimedOutEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_lambdaFunctionTimedOutEventDetails)
+		v.LambdaFunctionTimedOutEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MapIterationAbortedEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_mapIterationAbortedEventDetails)
+		v.MapIterationAbortedEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MapIterationFailedEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_mapIterationFailedEventDetails)
+		v.MapIterationFailedEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MapIterationStartedEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_mapIterationStartedEventDetails)
+		v.MapIterationStartedEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MapIterationSucceededEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_mapIterationSucceededEventDetails)
+		v.MapIterationSucceededEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MapRunFailedEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_mapRunFailedEventDetails)
+		v.MapRunFailedEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MapRunRedrivenEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_mapRunRedrivenEventDetails)
+		v.MapRunRedrivenEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MapRunStartedEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_mapRunStartedEventDetails)
+		v.MapRunStartedEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MapStateStartedEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_mapStateStartedEventDetails)
+		v.MapStateStartedEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PreviousEventId != 0 {
+		s.WriteInt64(schemas.HistoryEvent_previousEventId, v.PreviousEventId)
+	}
+	if v.StateEnteredEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_stateEnteredEventDetails)
+		v.StateEnteredEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StateExitedEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_stateExitedEventDetails)
+		v.StateExitedEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskFailedEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_taskFailedEventDetails)
+		v.TaskFailedEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskScheduledEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_taskScheduledEventDetails)
+		v.TaskScheduledEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskStartFailedEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_taskStartFailedEventDetails)
+		v.TaskStartFailedEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskStartedEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_taskStartedEventDetails)
+		v.TaskStartedEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskSubmitFailedEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_taskSubmitFailedEventDetails)
+		v.TaskSubmitFailedEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskSubmittedEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_taskSubmittedEventDetails)
+		v.TaskSubmittedEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskSucceededEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_taskSucceededEventDetails)
+		v.TaskSucceededEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskTimedOutEventDetails != nil {
+		s.WriteStruct(schemas.HistoryEvent_taskTimedOutEventDetails)
+		v.TaskTimedOutEventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.HistoryEvent_timestamp, *v.Timestamp)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.HistoryEvent_type, string(v.Type))
+	}
+}
+func (v *HistoryEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HistoryEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HistoryEvent_activityFailedEventDetails:
+			v.ActivityFailedEventDetails = &ActivityFailedEventDetails{}
+			return v.ActivityFailedEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_activityScheduleFailedEventDetails:
+			v.ActivityScheduleFailedEventDetails = &ActivityScheduleFailedEventDetails{}
+			return v.ActivityScheduleFailedEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_activityScheduledEventDetails:
+			v.ActivityScheduledEventDetails = &ActivityScheduledEventDetails{}
+			return v.ActivityScheduledEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_activityStartedEventDetails:
+			v.ActivityStartedEventDetails = &ActivityStartedEventDetails{}
+			return v.ActivityStartedEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_activitySucceededEventDetails:
+			v.ActivitySucceededEventDetails = &ActivitySucceededEventDetails{}
+			return v.ActivitySucceededEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_activityTimedOutEventDetails:
+			v.ActivityTimedOutEventDetails = &ActivityTimedOutEventDetails{}
+			return v.ActivityTimedOutEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_evaluationFailedEventDetails:
+			v.EvaluationFailedEventDetails = &EvaluationFailedEventDetails{}
+			return v.EvaluationFailedEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_executionAbortedEventDetails:
+			v.ExecutionAbortedEventDetails = &ExecutionAbortedEventDetails{}
+			return v.ExecutionAbortedEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_executionFailedEventDetails:
+			v.ExecutionFailedEventDetails = &ExecutionFailedEventDetails{}
+			return v.ExecutionFailedEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_executionRedrivenEventDetails:
+			v.ExecutionRedrivenEventDetails = &ExecutionRedrivenEventDetails{}
+			return v.ExecutionRedrivenEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_executionStartedEventDetails:
+			v.ExecutionStartedEventDetails = &ExecutionStartedEventDetails{}
+			return v.ExecutionStartedEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_executionSucceededEventDetails:
+			v.ExecutionSucceededEventDetails = &ExecutionSucceededEventDetails{}
+			return v.ExecutionSucceededEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_executionTimedOutEventDetails:
+			v.ExecutionTimedOutEventDetails = &ExecutionTimedOutEventDetails{}
+			return v.ExecutionTimedOutEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_id:
+			return d.ReadInt64(schemas.HistoryEvent_id, &v.Id)
+		case schemas.HistoryEvent_lambdaFunctionFailedEventDetails:
+			v.LambdaFunctionFailedEventDetails = &LambdaFunctionFailedEventDetails{}
+			return v.LambdaFunctionFailedEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_lambdaFunctionScheduleFailedEventDetails:
+			v.LambdaFunctionScheduleFailedEventDetails = &LambdaFunctionScheduleFailedEventDetails{}
+			return v.LambdaFunctionScheduleFailedEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_lambdaFunctionScheduledEventDetails:
+			v.LambdaFunctionScheduledEventDetails = &LambdaFunctionScheduledEventDetails{}
+			return v.LambdaFunctionScheduledEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_lambdaFunctionStartFailedEventDetails:
+			v.LambdaFunctionStartFailedEventDetails = &LambdaFunctionStartFailedEventDetails{}
+			return v.LambdaFunctionStartFailedEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_lambdaFunctionSucceededEventDetails:
+			v.LambdaFunctionSucceededEventDetails = &LambdaFunctionSucceededEventDetails{}
+			return v.LambdaFunctionSucceededEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_lambdaFunctionTimedOutEventDetails:
+			v.LambdaFunctionTimedOutEventDetails = &LambdaFunctionTimedOutEventDetails{}
+			return v.LambdaFunctionTimedOutEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_mapIterationAbortedEventDetails:
+			v.MapIterationAbortedEventDetails = &MapIterationEventDetails{}
+			return v.MapIterationAbortedEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_mapIterationFailedEventDetails:
+			v.MapIterationFailedEventDetails = &MapIterationEventDetails{}
+			return v.MapIterationFailedEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_mapIterationStartedEventDetails:
+			v.MapIterationStartedEventDetails = &MapIterationEventDetails{}
+			return v.MapIterationStartedEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_mapIterationSucceededEventDetails:
+			v.MapIterationSucceededEventDetails = &MapIterationEventDetails{}
+			return v.MapIterationSucceededEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_mapRunFailedEventDetails:
+			v.MapRunFailedEventDetails = &MapRunFailedEventDetails{}
+			return v.MapRunFailedEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_mapRunRedrivenEventDetails:
+			v.MapRunRedrivenEventDetails = &MapRunRedrivenEventDetails{}
+			return v.MapRunRedrivenEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_mapRunStartedEventDetails:
+			v.MapRunStartedEventDetails = &MapRunStartedEventDetails{}
+			return v.MapRunStartedEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_mapStateStartedEventDetails:
+			v.MapStateStartedEventDetails = &MapStateStartedEventDetails{}
+			return v.MapStateStartedEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_previousEventId:
+			return d.ReadInt64(schemas.HistoryEvent_previousEventId, &v.PreviousEventId)
+		case schemas.HistoryEvent_stateEnteredEventDetails:
+			v.StateEnteredEventDetails = &StateEnteredEventDetails{}
+			return v.StateEnteredEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_stateExitedEventDetails:
+			v.StateExitedEventDetails = &StateExitedEventDetails{}
+			return v.StateExitedEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_taskFailedEventDetails:
+			v.TaskFailedEventDetails = &TaskFailedEventDetails{}
+			return v.TaskFailedEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_taskScheduledEventDetails:
+			v.TaskScheduledEventDetails = &TaskScheduledEventDetails{}
+			return v.TaskScheduledEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_taskStartFailedEventDetails:
+			v.TaskStartFailedEventDetails = &TaskStartFailedEventDetails{}
+			return v.TaskStartFailedEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_taskStartedEventDetails:
+			v.TaskStartedEventDetails = &TaskStartedEventDetails{}
+			return v.TaskStartedEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_taskSubmitFailedEventDetails:
+			v.TaskSubmitFailedEventDetails = &TaskSubmitFailedEventDetails{}
+			return v.TaskSubmitFailedEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_taskSubmittedEventDetails:
+			v.TaskSubmittedEventDetails = &TaskSubmittedEventDetails{}
+			return v.TaskSubmittedEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_taskSucceededEventDetails:
+			v.TaskSucceededEventDetails = &TaskSucceededEventDetails{}
+			return v.TaskSucceededEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_taskTimedOutEventDetails:
+			v.TaskTimedOutEventDetails = &TaskTimedOutEventDetails{}
+			return v.TaskTimedOutEventDetails.Deserialize(d)
+		case schemas.HistoryEvent_timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.HistoryEvent_timestamp, v.Timestamp)
+		case schemas.HistoryEvent_type:
+			var ev string
+			if err := d.ReadString(schemas.HistoryEvent_type, &ev); err != nil {
+				return err
+			}
+			v.Type = HistoryEventType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Provides details about input or output in an execution history event.
 type HistoryEventExecutionDataDetails struct {
 
@@ -562,6 +1562,27 @@ type HistoryEventExecutionDataDetails struct {
 	Truncated bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *HistoryEventExecutionDataDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HistoryEventExecutionDataDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HistoryEventExecutionDataDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Truncated != false {
+		s.WriteBool(schemas.HistoryEventExecutionDataDetails_truncated, v.Truncated)
+	}
+}
+func (v *HistoryEventExecutionDataDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HistoryEventExecutionDataDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HistoryEventExecutionDataDetails_truncated:
+			return d.ReadBool(schemas.HistoryEventExecutionDataDetails_truncated, &v.Truncated)
+		}
+		return nil
+	})
 }
 
 // Contains additional details about the state's execution, including its input
@@ -647,6 +1668,136 @@ type InspectionData struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InspectionData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InspectionData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InspectionData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterArguments != nil {
+		s.WriteString(schemas.InspectionData_afterArguments, *v.AfterArguments)
+	}
+	if v.AfterInputPath != nil {
+		s.WriteString(schemas.InspectionData_afterInputPath, *v.AfterInputPath)
+	}
+	if v.AfterItemBatcher != nil {
+		s.WriteString(schemas.InspectionData_afterItemBatcher, *v.AfterItemBatcher)
+	}
+	if v.AfterItemSelector != nil {
+		s.WriteString(schemas.InspectionData_afterItemSelector, *v.AfterItemSelector)
+	}
+	if v.AfterItemsPath != nil {
+		s.WriteString(schemas.InspectionData_afterItemsPath, *v.AfterItemsPath)
+	}
+	if v.AfterItemsPointer != nil {
+		s.WriteString(schemas.InspectionData_afterItemsPointer, *v.AfterItemsPointer)
+	}
+	if v.AfterParameters != nil {
+		s.WriteString(schemas.InspectionData_afterParameters, *v.AfterParameters)
+	}
+	if v.AfterResultPath != nil {
+		s.WriteString(schemas.InspectionData_afterResultPath, *v.AfterResultPath)
+	}
+	if v.AfterResultSelector != nil {
+		s.WriteString(schemas.InspectionData_afterResultSelector, *v.AfterResultSelector)
+	}
+	if v.ErrorDetails != nil {
+		s.WriteStruct(schemas.InspectionData_errorDetails)
+		v.ErrorDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Input != nil {
+		s.WriteString(schemas.InspectionData_input, *v.Input)
+	}
+	if v.MaxConcurrency != nil {
+		s.WriteInt32(schemas.InspectionData_maxConcurrency, *v.MaxConcurrency)
+	}
+	if v.Request != nil {
+		s.WriteStruct(schemas.InspectionData_request)
+		v.Request.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Response != nil {
+		s.WriteStruct(schemas.InspectionData_response)
+		v.Response.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Result != nil {
+		s.WriteString(schemas.InspectionData_result, *v.Result)
+	}
+	if v.ToleratedFailureCount != nil {
+		s.WriteInt32(schemas.InspectionData_toleratedFailureCount, *v.ToleratedFailureCount)
+	}
+	if v.ToleratedFailurePercentage != nil {
+		s.WriteFloat32(schemas.InspectionData_toleratedFailurePercentage, *v.ToleratedFailurePercentage)
+	}
+	if v.Variables != nil {
+		s.WriteString(schemas.InspectionData_variables, *v.Variables)
+	}
+}
+func (v *InspectionData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InspectionData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InspectionData_afterArguments:
+			v.AfterArguments = new(string)
+			return d.ReadString(schemas.InspectionData_afterArguments, v.AfterArguments)
+		case schemas.InspectionData_afterInputPath:
+			v.AfterInputPath = new(string)
+			return d.ReadString(schemas.InspectionData_afterInputPath, v.AfterInputPath)
+		case schemas.InspectionData_afterItemBatcher:
+			v.AfterItemBatcher = new(string)
+			return d.ReadString(schemas.InspectionData_afterItemBatcher, v.AfterItemBatcher)
+		case schemas.InspectionData_afterItemSelector:
+			v.AfterItemSelector = new(string)
+			return d.ReadString(schemas.InspectionData_afterItemSelector, v.AfterItemSelector)
+		case schemas.InspectionData_afterItemsPath:
+			v.AfterItemsPath = new(string)
+			return d.ReadString(schemas.InspectionData_afterItemsPath, v.AfterItemsPath)
+		case schemas.InspectionData_afterItemsPointer:
+			v.AfterItemsPointer = new(string)
+			return d.ReadString(schemas.InspectionData_afterItemsPointer, v.AfterItemsPointer)
+		case schemas.InspectionData_afterParameters:
+			v.AfterParameters = new(string)
+			return d.ReadString(schemas.InspectionData_afterParameters, v.AfterParameters)
+		case schemas.InspectionData_afterResultPath:
+			v.AfterResultPath = new(string)
+			return d.ReadString(schemas.InspectionData_afterResultPath, v.AfterResultPath)
+		case schemas.InspectionData_afterResultSelector:
+			v.AfterResultSelector = new(string)
+			return d.ReadString(schemas.InspectionData_afterResultSelector, v.AfterResultSelector)
+		case schemas.InspectionData_errorDetails:
+			v.ErrorDetails = &InspectionErrorDetails{}
+			return v.ErrorDetails.Deserialize(d)
+		case schemas.InspectionData_input:
+			v.Input = new(string)
+			return d.ReadString(schemas.InspectionData_input, v.Input)
+		case schemas.InspectionData_maxConcurrency:
+			v.MaxConcurrency = new(int32)
+			return d.ReadInt32(schemas.InspectionData_maxConcurrency, v.MaxConcurrency)
+		case schemas.InspectionData_request:
+			v.Request = &InspectionDataRequest{}
+			return v.Request.Deserialize(d)
+		case schemas.InspectionData_response:
+			v.Response = &InspectionDataResponse{}
+			return v.Response.Deserialize(d)
+		case schemas.InspectionData_result:
+			v.Result = new(string)
+			return d.ReadString(schemas.InspectionData_result, v.Result)
+		case schemas.InspectionData_toleratedFailureCount:
+			v.ToleratedFailureCount = new(int32)
+			return d.ReadInt32(schemas.InspectionData_toleratedFailureCount, v.ToleratedFailureCount)
+		case schemas.InspectionData_toleratedFailurePercentage:
+			v.ToleratedFailurePercentage = new(float32)
+			return d.ReadFloat32(schemas.InspectionData_toleratedFailurePercentage, v.ToleratedFailurePercentage)
+		case schemas.InspectionData_variables:
+			v.Variables = new(string)
+			return d.ReadString(schemas.InspectionData_variables, v.Variables)
+		}
+		return nil
+	})
+}
+
 // Contains additional details about the state's execution, including its input
 // and output data processing flow, and HTTP request information.
 type InspectionDataRequest struct {
@@ -667,6 +1818,52 @@ type InspectionDataRequest struct {
 	Url *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InspectionDataRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InspectionDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InspectionDataRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.InspectionDataRequest_body, *v.Body)
+	}
+	if v.Headers != nil {
+		s.WriteString(schemas.InspectionDataRequest_headers, *v.Headers)
+	}
+	if v.Method != nil {
+		s.WriteString(schemas.InspectionDataRequest_method, *v.Method)
+	}
+	if v.Protocol != nil {
+		s.WriteString(schemas.InspectionDataRequest_protocol, *v.Protocol)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.InspectionDataRequest_url, *v.Url)
+	}
+}
+func (v *InspectionDataRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InspectionDataRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InspectionDataRequest_body:
+			v.Body = new(string)
+			return d.ReadString(schemas.InspectionDataRequest_body, v.Body)
+		case schemas.InspectionDataRequest_headers:
+			v.Headers = new(string)
+			return d.ReadString(schemas.InspectionDataRequest_headers, v.Headers)
+		case schemas.InspectionDataRequest_method:
+			v.Method = new(string)
+			return d.ReadString(schemas.InspectionDataRequest_method, v.Method)
+		case schemas.InspectionDataRequest_protocol:
+			v.Protocol = new(string)
+			return d.ReadString(schemas.InspectionDataRequest_protocol, v.Protocol)
+		case schemas.InspectionDataRequest_url:
+			v.Url = new(string)
+			return d.ReadString(schemas.InspectionDataRequest_url, v.Url)
+		}
+		return nil
+	})
 }
 
 // Contains additional details about the state's execution, including its input
@@ -692,6 +1889,52 @@ type InspectionDataResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InspectionDataResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InspectionDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InspectionDataResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.InspectionDataResponse_body, *v.Body)
+	}
+	if v.Headers != nil {
+		s.WriteString(schemas.InspectionDataResponse_headers, *v.Headers)
+	}
+	if v.Protocol != nil {
+		s.WriteString(schemas.InspectionDataResponse_protocol, *v.Protocol)
+	}
+	if v.StatusCode != nil {
+		s.WriteString(schemas.InspectionDataResponse_statusCode, *v.StatusCode)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.InspectionDataResponse_statusMessage, *v.StatusMessage)
+	}
+}
+func (v *InspectionDataResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InspectionDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InspectionDataResponse_body:
+			v.Body = new(string)
+			return d.ReadString(schemas.InspectionDataResponse_body, v.Body)
+		case schemas.InspectionDataResponse_headers:
+			v.Headers = new(string)
+			return d.ReadString(schemas.InspectionDataResponse_headers, v.Headers)
+		case schemas.InspectionDataResponse_protocol:
+			v.Protocol = new(string)
+			return d.ReadString(schemas.InspectionDataResponse_protocol, v.Protocol)
+		case schemas.InspectionDataResponse_statusCode:
+			v.StatusCode = new(string)
+			return d.ReadString(schemas.InspectionDataResponse_statusCode, v.StatusCode)
+		case schemas.InspectionDataResponse_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.InspectionDataResponse_statusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 // An object containing data about a handled exception in the tested state.
 type InspectionErrorDetails struct {
 
@@ -707,6 +1950,40 @@ type InspectionErrorDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InspectionErrorDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InspectionErrorDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InspectionErrorDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatchIndex != nil {
+		s.WriteInt32(schemas.InspectionErrorDetails_catchIndex, *v.CatchIndex)
+	}
+	if v.RetryBackoffIntervalSeconds != nil {
+		s.WriteInt32(schemas.InspectionErrorDetails_retryBackoffIntervalSeconds, *v.RetryBackoffIntervalSeconds)
+	}
+	if v.RetryIndex != nil {
+		s.WriteInt32(schemas.InspectionErrorDetails_retryIndex, *v.RetryIndex)
+	}
+}
+func (v *InspectionErrorDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InspectionErrorDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InspectionErrorDetails_catchIndex:
+			v.CatchIndex = new(int32)
+			return d.ReadInt32(schemas.InspectionErrorDetails_catchIndex, v.CatchIndex)
+		case schemas.InspectionErrorDetails_retryBackoffIntervalSeconds:
+			v.RetryBackoffIntervalSeconds = new(int32)
+			return d.ReadInt32(schemas.InspectionErrorDetails_retryBackoffIntervalSeconds, v.RetryBackoffIntervalSeconds)
+		case schemas.InspectionErrorDetails_retryIndex:
+			v.RetryIndex = new(int32)
+			return d.ReadInt32(schemas.InspectionErrorDetails_retryIndex, v.RetryIndex)
+		}
+		return nil
+	})
+}
+
 // Contains details about a Lambda function that failed during an execution.
 type LambdaFunctionFailedEventDetails struct {
 
@@ -717,6 +1994,34 @@ type LambdaFunctionFailedEventDetails struct {
 	Error *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LambdaFunctionFailedEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaFunctionFailedEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaFunctionFailedEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != nil {
+		s.WriteString(schemas.LambdaFunctionFailedEventDetails_cause, *v.Cause)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.LambdaFunctionFailedEventDetails_error, *v.Error)
+	}
+}
+func (v *LambdaFunctionFailedEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaFunctionFailedEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaFunctionFailedEventDetails_cause:
+			v.Cause = new(string)
+			return d.ReadString(schemas.LambdaFunctionFailedEventDetails_cause, v.Cause)
+		case schemas.LambdaFunctionFailedEventDetails_error:
+			v.Error = new(string)
+			return d.ReadString(schemas.LambdaFunctionFailedEventDetails_error, v.Error)
+		}
+		return nil
+	})
 }
 
 // Contains details about a Lambda function scheduled during an execution.
@@ -743,6 +2048,56 @@ type LambdaFunctionScheduledEventDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LambdaFunctionScheduledEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaFunctionScheduledEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaFunctionScheduledEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Input != nil {
+		s.WriteString(schemas.LambdaFunctionScheduledEventDetails_input, *v.Input)
+	}
+	if v.InputDetails != nil {
+		s.WriteStruct(schemas.LambdaFunctionScheduledEventDetails_inputDetails)
+		v.InputDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resource != nil {
+		s.WriteString(schemas.LambdaFunctionScheduledEventDetails_resource, *v.Resource)
+	}
+	if v.TaskCredentials != nil {
+		s.WriteStruct(schemas.LambdaFunctionScheduledEventDetails_taskCredentials)
+		v.TaskCredentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimeoutInSeconds != nil {
+		s.WriteInt64(schemas.LambdaFunctionScheduledEventDetails_timeoutInSeconds, *v.TimeoutInSeconds)
+	}
+}
+func (v *LambdaFunctionScheduledEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaFunctionScheduledEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaFunctionScheduledEventDetails_input:
+			v.Input = new(string)
+			return d.ReadString(schemas.LambdaFunctionScheduledEventDetails_input, v.Input)
+		case schemas.LambdaFunctionScheduledEventDetails_inputDetails:
+			v.InputDetails = &HistoryEventExecutionDataDetails{}
+			return v.InputDetails.Deserialize(d)
+		case schemas.LambdaFunctionScheduledEventDetails_resource:
+			v.Resource = new(string)
+			return d.ReadString(schemas.LambdaFunctionScheduledEventDetails_resource, v.Resource)
+		case schemas.LambdaFunctionScheduledEventDetails_taskCredentials:
+			v.TaskCredentials = &TaskCredentials{}
+			return v.TaskCredentials.Deserialize(d)
+		case schemas.LambdaFunctionScheduledEventDetails_timeoutInSeconds:
+			v.TimeoutInSeconds = new(int64)
+			return d.ReadInt64(schemas.LambdaFunctionScheduledEventDetails_timeoutInSeconds, v.TimeoutInSeconds)
+		}
+		return nil
+	})
+}
+
 // Contains details about a failed Lambda function schedule event that occurred
 // during an execution.
 type LambdaFunctionScheduleFailedEventDetails struct {
@@ -756,6 +2111,34 @@ type LambdaFunctionScheduleFailedEventDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LambdaFunctionScheduleFailedEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaFunctionScheduleFailedEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaFunctionScheduleFailedEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != nil {
+		s.WriteString(schemas.LambdaFunctionScheduleFailedEventDetails_cause, *v.Cause)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.LambdaFunctionScheduleFailedEventDetails_error, *v.Error)
+	}
+}
+func (v *LambdaFunctionScheduleFailedEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaFunctionScheduleFailedEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaFunctionScheduleFailedEventDetails_cause:
+			v.Cause = new(string)
+			return d.ReadString(schemas.LambdaFunctionScheduleFailedEventDetails_cause, v.Cause)
+		case schemas.LambdaFunctionScheduleFailedEventDetails_error:
+			v.Error = new(string)
+			return d.ReadString(schemas.LambdaFunctionScheduleFailedEventDetails_error, v.Error)
+		}
+		return nil
+	})
+}
+
 // Contains details about a lambda function that failed to start during an
 // execution.
 type LambdaFunctionStartFailedEventDetails struct {
@@ -767,6 +2150,34 @@ type LambdaFunctionStartFailedEventDetails struct {
 	Error *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LambdaFunctionStartFailedEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaFunctionStartFailedEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaFunctionStartFailedEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != nil {
+		s.WriteString(schemas.LambdaFunctionStartFailedEventDetails_cause, *v.Cause)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.LambdaFunctionStartFailedEventDetails_error, *v.Error)
+	}
+}
+func (v *LambdaFunctionStartFailedEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaFunctionStartFailedEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaFunctionStartFailedEventDetails_cause:
+			v.Cause = new(string)
+			return d.ReadString(schemas.LambdaFunctionStartFailedEventDetails_cause, v.Cause)
+		case schemas.LambdaFunctionStartFailedEventDetails_error:
+			v.Error = new(string)
+			return d.ReadString(schemas.LambdaFunctionStartFailedEventDetails_error, v.Error)
+		}
+		return nil
+	})
 }
 
 // Contains details about a Lambda function that successfully terminated during an
@@ -783,6 +2194,36 @@ type LambdaFunctionSucceededEventDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LambdaFunctionSucceededEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaFunctionSucceededEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaFunctionSucceededEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Output != nil {
+		s.WriteString(schemas.LambdaFunctionSucceededEventDetails_output, *v.Output)
+	}
+	if v.OutputDetails != nil {
+		s.WriteStruct(schemas.LambdaFunctionSucceededEventDetails_outputDetails)
+		v.OutputDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LambdaFunctionSucceededEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaFunctionSucceededEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaFunctionSucceededEventDetails_output:
+			v.Output = new(string)
+			return d.ReadString(schemas.LambdaFunctionSucceededEventDetails_output, v.Output)
+		case schemas.LambdaFunctionSucceededEventDetails_outputDetails:
+			v.OutputDetails = &HistoryEventExecutionDataDetails{}
+			return v.OutputDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains details about a Lambda function timeout that occurred during an
 // execution.
 type LambdaFunctionTimedOutEventDetails struct {
@@ -796,6 +2237,34 @@ type LambdaFunctionTimedOutEventDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LambdaFunctionTimedOutEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaFunctionTimedOutEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaFunctionTimedOutEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != nil {
+		s.WriteString(schemas.LambdaFunctionTimedOutEventDetails_cause, *v.Cause)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.LambdaFunctionTimedOutEventDetails_error, *v.Error)
+	}
+}
+func (v *LambdaFunctionTimedOutEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaFunctionTimedOutEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaFunctionTimedOutEventDetails_cause:
+			v.Cause = new(string)
+			return d.ReadString(schemas.LambdaFunctionTimedOutEventDetails_cause, v.Cause)
+		case schemas.LambdaFunctionTimedOutEventDetails_error:
+			v.Error = new(string)
+			return d.ReadString(schemas.LambdaFunctionTimedOutEventDetails_error, v.Error)
+		}
+		return nil
+	})
+}
+
 type LogDestination struct {
 
 	// An object describing a CloudWatch log group. For more information, see [AWS::Logs::LogGroup] in the
@@ -805,6 +2274,30 @@ type LogDestination struct {
 	CloudWatchLogsLogGroup *CloudWatchLogsLogGroup
 
 	noSmithyDocumentSerde
+}
+
+func (v *LogDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LogDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LogDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogsLogGroup != nil {
+		s.WriteStruct(schemas.LogDestination_cloudWatchLogsLogGroup)
+		v.CloudWatchLogsLogGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LogDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LogDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LogDestination_cloudWatchLogsLogGroup:
+			v.CloudWatchLogsLogGroup = &CloudWatchLogsLogGroup{}
+			return v.CloudWatchLogsLogGroup.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The LoggingConfiguration data type is used to set CloudWatch Logs options.
@@ -824,6 +2317,40 @@ type LoggingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LoggingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoggingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoggingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLogDestinationList(s, schemas.LoggingConfiguration_destinations, v.Destinations)
+	if v.IncludeExecutionData != false {
+		s.WriteBool(schemas.LoggingConfiguration_includeExecutionData, v.IncludeExecutionData)
+	}
+	if v.Level != "" {
+		s.WriteString(schemas.LoggingConfiguration_level, string(v.Level))
+	}
+}
+func (v *LoggingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoggingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoggingConfiguration_destinations:
+			return deserializeLogDestinationList(d, schemas.LoggingConfiguration_destinations, &v.Destinations)
+		case schemas.LoggingConfiguration_includeExecutionData:
+			return d.ReadBool(schemas.LoggingConfiguration_includeExecutionData, &v.IncludeExecutionData)
+		case schemas.LoggingConfiguration_level:
+			var ev string
+			if err := d.ReadString(schemas.LoggingConfiguration_level, &ev); err != nil {
+				return err
+			}
+			v.Level = LogLevel(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains details about an iteration of a Map state.
 type MapIterationEventDetails struct {
 
@@ -834,6 +2361,33 @@ type MapIterationEventDetails struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MapIterationEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MapIterationEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MapIterationEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Index != 0 {
+		s.WriteInt32(schemas.MapIterationEventDetails_index, v.Index)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.MapIterationEventDetails_name, *v.Name)
+	}
+}
+func (v *MapIterationEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MapIterationEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MapIterationEventDetails_index:
+			return d.ReadInt32(schemas.MapIterationEventDetails_index, &v.Index)
+		case schemas.MapIterationEventDetails_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MapIterationEventDetails_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Contains details about all of the child workflow executions started by a Map
@@ -905,6 +2459,58 @@ type MapRunExecutionCounts struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MapRunExecutionCounts) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MapRunExecutionCounts)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MapRunExecutionCounts) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.MapRunExecutionCounts_aborted, v.Aborted)
+	s.WriteInt64(schemas.MapRunExecutionCounts_failed, v.Failed)
+	if v.FailuresNotRedrivable != nil {
+		s.WriteInt64(schemas.MapRunExecutionCounts_failuresNotRedrivable, *v.FailuresNotRedrivable)
+	}
+	s.WriteInt64(schemas.MapRunExecutionCounts_pending, v.Pending)
+	if v.PendingRedrive != nil {
+		s.WriteInt64(schemas.MapRunExecutionCounts_pendingRedrive, *v.PendingRedrive)
+	}
+	s.WriteInt64(schemas.MapRunExecutionCounts_resultsWritten, v.ResultsWritten)
+	s.WriteInt64(schemas.MapRunExecutionCounts_running, v.Running)
+	s.WriteInt64(schemas.MapRunExecutionCounts_succeeded, v.Succeeded)
+	s.WriteInt64(schemas.MapRunExecutionCounts_timedOut, v.TimedOut)
+	s.WriteInt64(schemas.MapRunExecutionCounts_total, v.Total)
+}
+func (v *MapRunExecutionCounts) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MapRunExecutionCounts, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MapRunExecutionCounts_aborted:
+			return d.ReadInt64(schemas.MapRunExecutionCounts_aborted, &v.Aborted)
+		case schemas.MapRunExecutionCounts_failed:
+			return d.ReadInt64(schemas.MapRunExecutionCounts_failed, &v.Failed)
+		case schemas.MapRunExecutionCounts_failuresNotRedrivable:
+			v.FailuresNotRedrivable = new(int64)
+			return d.ReadInt64(schemas.MapRunExecutionCounts_failuresNotRedrivable, v.FailuresNotRedrivable)
+		case schemas.MapRunExecutionCounts_pending:
+			return d.ReadInt64(schemas.MapRunExecutionCounts_pending, &v.Pending)
+		case schemas.MapRunExecutionCounts_pendingRedrive:
+			v.PendingRedrive = new(int64)
+			return d.ReadInt64(schemas.MapRunExecutionCounts_pendingRedrive, v.PendingRedrive)
+		case schemas.MapRunExecutionCounts_resultsWritten:
+			return d.ReadInt64(schemas.MapRunExecutionCounts_resultsWritten, &v.ResultsWritten)
+		case schemas.MapRunExecutionCounts_running:
+			return d.ReadInt64(schemas.MapRunExecutionCounts_running, &v.Running)
+		case schemas.MapRunExecutionCounts_succeeded:
+			return d.ReadInt64(schemas.MapRunExecutionCounts_succeeded, &v.Succeeded)
+		case schemas.MapRunExecutionCounts_timedOut:
+			return d.ReadInt64(schemas.MapRunExecutionCounts_timedOut, &v.TimedOut)
+		case schemas.MapRunExecutionCounts_total:
+			return d.ReadInt64(schemas.MapRunExecutionCounts_total, &v.Total)
+		}
+		return nil
+	})
+}
+
 // Contains details about a Map Run failure event that occurred during a state
 // machine execution.
 type MapRunFailedEventDetails struct {
@@ -916,6 +2522,34 @@ type MapRunFailedEventDetails struct {
 	Error *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MapRunFailedEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MapRunFailedEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MapRunFailedEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != nil {
+		s.WriteString(schemas.MapRunFailedEventDetails_cause, *v.Cause)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.MapRunFailedEventDetails_error, *v.Error)
+	}
+}
+func (v *MapRunFailedEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MapRunFailedEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MapRunFailedEventDetails_cause:
+			v.Cause = new(string)
+			return d.ReadString(schemas.MapRunFailedEventDetails_cause, v.Cause)
+		case schemas.MapRunFailedEventDetails_error:
+			v.Error = new(string)
+			return d.ReadString(schemas.MapRunFailedEventDetails_error, v.Error)
+		}
+		return nil
+	})
 }
 
 // Contains details about items that were processed in all of the child workflow
@@ -985,6 +2619,58 @@ type MapRunItemCounts struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MapRunItemCounts) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MapRunItemCounts)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MapRunItemCounts) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.MapRunItemCounts_aborted, v.Aborted)
+	s.WriteInt64(schemas.MapRunItemCounts_failed, v.Failed)
+	if v.FailuresNotRedrivable != nil {
+		s.WriteInt64(schemas.MapRunItemCounts_failuresNotRedrivable, *v.FailuresNotRedrivable)
+	}
+	s.WriteInt64(schemas.MapRunItemCounts_pending, v.Pending)
+	if v.PendingRedrive != nil {
+		s.WriteInt64(schemas.MapRunItemCounts_pendingRedrive, *v.PendingRedrive)
+	}
+	s.WriteInt64(schemas.MapRunItemCounts_resultsWritten, v.ResultsWritten)
+	s.WriteInt64(schemas.MapRunItemCounts_running, v.Running)
+	s.WriteInt64(schemas.MapRunItemCounts_succeeded, v.Succeeded)
+	s.WriteInt64(schemas.MapRunItemCounts_timedOut, v.TimedOut)
+	s.WriteInt64(schemas.MapRunItemCounts_total, v.Total)
+}
+func (v *MapRunItemCounts) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MapRunItemCounts, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MapRunItemCounts_aborted:
+			return d.ReadInt64(schemas.MapRunItemCounts_aborted, &v.Aborted)
+		case schemas.MapRunItemCounts_failed:
+			return d.ReadInt64(schemas.MapRunItemCounts_failed, &v.Failed)
+		case schemas.MapRunItemCounts_failuresNotRedrivable:
+			v.FailuresNotRedrivable = new(int64)
+			return d.ReadInt64(schemas.MapRunItemCounts_failuresNotRedrivable, v.FailuresNotRedrivable)
+		case schemas.MapRunItemCounts_pending:
+			return d.ReadInt64(schemas.MapRunItemCounts_pending, &v.Pending)
+		case schemas.MapRunItemCounts_pendingRedrive:
+			v.PendingRedrive = new(int64)
+			return d.ReadInt64(schemas.MapRunItemCounts_pendingRedrive, v.PendingRedrive)
+		case schemas.MapRunItemCounts_resultsWritten:
+			return d.ReadInt64(schemas.MapRunItemCounts_resultsWritten, &v.ResultsWritten)
+		case schemas.MapRunItemCounts_running:
+			return d.ReadInt64(schemas.MapRunItemCounts_running, &v.Running)
+		case schemas.MapRunItemCounts_succeeded:
+			return d.ReadInt64(schemas.MapRunItemCounts_succeeded, &v.Succeeded)
+		case schemas.MapRunItemCounts_timedOut:
+			return d.ReadInt64(schemas.MapRunItemCounts_timedOut, &v.TimedOut)
+		case schemas.MapRunItemCounts_total:
+			return d.ReadInt64(schemas.MapRunItemCounts_total, &v.Total)
+		}
+		return nil
+	})
+}
+
 // Contains details about a specific Map Run.
 type MapRunListItem struct {
 
@@ -1014,6 +2700,52 @@ type MapRunListItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MapRunListItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MapRunListItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MapRunListItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionArn != nil {
+		s.WriteString(schemas.MapRunListItem_executionArn, *v.ExecutionArn)
+	}
+	if v.MapRunArn != nil {
+		s.WriteString(schemas.MapRunListItem_mapRunArn, *v.MapRunArn)
+	}
+	if v.StartDate != nil {
+		s.WriteTime(schemas.MapRunListItem_startDate, *v.StartDate)
+	}
+	if v.StateMachineArn != nil {
+		s.WriteString(schemas.MapRunListItem_stateMachineArn, *v.StateMachineArn)
+	}
+	if v.StopDate != nil {
+		s.WriteTime(schemas.MapRunListItem_stopDate, *v.StopDate)
+	}
+}
+func (v *MapRunListItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MapRunListItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MapRunListItem_executionArn:
+			v.ExecutionArn = new(string)
+			return d.ReadString(schemas.MapRunListItem_executionArn, v.ExecutionArn)
+		case schemas.MapRunListItem_mapRunArn:
+			v.MapRunArn = new(string)
+			return d.ReadString(schemas.MapRunListItem_mapRunArn, v.MapRunArn)
+		case schemas.MapRunListItem_startDate:
+			v.StartDate = new(time.Time)
+			return d.ReadTime(schemas.MapRunListItem_startDate, v.StartDate)
+		case schemas.MapRunListItem_stateMachineArn:
+			v.StateMachineArn = new(string)
+			return d.ReadString(schemas.MapRunListItem_stateMachineArn, v.StateMachineArn)
+		case schemas.MapRunListItem_stopDate:
+			v.StopDate = new(time.Time)
+			return d.ReadTime(schemas.MapRunListItem_stopDate, v.StopDate)
+		}
+		return nil
+	})
+}
+
 // Contains details about a Map Run that was redriven.
 type MapRunRedrivenEventDetails struct {
 
@@ -1028,6 +2760,34 @@ type MapRunRedrivenEventDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MapRunRedrivenEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MapRunRedrivenEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MapRunRedrivenEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MapRunArn != nil {
+		s.WriteString(schemas.MapRunRedrivenEventDetails_mapRunArn, *v.MapRunArn)
+	}
+	if v.RedriveCount != nil {
+		s.WriteInt32(schemas.MapRunRedrivenEventDetails_redriveCount, *v.RedriveCount)
+	}
+}
+func (v *MapRunRedrivenEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MapRunRedrivenEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MapRunRedrivenEventDetails_mapRunArn:
+			v.MapRunArn = new(string)
+			return d.ReadString(schemas.MapRunRedrivenEventDetails_mapRunArn, v.MapRunArn)
+		case schemas.MapRunRedrivenEventDetails_redriveCount:
+			v.RedriveCount = new(int32)
+			return d.ReadInt32(schemas.MapRunRedrivenEventDetails_redriveCount, v.RedriveCount)
+		}
+		return nil
+	})
+}
+
 // Contains details about a Map Run that was started during a state machine
 // execution.
 type MapRunStartedEventDetails struct {
@@ -1038,6 +2798,28 @@ type MapRunStartedEventDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MapRunStartedEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MapRunStartedEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MapRunStartedEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MapRunArn != nil {
+		s.WriteString(schemas.MapRunStartedEventDetails_mapRunArn, *v.MapRunArn)
+	}
+}
+func (v *MapRunStartedEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MapRunStartedEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MapRunStartedEventDetails_mapRunArn:
+			v.MapRunArn = new(string)
+			return d.ReadString(schemas.MapRunStartedEventDetails_mapRunArn, v.MapRunArn)
+		}
+		return nil
+	})
+}
+
 // Details about a Map state that was started.
 type MapStateStartedEventDetails struct {
 
@@ -1045,6 +2827,27 @@ type MapStateStartedEventDetails struct {
 	Length int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *MapStateStartedEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MapStateStartedEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MapStateStartedEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Length != 0 {
+		s.WriteInt32(schemas.MapStateStartedEventDetails_length, v.Length)
+	}
+}
+func (v *MapStateStartedEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MapStateStartedEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MapStateStartedEventDetails_length:
+			return d.ReadInt32(schemas.MapStateStartedEventDetails_length, &v.Length)
+		}
+		return nil
+	})
 }
 
 // A JSON object that contains a mocked error.
@@ -1059,6 +2862,34 @@ type MockErrorOutput struct {
 	Error *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MockErrorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MockErrorOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MockErrorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != nil {
+		s.WriteString(schemas.MockErrorOutput_cause, *v.Cause)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.MockErrorOutput_error, *v.Error)
+	}
+}
+func (v *MockErrorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MockErrorOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MockErrorOutput_cause:
+			v.Cause = new(string)
+			return d.ReadString(schemas.MockErrorOutput_cause, v.Cause)
+		case schemas.MockErrorOutput_error:
+			v.Error = new(string)
+			return d.ReadString(schemas.MockErrorOutput_error, v.Error)
+		}
+		return nil
+	})
 }
 
 // A JSON object that contains a mocked result or errorOutput .
@@ -1087,6 +2918,46 @@ type MockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MockInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MockInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MockInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorOutput != nil {
+		s.WriteStruct(schemas.MockInput_errorOutput)
+		v.ErrorOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FieldValidationMode != "" {
+		s.WriteString(schemas.MockInput_fieldValidationMode, string(v.FieldValidationMode))
+	}
+	if v.Result != nil {
+		s.WriteString(schemas.MockInput_result, *v.Result)
+	}
+}
+func (v *MockInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MockInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MockInput_errorOutput:
+			v.ErrorOutput = &MockErrorOutput{}
+			return v.ErrorOutput.Deserialize(d)
+		case schemas.MockInput_fieldValidationMode:
+			var ev string
+			if err := d.ReadString(schemas.MockInput_fieldValidationMode, &ev); err != nil {
+				return err
+			}
+			v.FieldValidationMode = MockResponseValidationMode(ev)
+			return nil
+		case schemas.MockInput_result:
+			v.Result = new(string)
+			return d.ReadString(schemas.MockInput_result, v.Result)
+		}
+		return nil
+	})
+}
+
 // Contains details about the routing configuration of a state machine alias. In a
 // routing configuration, you define an array of objects that specify up to two
 // state machine versions. You also specify the percentage of traffic to be routed
@@ -1111,6 +2982,31 @@ type RoutingConfigurationListItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RoutingConfigurationListItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoutingConfigurationListItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoutingConfigurationListItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StateMachineVersionArn != nil {
+		s.WriteString(schemas.RoutingConfigurationListItem_stateMachineVersionArn, *v.StateMachineVersionArn)
+	}
+	s.WriteInt32(schemas.RoutingConfigurationListItem_weight, v.Weight)
+}
+func (v *RoutingConfigurationListItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoutingConfigurationListItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoutingConfigurationListItem_stateMachineVersionArn:
+			v.StateMachineVersionArn = new(string)
+			return d.ReadString(schemas.RoutingConfigurationListItem_stateMachineVersionArn, v.StateMachineVersionArn)
+		case schemas.RoutingConfigurationListItem_weight:
+			return d.ReadInt32(schemas.RoutingConfigurationListItem_weight, &v.Weight)
+		}
+		return nil
+	})
+}
+
 // Contains details about a state entered during an execution.
 type StateEnteredEventDetails struct {
 
@@ -1127,6 +3023,42 @@ type StateEnteredEventDetails struct {
 	InputDetails *HistoryEventExecutionDataDetails
 
 	noSmithyDocumentSerde
+}
+
+func (v *StateEnteredEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StateEnteredEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StateEnteredEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Input != nil {
+		s.WriteString(schemas.StateEnteredEventDetails_input, *v.Input)
+	}
+	if v.InputDetails != nil {
+		s.WriteStruct(schemas.StateEnteredEventDetails_inputDetails)
+		v.InputDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StateEnteredEventDetails_name, *v.Name)
+	}
+}
+func (v *StateEnteredEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StateEnteredEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StateEnteredEventDetails_input:
+			v.Input = new(string)
+			return d.ReadString(schemas.StateEnteredEventDetails_input, v.Input)
+		case schemas.StateEnteredEventDetails_inputDetails:
+			v.InputDetails = &HistoryEventExecutionDataDetails{}
+			return v.InputDetails.Deserialize(d)
+		case schemas.StateEnteredEventDetails_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StateEnteredEventDetails_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Contains details about an exit from a state during an execution.
@@ -1172,6 +3104,53 @@ type StateExitedEventDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StateExitedEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StateExitedEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StateExitedEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssignedVariables(s, schemas.StateExitedEventDetails_assignedVariables, v.AssignedVariables)
+	if v.AssignedVariablesDetails != nil {
+		s.WriteStruct(schemas.StateExitedEventDetails_assignedVariablesDetails)
+		v.AssignedVariablesDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StateExitedEventDetails_name, *v.Name)
+	}
+	if v.Output != nil {
+		s.WriteString(schemas.StateExitedEventDetails_output, *v.Output)
+	}
+	if v.OutputDetails != nil {
+		s.WriteStruct(schemas.StateExitedEventDetails_outputDetails)
+		v.OutputDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StateExitedEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StateExitedEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StateExitedEventDetails_assignedVariables:
+			return deserializeAssignedVariables(d, schemas.StateExitedEventDetails_assignedVariables, &v.AssignedVariables)
+		case schemas.StateExitedEventDetails_assignedVariablesDetails:
+			v.AssignedVariablesDetails = &AssignedVariablesDetails{}
+			return v.AssignedVariablesDetails.Deserialize(d)
+		case schemas.StateExitedEventDetails_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StateExitedEventDetails_name, v.Name)
+		case schemas.StateExitedEventDetails_output:
+			v.Output = new(string)
+			return d.ReadString(schemas.StateExitedEventDetails_output, v.Output)
+		case schemas.StateExitedEventDetails_outputDetails:
+			v.OutputDetails = &HistoryEventExecutionDataDetails{}
+			return v.OutputDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains details about a specific state machine alias.
 type StateMachineAliasListItem struct {
 
@@ -1188,6 +3167,34 @@ type StateMachineAliasListItem struct {
 	StateMachineAliasArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StateMachineAliasListItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StateMachineAliasListItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StateMachineAliasListItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.StateMachineAliasListItem_creationDate, *v.CreationDate)
+	}
+	if v.StateMachineAliasArn != nil {
+		s.WriteString(schemas.StateMachineAliasListItem_stateMachineAliasArn, *v.StateMachineAliasArn)
+	}
+}
+func (v *StateMachineAliasListItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StateMachineAliasListItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StateMachineAliasListItem_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.StateMachineAliasListItem_creationDate, v.CreationDate)
+		case schemas.StateMachineAliasListItem_stateMachineAliasArn:
+			v.StateMachineAliasArn = new(string)
+			return d.ReadString(schemas.StateMachineAliasListItem_stateMachineAliasArn, v.StateMachineAliasArn)
+		}
+		return nil
+	})
 }
 
 // Contains details about the state machine.
@@ -1235,6 +3242,50 @@ type StateMachineListItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StateMachineListItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StateMachineListItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StateMachineListItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.StateMachineListItem_creationDate, *v.CreationDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StateMachineListItem_name, *v.Name)
+	}
+	if v.StateMachineArn != nil {
+		s.WriteString(schemas.StateMachineListItem_stateMachineArn, *v.StateMachineArn)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.StateMachineListItem_type, string(v.Type))
+	}
+}
+func (v *StateMachineListItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StateMachineListItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StateMachineListItem_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.StateMachineListItem_creationDate, v.CreationDate)
+		case schemas.StateMachineListItem_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StateMachineListItem_name, v.Name)
+		case schemas.StateMachineListItem_stateMachineArn:
+			v.StateMachineArn = new(string)
+			return d.ReadString(schemas.StateMachineListItem_stateMachineArn, v.StateMachineArn)
+		case schemas.StateMachineListItem_type:
+			var ev string
+			if err := d.ReadString(schemas.StateMachineListItem_type, &ev); err != nil {
+				return err
+			}
+			v.Type = StateMachineType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains details about a specific state machine version.
 type StateMachineVersionListItem struct {
 
@@ -1251,6 +3302,34 @@ type StateMachineVersionListItem struct {
 	StateMachineVersionArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StateMachineVersionListItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StateMachineVersionListItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StateMachineVersionListItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.StateMachineVersionListItem_creationDate, *v.CreationDate)
+	}
+	if v.StateMachineVersionArn != nil {
+		s.WriteString(schemas.StateMachineVersionListItem_stateMachineVersionArn, *v.StateMachineVersionArn)
+	}
+}
+func (v *StateMachineVersionListItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StateMachineVersionListItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StateMachineVersionListItem_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.StateMachineVersionListItem_creationDate, v.CreationDate)
+		case schemas.StateMachineVersionListItem_stateMachineVersionArn:
+			v.StateMachineVersionArn = new(string)
+			return d.ReadString(schemas.StateMachineVersionListItem_stateMachineVersionArn, v.StateMachineVersionArn)
+		}
+		return nil
+	})
 }
 
 // Tags are key-value pairs that can be associated with Step Functions state
@@ -1275,6 +3354,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_key, v.Key)
+		case schemas.Tag_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Contains details about the credentials that Step Functions uses for a task.
 type TaskCredentials struct {
 
@@ -1283,6 +3390,28 @@ type TaskCredentials struct {
 	RoleArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TaskCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoleArn != nil {
+		s.WriteString(schemas.TaskCredentials_roleArn, *v.RoleArn)
+	}
+}
+func (v *TaskCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskCredentials_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.TaskCredentials_roleArn, v.RoleArn)
+		}
+		return nil
+	})
 }
 
 // Contains details about a task failure event.
@@ -1305,6 +3434,46 @@ type TaskFailedEventDetails struct {
 	Error *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TaskFailedEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskFailedEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskFailedEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != nil {
+		s.WriteString(schemas.TaskFailedEventDetails_cause, *v.Cause)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.TaskFailedEventDetails_error, *v.Error)
+	}
+	if v.Resource != nil {
+		s.WriteString(schemas.TaskFailedEventDetails_resource, *v.Resource)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.TaskFailedEventDetails_resourceType, *v.ResourceType)
+	}
+}
+func (v *TaskFailedEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskFailedEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskFailedEventDetails_cause:
+			v.Cause = new(string)
+			return d.ReadString(schemas.TaskFailedEventDetails_cause, v.Cause)
+		case schemas.TaskFailedEventDetails_error:
+			v.Error = new(string)
+			return d.ReadString(schemas.TaskFailedEventDetails_error, v.Error)
+		case schemas.TaskFailedEventDetails_resource:
+			v.Resource = new(string)
+			return d.ReadString(schemas.TaskFailedEventDetails_resource, v.Resource)
+		case schemas.TaskFailedEventDetails_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.TaskFailedEventDetails_resourceType, v.ResourceType)
+		}
+		return nil
+	})
 }
 
 // Contains details about a task scheduled during an execution.
@@ -1344,6 +3513,66 @@ type TaskScheduledEventDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TaskScheduledEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskScheduledEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskScheduledEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HeartbeatInSeconds != nil {
+		s.WriteInt64(schemas.TaskScheduledEventDetails_heartbeatInSeconds, *v.HeartbeatInSeconds)
+	}
+	if v.Parameters != nil {
+		s.WriteString(schemas.TaskScheduledEventDetails_parameters, *v.Parameters)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.TaskScheduledEventDetails_region, *v.Region)
+	}
+	if v.Resource != nil {
+		s.WriteString(schemas.TaskScheduledEventDetails_resource, *v.Resource)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.TaskScheduledEventDetails_resourceType, *v.ResourceType)
+	}
+	if v.TaskCredentials != nil {
+		s.WriteStruct(schemas.TaskScheduledEventDetails_taskCredentials)
+		v.TaskCredentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimeoutInSeconds != nil {
+		s.WriteInt64(schemas.TaskScheduledEventDetails_timeoutInSeconds, *v.TimeoutInSeconds)
+	}
+}
+func (v *TaskScheduledEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskScheduledEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskScheduledEventDetails_heartbeatInSeconds:
+			v.HeartbeatInSeconds = new(int64)
+			return d.ReadInt64(schemas.TaskScheduledEventDetails_heartbeatInSeconds, v.HeartbeatInSeconds)
+		case schemas.TaskScheduledEventDetails_parameters:
+			v.Parameters = new(string)
+			return d.ReadString(schemas.TaskScheduledEventDetails_parameters, v.Parameters)
+		case schemas.TaskScheduledEventDetails_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.TaskScheduledEventDetails_region, v.Region)
+		case schemas.TaskScheduledEventDetails_resource:
+			v.Resource = new(string)
+			return d.ReadString(schemas.TaskScheduledEventDetails_resource, v.Resource)
+		case schemas.TaskScheduledEventDetails_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.TaskScheduledEventDetails_resourceType, v.ResourceType)
+		case schemas.TaskScheduledEventDetails_taskCredentials:
+			v.TaskCredentials = &TaskCredentials{}
+			return v.TaskCredentials.Deserialize(d)
+		case schemas.TaskScheduledEventDetails_timeoutInSeconds:
+			v.TimeoutInSeconds = new(int64)
+			return d.ReadInt64(schemas.TaskScheduledEventDetails_timeoutInSeconds, v.TimeoutInSeconds)
+		}
+		return nil
+	})
+}
+
 // Contains details about the start of a task during an execution.
 type TaskStartedEventDetails struct {
 
@@ -1358,6 +3587,34 @@ type TaskStartedEventDetails struct {
 	ResourceType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TaskStartedEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskStartedEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskStartedEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Resource != nil {
+		s.WriteString(schemas.TaskStartedEventDetails_resource, *v.Resource)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.TaskStartedEventDetails_resourceType, *v.ResourceType)
+	}
+}
+func (v *TaskStartedEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskStartedEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskStartedEventDetails_resource:
+			v.Resource = new(string)
+			return d.ReadString(schemas.TaskStartedEventDetails_resource, v.Resource)
+		case schemas.TaskStartedEventDetails_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.TaskStartedEventDetails_resourceType, v.ResourceType)
+		}
+		return nil
+	})
 }
 
 // Contains details about a task that failed to start during an execution.
@@ -1382,6 +3639,46 @@ type TaskStartFailedEventDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TaskStartFailedEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskStartFailedEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskStartFailedEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != nil {
+		s.WriteString(schemas.TaskStartFailedEventDetails_cause, *v.Cause)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.TaskStartFailedEventDetails_error, *v.Error)
+	}
+	if v.Resource != nil {
+		s.WriteString(schemas.TaskStartFailedEventDetails_resource, *v.Resource)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.TaskStartFailedEventDetails_resourceType, *v.ResourceType)
+	}
+}
+func (v *TaskStartFailedEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskStartFailedEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskStartFailedEventDetails_cause:
+			v.Cause = new(string)
+			return d.ReadString(schemas.TaskStartFailedEventDetails_cause, v.Cause)
+		case schemas.TaskStartFailedEventDetails_error:
+			v.Error = new(string)
+			return d.ReadString(schemas.TaskStartFailedEventDetails_error, v.Error)
+		case schemas.TaskStartFailedEventDetails_resource:
+			v.Resource = new(string)
+			return d.ReadString(schemas.TaskStartFailedEventDetails_resource, v.Resource)
+		case schemas.TaskStartFailedEventDetails_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.TaskStartFailedEventDetails_resourceType, v.ResourceType)
+		}
+		return nil
+	})
+}
+
 // Contains details about a task that failed to submit during an execution.
 type TaskSubmitFailedEventDetails struct {
 
@@ -1402,6 +3699,46 @@ type TaskSubmitFailedEventDetails struct {
 	Error *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TaskSubmitFailedEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskSubmitFailedEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskSubmitFailedEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != nil {
+		s.WriteString(schemas.TaskSubmitFailedEventDetails_cause, *v.Cause)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.TaskSubmitFailedEventDetails_error, *v.Error)
+	}
+	if v.Resource != nil {
+		s.WriteString(schemas.TaskSubmitFailedEventDetails_resource, *v.Resource)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.TaskSubmitFailedEventDetails_resourceType, *v.ResourceType)
+	}
+}
+func (v *TaskSubmitFailedEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskSubmitFailedEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskSubmitFailedEventDetails_cause:
+			v.Cause = new(string)
+			return d.ReadString(schemas.TaskSubmitFailedEventDetails_cause, v.Cause)
+		case schemas.TaskSubmitFailedEventDetails_error:
+			v.Error = new(string)
+			return d.ReadString(schemas.TaskSubmitFailedEventDetails_error, v.Error)
+		case schemas.TaskSubmitFailedEventDetails_resource:
+			v.Resource = new(string)
+			return d.ReadString(schemas.TaskSubmitFailedEventDetails_resource, v.Resource)
+		case schemas.TaskSubmitFailedEventDetails_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.TaskSubmitFailedEventDetails_resourceType, v.ResourceType)
+		}
+		return nil
+	})
 }
 
 // Contains details about a task submitted to a resource .
@@ -1425,6 +3762,48 @@ type TaskSubmittedEventDetails struct {
 	OutputDetails *HistoryEventExecutionDataDetails
 
 	noSmithyDocumentSerde
+}
+
+func (v *TaskSubmittedEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskSubmittedEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskSubmittedEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Output != nil {
+		s.WriteString(schemas.TaskSubmittedEventDetails_output, *v.Output)
+	}
+	if v.OutputDetails != nil {
+		s.WriteStruct(schemas.TaskSubmittedEventDetails_outputDetails)
+		v.OutputDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resource != nil {
+		s.WriteString(schemas.TaskSubmittedEventDetails_resource, *v.Resource)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.TaskSubmittedEventDetails_resourceType, *v.ResourceType)
+	}
+}
+func (v *TaskSubmittedEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskSubmittedEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskSubmittedEventDetails_output:
+			v.Output = new(string)
+			return d.ReadString(schemas.TaskSubmittedEventDetails_output, v.Output)
+		case schemas.TaskSubmittedEventDetails_outputDetails:
+			v.OutputDetails = &HistoryEventExecutionDataDetails{}
+			return v.OutputDetails.Deserialize(d)
+		case schemas.TaskSubmittedEventDetails_resource:
+			v.Resource = new(string)
+			return d.ReadString(schemas.TaskSubmittedEventDetails_resource, v.Resource)
+		case schemas.TaskSubmittedEventDetails_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.TaskSubmittedEventDetails_resourceType, v.ResourceType)
+		}
+		return nil
+	})
 }
 
 // Contains details about the successful completion of a task state.
@@ -1451,6 +3830,48 @@ type TaskSucceededEventDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TaskSucceededEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskSucceededEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskSucceededEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Output != nil {
+		s.WriteString(schemas.TaskSucceededEventDetails_output, *v.Output)
+	}
+	if v.OutputDetails != nil {
+		s.WriteStruct(schemas.TaskSucceededEventDetails_outputDetails)
+		v.OutputDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resource != nil {
+		s.WriteString(schemas.TaskSucceededEventDetails_resource, *v.Resource)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.TaskSucceededEventDetails_resourceType, *v.ResourceType)
+	}
+}
+func (v *TaskSucceededEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskSucceededEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskSucceededEventDetails_output:
+			v.Output = new(string)
+			return d.ReadString(schemas.TaskSucceededEventDetails_output, v.Output)
+		case schemas.TaskSucceededEventDetails_outputDetails:
+			v.OutputDetails = &HistoryEventExecutionDataDetails{}
+			return v.OutputDetails.Deserialize(d)
+		case schemas.TaskSucceededEventDetails_resource:
+			v.Resource = new(string)
+			return d.ReadString(schemas.TaskSucceededEventDetails_resource, v.Resource)
+		case schemas.TaskSucceededEventDetails_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.TaskSucceededEventDetails_resourceType, v.ResourceType)
+		}
+		return nil
+	})
+}
+
 // Contains details about a resource timeout that occurred during an execution.
 type TaskTimedOutEventDetails struct {
 
@@ -1471,6 +3892,46 @@ type TaskTimedOutEventDetails struct {
 	Error *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TaskTimedOutEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskTimedOutEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskTimedOutEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != nil {
+		s.WriteString(schemas.TaskTimedOutEventDetails_cause, *v.Cause)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.TaskTimedOutEventDetails_error, *v.Error)
+	}
+	if v.Resource != nil {
+		s.WriteString(schemas.TaskTimedOutEventDetails_resource, *v.Resource)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.TaskTimedOutEventDetails_resourceType, *v.ResourceType)
+	}
+}
+func (v *TaskTimedOutEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskTimedOutEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskTimedOutEventDetails_cause:
+			v.Cause = new(string)
+			return d.ReadString(schemas.TaskTimedOutEventDetails_cause, v.Cause)
+		case schemas.TaskTimedOutEventDetails_error:
+			v.Error = new(string)
+			return d.ReadString(schemas.TaskTimedOutEventDetails_error, v.Error)
+		case schemas.TaskTimedOutEventDetails_resource:
+			v.Resource = new(string)
+			return d.ReadString(schemas.TaskTimedOutEventDetails_resource, v.Resource)
+		case schemas.TaskTimedOutEventDetails_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.TaskTimedOutEventDetails_resourceType, v.ResourceType)
+		}
+		return nil
+	})
 }
 
 // Contains configurations for the tested state.
@@ -1494,6 +3955,46 @@ type TestStateConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestStateConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestStateConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestStateConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCausedByState != nil {
+		s.WriteString(schemas.TestStateConfiguration_errorCausedByState, *v.ErrorCausedByState)
+	}
+	if v.MapItemReaderData != nil {
+		s.WriteString(schemas.TestStateConfiguration_mapItemReaderData, *v.MapItemReaderData)
+	}
+	if v.MapIterationFailureCount != nil {
+		s.WriteInt32(schemas.TestStateConfiguration_mapIterationFailureCount, *v.MapIterationFailureCount)
+	}
+	if v.RetrierRetryCount != nil {
+		s.WriteInt32(schemas.TestStateConfiguration_retrierRetryCount, *v.RetrierRetryCount)
+	}
+}
+func (v *TestStateConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestStateConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestStateConfiguration_errorCausedByState:
+			v.ErrorCausedByState = new(string)
+			return d.ReadString(schemas.TestStateConfiguration_errorCausedByState, v.ErrorCausedByState)
+		case schemas.TestStateConfiguration_mapItemReaderData:
+			v.MapItemReaderData = new(string)
+			return d.ReadString(schemas.TestStateConfiguration_mapItemReaderData, v.MapItemReaderData)
+		case schemas.TestStateConfiguration_mapIterationFailureCount:
+			v.MapIterationFailureCount = new(int32)
+			return d.ReadInt32(schemas.TestStateConfiguration_mapIterationFailureCount, v.MapIterationFailureCount)
+		case schemas.TestStateConfiguration_retrierRetryCount:
+			v.RetrierRetryCount = new(int32)
+			return d.ReadInt32(schemas.TestStateConfiguration_retrierRetryCount, v.RetrierRetryCount)
+		}
+		return nil
+	})
+}
+
 // Selects whether or not the state machine's X-Ray tracing is enabled. Default is
 // false
 type TracingConfiguration struct {
@@ -1502,6 +4003,27 @@ type TracingConfiguration struct {
 	Enabled bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *TracingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TracingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TracingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != false {
+		s.WriteBool(schemas.TracingConfiguration_enabled, v.Enabled)
+	}
+}
+func (v *TracingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TracingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TracingConfiguration_enabled:
+			return d.ReadBool(schemas.TracingConfiguration_enabled, &v.Enabled)
+		}
+		return nil
+	})
 }
 
 // Describes potential issues found during state machine validation. Rather than
@@ -1584,6 +4106,50 @@ type ValidateStateMachineDefinitionDiagnostic struct {
 	Location *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidateStateMachineDefinitionDiagnostic) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateStateMachineDefinitionDiagnostic)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateStateMachineDefinitionDiagnostic) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ValidateStateMachineDefinitionDiagnostic_code, *v.Code)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.ValidateStateMachineDefinitionDiagnostic_location, *v.Location)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ValidateStateMachineDefinitionDiagnostic_message, *v.Message)
+	}
+	if v.Severity != "" {
+		s.WriteString(schemas.ValidateStateMachineDefinitionDiagnostic_severity, string(v.Severity))
+	}
+}
+func (v *ValidateStateMachineDefinitionDiagnostic) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidateStateMachineDefinitionDiagnostic, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidateStateMachineDefinitionDiagnostic_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ValidateStateMachineDefinitionDiagnostic_code, v.Code)
+		case schemas.ValidateStateMachineDefinitionDiagnostic_location:
+			v.Location = new(string)
+			return d.ReadString(schemas.ValidateStateMachineDefinitionDiagnostic_location, v.Location)
+		case schemas.ValidateStateMachineDefinitionDiagnostic_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidateStateMachineDefinitionDiagnostic_message, v.Message)
+		case schemas.ValidateStateMachineDefinitionDiagnostic_severity:
+			var ev string
+			if err := d.ReadString(schemas.ValidateStateMachineDefinitionDiagnostic_severity, &ev); err != nil {
+				return err
+			}
+			v.Severity = ValidateStateMachineDefinitionSeverity(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

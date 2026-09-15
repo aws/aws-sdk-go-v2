@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,25 @@ type ListContainerRecipesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContainerRecipesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContainerRecipesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContainerRecipesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.ListContainerRecipesRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListContainerRecipesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContainerRecipesRequest_nextToken, *v.NextToken)
+	}
+	if v.Owner != "" {
+		s.WriteString(schemas.ListContainerRecipesRequest_owner, string(v.Owner))
+	}
+}
+
 type ListContainerRecipesOutput struct {
 
 	// The list of container recipes returned for the request.
@@ -72,13 +93,41 @@ type ListContainerRecipesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContainerRecipesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContainerRecipesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContainerRecipesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContainerRecipeSummaryList(s, schemas.ListContainerRecipesResponse_containerRecipeSummaryList, v.ContainerRecipeSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContainerRecipesResponse_nextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListContainerRecipesResponse_requestId, *v.RequestId)
+	}
+}
+func (v *ListContainerRecipesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListContainerRecipesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListContainerRecipesResponse_containerRecipeSummaryList:
+			return deserializeContainerRecipeSummaryList(d, schemas.ListContainerRecipesResponse_containerRecipeSummaryList, &v.ContainerRecipeSummaryList)
+		case schemas.ListContainerRecipesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListContainerRecipesResponse_nextToken, v.NextToken)
+		case schemas.ListContainerRecipesResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListContainerRecipesResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListContainerRecipesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListContainerRecipes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContainerRecipes, schemas.ListContainerRecipesRequest, schemas.ListContainerRecipesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListContainerRecipes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContainerRecipes, schemas.ListContainerRecipesRequest, schemas.ListContainerRecipesResponse), output: &ListContainerRecipesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

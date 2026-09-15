@@ -5,7 +5,9 @@ package fis
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type StartExperimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartExperimentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartExperimentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartExperimentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartExperimentRequest_clientToken, *v.ClientToken)
+	}
+	if v.ExperimentOptions != nil {
+		s.WriteStruct(schemas.StartExperimentRequest_experimentOptions)
+		v.ExperimentOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExperimentTemplateId != nil {
+		s.WriteString(schemas.StartExperimentRequest_experimentTemplateId, *v.ExperimentTemplateId)
+	}
+	serializeTagMap(s, schemas.StartExperimentRequest_tags, v.Tags)
+}
+
 type StartExperimentOutput struct {
 
 	// Information about the experiment.
@@ -58,13 +81,34 @@ type StartExperimentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartExperimentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartExperimentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartExperimentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Experiment != nil {
+		s.WriteStruct(schemas.StartExperimentResponse_experiment)
+		v.Experiment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartExperimentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartExperimentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartExperimentResponse_experiment:
+			v.Experiment = &types.Experiment{}
+			return v.Experiment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartExperimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartExperiment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartExperiment, schemas.StartExperimentRequest, schemas.StartExperimentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartExperiment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartExperiment, schemas.StartExperimentRequest, schemas.StartExperimentResponse), output: &StartExperimentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

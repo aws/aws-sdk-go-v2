@@ -4,7 +4,9 @@ package resiliencehub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -43,6 +45,28 @@ type DescribeDraftAppVersionResourcesImportStatusInput struct {
 	AppArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeDraftAppVersionResourcesImportStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDraftAppVersionResourcesImportStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDraftAppVersionResourcesImportStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.DescribeDraftAppVersionResourcesImportStatusRequest_appArn, *v.AppArn)
+	}
+}
+func (v *DescribeDraftAppVersionResourcesImportStatusInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDraftAppVersionResourcesImportStatusRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDraftAppVersionResourcesImportStatusRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.DescribeDraftAppVersionResourcesImportStatusRequest_appArn, v.AppArn)
+		}
+		return nil
+	})
 }
 
 type DescribeDraftAppVersionResourcesImportStatusOutput struct {
@@ -84,13 +108,63 @@ type DescribeDraftAppVersionResourcesImportStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDraftAppVersionResourcesImportStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDraftAppVersionResourcesImportStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDraftAppVersionResourcesImportStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.DescribeDraftAppVersionResourcesImportStatusResponse_appArn, *v.AppArn)
+	}
+	if v.AppVersion != nil {
+		s.WriteString(schemas.DescribeDraftAppVersionResourcesImportStatusResponse_appVersion, *v.AppVersion)
+	}
+	serializeErrorDetailList(s, schemas.DescribeDraftAppVersionResourcesImportStatusResponse_errorDetails, v.ErrorDetails)
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.DescribeDraftAppVersionResourcesImportStatusResponse_errorMessage, *v.ErrorMessage)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeDraftAppVersionResourcesImportStatusResponse_status, string(v.Status))
+	}
+	if v.StatusChangeTime != nil {
+		s.WriteTime(schemas.DescribeDraftAppVersionResourcesImportStatusResponse_statusChangeTime, *v.StatusChangeTime)
+	}
+}
+func (v *DescribeDraftAppVersionResourcesImportStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDraftAppVersionResourcesImportStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDraftAppVersionResourcesImportStatusResponse_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.DescribeDraftAppVersionResourcesImportStatusResponse_appArn, v.AppArn)
+		case schemas.DescribeDraftAppVersionResourcesImportStatusResponse_appVersion:
+			v.AppVersion = new(string)
+			return d.ReadString(schemas.DescribeDraftAppVersionResourcesImportStatusResponse_appVersion, v.AppVersion)
+		case schemas.DescribeDraftAppVersionResourcesImportStatusResponse_errorDetails:
+			return deserializeErrorDetailList(d, schemas.DescribeDraftAppVersionResourcesImportStatusResponse_errorDetails, &v.ErrorDetails)
+		case schemas.DescribeDraftAppVersionResourcesImportStatusResponse_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.DescribeDraftAppVersionResourcesImportStatusResponse_errorMessage, v.ErrorMessage)
+		case schemas.DescribeDraftAppVersionResourcesImportStatusResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDraftAppVersionResourcesImportStatusResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ResourceImportStatusType(ev)
+			return nil
+		case schemas.DescribeDraftAppVersionResourcesImportStatusResponse_statusChangeTime:
+			v.StatusChangeTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeDraftAppVersionResourcesImportStatusResponse_statusChangeTime, v.StatusChangeTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDraftAppVersionResourcesImportStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDraftAppVersionResourcesImportStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDraftAppVersionResourcesImportStatus, schemas.DescribeDraftAppVersionResourcesImportStatusRequest, schemas.DescribeDraftAppVersionResourcesImportStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDraftAppVersionResourcesImportStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDraftAppVersionResourcesImportStatus, schemas.DescribeDraftAppVersionResourcesImportStatusRequest, schemas.DescribeDraftAppVersionResourcesImportStatusResponse), output: &DescribeDraftAppVersionResourcesImportStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

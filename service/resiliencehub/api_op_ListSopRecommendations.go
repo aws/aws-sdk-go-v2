@@ -5,7 +5,9 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,40 @@ type ListSopRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSopRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSopRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSopRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentArn != nil {
+		s.WriteString(schemas.ListSopRecommendationsRequest_assessmentArn, *v.AssessmentArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSopRecommendationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSopRecommendationsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListSopRecommendationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSopRecommendationsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSopRecommendationsRequest_assessmentArn:
+			v.AssessmentArn = new(string)
+			return d.ReadString(schemas.ListSopRecommendationsRequest_assessmentArn, v.AssessmentArn)
+		case schemas.ListSopRecommendationsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListSopRecommendationsRequest_maxResults, v.MaxResults)
+		case schemas.ListSopRecommendationsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSopRecommendationsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListSopRecommendationsOutput struct {
 
 	// The standard operating procedure (SOP) recommendations for the Resilience Hub
@@ -65,13 +101,35 @@ type ListSopRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSopRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSopRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSopRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSopRecommendationsResponse_nextToken, *v.NextToken)
+	}
+	serializeSopRecommendationList(s, schemas.ListSopRecommendationsResponse_sopRecommendations, v.SopRecommendations)
+}
+func (v *ListSopRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSopRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSopRecommendationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSopRecommendationsResponse_nextToken, v.NextToken)
+		case schemas.ListSopRecommendationsResponse_sopRecommendations:
+			return deserializeSopRecommendationList(d, schemas.ListSopRecommendationsResponse_sopRecommendations, &v.SopRecommendations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSopRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSopRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSopRecommendations, schemas.ListSopRecommendationsRequest, schemas.ListSopRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSopRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSopRecommendations, schemas.ListSopRecommendationsRequest, schemas.ListSopRecommendationsResponse), output: &ListSopRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

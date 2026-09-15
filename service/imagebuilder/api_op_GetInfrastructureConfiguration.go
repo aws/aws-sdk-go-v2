@@ -4,7 +4,9 @@ package imagebuilder
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetInfrastructureConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInfrastructureConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInfrastructureConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInfrastructureConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InfrastructureConfigurationArn != nil {
+		s.WriteString(schemas.GetInfrastructureConfigurationRequest_infrastructureConfigurationArn, *v.InfrastructureConfigurationArn)
+	}
+}
+
 // GetInfrastructureConfiguration response object.
 type GetInfrastructureConfigurationOutput struct {
 
@@ -51,13 +65,40 @@ type GetInfrastructureConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInfrastructureConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInfrastructureConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInfrastructureConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InfrastructureConfiguration != nil {
+		s.WriteStruct(schemas.GetInfrastructureConfigurationResponse_infrastructureConfiguration)
+		v.InfrastructureConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.GetInfrastructureConfigurationResponse_requestId, *v.RequestId)
+	}
+}
+func (v *GetInfrastructureConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInfrastructureConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInfrastructureConfigurationResponse_infrastructureConfiguration:
+			v.InfrastructureConfiguration = &types.InfrastructureConfiguration{}
+			return v.InfrastructureConfiguration.Deserialize(d)
+		case schemas.GetInfrastructureConfigurationResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.GetInfrastructureConfigurationResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInfrastructureConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInfrastructureConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInfrastructureConfiguration, schemas.GetInfrastructureConfigurationRequest, schemas.GetInfrastructureConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetInfrastructureConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInfrastructureConfiguration, schemas.GetInfrastructureConfigurationRequest, schemas.GetInfrastructureConfigurationResponse), output: &GetInfrastructureConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package batch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,25 @@ type CreateConsumableResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConsumableResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConsumableResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConsumableResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsumableResourceName != nil {
+		s.WriteString(schemas.CreateConsumableResourceRequest_consumableResourceName, *v.ConsumableResourceName)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.CreateConsumableResourceRequest_resourceType, *v.ResourceType)
+	}
+	serializeTagrisTagsMap(s, schemas.CreateConsumableResourceRequest_tags, v.Tags)
+	if v.TotalQuantity != nil {
+		s.WriteInt64(schemas.CreateConsumableResourceRequest_totalQuantity, *v.TotalQuantity)
+	}
+}
+
 type CreateConsumableResourceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the consumable resource.
@@ -70,13 +91,38 @@ type CreateConsumableResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConsumableResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConsumableResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConsumableResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsumableResourceArn != nil {
+		s.WriteString(schemas.CreateConsumableResourceResponse_consumableResourceArn, *v.ConsumableResourceArn)
+	}
+	if v.ConsumableResourceName != nil {
+		s.WriteString(schemas.CreateConsumableResourceResponse_consumableResourceName, *v.ConsumableResourceName)
+	}
+}
+func (v *CreateConsumableResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConsumableResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConsumableResourceResponse_consumableResourceArn:
+			v.ConsumableResourceArn = new(string)
+			return d.ReadString(schemas.CreateConsumableResourceResponse_consumableResourceArn, v.ConsumableResourceArn)
+		case schemas.CreateConsumableResourceResponse_consumableResourceName:
+			v.ConsumableResourceName = new(string)
+			return d.ReadString(schemas.CreateConsumableResourceResponse_consumableResourceName, v.ConsumableResourceName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConsumableResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConsumableResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConsumableResource, schemas.CreateConsumableResourceRequest, schemas.CreateConsumableResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConsumableResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConsumableResource, schemas.CreateConsumableResourceRequest, schemas.CreateConsumableResourceResponse), output: &CreateConsumableResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

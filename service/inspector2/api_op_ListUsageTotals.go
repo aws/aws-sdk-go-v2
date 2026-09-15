@@ -5,7 +5,9 @@ package inspector2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,37 @@ type ListUsageTotalsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUsageTotalsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUsageTotalsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUsageTotalsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUsageAccountIdList(s, schemas.ListUsageTotalsRequest_accountIds, v.AccountIds)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListUsageTotalsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUsageTotalsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListUsageTotalsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUsageTotalsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUsageTotalsRequest_accountIds:
+			return deserializeUsageAccountIdList(d, schemas.ListUsageTotalsRequest_accountIds, &v.AccountIds)
+		case schemas.ListUsageTotalsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListUsageTotalsRequest_maxResults, v.MaxResults)
+		case schemas.ListUsageTotalsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUsageTotalsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListUsageTotalsOutput struct {
 
 	// The pagination parameter to be used on the next list operation to retrieve more
@@ -61,13 +94,35 @@ type ListUsageTotalsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUsageTotalsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUsageTotalsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUsageTotalsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUsageTotalsResponse_nextToken, *v.NextToken)
+	}
+	serializeUsageTotalList(s, schemas.ListUsageTotalsResponse_totals, v.Totals)
+}
+func (v *ListUsageTotalsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUsageTotalsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUsageTotalsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUsageTotalsResponse_nextToken, v.NextToken)
+		case schemas.ListUsageTotalsResponse_totals:
+			return deserializeUsageTotalList(d, schemas.ListUsageTotalsResponse_totals, &v.Totals)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUsageTotalsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListUsageTotals{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsageTotals, schemas.ListUsageTotalsRequest, schemas.ListUsageTotalsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListUsageTotals{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsageTotals, schemas.ListUsageTotalsRequest, schemas.ListUsageTotalsResponse), output: &ListUsageTotalsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

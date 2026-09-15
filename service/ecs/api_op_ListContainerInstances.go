@@ -5,7 +5,9 @@ package ecs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,30 @@ type ListContainerInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContainerInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContainerInstancesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContainerInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteString(schemas.ListContainerInstancesRequest_cluster, *v.Cluster)
+	}
+	if v.Filter != nil {
+		s.WriteString(schemas.ListContainerInstancesRequest_filter, *v.Filter)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListContainerInstancesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContainerInstancesRequest_nextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListContainerInstancesRequest_status, string(v.Status))
+	}
+}
+
 type ListContainerInstancesOutput struct {
 
 	// The list of container instances with full ARN entries for each container
@@ -92,13 +118,35 @@ type ListContainerInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContainerInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContainerInstancesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContainerInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.ListContainerInstancesResponse_containerInstanceArns, v.ContainerInstanceArns)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContainerInstancesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListContainerInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListContainerInstancesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListContainerInstancesResponse_containerInstanceArns:
+			return deserializeStringList(d, schemas.ListContainerInstancesResponse_containerInstanceArns, &v.ContainerInstanceArns)
+		case schemas.ListContainerInstancesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListContainerInstancesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListContainerInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListContainerInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContainerInstances, schemas.ListContainerInstancesRequest, schemas.ListContainerInstancesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListContainerInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContainerInstances, schemas.ListContainerInstancesRequest, schemas.ListContainerInstancesResponse), output: &ListContainerInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

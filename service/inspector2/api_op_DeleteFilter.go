@@ -4,6 +4,8 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,28 @@ type DeleteFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFilterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFilterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteFilterRequest_arn, *v.Arn)
+	}
+}
+func (v *DeleteFilterInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFilterRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFilterRequest_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteFilterRequest_arn, v.Arn)
+		}
+		return nil
+	})
+}
+
 type DeleteFilterOutput struct {
 
 	// The Amazon Resource Number (ARN) of the filter that has been deleted.
@@ -46,13 +70,32 @@ type DeleteFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFilterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFilterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteFilterResponse_arn, *v.Arn)
+	}
+}
+func (v *DeleteFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFilterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFilterResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteFilterResponse_arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFilter, schemas.DeleteFilterRequest, schemas.DeleteFilterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFilter, schemas.DeleteFilterRequest, schemas.DeleteFilterResponse), output: &DeleteFilterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

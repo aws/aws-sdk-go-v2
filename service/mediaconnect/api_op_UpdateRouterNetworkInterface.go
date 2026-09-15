@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,22 @@ type UpdateRouterNetworkInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRouterNetworkInterfaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRouterNetworkInterfaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRouterNetworkInterfaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateRouterNetworkInterfaceRequest_Arn, *v.Arn)
+	}
+	serializeRouterNetworkInterfaceConfiguration(s, schemas.UpdateRouterNetworkInterfaceRequest_Configuration, v.Configuration)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateRouterNetworkInterfaceRequest_Name, *v.Name)
+	}
+}
+
 type UpdateRouterNetworkInterfaceOutput struct {
 
 	// The updated router network interface.
@@ -56,13 +74,34 @@ type UpdateRouterNetworkInterfaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRouterNetworkInterfaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRouterNetworkInterfaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRouterNetworkInterfaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RouterNetworkInterface != nil {
+		s.WriteStruct(schemas.UpdateRouterNetworkInterfaceResponse_RouterNetworkInterface)
+		v.RouterNetworkInterface.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateRouterNetworkInterfaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRouterNetworkInterfaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRouterNetworkInterfaceResponse_RouterNetworkInterface:
+			v.RouterNetworkInterface = &types.RouterNetworkInterface{}
+			return v.RouterNetworkInterface.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRouterNetworkInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRouterNetworkInterface{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRouterNetworkInterface, schemas.UpdateRouterNetworkInterfaceRequest, schemas.UpdateRouterNetworkInterfaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRouterNetworkInterface{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRouterNetworkInterface, schemas.UpdateRouterNetworkInterfaceRequest, schemas.UpdateRouterNetworkInterfaceResponse), output: &UpdateRouterNetworkInterfaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

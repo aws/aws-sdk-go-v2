@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListLifecycleExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLifecycleExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLifecycleExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLifecycleExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLifecycleExecutionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLifecycleExecutionsRequest_nextToken, *v.NextToken)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ListLifecycleExecutionsRequest_resourceArn, *v.ResourceArn)
+	}
+}
+
 type ListLifecycleExecutionsOutput struct {
 
 	// A list of lifecycle runtime instances for the specified resource.
@@ -59,13 +79,35 @@ type ListLifecycleExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLifecycleExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLifecycleExecutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLifecycleExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLifecycleExecutionsList(s, schemas.ListLifecycleExecutionsResponse_lifecycleExecutions, v.LifecycleExecutions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLifecycleExecutionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListLifecycleExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLifecycleExecutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLifecycleExecutionsResponse_lifecycleExecutions:
+			return deserializeLifecycleExecutionsList(d, schemas.ListLifecycleExecutionsResponse_lifecycleExecutions, &v.LifecycleExecutions)
+		case schemas.ListLifecycleExecutionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLifecycleExecutionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLifecycleExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLifecycleExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLifecycleExecutions, schemas.ListLifecycleExecutionsRequest, schemas.ListLifecycleExecutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLifecycleExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLifecycleExecutions, schemas.ListLifecycleExecutionsRequest, schemas.ListLifecycleExecutionsResponse), output: &ListLifecycleExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

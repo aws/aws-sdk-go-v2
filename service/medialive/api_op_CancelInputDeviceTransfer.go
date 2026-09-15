@@ -4,6 +4,8 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type CancelInputDeviceTransferInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelInputDeviceTransferInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelInputDeviceTransferRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelInputDeviceTransferInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputDeviceId != nil {
+		s.WriteString(schemas.CancelInputDeviceTransferRequest_InputDeviceId, *v.InputDeviceId)
+	}
+}
+
 // Placeholder documentation for CancelInputDeviceTransferResponse
 type CancelInputDeviceTransferOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -42,13 +56,26 @@ type CancelInputDeviceTransferOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelInputDeviceTransferOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelInputDeviceTransferResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelInputDeviceTransferOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelInputDeviceTransferOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelInputDeviceTransferResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelInputDeviceTransferMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelInputDeviceTransfer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelInputDeviceTransfer, schemas.CancelInputDeviceTransferRequest, schemas.CancelInputDeviceTransferResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelInputDeviceTransfer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelInputDeviceTransfer, schemas.CancelInputDeviceTransferRequest, schemas.CancelInputDeviceTransferResponse), output: &CancelInputDeviceTransferOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

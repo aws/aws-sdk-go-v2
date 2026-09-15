@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -104,6 +106,46 @@ type CreateWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkflowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkflowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeDescription != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_changeDescription, *v.ChangeDescription)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_clientToken, *v.ClientToken)
+	}
+	if v.Data != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_data, *v.Data)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_description, *v.Description)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateWorkflowRequest_dryRun, v.DryRun)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_name, *v.Name)
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_semanticVersion, *v.SemanticVersion)
+	}
+	serializeTagMap(s, schemas.CreateWorkflowRequest_tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateWorkflowRequest_type, string(v.Type))
+	}
+	if v.Uri != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_uri, *v.Uri)
+	}
+}
+
 type CreateWorkflowOutput struct {
 
 	// The client token that uniquely identifies the request.
@@ -122,13 +164,46 @@ type CreateWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkflowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkflowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateWorkflowResponse_clientToken, *v.ClientToken)
+	}
+	if v.LatestVersionReferences != nil {
+		s.WriteStruct(schemas.CreateWorkflowResponse_latestVersionReferences)
+		v.LatestVersionReferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkflowBuildVersionArn != nil {
+		s.WriteString(schemas.CreateWorkflowResponse_workflowBuildVersionArn, *v.WorkflowBuildVersionArn)
+	}
+}
+func (v *CreateWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkflowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkflowResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateWorkflowResponse_clientToken, v.ClientToken)
+		case schemas.CreateWorkflowResponse_latestVersionReferences:
+			v.LatestVersionReferences = &types.LatestVersionReferences{}
+			return v.LatestVersionReferences.Deserialize(d)
+		case schemas.CreateWorkflowResponse_workflowBuildVersionArn:
+			v.WorkflowBuildVersionArn = new(string)
+			return d.ReadString(schemas.CreateWorkflowResponse_workflowBuildVersionArn, v.WorkflowBuildVersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkflow, schemas.CreateWorkflowRequest, schemas.CreateWorkflowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkflow, schemas.CreateWorkflowRequest, schemas.CreateWorkflowResponse), output: &CreateWorkflowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

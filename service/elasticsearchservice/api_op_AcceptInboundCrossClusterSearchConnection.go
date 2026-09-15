@@ -4,7 +4,9 @@ package elasticsearchservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type AcceptInboundCrossClusterSearchConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptInboundCrossClusterSearchConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptInboundCrossClusterSearchConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptInboundCrossClusterSearchConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossClusterSearchConnectionId != nil {
+		s.WriteString(schemas.AcceptInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId, *v.CrossClusterSearchConnectionId)
+	}
+}
+
 // The result of a AcceptInboundCrossClusterSearchConnection operation. Contains details of accepted inbound connection.
 type AcceptInboundCrossClusterSearchConnectionOutput struct {
 
@@ -48,13 +62,34 @@ type AcceptInboundCrossClusterSearchConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptInboundCrossClusterSearchConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptInboundCrossClusterSearchConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptInboundCrossClusterSearchConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossClusterSearchConnection != nil {
+		s.WriteStruct(schemas.AcceptInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection)
+		v.CrossClusterSearchConnection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AcceptInboundCrossClusterSearchConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceptInboundCrossClusterSearchConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceptInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection:
+			v.CrossClusterSearchConnection = &types.InboundCrossClusterSearchConnection{}
+			return v.CrossClusterSearchConnection.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcceptInboundCrossClusterSearchConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAcceptInboundCrossClusterSearchConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptInboundCrossClusterSearchConnection, schemas.AcceptInboundCrossClusterSearchConnectionRequest, schemas.AcceptInboundCrossClusterSearchConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAcceptInboundCrossClusterSearchConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptInboundCrossClusterSearchConnection, schemas.AcceptInboundCrossClusterSearchConnectionRequest, schemas.AcceptInboundCrossClusterSearchConnectionResponse), output: &AcceptInboundCrossClusterSearchConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

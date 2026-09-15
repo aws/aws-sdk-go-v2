@@ -5,7 +5,9 @@ package medialive
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type DescribeScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScheduleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelId != nil {
+		s.WriteString(schemas.DescribeScheduleRequest_ChannelId, *v.ChannelId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeScheduleRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeScheduleRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Placeholder documentation for DescribeScheduleResponse
 type DescribeScheduleOutput struct {
 
@@ -57,13 +77,35 @@ type DescribeScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScheduleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeScheduleResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfScheduleAction(s, schemas.DescribeScheduleResponse_ScheduleActions, v.ScheduleActions)
+}
+func (v *DescribeScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeScheduleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeScheduleResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeScheduleResponse_NextToken, v.NextToken)
+		case schemas.DescribeScheduleResponse_ScheduleActions:
+			return deserialize__listOfScheduleAction(d, schemas.DescribeScheduleResponse_ScheduleActions, &v.ScheduleActions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSchedule, schemas.DescribeScheduleRequest, schemas.DescribeScheduleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSchedule, schemas.DescribeScheduleRequest, schemas.DescribeScheduleResponse), output: &DescribeScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

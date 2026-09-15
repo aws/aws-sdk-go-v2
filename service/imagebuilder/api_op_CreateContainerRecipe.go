@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -118,6 +120,66 @@ type CreateContainerRecipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContainerRecipeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContainerRecipeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContainerRecipeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_clientToken, *v.ClientToken)
+	}
+	serializeComponentConfigurationList(s, schemas.CreateContainerRecipeRequest_components, v.Components)
+	if v.ContainerType != "" {
+		s.WriteString(schemas.CreateContainerRecipeRequest_containerType, string(v.ContainerType))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_description, *v.Description)
+	}
+	if v.DockerfileTemplateData != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_dockerfileTemplateData, *v.DockerfileTemplateData)
+	}
+	if v.DockerfileTemplateUri != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_dockerfileTemplateUri, *v.DockerfileTemplateUri)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateContainerRecipeRequest_dryRun, v.DryRun)
+	}
+	if v.ImageOsVersionOverride != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_imageOsVersionOverride, *v.ImageOsVersionOverride)
+	}
+	if v.InstanceConfiguration != nil {
+		s.WriteStruct(schemas.CreateContainerRecipeRequest_instanceConfiguration)
+		v.InstanceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_name, *v.Name)
+	}
+	if v.ParentImage != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_parentImage, *v.ParentImage)
+	}
+	if v.PlatformOverride != "" {
+		s.WriteString(schemas.CreateContainerRecipeRequest_platformOverride, string(v.PlatformOverride))
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_semanticVersion, *v.SemanticVersion)
+	}
+	serializeTagMap(s, schemas.CreateContainerRecipeRequest_tags, v.Tags)
+	if v.TargetRepository != nil {
+		s.WriteStruct(schemas.CreateContainerRecipeRequest_targetRepository)
+		v.TargetRepository.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkingDirectory != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_workingDirectory, *v.WorkingDirectory)
+	}
+}
+
 type CreateContainerRecipeOutput struct {
 
 	// The client token that uniquely identifies the request.
@@ -139,13 +201,52 @@ type CreateContainerRecipeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContainerRecipeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContainerRecipeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContainerRecipeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateContainerRecipeResponse_clientToken, *v.ClientToken)
+	}
+	if v.ContainerRecipeArn != nil {
+		s.WriteString(schemas.CreateContainerRecipeResponse_containerRecipeArn, *v.ContainerRecipeArn)
+	}
+	if v.LatestVersionReferences != nil {
+		s.WriteStruct(schemas.CreateContainerRecipeResponse_latestVersionReferences)
+		v.LatestVersionReferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateContainerRecipeResponse_requestId, *v.RequestId)
+	}
+}
+func (v *CreateContainerRecipeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateContainerRecipeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateContainerRecipeResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateContainerRecipeResponse_clientToken, v.ClientToken)
+		case schemas.CreateContainerRecipeResponse_containerRecipeArn:
+			v.ContainerRecipeArn = new(string)
+			return d.ReadString(schemas.CreateContainerRecipeResponse_containerRecipeArn, v.ContainerRecipeArn)
+		case schemas.CreateContainerRecipeResponse_latestVersionReferences:
+			v.LatestVersionReferences = &types.LatestVersionReferences{}
+			return v.LatestVersionReferences.Deserialize(d)
+		case schemas.CreateContainerRecipeResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateContainerRecipeResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateContainerRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateContainerRecipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContainerRecipe, schemas.CreateContainerRecipeRequest, schemas.CreateContainerRecipeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateContainerRecipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContainerRecipe, schemas.CreateContainerRecipeRequest, schemas.CreateContainerRecipeResponse), output: &CreateContainerRecipeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

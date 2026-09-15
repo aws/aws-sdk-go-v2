@@ -4,6 +4,8 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,16 @@ type UpdateOrgEc2DeepInspectionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOrgEc2DeepInspectionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOrgEc2DeepInspectionConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOrgEc2DeepInspectionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePathList(s, schemas.UpdateOrgEc2DeepInspectionConfigurationRequest_orgPackagePaths, v.OrgPackagePaths)
+}
+
 type UpdateOrgEc2DeepInspectionConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +55,26 @@ type UpdateOrgEc2DeepInspectionConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOrgEc2DeepInspectionConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOrgEc2DeepInspectionConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOrgEc2DeepInspectionConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateOrgEc2DeepInspectionConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateOrgEc2DeepInspectionConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateOrgEc2DeepInspectionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateOrgEc2DeepInspectionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOrgEc2DeepInspectionConfiguration, schemas.UpdateOrgEc2DeepInspectionConfigurationRequest, schemas.UpdateOrgEc2DeepInspectionConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateOrgEc2DeepInspectionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOrgEc2DeepInspectionConfiguration, schemas.UpdateOrgEc2DeepInspectionConfigurationRequest, schemas.UpdateOrgEc2DeepInspectionConfigurationResponse), output: &UpdateOrgEc2DeepInspectionConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

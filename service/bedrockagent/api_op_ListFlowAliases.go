@@ -5,7 +5,9 @@ package bedrockagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type ListFlowAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFlowAliasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFlowAliasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFlowAliasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowIdentifier != nil {
+		s.WriteString(schemas.ListFlowAliasesRequest_flowIdentifier, *v.FlowIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFlowAliasesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFlowAliasesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListFlowAliasesOutput struct {
 
 	// A list, each member of which contains information about an alias.
@@ -64,13 +84,35 @@ type ListFlowAliasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFlowAliasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFlowAliasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFlowAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFlowAliasSummaries(s, schemas.ListFlowAliasesResponse_flowAliasSummaries, v.FlowAliasSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFlowAliasesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListFlowAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFlowAliasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFlowAliasesResponse_flowAliasSummaries:
+			return deserializeFlowAliasSummaries(d, schemas.ListFlowAliasesResponse_flowAliasSummaries, &v.FlowAliasSummaries)
+		case schemas.ListFlowAliasesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFlowAliasesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFlowAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFlowAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFlowAliases, schemas.ListFlowAliasesRequest, schemas.ListFlowAliasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFlowAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFlowAliases, schemas.ListFlowAliasesRequest, schemas.ListFlowAliasesResponse), output: &ListFlowAliasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

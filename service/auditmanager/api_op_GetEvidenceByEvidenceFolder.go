@@ -5,7 +5,9 @@ package auditmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,30 @@ type GetEvidenceByEvidenceFolderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEvidenceByEvidenceFolderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEvidenceByEvidenceFolderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEvidenceByEvidenceFolderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.GetEvidenceByEvidenceFolderRequest_assessmentId, *v.AssessmentId)
+	}
+	if v.ControlSetId != nil {
+		s.WriteString(schemas.GetEvidenceByEvidenceFolderRequest_controlSetId, *v.ControlSetId)
+	}
+	if v.EvidenceFolderId != nil {
+		s.WriteString(schemas.GetEvidenceByEvidenceFolderRequest_evidenceFolderId, *v.EvidenceFolderId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetEvidenceByEvidenceFolderRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetEvidenceByEvidenceFolderRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetEvidenceByEvidenceFolderOutput struct {
 
 	//  The list of evidence that the GetEvidenceByEvidenceFolder API returned.
@@ -65,13 +91,35 @@ type GetEvidenceByEvidenceFolderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEvidenceByEvidenceFolderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEvidenceByEvidenceFolderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEvidenceByEvidenceFolderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEvidenceList(s, schemas.GetEvidenceByEvidenceFolderResponse_evidence, v.Evidence)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetEvidenceByEvidenceFolderResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetEvidenceByEvidenceFolderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEvidenceByEvidenceFolderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEvidenceByEvidenceFolderResponse_evidence:
+			return deserializeEvidenceList(d, schemas.GetEvidenceByEvidenceFolderResponse_evidence, &v.Evidence)
+		case schemas.GetEvidenceByEvidenceFolderResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetEvidenceByEvidenceFolderResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEvidenceByEvidenceFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEvidenceByEvidenceFolder{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEvidenceByEvidenceFolder, schemas.GetEvidenceByEvidenceFolderRequest, schemas.GetEvidenceByEvidenceFolderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEvidenceByEvidenceFolder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEvidenceByEvidenceFolder, schemas.GetEvidenceByEvidenceFolderRequest, schemas.GetEvidenceByEvidenceFolderResponse), output: &GetEvidenceByEvidenceFolderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

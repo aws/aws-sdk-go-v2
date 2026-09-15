@@ -5,7 +5,9 @@ package resiliencehubv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,32 @@ type ImportAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssociatedSystemList(s, schemas.ImportAppRequest_associatedSystems, v.AssociatedSystems)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ImportAppRequest_clientToken, *v.ClientToken)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.ImportAppRequest_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.ImportAppRequest_policyArn, *v.PolicyArn)
+	}
+	if v.SkipManuallyAddedResources != nil {
+		s.WriteBool(schemas.ImportAppRequest_skipManuallyAddedResources, *v.SkipManuallyAddedResources)
+	}
+	serializeTagMap(s, schemas.ImportAppRequest_tags, v.Tags)
+	if v.V1AppArn != nil {
+		s.WriteString(schemas.ImportAppRequest_v1AppArn, *v.V1AppArn)
+	}
+}
+
 type ImportAppOutput struct {
 
 	// The imported service.
@@ -67,13 +95,34 @@ type ImportAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportAppResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Service != nil {
+		s.WriteStruct(schemas.ImportAppResponse_service)
+		v.Service.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ImportAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportAppResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportAppResponse_service:
+			v.Service = &types.Service{}
+			return v.Service.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportApp, schemas.ImportAppRequest, schemas.ImportAppResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportApp, schemas.ImportAppRequest, schemas.ImportAppResponse), output: &ImportAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

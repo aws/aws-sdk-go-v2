@@ -4,6 +4,8 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type StopModelInvocationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopModelInvocationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopModelInvocationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopModelInvocationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobIdentifier != nil {
+		s.WriteString(schemas.StopModelInvocationJobRequest_jobIdentifier, *v.JobIdentifier)
+	}
+}
+
 type StopModelInvocationJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type StopModelInvocationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopModelInvocationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopModelInvocationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopModelInvocationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopModelInvocationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopModelInvocationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopModelInvocationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopModelInvocationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopModelInvocationJob, schemas.StopModelInvocationJobRequest, schemas.StopModelInvocationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopModelInvocationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopModelInvocationJob, schemas.StopModelInvocationJobRequest, schemas.StopModelInvocationJobResponse), output: &StopModelInvocationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

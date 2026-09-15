@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AutoEnable":true,"AutoEnableStandards":"NONE","MemberAccountLimitReached":true,"OrganizationConfiguration":{"ConfigurationType":"CENTRAL","Status":"PENDING","StatusMessage":"__StatusMessage__"}}

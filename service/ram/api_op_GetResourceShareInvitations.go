@@ -5,7 +5,9 @@ package ram
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,23 @@ type GetResourceShareInvitationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceShareInvitationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceShareInvitationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceShareInvitationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetResourceShareInvitationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetResourceShareInvitationsRequest_nextToken, *v.NextToken)
+	}
+	serializeResourceShareArnList(s, schemas.GetResourceShareInvitationsRequest_resourceShareArns, v.ResourceShareArns)
+	serializeResourceShareInvitationArnList(s, schemas.GetResourceShareInvitationsRequest_resourceShareInvitationArns, v.ResourceShareInvitationArns)
+}
+
 type GetResourceShareInvitationsOutput struct {
 
 	// If present, this value indicates that more output is available than is included
@@ -81,13 +100,35 @@ type GetResourceShareInvitationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceShareInvitationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceShareInvitationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceShareInvitationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetResourceShareInvitationsResponse_nextToken, *v.NextToken)
+	}
+	serializeResourceShareInvitationList(s, schemas.GetResourceShareInvitationsResponse_resourceShareInvitations, v.ResourceShareInvitations)
+}
+func (v *GetResourceShareInvitationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourceShareInvitationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourceShareInvitationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetResourceShareInvitationsResponse_nextToken, v.NextToken)
+		case schemas.GetResourceShareInvitationsResponse_resourceShareInvitations:
+			return deserializeResourceShareInvitationList(d, schemas.GetResourceShareInvitationsResponse_resourceShareInvitations, &v.ResourceShareInvitations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourceShareInvitationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourceShareInvitations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceShareInvitations, schemas.GetResourceShareInvitationsRequest, schemas.GetResourceShareInvitationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourceShareInvitations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceShareInvitations, schemas.GetResourceShareInvitationsRequest, schemas.GetResourceShareInvitationsResponse), output: &GetResourceShareInvitationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

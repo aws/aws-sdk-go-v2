@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -95,6 +97,33 @@ type CreateAutomatedReasoningPolicyTestCaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutomatedReasoningPolicyTestCaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutomatedReasoningPolicyTestCaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutomatedReasoningPolicyTestCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyTestCaseRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ConfidenceThreshold != nil {
+		s.WriteFloat64(schemas.CreateAutomatedReasoningPolicyTestCaseRequest_confidenceThreshold, *v.ConfidenceThreshold)
+	}
+	if v.ExpectedAggregatedFindingsResult != "" {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyTestCaseRequest_expectedAggregatedFindingsResult, string(v.ExpectedAggregatedFindingsResult))
+	}
+	if v.GuardContent != nil {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyTestCaseRequest_guardContent, *v.GuardContent)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyTestCaseRequest_policyArn, *v.PolicyArn)
+	}
+	if v.QueryContent != nil {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyTestCaseRequest_queryContent, *v.QueryContent)
+	}
+}
+
 type CreateAutomatedReasoningPolicyTestCaseOutput struct {
 
 	// The Amazon Resource Name (ARN) of the policy for which the test was created.
@@ -113,13 +142,38 @@ type CreateAutomatedReasoningPolicyTestCaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutomatedReasoningPolicyTestCaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutomatedReasoningPolicyTestCaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutomatedReasoningPolicyTestCaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyTestCaseResponse_policyArn, *v.PolicyArn)
+	}
+	if v.TestCaseId != nil {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyTestCaseResponse_testCaseId, *v.TestCaseId)
+	}
+}
+func (v *CreateAutomatedReasoningPolicyTestCaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAutomatedReasoningPolicyTestCaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAutomatedReasoningPolicyTestCaseResponse_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.CreateAutomatedReasoningPolicyTestCaseResponse_policyArn, v.PolicyArn)
+		case schemas.CreateAutomatedReasoningPolicyTestCaseResponse_testCaseId:
+			v.TestCaseId = new(string)
+			return d.ReadString(schemas.CreateAutomatedReasoningPolicyTestCaseResponse_testCaseId, v.TestCaseId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAutomatedReasoningPolicyTestCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAutomatedReasoningPolicyTestCase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutomatedReasoningPolicyTestCase, schemas.CreateAutomatedReasoningPolicyTestCaseRequest, schemas.CreateAutomatedReasoningPolicyTestCaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAutomatedReasoningPolicyTestCase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutomatedReasoningPolicyTestCase, schemas.CreateAutomatedReasoningPolicyTestCaseRequest, schemas.CreateAutomatedReasoningPolicyTestCaseResponse), output: &CreateAutomatedReasoningPolicyTestCaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

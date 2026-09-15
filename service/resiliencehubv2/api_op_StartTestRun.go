@@ -4,7 +4,9 @@ package resiliencehubv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type StartTestRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTestRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTestRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTestRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.StartTestRunRequest_serviceArn, *v.ServiceArn)
+	}
+	if v.TestId != nil {
+		s.WriteString(schemas.StartTestRunRequest_testId, *v.TestId)
+	}
+}
+
 type StartTestRunOutput struct {
 
 	// The ARNs of the AWS Fault Injection Service (AWS FIS) experiments started for
@@ -64,13 +81,45 @@ type StartTestRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTestRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTestRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTestRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExperimentArnList(s, schemas.StartTestRunResponse_experimentArns, v.ExperimentArns)
+	if v.Status != "" {
+		s.WriteString(schemas.StartTestRunResponse_status, string(v.Status))
+	}
+	if v.TestRunId != nil {
+		s.WriteString(schemas.StartTestRunResponse_testRunId, *v.TestRunId)
+	}
+}
+func (v *StartTestRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTestRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTestRunResponse_experimentArns:
+			return deserializeExperimentArnList(d, schemas.StartTestRunResponse_experimentArns, &v.ExperimentArns)
+		case schemas.StartTestRunResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.StartTestRunResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TestRunStatus(ev)
+			return nil
+		case schemas.StartTestRunResponse_testRunId:
+			v.TestRunId = new(string)
+			return d.ReadString(schemas.StartTestRunResponse_testRunId, v.TestRunId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartTestRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartTestRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTestRun, schemas.StartTestRunRequest, schemas.StartTestRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartTestRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTestRun, schemas.StartTestRunRequest, schemas.StartTestRunResponse), output: &StartTestRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

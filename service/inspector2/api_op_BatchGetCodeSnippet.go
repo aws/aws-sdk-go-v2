@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,16 @@ type BatchGetCodeSnippetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCodeSnippetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetCodeSnippetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetCodeSnippetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFindingArns(s, schemas.BatchGetCodeSnippetRequest_findingArns, v.FindingArns)
+}
+
 type BatchGetCodeSnippetOutput struct {
 
 	// The retrieved code snippets associated with the provided finding ARNs.
@@ -51,13 +63,32 @@ type BatchGetCodeSnippetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCodeSnippetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetCodeSnippetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetCodeSnippetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCodeSnippetResultList(s, schemas.BatchGetCodeSnippetResponse_codeSnippetResults, v.CodeSnippetResults)
+	serializeCodeSnippetErrorList(s, schemas.BatchGetCodeSnippetResponse_errors, v.Errors)
+}
+func (v *BatchGetCodeSnippetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetCodeSnippetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetCodeSnippetResponse_codeSnippetResults:
+			return deserializeCodeSnippetResultList(d, schemas.BatchGetCodeSnippetResponse_codeSnippetResults, &v.CodeSnippetResults)
+		case schemas.BatchGetCodeSnippetResponse_errors:
+			return deserializeCodeSnippetErrorList(d, schemas.BatchGetCodeSnippetResponse_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetCodeSnippetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetCodeSnippet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCodeSnippet, schemas.BatchGetCodeSnippetRequest, schemas.BatchGetCodeSnippetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetCodeSnippet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCodeSnippet, schemas.BatchGetCodeSnippetRequest, schemas.BatchGetCodeSnippetResponse), output: &BatchGetCodeSnippetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

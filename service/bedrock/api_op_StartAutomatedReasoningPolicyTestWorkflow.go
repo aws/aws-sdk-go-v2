@@ -5,6 +5,8 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,25 @@ type StartAutomatedReasoningPolicyTestWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAutomatedReasoningPolicyTestWorkflowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAutomatedReasoningPolicyTestWorkflowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAutomatedReasoningPolicyTestWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BuildWorkflowId != nil {
+		s.WriteString(schemas.StartAutomatedReasoningPolicyTestWorkflowRequest_buildWorkflowId, *v.BuildWorkflowId)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartAutomatedReasoningPolicyTestWorkflowRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.StartAutomatedReasoningPolicyTestWorkflowRequest_policyArn, *v.PolicyArn)
+	}
+	serializeAutomatedReasoningPolicyTestCaseIdList(s, schemas.StartAutomatedReasoningPolicyTestWorkflowRequest_testCaseIds, v.TestCaseIds)
+}
+
 type StartAutomatedReasoningPolicyTestWorkflowOutput struct {
 
 	// The Amazon Resource Name (ARN) of the policy for which the test workflow was
@@ -65,13 +86,32 @@ type StartAutomatedReasoningPolicyTestWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAutomatedReasoningPolicyTestWorkflowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAutomatedReasoningPolicyTestWorkflowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAutomatedReasoningPolicyTestWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.StartAutomatedReasoningPolicyTestWorkflowResponse_policyArn, *v.PolicyArn)
+	}
+}
+func (v *StartAutomatedReasoningPolicyTestWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAutomatedReasoningPolicyTestWorkflowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAutomatedReasoningPolicyTestWorkflowResponse_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.StartAutomatedReasoningPolicyTestWorkflowResponse_policyArn, v.PolicyArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartAutomatedReasoningPolicyTestWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartAutomatedReasoningPolicyTestWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAutomatedReasoningPolicyTestWorkflow, schemas.StartAutomatedReasoningPolicyTestWorkflowRequest, schemas.StartAutomatedReasoningPolicyTestWorkflowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartAutomatedReasoningPolicyTestWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAutomatedReasoningPolicyTestWorkflow, schemas.StartAutomatedReasoningPolicyTestWorkflowRequest, schemas.StartAutomatedReasoningPolicyTestWorkflowResponse), output: &StartAutomatedReasoningPolicyTestWorkflowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

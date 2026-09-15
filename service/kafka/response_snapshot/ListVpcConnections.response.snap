@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","vpcConnections":[{"authentication":"__Authentication__","creationTime":"2000-01-01T00:00:00Z","state":"CREATING","targetClusterArn":"__TargetClusterArn__","vpcConnectionArn":"__VpcConnectionArn__","vpcId":"__VpcId__"},{"authentication":"__Authentication__","creationTime":"2000-01-01T00:00:00Z","state":"CREATING","targetClusterArn":"__TargetClusterArn__","vpcConnectionArn":"__VpcConnectionArn__","vpcId":"__VpcId__"}]}

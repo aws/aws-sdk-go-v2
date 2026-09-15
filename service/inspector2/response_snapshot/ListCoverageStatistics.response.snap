@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"countsByGroup":[{"count":1,"groupKey":"SCAN_STATUS_CODE"},{"count":1,"groupKey":"SCAN_STATUS_CODE"}],"nextToken":"__NextToken__","totalCounts":1}

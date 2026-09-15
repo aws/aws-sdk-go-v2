@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -92,6 +94,41 @@ type CreateModelInvocationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelInvocationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelInvocationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelInvocationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateModelInvocationJobRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	serializeModelInvocationJobInputDataConfig(s, schemas.CreateModelInvocationJobRequest_inputDataConfig, v.InputDataConfig)
+	if v.JobName != nil {
+		s.WriteString(schemas.CreateModelInvocationJobRequest_jobName, *v.JobName)
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.CreateModelInvocationJobRequest_modelId, *v.ModelId)
+	}
+	if v.ModelInvocationType != "" {
+		s.WriteString(schemas.CreateModelInvocationJobRequest_modelInvocationType, string(v.ModelInvocationType))
+	}
+	serializeModelInvocationJobOutputDataConfig(s, schemas.CreateModelInvocationJobRequest_outputDataConfig, v.OutputDataConfig)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateModelInvocationJobRequest_roleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.CreateModelInvocationJobRequest_tags, v.Tags)
+	if v.TimeoutDurationInHours != nil {
+		s.WriteInt32(schemas.CreateModelInvocationJobRequest_timeoutDurationInHours, *v.TimeoutDurationInHours)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateModelInvocationJobRequest_vpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateModelInvocationJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the batch inference job.
@@ -105,13 +142,32 @@ type CreateModelInvocationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelInvocationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelInvocationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelInvocationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobArn != nil {
+		s.WriteString(schemas.CreateModelInvocationJobResponse_jobArn, *v.JobArn)
+	}
+}
+func (v *CreateModelInvocationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateModelInvocationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateModelInvocationJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.CreateModelInvocationJobResponse_jobArn, v.JobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateModelInvocationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateModelInvocationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelInvocationJob, schemas.CreateModelInvocationJobRequest, schemas.CreateModelInvocationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateModelInvocationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelInvocationJob, schemas.CreateModelInvocationJobRequest, schemas.CreateModelInvocationJobResponse), output: &CreateModelInvocationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

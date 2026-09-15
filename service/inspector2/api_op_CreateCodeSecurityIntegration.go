@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,23 @@ type CreateCodeSecurityIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCodeSecurityIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCodeSecurityIntegrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCodeSecurityIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCreateIntegrationDetail(s, schemas.CreateCodeSecurityIntegrationRequest_details, v.Details)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCodeSecurityIntegrationRequest_name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateCodeSecurityIntegrationRequest_tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateCodeSecurityIntegrationRequest_type, string(v.Type))
+	}
+}
+
 type CreateCodeSecurityIntegrationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created code security integration.
@@ -71,13 +90,48 @@ type CreateCodeSecurityIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCodeSecurityIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCodeSecurityIntegrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCodeSecurityIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizationUrl != nil {
+		s.WriteString(schemas.CreateCodeSecurityIntegrationResponse_authorizationUrl, *v.AuthorizationUrl)
+	}
+	if v.IntegrationArn != nil {
+		s.WriteString(schemas.CreateCodeSecurityIntegrationResponse_integrationArn, *v.IntegrationArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateCodeSecurityIntegrationResponse_status, string(v.Status))
+	}
+}
+func (v *CreateCodeSecurityIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCodeSecurityIntegrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCodeSecurityIntegrationResponse_authorizationUrl:
+			v.AuthorizationUrl = new(string)
+			return d.ReadString(schemas.CreateCodeSecurityIntegrationResponse_authorizationUrl, v.AuthorizationUrl)
+		case schemas.CreateCodeSecurityIntegrationResponse_integrationArn:
+			v.IntegrationArn = new(string)
+			return d.ReadString(schemas.CreateCodeSecurityIntegrationResponse_integrationArn, v.IntegrationArn)
+		case schemas.CreateCodeSecurityIntegrationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateCodeSecurityIntegrationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.IntegrationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCodeSecurityIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCodeSecurityIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCodeSecurityIntegration, schemas.CreateCodeSecurityIntegrationRequest, schemas.CreateCodeSecurityIntegrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCodeSecurityIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCodeSecurityIntegration, schemas.CreateCodeSecurityIntegrationRequest, schemas.CreateCodeSecurityIntegrationResponse), output: &CreateCodeSecurityIntegrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

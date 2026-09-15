@@ -4,6 +4,8 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteAssessmentFrameworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAssessmentFrameworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAssessmentFrameworkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAssessmentFrameworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FrameworkId != nil {
+		s.WriteString(schemas.DeleteAssessmentFrameworkRequest_frameworkId, *v.FrameworkId)
+	}
+}
+
 type DeleteAssessmentFrameworkOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteAssessmentFrameworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAssessmentFrameworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAssessmentFrameworkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAssessmentFrameworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAssessmentFrameworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAssessmentFrameworkResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAssessmentFrameworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAssessmentFramework{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAssessmentFramework, schemas.DeleteAssessmentFrameworkRequest, schemas.DeleteAssessmentFrameworkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAssessmentFramework{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAssessmentFramework, schemas.DeleteAssessmentFrameworkRequest, schemas.DeleteAssessmentFrameworkResponse), output: &DeleteAssessmentFrameworkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

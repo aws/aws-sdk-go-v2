@@ -5,7 +5,9 @@ package auditmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,27 @@ type ListAssessmentControlInsightsByControlDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssessmentControlInsightsByControlDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssessmentControlInsightsByControlDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssessmentControlInsightsByControlDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.ListAssessmentControlInsightsByControlDomainRequest_assessmentId, *v.AssessmentId)
+	}
+	if v.ControlDomainId != nil {
+		s.WriteString(schemas.ListAssessmentControlInsightsByControlDomainRequest_controlDomainId, *v.ControlDomainId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssessmentControlInsightsByControlDomainRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssessmentControlInsightsByControlDomainRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAssessmentControlInsightsByControlDomainOutput struct {
 
 	// The assessment control analytics data that the
@@ -74,13 +97,35 @@ type ListAssessmentControlInsightsByControlDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssessmentControlInsightsByControlDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssessmentControlInsightsByControlDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssessmentControlInsightsByControlDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeControlInsightsMetadataByAssessment(s, schemas.ListAssessmentControlInsightsByControlDomainResponse_controlInsightsByAssessment, v.ControlInsightsByAssessment)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssessmentControlInsightsByControlDomainResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAssessmentControlInsightsByControlDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssessmentControlInsightsByControlDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssessmentControlInsightsByControlDomainResponse_controlInsightsByAssessment:
+			return deserializeControlInsightsMetadataByAssessment(d, schemas.ListAssessmentControlInsightsByControlDomainResponse_controlInsightsByAssessment, &v.ControlInsightsByAssessment)
+		case schemas.ListAssessmentControlInsightsByControlDomainResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssessmentControlInsightsByControlDomainResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssessmentControlInsightsByControlDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssessmentControlInsightsByControlDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssessmentControlInsightsByControlDomain, schemas.ListAssessmentControlInsightsByControlDomainRequest, schemas.ListAssessmentControlInsightsByControlDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssessmentControlInsightsByControlDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssessmentControlInsightsByControlDomain, schemas.ListAssessmentControlInsightsByControlDomainRequest, schemas.ListAssessmentControlInsightsByControlDomainResponse), output: &ListAssessmentControlInsightsByControlDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

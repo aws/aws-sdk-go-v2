@@ -4,7 +4,9 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type DescribeCostCategoryDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCostCategoryDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCostCategoryDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCostCategoryDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CostCategoryArn != nil {
+		s.WriteString(schemas.DescribeCostCategoryDefinitionRequest_CostCategoryArn, *v.CostCategoryArn)
+	}
+	if v.EffectiveOn != nil {
+		s.WriteString(schemas.DescribeCostCategoryDefinitionRequest_EffectiveOn, *v.EffectiveOn)
+	}
+}
+
 type DescribeCostCategoryDefinitionOutput struct {
 
 	// The structure of Cost Categories. This includes detailed metadata and the set
@@ -55,13 +72,34 @@ type DescribeCostCategoryDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCostCategoryDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCostCategoryDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCostCategoryDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CostCategory != nil {
+		s.WriteStruct(schemas.DescribeCostCategoryDefinitionResponse_CostCategory)
+		v.CostCategory.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeCostCategoryDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCostCategoryDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCostCategoryDefinitionResponse_CostCategory:
+			v.CostCategory = &types.CostCategory{}
+			return v.CostCategory.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCostCategoryDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCostCategoryDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCostCategoryDefinition, schemas.DescribeCostCategoryDefinitionRequest, schemas.DescribeCostCategoryDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCostCategoryDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCostCategoryDefinition, schemas.DescribeCostCategoryDefinitionRequest, schemas.DescribeCostCategoryDefinitionResponse), output: &DescribeCostCategoryDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

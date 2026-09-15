@@ -4,7 +4,9 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetApiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApiInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApiRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApiInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.GetApiRequest_apiId, *v.ApiId)
+	}
+}
+
 type GetApiOutput struct {
 
 	// The Api object.
@@ -45,13 +59,34 @@ type GetApiOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApiOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApiResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApiOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Api != nil {
+		s.WriteStruct(schemas.GetApiResponse_api)
+		v.Api.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetApiOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApiResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApiResponse_api:
+			v.Api = &types.Api{}
+			return v.Api.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApi{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApi, schemas.GetApiRequest, schemas.GetApiResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApi{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApi, schemas.GetApiRequest, schemas.GetApiResponse), output: &GetApiOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

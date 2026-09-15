@@ -5,6 +5,8 @@ package elasticsearchservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type ListElasticsearchVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListElasticsearchVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListElasticsearchVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListElasticsearchVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListElasticsearchVersionsRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListElasticsearchVersionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Container for the parameters for response received from ListElasticsearchVersions operation.
 type ListElasticsearchVersionsOutput struct {
 
@@ -61,13 +78,35 @@ type ListElasticsearchVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListElasticsearchVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListElasticsearchVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListElasticsearchVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeElasticsearchVersionList(s, schemas.ListElasticsearchVersionsResponse_ElasticsearchVersions, v.ElasticsearchVersions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListElasticsearchVersionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListElasticsearchVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListElasticsearchVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListElasticsearchVersionsResponse_ElasticsearchVersions:
+			return deserializeElasticsearchVersionList(d, schemas.ListElasticsearchVersionsResponse_ElasticsearchVersions, &v.ElasticsearchVersions)
+		case schemas.ListElasticsearchVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListElasticsearchVersionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListElasticsearchVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListElasticsearchVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListElasticsearchVersions, schemas.ListElasticsearchVersionsRequest, schemas.ListElasticsearchVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListElasticsearchVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListElasticsearchVersions, schemas.ListElasticsearchVersionsRequest, schemas.ListElasticsearchVersionsResponse), output: &ListElasticsearchVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

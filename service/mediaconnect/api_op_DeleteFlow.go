@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.DeleteFlowRequest_FlowArn, *v.FlowArn)
+	}
+}
+
 type DeleteFlowOutput struct {
 
 	//  The ARN of the flow that was deleted.
@@ -48,13 +62,42 @@ type DeleteFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFlowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.DeleteFlowResponse_FlowArn, *v.FlowArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteFlowResponse_Status, string(v.Status))
+	}
+}
+func (v *DeleteFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFlowResponse_FlowArn:
+			v.FlowArn = new(string)
+			return d.ReadString(schemas.DeleteFlowResponse_FlowArn, v.FlowArn)
+		case schemas.DeleteFlowResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteFlowResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFlow, schemas.DeleteFlowRequest, schemas.DeleteFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFlow, schemas.DeleteFlowRequest, schemas.DeleteFlowResponse), output: &DeleteFlowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

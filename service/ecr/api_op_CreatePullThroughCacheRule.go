@@ -4,7 +4,9 @@ package ecr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -89,6 +91,36 @@ type CreatePullThroughCacheRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePullThroughCacheRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePullThroughCacheRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePullThroughCacheRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CredentialArn != nil {
+		s.WriteString(schemas.CreatePullThroughCacheRuleRequest_credentialArn, *v.CredentialArn)
+	}
+	if v.CustomRoleArn != nil {
+		s.WriteString(schemas.CreatePullThroughCacheRuleRequest_customRoleArn, *v.CustomRoleArn)
+	}
+	if v.EcrRepositoryPrefix != nil {
+		s.WriteString(schemas.CreatePullThroughCacheRuleRequest_ecrRepositoryPrefix, *v.EcrRepositoryPrefix)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.CreatePullThroughCacheRuleRequest_registryId, *v.RegistryId)
+	}
+	if v.UpstreamRegistry != "" {
+		s.WriteString(schemas.CreatePullThroughCacheRuleRequest_upstreamRegistry, string(v.UpstreamRegistry))
+	}
+	if v.UpstreamRegistryUrl != nil {
+		s.WriteString(schemas.CreatePullThroughCacheRuleRequest_upstreamRegistryUrl, *v.UpstreamRegistryUrl)
+	}
+	if v.UpstreamRepositoryPrefix != nil {
+		s.WriteString(schemas.CreatePullThroughCacheRuleRequest_upstreamRepositoryPrefix, *v.UpstreamRepositoryPrefix)
+	}
+}
+
 type CreatePullThroughCacheRuleOutput struct {
 
 	// The date and time, in JavaScript date format, when the pull through cache rule
@@ -123,13 +155,78 @@ type CreatePullThroughCacheRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePullThroughCacheRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePullThroughCacheRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePullThroughCacheRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreatePullThroughCacheRuleResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CredentialArn != nil {
+		s.WriteString(schemas.CreatePullThroughCacheRuleResponse_credentialArn, *v.CredentialArn)
+	}
+	if v.CustomRoleArn != nil {
+		s.WriteString(schemas.CreatePullThroughCacheRuleResponse_customRoleArn, *v.CustomRoleArn)
+	}
+	if v.EcrRepositoryPrefix != nil {
+		s.WriteString(schemas.CreatePullThroughCacheRuleResponse_ecrRepositoryPrefix, *v.EcrRepositoryPrefix)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.CreatePullThroughCacheRuleResponse_registryId, *v.RegistryId)
+	}
+	if v.UpstreamRegistry != "" {
+		s.WriteString(schemas.CreatePullThroughCacheRuleResponse_upstreamRegistry, string(v.UpstreamRegistry))
+	}
+	if v.UpstreamRegistryUrl != nil {
+		s.WriteString(schemas.CreatePullThroughCacheRuleResponse_upstreamRegistryUrl, *v.UpstreamRegistryUrl)
+	}
+	if v.UpstreamRepositoryPrefix != nil {
+		s.WriteString(schemas.CreatePullThroughCacheRuleResponse_upstreamRepositoryPrefix, *v.UpstreamRepositoryPrefix)
+	}
+}
+func (v *CreatePullThroughCacheRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePullThroughCacheRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePullThroughCacheRuleResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreatePullThroughCacheRuleResponse_createdAt, v.CreatedAt)
+		case schemas.CreatePullThroughCacheRuleResponse_credentialArn:
+			v.CredentialArn = new(string)
+			return d.ReadString(schemas.CreatePullThroughCacheRuleResponse_credentialArn, v.CredentialArn)
+		case schemas.CreatePullThroughCacheRuleResponse_customRoleArn:
+			v.CustomRoleArn = new(string)
+			return d.ReadString(schemas.CreatePullThroughCacheRuleResponse_customRoleArn, v.CustomRoleArn)
+		case schemas.CreatePullThroughCacheRuleResponse_ecrRepositoryPrefix:
+			v.EcrRepositoryPrefix = new(string)
+			return d.ReadString(schemas.CreatePullThroughCacheRuleResponse_ecrRepositoryPrefix, v.EcrRepositoryPrefix)
+		case schemas.CreatePullThroughCacheRuleResponse_registryId:
+			v.RegistryId = new(string)
+			return d.ReadString(schemas.CreatePullThroughCacheRuleResponse_registryId, v.RegistryId)
+		case schemas.CreatePullThroughCacheRuleResponse_upstreamRegistry:
+			var ev string
+			if err := d.ReadString(schemas.CreatePullThroughCacheRuleResponse_upstreamRegistry, &ev); err != nil {
+				return err
+			}
+			v.UpstreamRegistry = types.UpstreamRegistry(ev)
+			return nil
+		case schemas.CreatePullThroughCacheRuleResponse_upstreamRegistryUrl:
+			v.UpstreamRegistryUrl = new(string)
+			return d.ReadString(schemas.CreatePullThroughCacheRuleResponse_upstreamRegistryUrl, v.UpstreamRegistryUrl)
+		case schemas.CreatePullThroughCacheRuleResponse_upstreamRepositoryPrefix:
+			v.UpstreamRepositoryPrefix = new(string)
+			return d.ReadString(schemas.CreatePullThroughCacheRuleResponse_upstreamRepositoryPrefix, v.UpstreamRepositoryPrefix)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePullThroughCacheRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePullThroughCacheRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePullThroughCacheRule, schemas.CreatePullThroughCacheRuleRequest, schemas.CreatePullThroughCacheRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePullThroughCacheRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePullThroughCacheRule, schemas.CreatePullThroughCacheRuleRequest, schemas.CreatePullThroughCacheRuleResponse), output: &CreatePullThroughCacheRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

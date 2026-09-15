@@ -4,6 +4,8 @@ package imagebuilder
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type PutContainerRecipePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutContainerRecipePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutContainerRecipePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutContainerRecipePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerRecipeArn != nil {
+		s.WriteString(schemas.PutContainerRecipePolicyRequest_containerRecipeArn, *v.ContainerRecipeArn)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.PutContainerRecipePolicyRequest_policy, *v.Policy)
+	}
+}
+
 type PutContainerRecipePolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the container recipe that this policy was
@@ -59,13 +76,38 @@ type PutContainerRecipePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutContainerRecipePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutContainerRecipePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutContainerRecipePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerRecipeArn != nil {
+		s.WriteString(schemas.PutContainerRecipePolicyResponse_containerRecipeArn, *v.ContainerRecipeArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.PutContainerRecipePolicyResponse_requestId, *v.RequestId)
+	}
+}
+func (v *PutContainerRecipePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutContainerRecipePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutContainerRecipePolicyResponse_containerRecipeArn:
+			v.ContainerRecipeArn = new(string)
+			return d.ReadString(schemas.PutContainerRecipePolicyResponse_containerRecipeArn, v.ContainerRecipeArn)
+		case schemas.PutContainerRecipePolicyResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.PutContainerRecipePolicyResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutContainerRecipePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutContainerRecipePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutContainerRecipePolicy, schemas.PutContainerRecipePolicyRequest, schemas.PutContainerRecipePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutContainerRecipePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutContainerRecipePolicy, schemas.PutContainerRecipePolicyRequest, schemas.PutContainerRecipePolicyResponse), output: &PutContainerRecipePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

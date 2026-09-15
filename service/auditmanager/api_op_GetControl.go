@@ -4,7 +4,9 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetControlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetControlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetControlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ControlId != nil {
+		s.WriteString(schemas.GetControlRequest_controlId, *v.ControlId)
+	}
+}
+
 type GetControlOutput struct {
 
 	//  The details of the control that the GetControl API returned.
@@ -45,13 +59,34 @@ type GetControlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetControlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetControlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetControlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Control != nil {
+		s.WriteStruct(schemas.GetControlResponse_control)
+		v.Control.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetControlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetControlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetControlResponse_control:
+			v.Control = &types.Control{}
+			return v.Control.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetControl, schemas.GetControlRequest, schemas.GetControlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetControl, schemas.GetControlRequest, schemas.GetControlResponse), output: &GetControlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type RebootInputDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootInputDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootInputDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootInputDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Force != "" {
+		s.WriteString(schemas.RebootInputDeviceRequest_Force, string(v.Force))
+	}
+	if v.InputDeviceId != nil {
+		s.WriteString(schemas.RebootInputDeviceRequest_InputDeviceId, *v.InputDeviceId)
+	}
+}
+
 // Placeholder documentation for RebootInputDeviceResponse
 type RebootInputDeviceOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -51,13 +68,26 @@ type RebootInputDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootInputDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootInputDeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootInputDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RebootInputDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RebootInputDeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRebootInputDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRebootInputDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootInputDevice, schemas.RebootInputDeviceRequest, schemas.RebootInputDeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRebootInputDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootInputDevice, schemas.RebootInputDeviceRequest, schemas.RebootInputDeviceResponse), output: &RebootInputDeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package accessanalyzer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,30 @@ type ListFindingsV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFindingsV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFindingsV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFindingsV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzerArn != nil {
+		s.WriteString(schemas.ListFindingsV2Request_analyzerArn, *v.AnalyzerArn)
+	}
+	serializeFilterCriteriaMap(s, schemas.ListFindingsV2Request_filter, v.Filter)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFindingsV2Request_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFindingsV2Request_nextToken, *v.NextToken)
+	}
+	if v.Sort != nil {
+		s.WriteStruct(schemas.ListFindingsV2Request_sort)
+		v.Sort.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListFindingsV2Output struct {
 
 	// A list of findings retrieved from the analyzer that match the filter criteria
@@ -74,13 +100,35 @@ type ListFindingsV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFindingsV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFindingsV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFindingsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFindingsListV2(s, schemas.ListFindingsV2Response_findings, v.Findings)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFindingsV2Response_nextToken, *v.NextToken)
+	}
+}
+func (v *ListFindingsV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFindingsV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFindingsV2Response_findings:
+			return deserializeFindingsListV2(d, schemas.ListFindingsV2Response_findings, &v.Findings)
+		case schemas.ListFindingsV2Response_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFindingsV2Response_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFindingsV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFindingsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFindingsV2, schemas.ListFindingsV2Request, schemas.ListFindingsV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFindingsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFindingsV2, schemas.ListFindingsV2Request, schemas.ListFindingsV2Response), output: &ListFindingsV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

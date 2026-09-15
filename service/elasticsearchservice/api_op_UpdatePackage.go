@@ -4,7 +4,9 @@ package elasticsearchservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,29 @@ type UpdatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePackageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePackageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePackageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommitMessage != nil {
+		s.WriteString(schemas.UpdatePackageRequest_CommitMessage, *v.CommitMessage)
+	}
+	if v.PackageDescription != nil {
+		s.WriteString(schemas.UpdatePackageRequest_PackageDescription, *v.PackageDescription)
+	}
+	if v.PackageID != nil {
+		s.WriteString(schemas.UpdatePackageRequest_PackageID, *v.PackageID)
+	}
+	if v.PackageSource != nil {
+		s.WriteStruct(schemas.UpdatePackageRequest_PackageSource)
+		v.PackageSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Container for response returned by UpdatePackage operation.
 type UpdatePackageOutput struct {
 
@@ -59,13 +84,34 @@ type UpdatePackageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePackageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePackageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePackageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PackageDetails != nil {
+		s.WriteStruct(schemas.UpdatePackageResponse_PackageDetails)
+		v.PackageDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatePackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePackageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePackageResponse_PackageDetails:
+			v.PackageDetails = &types.PackageDetails{}
+			return v.PackageDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePackage, schemas.UpdatePackageRequest, schemas.UpdatePackageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePackage, schemas.UpdatePackageRequest, schemas.UpdatePackageResponse), output: &UpdatePackageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

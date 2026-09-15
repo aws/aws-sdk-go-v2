@@ -4,7 +4,9 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.GetAgentRequest_agentId, *v.AgentId)
+	}
+}
+
 type GetAgentOutput struct {
 
 	// Contains details about the agent.
@@ -47,13 +61,34 @@ type GetAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Agent != nil {
+		s.WriteStruct(schemas.GetAgentResponse_agent)
+		v.Agent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAgentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAgentResponse_agent:
+			v.Agent = &types.Agent{}
+			return v.Agent.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgent, schemas.GetAgentRequest, schemas.GetAgentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgent, schemas.GetAgentRequest, schemas.GetAgentResponse), output: &GetAgentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

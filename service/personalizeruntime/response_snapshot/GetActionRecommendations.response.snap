@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"actionList":[{"actionId":"__ActionId__","score":1},{"actionId":"__ActionId__","score":1}],"recommendationId":"__RecommendationId__"}

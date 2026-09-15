@@ -4,7 +4,9 @@ package batch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,29 @@ type CreateSchedulingPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSchedulingPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSchedulingPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSchedulingPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FairsharePolicy != nil {
+		s.WriteStruct(schemas.CreateSchedulingPolicyRequest_fairsharePolicy)
+		v.FairsharePolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSchedulingPolicyRequest_name, *v.Name)
+	}
+	if v.QuotaSharePolicy != nil {
+		s.WriteStruct(schemas.CreateSchedulingPolicyRequest_quotaSharePolicy)
+		v.QuotaSharePolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagrisTagsMap(s, schemas.CreateSchedulingPolicyRequest_tags, v.Tags)
+}
+
 type CreateSchedulingPolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the scheduling policy. The format is
@@ -78,13 +103,38 @@ type CreateSchedulingPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSchedulingPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSchedulingPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSchedulingPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateSchedulingPolicyResponse_arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSchedulingPolicyResponse_name, *v.Name)
+	}
+}
+func (v *CreateSchedulingPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSchedulingPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSchedulingPolicyResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateSchedulingPolicyResponse_arn, v.Arn)
+		case schemas.CreateSchedulingPolicyResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateSchedulingPolicyResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSchedulingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSchedulingPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSchedulingPolicy, schemas.CreateSchedulingPolicyRequest, schemas.CreateSchedulingPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSchedulingPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSchedulingPolicy, schemas.CreateSchedulingPolicyRequest, schemas.CreateSchedulingPolicyResponse), output: &CreateSchedulingPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

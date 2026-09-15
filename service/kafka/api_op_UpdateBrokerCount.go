@@ -4,6 +4,8 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type UpdateBrokerCountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBrokerCountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBrokerCountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBrokerCountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.UpdateBrokerCountRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.CurrentVersion != nil {
+		s.WriteString(schemas.UpdateBrokerCountRequest_CurrentVersion, *v.CurrentVersion)
+	}
+	if v.TargetNumberOfBrokerNodes != nil {
+		s.WriteInt32(schemas.UpdateBrokerCountRequest_TargetNumberOfBrokerNodes, *v.TargetNumberOfBrokerNodes)
+	}
+}
+
 type UpdateBrokerCountOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.
@@ -59,13 +79,38 @@ type UpdateBrokerCountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBrokerCountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBrokerCountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBrokerCountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.UpdateBrokerCountResponse_ClusterArn, *v.ClusterArn)
+	}
+	if v.ClusterOperationArn != nil {
+		s.WriteString(schemas.UpdateBrokerCountResponse_ClusterOperationArn, *v.ClusterOperationArn)
+	}
+}
+func (v *UpdateBrokerCountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBrokerCountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBrokerCountResponse_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.UpdateBrokerCountResponse_ClusterArn, v.ClusterArn)
+		case schemas.UpdateBrokerCountResponse_ClusterOperationArn:
+			v.ClusterOperationArn = new(string)
+			return d.ReadString(schemas.UpdateBrokerCountResponse_ClusterOperationArn, v.ClusterOperationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBrokerCountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBrokerCount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBrokerCount, schemas.UpdateBrokerCountRequest, schemas.UpdateBrokerCountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBrokerCount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBrokerCount, schemas.UpdateBrokerCountRequest, schemas.UpdateBrokerCountResponse), output: &UpdateBrokerCountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

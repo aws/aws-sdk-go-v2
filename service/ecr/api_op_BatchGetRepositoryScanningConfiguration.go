@@ -4,7 +4,9 @@ package ecr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,16 @@ type BatchGetRepositoryScanningConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetRepositoryScanningConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetRepositoryScanningConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetRepositoryScanningConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeScanningConfigurationRepositoryNameList(s, schemas.BatchGetRepositoryScanningConfigurationRequest_repositoryNames, v.RepositoryNames)
+}
+
 type BatchGetRepositoryScanningConfigurationOutput struct {
 
 	// Any failures associated with the call.
@@ -48,13 +60,32 @@ type BatchGetRepositoryScanningConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetRepositoryScanningConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetRepositoryScanningConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetRepositoryScanningConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRepositoryScanningConfigurationFailureList(s, schemas.BatchGetRepositoryScanningConfigurationResponse_failures, v.Failures)
+	serializeRepositoryScanningConfigurationList(s, schemas.BatchGetRepositoryScanningConfigurationResponse_scanningConfigurations, v.ScanningConfigurations)
+}
+func (v *BatchGetRepositoryScanningConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetRepositoryScanningConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetRepositoryScanningConfigurationResponse_failures:
+			return deserializeRepositoryScanningConfigurationFailureList(d, schemas.BatchGetRepositoryScanningConfigurationResponse_failures, &v.Failures)
+		case schemas.BatchGetRepositoryScanningConfigurationResponse_scanningConfigurations:
+			return deserializeRepositoryScanningConfigurationList(d, schemas.BatchGetRepositoryScanningConfigurationResponse_scanningConfigurations, &v.ScanningConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetRepositoryScanningConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetRepositoryScanningConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetRepositoryScanningConfiguration, schemas.BatchGetRepositoryScanningConfigurationRequest, schemas.BatchGetRepositoryScanningConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetRepositoryScanningConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetRepositoryScanningConfiguration, schemas.BatchGetRepositoryScanningConfigurationRequest, schemas.BatchGetRepositoryScanningConfigurationResponse), output: &BatchGetRepositoryScanningConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

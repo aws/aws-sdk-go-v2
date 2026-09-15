@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -85,6 +87,16 @@ type BatchImportFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchImportFindingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchImportFindingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchImportFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchImportFindingsRequestFindingList(s, schemas.BatchImportFindingsRequest_Findings, v.Findings)
+}
+
 type BatchImportFindingsOutput struct {
 
 	// The number of findings that failed to import.
@@ -106,13 +118,41 @@ type BatchImportFindingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchImportFindingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchImportFindingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchImportFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailedCount != nil {
+		s.WriteInt32(schemas.BatchImportFindingsResponse_FailedCount, *v.FailedCount)
+	}
+	serializeImportFindingsErrorList(s, schemas.BatchImportFindingsResponse_FailedFindings, v.FailedFindings)
+	if v.SuccessCount != nil {
+		s.WriteInt32(schemas.BatchImportFindingsResponse_SuccessCount, *v.SuccessCount)
+	}
+}
+func (v *BatchImportFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchImportFindingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchImportFindingsResponse_FailedCount:
+			v.FailedCount = new(int32)
+			return d.ReadInt32(schemas.BatchImportFindingsResponse_FailedCount, v.FailedCount)
+		case schemas.BatchImportFindingsResponse_FailedFindings:
+			return deserializeImportFindingsErrorList(d, schemas.BatchImportFindingsResponse_FailedFindings, &v.FailedFindings)
+		case schemas.BatchImportFindingsResponse_SuccessCount:
+			v.SuccessCount = new(int32)
+			return d.ReadInt32(schemas.BatchImportFindingsResponse_SuccessCount, v.SuccessCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchImportFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchImportFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchImportFindings, schemas.BatchImportFindingsRequest, schemas.BatchImportFindingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchImportFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchImportFindings, schemas.BatchImportFindingsRequest, schemas.BatchImportFindingsResponse), output: &BatchImportFindingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

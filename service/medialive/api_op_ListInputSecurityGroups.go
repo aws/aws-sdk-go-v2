@@ -5,7 +5,9 @@ package medialive
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListInputSecurityGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInputSecurityGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInputSecurityGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInputSecurityGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInputSecurityGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInputSecurityGroupsRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Placeholder documentation for ListInputSecurityGroupsResponse
 type ListInputSecurityGroupsOutput struct {
 
@@ -52,13 +69,35 @@ type ListInputSecurityGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInputSecurityGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInputSecurityGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInputSecurityGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfInputSecurityGroup(s, schemas.ListInputSecurityGroupsResponse_InputSecurityGroups, v.InputSecurityGroups)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInputSecurityGroupsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListInputSecurityGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInputSecurityGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInputSecurityGroupsResponse_InputSecurityGroups:
+			return deserialize__listOfInputSecurityGroup(d, schemas.ListInputSecurityGroupsResponse_InputSecurityGroups, &v.InputSecurityGroups)
+		case schemas.ListInputSecurityGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInputSecurityGroupsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInputSecurityGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInputSecurityGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInputSecurityGroups, schemas.ListInputSecurityGroupsRequest, schemas.ListInputSecurityGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListInputSecurityGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInputSecurityGroups, schemas.ListInputSecurityGroupsRequest, schemas.ListInputSecurityGroupsResponse), output: &ListInputSecurityGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

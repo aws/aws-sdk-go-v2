@@ -4,6 +4,8 @@ package imagebuilder
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type PutImagePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutImagePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutImagePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutImagePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageArn != nil {
+		s.WriteString(schemas.PutImagePolicyRequest_imageArn, *v.ImageArn)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.PutImagePolicyRequest_policy, *v.Policy)
+	}
+}
+
 type PutImagePolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the image that this policy was applied to.
@@ -58,13 +75,38 @@ type PutImagePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutImagePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutImagePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutImagePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageArn != nil {
+		s.WriteString(schemas.PutImagePolicyResponse_imageArn, *v.ImageArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.PutImagePolicyResponse_requestId, *v.RequestId)
+	}
+}
+func (v *PutImagePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutImagePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutImagePolicyResponse_imageArn:
+			v.ImageArn = new(string)
+			return d.ReadString(schemas.PutImagePolicyResponse_imageArn, v.ImageArn)
+		case schemas.PutImagePolicyResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.PutImagePolicyResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutImagePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutImagePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutImagePolicy, schemas.PutImagePolicyRequest, schemas.PutImagePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutImagePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutImagePolicy, schemas.PutImagePolicyRequest, schemas.PutImagePolicyResponse), output: &PutImagePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

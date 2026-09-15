@@ -4,7 +4,9 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetAssessmentFrameworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssessmentFrameworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssessmentFrameworkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssessmentFrameworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FrameworkId != nil {
+		s.WriteString(schemas.GetAssessmentFrameworkRequest_frameworkId, *v.FrameworkId)
+	}
+}
+
 type GetAssessmentFrameworkOutput struct {
 
 	//  The framework that the GetAssessmentFramework API returned.
@@ -48,13 +62,34 @@ type GetAssessmentFrameworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssessmentFrameworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssessmentFrameworkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssessmentFrameworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Framework != nil {
+		s.WriteStruct(schemas.GetAssessmentFrameworkResponse_framework)
+		v.Framework.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAssessmentFrameworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssessmentFrameworkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssessmentFrameworkResponse_framework:
+			v.Framework = &types.Framework{}
+			return v.Framework.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAssessmentFrameworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssessmentFramework{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssessmentFramework, schemas.GetAssessmentFrameworkRequest, schemas.GetAssessmentFrameworkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAssessmentFramework{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssessmentFramework, schemas.GetAssessmentFrameworkRequest, schemas.GetAssessmentFrameworkResponse), output: &GetAssessmentFrameworkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

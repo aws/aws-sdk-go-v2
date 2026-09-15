@@ -4,7 +4,9 @@ package batch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,19 @@ type CancelJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.CancelJobsRequest_jobs, v.Jobs)
+	if v.Reason != nil {
+		s.WriteString(schemas.CancelJobsRequest_reason, *v.Reason)
+	}
+}
+
 // The result of a CancelJobs request, including the jobs whose cancellation
 // request was accepted and the errors for jobs that couldn't be cancelled.
 type CancelJobsOutput struct {
@@ -84,13 +99,32 @@ type CancelJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCancelJobsErrorDetailList(s, schemas.CancelJobsResponse_errors, v.Errors)
+	serializeStringList(s, schemas.CancelJobsResponse_successful, v.Successful)
+}
+func (v *CancelJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelJobsResponse_errors:
+			return deserializeCancelJobsErrorDetailList(d, schemas.CancelJobsResponse_errors, &v.Errors)
+		case schemas.CancelJobsResponse_successful:
+			return deserializeStringList(d, schemas.CancelJobsResponse_successful, &v.Successful)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelJobs, schemas.CancelJobsRequest, schemas.CancelJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelJobs, schemas.CancelJobsRequest, schemas.CancelJobsResponse), output: &CancelJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

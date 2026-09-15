@@ -5,7 +5,9 @@ package mediaconnect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,26 @@ type CreateRouterNetworkInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRouterNetworkInterfaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRouterNetworkInterfaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRouterNetworkInterfaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRouterNetworkInterfaceRequest_ClientToken, *v.ClientToken)
+	}
+	serializeRouterNetworkInterfaceConfiguration(s, schemas.CreateRouterNetworkInterfaceRequest_Configuration, v.Configuration)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRouterNetworkInterfaceRequest_Name, *v.Name)
+	}
+	if v.RegionName != nil {
+		s.WriteString(schemas.CreateRouterNetworkInterfaceRequest_RegionName, *v.RegionName)
+	}
+	serialize__mapOfString(s, schemas.CreateRouterNetworkInterfaceRequest_Tags, v.Tags)
+}
+
 type CreateRouterNetworkInterfaceOutput struct {
 
 	// The newly-created router network interface.
@@ -64,13 +86,34 @@ type CreateRouterNetworkInterfaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRouterNetworkInterfaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRouterNetworkInterfaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRouterNetworkInterfaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RouterNetworkInterface != nil {
+		s.WriteStruct(schemas.CreateRouterNetworkInterfaceResponse_RouterNetworkInterface)
+		v.RouterNetworkInterface.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateRouterNetworkInterfaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRouterNetworkInterfaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRouterNetworkInterfaceResponse_RouterNetworkInterface:
+			v.RouterNetworkInterface = &types.RouterNetworkInterface{}
+			return v.RouterNetworkInterface.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRouterNetworkInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRouterNetworkInterface{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRouterNetworkInterface, schemas.CreateRouterNetworkInterfaceRequest, schemas.CreateRouterNetworkInterfaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRouterNetworkInterface{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRouterNetworkInterface, schemas.CreateRouterNetworkInterfaceRequest, schemas.CreateRouterNetworkInterfaceResponse), output: &CreateRouterNetworkInterfaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

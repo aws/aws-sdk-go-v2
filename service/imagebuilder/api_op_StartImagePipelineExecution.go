@@ -5,6 +5,8 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,22 @@ type StartImagePipelineExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartImagePipelineExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartImagePipelineExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartImagePipelineExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartImagePipelineExecutionRequest_clientToken, *v.ClientToken)
+	}
+	if v.ImagePipelineArn != nil {
+		s.WriteString(schemas.StartImagePipelineExecutionRequest_imagePipelineArn, *v.ImagePipelineArn)
+	}
+	serializeTagMap(s, schemas.StartImagePipelineExecutionRequest_tags, v.Tags)
+}
+
 type StartImagePipelineExecutionOutput struct {
 
 	// The client token that uniquely identifies the request.
@@ -66,13 +84,44 @@ type StartImagePipelineExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartImagePipelineExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartImagePipelineExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartImagePipelineExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartImagePipelineExecutionResponse_clientToken, *v.ClientToken)
+	}
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.StartImagePipelineExecutionResponse_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.StartImagePipelineExecutionResponse_requestId, *v.RequestId)
+	}
+}
+func (v *StartImagePipelineExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartImagePipelineExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartImagePipelineExecutionResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.StartImagePipelineExecutionResponse_clientToken, v.ClientToken)
+		case schemas.StartImagePipelineExecutionResponse_imageBuildVersionArn:
+			v.ImageBuildVersionArn = new(string)
+			return d.ReadString(schemas.StartImagePipelineExecutionResponse_imageBuildVersionArn, v.ImageBuildVersionArn)
+		case schemas.StartImagePipelineExecutionResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.StartImagePipelineExecutionResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartImagePipelineExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartImagePipelineExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImagePipelineExecution, schemas.StartImagePipelineExecutionRequest, schemas.StartImagePipelineExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartImagePipelineExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImagePipelineExecution, schemas.StartImagePipelineExecutionRequest, schemas.StartImagePipelineExecutionResponse), output: &StartImagePipelineExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

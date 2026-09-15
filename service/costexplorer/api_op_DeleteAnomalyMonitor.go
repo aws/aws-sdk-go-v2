@@ -4,6 +4,8 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteAnomalyMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAnomalyMonitorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAnomalyMonitorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAnomalyMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitorArn != nil {
+		s.WriteString(schemas.DeleteAnomalyMonitorRequest_MonitorArn, *v.MonitorArn)
+	}
+}
+
 type DeleteAnomalyMonitorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteAnomalyMonitorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAnomalyMonitorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAnomalyMonitorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAnomalyMonitorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAnomalyMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAnomalyMonitorResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAnomalyMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAnomalyMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAnomalyMonitor, schemas.DeleteAnomalyMonitorRequest, schemas.DeleteAnomalyMonitorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteAnomalyMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAnomalyMonitor, schemas.DeleteAnomalyMonitorRequest, schemas.DeleteAnomalyMonitorResponse), output: &DeleteAnomalyMonitorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

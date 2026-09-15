@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,26 @@ type DescribeCapacityProvidersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCapacityProvidersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCapacityProvidersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCapacityProvidersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.DescribeCapacityProvidersRequest_capacityProviders, v.CapacityProviders)
+	if v.Cluster != nil {
+		s.WriteString(schemas.DescribeCapacityProvidersRequest_cluster, *v.Cluster)
+	}
+	serializeCapacityProviderFieldList(s, schemas.DescribeCapacityProvidersRequest_include, v.Include)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeCapacityProvidersRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeCapacityProvidersRequest_nextToken, *v.NextToken)
+	}
+}
+
 type DescribeCapacityProvidersOutput struct {
 
 	// The list of capacity providers.
@@ -82,13 +104,38 @@ type DescribeCapacityProvidersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCapacityProvidersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCapacityProvidersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCapacityProvidersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCapacityProviders(s, schemas.DescribeCapacityProvidersResponse_capacityProviders, v.CapacityProviders)
+	serializeFailures(s, schemas.DescribeCapacityProvidersResponse_failures, v.Failures)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeCapacityProvidersResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeCapacityProvidersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCapacityProvidersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCapacityProvidersResponse_capacityProviders:
+			return deserializeCapacityProviders(d, schemas.DescribeCapacityProvidersResponse_capacityProviders, &v.CapacityProviders)
+		case schemas.DescribeCapacityProvidersResponse_failures:
+			return deserializeFailures(d, schemas.DescribeCapacityProvidersResponse_failures, &v.Failures)
+		case schemas.DescribeCapacityProvidersResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeCapacityProvidersResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCapacityProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCapacityProviders{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCapacityProviders, schemas.DescribeCapacityProvidersRequest, schemas.DescribeCapacityProvidersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCapacityProviders{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCapacityProviders, schemas.DescribeCapacityProvidersRequest, schemas.DescribeCapacityProvidersResponse), output: &DescribeCapacityProvidersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

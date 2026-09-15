@@ -4,6 +4,8 @@ package resiliencehub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -247,6 +249,34 @@ type PutDraftAppVersionTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDraftAppVersionTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDraftAppVersionTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDraftAppVersionTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.PutDraftAppVersionTemplateRequest_appArn, *v.AppArn)
+	}
+	if v.AppTemplateBody != nil {
+		s.WriteString(schemas.PutDraftAppVersionTemplateRequest_appTemplateBody, *v.AppTemplateBody)
+	}
+}
+func (v *PutDraftAppVersionTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutDraftAppVersionTemplateRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutDraftAppVersionTemplateRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.PutDraftAppVersionTemplateRequest_appArn, v.AppArn)
+		case schemas.PutDraftAppVersionTemplateRequest_appTemplateBody:
+			v.AppTemplateBody = new(string)
+			return d.ReadString(schemas.PutDraftAppVersionTemplateRequest_appTemplateBody, v.AppTemplateBody)
+		}
+		return nil
+	})
+}
+
 type PutDraftAppVersionTemplateOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
@@ -266,13 +296,38 @@ type PutDraftAppVersionTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDraftAppVersionTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDraftAppVersionTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDraftAppVersionTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.PutDraftAppVersionTemplateResponse_appArn, *v.AppArn)
+	}
+	if v.AppVersion != nil {
+		s.WriteString(schemas.PutDraftAppVersionTemplateResponse_appVersion, *v.AppVersion)
+	}
+}
+func (v *PutDraftAppVersionTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutDraftAppVersionTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutDraftAppVersionTemplateResponse_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.PutDraftAppVersionTemplateResponse_appArn, v.AppArn)
+		case schemas.PutDraftAppVersionTemplateResponse_appVersion:
+			v.AppVersion = new(string)
+			return d.ReadString(schemas.PutDraftAppVersionTemplateResponse_appVersion, v.AppVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutDraftAppVersionTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutDraftAppVersionTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDraftAppVersionTemplate, schemas.PutDraftAppVersionTemplateRequest, schemas.PutDraftAppVersionTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutDraftAppVersionTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDraftAppVersionTemplate, schemas.PutDraftAppVersionTemplateRequest, schemas.PutDraftAppVersionTemplateResponse), output: &PutDraftAppVersionTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

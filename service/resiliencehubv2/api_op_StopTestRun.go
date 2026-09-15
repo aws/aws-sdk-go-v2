@@ -4,7 +4,9 @@ package resiliencehubv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type StopTestRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopTestRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopTestRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopTestRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.StopTestRunRequest_serviceArn, *v.ServiceArn)
+	}
+	if v.TestRunId != nil {
+		s.WriteString(schemas.StopTestRunRequest_testRunId, *v.TestRunId)
+	}
+}
+
 type StopTestRunOutput struct {
 
 	// The status of the test run.
@@ -57,13 +74,42 @@ type StopTestRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopTestRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopTestRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopTestRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.StopTestRunResponse_status, string(v.Status))
+	}
+	if v.TestRunId != nil {
+		s.WriteString(schemas.StopTestRunResponse_testRunId, *v.TestRunId)
+	}
+}
+func (v *StopTestRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopTestRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopTestRunResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.StopTestRunResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TestRunStatus(ev)
+			return nil
+		case schemas.StopTestRunResponse_testRunId:
+			v.TestRunId = new(string)
+			return d.ReadString(schemas.StopTestRunResponse_testRunId, v.TestRunId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopTestRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopTestRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopTestRun, schemas.StopTestRunRequest, schemas.StopTestRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopTestRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopTestRun, schemas.StopTestRunRequest, schemas.StopTestRunResponse), output: &StopTestRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

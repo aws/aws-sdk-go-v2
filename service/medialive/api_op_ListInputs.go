@@ -5,7 +5,9 @@ package medialive
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListInputsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInputsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInputsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInputsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInputsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInputsRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Placeholder documentation for ListInputsResponse
 type ListInputsOutput struct {
 
@@ -52,13 +69,35 @@ type ListInputsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInputsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInputsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInputsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfInput(s, schemas.ListInputsResponse_Inputs, v.Inputs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInputsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListInputsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInputsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInputsResponse_Inputs:
+			return deserialize__listOfInput(d, schemas.ListInputsResponse_Inputs, &v.Inputs)
+		case schemas.ListInputsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInputsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInputsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInputs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInputs, schemas.ListInputsRequest, schemas.ListInputsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListInputs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInputs, schemas.ListInputsRequest, schemas.ListInputsResponse), output: &ListInputsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,22 @@ type UpdateBrokerStorageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBrokerStorageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBrokerStorageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBrokerStorageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.UpdateBrokerStorageRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.CurrentVersion != nil {
+		s.WriteString(schemas.UpdateBrokerStorageRequest_CurrentVersion, *v.CurrentVersion)
+	}
+	serialize__listOfBrokerEBSVolumeInfo(s, schemas.UpdateBrokerStorageRequest_TargetBrokerEBSVolumeInfo, v.TargetBrokerEBSVolumeInfo)
+}
+
 type UpdateBrokerStorageOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.
@@ -60,13 +78,38 @@ type UpdateBrokerStorageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBrokerStorageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBrokerStorageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBrokerStorageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.UpdateBrokerStorageResponse_ClusterArn, *v.ClusterArn)
+	}
+	if v.ClusterOperationArn != nil {
+		s.WriteString(schemas.UpdateBrokerStorageResponse_ClusterOperationArn, *v.ClusterOperationArn)
+	}
+}
+func (v *UpdateBrokerStorageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBrokerStorageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBrokerStorageResponse_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.UpdateBrokerStorageResponse_ClusterArn, v.ClusterArn)
+		case schemas.UpdateBrokerStorageResponse_ClusterOperationArn:
+			v.ClusterOperationArn = new(string)
+			return d.ReadString(schemas.UpdateBrokerStorageResponse_ClusterOperationArn, v.ClusterOperationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBrokerStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBrokerStorage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBrokerStorage, schemas.UpdateBrokerStorageRequest, schemas.UpdateBrokerStorageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBrokerStorage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBrokerStorage, schemas.UpdateBrokerStorageRequest, schemas.UpdateBrokerStorageResponse), output: &UpdateBrokerStorageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

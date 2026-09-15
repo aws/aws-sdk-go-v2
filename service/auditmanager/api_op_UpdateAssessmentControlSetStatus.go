@@ -4,7 +4,9 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type UpdateAssessmentControlSetStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssessmentControlSetStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssessmentControlSetStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssessmentControlSetStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.UpdateAssessmentControlSetStatusRequest_assessmentId, *v.AssessmentId)
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.UpdateAssessmentControlSetStatusRequest_comment, *v.Comment)
+	}
+	if v.ControlSetId != nil {
+		s.WriteString(schemas.UpdateAssessmentControlSetStatusRequest_controlSetId, *v.ControlSetId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateAssessmentControlSetStatusRequest_status, string(v.Status))
+	}
+}
+
 type UpdateAssessmentControlSetStatusOutput struct {
 
 	//  The name of the updated control set that the UpdateAssessmentControlSetStatus
@@ -61,13 +84,34 @@ type UpdateAssessmentControlSetStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAssessmentControlSetStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAssessmentControlSetStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAssessmentControlSetStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ControlSet != nil {
+		s.WriteStruct(schemas.UpdateAssessmentControlSetStatusResponse_controlSet)
+		v.ControlSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAssessmentControlSetStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAssessmentControlSetStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAssessmentControlSetStatusResponse_controlSet:
+			v.ControlSet = &types.AssessmentControlSet{}
+			return v.ControlSet.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAssessmentControlSetStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAssessmentControlSetStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssessmentControlSetStatus, schemas.UpdateAssessmentControlSetStatusRequest, schemas.UpdateAssessmentControlSetStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAssessmentControlSetStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAssessmentControlSetStatus, schemas.UpdateAssessmentControlSetStatusRequest, schemas.UpdateAssessmentControlSetStatusResponse), output: &UpdateAssessmentControlSetStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package auditmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListKeywordsForDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListKeywordsForDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListKeywordsForDataSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListKeywordsForDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListKeywordsForDataSourceRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListKeywordsForDataSourceRequest_nextToken, *v.NextToken)
+	}
+	if v.Source != "" {
+		s.WriteString(schemas.ListKeywordsForDataSourceRequest_source, string(v.Source))
+	}
+}
+
 type ListKeywordsForDataSourceOutput struct {
 
 	// The list of keywords for the control mapping source.
@@ -56,13 +76,35 @@ type ListKeywordsForDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListKeywordsForDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListKeywordsForDataSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListKeywordsForDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeKeywords(s, schemas.ListKeywordsForDataSourceResponse_keywords, v.Keywords)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListKeywordsForDataSourceResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListKeywordsForDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListKeywordsForDataSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListKeywordsForDataSourceResponse_keywords:
+			return deserializeKeywords(d, schemas.ListKeywordsForDataSourceResponse_keywords, &v.Keywords)
+		case schemas.ListKeywordsForDataSourceResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListKeywordsForDataSourceResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListKeywordsForDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListKeywordsForDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKeywordsForDataSource, schemas.ListKeywordsForDataSourceRequest, schemas.ListKeywordsForDataSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListKeywordsForDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKeywordsForDataSource, schemas.ListKeywordsForDataSourceRequest, schemas.ListKeywordsForDataSourceResponse), output: &ListKeywordsForDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

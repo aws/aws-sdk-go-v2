@@ -5,7 +5,9 @@ package accessanalyzer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,53 @@ type CreateAnalyzerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAnalyzerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAnalyzerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAnalyzerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzerName != nil {
+		s.WriteString(schemas.CreateAnalyzerRequest_analyzerName, *v.AnalyzerName)
+	}
+	serializeInlineArchiveRulesList(s, schemas.CreateAnalyzerRequest_archiveRules, v.ArchiveRules)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAnalyzerRequest_clientToken, *v.ClientToken)
+	}
+	serializeAnalyzerConfiguration(s, schemas.CreateAnalyzerRequest_configuration, v.Configuration)
+	serializeTagsMap(s, schemas.CreateAnalyzerRequest_tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateAnalyzerRequest_type, string(v.Type))
+	}
+}
+func (v *CreateAnalyzerInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAnalyzerRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAnalyzerRequest_analyzerName:
+			v.AnalyzerName = new(string)
+			return d.ReadString(schemas.CreateAnalyzerRequest_analyzerName, v.AnalyzerName)
+		case schemas.CreateAnalyzerRequest_archiveRules:
+			return deserializeInlineArchiveRulesList(d, schemas.CreateAnalyzerRequest_archiveRules, &v.ArchiveRules)
+		case schemas.CreateAnalyzerRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateAnalyzerRequest_clientToken, v.ClientToken)
+		case schemas.CreateAnalyzerRequest_configuration:
+			return deserializeAnalyzerConfiguration(d, schemas.CreateAnalyzerRequest_configuration, &v.Configuration)
+		case schemas.CreateAnalyzerRequest_tags:
+			return deserializeTagsMap(d, schemas.CreateAnalyzerRequest_tags, &v.Tags)
+		case schemas.CreateAnalyzerRequest_type:
+			var ev string
+			if err := d.ReadString(schemas.CreateAnalyzerRequest_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.Type(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The response to the request to create an analyzer.
 type CreateAnalyzerOutput struct {
 
@@ -77,13 +126,32 @@ type CreateAnalyzerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAnalyzerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAnalyzerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAnalyzerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateAnalyzerResponse_arn, *v.Arn)
+	}
+}
+func (v *CreateAnalyzerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAnalyzerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAnalyzerResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateAnalyzerResponse_arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAnalyzerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAnalyzer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAnalyzer, schemas.CreateAnalyzerRequest, schemas.CreateAnalyzerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAnalyzer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAnalyzer, schemas.CreateAnalyzerRequest, schemas.CreateAnalyzerResponse), output: &CreateAnalyzerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package mediatailor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,34 @@ type ListChannelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChannelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChannelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListChannelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListChannelsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListChannelsRequest_NextToken, *v.NextToken)
+	}
+}
+func (v *ListChannelsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListChannelsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListChannelsRequest_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListChannelsRequest_MaxResults, v.MaxResults)
+		case schemas.ListChannelsRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListChannelsRequest_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListChannelsOutput struct {
 
 	// A list of channels that are associated with this account.
@@ -67,13 +97,35 @@ type ListChannelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChannelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChannelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListChannelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfChannel(s, schemas.ListChannelsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListChannelsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListChannelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListChannelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListChannelsResponse_Items:
+			return deserialize__listOfChannel(d, schemas.ListChannelsResponse_Items, &v.Items)
+		case schemas.ListChannelsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListChannelsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListChannelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChannels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChannels, schemas.ListChannelsRequest, schemas.ListChannelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListChannels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChannels, schemas.ListChannelsRequest, schemas.ListChannelsResponse), output: &ListChannelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

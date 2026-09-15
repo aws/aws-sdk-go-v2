@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/bcmrecommendedactions/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -27,6 +29,45 @@ type ActionFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ActionFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActionFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActionFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != "" {
+		s.WriteString(schemas.ActionFilter_key, string(v.Key))
+	}
+	if v.MatchOption != "" {
+		s.WriteString(schemas.ActionFilter_matchOption, string(v.MatchOption))
+	}
+	serializeFilterValues(s, schemas.ActionFilter_values, v.Values)
+}
+func (v *ActionFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActionFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActionFilter_key:
+			var ev string
+			if err := d.ReadString(schemas.ActionFilter_key, &ev); err != nil {
+				return err
+			}
+			v.Key = FilterName(ev)
+			return nil
+		case schemas.ActionFilter_matchOption:
+			var ev string
+			if err := d.ReadString(schemas.ActionFilter_matchOption, &ev); err != nil {
+				return err
+			}
+			v.MatchOption = MatchOption(ev)
+			return nil
+		case schemas.ActionFilter_values:
+			return deserializeFilterValues(d, schemas.ActionFilter_values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Describes a specific recommended action.
@@ -59,6 +100,76 @@ type RecommendedAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecommendedAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecommendedAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecommendedAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.RecommendedAction_accountId, *v.AccountId)
+	}
+	serializeContext(s, schemas.RecommendedAction_context, v.Context)
+	if v.Feature != "" {
+		s.WriteString(schemas.RecommendedAction_feature, string(v.Feature))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RecommendedAction_id, *v.Id)
+	}
+	if v.LastUpdatedTimeStamp != nil {
+		s.WriteString(schemas.RecommendedAction_lastUpdatedTimeStamp, *v.LastUpdatedTimeStamp)
+	}
+	serializeNextSteps(s, schemas.RecommendedAction_nextSteps, v.NextSteps)
+	if v.Severity != "" {
+		s.WriteString(schemas.RecommendedAction_severity, string(v.Severity))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.RecommendedAction_type, string(v.Type))
+	}
+}
+func (v *RecommendedAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecommendedAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecommendedAction_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.RecommendedAction_accountId, v.AccountId)
+		case schemas.RecommendedAction_context:
+			return deserializeContext(d, schemas.RecommendedAction_context, &v.Context)
+		case schemas.RecommendedAction_feature:
+			var ev string
+			if err := d.ReadString(schemas.RecommendedAction_feature, &ev); err != nil {
+				return err
+			}
+			v.Feature = Feature(ev)
+			return nil
+		case schemas.RecommendedAction_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RecommendedAction_id, v.Id)
+		case schemas.RecommendedAction_lastUpdatedTimeStamp:
+			v.LastUpdatedTimeStamp = new(string)
+			return d.ReadString(schemas.RecommendedAction_lastUpdatedTimeStamp, v.LastUpdatedTimeStamp)
+		case schemas.RecommendedAction_nextSteps:
+			return deserializeNextSteps(d, schemas.RecommendedAction_nextSteps, &v.NextSteps)
+		case schemas.RecommendedAction_severity:
+			var ev string
+			if err := d.ReadString(schemas.RecommendedAction_severity, &ev); err != nil {
+				return err
+			}
+			v.Severity = Severity(ev)
+			return nil
+		case schemas.RecommendedAction_type:
+			var ev string
+			if err := d.ReadString(schemas.RecommendedAction_type, &ev); err != nil {
+				return err
+			}
+			v.Type = ActionType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Enables filtering of results based on specified action criteria. You can define
 // multiple action filters to refine results using combinations of feature type,
 // severity level, and recommendation type.
@@ -69,6 +180,25 @@ type RequestFilter struct {
 	Actions []ActionFilter
 
 	noSmithyDocumentSerde
+}
+
+func (v *RequestFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionFilterList(s, schemas.RequestFilter_actions, v.Actions)
+}
+func (v *RequestFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestFilter_actions:
+			return deserializeActionFilterList(d, schemas.RequestFilter_actions, &v.Actions)
+		}
+		return nil
+	})
 }
 
 // Provides specific details about why a particular field failed validation.
@@ -85,6 +215,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

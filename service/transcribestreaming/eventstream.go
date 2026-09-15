@@ -456,6 +456,12 @@ func (m *deserializeOpEventStreamStartCallAnalyticsStreamTranscription) HandleDe
 			return out, md, fmt.Errorf("serialize initial request: %w", err)
 		}
 	}
+	if m.options.Protocol.HasInitialEventMessage() {
+		if err = m.options.Protocol.DeserializeInitialResponse(schemas.StartCallAnalyticsStreamTranscriptionResponse, resp.Body, output); err != nil {
+			_ = resp.Body.Close()
+			return out, md, fmt.Errorf("deserialize initial response: %w", err)
+		}
+	}
 	eventReader := newCallAnalyticsTranscriptResultStreamReader(
 		smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.CallAnalyticsTranscriptResultStream, TypeRegistry, resp.Body),
 	)
@@ -464,11 +470,6 @@ func (m *deserializeOpEventStreamStartCallAnalyticsStreamTranscription) HandleDe
 			_ = eventReader.Close()
 		}
 	}()
-	if m.options.Protocol.HasInitialEventMessage() {
-		if err = m.options.Protocol.DeserializeInitialResponse(schemas.StartCallAnalyticsStreamTranscriptionResponse, resp.Body, output); err != nil {
-			return out, md, fmt.Errorf("deserialize initial response: %w", err)
-		}
-	}
 
 	output.eventStream = NewStartCallAnalyticsStreamTranscriptionEventStream(func(stream *StartCallAnalyticsStreamTranscriptionEventStream) {
 		stream.Writer = eventWriter
@@ -542,6 +543,12 @@ func (m *deserializeOpEventStreamStartMedicalScribeStream) HandleDeserialize(
 			return out, md, fmt.Errorf("serialize initial request: %w", err)
 		}
 	}
+	if m.options.Protocol.HasInitialEventMessage() {
+		if err = m.options.Protocol.DeserializeInitialResponse(schemas.StartMedicalScribeStreamResponse, resp.Body, output); err != nil {
+			_ = resp.Body.Close()
+			return out, md, fmt.Errorf("deserialize initial response: %w", err)
+		}
+	}
 	eventReader := newMedicalScribeResultStreamReader(
 		smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.MedicalScribeResultStream, TypeRegistry, resp.Body),
 	)
@@ -550,11 +557,6 @@ func (m *deserializeOpEventStreamStartMedicalScribeStream) HandleDeserialize(
 			_ = eventReader.Close()
 		}
 	}()
-	if m.options.Protocol.HasInitialEventMessage() {
-		if err = m.options.Protocol.DeserializeInitialResponse(schemas.StartMedicalScribeStreamResponse, resp.Body, output); err != nil {
-			return out, md, fmt.Errorf("deserialize initial response: %w", err)
-		}
-	}
 
 	output.eventStream = NewStartMedicalScribeStreamEventStream(func(stream *StartMedicalScribeStreamEventStream) {
 		stream.Writer = eventWriter
@@ -628,6 +630,12 @@ func (m *deserializeOpEventStreamStartMedicalStreamTranscription) HandleDeserial
 			return out, md, fmt.Errorf("serialize initial request: %w", err)
 		}
 	}
+	if m.options.Protocol.HasInitialEventMessage() {
+		if err = m.options.Protocol.DeserializeInitialResponse(schemas.StartMedicalStreamTranscriptionResponse, resp.Body, output); err != nil {
+			_ = resp.Body.Close()
+			return out, md, fmt.Errorf("deserialize initial response: %w", err)
+		}
+	}
 	eventReader := newMedicalTranscriptResultStreamReader(
 		smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.MedicalTranscriptResultStream, TypeRegistry, resp.Body),
 	)
@@ -636,11 +644,6 @@ func (m *deserializeOpEventStreamStartMedicalStreamTranscription) HandleDeserial
 			_ = eventReader.Close()
 		}
 	}()
-	if m.options.Protocol.HasInitialEventMessage() {
-		if err = m.options.Protocol.DeserializeInitialResponse(schemas.StartMedicalStreamTranscriptionResponse, resp.Body, output); err != nil {
-			return out, md, fmt.Errorf("deserialize initial response: %w", err)
-		}
-	}
 
 	output.eventStream = NewStartMedicalStreamTranscriptionEventStream(func(stream *StartMedicalStreamTranscriptionEventStream) {
 		stream.Writer = eventWriter
@@ -714,6 +717,12 @@ func (m *deserializeOpEventStreamStartStreamTranscription) HandleDeserialize(
 			return out, md, fmt.Errorf("serialize initial request: %w", err)
 		}
 	}
+	if m.options.Protocol.HasInitialEventMessage() {
+		if err = m.options.Protocol.DeserializeInitialResponse(schemas.StartStreamTranscriptionResponse, resp.Body, output); err != nil {
+			_ = resp.Body.Close()
+			return out, md, fmt.Errorf("deserialize initial response: %w", err)
+		}
+	}
 	eventReader := newTranscriptResultStreamReader(
 		smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.TranscriptResultStream, TypeRegistry, resp.Body),
 	)
@@ -722,11 +731,6 @@ func (m *deserializeOpEventStreamStartStreamTranscription) HandleDeserialize(
 			_ = eventReader.Close()
 		}
 	}()
-	if m.options.Protocol.HasInitialEventMessage() {
-		if err = m.options.Protocol.DeserializeInitialResponse(schemas.StartStreamTranscriptionResponse, resp.Body, output); err != nil {
-			return out, md, fmt.Errorf("deserialize initial response: %w", err)
-		}
-	}
 
 	output.eventStream = NewStartStreamTranscriptionEventStream(func(stream *StartStreamTranscriptionEventStream) {
 		stream.Writer = eventWriter

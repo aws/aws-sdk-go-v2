@@ -4,7 +4,9 @@ package kinesis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	"time"
@@ -127,6 +129,40 @@ type ListShardsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListShardsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListShardsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListShardsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExclusiveStartShardId != nil {
+		s.WriteString(schemas.ListShardsInput_ExclusiveStartShardId, *v.ExclusiveStartShardId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListShardsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListShardsInput_NextToken, *v.NextToken)
+	}
+	if v.ShardFilter != nil {
+		s.WriteStruct(schemas.ListShardsInput_ShardFilter)
+		v.ShardFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.ListShardsInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamCreationTimestamp != nil {
+		s.WriteTime(schemas.ListShardsInput_StreamCreationTimestamp, *v.StreamCreationTimestamp)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.ListShardsInput_StreamId, *v.StreamId)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.ListShardsInput_StreamName, *v.StreamName)
+	}
+}
 func (in *ListShardsInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
@@ -162,13 +198,35 @@ type ListShardsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListShardsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListShardsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListShardsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListShardsOutput_NextToken, *v.NextToken)
+	}
+	serializeShardList(s, schemas.ListShardsOutput_Shards, v.Shards)
+}
+func (v *ListShardsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListShardsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListShardsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListShardsOutput_NextToken, v.NextToken)
+		case schemas.ListShardsOutput_Shards:
+			return deserializeShardList(d, schemas.ListShardsOutput_Shards, &v.Shards)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListShardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListShards{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListShards, schemas.ListShardsInput, schemas.ListShardsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListShards{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListShards, schemas.ListShardsInput, schemas.ListShardsOutput), output: &ListShardsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package imagebuilder
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetDistributionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDistributionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDistributionConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDistributionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DistributionConfigurationArn != nil {
+		s.WriteString(schemas.GetDistributionConfigurationRequest_distributionConfigurationArn, *v.DistributionConfigurationArn)
+	}
+}
+
 type GetDistributionConfigurationOutput struct {
 
 	// The distribution configuration object.
@@ -49,13 +63,40 @@ type GetDistributionConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDistributionConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDistributionConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDistributionConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DistributionConfiguration != nil {
+		s.WriteStruct(schemas.GetDistributionConfigurationResponse_distributionConfiguration)
+		v.DistributionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.GetDistributionConfigurationResponse_requestId, *v.RequestId)
+	}
+}
+func (v *GetDistributionConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDistributionConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDistributionConfigurationResponse_distributionConfiguration:
+			v.DistributionConfiguration = &types.DistributionConfiguration{}
+			return v.DistributionConfiguration.Deserialize(d)
+		case schemas.GetDistributionConfigurationResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.GetDistributionConfigurationResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDistributionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDistributionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDistributionConfiguration, schemas.GetDistributionConfigurationRequest, schemas.GetDistributionConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDistributionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDistributionConfiguration, schemas.GetDistributionConfigurationRequest, schemas.GetDistributionConfigurationResponse), output: &GetDistributionConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

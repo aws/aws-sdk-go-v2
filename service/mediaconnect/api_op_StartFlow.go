@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type StartFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.StartFlowRequest_FlowArn, *v.FlowArn)
+	}
+}
+
 type StartFlowOutput struct {
 
 	//  The ARN of the flow that you started.
@@ -48,13 +62,42 @@ type StartFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFlowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.StartFlowResponse_FlowArn, *v.FlowArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartFlowResponse_Status, string(v.Status))
+	}
+}
+func (v *StartFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartFlowResponse_FlowArn:
+			v.FlowArn = new(string)
+			return d.ReadString(schemas.StartFlowResponse_FlowArn, v.FlowArn)
+		case schemas.StartFlowResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.StartFlowResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFlow, schemas.StartFlowRequest, schemas.StartFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFlow, schemas.StartFlowRequest, schemas.StartFlowResponse), output: &StartFlowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

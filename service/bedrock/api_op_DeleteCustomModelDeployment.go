@@ -4,6 +4,8 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,18 @@ type DeleteCustomModelDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomModelDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomModelDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomModelDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomModelDeploymentIdentifier != nil {
+		s.WriteString(schemas.DeleteCustomModelDeploymentRequest_customModelDeploymentIdentifier, *v.CustomModelDeploymentIdentifier)
+	}
+}
+
 type DeleteCustomModelDeploymentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +68,26 @@ type DeleteCustomModelDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomModelDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomModelDeploymentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomModelDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCustomModelDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCustomModelDeploymentResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCustomModelDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCustomModelDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomModelDeployment, schemas.DeleteCustomModelDeploymentRequest, schemas.DeleteCustomModelDeploymentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCustomModelDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomModelDeployment, schemas.DeleteCustomModelDeploymentRequest, schemas.DeleteCustomModelDeploymentResponse), output: &DeleteCustomModelDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

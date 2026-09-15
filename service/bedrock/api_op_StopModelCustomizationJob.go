@@ -4,6 +4,8 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type StopModelCustomizationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopModelCustomizationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopModelCustomizationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopModelCustomizationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobIdentifier != nil {
+		s.WriteString(schemas.StopModelCustomizationJobRequest_jobIdentifier, *v.JobIdentifier)
+	}
+}
+
 type StopModelCustomizationJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type StopModelCustomizationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopModelCustomizationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopModelCustomizationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopModelCustomizationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopModelCustomizationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopModelCustomizationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopModelCustomizationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopModelCustomizationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopModelCustomizationJob, schemas.StopModelCustomizationJobRequest, schemas.StopModelCustomizationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopModelCustomizationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopModelCustomizationJob, schemas.StopModelCustomizationJobRequest, schemas.StopModelCustomizationJobResponse), output: &StopModelCustomizationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package mediatailor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,34 @@ type DeleteProgramInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProgramInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProgramRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProgramInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelName != nil {
+		s.WriteString(schemas.DeleteProgramRequest_ChannelName, *v.ChannelName)
+	}
+	if v.ProgramName != nil {
+		s.WriteString(schemas.DeleteProgramRequest_ProgramName, *v.ProgramName)
+	}
+}
+func (v *DeleteProgramInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteProgramRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteProgramRequest_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.DeleteProgramRequest_ChannelName, v.ChannelName)
+		case schemas.DeleteProgramRequest_ProgramName:
+			v.ProgramName = new(string)
+			return d.ReadString(schemas.DeleteProgramRequest_ProgramName, v.ProgramName)
+		}
+		return nil
+	})
+}
+
 type DeleteProgramOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +78,26 @@ type DeleteProgramOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProgramOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProgramResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProgramOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteProgramOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteProgramResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteProgram{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProgram, schemas.DeleteProgramRequest, schemas.DeleteProgramResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteProgram{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProgram, schemas.DeleteProgramRequest, schemas.DeleteProgramResponse), output: &DeleteProgramOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

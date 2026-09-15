@@ -4,7 +4,9 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,40 @@ type UpdateSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultAssessmentReportsDestination != nil {
+		s.WriteStruct(schemas.UpdateSettingsRequest_defaultAssessmentReportsDestination)
+		v.DefaultAssessmentReportsDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultExportDestination != nil {
+		s.WriteStruct(schemas.UpdateSettingsRequest_defaultExportDestination)
+		v.DefaultExportDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRoles(s, schemas.UpdateSettingsRequest_defaultProcessOwners, v.DefaultProcessOwners)
+	if v.DeregistrationPolicy != nil {
+		s.WriteStruct(schemas.UpdateSettingsRequest_deregistrationPolicy)
+		v.DeregistrationPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EvidenceFinderEnabled != nil {
+		s.WriteBool(schemas.UpdateSettingsRequest_evidenceFinderEnabled, *v.EvidenceFinderEnabled)
+	}
+	if v.KmsKey != nil {
+		s.WriteString(schemas.UpdateSettingsRequest_kmsKey, *v.KmsKey)
+	}
+	if v.SnsTopic != nil {
+		s.WriteString(schemas.UpdateSettingsRequest_snsTopic, *v.SnsTopic)
+	}
+}
+
 type UpdateSettingsOutput struct {
 
 	//  The current list of settings.
@@ -73,13 +109,34 @@ type UpdateSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Settings != nil {
+		s.WriteStruct(schemas.UpdateSettingsResponse_settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSettingsResponse_settings:
+			v.Settings = &types.Settings{}
+			return v.Settings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSettings, schemas.UpdateSettingsRequest, schemas.UpdateSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSettings, schemas.UpdateSettingsRequest, schemas.UpdateSettingsResponse), output: &UpdateSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

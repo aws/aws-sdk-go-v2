@@ -5,7 +5,9 @@ package mediaconnect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -83,6 +85,45 @@ type CreateRouterInputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRouterInputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRouterInputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRouterInputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CreateRouterInputRequest_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRouterInputRequest_ClientToken, *v.ClientToken)
+	}
+	serializeRouterInputConfiguration(s, schemas.CreateRouterInputRequest_Configuration, v.Configuration)
+	serializeRouterContentQualityAnalysisConfiguration(s, schemas.CreateRouterInputRequest_ContentQualityAnalysisConfiguration, v.ContentQualityAnalysisConfiguration)
+	serializeMaintenanceConfiguration(s, schemas.CreateRouterInputRequest_MaintenanceConfiguration, v.MaintenanceConfiguration)
+	if v.MaximumBitrate != nil {
+		s.WriteInt64(schemas.CreateRouterInputRequest_MaximumBitrate, *v.MaximumBitrate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRouterInputRequest_Name, *v.Name)
+	}
+	if v.RegionName != nil {
+		s.WriteString(schemas.CreateRouterInputRequest_RegionName, *v.RegionName)
+	}
+	if v.RoutingScope != "" {
+		s.WriteString(schemas.CreateRouterInputRequest_RoutingScope, string(v.RoutingScope))
+	}
+	serialize__mapOfString(s, schemas.CreateRouterInputRequest_Tags, v.Tags)
+	if v.Tier != "" {
+		s.WriteString(schemas.CreateRouterInputRequest_Tier, string(v.Tier))
+	}
+	if v.TransitEncryption != nil {
+		s.WriteStruct(schemas.CreateRouterInputRequest_TransitEncryption)
+		v.TransitEncryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateRouterInputOutput struct {
 
 	// The newly-created router input.
@@ -96,13 +137,34 @@ type CreateRouterInputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRouterInputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRouterInputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRouterInputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RouterInput != nil {
+		s.WriteStruct(schemas.CreateRouterInputResponse_RouterInput)
+		v.RouterInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateRouterInputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRouterInputResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRouterInputResponse_RouterInput:
+			v.RouterInput = &types.RouterInput{}
+			return v.RouterInput.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRouterInputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRouterInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRouterInput, schemas.CreateRouterInputRequest, schemas.CreateRouterInputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRouterInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRouterInput, schemas.CreateRouterInputRequest, schemas.CreateRouterInputResponse), output: &CreateRouterInputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

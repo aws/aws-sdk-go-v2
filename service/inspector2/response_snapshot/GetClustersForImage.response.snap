@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"cluster":[{"clusterArn":"__ClusterArn__","clusterDetails":[{"clusterMetadata":{"awsEcsMetadataDetails":{"detailsGroup":"__DetailsGroup__","taskDefinitionArn":"__TaskDefinitionArn__"}},"lastInUse":946684800,"runningUnitCount":1,"stoppedUnitCount":1},{"clusterMetadata":{"awsEcsMetadataDetails":{"detailsGroup":"__DetailsGroup__","taskDefinitionArn":"__TaskDefinitionArn__"}},"lastInUse":946684800,"runningUnitCount":1,"stoppedUnitCount":1}]},{"clusterArn":"__ClusterArn__","clusterDetails":[{"clusterMetadata":{"awsEcsMetadataDetails":{"detailsGroup":"__DetailsGroup__","taskDefinitionArn":"__TaskDefinitionArn__"}},"lastInUse":946684800,"runningUnitCount":1,"stoppedUnitCount":1},{"clusterMetadata":{"awsEcsMetadataDetails":{"detailsGroup":"__DetailsGroup__","taskDefinitionArn":"__TaskDefinitionArn__"}},"lastInUse":946684800,"runningUnitCount":1,"stoppedUnitCount":1}]}],"nextToken":"__NextToken__"}

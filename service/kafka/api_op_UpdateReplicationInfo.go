@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,48 @@ type UpdateReplicationInfoInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateReplicationInfoInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateReplicationInfoRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateReplicationInfoInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsumerGroupReplication != nil {
+		s.WriteStruct(schemas.UpdateReplicationInfoRequest_ConsumerGroupReplication)
+		v.ConsumerGroupReplication.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CurrentVersion != nil {
+		s.WriteString(schemas.UpdateReplicationInfoRequest_CurrentVersion, *v.CurrentVersion)
+	}
+	if v.LogDelivery != nil {
+		s.WriteStruct(schemas.UpdateReplicationInfoRequest_LogDelivery)
+		v.LogDelivery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReplicatorArn != nil {
+		s.WriteString(schemas.UpdateReplicationInfoRequest_ReplicatorArn, *v.ReplicatorArn)
+	}
+	if v.SourceKafkaClusterArn != nil {
+		s.WriteString(schemas.UpdateReplicationInfoRequest_SourceKafkaClusterArn, *v.SourceKafkaClusterArn)
+	}
+	if v.SourceKafkaClusterId != nil {
+		s.WriteString(schemas.UpdateReplicationInfoRequest_SourceKafkaClusterId, *v.SourceKafkaClusterId)
+	}
+	if v.TargetKafkaClusterArn != nil {
+		s.WriteString(schemas.UpdateReplicationInfoRequest_TargetKafkaClusterArn, *v.TargetKafkaClusterArn)
+	}
+	if v.TargetKafkaClusterId != nil {
+		s.WriteString(schemas.UpdateReplicationInfoRequest_TargetKafkaClusterId, *v.TargetKafkaClusterId)
+	}
+	if v.TopicReplication != nil {
+		s.WriteStruct(schemas.UpdateReplicationInfoRequest_TopicReplication)
+		v.TopicReplication.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateReplicationInfoOutput struct {
 
 	// The Amazon Resource Name (ARN) of the replicator.
@@ -76,13 +120,42 @@ type UpdateReplicationInfoOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateReplicationInfoOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateReplicationInfoResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateReplicationInfoOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicatorArn != nil {
+		s.WriteString(schemas.UpdateReplicationInfoResponse_ReplicatorArn, *v.ReplicatorArn)
+	}
+	if v.ReplicatorState != "" {
+		s.WriteString(schemas.UpdateReplicationInfoResponse_ReplicatorState, string(v.ReplicatorState))
+	}
+}
+func (v *UpdateReplicationInfoOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateReplicationInfoResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateReplicationInfoResponse_ReplicatorArn:
+			v.ReplicatorArn = new(string)
+			return d.ReadString(schemas.UpdateReplicationInfoResponse_ReplicatorArn, v.ReplicatorArn)
+		case schemas.UpdateReplicationInfoResponse_ReplicatorState:
+			var ev string
+			if err := d.ReadString(schemas.UpdateReplicationInfoResponse_ReplicatorState, &ev); err != nil {
+				return err
+			}
+			v.ReplicatorState = types.ReplicatorState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateReplicationInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateReplicationInfo{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateReplicationInfo, schemas.UpdateReplicationInfoRequest, schemas.UpdateReplicationInfoResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateReplicationInfo{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateReplicationInfo, schemas.UpdateReplicationInfoRequest, schemas.UpdateReplicationInfoResponse), output: &UpdateReplicationInfoOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

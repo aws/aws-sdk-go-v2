@@ -5,6 +5,8 @@ package accessanalyzer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,40 @@ type ApplyArchiveRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplyArchiveRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplyArchiveRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplyArchiveRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzerArn != nil {
+		s.WriteString(schemas.ApplyArchiveRuleRequest_analyzerArn, *v.AnalyzerArn)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ApplyArchiveRuleRequest_clientToken, *v.ClientToken)
+	}
+	if v.RuleName != nil {
+		s.WriteString(schemas.ApplyArchiveRuleRequest_ruleName, *v.RuleName)
+	}
+}
+func (v *ApplyArchiveRuleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplyArchiveRuleRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplyArchiveRuleRequest_analyzerArn:
+			v.AnalyzerArn = new(string)
+			return d.ReadString(schemas.ApplyArchiveRuleRequest_analyzerArn, v.AnalyzerArn)
+		case schemas.ApplyArchiveRuleRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.ApplyArchiveRuleRequest_clientToken, v.ClientToken)
+		case schemas.ApplyArchiveRuleRequest_ruleName:
+			v.RuleName = new(string)
+			return d.ReadString(schemas.ApplyArchiveRuleRequest_ruleName, v.RuleName)
+		}
+		return nil
+	})
+}
+
 type ApplyArchiveRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +87,26 @@ type ApplyArchiveRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplyArchiveRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplyArchiveRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ApplyArchiveRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationApplyArchiveRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpApplyArchiveRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ApplyArchiveRule, schemas.ApplyArchiveRuleRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpApplyArchiveRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ApplyArchiveRule, schemas.ApplyArchiveRuleRequest, nil), output: &ApplyArchiveRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

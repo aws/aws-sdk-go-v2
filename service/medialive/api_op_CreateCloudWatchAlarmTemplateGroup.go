@@ -5,6 +5,8 @@ package medialive
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -48,6 +50,25 @@ type CreateCloudWatchAlarmTemplateGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCloudWatchAlarmTemplateGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCloudWatchAlarmTemplateGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCloudWatchAlarmTemplateGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateCloudWatchAlarmTemplateGroupRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCloudWatchAlarmTemplateGroupRequest_Name, *v.Name)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateCloudWatchAlarmTemplateGroupRequest_RequestId, *v.RequestId)
+	}
+	serializeTagMap(s, schemas.CreateCloudWatchAlarmTemplateGroupRequest_Tags, v.Tags)
+}
+
 // Placeholder documentation for CreateCloudWatchAlarmTemplateGroupResponse
 type CreateCloudWatchAlarmTemplateGroupOutput struct {
 
@@ -80,13 +101,65 @@ type CreateCloudWatchAlarmTemplateGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCloudWatchAlarmTemplateGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCloudWatchAlarmTemplateGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCloudWatchAlarmTemplateGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateCloudWatchAlarmTemplateGroupResponse_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateCloudWatchAlarmTemplateGroupResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateCloudWatchAlarmTemplateGroupResponse_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateCloudWatchAlarmTemplateGroupResponse_Id, *v.Id)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.CreateCloudWatchAlarmTemplateGroupResponse_ModifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCloudWatchAlarmTemplateGroupResponse_Name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateCloudWatchAlarmTemplateGroupResponse_Tags, v.Tags)
+}
+func (v *CreateCloudWatchAlarmTemplateGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCloudWatchAlarmTemplateGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCloudWatchAlarmTemplateGroupResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateCloudWatchAlarmTemplateGroupResponse_Arn, v.Arn)
+		case schemas.CreateCloudWatchAlarmTemplateGroupResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateCloudWatchAlarmTemplateGroupResponse_CreatedAt, v.CreatedAt)
+		case schemas.CreateCloudWatchAlarmTemplateGroupResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateCloudWatchAlarmTemplateGroupResponse_Description, v.Description)
+		case schemas.CreateCloudWatchAlarmTemplateGroupResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateCloudWatchAlarmTemplateGroupResponse_Id, v.Id)
+		case schemas.CreateCloudWatchAlarmTemplateGroupResponse_ModifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateCloudWatchAlarmTemplateGroupResponse_ModifiedAt, v.ModifiedAt)
+		case schemas.CreateCloudWatchAlarmTemplateGroupResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateCloudWatchAlarmTemplateGroupResponse_Name, v.Name)
+		case schemas.CreateCloudWatchAlarmTemplateGroupResponse_Tags:
+			return deserializeTagMap(d, schemas.CreateCloudWatchAlarmTemplateGroupResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCloudWatchAlarmTemplateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCloudWatchAlarmTemplateGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCloudWatchAlarmTemplateGroup, schemas.CreateCloudWatchAlarmTemplateGroupRequest, schemas.CreateCloudWatchAlarmTemplateGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCloudWatchAlarmTemplateGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCloudWatchAlarmTemplateGroup, schemas.CreateCloudWatchAlarmTemplateGroupRequest, schemas.CreateCloudWatchAlarmTemplateGroupResponse), output: &CreateCloudWatchAlarmTemplateGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,19 @@ type RebootBrokerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootBrokerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootBrokerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootBrokerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOf__string(s, schemas.RebootBrokerRequest_BrokerIds, v.BrokerIds)
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.RebootBrokerRequest_ClusterArn, *v.ClusterArn)
+	}
+}
+
 type RebootBrokerOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.
@@ -54,13 +69,38 @@ type RebootBrokerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootBrokerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootBrokerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootBrokerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.RebootBrokerResponse_ClusterArn, *v.ClusterArn)
+	}
+	if v.ClusterOperationArn != nil {
+		s.WriteString(schemas.RebootBrokerResponse_ClusterOperationArn, *v.ClusterOperationArn)
+	}
+}
+func (v *RebootBrokerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RebootBrokerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RebootBrokerResponse_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.RebootBrokerResponse_ClusterArn, v.ClusterArn)
+		case schemas.RebootBrokerResponse_ClusterOperationArn:
+			v.ClusterOperationArn = new(string)
+			return d.ReadString(schemas.RebootBrokerResponse_ClusterOperationArn, v.ClusterOperationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRebootBrokerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRebootBroker{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootBroker, schemas.RebootBrokerRequest, schemas.RebootBrokerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRebootBroker{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootBroker, schemas.RebootBrokerRequest, schemas.RebootBrokerResponse), output: &RebootBrokerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

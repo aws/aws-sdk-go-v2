@@ -5,7 +5,9 @@ package inspector2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,35 @@ type ListCisScanResultsAggregatedByChecksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCisScanResultsAggregatedByChecksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCisScanResultsAggregatedByChecksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCisScanResultsAggregatedByChecksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterCriteria != nil {
+		s.WriteStruct(schemas.ListCisScanResultsAggregatedByChecksRequest_filterCriteria)
+		v.FilterCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCisScanResultsAggregatedByChecksRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCisScanResultsAggregatedByChecksRequest_nextToken, *v.NextToken)
+	}
+	if v.ScanArn != nil {
+		s.WriteString(schemas.ListCisScanResultsAggregatedByChecksRequest_scanArn, *v.ScanArn)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListCisScanResultsAggregatedByChecksRequest_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListCisScanResultsAggregatedByChecksRequest_sortOrder, string(v.SortOrder))
+	}
+}
+
 type ListCisScanResultsAggregatedByChecksOutput struct {
 
 	// The check aggregations.
@@ -67,13 +98,35 @@ type ListCisScanResultsAggregatedByChecksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCisScanResultsAggregatedByChecksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCisScanResultsAggregatedByChecksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCisScanResultsAggregatedByChecksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCisCheckAggregationList(s, schemas.ListCisScanResultsAggregatedByChecksResponse_checkAggregations, v.CheckAggregations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCisScanResultsAggregatedByChecksResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCisScanResultsAggregatedByChecksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCisScanResultsAggregatedByChecksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCisScanResultsAggregatedByChecksResponse_checkAggregations:
+			return deserializeCisCheckAggregationList(d, schemas.ListCisScanResultsAggregatedByChecksResponse_checkAggregations, &v.CheckAggregations)
+		case schemas.ListCisScanResultsAggregatedByChecksResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCisScanResultsAggregatedByChecksResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCisScanResultsAggregatedByChecksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCisScanResultsAggregatedByChecks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCisScanResultsAggregatedByChecks, schemas.ListCisScanResultsAggregatedByChecksRequest, schemas.ListCisScanResultsAggregatedByChecksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCisScanResultsAggregatedByChecks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCisScanResultsAggregatedByChecks, schemas.ListCisScanResultsAggregatedByChecksRequest, schemas.ListCisScanResultsAggregatedByChecksResponse), output: &ListCisScanResultsAggregatedByChecksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

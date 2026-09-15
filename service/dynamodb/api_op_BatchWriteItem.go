@@ -5,8 +5,10 @@ package dynamodb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -168,6 +170,21 @@ type BatchWriteItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchWriteItemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchWriteItemInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchWriteItemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchWriteItemRequestMap(s, schemas.BatchWriteItemInput_RequestItems, v.RequestItems)
+	if v.ReturnConsumedCapacity != "" {
+		s.WriteString(schemas.BatchWriteItemInput_ReturnConsumedCapacity, string(v.ReturnConsumedCapacity))
+	}
+	if v.ReturnItemCollectionMetrics != "" {
+		s.WriteString(schemas.BatchWriteItemInput_ReturnItemCollectionMetrics, string(v.ReturnItemCollectionMetrics))
+	}
+}
 func (in *BatchWriteItemInput) bindEndpointParams(p *EndpointParameters) {
 	func() {
 		v1 := in.RequestItems
@@ -252,13 +269,35 @@ type BatchWriteItemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchWriteItemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchWriteItemOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchWriteItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConsumedCapacityMultiple(s, schemas.BatchWriteItemOutput_ConsumedCapacity, v.ConsumedCapacity)
+	serializeItemCollectionMetricsPerTable(s, schemas.BatchWriteItemOutput_ItemCollectionMetrics, v.ItemCollectionMetrics)
+	serializeBatchWriteItemRequestMap(s, schemas.BatchWriteItemOutput_UnprocessedItems, v.UnprocessedItems)
+}
+func (v *BatchWriteItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchWriteItemOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchWriteItemOutput_ConsumedCapacity:
+			return deserializeConsumedCapacityMultiple(d, schemas.BatchWriteItemOutput_ConsumedCapacity, &v.ConsumedCapacity)
+		case schemas.BatchWriteItemOutput_ItemCollectionMetrics:
+			return deserializeItemCollectionMetricsPerTable(d, schemas.BatchWriteItemOutput_ItemCollectionMetrics, &v.ItemCollectionMetrics)
+		case schemas.BatchWriteItemOutput_UnprocessedItems:
+			return deserializeBatchWriteItemRequestMap(d, schemas.BatchWriteItemOutput_UnprocessedItems, &v.UnprocessedItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchWriteItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchWriteItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchWriteItem, schemas.BatchWriteItemInput, schemas.BatchWriteItemOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchWriteItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchWriteItem, schemas.BatchWriteItemInput, schemas.BatchWriteItemOutput), output: &BatchWriteItemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

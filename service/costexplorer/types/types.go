@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -13,6 +15,30 @@ type AnalysisDetails struct {
 	SavingsPlansPurchaseAnalysisDetails *SavingsPlansPurchaseAnalysisDetails
 
 	noSmithyDocumentSerde
+}
+
+func (v *AnalysisDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnalysisDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnalysisDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SavingsPlansPurchaseAnalysisDetails != nil {
+		s.WriteStruct(schemas.AnalysisDetails_SavingsPlansPurchaseAnalysisDetails)
+		v.SavingsPlansPurchaseAnalysisDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AnalysisDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnalysisDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnalysisDetails_SavingsPlansPurchaseAnalysisDetails:
+			v.SavingsPlansPurchaseAnalysisDetails = &SavingsPlansPurchaseAnalysisDetails{}
+			return v.SavingsPlansPurchaseAnalysisDetails.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A summary of the analysis.
@@ -40,6 +66,74 @@ type AnalysisSummary struct {
 	EstimatedCompletionTime *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AnalysisSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnalysisSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnalysisSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisCompletionTime != nil {
+		s.WriteString(schemas.AnalysisSummary_AnalysisCompletionTime, *v.AnalysisCompletionTime)
+	}
+	if v.AnalysisId != nil {
+		s.WriteString(schemas.AnalysisSummary_AnalysisId, *v.AnalysisId)
+	}
+	if v.AnalysisStartedTime != nil {
+		s.WriteString(schemas.AnalysisSummary_AnalysisStartedTime, *v.AnalysisStartedTime)
+	}
+	if v.AnalysisStatus != "" {
+		s.WriteString(schemas.AnalysisSummary_AnalysisStatus, string(v.AnalysisStatus))
+	}
+	if v.CommitmentPurchaseAnalysisConfiguration != nil {
+		s.WriteStruct(schemas.AnalysisSummary_CommitmentPurchaseAnalysisConfiguration)
+		v.CommitmentPurchaseAnalysisConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.AnalysisSummary_ErrorCode, string(v.ErrorCode))
+	}
+	if v.EstimatedCompletionTime != nil {
+		s.WriteString(schemas.AnalysisSummary_EstimatedCompletionTime, *v.EstimatedCompletionTime)
+	}
+}
+func (v *AnalysisSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnalysisSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnalysisSummary_AnalysisCompletionTime:
+			v.AnalysisCompletionTime = new(string)
+			return d.ReadString(schemas.AnalysisSummary_AnalysisCompletionTime, v.AnalysisCompletionTime)
+		case schemas.AnalysisSummary_AnalysisId:
+			v.AnalysisId = new(string)
+			return d.ReadString(schemas.AnalysisSummary_AnalysisId, v.AnalysisId)
+		case schemas.AnalysisSummary_AnalysisStartedTime:
+			v.AnalysisStartedTime = new(string)
+			return d.ReadString(schemas.AnalysisSummary_AnalysisStartedTime, v.AnalysisStartedTime)
+		case schemas.AnalysisSummary_AnalysisStatus:
+			var ev string
+			if err := d.ReadString(schemas.AnalysisSummary_AnalysisStatus, &ev); err != nil {
+				return err
+			}
+			v.AnalysisStatus = AnalysisStatus(ev)
+			return nil
+		case schemas.AnalysisSummary_CommitmentPurchaseAnalysisConfiguration:
+			v.CommitmentPurchaseAnalysisConfiguration = &CommitmentPurchaseAnalysisConfiguration{}
+			return v.CommitmentPurchaseAnalysisConfiguration.Deserialize(d)
+		case schemas.AnalysisSummary_ErrorCode:
+			var ev string
+			if err := d.ReadString(schemas.AnalysisSummary_ErrorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = ErrorCode(ev)
+			return nil
+		case schemas.AnalysisSummary_EstimatedCompletionTime:
+			v.EstimatedCompletionTime = new(string)
+			return d.ReadString(schemas.AnalysisSummary_EstimatedCompletionTime, v.EstimatedCompletionTime)
+		}
+		return nil
+	})
 }
 
 // An unusual cost pattern. This consists of the detailed metadata and the current
@@ -86,6 +180,81 @@ type Anomaly struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Anomaly) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Anomaly)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Anomaly) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalyEndDate != nil {
+		s.WriteString(schemas.Anomaly_AnomalyEndDate, *v.AnomalyEndDate)
+	}
+	if v.AnomalyId != nil {
+		s.WriteString(schemas.Anomaly_AnomalyId, *v.AnomalyId)
+	}
+	if v.AnomalyScore != nil {
+		s.WriteStruct(schemas.Anomaly_AnomalyScore)
+		v.AnomalyScore.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AnomalyStartDate != nil {
+		s.WriteString(schemas.Anomaly_AnomalyStartDate, *v.AnomalyStartDate)
+	}
+	if v.DimensionValue != nil {
+		s.WriteString(schemas.Anomaly_DimensionValue, *v.DimensionValue)
+	}
+	if v.Feedback != "" {
+		s.WriteString(schemas.Anomaly_Feedback, string(v.Feedback))
+	}
+	if v.Impact != nil {
+		s.WriteStruct(schemas.Anomaly_Impact)
+		v.Impact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MonitorArn != nil {
+		s.WriteString(schemas.Anomaly_MonitorArn, *v.MonitorArn)
+	}
+	serializeRootCauses(s, schemas.Anomaly_RootCauses, v.RootCauses)
+}
+func (v *Anomaly) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Anomaly, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Anomaly_AnomalyEndDate:
+			v.AnomalyEndDate = new(string)
+			return d.ReadString(schemas.Anomaly_AnomalyEndDate, v.AnomalyEndDate)
+		case schemas.Anomaly_AnomalyId:
+			v.AnomalyId = new(string)
+			return d.ReadString(schemas.Anomaly_AnomalyId, v.AnomalyId)
+		case schemas.Anomaly_AnomalyScore:
+			v.AnomalyScore = &AnomalyScore{}
+			return v.AnomalyScore.Deserialize(d)
+		case schemas.Anomaly_AnomalyStartDate:
+			v.AnomalyStartDate = new(string)
+			return d.ReadString(schemas.Anomaly_AnomalyStartDate, v.AnomalyStartDate)
+		case schemas.Anomaly_DimensionValue:
+			v.DimensionValue = new(string)
+			return d.ReadString(schemas.Anomaly_DimensionValue, v.DimensionValue)
+		case schemas.Anomaly_Feedback:
+			var ev string
+			if err := d.ReadString(schemas.Anomaly_Feedback, &ev); err != nil {
+				return err
+			}
+			v.Feedback = AnomalyFeedbackType(ev)
+			return nil
+		case schemas.Anomaly_Impact:
+			v.Impact = &Impact{}
+			return v.Impact.Deserialize(d)
+		case schemas.Anomaly_MonitorArn:
+			v.MonitorArn = new(string)
+			return d.ReadString(schemas.Anomaly_MonitorArn, v.MonitorArn)
+		case schemas.Anomaly_RootCauses:
+			return deserializeRootCauses(d, schemas.Anomaly_RootCauses, &v.RootCauses)
+		}
+		return nil
+	})
+}
+
 // The time period for an anomaly.
 type AnomalyDateInterval struct {
 
@@ -98,6 +267,34 @@ type AnomalyDateInterval struct {
 	EndDate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AnomalyDateInterval) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnomalyDateInterval)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnomalyDateInterval) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndDate != nil {
+		s.WriteString(schemas.AnomalyDateInterval_EndDate, *v.EndDate)
+	}
+	if v.StartDate != nil {
+		s.WriteString(schemas.AnomalyDateInterval_StartDate, *v.StartDate)
+	}
+}
+func (v *AnomalyDateInterval) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnomalyDateInterval, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnomalyDateInterval_EndDate:
+			v.EndDate = new(string)
+			return d.ReadString(schemas.AnomalyDateInterval_EndDate, v.EndDate)
+		case schemas.AnomalyDateInterval_StartDate:
+			v.StartDate = new(string)
+			return d.ReadString(schemas.AnomalyDateInterval_StartDate, v.StartDate)
+		}
+		return nil
+	})
 }
 
 // This object continuously inspects your account's cost data for anomalies. It's
@@ -182,6 +379,85 @@ type AnomalyMonitor struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AnomalyMonitor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnomalyMonitor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnomalyMonitor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteString(schemas.AnomalyMonitor_CreationDate, *v.CreationDate)
+	}
+	if v.DimensionalValueCount != 0 {
+		s.WriteInt32(schemas.AnomalyMonitor_DimensionalValueCount, v.DimensionalValueCount)
+	}
+	if v.LastEvaluatedDate != nil {
+		s.WriteString(schemas.AnomalyMonitor_LastEvaluatedDate, *v.LastEvaluatedDate)
+	}
+	if v.LastUpdatedDate != nil {
+		s.WriteString(schemas.AnomalyMonitor_LastUpdatedDate, *v.LastUpdatedDate)
+	}
+	if v.MonitorArn != nil {
+		s.WriteString(schemas.AnomalyMonitor_MonitorArn, *v.MonitorArn)
+	}
+	if v.MonitorDimension != "" {
+		s.WriteString(schemas.AnomalyMonitor_MonitorDimension, string(v.MonitorDimension))
+	}
+	if v.MonitorName != nil {
+		s.WriteString(schemas.AnomalyMonitor_MonitorName, *v.MonitorName)
+	}
+	if v.MonitorSpecification != nil {
+		s.WriteStruct(schemas.AnomalyMonitor_MonitorSpecification)
+		v.MonitorSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MonitorType != "" {
+		s.WriteString(schemas.AnomalyMonitor_MonitorType, string(v.MonitorType))
+	}
+}
+func (v *AnomalyMonitor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnomalyMonitor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnomalyMonitor_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.AnomalyMonitor_CreationDate, v.CreationDate)
+		case schemas.AnomalyMonitor_DimensionalValueCount:
+			return d.ReadInt32(schemas.AnomalyMonitor_DimensionalValueCount, &v.DimensionalValueCount)
+		case schemas.AnomalyMonitor_LastEvaluatedDate:
+			v.LastEvaluatedDate = new(string)
+			return d.ReadString(schemas.AnomalyMonitor_LastEvaluatedDate, v.LastEvaluatedDate)
+		case schemas.AnomalyMonitor_LastUpdatedDate:
+			v.LastUpdatedDate = new(string)
+			return d.ReadString(schemas.AnomalyMonitor_LastUpdatedDate, v.LastUpdatedDate)
+		case schemas.AnomalyMonitor_MonitorArn:
+			v.MonitorArn = new(string)
+			return d.ReadString(schemas.AnomalyMonitor_MonitorArn, v.MonitorArn)
+		case schemas.AnomalyMonitor_MonitorDimension:
+			var ev string
+			if err := d.ReadString(schemas.AnomalyMonitor_MonitorDimension, &ev); err != nil {
+				return err
+			}
+			v.MonitorDimension = MonitorDimension(ev)
+			return nil
+		case schemas.AnomalyMonitor_MonitorName:
+			v.MonitorName = new(string)
+			return d.ReadString(schemas.AnomalyMonitor_MonitorName, v.MonitorName)
+		case schemas.AnomalyMonitor_MonitorSpecification:
+			v.MonitorSpecification = &Expression{}
+			return v.MonitorSpecification.Deserialize(d)
+		case schemas.AnomalyMonitor_MonitorType:
+			var ev string
+			if err := d.ReadString(schemas.AnomalyMonitor_MonitorType, &ev); err != nil {
+				return err
+			}
+			v.MonitorType = MonitorType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Quantifies the anomaly. The higher score means that it's more anomalous.
 type AnomalyScore struct {
 
@@ -196,6 +472,28 @@ type AnomalyScore struct {
 	MaxScore float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *AnomalyScore) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnomalyScore)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnomalyScore) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteFloat64(schemas.AnomalyScore_CurrentScore, v.CurrentScore)
+	s.WriteFloat64(schemas.AnomalyScore_MaxScore, v.MaxScore)
+}
+func (v *AnomalyScore) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnomalyScore, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnomalyScore_CurrentScore:
+			return d.ReadFloat64(schemas.AnomalyScore_CurrentScore, &v.CurrentScore)
+		case schemas.AnomalyScore_MaxScore:
+			return d.ReadFloat64(schemas.AnomalyScore_MaxScore, &v.MaxScore)
+		}
+		return nil
+	})
 }
 
 // An AnomalySubscription resource (also referred to as an alert subscription)
@@ -304,6 +602,70 @@ type AnomalySubscription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AnomalySubscription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnomalySubscription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnomalySubscription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.AnomalySubscription_AccountId, *v.AccountId)
+	}
+	if v.Frequency != "" {
+		s.WriteString(schemas.AnomalySubscription_Frequency, string(v.Frequency))
+	}
+	serializeMonitorArnList(s, schemas.AnomalySubscription_MonitorArnList, v.MonitorArnList)
+	serializeSubscribers(s, schemas.AnomalySubscription_Subscribers, v.Subscribers)
+	if v.SubscriptionArn != nil {
+		s.WriteString(schemas.AnomalySubscription_SubscriptionArn, *v.SubscriptionArn)
+	}
+	if v.SubscriptionName != nil {
+		s.WriteString(schemas.AnomalySubscription_SubscriptionName, *v.SubscriptionName)
+	}
+	if v.Threshold != nil {
+		s.WriteFloat64(schemas.AnomalySubscription_Threshold, *v.Threshold)
+	}
+	if v.ThresholdExpression != nil {
+		s.WriteStruct(schemas.AnomalySubscription_ThresholdExpression)
+		v.ThresholdExpression.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AnomalySubscription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnomalySubscription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnomalySubscription_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.AnomalySubscription_AccountId, v.AccountId)
+		case schemas.AnomalySubscription_Frequency:
+			var ev string
+			if err := d.ReadString(schemas.AnomalySubscription_Frequency, &ev); err != nil {
+				return err
+			}
+			v.Frequency = AnomalySubscriptionFrequency(ev)
+			return nil
+		case schemas.AnomalySubscription_MonitorArnList:
+			return deserializeMonitorArnList(d, schemas.AnomalySubscription_MonitorArnList, &v.MonitorArnList)
+		case schemas.AnomalySubscription_Subscribers:
+			return deserializeSubscribers(d, schemas.AnomalySubscription_Subscribers, &v.Subscribers)
+		case schemas.AnomalySubscription_SubscriptionArn:
+			v.SubscriptionArn = new(string)
+			return d.ReadString(schemas.AnomalySubscription_SubscriptionArn, v.SubscriptionArn)
+		case schemas.AnomalySubscription_SubscriptionName:
+			v.SubscriptionName = new(string)
+			return d.ReadString(schemas.AnomalySubscription_SubscriptionName, v.SubscriptionName)
+		case schemas.AnomalySubscription_Threshold:
+			v.Threshold = new(float64)
+			return d.ReadFloat64(schemas.AnomalySubscription_Threshold, v.Threshold)
+		case schemas.AnomalySubscription_ThresholdExpression:
+			v.ThresholdExpression = &Expression{}
+			return v.ThresholdExpression.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The configuration for the commitment purchase analysis.
 type CommitmentPurchaseAnalysisConfiguration struct {
 
@@ -311,6 +673,30 @@ type CommitmentPurchaseAnalysisConfiguration struct {
 	SavingsPlansPurchaseAnalysisConfiguration *SavingsPlansPurchaseAnalysisConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *CommitmentPurchaseAnalysisConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CommitmentPurchaseAnalysisConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CommitmentPurchaseAnalysisConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SavingsPlansPurchaseAnalysisConfiguration != nil {
+		s.WriteStruct(schemas.CommitmentPurchaseAnalysisConfiguration_SavingsPlansPurchaseAnalysisConfiguration)
+		v.SavingsPlansPurchaseAnalysisConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CommitmentPurchaseAnalysisConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CommitmentPurchaseAnalysisConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CommitmentPurchaseAnalysisConfiguration_SavingsPlansPurchaseAnalysisConfiguration:
+			v.SavingsPlansPurchaseAnalysisConfiguration = &SavingsPlansPurchaseAnalysisConfiguration{}
+			return v.SavingsPlansPurchaseAnalysisConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Contains cost or usage metric values for comparing two time periods. Each value
@@ -332,6 +718,46 @@ type ComparisonMetricValue struct {
 	Unit *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ComparisonMetricValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComparisonMetricValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComparisonMetricValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaselineTimePeriodAmount != nil {
+		s.WriteString(schemas.ComparisonMetricValue_BaselineTimePeriodAmount, *v.BaselineTimePeriodAmount)
+	}
+	if v.ComparisonTimePeriodAmount != nil {
+		s.WriteString(schemas.ComparisonMetricValue_ComparisonTimePeriodAmount, *v.ComparisonTimePeriodAmount)
+	}
+	if v.Difference != nil {
+		s.WriteString(schemas.ComparisonMetricValue_Difference, *v.Difference)
+	}
+	if v.Unit != nil {
+		s.WriteString(schemas.ComparisonMetricValue_Unit, *v.Unit)
+	}
+}
+func (v *ComparisonMetricValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComparisonMetricValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComparisonMetricValue_BaselineTimePeriodAmount:
+			v.BaselineTimePeriodAmount = new(string)
+			return d.ReadString(schemas.ComparisonMetricValue_BaselineTimePeriodAmount, v.BaselineTimePeriodAmount)
+		case schemas.ComparisonMetricValue_ComparisonTimePeriodAmount:
+			v.ComparisonTimePeriodAmount = new(string)
+			return d.ReadString(schemas.ComparisonMetricValue_ComparisonTimePeriodAmount, v.ComparisonTimePeriodAmount)
+		case schemas.ComparisonMetricValue_Difference:
+			v.Difference = new(string)
+			return d.ReadString(schemas.ComparisonMetricValue_Difference, v.Difference)
+		case schemas.ComparisonMetricValue_Unit:
+			v.Unit = new(string)
+			return d.ReadString(schemas.ComparisonMetricValue_Unit, v.Unit)
+		}
+		return nil
+	})
 }
 
 // The cost allocation tag structure. This includes detailed metadata for the
@@ -365,6 +791,60 @@ type CostAllocationTag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CostAllocationTag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CostAllocationTag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CostAllocationTag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastUpdatedDate != nil {
+		s.WriteString(schemas.CostAllocationTag_LastUpdatedDate, *v.LastUpdatedDate)
+	}
+	if v.LastUsedDate != nil {
+		s.WriteString(schemas.CostAllocationTag_LastUsedDate, *v.LastUsedDate)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CostAllocationTag_Status, string(v.Status))
+	}
+	if v.TagKey != nil {
+		s.WriteString(schemas.CostAllocationTag_TagKey, *v.TagKey)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CostAllocationTag_Type, string(v.Type))
+	}
+}
+func (v *CostAllocationTag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CostAllocationTag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CostAllocationTag_LastUpdatedDate:
+			v.LastUpdatedDate = new(string)
+			return d.ReadString(schemas.CostAllocationTag_LastUpdatedDate, v.LastUpdatedDate)
+		case schemas.CostAllocationTag_LastUsedDate:
+			v.LastUsedDate = new(string)
+			return d.ReadString(schemas.CostAllocationTag_LastUsedDate, v.LastUsedDate)
+		case schemas.CostAllocationTag_Status:
+			var ev string
+			if err := d.ReadString(schemas.CostAllocationTag_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = CostAllocationTagStatus(ev)
+			return nil
+		case schemas.CostAllocationTag_TagKey:
+			v.TagKey = new(string)
+			return d.ReadString(schemas.CostAllocationTag_TagKey, v.TagKey)
+		case schemas.CostAllocationTag_Type:
+			var ev string
+			if err := d.ReadString(schemas.CostAllocationTag_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = CostAllocationTagType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	The cost allocation tag backfill request structure that contains metadata and
 //
 // details of a certain backfill.
@@ -388,6 +868,56 @@ type CostAllocationTagBackfillRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CostAllocationTagBackfillRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CostAllocationTagBackfillRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CostAllocationTagBackfillRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackfillFrom != nil {
+		s.WriteString(schemas.CostAllocationTagBackfillRequest_BackfillFrom, *v.BackfillFrom)
+	}
+	if v.BackfillStatus != "" {
+		s.WriteString(schemas.CostAllocationTagBackfillRequest_BackfillStatus, string(v.BackfillStatus))
+	}
+	if v.CompletedAt != nil {
+		s.WriteString(schemas.CostAllocationTagBackfillRequest_CompletedAt, *v.CompletedAt)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteString(schemas.CostAllocationTagBackfillRequest_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.RequestedAt != nil {
+		s.WriteString(schemas.CostAllocationTagBackfillRequest_RequestedAt, *v.RequestedAt)
+	}
+}
+func (v *CostAllocationTagBackfillRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CostAllocationTagBackfillRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CostAllocationTagBackfillRequest_BackfillFrom:
+			v.BackfillFrom = new(string)
+			return d.ReadString(schemas.CostAllocationTagBackfillRequest_BackfillFrom, v.BackfillFrom)
+		case schemas.CostAllocationTagBackfillRequest_BackfillStatus:
+			var ev string
+			if err := d.ReadString(schemas.CostAllocationTagBackfillRequest_BackfillStatus, &ev); err != nil {
+				return err
+			}
+			v.BackfillStatus = CostAllocationTagBackfillStatus(ev)
+			return nil
+		case schemas.CostAllocationTagBackfillRequest_CompletedAt:
+			v.CompletedAt = new(string)
+			return d.ReadString(schemas.CostAllocationTagBackfillRequest_CompletedAt, v.CompletedAt)
+		case schemas.CostAllocationTagBackfillRequest_LastUpdatedAt:
+			v.LastUpdatedAt = new(string)
+			return d.ReadString(schemas.CostAllocationTagBackfillRequest_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.CostAllocationTagBackfillRequest_RequestedAt:
+			v.RequestedAt = new(string)
+			return d.ReadString(schemas.CostAllocationTagBackfillRequest_RequestedAt, v.RequestedAt)
+		}
+		return nil
+	})
+}
+
 // The cost allocation tag status. The status of a key can either be active or
 // inactive.
 type CostAllocationTagStatusEntry struct {
@@ -403,6 +933,38 @@ type CostAllocationTagStatusEntry struct {
 	TagKey *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CostAllocationTagStatusEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CostAllocationTagStatusEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CostAllocationTagStatusEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.CostAllocationTagStatusEntry_Status, string(v.Status))
+	}
+	if v.TagKey != nil {
+		s.WriteString(schemas.CostAllocationTagStatusEntry_TagKey, *v.TagKey)
+	}
+}
+func (v *CostAllocationTagStatusEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CostAllocationTagStatusEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CostAllocationTagStatusEntry_Status:
+			var ev string
+			if err := d.ReadString(schemas.CostAllocationTagStatusEntry_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = CostAllocationTagStatus(ev)
+			return nil
+		case schemas.CostAllocationTagStatusEntry_TagKey:
+			v.TagKey = new(string)
+			return d.ReadString(schemas.CostAllocationTagStatusEntry_TagKey, v.TagKey)
+		}
+		return nil
+	})
 }
 
 // Represents a comparison of cost and usage metrics between two time periods.
@@ -491,6 +1053,33 @@ type CostAndUsageComparison struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CostAndUsageComparison) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CostAndUsageComparison)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CostAndUsageComparison) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CostAndUsageSelector != nil {
+		s.WriteStruct(schemas.CostAndUsageComparison_CostAndUsageSelector)
+		v.CostAndUsageSelector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeComparisonMetrics(s, schemas.CostAndUsageComparison_Metrics, v.Metrics)
+}
+func (v *CostAndUsageComparison) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CostAndUsageComparison, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CostAndUsageComparison_CostAndUsageSelector:
+			v.CostAndUsageSelector = &Expression{}
+			return v.CostAndUsageSelector.Deserialize(d)
+		case schemas.CostAndUsageComparison_Metrics:
+			return deserializeComparisonMetrics(d, schemas.CostAndUsageComparison_Metrics, &v.Metrics)
+		}
+		return nil
+	})
+}
+
 // The structure of Cost Categories. This includes detailed metadata and the set
 // of rules for the CostCategory object.
 type CostCategory struct {
@@ -539,6 +1128,71 @@ type CostCategory struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CostCategory) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CostCategory)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CostCategory) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CostCategoryArn != nil {
+		s.WriteString(schemas.CostCategory_CostCategoryArn, *v.CostCategoryArn)
+	}
+	if v.DefaultValue != nil {
+		s.WriteString(schemas.CostCategory_DefaultValue, *v.DefaultValue)
+	}
+	if v.EffectiveEnd != nil {
+		s.WriteString(schemas.CostCategory_EffectiveEnd, *v.EffectiveEnd)
+	}
+	if v.EffectiveStart != nil {
+		s.WriteString(schemas.CostCategory_EffectiveStart, *v.EffectiveStart)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CostCategory_Name, *v.Name)
+	}
+	serializeCostCategoryProcessingStatusList(s, schemas.CostCategory_ProcessingStatus, v.ProcessingStatus)
+	if v.RuleVersion != "" {
+		s.WriteString(schemas.CostCategory_RuleVersion, string(v.RuleVersion))
+	}
+	serializeCostCategoryRulesList(s, schemas.CostCategory_Rules, v.Rules)
+	serializeCostCategorySplitChargeRulesList(s, schemas.CostCategory_SplitChargeRules, v.SplitChargeRules)
+}
+func (v *CostCategory) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CostCategory, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CostCategory_CostCategoryArn:
+			v.CostCategoryArn = new(string)
+			return d.ReadString(schemas.CostCategory_CostCategoryArn, v.CostCategoryArn)
+		case schemas.CostCategory_DefaultValue:
+			v.DefaultValue = new(string)
+			return d.ReadString(schemas.CostCategory_DefaultValue, v.DefaultValue)
+		case schemas.CostCategory_EffectiveEnd:
+			v.EffectiveEnd = new(string)
+			return d.ReadString(schemas.CostCategory_EffectiveEnd, v.EffectiveEnd)
+		case schemas.CostCategory_EffectiveStart:
+			v.EffectiveStart = new(string)
+			return d.ReadString(schemas.CostCategory_EffectiveStart, v.EffectiveStart)
+		case schemas.CostCategory_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CostCategory_Name, v.Name)
+		case schemas.CostCategory_ProcessingStatus:
+			return deserializeCostCategoryProcessingStatusList(d, schemas.CostCategory_ProcessingStatus, &v.ProcessingStatus)
+		case schemas.CostCategory_RuleVersion:
+			var ev string
+			if err := d.ReadString(schemas.CostCategory_RuleVersion, &ev); err != nil {
+				return err
+			}
+			v.RuleVersion = CostCategoryRuleVersion(ev)
+			return nil
+		case schemas.CostCategory_Rules:
+			return deserializeCostCategoryRulesList(d, schemas.CostCategory_Rules, &v.Rules)
+		case schemas.CostCategory_SplitChargeRules:
+			return deserializeCostCategorySplitChargeRulesList(d, schemas.CostCategory_SplitChargeRules, &v.SplitChargeRules)
+		}
+		return nil
+	})
+}
+
 // When you create or update a cost category, you can define the CostCategoryRule
 // rule type as INHERITED_VALUE . This rule type adds the flexibility to define a
 // rule that dynamically inherits the cost category value from the dimension value
@@ -561,6 +1215,38 @@ type CostCategoryInheritedValueDimension struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CostCategoryInheritedValueDimension) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CostCategoryInheritedValueDimension)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CostCategoryInheritedValueDimension) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DimensionKey != nil {
+		s.WriteString(schemas.CostCategoryInheritedValueDimension_DimensionKey, *v.DimensionKey)
+	}
+	if v.DimensionName != "" {
+		s.WriteString(schemas.CostCategoryInheritedValueDimension_DimensionName, string(v.DimensionName))
+	}
+}
+func (v *CostCategoryInheritedValueDimension) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CostCategoryInheritedValueDimension, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CostCategoryInheritedValueDimension_DimensionKey:
+			v.DimensionKey = new(string)
+			return d.ReadString(schemas.CostCategoryInheritedValueDimension_DimensionKey, v.DimensionKey)
+		case schemas.CostCategoryInheritedValueDimension_DimensionName:
+			var ev string
+			if err := d.ReadString(schemas.CostCategoryInheritedValueDimension_DimensionName, &ev); err != nil {
+				return err
+			}
+			v.DimensionName = CostCategoryInheritedValueDimensionName(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The list of processing statuses for Cost Management products for a specific
 // cost category.
 type CostCategoryProcessingStatus struct {
@@ -572,6 +1258,42 @@ type CostCategoryProcessingStatus struct {
 	Status CostCategoryStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *CostCategoryProcessingStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CostCategoryProcessingStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CostCategoryProcessingStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Component != "" {
+		s.WriteString(schemas.CostCategoryProcessingStatus_Component, string(v.Component))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CostCategoryProcessingStatus_Status, string(v.Status))
+	}
+}
+func (v *CostCategoryProcessingStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CostCategoryProcessingStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CostCategoryProcessingStatus_Component:
+			var ev string
+			if err := d.ReadString(schemas.CostCategoryProcessingStatus_Component, &ev); err != nil {
+				return err
+			}
+			v.Component = CostCategoryStatusComponent(ev)
+			return nil
+		case schemas.CostCategoryProcessingStatus_Status:
+			var ev string
+			if err := d.ReadString(schemas.CostCategoryProcessingStatus_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = CostCategoryStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A reference to a cost category containing only enough information to identify
@@ -612,6 +1334,66 @@ type CostCategoryReference struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CostCategoryReference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CostCategoryReference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CostCategoryReference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CostCategoryArn != nil {
+		s.WriteString(schemas.CostCategoryReference_CostCategoryArn, *v.CostCategoryArn)
+	}
+	if v.DefaultValue != nil {
+		s.WriteString(schemas.CostCategoryReference_DefaultValue, *v.DefaultValue)
+	}
+	if v.EffectiveEnd != nil {
+		s.WriteString(schemas.CostCategoryReference_EffectiveEnd, *v.EffectiveEnd)
+	}
+	if v.EffectiveStart != nil {
+		s.WriteString(schemas.CostCategoryReference_EffectiveStart, *v.EffectiveStart)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CostCategoryReference_Name, *v.Name)
+	}
+	if v.NumberOfRules != 0 {
+		s.WriteInt32(schemas.CostCategoryReference_NumberOfRules, v.NumberOfRules)
+	}
+	serializeCostCategoryProcessingStatusList(s, schemas.CostCategoryReference_ProcessingStatus, v.ProcessingStatus)
+	serializeResourceTypes(s, schemas.CostCategoryReference_SupportedResourceTypes, v.SupportedResourceTypes)
+	serializeCostCategoryValuesList(s, schemas.CostCategoryReference_Values, v.Values)
+}
+func (v *CostCategoryReference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CostCategoryReference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CostCategoryReference_CostCategoryArn:
+			v.CostCategoryArn = new(string)
+			return d.ReadString(schemas.CostCategoryReference_CostCategoryArn, v.CostCategoryArn)
+		case schemas.CostCategoryReference_DefaultValue:
+			v.DefaultValue = new(string)
+			return d.ReadString(schemas.CostCategoryReference_DefaultValue, v.DefaultValue)
+		case schemas.CostCategoryReference_EffectiveEnd:
+			v.EffectiveEnd = new(string)
+			return d.ReadString(schemas.CostCategoryReference_EffectiveEnd, v.EffectiveEnd)
+		case schemas.CostCategoryReference_EffectiveStart:
+			v.EffectiveStart = new(string)
+			return d.ReadString(schemas.CostCategoryReference_EffectiveStart, v.EffectiveStart)
+		case schemas.CostCategoryReference_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CostCategoryReference_Name, v.Name)
+		case schemas.CostCategoryReference_NumberOfRules:
+			return d.ReadInt32(schemas.CostCategoryReference_NumberOfRules, &v.NumberOfRules)
+		case schemas.CostCategoryReference_ProcessingStatus:
+			return deserializeCostCategoryProcessingStatusList(d, schemas.CostCategoryReference_ProcessingStatus, &v.ProcessingStatus)
+		case schemas.CostCategoryReference_SupportedResourceTypes:
+			return deserializeResourceTypes(d, schemas.CostCategoryReference_SupportedResourceTypes, &v.SupportedResourceTypes)
+		case schemas.CostCategoryReference_Values:
+			return deserializeCostCategoryValuesList(d, schemas.CostCategoryReference_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // A reference to a cost category association that contains information on an
 // associated resource.
 type CostCategoryResourceAssociation struct {
@@ -626,6 +1408,40 @@ type CostCategoryResourceAssociation struct {
 	ResourceArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CostCategoryResourceAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CostCategoryResourceAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CostCategoryResourceAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CostCategoryArn != nil {
+		s.WriteString(schemas.CostCategoryResourceAssociation_CostCategoryArn, *v.CostCategoryArn)
+	}
+	if v.CostCategoryName != nil {
+		s.WriteString(schemas.CostCategoryResourceAssociation_CostCategoryName, *v.CostCategoryName)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.CostCategoryResourceAssociation_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *CostCategoryResourceAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CostCategoryResourceAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CostCategoryResourceAssociation_CostCategoryArn:
+			v.CostCategoryArn = new(string)
+			return d.ReadString(schemas.CostCategoryResourceAssociation_CostCategoryArn, v.CostCategoryArn)
+		case schemas.CostCategoryResourceAssociation_CostCategoryName:
+			v.CostCategoryName = new(string)
+			return d.ReadString(schemas.CostCategoryResourceAssociation_CostCategoryName, v.CostCategoryName)
+		case schemas.CostCategoryResourceAssociation_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.CostCategoryResourceAssociation_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
 }
 
 // Rules are processed in order. If there are multiple rules that match the line
@@ -666,6 +1482,54 @@ type CostCategoryRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CostCategoryRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CostCategoryRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CostCategoryRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InheritedValue != nil {
+		s.WriteStruct(schemas.CostCategoryRule_InheritedValue)
+		v.InheritedValue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Rule != nil {
+		s.WriteStruct(schemas.CostCategoryRule_Rule)
+		v.Rule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CostCategoryRule_Type, string(v.Type))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.CostCategoryRule_Value, *v.Value)
+	}
+}
+func (v *CostCategoryRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CostCategoryRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CostCategoryRule_InheritedValue:
+			v.InheritedValue = &CostCategoryInheritedValueDimension{}
+			return v.InheritedValue.Deserialize(d)
+		case schemas.CostCategoryRule_Rule:
+			v.Rule = &Expression{}
+			return v.Rule.Deserialize(d)
+		case schemas.CostCategoryRule_Type:
+			var ev string
+			if err := d.ReadString(schemas.CostCategoryRule_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = CostCategoryRuleType(ev)
+			return nil
+		case schemas.CostCategoryRule_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.CostCategoryRule_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Use the split charge rule to split the cost of one cost category value across
 // several other target values.
 type CostCategorySplitChargeRule struct {
@@ -704,6 +1568,44 @@ type CostCategorySplitChargeRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CostCategorySplitChargeRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CostCategorySplitChargeRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CostCategorySplitChargeRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Method != "" {
+		s.WriteString(schemas.CostCategorySplitChargeRule_Method, string(v.Method))
+	}
+	serializeCostCategorySplitChargeRuleParametersList(s, schemas.CostCategorySplitChargeRule_Parameters, v.Parameters)
+	if v.Source != nil {
+		s.WriteString(schemas.CostCategorySplitChargeRule_Source, *v.Source)
+	}
+	serializeCostCategorySplitChargeRuleTargetsList(s, schemas.CostCategorySplitChargeRule_Targets, v.Targets)
+}
+func (v *CostCategorySplitChargeRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CostCategorySplitChargeRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CostCategorySplitChargeRule_Method:
+			var ev string
+			if err := d.ReadString(schemas.CostCategorySplitChargeRule_Method, &ev); err != nil {
+				return err
+			}
+			v.Method = CostCategorySplitChargeMethod(ev)
+			return nil
+		case schemas.CostCategorySplitChargeRule_Parameters:
+			return deserializeCostCategorySplitChargeRuleParametersList(d, schemas.CostCategorySplitChargeRule_Parameters, &v.Parameters)
+		case schemas.CostCategorySplitChargeRule_Source:
+			v.Source = new(string)
+			return d.ReadString(schemas.CostCategorySplitChargeRule_Source, v.Source)
+		case schemas.CostCategorySplitChargeRule_Targets:
+			return deserializeCostCategorySplitChargeRuleTargetsList(d, schemas.CostCategorySplitChargeRule_Targets, &v.Targets)
+		}
+		return nil
+	})
+}
+
 // The parameters for a split charge method.
 type CostCategorySplitChargeRuleParameter struct {
 
@@ -718,6 +1620,35 @@ type CostCategorySplitChargeRuleParameter struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CostCategorySplitChargeRuleParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CostCategorySplitChargeRuleParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CostCategorySplitChargeRuleParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.CostCategorySplitChargeRuleParameter_Type, string(v.Type))
+	}
+	serializeCostCategorySplitChargeRuleParameterValuesList(s, schemas.CostCategorySplitChargeRuleParameter_Values, v.Values)
+}
+func (v *CostCategorySplitChargeRuleParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CostCategorySplitChargeRuleParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CostCategorySplitChargeRuleParameter_Type:
+			var ev string
+			if err := d.ReadString(schemas.CostCategorySplitChargeRuleParameter_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = CostCategorySplitChargeRuleParameterType(ev)
+			return nil
+		case schemas.CostCategorySplitChargeRuleParameter_Values:
+			return deserializeCostCategorySplitChargeRuleParameterValuesList(d, schemas.CostCategorySplitChargeRuleParameter_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // The Cost Categories values used for filtering the costs.
@@ -743,6 +1674,34 @@ type CostCategoryValues struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CostCategoryValues) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CostCategoryValues)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CostCategoryValues) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.CostCategoryValues_Key, *v.Key)
+	}
+	serializeMatchOptions(s, schemas.CostCategoryValues_MatchOptions, v.MatchOptions)
+	serializeValues(s, schemas.CostCategoryValues_Values, v.Values)
+}
+func (v *CostCategoryValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CostCategoryValues, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CostCategoryValues_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.CostCategoryValues_Key, v.Key)
+		case schemas.CostCategoryValues_MatchOptions:
+			return deserializeMatchOptions(d, schemas.CostCategoryValues_MatchOptions, &v.MatchOptions)
+		case schemas.CostCategoryValues_Values:
+			return deserializeValues(d, schemas.CostCategoryValues_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Represents a collection of cost drivers and their associated metrics for cost
@@ -838,6 +1797,36 @@ type CostComparisonDriver struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CostComparisonDriver) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CostComparisonDriver)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CostComparisonDriver) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCostDrivers(s, schemas.CostComparisonDriver_CostDrivers, v.CostDrivers)
+	if v.CostSelector != nil {
+		s.WriteStruct(schemas.CostComparisonDriver_CostSelector)
+		v.CostSelector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeComparisonMetrics(s, schemas.CostComparisonDriver_Metrics, v.Metrics)
+}
+func (v *CostComparisonDriver) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CostComparisonDriver, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CostComparisonDriver_CostDrivers:
+			return deserializeCostDrivers(d, schemas.CostComparisonDriver_CostDrivers, &v.CostDrivers)
+		case schemas.CostComparisonDriver_CostSelector:
+			v.CostSelector = &Expression{}
+			return v.CostSelector.Deserialize(d)
+		case schemas.CostComparisonDriver_Metrics:
+			return deserializeComparisonMetrics(d, schemas.CostComparisonDriver_Metrics, &v.Metrics)
+		}
+		return nil
+	})
+}
+
 // Represents factors that contribute to cost variations between the baseline and
 // comparison time periods, including the type of driver, an identifier of the
 // driver, and associated metrics.
@@ -861,6 +1850,37 @@ type CostDriver struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CostDriver) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CostDriver)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CostDriver) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComparisonMetrics(s, schemas.CostDriver_Metrics, v.Metrics)
+	if v.Name != nil {
+		s.WriteString(schemas.CostDriver_Name, *v.Name)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.CostDriver_Type, *v.Type)
+	}
+}
+func (v *CostDriver) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CostDriver, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CostDriver_Metrics:
+			return deserializeComparisonMetrics(d, schemas.CostDriver_Metrics, &v.Metrics)
+		case schemas.CostDriver_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CostDriver_Name, v.Name)
+		case schemas.CostDriver_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.CostDriver_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // The amount of instance usage that a reservation covered.
 type Coverage struct {
 
@@ -874,6 +1894,46 @@ type Coverage struct {
 	CoverageNormalizedUnits *CoverageNormalizedUnits
 
 	noSmithyDocumentSerde
+}
+
+func (v *Coverage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Coverage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Coverage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoverageCost != nil {
+		s.WriteStruct(schemas.Coverage_CoverageCost)
+		v.CoverageCost.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CoverageHours != nil {
+		s.WriteStruct(schemas.Coverage_CoverageHours)
+		v.CoverageHours.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CoverageNormalizedUnits != nil {
+		s.WriteStruct(schemas.Coverage_CoverageNormalizedUnits)
+		v.CoverageNormalizedUnits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Coverage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Coverage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Coverage_CoverageCost:
+			v.CoverageCost = &CoverageCost{}
+			return v.CoverageCost.Deserialize(d)
+		case schemas.Coverage_CoverageHours:
+			v.CoverageHours = &CoverageHours{}
+			return v.CoverageHours.Deserialize(d)
+		case schemas.Coverage_CoverageNormalizedUnits:
+			v.CoverageNormalizedUnits = &CoverageNormalizedUnits{}
+			return v.CoverageNormalizedUnits.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Reservation coverage for a specified period, in hours.
@@ -891,6 +1951,41 @@ type CoverageByTime struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CoverageByTime) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoverageByTime)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoverageByTime) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeReservationCoverageGroups(s, schemas.CoverageByTime_Groups, v.Groups)
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.CoverageByTime_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Total != nil {
+		s.WriteStruct(schemas.CoverageByTime_Total)
+		v.Total.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CoverageByTime) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoverageByTime, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoverageByTime_Groups:
+			return deserializeReservationCoverageGroups(d, schemas.CoverageByTime_Groups, &v.Groups)
+		case schemas.CoverageByTime_TimePeriod:
+			v.TimePeriod = &DateInterval{}
+			return v.TimePeriod.Deserialize(d)
+		case schemas.CoverageByTime_Total:
+			v.Total = &Coverage{}
+			return v.Total.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // How much it costs to run an instance.
 type CoverageCost struct {
 
@@ -898,6 +1993,28 @@ type CoverageCost struct {
 	OnDemandCost *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CoverageCost) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoverageCost)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoverageCost) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OnDemandCost != nil {
+		s.WriteString(schemas.CoverageCost_OnDemandCost, *v.OnDemandCost)
+	}
+}
+func (v *CoverageCost) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoverageCost, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoverageCost_OnDemandCost:
+			v.OnDemandCost = new(string)
+			return d.ReadString(schemas.CoverageCost_OnDemandCost, v.OnDemandCost)
+		}
+		return nil
+	})
 }
 
 // How long a running instance either used a reservation or was On-Demand.
@@ -916,6 +2033,46 @@ type CoverageHours struct {
 	TotalRunningHours *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CoverageHours) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoverageHours)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoverageHours) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoverageHoursPercentage != nil {
+		s.WriteString(schemas.CoverageHours_CoverageHoursPercentage, *v.CoverageHoursPercentage)
+	}
+	if v.OnDemandHours != nil {
+		s.WriteString(schemas.CoverageHours_OnDemandHours, *v.OnDemandHours)
+	}
+	if v.ReservedHours != nil {
+		s.WriteString(schemas.CoverageHours_ReservedHours, *v.ReservedHours)
+	}
+	if v.TotalRunningHours != nil {
+		s.WriteString(schemas.CoverageHours_TotalRunningHours, *v.TotalRunningHours)
+	}
+}
+func (v *CoverageHours) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoverageHours, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoverageHours_CoverageHoursPercentage:
+			v.CoverageHoursPercentage = new(string)
+			return d.ReadString(schemas.CoverageHours_CoverageHoursPercentage, v.CoverageHoursPercentage)
+		case schemas.CoverageHours_OnDemandHours:
+			v.OnDemandHours = new(string)
+			return d.ReadString(schemas.CoverageHours_OnDemandHours, v.OnDemandHours)
+		case schemas.CoverageHours_ReservedHours:
+			v.ReservedHours = new(string)
+			return d.ReadString(schemas.CoverageHours_ReservedHours, v.ReservedHours)
+		case schemas.CoverageHours_TotalRunningHours:
+			v.TotalRunningHours = new(string)
+			return d.ReadString(schemas.CoverageHours_TotalRunningHours, v.TotalRunningHours)
+		}
+		return nil
+	})
 }
 
 // The amount of instance usage, in normalized units. You can use normalized units
@@ -947,6 +2104,46 @@ type CoverageNormalizedUnits struct {
 	TotalRunningNormalizedUnits *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CoverageNormalizedUnits) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoverageNormalizedUnits)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoverageNormalizedUnits) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoverageNormalizedUnitsPercentage != nil {
+		s.WriteString(schemas.CoverageNormalizedUnits_CoverageNormalizedUnitsPercentage, *v.CoverageNormalizedUnitsPercentage)
+	}
+	if v.OnDemandNormalizedUnits != nil {
+		s.WriteString(schemas.CoverageNormalizedUnits_OnDemandNormalizedUnits, *v.OnDemandNormalizedUnits)
+	}
+	if v.ReservedNormalizedUnits != nil {
+		s.WriteString(schemas.CoverageNormalizedUnits_ReservedNormalizedUnits, *v.ReservedNormalizedUnits)
+	}
+	if v.TotalRunningNormalizedUnits != nil {
+		s.WriteString(schemas.CoverageNormalizedUnits_TotalRunningNormalizedUnits, *v.TotalRunningNormalizedUnits)
+	}
+}
+func (v *CoverageNormalizedUnits) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoverageNormalizedUnits, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoverageNormalizedUnits_CoverageNormalizedUnitsPercentage:
+			v.CoverageNormalizedUnitsPercentage = new(string)
+			return d.ReadString(schemas.CoverageNormalizedUnits_CoverageNormalizedUnitsPercentage, v.CoverageNormalizedUnitsPercentage)
+		case schemas.CoverageNormalizedUnits_OnDemandNormalizedUnits:
+			v.OnDemandNormalizedUnits = new(string)
+			return d.ReadString(schemas.CoverageNormalizedUnits_OnDemandNormalizedUnits, v.OnDemandNormalizedUnits)
+		case schemas.CoverageNormalizedUnits_ReservedNormalizedUnits:
+			v.ReservedNormalizedUnits = new(string)
+			return d.ReadString(schemas.CoverageNormalizedUnits_ReservedNormalizedUnits, v.ReservedNormalizedUnits)
+		case schemas.CoverageNormalizedUnits_TotalRunningNormalizedUnits:
+			v.TotalRunningNormalizedUnits = new(string)
+			return d.ReadString(schemas.CoverageNormalizedUnits_TotalRunningNormalizedUnits, v.TotalRunningNormalizedUnits)
+		}
+		return nil
+	})
 }
 
 // Context about the current instance.
@@ -990,6 +2187,89 @@ type CurrentInstance struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CurrentInstance) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CurrentInstance)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CurrentInstance) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.CurrentInstance_CurrencyCode, *v.CurrencyCode)
+	}
+	if v.InstanceName != nil {
+		s.WriteString(schemas.CurrentInstance_InstanceName, *v.InstanceName)
+	}
+	if v.MonthlyCost != nil {
+		s.WriteString(schemas.CurrentInstance_MonthlyCost, *v.MonthlyCost)
+	}
+	if v.OnDemandHoursInLookbackPeriod != nil {
+		s.WriteString(schemas.CurrentInstance_OnDemandHoursInLookbackPeriod, *v.OnDemandHoursInLookbackPeriod)
+	}
+	if v.ReservationCoveredHoursInLookbackPeriod != nil {
+		s.WriteString(schemas.CurrentInstance_ReservationCoveredHoursInLookbackPeriod, *v.ReservationCoveredHoursInLookbackPeriod)
+	}
+	if v.ResourceDetails != nil {
+		s.WriteStruct(schemas.CurrentInstance_ResourceDetails)
+		v.ResourceDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.CurrentInstance_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceUtilization != nil {
+		s.WriteStruct(schemas.CurrentInstance_ResourceUtilization)
+		v.ResourceUtilization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SavingsPlansCoveredHoursInLookbackPeriod != nil {
+		s.WriteString(schemas.CurrentInstance_SavingsPlansCoveredHoursInLookbackPeriod, *v.SavingsPlansCoveredHoursInLookbackPeriod)
+	}
+	serializeTagValuesList(s, schemas.CurrentInstance_Tags, v.Tags)
+	if v.TotalRunningHoursInLookbackPeriod != nil {
+		s.WriteString(schemas.CurrentInstance_TotalRunningHoursInLookbackPeriod, *v.TotalRunningHoursInLookbackPeriod)
+	}
+}
+func (v *CurrentInstance) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CurrentInstance, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CurrentInstance_CurrencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.CurrentInstance_CurrencyCode, v.CurrencyCode)
+		case schemas.CurrentInstance_InstanceName:
+			v.InstanceName = new(string)
+			return d.ReadString(schemas.CurrentInstance_InstanceName, v.InstanceName)
+		case schemas.CurrentInstance_MonthlyCost:
+			v.MonthlyCost = new(string)
+			return d.ReadString(schemas.CurrentInstance_MonthlyCost, v.MonthlyCost)
+		case schemas.CurrentInstance_OnDemandHoursInLookbackPeriod:
+			v.OnDemandHoursInLookbackPeriod = new(string)
+			return d.ReadString(schemas.CurrentInstance_OnDemandHoursInLookbackPeriod, v.OnDemandHoursInLookbackPeriod)
+		case schemas.CurrentInstance_ReservationCoveredHoursInLookbackPeriod:
+			v.ReservationCoveredHoursInLookbackPeriod = new(string)
+			return d.ReadString(schemas.CurrentInstance_ReservationCoveredHoursInLookbackPeriod, v.ReservationCoveredHoursInLookbackPeriod)
+		case schemas.CurrentInstance_ResourceDetails:
+			v.ResourceDetails = &ResourceDetails{}
+			return v.ResourceDetails.Deserialize(d)
+		case schemas.CurrentInstance_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.CurrentInstance_ResourceId, v.ResourceId)
+		case schemas.CurrentInstance_ResourceUtilization:
+			v.ResourceUtilization = &ResourceUtilization{}
+			return v.ResourceUtilization.Deserialize(d)
+		case schemas.CurrentInstance_SavingsPlansCoveredHoursInLookbackPeriod:
+			v.SavingsPlansCoveredHoursInLookbackPeriod = new(string)
+			return d.ReadString(schemas.CurrentInstance_SavingsPlansCoveredHoursInLookbackPeriod, v.SavingsPlansCoveredHoursInLookbackPeriod)
+		case schemas.CurrentInstance_Tags:
+			return deserializeTagValuesList(d, schemas.CurrentInstance_Tags, &v.Tags)
+		case schemas.CurrentInstance_TotalRunningHoursInLookbackPeriod:
+			v.TotalRunningHoursInLookbackPeriod = new(string)
+			return d.ReadString(schemas.CurrentInstance_TotalRunningHoursInLookbackPeriod, v.TotalRunningHoursInLookbackPeriod)
+		}
+		return nil
+	})
+}
+
 // The time period of the request.
 type DateInterval struct {
 
@@ -1009,6 +2289,34 @@ type DateInterval struct {
 	Start *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DateInterval) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DateInterval)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DateInterval) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.End != nil {
+		s.WriteString(schemas.DateInterval_End, *v.End)
+	}
+	if v.Start != nil {
+		s.WriteString(schemas.DateInterval_Start, *v.Start)
+	}
+}
+func (v *DateInterval) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DateInterval, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DateInterval_End:
+			v.End = new(string)
+			return d.ReadString(schemas.DateInterval_End, v.End)
+		case schemas.DateInterval_Start:
+			v.Start = new(string)
+			return d.ReadString(schemas.DateInterval_Start, v.Start)
+		}
+		return nil
+	})
 }
 
 // The metadata that you can use to filter and group your results. You can use
@@ -1046,6 +2354,38 @@ type DimensionValues struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DimensionValues) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DimensionValues)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DimensionValues) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != "" {
+		s.WriteString(schemas.DimensionValues_Key, string(v.Key))
+	}
+	serializeMatchOptions(s, schemas.DimensionValues_MatchOptions, v.MatchOptions)
+	serializeValues(s, schemas.DimensionValues_Values, v.Values)
+}
+func (v *DimensionValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DimensionValues, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DimensionValues_Key:
+			var ev string
+			if err := d.ReadString(schemas.DimensionValues_Key, &ev); err != nil {
+				return err
+			}
+			v.Key = Dimension(ev)
+			return nil
+		case schemas.DimensionValues_MatchOptions:
+			return deserializeMatchOptions(d, schemas.DimensionValues_MatchOptions, &v.MatchOptions)
+		case schemas.DimensionValues_Values:
+			return deserializeValues(d, schemas.DimensionValues_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // The metadata of a specific type that you can use to filter and group your
 // results. You can use GetDimensionValues to find specific values.
 type DimensionValuesWithAttributes struct {
@@ -1057,6 +2397,31 @@ type DimensionValuesWithAttributes struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DimensionValuesWithAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DimensionValuesWithAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DimensionValuesWithAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.DimensionValuesWithAttributes_Attributes, v.Attributes)
+	if v.Value != nil {
+		s.WriteString(schemas.DimensionValuesWithAttributes_Value, *v.Value)
+	}
+}
+func (v *DimensionValuesWithAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DimensionValuesWithAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DimensionValuesWithAttributes_Attributes:
+			return deserializeAttributes(d, schemas.DimensionValuesWithAttributes_Attributes, &v.Attributes)
+		case schemas.DimensionValuesWithAttributes_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.DimensionValuesWithAttributes_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // The field that contains a list of disk (local storage) metrics that are
@@ -1078,6 +2443,46 @@ type DiskResourceUtilization struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DiskResourceUtilization) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DiskResourceUtilization)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DiskResourceUtilization) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DiskReadBytesPerSecond != nil {
+		s.WriteString(schemas.DiskResourceUtilization_DiskReadBytesPerSecond, *v.DiskReadBytesPerSecond)
+	}
+	if v.DiskReadOpsPerSecond != nil {
+		s.WriteString(schemas.DiskResourceUtilization_DiskReadOpsPerSecond, *v.DiskReadOpsPerSecond)
+	}
+	if v.DiskWriteBytesPerSecond != nil {
+		s.WriteString(schemas.DiskResourceUtilization_DiskWriteBytesPerSecond, *v.DiskWriteBytesPerSecond)
+	}
+	if v.DiskWriteOpsPerSecond != nil {
+		s.WriteString(schemas.DiskResourceUtilization_DiskWriteOpsPerSecond, *v.DiskWriteOpsPerSecond)
+	}
+}
+func (v *DiskResourceUtilization) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DiskResourceUtilization, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DiskResourceUtilization_DiskReadBytesPerSecond:
+			v.DiskReadBytesPerSecond = new(string)
+			return d.ReadString(schemas.DiskResourceUtilization_DiskReadBytesPerSecond, v.DiskReadBytesPerSecond)
+		case schemas.DiskResourceUtilization_DiskReadOpsPerSecond:
+			v.DiskReadOpsPerSecond = new(string)
+			return d.ReadString(schemas.DiskResourceUtilization_DiskReadOpsPerSecond, v.DiskReadOpsPerSecond)
+		case schemas.DiskResourceUtilization_DiskWriteBytesPerSecond:
+			v.DiskWriteBytesPerSecond = new(string)
+			return d.ReadString(schemas.DiskResourceUtilization_DiskWriteBytesPerSecond, v.DiskWriteBytesPerSecond)
+		case schemas.DiskResourceUtilization_DiskWriteOpsPerSecond:
+			v.DiskWriteOpsPerSecond = new(string)
+			return d.ReadString(schemas.DiskResourceUtilization_DiskWriteOpsPerSecond, v.DiskWriteOpsPerSecond)
+		}
+		return nil
+	})
+}
+
 // The DynamoDB reservations that Amazon Web Services recommends that you purchase.
 type DynamoDBCapacityDetails struct {
 
@@ -1088,6 +2493,34 @@ type DynamoDBCapacityDetails struct {
 	Region *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DynamoDBCapacityDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DynamoDBCapacityDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DynamoDBCapacityDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityUnits != nil {
+		s.WriteString(schemas.DynamoDBCapacityDetails_CapacityUnits, *v.CapacityUnits)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.DynamoDBCapacityDetails_Region, *v.Region)
+	}
+}
+func (v *DynamoDBCapacityDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DynamoDBCapacityDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DynamoDBCapacityDetails_CapacityUnits:
+			v.CapacityUnits = new(string)
+			return d.ReadString(schemas.DynamoDBCapacityDetails_CapacityUnits, v.CapacityUnits)
+		case schemas.DynamoDBCapacityDetails_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.DynamoDBCapacityDetails_Region, v.Region)
+		}
+		return nil
+	})
 }
 
 // The EBS field that contains a list of EBS metrics that are associated with the
@@ -1107,6 +2540,46 @@ type EBSResourceUtilization struct {
 	EbsWriteOpsPerSecond *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EBSResourceUtilization) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EBSResourceUtilization)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EBSResourceUtilization) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EbsReadBytesPerSecond != nil {
+		s.WriteString(schemas.EBSResourceUtilization_EbsReadBytesPerSecond, *v.EbsReadBytesPerSecond)
+	}
+	if v.EbsReadOpsPerSecond != nil {
+		s.WriteString(schemas.EBSResourceUtilization_EbsReadOpsPerSecond, *v.EbsReadOpsPerSecond)
+	}
+	if v.EbsWriteBytesPerSecond != nil {
+		s.WriteString(schemas.EBSResourceUtilization_EbsWriteBytesPerSecond, *v.EbsWriteBytesPerSecond)
+	}
+	if v.EbsWriteOpsPerSecond != nil {
+		s.WriteString(schemas.EBSResourceUtilization_EbsWriteOpsPerSecond, *v.EbsWriteOpsPerSecond)
+	}
+}
+func (v *EBSResourceUtilization) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EBSResourceUtilization, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EBSResourceUtilization_EbsReadBytesPerSecond:
+			v.EbsReadBytesPerSecond = new(string)
+			return d.ReadString(schemas.EBSResourceUtilization_EbsReadBytesPerSecond, v.EbsReadBytesPerSecond)
+		case schemas.EBSResourceUtilization_EbsReadOpsPerSecond:
+			v.EbsReadOpsPerSecond = new(string)
+			return d.ReadString(schemas.EBSResourceUtilization_EbsReadOpsPerSecond, v.EbsReadOpsPerSecond)
+		case schemas.EBSResourceUtilization_EbsWriteBytesPerSecond:
+			v.EbsWriteBytesPerSecond = new(string)
+			return d.ReadString(schemas.EBSResourceUtilization_EbsWriteBytesPerSecond, v.EbsWriteBytesPerSecond)
+		case schemas.EBSResourceUtilization_EbsWriteOpsPerSecond:
+			v.EbsWriteOpsPerSecond = new(string)
+			return d.ReadString(schemas.EBSResourceUtilization_EbsWriteOpsPerSecond, v.EbsWriteOpsPerSecond)
+		}
+		return nil
+	})
 }
 
 // Details about the Amazon EC2 reservations that Amazon Web Services recommends
@@ -1139,6 +2612,68 @@ type EC2InstanceDetails struct {
 	Tenancy *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EC2InstanceDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2InstanceDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2InstanceDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.EC2InstanceDetails_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.CurrentGeneration != false {
+		s.WriteBool(schemas.EC2InstanceDetails_CurrentGeneration, v.CurrentGeneration)
+	}
+	if v.Family != nil {
+		s.WriteString(schemas.EC2InstanceDetails_Family, *v.Family)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.EC2InstanceDetails_InstanceType, *v.InstanceType)
+	}
+	if v.Platform != nil {
+		s.WriteString(schemas.EC2InstanceDetails_Platform, *v.Platform)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.EC2InstanceDetails_Region, *v.Region)
+	}
+	if v.SizeFlexEligible != false {
+		s.WriteBool(schemas.EC2InstanceDetails_SizeFlexEligible, v.SizeFlexEligible)
+	}
+	if v.Tenancy != nil {
+		s.WriteString(schemas.EC2InstanceDetails_Tenancy, *v.Tenancy)
+	}
+}
+func (v *EC2InstanceDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2InstanceDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2InstanceDetails_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.EC2InstanceDetails_AvailabilityZone, v.AvailabilityZone)
+		case schemas.EC2InstanceDetails_CurrentGeneration:
+			return d.ReadBool(schemas.EC2InstanceDetails_CurrentGeneration, &v.CurrentGeneration)
+		case schemas.EC2InstanceDetails_Family:
+			v.Family = new(string)
+			return d.ReadString(schemas.EC2InstanceDetails_Family, v.Family)
+		case schemas.EC2InstanceDetails_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.EC2InstanceDetails_InstanceType, v.InstanceType)
+		case schemas.EC2InstanceDetails_Platform:
+			v.Platform = new(string)
+			return d.ReadString(schemas.EC2InstanceDetails_Platform, v.Platform)
+		case schemas.EC2InstanceDetails_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.EC2InstanceDetails_Region, v.Region)
+		case schemas.EC2InstanceDetails_SizeFlexEligible:
+			return d.ReadBool(schemas.EC2InstanceDetails_SizeFlexEligible, &v.SizeFlexEligible)
+		case schemas.EC2InstanceDetails_Tenancy:
+			v.Tenancy = new(string)
+			return d.ReadString(schemas.EC2InstanceDetails_Tenancy, v.Tenancy)
+		}
+		return nil
+	})
 }
 
 // Details on the Amazon EC2 Resource.
@@ -1176,6 +2711,76 @@ type EC2ResourceDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EC2ResourceDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2ResourceDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2ResourceDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HourlyOnDemandRate != nil {
+		s.WriteString(schemas.EC2ResourceDetails_HourlyOnDemandRate, *v.HourlyOnDemandRate)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.EC2ResourceDetails_InstanceType, *v.InstanceType)
+	}
+	if v.Memory != nil {
+		s.WriteString(schemas.EC2ResourceDetails_Memory, *v.Memory)
+	}
+	if v.NetworkPerformance != nil {
+		s.WriteString(schemas.EC2ResourceDetails_NetworkPerformance, *v.NetworkPerformance)
+	}
+	if v.Platform != nil {
+		s.WriteString(schemas.EC2ResourceDetails_Platform, *v.Platform)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.EC2ResourceDetails_Region, *v.Region)
+	}
+	if v.Sku != nil {
+		s.WriteString(schemas.EC2ResourceDetails_Sku, *v.Sku)
+	}
+	if v.Storage != nil {
+		s.WriteString(schemas.EC2ResourceDetails_Storage, *v.Storage)
+	}
+	if v.Vcpu != nil {
+		s.WriteString(schemas.EC2ResourceDetails_Vcpu, *v.Vcpu)
+	}
+}
+func (v *EC2ResourceDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2ResourceDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2ResourceDetails_HourlyOnDemandRate:
+			v.HourlyOnDemandRate = new(string)
+			return d.ReadString(schemas.EC2ResourceDetails_HourlyOnDemandRate, v.HourlyOnDemandRate)
+		case schemas.EC2ResourceDetails_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.EC2ResourceDetails_InstanceType, v.InstanceType)
+		case schemas.EC2ResourceDetails_Memory:
+			v.Memory = new(string)
+			return d.ReadString(schemas.EC2ResourceDetails_Memory, v.Memory)
+		case schemas.EC2ResourceDetails_NetworkPerformance:
+			v.NetworkPerformance = new(string)
+			return d.ReadString(schemas.EC2ResourceDetails_NetworkPerformance, v.NetworkPerformance)
+		case schemas.EC2ResourceDetails_Platform:
+			v.Platform = new(string)
+			return d.ReadString(schemas.EC2ResourceDetails_Platform, v.Platform)
+		case schemas.EC2ResourceDetails_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.EC2ResourceDetails_Region, v.Region)
+		case schemas.EC2ResourceDetails_Sku:
+			v.Sku = new(string)
+			return d.ReadString(schemas.EC2ResourceDetails_Sku, v.Sku)
+		case schemas.EC2ResourceDetails_Storage:
+			v.Storage = new(string)
+			return d.ReadString(schemas.EC2ResourceDetails_Storage, v.Storage)
+		case schemas.EC2ResourceDetails_Vcpu:
+			v.Vcpu = new(string)
+			return d.ReadString(schemas.EC2ResourceDetails_Vcpu, v.Vcpu)
+		}
+		return nil
+	})
+}
+
 // Utilization metrics for the instance.
 type EC2ResourceUtilization struct {
 
@@ -1204,6 +2809,64 @@ type EC2ResourceUtilization struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EC2ResourceUtilization) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2ResourceUtilization)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2ResourceUtilization) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DiskResourceUtilization != nil {
+		s.WriteStruct(schemas.EC2ResourceUtilization_DiskResourceUtilization)
+		v.DiskResourceUtilization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EBSResourceUtilization != nil {
+		s.WriteStruct(schemas.EC2ResourceUtilization_EBSResourceUtilization)
+		v.EBSResourceUtilization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxCpuUtilizationPercentage != nil {
+		s.WriteString(schemas.EC2ResourceUtilization_MaxCpuUtilizationPercentage, *v.MaxCpuUtilizationPercentage)
+	}
+	if v.MaxMemoryUtilizationPercentage != nil {
+		s.WriteString(schemas.EC2ResourceUtilization_MaxMemoryUtilizationPercentage, *v.MaxMemoryUtilizationPercentage)
+	}
+	if v.MaxStorageUtilizationPercentage != nil {
+		s.WriteString(schemas.EC2ResourceUtilization_MaxStorageUtilizationPercentage, *v.MaxStorageUtilizationPercentage)
+	}
+	if v.NetworkResourceUtilization != nil {
+		s.WriteStruct(schemas.EC2ResourceUtilization_NetworkResourceUtilization)
+		v.NetworkResourceUtilization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EC2ResourceUtilization) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2ResourceUtilization, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2ResourceUtilization_DiskResourceUtilization:
+			v.DiskResourceUtilization = &DiskResourceUtilization{}
+			return v.DiskResourceUtilization.Deserialize(d)
+		case schemas.EC2ResourceUtilization_EBSResourceUtilization:
+			v.EBSResourceUtilization = &EBSResourceUtilization{}
+			return v.EBSResourceUtilization.Deserialize(d)
+		case schemas.EC2ResourceUtilization_MaxCpuUtilizationPercentage:
+			v.MaxCpuUtilizationPercentage = new(string)
+			return d.ReadString(schemas.EC2ResourceUtilization_MaxCpuUtilizationPercentage, v.MaxCpuUtilizationPercentage)
+		case schemas.EC2ResourceUtilization_MaxMemoryUtilizationPercentage:
+			v.MaxMemoryUtilizationPercentage = new(string)
+			return d.ReadString(schemas.EC2ResourceUtilization_MaxMemoryUtilizationPercentage, v.MaxMemoryUtilizationPercentage)
+		case schemas.EC2ResourceUtilization_MaxStorageUtilizationPercentage:
+			v.MaxStorageUtilizationPercentage = new(string)
+			return d.ReadString(schemas.EC2ResourceUtilization_MaxStorageUtilizationPercentage, v.MaxStorageUtilizationPercentage)
+		case schemas.EC2ResourceUtilization_NetworkResourceUtilization:
+			v.NetworkResourceUtilization = &NetworkResourceUtilization{}
+			return v.NetworkResourceUtilization.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The Amazon EC2 hardware specifications that you want Amazon Web Services to
 // provide recommendations for.
 type EC2Specification struct {
@@ -1213,6 +2876,32 @@ type EC2Specification struct {
 	OfferingClass OfferingClass
 
 	noSmithyDocumentSerde
+}
+
+func (v *EC2Specification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2Specification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2Specification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OfferingClass != "" {
+		s.WriteString(schemas.EC2Specification_OfferingClass, string(v.OfferingClass))
+	}
+}
+func (v *EC2Specification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2Specification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2Specification_OfferingClass:
+			var ev string
+			if err := d.ReadString(schemas.EC2Specification_OfferingClass, &ev); err != nil {
+				return err
+			}
+			v.OfferingClass = OfferingClass(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Details about the Amazon ElastiCache reservations that Amazon Web Services
@@ -1240,6 +2929,56 @@ type ElastiCacheInstanceDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ElastiCacheInstanceDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ElastiCacheInstanceDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ElastiCacheInstanceDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentGeneration != false {
+		s.WriteBool(schemas.ElastiCacheInstanceDetails_CurrentGeneration, v.CurrentGeneration)
+	}
+	if v.Family != nil {
+		s.WriteString(schemas.ElastiCacheInstanceDetails_Family, *v.Family)
+	}
+	if v.NodeType != nil {
+		s.WriteString(schemas.ElastiCacheInstanceDetails_NodeType, *v.NodeType)
+	}
+	if v.ProductDescription != nil {
+		s.WriteString(schemas.ElastiCacheInstanceDetails_ProductDescription, *v.ProductDescription)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.ElastiCacheInstanceDetails_Region, *v.Region)
+	}
+	if v.SizeFlexEligible != false {
+		s.WriteBool(schemas.ElastiCacheInstanceDetails_SizeFlexEligible, v.SizeFlexEligible)
+	}
+}
+func (v *ElastiCacheInstanceDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ElastiCacheInstanceDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ElastiCacheInstanceDetails_CurrentGeneration:
+			return d.ReadBool(schemas.ElastiCacheInstanceDetails_CurrentGeneration, &v.CurrentGeneration)
+		case schemas.ElastiCacheInstanceDetails_Family:
+			v.Family = new(string)
+			return d.ReadString(schemas.ElastiCacheInstanceDetails_Family, v.Family)
+		case schemas.ElastiCacheInstanceDetails_NodeType:
+			v.NodeType = new(string)
+			return d.ReadString(schemas.ElastiCacheInstanceDetails_NodeType, v.NodeType)
+		case schemas.ElastiCacheInstanceDetails_ProductDescription:
+			v.ProductDescription = new(string)
+			return d.ReadString(schemas.ElastiCacheInstanceDetails_ProductDescription, v.ProductDescription)
+		case schemas.ElastiCacheInstanceDetails_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.ElastiCacheInstanceDetails_Region, v.Region)
+		case schemas.ElastiCacheInstanceDetails_SizeFlexEligible:
+			return d.ReadBool(schemas.ElastiCacheInstanceDetails_SizeFlexEligible, &v.SizeFlexEligible)
+		}
+		return nil
+	})
+}
+
 // Details about the Amazon OpenSearch Service reservations that Amazon Web
 // Services recommends that you purchase.
 type ESInstanceDetails struct {
@@ -1260,6 +2999,50 @@ type ESInstanceDetails struct {
 	SizeFlexEligible bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *ESInstanceDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ESInstanceDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ESInstanceDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentGeneration != false {
+		s.WriteBool(schemas.ESInstanceDetails_CurrentGeneration, v.CurrentGeneration)
+	}
+	if v.InstanceClass != nil {
+		s.WriteString(schemas.ESInstanceDetails_InstanceClass, *v.InstanceClass)
+	}
+	if v.InstanceSize != nil {
+		s.WriteString(schemas.ESInstanceDetails_InstanceSize, *v.InstanceSize)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.ESInstanceDetails_Region, *v.Region)
+	}
+	if v.SizeFlexEligible != false {
+		s.WriteBool(schemas.ESInstanceDetails_SizeFlexEligible, v.SizeFlexEligible)
+	}
+}
+func (v *ESInstanceDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ESInstanceDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ESInstanceDetails_CurrentGeneration:
+			return d.ReadBool(schemas.ESInstanceDetails_CurrentGeneration, &v.CurrentGeneration)
+		case schemas.ESInstanceDetails_InstanceClass:
+			v.InstanceClass = new(string)
+			return d.ReadString(schemas.ESInstanceDetails_InstanceClass, v.InstanceClass)
+		case schemas.ESInstanceDetails_InstanceSize:
+			v.InstanceSize = new(string)
+			return d.ReadString(schemas.ESInstanceDetails_InstanceSize, v.InstanceSize)
+		case schemas.ESInstanceDetails_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.ESInstanceDetails_Region, v.Region)
+		case schemas.ESInstanceDetails_SizeFlexEligible:
+			return d.ReadBool(schemas.ESInstanceDetails_SizeFlexEligible, &v.SizeFlexEligible)
+		}
+		return nil
+	})
 }
 
 // Use Expression to filter in various Cost Explorer APIs.
@@ -1362,6 +3145,60 @@ type Expression struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Expression) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Expression)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Expression) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExpressions(s, schemas.Expression_And, v.And)
+	if v.CostCategories != nil {
+		s.WriteStruct(schemas.Expression_CostCategories)
+		v.CostCategories.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Dimensions != nil {
+		s.WriteStruct(schemas.Expression_Dimensions)
+		v.Dimensions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Not != nil {
+		s.WriteStruct(schemas.Expression_Not)
+		v.Not.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeExpressions(s, schemas.Expression_Or, v.Or)
+	if v.Tags != nil {
+		s.WriteStruct(schemas.Expression_Tags)
+		v.Tags.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Expression) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Expression, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Expression_And:
+			return deserializeExpressions(d, schemas.Expression_And, &v.And)
+		case schemas.Expression_CostCategories:
+			v.CostCategories = &CostCategoryValues{}
+			return v.CostCategories.Deserialize(d)
+		case schemas.Expression_Dimensions:
+			v.Dimensions = &DimensionValues{}
+			return v.Dimensions.Deserialize(d)
+		case schemas.Expression_Not:
+			v.Not = &Expression{}
+			return v.Not.Deserialize(d)
+		case schemas.Expression_Or:
+			return deserializeExpressions(d, schemas.Expression_Or, &v.Or)
+		case schemas.Expression_Tags:
+			v.Tags = &TagValues{}
+			return v.Tags.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The forecast that's created for your query.
 type ForecastResult struct {
 
@@ -1378,6 +3215,48 @@ type ForecastResult struct {
 	TimePeriod *DateInterval
 
 	noSmithyDocumentSerde
+}
+
+func (v *ForecastResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForecastResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForecastResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeanValue != nil {
+		s.WriteString(schemas.ForecastResult_MeanValue, *v.MeanValue)
+	}
+	if v.PredictionIntervalLowerBound != nil {
+		s.WriteString(schemas.ForecastResult_PredictionIntervalLowerBound, *v.PredictionIntervalLowerBound)
+	}
+	if v.PredictionIntervalUpperBound != nil {
+		s.WriteString(schemas.ForecastResult_PredictionIntervalUpperBound, *v.PredictionIntervalUpperBound)
+	}
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.ForecastResult_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ForecastResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ForecastResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ForecastResult_MeanValue:
+			v.MeanValue = new(string)
+			return d.ReadString(schemas.ForecastResult_MeanValue, v.MeanValue)
+		case schemas.ForecastResult_PredictionIntervalLowerBound:
+			v.PredictionIntervalLowerBound = new(string)
+			return d.ReadString(schemas.ForecastResult_PredictionIntervalLowerBound, v.PredictionIntervalLowerBound)
+		case schemas.ForecastResult_PredictionIntervalUpperBound:
+			v.PredictionIntervalUpperBound = new(string)
+			return d.ReadString(schemas.ForecastResult_PredictionIntervalUpperBound, v.PredictionIntervalUpperBound)
+		case schemas.ForecastResult_TimePeriod:
+			v.TimePeriod = &DateInterval{}
+			return v.TimePeriod.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The summary of the Savings Plans recommendation generation.
@@ -1403,6 +3282,56 @@ type GenerationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EstimatedCompletionTime != nil {
+		s.WriteString(schemas.GenerationSummary_EstimatedCompletionTime, *v.EstimatedCompletionTime)
+	}
+	if v.GenerationCompletionTime != nil {
+		s.WriteString(schemas.GenerationSummary_GenerationCompletionTime, *v.GenerationCompletionTime)
+	}
+	if v.GenerationStartedTime != nil {
+		s.WriteString(schemas.GenerationSummary_GenerationStartedTime, *v.GenerationStartedTime)
+	}
+	if v.GenerationStatus != "" {
+		s.WriteString(schemas.GenerationSummary_GenerationStatus, string(v.GenerationStatus))
+	}
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.GenerationSummary_RecommendationId, *v.RecommendationId)
+	}
+}
+func (v *GenerationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerationSummary_EstimatedCompletionTime:
+			v.EstimatedCompletionTime = new(string)
+			return d.ReadString(schemas.GenerationSummary_EstimatedCompletionTime, v.EstimatedCompletionTime)
+		case schemas.GenerationSummary_GenerationCompletionTime:
+			v.GenerationCompletionTime = new(string)
+			return d.ReadString(schemas.GenerationSummary_GenerationCompletionTime, v.GenerationCompletionTime)
+		case schemas.GenerationSummary_GenerationStartedTime:
+			v.GenerationStartedTime = new(string)
+			return d.ReadString(schemas.GenerationSummary_GenerationStartedTime, v.GenerationStartedTime)
+		case schemas.GenerationSummary_GenerationStatus:
+			var ev string
+			if err := d.ReadString(schemas.GenerationSummary_GenerationStatus, &ev); err != nil {
+				return err
+			}
+			v.GenerationStatus = GenerationStatus(ev)
+			return nil
+		case schemas.GenerationSummary_RecommendationId:
+			v.RecommendationId = new(string)
+			return d.ReadString(schemas.GenerationSummary_RecommendationId, v.RecommendationId)
+		}
+		return nil
+	})
+}
+
 // One level of grouped data in the results.
 type Group struct {
 
@@ -1413,6 +3342,28 @@ type Group struct {
 	Metrics map[string]MetricValue
 
 	noSmithyDocumentSerde
+}
+
+func (v *Group) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Group)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Group) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeKeys(s, schemas.Group_Keys, v.Keys)
+	serializeMetrics(s, schemas.Group_Metrics, v.Metrics)
+}
+func (v *Group) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Group, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Group_Keys:
+			return deserializeKeys(d, schemas.Group_Keys, &v.Keys)
+		case schemas.Group_Metrics:
+			return deserializeMetrics(d, schemas.Group_Metrics, &v.Metrics)
+		}
+		return nil
+	})
 }
 
 // Represents a group when you specify a group by criteria or in the response to a
@@ -1426,6 +3377,38 @@ type GroupDefinition struct {
 	Type GroupDefinitionType
 
 	noSmithyDocumentSerde
+}
+
+func (v *GroupDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroupDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroupDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.GroupDefinition_Key, *v.Key)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GroupDefinition_Type, string(v.Type))
+	}
+}
+func (v *GroupDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroupDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroupDefinition_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.GroupDefinition_Key, v.Key)
+		case schemas.GroupDefinition_Type:
+			var ev string
+			if err := d.ReadString(schemas.GroupDefinition_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = GroupDefinitionType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The dollar value of the anomaly.
@@ -1455,6 +3438,48 @@ type Impact struct {
 	TotalImpactPercentage *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *Impact) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Impact)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Impact) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteFloat64(schemas.Impact_MaxImpact, v.MaxImpact)
+	if v.TotalActualSpend != nil {
+		s.WriteFloat64(schemas.Impact_TotalActualSpend, *v.TotalActualSpend)
+	}
+	if v.TotalExpectedSpend != nil {
+		s.WriteFloat64(schemas.Impact_TotalExpectedSpend, *v.TotalExpectedSpend)
+	}
+	if v.TotalImpact != 0 {
+		s.WriteFloat64(schemas.Impact_TotalImpact, v.TotalImpact)
+	}
+	if v.TotalImpactPercentage != nil {
+		s.WriteFloat64(schemas.Impact_TotalImpactPercentage, *v.TotalImpactPercentage)
+	}
+}
+func (v *Impact) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Impact, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Impact_MaxImpact:
+			return d.ReadFloat64(schemas.Impact_MaxImpact, &v.MaxImpact)
+		case schemas.Impact_TotalActualSpend:
+			v.TotalActualSpend = new(float64)
+			return d.ReadFloat64(schemas.Impact_TotalActualSpend, v.TotalActualSpend)
+		case schemas.Impact_TotalExpectedSpend:
+			v.TotalExpectedSpend = new(float64)
+			return d.ReadFloat64(schemas.Impact_TotalExpectedSpend, v.TotalExpectedSpend)
+		case schemas.Impact_TotalImpact:
+			return d.ReadFloat64(schemas.Impact_TotalImpact, &v.TotalImpact)
+		case schemas.Impact_TotalImpactPercentage:
+			v.TotalImpactPercentage = new(float64)
+			return d.ReadFloat64(schemas.Impact_TotalImpactPercentage, v.TotalImpactPercentage)
+		}
+		return nil
+	})
 }
 
 // Details about the reservations that Amazon Web Services recommends that you
@@ -1487,6 +3512,70 @@ type InstanceDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EC2InstanceDetails != nil {
+		s.WriteStruct(schemas.InstanceDetails_EC2InstanceDetails)
+		v.EC2InstanceDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ESInstanceDetails != nil {
+		s.WriteStruct(schemas.InstanceDetails_ESInstanceDetails)
+		v.ESInstanceDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ElastiCacheInstanceDetails != nil {
+		s.WriteStruct(schemas.InstanceDetails_ElastiCacheInstanceDetails)
+		v.ElastiCacheInstanceDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MemoryDBInstanceDetails != nil {
+		s.WriteStruct(schemas.InstanceDetails_MemoryDBInstanceDetails)
+		v.MemoryDBInstanceDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RDSInstanceDetails != nil {
+		s.WriteStruct(schemas.InstanceDetails_RDSInstanceDetails)
+		v.RDSInstanceDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RedshiftInstanceDetails != nil {
+		s.WriteStruct(schemas.InstanceDetails_RedshiftInstanceDetails)
+		v.RedshiftInstanceDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InstanceDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceDetails_EC2InstanceDetails:
+			v.EC2InstanceDetails = &EC2InstanceDetails{}
+			return v.EC2InstanceDetails.Deserialize(d)
+		case schemas.InstanceDetails_ESInstanceDetails:
+			v.ESInstanceDetails = &ESInstanceDetails{}
+			return v.ESInstanceDetails.Deserialize(d)
+		case schemas.InstanceDetails_ElastiCacheInstanceDetails:
+			v.ElastiCacheInstanceDetails = &ElastiCacheInstanceDetails{}
+			return v.ElastiCacheInstanceDetails.Deserialize(d)
+		case schemas.InstanceDetails_MemoryDBInstanceDetails:
+			v.MemoryDBInstanceDetails = &MemoryDBInstanceDetails{}
+			return v.MemoryDBInstanceDetails.Deserialize(d)
+		case schemas.InstanceDetails_RDSInstanceDetails:
+			v.RDSInstanceDetails = &RDSInstanceDetails{}
+			return v.RDSInstanceDetails.Deserialize(d)
+		case schemas.InstanceDetails_RedshiftInstanceDetails:
+			v.RedshiftInstanceDetails = &RedshiftInstanceDetails{}
+			return v.RedshiftInstanceDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Details about the MemoryDB reservations that Amazon Web Services recommends
 // that you purchase.
 type MemoryDBInstanceDetails struct {
@@ -1509,6 +3598,50 @@ type MemoryDBInstanceDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MemoryDBInstanceDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MemoryDBInstanceDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MemoryDBInstanceDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentGeneration != false {
+		s.WriteBool(schemas.MemoryDBInstanceDetails_CurrentGeneration, v.CurrentGeneration)
+	}
+	if v.Family != nil {
+		s.WriteString(schemas.MemoryDBInstanceDetails_Family, *v.Family)
+	}
+	if v.NodeType != nil {
+		s.WriteString(schemas.MemoryDBInstanceDetails_NodeType, *v.NodeType)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.MemoryDBInstanceDetails_Region, *v.Region)
+	}
+	if v.SizeFlexEligible != false {
+		s.WriteBool(schemas.MemoryDBInstanceDetails_SizeFlexEligible, v.SizeFlexEligible)
+	}
+}
+func (v *MemoryDBInstanceDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MemoryDBInstanceDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MemoryDBInstanceDetails_CurrentGeneration:
+			return d.ReadBool(schemas.MemoryDBInstanceDetails_CurrentGeneration, &v.CurrentGeneration)
+		case schemas.MemoryDBInstanceDetails_Family:
+			v.Family = new(string)
+			return d.ReadString(schemas.MemoryDBInstanceDetails_Family, v.Family)
+		case schemas.MemoryDBInstanceDetails_NodeType:
+			v.NodeType = new(string)
+			return d.ReadString(schemas.MemoryDBInstanceDetails_NodeType, v.NodeType)
+		case schemas.MemoryDBInstanceDetails_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.MemoryDBInstanceDetails_Region, v.Region)
+		case schemas.MemoryDBInstanceDetails_SizeFlexEligible:
+			return d.ReadBool(schemas.MemoryDBInstanceDetails_SizeFlexEligible, &v.SizeFlexEligible)
+		}
+		return nil
+	})
+}
+
 // The aggregated value for a metric.
 type MetricValue struct {
 
@@ -1521,6 +3654,34 @@ type MetricValue struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetricValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteString(schemas.MetricValue_Amount, *v.Amount)
+	}
+	if v.Unit != nil {
+		s.WriteString(schemas.MetricValue_Unit, *v.Unit)
+	}
+}
+func (v *MetricValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricValue_Amount:
+			v.Amount = new(string)
+			return d.ReadString(schemas.MetricValue_Amount, v.Amount)
+		case schemas.MetricValue_Unit:
+			v.Unit = new(string)
+			return d.ReadString(schemas.MetricValue_Unit, v.Unit)
+		}
+		return nil
+	})
+}
+
 // Details for the modification recommendation.
 type ModifyRecommendationDetail struct {
 
@@ -1529,6 +3690,25 @@ type ModifyRecommendationDetail struct {
 	TargetInstances []TargetInstance
 
 	noSmithyDocumentSerde
+}
+
+func (v *ModifyRecommendationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyRecommendationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyRecommendationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTargetInstancesList(s, schemas.ModifyRecommendationDetail_TargetInstances, v.TargetInstances)
+}
+func (v *ModifyRecommendationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyRecommendationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyRecommendationDetail_TargetInstances:
+			return deserializeTargetInstancesList(d, schemas.ModifyRecommendationDetail_TargetInstances, &v.TargetInstances)
+		}
+		return nil
+	})
 }
 
 // The network field that contains a list of network metrics that are associated
@@ -1548,6 +3728,46 @@ type NetworkResourceUtilization struct {
 	NetworkPacketsOutPerSecond *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkResourceUtilization) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkResourceUtilization)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkResourceUtilization) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkInBytesPerSecond != nil {
+		s.WriteString(schemas.NetworkResourceUtilization_NetworkInBytesPerSecond, *v.NetworkInBytesPerSecond)
+	}
+	if v.NetworkOutBytesPerSecond != nil {
+		s.WriteString(schemas.NetworkResourceUtilization_NetworkOutBytesPerSecond, *v.NetworkOutBytesPerSecond)
+	}
+	if v.NetworkPacketsInPerSecond != nil {
+		s.WriteString(schemas.NetworkResourceUtilization_NetworkPacketsInPerSecond, *v.NetworkPacketsInPerSecond)
+	}
+	if v.NetworkPacketsOutPerSecond != nil {
+		s.WriteString(schemas.NetworkResourceUtilization_NetworkPacketsOutPerSecond, *v.NetworkPacketsOutPerSecond)
+	}
+}
+func (v *NetworkResourceUtilization) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkResourceUtilization, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkResourceUtilization_NetworkInBytesPerSecond:
+			v.NetworkInBytesPerSecond = new(string)
+			return d.ReadString(schemas.NetworkResourceUtilization_NetworkInBytesPerSecond, v.NetworkInBytesPerSecond)
+		case schemas.NetworkResourceUtilization_NetworkOutBytesPerSecond:
+			v.NetworkOutBytesPerSecond = new(string)
+			return d.ReadString(schemas.NetworkResourceUtilization_NetworkOutBytesPerSecond, v.NetworkOutBytesPerSecond)
+		case schemas.NetworkResourceUtilization_NetworkPacketsInPerSecond:
+			v.NetworkPacketsInPerSecond = new(string)
+			return d.ReadString(schemas.NetworkResourceUtilization_NetworkPacketsInPerSecond, v.NetworkPacketsInPerSecond)
+		case schemas.NetworkResourceUtilization_NetworkPacketsOutPerSecond:
+			v.NetworkPacketsOutPerSecond = new(string)
+			return d.ReadString(schemas.NetworkResourceUtilization_NetworkPacketsOutPerSecond, v.NetworkPacketsOutPerSecond)
+		}
+		return nil
+	})
 }
 
 // Details about the Amazon RDS reservations that Amazon Web Services recommends
@@ -1586,6 +3806,80 @@ type RDSInstanceDetails struct {
 	SizeFlexEligible bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *RDSInstanceDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RDSInstanceDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RDSInstanceDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentGeneration != false {
+		s.WriteBool(schemas.RDSInstanceDetails_CurrentGeneration, v.CurrentGeneration)
+	}
+	if v.DatabaseEdition != nil {
+		s.WriteString(schemas.RDSInstanceDetails_DatabaseEdition, *v.DatabaseEdition)
+	}
+	if v.DatabaseEngine != nil {
+		s.WriteString(schemas.RDSInstanceDetails_DatabaseEngine, *v.DatabaseEngine)
+	}
+	if v.DeploymentModel != nil {
+		s.WriteString(schemas.RDSInstanceDetails_DeploymentModel, *v.DeploymentModel)
+	}
+	if v.DeploymentOption != nil {
+		s.WriteString(schemas.RDSInstanceDetails_DeploymentOption, *v.DeploymentOption)
+	}
+	if v.Family != nil {
+		s.WriteString(schemas.RDSInstanceDetails_Family, *v.Family)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.RDSInstanceDetails_InstanceType, *v.InstanceType)
+	}
+	if v.LicenseModel != nil {
+		s.WriteString(schemas.RDSInstanceDetails_LicenseModel, *v.LicenseModel)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.RDSInstanceDetails_Region, *v.Region)
+	}
+	if v.SizeFlexEligible != false {
+		s.WriteBool(schemas.RDSInstanceDetails_SizeFlexEligible, v.SizeFlexEligible)
+	}
+}
+func (v *RDSInstanceDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RDSInstanceDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RDSInstanceDetails_CurrentGeneration:
+			return d.ReadBool(schemas.RDSInstanceDetails_CurrentGeneration, &v.CurrentGeneration)
+		case schemas.RDSInstanceDetails_DatabaseEdition:
+			v.DatabaseEdition = new(string)
+			return d.ReadString(schemas.RDSInstanceDetails_DatabaseEdition, v.DatabaseEdition)
+		case schemas.RDSInstanceDetails_DatabaseEngine:
+			v.DatabaseEngine = new(string)
+			return d.ReadString(schemas.RDSInstanceDetails_DatabaseEngine, v.DatabaseEngine)
+		case schemas.RDSInstanceDetails_DeploymentModel:
+			v.DeploymentModel = new(string)
+			return d.ReadString(schemas.RDSInstanceDetails_DeploymentModel, v.DeploymentModel)
+		case schemas.RDSInstanceDetails_DeploymentOption:
+			v.DeploymentOption = new(string)
+			return d.ReadString(schemas.RDSInstanceDetails_DeploymentOption, v.DeploymentOption)
+		case schemas.RDSInstanceDetails_Family:
+			v.Family = new(string)
+			return d.ReadString(schemas.RDSInstanceDetails_Family, v.Family)
+		case schemas.RDSInstanceDetails_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.RDSInstanceDetails_InstanceType, v.InstanceType)
+		case schemas.RDSInstanceDetails_LicenseModel:
+			v.LicenseModel = new(string)
+			return d.ReadString(schemas.RDSInstanceDetails_LicenseModel, v.LicenseModel)
+		case schemas.RDSInstanceDetails_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.RDSInstanceDetails_Region, v.Region)
+		case schemas.RDSInstanceDetails_SizeFlexEligible:
+			return d.ReadBool(schemas.RDSInstanceDetails_SizeFlexEligible, &v.SizeFlexEligible)
+		}
+		return nil
+	})
 }
 
 // The details and metrics for the given recommendation.
@@ -1698,6 +3992,213 @@ type RecommendationDetailData struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecommendationDetailData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecommendationDetailData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecommendationDetailData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.RecommendationDetailData_AccountId, *v.AccountId)
+	}
+	if v.AccountScope != "" {
+		s.WriteString(schemas.RecommendationDetailData_AccountScope, string(v.AccountScope))
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.RecommendationDetailData_CurrencyCode, *v.CurrencyCode)
+	}
+	if v.CurrentAverageCoverage != nil {
+		s.WriteString(schemas.RecommendationDetailData_CurrentAverageCoverage, *v.CurrentAverageCoverage)
+	}
+	if v.CurrentAverageHourlyOnDemandSpend != nil {
+		s.WriteString(schemas.RecommendationDetailData_CurrentAverageHourlyOnDemandSpend, *v.CurrentAverageHourlyOnDemandSpend)
+	}
+	if v.CurrentMaximumHourlyOnDemandSpend != nil {
+		s.WriteString(schemas.RecommendationDetailData_CurrentMaximumHourlyOnDemandSpend, *v.CurrentMaximumHourlyOnDemandSpend)
+	}
+	if v.CurrentMinimumHourlyOnDemandSpend != nil {
+		s.WriteString(schemas.RecommendationDetailData_CurrentMinimumHourlyOnDemandSpend, *v.CurrentMinimumHourlyOnDemandSpend)
+	}
+	if v.EstimatedAverageCoverage != nil {
+		s.WriteString(schemas.RecommendationDetailData_EstimatedAverageCoverage, *v.EstimatedAverageCoverage)
+	}
+	if v.EstimatedAverageUtilization != nil {
+		s.WriteString(schemas.RecommendationDetailData_EstimatedAverageUtilization, *v.EstimatedAverageUtilization)
+	}
+	if v.EstimatedMonthlySavingsAmount != nil {
+		s.WriteString(schemas.RecommendationDetailData_EstimatedMonthlySavingsAmount, *v.EstimatedMonthlySavingsAmount)
+	}
+	if v.EstimatedOnDemandCost != nil {
+		s.WriteString(schemas.RecommendationDetailData_EstimatedOnDemandCost, *v.EstimatedOnDemandCost)
+	}
+	if v.EstimatedOnDemandCostWithCurrentCommitment != nil {
+		s.WriteString(schemas.RecommendationDetailData_EstimatedOnDemandCostWithCurrentCommitment, *v.EstimatedOnDemandCostWithCurrentCommitment)
+	}
+	if v.EstimatedROI != nil {
+		s.WriteString(schemas.RecommendationDetailData_EstimatedROI, *v.EstimatedROI)
+	}
+	if v.EstimatedSPCost != nil {
+		s.WriteString(schemas.RecommendationDetailData_EstimatedSPCost, *v.EstimatedSPCost)
+	}
+	if v.EstimatedSavingsAmount != nil {
+		s.WriteString(schemas.RecommendationDetailData_EstimatedSavingsAmount, *v.EstimatedSavingsAmount)
+	}
+	if v.EstimatedSavingsPercentage != nil {
+		s.WriteString(schemas.RecommendationDetailData_EstimatedSavingsPercentage, *v.EstimatedSavingsPercentage)
+	}
+	if v.ExistingHourlyCommitment != nil {
+		s.WriteString(schemas.RecommendationDetailData_ExistingHourlyCommitment, *v.ExistingHourlyCommitment)
+	}
+	if v.GenerationTimestamp != nil {
+		s.WriteString(schemas.RecommendationDetailData_GenerationTimestamp, *v.GenerationTimestamp)
+	}
+	if v.HourlyCommitmentToPurchase != nil {
+		s.WriteString(schemas.RecommendationDetailData_HourlyCommitmentToPurchase, *v.HourlyCommitmentToPurchase)
+	}
+	if v.InstanceFamily != nil {
+		s.WriteString(schemas.RecommendationDetailData_InstanceFamily, *v.InstanceFamily)
+	}
+	if v.LatestUsageTimestamp != nil {
+		s.WriteString(schemas.RecommendationDetailData_LatestUsageTimestamp, *v.LatestUsageTimestamp)
+	}
+	if v.LookbackPeriodInDays != "" {
+		s.WriteString(schemas.RecommendationDetailData_LookbackPeriodInDays, string(v.LookbackPeriodInDays))
+	}
+	serializeMetricsOverLookbackPeriod(s, schemas.RecommendationDetailData_MetricsOverLookbackPeriod, v.MetricsOverLookbackPeriod)
+	if v.OfferingId != nil {
+		s.WriteString(schemas.RecommendationDetailData_OfferingId, *v.OfferingId)
+	}
+	if v.PaymentOption != "" {
+		s.WriteString(schemas.RecommendationDetailData_PaymentOption, string(v.PaymentOption))
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.RecommendationDetailData_Region, *v.Region)
+	}
+	if v.SavingsPlansType != "" {
+		s.WriteString(schemas.RecommendationDetailData_SavingsPlansType, string(v.SavingsPlansType))
+	}
+	if v.TermInYears != "" {
+		s.WriteString(schemas.RecommendationDetailData_TermInYears, string(v.TermInYears))
+	}
+	if v.UpfrontCost != nil {
+		s.WriteString(schemas.RecommendationDetailData_UpfrontCost, *v.UpfrontCost)
+	}
+}
+func (v *RecommendationDetailData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecommendationDetailData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecommendationDetailData_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.RecommendationDetailData_AccountId, v.AccountId)
+		case schemas.RecommendationDetailData_AccountScope:
+			var ev string
+			if err := d.ReadString(schemas.RecommendationDetailData_AccountScope, &ev); err != nil {
+				return err
+			}
+			v.AccountScope = AccountScope(ev)
+			return nil
+		case schemas.RecommendationDetailData_CurrencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.RecommendationDetailData_CurrencyCode, v.CurrencyCode)
+		case schemas.RecommendationDetailData_CurrentAverageCoverage:
+			v.CurrentAverageCoverage = new(string)
+			return d.ReadString(schemas.RecommendationDetailData_CurrentAverageCoverage, v.CurrentAverageCoverage)
+		case schemas.RecommendationDetailData_CurrentAverageHourlyOnDemandSpend:
+			v.CurrentAverageHourlyOnDemandSpend = new(string)
+			return d.ReadString(schemas.RecommendationDetailData_CurrentAverageHourlyOnDemandSpend, v.CurrentAverageHourlyOnDemandSpend)
+		case schemas.RecommendationDetailData_CurrentMaximumHourlyOnDemandSpend:
+			v.CurrentMaximumHourlyOnDemandSpend = new(string)
+			return d.ReadString(schemas.RecommendationDetailData_CurrentMaximumHourlyOnDemandSpend, v.CurrentMaximumHourlyOnDemandSpend)
+		case schemas.RecommendationDetailData_CurrentMinimumHourlyOnDemandSpend:
+			v.CurrentMinimumHourlyOnDemandSpend = new(string)
+			return d.ReadString(schemas.RecommendationDetailData_CurrentMinimumHourlyOnDemandSpend, v.CurrentMinimumHourlyOnDemandSpend)
+		case schemas.RecommendationDetailData_EstimatedAverageCoverage:
+			v.EstimatedAverageCoverage = new(string)
+			return d.ReadString(schemas.RecommendationDetailData_EstimatedAverageCoverage, v.EstimatedAverageCoverage)
+		case schemas.RecommendationDetailData_EstimatedAverageUtilization:
+			v.EstimatedAverageUtilization = new(string)
+			return d.ReadString(schemas.RecommendationDetailData_EstimatedAverageUtilization, v.EstimatedAverageUtilization)
+		case schemas.RecommendationDetailData_EstimatedMonthlySavingsAmount:
+			v.EstimatedMonthlySavingsAmount = new(string)
+			return d.ReadString(schemas.RecommendationDetailData_EstimatedMonthlySavingsAmount, v.EstimatedMonthlySavingsAmount)
+		case schemas.RecommendationDetailData_EstimatedOnDemandCost:
+			v.EstimatedOnDemandCost = new(string)
+			return d.ReadString(schemas.RecommendationDetailData_EstimatedOnDemandCost, v.EstimatedOnDemandCost)
+		case schemas.RecommendationDetailData_EstimatedOnDemandCostWithCurrentCommitment:
+			v.EstimatedOnDemandCostWithCurrentCommitment = new(string)
+			return d.ReadString(schemas.RecommendationDetailData_EstimatedOnDemandCostWithCurrentCommitment, v.EstimatedOnDemandCostWithCurrentCommitment)
+		case schemas.RecommendationDetailData_EstimatedROI:
+			v.EstimatedROI = new(string)
+			return d.ReadString(schemas.RecommendationDetailData_EstimatedROI, v.EstimatedROI)
+		case schemas.RecommendationDetailData_EstimatedSPCost:
+			v.EstimatedSPCost = new(string)
+			return d.ReadString(schemas.RecommendationDetailData_EstimatedSPCost, v.EstimatedSPCost)
+		case schemas.RecommendationDetailData_EstimatedSavingsAmount:
+			v.EstimatedSavingsAmount = new(string)
+			return d.ReadString(schemas.RecommendationDetailData_EstimatedSavingsAmount, v.EstimatedSavingsAmount)
+		case schemas.RecommendationDetailData_EstimatedSavingsPercentage:
+			v.EstimatedSavingsPercentage = new(string)
+			return d.ReadString(schemas.RecommendationDetailData_EstimatedSavingsPercentage, v.EstimatedSavingsPercentage)
+		case schemas.RecommendationDetailData_ExistingHourlyCommitment:
+			v.ExistingHourlyCommitment = new(string)
+			return d.ReadString(schemas.RecommendationDetailData_ExistingHourlyCommitment, v.ExistingHourlyCommitment)
+		case schemas.RecommendationDetailData_GenerationTimestamp:
+			v.GenerationTimestamp = new(string)
+			return d.ReadString(schemas.RecommendationDetailData_GenerationTimestamp, v.GenerationTimestamp)
+		case schemas.RecommendationDetailData_HourlyCommitmentToPurchase:
+			v.HourlyCommitmentToPurchase = new(string)
+			return d.ReadString(schemas.RecommendationDetailData_HourlyCommitmentToPurchase, v.HourlyCommitmentToPurchase)
+		case schemas.RecommendationDetailData_InstanceFamily:
+			v.InstanceFamily = new(string)
+			return d.ReadString(schemas.RecommendationDetailData_InstanceFamily, v.InstanceFamily)
+		case schemas.RecommendationDetailData_LatestUsageTimestamp:
+			v.LatestUsageTimestamp = new(string)
+			return d.ReadString(schemas.RecommendationDetailData_LatestUsageTimestamp, v.LatestUsageTimestamp)
+		case schemas.RecommendationDetailData_LookbackPeriodInDays:
+			var ev string
+			if err := d.ReadString(schemas.RecommendationDetailData_LookbackPeriodInDays, &ev); err != nil {
+				return err
+			}
+			v.LookbackPeriodInDays = LookbackPeriodInDays(ev)
+			return nil
+		case schemas.RecommendationDetailData_MetricsOverLookbackPeriod:
+			return deserializeMetricsOverLookbackPeriod(d, schemas.RecommendationDetailData_MetricsOverLookbackPeriod, &v.MetricsOverLookbackPeriod)
+		case schemas.RecommendationDetailData_OfferingId:
+			v.OfferingId = new(string)
+			return d.ReadString(schemas.RecommendationDetailData_OfferingId, v.OfferingId)
+		case schemas.RecommendationDetailData_PaymentOption:
+			var ev string
+			if err := d.ReadString(schemas.RecommendationDetailData_PaymentOption, &ev); err != nil {
+				return err
+			}
+			v.PaymentOption = PaymentOption(ev)
+			return nil
+		case schemas.RecommendationDetailData_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.RecommendationDetailData_Region, v.Region)
+		case schemas.RecommendationDetailData_SavingsPlansType:
+			var ev string
+			if err := d.ReadString(schemas.RecommendationDetailData_SavingsPlansType, &ev); err != nil {
+				return err
+			}
+			v.SavingsPlansType = SupportedSavingsPlansType(ev)
+			return nil
+		case schemas.RecommendationDetailData_TermInYears:
+			var ev string
+			if err := d.ReadString(schemas.RecommendationDetailData_TermInYears, &ev); err != nil {
+				return err
+			}
+			v.TermInYears = TermInYears(ev)
+			return nil
+		case schemas.RecommendationDetailData_UpfrontCost:
+			v.UpfrontCost = new(string)
+			return d.ReadString(schemas.RecommendationDetailData_UpfrontCost, v.UpfrontCost)
+		}
+		return nil
+	})
+}
+
 // Contains the hourly metrics for the given recommendation over the lookback
 // period.
 type RecommendationDetailHourlyMetrics struct {
@@ -1722,6 +4223,52 @@ type RecommendationDetailHourlyMetrics struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecommendationDetailHourlyMetrics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecommendationDetailHourlyMetrics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecommendationDetailHourlyMetrics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentCoverage != nil {
+		s.WriteString(schemas.RecommendationDetailHourlyMetrics_CurrentCoverage, *v.CurrentCoverage)
+	}
+	if v.EstimatedCoverage != nil {
+		s.WriteString(schemas.RecommendationDetailHourlyMetrics_EstimatedCoverage, *v.EstimatedCoverage)
+	}
+	if v.EstimatedNewCommitmentUtilization != nil {
+		s.WriteString(schemas.RecommendationDetailHourlyMetrics_EstimatedNewCommitmentUtilization, *v.EstimatedNewCommitmentUtilization)
+	}
+	if v.EstimatedOnDemandCost != nil {
+		s.WriteString(schemas.RecommendationDetailHourlyMetrics_EstimatedOnDemandCost, *v.EstimatedOnDemandCost)
+	}
+	if v.StartTime != nil {
+		s.WriteString(schemas.RecommendationDetailHourlyMetrics_StartTime, *v.StartTime)
+	}
+}
+func (v *RecommendationDetailHourlyMetrics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecommendationDetailHourlyMetrics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecommendationDetailHourlyMetrics_CurrentCoverage:
+			v.CurrentCoverage = new(string)
+			return d.ReadString(schemas.RecommendationDetailHourlyMetrics_CurrentCoverage, v.CurrentCoverage)
+		case schemas.RecommendationDetailHourlyMetrics_EstimatedCoverage:
+			v.EstimatedCoverage = new(string)
+			return d.ReadString(schemas.RecommendationDetailHourlyMetrics_EstimatedCoverage, v.EstimatedCoverage)
+		case schemas.RecommendationDetailHourlyMetrics_EstimatedNewCommitmentUtilization:
+			v.EstimatedNewCommitmentUtilization = new(string)
+			return d.ReadString(schemas.RecommendationDetailHourlyMetrics_EstimatedNewCommitmentUtilization, v.EstimatedNewCommitmentUtilization)
+		case schemas.RecommendationDetailHourlyMetrics_EstimatedOnDemandCost:
+			v.EstimatedOnDemandCost = new(string)
+			return d.ReadString(schemas.RecommendationDetailHourlyMetrics_EstimatedOnDemandCost, v.EstimatedOnDemandCost)
+		case schemas.RecommendationDetailHourlyMetrics_StartTime:
+			v.StartTime = new(string)
+			return d.ReadString(schemas.RecommendationDetailHourlyMetrics_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 // Details about the Amazon Redshift reservations that Amazon Web Services
 // recommends that you purchase.
 type RedshiftInstanceDetails struct {
@@ -1742,6 +4289,50 @@ type RedshiftInstanceDetails struct {
 	SizeFlexEligible bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *RedshiftInstanceDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedshiftInstanceDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedshiftInstanceDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentGeneration != false {
+		s.WriteBool(schemas.RedshiftInstanceDetails_CurrentGeneration, v.CurrentGeneration)
+	}
+	if v.Family != nil {
+		s.WriteString(schemas.RedshiftInstanceDetails_Family, *v.Family)
+	}
+	if v.NodeType != nil {
+		s.WriteString(schemas.RedshiftInstanceDetails_NodeType, *v.NodeType)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.RedshiftInstanceDetails_Region, *v.Region)
+	}
+	if v.SizeFlexEligible != false {
+		s.WriteBool(schemas.RedshiftInstanceDetails_SizeFlexEligible, v.SizeFlexEligible)
+	}
+}
+func (v *RedshiftInstanceDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedshiftInstanceDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RedshiftInstanceDetails_CurrentGeneration:
+			return d.ReadBool(schemas.RedshiftInstanceDetails_CurrentGeneration, &v.CurrentGeneration)
+		case schemas.RedshiftInstanceDetails_Family:
+			v.Family = new(string)
+			return d.ReadString(schemas.RedshiftInstanceDetails_Family, v.Family)
+		case schemas.RedshiftInstanceDetails_NodeType:
+			v.NodeType = new(string)
+			return d.ReadString(schemas.RedshiftInstanceDetails_NodeType, v.NodeType)
+		case schemas.RedshiftInstanceDetails_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.RedshiftInstanceDetails_Region, v.Region)
+		case schemas.RedshiftInstanceDetails_SizeFlexEligible:
+			return d.ReadBool(schemas.RedshiftInstanceDetails_SizeFlexEligible, &v.SizeFlexEligible)
+		}
+		return nil
+	})
 }
 
 // The aggregated numbers for your reservation usage.
@@ -1813,6 +4404,124 @@ type ReservationAggregates struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReservationAggregates) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReservationAggregates)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReservationAggregates) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmortizedRecurringFee != nil {
+		s.WriteString(schemas.ReservationAggregates_AmortizedRecurringFee, *v.AmortizedRecurringFee)
+	}
+	if v.AmortizedUpfrontFee != nil {
+		s.WriteString(schemas.ReservationAggregates_AmortizedUpfrontFee, *v.AmortizedUpfrontFee)
+	}
+	if v.NetRISavings != nil {
+		s.WriteString(schemas.ReservationAggregates_NetRISavings, *v.NetRISavings)
+	}
+	if v.OnDemandCostOfRIHoursUsed != nil {
+		s.WriteString(schemas.ReservationAggregates_OnDemandCostOfRIHoursUsed, *v.OnDemandCostOfRIHoursUsed)
+	}
+	if v.PurchasedHours != nil {
+		s.WriteString(schemas.ReservationAggregates_PurchasedHours, *v.PurchasedHours)
+	}
+	if v.PurchasedUnits != nil {
+		s.WriteString(schemas.ReservationAggregates_PurchasedUnits, *v.PurchasedUnits)
+	}
+	if v.RICostForUnusedHours != nil {
+		s.WriteString(schemas.ReservationAggregates_RICostForUnusedHours, *v.RICostForUnusedHours)
+	}
+	if v.RealizedSavings != nil {
+		s.WriteString(schemas.ReservationAggregates_RealizedSavings, *v.RealizedSavings)
+	}
+	if v.TotalActualHours != nil {
+		s.WriteString(schemas.ReservationAggregates_TotalActualHours, *v.TotalActualHours)
+	}
+	if v.TotalActualUnits != nil {
+		s.WriteString(schemas.ReservationAggregates_TotalActualUnits, *v.TotalActualUnits)
+	}
+	if v.TotalAmortizedFee != nil {
+		s.WriteString(schemas.ReservationAggregates_TotalAmortizedFee, *v.TotalAmortizedFee)
+	}
+	if v.TotalPotentialRISavings != nil {
+		s.WriteString(schemas.ReservationAggregates_TotalPotentialRISavings, *v.TotalPotentialRISavings)
+	}
+	if v.UnrealizedSavings != nil {
+		s.WriteString(schemas.ReservationAggregates_UnrealizedSavings, *v.UnrealizedSavings)
+	}
+	if v.UnusedHours != nil {
+		s.WriteString(schemas.ReservationAggregates_UnusedHours, *v.UnusedHours)
+	}
+	if v.UnusedUnits != nil {
+		s.WriteString(schemas.ReservationAggregates_UnusedUnits, *v.UnusedUnits)
+	}
+	if v.UtilizationPercentage != nil {
+		s.WriteString(schemas.ReservationAggregates_UtilizationPercentage, *v.UtilizationPercentage)
+	}
+	if v.UtilizationPercentageInUnits != nil {
+		s.WriteString(schemas.ReservationAggregates_UtilizationPercentageInUnits, *v.UtilizationPercentageInUnits)
+	}
+}
+func (v *ReservationAggregates) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReservationAggregates, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReservationAggregates_AmortizedRecurringFee:
+			v.AmortizedRecurringFee = new(string)
+			return d.ReadString(schemas.ReservationAggregates_AmortizedRecurringFee, v.AmortizedRecurringFee)
+		case schemas.ReservationAggregates_AmortizedUpfrontFee:
+			v.AmortizedUpfrontFee = new(string)
+			return d.ReadString(schemas.ReservationAggregates_AmortizedUpfrontFee, v.AmortizedUpfrontFee)
+		case schemas.ReservationAggregates_NetRISavings:
+			v.NetRISavings = new(string)
+			return d.ReadString(schemas.ReservationAggregates_NetRISavings, v.NetRISavings)
+		case schemas.ReservationAggregates_OnDemandCostOfRIHoursUsed:
+			v.OnDemandCostOfRIHoursUsed = new(string)
+			return d.ReadString(schemas.ReservationAggregates_OnDemandCostOfRIHoursUsed, v.OnDemandCostOfRIHoursUsed)
+		case schemas.ReservationAggregates_PurchasedHours:
+			v.PurchasedHours = new(string)
+			return d.ReadString(schemas.ReservationAggregates_PurchasedHours, v.PurchasedHours)
+		case schemas.ReservationAggregates_PurchasedUnits:
+			v.PurchasedUnits = new(string)
+			return d.ReadString(schemas.ReservationAggregates_PurchasedUnits, v.PurchasedUnits)
+		case schemas.ReservationAggregates_RICostForUnusedHours:
+			v.RICostForUnusedHours = new(string)
+			return d.ReadString(schemas.ReservationAggregates_RICostForUnusedHours, v.RICostForUnusedHours)
+		case schemas.ReservationAggregates_RealizedSavings:
+			v.RealizedSavings = new(string)
+			return d.ReadString(schemas.ReservationAggregates_RealizedSavings, v.RealizedSavings)
+		case schemas.ReservationAggregates_TotalActualHours:
+			v.TotalActualHours = new(string)
+			return d.ReadString(schemas.ReservationAggregates_TotalActualHours, v.TotalActualHours)
+		case schemas.ReservationAggregates_TotalActualUnits:
+			v.TotalActualUnits = new(string)
+			return d.ReadString(schemas.ReservationAggregates_TotalActualUnits, v.TotalActualUnits)
+		case schemas.ReservationAggregates_TotalAmortizedFee:
+			v.TotalAmortizedFee = new(string)
+			return d.ReadString(schemas.ReservationAggregates_TotalAmortizedFee, v.TotalAmortizedFee)
+		case schemas.ReservationAggregates_TotalPotentialRISavings:
+			v.TotalPotentialRISavings = new(string)
+			return d.ReadString(schemas.ReservationAggregates_TotalPotentialRISavings, v.TotalPotentialRISavings)
+		case schemas.ReservationAggregates_UnrealizedSavings:
+			v.UnrealizedSavings = new(string)
+			return d.ReadString(schemas.ReservationAggregates_UnrealizedSavings, v.UnrealizedSavings)
+		case schemas.ReservationAggregates_UnusedHours:
+			v.UnusedHours = new(string)
+			return d.ReadString(schemas.ReservationAggregates_UnusedHours, v.UnusedHours)
+		case schemas.ReservationAggregates_UnusedUnits:
+			v.UnusedUnits = new(string)
+			return d.ReadString(schemas.ReservationAggregates_UnusedUnits, v.UnusedUnits)
+		case schemas.ReservationAggregates_UtilizationPercentage:
+			v.UtilizationPercentage = new(string)
+			return d.ReadString(schemas.ReservationAggregates_UtilizationPercentage, v.UtilizationPercentage)
+		case schemas.ReservationAggregates_UtilizationPercentageInUnits:
+			v.UtilizationPercentageInUnits = new(string)
+			return d.ReadString(schemas.ReservationAggregates_UtilizationPercentageInUnits, v.UtilizationPercentageInUnits)
+		}
+		return nil
+	})
+}
+
 // A group of reservations that share a set of attributes.
 type ReservationCoverageGroup struct {
 
@@ -1823,6 +4532,33 @@ type ReservationCoverageGroup struct {
 	Coverage *Coverage
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReservationCoverageGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReservationCoverageGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReservationCoverageGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.ReservationCoverageGroup_Attributes, v.Attributes)
+	if v.Coverage != nil {
+		s.WriteStruct(schemas.ReservationCoverageGroup_Coverage)
+		v.Coverage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ReservationCoverageGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReservationCoverageGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReservationCoverageGroup_Attributes:
+			return deserializeAttributes(d, schemas.ReservationCoverageGroup_Attributes, &v.Attributes)
+		case schemas.ReservationCoverageGroup_Coverage:
+			v.Coverage = &Coverage{}
+			return v.Coverage.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A specific reservation that Amazon Web Services recommends for purchase.
@@ -1853,6 +4589,81 @@ type ReservationPurchaseRecommendation struct {
 	TermInYears TermInYears
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReservationPurchaseRecommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReservationPurchaseRecommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReservationPurchaseRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountScope != "" {
+		s.WriteString(schemas.ReservationPurchaseRecommendation_AccountScope, string(v.AccountScope))
+	}
+	if v.LookbackPeriodInDays != "" {
+		s.WriteString(schemas.ReservationPurchaseRecommendation_LookbackPeriodInDays, string(v.LookbackPeriodInDays))
+	}
+	if v.PaymentOption != "" {
+		s.WriteString(schemas.ReservationPurchaseRecommendation_PaymentOption, string(v.PaymentOption))
+	}
+	serializeReservationPurchaseRecommendationDetails(s, schemas.ReservationPurchaseRecommendation_RecommendationDetails, v.RecommendationDetails)
+	if v.RecommendationSummary != nil {
+		s.WriteStruct(schemas.ReservationPurchaseRecommendation_RecommendationSummary)
+		v.RecommendationSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceSpecification != nil {
+		s.WriteStruct(schemas.ReservationPurchaseRecommendation_ServiceSpecification)
+		v.ServiceSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TermInYears != "" {
+		s.WriteString(schemas.ReservationPurchaseRecommendation_TermInYears, string(v.TermInYears))
+	}
+}
+func (v *ReservationPurchaseRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReservationPurchaseRecommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReservationPurchaseRecommendation_AccountScope:
+			var ev string
+			if err := d.ReadString(schemas.ReservationPurchaseRecommendation_AccountScope, &ev); err != nil {
+				return err
+			}
+			v.AccountScope = AccountScope(ev)
+			return nil
+		case schemas.ReservationPurchaseRecommendation_LookbackPeriodInDays:
+			var ev string
+			if err := d.ReadString(schemas.ReservationPurchaseRecommendation_LookbackPeriodInDays, &ev); err != nil {
+				return err
+			}
+			v.LookbackPeriodInDays = LookbackPeriodInDays(ev)
+			return nil
+		case schemas.ReservationPurchaseRecommendation_PaymentOption:
+			var ev string
+			if err := d.ReadString(schemas.ReservationPurchaseRecommendation_PaymentOption, &ev); err != nil {
+				return err
+			}
+			v.PaymentOption = PaymentOption(ev)
+			return nil
+		case schemas.ReservationPurchaseRecommendation_RecommendationDetails:
+			return deserializeReservationPurchaseRecommendationDetails(d, schemas.ReservationPurchaseRecommendation_RecommendationDetails, &v.RecommendationDetails)
+		case schemas.ReservationPurchaseRecommendation_RecommendationSummary:
+			v.RecommendationSummary = &ReservationPurchaseRecommendationSummary{}
+			return v.RecommendationSummary.Deserialize(d)
+		case schemas.ReservationPurchaseRecommendation_ServiceSpecification:
+			v.ServiceSpecification = &ServiceSpecification{}
+			return v.ServiceSpecification.Deserialize(d)
+		case schemas.ReservationPurchaseRecommendation_TermInYears:
+			var ev string
+			if err := d.ReadString(schemas.ReservationPurchaseRecommendation_TermInYears, &ev); err != nil {
+				return err
+			}
+			v.TermInYears = TermInYears(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Details about your recommended reservation purchase.
@@ -1974,6 +4785,170 @@ type ReservationPurchaseRecommendationDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReservationPurchaseRecommendationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReservationPurchaseRecommendationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReservationPurchaseRecommendationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationDetail_AccountId, *v.AccountId)
+	}
+	if v.AverageNormalizedUnitsUsedPerHour != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationDetail_AverageNormalizedUnitsUsedPerHour, *v.AverageNormalizedUnitsUsedPerHour)
+	}
+	if v.AverageNumberOfCapacityUnitsUsedPerHour != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationDetail_AverageNumberOfCapacityUnitsUsedPerHour, *v.AverageNumberOfCapacityUnitsUsedPerHour)
+	}
+	if v.AverageNumberOfInstancesUsedPerHour != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationDetail_AverageNumberOfInstancesUsedPerHour, *v.AverageNumberOfInstancesUsedPerHour)
+	}
+	if v.AverageUtilization != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationDetail_AverageUtilization, *v.AverageUtilization)
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationDetail_CurrencyCode, *v.CurrencyCode)
+	}
+	if v.EstimatedBreakEvenInMonths != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationDetail_EstimatedBreakEvenInMonths, *v.EstimatedBreakEvenInMonths)
+	}
+	if v.EstimatedMonthlyOnDemandCost != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationDetail_EstimatedMonthlyOnDemandCost, *v.EstimatedMonthlyOnDemandCost)
+	}
+	if v.EstimatedMonthlySavingsAmount != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationDetail_EstimatedMonthlySavingsAmount, *v.EstimatedMonthlySavingsAmount)
+	}
+	if v.EstimatedMonthlySavingsPercentage != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationDetail_EstimatedMonthlySavingsPercentage, *v.EstimatedMonthlySavingsPercentage)
+	}
+	if v.EstimatedReservationCostForLookbackPeriod != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationDetail_EstimatedReservationCostForLookbackPeriod, *v.EstimatedReservationCostForLookbackPeriod)
+	}
+	if v.InstanceDetails != nil {
+		s.WriteStruct(schemas.ReservationPurchaseRecommendationDetail_InstanceDetails)
+		v.InstanceDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaximumNormalizedUnitsUsedPerHour != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationDetail_MaximumNormalizedUnitsUsedPerHour, *v.MaximumNormalizedUnitsUsedPerHour)
+	}
+	if v.MaximumNumberOfCapacityUnitsUsedPerHour != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationDetail_MaximumNumberOfCapacityUnitsUsedPerHour, *v.MaximumNumberOfCapacityUnitsUsedPerHour)
+	}
+	if v.MaximumNumberOfInstancesUsedPerHour != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationDetail_MaximumNumberOfInstancesUsedPerHour, *v.MaximumNumberOfInstancesUsedPerHour)
+	}
+	if v.MinimumNormalizedUnitsUsedPerHour != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationDetail_MinimumNormalizedUnitsUsedPerHour, *v.MinimumNormalizedUnitsUsedPerHour)
+	}
+	if v.MinimumNumberOfCapacityUnitsUsedPerHour != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationDetail_MinimumNumberOfCapacityUnitsUsedPerHour, *v.MinimumNumberOfCapacityUnitsUsedPerHour)
+	}
+	if v.MinimumNumberOfInstancesUsedPerHour != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationDetail_MinimumNumberOfInstancesUsedPerHour, *v.MinimumNumberOfInstancesUsedPerHour)
+	}
+	if v.RecommendedNormalizedUnitsToPurchase != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationDetail_RecommendedNormalizedUnitsToPurchase, *v.RecommendedNormalizedUnitsToPurchase)
+	}
+	if v.RecommendedNumberOfCapacityUnitsToPurchase != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationDetail_RecommendedNumberOfCapacityUnitsToPurchase, *v.RecommendedNumberOfCapacityUnitsToPurchase)
+	}
+	if v.RecommendedNumberOfInstancesToPurchase != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationDetail_RecommendedNumberOfInstancesToPurchase, *v.RecommendedNumberOfInstancesToPurchase)
+	}
+	if v.RecurringStandardMonthlyCost != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationDetail_RecurringStandardMonthlyCost, *v.RecurringStandardMonthlyCost)
+	}
+	if v.ReservedCapacityDetails != nil {
+		s.WriteStruct(schemas.ReservationPurchaseRecommendationDetail_ReservedCapacityDetails)
+		v.ReservedCapacityDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpfrontCost != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationDetail_UpfrontCost, *v.UpfrontCost)
+	}
+}
+func (v *ReservationPurchaseRecommendationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReservationPurchaseRecommendationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReservationPurchaseRecommendationDetail_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationDetail_AccountId, v.AccountId)
+		case schemas.ReservationPurchaseRecommendationDetail_AverageNormalizedUnitsUsedPerHour:
+			v.AverageNormalizedUnitsUsedPerHour = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationDetail_AverageNormalizedUnitsUsedPerHour, v.AverageNormalizedUnitsUsedPerHour)
+		case schemas.ReservationPurchaseRecommendationDetail_AverageNumberOfCapacityUnitsUsedPerHour:
+			v.AverageNumberOfCapacityUnitsUsedPerHour = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationDetail_AverageNumberOfCapacityUnitsUsedPerHour, v.AverageNumberOfCapacityUnitsUsedPerHour)
+		case schemas.ReservationPurchaseRecommendationDetail_AverageNumberOfInstancesUsedPerHour:
+			v.AverageNumberOfInstancesUsedPerHour = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationDetail_AverageNumberOfInstancesUsedPerHour, v.AverageNumberOfInstancesUsedPerHour)
+		case schemas.ReservationPurchaseRecommendationDetail_AverageUtilization:
+			v.AverageUtilization = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationDetail_AverageUtilization, v.AverageUtilization)
+		case schemas.ReservationPurchaseRecommendationDetail_CurrencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationDetail_CurrencyCode, v.CurrencyCode)
+		case schemas.ReservationPurchaseRecommendationDetail_EstimatedBreakEvenInMonths:
+			v.EstimatedBreakEvenInMonths = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationDetail_EstimatedBreakEvenInMonths, v.EstimatedBreakEvenInMonths)
+		case schemas.ReservationPurchaseRecommendationDetail_EstimatedMonthlyOnDemandCost:
+			v.EstimatedMonthlyOnDemandCost = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationDetail_EstimatedMonthlyOnDemandCost, v.EstimatedMonthlyOnDemandCost)
+		case schemas.ReservationPurchaseRecommendationDetail_EstimatedMonthlySavingsAmount:
+			v.EstimatedMonthlySavingsAmount = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationDetail_EstimatedMonthlySavingsAmount, v.EstimatedMonthlySavingsAmount)
+		case schemas.ReservationPurchaseRecommendationDetail_EstimatedMonthlySavingsPercentage:
+			v.EstimatedMonthlySavingsPercentage = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationDetail_EstimatedMonthlySavingsPercentage, v.EstimatedMonthlySavingsPercentage)
+		case schemas.ReservationPurchaseRecommendationDetail_EstimatedReservationCostForLookbackPeriod:
+			v.EstimatedReservationCostForLookbackPeriod = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationDetail_EstimatedReservationCostForLookbackPeriod, v.EstimatedReservationCostForLookbackPeriod)
+		case schemas.ReservationPurchaseRecommendationDetail_InstanceDetails:
+			v.InstanceDetails = &InstanceDetails{}
+			return v.InstanceDetails.Deserialize(d)
+		case schemas.ReservationPurchaseRecommendationDetail_MaximumNormalizedUnitsUsedPerHour:
+			v.MaximumNormalizedUnitsUsedPerHour = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationDetail_MaximumNormalizedUnitsUsedPerHour, v.MaximumNormalizedUnitsUsedPerHour)
+		case schemas.ReservationPurchaseRecommendationDetail_MaximumNumberOfCapacityUnitsUsedPerHour:
+			v.MaximumNumberOfCapacityUnitsUsedPerHour = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationDetail_MaximumNumberOfCapacityUnitsUsedPerHour, v.MaximumNumberOfCapacityUnitsUsedPerHour)
+		case schemas.ReservationPurchaseRecommendationDetail_MaximumNumberOfInstancesUsedPerHour:
+			v.MaximumNumberOfInstancesUsedPerHour = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationDetail_MaximumNumberOfInstancesUsedPerHour, v.MaximumNumberOfInstancesUsedPerHour)
+		case schemas.ReservationPurchaseRecommendationDetail_MinimumNormalizedUnitsUsedPerHour:
+			v.MinimumNormalizedUnitsUsedPerHour = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationDetail_MinimumNormalizedUnitsUsedPerHour, v.MinimumNormalizedUnitsUsedPerHour)
+		case schemas.ReservationPurchaseRecommendationDetail_MinimumNumberOfCapacityUnitsUsedPerHour:
+			v.MinimumNumberOfCapacityUnitsUsedPerHour = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationDetail_MinimumNumberOfCapacityUnitsUsedPerHour, v.MinimumNumberOfCapacityUnitsUsedPerHour)
+		case schemas.ReservationPurchaseRecommendationDetail_MinimumNumberOfInstancesUsedPerHour:
+			v.MinimumNumberOfInstancesUsedPerHour = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationDetail_MinimumNumberOfInstancesUsedPerHour, v.MinimumNumberOfInstancesUsedPerHour)
+		case schemas.ReservationPurchaseRecommendationDetail_RecommendedNormalizedUnitsToPurchase:
+			v.RecommendedNormalizedUnitsToPurchase = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationDetail_RecommendedNormalizedUnitsToPurchase, v.RecommendedNormalizedUnitsToPurchase)
+		case schemas.ReservationPurchaseRecommendationDetail_RecommendedNumberOfCapacityUnitsToPurchase:
+			v.RecommendedNumberOfCapacityUnitsToPurchase = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationDetail_RecommendedNumberOfCapacityUnitsToPurchase, v.RecommendedNumberOfCapacityUnitsToPurchase)
+		case schemas.ReservationPurchaseRecommendationDetail_RecommendedNumberOfInstancesToPurchase:
+			v.RecommendedNumberOfInstancesToPurchase = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationDetail_RecommendedNumberOfInstancesToPurchase, v.RecommendedNumberOfInstancesToPurchase)
+		case schemas.ReservationPurchaseRecommendationDetail_RecurringStandardMonthlyCost:
+			v.RecurringStandardMonthlyCost = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationDetail_RecurringStandardMonthlyCost, v.RecurringStandardMonthlyCost)
+		case schemas.ReservationPurchaseRecommendationDetail_ReservedCapacityDetails:
+			v.ReservedCapacityDetails = &ReservedCapacityDetails{}
+			return v.ReservedCapacityDetails.Deserialize(d)
+		case schemas.ReservationPurchaseRecommendationDetail_UpfrontCost:
+			v.UpfrontCost = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationDetail_UpfrontCost, v.UpfrontCost)
+		}
+		return nil
+	})
+}
+
 // Information about a recommendation, such as the timestamp for when Amazon Web
 // Services made a specific recommendation.
 type ReservationPurchaseRecommendationMetadata struct {
@@ -1988,6 +4963,40 @@ type ReservationPurchaseRecommendationMetadata struct {
 	RecommendationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReservationPurchaseRecommendationMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReservationPurchaseRecommendationMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReservationPurchaseRecommendationMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalMetadata != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationMetadata_AdditionalMetadata, *v.AdditionalMetadata)
+	}
+	if v.GenerationTimestamp != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationMetadata_GenerationTimestamp, *v.GenerationTimestamp)
+	}
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationMetadata_RecommendationId, *v.RecommendationId)
+	}
+}
+func (v *ReservationPurchaseRecommendationMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReservationPurchaseRecommendationMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReservationPurchaseRecommendationMetadata_AdditionalMetadata:
+			v.AdditionalMetadata = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationMetadata_AdditionalMetadata, v.AdditionalMetadata)
+		case schemas.ReservationPurchaseRecommendationMetadata_GenerationTimestamp:
+			v.GenerationTimestamp = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationMetadata_GenerationTimestamp, v.GenerationTimestamp)
+		case schemas.ReservationPurchaseRecommendationMetadata_RecommendationId:
+			v.RecommendationId = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationMetadata_RecommendationId, v.RecommendationId)
+		}
+		return nil
+	})
 }
 
 // A summary about this recommendation, such as the currency code, the amount that
@@ -2009,6 +5018,40 @@ type ReservationPurchaseRecommendationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReservationPurchaseRecommendationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReservationPurchaseRecommendationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReservationPurchaseRecommendationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationSummary_CurrencyCode, *v.CurrencyCode)
+	}
+	if v.TotalEstimatedMonthlySavingsAmount != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationSummary_TotalEstimatedMonthlySavingsAmount, *v.TotalEstimatedMonthlySavingsAmount)
+	}
+	if v.TotalEstimatedMonthlySavingsPercentage != nil {
+		s.WriteString(schemas.ReservationPurchaseRecommendationSummary_TotalEstimatedMonthlySavingsPercentage, *v.TotalEstimatedMonthlySavingsPercentage)
+	}
+}
+func (v *ReservationPurchaseRecommendationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReservationPurchaseRecommendationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReservationPurchaseRecommendationSummary_CurrencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationSummary_CurrencyCode, v.CurrencyCode)
+		case schemas.ReservationPurchaseRecommendationSummary_TotalEstimatedMonthlySavingsAmount:
+			v.TotalEstimatedMonthlySavingsAmount = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationSummary_TotalEstimatedMonthlySavingsAmount, v.TotalEstimatedMonthlySavingsAmount)
+		case schemas.ReservationPurchaseRecommendationSummary_TotalEstimatedMonthlySavingsPercentage:
+			v.TotalEstimatedMonthlySavingsPercentage = new(string)
+			return d.ReadString(schemas.ReservationPurchaseRecommendationSummary_TotalEstimatedMonthlySavingsPercentage, v.TotalEstimatedMonthlySavingsPercentage)
+		}
+		return nil
+	})
+}
+
 // A group of reservations that share a set of attributes.
 type ReservationUtilizationGroup struct {
 
@@ -2027,6 +5070,45 @@ type ReservationUtilizationGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReservationUtilizationGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReservationUtilizationGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReservationUtilizationGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.ReservationUtilizationGroup_Attributes, v.Attributes)
+	if v.Key != nil {
+		s.WriteString(schemas.ReservationUtilizationGroup_Key, *v.Key)
+	}
+	if v.Utilization != nil {
+		s.WriteStruct(schemas.ReservationUtilizationGroup_Utilization)
+		v.Utilization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ReservationUtilizationGroup_Value, *v.Value)
+	}
+}
+func (v *ReservationUtilizationGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReservationUtilizationGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReservationUtilizationGroup_Attributes:
+			return deserializeAttributes(d, schemas.ReservationUtilizationGroup_Attributes, &v.Attributes)
+		case schemas.ReservationUtilizationGroup_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ReservationUtilizationGroup_Key, v.Key)
+		case schemas.ReservationUtilizationGroup_Utilization:
+			v.Utilization = &ReservationAggregates{}
+			return v.Utilization.Deserialize(d)
+		case schemas.ReservationUtilizationGroup_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ReservationUtilizationGroup_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Details about the reservations that Amazon Web Services recommends that you
 //
 // purchase.
@@ -2038,6 +5120,30 @@ type ReservedCapacityDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReservedCapacityDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReservedCapacityDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReservedCapacityDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DynamoDBCapacityDetails != nil {
+		s.WriteStruct(schemas.ReservedCapacityDetails_DynamoDBCapacityDetails)
+		v.DynamoDBCapacityDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ReservedCapacityDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReservedCapacityDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReservedCapacityDetails_DynamoDBCapacityDetails:
+			v.DynamoDBCapacityDetails = &DynamoDBCapacityDetails{}
+			return v.DynamoDBCapacityDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Details for the resource.
 type ResourceDetails struct {
 
@@ -2045,6 +5151,30 @@ type ResourceDetails struct {
 	EC2ResourceDetails *EC2ResourceDetails
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EC2ResourceDetails != nil {
+		s.WriteStruct(schemas.ResourceDetails_EC2ResourceDetails)
+		v.EC2ResourceDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ResourceDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceDetails_EC2ResourceDetails:
+			v.EC2ResourceDetails = &EC2ResourceDetails{}
+			return v.EC2ResourceDetails.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The tag structure that contains a tag key and value.
@@ -2070,6 +5200,34 @@ type ResourceTag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceTag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceTag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceTag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.ResourceTag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ResourceTag_Value, *v.Value)
+	}
+}
+func (v *ResourceTag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceTag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceTag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ResourceTag_Key, v.Key)
+		case schemas.ResourceTag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ResourceTag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Resource utilization of current resource.
 type ResourceUtilization struct {
 
@@ -2077,6 +5235,30 @@ type ResourceUtilization struct {
 	EC2ResourceUtilization *EC2ResourceUtilization
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceUtilization) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceUtilization)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceUtilization) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EC2ResourceUtilization != nil {
+		s.WriteStruct(schemas.ResourceUtilization_EC2ResourceUtilization)
+		v.EC2ResourceUtilization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ResourceUtilization) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceUtilization, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceUtilization_EC2ResourceUtilization:
+			v.EC2ResourceUtilization = &EC2ResourceUtilization{}
+			return v.EC2ResourceUtilization.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The result that's associated with a time period.
@@ -2095,6 +5277,41 @@ type ResultByTime struct {
 	Total map[string]MetricValue
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResultByTime) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResultByTime)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResultByTime) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Estimated != false {
+		s.WriteBool(schemas.ResultByTime_Estimated, v.Estimated)
+	}
+	serializeGroups(s, schemas.ResultByTime_Groups, v.Groups)
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.ResultByTime_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMetrics(s, schemas.ResultByTime_Total, v.Total)
+}
+func (v *ResultByTime) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResultByTime, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResultByTime_Estimated:
+			return d.ReadBool(schemas.ResultByTime_Estimated, &v.Estimated)
+		case schemas.ResultByTime_Groups:
+			return deserializeGroups(d, schemas.ResultByTime_Groups, &v.Groups)
+		case schemas.ResultByTime_TimePeriod:
+			v.TimePeriod = &DateInterval{}
+			return v.TimePeriod.Deserialize(d)
+		case schemas.ResultByTime_Total:
+			return deserializeMetrics(d, schemas.ResultByTime_Total, &v.Total)
+		}
+		return nil
+	})
 }
 
 // Recommendations to rightsize resources.
@@ -2123,6 +5340,65 @@ type RightsizingRecommendation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RightsizingRecommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RightsizingRecommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RightsizingRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.RightsizingRecommendation_AccountId, *v.AccountId)
+	}
+	if v.CurrentInstance != nil {
+		s.WriteStruct(schemas.RightsizingRecommendation_CurrentInstance)
+		v.CurrentInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFindingReasonCodes(s, schemas.RightsizingRecommendation_FindingReasonCodes, v.FindingReasonCodes)
+	if v.ModifyRecommendationDetail != nil {
+		s.WriteStruct(schemas.RightsizingRecommendation_ModifyRecommendationDetail)
+		v.ModifyRecommendationDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RightsizingType != "" {
+		s.WriteString(schemas.RightsizingRecommendation_RightsizingType, string(v.RightsizingType))
+	}
+	if v.TerminateRecommendationDetail != nil {
+		s.WriteStruct(schemas.RightsizingRecommendation_TerminateRecommendationDetail)
+		v.TerminateRecommendationDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RightsizingRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RightsizingRecommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RightsizingRecommendation_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.RightsizingRecommendation_AccountId, v.AccountId)
+		case schemas.RightsizingRecommendation_CurrentInstance:
+			v.CurrentInstance = &CurrentInstance{}
+			return v.CurrentInstance.Deserialize(d)
+		case schemas.RightsizingRecommendation_FindingReasonCodes:
+			return deserializeFindingReasonCodes(d, schemas.RightsizingRecommendation_FindingReasonCodes, &v.FindingReasonCodes)
+		case schemas.RightsizingRecommendation_ModifyRecommendationDetail:
+			v.ModifyRecommendationDetail = &ModifyRecommendationDetail{}
+			return v.ModifyRecommendationDetail.Deserialize(d)
+		case schemas.RightsizingRecommendation_RightsizingType:
+			var ev string
+			if err := d.ReadString(schemas.RightsizingRecommendation_RightsizingType, &ev); err != nil {
+				return err
+			}
+			v.RightsizingType = RightsizingType(ev)
+			return nil
+		case schemas.RightsizingRecommendation_TerminateRecommendationDetail:
+			v.TerminateRecommendationDetail = &TerminateRecommendationDetail{}
+			return v.TerminateRecommendationDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // You can use RightsizingRecommendationConfiguration to customize recommendations
 // across two attributes. You can choose to view recommendations for instances
 // within the same instance families or across different instance families. You can
@@ -2147,6 +5423,35 @@ type RightsizingRecommendationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RightsizingRecommendationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RightsizingRecommendationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RightsizingRecommendationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.RightsizingRecommendationConfiguration_BenefitsConsidered, v.BenefitsConsidered)
+	if v.RecommendationTarget != "" {
+		s.WriteString(schemas.RightsizingRecommendationConfiguration_RecommendationTarget, string(v.RecommendationTarget))
+	}
+}
+func (v *RightsizingRecommendationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RightsizingRecommendationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RightsizingRecommendationConfiguration_BenefitsConsidered:
+			return d.ReadBool(schemas.RightsizingRecommendationConfiguration_BenefitsConsidered, &v.BenefitsConsidered)
+		case schemas.RightsizingRecommendationConfiguration_RecommendationTarget:
+			var ev string
+			if err := d.ReadString(schemas.RightsizingRecommendationConfiguration_RecommendationTarget, &ev); err != nil {
+				return err
+			}
+			v.RecommendationTarget = RecommendationTarget(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Metadata for a recommendation set.
 type RightsizingRecommendationMetadata struct {
 
@@ -2166,6 +5471,50 @@ type RightsizingRecommendationMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RightsizingRecommendationMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RightsizingRecommendationMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RightsizingRecommendationMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalMetadata != nil {
+		s.WriteString(schemas.RightsizingRecommendationMetadata_AdditionalMetadata, *v.AdditionalMetadata)
+	}
+	if v.GenerationTimestamp != nil {
+		s.WriteString(schemas.RightsizingRecommendationMetadata_GenerationTimestamp, *v.GenerationTimestamp)
+	}
+	if v.LookbackPeriodInDays != "" {
+		s.WriteString(schemas.RightsizingRecommendationMetadata_LookbackPeriodInDays, string(v.LookbackPeriodInDays))
+	}
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.RightsizingRecommendationMetadata_RecommendationId, *v.RecommendationId)
+	}
+}
+func (v *RightsizingRecommendationMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RightsizingRecommendationMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RightsizingRecommendationMetadata_AdditionalMetadata:
+			v.AdditionalMetadata = new(string)
+			return d.ReadString(schemas.RightsizingRecommendationMetadata_AdditionalMetadata, v.AdditionalMetadata)
+		case schemas.RightsizingRecommendationMetadata_GenerationTimestamp:
+			v.GenerationTimestamp = new(string)
+			return d.ReadString(schemas.RightsizingRecommendationMetadata_GenerationTimestamp, v.GenerationTimestamp)
+		case schemas.RightsizingRecommendationMetadata_LookbackPeriodInDays:
+			var ev string
+			if err := d.ReadString(schemas.RightsizingRecommendationMetadata_LookbackPeriodInDays, &ev); err != nil {
+				return err
+			}
+			v.LookbackPeriodInDays = LookbackPeriodInDays(ev)
+			return nil
+		case schemas.RightsizingRecommendationMetadata_RecommendationId:
+			v.RecommendationId = new(string)
+			return d.ReadString(schemas.RightsizingRecommendationMetadata_RecommendationId, v.RecommendationId)
+		}
+		return nil
+	})
+}
+
 // The summary of rightsizing recommendations
 type RightsizingRecommendationSummary struct {
 
@@ -2183,6 +5532,46 @@ type RightsizingRecommendationSummary struct {
 	TotalRecommendationCount *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RightsizingRecommendationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RightsizingRecommendationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RightsizingRecommendationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EstimatedTotalMonthlySavingsAmount != nil {
+		s.WriteString(schemas.RightsizingRecommendationSummary_EstimatedTotalMonthlySavingsAmount, *v.EstimatedTotalMonthlySavingsAmount)
+	}
+	if v.SavingsCurrencyCode != nil {
+		s.WriteString(schemas.RightsizingRecommendationSummary_SavingsCurrencyCode, *v.SavingsCurrencyCode)
+	}
+	if v.SavingsPercentage != nil {
+		s.WriteString(schemas.RightsizingRecommendationSummary_SavingsPercentage, *v.SavingsPercentage)
+	}
+	if v.TotalRecommendationCount != nil {
+		s.WriteString(schemas.RightsizingRecommendationSummary_TotalRecommendationCount, *v.TotalRecommendationCount)
+	}
+}
+func (v *RightsizingRecommendationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RightsizingRecommendationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RightsizingRecommendationSummary_EstimatedTotalMonthlySavingsAmount:
+			v.EstimatedTotalMonthlySavingsAmount = new(string)
+			return d.ReadString(schemas.RightsizingRecommendationSummary_EstimatedTotalMonthlySavingsAmount, v.EstimatedTotalMonthlySavingsAmount)
+		case schemas.RightsizingRecommendationSummary_SavingsCurrencyCode:
+			v.SavingsCurrencyCode = new(string)
+			return d.ReadString(schemas.RightsizingRecommendationSummary_SavingsCurrencyCode, v.SavingsCurrencyCode)
+		case schemas.RightsizingRecommendationSummary_SavingsPercentage:
+			v.SavingsPercentage = new(string)
+			return d.ReadString(schemas.RightsizingRecommendationSummary_SavingsPercentage, v.SavingsPercentage)
+		case schemas.RightsizingRecommendationSummary_TotalRecommendationCount:
+			v.TotalRecommendationCount = new(string)
+			return d.ReadString(schemas.RightsizingRecommendationSummary_TotalRecommendationCount, v.TotalRecommendationCount)
+		}
+		return nil
+	})
 }
 
 // The combination of Amazon Web Services service, linked account, linked account
@@ -2212,6 +5601,60 @@ type RootCause struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RootCause) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RootCause)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RootCause) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Impact != nil {
+		s.WriteStruct(schemas.RootCause_Impact)
+		v.Impact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LinkedAccount != nil {
+		s.WriteString(schemas.RootCause_LinkedAccount, *v.LinkedAccount)
+	}
+	if v.LinkedAccountName != nil {
+		s.WriteString(schemas.RootCause_LinkedAccountName, *v.LinkedAccountName)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.RootCause_Region, *v.Region)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.RootCause_Service, *v.Service)
+	}
+	if v.UsageType != nil {
+		s.WriteString(schemas.RootCause_UsageType, *v.UsageType)
+	}
+}
+func (v *RootCause) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RootCause, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RootCause_Impact:
+			v.Impact = &RootCauseImpact{}
+			return v.Impact.Deserialize(d)
+		case schemas.RootCause_LinkedAccount:
+			v.LinkedAccount = new(string)
+			return d.ReadString(schemas.RootCause_LinkedAccount, v.LinkedAccount)
+		case schemas.RootCause_LinkedAccountName:
+			v.LinkedAccountName = new(string)
+			return d.ReadString(schemas.RootCause_LinkedAccountName, v.LinkedAccountName)
+		case schemas.RootCause_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.RootCause_Region, v.Region)
+		case schemas.RootCause_Service:
+			v.Service = new(string)
+			return d.ReadString(schemas.RootCause_Service, v.Service)
+		case schemas.RootCause_UsageType:
+			v.UsageType = new(string)
+			return d.ReadString(schemas.RootCause_UsageType, v.UsageType)
+		}
+		return nil
+	})
+}
+
 // The dollar value of the root cause.
 type RootCauseImpact struct {
 
@@ -2221,6 +5664,25 @@ type RootCauseImpact struct {
 	Contribution float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *RootCauseImpact) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RootCauseImpact)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RootCauseImpact) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteFloat64(schemas.RootCauseImpact_Contribution, v.Contribution)
+}
+func (v *RootCauseImpact) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RootCauseImpact, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RootCauseImpact_Contribution:
+			return d.ReadFloat64(schemas.RootCauseImpact_Contribution, &v.Contribution)
+		}
+		return nil
+	})
 }
 
 // The Savings Plans commitment details.
@@ -2251,6 +5713,76 @@ type SavingsPlans struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SavingsPlans) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SavingsPlans)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SavingsPlans) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceFamily != nil {
+		s.WriteString(schemas.SavingsPlans_InstanceFamily, *v.InstanceFamily)
+	}
+	if v.OfferingId != nil {
+		s.WriteString(schemas.SavingsPlans_OfferingId, *v.OfferingId)
+	}
+	if v.PaymentOption != "" {
+		s.WriteString(schemas.SavingsPlans_PaymentOption, string(v.PaymentOption))
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.SavingsPlans_Region, *v.Region)
+	}
+	if v.SavingsPlansCommitment != nil {
+		s.WriteFloat64(schemas.SavingsPlans_SavingsPlansCommitment, *v.SavingsPlansCommitment)
+	}
+	if v.SavingsPlansType != "" {
+		s.WriteString(schemas.SavingsPlans_SavingsPlansType, string(v.SavingsPlansType))
+	}
+	if v.TermInYears != "" {
+		s.WriteString(schemas.SavingsPlans_TermInYears, string(v.TermInYears))
+	}
+}
+func (v *SavingsPlans) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SavingsPlans, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SavingsPlans_InstanceFamily:
+			v.InstanceFamily = new(string)
+			return d.ReadString(schemas.SavingsPlans_InstanceFamily, v.InstanceFamily)
+		case schemas.SavingsPlans_OfferingId:
+			v.OfferingId = new(string)
+			return d.ReadString(schemas.SavingsPlans_OfferingId, v.OfferingId)
+		case schemas.SavingsPlans_PaymentOption:
+			var ev string
+			if err := d.ReadString(schemas.SavingsPlans_PaymentOption, &ev); err != nil {
+				return err
+			}
+			v.PaymentOption = PaymentOption(ev)
+			return nil
+		case schemas.SavingsPlans_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.SavingsPlans_Region, v.Region)
+		case schemas.SavingsPlans_SavingsPlansCommitment:
+			v.SavingsPlansCommitment = new(float64)
+			return d.ReadFloat64(schemas.SavingsPlans_SavingsPlansCommitment, v.SavingsPlansCommitment)
+		case schemas.SavingsPlans_SavingsPlansType:
+			var ev string
+			if err := d.ReadString(schemas.SavingsPlans_SavingsPlansType, &ev); err != nil {
+				return err
+			}
+			v.SavingsPlansType = SupportedSavingsPlansType(ev)
+			return nil
+		case schemas.SavingsPlans_TermInYears:
+			var ev string
+			if err := d.ReadString(schemas.SavingsPlans_TermInYears, &ev); err != nil {
+				return err
+			}
+			v.TermInYears = TermInYears(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The amortized amount of Savings Plans purchased in a specific account during a
 // specific time interval.
 type SavingsPlansAmortizedCommitment struct {
@@ -2270,6 +5802,40 @@ type SavingsPlansAmortizedCommitment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SavingsPlansAmortizedCommitment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SavingsPlansAmortizedCommitment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SavingsPlansAmortizedCommitment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmortizedRecurringCommitment != nil {
+		s.WriteString(schemas.SavingsPlansAmortizedCommitment_AmortizedRecurringCommitment, *v.AmortizedRecurringCommitment)
+	}
+	if v.AmortizedUpfrontCommitment != nil {
+		s.WriteString(schemas.SavingsPlansAmortizedCommitment_AmortizedUpfrontCommitment, *v.AmortizedUpfrontCommitment)
+	}
+	if v.TotalAmortizedCommitment != nil {
+		s.WriteString(schemas.SavingsPlansAmortizedCommitment_TotalAmortizedCommitment, *v.TotalAmortizedCommitment)
+	}
+}
+func (v *SavingsPlansAmortizedCommitment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SavingsPlansAmortizedCommitment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SavingsPlansAmortizedCommitment_AmortizedRecurringCommitment:
+			v.AmortizedRecurringCommitment = new(string)
+			return d.ReadString(schemas.SavingsPlansAmortizedCommitment_AmortizedRecurringCommitment, v.AmortizedRecurringCommitment)
+		case schemas.SavingsPlansAmortizedCommitment_AmortizedUpfrontCommitment:
+			v.AmortizedUpfrontCommitment = new(string)
+			return d.ReadString(schemas.SavingsPlansAmortizedCommitment_AmortizedUpfrontCommitment, v.AmortizedUpfrontCommitment)
+		case schemas.SavingsPlansAmortizedCommitment_TotalAmortizedCommitment:
+			v.TotalAmortizedCommitment = new(string)
+			return d.ReadString(schemas.SavingsPlansAmortizedCommitment_TotalAmortizedCommitment, v.TotalAmortizedCommitment)
+		}
+		return nil
+	})
+}
+
 // The amount of Savings Plans eligible usage that's covered by Savings Plans. All
 // calculations consider the On-Demand equivalent of your Savings Plans usage.
 type SavingsPlansCoverage struct {
@@ -2284,6 +5850,41 @@ type SavingsPlansCoverage struct {
 	TimePeriod *DateInterval
 
 	noSmithyDocumentSerde
+}
+
+func (v *SavingsPlansCoverage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SavingsPlansCoverage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SavingsPlansCoverage) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.SavingsPlansCoverage_Attributes, v.Attributes)
+	if v.Coverage != nil {
+		s.WriteStruct(schemas.SavingsPlansCoverage_Coverage)
+		v.Coverage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.SavingsPlansCoverage_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SavingsPlansCoverage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SavingsPlansCoverage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SavingsPlansCoverage_Attributes:
+			return deserializeAttributes(d, schemas.SavingsPlansCoverage_Attributes, &v.Attributes)
+		case schemas.SavingsPlansCoverage_Coverage:
+			v.Coverage = &SavingsPlansCoverageData{}
+			return v.Coverage.Deserialize(d)
+		case schemas.SavingsPlansCoverage_TimePeriod:
+			v.TimePeriod = &DateInterval{}
+			return v.TimePeriod.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specific coverage percentage, On-Demand costs, and spend covered by Savings
@@ -2307,6 +5908,46 @@ type SavingsPlansCoverageData struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SavingsPlansCoverageData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SavingsPlansCoverageData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SavingsPlansCoverageData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoveragePercentage != nil {
+		s.WriteString(schemas.SavingsPlansCoverageData_CoveragePercentage, *v.CoveragePercentage)
+	}
+	if v.OnDemandCost != nil {
+		s.WriteString(schemas.SavingsPlansCoverageData_OnDemandCost, *v.OnDemandCost)
+	}
+	if v.SpendCoveredBySavingsPlans != nil {
+		s.WriteString(schemas.SavingsPlansCoverageData_SpendCoveredBySavingsPlans, *v.SpendCoveredBySavingsPlans)
+	}
+	if v.TotalCost != nil {
+		s.WriteString(schemas.SavingsPlansCoverageData_TotalCost, *v.TotalCost)
+	}
+}
+func (v *SavingsPlansCoverageData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SavingsPlansCoverageData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SavingsPlansCoverageData_CoveragePercentage:
+			v.CoveragePercentage = new(string)
+			return d.ReadString(schemas.SavingsPlansCoverageData_CoveragePercentage, v.CoveragePercentage)
+		case schemas.SavingsPlansCoverageData_OnDemandCost:
+			v.OnDemandCost = new(string)
+			return d.ReadString(schemas.SavingsPlansCoverageData_OnDemandCost, v.OnDemandCost)
+		case schemas.SavingsPlansCoverageData_SpendCoveredBySavingsPlans:
+			v.SpendCoveredBySavingsPlans = new(string)
+			return d.ReadString(schemas.SavingsPlansCoverageData_SpendCoveredBySavingsPlans, v.SpendCoveredBySavingsPlans)
+		case schemas.SavingsPlansCoverageData_TotalCost:
+			v.TotalCost = new(string)
+			return d.ReadString(schemas.SavingsPlansCoverageData_TotalCost, v.TotalCost)
+		}
+		return nil
+	})
+}
+
 // The attribute details on a specific Savings Plan.
 type SavingsPlansDetails struct {
 
@@ -2321,6 +5962,40 @@ type SavingsPlansDetails struct {
 	Region *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SavingsPlansDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SavingsPlansDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SavingsPlansDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceFamily != nil {
+		s.WriteString(schemas.SavingsPlansDetails_InstanceFamily, *v.InstanceFamily)
+	}
+	if v.OfferingId != nil {
+		s.WriteString(schemas.SavingsPlansDetails_OfferingId, *v.OfferingId)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.SavingsPlansDetails_Region, *v.Region)
+	}
+}
+func (v *SavingsPlansDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SavingsPlansDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SavingsPlansDetails_InstanceFamily:
+			v.InstanceFamily = new(string)
+			return d.ReadString(schemas.SavingsPlansDetails_InstanceFamily, v.InstanceFamily)
+		case schemas.SavingsPlansDetails_OfferingId:
+			v.OfferingId = new(string)
+			return d.ReadString(schemas.SavingsPlansDetails_OfferingId, v.OfferingId)
+		case schemas.SavingsPlansDetails_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.SavingsPlansDetails_Region, v.Region)
+		}
+		return nil
+	})
 }
 
 // The configuration for the Savings Plans purchase analysis.
@@ -2357,6 +6032,68 @@ type SavingsPlansPurchaseAnalysisConfiguration struct {
 	SavingsPlansToExclude []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SavingsPlansPurchaseAnalysisConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SavingsPlansPurchaseAnalysisConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SavingsPlansPurchaseAnalysisConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisConfiguration_AccountId, *v.AccountId)
+	}
+	if v.AccountScope != "" {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisConfiguration_AccountScope, string(v.AccountScope))
+	}
+	if v.AnalysisType != "" {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisConfiguration_AnalysisType, string(v.AnalysisType))
+	}
+	if v.LookBackTimePeriod != nil {
+		s.WriteStruct(schemas.SavingsPlansPurchaseAnalysisConfiguration_LookBackTimePeriod)
+		v.LookBackTimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SavingsPlansTargetCoverage != nil {
+		s.WriteInt32(schemas.SavingsPlansPurchaseAnalysisConfiguration_SavingsPlansTargetCoverage, *v.SavingsPlansTargetCoverage)
+	}
+	serializeSavingsPlansToAdd(s, schemas.SavingsPlansPurchaseAnalysisConfiguration_SavingsPlansToAdd, v.SavingsPlansToAdd)
+	serializeSavingsPlansToExclude(s, schemas.SavingsPlansPurchaseAnalysisConfiguration_SavingsPlansToExclude, v.SavingsPlansToExclude)
+}
+func (v *SavingsPlansPurchaseAnalysisConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SavingsPlansPurchaseAnalysisConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SavingsPlansPurchaseAnalysisConfiguration_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseAnalysisConfiguration_AccountId, v.AccountId)
+		case schemas.SavingsPlansPurchaseAnalysisConfiguration_AccountScope:
+			var ev string
+			if err := d.ReadString(schemas.SavingsPlansPurchaseAnalysisConfiguration_AccountScope, &ev); err != nil {
+				return err
+			}
+			v.AccountScope = AccountScope(ev)
+			return nil
+		case schemas.SavingsPlansPurchaseAnalysisConfiguration_AnalysisType:
+			var ev string
+			if err := d.ReadString(schemas.SavingsPlansPurchaseAnalysisConfiguration_AnalysisType, &ev); err != nil {
+				return err
+			}
+			v.AnalysisType = AnalysisType(ev)
+			return nil
+		case schemas.SavingsPlansPurchaseAnalysisConfiguration_LookBackTimePeriod:
+			v.LookBackTimePeriod = &DateInterval{}
+			return v.LookBackTimePeriod.Deserialize(d)
+		case schemas.SavingsPlansPurchaseAnalysisConfiguration_SavingsPlansTargetCoverage:
+			v.SavingsPlansTargetCoverage = new(int32)
+			return d.ReadInt32(schemas.SavingsPlansPurchaseAnalysisConfiguration_SavingsPlansTargetCoverage, v.SavingsPlansTargetCoverage)
+		case schemas.SavingsPlansPurchaseAnalysisConfiguration_SavingsPlansToAdd:
+			return deserializeSavingsPlansToAdd(d, schemas.SavingsPlansPurchaseAnalysisConfiguration_SavingsPlansToAdd, &v.SavingsPlansToAdd)
+		case schemas.SavingsPlansPurchaseAnalysisConfiguration_SavingsPlansToExclude:
+			return deserializeSavingsPlansToExclude(d, schemas.SavingsPlansPurchaseAnalysisConfiguration_SavingsPlansToExclude, &v.SavingsPlansToExclude)
+		}
+		return nil
+	})
 }
 
 // Details about the Savings Plans purchase analysis.
@@ -2438,6 +6175,151 @@ type SavingsPlansPurchaseAnalysisDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SavingsPlansPurchaseAnalysisDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SavingsPlansPurchaseAnalysisDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SavingsPlansPurchaseAnalysisDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalMetadata != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisDetails_AdditionalMetadata, *v.AdditionalMetadata)
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisDetails_CurrencyCode, *v.CurrencyCode)
+	}
+	if v.CurrentAverageCoverage != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisDetails_CurrentAverageCoverage, *v.CurrentAverageCoverage)
+	}
+	if v.CurrentAverageHourlyOnDemandSpend != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisDetails_CurrentAverageHourlyOnDemandSpend, *v.CurrentAverageHourlyOnDemandSpend)
+	}
+	if v.CurrentMaximumHourlyOnDemandSpend != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisDetails_CurrentMaximumHourlyOnDemandSpend, *v.CurrentMaximumHourlyOnDemandSpend)
+	}
+	if v.CurrentMinimumHourlyOnDemandSpend != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisDetails_CurrentMinimumHourlyOnDemandSpend, *v.CurrentMinimumHourlyOnDemandSpend)
+	}
+	if v.CurrentOnDemandSpend != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisDetails_CurrentOnDemandSpend, *v.CurrentOnDemandSpend)
+	}
+	if v.EstimatedAverageCoverage != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedAverageCoverage, *v.EstimatedAverageCoverage)
+	}
+	if v.EstimatedAverageUtilization != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedAverageUtilization, *v.EstimatedAverageUtilization)
+	}
+	if v.EstimatedCommitmentCost != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedCommitmentCost, *v.EstimatedCommitmentCost)
+	}
+	if v.EstimatedMonthlySavingsAmount != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedMonthlySavingsAmount, *v.EstimatedMonthlySavingsAmount)
+	}
+	if v.EstimatedOnDemandCost != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedOnDemandCost, *v.EstimatedOnDemandCost)
+	}
+	if v.EstimatedOnDemandCostWithCurrentCommitment != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedOnDemandCostWithCurrentCommitment, *v.EstimatedOnDemandCostWithCurrentCommitment)
+	}
+	if v.EstimatedROI != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedROI, *v.EstimatedROI)
+	}
+	if v.EstimatedSavingsAmount != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedSavingsAmount, *v.EstimatedSavingsAmount)
+	}
+	if v.EstimatedSavingsPercentage != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedSavingsPercentage, *v.EstimatedSavingsPercentage)
+	}
+	if v.ExistingHourlyCommitment != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisDetails_ExistingHourlyCommitment, *v.ExistingHourlyCommitment)
+	}
+	if v.HourlyCommitmentToPurchase != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisDetails_HourlyCommitmentToPurchase, *v.HourlyCommitmentToPurchase)
+	}
+	if v.LatestUsageTimestamp != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisDetails_LatestUsageTimestamp, *v.LatestUsageTimestamp)
+	}
+	if v.LookbackPeriodInHours != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisDetails_LookbackPeriodInHours, *v.LookbackPeriodInHours)
+	}
+	serializeMetricsOverLookbackPeriod(s, schemas.SavingsPlansPurchaseAnalysisDetails_MetricsOverLookbackPeriod, v.MetricsOverLookbackPeriod)
+	if v.UpfrontCost != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseAnalysisDetails_UpfrontCost, *v.UpfrontCost)
+	}
+}
+func (v *SavingsPlansPurchaseAnalysisDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SavingsPlansPurchaseAnalysisDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SavingsPlansPurchaseAnalysisDetails_AdditionalMetadata:
+			v.AdditionalMetadata = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseAnalysisDetails_AdditionalMetadata, v.AdditionalMetadata)
+		case schemas.SavingsPlansPurchaseAnalysisDetails_CurrencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseAnalysisDetails_CurrencyCode, v.CurrencyCode)
+		case schemas.SavingsPlansPurchaseAnalysisDetails_CurrentAverageCoverage:
+			v.CurrentAverageCoverage = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseAnalysisDetails_CurrentAverageCoverage, v.CurrentAverageCoverage)
+		case schemas.SavingsPlansPurchaseAnalysisDetails_CurrentAverageHourlyOnDemandSpend:
+			v.CurrentAverageHourlyOnDemandSpend = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseAnalysisDetails_CurrentAverageHourlyOnDemandSpend, v.CurrentAverageHourlyOnDemandSpend)
+		case schemas.SavingsPlansPurchaseAnalysisDetails_CurrentMaximumHourlyOnDemandSpend:
+			v.CurrentMaximumHourlyOnDemandSpend = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseAnalysisDetails_CurrentMaximumHourlyOnDemandSpend, v.CurrentMaximumHourlyOnDemandSpend)
+		case schemas.SavingsPlansPurchaseAnalysisDetails_CurrentMinimumHourlyOnDemandSpend:
+			v.CurrentMinimumHourlyOnDemandSpend = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseAnalysisDetails_CurrentMinimumHourlyOnDemandSpend, v.CurrentMinimumHourlyOnDemandSpend)
+		case schemas.SavingsPlansPurchaseAnalysisDetails_CurrentOnDemandSpend:
+			v.CurrentOnDemandSpend = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseAnalysisDetails_CurrentOnDemandSpend, v.CurrentOnDemandSpend)
+		case schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedAverageCoverage:
+			v.EstimatedAverageCoverage = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedAverageCoverage, v.EstimatedAverageCoverage)
+		case schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedAverageUtilization:
+			v.EstimatedAverageUtilization = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedAverageUtilization, v.EstimatedAverageUtilization)
+		case schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedCommitmentCost:
+			v.EstimatedCommitmentCost = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedCommitmentCost, v.EstimatedCommitmentCost)
+		case schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedMonthlySavingsAmount:
+			v.EstimatedMonthlySavingsAmount = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedMonthlySavingsAmount, v.EstimatedMonthlySavingsAmount)
+		case schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedOnDemandCost:
+			v.EstimatedOnDemandCost = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedOnDemandCost, v.EstimatedOnDemandCost)
+		case schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedOnDemandCostWithCurrentCommitment:
+			v.EstimatedOnDemandCostWithCurrentCommitment = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedOnDemandCostWithCurrentCommitment, v.EstimatedOnDemandCostWithCurrentCommitment)
+		case schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedROI:
+			v.EstimatedROI = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedROI, v.EstimatedROI)
+		case schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedSavingsAmount:
+			v.EstimatedSavingsAmount = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedSavingsAmount, v.EstimatedSavingsAmount)
+		case schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedSavingsPercentage:
+			v.EstimatedSavingsPercentage = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseAnalysisDetails_EstimatedSavingsPercentage, v.EstimatedSavingsPercentage)
+		case schemas.SavingsPlansPurchaseAnalysisDetails_ExistingHourlyCommitment:
+			v.ExistingHourlyCommitment = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseAnalysisDetails_ExistingHourlyCommitment, v.ExistingHourlyCommitment)
+		case schemas.SavingsPlansPurchaseAnalysisDetails_HourlyCommitmentToPurchase:
+			v.HourlyCommitmentToPurchase = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseAnalysisDetails_HourlyCommitmentToPurchase, v.HourlyCommitmentToPurchase)
+		case schemas.SavingsPlansPurchaseAnalysisDetails_LatestUsageTimestamp:
+			v.LatestUsageTimestamp = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseAnalysisDetails_LatestUsageTimestamp, v.LatestUsageTimestamp)
+		case schemas.SavingsPlansPurchaseAnalysisDetails_LookbackPeriodInHours:
+			v.LookbackPeriodInHours = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseAnalysisDetails_LookbackPeriodInHours, v.LookbackPeriodInHours)
+		case schemas.SavingsPlansPurchaseAnalysisDetails_MetricsOverLookbackPeriod:
+			return deserializeMetricsOverLookbackPeriod(d, schemas.SavingsPlansPurchaseAnalysisDetails_MetricsOverLookbackPeriod, &v.MetricsOverLookbackPeriod)
+		case schemas.SavingsPlansPurchaseAnalysisDetails_UpfrontCost:
+			v.UpfrontCost = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseAnalysisDetails_UpfrontCost, v.UpfrontCost)
+		}
+		return nil
+	})
+}
+
 // Contains your request parameters, Savings Plan Recommendations Summary, and
 // Details.
 type SavingsPlansPurchaseRecommendation struct {
@@ -2469,6 +6351,83 @@ type SavingsPlansPurchaseRecommendation struct {
 	TermInYears TermInYears
 
 	noSmithyDocumentSerde
+}
+
+func (v *SavingsPlansPurchaseRecommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SavingsPlansPurchaseRecommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SavingsPlansPurchaseRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountScope != "" {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendation_AccountScope, string(v.AccountScope))
+	}
+	if v.LookbackPeriodInDays != "" {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendation_LookbackPeriodInDays, string(v.LookbackPeriodInDays))
+	}
+	if v.PaymentOption != "" {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendation_PaymentOption, string(v.PaymentOption))
+	}
+	serializeSavingsPlansPurchaseRecommendationDetailList(s, schemas.SavingsPlansPurchaseRecommendation_SavingsPlansPurchaseRecommendationDetails, v.SavingsPlansPurchaseRecommendationDetails)
+	if v.SavingsPlansPurchaseRecommendationSummary != nil {
+		s.WriteStruct(schemas.SavingsPlansPurchaseRecommendation_SavingsPlansPurchaseRecommendationSummary)
+		v.SavingsPlansPurchaseRecommendationSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SavingsPlansType != "" {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendation_SavingsPlansType, string(v.SavingsPlansType))
+	}
+	if v.TermInYears != "" {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendation_TermInYears, string(v.TermInYears))
+	}
+}
+func (v *SavingsPlansPurchaseRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SavingsPlansPurchaseRecommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SavingsPlansPurchaseRecommendation_AccountScope:
+			var ev string
+			if err := d.ReadString(schemas.SavingsPlansPurchaseRecommendation_AccountScope, &ev); err != nil {
+				return err
+			}
+			v.AccountScope = AccountScope(ev)
+			return nil
+		case schemas.SavingsPlansPurchaseRecommendation_LookbackPeriodInDays:
+			var ev string
+			if err := d.ReadString(schemas.SavingsPlansPurchaseRecommendation_LookbackPeriodInDays, &ev); err != nil {
+				return err
+			}
+			v.LookbackPeriodInDays = LookbackPeriodInDays(ev)
+			return nil
+		case schemas.SavingsPlansPurchaseRecommendation_PaymentOption:
+			var ev string
+			if err := d.ReadString(schemas.SavingsPlansPurchaseRecommendation_PaymentOption, &ev); err != nil {
+				return err
+			}
+			v.PaymentOption = PaymentOption(ev)
+			return nil
+		case schemas.SavingsPlansPurchaseRecommendation_SavingsPlansPurchaseRecommendationDetails:
+			return deserializeSavingsPlansPurchaseRecommendationDetailList(d, schemas.SavingsPlansPurchaseRecommendation_SavingsPlansPurchaseRecommendationDetails, &v.SavingsPlansPurchaseRecommendationDetails)
+		case schemas.SavingsPlansPurchaseRecommendation_SavingsPlansPurchaseRecommendationSummary:
+			v.SavingsPlansPurchaseRecommendationSummary = &SavingsPlansPurchaseRecommendationSummary{}
+			return v.SavingsPlansPurchaseRecommendationSummary.Deserialize(d)
+		case schemas.SavingsPlansPurchaseRecommendation_SavingsPlansType:
+			var ev string
+			if err := d.ReadString(schemas.SavingsPlansPurchaseRecommendation_SavingsPlansType, &ev); err != nil {
+				return err
+			}
+			v.SavingsPlansType = SupportedSavingsPlansType(ev)
+			return nil
+		case schemas.SavingsPlansPurchaseRecommendation_TermInYears:
+			var ev string
+			if err := d.ReadString(schemas.SavingsPlansPurchaseRecommendation_TermInYears, &ev); err != nil {
+				return err
+			}
+			v.TermInYears = TermInYears(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Details for your recommended Savings Plans.
@@ -2541,6 +6500,126 @@ type SavingsPlansPurchaseRecommendationDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SavingsPlansPurchaseRecommendationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SavingsPlansPurchaseRecommendationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SavingsPlansPurchaseRecommendationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationDetail_AccountId, *v.AccountId)
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationDetail_CurrencyCode, *v.CurrencyCode)
+	}
+	if v.CurrentAverageHourlyOnDemandSpend != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationDetail_CurrentAverageHourlyOnDemandSpend, *v.CurrentAverageHourlyOnDemandSpend)
+	}
+	if v.CurrentMaximumHourlyOnDemandSpend != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationDetail_CurrentMaximumHourlyOnDemandSpend, *v.CurrentMaximumHourlyOnDemandSpend)
+	}
+	if v.CurrentMinimumHourlyOnDemandSpend != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationDetail_CurrentMinimumHourlyOnDemandSpend, *v.CurrentMinimumHourlyOnDemandSpend)
+	}
+	if v.EstimatedAverageUtilization != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedAverageUtilization, *v.EstimatedAverageUtilization)
+	}
+	if v.EstimatedMonthlySavingsAmount != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedMonthlySavingsAmount, *v.EstimatedMonthlySavingsAmount)
+	}
+	if v.EstimatedOnDemandCost != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedOnDemandCost, *v.EstimatedOnDemandCost)
+	}
+	if v.EstimatedOnDemandCostWithCurrentCommitment != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedOnDemandCostWithCurrentCommitment, *v.EstimatedOnDemandCostWithCurrentCommitment)
+	}
+	if v.EstimatedROI != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedROI, *v.EstimatedROI)
+	}
+	if v.EstimatedSPCost != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedSPCost, *v.EstimatedSPCost)
+	}
+	if v.EstimatedSavingsAmount != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedSavingsAmount, *v.EstimatedSavingsAmount)
+	}
+	if v.EstimatedSavingsPercentage != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedSavingsPercentage, *v.EstimatedSavingsPercentage)
+	}
+	if v.HourlyCommitmentToPurchase != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationDetail_HourlyCommitmentToPurchase, *v.HourlyCommitmentToPurchase)
+	}
+	if v.RecommendationDetailId != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationDetail_RecommendationDetailId, *v.RecommendationDetailId)
+	}
+	if v.SavingsPlansDetails != nil {
+		s.WriteStruct(schemas.SavingsPlansPurchaseRecommendationDetail_SavingsPlansDetails)
+		v.SavingsPlansDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpfrontCost != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationDetail_UpfrontCost, *v.UpfrontCost)
+	}
+}
+func (v *SavingsPlansPurchaseRecommendationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SavingsPlansPurchaseRecommendationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SavingsPlansPurchaseRecommendationDetail_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationDetail_AccountId, v.AccountId)
+		case schemas.SavingsPlansPurchaseRecommendationDetail_CurrencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationDetail_CurrencyCode, v.CurrencyCode)
+		case schemas.SavingsPlansPurchaseRecommendationDetail_CurrentAverageHourlyOnDemandSpend:
+			v.CurrentAverageHourlyOnDemandSpend = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationDetail_CurrentAverageHourlyOnDemandSpend, v.CurrentAverageHourlyOnDemandSpend)
+		case schemas.SavingsPlansPurchaseRecommendationDetail_CurrentMaximumHourlyOnDemandSpend:
+			v.CurrentMaximumHourlyOnDemandSpend = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationDetail_CurrentMaximumHourlyOnDemandSpend, v.CurrentMaximumHourlyOnDemandSpend)
+		case schemas.SavingsPlansPurchaseRecommendationDetail_CurrentMinimumHourlyOnDemandSpend:
+			v.CurrentMinimumHourlyOnDemandSpend = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationDetail_CurrentMinimumHourlyOnDemandSpend, v.CurrentMinimumHourlyOnDemandSpend)
+		case schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedAverageUtilization:
+			v.EstimatedAverageUtilization = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedAverageUtilization, v.EstimatedAverageUtilization)
+		case schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedMonthlySavingsAmount:
+			v.EstimatedMonthlySavingsAmount = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedMonthlySavingsAmount, v.EstimatedMonthlySavingsAmount)
+		case schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedOnDemandCost:
+			v.EstimatedOnDemandCost = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedOnDemandCost, v.EstimatedOnDemandCost)
+		case schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedOnDemandCostWithCurrentCommitment:
+			v.EstimatedOnDemandCostWithCurrentCommitment = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedOnDemandCostWithCurrentCommitment, v.EstimatedOnDemandCostWithCurrentCommitment)
+		case schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedROI:
+			v.EstimatedROI = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedROI, v.EstimatedROI)
+		case schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedSPCost:
+			v.EstimatedSPCost = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedSPCost, v.EstimatedSPCost)
+		case schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedSavingsAmount:
+			v.EstimatedSavingsAmount = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedSavingsAmount, v.EstimatedSavingsAmount)
+		case schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedSavingsPercentage:
+			v.EstimatedSavingsPercentage = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationDetail_EstimatedSavingsPercentage, v.EstimatedSavingsPercentage)
+		case schemas.SavingsPlansPurchaseRecommendationDetail_HourlyCommitmentToPurchase:
+			v.HourlyCommitmentToPurchase = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationDetail_HourlyCommitmentToPurchase, v.HourlyCommitmentToPurchase)
+		case schemas.SavingsPlansPurchaseRecommendationDetail_RecommendationDetailId:
+			v.RecommendationDetailId = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationDetail_RecommendationDetailId, v.RecommendationDetailId)
+		case schemas.SavingsPlansPurchaseRecommendationDetail_SavingsPlansDetails:
+			v.SavingsPlansDetails = &SavingsPlansDetails{}
+			return v.SavingsPlansDetails.Deserialize(d)
+		case schemas.SavingsPlansPurchaseRecommendationDetail_UpfrontCost:
+			v.UpfrontCost = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationDetail_UpfrontCost, v.UpfrontCost)
+		}
+		return nil
+	})
+}
+
 // Metadata about your Savings Plans Purchase Recommendations.
 type SavingsPlansPurchaseRecommendationMetadata struct {
 
@@ -2554,6 +6633,40 @@ type SavingsPlansPurchaseRecommendationMetadata struct {
 	RecommendationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SavingsPlansPurchaseRecommendationMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SavingsPlansPurchaseRecommendationMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SavingsPlansPurchaseRecommendationMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalMetadata != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationMetadata_AdditionalMetadata, *v.AdditionalMetadata)
+	}
+	if v.GenerationTimestamp != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationMetadata_GenerationTimestamp, *v.GenerationTimestamp)
+	}
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationMetadata_RecommendationId, *v.RecommendationId)
+	}
+}
+func (v *SavingsPlansPurchaseRecommendationMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SavingsPlansPurchaseRecommendationMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SavingsPlansPurchaseRecommendationMetadata_AdditionalMetadata:
+			v.AdditionalMetadata = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationMetadata_AdditionalMetadata, v.AdditionalMetadata)
+		case schemas.SavingsPlansPurchaseRecommendationMetadata_GenerationTimestamp:
+			v.GenerationTimestamp = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationMetadata_GenerationTimestamp, v.GenerationTimestamp)
+		case schemas.SavingsPlansPurchaseRecommendationMetadata_RecommendationId:
+			v.RecommendationId = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationMetadata_RecommendationId, v.RecommendationId)
+		}
+		return nil
+	})
 }
 
 // Summary metrics for your Savings Plans Purchase Recommendations.
@@ -2606,6 +6719,88 @@ type SavingsPlansPurchaseRecommendationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SavingsPlansPurchaseRecommendationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SavingsPlansPurchaseRecommendationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SavingsPlansPurchaseRecommendationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationSummary_CurrencyCode, *v.CurrencyCode)
+	}
+	if v.CurrentOnDemandSpend != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationSummary_CurrentOnDemandSpend, *v.CurrentOnDemandSpend)
+	}
+	if v.DailyCommitmentToPurchase != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationSummary_DailyCommitmentToPurchase, *v.DailyCommitmentToPurchase)
+	}
+	if v.EstimatedMonthlySavingsAmount != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationSummary_EstimatedMonthlySavingsAmount, *v.EstimatedMonthlySavingsAmount)
+	}
+	if v.EstimatedOnDemandCostWithCurrentCommitment != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationSummary_EstimatedOnDemandCostWithCurrentCommitment, *v.EstimatedOnDemandCostWithCurrentCommitment)
+	}
+	if v.EstimatedROI != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationSummary_EstimatedROI, *v.EstimatedROI)
+	}
+	if v.EstimatedSavingsAmount != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationSummary_EstimatedSavingsAmount, *v.EstimatedSavingsAmount)
+	}
+	if v.EstimatedSavingsPercentage != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationSummary_EstimatedSavingsPercentage, *v.EstimatedSavingsPercentage)
+	}
+	if v.EstimatedTotalCost != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationSummary_EstimatedTotalCost, *v.EstimatedTotalCost)
+	}
+	if v.HourlyCommitmentToPurchase != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationSummary_HourlyCommitmentToPurchase, *v.HourlyCommitmentToPurchase)
+	}
+	if v.TotalRecommendationCount != nil {
+		s.WriteString(schemas.SavingsPlansPurchaseRecommendationSummary_TotalRecommendationCount, *v.TotalRecommendationCount)
+	}
+}
+func (v *SavingsPlansPurchaseRecommendationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SavingsPlansPurchaseRecommendationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SavingsPlansPurchaseRecommendationSummary_CurrencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationSummary_CurrencyCode, v.CurrencyCode)
+		case schemas.SavingsPlansPurchaseRecommendationSummary_CurrentOnDemandSpend:
+			v.CurrentOnDemandSpend = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationSummary_CurrentOnDemandSpend, v.CurrentOnDemandSpend)
+		case schemas.SavingsPlansPurchaseRecommendationSummary_DailyCommitmentToPurchase:
+			v.DailyCommitmentToPurchase = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationSummary_DailyCommitmentToPurchase, v.DailyCommitmentToPurchase)
+		case schemas.SavingsPlansPurchaseRecommendationSummary_EstimatedMonthlySavingsAmount:
+			v.EstimatedMonthlySavingsAmount = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationSummary_EstimatedMonthlySavingsAmount, v.EstimatedMonthlySavingsAmount)
+		case schemas.SavingsPlansPurchaseRecommendationSummary_EstimatedOnDemandCostWithCurrentCommitment:
+			v.EstimatedOnDemandCostWithCurrentCommitment = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationSummary_EstimatedOnDemandCostWithCurrentCommitment, v.EstimatedOnDemandCostWithCurrentCommitment)
+		case schemas.SavingsPlansPurchaseRecommendationSummary_EstimatedROI:
+			v.EstimatedROI = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationSummary_EstimatedROI, v.EstimatedROI)
+		case schemas.SavingsPlansPurchaseRecommendationSummary_EstimatedSavingsAmount:
+			v.EstimatedSavingsAmount = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationSummary_EstimatedSavingsAmount, v.EstimatedSavingsAmount)
+		case schemas.SavingsPlansPurchaseRecommendationSummary_EstimatedSavingsPercentage:
+			v.EstimatedSavingsPercentage = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationSummary_EstimatedSavingsPercentage, v.EstimatedSavingsPercentage)
+		case schemas.SavingsPlansPurchaseRecommendationSummary_EstimatedTotalCost:
+			v.EstimatedTotalCost = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationSummary_EstimatedTotalCost, v.EstimatedTotalCost)
+		case schemas.SavingsPlansPurchaseRecommendationSummary_HourlyCommitmentToPurchase:
+			v.HourlyCommitmentToPurchase = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationSummary_HourlyCommitmentToPurchase, v.HourlyCommitmentToPurchase)
+		case schemas.SavingsPlansPurchaseRecommendationSummary_TotalRecommendationCount:
+			v.TotalRecommendationCount = new(string)
+			return d.ReadString(schemas.SavingsPlansPurchaseRecommendationSummary_TotalRecommendationCount, v.TotalRecommendationCount)
+		}
+		return nil
+	})
+}
+
 // The amount of savings that you're accumulating, against the public On-Demand
 // rate of the usage accrued in an account.
 type SavingsPlansSavings struct {
@@ -2619,6 +6814,34 @@ type SavingsPlansSavings struct {
 	OnDemandCostEquivalent *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SavingsPlansSavings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SavingsPlansSavings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SavingsPlansSavings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetSavings != nil {
+		s.WriteString(schemas.SavingsPlansSavings_NetSavings, *v.NetSavings)
+	}
+	if v.OnDemandCostEquivalent != nil {
+		s.WriteString(schemas.SavingsPlansSavings_OnDemandCostEquivalent, *v.OnDemandCostEquivalent)
+	}
+}
+func (v *SavingsPlansSavings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SavingsPlansSavings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SavingsPlansSavings_NetSavings:
+			v.NetSavings = new(string)
+			return d.ReadString(schemas.SavingsPlansSavings_NetSavings, v.NetSavings)
+		case schemas.SavingsPlansSavings_OnDemandCostEquivalent:
+			v.OnDemandCostEquivalent = new(string)
+			return d.ReadString(schemas.SavingsPlansSavings_OnDemandCostEquivalent, v.OnDemandCostEquivalent)
+		}
+		return nil
+	})
 }
 
 // The measurement of how well you're using your existing Savings Plans.
@@ -2643,6 +6866,46 @@ type SavingsPlansUtilization struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SavingsPlansUtilization) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SavingsPlansUtilization)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SavingsPlansUtilization) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TotalCommitment != nil {
+		s.WriteString(schemas.SavingsPlansUtilization_TotalCommitment, *v.TotalCommitment)
+	}
+	if v.UnusedCommitment != nil {
+		s.WriteString(schemas.SavingsPlansUtilization_UnusedCommitment, *v.UnusedCommitment)
+	}
+	if v.UsedCommitment != nil {
+		s.WriteString(schemas.SavingsPlansUtilization_UsedCommitment, *v.UsedCommitment)
+	}
+	if v.UtilizationPercentage != nil {
+		s.WriteString(schemas.SavingsPlansUtilization_UtilizationPercentage, *v.UtilizationPercentage)
+	}
+}
+func (v *SavingsPlansUtilization) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SavingsPlansUtilization, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SavingsPlansUtilization_TotalCommitment:
+			v.TotalCommitment = new(string)
+			return d.ReadString(schemas.SavingsPlansUtilization_TotalCommitment, v.TotalCommitment)
+		case schemas.SavingsPlansUtilization_UnusedCommitment:
+			v.UnusedCommitment = new(string)
+			return d.ReadString(schemas.SavingsPlansUtilization_UnusedCommitment, v.UnusedCommitment)
+		case schemas.SavingsPlansUtilization_UsedCommitment:
+			v.UsedCommitment = new(string)
+			return d.ReadString(schemas.SavingsPlansUtilization_UsedCommitment, v.UsedCommitment)
+		case schemas.SavingsPlansUtilization_UtilizationPercentage:
+			v.UtilizationPercentage = new(string)
+			return d.ReadString(schemas.SavingsPlansUtilization_UtilizationPercentage, v.UtilizationPercentage)
+		}
+		return nil
+	})
+}
+
 // The aggregated utilization metrics for your Savings Plans usage.
 type SavingsPlansUtilizationAggregates struct {
 
@@ -2662,6 +6925,46 @@ type SavingsPlansUtilizationAggregates struct {
 	Savings *SavingsPlansSavings
 
 	noSmithyDocumentSerde
+}
+
+func (v *SavingsPlansUtilizationAggregates) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SavingsPlansUtilizationAggregates)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SavingsPlansUtilizationAggregates) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmortizedCommitment != nil {
+		s.WriteStruct(schemas.SavingsPlansUtilizationAggregates_AmortizedCommitment)
+		v.AmortizedCommitment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Savings != nil {
+		s.WriteStruct(schemas.SavingsPlansUtilizationAggregates_Savings)
+		v.Savings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Utilization != nil {
+		s.WriteStruct(schemas.SavingsPlansUtilizationAggregates_Utilization)
+		v.Utilization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SavingsPlansUtilizationAggregates) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SavingsPlansUtilizationAggregates, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SavingsPlansUtilizationAggregates_AmortizedCommitment:
+			v.AmortizedCommitment = &SavingsPlansAmortizedCommitment{}
+			return v.AmortizedCommitment.Deserialize(d)
+		case schemas.SavingsPlansUtilizationAggregates_Savings:
+			v.Savings = &SavingsPlansSavings{}
+			return v.Savings.Deserialize(d)
+		case schemas.SavingsPlansUtilizationAggregates_Utilization:
+			v.Utilization = &SavingsPlansUtilization{}
+			return v.Utilization.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The amount of Savings Plans utilization (in hours).
@@ -2688,6 +6991,54 @@ type SavingsPlansUtilizationByTime struct {
 	Savings *SavingsPlansSavings
 
 	noSmithyDocumentSerde
+}
+
+func (v *SavingsPlansUtilizationByTime) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SavingsPlansUtilizationByTime)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SavingsPlansUtilizationByTime) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmortizedCommitment != nil {
+		s.WriteStruct(schemas.SavingsPlansUtilizationByTime_AmortizedCommitment)
+		v.AmortizedCommitment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Savings != nil {
+		s.WriteStruct(schemas.SavingsPlansUtilizationByTime_Savings)
+		v.Savings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.SavingsPlansUtilizationByTime_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Utilization != nil {
+		s.WriteStruct(schemas.SavingsPlansUtilizationByTime_Utilization)
+		v.Utilization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SavingsPlansUtilizationByTime) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SavingsPlansUtilizationByTime, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SavingsPlansUtilizationByTime_AmortizedCommitment:
+			v.AmortizedCommitment = &SavingsPlansAmortizedCommitment{}
+			return v.AmortizedCommitment.Deserialize(d)
+		case schemas.SavingsPlansUtilizationByTime_Savings:
+			v.Savings = &SavingsPlansSavings{}
+			return v.Savings.Deserialize(d)
+		case schemas.SavingsPlansUtilizationByTime_TimePeriod:
+			v.TimePeriod = &DateInterval{}
+			return v.TimePeriod.Deserialize(d)
+		case schemas.SavingsPlansUtilizationByTime_Utilization:
+			v.Utilization = &SavingsPlansUtilization{}
+			return v.Utilization.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A single daily or monthly Savings Plans utilization rate and details for your
@@ -2717,6 +7068,55 @@ type SavingsPlansUtilizationDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SavingsPlansUtilizationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SavingsPlansUtilizationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SavingsPlansUtilizationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmortizedCommitment != nil {
+		s.WriteStruct(schemas.SavingsPlansUtilizationDetail_AmortizedCommitment)
+		v.AmortizedCommitment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAttributes(s, schemas.SavingsPlansUtilizationDetail_Attributes, v.Attributes)
+	if v.Savings != nil {
+		s.WriteStruct(schemas.SavingsPlansUtilizationDetail_Savings)
+		v.Savings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SavingsPlanArn != nil {
+		s.WriteString(schemas.SavingsPlansUtilizationDetail_SavingsPlanArn, *v.SavingsPlanArn)
+	}
+	if v.Utilization != nil {
+		s.WriteStruct(schemas.SavingsPlansUtilizationDetail_Utilization)
+		v.Utilization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SavingsPlansUtilizationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SavingsPlansUtilizationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SavingsPlansUtilizationDetail_AmortizedCommitment:
+			v.AmortizedCommitment = &SavingsPlansAmortizedCommitment{}
+			return v.AmortizedCommitment.Deserialize(d)
+		case schemas.SavingsPlansUtilizationDetail_Attributes:
+			return deserializeAttributes(d, schemas.SavingsPlansUtilizationDetail_Attributes, &v.Attributes)
+		case schemas.SavingsPlansUtilizationDetail_Savings:
+			v.Savings = &SavingsPlansSavings{}
+			return v.Savings.Deserialize(d)
+		case schemas.SavingsPlansUtilizationDetail_SavingsPlanArn:
+			v.SavingsPlanArn = new(string)
+			return d.ReadString(schemas.SavingsPlansUtilizationDetail_SavingsPlanArn, v.SavingsPlanArn)
+		case schemas.SavingsPlansUtilizationDetail_Utilization:
+			v.Utilization = &SavingsPlansUtilization{}
+			return v.Utilization.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Hardware specifications for the service that you want recommendations for.
 type ServiceSpecification struct {
 
@@ -2725,6 +7125,30 @@ type ServiceSpecification struct {
 	EC2Specification *EC2Specification
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EC2Specification != nil {
+		s.WriteStruct(schemas.ServiceSpecification_EC2Specification)
+		v.EC2Specification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ServiceSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceSpecification_EC2Specification:
+			v.EC2Specification = &EC2Specification{}
+			return v.EC2Specification.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The details for how to sort the data.
@@ -2741,6 +7165,38 @@ type SortDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SortDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SortDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SortDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.SortDefinition_Key, *v.Key)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.SortDefinition_SortOrder, string(v.SortOrder))
+	}
+}
+func (v *SortDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SortDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SortDefinition_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.SortDefinition_Key, v.Key)
+		case schemas.SortDefinition_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.SortDefinition_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The recipient of AnomalySubscription notifications.
 type Subscriber struct {
 
@@ -2754,6 +7210,48 @@ type Subscriber struct {
 	Type SubscriberType
 
 	noSmithyDocumentSerde
+}
+
+func (v *Subscriber) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Subscriber)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Subscriber) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteString(schemas.Subscriber_Address, *v.Address)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Subscriber_Status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Subscriber_Type, string(v.Type))
+	}
+}
+func (v *Subscriber) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Subscriber, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Subscriber_Address:
+			v.Address = new(string)
+			return d.ReadString(schemas.Subscriber_Address, v.Address)
+		case schemas.Subscriber_Status:
+			var ev string
+			if err := d.ReadString(schemas.Subscriber_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = SubscriberStatus(ev)
+			return nil
+		case schemas.Subscriber_Type:
+			var ev string
+			if err := d.ReadString(schemas.Subscriber_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = SubscriberType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The values that are available for a tag.
@@ -2778,6 +7276,34 @@ type TagValues struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TagValues) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagValues)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagValues) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.TagValues_Key, *v.Key)
+	}
+	serializeMatchOptions(s, schemas.TagValues_MatchOptions, v.MatchOptions)
+	serializeValues(s, schemas.TagValues_Values, v.Values)
+}
+func (v *TagValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagValues, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagValues_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.TagValues_Key, v.Key)
+		case schemas.TagValues_MatchOptions:
+			return deserializeMatchOptions(d, schemas.TagValues_MatchOptions, &v.MatchOptions)
+		case schemas.TagValues_Values:
+			return deserializeValues(d, schemas.TagValues_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Details on recommended instance.
@@ -2810,6 +7336,64 @@ type TargetInstance struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TargetInstance) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetInstance)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetInstance) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.TargetInstance_CurrencyCode, *v.CurrencyCode)
+	}
+	if v.DefaultTargetInstance != false {
+		s.WriteBool(schemas.TargetInstance_DefaultTargetInstance, v.DefaultTargetInstance)
+	}
+	if v.EstimatedMonthlyCost != nil {
+		s.WriteString(schemas.TargetInstance_EstimatedMonthlyCost, *v.EstimatedMonthlyCost)
+	}
+	if v.EstimatedMonthlySavings != nil {
+		s.WriteString(schemas.TargetInstance_EstimatedMonthlySavings, *v.EstimatedMonthlySavings)
+	}
+	if v.ExpectedResourceUtilization != nil {
+		s.WriteStruct(schemas.TargetInstance_ExpectedResourceUtilization)
+		v.ExpectedResourceUtilization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePlatformDifferences(s, schemas.TargetInstance_PlatformDifferences, v.PlatformDifferences)
+	if v.ResourceDetails != nil {
+		s.WriteStruct(schemas.TargetInstance_ResourceDetails)
+		v.ResourceDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TargetInstance) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetInstance, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetInstance_CurrencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.TargetInstance_CurrencyCode, v.CurrencyCode)
+		case schemas.TargetInstance_DefaultTargetInstance:
+			return d.ReadBool(schemas.TargetInstance_DefaultTargetInstance, &v.DefaultTargetInstance)
+		case schemas.TargetInstance_EstimatedMonthlyCost:
+			v.EstimatedMonthlyCost = new(string)
+			return d.ReadString(schemas.TargetInstance_EstimatedMonthlyCost, v.EstimatedMonthlyCost)
+		case schemas.TargetInstance_EstimatedMonthlySavings:
+			v.EstimatedMonthlySavings = new(string)
+			return d.ReadString(schemas.TargetInstance_EstimatedMonthlySavings, v.EstimatedMonthlySavings)
+		case schemas.TargetInstance_ExpectedResourceUtilization:
+			v.ExpectedResourceUtilization = &ResourceUtilization{}
+			return v.ExpectedResourceUtilization.Deserialize(d)
+		case schemas.TargetInstance_PlatformDifferences:
+			return deserializePlatformDifferences(d, schemas.TargetInstance_PlatformDifferences, &v.PlatformDifferences)
+		case schemas.TargetInstance_ResourceDetails:
+			v.ResourceDetails = &ResourceDetails{}
+			return v.ResourceDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Details on termination recommendation.
 type TerminateRecommendationDetail struct {
 
@@ -2821,6 +7405,34 @@ type TerminateRecommendationDetail struct {
 	EstimatedMonthlySavings *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TerminateRecommendationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateRecommendationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateRecommendationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.TerminateRecommendationDetail_CurrencyCode, *v.CurrencyCode)
+	}
+	if v.EstimatedMonthlySavings != nil {
+		s.WriteString(schemas.TerminateRecommendationDetail_EstimatedMonthlySavings, *v.EstimatedMonthlySavings)
+	}
+}
+func (v *TerminateRecommendationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TerminateRecommendationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TerminateRecommendationDetail_CurrencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.TerminateRecommendationDetail_CurrencyCode, v.CurrencyCode)
+		case schemas.TerminateRecommendationDetail_EstimatedMonthlySavings:
+			v.EstimatedMonthlySavings = new(string)
+			return d.ReadString(schemas.TerminateRecommendationDetail_EstimatedMonthlySavings, v.EstimatedMonthlySavings)
+		}
+		return nil
+	})
 }
 
 // Filters cost anomalies based on the total impact.
@@ -2842,6 +7454,40 @@ type TotalImpactFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TotalImpactFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TotalImpactFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TotalImpactFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndValue != 0 {
+		s.WriteFloat64(schemas.TotalImpactFilter_EndValue, v.EndValue)
+	}
+	if v.NumericOperator != "" {
+		s.WriteString(schemas.TotalImpactFilter_NumericOperator, string(v.NumericOperator))
+	}
+	s.WriteFloat64(schemas.TotalImpactFilter_StartValue, v.StartValue)
+}
+func (v *TotalImpactFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TotalImpactFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TotalImpactFilter_EndValue:
+			return d.ReadFloat64(schemas.TotalImpactFilter_EndValue, &v.EndValue)
+		case schemas.TotalImpactFilter_NumericOperator:
+			var ev string
+			if err := d.ReadString(schemas.TotalImpactFilter_NumericOperator, &ev); err != nil {
+				return err
+			}
+			v.NumericOperator = NumericOperator(ev)
+			return nil
+		case schemas.TotalImpactFilter_StartValue:
+			return d.ReadFloat64(schemas.TotalImpactFilter_StartValue, &v.StartValue)
+		}
+		return nil
+	})
+}
+
 // Gives a detailed description of the result of an action. It's on each cost
 // allocation tag entry in the request.
 type UpdateCostAllocationTagsStatusError struct {
@@ -2858,6 +7504,40 @@ type UpdateCostAllocationTagsStatusError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCostAllocationTagsStatusError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCostAllocationTagsStatusError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCostAllocationTagsStatusError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.UpdateCostAllocationTagsStatusError_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.UpdateCostAllocationTagsStatusError_Message, *v.Message)
+	}
+	if v.TagKey != nil {
+		s.WriteString(schemas.UpdateCostAllocationTagsStatusError_TagKey, *v.TagKey)
+	}
+}
+func (v *UpdateCostAllocationTagsStatusError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCostAllocationTagsStatusError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCostAllocationTagsStatusError_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.UpdateCostAllocationTagsStatusError_Code, v.Code)
+		case schemas.UpdateCostAllocationTagsStatusError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UpdateCostAllocationTagsStatusError_Message, v.Message)
+		case schemas.UpdateCostAllocationTagsStatusError_TagKey:
+			v.TagKey = new(string)
+			return d.ReadString(schemas.UpdateCostAllocationTagsStatusError_TagKey, v.TagKey)
+		}
+		return nil
+	})
+}
+
 // The amount of utilization, in hours.
 type UtilizationByTime struct {
 
@@ -2871,6 +7551,41 @@ type UtilizationByTime struct {
 	Total *ReservationAggregates
 
 	noSmithyDocumentSerde
+}
+
+func (v *UtilizationByTime) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UtilizationByTime)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UtilizationByTime) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeReservationUtilizationGroups(s, schemas.UtilizationByTime_Groups, v.Groups)
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.UtilizationByTime_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Total != nil {
+		s.WriteStruct(schemas.UtilizationByTime_Total)
+		v.Total.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UtilizationByTime) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UtilizationByTime, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UtilizationByTime_Groups:
+			return deserializeReservationUtilizationGroups(d, schemas.UtilizationByTime_Groups, &v.Groups)
+		case schemas.UtilizationByTime_TimePeriod:
+			v.TimePeriod = &DateInterval{}
+			return v.TimePeriod.Deserialize(d)
+		case schemas.UtilizationByTime_Total:
+			v.Total = &ReservationAggregates{}
+			return v.Total.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

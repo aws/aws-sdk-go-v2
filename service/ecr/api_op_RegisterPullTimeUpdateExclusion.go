@@ -4,6 +4,8 @@ package ecr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -36,6 +38,18 @@ type RegisterPullTimeUpdateExclusionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterPullTimeUpdateExclusionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterPullTimeUpdateExclusionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterPullTimeUpdateExclusionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PrincipalArn != nil {
+		s.WriteString(schemas.RegisterPullTimeUpdateExclusionRequest_principalArn, *v.PrincipalArn)
+	}
+}
+
 type RegisterPullTimeUpdateExclusionOutput struct {
 
 	// The date and time, expressed in standard JavaScript date format, when the
@@ -52,13 +66,38 @@ type RegisterPullTimeUpdateExclusionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterPullTimeUpdateExclusionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterPullTimeUpdateExclusionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterPullTimeUpdateExclusionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.RegisterPullTimeUpdateExclusionResponse_createdAt, *v.CreatedAt)
+	}
+	if v.PrincipalArn != nil {
+		s.WriteString(schemas.RegisterPullTimeUpdateExclusionResponse_principalArn, *v.PrincipalArn)
+	}
+}
+func (v *RegisterPullTimeUpdateExclusionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterPullTimeUpdateExclusionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterPullTimeUpdateExclusionResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.RegisterPullTimeUpdateExclusionResponse_createdAt, v.CreatedAt)
+		case schemas.RegisterPullTimeUpdateExclusionResponse_principalArn:
+			v.PrincipalArn = new(string)
+			return d.ReadString(schemas.RegisterPullTimeUpdateExclusionResponse_principalArn, v.PrincipalArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterPullTimeUpdateExclusionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterPullTimeUpdateExclusion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterPullTimeUpdateExclusion, schemas.RegisterPullTimeUpdateExclusionRequest, schemas.RegisterPullTimeUpdateExclusionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterPullTimeUpdateExclusion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterPullTimeUpdateExclusion, schemas.RegisterPullTimeUpdateExclusionRequest, schemas.RegisterPullTimeUpdateExclusionResponse), output: &RegisterPullTimeUpdateExclusionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

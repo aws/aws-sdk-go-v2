@@ -4,7 +4,9 @@ package imagebuilder
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type GetMarketplaceResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMarketplaceResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMarketplaceResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMarketplaceResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetMarketplaceResourceRequest_resourceArn, *v.ResourceArn)
+	}
+	if v.ResourceLocation != nil {
+		s.WriteString(schemas.GetMarketplaceResourceRequest_resourceLocation, *v.ResourceLocation)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.GetMarketplaceResourceRequest_resourceType, string(v.ResourceType))
+	}
+}
+
 type GetMarketplaceResourceOutput struct {
 
 	// Returns obfuscated data that contains the YAML content of the component.
@@ -65,13 +85,44 @@ type GetMarketplaceResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMarketplaceResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMarketplaceResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMarketplaceResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Data != nil {
+		s.WriteString(schemas.GetMarketplaceResourceResponse_data, *v.Data)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetMarketplaceResourceResponse_resourceArn, *v.ResourceArn)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.GetMarketplaceResourceResponse_url, *v.Url)
+	}
+}
+func (v *GetMarketplaceResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMarketplaceResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMarketplaceResourceResponse_data:
+			v.Data = new(string)
+			return d.ReadString(schemas.GetMarketplaceResourceResponse_data, v.Data)
+		case schemas.GetMarketplaceResourceResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.GetMarketplaceResourceResponse_resourceArn, v.ResourceArn)
+		case schemas.GetMarketplaceResourceResponse_url:
+			v.Url = new(string)
+			return d.ReadString(schemas.GetMarketplaceResourceResponse_url, v.Url)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMarketplaceResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMarketplaceResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMarketplaceResource, schemas.GetMarketplaceResourceRequest, schemas.GetMarketplaceResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMarketplaceResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMarketplaceResource, schemas.GetMarketplaceResourceRequest, schemas.GetMarketplaceResourceResponse), output: &GetMarketplaceResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

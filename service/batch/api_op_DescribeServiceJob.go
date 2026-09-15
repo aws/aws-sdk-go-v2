@@ -4,7 +4,9 @@ package batch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type DescribeServiceJobInput struct {
 	JobId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeServiceJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeServiceJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeServiceJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeServiceJobRequest_jobId, *v.JobId)
+	}
 }
 
 type DescribeServiceJobOutput struct {
@@ -139,13 +153,179 @@ type DescribeServiceJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeServiceJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeServiceJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeServiceJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeServiceJobAttemptDetails(s, schemas.DescribeServiceJobResponse_attempts, v.Attempts)
+	serializeServiceJobCapacityUsageDetailList(s, schemas.DescribeServiceJobResponse_capacityUsage, v.CapacityUsage)
+	if v.CreatedAt != nil {
+		s.WriteInt64(schemas.DescribeServiceJobResponse_createdAt, *v.CreatedAt)
+	}
+	if v.IsTerminated != nil {
+		s.WriteBool(schemas.DescribeServiceJobResponse_isTerminated, *v.IsTerminated)
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.DescribeServiceJobResponse_jobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeServiceJobResponse_jobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.DescribeServiceJobResponse_jobName, *v.JobName)
+	}
+	if v.JobQueue != nil {
+		s.WriteString(schemas.DescribeServiceJobResponse_jobQueue, *v.JobQueue)
+	}
+	if v.LatestAttempt != nil {
+		s.WriteStruct(schemas.DescribeServiceJobResponse_latestAttempt)
+		v.LatestAttempt.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PreemptionConfiguration != nil {
+		s.WriteStruct(schemas.DescribeServiceJobResponse_preemptionConfiguration)
+		v.PreemptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PreemptionSummary != nil {
+		s.WriteStruct(schemas.DescribeServiceJobResponse_preemptionSummary)
+		v.PreemptionSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QuotaShareName != nil {
+		s.WriteString(schemas.DescribeServiceJobResponse_quotaShareName, *v.QuotaShareName)
+	}
+	if v.RetryStrategy != nil {
+		s.WriteStruct(schemas.DescribeServiceJobResponse_retryStrategy)
+		v.RetryStrategy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScheduledAt != nil {
+		s.WriteInt64(schemas.DescribeServiceJobResponse_scheduledAt, *v.ScheduledAt)
+	}
+	if v.SchedulingPriority != nil {
+		s.WriteInt32(schemas.DescribeServiceJobResponse_schedulingPriority, *v.SchedulingPriority)
+	}
+	if v.ServiceJobType != "" {
+		s.WriteString(schemas.DescribeServiceJobResponse_serviceJobType, string(v.ServiceJobType))
+	}
+	if v.ServiceRequestPayload != nil {
+		s.WriteString(schemas.DescribeServiceJobResponse_serviceRequestPayload, *v.ServiceRequestPayload)
+	}
+	if v.ShareIdentifier != nil {
+		s.WriteString(schemas.DescribeServiceJobResponse_shareIdentifier, *v.ShareIdentifier)
+	}
+	if v.StartedAt != nil {
+		s.WriteInt64(schemas.DescribeServiceJobResponse_startedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeServiceJobResponse_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.DescribeServiceJobResponse_statusReason, *v.StatusReason)
+	}
+	if v.StoppedAt != nil {
+		s.WriteInt64(schemas.DescribeServiceJobResponse_stoppedAt, *v.StoppedAt)
+	}
+	serializeTagrisTagsMap(s, schemas.DescribeServiceJobResponse_tags, v.Tags)
+	if v.TimeoutConfig != nil {
+		s.WriteStruct(schemas.DescribeServiceJobResponse_timeoutConfig)
+		v.TimeoutConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeServiceJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeServiceJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeServiceJobResponse_attempts:
+			return deserializeServiceJobAttemptDetails(d, schemas.DescribeServiceJobResponse_attempts, &v.Attempts)
+		case schemas.DescribeServiceJobResponse_capacityUsage:
+			return deserializeServiceJobCapacityUsageDetailList(d, schemas.DescribeServiceJobResponse_capacityUsage, &v.CapacityUsage)
+		case schemas.DescribeServiceJobResponse_createdAt:
+			v.CreatedAt = new(int64)
+			return d.ReadInt64(schemas.DescribeServiceJobResponse_createdAt, v.CreatedAt)
+		case schemas.DescribeServiceJobResponse_isTerminated:
+			v.IsTerminated = new(bool)
+			return d.ReadBool(schemas.DescribeServiceJobResponse_isTerminated, v.IsTerminated)
+		case schemas.DescribeServiceJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.DescribeServiceJobResponse_jobArn, v.JobArn)
+		case schemas.DescribeServiceJobResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.DescribeServiceJobResponse_jobId, v.JobId)
+		case schemas.DescribeServiceJobResponse_jobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.DescribeServiceJobResponse_jobName, v.JobName)
+		case schemas.DescribeServiceJobResponse_jobQueue:
+			v.JobQueue = new(string)
+			return d.ReadString(schemas.DescribeServiceJobResponse_jobQueue, v.JobQueue)
+		case schemas.DescribeServiceJobResponse_latestAttempt:
+			v.LatestAttempt = &types.LatestServiceJobAttempt{}
+			return v.LatestAttempt.Deserialize(d)
+		case schemas.DescribeServiceJobResponse_preemptionConfiguration:
+			v.PreemptionConfiguration = &types.ServiceJobPreemptionConfiguration{}
+			return v.PreemptionConfiguration.Deserialize(d)
+		case schemas.DescribeServiceJobResponse_preemptionSummary:
+			v.PreemptionSummary = &types.ServiceJobPreemptionSummary{}
+			return v.PreemptionSummary.Deserialize(d)
+		case schemas.DescribeServiceJobResponse_quotaShareName:
+			v.QuotaShareName = new(string)
+			return d.ReadString(schemas.DescribeServiceJobResponse_quotaShareName, v.QuotaShareName)
+		case schemas.DescribeServiceJobResponse_retryStrategy:
+			v.RetryStrategy = &types.ServiceJobRetryStrategy{}
+			return v.RetryStrategy.Deserialize(d)
+		case schemas.DescribeServiceJobResponse_scheduledAt:
+			v.ScheduledAt = new(int64)
+			return d.ReadInt64(schemas.DescribeServiceJobResponse_scheduledAt, v.ScheduledAt)
+		case schemas.DescribeServiceJobResponse_schedulingPriority:
+			v.SchedulingPriority = new(int32)
+			return d.ReadInt32(schemas.DescribeServiceJobResponse_schedulingPriority, v.SchedulingPriority)
+		case schemas.DescribeServiceJobResponse_serviceJobType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeServiceJobResponse_serviceJobType, &ev); err != nil {
+				return err
+			}
+			v.ServiceJobType = types.ServiceJobType(ev)
+			return nil
+		case schemas.DescribeServiceJobResponse_serviceRequestPayload:
+			v.ServiceRequestPayload = new(string)
+			return d.ReadString(schemas.DescribeServiceJobResponse_serviceRequestPayload, v.ServiceRequestPayload)
+		case schemas.DescribeServiceJobResponse_shareIdentifier:
+			v.ShareIdentifier = new(string)
+			return d.ReadString(schemas.DescribeServiceJobResponse_shareIdentifier, v.ShareIdentifier)
+		case schemas.DescribeServiceJobResponse_startedAt:
+			v.StartedAt = new(int64)
+			return d.ReadInt64(schemas.DescribeServiceJobResponse_startedAt, v.StartedAt)
+		case schemas.DescribeServiceJobResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeServiceJobResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ServiceJobStatus(ev)
+			return nil
+		case schemas.DescribeServiceJobResponse_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.DescribeServiceJobResponse_statusReason, v.StatusReason)
+		case schemas.DescribeServiceJobResponse_stoppedAt:
+			v.StoppedAt = new(int64)
+			return d.ReadInt64(schemas.DescribeServiceJobResponse_stoppedAt, v.StoppedAt)
+		case schemas.DescribeServiceJobResponse_tags:
+			return deserializeTagrisTagsMap(d, schemas.DescribeServiceJobResponse_tags, &v.Tags)
+		case schemas.DescribeServiceJobResponse_timeoutConfig:
+			v.TimeoutConfig = &types.ServiceJobTimeout{}
+			return v.TimeoutConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeServiceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeServiceJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeServiceJob, schemas.DescribeServiceJobRequest, schemas.DescribeServiceJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeServiceJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeServiceJob, schemas.DescribeServiceJobRequest, schemas.DescribeServiceJobResponse), output: &DescribeServiceJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

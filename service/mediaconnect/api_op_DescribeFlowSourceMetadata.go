@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,18 @@ type DescribeFlowSourceMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFlowSourceMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFlowSourceMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFlowSourceMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.DescribeFlowSourceMetadataRequest_FlowArn, *v.FlowArn)
+	}
+}
+
 type DescribeFlowSourceMetadataOutput struct {
 
 	//  The ARN of the flow that DescribeFlowSourceMetadata was performed on.
@@ -65,13 +79,57 @@ type DescribeFlowSourceMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFlowSourceMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFlowSourceMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFlowSourceMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.DescribeFlowSourceMetadataResponse_FlowArn, *v.FlowArn)
+	}
+	serialize__listOfMessageDetail(s, schemas.DescribeFlowSourceMetadataResponse_Messages, v.Messages)
+	if v.NdiInfo != nil {
+		s.WriteStruct(schemas.DescribeFlowSourceMetadataResponse_NdiInfo)
+		v.NdiInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.DescribeFlowSourceMetadataResponse_Timestamp, *v.Timestamp)
+	}
+	if v.TransportMediaInfo != nil {
+		s.WriteStruct(schemas.DescribeFlowSourceMetadataResponse_TransportMediaInfo)
+		v.TransportMediaInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeFlowSourceMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFlowSourceMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFlowSourceMetadataResponse_FlowArn:
+			v.FlowArn = new(string)
+			return d.ReadString(schemas.DescribeFlowSourceMetadataResponse_FlowArn, v.FlowArn)
+		case schemas.DescribeFlowSourceMetadataResponse_Messages:
+			return deserialize__listOfMessageDetail(d, schemas.DescribeFlowSourceMetadataResponse_Messages, &v.Messages)
+		case schemas.DescribeFlowSourceMetadataResponse_NdiInfo:
+			v.NdiInfo = &types.NdiSourceMetadataInfo{}
+			return v.NdiInfo.Deserialize(d)
+		case schemas.DescribeFlowSourceMetadataResponse_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.DescribeFlowSourceMetadataResponse_Timestamp, v.Timestamp)
+		case schemas.DescribeFlowSourceMetadataResponse_TransportMediaInfo:
+			v.TransportMediaInfo = &types.TransportMediaInfo{}
+			return v.TransportMediaInfo.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFlowSourceMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeFlowSourceMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFlowSourceMetadata, schemas.DescribeFlowSourceMetadataRequest, schemas.DescribeFlowSourceMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeFlowSourceMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFlowSourceMetadata, schemas.DescribeFlowSourceMetadataRequest, schemas.DescribeFlowSourceMetadataResponse), output: &DescribeFlowSourceMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

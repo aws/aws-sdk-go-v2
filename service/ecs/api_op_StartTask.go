@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -150,6 +152,52 @@ type StartTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteString(schemas.StartTaskRequest_cluster, *v.Cluster)
+	}
+	serializeStringList(s, schemas.StartTaskRequest_containerInstances, v.ContainerInstances)
+	if v.EnableECSManagedTags != false {
+		s.WriteBool(schemas.StartTaskRequest_enableECSManagedTags, v.EnableECSManagedTags)
+	}
+	if v.EnableExecuteCommand != false {
+		s.WriteBool(schemas.StartTaskRequest_enableExecuteCommand, v.EnableExecuteCommand)
+	}
+	if v.Group != nil {
+		s.WriteString(schemas.StartTaskRequest_group, *v.Group)
+	}
+	if v.NetworkConfiguration != nil {
+		s.WriteStruct(schemas.StartTaskRequest_networkConfiguration)
+		v.NetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Overrides != nil {
+		s.WriteStruct(schemas.StartTaskRequest_overrides)
+		v.Overrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PropagateTags != "" {
+		s.WriteString(schemas.StartTaskRequest_propagateTags, string(v.PropagateTags))
+	}
+	if v.ReferenceId != nil {
+		s.WriteString(schemas.StartTaskRequest_referenceId, *v.ReferenceId)
+	}
+	if v.StartedBy != nil {
+		s.WriteString(schemas.StartTaskRequest_startedBy, *v.StartedBy)
+	}
+	serializeTags(s, schemas.StartTaskRequest_tags, v.Tags)
+	if v.TaskDefinition != nil {
+		s.WriteString(schemas.StartTaskRequest_taskDefinition, *v.TaskDefinition)
+	}
+	serializeTaskVolumeConfigurations(s, schemas.StartTaskRequest_volumeConfigurations, v.VolumeConfigurations)
+}
+
 type StartTaskOutput struct {
 
 	// Any failures associated with the call.
@@ -165,13 +213,32 @@ type StartTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailures(s, schemas.StartTaskResponse_failures, v.Failures)
+	serializeTasks(s, schemas.StartTaskResponse_tasks, v.Tasks)
+}
+func (v *StartTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTaskResponse_failures:
+			return deserializeFailures(d, schemas.StartTaskResponse_failures, &v.Failures)
+		case schemas.StartTaskResponse_tasks:
+			return deserializeTasks(d, schemas.StartTaskResponse_tasks, &v.Tasks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTask, schemas.StartTaskRequest, schemas.StartTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTask, schemas.StartTaskRequest, schemas.StartTaskResponse), output: &StartTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

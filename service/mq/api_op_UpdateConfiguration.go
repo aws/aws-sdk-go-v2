@@ -4,7 +4,9 @@ package mq
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mq/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mq/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -45,6 +47,24 @@ type UpdateConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationId != nil {
+		s.WriteString(schemas.UpdateConfigurationRequest_ConfigurationId, *v.ConfigurationId)
+	}
+	if v.Data != nil {
+		s.WriteString(schemas.UpdateConfigurationRequest_Data, *v.Data)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateConfigurationRequest_Description, *v.Description)
+	}
+}
+
 type UpdateConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the configuration.
@@ -74,13 +94,61 @@ type UpdateConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateConfigurationResponse_Arn, *v.Arn)
+	}
+	if v.Created != nil {
+		s.WriteTime(schemas.UpdateConfigurationResponse_Created, *v.Created)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateConfigurationResponse_Id, *v.Id)
+	}
+	if v.LatestRevision != nil {
+		s.WriteStruct(schemas.UpdateConfigurationResponse_LatestRevision)
+		v.LatestRevision.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateConfigurationResponse_Name, *v.Name)
+	}
+	serialize__listOfSanitizationWarning(s, schemas.UpdateConfigurationResponse_Warnings, v.Warnings)
+}
+func (v *UpdateConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConfigurationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateConfigurationResponse_Arn, v.Arn)
+		case schemas.UpdateConfigurationResponse_Created:
+			v.Created = new(time.Time)
+			return d.ReadTime(schemas.UpdateConfigurationResponse_Created, v.Created)
+		case schemas.UpdateConfigurationResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateConfigurationResponse_Id, v.Id)
+		case schemas.UpdateConfigurationResponse_LatestRevision:
+			v.LatestRevision = &types.ConfigurationRevision{}
+			return v.LatestRevision.Deserialize(d)
+		case schemas.UpdateConfigurationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateConfigurationResponse_Name, v.Name)
+		case schemas.UpdateConfigurationResponse_Warnings:
+			return deserialize__listOfSanitizationWarning(d, schemas.UpdateConfigurationResponse_Warnings, &v.Warnings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfiguration, schemas.UpdateConfigurationRequest, schemas.UpdateConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfiguration, schemas.UpdateConfigurationRequest, schemas.UpdateConfigurationResponse), output: &UpdateConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package bedrockagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,27 @@ type ListAgentKnowledgeBasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentKnowledgeBasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentKnowledgeBasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentKnowledgeBasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.ListAgentKnowledgeBasesRequest_agentId, *v.AgentId)
+	}
+	if v.AgentVersion != nil {
+		s.WriteString(schemas.ListAgentKnowledgeBasesRequest_agentVersion, *v.AgentVersion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAgentKnowledgeBasesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentKnowledgeBasesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAgentKnowledgeBasesOutput struct {
 
 	// A list of objects, each of which contains information about a knowledge base
@@ -72,13 +95,35 @@ type ListAgentKnowledgeBasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentKnowledgeBasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentKnowledgeBasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentKnowledgeBasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentKnowledgeBaseSummaries(s, schemas.ListAgentKnowledgeBasesResponse_agentKnowledgeBaseSummaries, v.AgentKnowledgeBaseSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentKnowledgeBasesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAgentKnowledgeBasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAgentKnowledgeBasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAgentKnowledgeBasesResponse_agentKnowledgeBaseSummaries:
+			return deserializeAgentKnowledgeBaseSummaries(d, schemas.ListAgentKnowledgeBasesResponse_agentKnowledgeBaseSummaries, &v.AgentKnowledgeBaseSummaries)
+		case schemas.ListAgentKnowledgeBasesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAgentKnowledgeBasesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAgentKnowledgeBasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAgentKnowledgeBases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentKnowledgeBases, schemas.ListAgentKnowledgeBasesRequest, schemas.ListAgentKnowledgeBasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAgentKnowledgeBases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentKnowledgeBases, schemas.ListAgentKnowledgeBasesRequest, schemas.ListAgentKnowledgeBasesResponse), output: &ListAgentKnowledgeBasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

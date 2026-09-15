@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,16 @@ type BatchUpdateStandardsControlAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateStandardsControlAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateStandardsControlAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateStandardsControlAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStandardsControlAssociationUpdates(s, schemas.BatchUpdateStandardsControlAssociationsRequest_StandardsControlAssociationUpdates, v.StandardsControlAssociationUpdates)
+}
+
 type BatchUpdateStandardsControlAssociationsOutput struct {
 
 	//  A security control (identified with SecurityControlId , SecurityControlArn , or
@@ -53,13 +65,29 @@ type BatchUpdateStandardsControlAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateStandardsControlAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateStandardsControlAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateStandardsControlAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUnprocessedStandardsControlAssociationUpdates(s, schemas.BatchUpdateStandardsControlAssociationsResponse_UnprocessedAssociationUpdates, v.UnprocessedAssociationUpdates)
+}
+func (v *BatchUpdateStandardsControlAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateStandardsControlAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateStandardsControlAssociationsResponse_UnprocessedAssociationUpdates:
+			return deserializeUnprocessedStandardsControlAssociationUpdates(d, schemas.BatchUpdateStandardsControlAssociationsResponse_UnprocessedAssociationUpdates, &v.UnprocessedAssociationUpdates)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdateStandardsControlAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateStandardsControlAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateStandardsControlAssociations, schemas.BatchUpdateStandardsControlAssociationsRequest, schemas.BatchUpdateStandardsControlAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateStandardsControlAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateStandardsControlAssociations, schemas.BatchUpdateStandardsControlAssociationsRequest, schemas.BatchUpdateStandardsControlAssociationsResponse), output: &BatchUpdateStandardsControlAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

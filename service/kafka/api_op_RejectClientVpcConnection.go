@@ -4,6 +4,8 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type RejectClientVpcConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectClientVpcConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectClientVpcConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectClientVpcConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.RejectClientVpcConnectionRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.VpcConnectionArn != nil {
+		s.WriteString(schemas.RejectClientVpcConnectionRequest_VpcConnectionArn, *v.VpcConnectionArn)
+	}
+}
+
 type RejectClientVpcConnectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type RejectClientVpcConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectClientVpcConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectClientVpcConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectClientVpcConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RejectClientVpcConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RejectClientVpcConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRejectClientVpcConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRejectClientVpcConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectClientVpcConnection, schemas.RejectClientVpcConnectionRequest, schemas.RejectClientVpcConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRejectClientVpcConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectClientVpcConnection, schemas.RejectClientVpcConnectionRequest, schemas.RejectClientVpcConnectionResponse), output: &RejectClientVpcConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

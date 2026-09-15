@@ -4,6 +4,8 @@ package sfn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,18 @@ type SendTaskHeartbeatInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendTaskHeartbeatInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendTaskHeartbeatInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendTaskHeartbeatInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskToken != nil {
+		s.WriteString(schemas.SendTaskHeartbeatInput_taskToken, *v.TaskToken)
+	}
+}
+
 type SendTaskHeartbeatOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,13 +73,26 @@ type SendTaskHeartbeatOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendTaskHeartbeatOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendTaskHeartbeatOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendTaskHeartbeatOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SendTaskHeartbeatOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendTaskHeartbeatOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendTaskHeartbeatMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSendTaskHeartbeat{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendTaskHeartbeat, schemas.SendTaskHeartbeatInput, schemas.SendTaskHeartbeatOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSendTaskHeartbeat{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendTaskHeartbeat, schemas.SendTaskHeartbeatInput, schemas.SendTaskHeartbeatOutput), output: &SendTaskHeartbeatOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

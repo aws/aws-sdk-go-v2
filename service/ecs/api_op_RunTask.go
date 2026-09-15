@@ -5,7 +5,9 @@ package ecs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -295,6 +297,66 @@ type RunTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RunTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RunTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RunTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCapacityProviderStrategy(s, schemas.RunTaskRequest_capacityProviderStrategy, v.CapacityProviderStrategy)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.RunTaskRequest_clientToken, *v.ClientToken)
+	}
+	if v.Cluster != nil {
+		s.WriteString(schemas.RunTaskRequest_cluster, *v.Cluster)
+	}
+	if v.Count != nil {
+		s.WriteInt32(schemas.RunTaskRequest_count, *v.Count)
+	}
+	if v.EnableECSManagedTags != false {
+		s.WriteBool(schemas.RunTaskRequest_enableECSManagedTags, v.EnableECSManagedTags)
+	}
+	if v.EnableExecuteCommand != false {
+		s.WriteBool(schemas.RunTaskRequest_enableExecuteCommand, v.EnableExecuteCommand)
+	}
+	if v.Group != nil {
+		s.WriteString(schemas.RunTaskRequest_group, *v.Group)
+	}
+	if v.LaunchType != "" {
+		s.WriteString(schemas.RunTaskRequest_launchType, string(v.LaunchType))
+	}
+	if v.NetworkConfiguration != nil {
+		s.WriteStruct(schemas.RunTaskRequest_networkConfiguration)
+		v.NetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Overrides != nil {
+		s.WriteStruct(schemas.RunTaskRequest_overrides)
+		v.Overrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePlacementConstraints(s, schemas.RunTaskRequest_placementConstraints, v.PlacementConstraints)
+	serializePlacementStrategies(s, schemas.RunTaskRequest_placementStrategy, v.PlacementStrategy)
+	if v.PlatformVersion != nil {
+		s.WriteString(schemas.RunTaskRequest_platformVersion, *v.PlatformVersion)
+	}
+	if v.PropagateTags != "" {
+		s.WriteString(schemas.RunTaskRequest_propagateTags, string(v.PropagateTags))
+	}
+	if v.ReferenceId != nil {
+		s.WriteString(schemas.RunTaskRequest_referenceId, *v.ReferenceId)
+	}
+	if v.StartedBy != nil {
+		s.WriteString(schemas.RunTaskRequest_startedBy, *v.StartedBy)
+	}
+	serializeTags(s, schemas.RunTaskRequest_tags, v.Tags)
+	if v.TaskDefinition != nil {
+		s.WriteString(schemas.RunTaskRequest_taskDefinition, *v.TaskDefinition)
+	}
+	serializeTaskVolumeConfigurations(s, schemas.RunTaskRequest_volumeConfigurations, v.VolumeConfigurations)
+}
+
 type RunTaskOutput struct {
 
 	// Any failures associated with the call.
@@ -316,13 +378,32 @@ type RunTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RunTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RunTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RunTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailures(s, schemas.RunTaskResponse_failures, v.Failures)
+	serializeTasks(s, schemas.RunTaskResponse_tasks, v.Tasks)
+}
+func (v *RunTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RunTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RunTaskResponse_failures:
+			return deserializeFailures(d, schemas.RunTaskResponse_failures, &v.Failures)
+		case schemas.RunTaskResponse_tasks:
+			return deserializeTasks(d, schemas.RunTaskResponse_tasks, &v.Tasks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRunTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRunTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RunTask, schemas.RunTaskRequest, schemas.RunTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRunTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RunTask, schemas.RunTaskRequest, schemas.RunTaskResponse), output: &RunTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

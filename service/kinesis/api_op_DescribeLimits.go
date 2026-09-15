@@ -4,6 +4,8 @@ package kinesis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -33,6 +35,14 @@ type DescribeLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLimitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLimitsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
 func (in *DescribeLimitsInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.OperationType = ptr.String("control")
@@ -72,13 +82,62 @@ type DescribeLimitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLimitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLimitsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelCount != nil {
+		s.WriteInt32(schemas.DescribeLimitsOutput_ChannelCount, *v.ChannelCount)
+	}
+	if v.ChannelCountLimit != nil {
+		s.WriteInt32(schemas.DescribeLimitsOutput_ChannelCountLimit, *v.ChannelCountLimit)
+	}
+	if v.OnDemandStreamCount != nil {
+		s.WriteInt32(schemas.DescribeLimitsOutput_OnDemandStreamCount, *v.OnDemandStreamCount)
+	}
+	if v.OnDemandStreamCountLimit != nil {
+		s.WriteInt32(schemas.DescribeLimitsOutput_OnDemandStreamCountLimit, *v.OnDemandStreamCountLimit)
+	}
+	if v.OpenShardCount != nil {
+		s.WriteInt32(schemas.DescribeLimitsOutput_OpenShardCount, *v.OpenShardCount)
+	}
+	if v.ShardLimit != nil {
+		s.WriteInt32(schemas.DescribeLimitsOutput_ShardLimit, *v.ShardLimit)
+	}
+}
+func (v *DescribeLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLimitsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLimitsOutput_ChannelCount:
+			v.ChannelCount = new(int32)
+			return d.ReadInt32(schemas.DescribeLimitsOutput_ChannelCount, v.ChannelCount)
+		case schemas.DescribeLimitsOutput_ChannelCountLimit:
+			v.ChannelCountLimit = new(int32)
+			return d.ReadInt32(schemas.DescribeLimitsOutput_ChannelCountLimit, v.ChannelCountLimit)
+		case schemas.DescribeLimitsOutput_OnDemandStreamCount:
+			v.OnDemandStreamCount = new(int32)
+			return d.ReadInt32(schemas.DescribeLimitsOutput_OnDemandStreamCount, v.OnDemandStreamCount)
+		case schemas.DescribeLimitsOutput_OnDemandStreamCountLimit:
+			v.OnDemandStreamCountLimit = new(int32)
+			return d.ReadInt32(schemas.DescribeLimitsOutput_OnDemandStreamCountLimit, v.OnDemandStreamCountLimit)
+		case schemas.DescribeLimitsOutput_OpenShardCount:
+			v.OpenShardCount = new(int32)
+			return d.ReadInt32(schemas.DescribeLimitsOutput_OpenShardCount, v.OpenShardCount)
+		case schemas.DescribeLimitsOutput_ShardLimit:
+			v.ShardLimit = new(int32)
+			return d.ReadInt32(schemas.DescribeLimitsOutput_ShardLimit, v.ShardLimit)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLimits, schemas.DescribeLimitsInput, schemas.DescribeLimitsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLimits, schemas.DescribeLimitsInput, schemas.DescribeLimitsOutput), output: &DescribeLimitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

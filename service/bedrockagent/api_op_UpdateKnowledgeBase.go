@@ -4,7 +4,9 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,37 @@ type UpdateKnowledgeBaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateKnowledgeBaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateKnowledgeBaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateKnowledgeBaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateKnowledgeBaseRequest_description, *v.Description)
+	}
+	if v.KnowledgeBaseConfiguration != nil {
+		s.WriteStruct(schemas.UpdateKnowledgeBaseRequest_knowledgeBaseConfiguration)
+		v.KnowledgeBaseConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.UpdateKnowledgeBaseRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateKnowledgeBaseRequest_name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateKnowledgeBaseRequest_roleArn, *v.RoleArn)
+	}
+	if v.StorageConfiguration != nil {
+		s.WriteStruct(schemas.UpdateKnowledgeBaseRequest_storageConfiguration)
+		v.StorageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateKnowledgeBaseOutput struct {
 
 	// Contains details about the knowledge base.
@@ -88,13 +121,34 @@ type UpdateKnowledgeBaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateKnowledgeBaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateKnowledgeBaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateKnowledgeBaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnowledgeBase != nil {
+		s.WriteStruct(schemas.UpdateKnowledgeBaseResponse_knowledgeBase)
+		v.KnowledgeBase.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateKnowledgeBaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateKnowledgeBaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateKnowledgeBaseResponse_knowledgeBase:
+			v.KnowledgeBase = &types.KnowledgeBase{}
+			return v.KnowledgeBase.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateKnowledgeBaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKnowledgeBase, schemas.UpdateKnowledgeBaseRequest, schemas.UpdateKnowledgeBaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKnowledgeBase, schemas.UpdateKnowledgeBaseRequest, schemas.UpdateKnowledgeBaseResponse), output: &UpdateKnowledgeBaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

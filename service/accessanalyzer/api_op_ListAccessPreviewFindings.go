@@ -5,7 +5,9 @@ package accessanalyzer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,49 @@ type ListAccessPreviewFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccessPreviewFindingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccessPreviewFindingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccessPreviewFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPreviewId != nil {
+		s.WriteString(schemas.ListAccessPreviewFindingsRequest_accessPreviewId, *v.AccessPreviewId)
+	}
+	if v.AnalyzerArn != nil {
+		s.WriteString(schemas.ListAccessPreviewFindingsRequest_analyzerArn, *v.AnalyzerArn)
+	}
+	serializeFilterCriteriaMap(s, schemas.ListAccessPreviewFindingsRequest_filter, v.Filter)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAccessPreviewFindingsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccessPreviewFindingsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAccessPreviewFindingsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccessPreviewFindingsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccessPreviewFindingsRequest_accessPreviewId:
+			v.AccessPreviewId = new(string)
+			return d.ReadString(schemas.ListAccessPreviewFindingsRequest_accessPreviewId, v.AccessPreviewId)
+		case schemas.ListAccessPreviewFindingsRequest_analyzerArn:
+			v.AnalyzerArn = new(string)
+			return d.ReadString(schemas.ListAccessPreviewFindingsRequest_analyzerArn, v.AnalyzerArn)
+		case schemas.ListAccessPreviewFindingsRequest_filter:
+			return deserializeFilterCriteriaMap(d, schemas.ListAccessPreviewFindingsRequest_filter, &v.Filter)
+		case schemas.ListAccessPreviewFindingsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListAccessPreviewFindingsRequest_maxResults, v.MaxResults)
+		case schemas.ListAccessPreviewFindingsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccessPreviewFindingsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListAccessPreviewFindingsOutput struct {
 
 	// A list of access preview findings that match the specified filter criteria.
@@ -68,13 +113,35 @@ type ListAccessPreviewFindingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccessPreviewFindingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccessPreviewFindingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccessPreviewFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessPreviewFindingsList(s, schemas.ListAccessPreviewFindingsResponse_findings, v.Findings)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccessPreviewFindingsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAccessPreviewFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccessPreviewFindingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccessPreviewFindingsResponse_findings:
+			return deserializeAccessPreviewFindingsList(d, schemas.ListAccessPreviewFindingsResponse_findings, &v.Findings)
+		case schemas.ListAccessPreviewFindingsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccessPreviewFindingsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAccessPreviewFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAccessPreviewFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessPreviewFindings, schemas.ListAccessPreviewFindingsRequest, schemas.ListAccessPreviewFindingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAccessPreviewFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessPreviewFindings, schemas.ListAccessPreviewFindingsRequest, schemas.ListAccessPreviewFindingsResponse), output: &ListAccessPreviewFindingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

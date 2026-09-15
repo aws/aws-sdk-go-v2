@@ -5,7 +5,9 @@ package ecs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -97,6 +99,45 @@ type ListTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTasksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteString(schemas.ListTasksRequest_cluster, *v.Cluster)
+	}
+	if v.ContainerInstance != nil {
+		s.WriteString(schemas.ListTasksRequest_containerInstance, *v.ContainerInstance)
+	}
+	if v.DaemonName != nil {
+		s.WriteString(schemas.ListTasksRequest_daemonName, *v.DaemonName)
+	}
+	if v.DesiredStatus != "" {
+		s.WriteString(schemas.ListTasksRequest_desiredStatus, string(v.DesiredStatus))
+	}
+	if v.Family != nil {
+		s.WriteString(schemas.ListTasksRequest_family, *v.Family)
+	}
+	if v.LaunchType != "" {
+		s.WriteString(schemas.ListTasksRequest_launchType, string(v.LaunchType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTasksRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTasksRequest_nextToken, *v.NextToken)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.ListTasksRequest_serviceName, *v.ServiceName)
+	}
+	if v.StartedBy != nil {
+		s.WriteString(schemas.ListTasksRequest_startedBy, *v.StartedBy)
+	}
+}
+
 type ListTasksOutput struct {
 
 	// The nextToken value to include in a future ListTasks request. When the results
@@ -114,13 +155,35 @@ type ListTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTasksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTasksResponse_nextToken, *v.NextToken)
+	}
+	serializeStringList(s, schemas.ListTasksResponse_taskArns, v.TaskArns)
+}
+func (v *ListTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTasksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTasksResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTasksResponse_nextToken, v.NextToken)
+		case schemas.ListTasksResponse_taskArns:
+			return deserializeStringList(d, schemas.ListTasksResponse_taskArns, &v.TaskArns)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTasks, schemas.ListTasksRequest, schemas.ListTasksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTasks, schemas.ListTasksRequest, schemas.ListTasksResponse), output: &ListTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

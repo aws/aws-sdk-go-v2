@@ -4,6 +4,8 @@ package bcmdataexports
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bcmdataexports/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportArn != nil {
+		s.WriteString(schemas.DeleteExportRequest_ExportArn, *v.ExportArn)
+	}
+}
+
 type DeleteExportOutput struct {
 
 	// The Amazon Resource Name (ARN) for this export.
@@ -44,13 +58,32 @@ type DeleteExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteExportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportArn != nil {
+		s.WriteString(schemas.DeleteExportResponse_ExportArn, *v.ExportArn)
+	}
+}
+func (v *DeleteExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteExportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteExportResponse_ExportArn:
+			v.ExportArn = new(string)
+			return d.ReadString(schemas.DeleteExportResponse_ExportArn, v.ExportArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteExport, schemas.DeleteExportRequest, schemas.DeleteExportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteExport, schemas.DeleteExportRequest, schemas.DeleteExportResponse), output: &DeleteExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

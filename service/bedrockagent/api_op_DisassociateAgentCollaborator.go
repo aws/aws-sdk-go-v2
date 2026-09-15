@@ -4,6 +4,8 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type DisassociateAgentCollaboratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateAgentCollaboratorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateAgentCollaboratorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateAgentCollaboratorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.DisassociateAgentCollaboratorRequest_agentId, *v.AgentId)
+	}
+	if v.AgentVersion != nil {
+		s.WriteString(schemas.DisassociateAgentCollaboratorRequest_agentVersion, *v.AgentVersion)
+	}
+	if v.CollaboratorId != nil {
+		s.WriteString(schemas.DisassociateAgentCollaboratorRequest_collaboratorId, *v.CollaboratorId)
+	}
+}
+
 type DisassociateAgentCollaboratorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +70,26 @@ type DisassociateAgentCollaboratorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateAgentCollaboratorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateAgentCollaboratorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateAgentCollaboratorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateAgentCollaboratorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateAgentCollaboratorResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateAgentCollaboratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateAgentCollaborator{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAgentCollaborator, schemas.DisassociateAgentCollaboratorRequest, schemas.DisassociateAgentCollaboratorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateAgentCollaborator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAgentCollaborator, schemas.DisassociateAgentCollaboratorRequest, schemas.DisassociateAgentCollaboratorResponse), output: &DisassociateAgentCollaboratorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

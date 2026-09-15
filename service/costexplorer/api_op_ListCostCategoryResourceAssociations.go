@@ -5,7 +5,9 @@ package costexplorer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListCostCategoryResourceAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCostCategoryResourceAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCostCategoryResourceAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCostCategoryResourceAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CostCategoryArn != nil {
+		s.WriteString(schemas.ListCostCategoryResourceAssociationsRequest_CostCategoryArn, *v.CostCategoryArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCostCategoryResourceAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCostCategoryResourceAssociationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListCostCategoryResourceAssociationsOutput struct {
 
 	//  A reference to a cost category association that contains information on an
@@ -61,13 +81,35 @@ type ListCostCategoryResourceAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCostCategoryResourceAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCostCategoryResourceAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCostCategoryResourceAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCostCategoryResourceAssociations(s, schemas.ListCostCategoryResourceAssociationsResponse_CostCategoryResourceAssociations, v.CostCategoryResourceAssociations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCostCategoryResourceAssociationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCostCategoryResourceAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCostCategoryResourceAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCostCategoryResourceAssociationsResponse_CostCategoryResourceAssociations:
+			return deserializeCostCategoryResourceAssociations(d, schemas.ListCostCategoryResourceAssociationsResponse_CostCategoryResourceAssociations, &v.CostCategoryResourceAssociations)
+		case schemas.ListCostCategoryResourceAssociationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCostCategoryResourceAssociationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCostCategoryResourceAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCostCategoryResourceAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCostCategoryResourceAssociations, schemas.ListCostCategoryResourceAssociationsRequest, schemas.ListCostCategoryResourceAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCostCategoryResourceAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCostCategoryResourceAssociations, schemas.ListCostCategoryResourceAssociationsRequest, schemas.ListCostCategoryResourceAssociationsResponse), output: &ListCostCategoryResourceAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

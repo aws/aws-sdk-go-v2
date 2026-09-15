@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","testRunSources":[{"successCriteriaAlarm":{"accountId":"__AccountId__","alarmArn":"__AlarmArn__","alarmName":"__AlarmName__","outcome":"PASSED","outcomeReason":"__OutcomeReason__","region":"__Region__"}},{"successCriteriaAlarm":{"accountId":"__AccountId__","alarmArn":"__AlarmArn__","alarmName":"__AlarmName__","outcome":"PASSED","outcomeReason":"__OutcomeReason__","region":"__Region__"}}]}

@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,39 @@ type UpdateLifecyclePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLifecyclePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLifecyclePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLifecyclePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateLifecyclePolicyRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateLifecyclePolicyRequest_description, *v.Description)
+	}
+	if v.ExecutionRole != nil {
+		s.WriteString(schemas.UpdateLifecyclePolicyRequest_executionRole, *v.ExecutionRole)
+	}
+	if v.LifecyclePolicyArn != nil {
+		s.WriteString(schemas.UpdateLifecyclePolicyRequest_lifecyclePolicyArn, *v.LifecyclePolicyArn)
+	}
+	serializeLifecyclePolicyDetails(s, schemas.UpdateLifecyclePolicyRequest_policyDetails, v.PolicyDetails)
+	if v.ResourceSelection != nil {
+		s.WriteStruct(schemas.UpdateLifecyclePolicyRequest_resourceSelection)
+		v.ResourceSelection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.UpdateLifecyclePolicyRequest_resourceType, string(v.ResourceType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateLifecyclePolicyRequest_status, string(v.Status))
+	}
+}
+
 type UpdateLifecyclePolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the image lifecycle policy resource that was
@@ -84,13 +119,32 @@ type UpdateLifecyclePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLifecyclePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLifecyclePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLifecyclePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LifecyclePolicyArn != nil {
+		s.WriteString(schemas.UpdateLifecyclePolicyResponse_lifecyclePolicyArn, *v.LifecyclePolicyArn)
+	}
+}
+func (v *UpdateLifecyclePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLifecyclePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateLifecyclePolicyResponse_lifecyclePolicyArn:
+			v.LifecyclePolicyArn = new(string)
+			return d.ReadString(schemas.UpdateLifecyclePolicyResponse_lifecyclePolicyArn, v.LifecyclePolicyArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLifecyclePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLifecyclePolicy, schemas.UpdateLifecyclePolicyRequest, schemas.UpdateLifecyclePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateLifecyclePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLifecyclePolicy, schemas.UpdateLifecyclePolicyRequest, schemas.UpdateLifecyclePolicyResponse), output: &UpdateLifecyclePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

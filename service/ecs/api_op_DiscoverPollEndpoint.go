@@ -4,6 +4,8 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DiscoverPollEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DiscoverPollEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DiscoverPollEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DiscoverPollEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteString(schemas.DiscoverPollEndpointRequest_cluster, *v.Cluster)
+	}
+	if v.ContainerInstance != nil {
+		s.WriteString(schemas.DiscoverPollEndpointRequest_containerInstance, *v.ContainerInstance)
+	}
+}
+
 type DiscoverPollEndpointOutput struct {
 
 	// The endpoint for the Amazon ECS agent to poll.
@@ -62,13 +79,44 @@ type DiscoverPollEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DiscoverPollEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DiscoverPollEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DiscoverPollEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Endpoint != nil {
+		s.WriteString(schemas.DiscoverPollEndpointResponse_endpoint, *v.Endpoint)
+	}
+	if v.ServiceConnectEndpoint != nil {
+		s.WriteString(schemas.DiscoverPollEndpointResponse_serviceConnectEndpoint, *v.ServiceConnectEndpoint)
+	}
+	if v.TelemetryEndpoint != nil {
+		s.WriteString(schemas.DiscoverPollEndpointResponse_telemetryEndpoint, *v.TelemetryEndpoint)
+	}
+}
+func (v *DiscoverPollEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DiscoverPollEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DiscoverPollEndpointResponse_endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.DiscoverPollEndpointResponse_endpoint, v.Endpoint)
+		case schemas.DiscoverPollEndpointResponse_serviceConnectEndpoint:
+			v.ServiceConnectEndpoint = new(string)
+			return d.ReadString(schemas.DiscoverPollEndpointResponse_serviceConnectEndpoint, v.ServiceConnectEndpoint)
+		case schemas.DiscoverPollEndpointResponse_telemetryEndpoint:
+			v.TelemetryEndpoint = new(string)
+			return d.ReadString(schemas.DiscoverPollEndpointResponse_telemetryEndpoint, v.TelemetryEndpoint)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDiscoverPollEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDiscoverPollEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DiscoverPollEndpoint, schemas.DiscoverPollEndpointRequest, schemas.DiscoverPollEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDiscoverPollEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DiscoverPollEndpoint, schemas.DiscoverPollEndpointRequest, schemas.DiscoverPollEndpointResponse), output: &DiscoverPollEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

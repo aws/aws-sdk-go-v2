@@ -4,7 +4,9 @@ package fis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetActionRequest_id, *v.Id)
+	}
+}
+
 type GetActionOutput struct {
 
 	// Information about the action.
@@ -45,13 +59,34 @@ type GetActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetActionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteStruct(schemas.GetActionResponse_action)
+		v.Action.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetActionResponse_action:
+			v.Action = &types.Action{}
+			return v.Action.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAction, schemas.GetActionRequest, schemas.GetActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAction, schemas.GetActionRequest, schemas.GetActionResponse), output: &GetActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
