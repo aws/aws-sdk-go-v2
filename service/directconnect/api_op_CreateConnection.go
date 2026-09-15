@@ -55,6 +55,9 @@ type CreateConnectionInput struct {
 	// This member is required.
 	Location *string
 
+	// The billing mode for the connection.
+	BillingMode types.RequestBillingMode
+
 	// The ID of the LAG.
 	LagId *string
 
@@ -92,6 +95,9 @@ type CreateConnectionOutput struct {
 
 	// The bandwidth of the connection.
 	Bandwidth *string
+
+	// The billing mode of the connection.
+	BillingMode types.BillingMode
 
 	// The ID of the connection.
 	ConnectionId *string

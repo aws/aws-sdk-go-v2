@@ -1901,7 +1901,7 @@ var Protocol_AS2 *smithy.Schema
 var ProtocolDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "ProtocolDetails",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var ProtocolDetails_PassiveIp *smithy.Schema
 
 var ProtocolDetails_TlsSessionResumptionMode *smithy.Schema
@@ -1910,11 +1910,27 @@ var ProtocolDetails_SetStatOption *smithy.Schema
 
 var ProtocolDetails_As2Transports *smithy.Schema
 
+var ProtocolDetails_ProxyConfig *smithy.Schema
+
 var _Protocols = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
 	Name:      "Protocols",
 }, smithy.ShapeTypeList, 1)
 var _Protocols_member *smithy.Schema
+
+var ProxyConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transfer",
+	Name:      "ProxyConfig",
+}, smithy.ShapeTypeStructure, 1)
+var ProxyConfig_SftpMode *smithy.Schema
+
+var ProxyMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transfer",
+	Name:      "ProxyMode",
+}, smithy.ShapeTypeEnum, 2)
+var ProxyMode_NONE *smithy.Schema
+
+var ProxyMode_PROXY_PROTOCOL_V2_ENFORCED *smithy.Schema
 
 var _Resource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transfer",
@@ -4368,6 +4384,12 @@ func init() {
 
 	SetStatOption_ENABLE_NO_OP = SetStatOption.AddMember("ENABLE_NO_OP", smithyprelude.Unit)
 
+	ProxyMode_NONE = ProxyMode.AddMember("NONE", smithyprelude.Unit)
+
+	ProxyMode_PROXY_PROTOCOL_V2_ENFORCED = ProxyMode.AddMember("PROXY_PROTOCOL_V2_ENFORCED", smithyprelude.Unit)
+
+	ProxyConfig_SftpMode = ProxyConfig.AddMember("SftpMode", ProxyMode)
+
 	ProtocolDetails_PassiveIp = ProtocolDetails.AddMember("PassiveIp", _PassiveIp)
 
 	ProtocolDetails_TlsSessionResumptionMode = ProtocolDetails.AddMember("TlsSessionResumptionMode", TlsSessionResumptionMode)
@@ -4375,6 +4397,8 @@ func init() {
 	ProtocolDetails_SetStatOption = ProtocolDetails.AddMember("SetStatOption", SetStatOption)
 
 	ProtocolDetails_As2Transports = ProtocolDetails.AddMember("As2Transports", _As2Transports)
+
+	ProtocolDetails_ProxyConfig = ProtocolDetails.AddMember("ProxyConfig", ProxyConfig)
 
 	Domain_S3 = Domain.AddMember("S3", smithyprelude.Unit)
 

@@ -570,6 +570,7 @@ func TestCheckRequestSnapshot_CreateAgentRuntime(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
+		PlatformVersion: ptr.String("__PlatformVersion__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6251,7 +6252,8 @@ func TestCheckRequestSnapshot_UpdateAgentRuntime(t *testing.T) {
 		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
 		},
-		ClientToken: ptr.String("__ClientToken__"),
+		PlatformVersion: ptr.String("__PlatformVersion__"),
+		ClientToken:     ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8877,6 +8879,7 @@ func TestUpdateRequestSnapshot_CreateAgentRuntime(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
+		PlatformVersion: ptr.String("__PlatformVersion__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -14558,7 +14561,8 @@ func TestUpdateRequestSnapshot_UpdateAgentRuntime(t *testing.T) {
 		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
 		},
-		ClientToken: ptr.String("__ClientToken__"),
+		PlatformVersion: ptr.String("__PlatformVersion__"),
+		ClientToken:     ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

@@ -1084,6 +1084,9 @@ func TestUpdateResponseSnapshot_DescribeServer(t *testing.T) {
 					types.As2Transport("HTTP"),
 					types.As2Transport("HTTP"),
 				},
+				ProxyConfig: &types.ProxyConfig{
+					SftpMode: types.ProxyMode("NONE"),
+				},
 			},
 			Domain: types.Domain("S3"),
 			EndpointDetails: &types.EndpointDetails{

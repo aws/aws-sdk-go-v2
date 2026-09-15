@@ -659,6 +659,7 @@ func TestCheckResponseSnapshot_CreateAgentRuntime(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
+		PlatformVersion: ptr.String("__PlatformVersion__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -5303,6 +5304,7 @@ func TestCheckResponseSnapshot_GetAgentRuntime(t *testing.T) {
 		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
 		},
+		PlatformVersion: ptr.String("__PlatformVersion__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetAgentRuntime.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10790,7 +10792,8 @@ func TestCheckResponseSnapshot_UpdateAgentRuntime(t *testing.T) {
 		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
 		},
-		ClientToken: ptr.String("__ClientToken__"),
+		PlatformVersion: ptr.String("__PlatformVersion__"),
+		ClientToken:     ptr.String("__ClientToken__"),
 	})
 	if err != nil {
 		t.Fatal(err)

@@ -68,6 +68,9 @@ type DisassociateConnectionFromLagOutput struct {
 	// The bandwidth of the connection.
 	Bandwidth *string
 
+	// The billing mode of the connection.
+	BillingMode types.BillingMode
+
 	// The ID of the connection.
 	ConnectionId *string
 

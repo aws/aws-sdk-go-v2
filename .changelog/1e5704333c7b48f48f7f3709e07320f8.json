@@ -1,0 +1,8 @@
+{
+    "id": "1e570433-3c7b-48f4-8f7f-3709e07320f8",
+    "type": "feature",
+    "description": "AWS Transfer Family now preserves the original source IP address using Proxy Protocol v2 when you place a Network Load Balancer in front of your server for SFTP connections.",
+    "modules": [
+        "service/transfer"
+    ]
+}
