@@ -189,6 +189,12 @@ func (m *deserializeOpEventStreamGetLogObject) HandleDeserialize(
 		out.Result = output
 	}
 
+	if m.options.Protocol.HasInitialEventMessage() {
+		if err = m.options.Protocol.DeserializeInitialResponse(schemas.GetLogObjectResponse, resp.Body, output); err != nil {
+			_ = resp.Body.Close()
+			return out, md, fmt.Errorf("deserialize initial response: %w", err)
+		}
+	}
 	eventReader := newGetLogObjectResponseStreamReader(
 		smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.GetLogObjectResponseStream, TypeRegistry, resp.Body),
 	)
@@ -197,11 +203,6 @@ func (m *deserializeOpEventStreamGetLogObject) HandleDeserialize(
 			_ = eventReader.Close()
 		}
 	}()
-	if m.options.Protocol.HasInitialEventMessage() {
-		if err = m.options.Protocol.DeserializeInitialResponse(schemas.GetLogObjectResponse, resp.Body, output); err != nil {
-			return out, md, fmt.Errorf("deserialize initial response: %w", err)
-		}
-	}
 
 	output.eventStream = NewGetLogObjectEventStream(func(stream *GetLogObjectEventStream) {
 
@@ -244,6 +245,12 @@ func (m *deserializeOpEventStreamStartLiveTail) HandleDeserialize(
 		out.Result = output
 	}
 
+	if m.options.Protocol.HasInitialEventMessage() {
+		if err = m.options.Protocol.DeserializeInitialResponse(schemas.StartLiveTailResponse, resp.Body, output); err != nil {
+			_ = resp.Body.Close()
+			return out, md, fmt.Errorf("deserialize initial response: %w", err)
+		}
+	}
 	eventReader := newStartLiveTailResponseStreamReader(
 		smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.StartLiveTailResponseStream, TypeRegistry, resp.Body),
 	)
@@ -252,11 +259,6 @@ func (m *deserializeOpEventStreamStartLiveTail) HandleDeserialize(
 			_ = eventReader.Close()
 		}
 	}()
-	if m.options.Protocol.HasInitialEventMessage() {
-		if err = m.options.Protocol.DeserializeInitialResponse(schemas.StartLiveTailResponse, resp.Body, output); err != nil {
-			return out, md, fmt.Errorf("deserialize initial response: %w", err)
-		}
-	}
 
 	output.eventStream = NewStartLiveTailEventStream(func(stream *StartLiveTailEventStream) {
 

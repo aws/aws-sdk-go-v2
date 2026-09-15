@@ -579,6 +579,12 @@ func (m *deserializeOpEventStreamInvokeAgent) HandleDeserialize(
 		out.Result = output
 	}
 
+	if m.options.Protocol.HasInitialEventMessage() {
+		if err = m.options.Protocol.DeserializeInitialResponse(schemas.InvokeAgentResponse, resp.Body, output); err != nil {
+			_ = resp.Body.Close()
+			return out, md, fmt.Errorf("deserialize initial response: %w", err)
+		}
+	}
 	eventReader := newResponseStreamReader(
 		smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.ResponseStream, TypeRegistry, resp.Body),
 	)
@@ -587,11 +593,6 @@ func (m *deserializeOpEventStreamInvokeAgent) HandleDeserialize(
 			_ = eventReader.Close()
 		}
 	}()
-	if m.options.Protocol.HasInitialEventMessage() {
-		if err = m.options.Protocol.DeserializeInitialResponse(schemas.InvokeAgentResponse, resp.Body, output); err != nil {
-			return out, md, fmt.Errorf("deserialize initial response: %w", err)
-		}
-	}
 
 	output.eventStream = NewInvokeAgentEventStream(func(stream *InvokeAgentEventStream) {
 
@@ -634,6 +635,12 @@ func (m *deserializeOpEventStreamInvokeFlow) HandleDeserialize(
 		out.Result = output
 	}
 
+	if m.options.Protocol.HasInitialEventMessage() {
+		if err = m.options.Protocol.DeserializeInitialResponse(schemas.InvokeFlowResponse, resp.Body, output); err != nil {
+			_ = resp.Body.Close()
+			return out, md, fmt.Errorf("deserialize initial response: %w", err)
+		}
+	}
 	eventReader := newFlowResponseStreamReader(
 		smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.FlowResponseStream, TypeRegistry, resp.Body),
 	)
@@ -642,11 +649,6 @@ func (m *deserializeOpEventStreamInvokeFlow) HandleDeserialize(
 			_ = eventReader.Close()
 		}
 	}()
-	if m.options.Protocol.HasInitialEventMessage() {
-		if err = m.options.Protocol.DeserializeInitialResponse(schemas.InvokeFlowResponse, resp.Body, output); err != nil {
-			return out, md, fmt.Errorf("deserialize initial response: %w", err)
-		}
-	}
 
 	output.eventStream = NewInvokeFlowEventStream(func(stream *InvokeFlowEventStream) {
 
@@ -689,6 +691,12 @@ func (m *deserializeOpEventStreamInvokeInlineAgent) HandleDeserialize(
 		out.Result = output
 	}
 
+	if m.options.Protocol.HasInitialEventMessage() {
+		if err = m.options.Protocol.DeserializeInitialResponse(schemas.InvokeInlineAgentResponse, resp.Body, output); err != nil {
+			_ = resp.Body.Close()
+			return out, md, fmt.Errorf("deserialize initial response: %w", err)
+		}
+	}
 	eventReader := newInlineAgentResponseStreamReader(
 		smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.InlineAgentResponseStream, TypeRegistry, resp.Body),
 	)
@@ -697,11 +705,6 @@ func (m *deserializeOpEventStreamInvokeInlineAgent) HandleDeserialize(
 			_ = eventReader.Close()
 		}
 	}()
-	if m.options.Protocol.HasInitialEventMessage() {
-		if err = m.options.Protocol.DeserializeInitialResponse(schemas.InvokeInlineAgentResponse, resp.Body, output); err != nil {
-			return out, md, fmt.Errorf("deserialize initial response: %w", err)
-		}
-	}
 
 	output.eventStream = NewInvokeInlineAgentEventStream(func(stream *InvokeInlineAgentEventStream) {
 
@@ -744,6 +747,12 @@ func (m *deserializeOpEventStreamOptimizePrompt) HandleDeserialize(
 		out.Result = output
 	}
 
+	if m.options.Protocol.HasInitialEventMessage() {
+		if err = m.options.Protocol.DeserializeInitialResponse(schemas.OptimizePromptResponse, resp.Body, output); err != nil {
+			_ = resp.Body.Close()
+			return out, md, fmt.Errorf("deserialize initial response: %w", err)
+		}
+	}
 	eventReader := newOptimizedPromptStreamReader(
 		smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.OptimizedPromptStream, TypeRegistry, resp.Body),
 	)
@@ -752,11 +761,6 @@ func (m *deserializeOpEventStreamOptimizePrompt) HandleDeserialize(
 			_ = eventReader.Close()
 		}
 	}()
-	if m.options.Protocol.HasInitialEventMessage() {
-		if err = m.options.Protocol.DeserializeInitialResponse(schemas.OptimizePromptResponse, resp.Body, output); err != nil {
-			return out, md, fmt.Errorf("deserialize initial response: %w", err)
-		}
-	}
 
 	output.eventStream = NewOptimizePromptEventStream(func(stream *OptimizePromptEventStream) {
 
@@ -799,6 +803,12 @@ func (m *deserializeOpEventStreamRetrieveAndGenerateStream) HandleDeserialize(
 		out.Result = output
 	}
 
+	if m.options.Protocol.HasInitialEventMessage() {
+		if err = m.options.Protocol.DeserializeInitialResponse(schemas.RetrieveAndGenerateStreamResponse, resp.Body, output); err != nil {
+			_ = resp.Body.Close()
+			return out, md, fmt.Errorf("deserialize initial response: %w", err)
+		}
+	}
 	eventReader := newRetrieveAndGenerateStreamResponseOutputReader(
 		smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.RetrieveAndGenerateStreamResponseOutput, TypeRegistry, resp.Body),
 	)
@@ -807,11 +817,6 @@ func (m *deserializeOpEventStreamRetrieveAndGenerateStream) HandleDeserialize(
 			_ = eventReader.Close()
 		}
 	}()
-	if m.options.Protocol.HasInitialEventMessage() {
-		if err = m.options.Protocol.DeserializeInitialResponse(schemas.RetrieveAndGenerateStreamResponse, resp.Body, output); err != nil {
-			return out, md, fmt.Errorf("deserialize initial response: %w", err)
-		}
-	}
 
 	output.eventStream = NewRetrieveAndGenerateStreamEventStream(func(stream *RetrieveAndGenerateStreamEventStream) {
 

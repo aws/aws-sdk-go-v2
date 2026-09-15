@@ -312,6 +312,12 @@ func (m *deserializeOpEventStreamConverseStream) HandleDeserialize(
 		out.Result = output
 	}
 
+	if m.options.Protocol.HasInitialEventMessage() {
+		if err = m.options.Protocol.DeserializeInitialResponse(schemas.ConverseStreamResponse, resp.Body, output); err != nil {
+			_ = resp.Body.Close()
+			return out, md, fmt.Errorf("deserialize initial response: %w", err)
+		}
+	}
 	eventReader := newConverseStreamOutputReader(
 		smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.ConverseStreamOutput, TypeRegistry, resp.Body),
 	)
@@ -320,11 +326,6 @@ func (m *deserializeOpEventStreamConverseStream) HandleDeserialize(
 			_ = eventReader.Close()
 		}
 	}()
-	if m.options.Protocol.HasInitialEventMessage() {
-		if err = m.options.Protocol.DeserializeInitialResponse(schemas.ConverseStreamResponse, resp.Body, output); err != nil {
-			return out, md, fmt.Errorf("deserialize initial response: %w", err)
-		}
-	}
 
 	output.eventStream = NewConverseStreamEventStream(func(stream *ConverseStreamEventStream) {
 
@@ -465,6 +466,12 @@ func (m *deserializeOpEventStreamInvokeModelWithResponseStream) HandleDeserializ
 		out.Result = output
 	}
 
+	if m.options.Protocol.HasInitialEventMessage() {
+		if err = m.options.Protocol.DeserializeInitialResponse(schemas.InvokeModelWithResponseStreamResponse, resp.Body, output); err != nil {
+			_ = resp.Body.Close()
+			return out, md, fmt.Errorf("deserialize initial response: %w", err)
+		}
+	}
 	eventReader := newResponseStreamReader(
 		smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.ResponseStream, TypeRegistry, resp.Body),
 	)
@@ -473,11 +480,6 @@ func (m *deserializeOpEventStreamInvokeModelWithResponseStream) HandleDeserializ
 			_ = eventReader.Close()
 		}
 	}()
-	if m.options.Protocol.HasInitialEventMessage() {
-		if err = m.options.Protocol.DeserializeInitialResponse(schemas.InvokeModelWithResponseStreamResponse, resp.Body, output); err != nil {
-			return out, md, fmt.Errorf("deserialize initial response: %w", err)
-		}
-	}
 
 	output.eventStream = NewInvokeModelWithResponseStreamEventStream(func(stream *InvokeModelWithResponseStreamEventStream) {
 

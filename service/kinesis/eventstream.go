@@ -115,6 +115,12 @@ func (m *deserializeOpEventStreamSubscribeToShard) HandleDeserialize(
 		out.Result = output
 	}
 
+	if m.options.Protocol.HasInitialEventMessage() {
+		if err = m.options.Protocol.DeserializeInitialResponse(schemas.SubscribeToShardOutput, resp.Body, output); err != nil {
+			_ = resp.Body.Close()
+			return out, md, fmt.Errorf("deserialize initial response: %w", err)
+		}
+	}
 	eventReader := newSubscribeToShardEventStreamReader(
 		smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.SubscribeToShardEventStream, TypeRegistry, resp.Body),
 	)
@@ -123,11 +129,6 @@ func (m *deserializeOpEventStreamSubscribeToShard) HandleDeserialize(
 			_ = eventReader.Close()
 		}
 	}()
-	if m.options.Protocol.HasInitialEventMessage() {
-		if err = m.options.Protocol.DeserializeInitialResponse(schemas.SubscribeToShardOutput, resp.Body, output); err != nil {
-			return out, md, fmt.Errorf("deserialize initial response: %w", err)
-		}
-	}
 
 	output.eventStream = NewSubscribeToShardEventStream(func(stream *SubscribeToShardEventStream) {
 
