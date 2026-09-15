@@ -130,6 +130,9 @@ func (v *CreateImagePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DistributionConfigurationArn != nil {
 		s.WriteString(schemas.CreateImagePipelineRequest_distributionConfigurationArn, *v.DistributionConfigurationArn)
 	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateImagePipelineRequest_dryRun, v.DryRun)
+	}
 	if v.EnhancedImageMetadataEnabled != nil {
 		s.WriteBool(schemas.CreateImagePipelineRequest_enhancedImageMetadataEnabled, *v.EnhancedImageMetadataEnabled)
 	}

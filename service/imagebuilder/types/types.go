@@ -555,6 +555,77 @@ func (v *ComponentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains details about the component that caused the image creation process to
+// fail. The details identify the first step that failed when the component ran.
+type ComponentFailureContext struct {
+
+	// The action that the failed step runs, for example ExecuteBash .
+	Action *string
+
+	// The Amazon Resource Name (ARN) of the component build version that failed.
+	ComponentArn *string
+
+	// The error message from the step that failed. Image Builder truncates messages
+	// that are longer than 1024 characters. The component log in Amazon CloudWatch
+	// Logs contains the full output.
+	ErrorMessage *string
+
+	// The name of the phase in the component document where the failure occurred,
+	// such as build , validate , or test .
+	PhaseName *string
+
+	// The name of the step in the component document that failed.
+	StepName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ComponentFailureContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComponentFailureContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComponentFailureContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteString(schemas.ComponentFailureContext_action, *v.Action)
+	}
+	if v.ComponentArn != nil {
+		s.WriteString(schemas.ComponentFailureContext_componentArn, *v.ComponentArn)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.ComponentFailureContext_errorMessage, *v.ErrorMessage)
+	}
+	if v.PhaseName != nil {
+		s.WriteString(schemas.ComponentFailureContext_phaseName, *v.PhaseName)
+	}
+	if v.StepName != nil {
+		s.WriteString(schemas.ComponentFailureContext_stepName, *v.StepName)
+	}
+}
+func (v *ComponentFailureContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComponentFailureContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComponentFailureContext_action:
+			v.Action = new(string)
+			return d.ReadString(schemas.ComponentFailureContext_action, v.Action)
+		case schemas.ComponentFailureContext_componentArn:
+			v.ComponentArn = new(string)
+			return d.ReadString(schemas.ComponentFailureContext_componentArn, v.ComponentArn)
+		case schemas.ComponentFailureContext_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.ComponentFailureContext_errorMessage, v.ErrorMessage)
+		case schemas.ComponentFailureContext_phaseName:
+			v.PhaseName = new(string)
+			return d.ReadString(schemas.ComponentFailureContext_phaseName, v.PhaseName)
+		case schemas.ComponentFailureContext_stepName:
+			v.StepName = new(string)
+			return d.ReadString(schemas.ComponentFailureContext_stepName, v.StepName)
+		}
+		return nil
+	})
+}
+
 // Contains a key/value pair that sets the named component parameter.
 type ComponentParameter struct {
 
@@ -898,8 +969,8 @@ type ComponentVersion struct {
 	// Describes the current status of the component version.
 	Status ComponentStatus
 
-	// he operating system (OS) version supported by the component. If the OS
-	// information is available, a prefix match is performed against the base image OS
+	// The operating system (OS) version supported by the component. If OS information
+	// is available, Image Builder performs a prefix match against the base image OS
 	// version during image recipe creation.
 	SupportedOsVersions []string
 
@@ -912,18 +983,18 @@ type ComponentVersion struct {
 	// The semantic version has four nodes: ../. You can assign values for the first
 	// three, and can filter on all of them.
 	//
-	// Assignment: For the first three nodes you can assign any positive integer
-	// value, including zero, with an upper limit of 2^30-1, or 1073741823 for each
-	// node. Image Builder automatically assigns the build number to the fourth node.
+	// Assignment: For the first three nodes, you can assign any positive integer
+	// value, including zero. The upper limit is 2^30-1, or 1073741823, for each node.
+	// Image Builder automatically assigns the build number to the fourth node.
 	//
 	// Patterns: You can use any numeric pattern that adheres to the assignment
 	// requirements for the nodes that you can assign. For example, you might choose a
 	// software version pattern, such as 1.0.0, or a date, such as 2021.01.01.
 	//
-	// Filtering: With semantic versioning, you have the flexibility to use wildcards
-	// (x) to specify the most recent versions or nodes when selecting the base image
-	// or components for your recipe. When you use a wildcard in any node, all nodes to
-	// the right of the first wildcard must also be wildcards.
+	// Filtering: You can use wildcards (x) to specify the most recent versions or
+	// nodes when selecting the base image or components for your recipe. When you use
+	// a wildcard in any node, all nodes to the right of the first wildcard must also
+	// be wildcards.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -1184,18 +1255,18 @@ type ContainerRecipe struct {
 	// The semantic version has four nodes: ../. You can assign values for the first
 	// three, and can filter on all of them.
 	//
-	// Assignment: For the first three nodes you can assign any positive integer
-	// value, including zero, with an upper limit of 2^30-1, or 1073741823 for each
-	// node. Image Builder automatically assigns the build number to the fourth node.
+	// Assignment: For the first three nodes, you can assign any positive integer
+	// value, including zero. The upper limit is 2^30-1, or 1073741823, for each node.
+	// Image Builder automatically assigns the build number to the fourth node.
 	//
 	// Patterns: You can use any numeric pattern that adheres to the assignment
 	// requirements for the nodes that you can assign. For example, you might choose a
 	// software version pattern, such as 1.0.0, or a date, such as 2021.01.01.
 	//
-	// Filtering: With semantic versioning, you have the flexibility to use wildcards
-	// (x) to specify the most recent versions or nodes when selecting the base image
-	// or components for your recipe. When you use a wildcard in any node, all nodes to
-	// the right of the first wildcard must also be wildcards.
+	// Filtering: You can use wildcards (x) to specify the most recent versions or
+	// nodes when selecting the base image or components for your recipe. When you use
+	// a wildcard in any node, all nodes to the right of the first wildcard must also
+	// be wildcards.
 	Version *string
 
 	// The working directory for use during build and test workflows.
@@ -1887,16 +1958,55 @@ func (v *DistributionConfigurationSummary) Deserialize(d smithy.ShapeDeserialize
 	})
 }
 
+// Contains details about a failure that occurred while Image Builder distributed
+// the image or applied configuration to the distributed image.
+type DistributionFailureContext struct {
+
+	// The error message for the distribution failure.
+	ErrorMessage *string
+
+	// The details about the failure for each Region where the image didn't finish
+	// distribution or configuration.
+	RegionFailures []RegionFailure
+
+	noSmithyDocumentSerde
+}
+
+func (v *DistributionFailureContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DistributionFailureContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DistributionFailureContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.DistributionFailureContext_errorMessage, *v.ErrorMessage)
+	}
+	serializeRegionFailureList(s, schemas.DistributionFailureContext_regionFailures, v.RegionFailures)
+}
+func (v *DistributionFailureContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DistributionFailureContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DistributionFailureContext_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.DistributionFailureContext_errorMessage, v.ErrorMessage)
+		case schemas.DistributionFailureContext_regionFailures:
+			return deserializeRegionFailureList(d, schemas.DistributionFailureContext_regionFailures, &v.RegionFailures)
+		}
+		return nil
+	})
+}
+
 // Amazon EBS-specific block device mapping specifications.
 type EbsInstanceBlockDeviceSpecification struct {
 
-	// Use to configure delete on termination of the associated device.
+	// Specifies whether to delete the associated device on termination.
 	DeleteOnTermination *bool
 
-	// Use to configure device encryption.
+	// Specifies whether to encrypt the device.
 	Encrypted *bool
 
-	// Use to configure device IOPS.
+	// The IOPS value for the device. Required only when volumeType is io1 or io2.
 	Iops *int32
 
 	// The Amazon Resource Name (ARN) that uniquely identifies the KMS key to use when
@@ -1912,10 +2022,10 @@ type EbsInstanceBlockDeviceSpecification struct {
 	//  For GP3 volumes only – The throughput in MiB/s that the volume supports.
 	Throughput *int32
 
-	// Use to override the device's volume size.
+	// Overrides the volume size for the device.
 	VolumeSize *int32
 
-	// Use to override the device's volume type.
+	// Overrides the volume type for the device.
 	VolumeType EbsVolumeType
 
 	noSmithyDocumentSerde
@@ -2353,18 +2463,18 @@ type Image struct {
 	// The semantic version has four nodes: ../. You can assign values for the first
 	// three, and can filter on all of them.
 	//
-	// Assignment: For the first three nodes you can assign any positive integer
-	// value, including zero, with an upper limit of 2^30-1, or 1073741823 for each
-	// node. Image Builder automatically assigns the build number to the fourth node.
+	// Assignment: For the first three nodes, you can assign any positive integer
+	// value, including zero. The upper limit is 2^30-1, or 1073741823, for each node.
+	// Image Builder automatically assigns the build number to the fourth node.
 	//
 	// Patterns: You can use any numeric pattern that adheres to the assignment
 	// requirements for the nodes that you can assign. For example, you might choose a
 	// software version pattern, such as 1.0.0, or a date, such as 2021.01.01.
 	//
-	// Filtering: With semantic versioning, you have the flexibility to use wildcards
-	// (x) to specify the most recent versions or nodes when selecting the base image
-	// or components for your recipe. When you use a wildcard in any node, all nodes to
-	// the right of the first wildcard must also be wildcards.
+	// Filtering: You can use wildcards (x) to specify the most recent versions or
+	// nodes when selecting the base image or components for your recipe. When you use
+	// a wildcard in any node, all nodes to the right of the first wildcard must also
+	// be wildcards.
 	Version *string
 
 	// Contains the build and test workflows that are associated with the image.
@@ -2624,6 +2734,108 @@ func (v *ImageAggregation) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains details about the failure when the image creation process fails.
+// Properties appear in the failure context when the related information is
+// available for the failure.
+type ImageFailureContext struct {
+
+	// The details about the component that failed, if the failure occurred while a
+	// component was running.
+	ComponentFailure *ComponentFailureContext
+
+	// The details about the distribution failure, if the failure occurred while Image
+	// Builder distributed or configured the image.
+	DistributionFailure *DistributionFailureContext
+
+	// The name of the workflow step that failed, as it appears in the workflow
+	// document.
+	FailedStep *string
+
+	// The status that the image had when the failure occurred. This indicates the
+	// stage of the image creation process where the image failed, for example BUILDING
+	// or DISTRIBUTING .
+	ImageStatus ImageStatus
+
+	// The unique identifier of the workflow step execution that failed.
+	StepExecutionId *string
+
+	// The Amazon Resource Name (ARN) of the workflow build version that was running
+	// when the image failed.
+	WorkflowArn *string
+
+	// The unique identifier of the workflow execution that was running when the image
+	// failed.
+	WorkflowExecutionId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ImageFailureContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImageFailureContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImageFailureContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentFailure != nil {
+		s.WriteStruct(schemas.ImageFailureContext_componentFailure)
+		v.ComponentFailure.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DistributionFailure != nil {
+		s.WriteStruct(schemas.ImageFailureContext_distributionFailure)
+		v.DistributionFailure.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailedStep != nil {
+		s.WriteString(schemas.ImageFailureContext_failedStep, *v.FailedStep)
+	}
+	if v.ImageStatus != "" {
+		s.WriteString(schemas.ImageFailureContext_imageStatus, string(v.ImageStatus))
+	}
+	if v.StepExecutionId != nil {
+		s.WriteString(schemas.ImageFailureContext_stepExecutionId, *v.StepExecutionId)
+	}
+	if v.WorkflowArn != nil {
+		s.WriteString(schemas.ImageFailureContext_workflowArn, *v.WorkflowArn)
+	}
+	if v.WorkflowExecutionId != nil {
+		s.WriteString(schemas.ImageFailureContext_workflowExecutionId, *v.WorkflowExecutionId)
+	}
+}
+func (v *ImageFailureContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImageFailureContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImageFailureContext_componentFailure:
+			v.ComponentFailure = &ComponentFailureContext{}
+			return v.ComponentFailure.Deserialize(d)
+		case schemas.ImageFailureContext_distributionFailure:
+			v.DistributionFailure = &DistributionFailureContext{}
+			return v.DistributionFailure.Deserialize(d)
+		case schemas.ImageFailureContext_failedStep:
+			v.FailedStep = new(string)
+			return d.ReadString(schemas.ImageFailureContext_failedStep, v.FailedStep)
+		case schemas.ImageFailureContext_imageStatus:
+			var ev string
+			if err := d.ReadString(schemas.ImageFailureContext_imageStatus, &ev); err != nil {
+				return err
+			}
+			v.ImageStatus = ImageStatus(ev)
+			return nil
+		case schemas.ImageFailureContext_stepExecutionId:
+			v.StepExecutionId = new(string)
+			return d.ReadString(schemas.ImageFailureContext_stepExecutionId, v.StepExecutionId)
+		case schemas.ImageFailureContext_workflowArn:
+			v.WorkflowArn = new(string)
+			return d.ReadString(schemas.ImageFailureContext_workflowArn, v.WorkflowArn)
+		case schemas.ImageFailureContext_workflowExecutionId:
+			v.WorkflowExecutionId = new(string)
+			return d.ReadString(schemas.ImageFailureContext_workflowExecutionId, v.WorkflowExecutionId)
+		}
+		return nil
+	})
+}
+
 // The logging configuration that's defined for the image. Image Builder uses the
 // defined settings to direct execution log output during image creation.
 type ImageLoggingConfiguration struct {
@@ -2750,9 +2962,9 @@ type ImagePipeline struct {
 	// with this image pipeline.
 	DistributionConfigurationArn *string
 
-	// Collects additional information about the image being created, including the
-	// operating system (OS) version and package list. This information is used to
-	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
+	// Specifies whether to collect additional information about the image being
+	// created, including the operating system (OS) version and package list. Defaults
+	// to true .
 	EnhancedImageMetadataEnabled *bool
 
 	// The name or Amazon Resource Name (ARN) for the IAM role you create that grants
@@ -3641,6 +3853,10 @@ func (v *ImageScanState) Deserialize(d smithy.ShapeDeserializer) error {
 // Image status and the reason for that status.
 type ImageState struct {
 
+	// The details about the failure, for images that failed to complete. Image
+	// Builder only sets this property when the image status is FAILED .
+	FailureContext *ImageFailureContext
+
 	// The reason for the status of the image.
 	Reason *string
 
@@ -3657,6 +3873,11 @@ func (v *ImageState) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ImageState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureContext != nil {
+		s.WriteStruct(schemas.ImageState_failureContext)
+		v.FailureContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Reason != nil {
 		s.WriteString(schemas.ImageState_reason, *v.Reason)
 	}
@@ -3667,6 +3888,9 @@ func (v *ImageState) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *ImageState) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ImageState, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ImageState_failureContext:
+			v.FailureContext = &ImageFailureContext{}
+			return v.FailureContext.Deserialize(d)
 		case schemas.ImageState_reason:
 			v.Reason = new(string)
 			return d.ReadString(schemas.ImageState_reason, v.Reason)
@@ -3886,8 +4110,8 @@ func (v *ImageSummary) Deserialize(d smithy.ShapeDeserializer) error {
 // it.
 type ImageTestsConfiguration struct {
 
-	// Determines if tests should run after building the image. Image Builder defaults
-	// to enable tests to run following the image build, before image distribution.
+	// Specifies whether tests run after building the image. When enabled, tests run
+	// after the image build and before image distribution. Defaults to true .
 	ImageTestsEnabled *bool
 
 	// The maximum time in minutes that tests are permitted to run.
@@ -3987,18 +4211,18 @@ type ImageVersion struct {
 	// The semantic version has four nodes: ../. You can assign values for the first
 	// three, and can filter on all of them.
 	//
-	// Assignment: For the first three nodes you can assign any positive integer
-	// value, including zero, with an upper limit of 2^30-1, or 1073741823 for each
-	// node. Image Builder automatically assigns the build number to the fourth node.
+	// Assignment: For the first three nodes, you can assign any positive integer
+	// value, including zero. The upper limit is 2^30-1, or 1073741823, for each node.
+	// Image Builder automatically assigns the build number to the fourth node.
 	//
 	// Patterns: You can use any numeric pattern that adheres to the assignment
 	// requirements for the nodes that you can assign. For example, you might choose a
 	// software version pattern, such as 1.0.0, or a date, such as 2021.01.01.
 	//
-	// Filtering: With semantic versioning, you have the flexibility to use wildcards
-	// (x) to specify the most recent versions or nodes when selecting the base image
-	// or components for your recipe. When you use a wildcard in any node, all nodes to
-	// the right of the first wildcard must also be wildcards.
+	// Filtering: You can use wildcards (x) to specify the most recent versions or
+	// nodes when selecting the base image or components for your recipe. When you use
+	// a wildcard in any node, all nodes to the right of the first wildcard must also
+	// be wildcards.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -4130,7 +4354,7 @@ type InfrastructureConfiguration struct {
 	Name *string
 
 	// The instance placement settings that define where the instances that are
-	// launched from your image will run.
+	// launched from your image run.
 	Placement *Placement
 
 	// The tags attached to the resource created by Image Builder.
@@ -4139,8 +4363,8 @@ type InfrastructureConfiguration struct {
 	// The security group IDs of the infrastructure configuration.
 	SecurityGroupIds []string
 
-	// The Amazon Resource Name (ARN) for the SNS topic to which we send image build
-	// event notifications.
+	// The Amazon Resource Name (ARN) of the SNS topic to which Image Builder sends
+	// image build event notifications.
 	//
 	// EC2 Image Builder is unable to send notifications to SNS topics that are
 	// encrypted using keys from other accounts. The key that is used to encrypt the
@@ -4297,7 +4521,7 @@ type InfrastructureConfigurationSummary struct {
 	Name *string
 
 	// The instance placement settings that define where the instances that are
-	// launched from your image will run.
+	// launched from your image run.
 	Placement *Placement
 
 	// The tags attached to the image created by Image Builder.
@@ -4419,13 +4643,13 @@ type InstanceBlockDeviceMapping struct {
 	// The device to which these mappings apply.
 	DeviceName *string
 
-	// Use to manage Amazon EBS-specific configuration for this mapping.
+	// The Amazon EBS-specific configuration for this mapping.
 	Ebs *EbsInstanceBlockDeviceSpecification
 
-	// Use to remove a mapping from the base image.
+	// Specifies a mapping to remove from the base image.
 	NoDevice *string
 
-	// Use to manage instance ephemeral devices.
+	// The virtual device name for instance ephemeral devices.
 	VirtualName *string
 
 	noSmithyDocumentSerde
@@ -6229,6 +6453,87 @@ func (v *ProductCodeListItem) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains details about a distribution or image configuration failure for a
+// single Region.
+type RegionFailure struct {
+
+	// The error message for the failure in the Region.
+	ErrorMessage *string
+
+	// The image configuration step where the failure occurred. Image Builder sets
+	// this property when the failure happened during post-distribution configuration,
+	// such as launch template updates or virtual machine (VM) export. This property
+	// doesn't appear for failures that occurred while Image Builder copied the image
+	// to the Region.
+	ImageConfigurationStep ImageConfigurationStep
+
+	// The Region where the failure occurred.
+	Region *string
+
+	// The failure status for the Region. Indicates whether the process failed, was
+	// canceled, or timed out.
+	Status RegionFailureStatus
+
+	// The account ID of the account that the image was distributed to in the Region.
+	TargetAccountId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RegionFailure) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegionFailure)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegionFailure) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.RegionFailure_errorMessage, *v.ErrorMessage)
+	}
+	if v.ImageConfigurationStep != "" {
+		s.WriteString(schemas.RegionFailure_imageConfigurationStep, string(v.ImageConfigurationStep))
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.RegionFailure_region, *v.Region)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RegionFailure_status, string(v.Status))
+	}
+	if v.TargetAccountId != nil {
+		s.WriteString(schemas.RegionFailure_targetAccountId, *v.TargetAccountId)
+	}
+}
+func (v *RegionFailure) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegionFailure, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegionFailure_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.RegionFailure_errorMessage, v.ErrorMessage)
+		case schemas.RegionFailure_imageConfigurationStep:
+			var ev string
+			if err := d.ReadString(schemas.RegionFailure_imageConfigurationStep, &ev); err != nil {
+				return err
+			}
+			v.ImageConfigurationStep = ImageConfigurationStep(ev)
+			return nil
+		case schemas.RegionFailure_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.RegionFailure_region, v.Region)
+		case schemas.RegionFailure_status:
+			var ev string
+			if err := d.ReadString(schemas.RegionFailure_status, &ev); err != nil {
+				return err
+			}
+			v.Status = RegionFailureStatus(ev)
+			return nil
+		case schemas.RegionFailure_targetAccountId:
+			v.TargetAccountId = new(string)
+			return d.ReadString(schemas.RegionFailure_targetAccountId, v.TargetAccountId)
+		}
+		return nil
+	})
+}
+
 // Controls Secure Boot and UEFI data settings for the resulting image during ISO
 // imports. For more information, see [UEFI Secure Boot for Amazon EC2 instances]in the Amazon EC2 User Guide .
 //
@@ -6756,8 +7061,8 @@ type SsmParameterConfiguration struct {
 	// target account for the Region.
 	AmiAccountId *string
 
-	// The data type specifies what type of value the Parameter contains. We recommend
-	// that you use data type aws:ec2:image .
+	// The type of value the parameter contains. We recommend the aws:ec2:image data
+	// type.
 	DataType SsmParameterDataType
 
 	noSmithyDocumentSerde
@@ -7682,6 +7987,10 @@ type WorkflowStepMetadata struct {
 	// The step action name.
 	Action *string
 
+	// The current attempt number for the workflow step. The first run is attempt one.
+	// The number increases by one for each retry.
+	AttemptNumber *int32
+
 	// Description of the workflow step.
 	Description *string
 
@@ -7690,6 +7999,11 @@ type WorkflowStepMetadata struct {
 
 	// Input parameters that Image Builder provides for the workflow step.
 	Inputs *string
+
+	// The maximum number of attempts allowed for the workflow step, based on the
+	// retry configuration in the workflow document. If the step doesn't configure
+	// retries, the maximum is one attempt.
+	MaxAttempts *int32
 
 	// Detailed output message that the workflow step provides at runtime.
 	Message *string
@@ -7726,6 +8040,9 @@ func (v *WorkflowStepMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Action != nil {
 		s.WriteString(schemas.WorkflowStepMetadata_action, *v.Action)
 	}
+	if v.AttemptNumber != nil {
+		s.WriteInt32(schemas.WorkflowStepMetadata_attemptNumber, *v.AttemptNumber)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.WorkflowStepMetadata_description, *v.Description)
 	}
@@ -7734,6 +8051,9 @@ func (v *WorkflowStepMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Inputs != nil {
 		s.WriteString(schemas.WorkflowStepMetadata_inputs, *v.Inputs)
+	}
+	if v.MaxAttempts != nil {
+		s.WriteInt32(schemas.WorkflowStepMetadata_maxAttempts, *v.MaxAttempts)
 	}
 	if v.Message != nil {
 		s.WriteString(schemas.WorkflowStepMetadata_message, *v.Message)
@@ -7763,6 +8083,9 @@ func (v *WorkflowStepMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.WorkflowStepMetadata_action:
 			v.Action = new(string)
 			return d.ReadString(schemas.WorkflowStepMetadata_action, v.Action)
+		case schemas.WorkflowStepMetadata_attemptNumber:
+			v.AttemptNumber = new(int32)
+			return d.ReadInt32(schemas.WorkflowStepMetadata_attemptNumber, v.AttemptNumber)
 		case schemas.WorkflowStepMetadata_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.WorkflowStepMetadata_description, v.Description)
@@ -7772,6 +8095,9 @@ func (v *WorkflowStepMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.WorkflowStepMetadata_inputs:
 			v.Inputs = new(string)
 			return d.ReadString(schemas.WorkflowStepMetadata_inputs, v.Inputs)
+		case schemas.WorkflowStepMetadata_maxAttempts:
+			v.MaxAttempts = new(int32)
+			return d.ReadInt32(schemas.WorkflowStepMetadata_maxAttempts, v.MaxAttempts)
 		case schemas.WorkflowStepMetadata_message:
 			v.Message = new(string)
 			return d.ReadString(schemas.WorkflowStepMetadata_message, v.Message)

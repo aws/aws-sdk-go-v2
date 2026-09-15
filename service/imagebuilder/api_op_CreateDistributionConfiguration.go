@@ -78,6 +78,9 @@ func (v *CreateDistributionConfigurationInput) SerializeMembers(s smithy.ShapeSe
 		s.WriteString(schemas.CreateDistributionConfigurationRequest_description, *v.Description)
 	}
 	serializeDistributionList(s, schemas.CreateDistributionConfigurationRequest_distributions, v.Distributions)
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateDistributionConfigurationRequest_dryRun, v.DryRun)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDistributionConfigurationRequest_name, *v.Name)
 	}

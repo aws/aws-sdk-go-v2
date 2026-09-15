@@ -95,6 +95,9 @@ func (v *CreateLifecyclePolicyInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Description != nil {
 		s.WriteString(schemas.CreateLifecyclePolicyRequest_description, *v.Description)
 	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateLifecyclePolicyRequest_dryRun, v.DryRun)
+	}
 	if v.ExecutionRole != nil {
 		s.WriteString(schemas.CreateLifecyclePolicyRequest_executionRole, *v.ExecutionRole)
 	}

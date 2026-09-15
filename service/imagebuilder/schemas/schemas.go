@@ -757,6 +757,20 @@ var _ComponentData = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ComponentData",
 }, smithy.ShapeTypeString, 0)
 
+var ComponentFailureContext = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.imagebuilder",
+	Name:      "ComponentFailureContext",
+}, smithy.ShapeTypeStructure, 5)
+var ComponentFailureContext_componentArn *smithy.Schema
+
+var ComponentFailureContext_phaseName *smithy.Schema
+
+var ComponentFailureContext_stepName *smithy.Schema
+
+var ComponentFailureContext_action *smithy.Schema
+
+var ComponentFailureContext_errorMessage *smithy.Schema
+
 var ComponentFormat = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "ComponentFormat",
@@ -1176,6 +1190,14 @@ var _DistributionConfigurationSummaryList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _DistributionConfigurationSummaryList_member *smithy.Schema
 
+var DistributionFailureContext = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.imagebuilder",
+	Name:      "DistributionFailureContext",
+}, smithy.ShapeTypeStructure, 2)
+var DistributionFailureContext_errorMessage *smithy.Schema
+
+var DistributionFailureContext_regionFailures *smithy.Schema
+
 var _DistributionList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "DistributionList",
@@ -1437,6 +1459,38 @@ var _ImageBuildVersionArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "ImageBuildVersionArn",
 }, smithy.ShapeTypeString, 0)
+
+var ImageConfigurationStep = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.imagebuilder",
+	Name:      "ImageConfigurationStep",
+}, smithy.ShapeTypeEnum, 5)
+var ImageConfigurationStep_ASSOCIATE_LICENSES *smithy.Schema
+
+var ImageConfigurationStep_UPDATE_LAUNCH_TEMPLATES *smithy.Schema
+
+var ImageConfigurationStep_PUT_SSM_PARAMETERS *smithy.Schema
+
+var ImageConfigurationStep_UPDATE_FAST_LAUNCH_CONFIGURATIONS *smithy.Schema
+
+var ImageConfigurationStep_EXPORT_AMI *smithy.Schema
+
+var ImageFailureContext = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.imagebuilder",
+	Name:      "ImageFailureContext",
+}, smithy.ShapeTypeStructure, 7)
+var ImageFailureContext_imageStatus *smithy.Schema
+
+var ImageFailureContext_workflowExecutionId *smithy.Schema
+
+var ImageFailureContext_workflowArn *smithy.Schema
+
+var ImageFailureContext_stepExecutionId *smithy.Schema
+
+var ImageFailureContext_failedStep *smithy.Schema
+
+var ImageFailureContext_componentFailure *smithy.Schema
+
+var ImageFailureContext_distributionFailure *smithy.Schema
 
 var ImageLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
@@ -1719,10 +1773,12 @@ var ImageSource_CUSTOM *smithy.Schema
 var ImageState = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "ImageState",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var ImageState_status *smithy.Schema
 
 var ImageState_reason *smithy.Schema
+
+var ImageState_failureContext *smithy.Schema
 
 var ImageStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
@@ -2481,6 +2537,11 @@ var _MaxParallelLaunches = smithy.NewSchema(smithy.ShapeID{
 	Name:      "MaxParallelLaunches",
 }, smithy.ShapeTypeInteger, 0)
 
+var _NonEmptyMaxLengthString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.imagebuilder",
+	Name:      "NonEmptyMaxLengthString",
+}, smithy.ShapeTypeString, 0)
+
 var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "NonEmptyString",
@@ -2679,6 +2740,36 @@ var ProductCodeType = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ProductCodeType",
 }, smithy.ShapeTypeEnum, 1)
 var ProductCodeType_MARKETPLACE *smithy.Schema
+
+var RegionFailure = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.imagebuilder",
+	Name:      "RegionFailure",
+}, smithy.ShapeTypeStructure, 5)
+var RegionFailure_region *smithy.Schema
+
+var RegionFailure_status *smithy.Schema
+
+var RegionFailure_imageConfigurationStep *smithy.Schema
+
+var RegionFailure_errorMessage *smithy.Schema
+
+var RegionFailure_targetAccountId *smithy.Schema
+
+var _RegionFailureList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.imagebuilder",
+	Name:      "RegionFailureList",
+}, smithy.ShapeTypeList, 1)
+var _RegionFailureList_member *smithy.Schema
+
+var RegionFailureStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.imagebuilder",
+	Name:      "RegionFailureStatus",
+}, smithy.ShapeTypeEnum, 3)
+var RegionFailureStatus_FAILED *smithy.Schema
+
+var RegionFailureStatus_CANCELLED *smithy.Schema
+
+var RegionFailureStatus_TIMED_OUT *smithy.Schema
 
 var _RegionList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
@@ -3275,6 +3366,11 @@ var WorkflowStepActionType_RESUME *smithy.Schema
 
 var WorkflowStepActionType_STOP *smithy.Schema
 
+var _WorkflowStepAttemptCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.imagebuilder",
+	Name:      "WorkflowStepAttemptCount",
+}, smithy.ShapeTypeInteger, 0)
+
 var _WorkflowStepCount = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "WorkflowStepCount",
@@ -3361,7 +3457,7 @@ var _WorkflowStepMessage = smithy.NewSchema(smithy.ShapeID{
 var WorkflowStepMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "WorkflowStepMetadata",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 13)
 var WorkflowStepMetadata_stepExecutionId *smithy.Schema
 
 var WorkflowStepMetadata_name *smithy.Schema
@@ -3383,6 +3479,10 @@ var WorkflowStepMetadata_outputs *smithy.Schema
 var WorkflowStepMetadata_startTime *smithy.Schema
 
 var WorkflowStepMetadata_endTime *smithy.Schema
+
+var WorkflowStepMetadata_attemptNumber *smithy.Schema
+
+var WorkflowStepMetadata_maxAttempts *smithy.Schema
 
 var _WorkflowStepName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
@@ -3553,7 +3653,7 @@ var CreateComponentResponse_latestVersionReferences *smithy.Schema
 var CreateContainerRecipeRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "CreateContainerRecipeRequest",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 17)
 var CreateContainerRecipeRequest_containerType *smithy.Schema
 
 var CreateContainerRecipeRequest_name *smithy.Schema
@@ -3586,6 +3686,8 @@ var CreateContainerRecipeRequest_kmsKeyId *smithy.Schema
 
 var CreateContainerRecipeRequest_clientToken *smithy.Schema
 
+var CreateContainerRecipeRequest_dryRun *smithy.Schema
+
 var CreateContainerRecipeResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "CreateContainerRecipeResponse",
@@ -3601,7 +3703,7 @@ var CreateContainerRecipeResponse_latestVersionReferences *smithy.Schema
 var CreateDistributionConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "CreateDistributionConfigurationRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var CreateDistributionConfigurationRequest_name *smithy.Schema
 
 var CreateDistributionConfigurationRequest_description *smithy.Schema
@@ -3611,6 +3713,8 @@ var CreateDistributionConfigurationRequest_distributions *smithy.Schema
 var CreateDistributionConfigurationRequest_tags *smithy.Schema
 
 var CreateDistributionConfigurationRequest_clientToken *smithy.Schema
+
+var CreateDistributionConfigurationRequest_dryRun *smithy.Schema
 
 var CreateDistributionConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
@@ -3665,7 +3769,7 @@ var CreateImageResponse_latestVersionReferences *smithy.Schema
 var CreateImagePipelineRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "CreateImagePipelineRequest",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 18)
 var CreateImagePipelineRequest_name *smithy.Schema
 
 var CreateImagePipelineRequest_description *smithy.Schema
@@ -3700,6 +3804,8 @@ var CreateImagePipelineRequest_executionRole *smithy.Schema
 
 var CreateImagePipelineRequest_loggingConfiguration *smithy.Schema
 
+var CreateImagePipelineRequest_dryRun *smithy.Schema
+
 var CreateImagePipelineResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "CreateImagePipelineResponse",
@@ -3713,7 +3819,7 @@ var CreateImagePipelineResponse_imagePipelineArn *smithy.Schema
 var CreateImageRecipeRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "CreateImageRecipeRequest",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var CreateImageRecipeRequest_name *smithy.Schema
 
 var CreateImageRecipeRequest_description *smithy.Schema
@@ -3738,6 +3844,8 @@ var CreateImageRecipeRequest_amiWatermarks *smithy.Schema
 
 var CreateImageRecipeRequest_clientToken *smithy.Schema
 
+var CreateImageRecipeRequest_dryRun *smithy.Schema
+
 var CreateImageRecipeResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "CreateImageRecipeResponse",
@@ -3753,7 +3861,7 @@ var CreateImageRecipeResponse_latestVersionReferences *smithy.Schema
 var CreateInfrastructureConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "CreateInfrastructureConfigurationRequest",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var CreateInfrastructureConfigurationRequest_name *smithy.Schema
 
 var CreateInfrastructureConfigurationRequest_description *smithy.Schema
@@ -3784,6 +3892,8 @@ var CreateInfrastructureConfigurationRequest_placement *smithy.Schema
 
 var CreateInfrastructureConfigurationRequest_clientToken *smithy.Schema
 
+var CreateInfrastructureConfigurationRequest_dryRun *smithy.Schema
+
 var CreateInfrastructureConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "CreateInfrastructureConfigurationResponse",
@@ -3797,7 +3907,7 @@ var CreateInfrastructureConfigurationResponse_infrastructureConfigurationArn *sm
 var CreateLifecyclePolicyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "CreateLifecyclePolicyRequest",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var CreateLifecyclePolicyRequest_name *smithy.Schema
 
 var CreateLifecyclePolicyRequest_description *smithy.Schema
@@ -3815,6 +3925,8 @@ var CreateLifecyclePolicyRequest_resourceSelection *smithy.Schema
 var CreateLifecyclePolicyRequest_tags *smithy.Schema
 
 var CreateLifecyclePolicyRequest_clientToken *smithy.Schema
+
+var CreateLifecyclePolicyRequest_dryRun *smithy.Schema
 
 var CreateLifecyclePolicyResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
@@ -4273,7 +4385,7 @@ var GetWorkflowStepExecutionRequest_stepExecutionId *smithy.Schema
 var GetWorkflowStepExecutionResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "GetWorkflowStepExecutionResponse",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 19)
 var GetWorkflowStepExecutionResponse_requestId *smithy.Schema
 
 var GetWorkflowStepExecutionResponse_stepExecutionId *smithy.Schema
@@ -4307,6 +4419,10 @@ var GetWorkflowStepExecutionResponse_endTime *smithy.Schema
 var GetWorkflowStepExecutionResponse_onFailure *smithy.Schema
 
 var GetWorkflowStepExecutionResponse_timeoutSeconds *smithy.Schema
+
+var GetWorkflowStepExecutionResponse_attemptNumber *smithy.Schema
+
+var GetWorkflowStepExecutionResponse_maxAttempts *smithy.Schema
 
 var ImportComponentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
@@ -5235,9 +5351,67 @@ func init() {
 
 	ImageStatus_DISABLED = ImageStatus.AddMember("DISABLED", smithyprelude.Unit)
 
+	ComponentFailureContext_componentArn = ComponentFailureContext.AddMember("componentArn", _ComponentBuildVersionArn)
+
+	ComponentFailureContext_phaseName = ComponentFailureContext.AddMember("phaseName", _NonEmptyString)
+
+	ComponentFailureContext_stepName = ComponentFailureContext.AddMember("stepName", _NonEmptyString)
+
+	ComponentFailureContext_action = ComponentFailureContext.AddMember("action", _NonEmptyString)
+
+	ComponentFailureContext_errorMessage = ComponentFailureContext.AddMember("errorMessage", _NonEmptyMaxLengthString)
+
+	RegionFailureStatus_FAILED = RegionFailureStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	RegionFailureStatus_CANCELLED = RegionFailureStatus.AddMember("CANCELLED", smithyprelude.Unit)
+
+	RegionFailureStatus_TIMED_OUT = RegionFailureStatus.AddMember("TIMED_OUT", smithyprelude.Unit)
+
+	ImageConfigurationStep_ASSOCIATE_LICENSES = ImageConfigurationStep.AddMember("ASSOCIATE_LICENSES", smithyprelude.Unit)
+
+	ImageConfigurationStep_UPDATE_LAUNCH_TEMPLATES = ImageConfigurationStep.AddMember("UPDATE_LAUNCH_TEMPLATES", smithyprelude.Unit)
+
+	ImageConfigurationStep_PUT_SSM_PARAMETERS = ImageConfigurationStep.AddMember("PUT_SSM_PARAMETERS", smithyprelude.Unit)
+
+	ImageConfigurationStep_UPDATE_FAST_LAUNCH_CONFIGURATIONS = ImageConfigurationStep.AddMember("UPDATE_FAST_LAUNCH_CONFIGURATIONS", smithyprelude.Unit)
+
+	ImageConfigurationStep_EXPORT_AMI = ImageConfigurationStep.AddMember("EXPORT_AMI", smithyprelude.Unit)
+
+	RegionFailure_region = RegionFailure.AddMember("region", _NonEmptyString)
+
+	RegionFailure_status = RegionFailure.AddMember("status", RegionFailureStatus)
+
+	RegionFailure_imageConfigurationStep = RegionFailure.AddMember("imageConfigurationStep", ImageConfigurationStep)
+
+	RegionFailure_errorMessage = RegionFailure.AddMember("errorMessage", _NonEmptyMaxLengthString)
+
+	RegionFailure_targetAccountId = RegionFailure.AddMember("targetAccountId", _AccountId)
+
+	_RegionFailureList_member = _RegionFailureList.AddMember("member", RegionFailure)
+
+	DistributionFailureContext_errorMessage = DistributionFailureContext.AddMember("errorMessage", _NonEmptyMaxLengthString)
+
+	DistributionFailureContext_regionFailures = DistributionFailureContext.AddMember("regionFailures", _RegionFailureList)
+
+	ImageFailureContext_imageStatus = ImageFailureContext.AddMember("imageStatus", ImageStatus)
+
+	ImageFailureContext_workflowExecutionId = ImageFailureContext.AddMember("workflowExecutionId", _WorkflowExecutionId)
+
+	ImageFailureContext_workflowArn = ImageFailureContext.AddMember("workflowArn", _WorkflowBuildVersionArn)
+
+	ImageFailureContext_stepExecutionId = ImageFailureContext.AddMember("stepExecutionId", _WorkflowStepExecutionId)
+
+	ImageFailureContext_failedStep = ImageFailureContext.AddMember("failedStep", _WorkflowStepName)
+
+	ImageFailureContext_componentFailure = ImageFailureContext.AddMember("componentFailure", ComponentFailureContext)
+
+	ImageFailureContext_distributionFailure = ImageFailureContext.AddMember("distributionFailure", DistributionFailureContext)
+
 	ImageState_status = ImageState.AddMember("status", ImageStatus)
 
 	ImageState_reason = ImageState.AddMember("reason", _NonEmptyString)
+
+	ImageState_failureContext = ImageState.AddMember("failureContext", ImageFailureContext)
 
 	Ami_region = Ami.AddMember("region", _NonEmptyString)
 
@@ -6659,6 +6833,10 @@ func init() {
 
 	WorkflowStepMetadata_endTime = WorkflowStepMetadata.AddMember("endTime", _DateTime)
 
+	WorkflowStepMetadata_attemptNumber = WorkflowStepMetadata.AddMember("attemptNumber", _WorkflowStepAttemptCount)
+
+	WorkflowStepMetadata_maxAttempts = WorkflowStepMetadata.AddMember("maxAttempts", _WorkflowStepAttemptCount)
+
 	_WorkflowStepExecutionsList_member = _WorkflowStepExecutionsList.AddMember("member", WorkflowStepMetadata)
 
 	WorkflowSummary_arn = WorkflowSummary.AddMember("arn", _WorkflowNameArn)
@@ -6779,6 +6957,8 @@ func init() {
 
 	CreateContainerRecipeRequest_clientToken = CreateContainerRecipeRequest.AddMember("clientToken", _ClientToken)
 
+	CreateContainerRecipeRequest_dryRun = CreateContainerRecipeRequest.AddMember("dryRun", _Boolean)
+
 	CreateContainerRecipeResponse_requestId = CreateContainerRecipeResponse.AddMember("requestId", _NonEmptyString)
 
 	CreateContainerRecipeResponse_clientToken = CreateContainerRecipeResponse.AddMember("clientToken", _ClientToken)
@@ -6796,6 +6976,8 @@ func init() {
 	CreateDistributionConfigurationRequest_tags = CreateDistributionConfigurationRequest.AddMember("tags", _TagMap)
 
 	CreateDistributionConfigurationRequest_clientToken = CreateDistributionConfigurationRequest.AddMember("clientToken", _ClientToken)
+
+	CreateDistributionConfigurationRequest_dryRun = CreateDistributionConfigurationRequest.AddMember("dryRun", _Boolean)
 
 	CreateDistributionConfigurationResponse_requestId = CreateDistributionConfigurationResponse.AddMember("requestId", _NonEmptyString)
 
@@ -6869,6 +7051,8 @@ func init() {
 
 	CreateImagePipelineRequest_loggingConfiguration = CreateImagePipelineRequest.AddMember("loggingConfiguration", PipelineLoggingConfiguration)
 
+	CreateImagePipelineRequest_dryRun = CreateImagePipelineRequest.AddMember("dryRun", _Boolean)
+
 	CreateImagePipelineResponse_requestId = CreateImagePipelineResponse.AddMember("requestId", _NonEmptyString)
 
 	CreateImagePipelineResponse_clientToken = CreateImagePipelineResponse.AddMember("clientToken", _ClientToken)
@@ -6898,6 +7082,8 @@ func init() {
 	CreateImageRecipeRequest_amiWatermarks = CreateImageRecipeRequest.AddMember("amiWatermarks", _AmiWatermarksList)
 
 	CreateImageRecipeRequest_clientToken = CreateImageRecipeRequest.AddMember("clientToken", _ClientToken)
+
+	CreateImageRecipeRequest_dryRun = CreateImageRecipeRequest.AddMember("dryRun", _Boolean)
 
 	CreateImageRecipeResponse_requestId = CreateImageRecipeResponse.AddMember("requestId", _NonEmptyString)
 
@@ -6937,6 +7123,8 @@ func init() {
 
 	CreateInfrastructureConfigurationRequest_clientToken = CreateInfrastructureConfigurationRequest.AddMember("clientToken", _ClientToken)
 
+	CreateInfrastructureConfigurationRequest_dryRun = CreateInfrastructureConfigurationRequest.AddMember("dryRun", _Boolean)
+
 	CreateInfrastructureConfigurationResponse_requestId = CreateInfrastructureConfigurationResponse.AddMember("requestId", _NonEmptyString)
 
 	CreateInfrastructureConfigurationResponse_clientToken = CreateInfrastructureConfigurationResponse.AddMember("clientToken", _ClientToken)
@@ -6960,6 +7148,8 @@ func init() {
 	CreateLifecyclePolicyRequest_tags = CreateLifecyclePolicyRequest.AddMember("tags", _TagMap)
 
 	CreateLifecyclePolicyRequest_clientToken = CreateLifecyclePolicyRequest.AddMember("clientToken", _ClientToken)
+
+	CreateLifecyclePolicyRequest_dryRun = CreateLifecyclePolicyRequest.AddMember("dryRun", _Boolean)
 
 	CreateLifecyclePolicyResponse_clientToken = CreateLifecyclePolicyResponse.AddMember("clientToken", _ClientToken)
 
@@ -7224,6 +7414,10 @@ func init() {
 	GetWorkflowStepExecutionResponse_onFailure = GetWorkflowStepExecutionResponse.AddMember("onFailure", _NonEmptyString)
 
 	GetWorkflowStepExecutionResponse_timeoutSeconds = GetWorkflowStepExecutionResponse.AddMember("timeoutSeconds", _WorkflowStepTimeoutSecondsInteger)
+
+	GetWorkflowStepExecutionResponse_attemptNumber = GetWorkflowStepExecutionResponse.AddMember("attemptNumber", _WorkflowStepAttemptCount)
+
+	GetWorkflowStepExecutionResponse_maxAttempts = GetWorkflowStepExecutionResponse.AddMember("maxAttempts", _WorkflowStepAttemptCount)
 
 	ImportComponentRequest_name = ImportComponentRequest.AddMember("name", _ResourceName)
 

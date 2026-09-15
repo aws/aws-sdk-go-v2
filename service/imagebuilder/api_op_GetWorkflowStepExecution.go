@@ -136,6 +136,9 @@ func (v *GetWorkflowStepExecutionOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Action != nil {
 		s.WriteString(schemas.GetWorkflowStepExecutionResponse_action, *v.Action)
 	}
+	if v.AttemptNumber != nil {
+		s.WriteInt32(schemas.GetWorkflowStepExecutionResponse_attemptNumber, *v.AttemptNumber)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.GetWorkflowStepExecutionResponse_description, *v.Description)
 	}
@@ -147,6 +150,9 @@ func (v *GetWorkflowStepExecutionOutput) SerializeMembers(s smithy.ShapeSerializ
 	}
 	if v.Inputs != nil {
 		s.WriteString(schemas.GetWorkflowStepExecutionResponse_inputs, *v.Inputs)
+	}
+	if v.MaxAttempts != nil {
+		s.WriteInt32(schemas.GetWorkflowStepExecutionResponse_maxAttempts, *v.MaxAttempts)
 	}
 	if v.Message != nil {
 		s.WriteString(schemas.GetWorkflowStepExecutionResponse_message, *v.Message)
@@ -191,6 +197,9 @@ func (v *GetWorkflowStepExecutionOutput) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.GetWorkflowStepExecutionResponse_action:
 			v.Action = new(string)
 			return d.ReadString(schemas.GetWorkflowStepExecutionResponse_action, v.Action)
+		case schemas.GetWorkflowStepExecutionResponse_attemptNumber:
+			v.AttemptNumber = new(int32)
+			return d.ReadInt32(schemas.GetWorkflowStepExecutionResponse_attemptNumber, v.AttemptNumber)
 		case schemas.GetWorkflowStepExecutionResponse_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.GetWorkflowStepExecutionResponse_description, v.Description)
@@ -203,6 +212,9 @@ func (v *GetWorkflowStepExecutionOutput) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.GetWorkflowStepExecutionResponse_inputs:
 			v.Inputs = new(string)
 			return d.ReadString(schemas.GetWorkflowStepExecutionResponse_inputs, v.Inputs)
+		case schemas.GetWorkflowStepExecutionResponse_maxAttempts:
+			v.MaxAttempts = new(int32)
+			return d.ReadInt32(schemas.GetWorkflowStepExecutionResponse_maxAttempts, v.MaxAttempts)
 		case schemas.GetWorkflowStepExecutionResponse_message:
 			v.Message = new(string)
 			return d.ReadString(schemas.GetWorkflowStepExecutionResponse_message, v.Message)

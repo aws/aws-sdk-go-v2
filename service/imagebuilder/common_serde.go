@@ -544,6 +544,19 @@ func serializeProductCodeList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 	s.CloseList()
 }
 
+func serializeRegionFailureList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RegionFailure) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeRegionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	if v == nil {
 		return
@@ -1333,6 +1346,20 @@ func deserializeProductCodeList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	var vv types.ProductCodeListItem
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ProductCodeListItem{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRegionFailureList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RegionFailure) error {
+	*v = make([]types.RegionFailure, 0)
+	var vv types.RegionFailure
+	return smithy.ReadList(d, s, func() error {
+		vv = types.RegionFailure{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

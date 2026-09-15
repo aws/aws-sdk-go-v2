@@ -140,6 +140,9 @@ func (v *CreateImageRecipeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateImageRecipeRequest_description, *v.Description)
 	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateImageRecipeRequest_dryRun, v.DryRun)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateImageRecipeRequest_name, *v.Name)
 	}

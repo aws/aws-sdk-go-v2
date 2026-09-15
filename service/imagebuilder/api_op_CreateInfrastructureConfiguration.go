@@ -124,6 +124,9 @@ func (v *CreateInfrastructureConfigurationInput) SerializeMembers(s smithy.Shape
 	if v.Description != nil {
 		s.WriteString(schemas.CreateInfrastructureConfigurationRequest_description, *v.Description)
 	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateInfrastructureConfigurationRequest_dryRun, v.DryRun)
+	}
 	if v.InstanceMetadataOptions != nil {
 		s.WriteStruct(schemas.CreateInfrastructureConfigurationRequest_instanceMetadataOptions)
 		v.InstanceMetadataOptions.SerializeMembers(s)

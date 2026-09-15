@@ -143,6 +143,9 @@ func (v *CreateContainerRecipeInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.DockerfileTemplateUri != nil {
 		s.WriteString(schemas.CreateContainerRecipeRequest_dockerfileTemplateUri, *v.DockerfileTemplateUri)
 	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateContainerRecipeRequest_dryRun, v.DryRun)
+	}
 	if v.ImageOsVersionOverride != nil {
 		s.WriteString(schemas.CreateContainerRecipeRequest_imageOsVersionOverride, *v.ImageOsVersionOverride)
 	}
