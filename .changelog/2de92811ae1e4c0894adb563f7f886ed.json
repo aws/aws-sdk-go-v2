@@ -1,8 +1,0 @@
-{
-    "id": "2de92811-ae1e-4c08-94ad-b563f7f886ed",
-    "type": "feature",
-    "description": "AWS Direct Connect is introducing flat-rate pricing, a simplified billing model that gives you a fixed monthly price for dedicated connectivity with no per-gigabyte data transfer out charges within the selected pricing tier.",
-    "modules": [
-        "service/directconnect"
-    ]
-}

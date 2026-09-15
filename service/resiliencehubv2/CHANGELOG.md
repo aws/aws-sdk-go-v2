@@ -1,3 +1,7 @@
+# v1.11.0 (2026-09-15)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.10.0 (2026-09-10)
 
 * **Feature**: This release adds the ListTestRunSourceEvents and ListTestRunDependencies APIs, which return the alarm state changes during a test run and the dependencies the run blocked.

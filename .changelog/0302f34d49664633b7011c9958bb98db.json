@@ -1,8 +1,0 @@
-{
-    "id": "0302f34d-4966-4633-b701-1c9958bb98db",
-    "type": "feature",
-    "description": "Amazon Bedrock AgentCore Runtime now supports specifying the platform version of an agent runtime through the new platformVersion field on CreateAgentRuntime, UpdateAgentRuntime, and GetAgentRuntime.",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

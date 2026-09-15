@@ -1,3 +1,7 @@
+# v1.105.0 (2026-09-15)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.104.0 (2026-09-11)
 
 * **Feature**: Adds Dolby Vision metadata to Probe results, including profile, level, and presence of the RPU, base layer, and enhancement layer. Adds video sample and display aspect ratios. Adds the UnprocessableEntityException (HTTP 422) error to Probe for recognized but malformed or corrupt inputs.

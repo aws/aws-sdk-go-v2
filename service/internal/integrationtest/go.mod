@@ -4,15 +4,15 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.47.0
 	github.com/aws/aws-sdk-go-v2/config v1.33.5
 	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.23.7
-	github.com/aws/aws-sdk-go-v2/service/bedrockruntime v1.62.0
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.68.0
+	github.com/aws/aws-sdk-go-v2/service/bedrockruntime v1.63.0
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.69.0
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.332.0
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.108.0
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.113.1
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.79.0
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.52.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.51.0
-	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.44.0
+	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.44.1
 	github.com/aws/smithy-go v1.28.1
 )
 

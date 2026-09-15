@@ -1,3 +1,7 @@
+# v1.111.0 (2026-09-15)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.110.0 (2026-09-09)
 
 * **Feature**: MediaLive now supports Manual Style Control for vertical caption positioning in TTML, WebVTT, and Embedded captions, Contextual Metadata Enrichment via Elemental Inference, and an Output Usage field on MediaPackage v2 for Dynamic Multiview validation.
