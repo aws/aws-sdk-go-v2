@@ -339,3 +339,90 @@ func TestRetrieve_Failure_Refresh(t *testing.T) {
 		t.Errorf("unexpected error: %v", err)
 	}
 }
+
+// Failure - Refresh response has no token payload (e.g. unmodeled error
+// returned with HTTP 200); should return an error instead of panicking.
+func TestRetrieve_Failure_NilTokenOutput(t *testing.T) {
+	token, _ := mockToken()
+	restoreOpen := mockOpenFile(token, nil)
+	restoreNowTime := mockNowTime(time.Unix(60, 0).UTC())
+	defer restoreOpen()
+	defer restoreNowTime()
+
+	svc := mockTokenAPIClient(&signin.CreateOAuth2TokenOutput{
+		TokenOutput: nil,
+	}, nil)
+
+	p := New(svc, "mocktokenpath")
+	_, err := p.Retrieve(context.Background())
+	if err == nil {
+		t.Fatal("expect err, got none")
+	}
+	if !strings.Contains(err.Error(), "missing token payload in CreateOAuth2Token response") {
+		t.Errorf("unexpected error: %v", err)
+	}
+}
+
+// Success - Refresh response omits the refresh token; the previously cached
+// refresh token should be preserved rather than clearing it.
+func TestRetrieve_OK_NilRefreshToken(t *testing.T) {
+	token, _ := mockToken()
+	restoreOpen := mockOpenFile(token, nil)
+	written, restoreCreate := mockCreateFile(nil)
+	restoreNowTime := mockNowTime(time.Unix(60, 0).UTC())
+	defer restoreOpen()
+	defer restoreCreate()
+	defer restoreNowTime()
+
+	svc := mockTokenAPIClient(&signin.CreateOAuth2TokenOutput{
+		TokenOutput: &types.CreateOAuth2TokenResponseBody{
+			AccessToken: &types.AccessToken{
+				AccessKeyId:     aws.String("NEW_AKID"),
+				SecretAccessKey: aws.String("NEW_SECRET"),
+				SessionToken:    aws.String("NEW_SESSION"),
+			},
+			ExpiresIn:    aws.Int32(900),
+			RefreshToken: nil,
+		},
+	}, nil)
+
+	p := New(svc, "mocktokenpath")
+	creds, err := p.Retrieve(context.Background())
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if e, a := "NEW_AKID", creds.AccessKeyID; e != a {
+		t.Errorf("akid: %q != %q", e, a)
+	}
+	if e, a := "NEW_SECRET", creds.SecretAccessKey; e != a {
+		t.Errorf("secret: %q != %q", e, a)
+	}
+	if e, a := "NEW_SESSION", creds.SessionToken; e != a {
+		t.Errorf("session: %q != %q", e, a)
+	}
+	// we mocked time.Now() to return 60 and creds expire in 900 seconds
+	if e, a := time.Unix(960, 0).UTC(), creds.Expires; e != a {
+		t.Errorf("expires: %v != %v", e, a)
+	}
+
+	var savedToken *loginToken
+	if err := json.Unmarshal(written.p, &savedToken); err != nil {
+		t.Fatal(err)
+	}
+	if e, a := "NEW_AKID", savedToken.AccessToken.AccessKeyID; e != a {
+		t.Errorf("akid: %q != %q", e, a)
+	}
+	if e, a := "NEW_SECRET", savedToken.AccessToken.SecretAccessKey; e != a {
+		t.Errorf("secret: %q != %q", e, a)
+	}
+	if e, a := "NEW_SESSION", savedToken.AccessToken.SessionToken; e != a {
+		t.Errorf("session: %q != %q", e, a)
+	}
+	if e, a := time.Unix(960, 0).UTC(), savedToken.AccessToken.ExpiresAt; e != a {
+		t.Errorf("expires: %v != %v", e, a)
+	}
+	if e, a := "RefreshToken", savedToken.RefreshToken; e != a {
+		t.Errorf("refresh token should be preserved: %q != %q", e, a)
+	}
+}
