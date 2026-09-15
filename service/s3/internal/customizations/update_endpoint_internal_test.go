@@ -6,6 +6,64 @@ import (
 	"testing"
 )
 
+func TestDNSCompatibleBucketName(t *testing.T) {
+	cases := map[string]struct {
+		bucket   string
+		expected bool
+	}{
+		"empty bucket name": {
+			bucket:   "",
+			expected: false,
+		},
+		"valid bucket name": {
+			bucket:   "bucket-name",
+			expected: true,
+		},
+		"leading dash": {
+			bucket:   "-bucket",
+			expected: false,
+		},
+		"double dot": {
+			bucket:   "bucket..name",
+			expected: false,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			if actual := dnsCompatibleBucketName(c.bucket); actual != c.expected {
+				t.Errorf("expected %v, got %v", c.expected, actual)
+			}
+		})
+	}
+}
+
+func TestHostCompatibleBucketName(t *testing.T) {
+	u := url.URL{Scheme: "https", Host: "s3.us-west-2.amazonaws.com"}
+
+	cases := map[string]struct {
+		bucket   string
+		expected bool
+	}{
+		"empty bucket name": {
+			bucket:   "",
+			expected: false,
+		},
+		"valid bucket name": {
+			bucket:   "bucket-name",
+			expected: true,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			if actual := hostCompatibleBucketName(&u, c.bucket); actual != c.expected {
+				t.Errorf("expected %v, got %v", c.expected, actual)
+			}
+		})
+	}
+}
+
 func TestRemoveBucketFromPath(t *testing.T) {
 	cases := []struct {
 		url      url.URL
