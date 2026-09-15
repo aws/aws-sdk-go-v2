@@ -510,8 +510,8 @@ func testDownloadObject(t *testing.T, bucket string, testData downloadObjectTest
 		return
 	}
 
-	if e, a := testData.ExpectBody, w.Bytes(); !bytes.EqualFold(e, a) {
-		t.Errorf("expect %s, got %s", e, a)
+	if e, a := testData.ExpectBody, w.Bytes(); !bytes.Equal(e, a) {
+		t.Errorf("downloaded object does not match the uploaded body: %s", describeBytesDiff(e, a))
 	}
 }
 
@@ -782,10 +782,26 @@ func testDownloadDirectory(t *testing.T, bucket string, testData downloadDirecto
 			t.Errorf("no data recorded for file %s", path)
 			continue
 		}
-		if e, a := expectData, b; !bytes.EqualFold(e, a) {
-			t.Errorf("for file %s, expect %s, got %s", f, e, a)
+		if e, a := expectData, b; !bytes.Equal(e, a) {
+			t.Errorf("downloaded file %s does not match the uploaded object: %s", f, describeBytesDiff(e, a))
 		}
 	}
+}
+
+// describeBytesDiff summarizes how two byte slices differ, for assertions on
+// payloads too large to print. Misplaced writes preserve length, so the offset
+// of the first difference is reported as well as the lengths.
+func describeBytesDiff(expect, actual []byte) string {
+	if len(expect) != len(actual) {
+		return fmt.Sprintf("expect %d bytes, got %d bytes", len(expect), len(actual))
+	}
+	for i := range expect {
+		if expect[i] != actual[i] {
+			return fmt.Sprintf("both %d bytes, first difference at offset %d: expect %#x, got %#x",
+				len(expect), i, expect[i], actual[i])
+		}
+	}
+	return "no difference"
 }
 
 // TODO: duped from service/internal/integrationtest, remove after beta.
