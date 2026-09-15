@@ -65,6 +65,10 @@ type AdaptiveMode struct {
 
 	retryer   aws.RetryerV2
 	rateLimit *adaptiveRateLimit
+
+	// Refills the nested Standard retryer's retry quota, so that the quota is
+	// not only ever consumed by GetRetryToken.
+	releaseRetryQuota func(error) error
 }
 
 // NewAdaptiveMode returns an initialized AdaptiveMode retry strategy.
@@ -77,11 +81,14 @@ func NewAdaptiveMode(optFns ...func(*AdaptiveModeOptions)) *AdaptiveMode {
 		fn(&o)
 	}
 
+	standard := NewStandard(o.StandardOptions...)
+
 	return &AdaptiveMode{
-		options:   o,
-		throttles: IsErrorThrottles(o.Throttles),
-		retryer:   NewStandard(o.StandardOptions...),
-		rateLimit: newAdaptiveRateLimit(),
+		options:           o,
+		throttles:         IsErrorThrottles(o.Throttles),
+		retryer:           standard,
+		rateLimit:         newAdaptiveRateLimit(),
+		releaseRetryQuota: releaseToken(standard.noRetryIncrement).release,
 	}
 }
 
@@ -152,5 +159,7 @@ func (a *AdaptiveMode) handleResponse(opErr error) error {
 	throttled := a.throttles.IsErrorThrottle(opErr).Bool()
 
 	a.rateLimit.Update(throttled)
-	return nil
+
+	// As in Standard retry mode, release the token if the attempt succeeded.
+	return a.releaseRetryQuota(opErr)
 }
