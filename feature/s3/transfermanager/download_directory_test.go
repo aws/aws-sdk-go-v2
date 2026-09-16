@@ -905,8 +905,8 @@ func TestDownloadDirectoryNoHeadObject(t *testing.T) {
 		t.Errorf("expect no HeadObject calls on the directory path, got %d", n)
 	}
 	// An empty HeadObjectInputs is also consistent with no download happening.
-	if s3Client.GetObjectInvocations == 0 {
-		t.Error("expect at least one GetObject call, got none")
+	if e, a := 2, s3Client.GetObjectInvocations; e != a {
+		t.Errorf("expect %d GetObject calls, one per single-part object, got %d", e, a)
 	}
 }
 
