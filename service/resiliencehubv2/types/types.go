@@ -768,6 +768,68 @@ func (v *DependencyDiscoveryConfig) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
+// Contains a single insight about a service's dependencies.
+type DependencyInsight struct {
+
+	// The category of the insight. Valid values:
+	//
+	//   - CROSS_REGION - The insight relates to dependencies used across multiple
+	//   Regions.
+	//
+	//   - NEW_DEPENDENCY - The insight relates to a recently detected dependency.
+	//
+	//   - THIRD_PARTY - The insight relates to a third-party dependency.
+	//
+	//   - UNEVEN_USAGE - The insight relates to a dependency with uneven usage across
+	//   the service.
+	//
+	//   - AWS_SERVICE - The insight relates to a dependency on an Amazon Web Services
+	//   service.
+	//
+	// This member is required.
+	Category InsightsCategory
+
+	// A human-readable explanation of the insight, describing the dependency behavior
+	// or condition that was detected.
+	//
+	// This member is required.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DependencyInsight) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DependencyInsight)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DependencyInsight) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Category != "" {
+		s.WriteString(schemas.DependencyInsight_category, string(v.Category))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DependencyInsight_description, *v.Description)
+	}
+}
+func (v *DependencyInsight) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DependencyInsight, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DependencyInsight_category:
+			var ev string
+			if err := d.ReadString(schemas.DependencyInsight_category, &ev); err != nil {
+				return err
+			}
+			v.Category = InsightsCategory(ev)
+			return nil
+		case schemas.DependencyInsight_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DependencyInsight_description, v.Description)
+		}
+		return nil
+	})
+}
+
 // Contains summary information about a discovered dependency.
 type DependencySummary struct {
 
@@ -2237,6 +2299,12 @@ type Policy struct {
 	// The multi-Region disaster recovery targets defined in the policy.
 	MultiRegion *MultiRegionTargets
 
+	// The identifier of the organization this policy is shared with.
+	OrganizationId *string
+
+	// Specifies whether cross-account sharing is enabled.
+	SharingEnabled *bool
+
 	// Resource tags.
 	Tags map[string]string
 
@@ -2288,8 +2356,14 @@ func (v *Policy) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Policy_name, *v.Name)
 	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.Policy_organizationId, *v.OrganizationId)
+	}
 	if v.PolicyArn != nil {
 		s.WriteString(schemas.Policy_policyArn, *v.PolicyArn)
+	}
+	if v.SharingEnabled != nil {
+		s.WriteBool(schemas.Policy_sharingEnabled, *v.SharingEnabled)
 	}
 	serializeTagMap(s, schemas.Policy_tags, v.Tags)
 	if v.UpdatedAt != nil {
@@ -2326,14 +2400,407 @@ func (v *Policy) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Policy_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.Policy_name, v.Name)
+		case schemas.Policy_organizationId:
+			v.OrganizationId = new(string)
+			return d.ReadString(schemas.Policy_organizationId, v.OrganizationId)
 		case schemas.Policy_policyArn:
 			v.PolicyArn = new(string)
 			return d.ReadString(schemas.Policy_policyArn, v.PolicyArn)
+		case schemas.Policy_sharingEnabled:
+			v.SharingEnabled = new(bool)
+			return d.ReadBool(schemas.Policy_sharingEnabled, v.SharingEnabled)
 		case schemas.Policy_tags:
 			return deserializeTagMap(d, schemas.Policy_tags, &v.Tags)
 		case schemas.Policy_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.Policy_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// Contains details about the service that started using the policy, such as the
+// account that owns the service.
+type PolicyAttachedToServiceMetadata struct {
+
+	// The account that owns the service.
+	AccountId *string
+
+	// ARN identifier.
+	ServiceArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *PolicyAttachedToServiceMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyAttachedToServiceMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyAttachedToServiceMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.PolicyAttachedToServiceMetadata_accountId, *v.AccountId)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.PolicyAttachedToServiceMetadata_serviceArn, *v.ServiceArn)
+	}
+}
+func (v *PolicyAttachedToServiceMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyAttachedToServiceMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyAttachedToServiceMetadata_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.PolicyAttachedToServiceMetadata_accountId, v.AccountId)
+		case schemas.PolicyAttachedToServiceMetadata_serviceArn:
+			v.ServiceArn = new(string)
+			return d.ReadString(schemas.PolicyAttachedToServiceMetadata_serviceArn, v.ServiceArn)
+		}
+		return nil
+	})
+}
+
+// Contains details about a policy that was deleted, including the number of
+// services that were affected.
+type PolicyDeletedMetadata struct {
+
+	// The number of services that were using the policy when it was deleted.
+	AffectedServiceCount *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *PolicyDeletedMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyDeletedMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyDeletedMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AffectedServiceCount != nil {
+		s.WriteInt32(schemas.PolicyDeletedMetadata_affectedServiceCount, *v.AffectedServiceCount)
+	}
+}
+func (v *PolicyDeletedMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyDeletedMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyDeletedMetadata_affectedServiceCount:
+			v.AffectedServiceCount = new(int32)
+			return d.ReadInt32(schemas.PolicyDeletedMetadata_affectedServiceCount, v.AffectedServiceCount)
+		}
+		return nil
+	})
+}
+
+// Contains details about the service that stopped using the policy, such as the
+// account that owns the service.
+type PolicyDetachedFromServiceMetadata struct {
+
+	// The account that owns the service.
+	AccountId *string
+
+	// ARN identifier.
+	ServiceArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *PolicyDetachedFromServiceMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyDetachedFromServiceMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyDetachedFromServiceMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.PolicyDetachedFromServiceMetadata_accountId, *v.AccountId)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.PolicyDetachedFromServiceMetadata_serviceArn, *v.ServiceArn)
+	}
+}
+func (v *PolicyDetachedFromServiceMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyDetachedFromServiceMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyDetachedFromServiceMetadata_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.PolicyDetachedFromServiceMetadata_accountId, v.AccountId)
+		case schemas.PolicyDetachedFromServiceMetadata_serviceArn:
+			v.ServiceArn = new(string)
+			return d.ReadString(schemas.PolicyDetachedFromServiceMetadata_serviceArn, v.ServiceArn)
+		}
+		return nil
+	})
+}
+
+// An event on the timeline of a resilience policy.
+type PolicyEvent struct {
+
+	// Identifies the actor that triggered an event.
+	//
+	// This member is required.
+	Actor *EventActor
+
+	// The details of the event.
+	//
+	// This member is required.
+	EventDetails *PolicyEventDetails
+
+	// The identifier of the event.
+	//
+	// This member is required.
+	EventId *string
+
+	// The type of the event.
+	//
+	// This member is required.
+	EventType PolicyEventType
+
+	// ARN identifier.
+	//
+	// This member is required.
+	PolicyArn *string
+
+	// The time the event occurred.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *PolicyEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Actor != nil {
+		s.WriteStruct(schemas.PolicyEvent_actor)
+		v.Actor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventDetails != nil {
+		s.WriteStruct(schemas.PolicyEvent_eventDetails)
+		v.EventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.PolicyEvent_eventId, *v.EventId)
+	}
+	if v.EventType != "" {
+		s.WriteString(schemas.PolicyEvent_eventType, string(v.EventType))
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.PolicyEvent_policyArn, *v.PolicyArn)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.PolicyEvent_timestamp, *v.Timestamp)
+	}
+}
+func (v *PolicyEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyEvent_actor:
+			v.Actor = &EventActor{}
+			return v.Actor.Deserialize(d)
+		case schemas.PolicyEvent_eventDetails:
+			v.EventDetails = &PolicyEventDetails{}
+			return v.EventDetails.Deserialize(d)
+		case schemas.PolicyEvent_eventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.PolicyEvent_eventId, v.EventId)
+		case schemas.PolicyEvent_eventType:
+			var ev string
+			if err := d.ReadString(schemas.PolicyEvent_eventType, &ev); err != nil {
+				return err
+			}
+			v.EventType = PolicyEventType(ev)
+			return nil
+		case schemas.PolicyEvent_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.PolicyEvent_policyArn, v.PolicyArn)
+		case schemas.PolicyEvent_timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.PolicyEvent_timestamp, v.Timestamp)
+		}
+		return nil
+	})
+}
+
+// Contains the title, description, and event-specific metadata for a single event
+// on the timeline of a resilience policy.
+type PolicyEventDetails struct {
+
+	// A description of the event.
+	//
+	// This member is required.
+	Description *string
+
+	// A short summary of the event.
+	//
+	// This member is required.
+	Title *string
+
+	// The event-specific metadata, with one member populated according to the event
+	// type.
+	EventMetadata PolicyEventMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (v *PolicyEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.PolicyEventDetails_description, *v.Description)
+	}
+	serializePolicyEventMetadata(s, schemas.PolicyEventDetails_eventMetadata, v.EventMetadata)
+	if v.Title != nil {
+		s.WriteString(schemas.PolicyEventDetails_title, *v.Title)
+	}
+}
+func (v *PolicyEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyEventDetails_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PolicyEventDetails_description, v.Description)
+		case schemas.PolicyEventDetails_eventMetadata:
+			return deserializePolicyEventMetadata(d, schemas.PolicyEventDetails_eventMetadata, &v.EventMetadata)
+		case schemas.PolicyEventDetails_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.PolicyEventDetails_title, v.Title)
+		}
+		return nil
+	})
+}
+
+// Contains the event-specific metadata for a policy event. Exactly one member is
+// populated, according to the event type.
+//
+//   - policyAttachedToService — a service started using the policy.
+//
+//   - policyDetachedFromService — a service stopped using the policy.
+//
+//   - policySharingRevoked — cross-account sharing was disabled for the policy.
+//
+//   - policyDeleted — the policy was deleted.
+//
+// The following types satisfy this interface:
+//
+//	PolicyEventMetadataMemberPolicyAttachedToService
+//	PolicyEventMetadataMemberPolicyDeleted
+//	PolicyEventMetadataMemberPolicyDetachedFromService
+//	PolicyEventMetadataMemberPolicySharingRevoked
+type PolicyEventMetadata interface {
+	isPolicyEventMetadata()
+}
+
+// Contains details about the service that started using the policy, such as the
+// account that owns the service.
+type PolicyEventMetadataMemberPolicyAttachedToService struct {
+	Value PolicyAttachedToServiceMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyEventMetadataMemberPolicyAttachedToService) isPolicyEventMetadata() {}
+func (v *PolicyEventMetadataMemberPolicyAttachedToService) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyEventMetadata_policyAttachedToService)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PolicyEventMetadataMemberPolicyAttachedToService) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Contains details about a policy that was deleted, including the number of
+// services that were affected.
+type PolicyEventMetadataMemberPolicyDeleted struct {
+	Value PolicyDeletedMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyEventMetadataMemberPolicyDeleted) isPolicyEventMetadata() {}
+func (v *PolicyEventMetadataMemberPolicyDeleted) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyEventMetadata_policyDeleted)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PolicyEventMetadataMemberPolicyDeleted) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Contains details about the service that stopped using the policy, such as the
+// account that owns the service.
+type PolicyEventMetadataMemberPolicyDetachedFromService struct {
+	Value PolicyDetachedFromServiceMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyEventMetadataMemberPolicyDetachedFromService) isPolicyEventMetadata() {}
+func (v *PolicyEventMetadataMemberPolicyDetachedFromService) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyEventMetadata_policyDetachedFromService)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PolicyEventMetadataMemberPolicyDetachedFromService) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Contains details about a policy for which organization sharing was revoked,
+// including the number of services that were affected.
+type PolicyEventMetadataMemberPolicySharingRevoked struct {
+	Value PolicySharingRevokedMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyEventMetadataMemberPolicySharingRevoked) isPolicyEventMetadata() {}
+func (v *PolicyEventMetadataMemberPolicySharingRevoked) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyEventMetadata_policySharingRevoked)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PolicyEventMetadataMemberPolicySharingRevoked) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Contains details about a policy for which organization sharing was revoked,
+// including the number of services that were affected.
+type PolicySharingRevokedMetadata struct {
+
+	// The number of services that were using the policy when sharing was revoked.
+	AffectedServiceCount *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *PolicySharingRevokedMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicySharingRevokedMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicySharingRevokedMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AffectedServiceCount != nil {
+		s.WriteInt32(schemas.PolicySharingRevokedMetadata_affectedServiceCount, *v.AffectedServiceCount)
+	}
+}
+func (v *PolicySharingRevokedMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicySharingRevokedMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicySharingRevokedMetadata_affectedServiceCount:
+			v.AffectedServiceCount = new(int32)
+			return d.ReadInt32(schemas.PolicySharingRevokedMetadata_affectedServiceCount, v.AffectedServiceCount)
 		}
 		return nil
 	})
@@ -2369,6 +2836,12 @@ type PolicySummary struct {
 
 	// The multi-Region disaster recovery targets defined in the policy.
 	MultiRegion *MultiRegionTargets
+
+	// The identifier of the organization this policy is shared with.
+	OrganizationId *string
+
+	// Specifies whether cross-account sharing is enabled.
+	SharingEnabled *bool
 
 	// The timestamp when the policy was last updated.
 	UpdatedAt *time.Time
@@ -2412,8 +2885,14 @@ func (v *PolicySummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.PolicySummary_name, *v.Name)
 	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.PolicySummary_organizationId, *v.OrganizationId)
+	}
 	if v.PolicyArn != nil {
 		s.WriteString(schemas.PolicySummary_policyArn, *v.PolicyArn)
+	}
+	if v.SharingEnabled != nil {
+		s.WriteBool(schemas.PolicySummary_sharingEnabled, *v.SharingEnabled)
 	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.PolicySummary_updatedAt, *v.UpdatedAt)
@@ -2443,9 +2922,15 @@ func (v *PolicySummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.PolicySummary_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.PolicySummary_name, v.Name)
+		case schemas.PolicySummary_organizationId:
+			v.OrganizationId = new(string)
+			return d.ReadString(schemas.PolicySummary_organizationId, v.OrganizationId)
 		case schemas.PolicySummary_policyArn:
 			v.PolicyArn = new(string)
 			return d.ReadString(schemas.PolicySummary_policyArn, v.PolicyArn)
+		case schemas.PolicySummary_sharingEnabled:
+			v.SharingEnabled = new(bool)
+			return d.ReadBool(schemas.PolicySummary_sharingEnabled, v.SharingEnabled)
 		case schemas.PolicySummary_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.PolicySummary_updatedAt, v.UpdatedAt)
@@ -4348,6 +4833,17 @@ type ServicePolicyAssociatedMetadata struct {
 	// The name of the associated policy.
 	PolicyName *string
 
+	// The account that owns the policy.
+	PolicyOwnerAccountId *string
+
+	// The source of the policy.
+	//
+	//   - SELF — the policy belongs to the account that owns the service.
+	//
+	//   - CROSS_ACCOUNT — the policy belongs to another account and was shared with
+	//   the organization.
+	PolicySource PolicyValueSource
+
 	noSmithyDocumentSerde
 }
 
@@ -4364,6 +4860,12 @@ func (v *ServicePolicyAssociatedMetadata) SerializeMembers(s smithy.ShapeSeriali
 	if v.PolicyName != nil {
 		s.WriteString(schemas.ServicePolicyAssociatedMetadata_policyName, *v.PolicyName)
 	}
+	if v.PolicyOwnerAccountId != nil {
+		s.WriteString(schemas.ServicePolicyAssociatedMetadata_policyOwnerAccountId, *v.PolicyOwnerAccountId)
+	}
+	if v.PolicySource != "" {
+		s.WriteString(schemas.ServicePolicyAssociatedMetadata_policySource, string(v.PolicySource))
+	}
 }
 func (v *ServicePolicyAssociatedMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServicePolicyAssociatedMetadata, func(s *smithy.Schema) error {
@@ -4374,6 +4876,16 @@ func (v *ServicePolicyAssociatedMetadata) Deserialize(d smithy.ShapeDeserializer
 		case schemas.ServicePolicyAssociatedMetadata_policyName:
 			v.PolicyName = new(string)
 			return d.ReadString(schemas.ServicePolicyAssociatedMetadata_policyName, v.PolicyName)
+		case schemas.ServicePolicyAssociatedMetadata_policyOwnerAccountId:
+			v.PolicyOwnerAccountId = new(string)
+			return d.ReadString(schemas.ServicePolicyAssociatedMetadata_policyOwnerAccountId, v.PolicyOwnerAccountId)
+		case schemas.ServicePolicyAssociatedMetadata_policySource:
+			var ev string
+			if err := d.ReadString(schemas.ServicePolicyAssociatedMetadata_policySource, &ev); err != nil {
+				return err
+			}
+			v.PolicySource = PolicyValueSource(ev)
+			return nil
 		}
 		return nil
 	})
@@ -4387,6 +4899,20 @@ type ServicePolicyDisassociatedMetadata struct {
 
 	// The name of the disassociated policy.
 	PolicyName *string
+
+	// The account that owns the policy.
+	PolicyOwnerAccountId *string
+
+	// The source of the policy.
+	//
+	//   - SELF — the policy belongs to the account that owns the service.
+	//
+	//   - CROSS_ACCOUNT — the policy belongs to another account and was shared with
+	//   the organization.
+	PolicySource PolicyValueSource
+
+	// The reason the policy was disassociated from the service.
+	Reason PolicyDisassociationReason
 
 	noSmithyDocumentSerde
 }
@@ -4404,6 +4930,15 @@ func (v *ServicePolicyDisassociatedMetadata) SerializeMembers(s smithy.ShapeSeri
 	if v.PolicyName != nil {
 		s.WriteString(schemas.ServicePolicyDisassociatedMetadata_policyName, *v.PolicyName)
 	}
+	if v.PolicyOwnerAccountId != nil {
+		s.WriteString(schemas.ServicePolicyDisassociatedMetadata_policyOwnerAccountId, *v.PolicyOwnerAccountId)
+	}
+	if v.PolicySource != "" {
+		s.WriteString(schemas.ServicePolicyDisassociatedMetadata_policySource, string(v.PolicySource))
+	}
+	if v.Reason != "" {
+		s.WriteString(schemas.ServicePolicyDisassociatedMetadata_reason, string(v.Reason))
+	}
 }
 func (v *ServicePolicyDisassociatedMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServicePolicyDisassociatedMetadata, func(s *smithy.Schema) error {
@@ -4414,6 +4949,23 @@ func (v *ServicePolicyDisassociatedMetadata) Deserialize(d smithy.ShapeDeseriali
 		case schemas.ServicePolicyDisassociatedMetadata_policyName:
 			v.PolicyName = new(string)
 			return d.ReadString(schemas.ServicePolicyDisassociatedMetadata_policyName, v.PolicyName)
+		case schemas.ServicePolicyDisassociatedMetadata_policyOwnerAccountId:
+			v.PolicyOwnerAccountId = new(string)
+			return d.ReadString(schemas.ServicePolicyDisassociatedMetadata_policyOwnerAccountId, v.PolicyOwnerAccountId)
+		case schemas.ServicePolicyDisassociatedMetadata_policySource:
+			var ev string
+			if err := d.ReadString(schemas.ServicePolicyDisassociatedMetadata_policySource, &ev); err != nil {
+				return err
+			}
+			v.PolicySource = PolicyValueSource(ev)
+			return nil
+		case schemas.ServicePolicyDisassociatedMetadata_reason:
+			var ev string
+			if err := d.ReadString(schemas.ServicePolicyDisassociatedMetadata_reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = PolicyDisassociationReason(ev)
+			return nil
 		}
 		return nil
 	})
@@ -8085,6 +8637,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isPolicyEventMetadata()       {}
 func (*UnknownUnionMember) isReportOutput()              {}
 func (*UnknownUnionMember) isReportOutputConfiguration() {}
 func (*UnknownUnionMember) isResourceConfiguration()     {}

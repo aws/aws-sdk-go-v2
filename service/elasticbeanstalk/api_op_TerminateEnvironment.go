@@ -31,37 +31,36 @@ type TerminateEnvironmentInput struct {
 	// The ID of the environment to terminate.
 	//
 	// Condition: You must specify either this or an EnvironmentName, or both. If you
-	// do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
+	// do not specify either, Elastic Beanstalk returns MissingRequiredParameter
 	// error.
 	EnvironmentId *string
 
 	// The name of the environment to terminate.
 	//
 	// Condition: You must specify either this or an EnvironmentId, or both. If you do
-	// not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
-	// error.
+	// not specify either, Elastic Beanstalk returns MissingRequiredParameter error.
 	EnvironmentName *string
 
 	// Terminates the target environment even if another environment in the same group
 	// is dependent on it.
 	ForceTerminate *bool
 
-	// Indicates whether the associated AWS resources should shut down when the
-	// environment is terminated:
+	// Indicates whether the associated Amazon Web Services resources should shut down
+	// when the environment is terminated:
 	//
-	//   - true : The specified environment as well as the associated AWS resources,
-	//   such as Auto Scaling group and LoadBalancer, are terminated.
+	//   - true : The specified environment as well as the associated Amazon Web
+	//   Services resources, such as Auto Scaling group and LoadBalancer, are terminated.
 	//
-	//   - false : AWS Elastic Beanstalk resource management is removed from the
-	//   environment, but the AWS resources continue to operate.
+	//   - false : Elastic Beanstalk resource management is removed from the
+	//   environment, but the Amazon Web Services resources continue to operate.
 	//
-	// For more information, see the [AWS Elastic Beanstalk User Guide.]
+	// For more information, see the [Elastic Beanstalk User Guide.]
 	//
 	// Default: true
 	//
 	// Valid Values: true | false
 	//
-	// [AWS Elastic Beanstalk User Guide.]: https://docs.aws.amazon.com/elasticbeanstalk/latest/ug/
+	// [Elastic Beanstalk User Guide.]: https://docs.aws.amazon.com/elasticbeanstalk/latest/ug/
 	TerminateResources *bool
 
 	noSmithyDocumentSerde
@@ -110,8 +109,8 @@ type TerminateEnvironmentOutput struct {
 	// The name of this environment.
 	EnvironmentName *string
 
-	// Describes the health status of the environment. AWS Elastic Beanstalk indicates
-	// the failure levels for a running environment:
+	// Describes the health status of the environment. Elastic Beanstalk indicates the
+	// failure levels for a running environment:
 	//
 	//   - Red : Indicates the environment is not responsive. Occurs when three or more
 	//   consecutive failures occur for an environment.
@@ -134,16 +133,16 @@ type TerminateEnvironmentOutput struct {
 	// [Health Colors and Statuses]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
 	HealthStatus types.EnvironmentHealthStatus
 
-	// The Amazon Resource Name (ARN) of the environment's operations role. For more
-	// information, see [Operations roles]in the AWS Elastic Beanstalk Developer Guide.
+	// The operations role feature of Elastic Beanstalk is in beta release and is
+	// subject to change.
 	//
-	// [Operations roles]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html
+	// The Amazon Resource Name (ARN) of the environment's operations role.
 	OperationsRole *string
 
 	// The ARN of the platform version.
 	PlatformArn *string
 
-	// The description of the AWS resources used by this environment.
+	// The description of the Amazon Web Services resources used by this environment.
 	Resources *types.EnvironmentResourcesDescription
 
 	//  The name of the SolutionStack deployed with this environment.
@@ -151,7 +150,15 @@ type TerminateEnvironmentOutput struct {
 
 	// The current operational status of the environment:
 	//
+	//   - Aborting : Environment is in the process of aborting a deployment.
+	//
 	//   - Launching : Environment is in the process of initial deployment.
+	//
+	//   - LinkingFrom : Environment is in the process of being linked to by another
+	//   environment. See [Environment links]for details.
+	//
+	//   - LinkingTo : Environment is in the process of linking to another environment.
+	//   See [Environment links]for details.
 	//
 	//   - Updating : Environment is in the process of updating its configuration
 	//   settings or application version.
@@ -162,6 +169,8 @@ type TerminateEnvironmentOutput struct {
 	//   - Terminating : Environment is in the shut-down process.
 	//
 	//   - Terminated : Environment is not running.
+	//
+	// [Environment links]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html
 	Status types.EnvironmentStatus
 
 	// The name of the configuration template used to originally launch this

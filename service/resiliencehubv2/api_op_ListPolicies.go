@@ -29,6 +29,9 @@ func (c *Client) ListPolicies(ctx context.Context, params *ListPoliciesInput, op
 
 type ListPoliciesInput struct {
 
+	// The identifier of the account that owns the policies to include in the results.
+	AccountId *string
+
 	// Pagination page size.
 	MaxResults *int32
 
@@ -45,6 +48,9 @@ func (v *ListPoliciesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListPoliciesRequest_accountId, *v.AccountId)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListPoliciesRequest_maxResults, *v.MaxResults)
 	}

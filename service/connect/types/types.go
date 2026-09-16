@@ -4993,6 +4993,91 @@ func (v *ContactAnalysis) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Information about a reference when the referenceType is CONTACT_ANALYSIS .
+// Otherwise, null.
+type ContactAnalysisReference struct {
+
+	// The analytics mode of the contact analysis.
+	AnalyticsMode AnalyticsMode
+
+	// The Amazon Resource Name (ARN) of the contact analysis reference.
+	Arn *string
+
+	// Indicates whether sensitive data has been redacted from the contact analysis.
+	IsRedacted *bool
+
+	// Identifier of the contact analysis reference.
+	Name *string
+
+	// Status of the contact analysis reference type.
+	Status ReferenceStatus
+
+	// The location path of the contact analysis reference.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContactAnalysisReference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContactAnalysisReference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContactAnalysisReference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyticsMode != "" {
+		s.WriteString(schemas.ContactAnalysisReference_AnalyticsMode, string(v.AnalyticsMode))
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.ContactAnalysisReference_Arn, *v.Arn)
+	}
+	if v.IsRedacted != nil {
+		s.WriteBool(schemas.ContactAnalysisReference_IsRedacted, *v.IsRedacted)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ContactAnalysisReference_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ContactAnalysisReference_Status, string(v.Status))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ContactAnalysisReference_Value, *v.Value)
+	}
+}
+func (v *ContactAnalysisReference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContactAnalysisReference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContactAnalysisReference_AnalyticsMode:
+			var ev string
+			if err := d.ReadString(schemas.ContactAnalysisReference_AnalyticsMode, &ev); err != nil {
+				return err
+			}
+			v.AnalyticsMode = AnalyticsMode(ev)
+			return nil
+		case schemas.ContactAnalysisReference_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ContactAnalysisReference_Arn, v.Arn)
+		case schemas.ContactAnalysisReference_IsRedacted:
+			v.IsRedacted = new(bool)
+			return d.ReadBool(schemas.ContactAnalysisReference_IsRedacted, v.IsRedacted)
+		case schemas.ContactAnalysisReference_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ContactAnalysisReference_Name, v.Name)
+		case schemas.ContactAnalysisReference_Status:
+			var ev string
+			if err := d.ReadString(schemas.ContactAnalysisReference_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ReferenceStatus(ev)
+			return nil
+		case schemas.ContactAnalysisReference_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ContactAnalysisReference_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The contact configuration for push notification registration.
 type ContactConfiguration struct {
 
@@ -26653,6 +26738,7 @@ func (v *Reference) Deserialize(d smithy.ShapeDeserializer) error {
 // The following types satisfy this interface:
 //
 //	ReferenceSummaryMemberAttachment
+//	ReferenceSummaryMemberContactAnalysis
 //	ReferenceSummaryMemberDate
 //	ReferenceSummaryMemberEmail
 //	ReferenceSummaryMemberEmailMessage
@@ -26681,6 +26767,24 @@ func (v *ReferenceSummaryMemberAttachment) Serialize(s smithy.ShapeSerializer) {
 	s.CloseStruct()
 }
 func (v *ReferenceSummaryMemberAttachment) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Information about a reference when the referenceType is CONTACT_ANALYSIS .
+// Otherwise, null.
+type ReferenceSummaryMemberContactAnalysis struct {
+	Value ContactAnalysisReference
+
+	noSmithyDocumentSerde
+}
+
+func (*ReferenceSummaryMemberContactAnalysis) isReferenceSummary() {}
+func (v *ReferenceSummaryMemberContactAnalysis) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReferenceSummary_ContactAnalysis)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ReferenceSummaryMemberContactAnalysis) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 

@@ -204,7 +204,9 @@ func TestCheckResponseSnapshot_CreatePolicy(t *testing.T) {
 			DataRecovery: &types.DataRecoveryTargets{
 				TimeBetweenBackupsInMinutes: ptr.Int32(1),
 			},
-			KmsKeyId: ptr.String("__KmsKeyId__"),
+			SharingEnabled: ptr.Bool(true),
+			OrganizationId: ptr.String("__OrganizationId__"),
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
@@ -240,7 +242,8 @@ func TestCheckResponseSnapshot_CreatePolicy(t *testing.T) {
 		DataRecovery: &types.DataRecoveryTargets{
 			TimeBetweenBackupsInMinutes: ptr.Int32(1),
 		},
-		KmsKeyId: ptr.String("__KmsKeyId__"),
+		SharingEnabled: ptr.Bool(true),
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -1000,6 +1003,43 @@ func TestCheckResponseSnapshot_DeleteUserJourney(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetDependencyInsights(t *testing.T) {
+	want := &GetDependencyInsightsOutput{
+		Overview: ptr.String("__Overview__"),
+		Insights: []types.DependencyInsight{
+			{
+				Category:    types.InsightsCategory("CROSS_REGION"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Category:    types.InsightsCategory("CROSS_REGION"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		Status:       types.DependencyInsightsStatus("IN_PROGRESS"),
+		CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ErrorCode:    types.DependencyInsightsErrorCode("INSUFFICIENT_DATA"),
+		ErrorMessage: ptr.String("__ErrorMessage__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetDependencyInsights.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetDependencyInsights(context.Background(), &GetDependencyInsightsInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetDependencyInsights.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetFailureModeFinding(t *testing.T) {
 	want := &GetFailureModeFindingOutput{
 		Finding: &types.Finding{
@@ -1103,7 +1143,9 @@ func TestCheckResponseSnapshot_GetPolicy(t *testing.T) {
 			DataRecovery: &types.DataRecoveryTargets{
 				TimeBetweenBackupsInMinutes: ptr.Int32(1),
 			},
-			KmsKeyId: ptr.String("__KmsKeyId__"),
+			SharingEnabled: ptr.Bool(true),
+			OrganizationId: ptr.String("__OrganizationId__"),
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
@@ -1817,7 +1859,9 @@ func TestCheckResponseSnapshot_ImportPolicy(t *testing.T) {
 			DataRecovery: &types.DataRecoveryTargets{
 				TimeBetweenBackupsInMinutes: ptr.Int32(1),
 			},
-			KmsKeyId: ptr.String("__KmsKeyId__"),
+			SharingEnabled: ptr.Bool(true),
+			OrganizationId: ptr.String("__OrganizationId__"),
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
@@ -2278,6 +2322,8 @@ func TestCheckResponseSnapshot_ListPolicies(t *testing.T) {
 				DataRecovery: &types.DataRecoveryTargets{
 					TimeBetweenBackupsInMinutes: ptr.Int32(1),
 				},
+				SharingEnabled:         ptr.Bool(true),
+				OrganizationId:         ptr.String("__OrganizationId__"),
 				AssociatedServiceCount: ptr.Int32(1),
 				CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -2301,6 +2347,8 @@ func TestCheckResponseSnapshot_ListPolicies(t *testing.T) {
 				DataRecovery: &types.DataRecoveryTargets{
 					TimeBetweenBackupsInMinutes: ptr.Int32(1),
 				},
+				SharingEnabled:         ptr.Bool(true),
+				OrganizationId:         ptr.String("__OrganizationId__"),
 				AssociatedServiceCount: ptr.Int32(1),
 				CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -2317,6 +2365,7 @@ func TestCheckResponseSnapshot_ListPolicies(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ListPolicies(context.Background(), &ListPoliciesInput{
+		AccountId:  ptr.String("__AccountId__"),
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
 	})
@@ -2325,6 +2374,83 @@ func TestCheckResponseSnapshot_ListPolicies(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListPolicies.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListPolicyEvents(t *testing.T) {
+	want := &ListPolicyEventsOutput{
+		Events: []types.PolicyEvent{
+			{
+				EventId:   ptr.String("__EventId__"),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventType: types.PolicyEventType("POLICY_ATTACHED_TO_SERVICE"),
+				PolicyArn: ptr.String("__PolicyArn__"),
+				Actor: &types.EventActor{
+					Type:        types.ActorType("USER"),
+					PrincipalId: ptr.String("__PrincipalId__"),
+					AccountId:   ptr.String("__AccountId__"),
+					UserName:    ptr.String("__UserName__"),
+				},
+				EventDetails: &types.PolicyEventDetails{
+					Title:       ptr.String("__Title__"),
+					Description: ptr.String("__Description__"),
+					EventMetadata: &types.PolicyEventMetadataMemberPolicyAttachedToService{
+						Value: types.PolicyAttachedToServiceMetadata{
+							ServiceArn: ptr.String("__ServiceArn__"),
+							AccountId:  ptr.String("__AccountId__"),
+						},
+					},
+				},
+			},
+			{
+				EventId:   ptr.String("__EventId__"),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventType: types.PolicyEventType("POLICY_ATTACHED_TO_SERVICE"),
+				PolicyArn: ptr.String("__PolicyArn__"),
+				Actor: &types.EventActor{
+					Type:        types.ActorType("USER"),
+					PrincipalId: ptr.String("__PrincipalId__"),
+					AccountId:   ptr.String("__AccountId__"),
+					UserName:    ptr.String("__UserName__"),
+				},
+				EventDetails: &types.PolicyEventDetails{
+					Title:       ptr.String("__Title__"),
+					Description: ptr.String("__Description__"),
+					EventMetadata: &types.PolicyEventMetadataMemberPolicyAttachedToService{
+						Value: types.PolicyAttachedToServiceMetadata{
+							ServiceArn: ptr.String("__ServiceArn__"),
+							AccountId:  ptr.String("__AccountId__"),
+						},
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListPolicyEvents.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListPolicyEvents(context.Background(), &ListPolicyEventsInput{
+		PolicyArn: ptr.String("__PolicyArn__"),
+		EventTypes: []types.PolicyEventType{
+			types.PolicyEventType("POLICY_ATTACHED_TO_SERVICE"),
+			types.PolicyEventType("POLICY_ATTACHED_TO_SERVICE"),
+		},
+		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListPolicyEvents.response", err)
 	}
 }
 
@@ -3389,6 +3515,30 @@ func TestCheckResponseSnapshot_PutTestSources(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_StartDependencyInsights(t *testing.T) {
+	want := &StartDependencyInsightsOutput{
+		Status: types.DependencyInsightsStatus("IN_PROGRESS"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartDependencyInsights.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartDependencyInsights(context.Background(), &StartDependencyInsightsInput{
+		ServiceArn:  ptr.String("__ServiceArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartDependencyInsights.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_StartFailureModeAssessment(t *testing.T) {
 	want := &StartFailureModeAssessmentOutput{
 		AssessmentId:     ptr.String("__AssessmentId__"),
@@ -3688,7 +3838,9 @@ func TestCheckResponseSnapshot_UpdatePolicy(t *testing.T) {
 			DataRecovery: &types.DataRecoveryTargets{
 				TimeBetweenBackupsInMinutes: ptr.Int32(1),
 			},
-			KmsKeyId: ptr.String("__KmsKeyId__"),
+			SharingEnabled: ptr.Bool(true),
+			OrganizationId: ptr.String("__OrganizationId__"),
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
@@ -3724,6 +3876,7 @@ func TestCheckResponseSnapshot_UpdatePolicy(t *testing.T) {
 		DataRecovery: &types.DataRecoveryTargets{
 			TimeBetweenBackupsInMinutes: ptr.Int32(1),
 		},
+		SharingEnabled: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)

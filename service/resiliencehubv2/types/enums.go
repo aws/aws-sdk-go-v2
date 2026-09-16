@@ -279,6 +279,48 @@ func (DependencyDiscoveryStatus) Values() []DependencyDiscoveryStatus {
 	}
 }
 
+type DependencyInsightsErrorCode string
+
+// Enum values for DependencyInsightsErrorCode
+const (
+	DependencyInsightsErrorCodeInsufficientData    DependencyInsightsErrorCode = "INSUFFICIENT_DATA"
+	DependencyInsightsErrorCodeLlmGenerationFailed DependencyInsightsErrorCode = "LLM_GENERATION_FAILED"
+	DependencyInsightsErrorCodeInternalError       DependencyInsightsErrorCode = "INTERNAL_ERROR"
+)
+
+// Values returns all known values for DependencyInsightsErrorCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DependencyInsightsErrorCode) Values() []DependencyInsightsErrorCode {
+	return []DependencyInsightsErrorCode{
+		"INSUFFICIENT_DATA",
+		"LLM_GENERATION_FAILED",
+		"INTERNAL_ERROR",
+	}
+}
+
+type DependencyInsightsStatus string
+
+// Enum values for DependencyInsightsStatus
+const (
+	DependencyInsightsStatusInProgress DependencyInsightsStatus = "IN_PROGRESS"
+	DependencyInsightsStatusCompleted  DependencyInsightsStatus = "COMPLETED"
+	DependencyInsightsStatusFailed     DependencyInsightsStatus = "FAILED"
+)
+
+// Values returns all known values for DependencyInsightsStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DependencyInsightsStatus) Values() []DependencyInsightsStatus {
+	return []DependencyInsightsStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
 type EksLabelSelectorOperator string
 
 // Enum values for EksLabelSelectorOperator
@@ -396,6 +438,31 @@ func (InputSourceType) Values() []InputSourceType {
 	}
 }
 
+type InsightsCategory string
+
+// Enum values for InsightsCategory
+const (
+	InsightsCategoryCrossRegion   InsightsCategory = "CROSS_REGION"
+	InsightsCategoryNewDependency InsightsCategory = "NEW_DEPENDENCY"
+	InsightsCategoryThirdParty    InsightsCategory = "THIRD_PARTY"
+	InsightsCategoryUnevenUsage   InsightsCategory = "UNEVEN_USAGE"
+	InsightsCategoryAwsService    InsightsCategory = "AWS_SERVICE"
+)
+
+// Values returns all known values for InsightsCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightsCategory) Values() []InsightsCategory {
+	return []InsightsCategory{
+		"CROSS_REGION",
+		"NEW_DEPENDENCY",
+		"THIRD_PARTY",
+		"UNEVEN_USAGE",
+		"AWS_SERVICE",
+	}
+}
+
 type MultiAzDisasterRecoveryApproach string
 
 // Enum values for MultiAzDisasterRecoveryApproach
@@ -489,6 +556,50 @@ func (PolicyComponent) Values() []PolicyComponent {
 		"MULTI_AZ_DISASTER_RECOVERY",
 		"MULTI_REGION_DISASTER_RECOVERY",
 		"DATA_RECOVERY",
+	}
+}
+
+type PolicyDisassociationReason string
+
+// Enum values for PolicyDisassociationReason
+const (
+	PolicyDisassociationReasonReplacedByUpdate PolicyDisassociationReason = "REPLACED_BY_UPDATE"
+	PolicyDisassociationReasonSharingRevoked   PolicyDisassociationReason = "SHARING_REVOKED"
+	PolicyDisassociationReasonPolicyDeleted    PolicyDisassociationReason = "POLICY_DELETED"
+)
+
+// Values returns all known values for PolicyDisassociationReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyDisassociationReason) Values() []PolicyDisassociationReason {
+	return []PolicyDisassociationReason{
+		"REPLACED_BY_UPDATE",
+		"SHARING_REVOKED",
+		"POLICY_DELETED",
+	}
+}
+
+type PolicyEventType string
+
+// Enum values for PolicyEventType
+const (
+	PolicyEventTypePolicyAttachedToService   PolicyEventType = "POLICY_ATTACHED_TO_SERVICE"
+	PolicyEventTypePolicyDetachedFromService PolicyEventType = "POLICY_DETACHED_FROM_SERVICE"
+	PolicyEventTypePolicySharingRevoked      PolicyEventType = "POLICY_SHARING_REVOKED"
+	PolicyEventTypePolicyDeleted             PolicyEventType = "POLICY_DELETED"
+)
+
+// Values returns all known values for PolicyEventType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyEventType) Values() []PolicyEventType {
+	return []PolicyEventType{
+		"POLICY_ATTACHED_TO_SERVICE",
+		"POLICY_DETACHED_FROM_SERVICE",
+		"POLICY_SHARING_REVOKED",
+		"POLICY_DELETED",
 	}
 }
 

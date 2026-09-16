@@ -92,6 +92,25 @@ func (ApplicationVersionStatus) Values() []ApplicationVersionStatus {
 	}
 }
 
+type ArchitectureType string
+
+// Enum values for ArchitectureType
+const (
+	ArchitectureTypeAmd64 ArchitectureType = "amd64"
+	ArchitectureTypeArm64 ArchitectureType = "arm64"
+)
+
+// Values returns all known values for ArchitectureType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ArchitectureType) Values() []ArchitectureType {
+	return []ArchitectureType{
+		"amd64",
+		"arm64",
+	}
+}
+
 type ComputeType string
 
 // Enum values for ComputeType
@@ -347,6 +366,25 @@ func (FailureType) Values() []FailureType {
 		"InternalFailure",
 		"InvalidEnvironmentState",
 		"PermissionsError",
+	}
+}
+
+type ImageBuildType string
+
+// Enum values for ImageBuildType
+const (
+	ImageBuildTypeDocker    ImageBuildType = "docker"
+	ImageBuildTypeBuildpack ImageBuildType = "buildpack"
+)
+
+// Values returns all known values for ImageBuildType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImageBuildType) Values() []ImageBuildType {
+	return []ImageBuildType{
+		"docker",
+		"buildpack",
 	}
 }
 

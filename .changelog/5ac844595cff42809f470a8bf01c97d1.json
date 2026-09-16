@@ -1,0 +1,8 @@
+{
+    "id": "5ac84459-5cff-4280-9f47-0a8bf01c97d1",
+    "type": "feature",
+    "description": "Adds support for ContactAnalysis via ListContactReferences.",
+    "modules": [
+        "service/connect"
+    ]
+}

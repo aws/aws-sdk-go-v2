@@ -38,7 +38,7 @@ type ListServiceEventsInput struct {
 	// The end time for filtering events.
 	EndTime *time.Time
 
-	// Filter events by type.
+	// The type of events to include in the results.
 	EventTypes []types.ServiceEventType
 
 	// Pagination page size.

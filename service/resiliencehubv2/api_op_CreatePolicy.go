@@ -56,6 +56,10 @@ type CreatePolicyInput struct {
 	// The multi-Region disaster recovery targets for the resilience policy.
 	MultiRegion *types.MultiRegionTargets
 
+	// Specifies whether cross-account sharing is enabled for the policy. Only a
+	// delegated administrator or the management account can enable sharing.
+	SharingEnabled *bool
+
 	// Resource tags.
 	Tags map[string]string
 
@@ -100,6 +104,9 @@ func (v *CreatePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreatePolicyRequest_name, *v.Name)
+	}
+	if v.SharingEnabled != nil {
+		s.WriteBool(schemas.CreatePolicyRequest_sharingEnabled, *v.SharingEnabled)
 	}
 	serializeTagMap(s, schemas.CreatePolicyRequest_tags, v.Tags)
 }

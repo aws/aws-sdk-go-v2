@@ -288,6 +288,12 @@ func serializeReferenceSummary(s smithy.ShapeSerializer, schema *smithy.Schema, 
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *ReferenceSummaryMemberContactAnalysis:
+		s.WriteUnion(schema, schemas.ReferenceSummary_ContactAnalysis)
+		s.WriteStruct(schemas.ReferenceSummary_ContactAnalysis)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *ReferenceSummaryMemberDate:
 		s.WriteUnion(schema, schemas.ReferenceSummary_Date)
 		s.WriteStruct(schemas.ReferenceSummary_Date)
@@ -650,6 +656,10 @@ func deserializeReferenceSummary(d smithy.ShapeDeserializer, s *smithy.Schema, v
 		switch ms {
 		case schemas.ReferenceSummary_Attachment:
 			vv := &ReferenceSummaryMemberAttachment{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ReferenceSummary_ContactAnalysis:
+			vv := &ReferenceSummaryMemberContactAnalysis{}
 			*v = vv
 			return vv.Deserialize(d)
 		case schemas.ReferenceSummary_Date:

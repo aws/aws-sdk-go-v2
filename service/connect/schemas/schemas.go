@@ -4625,6 +4625,22 @@ var ContactAnalysis = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ContactAnalysis_Transcript *smithy.Schema
 
+var ContactAnalysisReference = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ContactAnalysisReference",
+}, smithy.ShapeTypeStructure, 6)
+var ContactAnalysisReference_Name *smithy.Schema
+
+var ContactAnalysisReference_Value *smithy.Schema
+
+var ContactAnalysisReference_Status *smithy.Schema
+
+var ContactAnalysisReference_Arn *smithy.Schema
+
+var ContactAnalysisReference_AnalyticsMode *smithy.Schema
+
+var ContactAnalysisReference_IsRedacted *smithy.Schema
+
 var ContactConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ContactConfiguration",
@@ -13408,7 +13424,7 @@ var _ReferenceStatusReason = smithy.NewSchema(smithy.ShapeID{
 var ReferenceSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ReferenceSummary",
-}, smithy.ShapeTypeUnion, 10)
+}, smithy.ShapeTypeUnion, 11)
 var ReferenceSummary_Url *smithy.Schema
 
 var ReferenceSummary_Attachment *smithy.Schema
@@ -13428,6 +13444,8 @@ var ReferenceSummary_Number *smithy.Schema
 var ReferenceSummary_Date *smithy.Schema
 
 var ReferenceSummary_Email *smithy.Schema
+
+var ReferenceSummary_ContactAnalysis *smithy.Schema
 
 var _ReferenceSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -26615,6 +26633,18 @@ func init() {
 
 	ContactAnalysis_Transcript = ContactAnalysis.AddMember("Transcript", Transcript)
 
+	ContactAnalysisReference_Name = ContactAnalysisReference.AddMember("Name", _ReferenceKey)
+
+	ContactAnalysisReference_Value = ContactAnalysisReference.AddMember("Value", _ReferenceValue)
+
+	ContactAnalysisReference_Status = ContactAnalysisReference.AddMember("Status", ReferenceStatus)
+
+	ContactAnalysisReference_Arn = ContactAnalysisReference.AddMember("Arn", _ARN)
+
+	ContactAnalysisReference_AnalyticsMode = ContactAnalysisReference.AddMember("AnalyticsMode", AnalyticsMode)
+
+	ContactAnalysisReference_IsRedacted = ContactAnalysisReference.AddMember("IsRedacted", _NullableBoolean)
+
 	ContactConfiguration_ContactId = ContactConfiguration.AddMember("ContactId", _ContactId)
 
 	ContactConfiguration_ParticipantRole = ContactConfiguration.AddMember("ParticipantRole", ParticipantRole)
@@ -30368,6 +30398,8 @@ func init() {
 	ReferenceSummary_Date = ReferenceSummary.AddMember("Date", DateReference)
 
 	ReferenceSummary_Email = ReferenceSummary.AddMember("Email", EmailReference)
+
+	ReferenceSummary_ContactAnalysis = ReferenceSummary.AddMember("ContactAnalysis", ContactAnalysisReference)
 
 	_ReferenceSummaryList_member = _ReferenceSummaryList.AddMember("member", ReferenceSummary)
 

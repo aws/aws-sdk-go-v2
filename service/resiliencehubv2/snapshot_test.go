@@ -302,6 +302,18 @@ func TestCheckSnapshot_DeleteUserJourney(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetDependencyInsights(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDependencyInsights(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDependencyInsights")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetFailureModeFinding(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetFailureModeFinding(context.Background(), nil, func(o *Options) {
@@ -487,6 +499,18 @@ func TestCheckSnapshot_ListPolicies(t *testing.T) {
 	_, err := svc.ListPolicies(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPolicyEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicyEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPolicyEvents")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -727,6 +751,18 @@ func TestCheckSnapshot_PutTestSources(t *testing.T) {
 	_, err := svc.PutTestSources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutTestSources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartDependencyInsights(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartDependencyInsights(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartDependencyInsights")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1141,6 +1177,18 @@ func TestUpdateSnapshot_DeleteUserJourney(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetDependencyInsights(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDependencyInsights(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDependencyInsights")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetFailureModeFinding(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetFailureModeFinding(context.Background(), nil, func(o *Options) {
@@ -1326,6 +1374,18 @@ func TestUpdateSnapshot_ListPolicies(t *testing.T) {
 	_, err := svc.ListPolicies(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPolicyEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPolicyEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPolicyEvents")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1566,6 +1626,18 @@ func TestUpdateSnapshot_PutTestSources(t *testing.T) {
 	_, err := svc.PutTestSources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutTestSources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartDependencyInsights(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartDependencyInsights(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartDependencyInsights")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

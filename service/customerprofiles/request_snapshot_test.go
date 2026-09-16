@@ -6594,6 +6594,93 @@ func TestCheckRequestSnapshot_SearchProfiles(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_SearchRecommendations(t *testing.T) {
+	input := &SearchRecommendationsInput{
+		DomainName: ptr.String("__DomainName__"),
+		KeyName:    ptr.String("__KeyName__"),
+		KeyValues: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Recommender: &types.Recommender{
+			Name: ptr.String("__Name__"),
+			Filters: []types.RecommenderFilter{
+				{
+					Name: ptr.String("__Name__"),
+					Values: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Values: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+			PromotionalFilters: []types.RecommenderPromotionalFilter{
+				{
+					Name: ptr.String("__Name__"),
+					Values: map[string]string{
+						"key0": "__Value__",
+					},
+					PromotionName:        ptr.String("__PromotionName__"),
+					PercentPromotedItems: ptr.Int32(1),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Values: map[string]string{
+						"key0": "__Value__",
+					},
+					PromotionName:        ptr.String("__PromotionName__"),
+					PercentPromotedItems: ptr.Int32(1),
+				},
+			},
+		},
+		CandidateIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Context: map[string]string{
+			"key0": "__Value__",
+		},
+		Diversity: &types.RecommendationDiversityConfig{
+			Enabled: ptr.Bool(true),
+			Values: map[string]int32{
+				"key0": 1,
+			},
+		},
+		Metadata: &types.RecommendationMetadata{
+			Columns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MaxRecommendations: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SearchRecommendations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchRecommendations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_StartRecommender(t *testing.T) {
 	input := &StartRecommenderInput{
 		DomainName:      ptr.String("__DomainName__"),
@@ -13695,6 +13782,93 @@ func TestUpdateRequestSnapshot_SearchProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchProfiles"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_SearchRecommendations(t *testing.T) {
+	input := &SearchRecommendationsInput{
+		DomainName: ptr.String("__DomainName__"),
+		KeyName:    ptr.String("__KeyName__"),
+		KeyValues: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Recommender: &types.Recommender{
+			Name: ptr.String("__Name__"),
+			Filters: []types.RecommenderFilter{
+				{
+					Name: ptr.String("__Name__"),
+					Values: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Values: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+			PromotionalFilters: []types.RecommenderPromotionalFilter{
+				{
+					Name: ptr.String("__Name__"),
+					Values: map[string]string{
+						"key0": "__Value__",
+					},
+					PromotionName:        ptr.String("__PromotionName__"),
+					PercentPromotedItems: ptr.Int32(1),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Values: map[string]string{
+						"key0": "__Value__",
+					},
+					PromotionName:        ptr.String("__PromotionName__"),
+					PercentPromotedItems: ptr.Int32(1),
+				},
+			},
+		},
+		CandidateIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Context: map[string]string{
+			"key0": "__Value__",
+		},
+		Diversity: &types.RecommendationDiversityConfig{
+			Enabled: ptr.Bool(true),
+			Values: map[string]int32{
+				"key0": 1,
+			},
+		},
+		Metadata: &types.RecommendationMetadata{
+			Columns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MaxRecommendations: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SearchRecommendations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchRecommendations"); err != nil {
 		t.Fatal(err)
 	}
 }

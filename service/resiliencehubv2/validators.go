@@ -410,6 +410,26 @@ func (m *validateOpDeleteUserJourney) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDependencyInsights struct {
+}
+
+func (*validateOpGetDependencyInsights) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDependencyInsights) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDependencyInsightsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDependencyInsightsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetFailureModeFinding struct {
 }
 
@@ -685,6 +705,26 @@ func (m *validateOpListInputSources) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListInputSourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListPolicyEvents struct {
+}
+
+func (*validateOpListPolicyEvents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPolicyEvents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPolicyEventsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPolicyEventsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1005,6 +1045,26 @@ func (m *validateOpPutTestSources) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutTestSourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartDependencyInsights struct {
+}
+
+func (*validateOpStartDependencyInsights) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartDependencyInsights) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartDependencyInsightsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartDependencyInsightsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1370,6 +1430,10 @@ func addOpDeleteUserJourneyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteUserJourney{}, middleware.After)
 }
 
+func addOpGetDependencyInsightsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDependencyInsights{}, middleware.After)
+}
+
 func addOpGetFailureModeFindingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFailureModeFinding{}, middleware.After)
 }
@@ -1424,6 +1488,10 @@ func addOpListFailureModeFindingsValidationMiddleware(stack *middleware.Stack) e
 
 func addOpListInputSourcesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListInputSources{}, middleware.After)
+}
+
+func addOpListPolicyEventsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPolicyEvents{}, middleware.After)
 }
 
 func addOpListResolvedTestRunTargetResourcesValidationMiddleware(stack *middleware.Stack) error {
@@ -1488,6 +1556,10 @@ func addOpListUserJourneysValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutTestSourcesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutTestSources{}, middleware.After)
+}
+
+func addOpStartDependencyInsightsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartDependencyInsights{}, middleware.After)
 }
 
 func addOpStartFailureModeAssessmentValidationMiddleware(stack *middleware.Stack) error {
@@ -2330,6 +2402,21 @@ func validateOpDeleteUserJourneyInput(v *DeleteUserJourneyInput) error {
 	}
 }
 
+func validateOpGetDependencyInsightsInput(v *GetDependencyInsightsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDependencyInsightsInput"}
+	if v.ServiceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetFailureModeFindingInput(v *GetFailureModeFindingInput) error {
 	if v == nil {
 		return nil
@@ -2549,6 +2636,21 @@ func validateOpListInputSourcesInput(v *ListInputSourcesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListInputSourcesInput"}
 	if v.ServiceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPolicyEventsInput(v *ListPolicyEventsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPolicyEventsInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2820,6 +2922,21 @@ func validateOpPutTestSourcesInput(v *PutTestSourcesInput) error {
 		if err := validateTestSourceInputList(v.TestSources); err != nil {
 			invalidParams.AddNested("TestSources", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartDependencyInsightsInput(v *StartDependencyInsightsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartDependencyInsightsInput"}
+	if v.ServiceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

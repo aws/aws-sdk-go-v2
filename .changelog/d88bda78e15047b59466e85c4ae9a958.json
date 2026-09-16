@@ -1,0 +1,8 @@
+{
+    "id": "d88bda78-e150-47b5-9466-e85c4ae9a958",
+    "type": "feature",
+    "description": "Adds support to create and manage Elastic Beanstalk Cluster Environments.",
+    "modules": [
+        "service/elasticbeanstalk"
+    ]
+}

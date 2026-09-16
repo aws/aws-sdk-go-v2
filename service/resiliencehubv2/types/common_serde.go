@@ -7,6 +7,35 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+func serializePolicyEventMetadata(s smithy.ShapeSerializer, schema *smithy.Schema, v PolicyEventMetadata) {
+	switch vv := v.(type) {
+	case *PolicyEventMetadataMemberPolicyAttachedToService:
+		s.WriteUnion(schema, schemas.PolicyEventMetadata_policyAttachedToService)
+		s.WriteStruct(schemas.PolicyEventMetadata_policyAttachedToService)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *PolicyEventMetadataMemberPolicyDeleted:
+		s.WriteUnion(schema, schemas.PolicyEventMetadata_policyDeleted)
+		s.WriteStruct(schemas.PolicyEventMetadata_policyDeleted)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *PolicyEventMetadataMemberPolicyDetachedFromService:
+		s.WriteUnion(schema, schemas.PolicyEventMetadata_policyDetachedFromService)
+		s.WriteStruct(schemas.PolicyEventMetadata_policyDetachedFromService)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *PolicyEventMetadataMemberPolicySharingRevoked:
+		s.WriteUnion(schema, schemas.PolicyEventMetadata_policySharingRevoked)
+		s.WriteStruct(schemas.PolicyEventMetadata_policySharingRevoked)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeReportOutput(s smithy.ShapeSerializer, schema *smithy.Schema, v ReportOutput) {
 	switch vv := v.(type) {
 	case *ReportOutputMemberFailedReportOutput:
@@ -306,6 +335,30 @@ func serializeTestSourceSummary(s smithy.ShapeSerializer, schema *smithy.Schema,
 		s.CloseStruct()
 		s.CloseUnion()
 	}
+}
+
+func deserializePolicyEventMetadata(d smithy.ShapeDeserializer, s *smithy.Schema, v *PolicyEventMetadata) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.PolicyEventMetadata_policyAttachedToService:
+			vv := &PolicyEventMetadataMemberPolicyAttachedToService{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.PolicyEventMetadata_policyDeleted:
+			vv := &PolicyEventMetadataMemberPolicyDeleted{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.PolicyEventMetadata_policyDetachedFromService:
+			vv := &PolicyEventMetadataMemberPolicyDetachedFromService{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.PolicyEventMetadata_policySharingRevoked:
+			vv := &PolicyEventMetadataMemberPolicySharingRevoked{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 func deserializeReportOutput(d smithy.ShapeDeserializer, s *smithy.Schema, v *ReportOutput) error {
@@ -630,6 +683,19 @@ func serializeCrossAccountRoleList(s smithy.ShapeSerializer, schema *smithy.Sche
 	s.CloseList()
 }
 
+func serializeDependencyInsightsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []DependencyInsight) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeDependencySummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []DependencySummary) {
 	if v == nil {
 		return
@@ -774,6 +840,30 @@ func serializeObservabilityRecommendationsList(s smithy.ShapeSerializer, schema 
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializePolicyEventList(s smithy.ShapeSerializer, schema *smithy.Schema, v []PolicyEvent) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializePolicyEventTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []PolicyEventType) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -1363,6 +1453,20 @@ func deserializeCrossAccountRoleList(d smithy.ShapeDeserializer, s *smithy.Schem
 	})
 }
 
+func deserializeDependencyInsightsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DependencyInsight) error {
+	*v = make([]DependencyInsight, 0)
+	var vv DependencyInsight
+	return smithy.ReadList(d, s, func() error {
+		vv = DependencyInsight{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeDependencySummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DependencySummary) error {
 	*v = make([]DependencySummary, 0)
 	var vv DependencySummary
@@ -1527,6 +1631,34 @@ func deserializeObservabilityRecommendationsList(d smithy.ShapeDeserializer, s *
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializePolicyEventList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PolicyEvent) error {
+	*v = make([]PolicyEvent, 0)
+	var vv PolicyEvent
+	return smithy.ReadList(d, s, func() error {
+		vv = PolicyEvent{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializePolicyEventTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PolicyEventType) error {
+	*v = make([]PolicyEventType, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, PolicyEventType(vv))
 		return nil
 	})
 }

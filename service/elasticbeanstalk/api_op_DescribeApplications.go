@@ -9,6 +9,23 @@ import (
 )
 
 // Returns the descriptions of existing applications.
+//
+// This action only returns information about applications that the calling
+// principle has IAM permissions to access. For example, consider a case where a
+// user only has permission to access two of three applications. When the user
+// calls the DescribeApplications action, the response will only include the two
+// applications that the user has permission to access instead of all three
+// applications. If the user doesn’t have access to any of the applications an
+// empty result is returned.
+//
+// The AWSElasticBeanstalkReadOnly managed policy allows operators to view
+// information about resources related to Elastic Beanstalk environments. For more
+// information, see [Managing Elastic Beanstalk user policies]in the Elastic Beanstalk Developer Guide. For detailed
+// instructions to attach a policy to a user or group, see the section [Controlling access with managed policies]in the same
+// topic.
+//
+// [Managing Elastic Beanstalk user policies]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html
+// [Controlling access with managed policies]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed
 func (c *Client) DescribeApplications(ctx context.Context, params *DescribeApplicationsInput, optFns ...func(*Options)) (*DescribeApplicationsOutput, error) {
 	if params == nil {
 		params = &DescribeApplicationsInput{}
@@ -27,7 +44,7 @@ func (c *Client) DescribeApplications(ctx context.Context, params *DescribeAppli
 // Request to describe one or more applications.
 type DescribeApplicationsInput struct {
 
-	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to only
+	// If specified, Elastic Beanstalk restricts the returned descriptions to only
 	// include those with the specified names.
 	ApplicationNames []string
 

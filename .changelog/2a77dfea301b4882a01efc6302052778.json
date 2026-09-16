@@ -1,0 +1,8 @@
+{
+    "id": "2a77dfea-301b-4882-a01e-fc6302052778",
+    "type": "feature",
+    "description": "This release introduces the SearchRecommendations API, which retrieves recommendations for a profile identified by a search key.",
+    "modules": [
+        "service/customerprofiles"
+    ]
+}

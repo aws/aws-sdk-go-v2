@@ -301,7 +301,8 @@ func TestCheckRequestSnapshot_CreatePolicy(t *testing.T) {
 		DataRecovery: &types.DataRecoveryTargets{
 			TimeBetweenBackupsInMinutes: ptr.Int32(1),
 		},
-		KmsKeyId: ptr.String("__KmsKeyId__"),
+		SharingEnabled: ptr.Bool(true),
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -916,6 +917,33 @@ func TestCheckRequestSnapshot_DeleteUserJourney(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetDependencyInsights(t *testing.T) {
+	input := &GetDependencyInsightsInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDependencyInsights(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDependencyInsights"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetFailureModeFinding(t *testing.T) {
 	input := &GetFailureModeFindingInput{
 		FindingId:  ptr.String("__FindingId__"),
@@ -1388,6 +1416,7 @@ func TestCheckRequestSnapshot_ListInputSources(t *testing.T) {
 
 func TestCheckRequestSnapshot_ListPolicies(t *testing.T) {
 	input := &ListPoliciesInput{
+		AccountId:  ptr.String("__AccountId__"),
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
 	}
@@ -1410,6 +1439,41 @@ func TestCheckRequestSnapshot_ListPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPolicies"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListPolicyEvents(t *testing.T) {
+	input := &ListPolicyEventsInput{
+		PolicyArn: ptr.String("__PolicyArn__"),
+		EventTypes: []types.PolicyEventType{
+			types.PolicyEventType("POLICY_ATTACHED_TO_SERVICE"),
+			types.PolicyEventType("POLICY_ATTACHED_TO_SERVICE"),
+		},
+		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListPolicyEvents(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPolicyEvents"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2037,6 +2101,34 @@ func TestCheckRequestSnapshot_PutTestSources(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_StartDependencyInsights(t *testing.T) {
+	input := &StartDependencyInsightsInput{
+		ServiceArn:  ptr.String("__ServiceArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartDependencyInsights(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartDependencyInsights"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_StartFailureModeAssessment(t *testing.T) {
 	input := &StartFailureModeAssessmentInput{
 		ServiceArn:  ptr.String("__ServiceArn__"),
@@ -2291,6 +2383,7 @@ func TestCheckRequestSnapshot_UpdatePolicy(t *testing.T) {
 		DataRecovery: &types.DataRecoveryTargets{
 			TimeBetweenBackupsInMinutes: ptr.Int32(1),
 		},
+		SharingEnabled: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2631,7 +2724,8 @@ func TestUpdateRequestSnapshot_CreatePolicy(t *testing.T) {
 		DataRecovery: &types.DataRecoveryTargets{
 			TimeBetweenBackupsInMinutes: ptr.Int32(1),
 		},
-		KmsKeyId: ptr.String("__KmsKeyId__"),
+		SharingEnabled: ptr.Bool(true),
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -3246,6 +3340,33 @@ func TestUpdateRequestSnapshot_DeleteUserJourney(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetDependencyInsights(t *testing.T) {
+	input := &GetDependencyInsightsInput{
+		ServiceArn: ptr.String("__ServiceArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDependencyInsights(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDependencyInsights"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetFailureModeFinding(t *testing.T) {
 	input := &GetFailureModeFindingInput{
 		FindingId:  ptr.String("__FindingId__"),
@@ -3718,6 +3839,7 @@ func TestUpdateRequestSnapshot_ListInputSources(t *testing.T) {
 
 func TestUpdateRequestSnapshot_ListPolicies(t *testing.T) {
 	input := &ListPoliciesInput{
+		AccountId:  ptr.String("__AccountId__"),
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
 	}
@@ -3740,6 +3862,41 @@ func TestUpdateRequestSnapshot_ListPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPolicies"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListPolicyEvents(t *testing.T) {
+	input := &ListPolicyEventsInput{
+		PolicyArn: ptr.String("__PolicyArn__"),
+		EventTypes: []types.PolicyEventType{
+			types.PolicyEventType("POLICY_ATTACHED_TO_SERVICE"),
+			types.PolicyEventType("POLICY_ATTACHED_TO_SERVICE"),
+		},
+		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListPolicyEvents(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPolicyEvents"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4367,6 +4524,34 @@ func TestUpdateRequestSnapshot_PutTestSources(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_StartDependencyInsights(t *testing.T) {
+	input := &StartDependencyInsightsInput{
+		ServiceArn:  ptr.String("__ServiceArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartDependencyInsights(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartDependencyInsights"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_StartFailureModeAssessment(t *testing.T) {
 	input := &StartFailureModeAssessmentInput{
 		ServiceArn:  ptr.String("__ServiceArn__"),
@@ -4621,6 +4806,7 @@ func TestUpdateRequestSnapshot_UpdatePolicy(t *testing.T) {
 		DataRecovery: &types.DataRecoveryTargets{
 			TimeBetweenBackupsInMinutes: ptr.Int32(1),
 		},
+		SharingEnabled: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""

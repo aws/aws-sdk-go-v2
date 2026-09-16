@@ -1757,7 +1757,7 @@ var _ResaleAuthorizationEntityIdString = smithy.NewSchema(smithy.ShapeID{
 var ResaleAuthorizationFilters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "ResaleAuthorizationFilters",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 16)
 var ResaleAuthorizationFilters_EntityId *smithy.Schema
 
 var ResaleAuthorizationFilters_Name *smithy.Schema
@@ -1785,6 +1785,27 @@ var ResaleAuthorizationFilters_OfferExtendedStatus *smithy.Schema
 var ResaleAuthorizationFilters_LastModifiedDate *smithy.Schema
 
 var ResaleAuthorizationFilters_ResellerRole *smithy.Schema
+
+var ResaleAuthorizationFilters_SourceAuthorization *smithy.Schema
+
+var ResaleAuthorizationFilters_IssuerAccountId *smithy.Schema
+
+var ResaleAuthorizationIssuerAccountIdFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ResaleAuthorizationIssuerAccountIdFilter",
+}, smithy.ShapeTypeStructure, 1)
+var ResaleAuthorizationIssuerAccountIdFilter_ValueList *smithy.Schema
+
+var _ResaleAuthorizationIssuerAccountIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ResaleAuthorizationIssuerAccountIdFilterValueList",
+}, smithy.ShapeTypeList, 1)
+var _ResaleAuthorizationIssuerAccountIdFilterValueList_member *smithy.Schema
+
+var _ResaleAuthorizationIssuerAccountIdString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ResaleAuthorizationIssuerAccountIdString",
+}, smithy.ShapeTypeString, 0)
 
 var ResaleAuthorizationLastModifiedDateFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
@@ -2016,7 +2037,7 @@ var ResaleAuthorizationSort_SortOrder *smithy.Schema
 var ResaleAuthorizationSortBy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "ResaleAuthorizationSortBy",
-}, smithy.ShapeTypeEnum, 13)
+}, smithy.ShapeTypeEnum, 16)
 var ResaleAuthorizationSortBy_EntityId *smithy.Schema
 
 var ResaleAuthorizationSortBy_Name *smithy.Schema
@@ -2043,6 +2064,29 @@ var ResaleAuthorizationSortBy_AvailabilityEndDate *smithy.Schema
 
 var ResaleAuthorizationSortBy_LastModifiedDate *smithy.Schema
 
+var ResaleAuthorizationSortBy_ResellerRole *smithy.Schema
+
+var ResaleAuthorizationSortBy_SourceAuthorization *smithy.Schema
+
+var ResaleAuthorizationSortBy_IssuerAccountId *smithy.Schema
+
+var ResaleAuthorizationSourceAuthorizationFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ResaleAuthorizationSourceAuthorizationFilter",
+}, smithy.ShapeTypeStructure, 1)
+var ResaleAuthorizationSourceAuthorizationFilter_ValueList *smithy.Schema
+
+var _ResaleAuthorizationSourceAuthorizationFilterValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ResaleAuthorizationSourceAuthorizationFilterValueList",
+}, smithy.ShapeTypeList, 1)
+var _ResaleAuthorizationSourceAuthorizationFilterValueList_member *smithy.Schema
+
+var _ResaleAuthorizationSourceAuthorizationString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ResaleAuthorizationSourceAuthorizationString",
+}, smithy.ShapeTypeString, 0)
+
 var ResaleAuthorizationStatusFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "ResaleAuthorizationStatusFilter",
@@ -2068,7 +2112,7 @@ var ResaleAuthorizationStatusString_Restricted *smithy.Schema
 var ResaleAuthorizationSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "ResaleAuthorizationSummary",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 14)
 var ResaleAuthorizationSummary_Name *smithy.Schema
 
 var ResaleAuthorizationSummary_ProductId *smithy.Schema
@@ -2092,6 +2136,10 @@ var ResaleAuthorizationSummary_CreatedDate *smithy.Schema
 var ResaleAuthorizationSummary_AvailabilityEndDate *smithy.Schema
 
 var ResaleAuthorizationSummary_ResellerRole *smithy.Schema
+
+var ResaleAuthorizationSummary_SourceAuthorization *smithy.Schema
+
+var ResaleAuthorizationSummary_IssuerAccountId *smithy.Schema
 
 var _ResourceARN = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
@@ -3110,6 +3158,10 @@ func init() {
 
 	ResaleAuthorizationSummary_ResellerRole = ResaleAuthorizationSummary.AddMember("ResellerRole", ResaleAuthorizationResellerRoleString)
 
+	ResaleAuthorizationSummary_SourceAuthorization = ResaleAuthorizationSummary.AddMember("SourceAuthorization", _ResaleAuthorizationSourceAuthorizationString)
+
+	ResaleAuthorizationSummary_IssuerAccountId = ResaleAuthorizationSummary.AddMember("IssuerAccountId", _ResaleAuthorizationIssuerAccountIdString)
+
 	MachineLearningProductVisibilityString_Limited = MachineLearningProductVisibilityString.AddMember("Limited", smithyprelude.Unit)
 
 	MachineLearningProductVisibilityString_Public = MachineLearningProductVisibilityString.AddMember("Public", smithyprelude.Unit)
@@ -3370,6 +3422,14 @@ func init() {
 
 	ResaleAuthorizationResellerRoleFilter_ValueList = ResaleAuthorizationResellerRoleFilter.AddMember("ValueList", _ResaleAuthorizationResellerRoleFilterValueList)
 
+	_ResaleAuthorizationSourceAuthorizationFilterValueList_member = _ResaleAuthorizationSourceAuthorizationFilterValueList.AddMember("member", _ResaleAuthorizationSourceAuthorizationString)
+
+	ResaleAuthorizationSourceAuthorizationFilter_ValueList = ResaleAuthorizationSourceAuthorizationFilter.AddMember("ValueList", _ResaleAuthorizationSourceAuthorizationFilterValueList)
+
+	_ResaleAuthorizationIssuerAccountIdFilterValueList_member = _ResaleAuthorizationIssuerAccountIdFilterValueList.AddMember("member", _ResaleAuthorizationIssuerAccountIdString)
+
+	ResaleAuthorizationIssuerAccountIdFilter_ValueList = ResaleAuthorizationIssuerAccountIdFilter.AddMember("ValueList", _ResaleAuthorizationIssuerAccountIdFilterValueList)
+
 	ResaleAuthorizationFilters_EntityId = ResaleAuthorizationFilters.AddMember("EntityId", ResaleAuthorizationEntityIdFilter)
 
 	ResaleAuthorizationFilters_Name = ResaleAuthorizationFilters.AddMember("Name", ResaleAuthorizationNameFilter)
@@ -3397,6 +3457,10 @@ func init() {
 	ResaleAuthorizationFilters_LastModifiedDate = ResaleAuthorizationFilters.AddMember("LastModifiedDate", ResaleAuthorizationLastModifiedDateFilter)
 
 	ResaleAuthorizationFilters_ResellerRole = ResaleAuthorizationFilters.AddMember("ResellerRole", ResaleAuthorizationResellerRoleFilter)
+
+	ResaleAuthorizationFilters_SourceAuthorization = ResaleAuthorizationFilters.AddMember("SourceAuthorization", ResaleAuthorizationSourceAuthorizationFilter)
+
+	ResaleAuthorizationFilters_IssuerAccountId = ResaleAuthorizationFilters.AddMember("IssuerAccountId", ResaleAuthorizationIssuerAccountIdFilter)
 
 	_MachineLearningProductEntityIdFilterValueList_member = _MachineLearningProductEntityIdFilterValueList.AddMember("member", _MachineLearningProductEntityIdString)
 
@@ -3559,6 +3623,12 @@ func init() {
 	ResaleAuthorizationSortBy_AvailabilityEndDate = ResaleAuthorizationSortBy.AddMember("AvailabilityEndDate", smithyprelude.Unit)
 
 	ResaleAuthorizationSortBy_LastModifiedDate = ResaleAuthorizationSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
+
+	ResaleAuthorizationSortBy_ResellerRole = ResaleAuthorizationSortBy.AddMember("ResellerRole", smithyprelude.Unit)
+
+	ResaleAuthorizationSortBy_SourceAuthorization = ResaleAuthorizationSortBy.AddMember("SourceAuthorization", smithyprelude.Unit)
+
+	ResaleAuthorizationSortBy_IssuerAccountId = ResaleAuthorizationSortBy.AddMember("IssuerAccountId", smithyprelude.Unit)
 
 	ResaleAuthorizationSort_SortBy = ResaleAuthorizationSort.AddMember("SortBy", ResaleAuthorizationSortBy)
 

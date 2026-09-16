@@ -38,8 +38,7 @@ type UpdateApplicationInput struct {
 
 	// A new description for the application.
 	//
-	// Default: If not specified, AWS Elastic Beanstalk does not update the
-	// description.
+	// Default: If not specified, Elastic Beanstalk does not update the description.
 	Description *string
 
 	noSmithyDocumentSerde

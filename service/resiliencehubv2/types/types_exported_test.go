@@ -7,6 +7,36 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
 )
 
+func ExamplePolicyEventMetadata_outputUsage() {
+	var union types.PolicyEventMetadata
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PolicyEventMetadataMemberPolicyAttachedToService:
+		_ = v.Value // Value is types.PolicyAttachedToServiceMetadata
+
+	case *types.PolicyEventMetadataMemberPolicyDeleted:
+		_ = v.Value // Value is types.PolicyDeletedMetadata
+
+	case *types.PolicyEventMetadataMemberPolicyDetachedFromService:
+		_ = v.Value // Value is types.PolicyDetachedFromServiceMetadata
+
+	case *types.PolicyEventMetadataMemberPolicySharingRevoked:
+		_ = v.Value // Value is types.PolicySharingRevokedMetadata
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.PolicyAttachedToServiceMetadata
+var _ *types.PolicyDetachedFromServiceMetadata
+var _ *types.PolicySharingRevokedMetadata
+var _ *types.PolicyDeletedMetadata
+
 func ExampleReportOutput_outputUsage() {
 	var union types.ReportOutput
 	// type switches can be used to check the union value

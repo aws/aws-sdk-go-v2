@@ -522,6 +522,9 @@ const (
 	ResaleAuthorizationSortByCreatedDate           ResaleAuthorizationSortBy = "CreatedDate"
 	ResaleAuthorizationSortByAvailabilityEndDate   ResaleAuthorizationSortBy = "AvailabilityEndDate"
 	ResaleAuthorizationSortByLastModifiedDate      ResaleAuthorizationSortBy = "LastModifiedDate"
+	ResaleAuthorizationSortByResellerRole          ResaleAuthorizationSortBy = "ResellerRole"
+	ResaleAuthorizationSortBySourceAuthorization   ResaleAuthorizationSortBy = "SourceAuthorization"
+	ResaleAuthorizationSortByIssuerAccountId       ResaleAuthorizationSortBy = "IssuerAccountId"
 )
 
 // Values returns all known values for ResaleAuthorizationSortBy. Note that this
@@ -543,6 +546,9 @@ func (ResaleAuthorizationSortBy) Values() []ResaleAuthorizationSortBy {
 		"CreatedDate",
 		"AvailabilityEndDate",
 		"LastModifiedDate",
+		"ResellerRole",
+		"SourceAuthorization",
+		"IssuerAccountId",
 	}
 }
 

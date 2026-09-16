@@ -10,8 +10,24 @@ import (
 )
 
 // Returns information about the overall health of the specified environment. The
-// DescribeEnvironmentHealth operation is only available with AWS Elastic Beanstalk
+// DescribeEnvironmentHealth operation is only available with Elastic Beanstalk
 // Enhanced Health.
+//
+// This action only returns information about environments that the calling
+// principle has IAM permissions to access. For example, consider a case where a
+// user only has permission to access one of three environments. When the user
+// calls this action, the response will only include the one environment that the
+// user has permission to access instead of all three environments. If the user
+// doesn’t have access to any of the environments an empty result is returned.
+//
+// The [AWSElasticBeanstalkReadOnly] managed policy allows operators to view information about resources
+// related to Elastic Beanstalk environments. For more information, see [Managing Elastic Beanstalk user policies]in the
+// Elastic Beanstalk Developer Guide. For detailed instructions to attach a policy
+// to a user or group, see the section [Controlling access with managed policies]in the same topic.
+//
+// [AWSElasticBeanstalkReadOnly]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html
+// [Managing Elastic Beanstalk user policies]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html
+// [Controlling access with managed policies]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed
 func (c *Client) DescribeEnvironmentHealth(ctx context.Context, params *DescribeEnvironmentHealthInput, optFns ...func(*Options)) (*DescribeEnvironmentHealthOutput, error) {
 	if params == nil {
 		params = &DescribeEnvironmentHealthInput{}
@@ -47,7 +63,7 @@ type DescribeEnvironmentHealthInput struct {
 	noSmithyDocumentSerde
 }
 
-// Health details for an AWS Elastic Beanstalk environment.
+// Health details for an Elastic Beanstalk environment.
 type DescribeEnvironmentHealthOutput struct {
 
 	// Application request metrics for the environment.

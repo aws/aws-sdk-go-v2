@@ -219,7 +219,9 @@ func TestUpdateResponseSnapshot_CreatePolicy(t *testing.T) {
 			DataRecovery: &types.DataRecoveryTargets{
 				TimeBetweenBackupsInMinutes: ptr.Int32(1),
 			},
-			KmsKeyId: ptr.String("__KmsKeyId__"),
+			SharingEnabled: ptr.Bool(true),
+			OrganizationId: ptr.String("__OrganizationId__"),
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
@@ -884,6 +886,44 @@ func TestUpdateResponseSnapshot_DeleteUserJourney(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetDependencyInsights(t *testing.T) {
+	want := &GetDependencyInsightsOutput{
+		Overview: ptr.String("__Overview__"),
+		Insights: []types.DependencyInsight{
+			{
+				Category:    types.InsightsCategory("CROSS_REGION"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Category:    types.InsightsCategory("CROSS_REGION"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		Status:       types.DependencyInsightsStatus("IN_PROGRESS"),
+		CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ErrorCode:    types.DependencyInsightsErrorCode("INSUFFICIENT_DATA"),
+		ErrorMessage: ptr.String("__ErrorMessage__"),
+	}
+	proto := restjson1.New(schemas.NGRHServiceCore)
+	opSchema := smithy.NewOperationSchema(schemas.GetDependencyInsights, schemas.GetDependencyInsightsResponse, schemas.GetDependencyInsightsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetDependencyInsights.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetFailureModeFinding(t *testing.T) {
 	want := &GetFailureModeFindingOutput{
 		Finding: &types.Finding{
@@ -987,7 +1027,9 @@ func TestUpdateResponseSnapshot_GetPolicy(t *testing.T) {
 			DataRecovery: &types.DataRecoveryTargets{
 				TimeBetweenBackupsInMinutes: ptr.Int32(1),
 			},
-			KmsKeyId: ptr.String("__KmsKeyId__"),
+			SharingEnabled: ptr.Bool(true),
+			OrganizationId: ptr.String("__OrganizationId__"),
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
@@ -1681,7 +1723,9 @@ func TestUpdateResponseSnapshot_ImportPolicy(t *testing.T) {
 			DataRecovery: &types.DataRecoveryTargets{
 				TimeBetweenBackupsInMinutes: ptr.Int32(1),
 			},
-			KmsKeyId: ptr.String("__KmsKeyId__"),
+			SharingEnabled: ptr.Bool(true),
+			OrganizationId: ptr.String("__OrganizationId__"),
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},
@@ -2112,6 +2156,8 @@ func TestUpdateResponseSnapshot_ListPolicies(t *testing.T) {
 				DataRecovery: &types.DataRecoveryTargets{
 					TimeBetweenBackupsInMinutes: ptr.Int32(1),
 				},
+				SharingEnabled:         ptr.Bool(true),
+				OrganizationId:         ptr.String("__OrganizationId__"),
 				AssociatedServiceCount: ptr.Int32(1),
 				CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -2135,6 +2181,8 @@ func TestUpdateResponseSnapshot_ListPolicies(t *testing.T) {
 				DataRecovery: &types.DataRecoveryTargets{
 					TimeBetweenBackupsInMinutes: ptr.Int32(1),
 				},
+				SharingEnabled:         ptr.Bool(true),
+				OrganizationId:         ptr.String("__OrganizationId__"),
 				AssociatedServiceCount: ptr.Int32(1),
 				CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -2158,6 +2206,76 @@ func TestUpdateResponseSnapshot_ListPolicies(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListPolicies.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListPolicyEvents(t *testing.T) {
+	want := &ListPolicyEventsOutput{
+		Events: []types.PolicyEvent{
+			{
+				EventId:   ptr.String("__EventId__"),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventType: types.PolicyEventType("POLICY_ATTACHED_TO_SERVICE"),
+				PolicyArn: ptr.String("__PolicyArn__"),
+				Actor: &types.EventActor{
+					Type:        types.ActorType("USER"),
+					PrincipalId: ptr.String("__PrincipalId__"),
+					AccountId:   ptr.String("__AccountId__"),
+					UserName:    ptr.String("__UserName__"),
+				},
+				EventDetails: &types.PolicyEventDetails{
+					Title:       ptr.String("__Title__"),
+					Description: ptr.String("__Description__"),
+					EventMetadata: &types.PolicyEventMetadataMemberPolicyAttachedToService{
+						Value: types.PolicyAttachedToServiceMetadata{
+							ServiceArn: ptr.String("__ServiceArn__"),
+							AccountId:  ptr.String("__AccountId__"),
+						},
+					},
+				},
+			},
+			{
+				EventId:   ptr.String("__EventId__"),
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventType: types.PolicyEventType("POLICY_ATTACHED_TO_SERVICE"),
+				PolicyArn: ptr.String("__PolicyArn__"),
+				Actor: &types.EventActor{
+					Type:        types.ActorType("USER"),
+					PrincipalId: ptr.String("__PrincipalId__"),
+					AccountId:   ptr.String("__AccountId__"),
+					UserName:    ptr.String("__UserName__"),
+				},
+				EventDetails: &types.PolicyEventDetails{
+					Title:       ptr.String("__Title__"),
+					Description: ptr.String("__Description__"),
+					EventMetadata: &types.PolicyEventMetadataMemberPolicyAttachedToService{
+						Value: types.PolicyAttachedToServiceMetadata{
+							ServiceArn: ptr.String("__ServiceArn__"),
+							AccountId:  ptr.String("__AccountId__"),
+						},
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.NGRHServiceCore)
+	opSchema := smithy.NewOperationSchema(schemas.ListPolicyEvents, schemas.ListPolicyEventsResponse, schemas.ListPolicyEventsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListPolicyEvents.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3160,6 +3278,30 @@ func TestUpdateResponseSnapshot_PutTestSources(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_StartDependencyInsights(t *testing.T) {
+	want := &StartDependencyInsightsOutput{
+		Status: types.DependencyInsightsStatus("IN_PROGRESS"),
+	}
+	proto := restjson1.New(schemas.NGRHServiceCore)
+	opSchema := smithy.NewOperationSchema(schemas.StartDependencyInsights, schemas.StartDependencyInsightsResponse, schemas.StartDependencyInsightsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartDependencyInsights.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_StartFailureModeAssessment(t *testing.T) {
 	want := &StartFailureModeAssessmentOutput{
 		AssessmentId:     ptr.String("__AssessmentId__"),
@@ -3449,7 +3591,9 @@ func TestUpdateResponseSnapshot_UpdatePolicy(t *testing.T) {
 			DataRecovery: &types.DataRecoveryTargets{
 				TimeBetweenBackupsInMinutes: ptr.Int32(1),
 			},
-			KmsKeyId: ptr.String("__KmsKeyId__"),
+			SharingEnabled: ptr.Bool(true),
+			OrganizationId: ptr.String("__OrganizationId__"),
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
 			Tags: map[string]string{
 				"key0": "__Value__",
 			},

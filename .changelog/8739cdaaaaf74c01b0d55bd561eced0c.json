@@ -1,0 +1,8 @@
+{
+    "id": "8739cdaa-aaf7-4c01-b0d5-5bd561eced0c",
+    "type": "feature",
+    "description": "Next Gen Resilience Hub now supports dependency insights (LLM-based insights about customer's service dependencies) and organization-level policy sharing (provision to share policy with member accounts for an organization)",
+    "modules": [
+        "service/resiliencehubv2"
+    ]
+}

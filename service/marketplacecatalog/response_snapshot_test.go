@@ -639,6 +639,8 @@ func TestCheckResponseSnapshot_ListEntities(t *testing.T) {
 					CreatedDate:           ptr.String("__CreatedDate__"),
 					AvailabilityEndDate:   ptr.String("__AvailabilityEndDate__"),
 					ResellerRole:          types.ResaleAuthorizationResellerRoleString("ChannelPartner"),
+					SourceAuthorization:   ptr.String("__SourceAuthorization__"),
+					IssuerAccountId:       ptr.String("__IssuerAccountId__"),
 				},
 				MachineLearningProductSummary: &types.MachineLearningProductSummary{
 					ProductTitle: ptr.String("__ProductTitle__"),
@@ -711,6 +713,8 @@ func TestCheckResponseSnapshot_ListEntities(t *testing.T) {
 					CreatedDate:           ptr.String("__CreatedDate__"),
 					AvailabilityEndDate:   ptr.String("__AvailabilityEndDate__"),
 					ResellerRole:          types.ResaleAuthorizationResellerRoleString("ChannelPartner"),
+					SourceAuthorization:   ptr.String("__SourceAuthorization__"),
+					IssuerAccountId:       ptr.String("__IssuerAccountId__"),
 				},
 				MachineLearningProductSummary: &types.MachineLearningProductSummary{
 					ProductTitle: ptr.String("__ProductTitle__"),

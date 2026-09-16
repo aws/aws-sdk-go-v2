@@ -48,6 +48,10 @@ type UpdatePolicyInput struct {
 	// The updated multi-Region disaster recovery targets for the policy.
 	MultiRegion *types.MultiRegionTargets
 
+	// Specifies whether cross-account sharing is enabled for the policy. Disabling
+	// sharing stops member services from using the policy.
+	SharingEnabled *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -83,6 +87,9 @@ func (v *UpdatePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.PolicyArn != nil {
 		s.WriteString(schemas.UpdatePolicyRequest_policyArn, *v.PolicyArn)
+	}
+	if v.SharingEnabled != nil {
+		s.WriteBool(schemas.UpdatePolicyRequest_sharingEnabled, *v.SharingEnabled)
 	}
 }
 
