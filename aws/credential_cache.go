@@ -27,10 +27,14 @@ type CredentialsCacheOptions struct {
 
 	// ExpiryWindowJitterFrac provides a mechanism for randomizing the
 	// expiration of credentials within the configured ExpiryWindow by a random
-	// percentage. Valid values are between 0.0 and 1.0.
+	// percentage, helping distribute credential refresh operations over time.
+	// Valid values are between 0.0 and 1.0.
+	//
+	// The effective early-expiry window is randomly selected between:
+    //     (1 - ExpiryWindowJitterFrac) * ExpiryWindow  and  ExpiryWindow
 	//
 	// As an example if ExpiryWindow is 60 seconds and ExpiryWindowJitterFrac
-	// is 0.5 then credentials will be set to expire between 30 to 60 seconds
+	// is 0.3 then credentials will be set to expire between 42 and 60 seconds
 	// prior to their actual expiration time.
 	//
 	// If ExpiryWindow is 0 or less then ExpiryWindowJitterFrac is ignored.
