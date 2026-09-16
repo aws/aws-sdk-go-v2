@@ -328,6 +328,57 @@ func TestMarshalMapOmitEmptyElem(t *testing.T) {
 	}
 }
 
+func TestMarshalOmitEmptyElemDoublePointer(t *testing.T) {
+	var inner *int
+	doublePointer := &inner
+
+	cases := map[string]struct {
+		input    interface{}
+		expected types.AttributeValue
+	}{
+		"list": {
+			input: struct {
+				Values []**int `dynamodbav:",omitemptyelem"`
+			}{
+				Values: []**int{
+					doublePointer,
+				},
+			},
+			expected: &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"Values": &types.AttributeValueMemberL{Value: []types.AttributeValue{}},
+				},
+			},
+		},
+		"map": {
+			input: struct {
+				Values map[string]**int `dynamodbav:",omitemptyelem"`
+			}{
+				Values: map[string]**int{
+					"value": doublePointer,
+				},
+			},
+			expected: &types.AttributeValueMemberM{
+				Value: map[string]types.AttributeValue{
+					"Values": &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{}},
+				},
+			},
+		},
+	}
+
+	for name, testCase := range cases {
+		t.Run(name, func(t *testing.T) {
+			actual, err := Marshal(testCase.input)
+			if err != nil {
+				t.Fatalf("expect nil, got %v", err)
+			}
+			if diff := cmpDiff(testCase.expected, actual); len(diff) != 0 {
+				t.Errorf("expect match\n%s", diff)
+			}
+		})
+	}
+}
+
 type testNullEmptyElemListStruct struct {
 	Values []string `dynamodbav:",nullemptyelem"`
 }

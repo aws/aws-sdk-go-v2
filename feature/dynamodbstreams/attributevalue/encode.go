@@ -704,8 +704,9 @@ func (e *Encoder) encodeSlice(v reflect.Value, fieldTag tag) (types.AttributeVal
 func (e *Encoder) encodeListElems(v reflect.Value, fieldTag tag, setElem func(types.AttributeValue) error) error {
 	for i := 0; i < v.Len(); i++ {
 		elem, err := e.encode(v.Index(i), tag{
-			OmitEmpty: fieldTag.OmitEmptyElem,
-			NullEmpty: fieldTag.NullEmptyElem,
+			OmitEmpty:     fieldTag.OmitEmptyElem,
+			OmitEmptyElem: fieldTag.OmitEmptyElem,
+			NullEmpty:     fieldTag.NullEmptyElem,
 		})
 		if err != nil {
 			return err
