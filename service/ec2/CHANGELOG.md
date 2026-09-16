@@ -1,3 +1,7 @@
+# v1.333.0 (2026-09-16)
+
+* **Feature**: Releasing new EC2 R9g and R9gd memory-optimized instances powered by AWS Graviton5 processors, with up to 25 percent better compute performance than R8g instances, faster DDR5 memory, and up to 100 Gbps network and 72 Gbps EBS bandwidth. R9gd instances additionally provide local NVMe SSD storage.
+
 # v1.332.0 (2026-09-10)
 
 * **Feature**: The CreateImage API now supports a BootModeOverride parameter to explicitly set UEFI boot mode on a new AMI, overriding the source instance's inherited boot mode.

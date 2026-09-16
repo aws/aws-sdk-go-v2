@@ -1,3 +1,7 @@
+# v1.43.0 (2026-09-16)
+
+* **Feature**: Adds support to create and manage Elastic Beanstalk Cluster Environments.
+
 # v1.42.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

@@ -1,3 +1,7 @@
+# v1.12.0 (2026-09-16)
+
+* **Feature**: Next Gen Resilience Hub now supports dependency insights (LLM-based insights about customer's service dependencies) and organization-level policy sharing (provision to share policy with member accounts for an organization)
+
 # v1.11.0 (2026-09-15)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

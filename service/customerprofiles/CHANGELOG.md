@@ -1,3 +1,7 @@
+# v1.72.0 (2026-09-16)
+
+* **Feature**: This release introduces the SearchRecommendations API, which retrieves recommendations for a profile identified by a search key.
+
 # v1.71.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

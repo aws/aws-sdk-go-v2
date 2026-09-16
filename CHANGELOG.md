@@ -1,3 +1,21 @@
+# Release (2026-09-16)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.68.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1680-2026-09-16)
+  * **Feature**: Adds support for a new DELETE FAILED status for Bedrock AgentCore Runtimes and Bedrock AgentCore Runtime Endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.199.0](service/connect/CHANGELOG.md#v11990-2026-09-16)
+  * **Feature**: Adds support for ContactAnalysis via ListContactReferences.
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.72.0](service/customerprofiles/CHANGELOG.md#v1720-2026-09-16)
+  * **Feature**: This release introduces the SearchRecommendations API, which retrieves recommendations for a profile identified by a search key.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.333.0](service/ec2/CHANGELOG.md#v13330-2026-09-16)
+  * **Feature**: Releasing new EC2 R9g and R9gd memory-optimized instances powered by AWS Graviton5 processors, with up to 25 percent better compute performance than R8g instances, faster DDR5 memory, and up to 100 Gbps network and 72 Gbps EBS bandwidth. R9gd instances additionally provide local NVMe SSD storage.
+* `github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk`: [v1.43.0](service/elasticbeanstalk/CHANGELOG.md#v1430-2026-09-16)
+  * **Feature**: Adds support to create and manage Elastic Beanstalk Cluster Environments.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.52.0](service/marketplacecatalog/CHANGELOG.md#v1520-2026-09-16)
+  * **Feature**: This release enhances the ListEntities API to support issuerAccountId and SourceAuthorization filter for ResaleAuthorization entity.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehubv2`: [v1.12.0](service/resiliencehubv2/CHANGELOG.md#v1120-2026-09-16)
+  * **Feature**: Next Gen Resilience Hub now supports dependency insights (LLM-based insights about customer's service dependencies) and organization-level policy sharing (provision to share policy with member accounts for an organization)
+
 # Release (2026-09-15)
 
 ## General Highlights

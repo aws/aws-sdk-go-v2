@@ -1,3 +1,7 @@
+# v1.199.0 (2026-09-16)
+
+* **Feature**: Adds support for ContactAnalysis via ListContactReferences.
+
 # v1.198.0 (2026-09-09)
 
 * **Feature**: Add metric configuration field to evaluation forms and ListEvaluationFormAIVersions API for retrieving AI-generated evaluation form versions
