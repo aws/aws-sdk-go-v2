@@ -8879,6 +8879,50 @@
                 "smithy.api#documentation": "<p>A structure that defines search criteria for contacts using analysis outputs from Connect Customer Contact\n   Lens.</p>"
             }
         },
+        "com.amazonaws.connect#ContactAnalysisReference": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.connect#ReferenceKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the contact analysis reference.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.connect#ReferenceValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location path of the contact analysis reference.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#ReferenceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of the contact analysis reference type.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact analysis reference.</p>"
+                    }
+                },
+                "AnalyticsMode": {
+                    "target": "com.amazonaws.connect#AnalyticsMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The analytics mode of the contact analysis.</p>"
+                    }
+                },
+                "IsRedacted": {
+                    "target": "com.amazonaws.connect#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether sensitive data has been redacted from the contact analysis.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a reference when the <code>referenceType</code> is <code>CONTACT_ANALYSIS</code>. Otherwise,\n   null.</p>"
+            }
+        },
         "com.amazonaws.connect#ContactConfiguration": {
             "type": "structure",
             "members": {
@@ -49958,6 +50002,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about a reference when the <code>referenceType</code> is <code>EMAIL</code>. Otherwise, null.</p>"
                     }
+                },
+                "ContactAnalysis": {
+                    "target": "com.amazonaws.connect#ContactAnalysisReference"
                 }
             },
             "traits": {

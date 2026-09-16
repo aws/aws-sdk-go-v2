@@ -1010,6 +1010,12 @@
                         "smithy.api#documentation": "<p>The data recovery targets for the resilience policy.</p>"
                     }
                 },
+                "sharingEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether cross-account sharing is enabled for the policy. Only a delegated administrator or the management account can enable sharing.</p>"
+                    }
+                },
                 "kmsKeyId": {
                     "target": "com.amazonaws.resiliencehubv2#KmsKeyId"
                 },
@@ -2834,6 +2840,88 @@
                 }
             }
         },
+        "com.amazonaws.resiliencehubv2#DependencyInsight": {
+            "type": "structure",
+            "members": {
+                "category": {
+                    "target": "com.amazonaws.resiliencehubv2#InsightsCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of the insight. Valid values:</p> <ul> <li> <p>CROSS_REGION - The insight relates to dependencies used across multiple Regions.</p> </li> <li> <p>NEW_DEPENDENCY - The insight relates to a recently detected dependency.</p> </li> <li> <p>THIRD_PARTY - The insight relates to a third-party dependency.</p> </li> <li> <p>UNEVEN_USAGE - The insight relates to a dependency with uneven usage across the service.</p> </li> <li> <p>AWS_SERVICE - The insight relates to a dependency on an Amazon Web Services service.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable explanation of the insight, describing the dependency behavior or condition that was detected.</p>",
+                        "smithy.api#length": {
+                            "max": 1024
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a single insight about a service's dependencies.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#DependencyInsightsErrorCode": {
+            "type": "enum",
+            "members": {
+                "INSUFFICIENT_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSUFFICIENT_DATA"
+                    }
+                },
+                "LLM_GENERATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LLM_GENERATION_FAILED"
+                    }
+                },
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_ERROR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#DependencyInsightsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resiliencehubv2#DependencyInsight"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#DependencyInsightsStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.resiliencehubv2#DependencySummary": {
             "type": "structure",
             "members": {
@@ -3613,6 +3701,123 @@
                 "smithy.api#length": {
                     "max": 20
                 }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#GetDependencyInsights": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resiliencehubv2#GetDependencyInsightsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.resiliencehubv2#GetDependencyInsightsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resiliencehubv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get dependency insights for a service",
+                    "resources": {
+                        "required": {
+                            "service": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Retrieves the dependency insights generated for a service. The response reports the current generation status; insights are populated once generation has completed. If generation failed, the response includes an error code, whose possible values are listed under the response's errorCode field, and a message describing the cause. To use this operation, you must have the <code>resiliencehub:GetDependencyInsights</code> permission on the service.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/get-dependency-insights"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#GetDependencyInsightsRequest": {
+            "type": "structure",
+            "members": {
+                "serviceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#httpQuery": "serviceArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.resiliencehubv2#IamServiceResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.resiliencehubv2#GetDependencyInsightsResponse": {
+            "type": "structure",
+            "members": {
+                "overview": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the dependency insights for the service. This field is not returned until the status is COMPLETED.</p>",
+                        "smithy.api#length": {
+                            "max": 4096
+                        }
+                    }
+                },
+                "insights": {
+                    "target": "com.amazonaws.resiliencehubv2#DependencyInsightsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of dependency insights generated for the service. This field is not returned until the status is COMPLETED.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.resiliencehubv2#DependencyInsightsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the dependency insights generation. Valid values:</p> <ul> <li> <p>IN_PROGRESS - Insights generation is in progress.</p> </li> <li> <p>COMPLETED - Insights generation completed successfully.</p> </li> <li> <p>FAILED - Insights generation failed. See errorCode and errorMessage for details.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the dependency insights were generated.</p>"
+                    }
+                },
+                "errorCode": {
+                    "target": "com.amazonaws.resiliencehubv2#DependencyInsightsErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code returned when insights generation failed. Valid values:</p> <ul> <li> <p>INSUFFICIENT_DATA - There was not enough dependency data to generate insights.</p> </li> <li> <p>LLM_GENERATION_FAILED - The insights could not be generated.</p> </li> <li> <p>INTERNAL_ERROR - An internal error occurred while generating insights.</p> </li> </ul>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing why insights generation failed.</p>",
+                        "smithy.api#length": {
+                            "max": 1024
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.resiliencehubv2#GetFailureModeFinding": {
@@ -4804,6 +5009,41 @@
                 }
             }
         },
+        "com.amazonaws.resiliencehubv2#InsightsCategory": {
+            "type": "enum",
+            "members": {
+                "CROSS_REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CROSS_REGION"
+                    }
+                },
+                "NEW_DEPENDENCY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEW_DEPENDENCY"
+                    }
+                },
+                "THIRD_PARTY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THIRD_PARTY"
+                    }
+                },
+                "UNEVEN_USAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNEVEN_USAGE"
+                    }
+                },
+                "AWS_SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SERVICE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.resiliencehubv2#InternalServerException": {
             "type": "structure",
             "members": {
@@ -5502,6 +5742,13 @@
         "com.amazonaws.resiliencehubv2#ListPoliciesRequest": {
             "type": "structure",
             "members": {
+                "accountId": {
+                    "target": "com.amazonaws.resiliencehubv2#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the account that owns the policies to include in the results.</p>",
+                        "smithy.api#httpQuery": "accountId"
+                    }
+                },
                 "maxResults": {
                     "target": "com.amazonaws.resiliencehubv2#MaxResults",
                     "traits": {
@@ -5527,6 +5774,127 @@
                     "target": "com.amazonaws.resiliencehubv2#PolicySummaryList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of policy summaries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.resiliencehubv2#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ListPolicyEvents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resiliencehubv2#ListPolicyEventsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.resiliencehubv2#ListPolicyEventsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resiliencehubv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list events for a resilience policy",
+                    "resources": {
+                        "required": {
+                            "policy": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Lists events for a resilience policy, including services that started or stopped using it, changes to cross-account sharing, and deletion of the policy.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v2/list-policy-events"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "events"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ListPolicyEventsRequest": {
+            "type": "structure",
+            "members": {
+                "policyArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#httpQuery": "policyArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventTypes": {
+                    "target": "com.amazonaws.resiliencehubv2#PolicyEventTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of events to include in the results.</p>",
+                        "smithy.api#httpQuery": "eventTypes"
+                    }
+                },
+                "startTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time for filtering events.</p>",
+                        "smithy.api#httpQuery": "startTime"
+                    }
+                },
+                "endTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time for filtering events.</p>",
+                        "smithy.api#httpQuery": "endTime"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.resiliencehubv2#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 100,
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.resiliencehubv2#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.resiliencehubv2#IamPolicyResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ListPolicyEventsResponse": {
+            "type": "structure",
+            "members": {
+                "events": {
+                    "target": "com.amazonaws.resiliencehubv2#PolicyEventList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of policy events.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5992,7 +6360,7 @@
                 "eventTypes": {
                     "target": "com.amazonaws.resiliencehubv2#ServiceEventTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filter events by type.</p>",
+                        "smithy.api#documentation": "<p>The type of events to include in the results.</p>",
                         "smithy.api#httpQuery": "eventTypes"
                     }
                 },
@@ -6433,7 +6801,7 @@
                 "eventTypes": {
                     "target": "com.amazonaws.resiliencehubv2#SystemEventTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filter events by type.</p>",
+                        "smithy.api#documentation": "<p>The type of events to include in the results.</p>",
                         "smithy.api#httpQuery": "eventTypes"
                     }
                 },
@@ -7811,6 +8179,9 @@
                     "target": "com.amazonaws.resiliencehubv2#DeleteUserJourney"
                 },
                 {
+                    "target": "com.amazonaws.resiliencehubv2#GetDependencyInsights"
+                },
+                {
                     "target": "com.amazonaws.resiliencehubv2#GetFailureModeFinding"
                 },
                 {
@@ -7857,6 +8228,9 @@
                 },
                 {
                     "target": "com.amazonaws.resiliencehubv2#ListPolicies"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ListPolicyEvents"
                 },
                 {
                     "target": "com.amazonaws.resiliencehubv2#ListReports"
@@ -7917,6 +8291,9 @@
                 },
                 {
                     "target": "com.amazonaws.resiliencehubv2#PutTestSources"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#StartDependencyInsights"
                 },
                 {
                     "target": "com.amazonaws.resiliencehubv2#StartFailureModeAssessment"
@@ -9051,6 +9428,18 @@
                         "smithy.api#documentation": "<p>The data recovery targets defined in the policy.</p>"
                     }
                 },
+                "sharingEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether cross-account sharing is enabled.</p>"
+                    }
+                },
+                "organizationId": {
+                    "target": "com.amazonaws.resiliencehubv2#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the organization this policy is shared with.</p>"
+                    }
+                },
                 "kmsKeyId": {
                     "target": "com.amazonaws.resiliencehubv2#KmsKeyId"
                 },
@@ -9085,6 +9474,28 @@
                 ]
             }
         },
+        "com.amazonaws.resiliencehubv2#PolicyAttachedToServiceMetadata": {
+            "type": "structure",
+            "members": {
+                "serviceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn"
+                },
+                "accountId": {
+                    "target": "com.amazonaws.resiliencehubv2#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account that owns the service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about the service that started using the policy, such as the account that owns the service.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.resiliencehubv2#IamServiceResource"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.resiliencehubv2#PolicyComponent": {
             "type": "enum",
             "members": {
@@ -9112,6 +9523,238 @@
                         "smithy.api#enumValue": "DATA_RECOVERY"
                     }
                 }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#PolicyDeletedMetadata": {
+            "type": "structure",
+            "members": {
+                "affectedServiceCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of services that were using the policy when it was deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about a policy that was deleted, including the number of services that were affected.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#PolicyDetachedFromServiceMetadata": {
+            "type": "structure",
+            "members": {
+                "serviceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn"
+                },
+                "accountId": {
+                    "target": "com.amazonaws.resiliencehubv2#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account that owns the service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about the service that stopped using the policy, such as the account that owns the service.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.resiliencehubv2#IamServiceResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.resiliencehubv2#PolicyDisassociationReason": {
+            "type": "enum",
+            "members": {
+                "REPLACED_BY_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLACED_BY_UPDATE"
+                    }
+                },
+                "SHARING_REVOKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARING_REVOKED"
+                    }
+                },
+                "POLICY_DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POLICY_DELETED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#PolicyEvent": {
+            "type": "structure",
+            "members": {
+                "eventId": {
+                    "target": "com.amazonaws.resiliencehubv2#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the event occurred.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventType": {
+                    "target": "com.amazonaws.resiliencehubv2#PolicyEventType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "actor": {
+                    "target": "com.amazonaws.resiliencehubv2#EventActor",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventDetails": {
+                    "target": "com.amazonaws.resiliencehubv2#PolicyEventDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the event.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An event on the timeline of a resilience policy.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.resiliencehubv2#IamPolicyResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.resiliencehubv2#PolicyEventDetails": {
+            "type": "structure",
+            "members": {
+                "title": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short summary of the event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventMetadata": {
+                    "target": "com.amazonaws.resiliencehubv2#PolicyEventMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event-specific metadata, with one member populated according to the event type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the title, description, and event-specific metadata for a single event on the timeline of a resilience policy.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#PolicyEventList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resiliencehubv2#PolicyEvent"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#PolicyEventMetadata": {
+            "type": "union",
+            "members": {
+                "policyAttachedToService": {
+                    "target": "com.amazonaws.resiliencehubv2#PolicyAttachedToServiceMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the service that started using the policy, such as the account that owns the service.</p>"
+                    }
+                },
+                "policyDetachedFromService": {
+                    "target": "com.amazonaws.resiliencehubv2#PolicyDetachedFromServiceMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the service that stopped using the policy, such as the account that owns the service.</p>"
+                    }
+                },
+                "policySharingRevoked": {
+                    "target": "com.amazonaws.resiliencehubv2#PolicySharingRevokedMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about a policy for which organization sharing was revoked, including the number of services that were affected.</p>"
+                    }
+                },
+                "policyDeleted": {
+                    "target": "com.amazonaws.resiliencehubv2#PolicyDeletedMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about a policy that was deleted, including the number of services that were affected.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the event-specific metadata for a policy event. Exactly one member is populated, according to the event type.</p> <ul> <li> <p>policyAttachedToService — a service started using the policy.</p> </li> <li> <p>policyDetachedFromService — a service stopped using the policy.</p> </li> <li> <p>policySharingRevoked — cross-account sharing was disabled for the policy.</p> </li> <li> <p>policyDeleted — the policy was deleted.</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#PolicyEventType": {
+            "type": "enum",
+            "members": {
+                "POLICY_ATTACHED_TO_SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POLICY_ATTACHED_TO_SERVICE"
+                    }
+                },
+                "POLICY_DETACHED_FROM_SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POLICY_DETACHED_FROM_SERVICE"
+                    }
+                },
+                "POLICY_SHARING_REVOKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POLICY_SHARING_REVOKED"
+                    }
+                },
+                "POLICY_DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POLICY_DELETED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#PolicyEventTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resiliencehubv2#PolicyEventType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 4
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#PolicySharingRevokedMetadata": {
+            "type": "structure",
+            "members": {
+                "affectedServiceCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of services that were using the policy when sharing was revoked.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about a policy for which organization sharing was revoked, including the number of services that were affected.</p>"
             }
         },
         "com.amazonaws.resiliencehubv2#PolicySummary": {
@@ -9151,6 +9794,18 @@
                     "target": "com.amazonaws.resiliencehubv2#DataRecoveryTargets",
                     "traits": {
                         "smithy.api#documentation": "<p>The data recovery targets defined in the policy.</p>"
+                    }
+                },
+                "sharingEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether cross-account sharing is enabled.</p>"
+                    }
+                },
+                "organizationId": {
+                    "target": "com.amazonaws.resiliencehubv2#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the organization this policy is shared with.</p>"
                     }
                 },
                 "associatedServiceCount": {
@@ -10775,6 +11430,18 @@
                 },
                 "policyArn": {
                     "target": "com.amazonaws.resiliencehubv2#Arn"
+                },
+                "policyOwnerAccountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account that owns the policy.</p>"
+                    }
+                },
+                "policySource": {
+                    "target": "com.amazonaws.resiliencehubv2#PolicyValueSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the policy.</p> <ul> <li> <p>SELF — the policy belongs to the account that owns the service.</p> </li> <li> <p>CROSS_ACCOUNT — the policy belongs to another account and was shared with the organization.</p> </li> </ul>"
+                    }
                 }
             },
             "traits": {
@@ -10797,6 +11464,24 @@
                 },
                 "policyArn": {
                     "target": "com.amazonaws.resiliencehubv2#Arn"
+                },
+                "policyOwnerAccountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account that owns the policy.</p>"
+                    }
+                },
+                "policySource": {
+                    "target": "com.amazonaws.resiliencehubv2#PolicyValueSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the policy.</p> <ul> <li> <p>SELF — the policy belongs to the account that owns the service.</p> </li> <li> <p>CROSS_ACCOUNT — the policy belongs to another account and was shared with the organization.</p> </li> </ul>"
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.resiliencehubv2#PolicyDisassociationReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the policy was disassociated from the service.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11237,6 +11922,95 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The order in which to sort results.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehubv2#StartDependencyInsights": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resiliencehubv2#StartDependencyInsightsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.resiliencehubv2#StartDependencyInsightsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resiliencehubv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.resiliencehubv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to start dependency insights generation for a service",
+                    "resources": {
+                        "required": {
+                            "service": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Starts generating dependency insights for a service. Generation runs asynchronously; the response returns the initial status, and you retrieve the results with GetDependencyInsights. To use this operation, you must have the <code>resiliencehub:StartDependencyInsights</code> permission on the service.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/start-dependency-insights",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#StartDependencyInsightsRequest": {
+            "type": "structure",
+            "members": {
+                "serviceArn": {
+                    "target": "com.amazonaws.resiliencehubv2#Arn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.resiliencehubv2#ClientToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.resiliencehubv2#IamServiceResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.resiliencehubv2#StartDependencyInsightsResponse": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.resiliencehubv2#DependencyInsightsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the dependency insights generation. Valid values:</p> <ul> <li> <p>IN_PROGRESS - Insights generation is in progress.</p> </li> <li> <p>COMPLETED - Insights generation completed successfully.</p> </li> <li> <p>FAILED - Insights generation failed. Call GetDependencyInsights for the error code and message.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.resiliencehubv2#StartFailureModeAssessment": {
@@ -14211,6 +14985,12 @@
                     "target": "com.amazonaws.resiliencehubv2#DataRecoveryTargets",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated data recovery targets for the policy.</p>"
+                    }
+                },
+                "sharingEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether cross-account sharing is enabled for the policy. Disabling sharing stops member services from using the policy.</p>"
                     }
                 }
             },

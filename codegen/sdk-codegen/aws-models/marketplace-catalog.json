@@ -5971,10 +5971,58 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Allows filtering on the <code>ResellerRole</code> of a ResaleAuthorization.</p>"
                     }
+                },
+                "SourceAuthorization": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationSourceAuthorizationFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>SourceAuthorization</code> of a ResaleAuthorization.</p>"
+                    }
+                },
+                "IssuerAccountId": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationIssuerAccountIdFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>IssuerAccountId</code> of a ResaleAuthorization.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Object containing all the filter fields for resale authorization entity. Client can add only one wildcard filter and a maximum of 8 filters in a single <code>ListEntities</code> request.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationIssuerAccountIdFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationIssuerAccountIdFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>IssuerAccountId</code> of a ResaleAuthorization with list input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>IssuerAccountId</code> of a ResaleAuthorization.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationIssuerAccountIdFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationIssuerAccountIdString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationIssuerAccountIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^\\d{12}$"
             }
         },
         "com.amazonaws.marketplacecatalog#ResaleAuthorizationLastModifiedDateFilter": {
@@ -6554,7 +6602,61 @@
                     "traits": {
                         "smithy.api#enumValue": "LastModifiedDate"
                     }
+                },
+                "ResellerRole": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResellerRole"
+                    }
+                },
+                "SourceAuthorization": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SourceAuthorization"
+                    }
+                },
+                "IssuerAccountId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IssuerAccountId"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationSourceAuthorizationFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationSourceAuthorizationFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>SourceAuthorization</code> of a ResaleAuthorization with list input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>SourceAuthorization</code> of a ResaleAuthorization.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationSourceAuthorizationFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationSourceAuthorizationString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationSourceAuthorizationString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
             }
         },
         "com.amazonaws.marketplacecatalog#ResaleAuthorizationStatusFilter": {
@@ -6679,6 +6781,18 @@
                     "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerRoleString",
                     "traits": {
                         "smithy.api#documentation": "<p>The reseller role of the ResaleAuthorization.</p>"
+                    }
+                },
+                "SourceAuthorization": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationSourceAuthorizationString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source authorization of the ResaleAuthorization.</p>"
+                    }
+                },
+                "IssuerAccountId": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationIssuerAccountIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The issuer account ID of the ResaleAuthorization.</p>"
                     }
                 }
             },

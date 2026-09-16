@@ -4171,6 +4171,9 @@
                     "target": "com.amazonaws.customerprofiles#SearchProfiles"
                 },
                 {
+                    "target": "com.amazonaws.customerprofiles#SearchRecommendations"
+                },
+                {
                     "target": "com.amazonaws.customerprofiles#StartRecommender"
                 },
                 {
@@ -12172,6 +12175,19 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.customerprofiles#KeyValuesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#string1To255"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.customerprofiles#KmsArn": {
             "type": "string",
             "traits": {
@@ -17541,6 +17557,20 @@
                 "smithy.api#documentation": "<p>Runtime diversity configuration for a <code>GetProfileRecommendations</code> request.</p>"
             }
         },
+        "com.amazonaws.customerprofiles#RecommendationMetadata": {
+            "type": "structure",
+            "members": {
+                "Columns": {
+                    "target": "com.amazonaws.customerprofiles#MetadataColumnsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of metadata column names from your Items dataset to include in the recommendation response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for metadata to include in recommendation responses.</p>"
+            }
+        },
         "com.amazonaws.customerprofiles#Recommendations": {
             "type": "list",
             "member": {
@@ -17548,6 +17578,33 @@
             },
             "traits": {
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#Recommender": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the recommender.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of filters to apply to the returned recommendations. Filters define criteria for including or excluding items from the recommendation results.</p>"
+                    }
+                },
+                "PromotionalFilters": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderPromotionalFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of promotional filters to apply to the recommendations. Promotional filters allow you to promote specific items within a configurable subset of recommendation results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The recommender used to generate the recommendations.</p>"
             }
         },
         "com.amazonaws.customerprofiles#RecommenderConfig": {
@@ -18984,6 +19041,127 @@
                     "target": "com.amazonaws.customerprofiles#token",
                     "traits": {
                         "smithy.api#documentation": "<p>The pagination token from the previous SearchProfiles API call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#SearchRecommendations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#SearchRecommendationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#SearchRecommendationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves recommendations for a profile in a specific domain. The profile is identified\n         using a search key, which consists of a <code>KeyName</code> and a <code>KeyValues</code> list.\n         The <code>KeyName</code> can be a predefined key (for example, <code>_profileId</code>,\n         <code>_phone</code>, <code>_email</code>) or a custom-defined key.</p>\n         <p>The search key must match exactly one profile. If no profile matches the search key, the\n         operation returns a <code>ResourceNotFoundException</code>. If more than one profile matches\n         the search key, the operation returns a <code>BadRequestException</code>. You can use the\n         SearchProfiles API to review the matching profiles.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/recommendations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#SearchRecommendationsRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A searchable identifier of a customer profile. You can use a predefined key, such as\n         <code>_profileId</code>, <code>_phone</code>, or <code>_email</code>, or a custom-defined key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyValues": {
+                    "target": "com.amazonaws.customerprofiles#KeyValuesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key values. Provide one value for each field of the search key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Recommender": {
+                    "target": "com.amazonaws.customerprofiles#Recommender",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommender used to generate the recommendations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CandidateIds": {
+                    "target": "com.amazonaws.customerprofiles#CandidateIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of item IDs to rank for the user. Use this when you want to re-rank a specific set of items rather than getting recommendations from the full item catalog. Required for personalized-ranking use cases.</p>"
+                    }
+                },
+                "Context": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contextual metadata used to provide dynamic runtime information to tailor recommendations.</p>"
+                    }
+                },
+                "Diversity": {
+                    "target": "com.amazonaws.customerprofiles#RecommendationDiversityConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Runtime diversity configuration for this request. Enables diversity-aware recommendations and optionally supplies values for placeholder-based diversity caps configured on the recommender.</p>"
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.customerprofiles#RecommendationMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for metadata to include in recommendation responses.</p>"
+                    }
+                },
+                "MaxRecommendations": {
+                    "target": "com.amazonaws.customerprofiles#MaxSize500",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of recommendations to return. The default value is 5.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#SearchRecommendationsResponse": {
+            "type": "structure",
+            "members": {
+                "ProfileId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the profile for which to retrieve recommendations.</p>"
+                    }
+                },
+                "Recommendations": {
+                    "target": "com.amazonaws.customerprofiles#Recommendations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of recommendations generated by the recommender.</p>"
                     }
                 }
             },
