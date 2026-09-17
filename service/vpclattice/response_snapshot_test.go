@@ -2158,6 +2158,16 @@ func TestCheckResponseSnapshot_ListResourceEndpointAssociations(t *testing.T) {
 				VpcEndpointOwner:          ptr.String("__VpcEndpointOwner__"),
 				CreatedBy:                 ptr.String("__CreatedBy__"),
 				CreatedAt:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				PayerResponsibility: []types.PayerResponsibilityEntry{
+					{
+						Scope:                   types.PayerResponsibilityScope("ResourceGatewayCharges"),
+						PayerResponsibilityType: types.PayerResponsibilityPayer("VpcEndpointAccount"),
+					},
+					{
+						Scope:                   types.PayerResponsibilityScope("ResourceGatewayCharges"),
+						PayerResponsibilityType: types.PayerResponsibilityPayer("VpcEndpointAccount"),
+					},
+				},
 			},
 			{
 				Id:                        ptr.String("__Id__"),
@@ -2169,6 +2179,16 @@ func TestCheckResponseSnapshot_ListResourceEndpointAssociations(t *testing.T) {
 				VpcEndpointOwner:          ptr.String("__VpcEndpointOwner__"),
 				CreatedBy:                 ptr.String("__CreatedBy__"),
 				CreatedAt:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				PayerResponsibility: []types.PayerResponsibilityEntry{
+					{
+						Scope:                   types.PayerResponsibilityScope("ResourceGatewayCharges"),
+						PayerResponsibilityType: types.PayerResponsibilityPayer("VpcEndpointAccount"),
+					},
+					{
+						Scope:                   types.PayerResponsibilityScope("ResourceGatewayCharges"),
+						PayerResponsibilityType: types.PayerResponsibilityPayer("VpcEndpointAccount"),
+					},
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),

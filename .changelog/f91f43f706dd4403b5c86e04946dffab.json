@@ -1,0 +1,8 @@
+{
+    "id": "f91f43f7-06dd-4403-b5c8-6e04946dffab",
+    "type": "feature",
+    "description": "Adding support for \"Tunnel\" VPC Endpoint",
+    "modules": [
+        "service/ec2"
+    ]
+}

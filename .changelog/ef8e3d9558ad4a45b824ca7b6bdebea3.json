@@ -1,0 +1,8 @@
+{
+    "id": "ef8e3d95-58ad-4a45-b824-ca7b6bdebea3",
+    "type": "feature",
+    "description": "Add support for WhatsApp Calling APIs.",
+    "modules": [
+        "service/socialmessaging"
+    ]
+}

@@ -764,6 +764,7 @@ const (
 	MetricDimensionNameEmailIdentity    MetricDimensionName = "EMAIL_IDENTITY"
 	MetricDimensionNameConfigurationSet MetricDimensionName = "CONFIGURATION_SET"
 	MetricDimensionNameIsp              MetricDimensionName = "ISP"
+	MetricDimensionNameTenantName       MetricDimensionName = "TENANT_NAME"
 )
 
 // Values returns all known values for MetricDimensionName. Note that this can be
@@ -775,6 +776,7 @@ func (MetricDimensionName) Values() []MetricDimensionName {
 		"EMAIL_IDENTITY",
 		"CONFIGURATION_SET",
 		"ISP",
+		"TENANT_NAME",
 	}
 }
 

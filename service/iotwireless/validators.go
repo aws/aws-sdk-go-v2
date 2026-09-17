@@ -2499,6 +2499,57 @@ func validateGnss(v *types.Gnss) error {
 	}
 }
 
+func validateGnssCapture(v *types.GnssCapture) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GnssCapture"}
+	if v.Payload == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Payload"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGnssCaptures(v []types.GnssCapture) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GnssCaptures"}
+	for i := range v {
+		if err := validateGnssCapture(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGnssMultiFrame(v *types.GnssMultiFrame) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GnssMultiFrame"}
+	if v.Captures == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Captures"))
+	} else if v.Captures != nil {
+		if err := validateGnssCaptures(v.Captures); err != nil {
+			invalidParams.AddNested("Captures", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGsmList(v []types.GsmObj) error {
 	if v == nil {
 		return nil
@@ -4054,6 +4105,11 @@ func validateOpGetPositionEstimateInput(v *GetPositionEstimateInput) error {
 	if v.Gnss != nil {
 		if err := validateGnss(v.Gnss); err != nil {
 			invalidParams.AddNested("Gnss", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GnssMultiFrame != nil {
+		if err := validateGnssMultiFrame(v.GnssMultiFrame); err != nil {
+			invalidParams.AddNested("GnssMultiFrame", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

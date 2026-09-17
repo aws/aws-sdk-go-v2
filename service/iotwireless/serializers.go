@@ -4329,6 +4329,13 @@ func awsRestjson1_serializeOpDocumentGetPositionEstimateInput(v *GetPositionEsti
 		}
 	}
 
+	if v.GnssMultiFrame != nil {
+		ok := object.Key("GnssMultiFrame")
+		if err := awsRestjson1_serializeDocumentGnssMultiFrame(v.GnssMultiFrame, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Ip != nil {
 		ok := object.Key("Ip")
 		if err := awsRestjson1_serializeDocumentIp(v.Ip, ok); err != nil {
@@ -10263,6 +10270,111 @@ func awsRestjson1_serializeDocumentGnss(v *types.Gnss, value smithyjson.Value) e
 	if v.Payload != nil {
 		ok := object.Key("Payload")
 		ok.String(*v.Payload)
+	}
+
+	if v.Use2DSolver {
+		ok := object.Key("Use2DSolver")
+		ok.Boolean(v.Use2DSolver)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGnssCapture(v *types.GnssCapture, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CaptureTime != nil {
+		ok := object.Key("CaptureTime")
+		switch {
+		case math.IsNaN(float64(*v.CaptureTime)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.CaptureTime), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.CaptureTime), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.CaptureTime)
+
+		}
+	}
+
+	if v.Payload != nil {
+		ok := object.Key("Payload")
+		ok.String(*v.Payload)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGnssCaptures(v []types.GnssCapture, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentGnssCapture(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGnssMultiFrame(v *types.GnssMultiFrame, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssistAltitude != nil {
+		ok := object.Key("AssistAltitude")
+		switch {
+		case math.IsNaN(float64(*v.AssistAltitude)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.AssistAltitude), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.AssistAltitude), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.AssistAltitude)
+
+		}
+	}
+
+	if v.AssistPosition != nil {
+		ok := object.Key("AssistPosition")
+		if err := awsRestjson1_serializeDocumentAssistPosition(v.AssistPosition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Captures != nil {
+		ok := object.Key("Captures")
+		if err := awsRestjson1_serializeDocumentGnssCaptures(v.Captures, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CaptureTimeAccuracy != nil {
+		ok := object.Key("CaptureTimeAccuracy")
+		switch {
+		case math.IsNaN(float64(*v.CaptureTimeAccuracy)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.CaptureTimeAccuracy), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.CaptureTimeAccuracy), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.CaptureTimeAccuracy)
+
+		}
 	}
 
 	if v.Use2DSolver {

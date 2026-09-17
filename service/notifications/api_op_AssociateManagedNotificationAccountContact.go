@@ -41,6 +41,11 @@ type AssociateManagedNotificationAccountContactInput struct {
 	// This member is required.
 	ManagedNotificationConfigurationArn *string
 
+	// Specifies whether this contact is subscribed to sensitive events. The
+	// notifications:SubscribeSensitiveEvents permission controls access to sensitive
+	// events. Defaults to false.
+	IsSensitiveEventsSubscribed *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -53,6 +58,9 @@ func (v *AssociateManagedNotificationAccountContactInput) Serialize(s smithy.Sha
 func (v *AssociateManagedNotificationAccountContactInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContactIdentifier != "" {
 		s.WriteString(schemas.AssociateManagedNotificationAccountContactRequest_contactIdentifier, string(v.ContactIdentifier))
+	}
+	if v.IsSensitiveEventsSubscribed != nil {
+		s.WriteBool(schemas.AssociateManagedNotificationAccountContactRequest_isSensitiveEventsSubscribed, *v.IsSensitiveEventsSubscribed)
 	}
 	if v.ManagedNotificationConfigurationArn != nil {
 		s.WriteString(schemas.AssociateManagedNotificationAccountContactRequest_managedNotificationConfigurationArn, *v.ManagedNotificationConfigurationArn)

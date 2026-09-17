@@ -55,6 +55,12 @@ func serializeResourceConfigurationDefinition(s smithy.ShapeSerializer, schema *
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *types.ResourceConfigurationDefinitionMemberCidrResource:
+		s.WriteUnion(schema, schemas.ResourceConfigurationDefinition_cidrResource)
+		s.WriteStruct(schemas.ResourceConfigurationDefinition_cidrResource)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *types.ResourceConfigurationDefinitionMemberDnsResource:
 		s.WriteUnion(schema, schemas.ResourceConfigurationDefinition_dnsResource)
 		s.WriteStruct(schemas.ResourceConfigurationDefinition_dnsResource)
@@ -153,6 +159,10 @@ func deserializeResourceConfigurationDefinition(d smithy.ShapeDeserializer, s *s
 			vv := &types.ResourceConfigurationDefinitionMemberArnResource{}
 			*v = vv
 			return vv.Deserialize(d)
+		case schemas.ResourceConfigurationDefinition_cidrResource:
+			vv := &types.ResourceConfigurationDefinitionMemberCidrResource{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.ResourceConfigurationDefinition_dnsResource:
 			vv := &types.ResourceConfigurationDefinitionMemberDnsResource{}
 			*v = vv
@@ -207,6 +217,17 @@ func serializeAccessLogSubscriptionList(s smithy.ShapeSerializer, schema *smithy
 	s.CloseList()
 }
 
+func serializeCidrRangeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeDomainVerificationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DomainVerificationSummary) {
 	if v == nil {
 		return
@@ -234,6 +255,19 @@ func serializeHeaderMatchList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeListenerSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ListenerSummary) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializePayerResponsibilityList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PayerResponsibilityEntry) {
 	if v == nil {
 		return
 	}
@@ -573,6 +607,20 @@ func deserializeAccessLogSubscriptionList(d smithy.ShapeDeserializer, s *smithy.
 	})
 }
 
+func deserializeCidrRangeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeDomainVerificationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DomainVerificationSummary) error {
 	*v = make([]types.DomainVerificationSummary, 0)
 	var vv types.DomainVerificationSummary
@@ -606,6 +654,20 @@ func deserializeListenerSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema
 	var vv types.ListenerSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ListenerSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializePayerResponsibilityList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PayerResponsibilityEntry) error {
+	*v = make([]types.PayerResponsibilityEntry, 0)
+	var vv types.PayerResponsibilityEntry
+	return smithy.ReadList(d, s, func() error {
+		vv = types.PayerResponsibilityEntry{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

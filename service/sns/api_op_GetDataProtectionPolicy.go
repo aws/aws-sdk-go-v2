@@ -7,8 +7,13 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+// Amazon SNS message data protection is no longer available to new customers. For
+// more information and guidance on alternatives, see [Amazon SNS message data protection availability change].
+//
 // Retrieves the specified inline DataProtectionPolicy document that is stored in
 // the specified Amazon SNS topic.
+//
+// [Amazon SNS message data protection availability change]: https://docs.aws.amazon.com/sns/latest/dg/sns-message-data-protection-availability-change.html
 func (c *Client) GetDataProtectionPolicy(ctx context.Context, params *GetDataProtectionPolicyInput, optFns ...func(*Options)) (*GetDataProtectionPolicyOutput, error) {
 	if params == nil {
 		params = &GetDataProtectionPolicyInput{}

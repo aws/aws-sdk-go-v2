@@ -1863,6 +1863,23 @@ func validateCertificates(v []types.Certificate) error {
 	}
 }
 
+func validateCloudWatchFilterConfig(v *types.CloudWatchFilterConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchFilterConfig"}
+	if v.SessionTraceIds != nil {
+		if err := validateSessionTraceIdsList(v.SessionTraceIds); err != nil {
+			invalidParams.AddNested("SessionTraceIds", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCloudWatchLogsFilter(v *types.CloudWatchLogsFilter) error {
 	if v == nil {
 		return nil
@@ -1925,6 +1942,11 @@ func validateCloudWatchLogsSource(v *types.CloudWatchLogsSource) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchLogsSource"}
 	if v.ServiceNames == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceNames"))
+	}
+	if v.FilterConfig != nil {
+		if err := validateCloudWatchFilterConfig(v.FilterConfig); err != nil {
+			invalidParams.AddNested("FilterConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3916,6 +3938,41 @@ func validateSessionMetadataShape(v *types.SessionMetadataShape) error {
 	invalidParams := smithy.InvalidParamsError{Context: "SessionMetadataShape"}
 	if v.SessionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSessionTraceIds(v *types.SessionTraceIds) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SessionTraceIds"}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if v.TraceIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TraceIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSessionTraceIdsList(v []types.SessionTraceIds) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SessionTraceIdsList"}
+	for i := range v {
+		if err := validateSessionTraceIds(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

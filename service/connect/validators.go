@@ -18618,9 +18618,6 @@ func validateOpReplicateInstanceInput(v *ReplicateInstanceInput) error {
 	if v.ReplicaRegion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicaRegion"))
 	}
-	if v.ReplicaAlias == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReplicaAlias"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

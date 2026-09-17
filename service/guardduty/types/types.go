@@ -557,6 +557,24 @@ type BedrockGuardrailDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about an Amazon Bedrock guardrail evaluated during a model
+// invocation.
+type BedrockGuardrailResource struct {
+
+	// Indicates whether the guardrail intervened during the model invocation.
+	GuardrailAction GuardrailAction
+
+	// Indicates whether the guardrail was applied on the input or output of the model
+	// invocation.
+	GuardrailSource GuardrailSource
+
+	// The version of the Amazon Bedrock guardrail. Valid values are a numeric
+	// version, DRAFT , or ENFORCED .
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information on how the bucker owner's S3 Block Public Access settings
 // are being applied to the S3 bucket. See [S3 Block Public Access]for more information.
 //
@@ -4059,6 +4077,10 @@ type ResourceData struct {
 	// Contains detailed information about the Auto Scaling Group associated with the
 	// activity that prompted GuardDuty to generate a finding.
 	AutoscalingAutoScalingGroup *AutoscalingAutoScalingGroup
+
+	// Contains detailed information about the Amazon Bedrock guardrail associated
+	// with the activity that prompted GuardDuty to generate a finding.
+	BedrockGuardrail *BedrockGuardrailResource
 
 	// Contains detailed information about the CloudFormation stack associated with
 	// the activity that prompted GuardDuty to generate a finding.

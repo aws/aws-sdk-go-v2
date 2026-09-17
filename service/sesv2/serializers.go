@@ -11190,6 +11190,13 @@ func awsRestjson1_serializeDocumentMessageInsightsFilters(v *types.MessageInsigh
 		}
 	}
 
+	if v.TenantName != nil {
+		ok := object.Key("TenantName")
+		if err := awsRestjson1_serializeDocumentTenantNameFilterList(v.TenantName, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -11614,6 +11621,17 @@ func awsRestjson1_serializeDocumentTemplate(v *types.Template, value smithyjson.
 		ok.String(*v.TemplateName)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTenantNameFilterList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

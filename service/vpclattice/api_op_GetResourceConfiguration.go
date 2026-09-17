@@ -111,7 +111,7 @@ type GetResourceConfigurationOutput struct {
 
 	// The ID of the resource gateway used to connect to the resource configuration in
 	// a given VPC. You can specify the resource gateway identifier only for resource
-	// configurations with type SINGLE, GROUP, or ARN.
+	// configurations with type SINGLE, GROUP, ARN, or CIDR.
 	ResourceGatewayId *string
 
 	// The status of the resource configuration.
@@ -126,6 +126,9 @@ type GetResourceConfigurationOutput struct {
 	//   - CHILD - A single resource that is part of a group resource configuration.
 	//
 	//   - ARN - An Amazon Web Services resource.
+	//
+	//   - CIDR - A network segment (a range of IP addresses) accessed through a Tunnel
+	//   VPC endpoint.
 	Type types.ResourceConfigurationType
 
 	// Metadata pertaining to the operation's result.

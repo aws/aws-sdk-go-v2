@@ -1,4 +1,4 @@
 200
 Content-Type: application/json
 
-{"channelAssociations":[{"channelIdentifier":"__ChannelIdentifier__","channelType":"MOBILE","overrideOption":"ENABLED"},{"channelIdentifier":"__ChannelIdentifier__","channelType":"MOBILE","overrideOption":"ENABLED"}],"nextToken":"__NextToken__"}
+{"channelAssociations":[{"channelIdentifier":"__ChannelIdentifier__","channelType":"MOBILE","isSensitiveEventsSubscribed":true,"overrideOption":"ENABLED"},{"channelIdentifier":"__ChannelIdentifier__","channelType":"MOBILE","isSensitiveEventsSubscribed":true,"overrideOption":"ENABLED"}],"nextToken":"__NextToken__"}

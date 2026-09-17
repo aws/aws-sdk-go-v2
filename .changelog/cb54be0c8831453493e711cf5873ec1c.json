@@ -1,0 +1,8 @@
+{
+    "id": "cb54be0c-8831-4534-93e7-11cf5873ec1c",
+    "type": "feature",
+    "description": "Adding support for CIDR Resource Configuration",
+    "modules": [
+        "service/vpclattice"
+    ]
+}

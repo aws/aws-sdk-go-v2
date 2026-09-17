@@ -1,0 +1,8 @@
+{
+    "id": "67a56ff0-f513-432c-b385-0dc42f2e76c6",
+    "type": "feature",
+    "description": "Added support for attachments on managed notification events. Added support to access and subscribe sensitive managed notification events.",
+    "modules": [
+        "service/notifications"
+    ]
+}

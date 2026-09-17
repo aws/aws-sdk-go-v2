@@ -714,6 +714,35 @@ func TestCheckRequestSnapshot_GetWhatsAppBusinessPublicKey(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetWhatsAppCallPermission(t *testing.T) {
+	input := &GetWhatsAppCallPermissionInput{
+		OriginationPhoneNumberId: ptr.String("__OriginationPhoneNumberId__"),
+		DestinationPhoneNumber:   ptr.String("__DestinationPhoneNumber__"),
+		EndUserBsuid:             ptr.String("__EndUserBsuid__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetWhatsAppCallPermission(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetWhatsAppCallPermission"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetWhatsAppFlow(t *testing.T) {
 	input := &GetWhatsAppFlowInput{
 		Id:     ptr.String("__Id__"),
@@ -1146,6 +1175,35 @@ func TestCheckRequestSnapshot_PutWhatsAppBusinessPublicKey(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_SendWhatsAppCallEvent(t *testing.T) {
+	input := &SendWhatsAppCallEventInput{
+		OriginationPhoneNumberId: ptr.String("__OriginationPhoneNumberId__"),
+		MetaApiVersion:           ptr.String("__MetaApiVersion__"),
+		CallEvent:                []byte("blob"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SendWhatsAppCallEvent(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SendWhatsAppCallEvent"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_SendWhatsAppConversionEvent(t *testing.T) {
 	input := &SendWhatsAppConversionEventInput{
 		Id:        ptr.String("__Id__"),
@@ -1268,6 +1326,90 @@ func TestCheckRequestSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UntagResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateLinkedWhatsAppBusinessAccountPhoneNumber(t *testing.T) {
+	input := &UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput{
+		Id: ptr.String("__Id__"),
+		CallSettings: &types.WhatsAppCallSettings{
+			CallEnabled: ptr.Bool(true),
+			CallHours: &types.WhatsAppCallHours{
+				Enabled:  ptr.Bool(true),
+				Timezone: ptr.String("__Timezone__"),
+				WeeklyOperatingHours: []types.WhatsAppWeeklyOperatingHoursEntry{
+					{
+						DayOfWeek: types.WhatsAppDayOfWeek("MONDAY"),
+						OpenTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+						CloseTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+					},
+					{
+						DayOfWeek: types.WhatsAppDayOfWeek("MONDAY"),
+						OpenTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+						CloseTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+					},
+				},
+				HolidaySchedule: []types.WhatsAppHolidayScheduleEntry{
+					{
+						Date: ptr.String("__Date__"),
+						StartTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+						EndTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+					},
+					{
+						Date: ptr.String("__Date__"),
+						StartTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+						EndTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+					},
+				},
+			},
+			CallIconVisibility:       ptr.String("__CallIconVisibility__"),
+			CallbackPermissionStatus: ptr.String("__CallbackPermissionStatus__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateLinkedWhatsAppBusinessAccountPhoneNumber(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateLinkedWhatsAppBusinessAccountPhoneNumber"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1878,6 +2020,35 @@ func TestUpdateRequestSnapshot_GetWhatsAppBusinessPublicKey(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetWhatsAppCallPermission(t *testing.T) {
+	input := &GetWhatsAppCallPermissionInput{
+		OriginationPhoneNumberId: ptr.String("__OriginationPhoneNumberId__"),
+		DestinationPhoneNumber:   ptr.String("__DestinationPhoneNumber__"),
+		EndUserBsuid:             ptr.String("__EndUserBsuid__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetWhatsAppCallPermission(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetWhatsAppCallPermission"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetWhatsAppFlow(t *testing.T) {
 	input := &GetWhatsAppFlowInput{
 		Id:     ptr.String("__Id__"),
@@ -2310,6 +2481,35 @@ func TestUpdateRequestSnapshot_PutWhatsAppBusinessPublicKey(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_SendWhatsAppCallEvent(t *testing.T) {
+	input := &SendWhatsAppCallEventInput{
+		OriginationPhoneNumberId: ptr.String("__OriginationPhoneNumberId__"),
+		MetaApiVersion:           ptr.String("__MetaApiVersion__"),
+		CallEvent:                []byte("blob"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SendWhatsAppCallEvent(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SendWhatsAppCallEvent"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_SendWhatsAppConversionEvent(t *testing.T) {
 	input := &SendWhatsAppConversionEventInput{
 		Id:        ptr.String("__Id__"),
@@ -2432,6 +2632,90 @@ func TestUpdateRequestSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UntagResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateLinkedWhatsAppBusinessAccountPhoneNumber(t *testing.T) {
+	input := &UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput{
+		Id: ptr.String("__Id__"),
+		CallSettings: &types.WhatsAppCallSettings{
+			CallEnabled: ptr.Bool(true),
+			CallHours: &types.WhatsAppCallHours{
+				Enabled:  ptr.Bool(true),
+				Timezone: ptr.String("__Timezone__"),
+				WeeklyOperatingHours: []types.WhatsAppWeeklyOperatingHoursEntry{
+					{
+						DayOfWeek: types.WhatsAppDayOfWeek("MONDAY"),
+						OpenTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+						CloseTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+					},
+					{
+						DayOfWeek: types.WhatsAppDayOfWeek("MONDAY"),
+						OpenTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+						CloseTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+					},
+				},
+				HolidaySchedule: []types.WhatsAppHolidayScheduleEntry{
+					{
+						Date: ptr.String("__Date__"),
+						StartTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+						EndTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+					},
+					{
+						Date: ptr.String("__Date__"),
+						StartTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+						EndTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+					},
+				},
+			},
+			CallIconVisibility:       ptr.String("__CallIconVisibility__"),
+			CallbackPermissionStatus: ptr.String("__CallbackPermissionStatus__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateLinkedWhatsAppBusinessAccountPhoneNumber(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateLinkedWhatsAppBusinessAccountPhoneNumber"); err != nil {
 		t.Fatal(err)
 	}
 }

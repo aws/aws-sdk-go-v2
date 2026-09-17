@@ -170,6 +170,19 @@ func serializeNotificationConfigurations(s smithy.ShapeSerializer, schema *smith
 	s.CloseList()
 }
 
+func serializeNotificationEventAttachmentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.NotificationEventAttachment) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeNotificationEvents(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.NotificationEventOverview) {
 	if v == nil {
 		return
@@ -476,6 +489,20 @@ func deserializeNotificationConfigurations(d smithy.ShapeDeserializer, s *smithy
 	var vv types.NotificationConfigurationStructure
 	return smithy.ReadList(d, s, func() error {
 		vv = types.NotificationConfigurationStructure{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeNotificationEventAttachmentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.NotificationEventAttachment) error {
+	*v = make([]types.NotificationEventAttachment, 0)
+	var vv types.NotificationEventAttachment
+	return smithy.ReadList(d, s, func() error {
+		vv = types.NotificationEventAttachment{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

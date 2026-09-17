@@ -80,6 +80,9 @@ func ExampleResourceConfigurationDefinition_outputUsage() {
 	case *types.ResourceConfigurationDefinitionMemberArnResource:
 		_ = v.Value // Value is types.ArnResource
 
+	case *types.ResourceConfigurationDefinitionMemberCidrResource:
+		_ = v.Value // Value is types.CidrResource
+
 	case *types.ResourceConfigurationDefinitionMemberDnsResource:
 		_ = v.Value // Value is types.DnsResource
 
@@ -97,6 +100,7 @@ func ExampleResourceConfigurationDefinition_outputUsage() {
 
 var _ *types.DnsResource
 var _ *types.IpResource
+var _ *types.CidrResource
 var _ *types.ArnResource
 
 func ExampleRuleAction_outputUsage() {

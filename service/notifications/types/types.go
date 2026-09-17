@@ -455,6 +455,10 @@ type ManagedNotificationChannelAssociationSummary struct {
 	// This member is required.
 	ChannelType ChannelType
 
+	// Specifies whether this channel association is subscribed to sensitive events.
+	// Defaults to false for associations created without the flag.
+	IsSensitiveEventsSubscribed *bool
+
 	// Controls whether users can modify channel associations for a notification
 	// configuration.
 	//
@@ -487,6 +491,9 @@ func (v *ManagedNotificationChannelAssociationSummary) SerializeMembers(s smithy
 	if v.ChannelType != "" {
 		s.WriteString(schemas.ManagedNotificationChannelAssociationSummary_channelType, string(v.ChannelType))
 	}
+	if v.IsSensitiveEventsSubscribed != nil {
+		s.WriteBool(schemas.ManagedNotificationChannelAssociationSummary_isSensitiveEventsSubscribed, *v.IsSensitiveEventsSubscribed)
+	}
 	if v.OverrideOption != "" {
 		s.WriteString(schemas.ManagedNotificationChannelAssociationSummary_overrideOption, string(v.OverrideOption))
 	}
@@ -504,6 +511,9 @@ func (v *ManagedNotificationChannelAssociationSummary) Deserialize(d smithy.Shap
 			}
 			v.ChannelType = ChannelType(ev)
 			return nil
+		case schemas.ManagedNotificationChannelAssociationSummary_isSensitiveEventsSubscribed:
+			v.IsSensitiveEventsSubscribed = new(bool)
+			return d.ReadBool(schemas.ManagedNotificationChannelAssociationSummary_isSensitiveEventsSubscribed, v.IsSensitiveEventsSubscribed)
 		case schemas.ManagedNotificationChannelAssociationSummary_overrideOption:
 			var ev string
 			if err := d.ReadString(schemas.ManagedNotificationChannelAssociationSummary_overrideOption, &ev); err != nil {
@@ -516,9 +526,8 @@ func (v *ManagedNotificationChannelAssociationSummary) Deserialize(d smithy.Shap
 	})
 }
 
-// A ManagedNotificationChildEvent is a notification-focused representation of an
-// event. They contain semantic information used to create aggregated or
-// non-aggregated end-user notifications.
+// A notification-focused representation of an event. They contain semantic
+// information used to create aggregated or non-aggregated end-user notifications.
 type ManagedNotificationChildEvent struct {
 
 	// The Amazon Resource Name (ARN) of the ManagedNotificationEvent that is
@@ -1070,6 +1079,9 @@ type ManagedNotificationEvent struct {
 	// Provides additional information about the aggregation key.
 	AggregationSummary *AggregationSummary
 
+	// A list of files attached to the notification event.
+	Attachments []NotificationEventAttachment
+
 	// The end time of the notification event.
 	EndTime *time.Time
 
@@ -1118,6 +1130,7 @@ func (v *ManagedNotificationEvent) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AggregationSummary.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	serializeNotificationEventAttachmentList(s, schemas.ManagedNotificationEvent_attachments, v.Attachments)
 	if v.EndTime != nil {
 		s.WriteTime(schemas.ManagedNotificationEvent_endTime, *v.EndTime)
 	}
@@ -1165,6 +1178,8 @@ func (v *ManagedNotificationEvent) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.ManagedNotificationEvent_aggregationSummary:
 			v.AggregationSummary = &AggregationSummary{}
 			return v.AggregationSummary.Deserialize(d)
+		case schemas.ManagedNotificationEvent_attachments:
+			return deserializeNotificationEventAttachmentList(d, schemas.ManagedNotificationEvent_attachments, &v.Attachments)
 		case schemas.ManagedNotificationEvent_endTime:
 			v.EndTime = new(time.Time)
 			return d.ReadTime(schemas.ManagedNotificationEvent_endTime, v.EndTime)
@@ -1699,6 +1714,11 @@ type MessageComponents struct {
 	// A sentence long summary. For example, titles or an email subject line.
 	Headline *string
 
+	// A rich description in Portable Text format, which you can convert to markup
+	// formats such as HTML, Markdown, or plain text. Channels that don't support rich
+	// rendering ignore this field and use the plain text components instead.
+	MarkupDescription *string
+
 	// A paragraph long or multiple sentence summary. For example, Amazon Q Developer
 	// in chat applications notifications.
 	ParagraphSummary *string
@@ -1720,6 +1740,9 @@ func (v *MessageComponents) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Headline != nil {
 		s.WriteString(schemas.MessageComponents_headline, *v.Headline)
 	}
+	if v.MarkupDescription != nil {
+		s.WriteString(schemas.MessageComponents_markupDescription, *v.MarkupDescription)
+	}
 	if v.ParagraphSummary != nil {
 		s.WriteString(schemas.MessageComponents_paragraphSummary, *v.ParagraphSummary)
 	}
@@ -1735,6 +1758,9 @@ func (v *MessageComponents) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.MessageComponents_headline:
 			v.Headline = new(string)
 			return d.ReadString(schemas.MessageComponents_headline, v.Headline)
+		case schemas.MessageComponents_markupDescription:
+			v.MarkupDescription = new(string)
+			return d.ReadString(schemas.MessageComponents_markupDescription, v.MarkupDescription)
 		case schemas.MessageComponents_paragraphSummary:
 			v.ParagraphSummary = new(string)
 			return d.ReadString(schemas.MessageComponents_paragraphSummary, v.ParagraphSummary)
@@ -1893,6 +1919,60 @@ func (v *NotificationConfigurationStructure) Deserialize(d smithy.ShapeDeseriali
 			}
 			v.Subtype = NotificationConfigurationSubtype(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// A file attached to a notification event.
+type NotificationEventAttachment struct {
+
+	// The MIME content type of the attachment, for example application/pdf .
+	//
+	// This member is required.
+	ContentType *string
+
+	// The name of the attachment that recipients see.
+	//
+	// This member is required.
+	DisplayName *string
+
+	// A temporary URL for downloading the attachment. The URL expires shortly after
+	// it's issued.
+	AttachmentDownloadUrl *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *NotificationEventAttachment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationEventAttachment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotificationEventAttachment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentDownloadUrl != nil {
+		s.WriteString(schemas.NotificationEventAttachment_attachmentDownloadUrl, *v.AttachmentDownloadUrl)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.NotificationEventAttachment_contentType, *v.ContentType)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.NotificationEventAttachment_displayName, *v.DisplayName)
+	}
+}
+func (v *NotificationEventAttachment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotificationEventAttachment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotificationEventAttachment_attachmentDownloadUrl:
+			v.AttachmentDownloadUrl = new(string)
+			return d.ReadString(schemas.NotificationEventAttachment_attachmentDownloadUrl, v.AttachmentDownloadUrl)
+		case schemas.NotificationEventAttachment_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.NotificationEventAttachment_contentType, v.ContentType)
+		case schemas.NotificationEventAttachment_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.NotificationEventAttachment_displayName, v.DisplayName)
 		}
 		return nil
 	})

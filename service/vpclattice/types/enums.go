@@ -127,6 +127,45 @@ func (ListenerProtocol) Values() []ListenerProtocol {
 	}
 }
 
+type PayerResponsibilityPayer string
+
+// Enum values for PayerResponsibilityPayer
+const (
+	// The VPC endpoint account pays
+	PayerResponsibilityPayerVpcEndpointAccount PayerResponsibilityPayer = "VpcEndpointAccount"
+	// The resource gateway account pays
+	PayerResponsibilityPayerResourceGatewayAccount PayerResponsibilityPayer = "ResourceGatewayAccount"
+)
+
+// Values returns all known values for PayerResponsibilityPayer. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PayerResponsibilityPayer) Values() []PayerResponsibilityPayer {
+	return []PayerResponsibilityPayer{
+		"VpcEndpointAccount",
+		"ResourceGatewayAccount",
+	}
+}
+
+type PayerResponsibilityScope string
+
+// Enum values for PayerResponsibilityScope
+const (
+	// Charges for the resource gateway
+	PayerResponsibilityScopeResourceGatewayCharges PayerResponsibilityScope = "ResourceGatewayCharges"
+)
+
+// Values returns all known values for PayerResponsibilityScope. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PayerResponsibilityScope) Values() []PayerResponsibilityScope {
+	return []PayerResponsibilityScope{
+		"ResourceGatewayCharges",
+	}
+}
+
 type PrivateDnsPreference string
 
 // Enum values for PrivateDnsPreference
@@ -156,6 +195,8 @@ type ProtocolType string
 const (
 	// Resource Configuration protocol type TCP
 	ProtocolTypeTcp ProtocolType = "TCP"
+	// Resource Configuration protocol type TCP_UDP
+	ProtocolTypeTcpUdp ProtocolType = "TCP_UDP"
 )
 
 // Values returns all known values for ProtocolType. Note that this can be
@@ -165,6 +206,7 @@ const (
 func (ProtocolType) Values() []ProtocolType {
 	return []ProtocolType{
 		"TCP",
+		"TCP_UDP",
 	}
 }
 
@@ -263,6 +305,8 @@ const (
 	ResourceConfigurationTypeSingle ResourceConfigurationType = "SINGLE"
 	// Resource Configuration of type ARN
 	ResourceConfigurationTypeArn ResourceConfigurationType = "ARN"
+	// Resource Configuration of type CIDR
+	ResourceConfigurationTypeCidr ResourceConfigurationType = "CIDR"
 )
 
 // Values returns all known values for ResourceConfigurationType. Note that this
@@ -275,6 +319,7 @@ func (ResourceConfigurationType) Values() []ResourceConfigurationType {
 		"CHILD",
 		"SINGLE",
 		"ARN",
+		"CIDR",
 	}
 }
 

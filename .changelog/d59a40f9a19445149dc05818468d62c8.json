@@ -1,0 +1,8 @@
+{
+    "id": "d59a40f9-a194-4514-9dc0-5818468d62c8",
+    "type": "feature",
+    "description": "Added support to query the tenant name for BatchGetMetricData and CreateExportJob APIs to filter metrics and messages at the tenant level.",
+    "modules": [
+        "service/sesv2"
+    ]
+}

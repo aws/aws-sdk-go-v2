@@ -601,6 +601,63 @@ func TestCheckResponseSnapshot_GetLinkedWhatsAppBusinessAccountPhoneNumber(t *te
 			DataLocalizationRegion: ptr.String("__DataLocalizationRegion__"),
 		},
 		LinkedWhatsAppBusinessAccountId: ptr.String("__LinkedWhatsAppBusinessAccountId__"),
+		CallSettings: &types.WhatsAppCallSettings{
+			CallEnabled: ptr.Bool(true),
+			CallHours: &types.WhatsAppCallHours{
+				Enabled:  ptr.Bool(true),
+				Timezone: ptr.String("__Timezone__"),
+				WeeklyOperatingHours: []types.WhatsAppWeeklyOperatingHoursEntry{
+					{
+						DayOfWeek: types.WhatsAppDayOfWeek("MONDAY"),
+						OpenTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+						CloseTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+					},
+					{
+						DayOfWeek: types.WhatsAppDayOfWeek("MONDAY"),
+						OpenTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+						CloseTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+					},
+				},
+				HolidaySchedule: []types.WhatsAppHolidayScheduleEntry{
+					{
+						Date: ptr.String("__Date__"),
+						StartTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+						EndTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+					},
+					{
+						Date: ptr.String("__Date__"),
+						StartTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+						EndTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+					},
+				},
+			},
+			CallIconVisibility:       ptr.String("__CallIconVisibility__"),
+			CallbackPermissionStatus: ptr.String("__CallbackPermissionStatus__"),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetLinkedWhatsAppBusinessAccountPhoneNumber.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -642,6 +699,72 @@ func TestCheckResponseSnapshot_GetWhatsAppBusinessPublicKey(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetWhatsAppBusinessPublicKey.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetWhatsAppCallPermission(t *testing.T) {
+	want := &GetWhatsAppCallPermissionOutput{
+		Permission: &types.WhatsAppCallPermission{
+			Status:         ptr.String("__Status__"),
+			ExpirationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Actions: []types.WhatsAppCallPermissionAction{
+			{
+				ActionName:       ptr.String("__ActionName__"),
+				CanPerformAction: ptr.Bool(true),
+				Limits: []types.WhatsAppCallPermissionLimit{
+					{
+						TimePeriod:          ptr.String("__TimePeriod__"),
+						MaxAllowed:          ptr.Int32(1),
+						CurrentUsage:        ptr.Int32(1),
+						LimitExpirationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						TimePeriod:          ptr.String("__TimePeriod__"),
+						MaxAllowed:          ptr.Int32(1),
+						CurrentUsage:        ptr.Int32(1),
+						LimitExpirationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+			{
+				ActionName:       ptr.String("__ActionName__"),
+				CanPerformAction: ptr.Bool(true),
+				Limits: []types.WhatsAppCallPermissionLimit{
+					{
+						TimePeriod:          ptr.String("__TimePeriod__"),
+						MaxAllowed:          ptr.Int32(1),
+						CurrentUsage:        ptr.Int32(1),
+						LimitExpirationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						TimePeriod:          ptr.String("__TimePeriod__"),
+						MaxAllowed:          ptr.Int32(1),
+						CurrentUsage:        ptr.Int32(1),
+						LimitExpirationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetWhatsAppCallPermission.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetWhatsAppCallPermission(context.Background(), &GetWhatsAppCallPermissionInput{
+		OriginationPhoneNumberId: ptr.String("__OriginationPhoneNumberId__"),
+		DestinationPhoneNumber:   ptr.String("__DestinationPhoneNumber__"),
+		EndUserBsuid:             ptr.String("__EndUserBsuid__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetWhatsAppCallPermission.response", err)
 	}
 }
 
@@ -1280,6 +1403,31 @@ func TestCheckResponseSnapshot_PutWhatsAppBusinessPublicKey(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_SendWhatsAppCallEvent(t *testing.T) {
+	want := &SendWhatsAppCallEventOutput{
+		CallId: ptr.String("__CallId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("SendWhatsAppCallEvent.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.SendWhatsAppCallEvent(context.Background(), &SendWhatsAppCallEventInput{
+		OriginationPhoneNumberId: ptr.String("__OriginationPhoneNumberId__"),
+		MetaApiVersion:           ptr.String("__MetaApiVersion__"),
+		CallEvent:                []byte("blob"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "SendWhatsAppCallEvent.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_SendWhatsAppConversionEvent(t *testing.T) {
 	want := &SendWhatsAppConversionEventOutput{
 		RequestId: ptr.String("__RequestId__"),
@@ -1387,6 +1535,86 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UntagResource.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateLinkedWhatsAppBusinessAccountPhoneNumber(t *testing.T) {
+	want := &UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput{
+		PhoneNumberId: ptr.String("__PhoneNumberId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateLinkedWhatsAppBusinessAccountPhoneNumber.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateLinkedWhatsAppBusinessAccountPhoneNumber(context.Background(), &UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput{
+		Id: ptr.String("__Id__"),
+		CallSettings: &types.WhatsAppCallSettings{
+			CallEnabled: ptr.Bool(true),
+			CallHours: &types.WhatsAppCallHours{
+				Enabled:  ptr.Bool(true),
+				Timezone: ptr.String("__Timezone__"),
+				WeeklyOperatingHours: []types.WhatsAppWeeklyOperatingHoursEntry{
+					{
+						DayOfWeek: types.WhatsAppDayOfWeek("MONDAY"),
+						OpenTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+						CloseTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+					},
+					{
+						DayOfWeek: types.WhatsAppDayOfWeek("MONDAY"),
+						OpenTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+						CloseTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+					},
+				},
+				HolidaySchedule: []types.WhatsAppHolidayScheduleEntry{
+					{
+						Date: ptr.String("__Date__"),
+						StartTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+						EndTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+					},
+					{
+						Date: ptr.String("__Date__"),
+						StartTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+						EndTime: &types.WhatsAppTimeOfDay{
+							Hours:   ptr.Int32(1),
+							Minutes: ptr.Int32(1),
+						},
+					},
+				},
+			},
+			CallIconVisibility:       ptr.String("__CallIconVisibility__"),
+			CallbackPermissionStatus: ptr.String("__CallbackPermissionStatus__"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateLinkedWhatsAppBusinessAccountPhoneNumber.response", err)
 	}
 }
 
@@ -1588,6 +1816,35 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "AccessDeniedException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
+	want := &types.ConflictException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ConflictException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.SendWhatsAppCallEvent(context.Background(), &SendWhatsAppCallEventInput{
+		OriginationPhoneNumberId: ptr.String("__OriginationPhoneNumberId__"),
+		MetaApiVersion:           ptr.String("__MetaApiVersion__"),
+		CallEvent:                []byte("blob"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ConflictException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ConflictException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ConflictException.error", err)
 	}
 }
 

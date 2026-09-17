@@ -1,0 +1,8 @@
+{
+    "id": "d2a0d66f-09ff-4690-96ae-9abbe8596d95",
+    "type": "feature",
+    "description": "Made the replicaAlias attribute optional in the ReplicateInstance API to support Global routing for Amazon Connect Global Resiliency (ACGR) instances. This change maintains backward compatibility. When onboarding to ACGR without Global routing, you must specify a custom replicaAlias in your API call",
+    "modules": [
+        "service/connect"
+    ]
+}

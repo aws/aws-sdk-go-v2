@@ -9886,7 +9886,8 @@ type PayerResponsibilityScope string
 
 // Enum values for PayerResponsibilityScope
 const (
-	PayerResponsibilityScopeVpcEndpointCharges PayerResponsibilityScope = "vpc-endpoint-charges"
+	PayerResponsibilityScopeVpcEndpointCharges     PayerResponsibilityScope = "vpc-endpoint-charges"
+	PayerResponsibilityScopeResourceGatewayCharges PayerResponsibilityScope = "resource-gateway-charges"
 )
 
 // Values returns all known values for PayerResponsibilityScope. Note that this
@@ -9896,6 +9897,7 @@ const (
 func (PayerResponsibilityScope) Values() []PayerResponsibilityScope {
 	return []PayerResponsibilityScope{
 		"vpc-endpoint-charges",
+		"resource-gateway-charges",
 	}
 }
 
@@ -9904,6 +9906,7 @@ type PayerResponsibilityType string
 // Enum values for PayerResponsibilityType
 const (
 	PayerResponsibilityTypeVpcEndpointAccount        PayerResponsibilityType = "vpc-endpoint-account"
+	PayerResponsibilityTypeResourceGatewayAccount    PayerResponsibilityType = "resource-gateway-account"
 	PayerResponsibilityTypeVpcEndpointServiceAccount PayerResponsibilityType = "vpc-endpoint-service-account"
 )
 
@@ -9914,6 +9917,7 @@ const (
 func (PayerResponsibilityType) Values() []PayerResponsibilityType {
 	return []PayerResponsibilityType{
 		"vpc-endpoint-account",
+		"resource-gateway-account",
 		"vpc-endpoint-service-account",
 	}
 }
@@ -13687,6 +13691,7 @@ const (
 	VpcEndpointTypeGatewayLoadBalancer VpcEndpointType = "GatewayLoadBalancer"
 	VpcEndpointTypeResource            VpcEndpointType = "Resource"
 	VpcEndpointTypeServiceNetwork      VpcEndpointType = "ServiceNetwork"
+	VpcEndpointTypeTunnel              VpcEndpointType = "Tunnel"
 )
 
 // Values returns all known values for VpcEndpointType. Note that this can be
@@ -13700,6 +13705,7 @@ func (VpcEndpointType) Values() []VpcEndpointType {
 		"GatewayLoadBalancer",
 		"Resource",
 		"ServiceNetwork",
+		"Tunnel",
 	}
 }
 

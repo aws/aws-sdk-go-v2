@@ -35,10 +35,11 @@ type GetWhatsAppBusinessPublicKeyInput struct {
 
 type GetWhatsAppBusinessPublicKeyOutput struct {
 
-	// The stored RSA business public key (PEM), if present.
+	// The stored PEM-encoded 2048-bit RSA public key.
 	BusinessPublicKey *string
 
-	// Meta's signing status: "VALID" | "MISMATCH".
+	// The signature status of the stored business public key. Valid values are VALID
+	// and MISMATCH.
 	BusinessPublicKeySignatureStatus *string
 
 	// Metadata pertaining to the operation's result.

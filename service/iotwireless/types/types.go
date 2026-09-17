@@ -54,10 +54,13 @@ type Accuracy struct {
 	noSmithyDocumentSerde
 }
 
-// Optional configuration to customize location estimates.
+// Optional configuration for customizing position estimates, including parameters
+// that affect the accuracy and uncertainty of WiFi and cellular-based location
+// estimates.
 type AdvancedConfiguration struct {
 
-	// Configuration for WiFi and cellular-based payloads for location estimates.
+	// Configuration for WiFi and cellular-based location estimate payloads resolved
+	// by HERE's solvers.
 	WiFiCellular *WiFiCellular
 
 	noSmithyDocumentSerde
@@ -544,6 +547,57 @@ type Gnss struct {
 	// information is taken, in seconds GPS time (GPST). If capture time is not
 	// specified, the local server time is used.
 	CaptureTime *float32
+
+	// Optional value that gives the capture time estimate accuracy, in seconds. If
+	// capture time accuracy is not specified, default value of 300 is used.
+	CaptureTimeAccuracy *float32
+
+	// Optional parameter that forces 2D solve, which modifies the positioning
+	// algorithm to a 2D solution problem. When this parameter is specified, the
+	// assistance altitude should have an accuracy of at least 10 meters.
+	Use2DSolver bool
+
+	noSmithyDocumentSerde
+}
+
+// A single GNSS scan capture containing the scan payload and optional capture
+// time.
+type GnssCapture struct {
+
+	// Payload that contains the GNSS scan result, or NAV message, in hexadecimal
+	// notation.
+	//
+	// This member is required.
+	Payload *string
+
+	// Optional parameter that gives an estimate of the time when the GNSS scan
+	// information is taken, in seconds GPS time (GPST). If capture time is not
+	// specified, the local server time is used.
+	CaptureTime *float32
+
+	noSmithyDocumentSerde
+}
+
+// Global navigation satellite system (GNSS) multi-frame object used for
+// positioning. Contains multiple GNSS scan captures that are combined by the
+// solver.
+type GnssMultiFrame struct {
+
+	// List of GNSS scan captures. Each capture contains a payload from a single GNSS
+	// scan. The number of captures must be 2, 4, 8, 16, or 32.
+	//
+	// This member is required.
+	Captures []GnssCapture
+
+	// Optional assistance altitude, which is the altitude of the device at capture
+	// time, specified in meters above the WGS84 reference ellipsoid. This parameter is
+	// required when Use2DSolver is enabled.
+	AssistAltitude *float32
+
+	// Optional assistance position information, specified using latitude and
+	// longitude values in degrees. The coordinates are inside the WGS84 reference
+	// frame.
+	AssistPosition []float32
 
 	// Optional value that gives the capture time estimate accuracy, in seconds. If
 	// capture time accuracy is not specified, default value of 300 is used.
@@ -2305,11 +2359,20 @@ type WiFiAccessPoint struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration for WiFi and cellular location payloads.
+// Configuration for WiFi and cellular location payloads. Contains the confidence
+// level that determines the size of the uncertainty radius in the position
+// estimate.
 type WiFiCellular struct {
 
-	// Confidence level for WiFi and cellular position estimates, expressed as a
-	// percentage. Valid range: 50–99 inclusive. Defaults to 68 if not specified.
+	// The confidence level for WiFi and cellular position estimates, expressed as a
+	// percentage. This value determines the size of the confidence area or uncertainty
+	// radius for the estimated position. A higher confidence level produces a larger
+	// uncertainty radius, while a lower confidence level produces a smaller, more
+	// precise radius.
+	//
+	// Valid range: 50 to 99 inclusive. If not specified, the default value of 68 is
+	// used, which corresponds to approximately one standard deviation of the normal
+	// distribution.
 	ConfidencePercent *int32
 
 	noSmithyDocumentSerde
