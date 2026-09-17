@@ -966,9 +966,6 @@ func TestMapDownloadObjectInputIsTotal(t *testing.T) {
 	src := reflect.ValueOf(in).Elem()
 	for i := 0; i < src.NumField(); i++ {
 		f := src.Type().Field(i)
-		if !f.IsExported() {
-			continue
-		}
 		v, err := distinctValue(f.Type, i)
 		if err != nil {
 			// Deliberately fatal rather than skipped: a type this helper cannot
@@ -983,9 +980,6 @@ func TestMapDownloadObjectInputIsTotal(t *testing.T) {
 
 	for i := 0; i < src.NumField(); i++ {
 		f := src.Type().Field(i)
-		if !f.IsExported() {
-			continue
-		}
 		dst := got.FieldByName(f.Name)
 		if !dst.IsValid() {
 			t.Errorf("DownloadObjectInput is missing field %s, which GetObjectInput has", f.Name)
@@ -1005,7 +999,7 @@ func TestMapDownloadObjectInputIsTotal(t *testing.T) {
 	// a field DownloadDirectory would be leaving unset by accident.
 	for i := 0; i < got.NumField(); i++ {
 		f := got.Type().Field(i)
-		if !f.IsExported() || f.Name == "WriterAt" {
+		if f.Name == "WriterAt" {
 			continue
 		}
 		if _, ok := src.Type().FieldByName(f.Name); !ok {
