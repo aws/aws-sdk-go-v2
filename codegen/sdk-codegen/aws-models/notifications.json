@@ -360,6 +360,12 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the <code>ManagedNotificationConfiguration</code> to associate with the Account Contact.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "isSensitiveEventsSubscribed": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this contact is subscribed to sensitive events. The <code>notifications:SubscribeSensitiveEvents</code> permission controls access to sensitive events. Defaults to false.</p>"
+                    }
                 }
             },
             "traits": {
@@ -434,6 +440,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the <code>ManagedNotificationConfiguration</code> to associate with the additional Channel.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "isSensitiveEventsSubscribed": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this channel is subscribed to sensitive events. The <code>notifications:SubscribeSensitiveEvents</code> permission controls access to sensitive events. Defaults to false.</p>"
                     }
                 }
             },
@@ -523,6 +535,21 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.notifications#AttachmentContentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9]+/[a-zA-Z0-9][a-zA-Z0-9!#$&\\-^_.+]*$"
+            }
+        },
+        "com.amazonaws.notifications#AttachmentDisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
         "com.amazonaws.notifications#Channel": {
             "type": "resource",
             "identifiers": {
@@ -550,7 +577,7 @@
             "type": "string",
             "traits": {
                 "aws.api#arnReference": {},
-                "smithy.api#pattern": "^arn:aws:(chatbot|consoleapp|notifications-contacts):[a-zA-Z0-9-]*:[0-9]{12}:[a-zA-Z0-9-_.@]+/[a-zA-Z0-9/_.@:-]+$"
+                "smithy.api#pattern": "^arn:[a-z-]{3,10}:(chatbot|consoleapp|notifications-contacts):[a-zA-Z0-9-]*:[0-9]{12}:[a-zA-Z0-9-_.@]+/[a-zA-Z0-9/_.@:-]+$"
             }
         },
         "com.amazonaws.notifications#ChannelAssociationOverrideOption": {
@@ -573,34 +600,40 @@
         "com.amazonaws.notifications#ChannelIdentifier": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^ACCOUNT_PRIMARY|ACCOUNT_ALTERNATE_BILLING|ACCOUNT_ALTERNATE_OPERATIONS|ACCOUNT_ALTERNATE_SECURITY|arn:aws:(chatbot|consoleapp|notifications-contacts):[a-zA-Z0-9-]*:[0-9]{12}:[a-zA-Z0-9-_.@]+/[a-zA-Z0-9/_.@:-]+$"
+                "smithy.api#pattern": "^(ACCOUNT_PRIMARY|ACCOUNT_ALTERNATE_BILLING|ACCOUNT_ALTERNATE_OPERATIONS|ACCOUNT_ALTERNATE_SECURITY|arn:[a-z-]{3,10}:(chatbot|consoleapp|notifications-contacts):[a-zA-Z0-9-]*:[0-9]{12}:[a-zA-Z0-9-_.@]+/[a-zA-Z0-9/_.@:-]+)$"
             }
         },
         "com.amazonaws.notifications#ChannelType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "MOBILE",
-                        "value": "MOBILE",
-                        "documentation": "    AWS Console Mobile App sends notifications to mobile devices. Link:https://aws.amazon.com/console/mobile/\n"
-                    },
-                    {
-                        "name": "CHATBOT",
-                        "value": "CHATBOT",
-                        "documentation": "    Chatbot sends notifications to group platforms, like Slack or Chime. Link:https://aws.amazon.com/chatbot/\n"
-                    },
-                    {
-                        "name": "EMAIL",
-                        "value": "EMAIL",
-                        "documentation": "    Email sends notifications to email addresses.\n"
-                    },
-                    {
-                        "name": "ACCOUNT_CONTACT",
-                        "value": "ACCOUNT_CONTACT",
-                        "documentation": "    User Notification Service sends notifications to Account Managed contacts.\n"
+            "type": "enum",
+            "members": {
+                "MOBILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "AWS Console Mobile App sends notifications to mobile devices. Link:https://aws.amazon.com/console/mobile/",
+                        "smithy.api#enumValue": "MOBILE"
                     }
-                ]
+                },
+                "CHATBOT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Chatbot sends notifications to group platforms, like Slack or Chime. Link:https://aws.amazon.com/chatbot/",
+                        "smithy.api#enumValue": "CHATBOT"
+                    }
+                },
+                "EMAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Email sends notifications to email addresses.",
+                        "smithy.api#enumValue": "EMAIL"
+                    }
+                },
+                "ACCOUNT_CONTACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "User Notification Service sends notifications to Account Managed contacts.",
+                        "smithy.api#enumValue": "ACCOUNT_CONTACT"
+                    }
+                }
             }
         },
         "com.amazonaws.notifications#Channels": {
@@ -1015,7 +1048,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to deregister a NotificationHub"
                 },
-                "smithy.api#documentation": "<p>Deregisters a <code>NotificationConfiguration</code> in the specified Region.</p> <note> <p>You can't deregister the last <code>NotificationHub</code> in the account. <code>NotificationEvents</code> stored in the deregistered <code>NotificationConfiguration</code> are no longer be visible. Recreating a new <code>NotificationConfiguration</code> in the same Region restores access to those <code>NotificationEvents</code>.</p> </note>",
+                "smithy.api#documentation": "<p>Deregisters a <code>NotificationHub</code> in the specified Region.</p> <note> <p>You can't deregister the last <code>NotificationHub</code> in the account. <code>NotificationEvents</code> stored in the deregistered <code>NotificationHub</code> are no longer visible. Recreating a new <code>NotificationHub</code> in the same Region restores access to those <code>NotificationEvents</code>.</p> </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "DELETE",
@@ -1030,7 +1063,7 @@
                 "notificationHubRegion": {
                     "target": "com.amazonaws.notifications#Region",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>NotificationConfiguration</code> Region.</p>",
+                        "smithy.api#documentation": "<p>The <code>NotificationHub</code> Region.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1046,14 +1079,14 @@
                 "notificationHubRegion": {
                     "target": "com.amazonaws.notifications#Region",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>NotificationConfiguration</code> Region.</p>",
+                        "smithy.api#documentation": "<p>The <code>NotificationHub</code> Region.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "statusSummary": {
                     "target": "com.amazonaws.notifications#NotificationHubStatusSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p> <code>NotificationConfiguration</code> status information.</p>",
+                        "smithy.api#documentation": "<p> <code>NotificationHub</code> status information.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1539,7 +1572,7 @@
                     "service": "com.amazonaws.notifications#Notifications",
                     "resource": "com.amazonaws.notifications#EventRule"
                 },
-                "smithy.api#pattern": "^arn:aws:notifications::[0-9]{12}:configuration/[a-z0-9]{27}/rule/[a-z0-9]{27}$"
+                "smithy.api#pattern": "^arn:[a-z-]{3,10}:notifications::[0-9]{12}:configuration/[a-z0-9]{27}/rule/[a-z0-9]{27}$"
             }
         },
         "com.amazonaws.notifications#EventRuleEventPattern": {
@@ -3070,6 +3103,13 @@
                         "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the Managed Notification Events.</p>",
                         "smithy.api#httpQuery": "relatedAccount"
                     }
+                },
+                "includeSensitiveEvents": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to include sensitive events in the result. By default, only non-sensitive events are returned. The <code>notifications:AccessSensitiveEvents</code> permission controls access to sensitive events.</p>",
+                        "smithy.api#httpQuery": "includeSensitiveEvents"
+                    }
                 }
             },
             "traits": {
@@ -3926,6 +3966,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Controls whether users can modify channel associations for a notification configuration.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>ENABLED</code> </p> <ul> <li> <p>Users can associate or disassociate channels with the notification configuration.</p> </li> </ul> </li> <li> <p> <code>DISABLED</code> </p> <ul> <li> <p>Users cannot associate or disassociate channels with the notification configuration.</p> </li> </ul> </li> </ul> </li> </ul>"
                     }
+                },
+                "isSensitiveEventsSubscribed": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this channel association is subscribed to sensitive events. Defaults to false for associations created without the flag.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3936,6 +3982,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.notifications#ManagedNotificationChannelAssociationSummary"
+            }
+        },
+        "com.amazonaws.notifications#ManagedNotificationChannelIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(ACCOUNT_PRIMARY|ACCOUNT_ALTERNATE_BILLING|ACCOUNT_ALTERNATE_OPERATIONS|ACCOUNT_ALTERNATE_SECURITY|arn:[a-z-]{3,10}:(chatbot|consoleapp|notifications-contacts):[a-zA-Z0-9-]*:[0-9]{12}:[a-zA-Z0-9-_.@]+/[a-zA-Z0-9/_.@:-]+)$"
             }
         },
         "com.amazonaws.notifications#ManagedNotificationChildEvent": {
@@ -4028,7 +4080,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A ManagedNotificationChildEvent is a notification-focused representation of an event. They contain semantic information used to create aggregated or non-aggregated end-user notifications.</p>"
+                "smithy.api#documentation": "<p>A notification-focused representation of an event. They contain semantic information used to create aggregated or non-aggregated end-user notifications.</p>"
             }
         },
         "com.amazonaws.notifications#ManagedNotificationChildEventArn": {
@@ -4038,7 +4090,7 @@
                     "service": "com.amazonaws.notifications#Notifications",
                     "resource": "com.amazonaws.notifications#ManagedNotificationChildEvent"
                 },
-                "smithy.api#pattern": "^arn:[-.a-z0-9]{1,63}:notifications::[0-9]{12}:managed-notification-configuration/category/[a-zA-Z0-9\\-]{3,64}/sub-category/[a-zA-Z0-9\\-]{3,64}/event/[a-z0-9]{27}/child-event/[a-z0-9]{27}$"
+                "smithy.api#pattern": "^arn:[a-z-]{3,10}:notifications::[0-9]{12}:managed-notification-configuration/category/[a-zA-Z0-9\\-]{3,64}/sub-category/[a-zA-Z0-9\\-]{3,64}/event/[a-z0-9]{27}/child-event/[a-z0-9]{27}$"
             }
         },
         "com.amazonaws.notifications#ManagedNotificationChildEventOverview": {
@@ -4216,7 +4268,7 @@
         "com.amazonaws.notifications#ManagedNotificationConfigurationOsArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:[-.a-z0-9]{1,63}:notifications::[0-9]{12}:managed-notification-configuration/category/[a-zA-Z0-9\\-]{3,64}/sub-category/[a-zA-Z0-9\\-]{3,64}$"
+                "smithy.api#pattern": "^arn:[a-z-]{3,10}:notifications::[0-9]{12}:managed-notification-configuration/category/[a-zA-Z0-9\\-]{3,64}/sub-category/[a-zA-Z0-9\\-]{3,64}$"
             }
         },
         "com.amazonaws.notifications#ManagedNotificationConfigurationStructure": {
@@ -4337,6 +4389,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Organizational Unit Id that an Amazon Web Services account belongs to.</p>"
                     }
+                },
+                "attachments": {
+                    "target": "com.amazonaws.notifications#NotificationEventAttachmentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of files attached to the notification event.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4350,7 +4408,7 @@
                     "service": "com.amazonaws.notifications#Notifications",
                     "resource": "com.amazonaws.notifications#ManagedNotificationEvent"
                 },
-                "smithy.api#pattern": "^arn:[-.a-z0-9]{1,63}:notifications::[0-9]{12}:managed-notification-configuration/category/[a-zA-Z0-9\\-]{3,64}/sub-category/[a-zA-Z0-9\\-]{3,64}/event/[a-z0-9]{27}$"
+                "smithy.api#pattern": "^arn:[a-z-]{3,10}:notifications::[0-9]{12}:managed-notification-configuration/category/[a-zA-Z0-9\\-]{3,64}/sub-category/[a-zA-Z0-9\\-]{3,64}/event/[a-z0-9]{27}$"
             }
         },
         "com.amazonaws.notifications#ManagedNotificationEventOverview": {
@@ -4489,7 +4547,7 @@
             "type": "string",
             "traits": {
                 "aws.api#arnReference": {},
-                "smithy.api#pattern": "^arn:aws:events:[a-z-\\d]{2,25}:\\d{12}:rule\\/[a-zA-Z-\\d]{1,1024}$"
+                "smithy.api#pattern": "^arn:[a-z-]{3,10}:events:[a-z-\\d]{2,25}:\\d{12}:rule\\/[a-zA-Z-\\d]{1,1024}$"
             }
         },
         "com.amazonaws.notifications#ManagedRuleArns": {
@@ -4696,6 +4754,12 @@
                         "smithy.api#documentation": "<p>A complete summary with all possible relevant information.</p>"
                     }
                 },
+                "markupDescription": {
+                    "target": "com.amazonaws.notifications#TextPartReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A rich description in Portable Text format, which you can convert to markup formats such as HTML, Markdown, or plain text. Channels that don't support rich rendering ignore this field and use the plain text components instead.</p>"
+                    }
+                },
                 "dimensions": {
                     "target": "com.amazonaws.notifications#Dimensions",
                     "traits": {
@@ -4773,7 +4837,7 @@
                     "service": "com.amazonaws.notifications#Notifications",
                     "resource": "com.amazonaws.notifications#NotificationConfiguration"
                 },
-                "smithy.api#pattern": "^arn:aws:notifications::[0-9]{12}:configuration/[a-z0-9]{27}$"
+                "smithy.api#pattern": "^arn:[a-z-]{3,10}:notifications::[0-9]{12}:configuration/[a-z0-9]{27}$"
             }
         },
         "com.amazonaws.notifications#NotificationConfigurationDescription": {
@@ -4908,7 +4972,41 @@
                     "service": "com.amazonaws.notifications#Notifications",
                     "resource": "com.amazonaws.notifications#NotificationEventSchema"
                 },
-                "smithy.api#pattern": "^arn:[-.a-z0-9]{1,63}:notifications:[-.a-z0-9]{1,63}:[0-9]{12}:configuration/[a-z0-9]{27}/event/[a-z0-9]{27}$"
+                "smithy.api#pattern": "^arn:[a-z-]{3,10}:notifications:[-.a-z0-9]{1,63}:[0-9]{12}:configuration/[a-z0-9]{27}/event/[a-z0-9]{27}$"
+            }
+        },
+        "com.amazonaws.notifications#NotificationEventAttachment": {
+            "type": "structure",
+            "members": {
+                "displayName": {
+                    "target": "com.amazonaws.notifications#AttachmentDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the attachment that recipients see.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "attachmentDownloadUrl": {
+                    "target": "com.amazonaws.notifications#SensitiveUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A temporary URL for downloading the attachment. The URL expires shortly after it's issued.</p>"
+                    }
+                },
+                "contentType": {
+                    "target": "com.amazonaws.notifications#AttachmentContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MIME content type of the attachment, for example <code>application/pdf</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A file attached to a notification event.</p>"
+            }
+        },
+        "com.amazonaws.notifications#NotificationEventAttachmentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.notifications#NotificationEventAttachment"
             }
         },
         "com.amazonaws.notifications#NotificationEventId": {
@@ -5321,6 +5419,9 @@
                 },
                 {
                     "target": "com.amazonaws.notifications#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.notifications#UpdateManagedNotificationChannelAssociation"
                 }
             ],
             "resources": [
@@ -5815,7 +5916,7 @@
                     "min": 2,
                     "max": 25
                 },
-                "smithy.api#pattern": "^([a-z]{1,2})-([a-z]{1,15}-)+([0-9])$"
+                "smithy.api#pattern": "^([a-z]{1,4})-([a-z]{1,15}-)+([0-9])$"
             }
         },
         "com.amazonaws.notifications#Regions": {
@@ -5862,7 +5963,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to register a NotificationHub"
                 },
-                "smithy.api#documentation": "<p>Registers a <code>NotificationConfiguration</code> in the specified Region.</p> <p>There is a maximum of one <code>NotificationConfiguration</code> per Region. You can have a maximum of 3 <code>NotificationHub</code> resources at a time.</p>",
+                "smithy.api#documentation": "<p>Registers a <code>NotificationHub</code> in the specified Region.</p> <p>There is a maximum of one <code>NotificationHub</code> per Region. You can have a maximum of 3 <code>NotificationHub</code> resources at a time.</p>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -5899,7 +6000,7 @@
                 "statusSummary": {
                     "target": "com.amazonaws.notifications#NotificationHubStatusSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides additional information about the current <code>NotificationConfiguration</code> status information.</p>",
+                        "smithy.api#documentation": "<p>Provides additional information about the current <code>NotificationHub</code> status information.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6014,6 +6115,16 @@
                         "value": "v1.0"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.notifications#SensitiveUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^(https?):\\/\\/.*$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.notifications#ServiceCode": {
@@ -6417,6 +6528,10 @@
                     {
                         "name": "URL",
                         "value": "URL"
+                    },
+                    {
+                        "name": "PORTABLE_TEXT",
+                        "value": "PORTABLE_TEXT"
                     }
                 ]
             }
@@ -6437,7 +6552,7 @@
                         "smithy.api#documentation": "<p>A short single line description of the link. Must be hyper-linked with the URL itself. </p> <p>Used for text parts with the type <code>URL</code>.</p>",
                         "smithy.api#length": {
                             "min": 1,
-                            "max": 1024
+                            "max": 12000
                         }
                     }
                 },
@@ -6673,6 +6788,83 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.notifications#UpdateManagedNotificationChannelAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.notifications#UpdateManagedNotificationChannelAssociationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.notifications#UpdateManagedNotificationChannelAssociationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.notifications#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.notifications#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.notifications#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.notifications#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.notifications#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.notifications#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to toggle the sensitive-events subscription on an existing\n    Managed Notification channel association"
+                },
+                "smithy.api#documentation": "<p>Updates the <code>isSensitiveEventsSubscribed</code> property of a particular ManagedNotification channel association.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/channels/update-managed-notification-channel-association"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.notifications#UpdateManagedNotificationChannelAssociationRequest": {
+            "type": "structure",
+            "members": {
+                "managedNotificationConfigurationArn": {
+                    "target": "com.amazonaws.notifications#ManagedNotificationConfigurationOsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the <code>ManagedNotificationConfiguration</code> whose Channel association property you want to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelIdentifier": {
+                    "target": "com.amazonaws.notifications#ManagedNotificationChannelIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the channel association to update. You can specify one of the following:</p> <ul> <li> <p>An Account contact identifier.</p> </li> <li> <p>A Channel ARN.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "isSensitiveEventsSubscribed": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the association is subscribed to sensitive events. The <code>notifications:SubscribeSensitiveEvents</code> permission controls access to sensitive events.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.notifications#UpdateManagedNotificationChannelAssociationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.notifications#UpdateNotificationConfiguration": {
             "type": "operation",
             "input": {
@@ -6769,8 +6961,7 @@
             "traits": {
                 "smithy.api#length": {
                     "max": 2000
-                },
-                "smithy.api#pattern": "^(https?)://.*$"
+                }
             }
         },
         "com.amazonaws.notifications#ValidationException": {

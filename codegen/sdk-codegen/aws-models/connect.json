@@ -50291,8 +50291,7 @@
                 "ReplicaAlias": {
                     "target": "com.amazonaws.connect#DirectoryAlias",
                     "traits": {
-                        "smithy.api#documentation": "<p>The alias for the replicated instance. The <code>ReplicaAlias</code> must be unique.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The alias for the replicated instance. The <code>ReplicaAlias</code> must be unique.</p>"
                     }
                 }
             },

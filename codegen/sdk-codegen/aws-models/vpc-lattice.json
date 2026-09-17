@@ -315,6 +315,41 @@
                 "smithy.api#pattern": "^(arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:certificate/[0-9a-z-]+)?$"
             }
         },
+        "com.amazonaws.vpclattice#CidrRange": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.vpclattice#CidrRangeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.vpclattice#CidrRange"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.vpclattice#CidrResource": {
+            "type": "structure",
+            "members": {
+                "cidrRanges": {
+                    "target": "com.amazonaws.vpclattice#CidrRangeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIDR ranges of the network segment, for example, <code>10.0.0.0/16</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a CIDR resource, which represents a network segment as one or more CIDR ranges.</p>"
+            }
+        },
         "com.amazonaws.vpclattice#ClientToken": {
             "type": "string",
             "traits": {
@@ -678,26 +713,26 @@
                 "type": {
                     "target": "com.amazonaws.vpclattice#ResourceConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resource configuration. A resource configuration can be one of the following types:</p> <ul> <li> <p> <b>SINGLE</b> - A single resource.</p> </li> <li> <p> <b>GROUP</b> - A group of resources. You must create a group resource configuration before you create a child resource configuration.</p> </li> <li> <p> <b>CHILD</b> - A single resource that is part of a group resource configuration.</p> </li> <li> <p> <b>ARN</b> - An Amazon Web Services resource.</p> </li> </ul>",
+                        "smithy.api#documentation": "<p>The type of resource configuration. A resource configuration can be one of the following types:</p> <ul> <li> <p> <b>SINGLE</b> - A single resource.</p> </li> <li> <p> <b>GROUP</b> - A group of resources. You must create a group resource configuration before you create a child resource configuration.</p> </li> <li> <p> <b>CHILD</b> - A single resource that is part of a group resource configuration.</p> </li> <li> <p> <b>ARN</b> - An Amazon Web Services resource.</p> </li> <li> <p> <b>CIDR</b> - A network segment, expressed as a range of IP addresses (a CIDR block). Use this type to share a portion of your network rather than an individual resource. A consumer accesses the resources within the CIDR range through a <code>Tunnel</code> VPC endpoint. You can't add a CIDR resource configuration to a service network. A CIDR resource configuration must be associated with a resource gateway whose DNS resolution is set to <code>IN_VPC</code>.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "portRanges": {
                     "target": "com.amazonaws.vpclattice#PortRangeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>(SINGLE, GROUP, CHILD) The TCP port ranges that a consumer can use to access a resource configuration (for example: 1-65535). You can separate port ranges using commas (for example: 1,2,22-30).</p>"
+                        "smithy.api#documentation": "<p>(SINGLE, GROUP, CHILD, CIDR) The port ranges that a consumer can use to access a resource configuration (for example: 1-65535). You can separate port ranges using commas (for example: 1,2,22-30). To resolve DNS through a CIDR resource configuration, include port 53 in the port ranges.</p>"
                     }
                 },
                 "protocol": {
                     "target": "com.amazonaws.vpclattice#ProtocolType",
                     "traits": {
-                        "smithy.api#documentation": "<p>(SINGLE, GROUP) The protocol accepted by the resource configuration.</p>"
+                        "smithy.api#documentation": "<p>(SINGLE, GROUP, CIDR) The protocol accepted by the resource configuration. The default is <code>TCP</code>. <code>TCP_UDP</code> is supported only for CIDR resource configurations; specify it for a CIDR resource configuration to allow DNS resolution, which uses UDP.</p>"
                     }
                 },
                 "resourceGatewayIdentifier": {
                     "target": "com.amazonaws.vpclattice#ResourceGatewayIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>(SINGLE, GROUP, ARN) The ID or ARN of the resource gateway used to connect to the resource configuration. For a child resource configuration, this value is inherited from the parent resource configuration.</p>"
+                        "smithy.api#documentation": "<p>(SINGLE, GROUP, ARN, CIDR) The ID or ARN of the resource gateway used to connect to the resource configuration. For a child resource configuration, this value is inherited from the parent resource configuration. For a CIDR resource configuration, the associated resource gateway must have its DNS resolution set to <code>IN_VPC</code> so that DNS queries resolve in the context of your VPC.</p>"
                     }
                 },
                 "resourceConfigurationGroupIdentifier": {
@@ -709,7 +744,7 @@
                 "resourceConfigurationDefinition": {
                     "target": "com.amazonaws.vpclattice#ResourceConfigurationDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies the resource configuration in one of the following ways:</p> <ul> <li> <p> <b>Amazon Resource Name (ARN)</b> - Supported resource-types that are provisioned by Amazon Web Services services, such as RDS databases, can be identified by their ARN.</p> </li> <li> <p> <b>Domain name</b> - Any domain name that is publicly resolvable.</p> </li> <li> <p> <b>IP address</b> - For IPv4 and IPv6, only IP addresses in the VPC are supported.</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>Identifies the resource configuration in one of the following ways:</p> <ul> <li> <p> <b>Amazon Resource Name (ARN)</b> - Supported resource-types that are provisioned by Amazon Web Services services, such as RDS databases, can be identified by their ARN.</p> </li> <li> <p> <b>Domain name</b> - Any domain name that is publicly resolvable.</p> </li> <li> <p> <b>IP address</b> - For IPv4 and IPv6, only IP addresses in the VPC are supported.</p> </li> <li> <p> <b>CIDR range</b> - For a resource configuration of type CIDR, specify a <code>cidrResource</code> with one or more <code>cidrRanges</code> (for example, <code>10.0.0.0/16</code>) that cover the IP addresses of the resources you want to make accessible. You can specify up to 10 ranges, using IPv4, IPv6, or both, and each range must include a prefix length. To represent your entire network, specify <code>0.0.0.0/0</code> (IPv4) or <code>::/0</code> (IPv6) as the only range. You can't use reserved ranges such as <code>169.254.0.0/16</code>, <code>100.64.0.0/10</code>, <code>224.0.0.0/4</code>, <code>fe80::/10</code>, or <code>ff00::/8</code>.</p> </li> </ul>"
                     }
                 },
                 "allowAssociationToShareableServiceNetwork": {
@@ -790,7 +825,7 @@
                 "type": {
                     "target": "com.amazonaws.vpclattice#ResourceConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resource configuration. A resource configuration can be one of the following types:</p> <ul> <li> <p> <b>SINGLE</b> - A single resource.</p> </li> <li> <p> <b>GROUP</b> - A group of resources. You must create a group resource configuration before you create a child resource configuration.</p> </li> <li> <p> <b>CHILD</b> - A single resource that is part of a group resource configuration.</p> </li> <li> <p> <b>ARN</b> - An Amazon Web Services resource.</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>The type of resource configuration. A resource configuration can be one of the following types:</p> <ul> <li> <p> <b>SINGLE</b> - A single resource.</p> </li> <li> <p> <b>GROUP</b> - A group of resources. You must create a group resource configuration before you create a child resource configuration.</p> </li> <li> <p> <b>CHILD</b> - A single resource that is part of a group resource configuration.</p> </li> <li> <p> <b>ARN</b> - An Amazon Web Services resource.</p> </li> <li> <p> <b>CIDR</b> - A network segment, expressed as a range of IP addresses (a CIDR block). A consumer accesses the resources within the CIDR range through a <code>Tunnel</code> VPC endpoint. A CIDR resource configuration must be associated with a resource gateway whose DNS resolution is set to <code>IN_VPC</code>.</p> </li> </ul>"
                     }
                 },
                 "portRanges": {
@@ -959,7 +994,7 @@
                 "resourceConfigDnsResolution": {
                     "target": "com.amazonaws.vpclattice#ResourceConfigDnsResolution",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates how DNS is resolved for resource configurations associated to this resource gateway. ResourceConfigDnsResolution is set at creation time and cannot be changed.</p> <ul> <li> <p> <code>IN_VPC</code> - DNS resolution occurs privately within the resource gateway's VPC. DNS queries for resources behind this resource gateway resolve using the DNS resolvers defined in the VPC's DHCP option sets. Use this when your resource domain names are hosted in private Route 53 hosted zones or on-premises DNS servers reachable from the VPC.</p> </li> <li> <p> <code>PUBLIC</code> - DNS resolution occurs against public DNS resolvers. DNS queries for resources behind this resource gateway resolve using standard public DNS. Use this when your resource domain names are publicly resolvable.</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>Indicates how DNS is resolved for resource configurations associated with this resource gateway. This value is set when you create the resource gateway and can't be changed afterward. The default is <code>PUBLIC</code>.</p> <ul> <li> <p> <code>IN_VPC</code> - DNS resolution occurs privately within the resource gateway's VPC. DNS queries for resources behind this resource gateway resolve using the DNS resolvers defined in the VPC's DHCP option sets. Use this when your resource domain names are hosted in private Route 53 hosted zones or on-premises DNS servers reachable from the VPC. A CIDR resource configuration requires a resource gateway that uses <code>IN_VPC</code>, and an <code>IN_VPC</code> resource gateway can't be used for ARN resource configurations, so a single resource gateway can't serve both ARN and CIDR resource configurations.</p> </li> <li> <p> <code>PUBLIC</code> - DNS resolution occurs against public DNS resolvers. DNS queries for resources behind this resource gateway resolve using standard public DNS. Use this when your resource domain names are publicly resolvable.</p> </li> </ul>"
                     }
                 },
                 "tags": {
@@ -3752,7 +3787,7 @@
                 "resourceGatewayId": {
                     "target": "com.amazonaws.vpclattice#ResourceGatewayId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the resource gateway used to connect to the resource configuration in a given VPC. You can specify the resource gateway identifier only for resource configurations with type SINGLE, GROUP, or ARN.</p>"
+                        "smithy.api#documentation": "<p>The ID of the resource gateway used to connect to the resource configuration in a given VPC. You can specify the resource gateway identifier only for resource configurations with type SINGLE, GROUP, ARN, or CIDR.</p>"
                     }
                 },
                 "resourceConfigurationGroupId": {
@@ -3764,7 +3799,7 @@
                 "type": {
                     "target": "com.amazonaws.vpclattice#ResourceConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resource configuration.</p> <ul> <li> <p> <code>SINGLE</code> - A single resource.</p> </li> <li> <p> <code>GROUP</code> - A group of resources.</p> </li> <li> <p> <code>CHILD</code> - A single resource that is part of a group resource configuration.</p> </li> <li> <p> <code>ARN</code> - An Amazon Web Services resource.</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>The type of resource configuration.</p> <ul> <li> <p> <code>SINGLE</code> - A single resource.</p> </li> <li> <p> <code>GROUP</code> - A group of resources.</p> </li> <li> <p> <code>CHILD</code> - A single resource that is part of a group resource configuration.</p> </li> <li> <p> <code>ARN</code> - An Amazon Web Services resource.</p> </li> <li> <p> <code>CIDR</code> - A network segment (a range of IP addresses) accessed through a <code>Tunnel</code> VPC endpoint.</p> </li> </ul>"
                     }
                 },
                 "allowAssociationToShareableServiceNetwork": {
@@ -4405,7 +4440,7 @@
                 "privateDnsEntry": {
                     "target": "com.amazonaws.vpclattice#DnsEntry",
                     "traits": {
-                        "smithy.api#documentation": "<p>The private DNS entry for the service.</p>"
+                        "smithy.api#documentation": "<p>The private DNS entry for the service. This entry includes only the domain name.</p>"
                     }
                 },
                 "privateDnsEnabled": {
@@ -7934,6 +7969,69 @@
                 "smithy.api#documentation": "<p>Describes a path match type. Each rule can include only one of the following types of paths.</p>"
             }
         },
+        "com.amazonaws.vpclattice#PayerResponsibilityEntry": {
+            "type": "structure",
+            "members": {
+                "scope": {
+                    "target": "com.amazonaws.vpclattice#PayerResponsibilityScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of charges that this entry applies to. <code>ResourceGatewayCharges</code> covers the resource gateway's data processing charge.</p>"
+                    }
+                },
+                "payerResponsibilityType": {
+                    "target": "com.amazonaws.vpclattice#PayerResponsibilityPayer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account that pays this category of charges. <code>VpcEndpointAccount</code> owns the VPC endpoint. <code>ResourceGatewayAccount</code> owns the resource gateway.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies which account pays for a category of charges on a VPC endpoint association.</p>"
+            }
+        },
+        "com.amazonaws.vpclattice#PayerResponsibilityList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.vpclattice#PayerResponsibilityEntry"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.vpclattice#PayerResponsibilityPayer": {
+            "type": "enum",
+            "members": {
+                "VpcEndpointAccount": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "The VPC endpoint account pays",
+                        "smithy.api#enumValue": "VpcEndpointAccount"
+                    }
+                },
+                "ResourceGatewayAccount": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "The resource gateway account pays",
+                        "smithy.api#enumValue": "ResourceGatewayAccount"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.vpclattice#PayerResponsibilityScope": {
+            "type": "enum",
+            "members": {
+                "ResourceGatewayCharges": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Charges for the resource gateway",
+                        "smithy.api#enumValue": "ResourceGatewayCharges"
+                    }
+                }
+            }
+        },
         "com.amazonaws.vpclattice#PolicyString": {
             "type": "string",
             "traits": {
@@ -8021,6 +8119,13 @@
                     "traits": {
                         "smithy.api#documentation": "Resource Configuration protocol type TCP",
                         "smithy.api#enumValue": "TCP"
+                    }
+                },
+                "TCP_UDP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Resource Configuration protocol type TCP_UDP",
+                        "smithy.api#enumValue": "TCP_UDP"
                     }
                 }
             }
@@ -8316,6 +8421,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>"
                     }
+                },
+                "cidrResource": {
+                    "target": "com.amazonaws.vpclattice#CidrResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network segment for a resource configuration of type CIDR, specified as one or more CIDR ranges (<code>cidrRanges</code>). Resources whose IP addresses fall within these ranges are reachable through a <code>Tunnel</code> VPC endpoint.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8452,7 +8563,7 @@
                 "type": {
                     "target": "com.amazonaws.vpclattice#ResourceConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resource configuration.</p> <ul> <li> <p> <code>SINGLE</code> - A single resource.</p> </li> <li> <p> <code>GROUP</code> - A group of resources. You must create a group resource configuration before you create a child resource configuration.</p> </li> <li> <p> <code>CHILD</code> - A single resource that is part of a group resource configuration.</p> </li> <li> <p> <code>ARN</code> - An Amazon Web Services resource.</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>The type of resource configuration.</p> <ul> <li> <p> <code>SINGLE</code> - A single resource.</p> </li> <li> <p> <code>GROUP</code> - A group of resources. You must create a group resource configuration before you create a child resource configuration.</p> </li> <li> <p> <code>CHILD</code> - A single resource that is part of a group resource configuration.</p> </li> <li> <p> <code>ARN</code> - An Amazon Web Services resource.</p> </li> <li> <p> <code>CIDR</code> - A network segment (a range of IP addresses) accessed through a <code>Tunnel</code> VPC endpoint.</p> </li> </ul>"
                     }
                 },
                 "status": {
@@ -8537,6 +8648,13 @@
                     "traits": {
                         "smithy.api#documentation": "Resource Configuration of type ARN",
                         "smithy.api#enumValue": "ARN"
+                    }
+                },
+                "CIDR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Resource Configuration of type CIDR",
+                        "smithy.api#enumValue": "CIDR"
                     }
                 }
             }
@@ -8646,6 +8764,12 @@
                     "target": "com.amazonaws.vpclattice#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that the VPC endpoint association was created, in ISO-8601 format.</p>"
+                    }
+                },
+                "payerResponsibility": {
+                    "target": "com.amazonaws.vpclattice#PayerResponsibilityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Who pays for each category of charges on the VPC endpoint association.</p>"
                     }
                 }
             },
@@ -9669,7 +9793,7 @@
                 "privateDnsEntry": {
                     "target": "com.amazonaws.vpclattice#DnsEntry",
                     "traits": {
-                        "smithy.api#documentation": "<p>The private DNS entry for the service.</p>"
+                        "smithy.api#documentation": "<p>The private DNS entry for the service. This entry includes only the domain name.</p>"
                     }
                 },
                 "isManagedAssociation": {
@@ -11407,7 +11531,7 @@
                 "type": {
                     "target": "com.amazonaws.vpclattice#ResourceConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resource configuration.</p> <ul> <li> <p> <code>SINGLE</code> - A single resource.</p> </li> <li> <p> <code>GROUP</code> - A group of resources.</p> </li> <li> <p> <code>CHILD</code> - A single resource that is part of a group resource configuration.</p> </li> <li> <p> <code>ARN</code> - An Amazon Web Services resource.</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>The type of resource configuration.</p> <ul> <li> <p> <code>SINGLE</code> - A single resource.</p> </li> <li> <p> <code>GROUP</code> - A group of resources.</p> </li> <li> <p> <code>CHILD</code> - A single resource that is part of a group resource configuration.</p> </li> <li> <p> <code>ARN</code> - An Amazon Web Services resource.</p> </li> <li> <p> <code>CIDR</code> - A network segment (a range of IP addresses) accessed through a <code>Tunnel</code> VPC endpoint.</p> </li> </ul>"
                     }
                 },
                 "portRanges": {

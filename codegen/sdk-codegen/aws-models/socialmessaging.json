@@ -169,6 +169,19 @@
         "com.amazonaws.socialmessaging#CodeExpirationMinutes": {
             "type": "integer"
         },
+        "com.amazonaws.socialmessaging#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.socialmessaging#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Your request has conflicting operations. This can occur if you're trying to perform more than one operation on the same resource at the same time.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
         "com.amazonaws.socialmessaging#CreateWhatsAppDataset": {
             "type": "operation",
             "input": {
@@ -321,7 +334,7 @@
                 "endpointUri": {
                     "target": "com.amazonaws.socialmessaging#MetaFlowEndpointUri",
                     "traits": {
-                        "smithy.api#documentation": "Optional HTTPS endpoint for a dynamic Flow, registered with Meta as the\nFlow's endpoint_uri and called by Meta directly. When omitted, the Flow\nhas no endpoint (static Flow). Meta only calls the endpoint when the\nFlow JSON also declares data_api_version. To verify that requests\noriginate from Meta, attach your own Meta app via UpdateWhatsAppFlow."
+                        "smithy.api#documentation": "<p>The HTTPS endpoint that Meta calls for a data exchange Flow.</p>"
                     }
                 }
             },
@@ -1130,6 +1143,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The WABA identifier linked to the phone number, formatted as\n         <code>waba-01234567890123456789012345678901</code>.</p>"
                     }
+                },
+                "callSettings": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppCallSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The calling settings configured for the phone number. This value is absent when calling is not configured.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1168,7 +1187,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Retrieves the business public key for a phone number and its signature status.",
+                "smithy.api#documentation": "<p>Retrieves the business public key for a phone number and its signature status.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v1/whatsapp/business-public-key",
@@ -1183,7 +1202,7 @@
                 "originationPhoneNumberId": {
                     "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
                     "traits": {
-                        "smithy.api#documentation": "The unique identifier of the phone number whose business public key to retrieve.",
+                        "smithy.api#documentation": "<p>The unique identifier of the phone number whose business public key to retrieve.</p>",
                         "smithy.api#httpQuery": "originationPhoneNumberId",
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "OriginationPhoneNumberId"
@@ -1200,13 +1219,100 @@
                 "businessPublicKey": {
                     "target": "com.amazonaws.socialmessaging#BusinessPublicKeyPem",
                     "traits": {
-                        "smithy.api#documentation": "The stored RSA business public key (PEM), if present."
+                        "smithy.api#documentation": "<p>The stored PEM-encoded 2048-bit RSA public key.</p>"
                     }
                 },
                 "businessPublicKeySignatureStatus": {
                     "target": "com.amazonaws.socialmessaging#BusinessPublicKeySignatureStatus",
                     "traits": {
-                        "smithy.api#documentation": "Meta's signing status: \"VALID\" | \"MISMATCH\"."
+                        "smithy.api#documentation": "<p>The signature status of the stored business public key. Valid values are VALID and MISMATCH.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#GetWhatsAppCallPermission": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#GetWhatsAppCallPermissionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#GetWhatsAppCallPermissionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#AccessDeniedByMetaException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the current calling permission for a WhatsApp end user, along with the calling actions the business is allowed to take with that user. Provide the destination phone number or the business-scoped user ID to identify the end user.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/whatsapp/call/permission/get",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#GetWhatsAppCallPermissionInput": {
+            "type": "structure",
+            "members": {
+                "originationPhoneNumberId": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the business phone number for which to retrieve the calling permission. The phone number identifiers are formatted as <code>phone-number-id-01234567890123456789012345678901</code>.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "OriginationPhoneNumberId"
+                    }
+                },
+                "destinationPhoneNumber": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppDestinationPhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end user's phone number, in E.164 format, for which to retrieve the calling permission.</p>"
+                    }
+                },
+                "endUserBsuid": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppBusinessScopedUserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The business-scoped user identifier (BSUID) of the end user for which to retrieve the calling permission.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#GetWhatsAppCallPermissionOutput": {
+            "type": "structure",
+            "members": {
+                "permission": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppCallPermission",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current calling permission state for the end user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "actions": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppCallPermissionActionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The calling actions the business can take with the end user, and any limits that apply to each action.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -1328,7 +1434,7 @@
                 "endpointUri": {
                     "target": "com.amazonaws.socialmessaging#MetaFlowEndpointUri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The endpoint URI for data exchange Flows, if configured.</p>"
+                        "smithy.api#documentation": "<p>The HTTPS endpoint that Meta calls for a data exchange Flow.</p>"
                     }
                 },
                 "preview": {
@@ -1649,6 +1755,15 @@
                 "target": "smithy.api#String"
             }
         },
+        "com.amazonaws.socialmessaging#IanaTimezone": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.socialmessaging#InternalServiceException": {
             "type": "structure",
             "members": {
@@ -1674,6 +1789,15 @@
                 "smithy.api#documentation": "<p>One or more parameters provided to the action are not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.socialmessaging#Iso8601Duration": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
             }
         },
         "com.amazonaws.socialmessaging#IsoCountryCode": {
@@ -2172,6 +2296,9 @@
                     "target": "com.amazonaws.socialmessaging#GetWhatsAppBusinessPublicKey"
                 },
                 {
+                    "target": "com.amazonaws.socialmessaging#GetWhatsAppCallPermission"
+                },
+                {
                     "target": "com.amazonaws.socialmessaging#GetWhatsAppMessageMedia"
                 },
                 {
@@ -2181,7 +2308,13 @@
                     "target": "com.amazonaws.socialmessaging#PutWhatsAppBusinessPublicKey"
                 },
                 {
+                    "target": "com.amazonaws.socialmessaging#SendWhatsAppCallEvent"
+                },
+                {
                     "target": "com.amazonaws.socialmessaging#SendWhatsAppMessage"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#UpdateLinkedWhatsAppBusinessAccountPhoneNumber"
                 }
             ],
             "traits": {
@@ -3843,7 +3976,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Sets the business public key used to encrypt the data exchanged with the endpoint of a data exchange Flow.",
+                "smithy.api#documentation": "<p>Sets the business public key used to encrypt the data exchanged with the endpoint of a data exchange Flow.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v1/whatsapp/business-public-key",
@@ -3858,7 +3991,7 @@
                 "originationPhoneNumberId": {
                     "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
                     "traits": {
-                        "smithy.api#documentation": "The unique identifier of the phone number to associate with the business public key.",
+                        "smithy.api#documentation": "<p>The unique identifier of the phone number to associate with the business public key.</p>",
                         "smithy.api#required": {},
                         "smithy.api#resourceIdentifier": "OriginationPhoneNumberId"
                     }
@@ -3866,13 +3999,13 @@
                 "businessPublicKey": {
                     "target": "com.amazonaws.socialmessaging#BusinessPublicKeyPem",
                     "traits": {
-                        "smithy.api#documentation": "PEM-encoded RSA public key. Mutually exclusive with kmsKeyArn."
+                        "smithy.api#documentation": "<p>The PEM-encoded 2048-bit RSA public key to set. Mutually exclusive with <code>kmsKeyArn</code>.</p>"
                     }
                 },
                 "kmsKeyArn": {
                     "target": "com.amazonaws.socialmessaging#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "Customer-managed KMS asymmetric RSA key ARN. Mutually exclusive with businessPublicKey."
+                        "smithy.api#documentation": "<p>The ARN of a customer managed asymmetric RSA key in Amazon Web Services KMS. Mutually exclusive with <code>businessPublicKey</code>.</p>"
                     }
                 }
             },
@@ -3981,6 +4114,91 @@
             "traits": {
                 "smithy.api#documentation": "<p>You can use presigned URLs to grant time-limited access to objects in Amazon S3 without updating your bucket policy. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html\">Working with presigned URLs</a> in the <i>Amazon S3\n         User Guide</i>.</p>",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#SendWhatsAppCallEvent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#SendWhatsAppCallEventInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#SendWhatsAppCallEventOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#AccessDeniedByMetaException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sends a WhatsApp calling event, such as connecting or terminating a call, for a business phone number. This operation passes the event through to Meta. To use this operation, the origination phone number must belong to a WhatsApp Business Account that is linked to your Amazon Web Services account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/whatsapp/call/event",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#SendWhatsAppCallEventInput": {
+            "type": "structure",
+            "members": {
+                "originationPhoneNumberId": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the origination phone number for the call. The phone number identifiers are formatted as <code>phone-number-id-01234567890123456789012345678901</code>. Use <code>GetLinkedWhatsAppBusinessAccount</code> to find a phone number's ID.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "OriginationPhoneNumberId"
+                    }
+                },
+                "metaApiVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the Meta Graph API to use for the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "callEvent": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppCallEventBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The call event payload to send, as a JSON blob in the format defined by the Meta calling API.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#SendWhatsAppCallEventOutput": {
+            "type": "structure",
+            "members": {
+                "callId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier that Meta assigns to the call.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.socialmessaging#SendWhatsAppConversionEvent": {
@@ -5363,6 +5581,83 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.socialmessaging#UpdateLinkedWhatsAppBusinessAccountPhoneNumber": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#AccessDeniedByMetaException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the calling settings for a linked WhatsApp business phone number, such as whether calling is enabled and the hours during which the business accepts calls.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v1/whatsapp/waba/phone",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the phone number to update. The phone number identifiers are formatted as <code>phone-number-id-01234567890123456789012345678901</code>.</p>",
+                        "smithy.api#httpQuery": "id",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "OriginationPhoneNumberId"
+                    }
+                },
+                "callSettings": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppCallSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The calling settings to apply to the phone number.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput": {
+            "type": "structure",
+            "members": {
+                "phoneNumberId": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the phone number that was updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.socialmessaging#UpdateWhatsAppFlow": {
             "type": "operation",
             "input": {
@@ -5514,13 +5809,13 @@
                 "endpointUri": {
                     "target": "com.amazonaws.socialmessaging#MetaFlowEndpointUri",
                     "traits": {
-                        "smithy.api#documentation": "Optional HTTPS endpoint for a dynamic Flow, registered with Meta as the\nFlow's endpoint_uri and called by Meta directly. When omitted, the\nFlow's endpoint is unchanged."
+                        "smithy.api#documentation": "<p>The updated HTTPS endpoint for a data exchange Flow.</p>"
                     }
                 },
                 "metaAppId": {
                     "target": "com.amazonaws.socialmessaging#MetaFlowApplicationId",
                     "traits": {
-                        "smithy.api#documentation": "Optional Meta app ID to attach to the Flow. Meta signs data-exchange\nrequests with the attached app's secret, so attaching your own app is\nwhat enables X-Hub-Signature-256 and flow_token_signature verification\nat your endpoint. Meta requires the app to be owned by the same business\nthat owns the WABA. Attaching your own app is one-way: the service's\napp cannot be re-attached afterwards. When omitted, the attached app is\nunchanged. (Set via update because Meta ignores application_id at\ncreation time.)"
+                        "smithy.api#documentation": "<p>The ID of the Meta application to attach to the Flow.</p>"
                     }
                 }
             },
@@ -5782,6 +6077,232 @@
                 }
             }
         },
+        "com.amazonaws.socialmessaging#WhatsAppBusinessScopedUserId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppCallEventBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppCallHours": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether call hours are enforced. When disabled, the business accepts calls at any time.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timezone": {
+                    "target": "com.amazonaws.socialmessaging#IanaTimezone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IANA time zone in which the operating hours are interpreted, such as <code>America/New_York</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "weeklyOperatingHours": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppWeeklyOperatingHoursList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The weekly schedule of hours during which the business accepts calls.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "holidaySchedule": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppHolidayScheduleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date-specific overrides to the weekly operating hours, such as holidays.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The operating hours during which a business phone number accepts WhatsApp calls, including the time zone, weekly schedule, and any holiday overrides.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppCallIconVisibility": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppCallPermission": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppCallPermissionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permission status for the end user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "expirationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when a temporary permission expires. This value is absent for permanent permissions and when there is no permission.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The current calling permission state for a business phone number and a specific WhatsApp end user.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppCallPermissionAction": {
+            "type": "structure",
+            "members": {
+                "actionName": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppCallPermissionActionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the calling action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "canPerformAction": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the business can currently perform the action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "limits": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppCallPermissionLimitList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time-bound limits that apply to the action.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a single calling action the business can take with an end user, including whether the action is currently allowed and any limits that apply to it. Returned as an item in the actions list from <code>GetWhatsAppCallPermission</code>.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppCallPermissionActionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.socialmessaging#WhatsAppCallPermissionAction"
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppCallPermissionActionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppCallPermissionLimit": {
+            "type": "structure",
+            "members": {
+                "timePeriod": {
+                    "target": "com.amazonaws.socialmessaging#Iso8601Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time period over which the limit applies, as an ISO 8601 duration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxAllowed": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of times the action is allowed within the time period.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "currentUsage": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of times the action has been used within the current time period.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "limitExpirationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the limit resets. This value is present only when the current usage has reached the maximum allowed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A time-bound restriction on a calling action, such as the number of calls allowed within a time period.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppCallPermissionLimitList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.socialmessaging#WhatsAppCallPermissionLimit"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppCallPermissionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppCallSettings": {
+            "type": "structure",
+            "members": {
+                "callEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether calling is enabled for the phone number.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "callHours": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppCallHours",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hours during which the business accepts calls on the phone number.</p>"
+                    }
+                },
+                "callIconVisibility": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppCallIconVisibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility setting for the call icon shown to end users in WhatsApp.</p>"
+                    }
+                },
+                "callbackPermissionStatus": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppCallbackPermissionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The callback permission status for the phone number.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The calling configuration for a WhatsApp business phone number.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppCallbackPermissionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.socialmessaging#WhatsAppConversionEventBlob": {
             "type": "blob",
             "traits": {
@@ -5802,8 +6323,116 @@
                 "smithy.api#pattern": "^[0-9]+$"
             }
         },
+        "com.amazonaws.socialmessaging#WhatsAppDate": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 10
+                },
+                "smithy.api#pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppDayOfWeek": {
+            "type": "enum",
+            "members": {
+                "MONDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONDAY"
+                    }
+                },
+                "TUESDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TUESDAY"
+                    }
+                },
+                "WEDNESDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEDNESDAY"
+                    }
+                },
+                "THURSDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THURSDAY"
+                    }
+                },
+                "FRIDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FRIDAY"
+                    }
+                },
+                "SATURDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SATURDAY"
+                    }
+                },
+                "SUNDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUNDAY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppDestinationPhoneNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^\\+[1-9]\\d{1,14}$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.socialmessaging#WhatsAppDisplayPhoneNumber": {
             "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppHolidayScheduleEntry": {
+            "type": "structure",
+            "members": {
+                "date": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date that the override applies to, in ISO 8601 format (<code>YYYY-MM-DD</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppTimeOfDay",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time of day when the business begins accepting calls on the override date.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppTimeOfDay",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time of day when the business stops accepting calls on the override date.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A date-specific override to the weekly operating hours, such as a holiday.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppHolidayScheduleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.socialmessaging#WhatsAppHolidayScheduleEntry"
+            },
             "traits": {
                 "smithy.api#length": {
                     "max": 20
@@ -6082,6 +6711,76 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains the results of WhatsAppSignupCallback.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppTimeOfDay": {
+            "type": "structure",
+            "members": {
+                "hours": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hour of the day, from 0 to 23.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 23
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "minutes": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minute of the hour, from 0 to 59.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 59
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A time of day, expressed as an hour and minute.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppWeeklyOperatingHoursEntry": {
+            "type": "structure",
+            "members": {
+                "dayOfWeek": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppDayOfWeek",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The day of the week that the entry applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "openTime": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppTimeOfDay",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time of day when the business begins accepting calls.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "closeTime": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppTimeOfDay",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time of day when the business stops accepting calls.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single entry in a weekly calling schedule, defining the open and close times for one day of the week.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppWeeklyOperatingHoursList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.socialmessaging#WhatsAppWeeklyOperatingHoursEntry"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 14
+                }
             }
         },
         "com.amazonaws.socialmessaging#ZeroTapTermsAccepted": {
