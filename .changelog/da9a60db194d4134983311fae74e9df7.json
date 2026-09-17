@@ -1,8 +1,0 @@
-{
-    "id": "da9a60db-194d-4134-9833-11fae74e9df7",
-    "type": "feature",
-    "description": "Batch evaluation now supports evaluating specific traces within a session. Each session can specify up to 100 trace IDs to evaluate.",
-    "modules": [
-        "service/bedrockagentcore"
-    ]
-}

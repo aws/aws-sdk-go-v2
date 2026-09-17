@@ -1,3 +1,7 @@
+# v1.47.1 (2026-09-17)
+
+* **Documentation**: SNS API reference documentation update
+
 # v1.47.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

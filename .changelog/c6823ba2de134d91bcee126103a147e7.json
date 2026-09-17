@@ -1,8 +1,0 @@
-{
-    "id": "c6823ba2-de13-4d91-bcee-126103a147e7",
-    "type": "feature",
-    "description": "Adds Multi-frame GNSS support to the AWS IoT Core Device Location GetPositionEstimate API. The new GnssMultiFrame measurement type improves location accuracy by combining multiple GNSS signal captures (2, 4, 8, 16, or 32) from the same device to estimate its position.",
-    "modules": [
-        "service/iotwireless"
-    ]
-}

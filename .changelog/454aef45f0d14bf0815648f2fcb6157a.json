@@ -1,8 +1,0 @@
-{
-    "id": "454aef45-f0d1-4bf0-8156-48f2fcb6157a",
-    "type": "documentation",
-    "description": "SNS API reference documentation update",
-    "modules": [
-        "service/sns"
-    ]
-}

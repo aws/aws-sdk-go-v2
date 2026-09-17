@@ -1,3 +1,27 @@
+# Release (2026-09-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.49.0](service/bedrockagentcore/CHANGELOG.md#v1490-2026-09-17)
+  * **Feature**: Batch evaluation now supports evaluating specific traces within a session. Each session can specify up to 100 trace IDs to evaluate.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.200.0](service/connect/CHANGELOG.md#v12000-2026-09-17)
+  * **Feature**: Made the replicaAlias attribute optional in the ReplicateInstance API to support Global routing for Amazon Connect Global Resiliency (ACGR) instances. This change maintains backward compatibility. When onboarding to ACGR without Global routing, you must specify a custom replicaAlias in your API call
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.334.0](service/ec2/CHANGELOG.md#v13340-2026-09-17)
+  * **Feature**: Adding support for "Tunnel" VPC Endpoint
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.93.0](service/guardduty/CHANGELOG.md#v1930-2026-09-17)
+  * **Feature**: This change surfaces AI Protection resources on existing public IAM attack sequences. Customers will now see which model was accessed and whether a guardrail intervened as part of the credential-compromise sequence.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.65.0](service/iotwireless/CHANGELOG.md#v1650-2026-09-17)
+  * **Feature**: Adds Multi-frame GNSS support to the AWS IoT Core Device Location GetPositionEstimate API. The new GnssMultiFrame measurement type improves location accuracy by combining multiple GNSS signal captures (2, 4, 8, 16, or 32) from the same device to estimate its position.
+* `github.com/aws/aws-sdk-go-v2/service/notifications`: [v1.17.0](service/notifications/CHANGELOG.md#v1170-2026-09-17)
+  * **Feature**: Added support for attachments on managed notification events. Added support to access and subscribe sensitive managed notification events.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.74.0](service/sesv2/CHANGELOG.md#v1740-2026-09-17)
+  * **Feature**: Added support to query the tenant name for BatchGetMetricData and CreateExportJob APIs to filter metrics and messages at the tenant level.
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.47.1](service/sns/CHANGELOG.md#v1471-2026-09-17)
+  * **Documentation**: SNS API reference documentation update
+* `github.com/aws/aws-sdk-go-v2/service/socialmessaging`: [v1.21.0](service/socialmessaging/CHANGELOG.md#v1210-2026-09-17)
+  * **Feature**: Add support for WhatsApp Calling APIs.
+* `github.com/aws/aws-sdk-go-v2/service/vpclattice`: [v1.33.0](service/vpclattice/CHANGELOG.md#v1330-2026-09-17)
+  * **Feature**: Adding support for CIDR Resource Configuration
+
 # Release (2026-09-16)
 
 ## Module Highlights
