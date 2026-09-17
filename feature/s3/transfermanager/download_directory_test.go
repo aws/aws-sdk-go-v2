@@ -946,15 +946,8 @@ func TestDownloadDirectoryWriteOffsets(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect to read downloaded file, got %v", err)
 	}
-	if e, a := len(want), len(got); e != a {
-		t.Fatalf("expect downloaded file to be %d bytes, got %d", e, a)
-	}
 	if !bytes.Equal(want, got) {
-		for i := range want {
-			if want[i] != got[i] {
-				t.Fatalf("downloaded file differs at offset %d: expect %q, got %q", i, want[i], got[i])
-			}
-		}
+		t.Fatalf("downloaded file does not match the expected object: %s", describeBytesDiff(want, got))
 	}
 }
 
