@@ -7999,6 +7999,12 @@
                         "smithy.api#documentation": "<p>The description of the notebook.</p>"
                     }
                 },
+                "type": {
+                    "target": "com.amazonaws.datazone#NotebookType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the notebook.</p>"
+                    }
+                },
                 "metadata": {
                     "target": "com.amazonaws.datazone#Metadata",
                     "traits": {
@@ -8066,6 +8072,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the notebook.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.datazone#NotebookType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the notebook.</p>"
                     }
                 },
                 "description": {
@@ -21149,6 +21161,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "type": {
+                    "target": "com.amazonaws.datazone#NotebookType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the notebook.</p>"
+                    }
+                },
                 "description": {
                     "target": "com.amazonaws.datazone#Description",
                     "traits": {
@@ -28172,6 +28190,13 @@
                         "smithy.api#httpQuery": "status"
                     }
                 },
+                "type": {
+                    "target": "com.amazonaws.datazone#NotebookType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type to filter notebooks by.</p>",
+                        "smithy.api#httpQuery": "type"
+                    }
+                },
                 "nextToken": {
                     "target": "com.amazonaws.datazone#PaginationToken",
                     "traits": {
@@ -30883,6 +30908,9 @@
                 "status": {
                     "target": "com.amazonaws.datazone#NotebookStatus"
                 },
+                "type": {
+                    "target": "com.amazonaws.datazone#NotebookType"
+                },
                 "cellOrder": {
                     "target": "com.amazonaws.datazone#CellOrder"
                 },
@@ -31446,6 +31474,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "type": {
+                    "target": "com.amazonaws.datazone#NotebookType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the notebook.</p>"
+                    }
+                },
                 "description": {
                     "target": "com.amazonaws.datazone#Description",
                     "traits": {
@@ -31485,6 +31519,28 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.datazone#NotebookSummary"
+            }
+        },
+        "com.amazonaws.datazone#NotebookType": {
+            "type": "enum",
+            "members": {
+                "DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A data notebook.</p>",
+                        "smithy.api#enumValue": "DATA"
+                    }
+                },
+                "SQL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A SQL notebook.</p>",
+                        "smithy.api#enumValue": "SQL"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of a notebook in Amazon SageMaker Unified Studio.</p>"
             }
         },
         "com.amazonaws.datazone#NotificationOutput": {
@@ -43325,6 +43381,12 @@
                         "smithy.api#documentation": "<p>The updated ordered list of cells in the notebook.</p>"
                     }
                 },
+                "type": {
+                    "target": "com.amazonaws.datazone#NotebookType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated type of the notebook.</p>"
+                    }
+                },
                 "metadata": {
                     "target": "com.amazonaws.datazone#Metadata",
                     "traits": {
@@ -43398,6 +43460,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the notebook.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.datazone#NotebookType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the notebook.</p>"
                     }
                 },
                 "description": {

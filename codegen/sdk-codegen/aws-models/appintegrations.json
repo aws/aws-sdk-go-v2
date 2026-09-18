@@ -1210,6 +1210,12 @@
                     "traits": {
                         "smithy.api#enumValue": "MCP_SERVER"
                     }
+                },
+                "A2A_SERVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "A2A_SERVER"
+                    }
                 }
             },
             "traits": {
@@ -1246,6 +1252,37 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^(arn:aws:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})(:[\\w\\$]+)?$"
+            }
+        },
+        "com.amazonaws.appintegrations#AuthConfig": {
+            "type": "structure",
+            "members": {
+                "AuthType": {
+                    "target": "com.amazonaws.appintegrations#AuthType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of authentication used when calling the external application.</p>"
+                    }
+                },
+                "CredentialProviderIdentifier": {
+                    "target": "com.amazonaws.appintegrations#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Secrets Manager secret that stores the credentials. The secret must be accessible to Connect Customer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the authentication settings that Connect Customer uses to call an external application endpoint. The configuration includes the authentication type and credential location.</p>"
+            }
+        },
+        "com.amazonaws.appintegrations#AuthType": {
+            "type": "enum",
+            "members": {
+                "API_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "API_KEY"
+                    }
+                }
             }
         },
         "com.amazonaws.appintegrations#Boolean": {
@@ -1477,6 +1514,12 @@
                     "target": "com.amazonaws.appintegrations#ApplicationType",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of application.</p>"
+                    }
+                },
+                "AuthConfig": {
+                    "target": "com.amazonaws.appintegrations#AuthConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication settings that Connect Customer uses when calling the external application.</p>"
                     }
                 }
             },
@@ -2695,6 +2738,12 @@
                     "target": "com.amazonaws.appintegrations#ApplicationType",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of application.</p>"
+                    }
+                },
+                "AuthConfig": {
+                    "target": "com.amazonaws.appintegrations#AuthConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication settings that Connect Customer uses when calling the external application.</p>"
                     }
                 }
             },
@@ -4262,6 +4311,12 @@
                     "target": "com.amazonaws.appintegrations#ApplicationType",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of application.</p>"
+                    }
+                },
+                "AuthConfig": {
+                    "target": "com.amazonaws.appintegrations#AuthConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication settings that Connect Customer uses when calling the external application.</p>"
                     }
                 }
             },

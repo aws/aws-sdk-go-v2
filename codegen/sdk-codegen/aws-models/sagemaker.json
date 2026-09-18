@@ -41446,6 +41446,159 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.sagemaker#HubContent": {
+            "type": "structure",
+            "members": {
+                "HubContentName": {
+                    "target": "com.amazonaws.sagemaker#HubContentName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the hub content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubContentArn": {
+                    "target": "com.amazonaws.sagemaker#HubContentArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the hub content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubContentVersion": {
+                    "target": "com.amazonaws.sagemaker#HubContentVersion",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The version of the hub content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubContentType": {
+                    "target": "com.amazonaws.sagemaker#HubContentType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of hub content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DocumentSchemaVersion": {
+                    "target": "com.amazonaws.sagemaker#DocumentSchemaVersion",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The document schema version for the hub content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubName": {
+                    "target": "com.amazonaws.sagemaker#HubName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the hub that contains the content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubArn": {
+                    "target": "com.amazonaws.sagemaker#HubArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the hub that contains the content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HubContentDisplayName": {
+                    "target": "com.amazonaws.sagemaker#HubContentDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the hub content.</p>"
+                    }
+                },
+                "HubContentDescription": {
+                    "target": "com.amazonaws.sagemaker#HubContentDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the hub content.</p>"
+                    }
+                },
+                "HubContentMarkdown": {
+                    "target": "com.amazonaws.sagemaker#HubContentMarkdown",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that provides a description of the hub content. This string can include links, tables, and standard markdown formatting.</p>"
+                    }
+                },
+                "HubContentDocument": {
+                    "target": "com.amazonaws.sagemaker#HubContentDocument",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The hub content document that describes information about the hub content such as type, associated containers, scripts, and more.</p>"
+                    }
+                },
+                "SageMakerPublicHubContentArn": {
+                    "target": "com.amazonaws.sagemaker#SageMakerPublicHubContentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the public hub content.</p>"
+                    }
+                },
+                "ReferenceMinVersion": {
+                    "target": "com.amazonaws.sagemaker#ReferenceMinVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum version of the hub content.</p>"
+                    }
+                },
+                "SupportStatus": {
+                    "target": "com.amazonaws.sagemaker#HubContentSupportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The support status of the hub content.</p>"
+                    }
+                },
+                "HubContentSearchKeywords": {
+                    "target": "com.amazonaws.sagemaker#HubContentSearchKeywordList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The searchable keywords for the hub content.</p>"
+                    }
+                },
+                "HubContentDependencies": {
+                    "target": "com.amazonaws.sagemaker#HubContentDependencyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of any dependencies that the hub content has, such as scripts, model artifacts, datasets, or notebooks.</p>"
+                    }
+                },
+                "HubContentStatus": {
+                    "target": "com.amazonaws.sagemaker#HubContentStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The status of the hub content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.sagemaker#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure reason if importing hub content failed.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The date and time that hub content was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last modified time of the hub content.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.sagemaker#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any tags associated with the hub content.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a hub content resource, including its name, version, type, associated documents, dependencies, and status, as returned by a search result.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#HubContentArn": {
             "type": "string",
             "traits": {
@@ -74445,6 +74598,12 @@
                     "traits": {
                         "smithy.api#enumValue": "Job"
                     }
+                },
+                "HUB_CONTENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HubContent"
+                    }
                 }
             }
         },
@@ -78058,6 +78217,12 @@
                     "target": "com.amazonaws.sagemaker#Job",
                     "traits": {
                         "smithy.api#documentation": "<p>The properties of a job.</p>"
+                    }
+                },
+                "HubContent": {
+                    "target": "com.amazonaws.sagemaker#HubContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties of a hub content resource.</p>"
                     }
                 }
             },

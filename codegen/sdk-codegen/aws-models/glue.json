@@ -15777,6 +15777,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the ruleset that was created by the recommendation run.</p>"
                     }
+                },
+                "RecommendationMode": {
+                    "target": "com.amazonaws.glue#RecommendationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode that Glue Data Quality uses to recommend rules.</p>\n         <p>The default is <code>BASIC</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -24620,7 +24626,7 @@
                 "Role": {
                     "target": "com.amazonaws.glue#RoleString",
                     "traits": {
-                        "smithy.api#documentation": "<p>An IAM role supplied to encrypt the results of the run.</p>"
+                        "smithy.api#documentation": "<p>The IAM role that Glue assumes to access resources for the run.</p>"
                     }
                 },
                 "NumberOfWorkers": {
@@ -24694,6 +24700,12 @@
                     "target": "com.amazonaws.glue#DataQualityRuleRecommendationRunAdditionalRunOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional run options you can specify for a recommendation run.</p>"
+                    }
+                },
+                "RecommendationMode": {
+                    "target": "com.amazonaws.glue#RecommendationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode that Glue Data Quality uses to recommend rules.</p>\n         <p>The default is <code>BASIC</code>.</p>"
                     }
                 }
             },
@@ -41924,6 +41936,26 @@
                 }
             }
         },
+        "com.amazonaws.glue#RecommendationMode": {
+            "type": "enum",
+            "members": {
+                "BASIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BASIC"
+                    }
+                },
+                "ADVANCED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADVANCED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the mode for how Glue Data Quality recommends rules.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BASIC</code> uses an Glue job to analyze table data and recommend rules. This value is the default.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADVANCED</code> uses Amazon Athena to analyze table data and Amazon Bedrock to recommend rules.</p>\n            </li>\n         </ul>"
+            }
+        },
         "com.amazonaws.glue#Record": {
             "type": "document",
             "traits": {
@@ -47319,7 +47351,7 @@
                 "Role": {
                     "target": "com.amazonaws.glue#RoleString",
                     "traits": {
-                        "smithy.api#documentation": "<p>An IAM role supplied to encrypt the results of the run.</p>",
+                        "smithy.api#documentation": "<p>The IAM role that Glue assumes to access resources for the run.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/data-quality-authorization.html\">Configure IAM permissions for Glue Data Quality</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -47357,6 +47389,12 @@
                     "target": "com.amazonaws.glue#DataQualityRuleRecommendationRunAdditionalRunOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional run options you can specify for a recommendation run.</p>"
+                    }
+                },
+                "RecommendationMode": {
+                    "target": "com.amazonaws.glue#RecommendationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode that Glue Data Quality uses to recommend rules.</p>\n         <p>The default is <code>BASIC</code>.</p>"
                     }
                 }
             },

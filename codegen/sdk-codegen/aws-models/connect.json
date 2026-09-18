@@ -57,6 +57,40 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
             }
         },
+        "com.amazonaws.connect#AIAgent": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AI agent.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.connect#AIAgentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the AI agent. The valid value is <code>THIRD_PARTY</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an AI agent that a security profile allows access to for Agent-to-Agent authorization.</p>"
+            }
+        },
+        "com.amazonaws.connect#AIAgentType": {
+            "type": "enum",
+            "members": {
+                "THIRD_PARTY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THIRD_PARTY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of the AI agent.</p>"
+            }
+        },
         "com.amazonaws.connect#ARN": {
             "type": "string"
         },
@@ -1230,6 +1264,18 @@
                 }
             }
         },
+        "com.amazonaws.connect#AllowedAIAgents": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#AIAgent"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.connect#AllowedAccessControlTags": {
             "type": "map",
             "key": {
@@ -2056,6 +2102,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#ListSecurityKeys"
+                },
+                {
+                    "target": "com.amazonaws.connect#ListSecurityProfileAIAgents"
                 },
                 {
                     "target": "com.amazonaws.connect#ListSecurityProfileApplications"
@@ -14426,6 +14475,12 @@
                     "target": "com.amazonaws.connect#AllowedFlowModules",
                     "traits": {
                         "smithy.api#documentation": "<p> A list of Flow Modules an AI Agent can invoke as a tool. </p>"
+                    }
+                },
+                "AllowedAIAgents": {
+                    "target": "com.amazonaws.connect#AllowedAIAgents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of AI agents that the security profile will give access to.</p>"
                     }
                 },
                 "GranularAccessControlConfiguration": {
@@ -39480,6 +39535,116 @@
                     "target": "com.amazonaws.connect#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#ListSecurityProfileAIAgents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListSecurityProfileAIAgentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListSecurityProfileAIAgentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of the allowed AI agents in a specific security profile.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/security-profiles-ai-agents/{InstanceId}/{SecurityProfileId}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "AllowedAIAgents",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#ListSecurityProfileAIAgentsRequest": {
+            "type": "structure",
+            "members": {
+                "SecurityProfileId": {
+                    "target": "com.amazonaws.connect#SecurityProfileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the security profle.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult1000",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#ListSecurityProfileAIAgentsResponse": {
+            "type": "structure",
+            "members": {
+                "AllowedAIAgents": {
+                    "target": "com.amazonaws.connect#AllowedAIAgents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the allowed AI agents and their types.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when this resource was last modified.</p>"
+                    }
+                },
+                "LastModifiedRegion": {
+                    "target": "com.amazonaws.connect#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
                     }
                 }
             },
@@ -65898,6 +66063,12 @@
                     "target": "com.amazonaws.connect#AllowedFlowModules",
                     "traits": {
                         "smithy.api#documentation": "<p> A list of Flow Modules an AI Agent can invoke as a tool </p>"
+                    }
+                },
+                "AllowedAIAgents": {
+                    "target": "com.amazonaws.connect#AllowedAIAgents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of AI agents that the security profile will give access to.</p>"
                     }
                 },
                 "GranularAccessControlConfiguration": {
