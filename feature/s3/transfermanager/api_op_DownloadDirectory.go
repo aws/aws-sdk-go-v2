@@ -171,7 +171,7 @@ func (d *directoryDownloader) downloadDirectory(ctx context.Context) (*DownloadD
 			Bucket:            d.in.Bucket,
 			Prefix:            d.in.KeyPrefix,
 			ContinuationToken: nzstring(continuationToken),
-		})
+		}, d.options.clientOptions()...)
 		if err != nil {
 			d.setErr(fmt.Errorf("error when listing objects %v", err))
 			break
@@ -281,7 +281,9 @@ func (d *directoryDownloader) downloadSingleObject(ctx context.Context, data obj
 	if d.in.Callback != nil {
 		d.in.Callback.UpdateRequest(input)
 	}
-	out, err := d.c.GetObject(ctx, input)
+	out, err := d.c.GetObject(ctx, input, func(o *Options) {
+		o.ClientOptions = d.options.clientOptions()
+	})
 	if err != nil {
 		err = d.failurePolicy.OnDownloadFailed(d.in, input, err)
 		if err != nil {

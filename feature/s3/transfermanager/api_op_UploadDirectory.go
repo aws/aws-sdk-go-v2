@@ -404,7 +404,9 @@ func (u *directoryUploader) uploadSingleFile(ctx context.Context, data fileEntry
 	if u.in.Callback != nil {
 		u.in.Callback.UpdateRequest(input)
 	}
-	out, err := u.c.UploadObject(ctx, input)
+	out, err := u.c.UploadObject(ctx, input, func(o *Options) {
+		o.ClientOptions = u.options.clientOptions()
+	})
 	if err != nil {
 		err = u.failurePolicy.OnUploadFailed(u.in, input, err)
 		if err != nil {

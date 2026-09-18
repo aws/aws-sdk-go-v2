@@ -59,13 +59,13 @@ func (r *concurrentReader) Read(p []byte) (int, error) {
 		return 0, err
 	}
 
-	clientOptions := []func(*s3.Options){
+	clientOptions := r.options.clientOptions(
 		func(o *s3.Options) {
 			o.APIOptions = append(o.APIOptions,
 				middleware.AddSDKAgentKeyValue(middleware.FeatureMetadata, userAgentKey, goModuleVersion),
 				addFeatureUserAgent,
 			)
-		}}
+		})
 
 	var written int
 	var err error

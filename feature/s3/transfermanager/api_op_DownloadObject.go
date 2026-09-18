@@ -558,31 +558,52 @@ type downloader struct {
 	written    atomic.Int64
 	etag       string
 
+	writeBehind    *writeBehindWriterAt
+	preallocateErr error
+
 	err error
 
 	emitter *singleObjectProgressEmitter
 }
 
 func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error) {
+	out, err := d.downloadNoFinalize(ctx)
+
+	if d.writeBehind != nil {
+		if derr := d.writeBehind.drain(); derr != nil {
+			err = fmt.Errorf("write-behind: %w", derr)
+		}
+	}
+	if d.emitter != nil {
+		if err != nil {
+			freshCtx, cancel := d.freshContext(ctx)
+			defer cancel()
+			d.emitter.Failed(freshCtx, err)
+		} else {
+			d.emitter.Complete(ctx, out)
+		}
+	}
+
+	return out, err
+}
+
+func (d *downloader) downloadNoFinalize(ctx context.Context) (*DownloadObjectOutput, error) {
 	if err := d.init(); err != nil {
 		return nil, fmt.Errorf("unable to initialize download: %w", err)
 	}
 
-	clientOptions := []func(*s3.Options){
+	clientOptions := d.options.clientOptions(
 		func(o *s3.Options) {
 			o.APIOptions = append(o.APIOptions,
 				middleware.AddSDKAgentKeyValue(middleware.FeatureMetadata, userAgentKey, goModuleVersion),
 				addFeatureUserAgent,
 			)
-		}}
+		})
 
 	var output *DownloadObjectOutput
 	if d.options.GetObjectType == types.GetObjectParts {
 		output = d.getChunk(ctx, 1, "", clientOptions...)
 		if d.err != nil {
-			freshCtx, cancel := d.freshContext(ctx)
-			defer cancel()
-			d.emitter.Failed(freshCtx, d.err)
 			return output, d.err
 		}
 
@@ -599,7 +620,7 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 					break
 				}
 
-				ch <- dlChunk{w: d.in.WriterAt, start: d.pos - d.offset, part: i}
+				ch <- dlChunk{w: d.writeBehind, start: d.pos - d.offset, part: i}
 				d.pos += partSize
 			}
 
@@ -610,9 +631,6 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 		if rng := aws.ToString(d.in.Range); rng != "" {
 			rangeStart, rangeEnd, err := getReqRange(rng)
 			if err != nil {
-				freshCtx, cancel := d.freshContext(ctx)
-				defer cancel()
-				d.emitter.Failed(freshCtx, d.err)
 				return nil, err
 			}
 			d.offset = rangeStart
@@ -631,13 +649,9 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 					out := &DownloadObjectOutput{
 						ContentLength: aws.Int64(0),
 					}
-					d.emitter.Complete(ctx, out)
 					return out, nil
 				}
 			}
-			freshCtx, cancel := d.freshContext(ctx)
-			defer cancel()
-			d.emitter.Failed(freshCtx, d.err)
 			return nil, d.err
 		}
 		total := d.totalBytes
@@ -655,7 +669,7 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 			}
 
 			// Queue the next range of bytes to read.
-			ch <- dlChunk{w: d.in.WriterAt, start: d.pos - d.offset, withRange: d.byteRange()}
+			ch <- dlChunk{w: d.writeBehind, start: d.pos - d.offset, withRange: d.byteRange()}
 			d.pos += d.options.PartSizeBytes
 		}
 
@@ -665,13 +679,8 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 	}
 
 	if d.err != nil {
-		freshCtx, cancel := d.freshContext(ctx)
-		defer cancel()
-		d.emitter.Failed(freshCtx, d.err)
 		return nil, d.err
 	}
-
-	d.emitter.Complete(ctx, d.out)
 
 	d.out.ContentRange = aws.String(fmt.Sprintf("bytes=%d-%d", d.offset, d.totalBytes-1))
 	d.out.ContentLength = aws.Int64(d.written.Load())
@@ -690,6 +699,7 @@ func (d *downloader) init() error {
 		return fmt.Errorf("part body retry must be non-negative")
 	}
 
+	d.writeBehind = newWriteBehindWriterAt(d.in.WriterAt, writeBehindChunkSize)
 	d.totalBytes = -1
 	d.emitter = &singleObjectProgressEmitter{
 		Listeners: d.options.ObjectProgressListeners,
@@ -720,7 +730,7 @@ func (d *downloader) downloadPart(ctx context.Context, ch chan dlChunk, clientOp
 // getChunk grabs a chunk of data from the body.
 // Not thread safe. Should only be used when grabbing data on a single thread.
 func (d *downloader) getChunk(ctx context.Context, part int32, rng string, clientOptions ...func(*s3.Options)) *DownloadObjectOutput {
-	chunk := dlChunk{w: d.in.WriterAt, start: d.pos - d.offset, part: part, withRange: rng}
+	chunk := dlChunk{w: d.writeBehind, start: d.pos - d.offset, part: part, withRange: rng}
 
 	output, err := d.downloadChunk(ctx, chunk, clientOptions...)
 	if err != nil {
@@ -814,13 +824,32 @@ func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectI
 
 	d.totalBytesOnce.Do(func() {
 		d.setTotalBytes(out)
+		if preallocator, ok := d.in.WriterAt.(downloadFilePreallocator); ok && d.totalBytes > d.offset {
+			d.preallocateErr = preallocator.preallocate(d.totalBytes - d.offset)
+			if d.preallocateErr != nil {
+				return
+			}
+		}
 		d.emitter.Start(ctx, d.in, d.totalBytes-d.offset)
 	}) // Set total in first GET
+	if d.preallocateErr != nil {
+		_ = out.Body.Close()
+		return nil, fmt.Errorf("preallocating download file: %w", d.preallocateErr)
+	}
 
 	var n int64
 	defer out.Body.Close()
 	n, err = io.Copy(chunk, out.Body)
+	if err == nil && params.Range != nil && out.ContentLength != nil {
+		expected := aws.ToInt64(out.ContentLength)
+		if expected >= 0 && n != expected {
+			err = fmt.Errorf("%w: copied %d response body bytes, expected %d", io.ErrUnexpectedEOF, n, expected)
+		}
+	}
 	if err != nil {
+		if werr := d.writeBehind.waitPending(); werr != nil {
+			err = werr
+		}
 		return nil, &errReadingBody{err: err}
 	}
 
@@ -948,3 +977,68 @@ func (c *dlChunk) Write(p []byte) (int, error) {
 
 	return n, err
 }
+
+// writeBehindSink owns the buffers passed to enqueue. dlChunk.ReadFrom uses
+// this path to hand full chunks to the destination without io.Copy's intermediate
+// buffer or waiting for each WriteAt call to finish.
+type writeBehindSink interface {
+	getBuffer() []byte
+	putBuffer([]byte)
+	enqueue(buf []byte, n int64, off int64) (uint64, error)
+	waitThrough(seq uint64) error
+}
+
+func (c *dlChunk) ReadFrom(r io.Reader) (int64, error) {
+	sink, ok := c.w.(writeBehindSink)
+	if !ok {
+		return io.Copy(&chunkWriterOnly{c}, r)
+	}
+
+	var total int64
+	var lastSeq uint64
+	for {
+		buf := sink.getBuffer()
+		n, err := readWriteBehindChunk(r, buf)
+		if n > 0 {
+			off := c.start + c.cur
+			seq, werr := sink.enqueue(buf, int64(n), off)
+			if werr != nil {
+				return total, werr
+			}
+			lastSeq = seq
+			c.cur += int64(n)
+			total += int64(n)
+		} else {
+			sink.putBuffer(buf)
+		}
+		if err == io.EOF {
+			return total, nil
+		}
+		if err != nil {
+			if lastSeq != 0 {
+				if werr := sink.waitThrough(lastSeq); werr != nil {
+					return total, werr
+				}
+			}
+			return total, err
+		}
+	}
+}
+
+func readWriteBehindChunk(r io.Reader, buf []byte) (int, error) {
+	var n int
+	for n < len(buf) {
+		nr, err := r.Read(buf[n:])
+		n += nr
+		if err != nil {
+			return n, err
+		}
+	}
+	return n, nil
+}
+
+// chunkWriterOnly hides ReadFrom so io.Copy takes its generic path without
+// recursing into dlChunk.ReadFrom.
+type chunkWriterOnly struct{ c *dlChunk }
+
+func (w *chunkWriterOnly) Write(p []byte) (int, error) { return w.c.Write(p) }

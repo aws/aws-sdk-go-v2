@@ -5,12 +5,16 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
+	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
 // Options provides params needed for transfer api calls
 type Options struct {
-	// The client to use when uploading to S3.
+	// The client to use when uploading to or downloading from S3.
 	S3 S3APIClient
+
+	// ClientOptions are passed to every S3 operation made by the transfer manager.
+	ClientOptions []func(*s3.Options)
 
 	// The buffer size (in bytes) to use when buffering data into chunks and
 	// sending them as parts to S3. The minimum allowed part size is 5MB, and
@@ -152,6 +156,13 @@ func resolveMaxUploadParts(o *Options) {
 // Copy returns new copy of the Options
 func (o Options) Copy() Options {
 	to := o
+	to.ClientOptions = append([]func(*s3.Options){}, o.ClientOptions...)
 	to.ObjectProgressListeners = to.ObjectProgressListeners.Copy()
 	return to
+}
+
+func (o Options) clientOptions(optFns ...func(*s3.Options)) []func(*s3.Options) {
+	options := make([]func(*s3.Options), 0, len(optFns)+len(o.ClientOptions))
+	options = append(options, optFns...)
+	return append(options, o.ClientOptions...)
 }

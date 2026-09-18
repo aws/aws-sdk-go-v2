@@ -609,13 +609,13 @@ type getter struct {
 }
 
 func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
-	clientOptions := []func(*s3.Options){
+	clientOptions := g.options.clientOptions(
 		func(o *s3.Options) {
 			o.APIOptions = append(o.APIOptions,
 				middleware.AddSDKAgentKeyValue(middleware.FeatureMetadata, userAgentKey, goModuleVersion),
 				addFeatureUserAgent,
 			)
-		}}
+		})
 
 	r := &concurrentReader{
 		ctx:             ctx,

@@ -839,7 +839,7 @@ func (u *uploader) upload(ctx context.Context) (*UploadObjectOutput, error) {
 		return nil, fmt.Errorf("unable to initialize upload: %w", err)
 	}
 
-	clientOptions := []func(o *s3.Options){
+	clientOptions := u.options.clientOptions(
 		func(o *s3.Options) {
 			o.RequestChecksumCalculation = u.options.RequestChecksumCalculation
 			o.APIOptions = append(o.APIOptions,
@@ -849,7 +849,7 @@ func (u *uploader) upload(ctx context.Context) (*UploadObjectOutput, error) {
 					return s.Finalize.Insert(&setS3ExpressDefaultChecksum{}, "ResolveEndpointV2", smithymiddleware.After)
 				},
 			)
-		}}
+		})
 
 	r, n, cleanUp, err := u.nextReader(ctx)
 
@@ -1208,7 +1208,7 @@ func (u *multiUploader) fail(ctx context.Context, clientOptions ...func(*s3.Opti
 // complete successfully completes a multipart upload and returns the response.
 func (u *multiUploader) complete(ctx context.Context, clientOptions ...func(*s3.Options)) *s3.CompleteMultipartUploadOutput {
 	if u.geterr() != nil {
-		u.fail(ctx)
+		u.fail(ctx, clientOptions...)
 		return nil
 	}
 
@@ -1224,7 +1224,7 @@ func (u *multiUploader) complete(ctx context.Context, clientOptions ...func(*s3.
 	if err != nil {
 		u.seterr(err)
 		log.Printf("failed to complete multipart upload for upload ID %v: %v", u.uploadID, err)
-		u.fail(ctx)
+		u.fail(ctx, clientOptions...)
 	}
 
 	return resp
