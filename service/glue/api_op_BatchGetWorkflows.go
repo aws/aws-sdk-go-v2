@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,19 @@ type BatchGetWorkflowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetWorkflowsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetWorkflowsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetWorkflowsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeGraph != nil {
+		s.WriteBool(schemas.BatchGetWorkflowsRequest_IncludeGraph, *v.IncludeGraph)
+	}
+	serializeWorkflowNames(s, schemas.BatchGetWorkflowsRequest_Names, v.Names)
+}
+
 type BatchGetWorkflowsOutput struct {
 
 	// A list of names of workflows not found.
@@ -56,13 +71,32 @@ type BatchGetWorkflowsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetWorkflowsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetWorkflowsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetWorkflowsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWorkflowNames(s, schemas.BatchGetWorkflowsResponse_MissingWorkflows, v.MissingWorkflows)
+	serializeWorkflows(s, schemas.BatchGetWorkflowsResponse_Workflows, v.Workflows)
+}
+func (v *BatchGetWorkflowsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetWorkflowsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetWorkflowsResponse_MissingWorkflows:
+			return deserializeWorkflowNames(d, schemas.BatchGetWorkflowsResponse_MissingWorkflows, &v.MissingWorkflows)
+		case schemas.BatchGetWorkflowsResponse_Workflows:
+			return deserializeWorkflows(d, schemas.BatchGetWorkflowsResponse_Workflows, &v.Workflows)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetWorkflowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetWorkflows{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetWorkflows, schemas.BatchGetWorkflowsRequest, schemas.BatchGetWorkflowsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetWorkflows{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetWorkflows, schemas.BatchGetWorkflowsRequest, schemas.BatchGetWorkflowsResponse), output: &BatchGetWorkflowsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

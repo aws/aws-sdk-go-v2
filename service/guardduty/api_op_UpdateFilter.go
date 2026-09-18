@@ -4,7 +4,9 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -1440,6 +1442,35 @@ type UpdateFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFilterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFilterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.UpdateFilterRequest_Action, string(v.Action))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFilterRequest_Description, *v.Description)
+	}
+	if v.DetectorId != nil {
+		s.WriteString(schemas.UpdateFilterRequest_DetectorId, *v.DetectorId)
+	}
+	if v.FilterName != nil {
+		s.WriteString(schemas.UpdateFilterRequest_FilterName, *v.FilterName)
+	}
+	if v.FindingCriteria != nil {
+		s.WriteStruct(schemas.UpdateFilterRequest_FindingCriteria)
+		v.FindingCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Rank != nil {
+		s.WriteInt32(schemas.UpdateFilterRequest_Rank, *v.Rank)
+	}
+}
+
 type UpdateFilterOutput struct {
 
 	// The name of the filter.
@@ -1453,13 +1484,32 @@ type UpdateFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFilterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFilterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateFilterResponse_Name, *v.Name)
+	}
+}
+func (v *UpdateFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFilterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFilterResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateFilterResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFilter, schemas.UpdateFilterRequest, schemas.UpdateFilterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFilter, schemas.UpdateFilterRequest, schemas.UpdateFilterResponse), output: &UpdateFilterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

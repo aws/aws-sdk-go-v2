@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -126,6 +128,32 @@ type CreateAccessEntryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccessEntryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccessEntryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccessEntryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateAccessEntryRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.CreateAccessEntryRequest_clusterName, *v.ClusterName)
+	}
+	serializeStringList(s, schemas.CreateAccessEntryRequest_kubernetesGroups, v.KubernetesGroups)
+	if v.PrincipalArn != nil {
+		s.WriteString(schemas.CreateAccessEntryRequest_principalArn, *v.PrincipalArn)
+	}
+	serializeTagMap(s, schemas.CreateAccessEntryRequest_tags, v.Tags)
+	if v.Type != nil {
+		s.WriteString(schemas.CreateAccessEntryRequest_type, *v.Type)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.CreateAccessEntryRequest_username, *v.Username)
+	}
+}
+
 type CreateAccessEntryOutput struct {
 
 	// An access entry allows an IAM principal (user or role) to access your cluster.
@@ -142,13 +170,34 @@ type CreateAccessEntryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccessEntryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccessEntryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccessEntryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessEntry != nil {
+		s.WriteStruct(schemas.CreateAccessEntryResponse_accessEntry)
+		v.AccessEntry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAccessEntryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAccessEntryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAccessEntryResponse_accessEntry:
+			v.AccessEntry = &types.AccessEntry{}
+			return v.AccessEntry.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAccessEntryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAccessEntry{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessEntry, schemas.CreateAccessEntryRequest, schemas.CreateAccessEntryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAccessEntry{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessEntry, schemas.CreateAccessEntryRequest, schemas.CreateAccessEntryResponse), output: &CreateAccessEntryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

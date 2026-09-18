@@ -5,7 +5,9 @@ package guardduty
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -170,6 +172,34 @@ type ListFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFindingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFindingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.ListFindingsRequest_DetectorId, *v.DetectorId)
+	}
+	if v.FindingCriteria != nil {
+		s.WriteStruct(schemas.ListFindingsRequest_FindingCriteria)
+		v.FindingCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFindingsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFindingsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortCriteria != nil {
+		s.WriteStruct(schemas.ListFindingsRequest_SortCriteria)
+		v.SortCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListFindingsOutput struct {
 
 	// The IDs of the findings that you're listing.
@@ -187,13 +217,35 @@ type ListFindingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFindingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFindingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFindingIds(s, schemas.ListFindingsResponse_FindingIds, v.FindingIds)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFindingsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFindingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFindingsResponse_FindingIds:
+			return deserializeFindingIds(d, schemas.ListFindingsResponse_FindingIds, &v.FindingIds)
+		case schemas.ListFindingsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFindingsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFindings, schemas.ListFindingsRequest, schemas.ListFindingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFindings, schemas.ListFindingsRequest, schemas.ListFindingsResponse), output: &ListFindingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

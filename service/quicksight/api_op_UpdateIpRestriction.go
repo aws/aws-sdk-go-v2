@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type UpdateIpRestrictionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIpRestrictionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIpRestrictionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIpRestrictionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateIpRestrictionRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.UpdateIpRestrictionRequest_Enabled, *v.Enabled)
+	}
+	serializeIpRestrictionRuleMap(s, schemas.UpdateIpRestrictionRequest_IpRestrictionRuleMap, v.IpRestrictionRuleMap)
+	serializeVpcEndpointIdRestrictionRuleMap(s, schemas.UpdateIpRestrictionRequest_VpcEndpointIdRestrictionRuleMap, v.VpcEndpointIdRestrictionRuleMap)
+	serializeVpcIdRestrictionRuleMap(s, schemas.UpdateIpRestrictionRequest_VpcIdRestrictionRuleMap, v.VpcIdRestrictionRuleMap)
+}
+
 type UpdateIpRestrictionOutput struct {
 
 	// The ID of the Amazon Web Services account that contains the IP rules.
@@ -68,13 +88,43 @@ type UpdateIpRestrictionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIpRestrictionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIpRestrictionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIpRestrictionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateIpRestrictionResponse_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateIpRestrictionResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateIpRestrictionResponse_Status, v.Status)
+	}
+}
+func (v *UpdateIpRestrictionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIpRestrictionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIpRestrictionResponse_AwsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.UpdateIpRestrictionResponse_AwsAccountId, v.AwsAccountId)
+		case schemas.UpdateIpRestrictionResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateIpRestrictionResponse_RequestId, v.RequestId)
+		case schemas.UpdateIpRestrictionResponse_Status:
+			return d.ReadInt32(schemas.UpdateIpRestrictionResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIpRestrictionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIpRestriction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIpRestriction, schemas.UpdateIpRestrictionRequest, schemas.UpdateIpRestrictionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIpRestriction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIpRestriction, schemas.UpdateIpRestrictionRequest, schemas.UpdateIpRestrictionResponse), output: &UpdateIpRestrictionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

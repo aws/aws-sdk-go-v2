@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,23 @@ type UpdateTriggerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTriggerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTriggerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTriggerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateTriggerRequest_Name, *v.Name)
+	}
+	if v.TriggerUpdate != nil {
+		s.WriteStruct(schemas.UpdateTriggerRequest_TriggerUpdate)
+		v.TriggerUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateTriggerOutput struct {
 
 	// The resulting trigger definition.
@@ -54,13 +73,34 @@ type UpdateTriggerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTriggerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTriggerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTriggerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Trigger != nil {
+		s.WriteStruct(schemas.UpdateTriggerResponse_Trigger)
+		v.Trigger.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateTriggerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTriggerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTriggerResponse_Trigger:
+			v.Trigger = &types.Trigger{}
+			return v.Trigger.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateTrigger{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTrigger, schemas.UpdateTriggerRequest, schemas.UpdateTriggerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateTrigger{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTrigger, schemas.UpdateTriggerRequest, schemas.UpdateTriggerResponse), output: &UpdateTriggerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

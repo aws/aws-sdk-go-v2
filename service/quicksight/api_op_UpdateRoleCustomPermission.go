@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type UpdateRoleCustomPermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRoleCustomPermissionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRoleCustomPermissionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRoleCustomPermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateRoleCustomPermissionRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.CustomPermissionsName != nil {
+		s.WriteString(schemas.UpdateRoleCustomPermissionRequest_CustomPermissionsName, *v.CustomPermissionsName)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.UpdateRoleCustomPermissionRequest_Namespace, *v.Namespace)
+	}
+	if v.Role != "" {
+		s.WriteString(schemas.UpdateRoleCustomPermissionRequest_Role, string(v.Role))
+	}
+}
+
 type UpdateRoleCustomPermissionOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -65,13 +88,37 @@ type UpdateRoleCustomPermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRoleCustomPermissionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRoleCustomPermissionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRoleCustomPermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateRoleCustomPermissionResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateRoleCustomPermissionResponse_Status, v.Status)
+	}
+}
+func (v *UpdateRoleCustomPermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRoleCustomPermissionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRoleCustomPermissionResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateRoleCustomPermissionResponse_RequestId, v.RequestId)
+		case schemas.UpdateRoleCustomPermissionResponse_Status:
+			return d.ReadInt32(schemas.UpdateRoleCustomPermissionResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRoleCustomPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRoleCustomPermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRoleCustomPermission, schemas.UpdateRoleCustomPermissionRequest, schemas.UpdateRoleCustomPermissionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRoleCustomPermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRoleCustomPermission, schemas.UpdateRoleCustomPermissionRequest, schemas.UpdateRoleCustomPermissionResponse), output: &UpdateRoleCustomPermissionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

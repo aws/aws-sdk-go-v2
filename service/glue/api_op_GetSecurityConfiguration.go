@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetSecurityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSecurityConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSecurityConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSecurityConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetSecurityConfigurationRequest_Name, *v.Name)
+	}
+}
+
 type GetSecurityConfigurationOutput struct {
 
 	// The requested security configuration.
@@ -45,13 +59,34 @@ type GetSecurityConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSecurityConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSecurityConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSecurityConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecurityConfiguration != nil {
+		s.WriteStruct(schemas.GetSecurityConfigurationResponse_SecurityConfiguration)
+		v.SecurityConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSecurityConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSecurityConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSecurityConfigurationResponse_SecurityConfiguration:
+			v.SecurityConfiguration = &types.SecurityConfiguration{}
+			return v.SecurityConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSecurityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSecurityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSecurityConfiguration, schemas.GetSecurityConfigurationRequest, schemas.GetSecurityConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSecurityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSecurityConfiguration, schemas.GetSecurityConfigurationRequest, schemas.GetSecurityConfigurationResponse), output: &GetSecurityConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

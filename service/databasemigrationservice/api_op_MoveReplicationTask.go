@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type MoveReplicationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MoveReplicationTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MoveReplicationTaskMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MoveReplicationTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationTaskArn != nil {
+		s.WriteString(schemas.MoveReplicationTaskMessage_ReplicationTaskArn, *v.ReplicationTaskArn)
+	}
+	if v.TargetReplicationInstanceArn != nil {
+		s.WriteString(schemas.MoveReplicationTaskMessage_TargetReplicationInstanceArn, *v.TargetReplicationInstanceArn)
+	}
+}
+
 type MoveReplicationTaskOutput struct {
 
 	// The replication task that was moved.
@@ -53,13 +70,34 @@ type MoveReplicationTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MoveReplicationTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MoveReplicationTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MoveReplicationTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationTask != nil {
+		s.WriteStruct(schemas.MoveReplicationTaskResponse_ReplicationTask)
+		v.ReplicationTask.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MoveReplicationTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MoveReplicationTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MoveReplicationTaskResponse_ReplicationTask:
+			v.ReplicationTask = &types.ReplicationTask{}
+			return v.ReplicationTask.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMoveReplicationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMoveReplicationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MoveReplicationTask, schemas.MoveReplicationTaskMessage, schemas.MoveReplicationTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpMoveReplicationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MoveReplicationTask, schemas.MoveReplicationTaskMessage, schemas.MoveReplicationTaskResponse), output: &MoveReplicationTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

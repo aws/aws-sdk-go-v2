@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type ListThemesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThemesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThemesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThemesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListThemesRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListThemesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThemesRequest_NextToken, *v.NextToken)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListThemesRequest_Type, string(v.Type))
+	}
+}
+
 type ListThemesOutput struct {
 
 	// The token for the next set of results, or null if there are no more results.
@@ -71,13 +94,46 @@ type ListThemesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThemesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThemesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThemesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThemesResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListThemesResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListThemesResponse_Status, v.Status)
+	}
+	serializeThemeSummaryList(s, schemas.ListThemesResponse_ThemeSummaryList, v.ThemeSummaryList)
+}
+func (v *ListThemesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListThemesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListThemesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListThemesResponse_NextToken, v.NextToken)
+		case schemas.ListThemesResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListThemesResponse_RequestId, v.RequestId)
+		case schemas.ListThemesResponse_Status:
+			return d.ReadInt32(schemas.ListThemesResponse_Status, &v.Status)
+		case schemas.ListThemesResponse_ThemeSummaryList:
+			return deserializeThemeSummaryList(d, schemas.ListThemesResponse_ThemeSummaryList, &v.ThemeSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListThemesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListThemes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThemes, schemas.ListThemesRequest, schemas.ListThemesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListThemes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThemes, schemas.ListThemesRequest, schemas.ListThemesResponse), output: &ListThemesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

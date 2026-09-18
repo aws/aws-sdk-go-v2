@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,22 @@ type ListEksAnywhereSubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEksAnywhereSubscriptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEksAnywhereSubscriptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEksAnywhereSubscriptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEksAnywhereSubscriptionStatusValues(s, schemas.ListEksAnywhereSubscriptionsRequest_includeStatus, v.IncludeStatus)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEksAnywhereSubscriptionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEksAnywhereSubscriptionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListEksAnywhereSubscriptionsOutput struct {
 
 	// The nextToken value to include in a future ListEksAnywhereSubscriptions
@@ -67,13 +85,35 @@ type ListEksAnywhereSubscriptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEksAnywhereSubscriptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEksAnywhereSubscriptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEksAnywhereSubscriptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEksAnywhereSubscriptionsResponse_nextToken, *v.NextToken)
+	}
+	serializeEksAnywhereSubscriptionList(s, schemas.ListEksAnywhereSubscriptionsResponse_subscriptions, v.Subscriptions)
+}
+func (v *ListEksAnywhereSubscriptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEksAnywhereSubscriptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEksAnywhereSubscriptionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEksAnywhereSubscriptionsResponse_nextToken, v.NextToken)
+		case schemas.ListEksAnywhereSubscriptionsResponse_subscriptions:
+			return deserializeEksAnywhereSubscriptionList(d, schemas.ListEksAnywhereSubscriptionsResponse_subscriptions, &v.Subscriptions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEksAnywhereSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEksAnywhereSubscriptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEksAnywhereSubscriptions, schemas.ListEksAnywhereSubscriptionsRequest, schemas.ListEksAnywhereSubscriptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEksAnywhereSubscriptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEksAnywhereSubscriptions, schemas.ListEksAnywhereSubscriptionsRequest, schemas.ListEksAnywhereSubscriptionsResponse), output: &ListEksAnywhereSubscriptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

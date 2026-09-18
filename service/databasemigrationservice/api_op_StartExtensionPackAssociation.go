@@ -4,6 +4,8 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,18 @@ type StartExtensionPackAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartExtensionPackAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartExtensionPackAssociationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartExtensionPackAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.StartExtensionPackAssociationMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+}
+
 type StartExtensionPackAssociationOutput struct {
 
 	// The identifier for the installation request.
@@ -61,13 +75,32 @@ type StartExtensionPackAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartExtensionPackAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartExtensionPackAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartExtensionPackAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestIdentifier != nil {
+		s.WriteString(schemas.StartExtensionPackAssociationResponse_RequestIdentifier, *v.RequestIdentifier)
+	}
+}
+func (v *StartExtensionPackAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartExtensionPackAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartExtensionPackAssociationResponse_RequestIdentifier:
+			v.RequestIdentifier = new(string)
+			return d.ReadString(schemas.StartExtensionPackAssociationResponse_RequestIdentifier, v.RequestIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartExtensionPackAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartExtensionPackAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartExtensionPackAssociation, schemas.StartExtensionPackAssociationMessage, schemas.StartExtensionPackAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartExtensionPackAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartExtensionPackAssociation, schemas.StartExtensionPackAssociationMessage, schemas.StartExtensionPackAssociationResponse), output: &StartExtensionPackAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

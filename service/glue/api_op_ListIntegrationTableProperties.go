@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,22 @@ type ListIntegrationTablePropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntegrationTablePropertiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntegrationTablePropertiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntegrationTablePropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIntegrationTablePropertiesFilterList(s, schemas.ListIntegrationTablePropertiesRequest_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.ListIntegrationTablePropertiesRequest_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.ListIntegrationTablePropertiesRequest_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type ListIntegrationTablePropertiesOutput struct {
 
 	// A list of integration table properties meeting the filter criteria.
@@ -55,13 +73,35 @@ type ListIntegrationTablePropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntegrationTablePropertiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntegrationTablePropertiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntegrationTablePropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIntegrationTablePropertiesList(s, schemas.ListIntegrationTablePropertiesResponse_IntegrationTablePropertiesList, v.IntegrationTablePropertiesList)
+	if v.Marker != nil {
+		s.WriteString(schemas.ListIntegrationTablePropertiesResponse_Marker, *v.Marker)
+	}
+}
+func (v *ListIntegrationTablePropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIntegrationTablePropertiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIntegrationTablePropertiesResponse_IntegrationTablePropertiesList:
+			return deserializeIntegrationTablePropertiesList(d, schemas.ListIntegrationTablePropertiesResponse_IntegrationTablePropertiesList, &v.IntegrationTablePropertiesList)
+		case schemas.ListIntegrationTablePropertiesResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListIntegrationTablePropertiesResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIntegrationTablePropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListIntegrationTableProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntegrationTableProperties, schemas.ListIntegrationTablePropertiesRequest, schemas.ListIntegrationTablePropertiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListIntegrationTableProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntegrationTableProperties, schemas.ListIntegrationTablePropertiesRequest, schemas.ListIntegrationTablePropertiesResponse), output: &ListIntegrationTablePropertiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

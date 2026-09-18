@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeApprovalPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApprovalPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApprovalPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApprovalPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyId != nil {
+		s.WriteString(schemas.DescribeApprovalPolicyRequest_PolicyId, *v.PolicyId)
+	}
+}
+
 type DescribeApprovalPolicyOutput struct {
 
 	// The approval policy.
@@ -47,13 +61,34 @@ type DescribeApprovalPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApprovalPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApprovalPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApprovalPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteStruct(schemas.DescribeApprovalPolicyResponse_Policy)
+		v.Policy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeApprovalPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeApprovalPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeApprovalPolicyResponse_Policy:
+			v.Policy = &types.ApprovalPolicy{}
+			return v.Policy.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeApprovalPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeApprovalPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApprovalPolicy, schemas.DescribeApprovalPolicyRequest, schemas.DescribeApprovalPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeApprovalPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApprovalPolicy, schemas.DescribeApprovalPolicyRequest, schemas.DescribeApprovalPolicyResponse), output: &DescribeApprovalPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

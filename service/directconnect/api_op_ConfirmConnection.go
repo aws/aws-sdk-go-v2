@@ -4,7 +4,9 @@ package directconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type ConfirmConnectionInput struct {
 	ConnectionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConfirmConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.ConfirmConnectionRequest_connectionId, *v.ConnectionId)
+	}
 }
 
 type ConfirmConnectionOutput struct {
@@ -72,13 +86,36 @@ type ConfirmConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfirmConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionState != "" {
+		s.WriteString(schemas.ConfirmConnectionResponse_connectionState, string(v.ConnectionState))
+	}
+}
+func (v *ConfirmConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfirmConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfirmConnectionResponse_connectionState:
+			var ev string
+			if err := d.ReadString(schemas.ConfirmConnectionResponse_connectionState, &ev); err != nil {
+				return err
+			}
+			v.ConnectionState = types.ConnectionState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConfirmConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpConfirmConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmConnection, schemas.ConfirmConnectionRequest, schemas.ConfirmConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpConfirmConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmConnection, schemas.ConfirmConnectionRequest, schemas.ConfirmConnectionResponse), output: &ConfirmConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

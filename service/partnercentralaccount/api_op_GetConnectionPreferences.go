@@ -4,7 +4,9 @@ package partnercentralaccount
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type GetConnectionPreferencesInput struct {
 	Catalog *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetConnectionPreferencesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConnectionPreferencesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectionPreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetConnectionPreferencesRequest_Catalog, *v.Catalog)
+	}
 }
 
 type GetConnectionPreferencesOutput struct {
@@ -74,13 +88,63 @@ type GetConnectionPreferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConnectionPreferencesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConnectionPreferencesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectionPreferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessType != "" {
+		s.WriteString(schemas.GetConnectionPreferencesResponse_AccessType, string(v.AccessType))
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.GetConnectionPreferencesResponse_Arn, *v.Arn)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetConnectionPreferencesResponse_Catalog, *v.Catalog)
+	}
+	serializeParticipantIdentifierList(s, schemas.GetConnectionPreferencesResponse_ExcludedParticipantIds, v.ExcludedParticipantIds)
+	if v.Revision != nil {
+		s.WriteInt64(schemas.GetConnectionPreferencesResponse_Revision, *v.Revision)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetConnectionPreferencesResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetConnectionPreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConnectionPreferencesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConnectionPreferencesResponse_AccessType:
+			var ev string
+			if err := d.ReadString(schemas.GetConnectionPreferencesResponse_AccessType, &ev); err != nil {
+				return err
+			}
+			v.AccessType = types.AccessType(ev)
+			return nil
+		case schemas.GetConnectionPreferencesResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetConnectionPreferencesResponse_Arn, v.Arn)
+		case schemas.GetConnectionPreferencesResponse_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.GetConnectionPreferencesResponse_Catalog, v.Catalog)
+		case schemas.GetConnectionPreferencesResponse_ExcludedParticipantIds:
+			return deserializeParticipantIdentifierList(d, schemas.GetConnectionPreferencesResponse_ExcludedParticipantIds, &v.ExcludedParticipantIds)
+		case schemas.GetConnectionPreferencesResponse_Revision:
+			v.Revision = new(int64)
+			return d.ReadInt64(schemas.GetConnectionPreferencesResponse_Revision, v.Revision)
+		case schemas.GetConnectionPreferencesResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetConnectionPreferencesResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConnectionPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetConnectionPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnectionPreferences, schemas.GetConnectionPreferencesRequest, schemas.GetConnectionPreferencesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetConnectionPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnectionPreferences, schemas.GetConnectionPreferencesRequest, schemas.GetConnectionPreferencesResponse), output: &GetConnectionPreferencesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

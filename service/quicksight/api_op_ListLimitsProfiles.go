@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,27 @@ type ListLimitsProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLimitsProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLimitsProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLimitsProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListLimitsProfilesRequest_accountId, *v.AccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLimitsProfilesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLimitsProfilesRequest_nextToken, *v.NextToken)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.ListLimitsProfilesRequest_resourceType, string(v.ResourceType))
+	}
+}
+
 type ListLimitsProfilesOutput struct {
 
 	// A list of limits profiles.
@@ -66,13 +89,35 @@ type ListLimitsProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLimitsProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLimitsProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLimitsProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLimitsProfilesResponse_nextToken, *v.NextToken)
+	}
+	serializeLimitsProfileList(s, schemas.ListLimitsProfilesResponse_profiles, v.Profiles)
+}
+func (v *ListLimitsProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLimitsProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLimitsProfilesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLimitsProfilesResponse_nextToken, v.NextToken)
+		case schemas.ListLimitsProfilesResponse_profiles:
+			return deserializeLimitsProfileList(d, schemas.ListLimitsProfilesResponse_profiles, &v.Profiles)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLimitsProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLimitsProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLimitsProfiles, schemas.ListLimitsProfilesRequest, schemas.ListLimitsProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLimitsProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLimitsProfiles, schemas.ListLimitsProfilesRequest, schemas.ListLimitsProfilesResponse), output: &ListLimitsProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

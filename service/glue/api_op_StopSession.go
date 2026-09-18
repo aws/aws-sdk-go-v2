@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type StopSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.StopSessionRequest_Id, *v.Id)
+	}
+	if v.RequestOrigin != nil {
+		s.WriteString(schemas.StopSessionRequest_RequestOrigin, *v.RequestOrigin)
+	}
+}
+
 type StopSessionOutput struct {
 
 	// Returns the Id of the stopped session.
@@ -47,13 +64,32 @@ type StopSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.StopSessionResponse_Id, *v.Id)
+	}
+}
+func (v *StopSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopSessionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StopSessionResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopSession, schemas.StopSessionRequest, schemas.StopSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopSession, schemas.StopSessionRequest, schemas.StopSessionResponse), output: &StopSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

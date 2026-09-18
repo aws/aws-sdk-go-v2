@@ -4,7 +4,9 @@ package amplifybackend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,36 @@ type ListBackendJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBackendJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBackendJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBackendJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.ListBackendJobsRequest_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.ListBackendJobsRequest_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.ListBackendJobsRequest_JobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBackendJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBackendJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.ListBackendJobsRequest_Operation, *v.Operation)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ListBackendJobsRequest_Status, *v.Status)
+	}
+}
+
 type ListBackendJobsOutput struct {
 
 	// An array of jobs and their properties.
@@ -71,13 +103,35 @@ type ListBackendJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBackendJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBackendJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBackendJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfBackendJobRespObj(s, schemas.ListBackendJobsResponse_Jobs, v.Jobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBackendJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBackendJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBackendJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBackendJobsResponse_Jobs:
+			return deserializeListOfBackendJobRespObj(d, schemas.ListBackendJobsResponse_Jobs, &v.Jobs)
+		case schemas.ListBackendJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBackendJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBackendJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBackendJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBackendJobs, schemas.ListBackendJobsRequest, schemas.ListBackendJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBackendJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBackendJobs, schemas.ListBackendJobsRequest, schemas.ListBackendJobsResponse), output: &ListBackendJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

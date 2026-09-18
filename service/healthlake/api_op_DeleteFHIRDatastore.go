@@ -4,7 +4,9 @@ package healthlake
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/healthlake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/healthlake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type DeleteFHIRDatastoreInput struct {
 	DatastoreId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteFHIRDatastoreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFHIRDatastoreRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFHIRDatastoreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatastoreId != nil {
+		s.WriteString(schemas.DeleteFHIRDatastoreRequest_DatastoreId, *v.DatastoreId)
+	}
 }
 
 type DeleteFHIRDatastoreOutput struct {
@@ -62,13 +76,54 @@ type DeleteFHIRDatastoreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFHIRDatastoreOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFHIRDatastoreResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFHIRDatastoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatastoreArn != nil {
+		s.WriteString(schemas.DeleteFHIRDatastoreResponse_DatastoreArn, *v.DatastoreArn)
+	}
+	if v.DatastoreEndpoint != nil {
+		s.WriteString(schemas.DeleteFHIRDatastoreResponse_DatastoreEndpoint, *v.DatastoreEndpoint)
+	}
+	if v.DatastoreId != nil {
+		s.WriteString(schemas.DeleteFHIRDatastoreResponse_DatastoreId, *v.DatastoreId)
+	}
+	if v.DatastoreStatus != "" {
+		s.WriteString(schemas.DeleteFHIRDatastoreResponse_DatastoreStatus, string(v.DatastoreStatus))
+	}
+}
+func (v *DeleteFHIRDatastoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFHIRDatastoreResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFHIRDatastoreResponse_DatastoreArn:
+			v.DatastoreArn = new(string)
+			return d.ReadString(schemas.DeleteFHIRDatastoreResponse_DatastoreArn, v.DatastoreArn)
+		case schemas.DeleteFHIRDatastoreResponse_DatastoreEndpoint:
+			v.DatastoreEndpoint = new(string)
+			return d.ReadString(schemas.DeleteFHIRDatastoreResponse_DatastoreEndpoint, v.DatastoreEndpoint)
+		case schemas.DeleteFHIRDatastoreResponse_DatastoreId:
+			v.DatastoreId = new(string)
+			return d.ReadString(schemas.DeleteFHIRDatastoreResponse_DatastoreId, v.DatastoreId)
+		case schemas.DeleteFHIRDatastoreResponse_DatastoreStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeleteFHIRDatastoreResponse_DatastoreStatus, &ev); err != nil {
+				return err
+			}
+			v.DatastoreStatus = types.DatastoreStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFHIRDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteFHIRDatastore{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFHIRDatastore, schemas.DeleteFHIRDatastoreRequest, schemas.DeleteFHIRDatastoreResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteFHIRDatastore{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFHIRDatastore, schemas.DeleteFHIRDatastoreRequest, schemas.DeleteFHIRDatastoreResponse), output: &DeleteFHIRDatastoreOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package datapipeline
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type DeactivatePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeactivatePipelineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeactivatePipelineInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeactivatePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CancelActive != nil {
+		s.WriteBool(schemas.DeactivatePipelineInput_cancelActive, *v.CancelActive)
+	}
+	if v.PipelineId != nil {
+		s.WriteString(schemas.DeactivatePipelineInput_pipelineId, *v.PipelineId)
+	}
+}
+
 // Contains the output of DeactivatePipeline.
 type DeactivatePipelineOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -52,13 +69,26 @@ type DeactivatePipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeactivatePipelineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeactivatePipelineOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeactivatePipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeactivatePipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeactivatePipelineOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeactivatePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeactivatePipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeactivatePipeline, schemas.DeactivatePipelineInput, schemas.DeactivatePipelineOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeactivatePipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeactivatePipeline, schemas.DeactivatePipelineInput, schemas.DeactivatePipelineOutput), output: &DeactivatePipelineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

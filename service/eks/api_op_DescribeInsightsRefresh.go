@@ -4,7 +4,9 @@ package eks
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type DescribeInsightsRefreshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInsightsRefreshInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInsightsRefreshRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInsightsRefreshInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.DescribeInsightsRefreshRequest_clusterName, *v.ClusterName)
+	}
+}
+
 type DescribeInsightsRefreshOutput struct {
 
 	// The date and time when the insights refresh operation ended.
@@ -55,13 +69,54 @@ type DescribeInsightsRefreshOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInsightsRefreshOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInsightsRefreshResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInsightsRefreshOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.DescribeInsightsRefreshResponse_endedAt, *v.EndedAt)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DescribeInsightsRefreshResponse_message, *v.Message)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.DescribeInsightsRefreshResponse_startedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeInsightsRefreshResponse_status, string(v.Status))
+	}
+}
+func (v *DescribeInsightsRefreshOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInsightsRefreshResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInsightsRefreshResponse_endedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeInsightsRefreshResponse_endedAt, v.EndedAt)
+		case schemas.DescribeInsightsRefreshResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DescribeInsightsRefreshResponse_message, v.Message)
+		case schemas.DescribeInsightsRefreshResponse_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeInsightsRefreshResponse_startedAt, v.StartedAt)
+		case schemas.DescribeInsightsRefreshResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeInsightsRefreshResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.InsightsRefreshStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeInsightsRefreshMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeInsightsRefresh{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInsightsRefresh, schemas.DescribeInsightsRefreshRequest, schemas.DescribeInsightsRefreshResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeInsightsRefresh{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInsightsRefresh, schemas.DescribeInsightsRefreshRequest, schemas.DescribeInsightsRefreshResponse), output: &DescribeInsightsRefreshOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

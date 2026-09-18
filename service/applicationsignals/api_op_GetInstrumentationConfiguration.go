@@ -4,7 +4,9 @@ package applicationsignals
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,28 @@ type GetInstrumentationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInstrumentationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInstrumentationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInstrumentationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Environment != nil {
+		s.WriteString(schemas.GetInstrumentationConfigurationRequest_Environment, *v.Environment)
+	}
+	if v.InstrumentationType != "" {
+		s.WriteString(schemas.GetInstrumentationConfigurationRequest_InstrumentationType, string(v.InstrumentationType))
+	}
+	serializeLocationIdentifier(s, schemas.GetInstrumentationConfigurationRequest_LocationIdentifier, v.LocationIdentifier)
+	if v.Service != nil {
+		s.WriteString(schemas.GetInstrumentationConfigurationRequest_Service, *v.Service)
+	}
+	if v.SignalType != "" {
+		s.WriteString(schemas.GetInstrumentationConfigurationRequest_SignalType, string(v.SignalType))
+	}
+}
+
 type GetInstrumentationConfigurationOutput struct {
 
 	// The complete instrumentation configuration, including its location hash,
@@ -71,13 +95,34 @@ type GetInstrumentationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInstrumentationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInstrumentationConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInstrumentationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.GetInstrumentationConfigurationResponse_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetInstrumentationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInstrumentationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInstrumentationConfigurationResponse_Configuration:
+			v.Configuration = &types.InstrumentationConfiguration{}
+			return v.Configuration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInstrumentationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInstrumentationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInstrumentationConfiguration, schemas.GetInstrumentationConfigurationRequest, schemas.GetInstrumentationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetInstrumentationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInstrumentationConfiguration, schemas.GetInstrumentationConfigurationRequest, schemas.GetInstrumentationConfigurationResponse), output: &GetInstrumentationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

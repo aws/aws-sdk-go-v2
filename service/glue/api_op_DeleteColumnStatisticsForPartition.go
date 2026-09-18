@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,28 @@ type DeleteColumnStatisticsForPartitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteColumnStatisticsForPartitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteColumnStatisticsForPartitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteColumnStatisticsForPartitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.DeleteColumnStatisticsForPartitionRequest_CatalogId, *v.CatalogId)
+	}
+	if v.ColumnName != nil {
+		s.WriteString(schemas.DeleteColumnStatisticsForPartitionRequest_ColumnName, *v.ColumnName)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.DeleteColumnStatisticsForPartitionRequest_DatabaseName, *v.DatabaseName)
+	}
+	serializeValueStringList(s, schemas.DeleteColumnStatisticsForPartitionRequest_PartitionValues, v.PartitionValues)
+	if v.TableName != nil {
+		s.WriteString(schemas.DeleteColumnStatisticsForPartitionRequest_TableName, *v.TableName)
+	}
+}
+
 type DeleteColumnStatisticsForPartitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,13 +86,26 @@ type DeleteColumnStatisticsForPartitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteColumnStatisticsForPartitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteColumnStatisticsForPartitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteColumnStatisticsForPartitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteColumnStatisticsForPartitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteColumnStatisticsForPartitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteColumnStatisticsForPartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteColumnStatisticsForPartition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteColumnStatisticsForPartition, schemas.DeleteColumnStatisticsForPartitionRequest, schemas.DeleteColumnStatisticsForPartitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteColumnStatisticsForPartition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteColumnStatisticsForPartition, schemas.DeleteColumnStatisticsForPartitionRequest, schemas.DeleteColumnStatisticsForPartitionResponse), output: &DeleteColumnStatisticsForPartitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

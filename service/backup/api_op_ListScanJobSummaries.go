@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,39 @@ type ListScanJobSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListScanJobSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListScanJobSummariesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListScanJobSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListScanJobSummariesInput_AccountId, *v.AccountId)
+	}
+	if v.AggregationPeriod != "" {
+		s.WriteString(schemas.ListScanJobSummariesInput_AggregationPeriod, string(v.AggregationPeriod))
+	}
+	if v.MalwareScanner != "" {
+		s.WriteString(schemas.ListScanJobSummariesInput_MalwareScanner, string(v.MalwareScanner))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListScanJobSummariesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListScanJobSummariesInput_NextToken, *v.NextToken)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ListScanJobSummariesInput_ResourceType, *v.ResourceType)
+	}
+	if v.ScanResultStatus != "" {
+		s.WriteString(schemas.ListScanJobSummariesInput_ScanResultStatus, string(v.ScanResultStatus))
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ListScanJobSummariesInput_State, string(v.State))
+	}
+}
+
 type ListScanJobSummariesOutput struct {
 
 	// The period for the returned results.
@@ -110,13 +145,41 @@ type ListScanJobSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListScanJobSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListScanJobSummariesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListScanJobSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationPeriod != nil {
+		s.WriteString(schemas.ListScanJobSummariesOutput_AggregationPeriod, *v.AggregationPeriod)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListScanJobSummariesOutput_NextToken, *v.NextToken)
+	}
+	serializeScanJobSummaryList(s, schemas.ListScanJobSummariesOutput_ScanJobSummaries, v.ScanJobSummaries)
+}
+func (v *ListScanJobSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListScanJobSummariesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListScanJobSummariesOutput_AggregationPeriod:
+			v.AggregationPeriod = new(string)
+			return d.ReadString(schemas.ListScanJobSummariesOutput_AggregationPeriod, v.AggregationPeriod)
+		case schemas.ListScanJobSummariesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListScanJobSummariesOutput_NextToken, v.NextToken)
+		case schemas.ListScanJobSummariesOutput_ScanJobSummaries:
+			return deserializeScanJobSummaryList(d, schemas.ListScanJobSummariesOutput_ScanJobSummaries, &v.ScanJobSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListScanJobSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListScanJobSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScanJobSummaries, schemas.ListScanJobSummariesInput, schemas.ListScanJobSummariesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListScanJobSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScanJobSummaries, schemas.ListScanJobSummariesInput, schemas.ListScanJobSummariesOutput), output: &ListScanJobSummariesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

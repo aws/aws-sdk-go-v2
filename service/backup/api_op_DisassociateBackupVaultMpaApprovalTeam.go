@@ -4,6 +4,8 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DisassociateBackupVaultMpaApprovalTeamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateBackupVaultMpaApprovalTeamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateBackupVaultMpaApprovalTeamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateBackupVaultMpaApprovalTeamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.DisassociateBackupVaultMpaApprovalTeamInput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.RequesterComment != nil {
+		s.WriteString(schemas.DisassociateBackupVaultMpaApprovalTeamInput_RequesterComment, *v.RequesterComment)
+	}
+}
+
 type DisassociateBackupVaultMpaApprovalTeamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DisassociateBackupVaultMpaApprovalTeamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateBackupVaultMpaApprovalTeamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateBackupVaultMpaApprovalTeamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateBackupVaultMpaApprovalTeamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateBackupVaultMpaApprovalTeamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateBackupVaultMpaApprovalTeam{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateBackupVaultMpaApprovalTeam, schemas.DisassociateBackupVaultMpaApprovalTeamInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateBackupVaultMpaApprovalTeam{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateBackupVaultMpaApprovalTeam, schemas.DisassociateBackupVaultMpaApprovalTeamInput, nil), output: &DisassociateBackupVaultMpaApprovalTeamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -42,6 +44,21 @@ type GetMLTaskRunInput struct {
 	TransformId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetMLTaskRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMLTaskRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMLTaskRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskRunId != nil {
+		s.WriteString(schemas.GetMLTaskRunRequest_TaskRunId, *v.TaskRunId)
+	}
+	if v.TransformId != nil {
+		s.WriteString(schemas.GetMLTaskRunRequest_TransformId, *v.TransformId)
+	}
 }
 
 type GetMLTaskRunOutput struct {
@@ -82,13 +99,91 @@ type GetMLTaskRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMLTaskRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMLTaskRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMLTaskRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletedOn != nil {
+		s.WriteTime(schemas.GetMLTaskRunResponse_CompletedOn, *v.CompletedOn)
+	}
+	if v.ErrorString != nil {
+		s.WriteString(schemas.GetMLTaskRunResponse_ErrorString, *v.ErrorString)
+	}
+	if v.ExecutionTime != 0 {
+		s.WriteInt32(schemas.GetMLTaskRunResponse_ExecutionTime, v.ExecutionTime)
+	}
+	if v.LastModifiedOn != nil {
+		s.WriteTime(schemas.GetMLTaskRunResponse_LastModifiedOn, *v.LastModifiedOn)
+	}
+	if v.LogGroupName != nil {
+		s.WriteString(schemas.GetMLTaskRunResponse_LogGroupName, *v.LogGroupName)
+	}
+	if v.Properties != nil {
+		s.WriteStruct(schemas.GetMLTaskRunResponse_Properties)
+		v.Properties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartedOn != nil {
+		s.WriteTime(schemas.GetMLTaskRunResponse_StartedOn, *v.StartedOn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetMLTaskRunResponse_Status, string(v.Status))
+	}
+	if v.TaskRunId != nil {
+		s.WriteString(schemas.GetMLTaskRunResponse_TaskRunId, *v.TaskRunId)
+	}
+	if v.TransformId != nil {
+		s.WriteString(schemas.GetMLTaskRunResponse_TransformId, *v.TransformId)
+	}
+}
+func (v *GetMLTaskRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMLTaskRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMLTaskRunResponse_CompletedOn:
+			v.CompletedOn = new(time.Time)
+			return d.ReadTime(schemas.GetMLTaskRunResponse_CompletedOn, v.CompletedOn)
+		case schemas.GetMLTaskRunResponse_ErrorString:
+			v.ErrorString = new(string)
+			return d.ReadString(schemas.GetMLTaskRunResponse_ErrorString, v.ErrorString)
+		case schemas.GetMLTaskRunResponse_ExecutionTime:
+			return d.ReadInt32(schemas.GetMLTaskRunResponse_ExecutionTime, &v.ExecutionTime)
+		case schemas.GetMLTaskRunResponse_LastModifiedOn:
+			v.LastModifiedOn = new(time.Time)
+			return d.ReadTime(schemas.GetMLTaskRunResponse_LastModifiedOn, v.LastModifiedOn)
+		case schemas.GetMLTaskRunResponse_LogGroupName:
+			v.LogGroupName = new(string)
+			return d.ReadString(schemas.GetMLTaskRunResponse_LogGroupName, v.LogGroupName)
+		case schemas.GetMLTaskRunResponse_Properties:
+			v.Properties = &types.TaskRunProperties{}
+			return v.Properties.Deserialize(d)
+		case schemas.GetMLTaskRunResponse_StartedOn:
+			v.StartedOn = new(time.Time)
+			return d.ReadTime(schemas.GetMLTaskRunResponse_StartedOn, v.StartedOn)
+		case schemas.GetMLTaskRunResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetMLTaskRunResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TaskStatusType(ev)
+			return nil
+		case schemas.GetMLTaskRunResponse_TaskRunId:
+			v.TaskRunId = new(string)
+			return d.ReadString(schemas.GetMLTaskRunResponse_TaskRunId, v.TaskRunId)
+		case schemas.GetMLTaskRunResponse_TransformId:
+			v.TransformId = new(string)
+			return d.ReadString(schemas.GetMLTaskRunResponse_TransformId, v.TransformId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMLTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMLTaskRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMLTaskRun, schemas.GetMLTaskRunRequest, schemas.GetMLTaskRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetMLTaskRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMLTaskRun, schemas.GetMLTaskRunRequest, schemas.GetMLTaskRunResponse), output: &GetMLTaskRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

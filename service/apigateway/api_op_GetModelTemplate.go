@@ -4,6 +4,8 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetModelTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetModelTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelName != nil {
+		s.WriteString(schemas.GetModelTemplateRequest_modelName, *v.ModelName)
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.GetModelTemplateRequest_restApiId, *v.RestApiId)
+	}
+}
+
 // Represents a mapping template used to transform a payload.
 type GetModelTemplateOutput struct {
 
@@ -53,13 +70,32 @@ type GetModelTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetModelTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Template)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Value != nil {
+		s.WriteString(schemas.Template_value, *v.Value)
+	}
+}
+func (v *GetModelTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Template, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Template_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Template_value, v.Value)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetModelTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetModelTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModelTemplate, schemas.GetModelTemplateRequest, schemas.Template)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetModelTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModelTemplate, schemas.GetModelTemplateRequest, schemas.Template), output: &GetModelTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

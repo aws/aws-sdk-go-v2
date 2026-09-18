@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DescribeAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisId != nil {
+		s.WriteString(schemas.DescribeAnalysisRequest_AnalysisId, *v.AnalysisId)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeAnalysisRequest_AwsAccountId, *v.AwsAccountId)
+	}
+}
+
 type DescribeAnalysisOutput struct {
 
 	// A metadata structure that contains summary information for the analysis that
@@ -59,13 +76,45 @@ type DescribeAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Analysis != nil {
+		s.WriteStruct(schemas.DescribeAnalysisResponse_Analysis)
+		v.Analysis.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeAnalysisResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeAnalysisResponse_Status, v.Status)
+	}
+}
+func (v *DescribeAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAnalysisResponse_Analysis:
+			v.Analysis = &types.Analysis{}
+			return v.Analysis.Deserialize(d)
+		case schemas.DescribeAnalysisResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeAnalysisResponse_RequestId, v.RequestId)
+		case schemas.DescribeAnalysisResponse_Status:
+			return d.ReadInt32(schemas.DescribeAnalysisResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAnalysis, schemas.DescribeAnalysisRequest, schemas.DescribeAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAnalysis, schemas.DescribeAnalysisRequest, schemas.DescribeAnalysisResponse), output: &DescribeAnalysisOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package applicationsignals
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -88,6 +90,28 @@ type ListEntityEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntityEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntityEventsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntityEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListEntityEventsInput_EndTime, *v.EndTime)
+	}
+	serializeAttributes(s, schemas.ListEntityEventsInput_Entity, v.Entity)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEntityEventsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntityEventsInput_NextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListEntityEventsInput_StartTime, *v.StartTime)
+	}
+}
+
 type ListEntityEventsOutput struct {
 
 	// An array of structures, where each structure contains information about one
@@ -121,13 +145,47 @@ type ListEntityEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntityEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntityEventsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntityEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChangeEvents(s, schemas.ListEntityEventsOutput_ChangeEvents, v.ChangeEvents)
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListEntityEventsOutput_EndTime, *v.EndTime)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntityEventsOutput_NextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListEntityEventsOutput_StartTime, *v.StartTime)
+	}
+}
+func (v *ListEntityEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEntityEventsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEntityEventsOutput_ChangeEvents:
+			return deserializeChangeEvents(d, schemas.ListEntityEventsOutput_ChangeEvents, &v.ChangeEvents)
+		case schemas.ListEntityEventsOutput_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ListEntityEventsOutput_EndTime, v.EndTime)
+		case schemas.ListEntityEventsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEntityEventsOutput_NextToken, v.NextToken)
+		case schemas.ListEntityEventsOutput_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ListEntityEventsOutput_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEntityEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEntityEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntityEvents, schemas.ListEntityEventsInput, schemas.ListEntityEventsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEntityEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntityEvents, schemas.ListEntityEventsInput, schemas.ListEntityEventsOutput), output: &ListEntityEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

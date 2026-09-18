@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,25 @@ type ExportMetadataModelAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportMetadataModelAssessmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportMetadataModelAssessmentMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportMetadataModelAssessmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssessmentReportTypesList(s, schemas.ExportMetadataModelAssessmentMessage_AssessmentReportTypes, v.AssessmentReportTypes)
+	if v.FileName != nil {
+		s.WriteString(schemas.ExportMetadataModelAssessmentMessage_FileName, *v.FileName)
+	}
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.ExportMetadataModelAssessmentMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+	if v.SelectionRules != nil {
+		s.WriteString(schemas.ExportMetadataModelAssessmentMessage_SelectionRules, *v.SelectionRules)
+	}
+}
+
 type ExportMetadataModelAssessmentOutput struct {
 
 	// The Amazon S3 details for an assessment exported in CSV format.
@@ -76,13 +97,42 @@ type ExportMetadataModelAssessmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportMetadataModelAssessmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportMetadataModelAssessmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportMetadataModelAssessmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CsvReport != nil {
+		s.WriteStruct(schemas.ExportMetadataModelAssessmentResponse_CsvReport)
+		v.CsvReport.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PdfReport != nil {
+		s.WriteStruct(schemas.ExportMetadataModelAssessmentResponse_PdfReport)
+		v.PdfReport.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExportMetadataModelAssessmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportMetadataModelAssessmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportMetadataModelAssessmentResponse_CsvReport:
+			v.CsvReport = &types.ExportMetadataModelAssessmentResultEntry{}
+			return v.CsvReport.Deserialize(d)
+		case schemas.ExportMetadataModelAssessmentResponse_PdfReport:
+			v.PdfReport = &types.ExportMetadataModelAssessmentResultEntry{}
+			return v.PdfReport.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExportMetadataModelAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpExportMetadataModelAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportMetadataModelAssessment, schemas.ExportMetadataModelAssessmentMessage, schemas.ExportMetadataModelAssessmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpExportMetadataModelAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportMetadataModelAssessment, schemas.ExportMetadataModelAssessmentMessage, schemas.ExportMetadataModelAssessmentResponse), output: &ExportMetadataModelAssessmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

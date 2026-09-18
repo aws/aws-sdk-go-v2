@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -130,6 +132,57 @@ type ListCopyJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCopyJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCopyJobsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCopyJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByAccountId != nil {
+		s.WriteString(schemas.ListCopyJobsInput_ByAccountId, *v.ByAccountId)
+	}
+	if v.ByCompleteAfter != nil {
+		s.WriteTime(schemas.ListCopyJobsInput_ByCompleteAfter, *v.ByCompleteAfter)
+	}
+	if v.ByCompleteBefore != nil {
+		s.WriteTime(schemas.ListCopyJobsInput_ByCompleteBefore, *v.ByCompleteBefore)
+	}
+	if v.ByCreatedAfter != nil {
+		s.WriteTime(schemas.ListCopyJobsInput_ByCreatedAfter, *v.ByCreatedAfter)
+	}
+	if v.ByCreatedBefore != nil {
+		s.WriteTime(schemas.ListCopyJobsInput_ByCreatedBefore, *v.ByCreatedBefore)
+	}
+	if v.ByDestinationVaultArn != nil {
+		s.WriteString(schemas.ListCopyJobsInput_ByDestinationVaultArn, *v.ByDestinationVaultArn)
+	}
+	if v.ByMessageCategory != nil {
+		s.WriteString(schemas.ListCopyJobsInput_ByMessageCategory, *v.ByMessageCategory)
+	}
+	if v.ByParentJobId != nil {
+		s.WriteString(schemas.ListCopyJobsInput_ByParentJobId, *v.ByParentJobId)
+	}
+	if v.ByResourceArn != nil {
+		s.WriteString(schemas.ListCopyJobsInput_ByResourceArn, *v.ByResourceArn)
+	}
+	if v.ByResourceType != nil {
+		s.WriteString(schemas.ListCopyJobsInput_ByResourceType, *v.ByResourceType)
+	}
+	if v.BySourceRecoveryPointArn != nil {
+		s.WriteString(schemas.ListCopyJobsInput_BySourceRecoveryPointArn, *v.BySourceRecoveryPointArn)
+	}
+	if v.ByState != "" {
+		s.WriteString(schemas.ListCopyJobsInput_ByState, string(v.ByState))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCopyJobsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCopyJobsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListCopyJobsOutput struct {
 
 	// An array of structures containing metadata about your copy jobs returned in
@@ -148,13 +201,35 @@ type ListCopyJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCopyJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCopyJobsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCopyJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCopyJobsList(s, schemas.ListCopyJobsOutput_CopyJobs, v.CopyJobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCopyJobsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCopyJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCopyJobsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCopyJobsOutput_CopyJobs:
+			return deserializeCopyJobsList(d, schemas.ListCopyJobsOutput_CopyJobs, &v.CopyJobs)
+		case schemas.ListCopyJobsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCopyJobsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCopyJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCopyJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCopyJobs, schemas.ListCopyJobsInput, schemas.ListCopyJobsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCopyJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCopyJobs, schemas.ListCopyJobsInput, schemas.ListCopyJobsOutput), output: &ListCopyJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

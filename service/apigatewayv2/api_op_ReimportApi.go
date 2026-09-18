@@ -4,7 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -49,6 +51,27 @@ type ReimportApiInput struct {
 	FailOnWarnings *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReimportApiInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReimportApiRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReimportApiInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.ReimportApiRequest_ApiId, *v.ApiId)
+	}
+	if v.Basepath != nil {
+		s.WriteString(schemas.ReimportApiRequest_Basepath, *v.Basepath)
+	}
+	if v.Body != nil {
+		s.WriteString(schemas.ReimportApiRequest_Body, *v.Body)
+	}
+	if v.FailOnWarnings != nil {
+		s.WriteBool(schemas.ReimportApiRequest_FailOnWarnings, *v.FailOnWarnings)
+	}
 }
 
 type ReimportApiOutput struct {
@@ -127,13 +150,129 @@ type ReimportApiOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReimportApiOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReimportApiResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReimportApiOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiEndpoint != nil {
+		s.WriteString(schemas.ReimportApiResponse_ApiEndpoint, *v.ApiEndpoint)
+	}
+	if v.ApiGatewayManaged != nil {
+		s.WriteBool(schemas.ReimportApiResponse_ApiGatewayManaged, *v.ApiGatewayManaged)
+	}
+	if v.ApiId != nil {
+		s.WriteString(schemas.ReimportApiResponse_ApiId, *v.ApiId)
+	}
+	if v.ApiKeySelectionExpression != nil {
+		s.WriteString(schemas.ReimportApiResponse_ApiKeySelectionExpression, *v.ApiKeySelectionExpression)
+	}
+	if v.CorsConfiguration != nil {
+		s.WriteStruct(schemas.ReimportApiResponse_CorsConfiguration)
+		v.CorsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.ReimportApiResponse_CreatedDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ReimportApiResponse_Description, *v.Description)
+	}
+	if v.DisableExecuteApiEndpoint != nil {
+		s.WriteBool(schemas.ReimportApiResponse_DisableExecuteApiEndpoint, *v.DisableExecuteApiEndpoint)
+	}
+	if v.DisableSchemaValidation != nil {
+		s.WriteBool(schemas.ReimportApiResponse_DisableSchemaValidation, *v.DisableSchemaValidation)
+	}
+	serialize__listOf__string(s, schemas.ReimportApiResponse_ImportInfo, v.ImportInfo)
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.ReimportApiResponse_IpAddressType, string(v.IpAddressType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ReimportApiResponse_Name, *v.Name)
+	}
+	if v.ProtocolType != "" {
+		s.WriteString(schemas.ReimportApiResponse_ProtocolType, string(v.ProtocolType))
+	}
+	if v.RouteSelectionExpression != nil {
+		s.WriteString(schemas.ReimportApiResponse_RouteSelectionExpression, *v.RouteSelectionExpression)
+	}
+	serializeTags(s, schemas.ReimportApiResponse_Tags, v.Tags)
+	if v.Version != nil {
+		s.WriteString(schemas.ReimportApiResponse_Version, *v.Version)
+	}
+	serialize__listOf__string(s, schemas.ReimportApiResponse_Warnings, v.Warnings)
+}
+func (v *ReimportApiOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReimportApiResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReimportApiResponse_ApiEndpoint:
+			v.ApiEndpoint = new(string)
+			return d.ReadString(schemas.ReimportApiResponse_ApiEndpoint, v.ApiEndpoint)
+		case schemas.ReimportApiResponse_ApiGatewayManaged:
+			v.ApiGatewayManaged = new(bool)
+			return d.ReadBool(schemas.ReimportApiResponse_ApiGatewayManaged, v.ApiGatewayManaged)
+		case schemas.ReimportApiResponse_ApiId:
+			v.ApiId = new(string)
+			return d.ReadString(schemas.ReimportApiResponse_ApiId, v.ApiId)
+		case schemas.ReimportApiResponse_ApiKeySelectionExpression:
+			v.ApiKeySelectionExpression = new(string)
+			return d.ReadString(schemas.ReimportApiResponse_ApiKeySelectionExpression, v.ApiKeySelectionExpression)
+		case schemas.ReimportApiResponse_CorsConfiguration:
+			v.CorsConfiguration = &types.Cors{}
+			return v.CorsConfiguration.Deserialize(d)
+		case schemas.ReimportApiResponse_CreatedDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.ReimportApiResponse_CreatedDate, v.CreatedDate)
+		case schemas.ReimportApiResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ReimportApiResponse_Description, v.Description)
+		case schemas.ReimportApiResponse_DisableExecuteApiEndpoint:
+			v.DisableExecuteApiEndpoint = new(bool)
+			return d.ReadBool(schemas.ReimportApiResponse_DisableExecuteApiEndpoint, v.DisableExecuteApiEndpoint)
+		case schemas.ReimportApiResponse_DisableSchemaValidation:
+			v.DisableSchemaValidation = new(bool)
+			return d.ReadBool(schemas.ReimportApiResponse_DisableSchemaValidation, v.DisableSchemaValidation)
+		case schemas.ReimportApiResponse_ImportInfo:
+			return deserialize__listOf__string(d, schemas.ReimportApiResponse_ImportInfo, &v.ImportInfo)
+		case schemas.ReimportApiResponse_IpAddressType:
+			var ev string
+			if err := d.ReadString(schemas.ReimportApiResponse_IpAddressType, &ev); err != nil {
+				return err
+			}
+			v.IpAddressType = types.IpAddressType(ev)
+			return nil
+		case schemas.ReimportApiResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ReimportApiResponse_Name, v.Name)
+		case schemas.ReimportApiResponse_ProtocolType:
+			var ev string
+			if err := d.ReadString(schemas.ReimportApiResponse_ProtocolType, &ev); err != nil {
+				return err
+			}
+			v.ProtocolType = types.ProtocolType(ev)
+			return nil
+		case schemas.ReimportApiResponse_RouteSelectionExpression:
+			v.RouteSelectionExpression = new(string)
+			return d.ReadString(schemas.ReimportApiResponse_RouteSelectionExpression, v.RouteSelectionExpression)
+		case schemas.ReimportApiResponse_Tags:
+			return deserializeTags(d, schemas.ReimportApiResponse_Tags, &v.Tags)
+		case schemas.ReimportApiResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.ReimportApiResponse_Version, v.Version)
+		case schemas.ReimportApiResponse_Warnings:
+			return deserialize__listOf__string(d, schemas.ReimportApiResponse_Warnings, &v.Warnings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationReimportApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpReimportApi{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReimportApi, schemas.ReimportApiRequest, schemas.ReimportApiResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpReimportApi{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReimportApi, schemas.ReimportApiRequest, schemas.ReimportApiResponse), output: &ReimportApiOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

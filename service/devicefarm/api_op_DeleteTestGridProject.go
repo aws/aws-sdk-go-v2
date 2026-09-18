@@ -4,6 +4,8 @@ package devicefarm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DeleteTestGridProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTestGridProjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTestGridProjectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTestGridProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.DeleteTestGridProjectRequest_projectArn, *v.ProjectArn)
+	}
+}
+
 type DeleteTestGridProjectOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +58,26 @@ type DeleteTestGridProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTestGridProjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTestGridProjectResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTestGridProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTestGridProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTestGridProjectResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTestGridProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteTestGridProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTestGridProject, schemas.DeleteTestGridProjectRequest, schemas.DeleteTestGridProjectResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteTestGridProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTestGridProject, schemas.DeleteTestGridProjectRequest, schemas.DeleteTestGridProjectResult), output: &DeleteTestGridProjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

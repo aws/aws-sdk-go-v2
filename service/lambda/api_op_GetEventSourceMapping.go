@@ -4,7 +4,9 @@ package lambda
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type GetEventSourceMappingInput struct {
 	UUID *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetEventSourceMappingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEventSourceMappingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEventSourceMappingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UUID != nil {
+		s.WriteString(schemas.GetEventSourceMappingRequest_UUID, *v.UUID)
+	}
 }
 
 // A mapping between an Amazon Web Services resource and a Lambda function. For
@@ -218,13 +232,238 @@ type GetEventSourceMappingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEventSourceMappingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventSourceMappingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEventSourceMappingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmazonManagedKafkaEventSourceConfig != nil {
+		s.WriteStruct(schemas.EventSourceMappingConfiguration_AmazonManagedKafkaEventSourceConfig)
+		v.AmazonManagedKafkaEventSourceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BatchSize != nil {
+		s.WriteInt32(schemas.EventSourceMappingConfiguration_BatchSize, *v.BatchSize)
+	}
+	if v.BisectBatchOnFunctionError != nil {
+		s.WriteBool(schemas.EventSourceMappingConfiguration_BisectBatchOnFunctionError, *v.BisectBatchOnFunctionError)
+	}
+	if v.DestinationConfig != nil {
+		s.WriteStruct(schemas.EventSourceMappingConfiguration_DestinationConfig)
+		v.DestinationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DocumentDBEventSourceConfig != nil {
+		s.WriteStruct(schemas.EventSourceMappingConfiguration_DocumentDBEventSourceConfig)
+		v.DocumentDBEventSourceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventSourceArn != nil {
+		s.WriteString(schemas.EventSourceMappingConfiguration_EventSourceArn, *v.EventSourceArn)
+	}
+	if v.EventSourceMappingArn != nil {
+		s.WriteString(schemas.EventSourceMappingConfiguration_EventSourceMappingArn, *v.EventSourceMappingArn)
+	}
+	if v.FilterCriteria != nil {
+		s.WriteStruct(schemas.EventSourceMappingConfiguration_FilterCriteria)
+		v.FilterCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FilterCriteriaError != nil {
+		s.WriteStruct(schemas.EventSourceMappingConfiguration_FilterCriteriaError)
+		v.FilterCriteriaError.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FunctionArn != nil {
+		s.WriteString(schemas.EventSourceMappingConfiguration_FunctionArn, *v.FunctionArn)
+	}
+	serializeFunctionResponseTypeList(s, schemas.EventSourceMappingConfiguration_FunctionResponseTypes, v.FunctionResponseTypes)
+	if v.KMSKeyArn != nil {
+		s.WriteString(schemas.EventSourceMappingConfiguration_KMSKeyArn, *v.KMSKeyArn)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.EventSourceMappingConfiguration_LastModified, *v.LastModified)
+	}
+	if v.LastProcessingResult != nil {
+		s.WriteString(schemas.EventSourceMappingConfiguration_LastProcessingResult, *v.LastProcessingResult)
+	}
+	if v.LoggingConfig != nil {
+		s.WriteStruct(schemas.EventSourceMappingConfiguration_LoggingConfig)
+		v.LoggingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaximumBatchingWindowInSeconds != nil {
+		s.WriteInt32(schemas.EventSourceMappingConfiguration_MaximumBatchingWindowInSeconds, *v.MaximumBatchingWindowInSeconds)
+	}
+	if v.MaximumRecordAgeInSeconds != nil {
+		s.WriteInt32(schemas.EventSourceMappingConfiguration_MaximumRecordAgeInSeconds, *v.MaximumRecordAgeInSeconds)
+	}
+	if v.MaximumRetryAttempts != nil {
+		s.WriteInt32(schemas.EventSourceMappingConfiguration_MaximumRetryAttempts, *v.MaximumRetryAttempts)
+	}
+	if v.MetricsConfig != nil {
+		s.WriteStruct(schemas.EventSourceMappingConfiguration_MetricsConfig)
+		v.MetricsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParallelizationFactor != nil {
+		s.WriteInt32(schemas.EventSourceMappingConfiguration_ParallelizationFactor, *v.ParallelizationFactor)
+	}
+	if v.ProvisionedPollerConfig != nil {
+		s.WriteStruct(schemas.EventSourceMappingConfiguration_ProvisionedPollerConfig)
+		v.ProvisionedPollerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeQueues(s, schemas.EventSourceMappingConfiguration_Queues, v.Queues)
+	if v.ScalingConfig != nil {
+		s.WriteStruct(schemas.EventSourceMappingConfiguration_ScalingConfig)
+		v.ScalingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SelfManagedEventSource != nil {
+		s.WriteStruct(schemas.EventSourceMappingConfiguration_SelfManagedEventSource)
+		v.SelfManagedEventSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SelfManagedKafkaEventSourceConfig != nil {
+		s.WriteStruct(schemas.EventSourceMappingConfiguration_SelfManagedKafkaEventSourceConfig)
+		v.SelfManagedKafkaEventSourceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSourceAccessConfigurations(s, schemas.EventSourceMappingConfiguration_SourceAccessConfigurations, v.SourceAccessConfigurations)
+	if v.StartingPosition != "" {
+		s.WriteString(schemas.EventSourceMappingConfiguration_StartingPosition, string(v.StartingPosition))
+	}
+	if v.StartingPositionTimestamp != nil {
+		s.WriteTime(schemas.EventSourceMappingConfiguration_StartingPositionTimestamp, *v.StartingPositionTimestamp)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.EventSourceMappingConfiguration_State, *v.State)
+	}
+	if v.StateTransitionReason != nil {
+		s.WriteString(schemas.EventSourceMappingConfiguration_StateTransitionReason, *v.StateTransitionReason)
+	}
+	serializeTopics(s, schemas.EventSourceMappingConfiguration_Topics, v.Topics)
+	if v.TumblingWindowInSeconds != nil {
+		s.WriteInt32(schemas.EventSourceMappingConfiguration_TumblingWindowInSeconds, *v.TumblingWindowInSeconds)
+	}
+	if v.UUID != nil {
+		s.WriteString(schemas.EventSourceMappingConfiguration_UUID, *v.UUID)
+	}
+}
+func (v *GetEventSourceMappingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventSourceMappingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventSourceMappingConfiguration_AmazonManagedKafkaEventSourceConfig:
+			v.AmazonManagedKafkaEventSourceConfig = &types.AmazonManagedKafkaEventSourceConfig{}
+			return v.AmazonManagedKafkaEventSourceConfig.Deserialize(d)
+		case schemas.EventSourceMappingConfiguration_BatchSize:
+			v.BatchSize = new(int32)
+			return d.ReadInt32(schemas.EventSourceMappingConfiguration_BatchSize, v.BatchSize)
+		case schemas.EventSourceMappingConfiguration_BisectBatchOnFunctionError:
+			v.BisectBatchOnFunctionError = new(bool)
+			return d.ReadBool(schemas.EventSourceMappingConfiguration_BisectBatchOnFunctionError, v.BisectBatchOnFunctionError)
+		case schemas.EventSourceMappingConfiguration_DestinationConfig:
+			v.DestinationConfig = &types.DestinationConfig{}
+			return v.DestinationConfig.Deserialize(d)
+		case schemas.EventSourceMappingConfiguration_DocumentDBEventSourceConfig:
+			v.DocumentDBEventSourceConfig = &types.DocumentDBEventSourceConfig{}
+			return v.DocumentDBEventSourceConfig.Deserialize(d)
+		case schemas.EventSourceMappingConfiguration_EventSourceArn:
+			v.EventSourceArn = new(string)
+			return d.ReadString(schemas.EventSourceMappingConfiguration_EventSourceArn, v.EventSourceArn)
+		case schemas.EventSourceMappingConfiguration_EventSourceMappingArn:
+			v.EventSourceMappingArn = new(string)
+			return d.ReadString(schemas.EventSourceMappingConfiguration_EventSourceMappingArn, v.EventSourceMappingArn)
+		case schemas.EventSourceMappingConfiguration_FilterCriteria:
+			v.FilterCriteria = &types.FilterCriteria{}
+			return v.FilterCriteria.Deserialize(d)
+		case schemas.EventSourceMappingConfiguration_FilterCriteriaError:
+			v.FilterCriteriaError = &types.FilterCriteriaError{}
+			return v.FilterCriteriaError.Deserialize(d)
+		case schemas.EventSourceMappingConfiguration_FunctionArn:
+			v.FunctionArn = new(string)
+			return d.ReadString(schemas.EventSourceMappingConfiguration_FunctionArn, v.FunctionArn)
+		case schemas.EventSourceMappingConfiguration_FunctionResponseTypes:
+			return deserializeFunctionResponseTypeList(d, schemas.EventSourceMappingConfiguration_FunctionResponseTypes, &v.FunctionResponseTypes)
+		case schemas.EventSourceMappingConfiguration_KMSKeyArn:
+			v.KMSKeyArn = new(string)
+			return d.ReadString(schemas.EventSourceMappingConfiguration_KMSKeyArn, v.KMSKeyArn)
+		case schemas.EventSourceMappingConfiguration_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.EventSourceMappingConfiguration_LastModified, v.LastModified)
+		case schemas.EventSourceMappingConfiguration_LastProcessingResult:
+			v.LastProcessingResult = new(string)
+			return d.ReadString(schemas.EventSourceMappingConfiguration_LastProcessingResult, v.LastProcessingResult)
+		case schemas.EventSourceMappingConfiguration_LoggingConfig:
+			v.LoggingConfig = &types.EventSourceMappingLoggingConfig{}
+			return v.LoggingConfig.Deserialize(d)
+		case schemas.EventSourceMappingConfiguration_MaximumBatchingWindowInSeconds:
+			v.MaximumBatchingWindowInSeconds = new(int32)
+			return d.ReadInt32(schemas.EventSourceMappingConfiguration_MaximumBatchingWindowInSeconds, v.MaximumBatchingWindowInSeconds)
+		case schemas.EventSourceMappingConfiguration_MaximumRecordAgeInSeconds:
+			v.MaximumRecordAgeInSeconds = new(int32)
+			return d.ReadInt32(schemas.EventSourceMappingConfiguration_MaximumRecordAgeInSeconds, v.MaximumRecordAgeInSeconds)
+		case schemas.EventSourceMappingConfiguration_MaximumRetryAttempts:
+			v.MaximumRetryAttempts = new(int32)
+			return d.ReadInt32(schemas.EventSourceMappingConfiguration_MaximumRetryAttempts, v.MaximumRetryAttempts)
+		case schemas.EventSourceMappingConfiguration_MetricsConfig:
+			v.MetricsConfig = &types.EventSourceMappingMetricsConfig{}
+			return v.MetricsConfig.Deserialize(d)
+		case schemas.EventSourceMappingConfiguration_ParallelizationFactor:
+			v.ParallelizationFactor = new(int32)
+			return d.ReadInt32(schemas.EventSourceMappingConfiguration_ParallelizationFactor, v.ParallelizationFactor)
+		case schemas.EventSourceMappingConfiguration_ProvisionedPollerConfig:
+			v.ProvisionedPollerConfig = &types.ProvisionedPollerConfig{}
+			return v.ProvisionedPollerConfig.Deserialize(d)
+		case schemas.EventSourceMappingConfiguration_Queues:
+			return deserializeQueues(d, schemas.EventSourceMappingConfiguration_Queues, &v.Queues)
+		case schemas.EventSourceMappingConfiguration_ScalingConfig:
+			v.ScalingConfig = &types.ScalingConfig{}
+			return v.ScalingConfig.Deserialize(d)
+		case schemas.EventSourceMappingConfiguration_SelfManagedEventSource:
+			v.SelfManagedEventSource = &types.SelfManagedEventSource{}
+			return v.SelfManagedEventSource.Deserialize(d)
+		case schemas.EventSourceMappingConfiguration_SelfManagedKafkaEventSourceConfig:
+			v.SelfManagedKafkaEventSourceConfig = &types.SelfManagedKafkaEventSourceConfig{}
+			return v.SelfManagedKafkaEventSourceConfig.Deserialize(d)
+		case schemas.EventSourceMappingConfiguration_SourceAccessConfigurations:
+			return deserializeSourceAccessConfigurations(d, schemas.EventSourceMappingConfiguration_SourceAccessConfigurations, &v.SourceAccessConfigurations)
+		case schemas.EventSourceMappingConfiguration_StartingPosition:
+			var ev string
+			if err := d.ReadString(schemas.EventSourceMappingConfiguration_StartingPosition, &ev); err != nil {
+				return err
+			}
+			v.StartingPosition = types.EventSourcePosition(ev)
+			return nil
+		case schemas.EventSourceMappingConfiguration_StartingPositionTimestamp:
+			v.StartingPositionTimestamp = new(time.Time)
+			return d.ReadTime(schemas.EventSourceMappingConfiguration_StartingPositionTimestamp, v.StartingPositionTimestamp)
+		case schemas.EventSourceMappingConfiguration_State:
+			v.State = new(string)
+			return d.ReadString(schemas.EventSourceMappingConfiguration_State, v.State)
+		case schemas.EventSourceMappingConfiguration_StateTransitionReason:
+			v.StateTransitionReason = new(string)
+			return d.ReadString(schemas.EventSourceMappingConfiguration_StateTransitionReason, v.StateTransitionReason)
+		case schemas.EventSourceMappingConfiguration_Topics:
+			return deserializeTopics(d, schemas.EventSourceMappingConfiguration_Topics, &v.Topics)
+		case schemas.EventSourceMappingConfiguration_TumblingWindowInSeconds:
+			v.TumblingWindowInSeconds = new(int32)
+			return d.ReadInt32(schemas.EventSourceMappingConfiguration_TumblingWindowInSeconds, v.TumblingWindowInSeconds)
+		case schemas.EventSourceMappingConfiguration_UUID:
+			v.UUID = new(string)
+			return d.ReadString(schemas.EventSourceMappingConfiguration_UUID, v.UUID)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEventSourceMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEventSourceMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEventSourceMapping, schemas.GetEventSourceMappingRequest, schemas.EventSourceMappingConfiguration)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEventSourceMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEventSourceMapping, schemas.GetEventSourceMappingRequest, schemas.EventSourceMappingConfiguration), output: &GetEventSourceMappingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

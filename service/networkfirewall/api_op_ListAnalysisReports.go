@@ -5,7 +5,9 @@ package networkfirewall
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,27 @@ type ListAnalysisReportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnalysisReportsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnalysisReportsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnalysisReportsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.ListAnalysisReportsRequest_FirewallArn, *v.FirewallArn)
+	}
+	if v.FirewallName != nil {
+		s.WriteString(schemas.ListAnalysisReportsRequest_FirewallName, *v.FirewallName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAnalysisReportsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnalysisReportsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAnalysisReportsOutput struct {
 
 	// The id and ReportTime associated with a requested analysis report. Does not
@@ -74,13 +97,35 @@ type ListAnalysisReportsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnalysisReportsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnalysisReportsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnalysisReportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalysisReports(s, schemas.ListAnalysisReportsResponse_AnalysisReports, v.AnalysisReports)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnalysisReportsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAnalysisReportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAnalysisReportsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAnalysisReportsResponse_AnalysisReports:
+			return deserializeAnalysisReports(d, schemas.ListAnalysisReportsResponse_AnalysisReports, &v.AnalysisReports)
+		case schemas.ListAnalysisReportsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAnalysisReportsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAnalysisReportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListAnalysisReports{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnalysisReports, schemas.ListAnalysisReportsRequest, schemas.ListAnalysisReportsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListAnalysisReports{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnalysisReports, schemas.ListAnalysisReportsRequest, schemas.ListAnalysisReportsResponse), output: &ListAnalysisReportsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

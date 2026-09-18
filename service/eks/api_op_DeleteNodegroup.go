@@ -4,7 +4,9 @@ package eks
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteNodegroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNodegroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNodegroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNodegroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.DeleteNodegroupRequest_clusterName, *v.ClusterName)
+	}
+	if v.NodegroupName != nil {
+		s.WriteString(schemas.DeleteNodegroupRequest_nodegroupName, *v.NodegroupName)
+	}
+}
+
 type DeleteNodegroupOutput struct {
 
 	// The full description of your deleted node group.
@@ -50,13 +67,34 @@ type DeleteNodegroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNodegroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNodegroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNodegroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Nodegroup != nil {
+		s.WriteStruct(schemas.DeleteNodegroupResponse_nodegroup)
+		v.Nodegroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteNodegroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteNodegroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteNodegroupResponse_nodegroup:
+			v.Nodegroup = &types.Nodegroup{}
+			return v.Nodegroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteNodegroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteNodegroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNodegroup, schemas.DeleteNodegroupRequest, schemas.DeleteNodegroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteNodegroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNodegroup, schemas.DeleteNodegroupRequest, schemas.DeleteNodegroupResponse), output: &DeleteNodegroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

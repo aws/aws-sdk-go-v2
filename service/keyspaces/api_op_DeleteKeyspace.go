@@ -4,6 +4,8 @@ package keyspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/keyspaces/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,28 @@ type DeleteKeyspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteKeyspaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteKeyspaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteKeyspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyspaceName != nil {
+		s.WriteString(schemas.DeleteKeyspaceRequest_keyspaceName, *v.KeyspaceName)
+	}
+}
+func (v *DeleteKeyspaceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteKeyspaceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteKeyspaceRequest_keyspaceName:
+			v.KeyspaceName = new(string)
+			return d.ReadString(schemas.DeleteKeyspaceRequest_keyspaceName, v.KeyspaceName)
+		}
+		return nil
+	})
+}
+
 type DeleteKeyspaceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +64,26 @@ type DeleteKeyspaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteKeyspaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteKeyspaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteKeyspaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteKeyspaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteKeyspaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteKeyspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteKeyspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKeyspace, schemas.DeleteKeyspaceRequest, schemas.DeleteKeyspaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteKeyspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKeyspace, schemas.DeleteKeyspaceRequest, schemas.DeleteKeyspaceResponse), output: &DeleteKeyspaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

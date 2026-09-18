@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type GetSecurityConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSecurityConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSecurityConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSecurityConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetSecurityConfigurationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSecurityConfigurationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetSecurityConfigurationsOutput struct {
 
 	// A continuation token, if there are more security configurations to return.
@@ -50,13 +67,35 @@ type GetSecurityConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSecurityConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSecurityConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSecurityConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSecurityConfigurationsResponse_NextToken, *v.NextToken)
+	}
+	serializeSecurityConfigurationList(s, schemas.GetSecurityConfigurationsResponse_SecurityConfigurations, v.SecurityConfigurations)
+}
+func (v *GetSecurityConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSecurityConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSecurityConfigurationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetSecurityConfigurationsResponse_NextToken, v.NextToken)
+		case schemas.GetSecurityConfigurationsResponse_SecurityConfigurations:
+			return deserializeSecurityConfigurationList(d, schemas.GetSecurityConfigurationsResponse_SecurityConfigurations, &v.SecurityConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSecurityConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSecurityConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSecurityConfigurations, schemas.GetSecurityConfigurationsRequest, schemas.GetSecurityConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSecurityConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSecurityConfigurations, schemas.GetSecurityConfigurationsRequest, schemas.GetSecurityConfigurationsResponse), output: &GetSecurityConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

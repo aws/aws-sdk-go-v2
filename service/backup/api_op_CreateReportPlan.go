@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -73,6 +75,35 @@ type CreateReportPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReportPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReportPlanInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReportPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.CreateReportPlanInput_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.ReportDeliveryChannel != nil {
+		s.WriteStruct(schemas.CreateReportPlanInput_ReportDeliveryChannel)
+		v.ReportDeliveryChannel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReportPlanDescription != nil {
+		s.WriteString(schemas.CreateReportPlanInput_ReportPlanDescription, *v.ReportPlanDescription)
+	}
+	if v.ReportPlanName != nil {
+		s.WriteString(schemas.CreateReportPlanInput_ReportPlanName, *v.ReportPlanName)
+	}
+	serializestringMap(s, schemas.CreateReportPlanInput_ReportPlanTags, v.ReportPlanTags)
+	if v.ReportSetting != nil {
+		s.WriteStruct(schemas.CreateReportPlanInput_ReportSetting)
+		v.ReportSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateReportPlanOutput struct {
 
 	// The date and time a backup vault is created, in Unix format and Coordinated
@@ -94,13 +125,44 @@ type CreateReportPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReportPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReportPlanOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReportPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CreateReportPlanOutput_CreationTime, *v.CreationTime)
+	}
+	if v.ReportPlanArn != nil {
+		s.WriteString(schemas.CreateReportPlanOutput_ReportPlanArn, *v.ReportPlanArn)
+	}
+	if v.ReportPlanName != nil {
+		s.WriteString(schemas.CreateReportPlanOutput_ReportPlanName, *v.ReportPlanName)
+	}
+}
+func (v *CreateReportPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateReportPlanOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateReportPlanOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateReportPlanOutput_CreationTime, v.CreationTime)
+		case schemas.CreateReportPlanOutput_ReportPlanArn:
+			v.ReportPlanArn = new(string)
+			return d.ReadString(schemas.CreateReportPlanOutput_ReportPlanArn, v.ReportPlanArn)
+		case schemas.CreateReportPlanOutput_ReportPlanName:
+			v.ReportPlanName = new(string)
+			return d.ReadString(schemas.CreateReportPlanOutput_ReportPlanName, v.ReportPlanName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateReportPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateReportPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReportPlan, schemas.CreateReportPlanInput, schemas.CreateReportPlanOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateReportPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReportPlan, schemas.CreateReportPlanInput, schemas.CreateReportPlanOutput), output: &CreateReportPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

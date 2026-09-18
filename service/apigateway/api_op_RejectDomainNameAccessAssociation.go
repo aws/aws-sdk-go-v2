@@ -4,6 +4,8 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type RejectDomainNameAccessAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectDomainNameAccessAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectDomainNameAccessAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectDomainNameAccessAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainNameAccessAssociationArn != nil {
+		s.WriteString(schemas.RejectDomainNameAccessAssociationRequest_domainNameAccessAssociationArn, *v.DomainNameAccessAssociationArn)
+	}
+	if v.DomainNameArn != nil {
+		s.WriteString(schemas.RejectDomainNameAccessAssociationRequest_domainNameArn, *v.DomainNameArn)
+	}
+}
+
 type RejectDomainNameAccessAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +67,26 @@ type RejectDomainNameAccessAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectDomainNameAccessAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectDomainNameAccessAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RejectDomainNameAccessAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRejectDomainNameAccessAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRejectDomainNameAccessAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectDomainNameAccessAssociation, schemas.RejectDomainNameAccessAssociationRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRejectDomainNameAccessAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectDomainNameAccessAssociation, schemas.RejectDomainNameAccessAssociationRequest, nil), output: &RejectDomainNameAccessAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

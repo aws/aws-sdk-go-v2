@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListTopicsV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTopicsV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTopicsV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTopicsV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListTopicsV2Request_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTopicsV2Request_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTopicsV2Request_NextToken, *v.NextToken)
+	}
+}
+
 type ListTopicsV2Output struct {
 
 	// The token for the next set of results, or null if there are no more results.
@@ -63,13 +83,46 @@ type ListTopicsV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTopicsV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTopicsV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTopicsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTopicsV2Response_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListTopicsV2Response_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListTopicsV2Response_Status, v.Status)
+	}
+	serializeTopicV2Summaries(s, schemas.ListTopicsV2Response_TopicSummaryList, v.TopicSummaryList)
+}
+func (v *ListTopicsV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTopicsV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTopicsV2Response_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTopicsV2Response_NextToken, v.NextToken)
+		case schemas.ListTopicsV2Response_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListTopicsV2Response_RequestId, v.RequestId)
+		case schemas.ListTopicsV2Response_Status:
+			return d.ReadInt32(schemas.ListTopicsV2Response_Status, &v.Status)
+		case schemas.ListTopicsV2Response_TopicSummaryList:
+			return deserializeTopicV2Summaries(d, schemas.ListTopicsV2Response_TopicSummaryList, &v.TopicSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTopicsV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTopicsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTopicsV2, schemas.ListTopicsV2Request, schemas.ListTopicsV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTopicsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTopicsV2, schemas.ListTopicsV2Request, schemas.ListTopicsV2Response), output: &ListTopicsV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

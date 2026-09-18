@@ -4,7 +4,9 @@ package networkfirewall
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DescribeFirewallInput struct {
 	FirewallName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeFirewallInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFirewallRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFirewallInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.DescribeFirewallRequest_FirewallArn, *v.FirewallArn)
+	}
+	if v.FirewallName != nil {
+		s.WriteString(schemas.DescribeFirewallRequest_FirewallName, *v.FirewallName)
+	}
 }
 
 type DescribeFirewallOutput struct {
@@ -77,13 +94,48 @@ type DescribeFirewallOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFirewallOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFirewallResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFirewallOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Firewall != nil {
+		s.WriteStruct(schemas.DescribeFirewallResponse_Firewall)
+		v.Firewall.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FirewallStatus != nil {
+		s.WriteStruct(schemas.DescribeFirewallResponse_FirewallStatus)
+		v.FirewallStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.DescribeFirewallResponse_UpdateToken, *v.UpdateToken)
+	}
+}
+func (v *DescribeFirewallOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFirewallResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFirewallResponse_Firewall:
+			v.Firewall = &types.Firewall{}
+			return v.Firewall.Deserialize(d)
+		case schemas.DescribeFirewallResponse_FirewallStatus:
+			v.FirewallStatus = &types.FirewallStatus{}
+			return v.FirewallStatus.Deserialize(d)
+		case schemas.DescribeFirewallResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.DescribeFirewallResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFirewallMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeFirewall{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFirewall, schemas.DescribeFirewallRequest, schemas.DescribeFirewallResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeFirewall{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFirewall, schemas.DescribeFirewallRequest, schemas.DescribeFirewallResponse), output: &DescribeFirewallOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

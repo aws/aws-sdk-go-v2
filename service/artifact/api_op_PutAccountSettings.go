@@ -4,7 +4,9 @@ package artifact
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/artifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/artifact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type PutAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotificationSubscriptionStatus != "" {
+		s.WriteString(schemas.PutAccountSettingsRequest_notificationSubscriptionStatus, string(v.NotificationSubscriptionStatus))
+	}
+}
+
 type PutAccountSettingsOutput struct {
 
 	// Account settings for the customer.
@@ -43,13 +57,34 @@ type PutAccountSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountSettings != nil {
+		s.WriteStruct(schemas.PutAccountSettingsResponse_accountSettings)
+		v.AccountSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutAccountSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAccountSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAccountSettingsResponse_accountSettings:
+			v.AccountSettings = &types.AccountSettings{}
+			return v.AccountSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountSettings, schemas.PutAccountSettingsRequest, schemas.PutAccountSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountSettings, schemas.PutAccountSettingsRequest, schemas.PutAccountSettingsResponse), output: &PutAccountSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

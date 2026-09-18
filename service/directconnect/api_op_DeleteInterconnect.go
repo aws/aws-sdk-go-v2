@@ -4,7 +4,9 @@ package directconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteInterconnectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInterconnectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInterconnectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInterconnectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InterconnectId != nil {
+		s.WriteString(schemas.DeleteInterconnectRequest_interconnectId, *v.InterconnectId)
+	}
+}
+
 type DeleteInterconnectOutput struct {
 
 	// The state of the interconnect. The following are the possible values:
@@ -63,13 +77,36 @@ type DeleteInterconnectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInterconnectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInterconnectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInterconnectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InterconnectState != "" {
+		s.WriteString(schemas.DeleteInterconnectResponse_interconnectState, string(v.InterconnectState))
+	}
+}
+func (v *DeleteInterconnectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteInterconnectResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteInterconnectResponse_interconnectState:
+			var ev string
+			if err := d.ReadString(schemas.DeleteInterconnectResponse_interconnectState, &ev); err != nil {
+				return err
+			}
+			v.InterconnectState = types.InterconnectState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteInterconnectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteInterconnect{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInterconnect, schemas.DeleteInterconnectRequest, schemas.DeleteInterconnectResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteInterconnect{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInterconnect, schemas.DeleteInterconnectRequest, schemas.DeleteInterconnectResponse), output: &DeleteInterconnectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

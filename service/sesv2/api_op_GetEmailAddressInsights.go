@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type GetEmailAddressInsightsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEmailAddressInsightsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEmailAddressInsightsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEmailAddressInsightsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.GetEmailAddressInsightsRequest_EmailAddress, *v.EmailAddress)
+	}
+}
+
 // Validation insights about an email address.
 type GetEmailAddressInsightsOutput struct {
 
@@ -49,13 +63,34 @@ type GetEmailAddressInsightsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEmailAddressInsightsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEmailAddressInsightsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEmailAddressInsightsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MailboxValidation != nil {
+		s.WriteStruct(schemas.GetEmailAddressInsightsResponse_MailboxValidation)
+		v.MailboxValidation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetEmailAddressInsightsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEmailAddressInsightsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEmailAddressInsightsResponse_MailboxValidation:
+			v.MailboxValidation = &types.MailboxValidation{}
+			return v.MailboxValidation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEmailAddressInsightsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEmailAddressInsights{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEmailAddressInsights, schemas.GetEmailAddressInsightsRequest, schemas.GetEmailAddressInsightsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEmailAddressInsights{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEmailAddressInsights, schemas.GetEmailAddressInsightsRequest, schemas.GetEmailAddressInsightsResponse), output: &GetEmailAddressInsightsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

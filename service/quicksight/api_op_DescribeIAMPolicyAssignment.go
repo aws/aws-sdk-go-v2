@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type DescribeIAMPolicyAssignmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIAMPolicyAssignmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIAMPolicyAssignmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIAMPolicyAssignmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssignmentName != nil {
+		s.WriteString(schemas.DescribeIAMPolicyAssignmentRequest_AssignmentName, *v.AssignmentName)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeIAMPolicyAssignmentRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.DescribeIAMPolicyAssignmentRequest_Namespace, *v.Namespace)
+	}
+}
+
 type DescribeIAMPolicyAssignmentOutput struct {
 
 	// Information describing the IAM policy assignment.
@@ -63,13 +83,45 @@ type DescribeIAMPolicyAssignmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIAMPolicyAssignmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIAMPolicyAssignmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIAMPolicyAssignmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IAMPolicyAssignment != nil {
+		s.WriteStruct(schemas.DescribeIAMPolicyAssignmentResponse_IAMPolicyAssignment)
+		v.IAMPolicyAssignment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeIAMPolicyAssignmentResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeIAMPolicyAssignmentResponse_Status, v.Status)
+	}
+}
+func (v *DescribeIAMPolicyAssignmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeIAMPolicyAssignmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeIAMPolicyAssignmentResponse_IAMPolicyAssignment:
+			v.IAMPolicyAssignment = &types.IAMPolicyAssignment{}
+			return v.IAMPolicyAssignment.Deserialize(d)
+		case schemas.DescribeIAMPolicyAssignmentResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeIAMPolicyAssignmentResponse_RequestId, v.RequestId)
+		case schemas.DescribeIAMPolicyAssignmentResponse_Status:
+			return d.ReadInt32(schemas.DescribeIAMPolicyAssignmentResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeIAMPolicyAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeIAMPolicyAssignment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIAMPolicyAssignment, schemas.DescribeIAMPolicyAssignmentRequest, schemas.DescribeIAMPolicyAssignmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeIAMPolicyAssignment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIAMPolicyAssignment, schemas.DescribeIAMPolicyAssignmentRequest, schemas.DescribeIAMPolicyAssignmentResponse), output: &DescribeIAMPolicyAssignmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,27 @@ type UpdateSpaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSpaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSpaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateSpaceRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSpaceRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateSpaceRequest_Name, *v.Name)
+	}
+	if v.SpaceId != nil {
+		s.WriteString(schemas.UpdateSpaceRequest_SpaceId, *v.SpaceId)
+	}
+}
+
 type UpdateSpaceOutput struct {
 
 	// The ID of the space.
@@ -63,13 +86,44 @@ type UpdateSpaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSpaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSpaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSpaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateSpaceResponse_RequestId, *v.RequestId)
+	}
+	if v.SpaceArn != nil {
+		s.WriteString(schemas.UpdateSpaceResponse_spaceArn, *v.SpaceArn)
+	}
+	if v.SpaceId != nil {
+		s.WriteString(schemas.UpdateSpaceResponse_spaceId, *v.SpaceId)
+	}
+}
+func (v *UpdateSpaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSpaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSpaceResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateSpaceResponse_RequestId, v.RequestId)
+		case schemas.UpdateSpaceResponse_spaceArn:
+			v.SpaceArn = new(string)
+			return d.ReadString(schemas.UpdateSpaceResponse_spaceArn, v.SpaceArn)
+		case schemas.UpdateSpaceResponse_spaceId:
+			v.SpaceId = new(string)
+			return d.ReadString(schemas.UpdateSpaceResponse_spaceId, v.SpaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSpaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSpace, schemas.UpdateSpaceRequest, schemas.UpdateSpaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSpace, schemas.UpdateSpaceRequest, schemas.UpdateSpaceResponse), output: &UpdateSpaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package devicefarm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type ListDevicePoolsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDevicePoolsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDevicePoolsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDevicePoolsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListDevicePoolsRequest_arn, *v.Arn)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDevicePoolsRequest_nextToken, *v.NextToken)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListDevicePoolsRequest_type, string(v.Type))
+	}
+}
+
 // Represents the result of a list device pools request.
 type ListDevicePoolsOutput struct {
 
@@ -67,13 +87,35 @@ type ListDevicePoolsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDevicePoolsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDevicePoolsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDevicePoolsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDevicePools(s, schemas.ListDevicePoolsResult_devicePools, v.DevicePools)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDevicePoolsResult_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDevicePoolsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDevicePoolsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDevicePoolsResult_devicePools:
+			return deserializeDevicePools(d, schemas.ListDevicePoolsResult_devicePools, &v.DevicePools)
+		case schemas.ListDevicePoolsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDevicePoolsResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDevicePoolsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDevicePools{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevicePools, schemas.ListDevicePoolsRequest, schemas.ListDevicePoolsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDevicePools{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevicePools, schemas.ListDevicePoolsRequest, schemas.ListDevicePoolsResult), output: &ListDevicePoolsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package directconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,30 @@ type DescribeDirectConnectGatewayAssociationProposalsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDirectConnectGatewayAssociationProposalsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDirectConnectGatewayAssociationProposalsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDirectConnectGatewayAssociationProposalsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedGatewayId != nil {
+		s.WriteString(schemas.DescribeDirectConnectGatewayAssociationProposalsRequest_associatedGatewayId, *v.AssociatedGatewayId)
+	}
+	if v.DirectConnectGatewayId != nil {
+		s.WriteString(schemas.DescribeDirectConnectGatewayAssociationProposalsRequest_directConnectGatewayId, *v.DirectConnectGatewayId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeDirectConnectGatewayAssociationProposalsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDirectConnectGatewayAssociationProposalsRequest_nextToken, *v.NextToken)
+	}
+	if v.ProposalId != nil {
+		s.WriteString(schemas.DescribeDirectConnectGatewayAssociationProposalsRequest_proposalId, *v.ProposalId)
+	}
+}
+
 type DescribeDirectConnectGatewayAssociationProposalsOutput struct {
 
 	// Describes the Direct Connect gateway association proposals.
@@ -63,13 +89,35 @@ type DescribeDirectConnectGatewayAssociationProposalsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDirectConnectGatewayAssociationProposalsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDirectConnectGatewayAssociationProposalsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDirectConnectGatewayAssociationProposalsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDirectConnectGatewayAssociationProposalList(s, schemas.DescribeDirectConnectGatewayAssociationProposalsResult_directConnectGatewayAssociationProposals, v.DirectConnectGatewayAssociationProposals)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDirectConnectGatewayAssociationProposalsResult_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeDirectConnectGatewayAssociationProposalsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDirectConnectGatewayAssociationProposalsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDirectConnectGatewayAssociationProposalsResult_directConnectGatewayAssociationProposals:
+			return deserializeDirectConnectGatewayAssociationProposalList(d, schemas.DescribeDirectConnectGatewayAssociationProposalsResult_directConnectGatewayAssociationProposals, &v.DirectConnectGatewayAssociationProposals)
+		case schemas.DescribeDirectConnectGatewayAssociationProposalsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeDirectConnectGatewayAssociationProposalsResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDirectConnectGatewayAssociationProposalsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDirectConnectGatewayAssociationProposals{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDirectConnectGatewayAssociationProposals, schemas.DescribeDirectConnectGatewayAssociationProposalsRequest, schemas.DescribeDirectConnectGatewayAssociationProposalsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDirectConnectGatewayAssociationProposals{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDirectConnectGatewayAssociationProposals, schemas.DescribeDirectConnectGatewayAssociationProposalsRequest, schemas.DescribeDirectConnectGatewayAssociationProposalsResult), output: &DescribeDirectConnectGatewayAssociationProposalsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package devicefarm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type StopJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StopJobRequest_arn, *v.Arn)
+	}
+}
+
 type StopJobOutput struct {
 
 	// The job that was stopped.
@@ -49,13 +63,34 @@ type StopJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopJobResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Job != nil {
+		s.WriteStruct(schemas.StopJobResult_job)
+		v.Job.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StopJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopJobResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopJobResult_job:
+			v.Job = &types.Job{}
+			return v.Job.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopJob, schemas.StopJobRequest, schemas.StopJobResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopJob, schemas.StopJobRequest, schemas.StopJobResult), output: &StopJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

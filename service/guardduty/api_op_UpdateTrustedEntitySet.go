@@ -4,6 +4,8 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,33 @@ type UpdateTrustedEntitySetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTrustedEntitySetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTrustedEntitySetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTrustedEntitySetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Activate != nil {
+		s.WriteBool(schemas.UpdateTrustedEntitySetRequest_Activate, *v.Activate)
+	}
+	if v.DetectorId != nil {
+		s.WriteString(schemas.UpdateTrustedEntitySetRequest_DetectorId, *v.DetectorId)
+	}
+	if v.ExpectedBucketOwner != nil {
+		s.WriteString(schemas.UpdateTrustedEntitySetRequest_ExpectedBucketOwner, *v.ExpectedBucketOwner)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.UpdateTrustedEntitySetRequest_Location, *v.Location)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateTrustedEntitySetRequest_Name, *v.Name)
+	}
+	if v.TrustedEntitySetId != nil {
+		s.WriteString(schemas.UpdateTrustedEntitySetRequest_TrustedEntitySetId, *v.TrustedEntitySetId)
+	}
+}
+
 type UpdateTrustedEntitySetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -70,13 +99,26 @@ type UpdateTrustedEntitySetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTrustedEntitySetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTrustedEntitySetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTrustedEntitySetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateTrustedEntitySetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTrustedEntitySetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTrustedEntitySetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTrustedEntitySet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTrustedEntitySet, schemas.UpdateTrustedEntitySetRequest, schemas.UpdateTrustedEntitySetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTrustedEntitySet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTrustedEntitySet, schemas.UpdateTrustedEntitySetRequest, schemas.UpdateTrustedEntitySetResponse), output: &UpdateTrustedEntitySetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

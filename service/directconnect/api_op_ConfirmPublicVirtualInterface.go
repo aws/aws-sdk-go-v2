@@ -4,7 +4,9 @@ package directconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type ConfirmPublicVirtualInterfaceInput struct {
 	VirtualInterfaceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConfirmPublicVirtualInterfaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmPublicVirtualInterfaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmPublicVirtualInterfaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualInterfaceId != nil {
+		s.WriteString(schemas.ConfirmPublicVirtualInterfaceRequest_virtualInterfaceId, *v.VirtualInterfaceId)
+	}
 }
 
 type ConfirmPublicVirtualInterfaceOutput struct {
@@ -80,13 +94,36 @@ type ConfirmPublicVirtualInterfaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfirmPublicVirtualInterfaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmPublicVirtualInterfaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmPublicVirtualInterfaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualInterfaceState != "" {
+		s.WriteString(schemas.ConfirmPublicVirtualInterfaceResponse_virtualInterfaceState, string(v.VirtualInterfaceState))
+	}
+}
+func (v *ConfirmPublicVirtualInterfaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfirmPublicVirtualInterfaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfirmPublicVirtualInterfaceResponse_virtualInterfaceState:
+			var ev string
+			if err := d.ReadString(schemas.ConfirmPublicVirtualInterfaceResponse_virtualInterfaceState, &ev); err != nil {
+				return err
+			}
+			v.VirtualInterfaceState = types.VirtualInterfaceState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConfirmPublicVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpConfirmPublicVirtualInterface{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmPublicVirtualInterface, schemas.ConfirmPublicVirtualInterfaceRequest, schemas.ConfirmPublicVirtualInterfaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpConfirmPublicVirtualInterface{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmPublicVirtualInterface, schemas.ConfirmPublicVirtualInterfaceRequest, schemas.ConfirmPublicVirtualInterfaceResponse), output: &ConfirmPublicVirtualInterfaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

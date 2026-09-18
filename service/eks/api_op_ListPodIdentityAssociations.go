@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,30 @@ type ListPodIdentityAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPodIdentityAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPodIdentityAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPodIdentityAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ListPodIdentityAssociationsRequest_clusterName, *v.ClusterName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPodIdentityAssociationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.ListPodIdentityAssociationsRequest_namespace, *v.Namespace)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPodIdentityAssociationsRequest_nextToken, *v.NextToken)
+	}
+	if v.ServiceAccount != nil {
+		s.WriteString(schemas.ListPodIdentityAssociationsRequest_serviceAccount, *v.ServiceAccount)
+	}
+}
+
 type ListPodIdentityAssociationsOutput struct {
 
 	// The list of summarized descriptions of the associations that are in the cluster
@@ -97,13 +123,35 @@ type ListPodIdentityAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPodIdentityAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPodIdentityAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPodIdentityAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePodIdentityAssociationSummaries(s, schemas.ListPodIdentityAssociationsResponse_associations, v.Associations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPodIdentityAssociationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListPodIdentityAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPodIdentityAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPodIdentityAssociationsResponse_associations:
+			return deserializePodIdentityAssociationSummaries(d, schemas.ListPodIdentityAssociationsResponse_associations, &v.Associations)
+		case schemas.ListPodIdentityAssociationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPodIdentityAssociationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPodIdentityAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPodIdentityAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPodIdentityAssociations, schemas.ListPodIdentityAssociationsRequest, schemas.ListPodIdentityAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPodIdentityAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPodIdentityAssociations, schemas.ListPodIdentityAssociationsRequest, schemas.ListPodIdentityAssociationsResponse), output: &ListPodIdentityAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

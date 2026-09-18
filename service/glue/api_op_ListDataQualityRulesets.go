@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,27 @@ type ListDataQualityRulesetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataQualityRulesetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataQualityRulesetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataQualityRulesetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListDataQualityRulesetsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataQualityRulesetsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataQualityRulesetsRequest_NextToken, *v.NextToken)
+	}
+	serializeTagsMap(s, schemas.ListDataQualityRulesetsRequest_Tags, v.Tags)
+}
+
 type ListDataQualityRulesetsOutput struct {
 
 	// A pagination token, if more results are available.
@@ -56,13 +79,35 @@ type ListDataQualityRulesetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataQualityRulesetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataQualityRulesetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataQualityRulesetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataQualityRulesetsResponse_NextToken, *v.NextToken)
+	}
+	serializeDataQualityRulesetList(s, schemas.ListDataQualityRulesetsResponse_Rulesets, v.Rulesets)
+}
+func (v *ListDataQualityRulesetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataQualityRulesetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataQualityRulesetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataQualityRulesetsResponse_NextToken, v.NextToken)
+		case schemas.ListDataQualityRulesetsResponse_Rulesets:
+			return deserializeDataQualityRulesetList(d, schemas.ListDataQualityRulesetsResponse_Rulesets, &v.Rulesets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataQualityRulesetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDataQualityRulesets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataQualityRulesets, schemas.ListDataQualityRulesetsRequest, schemas.ListDataQualityRulesetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDataQualityRulesets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataQualityRulesets, schemas.ListDataQualityRulesetsRequest, schemas.ListDataQualityRulesetsResponse), output: &ListDataQualityRulesetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

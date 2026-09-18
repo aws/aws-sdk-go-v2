@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/keyspaces/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -19,6 +21,30 @@ type AutoScalingPolicy struct {
 	TargetTrackingScalingPolicyConfiguration *TargetTrackingScalingPolicyConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutoScalingPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoScalingPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoScalingPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetTrackingScalingPolicyConfiguration != nil {
+		s.WriteStruct(schemas.AutoScalingPolicy_targetTrackingScalingPolicyConfiguration)
+		v.TargetTrackingScalingPolicyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AutoScalingPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoScalingPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoScalingPolicy_targetTrackingScalingPolicyConfiguration:
+			v.TargetTrackingScalingPolicyConfiguration = &TargetTrackingScalingPolicyConfiguration{}
+			return v.TargetTrackingScalingPolicyConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The optional auto scaling settings for a table with provisioned throughput
@@ -89,6 +115,47 @@ type AutoScalingSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutoScalingSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoScalingSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoScalingSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingDisabled != false {
+		s.WriteBool(schemas.AutoScalingSettings_autoScalingDisabled, v.AutoScalingDisabled)
+	}
+	if v.MaximumUnits != nil {
+		s.WriteInt64(schemas.AutoScalingSettings_maximumUnits, *v.MaximumUnits)
+	}
+	if v.MinimumUnits != nil {
+		s.WriteInt64(schemas.AutoScalingSettings_minimumUnits, *v.MinimumUnits)
+	}
+	if v.ScalingPolicy != nil {
+		s.WriteStruct(schemas.AutoScalingSettings_scalingPolicy)
+		v.ScalingPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AutoScalingSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoScalingSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoScalingSettings_autoScalingDisabled:
+			return d.ReadBool(schemas.AutoScalingSettings_autoScalingDisabled, &v.AutoScalingDisabled)
+		case schemas.AutoScalingSettings_maximumUnits:
+			v.MaximumUnits = new(int64)
+			return d.ReadInt64(schemas.AutoScalingSettings_maximumUnits, v.MaximumUnits)
+		case schemas.AutoScalingSettings_minimumUnits:
+			v.MinimumUnits = new(int64)
+			return d.ReadInt64(schemas.AutoScalingSettings_minimumUnits, v.MinimumUnits)
+		case schemas.AutoScalingSettings_scalingPolicy:
+			v.ScalingPolicy = &AutoScalingPolicy{}
+			return v.ScalingPolicy.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The optional auto scaling capacity settings for a table in provisioned capacity
 // mode.
 type AutoScalingSpecification struct {
@@ -100,6 +167,38 @@ type AutoScalingSpecification struct {
 	WriteCapacityAutoScaling *AutoScalingSettings
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutoScalingSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoScalingSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoScalingSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReadCapacityAutoScaling != nil {
+		s.WriteStruct(schemas.AutoScalingSpecification_readCapacityAutoScaling)
+		v.ReadCapacityAutoScaling.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WriteCapacityAutoScaling != nil {
+		s.WriteStruct(schemas.AutoScalingSpecification_writeCapacityAutoScaling)
+		v.WriteCapacityAutoScaling.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AutoScalingSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoScalingSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoScalingSpecification_readCapacityAutoScaling:
+			v.ReadCapacityAutoScaling = &AutoScalingSettings{}
+			return v.ReadCapacityAutoScaling.Deserialize(d)
+		case schemas.AutoScalingSpecification_writeCapacityAutoScaling:
+			v.WriteCapacityAutoScaling = &AutoScalingSettings{}
+			return v.WriteCapacityAutoScaling.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Amazon Keyspaces has two read/write capacity modes for processing reads and
@@ -144,6 +243,44 @@ type CapacitySpecification struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CapacitySpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacitySpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacitySpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReadCapacityUnits != nil {
+		s.WriteInt64(schemas.CapacitySpecification_readCapacityUnits, *v.ReadCapacityUnits)
+	}
+	if v.ThroughputMode != "" {
+		s.WriteString(schemas.CapacitySpecification_throughputMode, string(v.ThroughputMode))
+	}
+	if v.WriteCapacityUnits != nil {
+		s.WriteInt64(schemas.CapacitySpecification_writeCapacityUnits, *v.WriteCapacityUnits)
+	}
+}
+func (v *CapacitySpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacitySpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacitySpecification_readCapacityUnits:
+			v.ReadCapacityUnits = new(int64)
+			return d.ReadInt64(schemas.CapacitySpecification_readCapacityUnits, v.ReadCapacityUnits)
+		case schemas.CapacitySpecification_throughputMode:
+			var ev string
+			if err := d.ReadString(schemas.CapacitySpecification_throughputMode, &ev); err != nil {
+				return err
+			}
+			v.ThroughputMode = ThroughputMode(ev)
+			return nil
+		case schemas.CapacitySpecification_writeCapacityUnits:
+			v.WriteCapacityUnits = new(int64)
+			return d.ReadInt64(schemas.CapacitySpecification_writeCapacityUnits, v.WriteCapacityUnits)
+		}
+		return nil
+	})
+}
+
 // The read/write throughput capacity mode for a table. The options are:
 //
 //   - throughputMode:PAY_PER_REQUEST and
@@ -186,6 +323,50 @@ type CapacitySpecificationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CapacitySpecificationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacitySpecificationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacitySpecificationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastUpdateToPayPerRequestTimestamp != nil {
+		s.WriteTime(schemas.CapacitySpecificationSummary_lastUpdateToPayPerRequestTimestamp, *v.LastUpdateToPayPerRequestTimestamp)
+	}
+	if v.ReadCapacityUnits != nil {
+		s.WriteInt64(schemas.CapacitySpecificationSummary_readCapacityUnits, *v.ReadCapacityUnits)
+	}
+	if v.ThroughputMode != "" {
+		s.WriteString(schemas.CapacitySpecificationSummary_throughputMode, string(v.ThroughputMode))
+	}
+	if v.WriteCapacityUnits != nil {
+		s.WriteInt64(schemas.CapacitySpecificationSummary_writeCapacityUnits, *v.WriteCapacityUnits)
+	}
+}
+func (v *CapacitySpecificationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacitySpecificationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacitySpecificationSummary_lastUpdateToPayPerRequestTimestamp:
+			v.LastUpdateToPayPerRequestTimestamp = new(time.Time)
+			return d.ReadTime(schemas.CapacitySpecificationSummary_lastUpdateToPayPerRequestTimestamp, v.LastUpdateToPayPerRequestTimestamp)
+		case schemas.CapacitySpecificationSummary_readCapacityUnits:
+			v.ReadCapacityUnits = new(int64)
+			return d.ReadInt64(schemas.CapacitySpecificationSummary_readCapacityUnits, v.ReadCapacityUnits)
+		case schemas.CapacitySpecificationSummary_throughputMode:
+			var ev string
+			if err := d.ReadString(schemas.CapacitySpecificationSummary_throughputMode, &ev); err != nil {
+				return err
+			}
+			v.ThroughputMode = ThroughputMode(ev)
+			return nil
+		case schemas.CapacitySpecificationSummary_writeCapacityUnits:
+			v.WriteCapacityUnits = new(int64)
+			return d.ReadInt64(schemas.CapacitySpecificationSummary_writeCapacityUnits, v.WriteCapacityUnits)
+		}
+		return nil
+	})
+}
+
 // The settings for the CDC stream of a table. For more information about CDC
 // streams, see [Working with change data capture (CDC) streams in Amazon Keyspaces]in the Amazon Keyspaces Developer Guide.
 //
@@ -222,6 +403,55 @@ type CdcSpecification struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CdcSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CdcSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CdcSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PropagateTags != "" {
+		s.WriteString(schemas.CdcSpecification_propagateTags, string(v.PropagateTags))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CdcSpecification_status, string(v.Status))
+	}
+	serializeTagList(s, schemas.CdcSpecification_tags, v.Tags)
+	if v.ViewType != "" {
+		s.WriteString(schemas.CdcSpecification_viewType, string(v.ViewType))
+	}
+}
+func (v *CdcSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CdcSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CdcSpecification_propagateTags:
+			var ev string
+			if err := d.ReadString(schemas.CdcSpecification_propagateTags, &ev); err != nil {
+				return err
+			}
+			v.PropagateTags = CdcPropagateTags(ev)
+			return nil
+		case schemas.CdcSpecification_status:
+			var ev string
+			if err := d.ReadString(schemas.CdcSpecification_status, &ev); err != nil {
+				return err
+			}
+			v.Status = CdcStatus(ev)
+			return nil
+		case schemas.CdcSpecification_tags:
+			return deserializeTagList(d, schemas.CdcSpecification_tags, &v.Tags)
+		case schemas.CdcSpecification_viewType:
+			var ev string
+			if err := d.ReadString(schemas.CdcSpecification_viewType, &ev); err != nil {
+				return err
+			}
+			v.ViewType = ViewType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The settings of the CDC stream of the table. For more information about CDC
 // streams, see [Working with change data capture (CDC) streams in Amazon Keyspaces]in the Amazon Keyspaces Developer Guide.
 //
@@ -252,6 +482,42 @@ type CdcSpecificationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CdcSpecificationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CdcSpecificationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CdcSpecificationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.CdcSpecificationSummary_status, string(v.Status))
+	}
+	if v.ViewType != "" {
+		s.WriteString(schemas.CdcSpecificationSummary_viewType, string(v.ViewType))
+	}
+}
+func (v *CdcSpecificationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CdcSpecificationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CdcSpecificationSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.CdcSpecificationSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = CdcStatus(ev)
+			return nil
+		case schemas.CdcSpecificationSummary_viewType:
+			var ev string
+			if err := d.ReadString(schemas.CdcSpecificationSummary_viewType, &ev); err != nil {
+				return err
+			}
+			v.ViewType = ViewType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The client-side timestamp setting of the table.
 //
 // For more information, see [How it works: Amazon Keyspaces client-side timestamps] in the Amazon Keyspaces Developer Guide.
@@ -265,6 +531,32 @@ type ClientSideTimestamps struct {
 	Status ClientSideTimestampsStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *ClientSideTimestamps) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientSideTimestamps)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientSideTimestamps) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.ClientSideTimestamps_status, string(v.Status))
+	}
+}
+func (v *ClientSideTimestamps) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientSideTimestamps, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientSideTimestamps_status:
+			var ev string
+			if err := d.ReadString(schemas.ClientSideTimestamps_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ClientSideTimestampsStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The optional clustering column portion of your primary key determines how the
@@ -282,6 +574,38 @@ type ClusteringKey struct {
 	OrderBy SortOrder
 
 	noSmithyDocumentSerde
+}
+
+func (v *ClusteringKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusteringKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusteringKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ClusteringKey_name, *v.Name)
+	}
+	if v.OrderBy != "" {
+		s.WriteString(schemas.ClusteringKey_orderBy, string(v.OrderBy))
+	}
+}
+func (v *ClusteringKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusteringKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusteringKey_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ClusteringKey_name, v.Name)
+		case schemas.ClusteringKey_orderBy:
+			var ev string
+			if err := d.ReadString(schemas.ClusteringKey_orderBy, &ev); err != nil {
+				return err
+			}
+			v.OrderBy = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The names and data types of regular columns.
@@ -303,6 +627,34 @@ type ColumnDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ColumnDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ColumnDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ColumnDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ColumnDefinition_name, *v.Name)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ColumnDefinition_type, *v.Type)
+	}
+}
+func (v *ColumnDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ColumnDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ColumnDefinition_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ColumnDefinition_name, v.Name)
+		case schemas.ColumnDefinition_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ColumnDefinition_type, v.Type)
+		}
+		return nil
+	})
+}
+
 // An optional comment that describes the table.
 type Comment struct {
 
@@ -312,6 +664,28 @@ type Comment struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Comment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Comment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Comment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.Comment_message, *v.Message)
+	}
+}
+func (v *Comment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Comment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Comment_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.Comment_message, v.Message)
+		}
+		return nil
+	})
 }
 
 // Amazon Keyspaces encrypts and decrypts the table data at rest transparently and
@@ -361,6 +735,38 @@ type EncryptionSpecification struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EncryptionSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EncryptionSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.EncryptionSpecification_kmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.EncryptionSpecification_type, string(v.Type))
+	}
+}
+func (v *EncryptionSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EncryptionSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EncryptionSpecification_kmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.EncryptionSpecification_kmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.EncryptionSpecification_type:
+			var ev string
+			if err := d.ReadString(schemas.EncryptionSpecification_type, &ev); err != nil {
+				return err
+			}
+			v.Type = EncryptionType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A field definition consists out of a name and a type.
 type FieldDefinition struct {
 
@@ -380,6 +786,34 @@ type FieldDefinition struct {
 	Type *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FieldDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FieldDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FieldDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.FieldDefinition_name, *v.Name)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.FieldDefinition_type, *v.Type)
+	}
+}
+func (v *FieldDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FieldDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FieldDefinition_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FieldDefinition_name, v.Name)
+		case schemas.FieldDefinition_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.FieldDefinition_type, v.Type)
+		}
+		return nil
+	})
 }
 
 // Represents the properties of a keyspace.
@@ -409,6 +843,47 @@ type KeyspaceSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KeyspaceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyspaceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeyspaceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyspaceName != nil {
+		s.WriteString(schemas.KeyspaceSummary_keyspaceName, *v.KeyspaceName)
+	}
+	serializeRegionList(s, schemas.KeyspaceSummary_replicationRegions, v.ReplicationRegions)
+	if v.ReplicationStrategy != "" {
+		s.WriteString(schemas.KeyspaceSummary_replicationStrategy, string(v.ReplicationStrategy))
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.KeyspaceSummary_resourceArn, *v.ResourceArn)
+	}
+}
+func (v *KeyspaceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeyspaceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeyspaceSummary_keyspaceName:
+			v.KeyspaceName = new(string)
+			return d.ReadString(schemas.KeyspaceSummary_keyspaceName, v.KeyspaceName)
+		case schemas.KeyspaceSummary_replicationRegions:
+			return deserializeRegionList(d, schemas.KeyspaceSummary_replicationRegions, &v.ReplicationRegions)
+		case schemas.KeyspaceSummary_replicationStrategy:
+			var ev string
+			if err := d.ReadString(schemas.KeyspaceSummary_replicationStrategy, &ev); err != nil {
+				return err
+			}
+			v.ReplicationStrategy = Rs(ev)
+			return nil
+		case schemas.KeyspaceSummary_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.KeyspaceSummary_resourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
+
 // The partition key portion of the primary key is required and determines how
 // Amazon Keyspaces stores the data. The partition key can be a single column, or
 // it can be a compound value composed of two or more columns.
@@ -420,6 +895,28 @@ type PartitionKey struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PartitionKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PartitionKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PartitionKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.PartitionKey_name, *v.Name)
+	}
+}
+func (v *PartitionKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PartitionKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PartitionKey_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PartitionKey_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Point-in-time recovery (PITR) helps protect your Amazon Keyspaces tables from
@@ -443,6 +940,32 @@ type PointInTimeRecovery struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PointInTimeRecovery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PointInTimeRecovery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PointInTimeRecovery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.PointInTimeRecovery_status, string(v.Status))
+	}
+}
+func (v *PointInTimeRecovery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PointInTimeRecovery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PointInTimeRecovery_status:
+			var ev string
+			if err := d.ReadString(schemas.PointInTimeRecovery_status, &ev); err != nil {
+				return err
+			}
+			v.Status = PointInTimeRecoveryStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The point-in-time recovery status of the specified table.
 type PointInTimeRecoverySummary struct {
 
@@ -457,6 +980,38 @@ type PointInTimeRecoverySummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PointInTimeRecoverySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PointInTimeRecoverySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PointInTimeRecoverySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EarliestRestorableTimestamp != nil {
+		s.WriteTime(schemas.PointInTimeRecoverySummary_earliestRestorableTimestamp, *v.EarliestRestorableTimestamp)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.PointInTimeRecoverySummary_status, string(v.Status))
+	}
+}
+func (v *PointInTimeRecoverySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PointInTimeRecoverySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PointInTimeRecoverySummary_earliestRestorableTimestamp:
+			v.EarliestRestorableTimestamp = new(time.Time)
+			return d.ReadTime(schemas.PointInTimeRecoverySummary_earliestRestorableTimestamp, v.EarliestRestorableTimestamp)
+		case schemas.PointInTimeRecoverySummary_status:
+			var ev string
+			if err := d.ReadString(schemas.PointInTimeRecoverySummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = PointInTimeRecoveryStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The auto scaling settings of a multi-Region table in the specified Amazon Web
 // Services Region.
 type ReplicaAutoScalingSpecification struct {
@@ -469,6 +1024,36 @@ type ReplicaAutoScalingSpecification struct {
 	Region *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReplicaAutoScalingSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicaAutoScalingSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicaAutoScalingSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingSpecification != nil {
+		s.WriteStruct(schemas.ReplicaAutoScalingSpecification_autoScalingSpecification)
+		v.AutoScalingSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.ReplicaAutoScalingSpecification_region, *v.Region)
+	}
+}
+func (v *ReplicaAutoScalingSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicaAutoScalingSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicaAutoScalingSpecification_autoScalingSpecification:
+			v.AutoScalingSpecification = &AutoScalingSpecification{}
+			return v.AutoScalingSpecification.Deserialize(d)
+		case schemas.ReplicaAutoScalingSpecification_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.ReplicaAutoScalingSpecification_region, v.Region)
+		}
+		return nil
+	})
 }
 
 // The Amazon Web Services Region specific settings of a multi-Region table.
@@ -499,6 +1084,42 @@ type ReplicaSpecification struct {
 	ReadCapacityUnits *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReplicaSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicaSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicaSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReadCapacityAutoScaling != nil {
+		s.WriteStruct(schemas.ReplicaSpecification_readCapacityAutoScaling)
+		v.ReadCapacityAutoScaling.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReadCapacityUnits != nil {
+		s.WriteInt64(schemas.ReplicaSpecification_readCapacityUnits, *v.ReadCapacityUnits)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.ReplicaSpecification_region, *v.Region)
+	}
+}
+func (v *ReplicaSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicaSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicaSpecification_readCapacityAutoScaling:
+			v.ReadCapacityAutoScaling = &AutoScalingSettings{}
+			return v.ReadCapacityAutoScaling.Deserialize(d)
+		case schemas.ReplicaSpecification_readCapacityUnits:
+			v.ReadCapacityUnits = new(int64)
+			return d.ReadInt64(schemas.ReplicaSpecification_readCapacityUnits, v.ReadCapacityUnits)
+		case schemas.ReplicaSpecification_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.ReplicaSpecification_region, v.Region)
+		}
+		return nil
+	})
 }
 
 // The Region-specific settings of a multi-Region table in the specified Amazon
@@ -538,6 +1159,54 @@ type ReplicaSpecificationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReplicaSpecificationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicaSpecificationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicaSpecificationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacitySpecification != nil {
+		s.WriteStruct(schemas.ReplicaSpecificationSummary_capacitySpecification)
+		v.CapacitySpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.ReplicaSpecificationSummary_region, *v.Region)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ReplicaSpecificationSummary_status, string(v.Status))
+	}
+	if v.WarmThroughputSpecification != nil {
+		s.WriteStruct(schemas.ReplicaSpecificationSummary_warmThroughputSpecification)
+		v.WarmThroughputSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ReplicaSpecificationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicaSpecificationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicaSpecificationSummary_capacitySpecification:
+			v.CapacitySpecification = &CapacitySpecificationSummary{}
+			return v.CapacitySpecification.Deserialize(d)
+		case schemas.ReplicaSpecificationSummary_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.ReplicaSpecificationSummary_region, v.Region)
+		case schemas.ReplicaSpecificationSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.ReplicaSpecificationSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = TableStatus(ev)
+			return nil
+		case schemas.ReplicaSpecificationSummary_warmThroughputSpecification:
+			v.WarmThroughputSpecification = &WarmThroughputSpecificationSummary{}
+			return v.WarmThroughputSpecification.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	This shows the summary status of the keyspace after a new Amazon Web Services
 //
 // Region was added.
@@ -561,6 +1230,44 @@ type ReplicationGroupStatus struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReplicationGroupStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicationGroupStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicationGroupStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyspaceStatus != "" {
+		s.WriteString(schemas.ReplicationGroupStatus_keyspaceStatus, string(v.KeyspaceStatus))
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.ReplicationGroupStatus_region, *v.Region)
+	}
+	if v.TablesReplicationProgress != nil {
+		s.WriteString(schemas.ReplicationGroupStatus_tablesReplicationProgress, *v.TablesReplicationProgress)
+	}
+}
+func (v *ReplicationGroupStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicationGroupStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicationGroupStatus_keyspaceStatus:
+			var ev string
+			if err := d.ReadString(schemas.ReplicationGroupStatus_keyspaceStatus, &ev); err != nil {
+				return err
+			}
+			v.KeyspaceStatus = KeyspaceStatus(ev)
+			return nil
+		case schemas.ReplicationGroupStatus_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.ReplicationGroupStatus_region, v.Region)
+		case schemas.ReplicationGroupStatus_tablesReplicationProgress:
+			v.TablesReplicationProgress = new(string)
+			return d.ReadString(schemas.ReplicationGroupStatus_tablesReplicationProgress, v.TablesReplicationProgress)
+		}
+		return nil
+	})
+}
+
 // The replication specification of the keyspace includes:
 //
 //   - regionList - the Amazon Web Services Regions where the keyspace is
@@ -580,6 +1287,35 @@ type ReplicationSpecification struct {
 	RegionList []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReplicationSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicationSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicationSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRegionList(s, schemas.ReplicationSpecification_regionList, v.RegionList)
+	if v.ReplicationStrategy != "" {
+		s.WriteString(schemas.ReplicationSpecification_replicationStrategy, string(v.ReplicationStrategy))
+	}
+}
+func (v *ReplicationSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicationSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicationSpecification_regionList:
+			return deserializeRegionList(d, schemas.ReplicationSpecification_regionList, &v.RegionList)
+		case schemas.ReplicationSpecification_replicationStrategy:
+			var ev string
+			if err := d.ReadString(schemas.ReplicationSpecification_replicationStrategy, &ev); err != nil {
+				return err
+			}
+			v.ReplicationStrategy = Rs(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes the schema of the table.
@@ -605,6 +1341,34 @@ type SchemaDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SchemaDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SchemaDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SchemaDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeColumnDefinitionList(s, schemas.SchemaDefinition_allColumns, v.AllColumns)
+	serializeClusteringKeyList(s, schemas.SchemaDefinition_clusteringKeys, v.ClusteringKeys)
+	serializePartitionKeyList(s, schemas.SchemaDefinition_partitionKeys, v.PartitionKeys)
+	serializeStaticColumnList(s, schemas.SchemaDefinition_staticColumns, v.StaticColumns)
+}
+func (v *SchemaDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SchemaDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SchemaDefinition_allColumns:
+			return deserializeColumnDefinitionList(d, schemas.SchemaDefinition_allColumns, &v.AllColumns)
+		case schemas.SchemaDefinition_clusteringKeys:
+			return deserializeClusteringKeyList(d, schemas.SchemaDefinition_clusteringKeys, &v.ClusteringKeys)
+		case schemas.SchemaDefinition_partitionKeys:
+			return deserializePartitionKeyList(d, schemas.SchemaDefinition_partitionKeys, &v.PartitionKeys)
+		case schemas.SchemaDefinition_staticColumns:
+			return deserializeStaticColumnList(d, schemas.SchemaDefinition_staticColumns, &v.StaticColumns)
+		}
+		return nil
+	})
+}
+
 // The static columns of the table. Static columns store values that are shared by
 // all rows in the same partition.
 type StaticColumn struct {
@@ -615,6 +1379,28 @@ type StaticColumn struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StaticColumn) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StaticColumn)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StaticColumn) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.StaticColumn_name, *v.Name)
+	}
+}
+func (v *StaticColumn) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StaticColumn, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StaticColumn_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StaticColumn_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Returns the name of the specified table, the keyspace it is stored in, and the
@@ -638,6 +1424,40 @@ type TableSummary struct {
 	TableName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TableSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TableSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyspaceName != nil {
+		s.WriteString(schemas.TableSummary_keyspaceName, *v.KeyspaceName)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.TableSummary_resourceArn, *v.ResourceArn)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.TableSummary_tableName, *v.TableName)
+	}
+}
+func (v *TableSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TableSummary_keyspaceName:
+			v.KeyspaceName = new(string)
+			return d.ReadString(schemas.TableSummary_keyspaceName, v.KeyspaceName)
+		case schemas.TableSummary_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.TableSummary_resourceArn, v.ResourceArn)
+		case schemas.TableSummary_tableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.TableSummary_tableName, v.TableName)
+		}
+		return nil
+	})
 }
 
 // Describes a tag. A tag is a key-value pair. You can add up to 50 tags to a
@@ -667,6 +1487,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_key, v.Key)
+		case schemas.Tag_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // The auto scaling policy that scales a table based on the ratio of consumed to
@@ -706,6 +1554,40 @@ type TargetTrackingScalingPolicyConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TargetTrackingScalingPolicyConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetTrackingScalingPolicyConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetTrackingScalingPolicyConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisableScaleIn != false {
+		s.WriteBool(schemas.TargetTrackingScalingPolicyConfiguration_disableScaleIn, v.DisableScaleIn)
+	}
+	if v.ScaleInCooldown != 0 {
+		s.WriteInt32(schemas.TargetTrackingScalingPolicyConfiguration_scaleInCooldown, v.ScaleInCooldown)
+	}
+	if v.ScaleOutCooldown != 0 {
+		s.WriteInt32(schemas.TargetTrackingScalingPolicyConfiguration_scaleOutCooldown, v.ScaleOutCooldown)
+	}
+	s.WriteFloat64(schemas.TargetTrackingScalingPolicyConfiguration_targetValue, v.TargetValue)
+}
+func (v *TargetTrackingScalingPolicyConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetTrackingScalingPolicyConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetTrackingScalingPolicyConfiguration_disableScaleIn:
+			return d.ReadBool(schemas.TargetTrackingScalingPolicyConfiguration_disableScaleIn, &v.DisableScaleIn)
+		case schemas.TargetTrackingScalingPolicyConfiguration_scaleInCooldown:
+			return d.ReadInt32(schemas.TargetTrackingScalingPolicyConfiguration_scaleInCooldown, &v.ScaleInCooldown)
+		case schemas.TargetTrackingScalingPolicyConfiguration_scaleOutCooldown:
+			return d.ReadInt32(schemas.TargetTrackingScalingPolicyConfiguration_scaleOutCooldown, &v.ScaleOutCooldown)
+		case schemas.TargetTrackingScalingPolicyConfiguration_targetValue:
+			return d.ReadFloat64(schemas.TargetTrackingScalingPolicyConfiguration_targetValue, &v.TargetValue)
+		}
+		return nil
+	})
+}
+
 // Enable custom Time to Live (TTL) settings for rows and columns without setting
 // a TTL default for the specified table.
 //
@@ -720,6 +1602,32 @@ type TimeToLive struct {
 	Status TimeToLiveStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *TimeToLive) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimeToLive)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimeToLive) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.TimeToLive_status, string(v.Status))
+	}
+}
+func (v *TimeToLive) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimeToLive, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimeToLive_status:
+			var ev string
+			if err := d.ReadString(schemas.TimeToLive_status, &ev); err != nil {
+				return err
+			}
+			v.Status = TimeToLiveStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Specifies the warm throughput settings for a table. Pre-warming a table by
@@ -742,6 +1650,34 @@ type WarmThroughputSpecification struct {
 	WriteUnitsPerSecond *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *WarmThroughputSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WarmThroughputSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WarmThroughputSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReadUnitsPerSecond != nil {
+		s.WriteInt64(schemas.WarmThroughputSpecification_readUnitsPerSecond, *v.ReadUnitsPerSecond)
+	}
+	if v.WriteUnitsPerSecond != nil {
+		s.WriteInt64(schemas.WarmThroughputSpecification_writeUnitsPerSecond, *v.WriteUnitsPerSecond)
+	}
+}
+func (v *WarmThroughputSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WarmThroughputSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WarmThroughputSpecification_readUnitsPerSecond:
+			v.ReadUnitsPerSecond = new(int64)
+			return d.ReadInt64(schemas.WarmThroughputSpecification_readUnitsPerSecond, v.ReadUnitsPerSecond)
+		case schemas.WarmThroughputSpecification_writeUnitsPerSecond:
+			v.WriteUnitsPerSecond = new(int64)
+			return d.ReadInt64(schemas.WarmThroughputSpecification_writeUnitsPerSecond, v.WriteUnitsPerSecond)
+		}
+		return nil
+	})
 }
 
 // Contains the current warm throughput settings for a table, including the
@@ -769,6 +1705,44 @@ type WarmThroughputSpecificationSummary struct {
 	WriteUnitsPerSecond *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *WarmThroughputSpecificationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WarmThroughputSpecificationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WarmThroughputSpecificationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReadUnitsPerSecond != nil {
+		s.WriteInt64(schemas.WarmThroughputSpecificationSummary_readUnitsPerSecond, *v.ReadUnitsPerSecond)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.WarmThroughputSpecificationSummary_status, string(v.Status))
+	}
+	if v.WriteUnitsPerSecond != nil {
+		s.WriteInt64(schemas.WarmThroughputSpecificationSummary_writeUnitsPerSecond, *v.WriteUnitsPerSecond)
+	}
+}
+func (v *WarmThroughputSpecificationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WarmThroughputSpecificationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WarmThroughputSpecificationSummary_readUnitsPerSecond:
+			v.ReadUnitsPerSecond = new(int64)
+			return d.ReadInt64(schemas.WarmThroughputSpecificationSummary_readUnitsPerSecond, v.ReadUnitsPerSecond)
+		case schemas.WarmThroughputSpecificationSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.WarmThroughputSpecificationSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = WarmThroughputStatus(ev)
+			return nil
+		case schemas.WarmThroughputSpecificationSummary_writeUnitsPerSecond:
+			v.WriteUnitsPerSecond = new(int64)
+			return d.ReadInt64(schemas.WarmThroughputSpecificationSummary_writeUnitsPerSecond, v.WriteUnitsPerSecond)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -4,6 +4,8 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetRequestValidatorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRequestValidatorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRequestValidatorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRequestValidatorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestValidatorId != nil {
+		s.WriteString(schemas.GetRequestValidatorRequest_requestValidatorId, *v.RequestValidatorId)
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.GetRequestValidatorRequest_restApiId, *v.RestApiId)
+	}
+}
+
 // A set of validation rules for incoming Method requests.
 type GetRequestValidatorOutput struct {
 
@@ -62,13 +79,48 @@ type GetRequestValidatorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRequestValidatorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestValidator)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRequestValidatorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.RequestValidator_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RequestValidator_name, *v.Name)
+	}
+	if v.ValidateRequestBody != false {
+		s.WriteBool(schemas.RequestValidator_validateRequestBody, v.ValidateRequestBody)
+	}
+	if v.ValidateRequestParameters != false {
+		s.WriteBool(schemas.RequestValidator_validateRequestParameters, v.ValidateRequestParameters)
+	}
+}
+func (v *GetRequestValidatorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestValidator, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestValidator_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RequestValidator_id, v.Id)
+		case schemas.RequestValidator_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RequestValidator_name, v.Name)
+		case schemas.RequestValidator_validateRequestBody:
+			return d.ReadBool(schemas.RequestValidator_validateRequestBody, &v.ValidateRequestBody)
+		case schemas.RequestValidator_validateRequestParameters:
+			return d.ReadBool(schemas.RequestValidator_validateRequestParameters, &v.ValidateRequestParameters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRequestValidatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRequestValidator{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRequestValidator, schemas.GetRequestValidatorRequest, schemas.RequestValidator)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRequestValidator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRequestValidator, schemas.GetRequestValidatorRequest, schemas.RequestValidator), output: &GetRequestValidatorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

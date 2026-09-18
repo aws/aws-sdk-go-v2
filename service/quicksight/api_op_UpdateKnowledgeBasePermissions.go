@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,23 @@ type UpdateKnowledgeBasePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateKnowledgeBasePermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateKnowledgeBasePermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateKnowledgeBasePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateKnowledgeBasePermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeResourcePermissionList(s, schemas.UpdateKnowledgeBasePermissionsRequest_GrantPermissions, v.GrantPermissions)
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.UpdateKnowledgeBasePermissionsRequest_KnowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	serializeResourcePermissionList(s, schemas.UpdateKnowledgeBasePermissionsRequest_RevokePermissions, v.RevokePermissions)
+}
+
 type UpdateKnowledgeBasePermissionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the knowledge base.
@@ -72,13 +91,53 @@ type UpdateKnowledgeBasePermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateKnowledgeBasePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateKnowledgeBasePermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateKnowledgeBasePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnowledgeBaseArn != nil {
+		s.WriteString(schemas.UpdateKnowledgeBasePermissionsResponse_KnowledgeBaseArn, *v.KnowledgeBaseArn)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.UpdateKnowledgeBasePermissionsResponse_KnowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	serializeResourcePermissionList(s, schemas.UpdateKnowledgeBasePermissionsResponse_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateKnowledgeBasePermissionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != nil {
+		s.WriteInt32(schemas.UpdateKnowledgeBasePermissionsResponse_Status, *v.Status)
+	}
+}
+func (v *UpdateKnowledgeBasePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateKnowledgeBasePermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateKnowledgeBasePermissionsResponse_KnowledgeBaseArn:
+			v.KnowledgeBaseArn = new(string)
+			return d.ReadString(schemas.UpdateKnowledgeBasePermissionsResponse_KnowledgeBaseArn, v.KnowledgeBaseArn)
+		case schemas.UpdateKnowledgeBasePermissionsResponse_KnowledgeBaseId:
+			v.KnowledgeBaseId = new(string)
+			return d.ReadString(schemas.UpdateKnowledgeBasePermissionsResponse_KnowledgeBaseId, v.KnowledgeBaseId)
+		case schemas.UpdateKnowledgeBasePermissionsResponse_Permissions:
+			return deserializeResourcePermissionList(d, schemas.UpdateKnowledgeBasePermissionsResponse_Permissions, &v.Permissions)
+		case schemas.UpdateKnowledgeBasePermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateKnowledgeBasePermissionsResponse_RequestId, v.RequestId)
+		case schemas.UpdateKnowledgeBasePermissionsResponse_Status:
+			v.Status = new(int32)
+			return d.ReadInt32(schemas.UpdateKnowledgeBasePermissionsResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateKnowledgeBasePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateKnowledgeBasePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKnowledgeBasePermissions, schemas.UpdateKnowledgeBasePermissionsRequest, schemas.UpdateKnowledgeBasePermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateKnowledgeBasePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKnowledgeBasePermissions, schemas.UpdateKnowledgeBasePermissionsRequest, schemas.UpdateKnowledgeBasePermissionsResponse), output: &UpdateKnowledgeBasePermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

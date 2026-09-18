@@ -4,7 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,27 @@ type UpdateDomainNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainNameInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainNameRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainNameInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpdateDomainNameRequest_DomainName, *v.DomainName)
+	}
+	serializeDomainNameConfigurations(s, schemas.UpdateDomainNameRequest_DomainNameConfigurations, v.DomainNameConfigurations)
+	if v.MutualTlsAuthentication != nil {
+		s.WriteStruct(schemas.UpdateDomainNameRequest_MutualTlsAuthentication)
+		v.MutualTlsAuthentication.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoutingMode != "" {
+		s.WriteString(schemas.UpdateDomainNameRequest_RoutingMode, string(v.RoutingMode))
+	}
+}
+
 type UpdateDomainNameOutput struct {
 
 	// The API mapping selection expression.
@@ -73,13 +96,68 @@ type UpdateDomainNameOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainNameOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainNameResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainNameOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiMappingSelectionExpression != nil {
+		s.WriteString(schemas.UpdateDomainNameResponse_ApiMappingSelectionExpression, *v.ApiMappingSelectionExpression)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpdateDomainNameResponse_DomainName, *v.DomainName)
+	}
+	if v.DomainNameArn != nil {
+		s.WriteString(schemas.UpdateDomainNameResponse_DomainNameArn, *v.DomainNameArn)
+	}
+	serializeDomainNameConfigurations(s, schemas.UpdateDomainNameResponse_DomainNameConfigurations, v.DomainNameConfigurations)
+	if v.MutualTlsAuthentication != nil {
+		s.WriteStruct(schemas.UpdateDomainNameResponse_MutualTlsAuthentication)
+		v.MutualTlsAuthentication.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoutingMode != "" {
+		s.WriteString(schemas.UpdateDomainNameResponse_RoutingMode, string(v.RoutingMode))
+	}
+	serializeTags(s, schemas.UpdateDomainNameResponse_Tags, v.Tags)
+}
+func (v *UpdateDomainNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDomainNameResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDomainNameResponse_ApiMappingSelectionExpression:
+			v.ApiMappingSelectionExpression = new(string)
+			return d.ReadString(schemas.UpdateDomainNameResponse_ApiMappingSelectionExpression, v.ApiMappingSelectionExpression)
+		case schemas.UpdateDomainNameResponse_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.UpdateDomainNameResponse_DomainName, v.DomainName)
+		case schemas.UpdateDomainNameResponse_DomainNameArn:
+			v.DomainNameArn = new(string)
+			return d.ReadString(schemas.UpdateDomainNameResponse_DomainNameArn, v.DomainNameArn)
+		case schemas.UpdateDomainNameResponse_DomainNameConfigurations:
+			return deserializeDomainNameConfigurations(d, schemas.UpdateDomainNameResponse_DomainNameConfigurations, &v.DomainNameConfigurations)
+		case schemas.UpdateDomainNameResponse_MutualTlsAuthentication:
+			v.MutualTlsAuthentication = &types.MutualTlsAuthentication{}
+			return v.MutualTlsAuthentication.Deserialize(d)
+		case schemas.UpdateDomainNameResponse_RoutingMode:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDomainNameResponse_RoutingMode, &ev); err != nil {
+				return err
+			}
+			v.RoutingMode = types.RoutingMode(ev)
+			return nil
+		case schemas.UpdateDomainNameResponse_Tags:
+			return deserializeTags(d, schemas.UpdateDomainNameResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDomainNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDomainName{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomainName, schemas.UpdateDomainNameRequest, schemas.UpdateDomainNameResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDomainName{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomainName, schemas.UpdateDomainNameRequest, schemas.UpdateDomainNameResponse), output: &UpdateDomainNameOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

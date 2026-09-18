@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,17 @@ type PutDeliverabilityDashboardOptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDeliverabilityDashboardOptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDeliverabilityDashboardOptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDeliverabilityDashboardOptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.PutDeliverabilityDashboardOptionRequest_DashboardEnabled, v.DashboardEnabled)
+	serializeDomainDeliverabilityTrackingOptions(s, schemas.PutDeliverabilityDashboardOptionRequest_SubscribedDomains, v.SubscribedDomains)
+}
+
 // A response that indicates whether the Deliverability dashboard is enabled.
 type PutDeliverabilityDashboardOptionOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -68,13 +81,26 @@ type PutDeliverabilityDashboardOptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDeliverabilityDashboardOptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDeliverabilityDashboardOptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDeliverabilityDashboardOptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutDeliverabilityDashboardOptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutDeliverabilityDashboardOptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutDeliverabilityDashboardOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutDeliverabilityDashboardOption{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDeliverabilityDashboardOption, schemas.PutDeliverabilityDashboardOptionRequest, schemas.PutDeliverabilityDashboardOptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutDeliverabilityDashboardOption{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDeliverabilityDashboardOption, schemas.PutDeliverabilityDashboardOptionRequest, schemas.PutDeliverabilityDashboardOptionResponse), output: &PutDeliverabilityDashboardOptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

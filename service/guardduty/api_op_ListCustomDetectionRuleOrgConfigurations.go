@@ -5,7 +5,9 @@ package guardduty
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListCustomDetectionRuleOrgConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomDetectionRuleOrgConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomDetectionRuleOrgConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomDetectionRuleOrgConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCustomDetectionRuleOrgConfigurationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomDetectionRuleOrgConfigurationsRequest_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListCustomDetectionRuleOrgConfigurationsRequest_Status, string(v.Status))
+	}
+}
+
 type ListCustomDetectionRuleOrgConfigurationsOutput struct {
 
 	// A list of organization configurations for custom detection rules.
@@ -59,13 +79,35 @@ type ListCustomDetectionRuleOrgConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomDetectionRuleOrgConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomDetectionRuleOrgConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomDetectionRuleOrgConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDetectionRuleOrgConfigurationSummaryList(s, schemas.ListCustomDetectionRuleOrgConfigurationsResponse_Configurations, v.Configurations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomDetectionRuleOrgConfigurationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCustomDetectionRuleOrgConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomDetectionRuleOrgConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomDetectionRuleOrgConfigurationsResponse_Configurations:
+			return deserializeDetectionRuleOrgConfigurationSummaryList(d, schemas.ListCustomDetectionRuleOrgConfigurationsResponse_Configurations, &v.Configurations)
+		case schemas.ListCustomDetectionRuleOrgConfigurationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCustomDetectionRuleOrgConfigurationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCustomDetectionRuleOrgConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCustomDetectionRuleOrgConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomDetectionRuleOrgConfigurations, schemas.ListCustomDetectionRuleOrgConfigurationsRequest, schemas.ListCustomDetectionRuleOrgConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCustomDetectionRuleOrgConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomDetectionRuleOrgConfigurations, schemas.ListCustomDetectionRuleOrgConfigurationsRequest, schemas.ListCustomDetectionRuleOrgConfigurationsResponse), output: &ListCustomDetectionRuleOrgConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

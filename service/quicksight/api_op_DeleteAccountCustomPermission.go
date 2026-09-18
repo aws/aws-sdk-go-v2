@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteAccountCustomPermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccountCustomPermissionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccountCustomPermissionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccountCustomPermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteAccountCustomPermissionRequest_AwsAccountId, *v.AwsAccountId)
+	}
+}
+
 type DeleteAccountCustomPermissionOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -48,13 +62,37 @@ type DeleteAccountCustomPermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccountCustomPermissionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccountCustomPermissionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccountCustomPermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteAccountCustomPermissionResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DeleteAccountCustomPermissionResponse_Status, v.Status)
+	}
+}
+func (v *DeleteAccountCustomPermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAccountCustomPermissionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAccountCustomPermissionResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteAccountCustomPermissionResponse_RequestId, v.RequestId)
+		case schemas.DeleteAccountCustomPermissionResponse_Status:
+			return d.ReadInt32(schemas.DeleteAccountCustomPermissionResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAccountCustomPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAccountCustomPermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccountCustomPermission, schemas.DeleteAccountCustomPermissionRequest, schemas.DeleteAccountCustomPermissionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAccountCustomPermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccountCustomPermission, schemas.DeleteAccountCustomPermissionRequest, schemas.DeleteAccountCustomPermissionResponse), output: &DeleteAccountCustomPermissionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

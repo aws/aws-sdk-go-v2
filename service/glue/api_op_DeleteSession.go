@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type DeleteSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteSessionRequest_Id, *v.Id)
+	}
+	if v.RequestOrigin != nil {
+		s.WriteString(schemas.DeleteSessionRequest_RequestOrigin, *v.RequestOrigin)
+	}
+}
+
 type DeleteSessionOutput struct {
 
 	// Returns the ID of the deleted session.
@@ -47,13 +64,32 @@ type DeleteSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteSessionResponse_Id, *v.Id)
+	}
+}
+func (v *DeleteSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSessionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteSessionResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSession, schemas.DeleteSessionRequest, schemas.DeleteSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSession, schemas.DeleteSessionRequest, schemas.DeleteSessionResponse), output: &DeleteSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type UpdateSPICECapacityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSPICECapacityConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSPICECapacityConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSPICECapacityConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateSPICECapacityConfigurationRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.PurchaseMode != "" {
+		s.WriteString(schemas.UpdateSPICECapacityConfigurationRequest_PurchaseMode, string(v.PurchaseMode))
+	}
+}
+
 type UpdateSPICECapacityConfigurationOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -61,13 +78,37 @@ type UpdateSPICECapacityConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSPICECapacityConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSPICECapacityConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSPICECapacityConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateSPICECapacityConfigurationResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateSPICECapacityConfigurationResponse_Status, v.Status)
+	}
+}
+func (v *UpdateSPICECapacityConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSPICECapacityConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSPICECapacityConfigurationResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateSPICECapacityConfigurationResponse_RequestId, v.RequestId)
+		case schemas.UpdateSPICECapacityConfigurationResponse_Status:
+			return d.ReadInt32(schemas.UpdateSPICECapacityConfigurationResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSPICECapacityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSPICECapacityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSPICECapacityConfiguration, schemas.UpdateSPICECapacityConfigurationRequest, schemas.UpdateSPICECapacityConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSPICECapacityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSPICECapacityConfiguration, schemas.UpdateSPICECapacityConfigurationRequest, schemas.UpdateSPICECapacityConfigurationResponse), output: &UpdateSPICECapacityConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

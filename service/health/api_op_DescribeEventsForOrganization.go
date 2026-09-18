@@ -5,7 +5,9 @@ package health
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/health/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/health/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,29 @@ type DescribeEventsForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEventsForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEventsForOrganizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEventsForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.DescribeEventsForOrganizationRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Locale != nil {
+		s.WriteString(schemas.DescribeEventsForOrganizationRequest_locale, *v.Locale)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeEventsForOrganizationRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEventsForOrganizationRequest_nextToken, *v.NextToken)
+	}
+}
+
 type DescribeEventsForOrganizationOutput struct {
 
 	// The events that match the specified filter criteria.
@@ -96,13 +121,35 @@ type DescribeEventsForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEventsForOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEventsForOrganizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEventsForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOrganizationEventList(s, schemas.DescribeEventsForOrganizationResponse_events, v.Events)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEventsForOrganizationResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeEventsForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEventsForOrganizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEventsForOrganizationResponse_events:
+			return deserializeOrganizationEventList(d, schemas.DescribeEventsForOrganizationResponse_events, &v.Events)
+		case schemas.DescribeEventsForOrganizationResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeEventsForOrganizationResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEventsForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEventsForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventsForOrganization, schemas.DescribeEventsForOrganizationRequest, schemas.DescribeEventsForOrganizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEventsForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventsForOrganization, schemas.DescribeEventsForOrganizationRequest, schemas.DescribeEventsForOrganizationResponse), output: &DescribeEventsForOrganizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

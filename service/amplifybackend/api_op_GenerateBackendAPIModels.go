@@ -4,6 +4,8 @@ package amplifybackend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type GenerateBackendAPIModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateBackendAPIModelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateBackendAPIModelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateBackendAPIModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.GenerateBackendAPIModelsRequest_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.GenerateBackendAPIModelsRequest_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.GenerateBackendAPIModelsRequest_ResourceName, *v.ResourceName)
+	}
+}
+
 type GenerateBackendAPIModelsOutput struct {
 
 	// The app ID.
@@ -70,13 +90,62 @@ type GenerateBackendAPIModelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateBackendAPIModelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateBackendAPIModelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateBackendAPIModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.GenerateBackendAPIModelsResponse_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.GenerateBackendAPIModelsResponse_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.GenerateBackendAPIModelsResponse_Error, *v.Error)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GenerateBackendAPIModelsResponse_JobId, *v.JobId)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.GenerateBackendAPIModelsResponse_Operation, *v.Operation)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.GenerateBackendAPIModelsResponse_Status, *v.Status)
+	}
+}
+func (v *GenerateBackendAPIModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerateBackendAPIModelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerateBackendAPIModelsResponse_AppId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.GenerateBackendAPIModelsResponse_AppId, v.AppId)
+		case schemas.GenerateBackendAPIModelsResponse_BackendEnvironmentName:
+			v.BackendEnvironmentName = new(string)
+			return d.ReadString(schemas.GenerateBackendAPIModelsResponse_BackendEnvironmentName, v.BackendEnvironmentName)
+		case schemas.GenerateBackendAPIModelsResponse_Error:
+			v.Error = new(string)
+			return d.ReadString(schemas.GenerateBackendAPIModelsResponse_Error, v.Error)
+		case schemas.GenerateBackendAPIModelsResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GenerateBackendAPIModelsResponse_JobId, v.JobId)
+		case schemas.GenerateBackendAPIModelsResponse_Operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.GenerateBackendAPIModelsResponse_Operation, v.Operation)
+		case schemas.GenerateBackendAPIModelsResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.GenerateBackendAPIModelsResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGenerateBackendAPIModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGenerateBackendAPIModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateBackendAPIModels, schemas.GenerateBackendAPIModelsRequest, schemas.GenerateBackendAPIModelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGenerateBackendAPIModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateBackendAPIModels, schemas.GenerateBackendAPIModelsRequest, schemas.GenerateBackendAPIModelsResponse), output: &GenerateBackendAPIModelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package mturk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,15 @@ type GetAccountBalanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountBalanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountBalanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountBalanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetAccountBalanceOutput struct {
 
 	// A string representing a currency amount.
@@ -46,13 +57,38 @@ type GetAccountBalanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountBalanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountBalanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountBalanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailableBalance != nil {
+		s.WriteString(schemas.GetAccountBalanceResponse_AvailableBalance, *v.AvailableBalance)
+	}
+	if v.OnHoldBalance != nil {
+		s.WriteString(schemas.GetAccountBalanceResponse_OnHoldBalance, *v.OnHoldBalance)
+	}
+}
+func (v *GetAccountBalanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccountBalanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccountBalanceResponse_AvailableBalance:
+			v.AvailableBalance = new(string)
+			return d.ReadString(schemas.GetAccountBalanceResponse_AvailableBalance, v.AvailableBalance)
+		case schemas.GetAccountBalanceResponse_OnHoldBalance:
+			v.OnHoldBalance = new(string)
+			return d.ReadString(schemas.GetAccountBalanceResponse_OnHoldBalance, v.OnHoldBalance)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccountBalanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAccountBalance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountBalance, schemas.GetAccountBalanceRequest, schemas.GetAccountBalanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAccountBalance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountBalance, schemas.GetAccountBalanceRequest, schemas.GetAccountBalanceResponse), output: &GetAccountBalanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

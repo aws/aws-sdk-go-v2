@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,38 @@ type CreateInstanceProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInstanceProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInstanceProfileMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInstanceProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CreateInstanceProfileMessage_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateInstanceProfileMessage_Description, *v.Description)
+	}
+	if v.InstanceProfileName != nil {
+		s.WriteString(schemas.CreateInstanceProfileMessage_InstanceProfileName, *v.InstanceProfileName)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.CreateInstanceProfileMessage_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.NetworkType != nil {
+		s.WriteString(schemas.CreateInstanceProfileMessage_NetworkType, *v.NetworkType)
+	}
+	if v.PubliclyAccessible != nil {
+		s.WriteBool(schemas.CreateInstanceProfileMessage_PubliclyAccessible, *v.PubliclyAccessible)
+	}
+	if v.SubnetGroupIdentifier != nil {
+		s.WriteString(schemas.CreateInstanceProfileMessage_SubnetGroupIdentifier, *v.SubnetGroupIdentifier)
+	}
+	serializeTagList(s, schemas.CreateInstanceProfileMessage_Tags, v.Tags)
+	serializeStringList(s, schemas.CreateInstanceProfileMessage_VpcSecurityGroups, v.VpcSecurityGroups)
+}
+
 type CreateInstanceProfileOutput struct {
 
 	// The instance profile that was created.
@@ -85,13 +119,34 @@ type CreateInstanceProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInstanceProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInstanceProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInstanceProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceProfile != nil {
+		s.WriteStruct(schemas.CreateInstanceProfileResponse_InstanceProfile)
+		v.InstanceProfile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateInstanceProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateInstanceProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateInstanceProfileResponse_InstanceProfile:
+			v.InstanceProfile = &types.InstanceProfile{}
+			return v.InstanceProfile.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateInstanceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInstanceProfile, schemas.CreateInstanceProfileMessage, schemas.CreateInstanceProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateInstanceProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInstanceProfile, schemas.CreateInstanceProfileMessage, schemas.CreateInstanceProfileResponse), output: &CreateInstanceProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

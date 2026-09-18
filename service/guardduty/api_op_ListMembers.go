@@ -5,7 +5,9 @@ package guardduty
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,27 @@ type ListMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMembersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMembersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMembersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.ListMembersRequest_DetectorId, *v.DetectorId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMembersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMembersRequest_NextToken, *v.NextToken)
+	}
+	if v.OnlyAssociated != nil {
+		s.WriteString(schemas.ListMembersRequest_OnlyAssociated, *v.OnlyAssociated)
+	}
+}
+
 type ListMembersOutput struct {
 
 	// A list of members.
@@ -77,13 +100,35 @@ type ListMembersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMembersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMembersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMembersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMembers(s, schemas.ListMembersResponse_Members, v.Members)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMembersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListMembersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMembersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMembersResponse_Members:
+			return deserializeMembers(d, schemas.ListMembersResponse_Members, &v.Members)
+		case schemas.ListMembersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMembersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMembers, schemas.ListMembersRequest, schemas.ListMembersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMembers, schemas.ListMembersRequest, schemas.ListMembersResponse), output: &ListMembersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

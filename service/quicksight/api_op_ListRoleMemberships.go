@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,30 @@ type ListRoleMembershipsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoleMembershipsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoleMembershipsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoleMembershipsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListRoleMembershipsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRoleMembershipsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.ListRoleMembershipsRequest_Namespace, *v.Namespace)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRoleMembershipsRequest_NextToken, *v.NextToken)
+	}
+	if v.Role != "" {
+		s.WriteString(schemas.ListRoleMembershipsRequest_Role, string(v.Role))
+	}
+}
+
 type ListRoleMembershipsOutput struct {
 
 	// The list of groups associated with a role
@@ -73,13 +99,46 @@ type ListRoleMembershipsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoleMembershipsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoleMembershipsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoleMembershipsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroupsList(s, schemas.ListRoleMembershipsResponse_MembersList, v.MembersList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRoleMembershipsResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListRoleMembershipsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListRoleMembershipsResponse_Status, v.Status)
+	}
+}
+func (v *ListRoleMembershipsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRoleMembershipsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRoleMembershipsResponse_MembersList:
+			return deserializeGroupsList(d, schemas.ListRoleMembershipsResponse_MembersList, &v.MembersList)
+		case schemas.ListRoleMembershipsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRoleMembershipsResponse_NextToken, v.NextToken)
+		case schemas.ListRoleMembershipsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListRoleMembershipsResponse_RequestId, v.RequestId)
+		case schemas.ListRoleMembershipsResponse_Status:
+			return d.ReadInt32(schemas.ListRoleMembershipsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRoleMembershipsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRoleMemberships{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoleMemberships, schemas.ListRoleMembershipsRequest, schemas.ListRoleMembershipsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRoleMemberships{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoleMemberships, schemas.ListRoleMembershipsRequest, schemas.ListRoleMembershipsResponse), output: &ListRoleMembershipsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

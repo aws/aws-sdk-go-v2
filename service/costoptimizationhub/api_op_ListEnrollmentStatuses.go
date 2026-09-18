@@ -5,7 +5,9 @@ package costoptimizationhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,27 @@ type ListEnrollmentStatusesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnrollmentStatusesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnrollmentStatusesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnrollmentStatusesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListEnrollmentStatusesRequest_accountId, *v.AccountId)
+	}
+	if v.IncludeOrganizationInfo != false {
+		s.WriteBool(schemas.ListEnrollmentStatusesRequest_includeOrganizationInfo, v.IncludeOrganizationInfo)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEnrollmentStatusesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnrollmentStatusesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListEnrollmentStatusesOutput struct {
 
 	// The enrollment status of all member accounts in the organization if the account
@@ -62,13 +85,41 @@ type ListEnrollmentStatusesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnrollmentStatusesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnrollmentStatusesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnrollmentStatusesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeMemberAccounts != nil {
+		s.WriteBool(schemas.ListEnrollmentStatusesResponse_includeMemberAccounts, *v.IncludeMemberAccounts)
+	}
+	serializeAccountEnrollmentStatuses(s, schemas.ListEnrollmentStatusesResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnrollmentStatusesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEnrollmentStatusesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEnrollmentStatusesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEnrollmentStatusesResponse_includeMemberAccounts:
+			v.IncludeMemberAccounts = new(bool)
+			return d.ReadBool(schemas.ListEnrollmentStatusesResponse_includeMemberAccounts, v.IncludeMemberAccounts)
+		case schemas.ListEnrollmentStatusesResponse_items:
+			return deserializeAccountEnrollmentStatuses(d, schemas.ListEnrollmentStatusesResponse_items, &v.Items)
+		case schemas.ListEnrollmentStatusesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEnrollmentStatusesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEnrollmentStatusesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListEnrollmentStatuses{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnrollmentStatuses, schemas.ListEnrollmentStatusesRequest, schemas.ListEnrollmentStatusesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListEnrollmentStatuses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnrollmentStatuses, schemas.ListEnrollmentStatusesRequest, schemas.ListEnrollmentStatusesResponse), output: &ListEnrollmentStatusesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

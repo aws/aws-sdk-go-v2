@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -27,6 +29,15 @@ func (c *Client) GetGlueIdentityCenterConfiguration(ctx context.Context, params 
 // Request to retrieve the Glue Identity Center configuration.
 type GetGlueIdentityCenterConfigurationInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *GetGlueIdentityCenterConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGlueIdentityCenterConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGlueIdentityCenterConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 // Response containing the Glue Identity Center configuration details.
@@ -54,13 +65,47 @@ type GetGlueIdentityCenterConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGlueIdentityCenterConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGlueIdentityCenterConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGlueIdentityCenterConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.GetGlueIdentityCenterConfigurationResponse_ApplicationArn, *v.ApplicationArn)
+	}
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.GetGlueIdentityCenterConfigurationResponse_InstanceArn, *v.InstanceArn)
+	}
+	serializeOrchestrationStringList(s, schemas.GetGlueIdentityCenterConfigurationResponse_Scopes, v.Scopes)
+	if v.UserBackgroundSessionsEnabled != nil {
+		s.WriteBool(schemas.GetGlueIdentityCenterConfigurationResponse_UserBackgroundSessionsEnabled, *v.UserBackgroundSessionsEnabled)
+	}
+}
+func (v *GetGlueIdentityCenterConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGlueIdentityCenterConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGlueIdentityCenterConfigurationResponse_ApplicationArn:
+			v.ApplicationArn = new(string)
+			return d.ReadString(schemas.GetGlueIdentityCenterConfigurationResponse_ApplicationArn, v.ApplicationArn)
+		case schemas.GetGlueIdentityCenterConfigurationResponse_InstanceArn:
+			v.InstanceArn = new(string)
+			return d.ReadString(schemas.GetGlueIdentityCenterConfigurationResponse_InstanceArn, v.InstanceArn)
+		case schemas.GetGlueIdentityCenterConfigurationResponse_Scopes:
+			return deserializeOrchestrationStringList(d, schemas.GetGlueIdentityCenterConfigurationResponse_Scopes, &v.Scopes)
+		case schemas.GetGlueIdentityCenterConfigurationResponse_UserBackgroundSessionsEnabled:
+			v.UserBackgroundSessionsEnabled = new(bool)
+			return d.ReadBool(schemas.GetGlueIdentityCenterConfigurationResponse_UserBackgroundSessionsEnabled, v.UserBackgroundSessionsEnabled)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGlueIdentityCenterConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetGlueIdentityCenterConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGlueIdentityCenterConfiguration, schemas.GetGlueIdentityCenterConfigurationRequest, schemas.GetGlueIdentityCenterConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetGlueIdentityCenterConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGlueIdentityCenterConfiguration, schemas.GetGlueIdentityCenterConfigurationRequest, schemas.GetGlueIdentityCenterConfigurationResponse), output: &GetGlueIdentityCenterConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

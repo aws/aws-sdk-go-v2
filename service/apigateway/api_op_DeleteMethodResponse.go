@@ -4,6 +4,8 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type DeleteMethodResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMethodResponseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMethodResponseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMethodResponseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HttpMethod != nil {
+		s.WriteString(schemas.DeleteMethodResponseRequest_httpMethod, *v.HttpMethod)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DeleteMethodResponseRequest_resourceId, *v.ResourceId)
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.DeleteMethodResponseRequest_restApiId, *v.RestApiId)
+	}
+	if v.StatusCode != nil {
+		s.WriteString(schemas.DeleteMethodResponseRequest_statusCode, *v.StatusCode)
+	}
+}
+
 type DeleteMethodResponseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,13 +79,26 @@ type DeleteMethodResponseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMethodResponseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMethodResponseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteMethodResponseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMethodResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMethodResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMethodResponse, schemas.DeleteMethodResponseRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMethodResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMethodResponse, schemas.DeleteMethodResponseRequest, nil), output: &DeleteMethodResponseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

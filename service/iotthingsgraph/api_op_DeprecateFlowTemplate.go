@@ -4,6 +4,8 @@ package iotthingsgraph
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type DeprecateFlowTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeprecateFlowTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeprecateFlowTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeprecateFlowTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeprecateFlowTemplateRequest_id, *v.Id)
+	}
+}
+
 type DeprecateFlowTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +62,26 @@ type DeprecateFlowTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeprecateFlowTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeprecateFlowTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeprecateFlowTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeprecateFlowTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeprecateFlowTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeprecateFlowTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeprecateFlowTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeprecateFlowTemplate, schemas.DeprecateFlowTemplateRequest, schemas.DeprecateFlowTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeprecateFlowTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeprecateFlowTemplate, schemas.DeprecateFlowTemplateRequest, schemas.DeprecateFlowTemplateResponse), output: &DeprecateFlowTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

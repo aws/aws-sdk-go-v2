@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,25 @@ type ListCrawlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCrawlsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCrawlsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCrawlsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrawlerName != nil {
+		s.WriteString(schemas.ListCrawlsRequest_CrawlerName, *v.CrawlerName)
+	}
+	serializeCrawlsFilterList(s, schemas.ListCrawlsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCrawlsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCrawlsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListCrawlsOutput struct {
 
 	// A list of CrawlerHistory objects representing the crawl runs that meet your
@@ -73,13 +94,35 @@ type ListCrawlsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCrawlsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCrawlsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCrawlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCrawlerHistoryList(s, schemas.ListCrawlsResponse_Crawls, v.Crawls)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCrawlsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCrawlsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCrawlsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCrawlsResponse_Crawls:
+			return deserializeCrawlerHistoryList(d, schemas.ListCrawlsResponse_Crawls, &v.Crawls)
+		case schemas.ListCrawlsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCrawlsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCrawlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCrawls{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCrawls, schemas.ListCrawlsRequest, schemas.ListCrawlsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCrawls{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCrawls, schemas.ListCrawlsRequest, schemas.ListCrawlsResponse), output: &ListCrawlsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package marketplaceagreement
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,36 @@ type ListAgreementPaymentRequestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgreementPaymentRequestsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgreementPaymentRequestsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgreementPaymentRequestsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementId != nil {
+		s.WriteString(schemas.ListAgreementPaymentRequestsInput_agreementId, *v.AgreementId)
+	}
+	if v.AgreementType != nil {
+		s.WriteString(schemas.ListAgreementPaymentRequestsInput_agreementType, *v.AgreementType)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.ListAgreementPaymentRequestsInput_catalog, *v.Catalog)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAgreementPaymentRequestsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgreementPaymentRequestsInput_nextToken, *v.NextToken)
+	}
+	if v.PartyType != nil {
+		s.WriteString(schemas.ListAgreementPaymentRequestsInput_partyType, *v.PartyType)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListAgreementPaymentRequestsInput_status, string(v.Status))
+	}
+}
+
 type ListAgreementPaymentRequestsOutput struct {
 
 	// An array of PaymentRequestSummary objects containing summary information about
@@ -83,13 +115,35 @@ type ListAgreementPaymentRequestsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgreementPaymentRequestsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgreementPaymentRequestsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgreementPaymentRequestsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePaymentRequestSummaryList(s, schemas.ListAgreementPaymentRequestsOutput_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgreementPaymentRequestsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAgreementPaymentRequestsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAgreementPaymentRequestsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAgreementPaymentRequestsOutput_items:
+			return deserializePaymentRequestSummaryList(d, schemas.ListAgreementPaymentRequestsOutput_items, &v.Items)
+		case schemas.ListAgreementPaymentRequestsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAgreementPaymentRequestsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAgreementPaymentRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListAgreementPaymentRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgreementPaymentRequests, schemas.ListAgreementPaymentRequestsInput, schemas.ListAgreementPaymentRequestsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListAgreementPaymentRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgreementPaymentRequests, schemas.ListAgreementPaymentRequestsInput, schemas.ListAgreementPaymentRequestsOutput), output: &ListAgreementPaymentRequestsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

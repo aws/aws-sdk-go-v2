@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -25,6 +27,40 @@ type Field struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Field) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Field)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Field) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Field_key, *v.Key)
+	}
+	if v.RefValue != nil {
+		s.WriteString(schemas.Field_refValue, *v.RefValue)
+	}
+	if v.StringValue != nil {
+		s.WriteString(schemas.Field_stringValue, *v.StringValue)
+	}
+}
+func (v *Field) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Field, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Field_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Field_key, v.Key)
+		case schemas.Field_refValue:
+			v.RefValue = new(string)
+			return d.ReadString(schemas.Field_refValue, v.RefValue)
+		case schemas.Field_stringValue:
+			v.StringValue = new(string)
+			return d.ReadString(schemas.Field_stringValue, v.StringValue)
+		}
+		return nil
+	})
+}
+
 // Identity information for the EC2 instance that is hosting the task runner. You
 // can get this value by calling a metadata URI from the EC2 instance. For more
 // information, see [Instance Metadata]in the Amazon Elastic Compute Cloud User Guide. Passing in
@@ -45,6 +81,34 @@ type InstanceIdentity struct {
 	Signature *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceIdentity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceIdentity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceIdentity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Document != nil {
+		s.WriteString(schemas.InstanceIdentity_document, *v.Document)
+	}
+	if v.Signature != nil {
+		s.WriteString(schemas.InstanceIdentity_signature, *v.Signature)
+	}
+}
+func (v *InstanceIdentity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceIdentity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceIdentity_document:
+			v.Document = new(string)
+			return d.ReadString(schemas.InstanceIdentity_document, v.Document)
+		case schemas.InstanceIdentity_signature:
+			v.Signature = new(string)
+			return d.ReadString(schemas.InstanceIdentity_signature, v.Signature)
+		}
+		return nil
+	})
 }
 
 // Contains a logical operation for comparing the value of a field with a
@@ -89,6 +153,35 @@ type Operator struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Operator) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Operator)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Operator) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.Operator_type, string(v.Type))
+	}
+	serializestringList(s, schemas.Operator_values, v.Values)
+}
+func (v *Operator) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Operator, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Operator_type:
+			var ev string
+			if err := d.ReadString(schemas.Operator_type, &ev); err != nil {
+				return err
+			}
+			v.Type = OperatorType(ev)
+			return nil
+		case schemas.Operator_values:
+			return deserializestringList(d, schemas.Operator_values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // The attributes allowed or specified with a parameter object.
 type ParameterAttribute struct {
 
@@ -103,6 +196,34 @@ type ParameterAttribute struct {
 	StringValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ParameterAttribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParameterAttribute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParameterAttribute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.ParameterAttribute_key, *v.Key)
+	}
+	if v.StringValue != nil {
+		s.WriteString(schemas.ParameterAttribute_stringValue, *v.StringValue)
+	}
+}
+func (v *ParameterAttribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParameterAttribute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParameterAttribute_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ParameterAttribute_key, v.Key)
+		case schemas.ParameterAttribute_stringValue:
+			v.StringValue = new(string)
+			return d.ReadString(schemas.ParameterAttribute_stringValue, v.StringValue)
+		}
+		return nil
+	})
 }
 
 // Contains information about a parameter object.
@@ -121,6 +242,31 @@ type ParameterObject struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ParameterObject) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParameterObject)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParameterObject) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeParameterAttributeList(s, schemas.ParameterObject_attributes, v.Attributes)
+	if v.Id != nil {
+		s.WriteString(schemas.ParameterObject_id, *v.Id)
+	}
+}
+func (v *ParameterObject) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParameterObject, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParameterObject_attributes:
+			return deserializeParameterAttributeList(d, schemas.ParameterObject_attributes, &v.Attributes)
+		case schemas.ParameterObject_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ParameterObject_id, v.Id)
+		}
+		return nil
+	})
+}
+
 // A value or list of parameter values.
 type ParameterValue struct {
 
@@ -135,6 +281,34 @@ type ParameterValue struct {
 	StringValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ParameterValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParameterValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParameterValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ParameterValue_id, *v.Id)
+	}
+	if v.StringValue != nil {
+		s.WriteString(schemas.ParameterValue_stringValue, *v.StringValue)
+	}
+}
+func (v *ParameterValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParameterValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParameterValue_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ParameterValue_id, v.Id)
+		case schemas.ParameterValue_stringValue:
+			v.StringValue = new(string)
+			return d.ReadString(schemas.ParameterValue_stringValue, v.StringValue)
+		}
+		return nil
+	})
 }
 
 // Contains pipeline metadata.
@@ -169,6 +343,46 @@ type PipelineDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PipelineDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipelineDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipelineDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.PipelineDescription_description, *v.Description)
+	}
+	serializefieldList(s, schemas.PipelineDescription_fields, v.Fields)
+	if v.Name != nil {
+		s.WriteString(schemas.PipelineDescription_name, *v.Name)
+	}
+	if v.PipelineId != nil {
+		s.WriteString(schemas.PipelineDescription_pipelineId, *v.PipelineId)
+	}
+	serializetagList(s, schemas.PipelineDescription_tags, v.Tags)
+}
+func (v *PipelineDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipelineDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipelineDescription_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PipelineDescription_description, v.Description)
+		case schemas.PipelineDescription_fields:
+			return deserializefieldList(d, schemas.PipelineDescription_fields, &v.Fields)
+		case schemas.PipelineDescription_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PipelineDescription_name, v.Name)
+		case schemas.PipelineDescription_pipelineId:
+			v.PipelineId = new(string)
+			return d.ReadString(schemas.PipelineDescription_pipelineId, v.PipelineId)
+		case schemas.PipelineDescription_tags:
+			return deserializetagList(d, schemas.PipelineDescription_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Contains the name and identifier of a pipeline.
 type PipelineIdName struct {
 
@@ -180,6 +394,34 @@ type PipelineIdName struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PipelineIdName) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipelineIdName)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipelineIdName) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.PipelineIdName_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PipelineIdName_name, *v.Name)
+	}
+}
+func (v *PipelineIdName) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipelineIdName, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipelineIdName_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.PipelineIdName_id, v.Id)
+		case schemas.PipelineIdName_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PipelineIdName_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Contains information about a pipeline object. This can be a logical, physical,
@@ -205,6 +447,37 @@ type PipelineObject struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PipelineObject) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PipelineObject)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PipelineObject) SerializeMembers(s smithy.ShapeSerializer) {
+	serializefieldList(s, schemas.PipelineObject_fields, v.Fields)
+	if v.Id != nil {
+		s.WriteString(schemas.PipelineObject_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PipelineObject_name, *v.Name)
+	}
+}
+func (v *PipelineObject) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PipelineObject, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PipelineObject_fields:
+			return deserializefieldList(d, schemas.PipelineObject_fields, &v.Fields)
+		case schemas.PipelineObject_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.PipelineObject_id, v.Id)
+		case schemas.PipelineObject_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PipelineObject_name, v.Name)
+		}
+		return nil
+	})
+}
+
 // Defines the query to run against an object.
 type Query struct {
 
@@ -213,6 +486,25 @@ type Query struct {
 	Selectors []Selector
 
 	noSmithyDocumentSerde
+}
+
+func (v *Query) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Query)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Query) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSelectorList(s, schemas.Query_selectors, v.Selectors)
+}
+func (v *Query) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Query, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Query_selectors:
+			return deserializeSelectorList(d, schemas.Query_selectors, &v.Selectors)
+		}
+		return nil
+	})
 }
 
 // A comparision that is used to determine whether a query should return this
@@ -230,6 +522,36 @@ type Selector struct {
 	Operator *Operator
 
 	noSmithyDocumentSerde
+}
+
+func (v *Selector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Selector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Selector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldName != nil {
+		s.WriteString(schemas.Selector_fieldName, *v.FieldName)
+	}
+	if v.Operator != nil {
+		s.WriteStruct(schemas.Selector_operator)
+		v.Operator.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Selector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Selector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Selector_fieldName:
+			v.FieldName = new(string)
+			return d.ReadString(schemas.Selector_fieldName, v.FieldName)
+		case schemas.Selector_operator:
+			v.Operator = &Operator{}
+			return v.Operator.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Tags are key/value pairs defined by a user and associated with a pipeline to
@@ -258,6 +580,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_key, v.Key)
+		case schemas.Tag_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Contains information about a pipeline task that is assigned to a task runner.
 type TaskObject struct {
 
@@ -278,6 +628,43 @@ type TaskObject struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TaskObject) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskObject)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskObject) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttemptId != nil {
+		s.WriteString(schemas.TaskObject_attemptId, *v.AttemptId)
+	}
+	serializePipelineObjectMap(s, schemas.TaskObject_objects, v.Objects)
+	if v.PipelineId != nil {
+		s.WriteString(schemas.TaskObject_pipelineId, *v.PipelineId)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.TaskObject_taskId, *v.TaskId)
+	}
+}
+func (v *TaskObject) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskObject, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskObject_attemptId:
+			v.AttemptId = new(string)
+			return d.ReadString(schemas.TaskObject_attemptId, v.AttemptId)
+		case schemas.TaskObject_objects:
+			return deserializePipelineObjectMap(d, schemas.TaskObject_objects, &v.Objects)
+		case schemas.TaskObject_pipelineId:
+			v.PipelineId = new(string)
+			return d.ReadString(schemas.TaskObject_pipelineId, v.PipelineId)
+		case schemas.TaskObject_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.TaskObject_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
+
 // Defines a validation error. Validation errors prevent pipeline activation. The
 // set of validation errors that can be returned are defined by AWS Data Pipeline.
 type ValidationError struct {
@@ -289,6 +676,31 @@ type ValidationError struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationError) SerializeMembers(s smithy.ShapeSerializer) {
+	serializevalidationMessages(s, schemas.ValidationError_errors, v.Errors)
+	if v.Id != nil {
+		s.WriteString(schemas.ValidationError_id, *v.Id)
+	}
+}
+func (v *ValidationError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationError_errors:
+			return deserializevalidationMessages(d, schemas.ValidationError_errors, &v.Errors)
+		case schemas.ValidationError_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ValidationError_id, v.Id)
+		}
+		return nil
+	})
 }
 
 // Defines a validation warning. Validation warnings do not prevent pipeline
@@ -303,6 +715,31 @@ type ValidationWarning struct {
 	Warnings []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationWarning) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationWarning)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationWarning) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ValidationWarning_id, *v.Id)
+	}
+	serializevalidationMessages(s, schemas.ValidationWarning_warnings, v.Warnings)
+}
+func (v *ValidationWarning) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationWarning, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationWarning_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ValidationWarning_id, v.Id)
+		case schemas.ValidationWarning_warnings:
+			return deserializevalidationMessages(d, schemas.ValidationWarning_warnings, &v.Warnings)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

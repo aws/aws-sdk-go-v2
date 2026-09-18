@@ -5,6 +5,8 @@ package sagemakerfeaturestoreruntime
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type ListRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecordsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FeatureGroupName != nil {
+		s.WriteString(schemas.ListRecordsRequest_FeatureGroupName, *v.FeatureGroupName)
+	}
+	if v.IncludeSoftDeletedRecords != nil {
+		s.WriteBool(schemas.ListRecordsRequest_IncludeSoftDeletedRecords, *v.IncludeSoftDeletedRecords)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecordsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecordsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListRecordsOutput struct {
 
 	// A list of record identifier values for the records stored in the OnlineStore .
@@ -65,13 +88,35 @@ type ListRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecordsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecordsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecordsResponse_NextToken, *v.NextToken)
+	}
+	serializeRecordIdentifierList(s, schemas.ListRecordsResponse_RecordIdentifiers, v.RecordIdentifiers)
+}
+func (v *ListRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecordsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecordsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecordsResponse_NextToken, v.NextToken)
+		case schemas.ListRecordsResponse_RecordIdentifiers:
+			return deserializeRecordIdentifierList(d, schemas.ListRecordsResponse_RecordIdentifiers, &v.RecordIdentifiers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecords, schemas.ListRecordsRequest, schemas.ListRecordsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecords, schemas.ListRecordsRequest, schemas.ListRecordsResponse), output: &ListRecordsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

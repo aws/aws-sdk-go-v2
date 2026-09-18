@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type StartColumnStatisticsTaskRunScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartColumnStatisticsTaskRunScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartColumnStatisticsTaskRunScheduleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartColumnStatisticsTaskRunScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.StartColumnStatisticsTaskRunScheduleRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.StartColumnStatisticsTaskRunScheduleRequest_TableName, *v.TableName)
+	}
+}
+
 type StartColumnStatisticsTaskRunScheduleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type StartColumnStatisticsTaskRunScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartColumnStatisticsTaskRunScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartColumnStatisticsTaskRunScheduleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartColumnStatisticsTaskRunScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartColumnStatisticsTaskRunScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartColumnStatisticsTaskRunScheduleResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartColumnStatisticsTaskRunScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartColumnStatisticsTaskRunSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartColumnStatisticsTaskRunSchedule, schemas.StartColumnStatisticsTaskRunScheduleRequest, schemas.StartColumnStatisticsTaskRunScheduleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartColumnStatisticsTaskRunSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartColumnStatisticsTaskRunSchedule, schemas.StartColumnStatisticsTaskRunScheduleRequest, schemas.StartColumnStatisticsTaskRunScheduleResponse), output: &StartColumnStatisticsTaskRunScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package freetier
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/freetier/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/freetier/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type UpgradeAccountPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpgradeAccountPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpgradeAccountPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpgradeAccountPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountPlanType != "" {
+		s.WriteString(schemas.UpgradeAccountPlanRequest_accountPlanType, string(v.AccountPlanType))
+	}
+}
+
 type UpgradeAccountPlanOutput struct {
 
 	//  A unique identifier that identifies the account.
@@ -58,13 +72,52 @@ type UpgradeAccountPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpgradeAccountPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpgradeAccountPlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpgradeAccountPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.UpgradeAccountPlanResponse_accountId, *v.AccountId)
+	}
+	if v.AccountPlanStatus != "" {
+		s.WriteString(schemas.UpgradeAccountPlanResponse_accountPlanStatus, string(v.AccountPlanStatus))
+	}
+	if v.AccountPlanType != "" {
+		s.WriteString(schemas.UpgradeAccountPlanResponse_accountPlanType, string(v.AccountPlanType))
+	}
+}
+func (v *UpgradeAccountPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpgradeAccountPlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpgradeAccountPlanResponse_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.UpgradeAccountPlanResponse_accountId, v.AccountId)
+		case schemas.UpgradeAccountPlanResponse_accountPlanStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpgradeAccountPlanResponse_accountPlanStatus, &ev); err != nil {
+				return err
+			}
+			v.AccountPlanStatus = types.AccountPlanStatus(ev)
+			return nil
+		case schemas.UpgradeAccountPlanResponse_accountPlanType:
+			var ev string
+			if err := d.ReadString(schemas.UpgradeAccountPlanResponse_accountPlanType, &ev); err != nil {
+				return err
+			}
+			v.AccountPlanType = types.AccountPlanType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpgradeAccountPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpgradeAccountPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpgradeAccountPlan, schemas.UpgradeAccountPlanRequest, schemas.UpgradeAccountPlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpgradeAccountPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpgradeAccountPlan, schemas.UpgradeAccountPlanRequest, schemas.UpgradeAccountPlanResponse), output: &UpgradeAccountPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListBackupSelectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBackupSelectionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBackupSelectionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBackupSelectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupPlanId != nil {
+		s.WriteString(schemas.ListBackupSelectionsInput_BackupPlanId, *v.BackupPlanId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBackupSelectionsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBackupSelectionsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListBackupSelectionsOutput struct {
 
 	// An array of backup selection list items containing metadata about each resource
@@ -63,13 +83,35 @@ type ListBackupSelectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBackupSelectionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBackupSelectionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBackupSelectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBackupSelectionsList(s, schemas.ListBackupSelectionsOutput_BackupSelectionsList, v.BackupSelectionsList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBackupSelectionsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBackupSelectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBackupSelectionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBackupSelectionsOutput_BackupSelectionsList:
+			return deserializeBackupSelectionsList(d, schemas.ListBackupSelectionsOutput_BackupSelectionsList, &v.BackupSelectionsList)
+		case schemas.ListBackupSelectionsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBackupSelectionsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBackupSelectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBackupSelections{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBackupSelections, schemas.ListBackupSelectionsInput, schemas.ListBackupSelectionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBackupSelections{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBackupSelections, schemas.ListBackupSelectionsInput, schemas.ListBackupSelectionsOutput), output: &ListBackupSelectionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

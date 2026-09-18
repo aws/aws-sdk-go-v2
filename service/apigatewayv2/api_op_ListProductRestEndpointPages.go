@@ -4,7 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,27 @@ type ListProductRestEndpointPagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProductRestEndpointPagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProductRestEndpointPagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProductRestEndpointPagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteString(schemas.ListProductRestEndpointPagesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProductRestEndpointPagesRequest_NextToken, *v.NextToken)
+	}
+	if v.PortalProductId != nil {
+		s.WriteString(schemas.ListProductRestEndpointPagesRequest_PortalProductId, *v.PortalProductId)
+	}
+	if v.ResourceOwnerAccountId != nil {
+		s.WriteString(schemas.ListProductRestEndpointPagesRequest_ResourceOwnerAccountId, *v.ResourceOwnerAccountId)
+	}
+}
+
 type ListProductRestEndpointPagesOutput struct {
 
 	// The elements from this collection.
@@ -59,13 +82,35 @@ type ListProductRestEndpointPagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProductRestEndpointPagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProductRestEndpointPagesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProductRestEndpointPagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfProductRestEndpointPageSummaryNoBody(s, schemas.ListProductRestEndpointPagesResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProductRestEndpointPagesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListProductRestEndpointPagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProductRestEndpointPagesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProductRestEndpointPagesResponse_Items:
+			return deserialize__listOfProductRestEndpointPageSummaryNoBody(d, schemas.ListProductRestEndpointPagesResponse_Items, &v.Items)
+		case schemas.ListProductRestEndpointPagesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProductRestEndpointPagesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProductRestEndpointPagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProductRestEndpointPages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProductRestEndpointPages, schemas.ListProductRestEndpointPagesRequest, schemas.ListProductRestEndpointPagesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProductRestEndpointPages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProductRestEndpointPages, schemas.ListProductRestEndpointPagesRequest, schemas.ListProductRestEndpointPagesResponse), output: &ListProductRestEndpointPagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

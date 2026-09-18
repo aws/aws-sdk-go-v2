@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -47,6 +49,21 @@ type DescribeAddonInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAddonInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAddonRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAddonInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonName != nil {
+		s.WriteString(schemas.DescribeAddonRequest_addonName, *v.AddonName)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.DescribeAddonRequest_clusterName, *v.ClusterName)
+	}
+}
+
 type DescribeAddonOutput struct {
 
 	// An Amazon EKS add-on. For more information, see [Amazon EKS add-ons] in the Amazon EKS User Guide.
@@ -60,13 +77,34 @@ type DescribeAddonOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAddonOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAddonResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAddonOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Addon != nil {
+		s.WriteStruct(schemas.DescribeAddonResponse_addon)
+		v.Addon.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAddonOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAddonResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAddonResponse_addon:
+			v.Addon = &types.Addon{}
+			return v.Addon.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAddonMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAddon{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAddon, schemas.DescribeAddonRequest, schemas.DescribeAddonResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAddon{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAddon, schemas.DescribeAddonRequest, schemas.DescribeAddonResponse), output: &DescribeAddonOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

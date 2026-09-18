@@ -4,6 +4,8 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,21 @@ type GetTargetSelectionRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTargetSelectionRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTargetSelectionRulesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTargetSelectionRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.GetTargetSelectionRulesMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+	if v.SelectionRules != nil {
+		s.WriteString(schemas.GetTargetSelectionRulesMessage_SelectionRules, *v.SelectionRules)
+	}
+}
+
 type GetTargetSelectionRulesOutput struct {
 
 	// The JSON string representing the counterpart selection rules in the target.
@@ -68,13 +85,32 @@ type GetTargetSelectionRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTargetSelectionRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTargetSelectionRulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTargetSelectionRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetSelectionRules != nil {
+		s.WriteString(schemas.GetTargetSelectionRulesResponse_TargetSelectionRules, *v.TargetSelectionRules)
+	}
+}
+func (v *GetTargetSelectionRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTargetSelectionRulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTargetSelectionRulesResponse_TargetSelectionRules:
+			v.TargetSelectionRules = new(string)
+			return d.ReadString(schemas.GetTargetSelectionRulesResponse_TargetSelectionRules, v.TargetSelectionRules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTargetSelectionRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTargetSelectionRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTargetSelectionRules, schemas.GetTargetSelectionRulesMessage, schemas.GetTargetSelectionRulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTargetSelectionRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTargetSelectionRules, schemas.GetTargetSelectionRulesMessage, schemas.GetTargetSelectionRulesResponse), output: &GetTargetSelectionRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

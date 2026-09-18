@@ -5,7 +5,9 @@ package lookoutequipment
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,27 @@ type ListSensorStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSensorStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSensorStatisticsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSensorStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetName != nil {
+		s.WriteString(schemas.ListSensorStatisticsRequest_DatasetName, *v.DatasetName)
+	}
+	if v.IngestionJobId != nil {
+		s.WriteString(schemas.ListSensorStatisticsRequest_IngestionJobId, *v.IngestionJobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSensorStatisticsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSensorStatisticsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListSensorStatisticsOutput struct {
 
 	// An opaque pagination token indicating where to continue the listing of sensor
@@ -68,13 +91,35 @@ type ListSensorStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSensorStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSensorStatisticsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSensorStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSensorStatisticsResponse_NextToken, *v.NextToken)
+	}
+	serializeSensorStatisticsSummaries(s, schemas.ListSensorStatisticsResponse_SensorStatisticsSummaries, v.SensorStatisticsSummaries)
+}
+func (v *ListSensorStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSensorStatisticsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSensorStatisticsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSensorStatisticsResponse_NextToken, v.NextToken)
+		case schemas.ListSensorStatisticsResponse_SensorStatisticsSummaries:
+			return deserializeSensorStatisticsSummaries(d, schemas.ListSensorStatisticsResponse_SensorStatisticsSummaries, &v.SensorStatisticsSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSensorStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListSensorStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSensorStatistics, schemas.ListSensorStatisticsRequest, schemas.ListSensorStatisticsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListSensorStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSensorStatistics, schemas.ListSensorStatisticsRequest, schemas.ListSensorStatisticsResponse), output: &ListSensorStatisticsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

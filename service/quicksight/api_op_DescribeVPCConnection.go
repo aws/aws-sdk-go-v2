@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DescribeVPCConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVPCConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVPCConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVPCConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeVPCConnectionRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.VPCConnectionId != nil {
+		s.WriteString(schemas.DescribeVPCConnectionRequest_VPCConnectionId, *v.VPCConnectionId)
+	}
+}
+
 type DescribeVPCConnectionOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -59,13 +76,45 @@ type DescribeVPCConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVPCConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVPCConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVPCConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeVPCConnectionResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeVPCConnectionResponse_Status, v.Status)
+	}
+	if v.VPCConnection != nil {
+		s.WriteStruct(schemas.DescribeVPCConnectionResponse_VPCConnection)
+		v.VPCConnection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeVPCConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVPCConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVPCConnectionResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeVPCConnectionResponse_RequestId, v.RequestId)
+		case schemas.DescribeVPCConnectionResponse_Status:
+			return d.ReadInt32(schemas.DescribeVPCConnectionResponse_Status, &v.Status)
+		case schemas.DescribeVPCConnectionResponse_VPCConnection:
+			v.VPCConnection = &types.VPCConnection{}
+			return v.VPCConnection.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeVPCConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeVPCConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVPCConnection, schemas.DescribeVPCConnectionRequest, schemas.DescribeVPCConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeVPCConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVPCConnection, schemas.DescribeVPCConnectionRequest, schemas.DescribeVPCConnectionResponse), output: &DescribeVPCConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

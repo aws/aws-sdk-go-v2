@@ -4,7 +4,9 @@ package networkfirewall
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeVpcEndpointAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVpcEndpointAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVpcEndpointAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVpcEndpointAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcEndpointAssociationArn != nil {
+		s.WriteString(schemas.DescribeVpcEndpointAssociationRequest_VpcEndpointAssociationArn, *v.VpcEndpointAssociationArn)
+	}
+}
+
 type DescribeVpcEndpointAssociationOutput struct {
 
 	// The configuration settings for the VPC endpoint association. These settings
@@ -50,13 +64,42 @@ type DescribeVpcEndpointAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVpcEndpointAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVpcEndpointAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVpcEndpointAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcEndpointAssociation != nil {
+		s.WriteStruct(schemas.DescribeVpcEndpointAssociationResponse_VpcEndpointAssociation)
+		v.VpcEndpointAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VpcEndpointAssociationStatus != nil {
+		s.WriteStruct(schemas.DescribeVpcEndpointAssociationResponse_VpcEndpointAssociationStatus)
+		v.VpcEndpointAssociationStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeVpcEndpointAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVpcEndpointAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVpcEndpointAssociationResponse_VpcEndpointAssociation:
+			v.VpcEndpointAssociation = &types.VpcEndpointAssociation{}
+			return v.VpcEndpointAssociation.Deserialize(d)
+		case schemas.DescribeVpcEndpointAssociationResponse_VpcEndpointAssociationStatus:
+			v.VpcEndpointAssociationStatus = &types.VpcEndpointAssociationStatus{}
+			return v.VpcEndpointAssociationStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeVpcEndpointAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeVpcEndpointAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVpcEndpointAssociation, schemas.DescribeVpcEndpointAssociationRequest, schemas.DescribeVpcEndpointAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeVpcEndpointAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVpcEndpointAssociation, schemas.DescribeVpcEndpointAssociationRequest, schemas.DescribeVpcEndpointAssociationResponse), output: &DescribeVpcEndpointAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

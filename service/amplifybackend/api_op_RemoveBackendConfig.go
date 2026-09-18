@@ -4,6 +4,8 @@ package amplifybackend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type RemoveBackendConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveBackendConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveBackendConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveBackendConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.RemoveBackendConfigRequest_AppId, *v.AppId)
+	}
+}
+
 type RemoveBackendConfigOutput struct {
 
 	// If the request fails, this error is returned.
@@ -44,13 +58,32 @@ type RemoveBackendConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveBackendConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveBackendConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveBackendConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Error != nil {
+		s.WriteString(schemas.RemoveBackendConfigResponse_Error, *v.Error)
+	}
+}
+func (v *RemoveBackendConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveBackendConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveBackendConfigResponse_Error:
+			v.Error = new(string)
+			return d.ReadString(schemas.RemoveBackendConfigResponse_Error, v.Error)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveBackendConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveBackendConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveBackendConfig, schemas.RemoveBackendConfigRequest, schemas.RemoveBackendConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveBackendConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveBackendConfig, schemas.RemoveBackendConfigRequest, schemas.RemoveBackendConfigResponse), output: &RemoveBackendConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

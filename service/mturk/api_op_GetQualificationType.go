@@ -4,7 +4,9 @@ package mturk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetQualificationTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQualificationTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQualificationTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQualificationTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QualificationTypeId != nil {
+		s.WriteString(schemas.GetQualificationTypeRequest_QualificationTypeId, *v.QualificationTypeId)
+	}
+}
+
 type GetQualificationTypeOutput struct {
 
 	//  The returned Qualification Type
@@ -47,13 +61,34 @@ type GetQualificationTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQualificationTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQualificationTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQualificationTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QualificationType != nil {
+		s.WriteStruct(schemas.GetQualificationTypeResponse_QualificationType)
+		v.QualificationType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetQualificationTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetQualificationTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetQualificationTypeResponse_QualificationType:
+			v.QualificationType = &types.QualificationType{}
+			return v.QualificationType.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetQualificationTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetQualificationType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQualificationType, schemas.GetQualificationTypeRequest, schemas.GetQualificationTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetQualificationType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQualificationType, schemas.GetQualificationTypeRequest, schemas.GetQualificationTypeResponse), output: &GetQualificationTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

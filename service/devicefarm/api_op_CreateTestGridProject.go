@@ -4,7 +4,9 @@ package devicefarm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,26 @@ type CreateTestGridProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTestGridProjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTestGridProjectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTestGridProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateTestGridProjectRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateTestGridProjectRequest_name, *v.Name)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateTestGridProjectRequest_vpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateTestGridProjectOutput struct {
 
 	// ARN of the Selenium testing project that was created.
@@ -51,13 +73,34 @@ type CreateTestGridProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTestGridProjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTestGridProjectResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTestGridProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TestGridProject != nil {
+		s.WriteStruct(schemas.CreateTestGridProjectResult_testGridProject)
+		v.TestGridProject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateTestGridProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTestGridProjectResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTestGridProjectResult_testGridProject:
+			v.TestGridProject = &types.TestGridProject{}
+			return v.TestGridProject.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTestGridProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTestGridProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTestGridProject, schemas.CreateTestGridProjectRequest, schemas.CreateTestGridProjectResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateTestGridProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTestGridProject, schemas.CreateTestGridProjectRequest, schemas.CreateTestGridProjectResult), output: &CreateTestGridProjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

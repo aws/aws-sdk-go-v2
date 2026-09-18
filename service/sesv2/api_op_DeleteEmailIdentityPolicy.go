@@ -4,6 +4,8 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,21 @@ type DeleteEmailIdentityPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEmailIdentityPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEmailIdentityPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEmailIdentityPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailIdentity != nil {
+		s.WriteString(schemas.DeleteEmailIdentityPolicyRequest_EmailIdentity, *v.EmailIdentity)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.DeleteEmailIdentityPolicyRequest_PolicyName, *v.PolicyName)
+	}
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type DeleteEmailIdentityPolicyOutput struct {
@@ -68,13 +85,26 @@ type DeleteEmailIdentityPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEmailIdentityPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEmailIdentityPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEmailIdentityPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteEmailIdentityPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEmailIdentityPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEmailIdentityPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteEmailIdentityPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEmailIdentityPolicy, schemas.DeleteEmailIdentityPolicyRequest, schemas.DeleteEmailIdentityPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteEmailIdentityPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEmailIdentityPolicy, schemas.DeleteEmailIdentityPolicyRequest, schemas.DeleteEmailIdentityPolicyResponse), output: &DeleteEmailIdentityPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,33 @@ type UpdateIPSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIPSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIPSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIPSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Activate != nil {
+		s.WriteBool(schemas.UpdateIPSetRequest_Activate, *v.Activate)
+	}
+	if v.DetectorId != nil {
+		s.WriteString(schemas.UpdateIPSetRequest_DetectorId, *v.DetectorId)
+	}
+	if v.ExpectedBucketOwner != nil {
+		s.WriteString(schemas.UpdateIPSetRequest_ExpectedBucketOwner, *v.ExpectedBucketOwner)
+	}
+	if v.IpSetId != nil {
+		s.WriteString(schemas.UpdateIPSetRequest_IpSetId, *v.IpSetId)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.UpdateIPSetRequest_Location, *v.Location)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateIPSetRequest_Name, *v.Name)
+	}
+}
+
 type UpdateIPSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -64,13 +93,26 @@ type UpdateIPSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIPSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIPSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIPSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateIPSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIPSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIPSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIPSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIPSet, schemas.UpdateIPSetRequest, schemas.UpdateIPSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIPSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIPSet, schemas.UpdateIPSetRequest, schemas.UpdateIPSetResponse), output: &UpdateIPSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

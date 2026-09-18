@@ -4,7 +4,9 @@ package applicationsignals
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,28 @@ type DeleteInstrumentationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInstrumentationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInstrumentationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInstrumentationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Environment != nil {
+		s.WriteString(schemas.DeleteInstrumentationConfigurationRequest_Environment, *v.Environment)
+	}
+	if v.InstrumentationType != "" {
+		s.WriteString(schemas.DeleteInstrumentationConfigurationRequest_InstrumentationType, string(v.InstrumentationType))
+	}
+	serializeLocationIdentifier(s, schemas.DeleteInstrumentationConfigurationRequest_LocationIdentifier, v.LocationIdentifier)
+	if v.Service != nil {
+		s.WriteString(schemas.DeleteInstrumentationConfigurationRequest_Service, *v.Service)
+	}
+	if v.SignalType != "" {
+		s.WriteString(schemas.DeleteInstrumentationConfigurationRequest_SignalType, string(v.SignalType))
+	}
+}
+
 type DeleteInstrumentationConfigurationOutput struct {
 
 	// The result of the delete request. The value is DELETED when the configuration
@@ -71,13 +95,36 @@ type DeleteInstrumentationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInstrumentationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInstrumentationConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInstrumentationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletionStatus != "" {
+		s.WriteString(schemas.DeleteInstrumentationConfigurationResponse_DeletionStatus, string(v.DeletionStatus))
+	}
+}
+func (v *DeleteInstrumentationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteInstrumentationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteInstrumentationConfigurationResponse_DeletionStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeleteInstrumentationConfigurationResponse_DeletionStatus, &ev); err != nil {
+				return err
+			}
+			v.DeletionStatus = types.DynamicInstrumentationDeletionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteInstrumentationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteInstrumentationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInstrumentationConfiguration, schemas.DeleteInstrumentationConfigurationRequest, schemas.DeleteInstrumentationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteInstrumentationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInstrumentationConfiguration, schemas.DeleteInstrumentationConfigurationRequest, schemas.DeleteInstrumentationConfigurationResponse), output: &DeleteInstrumentationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

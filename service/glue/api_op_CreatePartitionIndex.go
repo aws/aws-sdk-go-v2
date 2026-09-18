@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,29 @@ type CreatePartitionIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePartitionIndexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePartitionIndexRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePartitionIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.CreatePartitionIndexRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.CreatePartitionIndexRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.PartitionIndex != nil {
+		s.WriteStruct(schemas.CreatePartitionIndexRequest_PartitionIndex)
+		v.PartitionIndex.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.CreatePartitionIndexRequest_TableName, *v.TableName)
+	}
+}
+
 type CreatePartitionIndexOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +80,26 @@ type CreatePartitionIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePartitionIndexOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePartitionIndexResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePartitionIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreatePartitionIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePartitionIndexResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePartitionIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePartitionIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePartitionIndex, schemas.CreatePartitionIndexRequest, schemas.CreatePartitionIndexResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePartitionIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePartitionIndex, schemas.CreatePartitionIndexRequest, schemas.CreatePartitionIndexResponse), output: &CreatePartitionIndexOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

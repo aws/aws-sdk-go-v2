@@ -4,7 +4,9 @@ package sagemakerfeaturestoreruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,19 @@ type BatchGetRecordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetRecordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetRecordRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpirationTimeResponse != "" {
+		s.WriteString(schemas.BatchGetRecordRequest_ExpirationTimeResponse, string(v.ExpirationTimeResponse))
+	}
+	serializeBatchGetRecordIdentifiers(s, schemas.BatchGetRecordRequest_Identifiers, v.Identifiers)
+}
+
 type BatchGetRecordOutput struct {
 
 	// A list of errors that have occurred when retrieving a batch of Records.
@@ -65,13 +80,35 @@ type BatchGetRecordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetRecordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetRecordResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetRecordErrors(s, schemas.BatchGetRecordResponse_Errors, v.Errors)
+	serializeBatchGetRecordResultDetails(s, schemas.BatchGetRecordResponse_Records, v.Records)
+	serializeUnprocessedIdentifiers(s, schemas.BatchGetRecordResponse_UnprocessedIdentifiers, v.UnprocessedIdentifiers)
+}
+func (v *BatchGetRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetRecordResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetRecordResponse_Errors:
+			return deserializeBatchGetRecordErrors(d, schemas.BatchGetRecordResponse_Errors, &v.Errors)
+		case schemas.BatchGetRecordResponse_Records:
+			return deserializeBatchGetRecordResultDetails(d, schemas.BatchGetRecordResponse_Records, &v.Records)
+		case schemas.BatchGetRecordResponse_UnprocessedIdentifiers:
+			return deserializeUnprocessedIdentifiers(d, schemas.BatchGetRecordResponse_UnprocessedIdentifiers, &v.UnprocessedIdentifiers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetRecord, schemas.BatchGetRecordRequest, schemas.BatchGetRecordResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetRecord, schemas.BatchGetRecordRequest, schemas.BatchGetRecordResponse), output: &BatchGetRecordOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

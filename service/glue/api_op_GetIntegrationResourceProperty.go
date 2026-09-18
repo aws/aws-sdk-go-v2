@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetIntegrationResourcePropertyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIntegrationResourcePropertyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIntegrationResourcePropertyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIntegrationResourcePropertyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetIntegrationResourcePropertyRequest_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type GetIntegrationResourcePropertyOutput struct {
 
 	// The connection ARN of the source, or the database ARN of the target.
@@ -56,13 +70,54 @@ type GetIntegrationResourcePropertyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIntegrationResourcePropertyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIntegrationResourcePropertyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIntegrationResourcePropertyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetIntegrationResourcePropertyResponse_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourcePropertyArn != nil {
+		s.WriteString(schemas.GetIntegrationResourcePropertyResponse_ResourcePropertyArn, *v.ResourcePropertyArn)
+	}
+	if v.SourceProcessingProperties != nil {
+		s.WriteStruct(schemas.GetIntegrationResourcePropertyResponse_SourceProcessingProperties)
+		v.SourceProcessingProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetProcessingProperties != nil {
+		s.WriteStruct(schemas.GetIntegrationResourcePropertyResponse_TargetProcessingProperties)
+		v.TargetProcessingProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetIntegrationResourcePropertyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIntegrationResourcePropertyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIntegrationResourcePropertyResponse_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.GetIntegrationResourcePropertyResponse_ResourceArn, v.ResourceArn)
+		case schemas.GetIntegrationResourcePropertyResponse_ResourcePropertyArn:
+			v.ResourcePropertyArn = new(string)
+			return d.ReadString(schemas.GetIntegrationResourcePropertyResponse_ResourcePropertyArn, v.ResourcePropertyArn)
+		case schemas.GetIntegrationResourcePropertyResponse_SourceProcessingProperties:
+			v.SourceProcessingProperties = &types.SourceProcessingProperties{}
+			return v.SourceProcessingProperties.Deserialize(d)
+		case schemas.GetIntegrationResourcePropertyResponse_TargetProcessingProperties:
+			v.TargetProcessingProperties = &types.TargetProcessingProperties{}
+			return v.TargetProcessingProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIntegrationResourcePropertyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetIntegrationResourceProperty{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntegrationResourceProperty, schemas.GetIntegrationResourcePropertyRequest, schemas.GetIntegrationResourcePropertyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetIntegrationResourceProperty{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntegrationResourceProperty, schemas.GetIntegrationResourcePropertyRequest, schemas.GetIntegrationResourcePropertyResponse), output: &GetIntegrationResourcePropertyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

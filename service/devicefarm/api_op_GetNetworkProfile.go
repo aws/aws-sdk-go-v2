@@ -4,7 +4,9 @@ package devicefarm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetNetworkProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNetworkProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNetworkProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetNetworkProfileRequest_arn, *v.Arn)
+	}
+}
+
 type GetNetworkProfileOutput struct {
 
 	// The network profile.
@@ -45,13 +59,34 @@ type GetNetworkProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNetworkProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNetworkProfileResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkProfile != nil {
+		s.WriteStruct(schemas.GetNetworkProfileResult_networkProfile)
+		v.NetworkProfile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetNetworkProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNetworkProfileResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNetworkProfileResult_networkProfile:
+			v.NetworkProfile = &types.NetworkProfile{}
+			return v.NetworkProfile.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNetworkProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetNetworkProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetworkProfile, schemas.GetNetworkProfileRequest, schemas.GetNetworkProfileResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetNetworkProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetworkProfile, schemas.GetNetworkProfileRequest, schemas.GetNetworkProfileResult), output: &GetNetworkProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

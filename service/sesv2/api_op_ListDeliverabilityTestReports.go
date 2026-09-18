@@ -5,7 +5,9 @@ package sesv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type ListDeliverabilityTestReportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeliverabilityTestReportsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDeliverabilityTestReportsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDeliverabilityTestReportsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDeliverabilityTestReportsRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListDeliverabilityTestReportsRequest_PageSize, *v.PageSize)
+	}
+}
+
 // A list of the predictive inbox placement test reports that are available for
 // your account, regardless of whether or not those tests are complete.
 type ListDeliverabilityTestReportsOutput struct {
@@ -69,13 +86,35 @@ type ListDeliverabilityTestReportsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeliverabilityTestReportsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDeliverabilityTestReportsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDeliverabilityTestReportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeliverabilityTestReports(s, schemas.ListDeliverabilityTestReportsResponse_DeliverabilityTestReports, v.DeliverabilityTestReports)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDeliverabilityTestReportsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDeliverabilityTestReportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDeliverabilityTestReportsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDeliverabilityTestReportsResponse_DeliverabilityTestReports:
+			return deserializeDeliverabilityTestReports(d, schemas.ListDeliverabilityTestReportsResponse_DeliverabilityTestReports, &v.DeliverabilityTestReports)
+		case schemas.ListDeliverabilityTestReportsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDeliverabilityTestReportsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDeliverabilityTestReportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDeliverabilityTestReports{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeliverabilityTestReports, schemas.ListDeliverabilityTestReportsRequest, schemas.ListDeliverabilityTestReportsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDeliverabilityTestReports{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeliverabilityTestReports, schemas.ListDeliverabilityTestReportsRequest, schemas.ListDeliverabilityTestReportsResponse), output: &ListDeliverabilityTestReportsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

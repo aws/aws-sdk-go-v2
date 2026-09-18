@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type ListIdentityProviderConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdentityProviderConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdentityProviderConfigsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdentityProviderConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ListIdentityProviderConfigsRequest_clusterName, *v.ClusterName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIdentityProviderConfigsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdentityProviderConfigsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListIdentityProviderConfigsOutput struct {
 
 	// The identity provider configurations for the cluster.
@@ -72,13 +92,35 @@ type ListIdentityProviderConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdentityProviderConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdentityProviderConfigsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdentityProviderConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentityProviderConfigs(s, schemas.ListIdentityProviderConfigsResponse_identityProviderConfigs, v.IdentityProviderConfigs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdentityProviderConfigsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListIdentityProviderConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIdentityProviderConfigsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIdentityProviderConfigsResponse_identityProviderConfigs:
+			return deserializeIdentityProviderConfigs(d, schemas.ListIdentityProviderConfigsResponse_identityProviderConfigs, &v.IdentityProviderConfigs)
+		case schemas.ListIdentityProviderConfigsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIdentityProviderConfigsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIdentityProviderConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIdentityProviderConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentityProviderConfigs, schemas.ListIdentityProviderConfigsRequest, schemas.ListIdentityProviderConfigsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIdentityProviderConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentityProviderConfigs, schemas.ListIdentityProviderConfigsRequest, schemas.ListIdentityProviderConfigsResponse), output: &ListIdentityProviderConfigsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

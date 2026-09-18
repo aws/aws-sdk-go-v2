@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -36,6 +38,18 @@ type GetContactListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContactListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContactListRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContactListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactListName != nil {
+		s.WriteString(schemas.GetContactListRequest_ContactListName, *v.ContactListName)
+	}
+}
+
 type GetContactListOutput struct {
 
 	// The name of the contact list.
@@ -63,13 +77,56 @@ type GetContactListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContactListOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContactListResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContactListOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactListName != nil {
+		s.WriteString(schemas.GetContactListResponse_ContactListName, *v.ContactListName)
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.GetContactListResponse_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetContactListResponse_Description, *v.Description)
+	}
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteTime(schemas.GetContactListResponse_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	serializeTagList(s, schemas.GetContactListResponse_Tags, v.Tags)
+	serializeTopics(s, schemas.GetContactListResponse_Topics, v.Topics)
+}
+func (v *GetContactListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetContactListResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetContactListResponse_ContactListName:
+			v.ContactListName = new(string)
+			return d.ReadString(schemas.GetContactListResponse_ContactListName, v.ContactListName)
+		case schemas.GetContactListResponse_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetContactListResponse_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.GetContactListResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetContactListResponse_Description, v.Description)
+		case schemas.GetContactListResponse_LastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetContactListResponse_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.GetContactListResponse_Tags:
+			return deserializeTagList(d, schemas.GetContactListResponse_Tags, &v.Tags)
+		case schemas.GetContactListResponse_Topics:
+			return deserializeTopics(d, schemas.GetContactListResponse_Topics, &v.Topics)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetContactListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetContactList{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContactList, schemas.GetContactListRequest, schemas.GetContactListResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetContactList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContactList, schemas.GetContactListRequest, schemas.GetContactListResponse), output: &GetContactListOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

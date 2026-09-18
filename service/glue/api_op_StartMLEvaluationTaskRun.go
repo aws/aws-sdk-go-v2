@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type StartMLEvaluationTaskRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMLEvaluationTaskRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMLEvaluationTaskRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMLEvaluationTaskRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransformId != nil {
+		s.WriteString(schemas.StartMLEvaluationTaskRunRequest_TransformId, *v.TransformId)
+	}
+}
+
 type StartMLEvaluationTaskRunOutput struct {
 
 	// The unique identifier associated with this run.
@@ -51,13 +65,32 @@ type StartMLEvaluationTaskRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMLEvaluationTaskRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMLEvaluationTaskRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMLEvaluationTaskRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskRunId != nil {
+		s.WriteString(schemas.StartMLEvaluationTaskRunResponse_TaskRunId, *v.TaskRunId)
+	}
+}
+func (v *StartMLEvaluationTaskRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMLEvaluationTaskRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMLEvaluationTaskRunResponse_TaskRunId:
+			v.TaskRunId = new(string)
+			return d.ReadString(schemas.StartMLEvaluationTaskRunResponse_TaskRunId, v.TaskRunId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMLEvaluationTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMLEvaluationTaskRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMLEvaluationTaskRun, schemas.StartMLEvaluationTaskRunRequest, schemas.StartMLEvaluationTaskRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMLEvaluationTaskRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMLEvaluationTaskRun, schemas.StartMLEvaluationTaskRunRequest, schemas.StartMLEvaluationTaskRunResponse), output: &StartMLEvaluationTaskRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

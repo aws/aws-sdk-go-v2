@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type ListThemeVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThemeVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThemeVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThemeVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListThemeVersionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListThemeVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThemeVersionsRequest_NextToken, *v.NextToken)
+	}
+	if v.ThemeId != nil {
+		s.WriteString(schemas.ListThemeVersionsRequest_ThemeId, *v.ThemeId)
+	}
+}
+
 type ListThemeVersionsOutput struct {
 
 	// The token for the next set of results, or null if there are no more results.
@@ -67,13 +90,46 @@ type ListThemeVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThemeVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThemeVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThemeVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThemeVersionsResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListThemeVersionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListThemeVersionsResponse_Status, v.Status)
+	}
+	serializeThemeVersionSummaryList(s, schemas.ListThemeVersionsResponse_ThemeVersionSummaryList, v.ThemeVersionSummaryList)
+}
+func (v *ListThemeVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListThemeVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListThemeVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListThemeVersionsResponse_NextToken, v.NextToken)
+		case schemas.ListThemeVersionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListThemeVersionsResponse_RequestId, v.RequestId)
+		case schemas.ListThemeVersionsResponse_Status:
+			return d.ReadInt32(schemas.ListThemeVersionsResponse_Status, &v.Status)
+		case schemas.ListThemeVersionsResponse_ThemeVersionSummaryList:
+			return deserializeThemeVersionSummaryList(d, schemas.ListThemeVersionsResponse_ThemeVersionSummaryList, &v.ThemeVersionSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListThemeVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListThemeVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThemeVersions, schemas.ListThemeVersionsRequest, schemas.ListThemeVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListThemeVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThemeVersions, schemas.ListThemeVersionsRequest, schemas.ListThemeVersionsResponse), output: &ListThemeVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

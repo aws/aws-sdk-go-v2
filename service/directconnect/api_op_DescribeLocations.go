@@ -4,7 +4,9 @@ package directconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,6 +31,22 @@ type DescribeLocationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLocationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLocationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DescribeLocationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type DescribeLocationsOutput struct {
 
 	// The locations.
@@ -40,13 +58,29 @@ type DescribeLocationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLocationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Locations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLocationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLocationList(s, schemas.Locations_locations, v.Locations)
+}
+func (v *DescribeLocationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Locations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Locations_locations:
+			return deserializeLocationList(d, schemas.Locations_locations, &v.Locations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLocationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLocations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLocations, nil, schemas.Locations)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLocations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLocations, nil, schemas.Locations), output: &DescribeLocationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

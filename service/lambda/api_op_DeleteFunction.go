@@ -4,6 +4,8 @@ package lambda
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,21 @@ type DeleteFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFunctionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFunctionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FunctionName != nil {
+		s.WriteString(schemas.DeleteFunctionRequest_FunctionName, *v.FunctionName)
+	}
+	if v.Qualifier != nil {
+		s.WriteString(schemas.DeleteFunctionRequest_Qualifier, *v.Qualifier)
+	}
+}
+
 type DeleteFunctionOutput struct {
 
 	// The HTTP status code returned by the operation.
@@ -69,13 +86,31 @@ type DeleteFunctionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFunctionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFunctionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StatusCode != 0 {
+		s.WriteInt32(schemas.DeleteFunctionResponse_StatusCode, v.StatusCode)
+	}
+}
+func (v *DeleteFunctionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFunctionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFunctionResponse_StatusCode:
+			return d.ReadInt32(schemas.DeleteFunctionResponse_StatusCode, &v.StatusCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFunction, schemas.DeleteFunctionRequest, schemas.DeleteFunctionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFunction, schemas.DeleteFunctionRequest, schemas.DeleteFunctionResponse), output: &DeleteFunctionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

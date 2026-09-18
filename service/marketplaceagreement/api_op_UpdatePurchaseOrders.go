@@ -4,7 +4,9 @@ package marketplaceagreement
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,16 @@ type UpdatePurchaseOrdersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePurchaseOrdersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePurchaseOrdersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePurchaseOrdersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePurchaseOrders(s, schemas.UpdatePurchaseOrdersInput_purchaseOrders, v.PurchaseOrders)
+}
+
 type UpdatePurchaseOrdersOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +54,26 @@ type UpdatePurchaseOrdersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePurchaseOrdersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePurchaseOrdersOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePurchaseOrdersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdatePurchaseOrdersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePurchaseOrdersOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePurchaseOrdersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdatePurchaseOrders{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePurchaseOrders, schemas.UpdatePurchaseOrdersInput, schemas.UpdatePurchaseOrdersOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdatePurchaseOrders{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePurchaseOrders, schemas.UpdatePurchaseOrdersInput, schemas.UpdatePurchaseOrdersOutput), output: &UpdatePurchaseOrdersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

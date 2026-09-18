@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/lambdacore/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -28,6 +30,14 @@ type NetworkConnectorConfigurationMemberVpcEgressConfiguration struct {
 }
 
 func (*NetworkConnectorConfigurationMemberVpcEgressConfiguration) isNetworkConnectorConfiguration() {}
+func (v *NetworkConnectorConfigurationMemberVpcEgressConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkConnectorConfiguration_VpcEgressConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *NetworkConnectorConfigurationMemberVpcEgressConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Summary information about a network connector returned by ListNetworkConnectors
 // . Contains identifying fields and current state. To retrieve full configuration
@@ -64,6 +74,66 @@ type NetworkConnectorSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NetworkConnectorSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkConnectorSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkConnectorSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.NetworkConnectorSummary_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.NetworkConnectorSummary_Id, *v.Id)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.NetworkConnectorSummary_LastModified, *v.LastModified)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.NetworkConnectorSummary_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.NetworkConnectorSummary_State, string(v.State))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.NetworkConnectorSummary_Type, string(v.Type))
+	}
+}
+func (v *NetworkConnectorSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkConnectorSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkConnectorSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.NetworkConnectorSummary_Arn, v.Arn)
+		case schemas.NetworkConnectorSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.NetworkConnectorSummary_Id, v.Id)
+		case schemas.NetworkConnectorSummary_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.NetworkConnectorSummary_LastModified, v.LastModified)
+		case schemas.NetworkConnectorSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.NetworkConnectorSummary_Name, v.Name)
+		case schemas.NetworkConnectorSummary_State:
+			var ev string
+			if err := d.ReadString(schemas.NetworkConnectorSummary_State, &ev); err != nil {
+				return err
+			}
+			v.State = NetworkConnectorState(ev)
+			return nil
+		case schemas.NetworkConnectorSummary_Type:
+			var ev string
+			if err := d.ReadString(schemas.NetworkConnectorSummary_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = NetworkConnectorType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Configuration for a VPC egress network connector. Specifies the VPC subnets,
 // security groups, network protocol, and associated Lambda compute resource types.
 type NetworkConnectorVpcEgressConfiguration struct {
@@ -85,6 +155,41 @@ type NetworkConnectorVpcEgressConfiguration struct {
 	SubnetIds []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkConnectorVpcEgressConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkConnectorVpcEgressConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkConnectorVpcEgressConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssociatedComputeResourceTypesList(s, schemas.NetworkConnectorVpcEgressConfiguration_AssociatedComputeResourceTypes, v.AssociatedComputeResourceTypes)
+	if v.NetworkProtocol != "" {
+		s.WriteString(schemas.NetworkConnectorVpcEgressConfiguration_NetworkProtocol, string(v.NetworkProtocol))
+	}
+	serializeNetworkConnectorSecurityGroupIds(s, schemas.NetworkConnectorVpcEgressConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	serializeNetworkConnectorSubnetIds(s, schemas.NetworkConnectorVpcEgressConfiguration_SubnetIds, v.SubnetIds)
+}
+func (v *NetworkConnectorVpcEgressConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkConnectorVpcEgressConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkConnectorVpcEgressConfiguration_AssociatedComputeResourceTypes:
+			return deserializeAssociatedComputeResourceTypesList(d, schemas.NetworkConnectorVpcEgressConfiguration_AssociatedComputeResourceTypes, &v.AssociatedComputeResourceTypes)
+		case schemas.NetworkConnectorVpcEgressConfiguration_NetworkProtocol:
+			var ev string
+			if err := d.ReadString(schemas.NetworkConnectorVpcEgressConfiguration_NetworkProtocol, &ev); err != nil {
+				return err
+			}
+			v.NetworkProtocol = NetworkProtocol(ev)
+			return nil
+		case schemas.NetworkConnectorVpcEgressConfiguration_SecurityGroupIds:
+			return deserializeNetworkConnectorSecurityGroupIds(d, schemas.NetworkConnectorVpcEgressConfiguration_SecurityGroupIds, &v.SecurityGroupIds)
+		case schemas.NetworkConnectorVpcEgressConfiguration_SubnetIds:
+			return deserializeNetworkConnectorSubnetIds(d, schemas.NetworkConnectorVpcEgressConfiguration_SubnetIds, &v.SubnetIds)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

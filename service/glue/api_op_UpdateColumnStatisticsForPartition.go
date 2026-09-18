@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,26 @@ type UpdateColumnStatisticsForPartitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateColumnStatisticsForPartitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateColumnStatisticsForPartitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateColumnStatisticsForPartitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.UpdateColumnStatisticsForPartitionRequest_CatalogId, *v.CatalogId)
+	}
+	serializeUpdateColumnStatisticsList(s, schemas.UpdateColumnStatisticsForPartitionRequest_ColumnStatisticsList, v.ColumnStatisticsList)
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.UpdateColumnStatisticsForPartitionRequest_DatabaseName, *v.DatabaseName)
+	}
+	serializeValueStringList(s, schemas.UpdateColumnStatisticsForPartitionRequest_PartitionValues, v.PartitionValues)
+	if v.TableName != nil {
+		s.WriteString(schemas.UpdateColumnStatisticsForPartitionRequest_TableName, *v.TableName)
+	}
+}
+
 type UpdateColumnStatisticsForPartitionOutput struct {
 
 	// Error occurred during updating column statistics data.
@@ -67,13 +89,29 @@ type UpdateColumnStatisticsForPartitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateColumnStatisticsForPartitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateColumnStatisticsForPartitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateColumnStatisticsForPartitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeColumnStatisticsErrors(s, schemas.UpdateColumnStatisticsForPartitionResponse_Errors, v.Errors)
+}
+func (v *UpdateColumnStatisticsForPartitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateColumnStatisticsForPartitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateColumnStatisticsForPartitionResponse_Errors:
+			return deserializeColumnStatisticsErrors(d, schemas.UpdateColumnStatisticsForPartitionResponse_Errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateColumnStatisticsForPartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateColumnStatisticsForPartition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateColumnStatisticsForPartition, schemas.UpdateColumnStatisticsForPartitionRequest, schemas.UpdateColumnStatisticsForPartitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateColumnStatisticsForPartition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateColumnStatisticsForPartition, schemas.UpdateColumnStatisticsForPartitionRequest, schemas.UpdateColumnStatisticsForPartitionResponse), output: &UpdateColumnStatisticsForPartitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

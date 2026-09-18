@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetDataQualityResultInput struct {
 	ResultId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDataQualityResultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataQualityResultRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataQualityResultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResultId != nil {
+		s.WriteString(schemas.GetDataQualityResultRequest_ResultId, *v.ResultId)
+	}
 }
 
 // The response for the data quality result.
@@ -96,13 +110,111 @@ type GetDataQualityResultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataQualityResultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataQualityResultResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataQualityResultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregatedMetrics != nil {
+		s.WriteStruct(schemas.GetDataQualityResultResponse_AggregatedMetrics)
+		v.AggregatedMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDataQualityAnalyzerResults(s, schemas.GetDataQualityResultResponse_AnalyzerResults, v.AnalyzerResults)
+	if v.CompletedOn != nil {
+		s.WriteTime(schemas.GetDataQualityResultResponse_CompletedOn, *v.CompletedOn)
+	}
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.GetDataQualityResultResponse_DataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EvaluationContext != nil {
+		s.WriteString(schemas.GetDataQualityResultResponse_EvaluationContext, *v.EvaluationContext)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.GetDataQualityResultResponse_JobName, *v.JobName)
+	}
+	if v.JobRunId != nil {
+		s.WriteString(schemas.GetDataQualityResultResponse_JobRunId, *v.JobRunId)
+	}
+	serializeDataQualityObservations(s, schemas.GetDataQualityResultResponse_Observations, v.Observations)
+	if v.ProfileId != nil {
+		s.WriteString(schemas.GetDataQualityResultResponse_ProfileId, *v.ProfileId)
+	}
+	if v.ResultId != nil {
+		s.WriteString(schemas.GetDataQualityResultResponse_ResultId, *v.ResultId)
+	}
+	serializeDataQualityRuleResults(s, schemas.GetDataQualityResultResponse_RuleResults, v.RuleResults)
+	if v.RulesetEvaluationRunId != nil {
+		s.WriteString(schemas.GetDataQualityResultResponse_RulesetEvaluationRunId, *v.RulesetEvaluationRunId)
+	}
+	if v.RulesetName != nil {
+		s.WriteString(schemas.GetDataQualityResultResponse_RulesetName, *v.RulesetName)
+	}
+	if v.Score != nil {
+		s.WriteFloat64(schemas.GetDataQualityResultResponse_Score, *v.Score)
+	}
+	if v.StartedOn != nil {
+		s.WriteTime(schemas.GetDataQualityResultResponse_StartedOn, *v.StartedOn)
+	}
+}
+func (v *GetDataQualityResultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataQualityResultResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataQualityResultResponse_AggregatedMetrics:
+			v.AggregatedMetrics = &types.DataQualityAggregatedMetrics{}
+			return v.AggregatedMetrics.Deserialize(d)
+		case schemas.GetDataQualityResultResponse_AnalyzerResults:
+			return deserializeDataQualityAnalyzerResults(d, schemas.GetDataQualityResultResponse_AnalyzerResults, &v.AnalyzerResults)
+		case schemas.GetDataQualityResultResponse_CompletedOn:
+			v.CompletedOn = new(time.Time)
+			return d.ReadTime(schemas.GetDataQualityResultResponse_CompletedOn, v.CompletedOn)
+		case schemas.GetDataQualityResultResponse_DataSource:
+			v.DataSource = &types.DataSource{}
+			return v.DataSource.Deserialize(d)
+		case schemas.GetDataQualityResultResponse_EvaluationContext:
+			v.EvaluationContext = new(string)
+			return d.ReadString(schemas.GetDataQualityResultResponse_EvaluationContext, v.EvaluationContext)
+		case schemas.GetDataQualityResultResponse_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.GetDataQualityResultResponse_JobName, v.JobName)
+		case schemas.GetDataQualityResultResponse_JobRunId:
+			v.JobRunId = new(string)
+			return d.ReadString(schemas.GetDataQualityResultResponse_JobRunId, v.JobRunId)
+		case schemas.GetDataQualityResultResponse_Observations:
+			return deserializeDataQualityObservations(d, schemas.GetDataQualityResultResponse_Observations, &v.Observations)
+		case schemas.GetDataQualityResultResponse_ProfileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.GetDataQualityResultResponse_ProfileId, v.ProfileId)
+		case schemas.GetDataQualityResultResponse_ResultId:
+			v.ResultId = new(string)
+			return d.ReadString(schemas.GetDataQualityResultResponse_ResultId, v.ResultId)
+		case schemas.GetDataQualityResultResponse_RuleResults:
+			return deserializeDataQualityRuleResults(d, schemas.GetDataQualityResultResponse_RuleResults, &v.RuleResults)
+		case schemas.GetDataQualityResultResponse_RulesetEvaluationRunId:
+			v.RulesetEvaluationRunId = new(string)
+			return d.ReadString(schemas.GetDataQualityResultResponse_RulesetEvaluationRunId, v.RulesetEvaluationRunId)
+		case schemas.GetDataQualityResultResponse_RulesetName:
+			v.RulesetName = new(string)
+			return d.ReadString(schemas.GetDataQualityResultResponse_RulesetName, v.RulesetName)
+		case schemas.GetDataQualityResultResponse_Score:
+			v.Score = new(float64)
+			return d.ReadFloat64(schemas.GetDataQualityResultResponse_Score, v.Score)
+		case schemas.GetDataQualityResultResponse_StartedOn:
+			v.StartedOn = new(time.Time)
+			return d.ReadTime(schemas.GetDataQualityResultResponse_StartedOn, v.StartedOn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataQualityResultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDataQualityResult{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataQualityResult, schemas.GetDataQualityResultRequest, schemas.GetDataQualityResultResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDataQualityResult{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataQualityResult, schemas.GetDataQualityResultRequest, schemas.GetDataQualityResultResponse), output: &GetDataQualityResultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

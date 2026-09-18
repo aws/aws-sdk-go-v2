@@ -4,7 +4,9 @@ package devicefarm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListNetworkProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNetworkProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNetworkProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNetworkProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListNetworkProfilesRequest_arn, *v.Arn)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNetworkProfilesRequest_nextToken, *v.NextToken)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListNetworkProfilesRequest_type, string(v.Type))
+	}
+}
+
 type ListNetworkProfilesOutput struct {
 
 	// A list of the available network profiles.
@@ -58,13 +78,35 @@ type ListNetworkProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNetworkProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNetworkProfilesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNetworkProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNetworkProfiles(s, schemas.ListNetworkProfilesResult_networkProfiles, v.NetworkProfiles)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNetworkProfilesResult_nextToken, *v.NextToken)
+	}
+}
+func (v *ListNetworkProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNetworkProfilesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNetworkProfilesResult_networkProfiles:
+			return deserializeNetworkProfiles(d, schemas.ListNetworkProfilesResult_networkProfiles, &v.NetworkProfiles)
+		case schemas.ListNetworkProfilesResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNetworkProfilesResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNetworkProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListNetworkProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworkProfiles, schemas.ListNetworkProfilesRequest, schemas.ListNetworkProfilesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListNetworkProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworkProfiles, schemas.ListNetworkProfilesRequest, schemas.ListNetworkProfilesResult), output: &ListNetworkProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

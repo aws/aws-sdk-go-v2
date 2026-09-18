@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DescribeDataSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeDataSetRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.DescribeDataSetRequest_DataSetId, *v.DataSetId)
+	}
+}
+
 type DescribeDataSetOutput struct {
 
 	// Information on the dataset.
@@ -57,13 +74,45 @@ type DescribeDataSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSet != nil {
+		s.WriteStruct(schemas.DescribeDataSetResponse_DataSet)
+		v.DataSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeDataSetResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeDataSetResponse_Status, v.Status)
+	}
+}
+func (v *DescribeDataSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDataSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDataSetResponse_DataSet:
+			v.DataSet = &types.DataSet{}
+			return v.DataSet.Deserialize(d)
+		case schemas.DescribeDataSetResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeDataSetResponse_RequestId, v.RequestId)
+		case schemas.DescribeDataSetResponse_Status:
+			return d.ReadInt32(schemas.DescribeDataSetResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDataSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataSet, schemas.DescribeDataSetRequest, schemas.DescribeDataSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDataSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataSet, schemas.DescribeDataSetRequest, schemas.DescribeDataSetResponse), output: &DescribeDataSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

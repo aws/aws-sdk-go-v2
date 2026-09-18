@@ -4,7 +4,9 @@ package directconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DeleteResiliencyGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResiliencyGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResiliencyGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResiliencyGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResiliencyGroupId != nil {
+		s.WriteString(schemas.DeleteResiliencyGroupRequest_resiliencyGroupId, *v.ResiliencyGroupId)
+	}
+}
+
 type DeleteResiliencyGroupOutput struct {
 
 	// Information about the resiliency group.
@@ -48,13 +62,34 @@ type DeleteResiliencyGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResiliencyGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResiliencyGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResiliencyGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResiliencyGroup != nil {
+		s.WriteStruct(schemas.DeleteResiliencyGroupResult_resiliencyGroup)
+		v.ResiliencyGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteResiliencyGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResiliencyGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteResiliencyGroupResult_resiliencyGroup:
+			v.ResiliencyGroup = &types.ResiliencyGroup{}
+			return v.ResiliencyGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteResiliencyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteResiliencyGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResiliencyGroup, schemas.DeleteResiliencyGroupRequest, schemas.DeleteResiliencyGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteResiliencyGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResiliencyGroup, schemas.DeleteResiliencyGroupRequest, schemas.DeleteResiliencyGroupResult), output: &DeleteResiliencyGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

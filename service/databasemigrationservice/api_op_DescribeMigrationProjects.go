@@ -5,7 +5,9 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,22 @@ type DescribeMigrationProjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMigrationProjectsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMigrationProjectsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMigrationProjectsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribeMigrationProjectsMessage_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeMigrationProjectsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeMigrationProjectsMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeMigrationProjectsOutput struct {
 
 	// Specifies the unique pagination token that makes it possible to display the
@@ -86,13 +104,35 @@ type DescribeMigrationProjectsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMigrationProjectsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMigrationProjectsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMigrationProjectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeMigrationProjectsResponse_Marker, *v.Marker)
+	}
+	serializeMigrationProjectList(s, schemas.DescribeMigrationProjectsResponse_MigrationProjects, v.MigrationProjects)
+}
+func (v *DescribeMigrationProjectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMigrationProjectsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMigrationProjectsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeMigrationProjectsResponse_Marker, v.Marker)
+		case schemas.DescribeMigrationProjectsResponse_MigrationProjects:
+			return deserializeMigrationProjectList(d, schemas.DescribeMigrationProjectsResponse_MigrationProjects, &v.MigrationProjects)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMigrationProjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMigrationProjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMigrationProjects, schemas.DescribeMigrationProjectsMessage, schemas.DescribeMigrationProjectsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeMigrationProjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMigrationProjects, schemas.DescribeMigrationProjectsMessage, schemas.DescribeMigrationProjectsResponse), output: &DescribeMigrationProjectsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,46 @@ type StartDataQualityRuleRecommendationRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDataQualityRuleRecommendationRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDataQualityRuleRecommendationRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDataQualityRuleRecommendationRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalRunOptions != nil {
+		s.WriteStruct(schemas.StartDataQualityRuleRecommendationRunRequest_AdditionalRunOptions)
+		v.AdditionalRunOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartDataQualityRuleRecommendationRunRequest_ClientToken, *v.ClientToken)
+	}
+	if v.CreatedRulesetName != nil {
+		s.WriteString(schemas.StartDataQualityRuleRecommendationRunRequest_CreatedRulesetName, *v.CreatedRulesetName)
+	}
+	if v.DataQualitySecurityConfiguration != nil {
+		s.WriteString(schemas.StartDataQualityRuleRecommendationRunRequest_DataQualitySecurityConfiguration, *v.DataQualitySecurityConfiguration)
+	}
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.StartDataQualityRuleRecommendationRunRequest_DataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NumberOfWorkers != nil {
+		s.WriteInt32(schemas.StartDataQualityRuleRecommendationRunRequest_NumberOfWorkers, *v.NumberOfWorkers)
+	}
+	if v.RecommendationMode != "" {
+		s.WriteString(schemas.StartDataQualityRuleRecommendationRunRequest_RecommendationMode, string(v.RecommendationMode))
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.StartDataQualityRuleRecommendationRunRequest_Role, *v.Role)
+	}
+	if v.Timeout != nil {
+		s.WriteInt32(schemas.StartDataQualityRuleRecommendationRunRequest_Timeout, *v.Timeout)
+	}
+}
+
 type StartDataQualityRuleRecommendationRunOutput struct {
 
 	// The unique run identifier associated with this run.
@@ -87,13 +129,32 @@ type StartDataQualityRuleRecommendationRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDataQualityRuleRecommendationRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDataQualityRuleRecommendationRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDataQualityRuleRecommendationRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RunId != nil {
+		s.WriteString(schemas.StartDataQualityRuleRecommendationRunResponse_RunId, *v.RunId)
+	}
+}
+func (v *StartDataQualityRuleRecommendationRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDataQualityRuleRecommendationRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDataQualityRuleRecommendationRunResponse_RunId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.StartDataQualityRuleRecommendationRunResponse_RunId, v.RunId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDataQualityRuleRecommendationRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartDataQualityRuleRecommendationRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDataQualityRuleRecommendationRun, schemas.StartDataQualityRuleRecommendationRunRequest, schemas.StartDataQualityRuleRecommendationRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartDataQualityRuleRecommendationRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDataQualityRuleRecommendationRun, schemas.StartDataQualityRuleRecommendationRunRequest, schemas.StartDataQualityRuleRecommendationRunResponse), output: &StartDataQualityRuleRecommendationRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

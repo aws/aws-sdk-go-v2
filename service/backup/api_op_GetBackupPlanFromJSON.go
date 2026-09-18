@@ -4,7 +4,9 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetBackupPlanFromJSONInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBackupPlanFromJSONInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBackupPlanFromJSONInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBackupPlanFromJSONInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupPlanTemplateJson != nil {
+		s.WriteString(schemas.GetBackupPlanFromJSONInput_BackupPlanTemplateJson, *v.BackupPlanTemplateJson)
+	}
+}
+
 type GetBackupPlanFromJSONOutput struct {
 
 	// Specifies the body of a backup plan. Includes a BackupPlanName and one or more
@@ -46,13 +60,34 @@ type GetBackupPlanFromJSONOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBackupPlanFromJSONOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBackupPlanFromJSONOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBackupPlanFromJSONOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupPlan != nil {
+		s.WriteStruct(schemas.GetBackupPlanFromJSONOutput_BackupPlan)
+		v.BackupPlan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetBackupPlanFromJSONOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBackupPlanFromJSONOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBackupPlanFromJSONOutput_BackupPlan:
+			v.BackupPlan = &types.BackupPlan{}
+			return v.BackupPlan.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBackupPlanFromJSONMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBackupPlanFromJSON{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackupPlanFromJSON, schemas.GetBackupPlanFromJSONInput, schemas.GetBackupPlanFromJSONOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBackupPlanFromJSON{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackupPlanFromJSON, schemas.GetBackupPlanFromJSONInput, schemas.GetBackupPlanFromJSONOutput), output: &GetBackupPlanFromJSONOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

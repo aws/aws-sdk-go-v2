@@ -4,7 +4,9 @@ package devicefarm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListInstanceProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstanceProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstanceProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstanceProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInstanceProfilesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInstanceProfilesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListInstanceProfilesOutput struct {
 
 	// An object that contains information about your instance profiles.
@@ -52,13 +69,35 @@ type ListInstanceProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstanceProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstanceProfilesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstanceProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstanceProfiles(s, schemas.ListInstanceProfilesResult_instanceProfiles, v.InstanceProfiles)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInstanceProfilesResult_nextToken, *v.NextToken)
+	}
+}
+func (v *ListInstanceProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInstanceProfilesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInstanceProfilesResult_instanceProfiles:
+			return deserializeInstanceProfiles(d, schemas.ListInstanceProfilesResult_instanceProfiles, &v.InstanceProfiles)
+		case schemas.ListInstanceProfilesResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInstanceProfilesResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInstanceProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListInstanceProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstanceProfiles, schemas.ListInstanceProfilesRequest, schemas.ListInstanceProfilesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListInstanceProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstanceProfiles, schemas.ListInstanceProfilesRequest, schemas.ListInstanceProfilesResult), output: &ListInstanceProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

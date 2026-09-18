@@ -5,7 +5,9 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type DescribeReplicationInstanceTaskLogsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReplicationInstanceTaskLogsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReplicationInstanceTaskLogsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicationInstanceTaskLogsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeReplicationInstanceTaskLogsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeReplicationInstanceTaskLogsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.ReplicationInstanceArn != nil {
+		s.WriteString(schemas.DescribeReplicationInstanceTaskLogsMessage_ReplicationInstanceArn, *v.ReplicationInstanceArn)
+	}
+}
+
 type DescribeReplicationInstanceTaskLogsOutput struct {
 
 	//  An optional pagination token provided by a previous request. If this parameter
@@ -69,13 +89,41 @@ type DescribeReplicationInstanceTaskLogsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReplicationInstanceTaskLogsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReplicationInstanceTaskLogsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicationInstanceTaskLogsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeReplicationInstanceTaskLogsResponse_Marker, *v.Marker)
+	}
+	if v.ReplicationInstanceArn != nil {
+		s.WriteString(schemas.DescribeReplicationInstanceTaskLogsResponse_ReplicationInstanceArn, *v.ReplicationInstanceArn)
+	}
+	serializeReplicationInstanceTaskLogsList(s, schemas.DescribeReplicationInstanceTaskLogsResponse_ReplicationInstanceTaskLogs, v.ReplicationInstanceTaskLogs)
+}
+func (v *DescribeReplicationInstanceTaskLogsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReplicationInstanceTaskLogsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReplicationInstanceTaskLogsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeReplicationInstanceTaskLogsResponse_Marker, v.Marker)
+		case schemas.DescribeReplicationInstanceTaskLogsResponse_ReplicationInstanceArn:
+			v.ReplicationInstanceArn = new(string)
+			return d.ReadString(schemas.DescribeReplicationInstanceTaskLogsResponse_ReplicationInstanceArn, v.ReplicationInstanceArn)
+		case schemas.DescribeReplicationInstanceTaskLogsResponse_ReplicationInstanceTaskLogs:
+			return deserializeReplicationInstanceTaskLogsList(d, schemas.DescribeReplicationInstanceTaskLogsResponse_ReplicationInstanceTaskLogs, &v.ReplicationInstanceTaskLogs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReplicationInstanceTaskLogsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeReplicationInstanceTaskLogs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicationInstanceTaskLogs, schemas.DescribeReplicationInstanceTaskLogsMessage, schemas.DescribeReplicationInstanceTaskLogsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeReplicationInstanceTaskLogs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicationInstanceTaskLogs, schemas.DescribeReplicationInstanceTaskLogsMessage, schemas.DescribeReplicationInstanceTaskLogsResponse), output: &DescribeReplicationInstanceTaskLogsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

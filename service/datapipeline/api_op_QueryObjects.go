@@ -5,7 +5,9 @@ package datapipeline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,32 @@ type QueryObjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryObjectsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryObjectsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryObjectsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.QueryObjectsInput_limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.QueryObjectsInput_marker, *v.Marker)
+	}
+	if v.PipelineId != nil {
+		s.WriteString(schemas.QueryObjectsInput_pipelineId, *v.PipelineId)
+	}
+	if v.Query != nil {
+		s.WriteStruct(schemas.QueryObjectsInput_query)
+		v.Query.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Sphere != nil {
+		s.WriteString(schemas.QueryObjectsInput_sphere, *v.Sphere)
+	}
+}
+
 // Contains the output of QueryObjects.
 type QueryObjectsOutput struct {
 
@@ -94,13 +122,40 @@ type QueryObjectsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryObjectsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryObjectsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryObjectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HasMoreResults != false {
+		s.WriteBool(schemas.QueryObjectsOutput_hasMoreResults, v.HasMoreResults)
+	}
+	serializeidList(s, schemas.QueryObjectsOutput_ids, v.Ids)
+	if v.Marker != nil {
+		s.WriteString(schemas.QueryObjectsOutput_marker, *v.Marker)
+	}
+}
+func (v *QueryObjectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryObjectsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryObjectsOutput_hasMoreResults:
+			return d.ReadBool(schemas.QueryObjectsOutput_hasMoreResults, &v.HasMoreResults)
+		case schemas.QueryObjectsOutput_ids:
+			return deserializeidList(d, schemas.QueryObjectsOutput_ids, &v.Ids)
+		case schemas.QueryObjectsOutput_marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.QueryObjectsOutput_marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationQueryObjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpQueryObjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryObjects, schemas.QueryObjectsInput, schemas.QueryObjectsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpQueryObjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryObjects, schemas.QueryObjectsInput, schemas.QueryObjectsOutput), output: &QueryObjectsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

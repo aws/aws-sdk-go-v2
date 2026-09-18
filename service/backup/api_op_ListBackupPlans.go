@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListBackupPlansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBackupPlansInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBackupPlansInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBackupPlansInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeDeleted != nil {
+		s.WriteBool(schemas.ListBackupPlansInput_IncludeDeleted, *v.IncludeDeleted)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBackupPlansInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBackupPlansInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListBackupPlansOutput struct {
 
 	// Information about the backup plans.
@@ -60,13 +80,35 @@ type ListBackupPlansOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBackupPlansOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBackupPlansOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBackupPlansOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBackupPlansList(s, schemas.ListBackupPlansOutput_BackupPlansList, v.BackupPlansList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBackupPlansOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBackupPlansOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBackupPlansOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBackupPlansOutput_BackupPlansList:
+			return deserializeBackupPlansList(d, schemas.ListBackupPlansOutput_BackupPlansList, &v.BackupPlansList)
+		case schemas.ListBackupPlansOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBackupPlansOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBackupPlansMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBackupPlans{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBackupPlans, schemas.ListBackupPlansInput, schemas.ListBackupPlansOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBackupPlans{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBackupPlans, schemas.ListBackupPlansInput, schemas.ListBackupPlansOutput), output: &ListBackupPlansOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

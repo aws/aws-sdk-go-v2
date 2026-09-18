@@ -5,7 +5,9 @@ package partnercentralaccount
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -59,6 +61,30 @@ type CancelConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.CancelConnectionRequest_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CancelConnectionRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ConnectionType != "" {
+		s.WriteString(schemas.CancelConnectionRequest_ConnectionType, string(v.ConnectionType))
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.CancelConnectionRequest_Identifier, *v.Identifier)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.CancelConnectionRequest_Reason, *v.Reason)
+	}
+}
+
 type CancelConnectionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the canceled connection.
@@ -97,13 +123,59 @@ type CancelConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CancelConnectionResponse_Arn, *v.Arn)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.CancelConnectionResponse_Catalog, *v.Catalog)
+	}
+	serializeConnectionTypeDetailMap(s, schemas.CancelConnectionResponse_ConnectionTypes, v.ConnectionTypes)
+	if v.Id != nil {
+		s.WriteString(schemas.CancelConnectionResponse_Id, *v.Id)
+	}
+	if v.OtherParticipantAccountId != nil {
+		s.WriteString(schemas.CancelConnectionResponse_OtherParticipantAccountId, *v.OtherParticipantAccountId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CancelConnectionResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *CancelConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelConnectionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CancelConnectionResponse_Arn, v.Arn)
+		case schemas.CancelConnectionResponse_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.CancelConnectionResponse_Catalog, v.Catalog)
+		case schemas.CancelConnectionResponse_ConnectionTypes:
+			return deserializeConnectionTypeDetailMap(d, schemas.CancelConnectionResponse_ConnectionTypes, &v.ConnectionTypes)
+		case schemas.CancelConnectionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CancelConnectionResponse_Id, v.Id)
+		case schemas.CancelConnectionResponse_OtherParticipantAccountId:
+			v.OtherParticipantAccountId = new(string)
+			return d.ReadString(schemas.CancelConnectionResponse_OtherParticipantAccountId, v.OtherParticipantAccountId)
+		case schemas.CancelConnectionResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CancelConnectionResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCancelConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelConnection, schemas.CancelConnectionRequest, schemas.CancelConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCancelConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelConnection, schemas.CancelConnectionRequest, schemas.CancelConnectionResponse), output: &CancelConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

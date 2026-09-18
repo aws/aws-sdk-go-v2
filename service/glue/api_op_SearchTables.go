@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -83,6 +85,35 @@ type SearchTablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchTablesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchTablesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchTablesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.SearchTablesRequest_CatalogId, *v.CatalogId)
+	}
+	serializeSearchPropertyPredicates(s, schemas.SearchTablesRequest_Filters, v.Filters)
+	if v.IncludeStatusDetails != nil {
+		s.WriteBool(schemas.SearchTablesRequest_IncludeStatusDetails, *v.IncludeStatusDetails)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchTablesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchTablesRequest_NextToken, *v.NextToken)
+	}
+	if v.ResourceShareType != "" {
+		s.WriteString(schemas.SearchTablesRequest_ResourceShareType, string(v.ResourceShareType))
+	}
+	if v.SearchText != nil {
+		s.WriteString(schemas.SearchTablesRequest_SearchText, *v.SearchText)
+	}
+	serializeSortCriteria(s, schemas.SearchTablesRequest_SortCriteria, v.SortCriteria)
+}
+
 type SearchTablesOutput struct {
 
 	// A continuation token, present if the current list segment is not the last.
@@ -98,13 +129,35 @@ type SearchTablesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchTablesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchTablesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchTablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchTablesResponse_NextToken, *v.NextToken)
+	}
+	serializeTableList(s, schemas.SearchTablesResponse_TableList, v.TableList)
+}
+func (v *SearchTablesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchTablesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchTablesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchTablesResponse_NextToken, v.NextToken)
+		case schemas.SearchTablesResponse_TableList:
+			return deserializeTableList(d, schemas.SearchTablesResponse_TableList, &v.TableList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchTables{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchTables, schemas.SearchTablesRequest, schemas.SearchTablesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSearchTables{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchTables, schemas.SearchTablesRequest, schemas.SearchTablesResponse), output: &SearchTablesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

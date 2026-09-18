@@ -4,7 +4,9 @@ package devicefarm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,27 @@ type CreateVPCEConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVPCEConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVPCEConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVPCEConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceDnsName != nil {
+		s.WriteString(schemas.CreateVPCEConfigurationRequest_serviceDnsName, *v.ServiceDnsName)
+	}
+	if v.VpceConfigurationDescription != nil {
+		s.WriteString(schemas.CreateVPCEConfigurationRequest_vpceConfigurationDescription, *v.VpceConfigurationDescription)
+	}
+	if v.VpceConfigurationName != nil {
+		s.WriteString(schemas.CreateVPCEConfigurationRequest_vpceConfigurationName, *v.VpceConfigurationName)
+	}
+	if v.VpceServiceName != nil {
+		s.WriteString(schemas.CreateVPCEConfigurationRequest_vpceServiceName, *v.VpceServiceName)
+	}
+}
+
 type CreateVPCEConfigurationOutput struct {
 
 	// An object that contains information about your VPC endpoint configuration.
@@ -63,13 +86,34 @@ type CreateVPCEConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVPCEConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVPCEConfigurationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVPCEConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpceConfiguration != nil {
+		s.WriteStruct(schemas.CreateVPCEConfigurationResult_vpceConfiguration)
+		v.VpceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateVPCEConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVPCEConfigurationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVPCEConfigurationResult_vpceConfiguration:
+			v.VpceConfiguration = &types.VPCEConfiguration{}
+			return v.VpceConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVPCEConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateVPCEConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVPCEConfiguration, schemas.CreateVPCEConfigurationRequest, schemas.CreateVPCEConfigurationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateVPCEConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVPCEConfiguration, schemas.CreateVPCEConfigurationRequest, schemas.CreateVPCEConfigurationResult), output: &CreateVPCEConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

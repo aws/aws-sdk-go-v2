@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -92,6 +94,24 @@ type DescribeAccountCustomizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountCustomizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountCustomizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountCustomizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeAccountCustomizationRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.DescribeAccountCustomizationRequest_Namespace, *v.Namespace)
+	}
+	if v.Resolved != false {
+		s.WriteBool(schemas.DescribeAccountCustomizationRequest_Resolved, v.Resolved)
+	}
+}
+
 type DescribeAccountCustomizationOutput struct {
 
 	// The Quick Sight customizations that exist.
@@ -119,13 +139,63 @@ type DescribeAccountCustomizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountCustomizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountCustomizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountCustomizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountCustomization != nil {
+		s.WriteStruct(schemas.DescribeAccountCustomizationResponse_AccountCustomization)
+		v.AccountCustomization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeAccountCustomizationResponse_Arn, *v.Arn)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeAccountCustomizationResponse_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.DescribeAccountCustomizationResponse_Namespace, *v.Namespace)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeAccountCustomizationResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeAccountCustomizationResponse_Status, v.Status)
+	}
+}
+func (v *DescribeAccountCustomizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccountCustomizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccountCustomizationResponse_AccountCustomization:
+			v.AccountCustomization = &types.AccountCustomization{}
+			return v.AccountCustomization.Deserialize(d)
+		case schemas.DescribeAccountCustomizationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeAccountCustomizationResponse_Arn, v.Arn)
+		case schemas.DescribeAccountCustomizationResponse_AwsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.DescribeAccountCustomizationResponse_AwsAccountId, v.AwsAccountId)
+		case schemas.DescribeAccountCustomizationResponse_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.DescribeAccountCustomizationResponse_Namespace, v.Namespace)
+		case schemas.DescribeAccountCustomizationResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeAccountCustomizationResponse_RequestId, v.RequestId)
+		case schemas.DescribeAccountCustomizationResponse_Status:
+			return d.ReadInt32(schemas.DescribeAccountCustomizationResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccountCustomizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAccountCustomization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountCustomization, schemas.DescribeAccountCustomizationRequest, schemas.DescribeAccountCustomizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAccountCustomization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountCustomization, schemas.DescribeAccountCustomizationRequest, schemas.DescribeAccountCustomizationResponse), output: &DescribeAccountCustomizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

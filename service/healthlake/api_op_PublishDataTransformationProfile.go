@@ -5,7 +5,9 @@ package healthlake
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/healthlake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/healthlake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -53,6 +55,27 @@ type PublishDataTransformationProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PublishDataTransformationProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublishDataTransformationProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublishDataTransformationProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeDescription != nil {
+		s.WriteString(schemas.PublishDataTransformationProfileRequest_ChangeDescription, *v.ChangeDescription)
+	}
+	if v.FromExistingVersion != nil {
+		s.WriteInt32(schemas.PublishDataTransformationProfileRequest_FromExistingVersion, *v.FromExistingVersion)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.PublishDataTransformationProfileRequest_ProfileId, *v.ProfileId)
+	}
+	if v.SourceFormat != "" {
+		s.WriteString(schemas.PublishDataTransformationProfileRequest_SourceFormat, string(v.SourceFormat))
+	}
+}
+
 // The response from the PublishDataTransformationProfile operation.
 type PublishDataTransformationProfileOutput struct {
 
@@ -90,13 +113,70 @@ type PublishDataTransformationProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PublishDataTransformationProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublishDataTransformationProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublishDataTransformationProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.PublishDataTransformationProfileResponse_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.PublishDataTransformationProfileResponse_ProfileId, *v.ProfileId)
+	}
+	if v.ProfileName != nil {
+		s.WriteString(schemas.PublishDataTransformationProfileResponse_ProfileName, *v.ProfileName)
+	}
+	if v.SourceFormat != "" {
+		s.WriteString(schemas.PublishDataTransformationProfileResponse_SourceFormat, string(v.SourceFormat))
+	}
+	if v.TargetFormat != "" {
+		s.WriteString(schemas.PublishDataTransformationProfileResponse_TargetFormat, string(v.TargetFormat))
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.PublishDataTransformationProfileResponse_Version, *v.Version)
+	}
+}
+func (v *PublishDataTransformationProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublishDataTransformationProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PublishDataTransformationProfileResponse_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.PublishDataTransformationProfileResponse_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.PublishDataTransformationProfileResponse_ProfileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.PublishDataTransformationProfileResponse_ProfileId, v.ProfileId)
+		case schemas.PublishDataTransformationProfileResponse_ProfileName:
+			v.ProfileName = new(string)
+			return d.ReadString(schemas.PublishDataTransformationProfileResponse_ProfileName, v.ProfileName)
+		case schemas.PublishDataTransformationProfileResponse_SourceFormat:
+			var ev string
+			if err := d.ReadString(schemas.PublishDataTransformationProfileResponse_SourceFormat, &ev); err != nil {
+				return err
+			}
+			v.SourceFormat = types.SourceFormat(ev)
+			return nil
+		case schemas.PublishDataTransformationProfileResponse_TargetFormat:
+			var ev string
+			if err := d.ReadString(schemas.PublishDataTransformationProfileResponse_TargetFormat, &ev); err != nil {
+				return err
+			}
+			v.TargetFormat = types.TargetFormat(ev)
+			return nil
+		case schemas.PublishDataTransformationProfileResponse_Version:
+			v.Version = new(int32)
+			return d.ReadInt32(schemas.PublishDataTransformationProfileResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPublishDataTransformationProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPublishDataTransformationProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishDataTransformationProfile, schemas.PublishDataTransformationProfileRequest, schemas.PublishDataTransformationProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPublishDataTransformationProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PublishDataTransformationProfile, schemas.PublishDataTransformationProfileRequest, schemas.PublishDataTransformationProfileResponse), output: &PublishDataTransformationProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

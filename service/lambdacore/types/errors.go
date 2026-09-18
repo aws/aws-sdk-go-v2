@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lambdacore/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -35,6 +36,33 @@ func (e *InvalidParameterValueException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidParameterValueException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidParameterValueException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidParameterValueException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.InvalidParameterValueException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidParameterValueException_message, *v.Message)
+	}
+}
+func (v *InvalidParameterValueException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidParameterValueException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidParameterValueException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.InvalidParameterValueException_Type, v.Type)
+		case schemas.InvalidParameterValueException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidParameterValueException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The account has reached the maximum number of network connectors allowed.
 // Delete unused connectors or request a limit increase through Service Quotas.
@@ -66,6 +94,33 @@ func (e *NetworkConnectorLimitExceededException) ErrorCode() string {
 func (e *NetworkConnectorLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *NetworkConnectorLimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkConnectorLimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkConnectorLimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.NetworkConnectorLimitExceededException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.NetworkConnectorLimitExceededException_message, *v.Message)
+	}
+}
+func (v *NetworkConnectorLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkConnectorLimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkConnectorLimitExceededException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.NetworkConnectorLimitExceededException_Type, v.Type)
+		case schemas.NetworkConnectorLimitExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NetworkConnectorLimitExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request could not be completed due to a conflict with the current state of
 // the resource. For example, attempting to update a connector that is not in
@@ -96,6 +151,33 @@ func (e *ResourceConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.ResourceConflictException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceConflictException_message, *v.Message)
+	}
+}
+func (v *ResourceConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceConflictException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ResourceConflictException_Type, v.Type)
+		case schemas.ResourceConflictException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceConflictException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified network connector does not exist. Verify the identifier (ID,
 // name, or ARN) and Region.
@@ -125,6 +207,33 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ResourceNotFoundException_Type, *v.Type)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
+		case schemas.ResourceNotFoundException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // An internal service error occurred. Retry the request with exponential backoff.
 type ServiceException struct {
@@ -153,6 +262,33 @@ func (e *ServiceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServiceException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ServiceException_Type, *v.Type)
+	}
+}
+func (v *ServiceException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceException_Message, v.Message)
+		case schemas.ServiceException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ServiceException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // The request was throttled due to exceeding the allowed request rate. Retry the
 // request after a brief wait using exponential backoff.
@@ -184,3 +320,46 @@ func (e *TooManyRequestsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyRequestsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyRequestsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyRequestsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reason != "" {
+		s.WriteString(schemas.TooManyRequestsException_Reason, string(v.Reason))
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.TooManyRequestsException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyRequestsException_message, *v.Message)
+	}
+	if v.RetryAfterSeconds != nil {
+		s.WriteString(schemas.TooManyRequestsException_retryAfterSeconds, *v.RetryAfterSeconds)
+	}
+}
+func (v *TooManyRequestsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyRequestsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyRequestsException_Reason:
+			var ev string
+			if err := d.ReadString(schemas.TooManyRequestsException_Reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = ThrottleReason(ev)
+			return nil
+		case schemas.TooManyRequestsException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.TooManyRequestsException_Type, v.Type)
+		case schemas.TooManyRequestsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyRequestsException_message, v.Message)
+		case schemas.TooManyRequestsException_retryAfterSeconds:
+			v.RetryAfterSeconds = new(string)
+			return d.ReadString(schemas.TooManyRequestsException_retryAfterSeconds, v.RetryAfterSeconds)
+		}
+		return nil
+	})
+}

@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,30 @@ type GenerateEmbedUrlForRegisteredUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateEmbedUrlForRegisteredUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateEmbedUrlForRegisteredUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateEmbedUrlForRegisteredUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.GenerateEmbedUrlForRegisteredUserRequest_AllowedDomains, v.AllowedDomains)
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.GenerateEmbedUrlForRegisteredUserRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.ExperienceConfiguration != nil {
+		s.WriteStruct(schemas.GenerateEmbedUrlForRegisteredUserRequest_ExperienceConfiguration)
+		v.ExperienceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SessionLifetimeInMinutes != nil {
+		s.WriteInt64(schemas.GenerateEmbedUrlForRegisteredUserRequest_SessionLifetimeInMinutes, *v.SessionLifetimeInMinutes)
+	}
+	if v.UserArn != nil {
+		s.WriteString(schemas.GenerateEmbedUrlForRegisteredUserRequest_UserArn, *v.UserArn)
+	}
+}
+
 type GenerateEmbedUrlForRegisteredUserOutput struct {
 
 	// The embed URL for the Amazon Quick Sight dashboard, visual, Q search bar,
@@ -114,13 +140,41 @@ type GenerateEmbedUrlForRegisteredUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateEmbedUrlForRegisteredUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateEmbedUrlForRegisteredUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateEmbedUrlForRegisteredUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmbedUrl != nil {
+		s.WriteString(schemas.GenerateEmbedUrlForRegisteredUserResponse_EmbedUrl, *v.EmbedUrl)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.GenerateEmbedUrlForRegisteredUserResponse_RequestId, *v.RequestId)
+	}
+	s.WriteInt32(schemas.GenerateEmbedUrlForRegisteredUserResponse_Status, v.Status)
+}
+func (v *GenerateEmbedUrlForRegisteredUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerateEmbedUrlForRegisteredUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerateEmbedUrlForRegisteredUserResponse_EmbedUrl:
+			v.EmbedUrl = new(string)
+			return d.ReadString(schemas.GenerateEmbedUrlForRegisteredUserResponse_EmbedUrl, v.EmbedUrl)
+		case schemas.GenerateEmbedUrlForRegisteredUserResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.GenerateEmbedUrlForRegisteredUserResponse_RequestId, v.RequestId)
+		case schemas.GenerateEmbedUrlForRegisteredUserResponse_Status:
+			return d.ReadInt32(schemas.GenerateEmbedUrlForRegisteredUserResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGenerateEmbedUrlForRegisteredUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGenerateEmbedUrlForRegisteredUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateEmbedUrlForRegisteredUser, schemas.GenerateEmbedUrlForRegisteredUserRequest, schemas.GenerateEmbedUrlForRegisteredUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGenerateEmbedUrlForRegisteredUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateEmbedUrlForRegisteredUser, schemas.GenerateEmbedUrlForRegisteredUserRequest, schemas.GenerateEmbedUrlForRegisteredUserResponse), output: &GenerateEmbedUrlForRegisteredUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

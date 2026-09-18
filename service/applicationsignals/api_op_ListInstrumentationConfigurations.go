@@ -5,7 +5,9 @@ package applicationsignals
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -66,6 +68,33 @@ type ListInstrumentationConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstrumentationConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstrumentationConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstrumentationConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Environment != nil {
+		s.WriteString(schemas.ListInstrumentationConfigurationsRequest_Environment, *v.Environment)
+	}
+	if v.InstrumentationType != "" {
+		s.WriteString(schemas.ListInstrumentationConfigurationsRequest_InstrumentationType, string(v.InstrumentationType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInstrumentationConfigurationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInstrumentationConfigurationsRequest_NextToken, *v.NextToken)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.ListInstrumentationConfigurationsRequest_Service, *v.Service)
+	}
+	if v.SyncedAt != nil {
+		s.WriteTime(schemas.ListInstrumentationConfigurationsRequest_SyncedAt, *v.SyncedAt)
+	}
+}
+
 type ListInstrumentationConfigurationsOutput struct {
 
 	// Indicates whether there are configuration changes since the provided SyncedAt
@@ -110,13 +139,65 @@ type ListInstrumentationConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstrumentationConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstrumentationConfigurationsPage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstrumentationConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Changed != nil {
+		s.WriteBool(schemas.InstrumentationConfigurationsPage_Changed, *v.Changed)
+	}
+	if v.Environment != nil {
+		s.WriteString(schemas.InstrumentationConfigurationsPage_Environment, *v.Environment)
+	}
+	serializeInstrumentationConfigurationsWithoutServiceEnv(s, schemas.InstrumentationConfigurationsPage_LatestConfigurations, v.LatestConfigurations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.InstrumentationConfigurationsPage_NextToken, *v.NextToken)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.InstrumentationConfigurationsPage_Service, *v.Service)
+	}
+	if v.SyncInterval != nil {
+		s.WriteInt32(schemas.InstrumentationConfigurationsPage_SyncInterval, *v.SyncInterval)
+	}
+	if v.SyncedAt != nil {
+		s.WriteTime(schemas.InstrumentationConfigurationsPage_SyncedAt, *v.SyncedAt)
+	}
+}
+func (v *ListInstrumentationConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstrumentationConfigurationsPage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstrumentationConfigurationsPage_Changed:
+			v.Changed = new(bool)
+			return d.ReadBool(schemas.InstrumentationConfigurationsPage_Changed, v.Changed)
+		case schemas.InstrumentationConfigurationsPage_Environment:
+			v.Environment = new(string)
+			return d.ReadString(schemas.InstrumentationConfigurationsPage_Environment, v.Environment)
+		case schemas.InstrumentationConfigurationsPage_LatestConfigurations:
+			return deserializeInstrumentationConfigurationsWithoutServiceEnv(d, schemas.InstrumentationConfigurationsPage_LatestConfigurations, &v.LatestConfigurations)
+		case schemas.InstrumentationConfigurationsPage_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.InstrumentationConfigurationsPage_NextToken, v.NextToken)
+		case schemas.InstrumentationConfigurationsPage_Service:
+			v.Service = new(string)
+			return d.ReadString(schemas.InstrumentationConfigurationsPage_Service, v.Service)
+		case schemas.InstrumentationConfigurationsPage_SyncInterval:
+			v.SyncInterval = new(int32)
+			return d.ReadInt32(schemas.InstrumentationConfigurationsPage_SyncInterval, v.SyncInterval)
+		case schemas.InstrumentationConfigurationsPage_SyncedAt:
+			v.SyncedAt = new(time.Time)
+			return d.ReadTime(schemas.InstrumentationConfigurationsPage_SyncedAt, v.SyncedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInstrumentationConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInstrumentationConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstrumentationConfigurations, schemas.ListInstrumentationConfigurationsRequest, schemas.InstrumentationConfigurationsPage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListInstrumentationConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstrumentationConfigurations, schemas.ListInstrumentationConfigurationsRequest, schemas.InstrumentationConfigurationsPage), output: &ListInstrumentationConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

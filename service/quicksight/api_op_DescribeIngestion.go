@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type DescribeIngestionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIngestionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIngestionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIngestionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeIngestionRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.DescribeIngestionRequest_DataSetId, *v.DataSetId)
+	}
+	if v.IngestionId != nil {
+		s.WriteString(schemas.DescribeIngestionRequest_IngestionId, *v.IngestionId)
+	}
+}
+
 type DescribeIngestionOutput struct {
 
 	// Information about the ingestion.
@@ -61,13 +81,45 @@ type DescribeIngestionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIngestionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIngestionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIngestionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ingestion != nil {
+		s.WriteStruct(schemas.DescribeIngestionResponse_Ingestion)
+		v.Ingestion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeIngestionResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeIngestionResponse_Status, v.Status)
+	}
+}
+func (v *DescribeIngestionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeIngestionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeIngestionResponse_Ingestion:
+			v.Ingestion = &types.Ingestion{}
+			return v.Ingestion.Deserialize(d)
+		case schemas.DescribeIngestionResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeIngestionResponse_RequestId, v.RequestId)
+		case schemas.DescribeIngestionResponse_Status:
+			return d.ReadInt32(schemas.DescribeIngestionResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeIngestionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeIngestion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIngestion, schemas.DescribeIngestionRequest, schemas.DescribeIngestionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeIngestion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIngestion, schemas.DescribeIngestionRequest, schemas.DescribeIngestionResponse), output: &DescribeIngestionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

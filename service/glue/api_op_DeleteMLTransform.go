@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteMLTransformInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMLTransformInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMLTransformRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMLTransformInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransformId != nil {
+		s.WriteString(schemas.DeleteMLTransformRequest_TransformId, *v.TransformId)
+	}
+}
+
 type DeleteMLTransformOutput struct {
 
 	// The unique identifier of the transform that was deleted.
@@ -49,13 +63,32 @@ type DeleteMLTransformOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMLTransformOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMLTransformResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMLTransformOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransformId != nil {
+		s.WriteString(schemas.DeleteMLTransformResponse_TransformId, *v.TransformId)
+	}
+}
+func (v *DeleteMLTransformOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMLTransformResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteMLTransformResponse_TransformId:
+			v.TransformId = new(string)
+			return d.ReadString(schemas.DeleteMLTransformResponse_TransformId, v.TransformId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMLTransformMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMLTransform{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMLTransform, schemas.DeleteMLTransformRequest, schemas.DeleteMLTransformResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteMLTransform{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMLTransform, schemas.DeleteMLTransformRequest, schemas.DeleteMLTransformResponse), output: &DeleteMLTransformOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

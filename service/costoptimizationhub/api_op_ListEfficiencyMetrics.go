@@ -5,7 +5,9 @@ package costoptimizationhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,37 @@ type ListEfficiencyMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEfficiencyMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEfficiencyMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEfficiencyMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Granularity != "" {
+		s.WriteString(schemas.ListEfficiencyMetricsRequest_granularity, string(v.Granularity))
+	}
+	if v.GroupBy != nil {
+		s.WriteString(schemas.ListEfficiencyMetricsRequest_groupBy, *v.GroupBy)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEfficiencyMetricsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEfficiencyMetricsRequest_nextToken, *v.NextToken)
+	}
+	if v.OrderBy != nil {
+		s.WriteStruct(schemas.ListEfficiencyMetricsRequest_orderBy)
+		v.OrderBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.ListEfficiencyMetricsRequest_timePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListEfficiencyMetricsOutput struct {
 
 	// A list of cost efficiency metrics grouped by the specified dimension. Each
@@ -87,13 +120,35 @@ type ListEfficiencyMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEfficiencyMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEfficiencyMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEfficiencyMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEfficiencyMetricsByGroupList(s, schemas.ListEfficiencyMetricsResponse_efficiencyMetricsByGroup, v.EfficiencyMetricsByGroup)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEfficiencyMetricsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEfficiencyMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEfficiencyMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEfficiencyMetricsResponse_efficiencyMetricsByGroup:
+			return deserializeEfficiencyMetricsByGroupList(d, schemas.ListEfficiencyMetricsResponse_efficiencyMetricsByGroup, &v.EfficiencyMetricsByGroup)
+		case schemas.ListEfficiencyMetricsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEfficiencyMetricsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEfficiencyMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListEfficiencyMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEfficiencyMetrics, schemas.ListEfficiencyMetricsRequest, schemas.ListEfficiencyMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListEfficiencyMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEfficiencyMetrics, schemas.ListEfficiencyMetricsRequest, schemas.ListEfficiencyMetricsResponse), output: &ListEfficiencyMetricsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

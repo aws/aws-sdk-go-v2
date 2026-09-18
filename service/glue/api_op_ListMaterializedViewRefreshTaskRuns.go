@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,30 @@ type ListMaterializedViewRefreshTaskRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMaterializedViewRefreshTaskRunsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMaterializedViewRefreshTaskRunsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMaterializedViewRefreshTaskRunsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.ListMaterializedViewRefreshTaskRunsRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.ListMaterializedViewRefreshTaskRunsRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMaterializedViewRefreshTaskRunsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMaterializedViewRefreshTaskRunsRequest_NextToken, *v.NextToken)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.ListMaterializedViewRefreshTaskRunsRequest_TableName, *v.TableName)
+	}
+}
+
 type ListMaterializedViewRefreshTaskRunsOutput struct {
 
 	// The results of the ListMaterializedViewRefreshTaskRuns action.
@@ -62,13 +88,35 @@ type ListMaterializedViewRefreshTaskRunsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMaterializedViewRefreshTaskRunsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMaterializedViewRefreshTaskRunsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMaterializedViewRefreshTaskRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMaterializedViewRefreshTaskRunsList(s, schemas.ListMaterializedViewRefreshTaskRunsResponse_MaterializedViewRefreshTaskRuns, v.MaterializedViewRefreshTaskRuns)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMaterializedViewRefreshTaskRunsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListMaterializedViewRefreshTaskRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMaterializedViewRefreshTaskRunsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMaterializedViewRefreshTaskRunsResponse_MaterializedViewRefreshTaskRuns:
+			return deserializeMaterializedViewRefreshTaskRunsList(d, schemas.ListMaterializedViewRefreshTaskRunsResponse_MaterializedViewRefreshTaskRuns, &v.MaterializedViewRefreshTaskRuns)
+		case schemas.ListMaterializedViewRefreshTaskRunsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMaterializedViewRefreshTaskRunsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMaterializedViewRefreshTaskRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMaterializedViewRefreshTaskRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMaterializedViewRefreshTaskRuns, schemas.ListMaterializedViewRefreshTaskRunsRequest, schemas.ListMaterializedViewRefreshTaskRunsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMaterializedViewRefreshTaskRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMaterializedViewRefreshTaskRuns, schemas.ListMaterializedViewRefreshTaskRunsRequest, schemas.ListMaterializedViewRefreshTaskRunsResponse), output: &ListMaterializedViewRefreshTaskRunsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package devicefarm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,33 @@ type UpdateProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProjectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateProjectRequest_arn, *v.Arn)
+	}
+	if v.DefaultJobTimeoutMinutes != nil {
+		s.WriteInt32(schemas.UpdateProjectRequest_defaultJobTimeoutMinutes, *v.DefaultJobTimeoutMinutes)
+	}
+	serializeEnvironmentVariables(s, schemas.UpdateProjectRequest_environmentVariables, v.EnvironmentVariables)
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.UpdateProjectRequest_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateProjectRequest_name, *v.Name)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.UpdateProjectRequest_vpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Represents the result of an update project request.
 type UpdateProjectOutput struct {
 
@@ -69,13 +98,34 @@ type UpdateProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProjectResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Project != nil {
+		s.WriteStruct(schemas.UpdateProjectResult_project)
+		v.Project.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProjectResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProjectResult_project:
+			v.Project = &types.Project{}
+			return v.Project.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProject, schemas.UpdateProjectRequest, schemas.UpdateProjectResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProject, schemas.UpdateProjectRequest, schemas.UpdateProjectResult), output: &UpdateProjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

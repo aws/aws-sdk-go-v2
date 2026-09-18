@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,23 @@ type UpdateAgentPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAgentPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAgentPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAgentPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.UpdateAgentPermissionsRequest_AgentId, *v.AgentId)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateAgentPermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeUpdateAgentPermissionsRequestGrantPermissionsList(s, schemas.UpdateAgentPermissionsRequest_GrantPermissions, v.GrantPermissions)
+	serializeUpdateAgentPermissionsRequestRevokePermissionsList(s, schemas.UpdateAgentPermissionsRequest_RevokePermissions, v.RevokePermissions)
+}
+
 type UpdateAgentPermissionsOutput struct {
 
 	// The unique identifier for the agent.
@@ -69,13 +88,47 @@ type UpdateAgentPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAgentPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAgentPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAgentPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.UpdateAgentPermissionsResponse_AgentId, *v.AgentId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateAgentPermissionsResponse_Arn, *v.Arn)
+	}
+	serializeResourcePermissionList(s, schemas.UpdateAgentPermissionsResponse_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateAgentPermissionsResponse_RequestId, *v.RequestId)
+	}
+}
+func (v *UpdateAgentPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAgentPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAgentPermissionsResponse_AgentId:
+			v.AgentId = new(string)
+			return d.ReadString(schemas.UpdateAgentPermissionsResponse_AgentId, v.AgentId)
+		case schemas.UpdateAgentPermissionsResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateAgentPermissionsResponse_Arn, v.Arn)
+		case schemas.UpdateAgentPermissionsResponse_Permissions:
+			return deserializeResourcePermissionList(d, schemas.UpdateAgentPermissionsResponse_Permissions, &v.Permissions)
+		case schemas.UpdateAgentPermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateAgentPermissionsResponse_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAgentPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAgentPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgentPermissions, schemas.UpdateAgentPermissionsRequest, schemas.UpdateAgentPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAgentPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgentPermissions, schemas.UpdateAgentPermissionsRequest, schemas.UpdateAgentPermissionsResponse), output: &UpdateAgentPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

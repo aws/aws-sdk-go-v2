@@ -4,7 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type GetIntegrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIntegrationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIntegrationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIntegrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.GetIntegrationsRequest_ApiId, *v.ApiId)
+	}
+	if v.MaxResults != nil {
+		s.WriteString(schemas.GetIntegrationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetIntegrationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetIntegrationsOutput struct {
 
 	// The elements from this collection.
@@ -56,13 +76,35 @@ type GetIntegrationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIntegrationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIntegrationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIntegrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfIntegration(s, schemas.GetIntegrationsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetIntegrationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetIntegrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIntegrationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIntegrationsResponse_Items:
+			return deserialize__listOfIntegration(d, schemas.GetIntegrationsResponse_Items, &v.Items)
+		case schemas.GetIntegrationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetIntegrationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIntegrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIntegrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntegrations, schemas.GetIntegrationsRequest, schemas.GetIntegrationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIntegrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntegrations, schemas.GetIntegrationsRequest, schemas.GetIntegrationsResponse), output: &GetIntegrationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,16 @@ type BatchGetDevEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetDevEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetDevEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetDevEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDevEndpointNames(s, schemas.BatchGetDevEndpointsRequest_DevEndpointNames, v.DevEndpointNames)
+}
+
 type BatchGetDevEndpointsOutput struct {
 
 	// A list of DevEndpoint definitions.
@@ -53,13 +65,32 @@ type BatchGetDevEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetDevEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetDevEndpointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetDevEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDevEndpointList(s, schemas.BatchGetDevEndpointsResponse_DevEndpoints, v.DevEndpoints)
+	serializeDevEndpointNames(s, schemas.BatchGetDevEndpointsResponse_DevEndpointsNotFound, v.DevEndpointsNotFound)
+}
+func (v *BatchGetDevEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetDevEndpointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetDevEndpointsResponse_DevEndpoints:
+			return deserializeDevEndpointList(d, schemas.BatchGetDevEndpointsResponse_DevEndpoints, &v.DevEndpoints)
+		case schemas.BatchGetDevEndpointsResponse_DevEndpointsNotFound:
+			return deserializeDevEndpointNames(d, schemas.BatchGetDevEndpointsResponse_DevEndpointsNotFound, &v.DevEndpointsNotFound)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetDevEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetDevEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetDevEndpoints, schemas.BatchGetDevEndpointsRequest, schemas.BatchGetDevEndpointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetDevEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetDevEndpoints, schemas.BatchGetDevEndpointsRequest, schemas.BatchGetDevEndpointsResponse), output: &BatchGetDevEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

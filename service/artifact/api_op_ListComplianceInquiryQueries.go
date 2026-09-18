@@ -5,7 +5,9 @@ package artifact
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/artifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/artifact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListComplianceInquiryQueriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComplianceInquiryQueriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComplianceInquiryQueriesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComplianceInquiryQueriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComplianceInquiryId != nil {
+		s.WriteString(schemas.ListComplianceInquiryQueriesRequest_complianceInquiryId, *v.ComplianceInquiryId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListComplianceInquiryQueriesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComplianceInquiryQueriesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListComplianceInquiryQueriesOutput struct {
 
 	// Pagination token to request the next page of resources.
@@ -55,13 +75,35 @@ type ListComplianceInquiryQueriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComplianceInquiryQueriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComplianceInquiryQueriesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComplianceInquiryQueriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComplianceInquiryQueriesResponse_nextToken, *v.NextToken)
+	}
+	serializeQueriesList(s, schemas.ListComplianceInquiryQueriesResponse_queries, v.Queries)
+}
+func (v *ListComplianceInquiryQueriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListComplianceInquiryQueriesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListComplianceInquiryQueriesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListComplianceInquiryQueriesResponse_nextToken, v.NextToken)
+		case schemas.ListComplianceInquiryQueriesResponse_queries:
+			return deserializeQueriesList(d, schemas.ListComplianceInquiryQueriesResponse_queries, &v.Queries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListComplianceInquiryQueriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListComplianceInquiryQueries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComplianceInquiryQueries, schemas.ListComplianceInquiryQueriesRequest, schemas.ListComplianceInquiryQueriesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListComplianceInquiryQueries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComplianceInquiryQueries, schemas.ListComplianceInquiryQueriesRequest, schemas.ListComplianceInquiryQueriesResponse), output: &ListComplianceInquiryQueriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,28 @@ type UpdateMethodResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMethodResponseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMethodResponseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMethodResponseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HttpMethod != nil {
+		s.WriteString(schemas.UpdateMethodResponseRequest_httpMethod, *v.HttpMethod)
+	}
+	serializeListOfPatchOperation(s, schemas.UpdateMethodResponseRequest_patchOperations, v.PatchOperations)
+	if v.ResourceId != nil {
+		s.WriteString(schemas.UpdateMethodResponseRequest_resourceId, *v.ResourceId)
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.UpdateMethodResponseRequest_restApiId, *v.RestApiId)
+	}
+	if v.StatusCode != nil {
+		s.WriteString(schemas.UpdateMethodResponseRequest_statusCode, *v.StatusCode)
+	}
+}
+
 // Represents a method response of a given HTTP status code returned to the
 // client. The method response is passed from the back end through the associated
 // integration response that can be transformed using a mapping template.
@@ -89,13 +113,38 @@ type UpdateMethodResponseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMethodResponseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MethodResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMethodResponseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOfStringToString(s, schemas.MethodResponse_responseModels, v.ResponseModels)
+	serializeMapOfStringToBoolean(s, schemas.MethodResponse_responseParameters, v.ResponseParameters)
+	if v.StatusCode != nil {
+		s.WriteString(schemas.MethodResponse_statusCode, *v.StatusCode)
+	}
+}
+func (v *UpdateMethodResponseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MethodResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MethodResponse_responseModels:
+			return deserializeMapOfStringToString(d, schemas.MethodResponse_responseModels, &v.ResponseModels)
+		case schemas.MethodResponse_responseParameters:
+			return deserializeMapOfStringToBoolean(d, schemas.MethodResponse_responseParameters, &v.ResponseParameters)
+		case schemas.MethodResponse_statusCode:
+			v.StatusCode = new(string)
+			return d.ReadString(schemas.MethodResponse_statusCode, v.StatusCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMethodResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMethodResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMethodResponse, schemas.UpdateMethodResponseRequest, schemas.MethodResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMethodResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMethodResponse, schemas.UpdateMethodResponseRequest, schemas.MethodResponse), output: &UpdateMethodResponseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

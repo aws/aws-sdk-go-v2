@@ -4,7 +4,9 @@ package networkfirewall
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,25 @@ type UpdateFirewallAnalysisSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFirewallAnalysisSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFirewallAnalysisSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFirewallAnalysisSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEnabledAnalysisTypes(s, schemas.UpdateFirewallAnalysisSettingsRequest_EnabledAnalysisTypes, v.EnabledAnalysisTypes)
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.UpdateFirewallAnalysisSettingsRequest_FirewallArn, *v.FirewallArn)
+	}
+	if v.FirewallName != nil {
+		s.WriteString(schemas.UpdateFirewallAnalysisSettingsRequest_FirewallName, *v.FirewallName)
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.UpdateFirewallAnalysisSettingsRequest_UpdateToken, *v.UpdateToken)
+	}
+}
+
 type UpdateFirewallAnalysisSettingsOutput struct {
 
 	// An optional setting indicating the specific traffic analysis types to enable on
@@ -99,13 +120,47 @@ type UpdateFirewallAnalysisSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFirewallAnalysisSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFirewallAnalysisSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFirewallAnalysisSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEnabledAnalysisTypes(s, schemas.UpdateFirewallAnalysisSettingsResponse_EnabledAnalysisTypes, v.EnabledAnalysisTypes)
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.UpdateFirewallAnalysisSettingsResponse_FirewallArn, *v.FirewallArn)
+	}
+	if v.FirewallName != nil {
+		s.WriteString(schemas.UpdateFirewallAnalysisSettingsResponse_FirewallName, *v.FirewallName)
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.UpdateFirewallAnalysisSettingsResponse_UpdateToken, *v.UpdateToken)
+	}
+}
+func (v *UpdateFirewallAnalysisSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFirewallAnalysisSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFirewallAnalysisSettingsResponse_EnabledAnalysisTypes:
+			return deserializeEnabledAnalysisTypes(d, schemas.UpdateFirewallAnalysisSettingsResponse_EnabledAnalysisTypes, &v.EnabledAnalysisTypes)
+		case schemas.UpdateFirewallAnalysisSettingsResponse_FirewallArn:
+			v.FirewallArn = new(string)
+			return d.ReadString(schemas.UpdateFirewallAnalysisSettingsResponse_FirewallArn, v.FirewallArn)
+		case schemas.UpdateFirewallAnalysisSettingsResponse_FirewallName:
+			v.FirewallName = new(string)
+			return d.ReadString(schemas.UpdateFirewallAnalysisSettingsResponse_FirewallName, v.FirewallName)
+		case schemas.UpdateFirewallAnalysisSettingsResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.UpdateFirewallAnalysisSettingsResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFirewallAnalysisSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateFirewallAnalysisSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFirewallAnalysisSettings, schemas.UpdateFirewallAnalysisSettingsRequest, schemas.UpdateFirewallAnalysisSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateFirewallAnalysisSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFirewallAnalysisSettings, schemas.UpdateFirewallAnalysisSettingsRequest, schemas.UpdateFirewallAnalysisSettingsResponse), output: &UpdateFirewallAnalysisSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

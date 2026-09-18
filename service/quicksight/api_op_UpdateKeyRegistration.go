@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,19 @@ type UpdateKeyRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateKeyRegistrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateKeyRegistrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateKeyRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateKeyRegistrationRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeKeyRegistration(s, schemas.UpdateKeyRegistrationRequest_KeyRegistration, v.KeyRegistration)
+}
+
 type UpdateKeyRegistrationOutput struct {
 
 	// A list of all customer managed key registrations that failed to update.
@@ -58,13 +73,38 @@ type UpdateKeyRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateKeyRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateKeyRegistrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateKeyRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedKeyRegistrationEntries(s, schemas.UpdateKeyRegistrationResponse_FailedKeyRegistration, v.FailedKeyRegistration)
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateKeyRegistrationResponse_RequestId, *v.RequestId)
+	}
+	serializeSuccessfulKeyRegistrationEntries(s, schemas.UpdateKeyRegistrationResponse_SuccessfulKeyRegistration, v.SuccessfulKeyRegistration)
+}
+func (v *UpdateKeyRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateKeyRegistrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateKeyRegistrationResponse_FailedKeyRegistration:
+			return deserializeFailedKeyRegistrationEntries(d, schemas.UpdateKeyRegistrationResponse_FailedKeyRegistration, &v.FailedKeyRegistration)
+		case schemas.UpdateKeyRegistrationResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateKeyRegistrationResponse_RequestId, v.RequestId)
+		case schemas.UpdateKeyRegistrationResponse_SuccessfulKeyRegistration:
+			return deserializeSuccessfulKeyRegistrationEntries(d, schemas.UpdateKeyRegistrationResponse_SuccessfulKeyRegistration, &v.SuccessfulKeyRegistration)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateKeyRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateKeyRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKeyRegistration, schemas.UpdateKeyRegistrationRequest, schemas.UpdateKeyRegistrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateKeyRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKeyRegistration, schemas.UpdateKeyRegistrationRequest, schemas.UpdateKeyRegistrationResponse), output: &UpdateKeyRegistrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

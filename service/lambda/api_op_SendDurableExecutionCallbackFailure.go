@@ -4,7 +4,9 @@ package lambda
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,23 @@ type SendDurableExecutionCallbackFailureInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendDurableExecutionCallbackFailureInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendDurableExecutionCallbackFailureRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendDurableExecutionCallbackFailureInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallbackId != nil {
+		s.WriteString(schemas.SendDurableExecutionCallbackFailureRequest_CallbackId, *v.CallbackId)
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.SendDurableExecutionCallbackFailureRequest_Error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SendDurableExecutionCallbackFailureOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +65,26 @@ type SendDurableExecutionCallbackFailureOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendDurableExecutionCallbackFailureOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendDurableExecutionCallbackFailureResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendDurableExecutionCallbackFailureOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SendDurableExecutionCallbackFailureOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendDurableExecutionCallbackFailureResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendDurableExecutionCallbackFailureMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendDurableExecutionCallbackFailure{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendDurableExecutionCallbackFailure, schemas.SendDurableExecutionCallbackFailureRequest, schemas.SendDurableExecutionCallbackFailureResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendDurableExecutionCallbackFailure{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendDurableExecutionCallbackFailure, schemas.SendDurableExecutionCallbackFailureRequest, schemas.SendDurableExecutionCallbackFailureResponse), output: &SendDurableExecutionCallbackFailureOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

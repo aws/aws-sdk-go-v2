@@ -4,7 +4,9 @@ package applicationsignals
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -94,6 +96,37 @@ type CreateInstrumentationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInstrumentationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInstrumentationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInstrumentationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDynamicInstrumentationAttributeFilters(s, schemas.CreateInstrumentationConfigurationRequest_AttributeFilters, v.AttributeFilters)
+	serializeCaptureConfiguration(s, schemas.CreateInstrumentationConfigurationRequest_CaptureConfiguration, v.CaptureConfiguration)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateInstrumentationConfigurationRequest_Description, *v.Description)
+	}
+	if v.Environment != nil {
+		s.WriteString(schemas.CreateInstrumentationConfigurationRequest_Environment, *v.Environment)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.CreateInstrumentationConfigurationRequest_ExpiresAt, *v.ExpiresAt)
+	}
+	if v.InstrumentationType != "" {
+		s.WriteString(schemas.CreateInstrumentationConfigurationRequest_InstrumentationType, string(v.InstrumentationType))
+	}
+	serializeLocation(s, schemas.CreateInstrumentationConfigurationRequest_Location, v.Location)
+	if v.Service != nil {
+		s.WriteString(schemas.CreateInstrumentationConfigurationRequest_Service, *v.Service)
+	}
+	if v.SignalType != "" {
+		s.WriteString(schemas.CreateInstrumentationConfigurationRequest_SignalType, string(v.SignalType))
+	}
+	serializeTagList(s, schemas.CreateInstrumentationConfigurationRequest_Tags, v.Tags)
+}
+
 type CreateInstrumentationConfigurationOutput struct {
 
 	// ARN for the created instrumentation configuration
@@ -160,13 +193,97 @@ type CreateInstrumentationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInstrumentationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInstrumentationConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInstrumentationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.CreateInstrumentationConfigurationResponse_ARN, *v.ARN)
+	}
+	serializeDynamicInstrumentationAttributeFilters(s, schemas.CreateInstrumentationConfigurationResponse_AttributeFilters, v.AttributeFilters)
+	serializeCaptureConfiguration(s, schemas.CreateInstrumentationConfigurationResponse_CaptureConfiguration, v.CaptureConfiguration)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateInstrumentationConfigurationResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateInstrumentationConfigurationResponse_Description, *v.Description)
+	}
+	if v.Environment != nil {
+		s.WriteString(schemas.CreateInstrumentationConfigurationResponse_Environment, *v.Environment)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.CreateInstrumentationConfigurationResponse_ExpiresAt, *v.ExpiresAt)
+	}
+	if v.InstrumentationType != "" {
+		s.WriteString(schemas.CreateInstrumentationConfigurationResponse_InstrumentationType, string(v.InstrumentationType))
+	}
+	serializeLocation(s, schemas.CreateInstrumentationConfigurationResponse_Location, v.Location)
+	if v.LocationHash != nil {
+		s.WriteString(schemas.CreateInstrumentationConfigurationResponse_LocationHash, *v.LocationHash)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.CreateInstrumentationConfigurationResponse_Service, *v.Service)
+	}
+	if v.SignalType != "" {
+		s.WriteString(schemas.CreateInstrumentationConfigurationResponse_SignalType, string(v.SignalType))
+	}
+}
+func (v *CreateInstrumentationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateInstrumentationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateInstrumentationConfigurationResponse_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.CreateInstrumentationConfigurationResponse_ARN, v.ARN)
+		case schemas.CreateInstrumentationConfigurationResponse_AttributeFilters:
+			return deserializeDynamicInstrumentationAttributeFilters(d, schemas.CreateInstrumentationConfigurationResponse_AttributeFilters, &v.AttributeFilters)
+		case schemas.CreateInstrumentationConfigurationResponse_CaptureConfiguration:
+			return deserializeCaptureConfiguration(d, schemas.CreateInstrumentationConfigurationResponse_CaptureConfiguration, &v.CaptureConfiguration)
+		case schemas.CreateInstrumentationConfigurationResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateInstrumentationConfigurationResponse_CreatedAt, v.CreatedAt)
+		case schemas.CreateInstrumentationConfigurationResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateInstrumentationConfigurationResponse_Description, v.Description)
+		case schemas.CreateInstrumentationConfigurationResponse_Environment:
+			v.Environment = new(string)
+			return d.ReadString(schemas.CreateInstrumentationConfigurationResponse_Environment, v.Environment)
+		case schemas.CreateInstrumentationConfigurationResponse_ExpiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.CreateInstrumentationConfigurationResponse_ExpiresAt, v.ExpiresAt)
+		case schemas.CreateInstrumentationConfigurationResponse_InstrumentationType:
+			var ev string
+			if err := d.ReadString(schemas.CreateInstrumentationConfigurationResponse_InstrumentationType, &ev); err != nil {
+				return err
+			}
+			v.InstrumentationType = types.InstrumentationType(ev)
+			return nil
+		case schemas.CreateInstrumentationConfigurationResponse_Location:
+			return deserializeLocation(d, schemas.CreateInstrumentationConfigurationResponse_Location, &v.Location)
+		case schemas.CreateInstrumentationConfigurationResponse_LocationHash:
+			v.LocationHash = new(string)
+			return d.ReadString(schemas.CreateInstrumentationConfigurationResponse_LocationHash, v.LocationHash)
+		case schemas.CreateInstrumentationConfigurationResponse_Service:
+			v.Service = new(string)
+			return d.ReadString(schemas.CreateInstrumentationConfigurationResponse_Service, v.Service)
+		case schemas.CreateInstrumentationConfigurationResponse_SignalType:
+			var ev string
+			if err := d.ReadString(schemas.CreateInstrumentationConfigurationResponse_SignalType, &ev); err != nil {
+				return err
+			}
+			v.SignalType = types.DynamicInstrumentationSignalType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateInstrumentationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateInstrumentationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInstrumentationConfiguration, schemas.CreateInstrumentationConfigurationRequest, schemas.CreateInstrumentationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateInstrumentationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInstrumentationConfiguration, schemas.CreateInstrumentationConfigurationRequest, schemas.CreateInstrumentationConfigurationResponse), output: &CreateInstrumentationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -106,6 +108,27 @@ type PutBackupVaultLockConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutBackupVaultLockConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutBackupVaultLockConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutBackupVaultLockConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.PutBackupVaultLockConfigurationInput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.ChangeableForDays != nil {
+		s.WriteInt64(schemas.PutBackupVaultLockConfigurationInput_ChangeableForDays, *v.ChangeableForDays)
+	}
+	if v.MaxRetentionDays != nil {
+		s.WriteInt64(schemas.PutBackupVaultLockConfigurationInput_MaxRetentionDays, *v.MaxRetentionDays)
+	}
+	if v.MinRetentionDays != nil {
+		s.WriteInt64(schemas.PutBackupVaultLockConfigurationInput_MinRetentionDays, *v.MinRetentionDays)
+	}
+}
+
 type PutBackupVaultLockConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -113,13 +136,26 @@ type PutBackupVaultLockConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutBackupVaultLockConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutBackupVaultLockConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutBackupVaultLockConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutBackupVaultLockConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutBackupVaultLockConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutBackupVaultLockConfiguration, schemas.PutBackupVaultLockConfigurationInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutBackupVaultLockConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutBackupVaultLockConfiguration, schemas.PutBackupVaultLockConfigurationInput, nil), output: &PutBackupVaultLockConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

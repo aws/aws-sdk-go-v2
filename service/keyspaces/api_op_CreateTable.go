@@ -4,7 +4,9 @@ package keyspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/keyspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/keyspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -217,6 +219,126 @@ type CreateTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTableRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingSpecification != nil {
+		s.WriteStruct(schemas.CreateTableRequest_autoScalingSpecification)
+		v.AutoScalingSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CapacitySpecification != nil {
+		s.WriteStruct(schemas.CreateTableRequest_capacitySpecification)
+		v.CapacitySpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CdcSpecification != nil {
+		s.WriteStruct(schemas.CreateTableRequest_cdcSpecification)
+		v.CdcSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientSideTimestamps != nil {
+		s.WriteStruct(schemas.CreateTableRequest_clientSideTimestamps)
+		v.ClientSideTimestamps.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Comment != nil {
+		s.WriteStruct(schemas.CreateTableRequest_comment)
+		v.Comment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultTimeToLive != nil {
+		s.WriteInt32(schemas.CreateTableRequest_defaultTimeToLive, *v.DefaultTimeToLive)
+	}
+	if v.EncryptionSpecification != nil {
+		s.WriteStruct(schemas.CreateTableRequest_encryptionSpecification)
+		v.EncryptionSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyspaceName != nil {
+		s.WriteString(schemas.CreateTableRequest_keyspaceName, *v.KeyspaceName)
+	}
+	if v.PointInTimeRecovery != nil {
+		s.WriteStruct(schemas.CreateTableRequest_pointInTimeRecovery)
+		v.PointInTimeRecovery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeReplicaSpecificationList(s, schemas.CreateTableRequest_replicaSpecifications, v.ReplicaSpecifications)
+	if v.SchemaDefinition != nil {
+		s.WriteStruct(schemas.CreateTableRequest_schemaDefinition)
+		v.SchemaDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.CreateTableRequest_tableName, *v.TableName)
+	}
+	serializeTagList(s, schemas.CreateTableRequest_tags, v.Tags)
+	if v.Ttl != nil {
+		s.WriteStruct(schemas.CreateTableRequest_ttl)
+		v.Ttl.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WarmThroughputSpecification != nil {
+		s.WriteStruct(schemas.CreateTableRequest_warmThroughputSpecification)
+		v.WarmThroughputSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateTableInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTableRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTableRequest_autoScalingSpecification:
+			v.AutoScalingSpecification = &types.AutoScalingSpecification{}
+			return v.AutoScalingSpecification.Deserialize(d)
+		case schemas.CreateTableRequest_capacitySpecification:
+			v.CapacitySpecification = &types.CapacitySpecification{}
+			return v.CapacitySpecification.Deserialize(d)
+		case schemas.CreateTableRequest_cdcSpecification:
+			v.CdcSpecification = &types.CdcSpecification{}
+			return v.CdcSpecification.Deserialize(d)
+		case schemas.CreateTableRequest_clientSideTimestamps:
+			v.ClientSideTimestamps = &types.ClientSideTimestamps{}
+			return v.ClientSideTimestamps.Deserialize(d)
+		case schemas.CreateTableRequest_comment:
+			v.Comment = &types.Comment{}
+			return v.Comment.Deserialize(d)
+		case schemas.CreateTableRequest_defaultTimeToLive:
+			v.DefaultTimeToLive = new(int32)
+			return d.ReadInt32(schemas.CreateTableRequest_defaultTimeToLive, v.DefaultTimeToLive)
+		case schemas.CreateTableRequest_encryptionSpecification:
+			v.EncryptionSpecification = &types.EncryptionSpecification{}
+			return v.EncryptionSpecification.Deserialize(d)
+		case schemas.CreateTableRequest_keyspaceName:
+			v.KeyspaceName = new(string)
+			return d.ReadString(schemas.CreateTableRequest_keyspaceName, v.KeyspaceName)
+		case schemas.CreateTableRequest_pointInTimeRecovery:
+			v.PointInTimeRecovery = &types.PointInTimeRecovery{}
+			return v.PointInTimeRecovery.Deserialize(d)
+		case schemas.CreateTableRequest_replicaSpecifications:
+			return deserializeReplicaSpecificationList(d, schemas.CreateTableRequest_replicaSpecifications, &v.ReplicaSpecifications)
+		case schemas.CreateTableRequest_schemaDefinition:
+			v.SchemaDefinition = &types.SchemaDefinition{}
+			return v.SchemaDefinition.Deserialize(d)
+		case schemas.CreateTableRequest_tableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.CreateTableRequest_tableName, v.TableName)
+		case schemas.CreateTableRequest_tags:
+			return deserializeTagList(d, schemas.CreateTableRequest_tags, &v.Tags)
+		case schemas.CreateTableRequest_ttl:
+			v.Ttl = &types.TimeToLive{}
+			return v.Ttl.Deserialize(d)
+		case schemas.CreateTableRequest_warmThroughputSpecification:
+			v.WarmThroughputSpecification = &types.WarmThroughputSpecification{}
+			return v.WarmThroughputSpecification.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type CreateTableOutput struct {
 
 	// The unique identifier of the table in the format of an Amazon Resource Name
@@ -231,13 +353,32 @@ type CreateTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTableResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.CreateTableResponse_resourceArn, *v.ResourceArn)
+	}
+}
+func (v *CreateTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTableResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTableResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.CreateTableResponse_resourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTable, schemas.CreateTableRequest, schemas.CreateTableResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTable, schemas.CreateTableRequest, schemas.CreateTableResponse), output: &CreateTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

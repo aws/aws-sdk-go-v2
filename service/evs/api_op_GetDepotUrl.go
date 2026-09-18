@@ -4,6 +4,8 @@ package evs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/evs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type GetDepotUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDepotUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDepotUrlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDepotUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.GetDepotUrlRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.Rotate != nil {
+		s.WriteBool(schemas.GetDepotUrlRequest_rotate, *v.Rotate)
+	}
+}
+
 type GetDepotUrlOutput struct {
 
 	// The URL for accessing the Amazon EVS Custom Addon depot. This URL includes the
@@ -63,13 +80,38 @@ type GetDepotUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDepotUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDepotUrlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDepotUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DepotUrl != nil {
+		s.WriteString(schemas.GetDepotUrlResponse_depotUrl, *v.DepotUrl)
+	}
+	if v.Token != nil {
+		s.WriteString(schemas.GetDepotUrlResponse_token, *v.Token)
+	}
+}
+func (v *GetDepotUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDepotUrlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDepotUrlResponse_depotUrl:
+			v.DepotUrl = new(string)
+			return d.ReadString(schemas.GetDepotUrlResponse_depotUrl, v.DepotUrl)
+		case schemas.GetDepotUrlResponse_token:
+			v.Token = new(string)
+			return d.ReadString(schemas.GetDepotUrlResponse_token, v.Token)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDepotUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetDepotUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDepotUrl, schemas.GetDepotUrlRequest, schemas.GetDepotUrlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetDepotUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDepotUrl, schemas.GetDepotUrlRequest, schemas.GetDepotUrlResponse), output: &GetDepotUrlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

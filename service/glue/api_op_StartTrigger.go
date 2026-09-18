@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type StartTriggerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTriggerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTriggerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTriggerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.StartTriggerRequest_Name, *v.Name)
+	}
+}
+
 type StartTriggerOutput struct {
 
 	// The name of the trigger that was started.
@@ -47,13 +61,32 @@ type StartTriggerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTriggerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTriggerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTriggerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.StartTriggerResponse_Name, *v.Name)
+	}
+}
+func (v *StartTriggerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTriggerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTriggerResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StartTriggerResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartTrigger{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTrigger, schemas.StartTriggerRequest, schemas.StartTriggerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartTrigger{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTrigger, schemas.StartTriggerRequest, schemas.StartTriggerResponse), output: &StartTriggerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

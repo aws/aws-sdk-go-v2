@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,26 @@ type ListSchemasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSchemasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSchemasInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSchemasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSchemasInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSchemasInput_NextToken, *v.NextToken)
+	}
+	if v.RegistryId != nil {
+		s.WriteStruct(schemas.ListSchemasInput_RegistryId)
+		v.RegistryId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListSchemasOutput struct {
 
 	// A continuation token for paginating the returned list of tokens, returned if
@@ -61,13 +83,35 @@ type ListSchemasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSchemasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSchemasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSchemasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSchemasResponse_NextToken, *v.NextToken)
+	}
+	serializeSchemaListDefinition(s, schemas.ListSchemasResponse_Schemas, v.Schemas)
+}
+func (v *ListSchemasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSchemasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSchemasResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSchemasResponse_NextToken, v.NextToken)
+		case schemas.ListSchemasResponse_Schemas:
+			return deserializeSchemaListDefinition(d, schemas.ListSchemasResponse_Schemas, &v.Schemas)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSchemasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSchemas{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSchemas, schemas.ListSchemasInput, schemas.ListSchemasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSchemas{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSchemas, schemas.ListSchemasInput, schemas.ListSchemasResponse), output: &ListSchemasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

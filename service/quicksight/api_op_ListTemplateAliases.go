@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type ListTemplateAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTemplateAliasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTemplateAliasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTemplateAliasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListTemplateAliasesRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTemplateAliasesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTemplateAliasesRequest_NextToken, *v.NextToken)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.ListTemplateAliasesRequest_TemplateId, *v.TemplateId)
+	}
+}
+
 type ListTemplateAliasesOutput struct {
 
 	// The token for the next set of results, or null if there are no more results.
@@ -67,13 +90,46 @@ type ListTemplateAliasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTemplateAliasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTemplateAliasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTemplateAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTemplateAliasesResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListTemplateAliasesResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListTemplateAliasesResponse_Status, v.Status)
+	}
+	serializeTemplateAliasList(s, schemas.ListTemplateAliasesResponse_TemplateAliasList, v.TemplateAliasList)
+}
+func (v *ListTemplateAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTemplateAliasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTemplateAliasesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTemplateAliasesResponse_NextToken, v.NextToken)
+		case schemas.ListTemplateAliasesResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListTemplateAliasesResponse_RequestId, v.RequestId)
+		case schemas.ListTemplateAliasesResponse_Status:
+			return d.ReadInt32(schemas.ListTemplateAliasesResponse_Status, &v.Status)
+		case schemas.ListTemplateAliasesResponse_TemplateAliasList:
+			return deserializeTemplateAliasList(d, schemas.ListTemplateAliasesResponse_TemplateAliasList, &v.TemplateAliasList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTemplateAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTemplateAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTemplateAliases, schemas.ListTemplateAliasesRequest, schemas.ListTemplateAliasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTemplateAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTemplateAliases, schemas.ListTemplateAliasesRequest, schemas.ListTemplateAliasesResponse), output: &ListTemplateAliasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

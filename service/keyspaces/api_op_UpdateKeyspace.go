@@ -4,7 +4,9 @@ package keyspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/keyspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/keyspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -109,6 +111,28 @@ type UpdateKeyspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateKeyspaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateKeyspaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateKeyspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientSideTimestamps != nil {
+		s.WriteStruct(schemas.UpdateKeyspaceRequest_clientSideTimestamps)
+		v.ClientSideTimestamps.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyspaceName != nil {
+		s.WriteString(schemas.UpdateKeyspaceRequest_keyspaceName, *v.KeyspaceName)
+	}
+	if v.ReplicationSpecification != nil {
+		s.WriteStruct(schemas.UpdateKeyspaceRequest_replicationSpecification)
+		v.ReplicationSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateKeyspaceOutput struct {
 
 	//  The unique identifier of the keyspace in the format of an Amazon Resource Name
@@ -123,13 +147,32 @@ type UpdateKeyspaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateKeyspaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateKeyspaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateKeyspaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.UpdateKeyspaceResponse_resourceArn, *v.ResourceArn)
+	}
+}
+func (v *UpdateKeyspaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateKeyspaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateKeyspaceResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.UpdateKeyspaceResponse_resourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateKeyspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateKeyspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKeyspace, schemas.UpdateKeyspaceRequest, schemas.UpdateKeyspaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateKeyspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateKeyspace, schemas.UpdateKeyspaceRequest, schemas.UpdateKeyspaceResponse), output: &UpdateKeyspaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

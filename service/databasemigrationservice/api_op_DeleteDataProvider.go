@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type DeleteDataProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataProviderMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataProviderIdentifier != nil {
+		s.WriteString(schemas.DeleteDataProviderMessage_DataProviderIdentifier, *v.DataProviderIdentifier)
+	}
+}
+
 type DeleteDataProviderOutput struct {
 
 	// The data provider that was deleted.
@@ -52,13 +66,34 @@ type DeleteDataProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataProviderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataProvider != nil {
+		s.WriteStruct(schemas.DeleteDataProviderResponse_DataProvider)
+		v.DataProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteDataProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDataProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDataProviderResponse_DataProvider:
+			v.DataProvider = &types.DataProvider{}
+			return v.DataProvider.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDataProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDataProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataProvider, schemas.DeleteDataProviderMessage, schemas.DeleteDataProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteDataProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataProvider, schemas.DeleteDataProviderMessage, schemas.DeleteDataProviderResponse), output: &DeleteDataProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

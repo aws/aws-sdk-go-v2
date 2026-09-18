@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,32 @@ type UpdateApprovalPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApprovalPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApprovalPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApprovalPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGovernedActionList(s, schemas.UpdateApprovalPolicyRequest_Actions, v.Actions)
+	if v.ApplicableTo != nil {
+		s.WriteStruct(schemas.UpdateApprovalPolicyRequest_ApplicableTo)
+		v.ApplicableTo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeApprovalGroupList(s, schemas.UpdateApprovalPolicyRequest_ApprovalGroups, v.ApprovalGroups)
+	serializeAssetTypeList(s, schemas.UpdateApprovalPolicyRequest_AssetTypes, v.AssetTypes)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateApprovalPolicyRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateApprovalPolicyRequest_Name, *v.Name)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.UpdateApprovalPolicyRequest_PolicyId, *v.PolicyId)
+	}
+}
+
 type UpdateApprovalPolicyOutput struct {
 
 	// The updated approval policy.
@@ -65,13 +93,34 @@ type UpdateApprovalPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApprovalPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApprovalPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApprovalPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteStruct(schemas.UpdateApprovalPolicyResponse_Policy)
+		v.Policy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateApprovalPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateApprovalPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateApprovalPolicyResponse_Policy:
+			v.Policy = &types.ApprovalPolicy{}
+			return v.Policy.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateApprovalPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApprovalPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApprovalPolicy, schemas.UpdateApprovalPolicyRequest, schemas.UpdateApprovalPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateApprovalPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApprovalPolicy, schemas.UpdateApprovalPolicyRequest, schemas.UpdateApprovalPolicyResponse), output: &UpdateApprovalPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -51,6 +53,15 @@ type GetDeliverabilityDashboardOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeliverabilityDashboardOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeliverabilityDashboardOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeliverabilityDashboardOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 // An object that shows the status of the Deliverability dashboard.
 type GetDeliverabilityDashboardOptionsOutput struct {
 
@@ -87,13 +98,51 @@ type GetDeliverabilityDashboardOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeliverabilityDashboardOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeliverabilityDashboardOptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeliverabilityDashboardOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountStatus != "" {
+		s.WriteString(schemas.GetDeliverabilityDashboardOptionsResponse_AccountStatus, string(v.AccountStatus))
+	}
+	serializeDomainDeliverabilityTrackingOptions(s, schemas.GetDeliverabilityDashboardOptionsResponse_ActiveSubscribedDomains, v.ActiveSubscribedDomains)
+	s.WriteBool(schemas.GetDeliverabilityDashboardOptionsResponse_DashboardEnabled, v.DashboardEnabled)
+	serializeDomainDeliverabilityTrackingOptions(s, schemas.GetDeliverabilityDashboardOptionsResponse_PendingExpirationSubscribedDomains, v.PendingExpirationSubscribedDomains)
+	if v.SubscriptionExpiryDate != nil {
+		s.WriteTime(schemas.GetDeliverabilityDashboardOptionsResponse_SubscriptionExpiryDate, *v.SubscriptionExpiryDate)
+	}
+}
+func (v *GetDeliverabilityDashboardOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDeliverabilityDashboardOptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDeliverabilityDashboardOptionsResponse_AccountStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetDeliverabilityDashboardOptionsResponse_AccountStatus, &ev); err != nil {
+				return err
+			}
+			v.AccountStatus = types.DeliverabilityDashboardAccountStatus(ev)
+			return nil
+		case schemas.GetDeliverabilityDashboardOptionsResponse_ActiveSubscribedDomains:
+			return deserializeDomainDeliverabilityTrackingOptions(d, schemas.GetDeliverabilityDashboardOptionsResponse_ActiveSubscribedDomains, &v.ActiveSubscribedDomains)
+		case schemas.GetDeliverabilityDashboardOptionsResponse_DashboardEnabled:
+			return d.ReadBool(schemas.GetDeliverabilityDashboardOptionsResponse_DashboardEnabled, &v.DashboardEnabled)
+		case schemas.GetDeliverabilityDashboardOptionsResponse_PendingExpirationSubscribedDomains:
+			return deserializeDomainDeliverabilityTrackingOptions(d, schemas.GetDeliverabilityDashboardOptionsResponse_PendingExpirationSubscribedDomains, &v.PendingExpirationSubscribedDomains)
+		case schemas.GetDeliverabilityDashboardOptionsResponse_SubscriptionExpiryDate:
+			v.SubscriptionExpiryDate = new(time.Time)
+			return d.ReadTime(schemas.GetDeliverabilityDashboardOptionsResponse_SubscriptionExpiryDate, v.SubscriptionExpiryDate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDeliverabilityDashboardOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeliverabilityDashboardOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeliverabilityDashboardOptions, schemas.GetDeliverabilityDashboardOptionsRequest, schemas.GetDeliverabilityDashboardOptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDeliverabilityDashboardOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeliverabilityDashboardOptions, schemas.GetDeliverabilityDashboardOptionsRequest, schemas.GetDeliverabilityDashboardOptionsResponse), output: &GetDeliverabilityDashboardOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

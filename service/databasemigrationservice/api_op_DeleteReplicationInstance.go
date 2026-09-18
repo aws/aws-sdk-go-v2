@@ -4,7 +4,9 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DeleteReplicationInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReplicationInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReplicationInstanceMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReplicationInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationInstanceArn != nil {
+		s.WriteString(schemas.DeleteReplicationInstanceMessage_ReplicationInstanceArn, *v.ReplicationInstanceArn)
+	}
+}
+
 type DeleteReplicationInstanceOutput struct {
 
 	// The replication instance that was deleted.
@@ -48,13 +62,34 @@ type DeleteReplicationInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReplicationInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReplicationInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReplicationInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationInstance != nil {
+		s.WriteStruct(schemas.DeleteReplicationInstanceResponse_ReplicationInstance)
+		v.ReplicationInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteReplicationInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteReplicationInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteReplicationInstanceResponse_ReplicationInstance:
+			v.ReplicationInstance = &types.ReplicationInstance{}
+			return v.ReplicationInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteReplicationInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteReplicationInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReplicationInstance, schemas.DeleteReplicationInstanceMessage, schemas.DeleteReplicationInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteReplicationInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReplicationInstance, schemas.DeleteReplicationInstanceMessage, schemas.DeleteReplicationInstanceResponse), output: &DeleteReplicationInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

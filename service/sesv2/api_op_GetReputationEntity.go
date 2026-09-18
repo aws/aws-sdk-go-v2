@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,21 @@ type GetReputationEntityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReputationEntityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReputationEntityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReputationEntityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReputationEntityReference != nil {
+		s.WriteString(schemas.GetReputationEntityRequest_ReputationEntityReference, *v.ReputationEntityReference)
+	}
+	if v.ReputationEntityType != "" {
+		s.WriteString(schemas.GetReputationEntityRequest_ReputationEntityType, string(v.ReputationEntityType))
+	}
+}
+
 // Information about the requested reputation entity.
 type GetReputationEntityOutput struct {
 
@@ -62,13 +79,34 @@ type GetReputationEntityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReputationEntityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReputationEntityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReputationEntityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReputationEntity != nil {
+		s.WriteStruct(schemas.GetReputationEntityResponse_ReputationEntity)
+		v.ReputationEntity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetReputationEntityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetReputationEntityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetReputationEntityResponse_ReputationEntity:
+			v.ReputationEntity = &types.ReputationEntity{}
+			return v.ReputationEntity.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetReputationEntityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetReputationEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReputationEntity, schemas.GetReputationEntityRequest, schemas.GetReputationEntityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetReputationEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReputationEntity, schemas.GetReputationEntityRequest, schemas.GetReputationEntityResponse), output: &GetReputationEntityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

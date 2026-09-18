@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,31 @@ type GetPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalPlanOptionsMap(s, schemas.GetPlanRequest_AdditionalPlanOptionsMap, v.AdditionalPlanOptionsMap)
+	if v.Language != "" {
+		s.WriteString(schemas.GetPlanRequest_Language, string(v.Language))
+	}
+	if v.Location != nil {
+		s.WriteStruct(schemas.GetPlanRequest_Location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMappingList(s, schemas.GetPlanRequest_Mapping, v.Mapping)
+	serializeCatalogEntries(s, schemas.GetPlanRequest_Sinks, v.Sinks)
+	if v.Source != nil {
+		s.WriteStruct(schemas.GetPlanRequest_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetPlanOutput struct {
 
 	// A Python script to perform the mapping.
@@ -73,13 +100,38 @@ type GetPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PythonScript != nil {
+		s.WriteString(schemas.GetPlanResponse_PythonScript, *v.PythonScript)
+	}
+	if v.ScalaCode != nil {
+		s.WriteString(schemas.GetPlanResponse_ScalaCode, *v.ScalaCode)
+	}
+}
+func (v *GetPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPlanResponse_PythonScript:
+			v.PythonScript = new(string)
+			return d.ReadString(schemas.GetPlanResponse_PythonScript, v.PythonScript)
+		case schemas.GetPlanResponse_ScalaCode:
+			v.ScalaCode = new(string)
+			return d.ReadString(schemas.GetPlanResponse_ScalaCode, v.ScalaCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlan, schemas.GetPlanRequest, schemas.GetPlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlan, schemas.GetPlanRequest, schemas.GetPlanResponse), output: &GetPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

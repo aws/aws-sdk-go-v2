@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type ListTopicReviewedAnswersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTopicReviewedAnswersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTopicReviewedAnswersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTopicReviewedAnswersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListTopicReviewedAnswersRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.TopicId != nil {
+		s.WriteString(schemas.ListTopicReviewedAnswersRequest_TopicId, *v.TopicId)
+	}
+}
+
 type ListTopicReviewedAnswersOutput struct {
 
 	// The definition of all Answers in the topic.
@@ -67,13 +84,52 @@ type ListTopicReviewedAnswersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTopicReviewedAnswersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTopicReviewedAnswersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTopicReviewedAnswersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTopicReviewedAnswers(s, schemas.ListTopicReviewedAnswersResponse_Answers, v.Answers)
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListTopicReviewedAnswersResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListTopicReviewedAnswersResponse_Status, v.Status)
+	}
+	if v.TopicArn != nil {
+		s.WriteString(schemas.ListTopicReviewedAnswersResponse_TopicArn, *v.TopicArn)
+	}
+	if v.TopicId != nil {
+		s.WriteString(schemas.ListTopicReviewedAnswersResponse_TopicId, *v.TopicId)
+	}
+}
+func (v *ListTopicReviewedAnswersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTopicReviewedAnswersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTopicReviewedAnswersResponse_Answers:
+			return deserializeTopicReviewedAnswers(d, schemas.ListTopicReviewedAnswersResponse_Answers, &v.Answers)
+		case schemas.ListTopicReviewedAnswersResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListTopicReviewedAnswersResponse_RequestId, v.RequestId)
+		case schemas.ListTopicReviewedAnswersResponse_Status:
+			return d.ReadInt32(schemas.ListTopicReviewedAnswersResponse_Status, &v.Status)
+		case schemas.ListTopicReviewedAnswersResponse_TopicArn:
+			v.TopicArn = new(string)
+			return d.ReadString(schemas.ListTopicReviewedAnswersResponse_TopicArn, v.TopicArn)
+		case schemas.ListTopicReviewedAnswersResponse_TopicId:
+			v.TopicId = new(string)
+			return d.ReadString(schemas.ListTopicReviewedAnswersResponse_TopicId, v.TopicId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTopicReviewedAnswersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTopicReviewedAnswers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTopicReviewedAnswers, schemas.ListTopicReviewedAnswersRequest, schemas.ListTopicReviewedAnswersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTopicReviewedAnswers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTopicReviewedAnswers, schemas.ListTopicReviewedAnswersRequest, schemas.ListTopicReviewedAnswersResponse), output: &ListTopicReviewedAnswersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

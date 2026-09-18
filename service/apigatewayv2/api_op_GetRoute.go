@@ -4,7 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type GetRouteInput struct {
 	RouteId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetRouteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRouteRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRouteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.GetRouteRequest_ApiId, *v.ApiId)
+	}
+	if v.RouteId != nil {
+		s.WriteString(schemas.GetRouteRequest_RouteId, *v.RouteId)
+	}
 }
 
 type GetRouteOutput struct {
@@ -102,13 +119,99 @@ type GetRouteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRouteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRouteResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRouteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiGatewayManaged != nil {
+		s.WriteBool(schemas.GetRouteResult_ApiGatewayManaged, *v.ApiGatewayManaged)
+	}
+	if v.ApiKeyRequired != nil {
+		s.WriteBool(schemas.GetRouteResult_ApiKeyRequired, *v.ApiKeyRequired)
+	}
+	serializeAuthorizationScopes(s, schemas.GetRouteResult_AuthorizationScopes, v.AuthorizationScopes)
+	if v.AuthorizationType != "" {
+		s.WriteString(schemas.GetRouteResult_AuthorizationType, string(v.AuthorizationType))
+	}
+	if v.AuthorizerId != nil {
+		s.WriteString(schemas.GetRouteResult_AuthorizerId, *v.AuthorizerId)
+	}
+	if v.ModelSelectionExpression != nil {
+		s.WriteString(schemas.GetRouteResult_ModelSelectionExpression, *v.ModelSelectionExpression)
+	}
+	if v.OperationName != nil {
+		s.WriteString(schemas.GetRouteResult_OperationName, *v.OperationName)
+	}
+	serializeRouteModels(s, schemas.GetRouteResult_RequestModels, v.RequestModels)
+	serializeRouteParameters(s, schemas.GetRouteResult_RequestParameters, v.RequestParameters)
+	if v.RouteId != nil {
+		s.WriteString(schemas.GetRouteResult_RouteId, *v.RouteId)
+	}
+	if v.RouteKey != nil {
+		s.WriteString(schemas.GetRouteResult_RouteKey, *v.RouteKey)
+	}
+	if v.RouteResponseSelectionExpression != nil {
+		s.WriteString(schemas.GetRouteResult_RouteResponseSelectionExpression, *v.RouteResponseSelectionExpression)
+	}
+	if v.Target != nil {
+		s.WriteString(schemas.GetRouteResult_Target, *v.Target)
+	}
+}
+func (v *GetRouteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRouteResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRouteResult_ApiGatewayManaged:
+			v.ApiGatewayManaged = new(bool)
+			return d.ReadBool(schemas.GetRouteResult_ApiGatewayManaged, v.ApiGatewayManaged)
+		case schemas.GetRouteResult_ApiKeyRequired:
+			v.ApiKeyRequired = new(bool)
+			return d.ReadBool(schemas.GetRouteResult_ApiKeyRequired, v.ApiKeyRequired)
+		case schemas.GetRouteResult_AuthorizationScopes:
+			return deserializeAuthorizationScopes(d, schemas.GetRouteResult_AuthorizationScopes, &v.AuthorizationScopes)
+		case schemas.GetRouteResult_AuthorizationType:
+			var ev string
+			if err := d.ReadString(schemas.GetRouteResult_AuthorizationType, &ev); err != nil {
+				return err
+			}
+			v.AuthorizationType = types.AuthorizationType(ev)
+			return nil
+		case schemas.GetRouteResult_AuthorizerId:
+			v.AuthorizerId = new(string)
+			return d.ReadString(schemas.GetRouteResult_AuthorizerId, v.AuthorizerId)
+		case schemas.GetRouteResult_ModelSelectionExpression:
+			v.ModelSelectionExpression = new(string)
+			return d.ReadString(schemas.GetRouteResult_ModelSelectionExpression, v.ModelSelectionExpression)
+		case schemas.GetRouteResult_OperationName:
+			v.OperationName = new(string)
+			return d.ReadString(schemas.GetRouteResult_OperationName, v.OperationName)
+		case schemas.GetRouteResult_RequestModels:
+			return deserializeRouteModels(d, schemas.GetRouteResult_RequestModels, &v.RequestModels)
+		case schemas.GetRouteResult_RequestParameters:
+			return deserializeRouteParameters(d, schemas.GetRouteResult_RequestParameters, &v.RequestParameters)
+		case schemas.GetRouteResult_RouteId:
+			v.RouteId = new(string)
+			return d.ReadString(schemas.GetRouteResult_RouteId, v.RouteId)
+		case schemas.GetRouteResult_RouteKey:
+			v.RouteKey = new(string)
+			return d.ReadString(schemas.GetRouteResult_RouteKey, v.RouteKey)
+		case schemas.GetRouteResult_RouteResponseSelectionExpression:
+			v.RouteResponseSelectionExpression = new(string)
+			return d.ReadString(schemas.GetRouteResult_RouteResponseSelectionExpression, v.RouteResponseSelectionExpression)
+		case schemas.GetRouteResult_Target:
+			v.Target = new(string)
+			return d.ReadString(schemas.GetRouteResult_Target, v.Target)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRoute{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRoute, schemas.GetRouteRequest, schemas.GetRouteResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRoute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRoute, schemas.GetRouteRequest, schemas.GetRouteResult), output: &GetRouteOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

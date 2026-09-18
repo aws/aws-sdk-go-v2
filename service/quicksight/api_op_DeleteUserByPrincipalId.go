@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type DeleteUserByPrincipalIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUserByPrincipalIdInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUserByPrincipalIdRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUserByPrincipalIdInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteUserByPrincipalIdRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.DeleteUserByPrincipalIdRequest_Namespace, *v.Namespace)
+	}
+	if v.PrincipalId != nil {
+		s.WriteString(schemas.DeleteUserByPrincipalIdRequest_PrincipalId, *v.PrincipalId)
+	}
+}
+
 type DeleteUserByPrincipalIdOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -59,13 +79,37 @@ type DeleteUserByPrincipalIdOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUserByPrincipalIdOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUserByPrincipalIdResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUserByPrincipalIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteUserByPrincipalIdResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DeleteUserByPrincipalIdResponse_Status, v.Status)
+	}
+}
+func (v *DeleteUserByPrincipalIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteUserByPrincipalIdResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteUserByPrincipalIdResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteUserByPrincipalIdResponse_RequestId, v.RequestId)
+		case schemas.DeleteUserByPrincipalIdResponse_Status:
+			return d.ReadInt32(schemas.DeleteUserByPrincipalIdResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteUserByPrincipalIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteUserByPrincipalId{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUserByPrincipalId, schemas.DeleteUserByPrincipalIdRequest, schemas.DeleteUserByPrincipalIdResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteUserByPrincipalId{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUserByPrincipalId, schemas.DeleteUserByPrincipalIdRequest, schemas.DeleteUserByPrincipalIdResponse), output: &DeleteUserByPrincipalIdOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

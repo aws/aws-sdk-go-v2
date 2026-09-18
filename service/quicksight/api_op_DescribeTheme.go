@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,27 @@ type DescribeThemeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeThemeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeThemeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeThemeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.DescribeThemeRequest_AliasName, *v.AliasName)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeThemeRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.ThemeId != nil {
+		s.WriteString(schemas.DescribeThemeRequest_ThemeId, *v.ThemeId)
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt64(schemas.DescribeThemeRequest_VersionNumber, *v.VersionNumber)
+	}
+}
+
 type DescribeThemeOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -67,13 +90,45 @@ type DescribeThemeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeThemeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeThemeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeThemeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeThemeResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeThemeResponse_Status, v.Status)
+	}
+	if v.Theme != nil {
+		s.WriteStruct(schemas.DescribeThemeResponse_Theme)
+		v.Theme.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeThemeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeThemeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeThemeResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeThemeResponse_RequestId, v.RequestId)
+		case schemas.DescribeThemeResponse_Status:
+			return d.ReadInt32(schemas.DescribeThemeResponse_Status, &v.Status)
+		case schemas.DescribeThemeResponse_Theme:
+			v.Theme = &types.Theme{}
+			return v.Theme.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeThemeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeTheme{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTheme, schemas.DescribeThemeRequest, schemas.DescribeThemeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeTheme{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTheme, schemas.DescribeThemeRequest, schemas.DescribeThemeResponse), output: &DescribeThemeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

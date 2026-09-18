@@ -4,7 +4,9 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type SwitchoverAutonomousDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SwitchoverAutonomousDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SwitchoverAutonomousDatabaseInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SwitchoverAutonomousDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.SwitchoverAutonomousDatabaseInput_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+	if v.PeerDbArn != nil {
+		s.WriteString(schemas.SwitchoverAutonomousDatabaseInput_peerDbArn, *v.PeerDbArn)
+	}
+}
+
 type SwitchoverAutonomousDatabaseOutput struct {
 
 	// The unique identifier of the Autonomous Database that was switched over.
@@ -62,13 +79,54 @@ type SwitchoverAutonomousDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SwitchoverAutonomousDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SwitchoverAutonomousDatabaseOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SwitchoverAutonomousDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.SwitchoverAutonomousDatabaseOutput_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.SwitchoverAutonomousDatabaseOutput_displayName, *v.DisplayName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SwitchoverAutonomousDatabaseOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.SwitchoverAutonomousDatabaseOutput_statusReason, *v.StatusReason)
+	}
+}
+func (v *SwitchoverAutonomousDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SwitchoverAutonomousDatabaseOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SwitchoverAutonomousDatabaseOutput_autonomousDatabaseId:
+			v.AutonomousDatabaseId = new(string)
+			return d.ReadString(schemas.SwitchoverAutonomousDatabaseOutput_autonomousDatabaseId, v.AutonomousDatabaseId)
+		case schemas.SwitchoverAutonomousDatabaseOutput_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.SwitchoverAutonomousDatabaseOutput_displayName, v.DisplayName)
+		case schemas.SwitchoverAutonomousDatabaseOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.SwitchoverAutonomousDatabaseOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AutonomousDatabaseResourceStatus(ev)
+			return nil
+		case schemas.SwitchoverAutonomousDatabaseOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.SwitchoverAutonomousDatabaseOutput_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSwitchoverAutonomousDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSwitchoverAutonomousDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SwitchoverAutonomousDatabase, schemas.SwitchoverAutonomousDatabaseInput, schemas.SwitchoverAutonomousDatabaseOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSwitchoverAutonomousDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SwitchoverAutonomousDatabase, schemas.SwitchoverAutonomousDatabaseInput, schemas.SwitchoverAutonomousDatabaseOutput), output: &SwitchoverAutonomousDatabaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

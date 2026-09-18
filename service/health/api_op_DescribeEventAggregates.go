@@ -5,7 +5,9 @@ package health
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/health/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/health/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,29 @@ type DescribeEventAggregatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEventAggregatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEventAggregatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEventAggregatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregateField != "" {
+		s.WriteString(schemas.DescribeEventAggregatesRequest_aggregateField, string(v.AggregateField))
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.DescribeEventAggregatesRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeEventAggregatesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEventAggregatesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type DescribeEventAggregatesOutput struct {
 
 	// The number of events in each category that meet the optional filter criteria.
@@ -72,13 +97,35 @@ type DescribeEventAggregatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEventAggregatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEventAggregatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEventAggregatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventAggregateList(s, schemas.DescribeEventAggregatesResponse_eventAggregates, v.EventAggregates)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEventAggregatesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeEventAggregatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEventAggregatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEventAggregatesResponse_eventAggregates:
+			return deserializeEventAggregateList(d, schemas.DescribeEventAggregatesResponse_eventAggregates, &v.EventAggregates)
+		case schemas.DescribeEventAggregatesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeEventAggregatesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEventAggregatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEventAggregates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventAggregates, schemas.DescribeEventAggregatesRequest, schemas.DescribeEventAggregatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEventAggregates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventAggregates, schemas.DescribeEventAggregatesRequest, schemas.DescribeEventAggregatesResponse), output: &DescribeEventAggregatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

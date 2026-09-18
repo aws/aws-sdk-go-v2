@@ -5,7 +5,9 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,22 @@ type DescribeFleetAdvisorDatabasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetAdvisorDatabasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetAdvisorDatabasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetAdvisorDatabasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribeFleetAdvisorDatabasesRequest_Filters, v.Filters)
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeFleetAdvisorDatabasesRequest_MaxRecords, *v.MaxRecords)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFleetAdvisorDatabasesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeFleetAdvisorDatabasesOutput struct {
 
 	// Provides descriptions of the Fleet Advisor collector databases, including the
@@ -84,13 +102,35 @@ type DescribeFleetAdvisorDatabasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetAdvisorDatabasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetAdvisorDatabasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetAdvisorDatabasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatabaseList(s, schemas.DescribeFleetAdvisorDatabasesResponse_Databases, v.Databases)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFleetAdvisorDatabasesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeFleetAdvisorDatabasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFleetAdvisorDatabasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFleetAdvisorDatabasesResponse_Databases:
+			return deserializeDatabaseList(d, schemas.DescribeFleetAdvisorDatabasesResponse_Databases, &v.Databases)
+		case schemas.DescribeFleetAdvisorDatabasesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeFleetAdvisorDatabasesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFleetAdvisorDatabasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFleetAdvisorDatabases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetAdvisorDatabases, schemas.DescribeFleetAdvisorDatabasesRequest, schemas.DescribeFleetAdvisorDatabasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeFleetAdvisorDatabases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetAdvisorDatabases, schemas.DescribeFleetAdvisorDatabasesRequest, schemas.DescribeFleetAdvisorDatabasesResponse), output: &DescribeFleetAdvisorDatabasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

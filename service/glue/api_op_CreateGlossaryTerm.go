@@ -5,6 +5,8 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,30 @@ type CreateGlossaryTermInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGlossaryTermInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGlossaryTermRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGlossaryTermInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateGlossaryTermRequest_ClientToken, *v.ClientToken)
+	}
+	if v.GlossaryIdentifier != nil {
+		s.WriteString(schemas.CreateGlossaryTermRequest_GlossaryIdentifier, *v.GlossaryIdentifier)
+	}
+	if v.LongDescription != nil {
+		s.WriteString(schemas.CreateGlossaryTermRequest_LongDescription, *v.LongDescription)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateGlossaryTermRequest_Name, *v.Name)
+	}
+	if v.ShortDescription != nil {
+		s.WriteString(schemas.CreateGlossaryTermRequest_ShortDescription, *v.ShortDescription)
+	}
+}
+
 type CreateGlossaryTermOutput struct {
 
 	// The unique identifier of the glossary containing this term.
@@ -72,13 +98,56 @@ type CreateGlossaryTermOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGlossaryTermOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGlossaryTermResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGlossaryTermOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlossaryId != nil {
+		s.WriteString(schemas.CreateGlossaryTermResponse_GlossaryId, *v.GlossaryId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateGlossaryTermResponse_Id, *v.Id)
+	}
+	if v.LongDescription != nil {
+		s.WriteString(schemas.CreateGlossaryTermResponse_LongDescription, *v.LongDescription)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateGlossaryTermResponse_Name, *v.Name)
+	}
+	if v.ShortDescription != nil {
+		s.WriteString(schemas.CreateGlossaryTermResponse_ShortDescription, *v.ShortDescription)
+	}
+}
+func (v *CreateGlossaryTermOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGlossaryTermResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGlossaryTermResponse_GlossaryId:
+			v.GlossaryId = new(string)
+			return d.ReadString(schemas.CreateGlossaryTermResponse_GlossaryId, v.GlossaryId)
+		case schemas.CreateGlossaryTermResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateGlossaryTermResponse_Id, v.Id)
+		case schemas.CreateGlossaryTermResponse_LongDescription:
+			v.LongDescription = new(string)
+			return d.ReadString(schemas.CreateGlossaryTermResponse_LongDescription, v.LongDescription)
+		case schemas.CreateGlossaryTermResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateGlossaryTermResponse_Name, v.Name)
+		case schemas.CreateGlossaryTermResponse_ShortDescription:
+			v.ShortDescription = new(string)
+			return d.ReadString(schemas.CreateGlossaryTermResponse_ShortDescription, v.ShortDescription)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGlossaryTermMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateGlossaryTerm{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGlossaryTerm, schemas.CreateGlossaryTermRequest, schemas.CreateGlossaryTermResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateGlossaryTerm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGlossaryTerm, schemas.CreateGlossaryTermRequest, schemas.CreateGlossaryTermResponse), output: &CreateGlossaryTermOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

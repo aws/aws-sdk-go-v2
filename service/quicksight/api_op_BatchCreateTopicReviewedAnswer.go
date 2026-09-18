@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,22 @@ type BatchCreateTopicReviewedAnswerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateTopicReviewedAnswerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateTopicReviewedAnswerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateTopicReviewedAnswerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCreateTopicReviewedAnswers(s, schemas.BatchCreateTopicReviewedAnswerRequest_Answers, v.Answers)
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.BatchCreateTopicReviewedAnswerRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.TopicId != nil {
+		s.WriteString(schemas.BatchCreateTopicReviewedAnswerRequest_TopicId, *v.TopicId)
+	}
+}
+
 type BatchCreateTopicReviewedAnswerOutput struct {
 
 	// The definition of Answers that are invalid and not created.
@@ -73,13 +91,55 @@ type BatchCreateTopicReviewedAnswerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateTopicReviewedAnswerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateTopicReviewedAnswerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateTopicReviewedAnswerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInvalidTopicReviewedAnswers(s, schemas.BatchCreateTopicReviewedAnswerResponse_InvalidAnswers, v.InvalidAnswers)
+	if v.RequestId != nil {
+		s.WriteString(schemas.BatchCreateTopicReviewedAnswerResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.BatchCreateTopicReviewedAnswerResponse_Status, v.Status)
+	}
+	serializeSucceededTopicReviewedAnswers(s, schemas.BatchCreateTopicReviewedAnswerResponse_SucceededAnswers, v.SucceededAnswers)
+	if v.TopicArn != nil {
+		s.WriteString(schemas.BatchCreateTopicReviewedAnswerResponse_TopicArn, *v.TopicArn)
+	}
+	if v.TopicId != nil {
+		s.WriteString(schemas.BatchCreateTopicReviewedAnswerResponse_TopicId, *v.TopicId)
+	}
+}
+func (v *BatchCreateTopicReviewedAnswerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateTopicReviewedAnswerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateTopicReviewedAnswerResponse_InvalidAnswers:
+			return deserializeInvalidTopicReviewedAnswers(d, schemas.BatchCreateTopicReviewedAnswerResponse_InvalidAnswers, &v.InvalidAnswers)
+		case schemas.BatchCreateTopicReviewedAnswerResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.BatchCreateTopicReviewedAnswerResponse_RequestId, v.RequestId)
+		case schemas.BatchCreateTopicReviewedAnswerResponse_Status:
+			return d.ReadInt32(schemas.BatchCreateTopicReviewedAnswerResponse_Status, &v.Status)
+		case schemas.BatchCreateTopicReviewedAnswerResponse_SucceededAnswers:
+			return deserializeSucceededTopicReviewedAnswers(d, schemas.BatchCreateTopicReviewedAnswerResponse_SucceededAnswers, &v.SucceededAnswers)
+		case schemas.BatchCreateTopicReviewedAnswerResponse_TopicArn:
+			v.TopicArn = new(string)
+			return d.ReadString(schemas.BatchCreateTopicReviewedAnswerResponse_TopicArn, v.TopicArn)
+		case schemas.BatchCreateTopicReviewedAnswerResponse_TopicId:
+			v.TopicId = new(string)
+			return d.ReadString(schemas.BatchCreateTopicReviewedAnswerResponse_TopicId, v.TopicId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchCreateTopicReviewedAnswerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchCreateTopicReviewedAnswer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateTopicReviewedAnswer, schemas.BatchCreateTopicReviewedAnswerRequest, schemas.BatchCreateTopicReviewedAnswerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchCreateTopicReviewedAnswer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateTopicReviewedAnswer, schemas.BatchCreateTopicReviewedAnswerRequest, schemas.BatchCreateTopicReviewedAnswerResponse), output: &BatchCreateTopicReviewedAnswerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

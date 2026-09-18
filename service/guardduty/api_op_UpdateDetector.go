@@ -4,7 +4,9 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,30 @@ type UpdateDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDetectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDetectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDetectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSources != nil {
+		s.WriteStruct(schemas.UpdateDetectorRequest_DataSources)
+		v.DataSources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DetectorId != nil {
+		s.WriteString(schemas.UpdateDetectorRequest_DetectorId, *v.DetectorId)
+	}
+	if v.Enable != nil {
+		s.WriteBool(schemas.UpdateDetectorRequest_Enable, *v.Enable)
+	}
+	serializeDetectorFeatureConfigurations(s, schemas.UpdateDetectorRequest_Features, v.Features)
+	if v.FindingPublishingFrequency != "" {
+		s.WriteString(schemas.UpdateDetectorRequest_FindingPublishingFrequency, string(v.FindingPublishingFrequency))
+	}
+}
+
 type UpdateDetectorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -79,13 +105,26 @@ type UpdateDetectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDetectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDetectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDetectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateDetectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDetectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDetector, schemas.UpdateDetectorRequest, schemas.UpdateDetectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDetector, schemas.UpdateDetectorRequest, schemas.UpdateDetectorResponse), output: &UpdateDetectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package artifact
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/artifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/artifact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -60,6 +62,34 @@ type PutComplianceInquiryFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutComplianceInquiryFeedbackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutComplianceInquiryFeedbackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutComplianceInquiryFeedbackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.PutComplianceInquiryFeedbackRequest_clientToken, *v.ClientToken)
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.PutComplianceInquiryFeedbackRequest_comment, *v.Comment)
+	}
+	if v.ComplianceInquiryId != nil {
+		s.WriteString(schemas.PutComplianceInquiryFeedbackRequest_complianceInquiryId, *v.ComplianceInquiryId)
+	}
+	if v.QueryIdentifier != nil {
+		s.WriteInt32(schemas.PutComplianceInquiryFeedbackRequest_queryIdentifier, *v.QueryIdentifier)
+	}
+	if v.Rating != "" {
+		s.WriteString(schemas.PutComplianceInquiryFeedbackRequest_rating, string(v.Rating))
+	}
+	serializeFeedbackReasonCodeList(s, schemas.PutComplianceInquiryFeedbackRequest_reasonCodes, v.ReasonCodes)
+	if v.ResponseRevisionId != nil {
+		s.WriteInt32(schemas.PutComplianceInquiryFeedbackRequest_responseRevisionId, *v.ResponseRevisionId)
+	}
+}
+
 type PutComplianceInquiryFeedbackOutput struct {
 
 	// The timestamp when the feedback was submitted.
@@ -73,13 +103,32 @@ type PutComplianceInquiryFeedbackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutComplianceInquiryFeedbackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutComplianceInquiryFeedbackResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutComplianceInquiryFeedbackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubmittedAt != nil {
+		s.WriteTime(schemas.PutComplianceInquiryFeedbackResponse_submittedAt, *v.SubmittedAt)
+	}
+}
+func (v *PutComplianceInquiryFeedbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutComplianceInquiryFeedbackResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutComplianceInquiryFeedbackResponse_submittedAt:
+			v.SubmittedAt = new(time.Time)
+			return d.ReadTime(schemas.PutComplianceInquiryFeedbackResponse_submittedAt, v.SubmittedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutComplianceInquiryFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutComplianceInquiryFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutComplianceInquiryFeedback, schemas.PutComplianceInquiryFeedbackRequest, schemas.PutComplianceInquiryFeedbackResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutComplianceInquiryFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutComplianceInquiryFeedback, schemas.PutComplianceInquiryFeedbackRequest, schemas.PutComplianceInquiryFeedbackResponse), output: &PutComplianceInquiryFeedbackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

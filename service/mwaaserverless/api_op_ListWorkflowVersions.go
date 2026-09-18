@@ -5,7 +5,9 @@ package mwaaserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mwaaserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mwaaserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListWorkflowVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkflowVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkflowVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkflowVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkflowVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkflowVersionsRequest_NextToken, *v.NextToken)
+	}
+	if v.WorkflowArn != nil {
+		s.WriteString(schemas.ListWorkflowVersionsRequest_WorkflowArn, *v.WorkflowArn)
+	}
+}
+
 type ListWorkflowVersionsOutput struct {
 
 	// The pagination token you need to use to retrieve the next set of results. This
@@ -58,13 +78,35 @@ type ListWorkflowVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkflowVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkflowVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkflowVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkflowVersionsResponse_NextToken, *v.NextToken)
+	}
+	serializeWorkflowVersionSummaries(s, schemas.ListWorkflowVersionsResponse_WorkflowVersions, v.WorkflowVersions)
+}
+func (v *ListWorkflowVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkflowVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkflowVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkflowVersionsResponse_NextToken, v.NextToken)
+		case schemas.ListWorkflowVersionsResponse_WorkflowVersions:
+			return deserializeWorkflowVersionSummaries(d, schemas.ListWorkflowVersionsResponse_WorkflowVersions, &v.WorkflowVersions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkflowVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListWorkflowVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkflowVersions, schemas.ListWorkflowVersionsRequest, schemas.ListWorkflowVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListWorkflowVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkflowVersions, schemas.ListWorkflowVersionsRequest, schemas.ListWorkflowVersionsResponse), output: &ListWorkflowVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

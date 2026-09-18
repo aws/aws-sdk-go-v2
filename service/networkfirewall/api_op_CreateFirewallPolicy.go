@@ -4,7 +4,9 @@ package networkfirewall
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,35 @@ type CreateFirewallPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFirewallPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFirewallPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFirewallPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateFirewallPolicyRequest_Description, *v.Description)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateFirewallPolicyRequest_DryRun, v.DryRun)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateFirewallPolicyRequest_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FirewallPolicy != nil {
+		s.WriteStruct(schemas.CreateFirewallPolicyRequest_FirewallPolicy)
+		v.FirewallPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FirewallPolicyName != nil {
+		s.WriteString(schemas.CreateFirewallPolicyRequest_FirewallPolicyName, *v.FirewallPolicyName)
+	}
+	serializeTagList(s, schemas.CreateFirewallPolicyRequest_Tags, v.Tags)
+}
+
 type CreateFirewallPolicyOutput struct {
 
 	// The high-level properties of a firewall policy. This, along with the FirewallPolicy, define
@@ -96,13 +127,40 @@ type CreateFirewallPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFirewallPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFirewallPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFirewallPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallPolicyResponse != nil {
+		s.WriteStruct(schemas.CreateFirewallPolicyResponse_FirewallPolicyResponse)
+		v.FirewallPolicyResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.CreateFirewallPolicyResponse_UpdateToken, *v.UpdateToken)
+	}
+}
+func (v *CreateFirewallPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFirewallPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFirewallPolicyResponse_FirewallPolicyResponse:
+			v.FirewallPolicyResponse = &types.FirewallPolicyResponse{}
+			return v.FirewallPolicyResponse.Deserialize(d)
+		case schemas.CreateFirewallPolicyResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.CreateFirewallPolicyResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFirewallPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateFirewallPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFirewallPolicy, schemas.CreateFirewallPolicyRequest, schemas.CreateFirewallPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateFirewallPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFirewallPolicy, schemas.CreateFirewallPolicyRequest, schemas.CreateFirewallPolicyResponse), output: &CreateFirewallPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

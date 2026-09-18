@@ -4,7 +4,9 @@ package marketplaceagreement
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -52,6 +54,24 @@ type RejectAgreementCancellationRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectAgreementCancellationRequestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectAgreementCancellationRequestInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectAgreementCancellationRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementCancellationRequestId != nil {
+		s.WriteString(schemas.RejectAgreementCancellationRequestInput_agreementCancellationRequestId, *v.AgreementCancellationRequestId)
+	}
+	if v.AgreementId != nil {
+		s.WriteString(schemas.RejectAgreementCancellationRequestInput_agreementId, *v.AgreementId)
+	}
+	if v.RejectionReason != nil {
+		s.WriteString(schemas.RejectAgreementCancellationRequestInput_rejectionReason, *v.RejectionReason)
+	}
+}
+
 type RejectAgreementCancellationRequestOutput struct {
 
 	// The unique identifier of the rejected cancellation request.
@@ -85,13 +105,82 @@ type RejectAgreementCancellationRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectAgreementCancellationRequestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectAgreementCancellationRequestOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectAgreementCancellationRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementCancellationRequestId != nil {
+		s.WriteString(schemas.RejectAgreementCancellationRequestOutput_agreementCancellationRequestId, *v.AgreementCancellationRequestId)
+	}
+	if v.AgreementId != nil {
+		s.WriteString(schemas.RejectAgreementCancellationRequestOutput_agreementId, *v.AgreementId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.RejectAgreementCancellationRequestOutput_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RejectAgreementCancellationRequestOutput_description, *v.Description)
+	}
+	if v.ReasonCode != "" {
+		s.WriteString(schemas.RejectAgreementCancellationRequestOutput_reasonCode, string(v.ReasonCode))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RejectAgreementCancellationRequestOutput_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.RejectAgreementCancellationRequestOutput_statusMessage, *v.StatusMessage)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.RejectAgreementCancellationRequestOutput_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *RejectAgreementCancellationRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RejectAgreementCancellationRequestOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RejectAgreementCancellationRequestOutput_agreementCancellationRequestId:
+			v.AgreementCancellationRequestId = new(string)
+			return d.ReadString(schemas.RejectAgreementCancellationRequestOutput_agreementCancellationRequestId, v.AgreementCancellationRequestId)
+		case schemas.RejectAgreementCancellationRequestOutput_agreementId:
+			v.AgreementId = new(string)
+			return d.ReadString(schemas.RejectAgreementCancellationRequestOutput_agreementId, v.AgreementId)
+		case schemas.RejectAgreementCancellationRequestOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.RejectAgreementCancellationRequestOutput_createdAt, v.CreatedAt)
+		case schemas.RejectAgreementCancellationRequestOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RejectAgreementCancellationRequestOutput_description, v.Description)
+		case schemas.RejectAgreementCancellationRequestOutput_reasonCode:
+			var ev string
+			if err := d.ReadString(schemas.RejectAgreementCancellationRequestOutput_reasonCode, &ev); err != nil {
+				return err
+			}
+			v.ReasonCode = types.AgreementCancellationRequestReasonCode(ev)
+			return nil
+		case schemas.RejectAgreementCancellationRequestOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.RejectAgreementCancellationRequestOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AgreementCancellationRequestStatus(ev)
+			return nil
+		case schemas.RejectAgreementCancellationRequestOutput_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.RejectAgreementCancellationRequestOutput_statusMessage, v.StatusMessage)
+		case schemas.RejectAgreementCancellationRequestOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.RejectAgreementCancellationRequestOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRejectAgreementCancellationRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRejectAgreementCancellationRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectAgreementCancellationRequest, schemas.RejectAgreementCancellationRequestInput, schemas.RejectAgreementCancellationRequestOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRejectAgreementCancellationRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectAgreementCancellationRequest, schemas.RejectAgreementCancellationRequestInput, schemas.RejectAgreementCancellationRequestOutput), output: &RejectAgreementCancellationRequestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

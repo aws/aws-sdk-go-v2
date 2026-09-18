@@ -4,7 +4,9 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,48 @@ type UpdateExadbVmClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExadbVmClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExadbVmClusterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExadbVmClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataCollectionOptions != nil {
+		s.WriteStruct(schemas.UpdateExadbVmClusterInput_dataCollectionOptions)
+		v.DataCollectionOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateExadbVmClusterInput_displayName, *v.DisplayName)
+	}
+	if v.EnabledEcpuCount != nil {
+		s.WriteInt32(schemas.UpdateExadbVmClusterInput_enabledEcpuCount, *v.EnabledEcpuCount)
+	}
+	if v.ExadbVmClusterId != nil {
+		s.WriteString(schemas.UpdateExadbVmClusterInput_exadbVmClusterId, *v.ExadbVmClusterId)
+	}
+	if v.GridImageId != nil {
+		s.WriteString(schemas.UpdateExadbVmClusterInput_gridImageId, *v.GridImageId)
+	}
+	if v.LicenseModel != "" {
+		s.WriteString(schemas.UpdateExadbVmClusterInput_licenseModel, string(v.LicenseModel))
+	}
+	serializeStringList(s, schemas.UpdateExadbVmClusterInput_sshPublicKeys, v.SshPublicKeys)
+	if v.SystemVersion != nil {
+		s.WriteString(schemas.UpdateExadbVmClusterInput_systemVersion, *v.SystemVersion)
+	}
+	if v.TotalEcpuCount != nil {
+		s.WriteInt32(schemas.UpdateExadbVmClusterInput_totalEcpuCount, *v.TotalEcpuCount)
+	}
+	if v.UpdateAction != "" {
+		s.WriteString(schemas.UpdateExadbVmClusterInput_updateAction, string(v.UpdateAction))
+	}
+	if v.VmFileSystemStorageTotalSizeInGBs != nil {
+		s.WriteInt32(schemas.UpdateExadbVmClusterInput_vmFileSystemStorageTotalSizeInGBs, *v.VmFileSystemStorageTotalSizeInGBs)
+	}
+}
+
 type UpdateExadbVmClusterOutput struct {
 
 	// The unique identifier of the Exascale VM cluster.
@@ -89,13 +133,54 @@ type UpdateExadbVmClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExadbVmClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExadbVmClusterOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExadbVmClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateExadbVmClusterOutput_displayName, *v.DisplayName)
+	}
+	if v.ExadbVmClusterId != nil {
+		s.WriteString(schemas.UpdateExadbVmClusterOutput_exadbVmClusterId, *v.ExadbVmClusterId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateExadbVmClusterOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.UpdateExadbVmClusterOutput_statusReason, *v.StatusReason)
+	}
+}
+func (v *UpdateExadbVmClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateExadbVmClusterOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateExadbVmClusterOutput_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.UpdateExadbVmClusterOutput_displayName, v.DisplayName)
+		case schemas.UpdateExadbVmClusterOutput_exadbVmClusterId:
+			v.ExadbVmClusterId = new(string)
+			return d.ReadString(schemas.UpdateExadbVmClusterOutput_exadbVmClusterId, v.ExadbVmClusterId)
+		case schemas.UpdateExadbVmClusterOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateExadbVmClusterOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ResourceStatus(ev)
+			return nil
+		case schemas.UpdateExadbVmClusterOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.UpdateExadbVmClusterOutput_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateExadbVmClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateExadbVmCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExadbVmCluster, schemas.UpdateExadbVmClusterInput, schemas.UpdateExadbVmClusterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateExadbVmCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExadbVmCluster, schemas.UpdateExadbVmClusterInput, schemas.UpdateExadbVmClusterOutput), output: &UpdateExadbVmClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

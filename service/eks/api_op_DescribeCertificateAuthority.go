@@ -4,7 +4,9 @@ package eks
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DescribeCertificateAuthorityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCertificateAuthorityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCertificateAuthorityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCertificateAuthorityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthorityId != nil {
+		s.WriteString(schemas.DescribeCertificateAuthorityRequest_certificateAuthorityId, *v.CertificateAuthorityId)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.DescribeCertificateAuthorityRequest_clusterName, *v.ClusterName)
+	}
+}
+
 type DescribeCertificateAuthorityOutput struct {
 
 	// An object containing detailed information about the certificate authority.
@@ -52,13 +69,34 @@ type DescribeCertificateAuthorityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCertificateAuthorityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCertificateAuthorityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCertificateAuthorityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthority != nil {
+		s.WriteStruct(schemas.DescribeCertificateAuthorityResponse_certificateAuthority)
+		v.CertificateAuthority.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeCertificateAuthorityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCertificateAuthorityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCertificateAuthorityResponse_certificateAuthority:
+			v.CertificateAuthority = &types.CertificateAuthority{}
+			return v.CertificateAuthority.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeCertificateAuthority{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCertificateAuthority, schemas.DescribeCertificateAuthorityRequest, schemas.DescribeCertificateAuthorityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeCertificateAuthority{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCertificateAuthority, schemas.DescribeCertificateAuthorityRequest, schemas.DescribeCertificateAuthorityResponse), output: &DescribeCertificateAuthorityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
