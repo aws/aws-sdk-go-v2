@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.StartReplicationTaskAssessmentRun
+
+{"ReplicationTaskAssessmentRun":{"AssessmentProgress":{"IndividualAssessmentCompletedCount":1,"IndividualAssessmentCount":1},"AssessmentRunName":"__AssessmentRunName__","IsLatestTaskAssessmentRun":true,"LastFailureMessage":"__LastFailureMessage__","ReplicationTaskArn":"__ReplicationTaskArn__","ReplicationTaskAssessmentRunArn":"__ReplicationTaskAssessmentRunArn__","ReplicationTaskAssessmentRunCreationDate":946684800,"ResultEncryptionMode":"__ResultEncryptionMode__","ResultKmsKeyArn":"__ResultKmsKeyArn__","ResultLocationBucket":"__ResultLocationBucket__","ResultLocationFolder":"__ResultLocationFolder__","ResultStatistic":{"Cancelled":1,"Error":1,"Failed":1,"Passed":1,"Skipped":1,"Warning":1},"ServiceAccessRoleArn":"__ServiceAccessRoleArn__","Status":"__Status__"}}

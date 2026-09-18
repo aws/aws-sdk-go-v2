@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"accessAssociationSource":"__AccessAssociationSource__","accessAssociationSourceType":"VPCE","domainNameAccessAssociationArn":"__DomainNameAccessAssociationArn__","domainNameArn":"__DomainNameArn__","tags":{"key0":"__Value__"}}

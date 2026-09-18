@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"investigationGroupArn":"__InvestigationGroupArn__","policy":"__Policy__"}

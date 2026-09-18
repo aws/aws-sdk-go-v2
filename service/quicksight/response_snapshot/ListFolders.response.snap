@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"FolderSummaryList":[{"Arn":"__Arn__","CreatedTime":946684800,"FolderId":"__FolderId__","FolderType":"SHARED","LastUpdatedTime":946684800,"Name":"__Name__","SharingModel":"ACCOUNT"},{"Arn":"__Arn__","CreatedTime":946684800,"FolderId":"__FolderId__","FolderType":"SHARED","LastUpdatedTime":946684800,"Name":"__Name__","SharingModel":"ACCOUNT"}],"NextToken":"__NextToken__","RequestId":"__RequestId__","Status":200}

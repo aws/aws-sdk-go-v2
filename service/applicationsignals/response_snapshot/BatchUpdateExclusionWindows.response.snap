@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Errors":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","SloId":"__SloId__"},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","SloId":"__SloId__"}],"SloIds":["__Member__","__Member__"]}

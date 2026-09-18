@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Arn":"__Arn__","Configuration":{"VpcEgressConfiguration":{"AssociatedComputeResourceTypes":["MicroVm","MicroVm"],"NetworkProtocol":"IPv4","SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"]}},"Id":"__Id__","LastModified":"2000-01-01T00:00:00Z","LastUpdateStatus":"Successful","LastUpdateStatusReason":"__LastUpdateStatusReason__","LastUpdateStatusReasonCode":"DisallowedByVpcEncryptionControl","Name":"__Name__","OperatorRole":"__OperatorRole__","State":"PENDING","StateReason":"__StateReason__","StateReasonCode":"DisallowedByVpcEncryptionControl","Version":1}

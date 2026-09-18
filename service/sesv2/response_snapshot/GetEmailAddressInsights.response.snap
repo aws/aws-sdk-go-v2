@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"MailboxValidation":{"Evaluations":{"HasValidDnsRecords":{"ConfidenceVerdict":"LOW"},"HasValidSyntax":{"ConfidenceVerdict":"LOW"},"IsDisposable":{"ConfidenceVerdict":"LOW"},"IsRandomInput":{"ConfidenceVerdict":"LOW"},"IsRoleAddress":{"ConfidenceVerdict":"LOW"},"MailboxExists":{"ConfidenceVerdict":"LOW"}},"IsValid":{"ConfidenceVerdict":"LOW"}}}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","attachmentId":"__AttachmentId__","dataSourceArn":"__DataSourceArn__","id":"__Id__","status":"PENDING"}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.CreateDevEndpoint
+
+{"Arguments":{"key0":"__Value__"},"AvailabilityZone":"__AvailabilityZone__","CreatedTimestamp":946684800,"EndpointName":"__EndpointName__","ExtraJarsS3Path":"__ExtraJarsS3Path__","ExtraPythonLibsS3Path":"__ExtraPythonLibsS3Path__","FailureReason":"__FailureReason__","GlueVersion":"__GlueVersion__","NumberOfNodes":1,"NumberOfWorkers":1,"RoleArn":"__RoleArn__","SecurityConfiguration":"__SecurityConfiguration__","SecurityGroupIds":["__Member__","__Member__"],"Status":"__Status__","SubnetId":"__SubnetId__","VpcId":"__VpcId__","WorkerType":"Standard","YarnEndpointAddress":"__YarnEndpointAddress__","ZeppelinRemoteSparkInterpreterPort":1}

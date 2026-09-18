@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Insights":[{"CreationTime":946684800,"DisplayName":"__DisplayName__","InsightId":"__InsightId__","IsExperimental":true,"Priority":"CRITICAL","Status":"ACTIVE","Type":"EVENT","UpdateTime":946684800},{"CreationTime":946684800,"DisplayName":"__DisplayName__","InsightId":"__InsightId__","IsExperimental":true,"Priority":"CRITICAL","Status":"ACTIVE","Type":"EVENT","UpdateTime":946684800}],"NextToken":"__NextToken__"}

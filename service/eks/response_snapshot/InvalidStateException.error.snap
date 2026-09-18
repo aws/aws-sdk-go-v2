@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"InvalidStateException","clusterName":"__ClusterName__","message":"__Message__"}

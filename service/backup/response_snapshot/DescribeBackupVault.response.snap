@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"BackupVaultArn":"__BackupVaultArn__","BackupVaultName":"__BackupVaultName__","CreationDate":946684800,"CreatorRequestId":"__CreatorRequestId__","EncryptionKeyArn":"__EncryptionKeyArn__","EncryptionKeyType":"AWS_OWNED_KMS_KEY","LatestMpaApprovalTeamUpdate":{"ExpiryDate":946684800,"InitiationDate":946684800,"MpaSessionArn":"__MpaSessionArn__","Status":"PENDING","StatusMessage":"__StatusMessage__"},"LockDate":946684800,"Locked":true,"MaxRetentionDays":1,"MinRetentionDays":1,"MpaApprovalTeamArn":"__MpaApprovalTeamArn__","MpaSessionArn":"__MpaSessionArn__","NumberOfRecoveryPoints":1,"SourceBackupVaultArn":"__SourceBackupVaultArn__","VaultState":"CREATING","VaultType":"BACKUP_VAULT"}

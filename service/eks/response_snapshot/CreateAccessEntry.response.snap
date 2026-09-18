@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"accessEntry":{"accessEntryArn":"__AccessEntryArn__","clusterName":"__ClusterName__","createdAt":946684800,"kubernetesGroups":["__Member__","__Member__"],"modifiedAt":946684800,"principalArn":"__PrincipalArn__","tags":{"key0":"__Value__"},"type":"__Type__","username":"__Username__"}}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextMarker":"__NextMarker__","ProvisionedConcurrencyConfigs":[{"AllocatedProvisionedConcurrentExecutions":1,"AvailableProvisionedConcurrentExecutions":1,"FunctionArn":"__FunctionArn__","LastModified":"__LastModified__","RequestedProvisionedConcurrentExecutions":1,"Status":"IN_PROGRESS","StatusReason":"__StatusReason__"},{"AllocatedProvisionedConcurrentExecutions":1,"AvailableProvisionedConcurrentExecutions":1,"FunctionArn":"__FunctionArn__","LastModified":"__LastModified__","RequestedProvisionedConcurrentExecutions":1,"Status":"IN_PROGRESS","StatusReason":"__StatusReason__"}]}

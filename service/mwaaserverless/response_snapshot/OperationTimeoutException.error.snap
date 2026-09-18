@@ -1,0 +1,5 @@
+504
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonMWAAServerless.CreateWorkflow
+
+{"__type":"OperationTimeoutException","Message":"__Message__"}
